@@ -1,5 +1,5 @@
 {
-  "name": "CGT",
+  "name": "cgt",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -36,8 +36,11 @@
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.3.2",
+    "sass": "^1.38.1",
+    "sass-loader": "^10",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
-    "stylelint-config-standard": "^22.0.0"
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-scss": "^3.20.1"
   }
 }
