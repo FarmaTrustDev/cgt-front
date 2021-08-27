@@ -46,4 +46,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   ssr: false,
+
+  // env for the API
+  env: {
+    baseUrl: process.env.VUE_APP_BASEURL,
+    api: process.env.VUE_APP_API_ENDPOINT,
+  },
 }

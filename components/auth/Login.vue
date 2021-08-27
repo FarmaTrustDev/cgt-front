@@ -98,15 +98,16 @@ export default {
             this.showError = true
           }
         })
-        .then(() => {
-          this.$router.push({ path: '/dashboard' })
-          this.loading = false
-        })
     },
     userDetail() {
-      UserServices.detail().then((response) => {
-        this.$store.commit('setUser', response.result)
-      })
+      UserServices.detail()
+        .then((response) => {
+          this.$store.commit('setUser', response.result)
+        })
+        .then(() => {
+          this.$router.push({ path: '/' })
+          this.loading = false
+        })
     },
   },
 }
