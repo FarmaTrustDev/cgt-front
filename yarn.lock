@@ -2827,6 +2827,21 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
+"chokidar@>=3.0.0 <4.0.0", chokidar@^3.4.1, chokidar@^3.5.1, chokidar@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
+  integrity sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==
+  dependencies:
+    anymatch "~3.1.2"
+    braces "~3.0.2"
+    glob-parent "~5.1.2"
+    is-binary-path "~2.1.0"
+    is-glob "~4.0.1"
+    normalize-path "~3.0.0"
+    readdirp "~3.6.0"
+  optionalDependencies:
+    fsevents "~2.3.2"
+
 chokidar@^2.1.8:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"
@@ -2845,21 +2860,6 @@ chokidar@^2.1.8:
     upath "^1.1.1"
   optionalDependencies:
     fsevents "^1.2.7"
-
-chokidar@^3.4.1, chokidar@^3.5.1, chokidar@^3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
-  integrity sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==
-  dependencies:
-    anymatch "~3.1.2"
-    braces "~3.0.2"
-    glob-parent "~5.1.2"
-    is-binary-path "~2.1.0"
-    is-glob "~4.0.1"
-    normalize-path "~3.0.0"
-    readdirp "~3.6.0"
-  optionalDependencies:
-    fsevents "~2.3.2"
 
 chownr@^1.1.1:
   version "1.1.4"
@@ -5830,6 +5830,11 @@ kind-of@^6.0.0, kind-of@^6.0.2, kind-of@^6.0.3:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+klona@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
+  integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
+
 known-css-properties@^0.21.0:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.21.0.tgz#15fbd0bbb83447f3ce09d8af247ed47c68ede80d"
@@ -8537,6 +8542,24 @@ safe-regex@^2.1.1:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
+sass-loader@^10:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-10.2.0.tgz#3d64c1590f911013b3fa48a0b22a83d5e1494716"
+  integrity sha512-kUceLzC1gIHz0zNJPpqRsJyisWatGYNFRmv2CKZK2/ngMJgLqxTbXwe/hJ85luyvZkgqU3VlJ33UVF2T/0g6mw==
+  dependencies:
+    klona "^2.0.4"
+    loader-utils "^2.0.0"
+    neo-async "^2.6.2"
+    schema-utils "^3.0.0"
+    semver "^7.3.2"
+
+sass@^1.38.1:
+  version "1.38.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.38.1.tgz#54dfb17fb168846b5850324b82fc62dc68f51bad"
+  integrity sha512-Lj8nPaSYOuRhgqdyShV50fY5jKnvaRmikUNalMPmbH+tKMGgEKVkltI/lP30PEfO2T1t6R9yc2QIBLgOc3uaFw==
+  dependencies:
+    chokidar ">=3.0.0 <4.0.0"
+
 sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -8717,6 +8740,11 @@ shell-quote@^1.6.1:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
   integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
+
+shvl@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/shvl/-/shvl-2.0.3.tgz#eb4bd37644f5684bba1fc52c3010c96fb5e6afd1"
+  integrity sha512-V7C6S9Hlol6SzOJPnQ7qzOVEWUQImt3BNmmzh40wObhla3XOYMe4gGiYzLrJd5TFa+cI2f9LKIRJTTKZSTbWgw==
 
 side-channel@^1.0.4:
   version "1.0.4"
@@ -9174,6 +9202,17 @@ stylelint-config-standard@^22.0.0:
   integrity sha512-uQVNi87SHjqTm8+4NIP5NMAyY/arXrBgimaaT7skvRfE9u3JKXRK9KBkbr4pVmeciuCcs64kAdjlxfq6Rur7Hw==
   dependencies:
     stylelint-config-recommended "^5.0.0"
+
+stylelint-scss@^3.20.1:
+  version "3.20.1"
+  resolved "https://registry.yarnpkg.com/stylelint-scss/-/stylelint-scss-3.20.1.tgz#88f175d9cfe1c81a72858bd0d3550cf61530e212"
+  integrity sha512-OTd55O1TTAC5nGKkVmUDLpz53LlK39R3MImv1CfuvsK7/qugktqiZAeQLuuC4UBhzxCnsc7fp9u/gfRZwFAIkA==
+  dependencies:
+    lodash "^4.17.15"
+    postcss-media-query-parser "^0.2.3"
+    postcss-resolve-nested-selector "^0.1.1"
+    postcss-selector-parser "^6.0.2"
+    postcss-value-parser "^4.1.0"
 
 stylelint-webpack-plugin@^2.0.0:
   version "2.2.2"
@@ -9984,6 +10023,14 @@ vue@^2.6.12:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
+
+vuex-persistedstate@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-4.0.0.tgz#ed82f266ca98c869a2aad9cb9880c2f608c05f3a"
+  integrity sha512-jDs+awbV9YD2A2F6S5zgtYq1Bjd8v0YldOK6HPv1EJZzGMse0FtZTREfXvA7zlVfq9MpmSZJNmYQVylfpZ5znQ==
+  dependencies:
+    deepmerge "^4.2.2"
+    shvl "^2.0.3"
 
 vuex@^3.6.2:
   version "3.6.2"
