@@ -1,6 +1,5 @@
 import { BASE_URL, BASE_API } from '../Constant'
-import { request, getAuthEvent } from '~/services/request'
-
+import request, { getAuthEvent } from '~/services/request'
 const baseUrl = `${BASE_URL}`
 const baseApi = `${BASE_API}/auth`
 
