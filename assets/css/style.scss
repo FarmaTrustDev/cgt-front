@@ -1,0 +1,35 @@
+@import './partials/variables';
+@import './partials/margin';
+@import './partials/padding';
+@import './partials/grid';
+@import './partials/background-color';
+@import './partials/helpers';
+@import './partials/border';
+@import './partials/cards';
+@import './partials/capsules';
+@import './partials/modal';
+@import './partials/formsFields';
+@import './components/sidebar';
+@import './components/login';
+@import './components/header';
+
+body {
+  background-color: white;
+}
+
+.profile-grey-bg {
+  background-color: #ececec;
+  padding: 20px;
+  border-radius: 35px;
+}
+
+.default-select {
+  .ant-select-selection {
+    margin-top: -8px;
+  }
+}
+
+.main {
+  padding: 24px;
+  margin-top: 15px;
+}

@@ -1,0 +1,25 @@
+.login {
+  max-width: 473px;
+  margin: auto;
+  .ant-card {
+    box-shadow: 0 26px 120px rgba(0, 0, 0, 0.04);
+    border-radius: 44px;
+    padding: 15px;
+  }
+}
+
+.half-secondary {
+  &::before {
+    @extend .bg-secondary;
+
+    content: '';
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    position: fixed;
+    right: 0;
+    top: 0;
+    border-radius: 44px;
+    max-width: 25%;
+  }
+}
