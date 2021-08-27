@@ -1,5 +1,7 @@
 <template>
-  <Tutorial />
+  <div class="container min-vh-100">
+    <AuthLogin />
+  </div>
 </template>
 
 <script>
@@ -8,3 +10,8 @@ export default {
   middleware: 'no-auth',
 }
 </script>
+<style scoped>
+.min-vh-100 {
+  min-height: 100%;
+}
+</style>
