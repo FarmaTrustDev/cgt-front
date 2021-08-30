@@ -1,9 +1,12 @@
 <template>
-  <div class="capsule primary-capsule default-border-radius">
-    <span class="title">{{ title }} </span>
-    <span class="description">{{ description }}</span>
-    <a-icon type="right" />
-  </div>
+  <a-card class="avatar-card" :hoverable="hoverable" @click="handleClick">
+    <a-card-meta :title="title">
+      <template slot="description"
+        >{{ description }}
+        <a-icon v-if="arrow" type="right" />
+      </template>
+    </a-card-meta>
+  </a-card>
 </template>
 <script>
 export default {
@@ -16,10 +19,24 @@ export default {
       type: String,
       default: '',
     },
+    hoverable: {
+      type: Boolean,
+      default: false,
+    },
+    arrow: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    handleClick(e) {
+      this.$emit('click', e)
+    },
   },
 }
 </script>
 <style lang="scss" scoped>
+// using on home page if other place used would be change on demand
 .capsule {
   font-size: 28px;
   padding: 15px 25px;

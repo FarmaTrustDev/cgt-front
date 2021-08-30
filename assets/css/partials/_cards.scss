@@ -11,10 +11,28 @@
   img {
     object-fit: inherit;
   }
-  .ant-card-meta-title,
-  .ant-card-meta-description {
+  .ant-card-meta-description,
+  .ant-card-meta-title {
     font-size: 16px;
     font-weight: bold;
+  }
+  .anticon-right {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    margin: auto;
+    bottom: 0;
+    height: 18px;
+    font-size: 24px;
+  }
+  //
+  &.bg-danger.white,
+  &.bg-primary.white {
+    color: white;
+    .ant-card-meta-description,
+    .ant-card-meta-title {
+      color: white;
+    }
   }
   &.ant-card-hoverable:hover {
     color: white;
