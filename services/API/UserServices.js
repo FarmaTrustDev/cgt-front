@@ -5,7 +5,7 @@ const baseApi = `${BASE_API}/user`
 
 function detail(data) {
   return request({
-    url: `${baseApi}/detail`,
+    url: `${baseApi}/user-detail`,
     data,
   })
 }
