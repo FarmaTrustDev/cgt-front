@@ -47,8 +47,7 @@ export default {
   computed: {
     // ...mapGetters(['getUser']),
     user() {
-      //    return this.$store.getters.getUser
-      return 'user name'
+      return this.$store.getters.getUser
     },
   },
   mounted() {
@@ -75,7 +74,7 @@ export default {
       setAccessToken('')
       this.$store.commit('setToken', {})
       this.$store.commit('setUser', {})
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/login' })
     },
   },
 }
