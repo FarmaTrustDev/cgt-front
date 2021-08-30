@@ -1,9 +1,16 @@
-.danger-capsule {
+.capsule {
   font-size: 28px;
   color: white;
-  background-color: $danger;
   padding: 15px 25px;
   margin-right: 10px;
+}
 
+.danger-capsule {
+  background-color: $danger;
+  @extend .capsule;
   @extend .default-border-radius;
+}
+
+.primary-capsule {
+  background-color: $primary-color;
 }
