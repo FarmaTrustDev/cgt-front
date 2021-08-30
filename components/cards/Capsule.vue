@@ -19,3 +19,10 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+.capsule {
+  font-size: 28px;
+  padding: 15px 25px;
+  margin-right: 10px;
+}
+</style>
