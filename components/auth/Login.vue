@@ -7,7 +7,7 @@
           <a-form-item label="Username">
             <a-input
               v-decorator="[
-                'email',
+                'username',
                 {
                   rules: [
                     { required: true, message: 'Please input your Email!' },
@@ -81,7 +81,7 @@ export default {
       })
     },
     login(params) {
-      AuthServices.login({ username: '', ...params })
+      AuthServices.login({ email: '', ...params })
         .then((response) => {
           setRefreshToken(response.refreshToken)
           setAccessToken(response.accessToken)
