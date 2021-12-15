@@ -5,7 +5,7 @@ const baseApi = `${BASE_API}/user`
 
 function detail(data) {
   return request({
-    url: `${baseApi}/user-detail`,
+    url: `${baseApi}/details`,
     data,
   })
 }
@@ -49,6 +49,7 @@ function upsertTimeTable(data) {
     data,
   })
 }
+
 const UserServices = {
   detail,
   adminSubMenus,

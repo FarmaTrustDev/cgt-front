@@ -103,7 +103,7 @@ export default {
     userDetail() {
       UserServices.detail()
         .then((response) => {
-          this.$store.commit('setUser', response.result)
+          this.$store.commit('setUser', response.data)
         })
         .then(() => {
           this.$router.push({ path: '/' })
