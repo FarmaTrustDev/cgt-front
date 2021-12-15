@@ -1,7 +1,6 @@
 <template>
   <div>
-    <PagesHomeCapsule />
-    <TreatmentsTable />
+    <PatientEnrollmentForm />
   </div>
 </template>
 

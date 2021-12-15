@@ -1,0 +1,286 @@
+<template>
+  <div>
+    <a-row>
+      <a-col :span="12">
+        <a-form-item
+          label="First Name"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'firstName',
+              {
+                initialValue: patient.firstName,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your First Name!',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your First Name"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Last Name"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'lastName',
+              {
+                initialValue: patient.lastName,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Last Name',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your Last Name"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Gender"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-select
+            v-decorator="[
+              'gender',
+              {
+                initialValue: patient.gender,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your Gender!',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Select gender"
+            style="width: 100%"
+            size="large"
+            class="default-select"
+          >
+            <a-select-option v-for="gender in Gender" :key="gender">
+              {{ gender }}
+            </a-select-option>
+          </a-select>
+        </a-form-item></a-col
+      >
+      <a-col :span="12">
+        <a-form-item
+          label="Date of Birth"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-date-picker
+            v-decorator="[
+              'dob',
+              {
+                initialValue: patient.dob,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your Date of Birth!',
+                  },
+                ],
+              },
+            ]"
+            style="width: 100%"
+            size="large"
+          >
+          </a-date-picker>
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Email address"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'Email',
+              {
+                initialValue: patient.email,
+                rules: [
+                  { required: true, message: 'Please input your Email!' },
+                ],
+              },
+            ]"
+            placeholder="Please input your Email"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Phone"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'Phone',
+              {
+                initialValue: patient.phone,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Phone',
+                  },
+                ],
+              },
+            ]"
+            type="number"
+            placeholder="Please input your Phone"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="24">
+        <a-form-item
+          label="Street Name"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-textarea
+            v-decorator="[
+              'address',
+              {
+                initialValue: patient.address,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Street Name',
+                  },
+                ],
+              },
+            ]"
+            :auto-size="{ minRows: 3, maxRows: 5 }"
+            placeholder="Please input your Street Name"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="City"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'City',
+              {
+                initialValue: patient.city,
+                rules: [{ required: true, message: 'Please input your City!' }],
+              },
+            ]"
+            placeholder="Please input your City"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="County"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'County',
+              {
+                initialValue: patient.county,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your County',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your County"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Post Code"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'PostCode',
+              {
+                initialValue: patient.postcode,
+                rules: [
+                  { required: true, message: 'Please input your Post Code!' },
+                ],
+              },
+            ]"
+            placeholder="Please input your Post Code"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Country"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'Country',
+              {
+                initialValue: 'United Kingdom',
+
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Country',
+                  },
+                ],
+              },
+            ]"
+            :disabled="true"
+            placeholder="Please input your Country"
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+  </div>
+</template>
+
+<script>
+const Gender = ['Male', 'Female']
+export default {
+  data() {
+    return {
+      formLayout: 'horizontal',
+      patient: {},
+      form: this.$form.createForm(this, {
+        name: 'patientEnrollment',
+      }),
+      Gender,
+    }
+  },
+  methods: {
+    onSubmit(e) {
+      this.loading = true
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values)
+        } else {
+          this.loading = false
+        }
+      })
+    },
+  },
+}
+</script>
