@@ -1,11 +1,9 @@
 <template>
-  <PatientEnrollment />
+  <PagesPatientEnrollment />
 </template>
 <script>
 export default {
-  mounted() {
-    console.log(this.$route)
-    console.log(this.$route.params.id)
-  },
+  components: {},
+
 }
 </script>
