@@ -178,25 +178,49 @@
       >
       <a-col :span="24">
         <a-form-item
-          label="Street Name"
+          label="Allergies"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
           <a-textarea
             v-decorator="[
-              'address',
+              'allergies',
               {
-                initialValue: patient.address,
+                initialValue: patient.allergies,
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Street Name',
+                    message: 'Please input your Allergies',
                   },
                 ],
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Please input your Street Name"
+            placeholder="Please input your Allergies"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="24">
+        <a-form-item
+          label="Problem"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-textarea
+            v-decorator="[
+              'problem',
+              {
+                initialValue: patient.problem,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Problem',
+                  },
+                ],
+              },
+            ]"
+            :auto-size="{ minRows: 3, maxRows: 5 }"
+            placeholder="Please input your Problem"
           />
         </a-form-item>
       </a-col>
