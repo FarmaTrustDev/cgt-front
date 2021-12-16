@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PatientEnrollmentForm />
+    <PatientEnrollment />
   </div>
 </template>
 

@@ -38,3 +38,5 @@ export const STATUSES = [
     bg_color: '#ffdbd0',
   },
 ]
+
+export const BLOOD_TYPES = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']

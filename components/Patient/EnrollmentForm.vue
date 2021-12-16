@@ -46,6 +46,76 @@
           />
         </a-form-item>
       </a-col>
+      <a-col :span="8">
+        <a-form-item
+          label="Email address"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'Email',
+              {
+                initialValue: patient.email,
+                rules: [
+                  { required: true, message: 'Please input your Email!' },
+                ],
+              },
+            ]"
+            placeholder="Please input your Email"
+          /> </a-form-item
+      ></a-col>
+
+      <a-col :span="8">
+        <a-form-item
+          label="Phone"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-input
+            v-decorator="[
+              'Phone',
+              {
+                initialValue: patient.phone,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Phone',
+                  },
+                ],
+              },
+            ]"
+            type="number"
+            placeholder="Please input your Phone"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-form-item
+          label="Date of Birth"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-date-picker
+            v-decorator="[
+              'dob',
+              {
+                initialValue: patient.dob,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your Date of Birth!',
+                  },
+                ],
+              },
+            ]"
+            style="width: 100%"
+            size="large"
+          >
+          </a-date-picker>
+        </a-form-item>
+      </a-col>
       <a-col :span="12">
         <a-form-item
           label="Gender"
@@ -78,72 +148,34 @@
       >
       <a-col :span="12">
         <a-form-item
-          label="Date of Birth"
+          label="Blood Type"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
-          <a-date-picker
+          <a-select
             v-decorator="[
-              'dob',
+              'bloodType',
               {
-                initialValue: patient.dob,
+                initialValue: patient.bloodType,
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please select your Gender!',
                   },
                 ],
               },
             ]"
+            placeholder="Select Blood Type"
             style="width: 100%"
             size="large"
+            class="default-select"
           >
-          </a-date-picker>
-        </a-form-item>
-      </a-col>
-      <a-col :span="12">
-        <a-form-item
-          label="Email address"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-        >
-          <a-input
-            v-decorator="[
-              'Email',
-              {
-                initialValue: patient.email,
-                rules: [
-                  { required: true, message: 'Please input your Email!' },
-                ],
-              },
-            ]"
-            placeholder="Please input your Email"
-          /> </a-form-item
-      ></a-col>
-      <a-col :span="12">
-        <a-form-item
-          label="Phone"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-        >
-          <a-input
-            v-decorator="[
-              'Phone',
-              {
-                initialValue: patient.phone,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Phone',
-                  },
-                ],
-              },
-            ]"
-            type="number"
-            placeholder="Please input your Phone"
-          />
-        </a-form-item>
-      </a-col>
+            <a-select-option v-for="type in bloodType" :key="type">
+              {{ type }}
+            </a-select-option>
+          </a-select>
+        </a-form-item></a-col
+      >
       <a-col :span="24">
         <a-form-item
           label="Street Name"
@@ -247,7 +279,6 @@
                 ],
               },
             ]"
-            :disabled="true"
             placeholder="Please input your Country"
           />
         </a-form-item>
@@ -257,30 +288,15 @@
 </template>
 
 <script>
+import { BLOOD_TYPES } from '~/services/Constant'
 const Gender = ['Male', 'Female']
 export default {
   data() {
     return {
-      formLayout: 'horizontal',
       patient: {},
-      form: this.$form.createForm(this, {
-        name: 'patientEnrollment',
-      }),
       Gender,
+      bloodType: BLOOD_TYPES,
     }
-  },
-  methods: {
-    onSubmit(e) {
-      this.loading = true
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log(values)
-        } else {
-          this.loading = false
-        }
-      })
-    },
   },
 }
 </script>
