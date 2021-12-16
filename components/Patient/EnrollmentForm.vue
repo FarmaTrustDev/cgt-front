@@ -140,8 +140,8 @@
             size="large"
             class="default-select"
           >
-            <a-select-option v-for="gender in Gender" :key="gender">
-              {{ gender }}
+            <a-select-option v-for="gender in Gender" :key="gender.id">
+              {{ gender.name }}
             </a-select-option>
           </a-select>
         </a-form-item></a-col
@@ -312,13 +312,13 @@
 </template>
 
 <script>
-import { BLOOD_TYPES } from '~/services/Constant'
-const Gender = ['Male', 'Female']
+import { BLOOD_TYPES, GENDER } from '~/services/Constant'
+
 export default {
   data() {
     return {
       patient: {},
-      Gender,
+      Gender: GENDER,
       bloodType: BLOOD_TYPES,
     }
   },

@@ -9,13 +9,15 @@
   </div>
 </template>
 <script>
+import notifications from '~/mixins/notifications'
+import PatientServices from '~/services/API/PatientServices'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
+  mixins: [notifications, routeHelpers],
   data() {
     return {
       loading: false,
       successResponse: '',
-      error: null,
-      showError: false,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
@@ -28,11 +30,20 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
+          this.create(values)
         } else {
           this.loading = false
         }
       })
+    },
+    create(values) {
+      PatientServices.create(values)
+        .then((response) => {
+          this.success(response.message)
+          this.goto(`/patients/enrollment/${response.data.id}`)
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = false))
     },
   },
 }
