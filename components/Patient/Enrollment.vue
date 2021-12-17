@@ -1,12 +1,14 @@
 <template>
   <div>
-    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <PatientEnrollmentForm />
-      <a-form-item>
-        <FormActionButton />
-        <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
-      </a-form-item>
-    </a-form>
+    <a-skeleton :loading="loading">
+      <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+        <PatientEnrollmentForm :patient="patient" />
+        <a-form-item>
+          <FormActionButton />
+          <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
+        </a-form-item>
+      </a-form>
+    </a-skeleton>
   </div>
 </template>
 <script>
@@ -20,15 +22,13 @@ export default {
       loading: false,
       successResponse: '',
       formLayout: 'vertical',
+      patient: {},
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
-        patient: {},
       }),
     }
   },
   mounted() {
-    console.log('asd', this.$route)
-    console.log('asd', this.$route.params.id)
     this.isCreated()
   },
   methods: {
@@ -41,10 +41,11 @@ export default {
     },
     fetch(id) {
       this.loading = true
-      PatientServices.get(id).then((patient) => {
-        this.patient = patient
-      })
-      console.log(id)
+      PatientServices.get(id)
+        .then((response) => {
+          this.patient = response.data
+        })
+        .finally(() => (this.loading = false))
     },
     onSubmit(e) {
       this.loading = true
