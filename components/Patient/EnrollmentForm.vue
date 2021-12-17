@@ -315,9 +315,14 @@
 import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 
 export default {
+  props: {
+    patient: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-      patient: {},
       Gender: GENDER,
       bloodType: BLOOD_TYPES,
     }

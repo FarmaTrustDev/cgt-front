@@ -22,10 +22,30 @@ export default {
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
+        patient: {},
       }),
     }
   },
+  mounted() {
+    console.log('asd', this.$route)
+    console.log('asd', this.$route.params.id)
+    this.isCreated()
+  },
   methods: {
+    isCreated() {
+      const patientId = this.$route.params.id
+
+      if (patientId) {
+        this.fetch(patientId)
+      }
+    },
+    fetch(id) {
+      this.loading = true
+      PatientServices.get(id).then((patient) => {
+        this.patient = patient
+      })
+      console.log(id)
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
@@ -41,7 +61,7 @@ export default {
       PatientServices.create(values)
         .then((response) => {
           this.success(response.message)
-          this.goto(`/patients/enrollment/${response.data.id}`)
+          this.goto(`/patients/enrollment/${response.data.globalId}`)
         })
         .catch(this.error)
         .finally(() => (this.loading = false))

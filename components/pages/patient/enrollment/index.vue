@@ -21,13 +21,10 @@ export default {
   },
   data() {
     return {
-      activeTab: 3,
+      activeTab: 1,
     }
   },
-  mounted() {
-    console.log('asd', this.$route)
-    console.log('asd', this.$route.params.id)
-  },
+
   methods: {
     tabChange(a, b, c) {
       console.log(a, b, c)
