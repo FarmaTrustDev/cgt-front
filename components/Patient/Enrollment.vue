@@ -4,7 +4,7 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <PatientEnrollmentForm :patient="patient" />
         <a-form-item>
-          <FormActionButton />
+          <FormActionButton :is-created="isCreated" />
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
         </a-form-item>
       </a-form>
@@ -23,19 +23,23 @@ export default {
       successResponse: '',
       formLayout: 'vertical',
       patient: {},
+      entityId: null,
+      isCreated: false,
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }),
     }
   },
   mounted() {
-    this.isCreated()
+    this.checkCreated()
   },
   methods: {
-    isCreated() {
+    checkCreated() {
       const patientId = this.$route.params.id
 
       if (patientId) {
+        this.entityId = patientId
+        this.isCreated = true
         this.fetch(patientId)
       }
     },
@@ -57,6 +61,21 @@ export default {
           this.loading = false
         }
       })
+    },
+    upsert(values) {
+      if (this.isCreated) {
+        return this.update(values)
+      }
+      return this.create(values)
+    },
+    update(values) {
+      PatientServices.update(this.entityId, values)
+        .then((response) => {
+          this.success(response.message)
+          this.goto(`/patients/enrollment/${response.data.globalId}`)
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = false))
     },
     create(values) {
       PatientServices.create(values)

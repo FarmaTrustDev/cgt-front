@@ -272,9 +272,9 @@
         >
           <a-input
             v-decorator="[
-              'PostCode',
+              'postCode',
               {
-                initialValue: patient.postcode,
+                initialValue: patient.postCode,
                 rules: [
                   { required: true, message: 'Please input your Post Code!' },
                 ],
