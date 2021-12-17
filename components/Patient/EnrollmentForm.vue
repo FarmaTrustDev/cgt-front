@@ -99,7 +99,7 @@
         >
           <a-date-picker
             v-decorator="[
-              'dob',
+              'dOB',
               {
                 initialValue: patient.dob,
                 rules: [

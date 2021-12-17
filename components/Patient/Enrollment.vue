@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-skeleton :loading="loading">
+    <a-spin :spinning="loading">
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <PatientEnrollmentForm :patient="patient" />
         <a-form-item>
@@ -8,7 +8,7 @@
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
         </a-form-item>
       </a-form>
-    </a-skeleton>
+    </a-spin>
   </div>
 </template>
 <script>
@@ -56,13 +56,14 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.create(values)
+          this.upsert(values)
         } else {
           this.loading = false
         }
       })
     },
     upsert(values) {
+      console.log(this.isCreated)
       if (this.isCreated) {
         return this.update(values)
       }
@@ -72,7 +73,7 @@ export default {
       PatientServices.update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
-          this.goto(`/patients/enrollment/${response.data.globalId}`)
+          // this.goto(`/patients/enrollment/${response.data.globalId}`)
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
