@@ -1,17 +1,17 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
 
-const baseApi = `${BASE_API}/user`
+const baseApi = `${BASE_API}/TreatmentType`
 
 function get(params = {}) {
   return request({
-    url: `${baseApi}/details`,
+    url: `${baseApi}`,
     params,
   })
 }
 
-const UserServices = {
+const TreatmentTypeServices = {
   get,
 }
 
-export default UserServices
+export default TreatmentTypeServices
