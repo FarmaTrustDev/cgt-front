@@ -1,5 +1,5 @@
 <template>
-  <a-form-item>
+  <a-form-item class="text-right">
     <a-button :type="btnType" html-type="submit">
       <slot name="icon" />{{ getText() }}</a-button
     >

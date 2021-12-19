@@ -52,6 +52,7 @@
           </a-select-option>
         </a-select></a-form-item
       >
+      <FormActionButton :is-created="isCreated" />
     </a-form>
   </div>
 </template>
@@ -69,6 +70,7 @@ export default {
   },
   data() {
     return {
+      isCreated: false,
       loading: false,
       treatmentType: {},
       typeLoading: true,
@@ -91,7 +93,7 @@ export default {
         .then((response) => {
           this.treatmentType = response.data
         })
-        .finally(() => (this.typeLoading = true))
+        .finally(() => (this.typeLoading = false))
     },
     fetchOrganization() {
       this.hospitalLoading = true
