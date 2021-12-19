@@ -51,3 +51,5 @@ export const GENDER = [
     name: 'Female',
   },
 ]
+
+export const HOSPITAL_ALIAS = 'HOSPITAL';

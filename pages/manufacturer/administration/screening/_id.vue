@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Screening Detail">
+  <page-layout :create="false" :loading="loading" title="Screening Detail">
     <template slot="content"> <create /> </template>
   </page-layout>
 </template>
