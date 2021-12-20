@@ -40,3 +40,16 @@ export const STATUSES = [
 ]
 
 export const BLOOD_TYPES = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
+
+export const GENDER = [
+  {
+    id: 1,
+    name: 'Male',
+  },
+  {
+    id: 2,
+    name: 'Female',
+  },
+]
+
+export const HOSPITAL_ALIAS = 'HOSPITAL';

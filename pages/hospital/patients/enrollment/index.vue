@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PatientEnrollment />
+    <PagesPatientEnrollment />
   </div>
 </template>
 

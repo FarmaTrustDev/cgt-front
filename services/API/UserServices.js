@@ -14,25 +14,16 @@ function users() {
     url: `${baseApi}/users`,
   })
 }
+
 function hospitals() {
   return request({
     url: `${baseApi}/hospitals`,
   })
 }
+
 function adminSubMenus() {
   return request({
     url: `${baseApi}/admin-menus`,
-  })
-}
-function getBlockedUsers() {
-  return request({
-    url: `${baseApi}/blocked-users`,
-  })
-}
-
-function getTimeTable() {
-  return request({
-    url: `${baseApi}/timetable`,
   })
 }
 
@@ -42,22 +33,11 @@ function profile() {
   })
 }
 
-function upsertTimeTable(data) {
-  return request({
-    url: `${baseApi}/timetable`,
-    method: 'post',
-    data,
-  })
-}
-
 const UserServices = {
   detail,
   adminSubMenus,
-  getBlockedUsers,
   users,
   hospitals,
-  getTimeTable,
-  upsertTimeTable,
   profile,
 }
 

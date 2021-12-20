@@ -99,7 +99,7 @@
         >
           <a-date-picker
             v-decorator="[
-              'dob',
+              'dOB',
               {
                 initialValue: patient.dob,
                 rules: [
@@ -140,8 +140,8 @@
             size="large"
             class="default-select"
           >
-            <a-select-option v-for="gender in Gender" :key="gender">
-              {{ gender }}
+            <a-select-option v-for="gender in Gender" :key="gender.id">
+              {{ gender.name }}
             </a-select-option>
           </a-select>
         </a-form-item></a-col
@@ -272,9 +272,9 @@
         >
           <a-input
             v-decorator="[
-              'PostCode',
+              'postCode',
               {
-                initialValue: patient.postcode,
+                initialValue: patient.postCode,
                 rules: [
                   { required: true, message: 'Please input your Post Code!' },
                 ],
@@ -312,13 +312,18 @@
 </template>
 
 <script>
-import { BLOOD_TYPES } from '~/services/Constant'
-const Gender = ['Male', 'Female']
+import { BLOOD_TYPES, GENDER } from '~/services/Constant'
+
 export default {
+  props: {
+    patient: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-      patient: {},
-      Gender,
+      Gender: GENDER,
       bloodType: BLOOD_TYPES,
     }
   },
