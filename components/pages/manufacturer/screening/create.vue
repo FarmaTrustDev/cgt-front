@@ -30,9 +30,9 @@
       <a-form-item>
         <a-select
           v-decorator="[
-            'HospitalIds',
+            'HospitalsId',
             {
-              initialValue: screeningTemplate.hospitalId,
+              initialValue: screeningTemplate.hospitalsId,
               rules: [
                 {
                   required: true,
@@ -52,12 +52,6 @@
             {{ hospital.name }}
           </a-select-option>
         </a-select>
-        <a-alert
-          closable
-          message="Selecting Treatment type load the Hospitals"
-          banner
-          type="warning"
-        />
       </a-form-item>
 
       <FormActionButton :is-created="isCreated" />
