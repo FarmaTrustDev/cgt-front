@@ -57,9 +57,12 @@
 
       <FormActionButton :loading="btnLoading" :is-created="isCreated" />
     </a-form>
-    <a-divider>Associate Screening</a-divider>
 
-    <CategoryTabs v-if="isCreated" :template-id="entity.id" />
+    <span v-if="isCreated">
+      <a-divider>Associate Screening</a-divider>
+
+      <CategoryTabs v-if="entity.id" :template-id="entity.id"
+    /></span>
   </div>
 </template>
 

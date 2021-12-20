@@ -24,7 +24,7 @@
       :footer="null"
       @cancel="handleCategoryModal(false)"
     >
-      <Form :template-id="templateId" />
+      <Form  :template-id="templateId" />
     </a-modal>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
       this.showCategoryModal = show
     },
     callback(key) {
-      console.log(key)
+      // console.log(key)
     },
     onEdit(targetKey, action) {
       this[action](targetKey)
