@@ -24,10 +24,20 @@ function create(data) {
   })
 }
 
+function update(id, data) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'Put',
+    data,
+  })
+}
+
+
 const ScreeningTemplateServices = {
   get,
   create,
   getById,
+  update
 }
 
 export default ScreeningTemplateServices

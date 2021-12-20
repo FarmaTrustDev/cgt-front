@@ -54,7 +54,7 @@
         </a-select>
       </a-form-item>
 
-      <FormActionButton :is-created="isCreated" />
+      <FormActionButton :loading="btnLoading" :is-created="isCreated" />
     </a-form>
   </div>
 </template>
@@ -84,6 +84,7 @@ export default {
       treatmentType: {},
       typeLoading: true,
       hospitalLoading: true,
+      btnLoading: false,
       form: this.$form.createForm(this, {
         name: 'screening',
       }),
@@ -122,13 +123,12 @@ export default {
         })
         .finally(() => (this.hospitalLoading = false))
     },
-    create(values) {
-      ScreeningTemplateServices.create(values).then((response) => {
-        this.success(response.message)
-        this.goto(
-          `/manufacturer/administration/screening/${response.data.globalId}`
-        )
-      })
+
+    upsert(values) {
+      if (this.isCreated) {
+        return this.update(values)
+      }
+      return this.create(values)
     },
     fetch(id) {
       this.loading = true
@@ -138,21 +138,30 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    create(values) {
+      ScreeningTemplateServices.create(values).then((response) => {
+        this.success(response.message)
+        this.goto(
+          `/manufacturer/administration/screening/${response.data.globalId}`
+        )
+      })
+    },
     update(values) {
+      this.btnLoading = true
       ScreeningTemplateServices.update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
           // this.goto(`/patients/enrollment/${response.data.globalId}`)
         })
         .catch(this.error)
-        .finally(() => (this.loading = false))
+        .finally(() => (this.btnLoading = false))
     },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.create(values)
+          this.upsert(values)
         } else {
           this.loading = false
         }
