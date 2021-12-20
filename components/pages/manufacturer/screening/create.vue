@@ -4,9 +4,9 @@
       <a-form-item>
         <a-select
           v-decorator="[
-            'Treatment Type',
+            'treatmentTypeId',
             {
-              initialValue: screeningTemplate.treatmentType,
+              initialValue: entity.treatmentTypeId,
               rules: [
                 {
                   required: true,
@@ -26,12 +26,13 @@
           </a-select-option>
         </a-select></a-form-item
       >
+
       <a-form-item>
         <a-select
           v-decorator="[
-            'Hospital',
+            'HospitalsId',
             {
-              initialValue: screeningTemplate.hospitalId,
+              initialValue: entity.hospitalsId,
               rules: [
                 {
                   required: true,
@@ -50,9 +51,10 @@
           <a-select-option v-for="hospital in hospitals" :key="hospital.id">
             {{ hospital.name }}
           </a-select-option>
-        </a-select></a-form-item
-      >
-      <FormActionButton :is-created="isCreated" />
+        </a-select>
+      </a-form-item>
+
+      <FormActionButton :loading="btnLoading" :is-created="isCreated" />
     </a-form>
   </div>
 </template>
@@ -60,26 +62,38 @@
 <script>
 import TreatmentService from '~/services/API/TreatmentTypeServices'
 import OrganizationServices from '~/services/API/OrganizationServices'
+import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 import { HOSPITAL_ALIAS } from '~/services/Constant'
+import routeHelpers from '~/mixins/route-helpers'
+import nullHelper from '~/mixins/null-helpers'
+import notifications from '~/mixins/notifications'
+import withCrud from '~/mixins/with-crud'
 export default {
+  mixins: [notifications, routeHelpers, nullHelper, withCrud],
   props: {
-    screeningTemplate: {
-      default: () => ({}),
-      type: Object,
-    },
+    // screeningTemplate: {
+    //   default: () => ({}),
+    //   type: Object,
+    // },
   },
   data() {
     return {
+      screeningTemplate: {},
+      entityId: null,
       isCreated: false,
       loading: false,
       treatmentType: {},
+      entity: {},
       typeLoading: true,
       hospitalLoading: true,
+      btnLoading: false,
       form: this.$form.createForm(this, {
         name: 'screening',
       }),
       hospitals: [],
       formLayout: 'vertical',
+      apiService: ScreeningTemplateServices,
+      gotoLink: '/manufacturer/administration/screening',
     }
   },
   mounted() {
@@ -103,7 +117,6 @@ export default {
         })
         .finally(() => (this.hospitalLoading = false))
     },
-    onSubmit() {},
   },
 }
 </script>

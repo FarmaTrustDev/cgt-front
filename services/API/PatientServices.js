@@ -19,7 +19,7 @@ function update(id, data) {
   })
 }
 
-function get(id) {
+function getById(id) {
   return request({
     url: `${baseApi}/${id}`,
   })
@@ -28,7 +28,7 @@ function get(id) {
 const PatientServices = {
   create,
   update,
-  get,
+  getById,
 }
 
 export default PatientServices

@@ -45,7 +45,7 @@ export default {
     },
     fetch(id) {
       this.loading = true
-      PatientServices.get(id)
+      PatientServices.getById(id)
         .then((response) => {
           this.patient = response.data
         })
@@ -63,7 +63,6 @@ export default {
       })
     },
     upsert(values) {
-      console.log(this.isCreated)
       if (this.isCreated) {
         return this.update(values)
       }

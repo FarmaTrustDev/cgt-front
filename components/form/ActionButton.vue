@@ -1,6 +1,6 @@
 <template>
   <a-form-item class="text-right">
-    <a-button :type="btnType" html-type="submit">
+    <a-button :loading="loading" :type="btnType" html-type="submit">
       <slot name="icon" />{{ getText() }}</a-button
     >
     <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
@@ -17,6 +17,7 @@ export default {
     isCreated: { default: false, type: Boolean },
     text: { default: defaultText, type: String },
     btnType: { default: 'primary', type: String },
+    loading: { default: false, type: Boolean },
   },
   data() {
     return {}
