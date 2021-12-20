@@ -67,8 +67,9 @@ import { HOSPITAL_ALIAS } from '~/services/Constant'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
+import withCrud from '~/mixins/with-crud'
 export default {
-  mixins: [notifications, routeHelpers, nullHelper],
+  mixins: [notifications, routeHelpers, nullHelper, withCrud],
   props: {
     // screeningTemplate: {
     //   default: () => ({}),
@@ -90,23 +91,14 @@ export default {
       }),
       hospitals: [],
       formLayout: 'vertical',
+      apiService: ScreeningTemplateServices,
     }
   },
   mounted() {
     this.fetchTreatmentTypes()
     this.fetchOrganization()
-    this.checkCreated()
   },
   methods: {
-    checkCreated() {
-      const entityId = this.$route.params.id
-
-      if (this.isGuid(entityId)) {
-        this.entityId = entityId
-        this.isCreated = true
-        this.fetch(entityId)
-      }
-    },
     fetchTreatmentTypes() {
       this.typeLoading = true
       TreatmentService.get()
@@ -122,50 +114,6 @@ export default {
           this.hospitals = response.data
         })
         .finally(() => (this.hospitalLoading = false))
-    },
-
-    upsert(values) {
-      if (this.isCreated) {
-        return this.update(values)
-      }
-      return this.create(values)
-    },
-    fetch(id) {
-      this.loading = true
-      ScreeningTemplateServices.getById(id)
-        .then((response) => {
-          this.screeningTemplate = response.data
-        })
-        .finally(() => (this.loading = false))
-    },
-    create(values) {
-      ScreeningTemplateServices.create(values).then((response) => {
-        this.success(response.message)
-        this.goto(
-          `/manufacturer/administration/screening/${response.data.globalId}`
-        )
-      })
-    },
-    update(values) {
-      this.btnLoading = true
-      ScreeningTemplateServices.update(this.entityId, values)
-        .then((response) => {
-          this.success(response.message)
-          // this.goto(`/patients/enrollment/${response.data.globalId}`)
-        })
-        .catch(this.error)
-        .finally(() => (this.btnLoading = false))
-    },
-    onSubmit(e) {
-      this.loading = true
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          this.upsert(values)
-        } else {
-          this.loading = false
-        }
-      })
     },
   },
 }
