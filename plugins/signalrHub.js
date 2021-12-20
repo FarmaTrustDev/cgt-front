@@ -2,7 +2,7 @@ import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
 
 export default ({ app, store }, inject) => {
   const hub = new HubConnectionBuilder()
-    .withUrl('https://localhost:44332/NotificationUserHub?userId=1')
+    .withUrl('http://localhost:22462/NotificationUserHub?userId=1')
     .configureLogging(LogLevel.Information)
     .build()
 
@@ -16,21 +16,22 @@ export default ({ app, store }, inject) => {
     console.warn('Disconnected from SignalR Hub.', message)
   })
 
-  hub.on('ReceiveMessage', res => {
+  hub.on('sendToUser', res => {
+    debugger
     console.log('Received message from signalr', JSON.stringify(res))
     // const { audience, group, action, data } = res
-    const { action, data } = res
-    switch (action) {
-      case 'bookmark_created':
-      case 'bookmark_updated':
-        store.commit('addOrUpdateBookmark', data.bookmark)
-        break
-      case 'bookmark_deleted':
-        store.commit('removeBookmark', data.bookmark.id)
-        break
-      default:
-        break
-    }
+    // const { action, data } = res
+    // switch (action) {
+    //   case 'bookmark_created':
+    //   case 'bookmark_updated':
+    //     store.commit('addOrUpdateBookmark', data.bookmark)
+    //     break
+    //   case 'bookmark_deleted':
+    //     store.commit('removeBookmark', data.bookmark.id)
+    //     break
+    //   default:
+    //     break
+    // }
   })
 
   hub.start().catch(function(err) {

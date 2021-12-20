@@ -9,6 +9,8 @@
   </div>
 </template>
 <script>
+import OrganizationServices from '~/services/API/OrganizationServices'
+
 export default {
   data() {
     return {
@@ -29,6 +31,11 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log(values)
+          OrganizationServices.post(values)
+            .then((response) => {
+              console.log(response.data)
+            })
+            .finally(() => (this.loading = false))
         } else {
           this.loading = false
         }
