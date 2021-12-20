@@ -9,11 +9,16 @@ function get(params = {}) {
     params,
   })
 }
-function post(data) {
+function create(data) {
   return request({
     url: `${baseApi}`,
     data,
     method: 'POST',
+  })
+}
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
   })
 }
 function put(data) {
@@ -31,9 +36,10 @@ function destroy(id) {
 }
 const OrganizationServices = {
   get,
-  post,
+  create,
   destroy,
-  put
+  put,
+  getById
 }
 
 export default OrganizationServices

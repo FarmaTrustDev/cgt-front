@@ -1,13 +1,14 @@
 <template>
   <page-layout :create="false" :loading="loading" title="Organizations">
-    <template slot="content"> <Organizations /> </template>
+    <template slot="content"> <organizations /> </template>
   </page-layout>
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import Organizations from '~/components/organizations/organizations'
+import organizations from '~/components/organizations/form'
+
 export default {
-  components: { 'page-layout': PageLayout, Organizations },
+  components: { 'page-layout': PageLayout, organizations },
   data() {
     return {
       loading: false,

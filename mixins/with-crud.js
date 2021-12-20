@@ -51,6 +51,7 @@ export default {
     create(values) {
       this.apiService.create(values).then((response) => {
         this.success(response.message)
+        console.log(`${this.gotoLink}/${response.data.globalId}`)
         this.goto(`${this.gotoLink}/${response.data.globalId}`)
       })
     },
