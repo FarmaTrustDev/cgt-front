@@ -18,10 +18,13 @@ export default {
       loading: false,
       btnLoading: false,
       formLayout: 'vertical',
+      shouldCheckCreated: true,
     }
   },
   mounted() {
-    this.checkCreated()
+    if (this.shouldCheckCreated) {
+      this.checkCreated()
+    }
   },
   methods: {
     checkCreated() {
@@ -51,7 +54,9 @@ export default {
     create(values) {
       this.apiService.create(values).then((response) => {
         this.success(response.message)
-        this.goto(`${this.gotoLink}/${response.data.globalId}`)
+        if (!this.isEmpty(this.gotoLink)) {
+          this.goto(`${this.gotoLink}/${response.data.globalId}`)
+        }
       })
     },
     update(values) {
