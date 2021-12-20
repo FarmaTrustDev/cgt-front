@@ -6,7 +6,7 @@
           v-decorator="[
             'treatmentTypeId',
             {
-              initialValue: screeningTemplate.treatmentTypeId,
+              initialValue: entity.treatmentTypeId,
               rules: [
                 {
                   required: true,
@@ -32,7 +32,7 @@
           v-decorator="[
             'HospitalsId',
             {
-              initialValue: screeningTemplate.hospitalsId,
+              initialValue: entity.hospitalsId,
               rules: [
                 {
                   required: true,
@@ -83,6 +83,7 @@ export default {
       isCreated: false,
       loading: false,
       treatmentType: {},
+      entity: {},
       typeLoading: true,
       hospitalLoading: true,
       btnLoading: false,

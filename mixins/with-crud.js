@@ -8,18 +8,15 @@ export default {
     //   type: Boolean,
     //   default: false,
     // },
-    service: { type: Object, default: () => {}, required: true },
+    // service: { type: Object, default: () => {}, required: true },
   },
   data() {
     return {
       entityId: null,
       isCreated: false,
-      entity: null,
+      entity: {},
       loading: false,
       btnLoading: false,
-      form: this.$form.createForm(this, {
-        name: 'screening',
-      }),
       formLayout: 'vertical',
     }
   },
