@@ -26,6 +26,7 @@
           </a-select-option>
         </a-select></a-form-item
       >
+
       <a-form-item>
         <a-select
           v-decorator="[
@@ -50,8 +51,10 @@
           <a-select-option v-for="hospital in hospitals" :key="hospital.id">
             {{ hospital.name }}
           </a-select-option>
-        </a-select></a-form-item
+        </a-select> <a-alert closable message="Selecting Treatment type load the Hospitals" banner type="warning" />
+        </a-form-item
       >
+     
       <FormActionButton :is-created="isCreated" />
     </a-form>
   </div>
@@ -103,7 +106,20 @@ export default {
         })
         .finally(() => (this.hospitalLoading = false))
     },
-    onSubmit() {},
+    create(values) {
+      console.log(values)
+    },
+    onSubmit(e) {
+      this.loading = true
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.create(values)
+        } else {
+          this.loading = false
+        }
+      })
+    },
   },
 }
 </script>
