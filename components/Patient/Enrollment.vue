@@ -63,7 +63,6 @@ export default {
       })
     },
     upsert(values) {
-      console.log(this.isCreated)
       if (this.isCreated) {
         return this.update(values)
       }

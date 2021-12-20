@@ -4,7 +4,7 @@
       <a-form-item>
         <a-select
           v-decorator="[
-            'Treatment Type',
+            'treatmentTypeId',
             {
               initialValue: screeningTemplate.treatmentType,
               rules: [
@@ -30,7 +30,7 @@
       <a-form-item>
         <a-select
           v-decorator="[
-            'Hospital',
+            'HospitalIds',
             {
               initialValue: screeningTemplate.hospitalId,
               rules: [
@@ -51,10 +51,15 @@
           <a-select-option v-for="hospital in hospitals" :key="hospital.id">
             {{ hospital.name }}
           </a-select-option>
-        </a-select> <a-alert closable message="Selecting Treatment type load the Hospitals" banner type="warning" />
-        </a-form-item
-      >
-     
+        </a-select>
+        <a-alert
+          closable
+          message="Selecting Treatment type load the Hospitals"
+          banner
+          type="warning"
+        />
+      </a-form-item>
+
       <FormActionButton :is-created="isCreated" />
     </a-form>
   </div>
@@ -63,8 +68,12 @@
 <script>
 import TreatmentService from '~/services/API/TreatmentTypeServices'
 import OrganizationServices from '~/services/API/OrganizationServices'
+import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 import { HOSPITAL_ALIAS } from '~/services/Constant'
+import routeHelpers from '~/mixins/route-helpers'
+import notifications from '~/mixins/notifications'
 export default {
+  mixins: [notifications, routeHelpers],
   props: {
     screeningTemplate: {
       default: () => ({}),
@@ -107,7 +116,12 @@ export default {
         .finally(() => (this.hospitalLoading = false))
     },
     create(values) {
-      console.log(values)
+      ScreeningTemplateServices.create(values).then((response) => {
+        this.success(response.message)
+        this.goto(
+          `/manufacturer/administration/screening/${response.data.globalId}`
+        )
+      })
     },
     onSubmit(e) {
       this.loading = true
