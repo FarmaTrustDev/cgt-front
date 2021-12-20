@@ -54,9 +54,7 @@ export default {
     create(values) {
       this.apiService.create(values).then((response) => {
         this.success(response.message)
-        this.goto(
-          `/manufacturer/administration/screening/${response.data.globalId}`
-        )
+        this.goto(`${this.gotoLink}/${response.data.globalId}`)
       })
     },
     update(values) {
@@ -65,7 +63,6 @@ export default {
         .update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
-          // this.goto(`/patients/enrollment/${response.data.globalId}`)
         })
         .catch(this.error)
         .finally(() => (this.btnLoading = false))

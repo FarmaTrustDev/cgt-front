@@ -92,6 +92,7 @@ export default {
       hospitals: [],
       formLayout: 'vertical',
       apiService: ScreeningTemplateServices,
+      gotoLink: '/manufacturer/administration/screening',
     }
   },
   mounted() {
