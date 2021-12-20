@@ -10,6 +10,12 @@ function get(params = {}) {
   })
 }
 
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+  })
+}
+
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -21,6 +27,7 @@ function create(data) {
 const ScreeningTemplateServices = {
   get,
   create,
+  getById,
 }
 
 export default ScreeningTemplateServices

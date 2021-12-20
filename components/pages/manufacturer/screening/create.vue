@@ -6,7 +6,7 @@
           v-decorator="[
             'treatmentTypeId',
             {
-              initialValue: screeningTemplate.treatmentType,
+              initialValue: screeningTemplate.treatmentTypeId,
               rules: [
                 {
                   required: true,
@@ -71,17 +71,20 @@ import OrganizationServices from '~/services/API/OrganizationServices'
 import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 import { HOSPITAL_ALIAS } from '~/services/Constant'
 import routeHelpers from '~/mixins/route-helpers'
+import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 export default {
-  mixins: [notifications, routeHelpers],
+  mixins: [notifications, routeHelpers, nullHelper],
   props: {
-    screeningTemplate: {
-      default: () => ({}),
-      type: Object,
-    },
+    // screeningTemplate: {
+    //   default: () => ({}),
+    //   type: Object,
+    // },
   },
   data() {
     return {
+      screeningTemplate: {},
+      entityId: null,
       isCreated: false,
       loading: false,
       treatmentType: {},
@@ -97,8 +100,18 @@ export default {
   mounted() {
     this.fetchTreatmentTypes()
     this.fetchOrganization()
+    this.checkCreated()
   },
   methods: {
+    checkCreated() {
+      const entityId = this.$route.params.id
+
+      if (this.isGuid(entityId)) {
+        this.entityId = entityId
+        this.isCreated = true
+        this.fetch(entityId)
+      }
+    },
     fetchTreatmentTypes() {
       this.typeLoading = true
       TreatmentService.get()
@@ -122,6 +135,23 @@ export default {
           `/manufacturer/administration/screening/${response.data.globalId}`
         )
       })
+    },
+    fetch(id) {
+      this.loading = true
+      ScreeningTemplateServices.getById(id)
+        .then((response) => {
+          this.screeningTemplate = response.data
+        })
+        .finally(() => (this.loading = false))
+    },
+    update(values) {
+      ScreeningTemplateServices.update(this.entityId, values)
+        .then((response) => {
+          this.success(response.message)
+          // this.goto(`/patients/enrollment/${response.data.globalId}`)
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = false))
     },
     onSubmit(e) {
       this.loading = true
