@@ -1,5 +1,5 @@
 <template>
-  <page-layout :create="false" :loading="loading" title="Organizations">
+  <page-layout :create="false" :loading="loading" title="Users">
     <template slot="content">
      <formfield />
     </template>
@@ -8,22 +8,15 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 
-import formfield from '~/components/organizations/form'
+import formfield from '~/components/pages/user/form/index.vue'
 export default {
   components: { 'page-layout': PageLayout,formfield },
-  props: {
-    organization: {
-      type: Object,
-      default: () => {},
-      required: false,
-    },
-  },
   data() {
     return {
       loading: false,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
-        name: 'OrganizationsCreate',
+        name: 'UsersCreate',
       }),
 
     }

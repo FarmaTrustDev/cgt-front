@@ -14,7 +14,6 @@ function users() {
     url: `${baseApi}/users`,
   })
 }
-
 function hospitals() {
   return request({
     url: `${baseApi}/hospitals`,
@@ -32,13 +31,47 @@ function profile() {
     url: `${baseApi}/profile`,
   })
 }
-
+function get() {
+  return request({
+    url: `${baseApi}`,
+  })
+}
+function create(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'POST',
+  })
+}
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+  })
+}
+function put(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'put',
+  })
+}
+function destroy(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'DELETE',
+  })
+}
 const UserServices = {
   detail,
   adminSubMenus,
   users,
   hospitals,
   profile,
+  create,
+  getById,
+  put,
+  destroy,
+  get
 }
 
 export default UserServices

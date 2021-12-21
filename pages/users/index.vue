@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Organizations">
+  <page-layout :loading="loading" title="Users">
     <template slot="content">
       <a-table
         :columns="columns"
@@ -7,7 +7,7 @@
         :data-source="datasource"
       >
         <template slot="action" slot-scope="action">
-          <a-button type="link" @click="goto(`/organizationsType/${action.globalId}`)"
+          <a-button type="link" @click="goto(`/users/${action.globalId}`)"
             ><a-icon type="edit"
           /></a-button>
 
@@ -22,32 +22,37 @@
   </page-layout>
 </template>
 <script>
-import OrganizationServicesServices from '~/services/API/OrganizationTypeServices'
+import UserServices from '~/services/API/UserServices'
 // import { success } from '~/services/Helpers/notifications'
 import routeHelpers from '~/mixins/route-helpers'
 
 import PageLayout from '~/components/layout/PageLayout'
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'firstName',
+    dataIndex: 'firstName',
+    key: 'firstName',
   },
-  // {
-  //   title: 'Email',
-  //   key: 'email',
-  //   dataIndex: 'email',
-  // },
-  // {
-  //   title: 'Phone',
-  //   key: 'phone',
-  //   dataIndex: 'phone',
-  // },
-  // {
-  //   title: 'Address',
-  //   key: 'address',
-  //   dataIndex: 'address',
-  // },
+  {
+    title: 'Email',
+    key: 'email',
+    dataIndex: 'email',
+  }, 
+  {
+    title: 'UserName',
+    key: 'userName',
+    dataIndex: 'userName',
+  },
+  {
+    title: 'Phone',
+    key: 'phone',
+    dataIndex: 'phone',
+  },
+  {
+    title: 'Address',
+    key: 'address',
+    dataIndex: 'address',
+  },
   {
     title: 'Action',
     key: 'action',
@@ -69,7 +74,7 @@ export default {
   },
   methods: {
     fetch() {
-      OrganizationServicesServices.get()
+      UserServices.get()
         .then((response) => {
           this.datasource = response.data
         })
