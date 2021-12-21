@@ -71,6 +71,7 @@ export default {
     this.fetchList()
   },
   methods: {
+    tabClick() {},
     handleCategoryModal(show) {
       this.showCategoryModal = show
     },
@@ -78,13 +79,13 @@ export default {
       this.fetchList()
       this.handleCategoryModal(false)
     },
-    onEdit(targetKey, action, r) {   
+    onEdit(targetKey, action, r) {
       this[action](targetKey)
     },
     callback(key) {
       // console.log(key)
     },
-    remove(key, asd) {     
+    remove(key, asd) {
       this.setCurrentId(key)
       this.handleCategoryModal(true)
     },

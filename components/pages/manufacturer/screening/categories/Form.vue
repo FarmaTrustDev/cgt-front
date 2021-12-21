@@ -48,7 +48,7 @@ export default {
     },
     // eslint-disable-next-line vue/require-default-prop
     categoryId: {
-      type: Number,
+      type: String,
     },
   },
   data() {
@@ -72,7 +72,7 @@ export default {
       ScreeningCategoryServices.getById(this.categoryId)
         .then((response) => {
           this.entity = response.data
-          this.entityId = this.entity.id
+          this.entityId = this.entity.globalId
         })
         .finally(() => (this.loading = false))
     }
@@ -81,6 +81,10 @@ export default {
     afterCreate(response) {
       this.$emit('upsert', response)
     },
+    afterUpdate(response) {
+      this.$emit('upsert', response)
+    },
+
   },
 }
 </script>
