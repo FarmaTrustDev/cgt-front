@@ -31,7 +31,7 @@
           />
         </a-form-item>
         <FormActionButton :loading="btnLoading" :is-created="isCreated">
-          <FormDeleteButton slot="extra" @delete="onDelete" />
+          <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" />
         </FormActionButton>
       </a-form>
     </a-skeleton>

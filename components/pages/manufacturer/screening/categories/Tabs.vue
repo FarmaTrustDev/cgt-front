@@ -16,7 +16,7 @@
           :closable="pane.closable"
           :editable="pane.closable"
         >
-          <TabContent :category-id="pane.globalId" />
+          <TabContent :category="pane" />
         </a-tab-pane>
         <!-- // adding button -->
         <a-button slot="tabBarExtraContent" type="primary" @click="add">

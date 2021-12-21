@@ -1,7 +1,7 @@
 <template>
   <div>
     <FormActionButton text="Add Screening" @click="handleCategoryModal(true)" />
-    {{ categoryId }}
+    {{ category }}
     <a-alert
       v-if="data.length <= 0"
       type="info"
@@ -33,7 +33,7 @@
       @cancel="handleCategoryModal(false)"
     >
       <Form
-        :category-id="categoryId"
+        :category="category"
         @close="handleCategoryModal"
         @upsert="handleUpsert"
       />
@@ -46,9 +46,14 @@ const data = []
 export default {
   components: { Form },
   props: {
-    categoryId: {
-      type: String,
+    // categoryId: {
+    //   type: String,
+    //   required: true,
+    // },
+    category: {
+      type: Object,
       required: true,
+      default: () => ({}),
     },
   },
   data() {

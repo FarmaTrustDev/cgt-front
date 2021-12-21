@@ -21,17 +21,17 @@
           />
           <a-input
             v-decorator="[
-              `templateId`,
+              `categoryId`,
               {
                 rules: [{ required: true, message: 'Please input your name!' }],
-                initialValue: categoryId,
+                initialValue: category.id,
               },
             ]"
             type="hidden"
           />
         </a-form-item>
         <FormActionButton :loading="btnLoading" :is-created="isCreated">
-          <FormDeleteButton slot="extra" @delete="onDelete" />
+          <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" />
         </FormActionButton>
       </a-form>
     </a-skeleton>
@@ -39,14 +39,19 @@
 </template>
 <script>
 import withCrud from '~/mixins/with-crud'
-import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
+import ScreeningServices from '~/services/API/ScreeningServices'
 import nullHelper from '~/mixins/null-helpers'
 export default {
   mixins: [withCrud, nullHelper],
   props: {
-    categoryId: {
-      type: String,
+    // categoryId: {
+    //   type: String,
+    //   required: true,
+    // },
+    category: {
+      type: Object,
       required: true,
+      default: () => ({}),
     },
   },
   data() {
@@ -58,21 +63,21 @@ export default {
         name: 'screening',
       }),
       formLayout: 'vertical',
-      apiService: ScreeningCategoryServices,
+      apiService: ScreeningServices,
       fetchIdFromParams: false,
       isCreated: false,
     }
   },
   mounted() {
-    if (!this.isEmpty(this.categoryId)) {
+    if (!this.isEmpty(this.screening)) {
       this.isCreated = true
       this.loading = true
-      ScreeningCategoryServices.getById(this.categoryId)
-        .then((response) => {
-          this.entity = response.data
-          this.entityId = this.entity.globalId
-        })
-        .finally(() => (this.loading = false))
+      // ScreeningCategoryServices.getById(this.screening)
+      //   .then((response) => {
+      //     this.entity = response.data
+      //     this.entityId = this.entity.globalId
+      //   })
+      //   .finally(() => (this.loading = false))
     }
   },
   methods: {
