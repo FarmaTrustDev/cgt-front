@@ -3,20 +3,29 @@
     <div :style="{ marginBottom: '16px' }">
       <a-button @click="add"> Add Category </a-button>
     </div>
-    <a-tabs v-model="activeKey" hide-add type="editable-card" @edit="onEdit">
-      <a-tab-pane
-        v-for="pane in panes"
-        :key="pane.key"
-        :tab="pane.title"
-        :closable="pane.closable"
-      >
-        <a-button slot="tabBarExtraContent" type="primary"
-          >tabBarExtraContent</a-button
-        >
-        {{ pane.content }}
-      </a-tab-pane>
-    </a-tabs>
 
+    <!-- Tabs -->
+    <a-spin :spinning="loading">
+      <a-tabs
+        v-model="activeKey"
+        hide-add
+        type="editable-card"
+        @tabClick="tabClick"
+        @edit="onEdit"
+      >
+        <a-tab-pane
+          v-for="pane in panes"
+          :key="pane.globalId"
+          :tab="pane.name"
+          :closable="pane.closable"
+          :editable="pane.closable"
+        >
+          <!-- {{ pane.content }} -->
+        </a-tab-pane>
+      </a-tabs>
+
+      <!-- Tabs -->
+    </a-spin>
     <a-modal
       v-model="showCategoryModal"
       :destroy-on-close="true"
@@ -25,6 +34,7 @@
       @cancel="handleCategoryModal(false)"
     >
       <Form
+        :category-id="currentCategoryId"
         :template-id="templateId"
         @close="handleCategoryModal"
         @upsert="handleCategory"
@@ -34,6 +44,7 @@
 </template>
 <script>
 import Form from '~/components/pages/manufacturer/screening/categories/Form'
+import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 export default {
   components: { Form },
   props: {
@@ -44,33 +55,58 @@ export default {
   },
   data() {
     const panes = [
-      { title: 'Tab 1', content: 'Content of Tab 1', key: '1' },
-      { title: 'Tab 2', content: 'Content of Tab 2', key: '2' },
+      // { title: 'Tab 1', content: 'Content of Tab 1', key: '1' },
+      // { title: 'Tab 2', content: 'Content of Tab 2', key: '2' },
     ]
     return {
+      currentCategoryId: null,
       activeKey: null,
       panes,
       newTabIndex: 0,
       showCategoryModal: false,
+      loading: true,
     }
+  },
+  mounted() {
+    this.fetchList()
   },
   methods: {
     handleCategoryModal(show) {
       this.showCategoryModal = show
     },
     handleCategory(response) {
+      this.fetchList()
       this.handleCategoryModal(false)
+    },
+    onEdit(targetKey, action, r) {   
+      this[action](targetKey)
     },
     callback(key) {
       // console.log(key)
     },
-    onEdit(targetKey, action) {
-      this[action](targetKey)
-    },
-    add() {
+    remove(key, asd) {     
+      this.setCurrentId(key)
       this.handleCategoryModal(true)
     },
-    remove(targetKey) {},
+    setCurrentId(key) {
+      this.currentCategoryId = key
+    },
+    add() {
+      this.setCurrentId(null)
+      this.handleCategoryModal(true)
+    },
+    fetchList() {
+      this.loading = true
+      ScreeningCategoryServices.get({
+        screeningTemplateId: this.templateId,
+      })
+        .then((response) => {
+          this.panes = response.data
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
   },
 }
 </script>
