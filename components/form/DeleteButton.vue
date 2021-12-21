@@ -8,7 +8,7 @@
     <template slot="title">
       <p>{{ text }}</p>
     </template>
-    <a-button html-type="button" type="danger">{{ btnText }}</a-button>
+    <a-button html-type="button" ghost type="danger">{{ btnText }}</a-button>
   </a-popconfirm>
 </template>
 <script>
