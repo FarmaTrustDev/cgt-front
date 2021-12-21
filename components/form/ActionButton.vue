@@ -1,7 +1,12 @@
 <template>
   <a-form-item class="text-right">
     <slot name="extra" />
-    <a-button :loading="loading" :type="btnType" html-type="submit">
+    <a-button
+      :loading="loading"
+      :type="btnType"
+      html-type="submit"
+      @click="submit"
+    >
       <slot name="icon" />{{ getText() }}</a-button
     >
   </a-form-item>
@@ -31,6 +36,9 @@ export default {
         return 'Update'
       }
       return this.text
+    },
+    submit() {
+      this.$emit('click')
     },
   },
 }

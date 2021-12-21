@@ -18,13 +18,13 @@ export default {
       loading: false,
       btnLoading: false,
       formLayout: 'vertical',
-      shouldCheckCreated: true,
+      fetchIdFromParams: true,
       // afterUpdate: null,
       // afterCreate: null,
     }
   },
   mounted() {
-    if (this.shouldCheckCreated) {
+    if (this.fetchIdFromParams) {
       this.checkCreated()
     }
   },

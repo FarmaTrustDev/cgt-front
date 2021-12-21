@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div :style="{ marginBottom: '16px' }">
-      <a-button @click="add"> Add Category </a-button>
-    </div>
-
     <!-- Tabs -->
     <a-spin :spinning="loading">
       <a-tabs
@@ -20,8 +16,12 @@
           :closable="pane.closable"
           :editable="pane.closable"
         >
-          <!-- {{ pane.content }} -->
+          <TabContent :category-id="pane.globalId" />
         </a-tab-pane>
+        <!-- // adding button -->
+        <a-button slot="tabBarExtraContent" type="primary" @click="add">
+          Add Category
+        </a-button>
       </a-tabs>
 
       <!-- Tabs -->
@@ -44,9 +44,10 @@
 </template>
 <script>
 import Form from '~/components/pages/manufacturer/screening/categories/Form'
+import TabContent from '~/components/pages/manufacturer/screening/categories/TabContent'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 export default {
-  components: { Form },
+  components: { Form, TabContent },
   props: {
     templateId: {
       required: true,
@@ -54,14 +55,10 @@ export default {
     },
   },
   data() {
-    const panes = [
-      // { title: 'Tab 1', content: 'Content of Tab 1', key: '1' },
-      // { title: 'Tab 2', content: 'Content of Tab 2', key: '2' },
-    ]
     return {
       currentCategoryId: null,
       activeKey: null,
-      panes,
+      panes: [],
       newTabIndex: 0,
       showCategoryModal: false,
       loading: true,

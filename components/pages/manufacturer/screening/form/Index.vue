@@ -24,7 +24,7 @@
               `templateId`,
               {
                 rules: [{ required: true, message: 'Please input your name!' }],
-                initialValue: templateId,
+                initialValue: categoryId,
               },
             ]"
             type="hidden"
@@ -44,13 +44,9 @@ import nullHelper from '~/mixins/null-helpers'
 export default {
   mixins: [withCrud, nullHelper],
   props: {
-    templateId: {
-      required: true,
-      type: Number,
-    },
-    // eslint-disable-next-line vue/require-default-prop
     categoryId: {
       type: String,
+      required: true,
     },
   },
   data() {
@@ -59,7 +55,7 @@ export default {
       loading: false,
       entity: {},
       form: this.$form.createForm(this, {
-        name: 'screeningCategory',
+        name: 'screening',
       }),
       formLayout: 'vertical',
       apiService: ScreeningCategoryServices,
