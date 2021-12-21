@@ -10,5 +10,8 @@ export default {
       const match = regex.exec(value)
       return match != null
     },
+    isFunction(func) {
+      return typeof func === 'function'
+    },
   },
 }

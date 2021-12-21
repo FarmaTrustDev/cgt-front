@@ -15,6 +15,7 @@
               ],
             },
           ]"
+          :disabled="isCreated"
           :loading="typeLoading"
           placeholder="Select Treatment Type"
           style="width: 100%"
@@ -56,6 +57,12 @@
 
       <FormActionButton :loading="btnLoading" :is-created="isCreated" />
     </a-form>
+
+    <span v-if="isCreated">
+      <a-divider>Associate Screening</a-divider>
+
+      <CategoryTabs v-if="entity.id" :template-id="entity.id"
+    /></span>
   </div>
 </template>
 
@@ -64,18 +71,11 @@ import TreatmentService from '~/services/API/TreatmentTypeServices'
 import OrganizationServices from '~/services/API/OrganizationServices'
 import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 import { HOSPITAL_ALIAS } from '~/services/Constant'
-import routeHelpers from '~/mixins/route-helpers'
-import nullHelper from '~/mixins/null-helpers'
-import notifications from '~/mixins/notifications'
+import CategoryTabs from '~/components/pages/manufacturer/screening/categories/Tabs'
 import withCrud from '~/mixins/with-crud'
 export default {
-  mixins: [notifications, routeHelpers, nullHelper, withCrud],
-  props: {
-    // screeningTemplate: {
-    //   default: () => ({}),
-    //   type: Object,
-    // },
-  },
+  components: { CategoryTabs },
+  mixins: [withCrud],
   data() {
     return {
       screeningTemplate: {},

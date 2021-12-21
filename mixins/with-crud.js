@@ -18,15 +18,19 @@ export default {
       loading: false,
       btnLoading: false,
       formLayout: 'vertical',
+      shouldCheckCreated: true,
+      // afterUpdate: null,
+      // afterCreate: null,
     }
   },
   mounted() {
-    this.checkCreated()
+    if (this.shouldCheckCreated) {
+      this.checkCreated()
+    }
   },
   methods: {
     checkCreated() {
       const entityId = this.$route.params.id
-
       if (this.isGuid(entityId)) {
         this.entityId = entityId
         this.isCreated = true
@@ -51,7 +55,12 @@ export default {
     create(values) {
       this.apiService.create(values).then((response) => {
         this.success(response.message)
-        this.goto(`${this.gotoLink}/${response.data.globalId}`)
+        if (!this.isEmpty(this.gotoLink)) {
+          this.goto(`${this.gotoLink}/${response.data.globalId}`)
+        }
+        if (this.isFunction(this.afterCreate)) {
+          this.afterCreate(response)
+        }
       })
     },
     update(values) {
@@ -60,6 +69,9 @@ export default {
         .update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
+          if (this.isFunction(this.afterUpdate)) {
+            this.afterUpdate(response)
+          }
         })
         .catch(this.error)
         .finally(() => (this.btnLoading = false))
