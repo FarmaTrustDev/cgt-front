@@ -87,5 +87,8 @@ export default {
         }
       })
     },
+    onDelete(e) {
+      console.log('Delete', e)
+    },
   },
 }

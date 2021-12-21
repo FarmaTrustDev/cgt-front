@@ -30,7 +30,9 @@
             type="hidden"
           />
         </a-form-item>
-        <FormActionButton :loading="btnLoading" :is-created="isCreated" />
+        <FormActionButton :loading="btnLoading" :is-created="isCreated">
+          <FormDeleteButton slot="extra" @delete="onDelete" />
+        </FormActionButton>
       </a-form>
     </a-skeleton>
   </div>
@@ -84,7 +86,6 @@ export default {
     afterUpdate(response) {
       this.$emit('upsert', response)
     },
-
   },
 }
 </script>

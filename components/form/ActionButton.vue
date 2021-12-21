@@ -1,9 +1,9 @@
 <template>
   <a-form-item class="text-right">
+    <slot name="extra" />
     <a-button :loading="loading" :type="btnType" html-type="submit">
       <slot name="icon" />{{ getText() }}</a-button
     >
-    <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
   </a-form-item>
 </template>
 <script>
