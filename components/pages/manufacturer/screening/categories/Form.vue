@@ -51,8 +51,8 @@ export default {
     }
   },
   methods: {
-    afterCreate() {
-      console.log('afterCreate');
+    afterCreate(response) {
+      this.$emit('upsert', response)
     },
   },
 }

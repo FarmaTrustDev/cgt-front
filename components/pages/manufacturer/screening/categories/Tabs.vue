@@ -24,7 +24,11 @@
       :footer="null"
       @cancel="handleCategoryModal(false)"
     >
-      <Form  :template-id="templateId" />
+      <Form
+        :template-id="templateId"
+        @close="handleCategoryModal"
+        @upsert="handleCategory"
+      />
     </a-modal>
   </div>
 </template>
@@ -53,6 +57,9 @@ export default {
   methods: {
     handleCategoryModal(show) {
       this.showCategoryModal = show
+    },
+    handleCategory(response) {
+      this.handleCategoryModal(false)
     },
     callback(key) {
       // console.log(key)
