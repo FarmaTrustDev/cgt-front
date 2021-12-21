@@ -3,46 +3,46 @@
     <a-row>
       <a-col :span="12">
         <a-form-item
-          label="Name"
+          label="First Name"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
           <a-input
             v-decorator="[
-              'name',
+              'firstName',
               {
-                initialValue: user.name,
+                initialValue: user.firstName,
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Name!',
+                    message: 'Please input your First Name',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your Name"
+            placeholder="Please input your First Name"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="User Name"
+          label="Last Name"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
           <a-input
             v-decorator="[
-              'userName',
+              'LastName',
               {
-                initialValue: user.userName,
+                initialValue: user.lastName,
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your User Name',
+                    message: 'Please input your last Name',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your User Name"
+            placeholder="Please input your last Name"
           />
         </a-form-item>
       </a-col>
@@ -60,7 +60,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Email!',
+                    message: 'Please input your Email',
                   },
                 ],
               },
@@ -70,30 +70,30 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Phone"
+          label="User Name"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
           <a-input
             v-decorator="[
-              'phone',
+              'userName',
               {
-                initialValue: user.phone,
+                initialValue: user.userName,
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Phone',
+                    message: 'Please input your UserName',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your Phone"
+            placeholder="Please input your UserName"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Address"
+          label="Office Address"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -105,38 +105,204 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Address!',
+                    message: 'Please input your Office Address',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your Address"
+            placeholder="Please input your Office Address"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Date of Birth"
+          label="Contact Number"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
         >
-          <a-date-picker
+          <a-input
             v-decorator="[
-              'dob',
+              'contactNumber',
               {
-                initialValue: user.dob,
+                initialValue: user.contactNumber,
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please input your Contact Number',
                   },
                 ],
               },
             ]"
-            style="width: 100%"
-            size="large"
-          >
-          </a-date-picker>
+            placeholder="Please input your Contact Number"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="What3Words"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'What3Words',
+              {
+                initialValue: user.What3Words,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your What3Words',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your What3Words"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Department"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'department',
+              {
+                initialValue: user.department,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Department',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your Department"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Postcode"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'postcode',
+              {
+                initialValue: user.postcode,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Postcode',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your Postcode"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Location"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'location',
+              {
+                initialValue: user.location,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Location',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your Location"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Postal Address"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'postalAddress:',
+              {
+                initialValue: user.postalAddress,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Postal Address',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your Postal Address"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="County"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'county:',
+              {
+                initialValue: user.county,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your County',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your County"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Country"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'country:',
+              {
+                initialValue: user.country,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Country',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Please input your Country"
+          />
         </a-form-item>
       </a-col>
     </a-row>
@@ -156,7 +322,7 @@ export default {
       typeLoading: true,
     }
   },
-  mounted() {  },
+  mounted() {},
   methods: {
     onSubmit() {},
   },

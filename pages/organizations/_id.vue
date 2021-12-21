@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Organizations">
+  <page-layout :create="false" :loading="loading" title="Organizations">
     <template slot="content">
      <formfield />
     </template>
