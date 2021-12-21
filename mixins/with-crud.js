@@ -19,6 +19,8 @@ export default {
       btnLoading: false,
       formLayout: 'vertical',
       shouldCheckCreated: true,
+      // afterUpdate: null,
+      // afterCreate: null,
     }
   },
   mounted() {
@@ -29,7 +31,6 @@ export default {
   methods: {
     checkCreated() {
       const entityId = this.$route.params.id
-
       if (this.isGuid(entityId)) {
         this.entityId = entityId
         this.isCreated = true
@@ -57,6 +58,9 @@ export default {
         if (!this.isEmpty(this.gotoLink)) {
           this.goto(`${this.gotoLink}/${response.data.globalId}`)
         }
+        if (this.isFunction(this.afterCreate)) {
+          this.afterCreate(response)
+        }
       })
     },
     update(values) {
@@ -65,6 +69,9 @@ export default {
         .update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
+          if (this.isFunction(this.afterUpdate)) {
+            this.afterUpdate(response)
+          }
         })
         .catch(this.error)
         .finally(() => (this.btnLoading = false))

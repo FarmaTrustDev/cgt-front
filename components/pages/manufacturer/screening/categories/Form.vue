@@ -50,5 +50,10 @@ export default {
       shouldCheckCreated: false,
     }
   },
+  methods: {
+    afterCreate() {
+      console.log('afterCreate');
+    },
+  },
 }
 </script>
