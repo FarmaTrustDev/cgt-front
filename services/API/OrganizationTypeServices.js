@@ -16,9 +16,38 @@ function post(data) {
     method: 'POST',
   })
 }
+function create(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'POST',
+  })
+}
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+  })
+}
+function put(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'put',
+  })
+}
+function destroy(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'DELETE',
+  })
+}
 const OrganizationTypeServices = {
   get,
-  post
+  post,
+  create,
+  destroy,
+  put,
+  getById
 }
 
 export default OrganizationTypeServices

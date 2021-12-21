@@ -7,7 +7,7 @@
         :data-source="datasource"
       >
         <template slot="action" slot-scope="action">
-          <a-button type="link" @click="goto(`/organizations/${action.id}`)"
+          <a-button type="link" @click="goto(`/organizations/${action.globalId}`)"
             ><a-icon type="edit"
           /></a-button>
 
