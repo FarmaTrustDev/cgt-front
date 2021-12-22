@@ -6,8 +6,8 @@
       @change="tabChange"
     >
       <a-tab-pane :key="1" tab="Patient Detail"><enrollment /> </a-tab-pane>
-      <a-tab-pane :key="2" tab="Consent"><Consent /> </a-tab-pane>
-      <a-tab-pane :key="3" tab="Screening"> Content of Tab Pane 3 </a-tab-pane>
+      <a-tab-pane :key="2" tab="Consent"><consent /> </a-tab-pane>
+      <a-tab-pane :key="3" tab="Screening"><screening /> </a-tab-pane>
       <a-tab-pane :key="4" tab="Scheduling"> Content of Tab Pane 4 </a-tab-pane>
     </a-tabs>
   </div>
@@ -15,11 +15,13 @@
 
 <script>
 import enrollment from '~/components/patient/enrollment'
-import Consent from '~/components/treatment/Consent.vue'
+import consent from '~/components/treatment/enrollment/Consent'
+import screening from '~/components/treatment/enrollment/Screening'
 export default {
   components: {
     enrollment,
-    Consent,
+    consent,
+    screening,
   },
   data() {
     return {
