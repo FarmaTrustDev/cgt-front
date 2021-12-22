@@ -82,7 +82,7 @@ export default {
     callback(key) {
       // console.log(key)
     },
-    remove(key, asd) {
+    remove(key) {
       this.setCurrentId(key)
       this.handleCategoryModal(true)
     },

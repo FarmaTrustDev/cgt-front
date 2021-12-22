@@ -1,7 +1,7 @@
 <template>
   <div>
     <FormActionButton text="Add Screening" @click="handleCategoryModal(true)" />
-    {{ category }}
+
     <a-alert
       v-if="data.length <= 0"
       type="info"
@@ -9,7 +9,7 @@
     ></a-alert>
     <a-list v-else item-layout="horizontal" :data-source="data">
       <a-list-item slot="renderItem" slot-scope="item"
-        >{{ item.title }}
+        >{{ item.name }}
         <a slot="actions">
           <a-dropdown>
             <a-icon type="more" />
@@ -42,8 +42,11 @@
 </template>
 <script>
 import Form from '~/components/pages/manufacturer/screening/Form'
+import ScreeningServices from '~/services/API/ScreeningServices'
+import nullHelper from '~/mixins/null-helpers'
 const data = []
 export default {
+  mixins: [nullHelper],
   components: { Form },
   props: {
     // categoryId: {
@@ -63,13 +66,26 @@ export default {
     }
   },
   mounted() {
-    console.log('tabKey', this.tabKey)
+    if (!this.isEmpty(this.category)) {
+      this.fetch()
+    }
   },
   methods: {
+    fetch() {
+      this.loading = true
+      ScreeningServices.get({ screeningCategoryId: this.category.id })
+        .then((response) => {
+          this.data = response.data
+        })
+        .finally(() => (this.loading = false))
+    },
     handleCategoryModal(show) {
       this.showScreeningModal = show
     },
     handleUpsert(response) {
+      this.fetch()
+      this.handleCategoryModal(false)
+
       console.log('response', response)
     },
   },

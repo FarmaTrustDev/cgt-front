@@ -69,10 +69,10 @@ export default {
     }
   },
   mounted() {
-    if (!this.isEmpty(this.screening)) {
-      this.isCreated = true
-      this.loading = true
-      // ScreeningCategoryServices.getById(this.screening)
+    if (!this.isEmpty(this.category)) {
+      // this.isCreated = true
+      // this.loading = true
+      // ScreeningServices.get({ category: this.category.id })
       //   .then((response) => {
       //     this.entity = response.data
       //     this.entityId = this.entity.globalId
