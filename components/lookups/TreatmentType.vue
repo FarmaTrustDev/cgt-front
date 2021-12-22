@@ -1,5 +1,5 @@
 <template>
-  <a-form-item>
+  <a-form-item label="Treatment Type">
     <a-select
       v-decorator="[
         'treatmentTypeId',

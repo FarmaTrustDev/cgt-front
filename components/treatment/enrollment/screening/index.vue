@@ -3,6 +3,11 @@
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <LookupsTreatmentType @onChange="onTreatmentSelect" />
     </a-form>
+    <a-skeleton :loading="loading">
+      <span v-if="categories">
+        <CategoryTabs :categories="categories" />
+      </span>
+    </a-skeleton>
   </div>
 </template>
 <script>
@@ -11,7 +16,9 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
+import CategoryTabs from '~/components/treatment/enrollment/screening/Tabs'
 export default {
+  components: { CategoryTabs },
   mixins: [notifications, routeHelpers, nullHelper],
   data() {
     return {
@@ -21,6 +28,7 @@ export default {
         name: 'patientEnrollment',
       }),
       loading: false,
+      categories: null,
     }
   },
   methods: {
@@ -36,9 +44,13 @@ export default {
       })
     },
     onTreatmentSelect(treatmentTypeId) {
-      ScreeningCategoryServices.getByTreatment(treatmentTypeId).then((r) => {
-        console.log(r)
-      })
+      this.loading = true
+      ScreeningCategoryServices.getByTreatment(treatmentTypeId)
+        .then((response) => {
+          this.categories = response.data
+        })
+        .finally(() => (this.loading = false))
+        .catch(this.error)
     },
     create(values) {
       console.log(values)

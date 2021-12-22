@@ -16,7 +16,7 @@
 <script>
 import enrollment from '~/components/patient/enrollment'
 import consent from '~/components/treatment/enrollment/Consent'
-import screening from '~/components/treatment/enrollment/Screening'
+import screening from '~/components/treatment/enrollment/screening'
 export default {
   components: {
     enrollment,
