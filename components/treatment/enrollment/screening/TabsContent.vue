@@ -5,7 +5,7 @@
       type="info"
       message="No Screenings available"
     ></a-alert>
-    <a-list v-else item-layout="horizontal" :data-source="screenings">
+    <!-- <a-list v-else item-layout="horizontal" :data-source="screenings">
       <a-list-item slot="renderItem" slot-scope="item"
         >{{ item.name }}
         <a slot="actions">
@@ -20,11 +20,40 @@
           </a-dropdown>
         </a>
       </a-list-item>
-    </a-list>
+    </a-list> -->
+    <a-table
+      :columns="columns"
+      :row-key="(record) => record.globalId"
+      :data-source="screenings"
+      :pagination="false"
+      :loading="loading"
+      @change="handleTableChange"
+    >
+      <template slot="name" slot-scope="name">
+        {{ name }}
+      </template>
+    </a-table>
   </div>
 </template>
 <script>
 const data = []
+const columns = [
+  {
+    title: 'Detail',
+    dataIndex: 'name',
+    scopedSlots: { customRender: 'name' },
+  },
+  {
+    title: 'Action',
+    dataIndex: 'gender',
+    scopedSlots: { customRender: 'action' },
+  },
+  {
+    title: 'Notes',
+    dataIndex: 'notes',
+    scopedSlots: { customRender: 'notes' },
+  },
+]
 export default {
   props: {
     screenings: {
@@ -36,6 +65,7 @@ export default {
   data() {
     return {
       data,
+      columns,
     }
   },
   mounted() {},

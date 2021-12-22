@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     setCurrentTab() {
-      console.log('categories', this.isEmpty(this.categories))
       const categories = this.categories
       if (!this.isEmpty(this.categories)) {
         this.activeKey = categories[0].globalId
