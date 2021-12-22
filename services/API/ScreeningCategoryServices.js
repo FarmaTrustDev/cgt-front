@@ -32,11 +32,18 @@ function update(id, data) {
   })
 }
 
+function getByTreatment(treatmentId) {
+  return request({
+    url: `${baseApi}/treatment-type/${treatmentId}`,
+  })
+}
+
 const ScreeningCategoryServices = {
   get,
   create,
   getById,
   update,
+  getByTreatment,
 }
 
 export default ScreeningCategoryServices
