@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <LookupsTreatmentType />
+      <LookupsTreatmentType @onChange="onTreatmentSelect" />
     </a-form>
   </div>
 </template>
@@ -10,6 +10,7 @@
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
+import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 export default {
   mixins: [notifications, routeHelpers, nullHelper],
   data() {
@@ -28,11 +29,15 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
           this.create(values)
         } else {
           this.loading = false
         }
+      })
+    },
+    onTreatmentSelect(treatmentTypeId) {
+      ScreeningCategoryServices.getByTreatment(treatmentTypeId).then((r) => {
+        console.log(r)
       })
     },
     create(values) {

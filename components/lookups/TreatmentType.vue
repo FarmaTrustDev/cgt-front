@@ -13,14 +13,18 @@
           ],
         },
       ]"
-      :disabled="isCreated"
       :loading="typeLoading"
       placeholder="Select Treatment Type"
       style="width: 100%"
-      size="large"
       class="default-select"
+      size="large"
+      @change="onchange"
     >
-      <a-select-option v-for="type in treatmentType" :key="type.id">
+      <a-select-option
+        v-for="type in treatmentTypes"
+        :key="type.id"
+        :data-globalId="type.globalId"
+      >
         {{ type.name }}
       </a-select-option>
     </a-select></a-form-item
@@ -30,6 +34,7 @@
 <script>
 import TreatmentService from '~/services/API/TreatmentTypeServices'
 export default {
+  props: { treatmentTypeId: { type: Number, default: null } },
   data() {
     return {
       treatmentTypes: {},
@@ -44,9 +49,12 @@ export default {
       this.typeLoading = true
       TreatmentService.get()
         .then((response) => {
-          this.treatmentType = response.data
+          this.treatmentTypes = response.data
         })
         .finally(() => (this.typeLoading = false))
+    },
+    onchange(value, e) {
+      this.$emit('onChange', value)
     },
   },
 }
