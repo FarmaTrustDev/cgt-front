@@ -6,6 +6,7 @@
         :key="category.globalId"
         :closable="false"
         :tab="category.name"
+        :force-render="true"
       >
         <tabContent :screenings="category.screenings" />
       </a-tab-pane>

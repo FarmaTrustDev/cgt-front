@@ -5,43 +5,89 @@
       type="info"
       message="No Screenings available"
     ></a-alert>
-    <!-- <a-list v-else item-layout="horizontal" :data-source="screenings">
-      <a-list-item slot="renderItem" slot-scope="item"
-        >{{ item.name }}
-        <a slot="actions">
-          <a-dropdown>
-            <a-icon type="more" />
-            <a-menu slot="overlay">
-              <a-menu-item key="1"> <a-icon type="edit" />Edit </a-menu-item>
-              <a-menu-item key="2">
-                <a-icon type="delete" />Delete
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
-        </a>
-      </a-list-item>
-    </a-list> -->
+
     <a-table
       :columns="columns"
       :row-key="(record) => record.globalId"
       :data-source="screenings"
       :pagination="false"
       :loading="loading"
-      @change="handleTableChange"
     >
       <template slot="name" slot-scope="name">
         {{ name }}
+      </template>
+      <template slot="action" slot-scope="name, row">
+        <!-- {{ row }} -->
+        <a-form-item>
+          <a-switch
+            v-decorator="[
+              `screening['id-'${row.id}][active]`,
+              {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your Organization Type!',
+                  },
+                ],
+                valuePropName: 'checked',
+              },
+            ]"
+            size="large"
+            checked-children="Yes"
+            un-checked-children="No"
+          />
+        </a-form-item>
+      </template>
+      <template slot="notes" slot-scope="name, row">
+        <a-form-item>
+          <a-input
+            v-decorator="[
+              `screening['id-'${row.id}][notes]`,
+              {
+                initialValue: null,
+              },
+            ]"
+            placeholder="input notes text"
+          />
+          <a-input
+            v-decorator="[
+              `screening['id-'${row.id}][id]`,
+              {
+                initialValue: row.id,
+              },
+            ]"
+            type="hidden"
+          />
+          <a-input
+            v-decorator="[
+              `screening['id-'${row.id}][categoryId]`,
+              {
+                initialValue: row.categoryId,
+              },
+            ]"
+            type="hidden"
+          />
+          <a-input
+            v-decorator="[
+              `screening['id-'${row.id}][name]`,
+              {
+                initialValue: row.name,
+              },
+            ]"
+            type="hidden"
+          />
+        </a-form-item>
       </template>
     </a-table>
   </div>
 </template>
 <script>
-const data = []
 const columns = [
   {
     title: 'Detail',
     dataIndex: 'name',
     scopedSlots: { customRender: 'name' },
+    width: '40%',
   },
   {
     title: 'Action',
@@ -64,7 +110,7 @@ export default {
   },
   data() {
     return {
-      data,
+      loading: false,
       columns,
     }
   },

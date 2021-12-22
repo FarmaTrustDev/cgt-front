@@ -2,12 +2,14 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <LookupsTreatmentType @onChange="onTreatmentSelect" />
+
+      <a-skeleton :loading="loading">
+        <span v-if="categories">
+          <CategoryTabs :categories="categories" />
+          <FormActionButton />
+        </span>
+      </a-skeleton>
     </a-form>
-    <a-skeleton :loading="loading">
-      <span v-if="categories">
-        <CategoryTabs :categories="categories" />
-      </span>
-    </a-skeleton>
   </div>
 </template>
 <script>
@@ -41,6 +43,7 @@ export default {
         } else {
           this.loading = false
         }
+        this.loading = false
       })
     },
     onTreatmentSelect(treatmentTypeId) {
