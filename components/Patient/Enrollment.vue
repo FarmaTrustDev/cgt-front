@@ -15,8 +15,9 @@
 import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
+import nullHelper from '~/mixins/null-helpers'
 export default {
-  mixins: [notifications, routeHelpers],
+  mixins: [notifications, routeHelpers, nullHelper],
   data() {
     return {
       loading: false,
@@ -37,7 +38,7 @@ export default {
     checkCreated() {
       const patientId = this.$route.params.id
 
-      if (patientId) {
+      if (this.isGuid(patientId)) {
         this.entityId = patientId
         this.isCreated = true
         this.fetch(patientId)
@@ -81,7 +82,7 @@ export default {
       PatientServices.create(values)
         .then((response) => {
           this.success(response.message)
-          this.goto(`/patients/enrollment/${response.data.globalId}`)
+          this.goto(`hospital/patients/enrollment/${response.data.globalId}`)
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
