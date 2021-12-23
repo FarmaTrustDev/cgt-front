@@ -2,7 +2,7 @@
   <div>
     <a-skeleton :loading="loading">
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-        <LookupsTreatmentType />
+        <LookupsTreatmentType :treatmentTypeId="entity.treatmentTypeId" />
         <a-form-item label="Description">
           <a-textarea
             v-decorator="[
@@ -95,7 +95,7 @@ export default {
       formLayout: 'vertical',
       apiService: ManufacturerTreatmentServices,
       isCreated: false,
-        gotoLink: '/manufacturer/schedules',
+      gotoLink: '/manufacturer/schedules',
     }
   },
   mounted() {},
