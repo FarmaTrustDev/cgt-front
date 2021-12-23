@@ -12,7 +12,7 @@
         <div class="hospital-detail">
           <div class="capsule">
             <img
-              src="http://sch-dev-atmps.microsysx.com/Uploads/logos/hospital/University-Hospitals-Birmingham/2020_10_22.14_48_51.jpg"
+              src="https://demoapi.qmaid.co/Logos/2020_10_22.14_48_51.jpg" logo hendling for temp
               class="logo"
             />
             <span class="title">{{ user.hospitalName }}</span>
