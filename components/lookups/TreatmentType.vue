@@ -15,8 +15,8 @@
       ]"
       :loading="typeLoading"
       placeholder="Select Treatment Type"
-      style="width: 100%"
-      class="default-select"
+      
+      class="default-select w-100"
       size="large"
       @change="onchange"
     >

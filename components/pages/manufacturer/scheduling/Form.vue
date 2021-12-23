@@ -20,10 +20,9 @@
             size="large"
             placeholder="Insert Category Name"
           />
-      
         </a-form-item>
         <a-form-item label="Duration">
-          <a-input
+          <a-input-number
             v-decorator="[
               'duration',
               {
@@ -36,14 +35,16 @@
                 ],
               },
             ]"
+            size="large"
+            class="default-select w-100"
             type="number"
             placeholder="Please input your Address"
           >
             <a-icon slot="prefix" type="calendar"
-          /></a-input>
+          /></a-input-number>
         </a-form-item>
         <a-form-item label="Price">
-          <a-input
+          <a-input-number
             v-decorator="[
               'price',
               {
@@ -56,11 +57,13 @@
                 ],
               },
             ]"
+            size="large"
             type="number"
+            class="default-select w-100"
             placeholder="Please input your Address"
           >
             <span slot="prefix">$</span>
-          </a-input>
+          </a-input-number>
         </a-form-item>
         <FormActionButton :loading="btnLoading" :is-created="isCreated">
           <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" />
@@ -71,7 +74,7 @@
 </template>
 <script>
 import withCrud from '~/mixins/with-crud'
-import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
+import ManufacturerTreatmentServices from '~/services/API/ManufacturerTreatmentServices'
 import nullHelper from '~/mixins/null-helpers'
 export default {
   mixins: [withCrud, nullHelper],
@@ -90,8 +93,9 @@ export default {
         name: 'screeningCategory',
       }),
       formLayout: 'vertical',
-      apiService: ScreeningCategoryServices,
+      apiService: ManufacturerTreatmentServices,
       isCreated: false,
+        gotoLink: '/manufacturer/schedules',
     }
   },
   mounted() {},
