@@ -41,13 +41,13 @@
   </div>
 </template>
 <script>
-import Form from '~/components/root/manufacturer/screening/Form'
+import Form from '~/components/root/manufacturer/screening/formField/index.vue'
 import ScreeningServices from '~/services/API/ScreeningServices'
 import nullHelper from '~/mixins/null-helpers'
 const data = []
 export default {
-  mixins: [nullHelper],
   components: { Form },
+  mixins: [nullHelper],
   props: {
     // categoryId: {
     //   type: String,
@@ -85,8 +85,6 @@ export default {
     handleUpsert(response) {
       this.fetch()
       this.handleCategoryModal(false)
-
-      console.log('response', response)
     },
   },
 }
