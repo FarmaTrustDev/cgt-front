@@ -43,8 +43,8 @@
   </div>
 </template>
 <script>
-import Form from '~/components/pages/manufacturer/screening/categories/Form'
-import TabContent from '~/components/pages/manufacturer/screening/categories/TabContent'
+import Form from '~/components/root/manufacturer/screening/categories/Form'
+import TabContent from '~/components/root/manufacturer/screening/categories/TabContent'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 export default {
   components: { Form, TabContent },

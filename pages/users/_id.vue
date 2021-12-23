@@ -8,7 +8,7 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 
-import formfield from '~/components/pages/user/form/index.vue'
+import formfield from '~/components/root/user/form/index.vue'
 export default {
   components: { 'page-layout': PageLayout,formfield },
   data() {

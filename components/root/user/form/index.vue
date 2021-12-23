@@ -14,7 +14,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import UserServices from '~/services/API/UserServices'
-import formfield from '~/components/pages/user/form/FormField.vue'
+import formfield from '~/components/root/user/form/FormField.vue'
 
 export default {
   components: { formfield },

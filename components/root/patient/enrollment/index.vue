@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import enrollment from '~/components/patient/enrollment'
+import enrollment from '~/components/patient/EnrollmentForm.vue'
 import consent from '~/components/treatment/enrollment/Consent'
 import screening from '~/components/treatment/enrollment/screening'
 import { isEmpty } from '~/services/Utilities'

@@ -71,7 +71,7 @@ import TreatmentService from '~/services/API/TreatmentTypeServices'
 import OrganizationServices from '~/services/API/OrganizationServices'
 import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 import { HOSPITAL_ALIAS } from '~/services/Constant'
-import CategoryTabs from '~/components/pages/manufacturer/screening/categories/Tabs'
+import CategoryTabs from '~/components/root/manufacturer/screening/categories/Tabs'
 import withCrud from '~/mixins/with-crud'
 export default {
   components: { CategoryTabs },

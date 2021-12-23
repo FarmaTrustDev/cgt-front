@@ -5,7 +5,7 @@
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import create from '~/components/pages/manufacturer/screening/Create'
+import create from '~/components/root/manufacturer/screening/Create'
 export default {
   components: { 'page-layout': PageLayout, create },
   data() {

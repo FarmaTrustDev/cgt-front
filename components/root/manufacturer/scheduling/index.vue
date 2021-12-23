@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Form from '~/components/pages/manufacturer/scheduling/Form'
+import Form from '~/components/root/manufacturer/scheduling/Form'
 export default {
   components: {
     Form,

@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import Form from '~/components/pages/manufacturer/screening/Form'
+import Form from '~/components/root/manufacturer/screening/Form'
 import ScreeningServices from '~/services/API/ScreeningServices'
 import nullHelper from '~/mixins/null-helpers'
 const data = []
