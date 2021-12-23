@@ -1,8 +1,9 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <LookupsTreatmentType @onChange="onTreatmentSelect" />
-
+    
+        <LookupsTreatmentType @onChange="onTreatmentSelect" />
+    
       <a-skeleton :loading="loading">
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
@@ -22,6 +23,12 @@ import CategoryTabs from '~/components/treatment/enrollment/screening/Tabs'
 export default {
   components: { CategoryTabs },
   mixins: [notifications, routeHelpers, nullHelper],
+  props: {
+    treatment: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
       patientId: null,

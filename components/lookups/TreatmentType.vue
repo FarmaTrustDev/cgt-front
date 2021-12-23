@@ -27,8 +27,8 @@
       >
         {{ type.name }}
       </a-select-option>
-    </a-select></a-form-item
-  >
+    </a-select>
+  </a-form-item>
 </template>
 
 <script>

@@ -21,12 +21,12 @@
         <a-form-item>
           <a-switch
             v-decorator="[
-              `screening[id-${row.id}][active]`,
+              `screening[id-${row.id}][isCheck]`,
               {
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Organization Type!',
+                    message: 'Check is required!',
                   },
                 ],
                 valuePropName: 'checked',
@@ -72,6 +72,15 @@
               `screening[id-${row.id}][name]`,
               {
                 initialValue: row.name,
+              },
+            ]"
+            type="hidden"
+          />
+           <a-input
+            v-decorator="[
+              `screening[id-${row.id}][manufacturer_id]`,
+              {
+                initialValue: row.manufacturerId,
               },
             ]"
             type="hidden"

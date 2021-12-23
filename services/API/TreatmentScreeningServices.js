@@ -1,7 +1,7 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
 
-const baseApi = `${BASE_API}/treatment`
+const baseApi = `${BASE_API}/treatmentScreening`
 
 function get(params = {}) {
   return request({
@@ -32,11 +32,11 @@ function update(id, data) {
   })
 }
 
-const TreatmentServices = {
+const ScreeningServices = {
   get,
   create,
   getById,
   update,
 }
 
-export default TreatmentServices
+export default ScreeningServices

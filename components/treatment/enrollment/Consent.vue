@@ -27,10 +27,12 @@
                   required: true,
                   message: 'Please select at least one activity type',
                 },
-                ,
               ],
+              initialValue: treatment.consent,
+              valuePropName: 'checked',
             },
           ]"
+          :disabled="treatment.consent"
         >
           Patient Consent Form Registered
         </a-checkbox>
@@ -59,6 +61,12 @@ import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 export default {
   mixins: [notifications, routeHelpers, nullHelper],
+  props: {
+    treatment: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
       patientId: null,
