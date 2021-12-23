@@ -21,7 +21,7 @@
         <a-form-item>
           <a-switch
             v-decorator="[
-              `screening[id-${row.id}][isCheck]`,
+              `screenings[id-${row.id}][isCheck]`,
               {
                 rules: [
                   {
@@ -42,7 +42,7 @@
         <a-form-item>
           <a-input
             v-decorator="[
-              `screening[id-${row.id}][notes]`,
+              `screenings[id-${row.id}][notes]`,
               {
                 initialValue: null,
               },
@@ -51,7 +51,7 @@
           />
           <a-input
             v-decorator="[
-              `screening[id-${row.id}][id]`,
+              `screenings[id-${row.id}][screeningId]`,
               {
                 initialValue: row.id,
               },
@@ -60,7 +60,7 @@
           />
           <a-input
             v-decorator="[
-              `screening[id-${row.id}][categoryId]`,
+              `screenings[id-${row.id}][categoryId]`,
               {
                 initialValue: row.categoryId,
               },
@@ -69,7 +69,7 @@
           />
           <a-input
             v-decorator="[
-              `screening[id-${row.id}][name]`,
+              `screenings[id-${row.id}][name]`,
               {
                 initialValue: row.name,
               },
@@ -78,7 +78,7 @@
           />
            <a-input
             v-decorator="[
-              `screening[id-${row.id}][manufacturer_id]`,
+              `screenings[id-${row.id}][manufacturer_id]`,
               {
                 initialValue: row.manufacturerId,
               },

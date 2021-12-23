@@ -32,11 +32,11 @@ function update(id, data) {
   })
 }
 
-const ScreeningServices = {
+const TreatmentScreeningServices = {
   get,
   create,
   getById,
   update,
 }
 
-export default ScreeningServices
+export default TreatmentScreeningServices
