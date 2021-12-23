@@ -53,15 +53,18 @@ export default {
         .finally(() => (this.loading = false))
     },
     create(values) {
-      this.apiService.create(values).then((response) => {
-        this.success(response.message)
-        if (!this.isEmpty(this.gotoLink)) {
-          this.goto(`${this.gotoLink}/${response.data.globalId}`)
-        }
-        if (this.isFunction(this.afterCreate)) {
-          this.afterCreate(response)
-        }
-      })
+      this.apiService
+        .create(values)
+        .then((response) => {
+          this.success(response.message)
+          if (!this.isEmpty(this.gotoLink)) {
+            this.goto(`${this.gotoLink}/${response.data.globalId}`)
+          }
+          if (this.isFunction(this.afterCreate)) {
+            this.afterCreate(response)
+          }
+        })
+        .finally(() => (this.btnLoading = false))
     },
     update(values) {
       this.btnLoading = true
@@ -86,6 +89,7 @@ export default {
           this.loading = false
         }
       })
+      this.loading = false
     },
     onDelete(e) {
       console.log('Delete', e)
