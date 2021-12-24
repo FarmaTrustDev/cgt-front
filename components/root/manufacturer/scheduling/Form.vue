@@ -2,7 +2,10 @@
   <div>
     <a-skeleton :loading="loading">
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-        <LookupsTreatmentType :treatment-type-id="entity.treatmentTypeId" />
+        <LookupsTreatmentType
+          :disabled="isCreated"
+          :treatment-type-id="entity.treatmentTypeId"
+        />
         <a-form-item label="Description">
           <a-textarea
             v-decorator="[

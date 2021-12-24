@@ -15,9 +15,9 @@
       ]"
       :loading="typeLoading"
       placeholder="Select Treatment Type"
-      
       class="default-select w-100"
       size="large"
+      :disabled="disabled"
       @change="onchange"
     >
       <a-select-option
@@ -34,7 +34,11 @@
 <script>
 import TreatmentService from '~/services/API/TreatmentTypeServices'
 export default {
-  props: { treatmentTypeId: { type: Number, default: null } },
+  props: {
+    treatmentTypeId: { type: Number, default: null },
+    disabled: { type: Boolean, default: false },
+  },
+
   data() {
     return {
       treatmentTypes: {},
