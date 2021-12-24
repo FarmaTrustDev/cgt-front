@@ -64,7 +64,7 @@ export default {
           // },
         },
         select(info) {
-          alert('selected ' + info.startStr + ' to ' + info.endStr)
+          // alert('selected ' + info.startStr + ' to ' + info.endStr)
         },
         dateClick: this.handleDateClick,
         views: {
@@ -79,6 +79,7 @@ export default {
       calendarEventsData: [],
       entityId: null,
       isCreated: false,
+      savedEvents: [],
     }
   },
   mounted() {
@@ -87,31 +88,34 @@ export default {
   methods: {
     getFormattedMoment,
     onDateChange(dateTime) {
-      const dateM = getFormattedMoment(dateTime)
-      // this.openDatePicker = true
+      if (dateTime) {
+        const dateM = getFormattedMoment(dateTime)
+        // this.openDatePicker = true
 
-      this.addEvent([
-        {
-          end: dateM,
-          title: 'Cellfuse',
-          start: dateM,
-        },
-      ])
+        this.addEvent([
+          {
+            end: dateM,
+            title: 'Cellfuse',
+            start: dateM,
+          },
+        ])
+      }
     },
     addEvent(data) {
       let updatedData = this.calendarEventsData
+
       updatedData = [...updatedData, ...data]
-      this.calendarOptions.events = updatedData
+      this.calendarOptions.events = [...updatedData, ...this.savedEvents]
       this.calendarEventsData = updatedData
     },
     handleDateClick(arg, callback) {
-      console.log(this.manufacturerTreatment)
       if (!this.isEmpty(this.manufacturerTreatment)) {
         TreatmentAvailabilityServices.get(
           { organizationId: this.manufacturerTreatment.organizationId },
           { ...arg }
         )
           .then((schedules) => {
+            this.savedEvents = schedules.data
             callback(schedules.data)
           })
           .catch(this.error)
