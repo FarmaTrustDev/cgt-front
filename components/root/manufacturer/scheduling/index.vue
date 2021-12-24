@@ -8,16 +8,18 @@
       <a-tab-pane :key="1" tab="Detail"
         ><Form :treatment="treatment" />
       </a-tab-pane>
-      <a-tab-pane :key="2" tab="Availability">Availability </a-tab-pane>
+      <a-tab-pane :key="2" tab="Availability"><Calendar /> </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 
 <script>
 import Form from '~/components/root/manufacturer/scheduling/Form'
+import Calendar from '~/components/root/manufacturer/scheduling/Calendar'
 export default {
   components: {
     Form,
+    Calendar,
   },
   data() {
     return {
