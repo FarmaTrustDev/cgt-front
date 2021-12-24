@@ -105,11 +105,17 @@ export default {
       this.calendarEventsData = updatedData
     },
     handleDateClick(arg, callback) {
-      //   TreatmentAvailabilityServices.getAvailability(arg)
-      //     .then((appointments) => {
-      //       callback(appointments.data)
-      //     })
-      //     .finally(() => (this.loading = false))
+      if (this.isGuid(this.$route.params.id)) {
+        TreatmentAvailabilityServices.get(
+          { organizationId: this.entityId },
+          { ...arg }
+        )
+          .then((schedules) => {
+            callback(schedules.data)
+          })
+          .catch(this.error)
+          .finally(() => (this.loading = false))
+      }
     },
     showCalendarOpener(show) {
       this.openDatePicker = show
