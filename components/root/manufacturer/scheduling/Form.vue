@@ -66,7 +66,6 @@
           </a-input-number>
         </a-form-item>
         <FormActionButton :loading="btnLoading" :is-created="isCreated">
-          <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" />
         </FormActionButton>
       </a-form>
     </a-skeleton>
@@ -96,6 +95,7 @@ export default {
       apiService: ManufacturerTreatmentServices,
       isCreated: false,
       gotoLink: '/manufacturer/schedules',
+      manufacturerTreatment: {},
     }
   },
   mounted() {},
@@ -104,6 +104,9 @@ export default {
       //   this.$emit('upsert', response)
     },
     afterUpdate(response) {},
+    getEntity(entity) {
+      this.manufacturerTreatment = entity.data
+    },
   },
 }
 </script>

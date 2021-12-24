@@ -49,6 +49,7 @@ export default {
         .getById(id)
         .then((response) => {
           this.entity = response.data
+          this.getEntity(response)
         })
         .finally(() => (this.loading = false))
     },

@@ -15,6 +15,7 @@
       }"
       @changeDate="handleDateClick"
     />
+    <FormActionButton @click="onSubmit"> </FormActionButton>
   </div>
 </template>
 <script>
@@ -22,11 +23,22 @@ import FullCalendar from '@fullcalendar/vue'
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
 import { getFormattedMoment } from '~/services/Helpers/MomentHelpers'
+import notifications from '~/mixins/notifications'
 // import AppointmentServices from '~/services/API/AppointmentServices'
+import nullHelper from '~/mixins/null-helpers'
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
+  },
+  mixins: [nullHelper, notifications],
+  props: {
+    // treatmentType: {
+    //   default: () => ({}),
+    //   type: Object,
+    //   require: true,
+    // },
   },
   data() {
     return {
@@ -65,9 +77,13 @@ export default {
       },
       openDatePicker: false,
       calendarEventsData: [],
+      entityId: null,
+      isCreated: false,
     }
   },
-  mounted() {},
+  mounted() {
+    this.checkCreated()
+  },
   methods: {
     getFormattedMoment,
     onDateChange(dateTime) {
@@ -77,15 +93,8 @@ export default {
       this.addEvent([
         {
           end: dateM,
-          globalId: '1cf30c36-13c2-4a9d-866d-43054ca14948',
-          id: 894,
-          patient_Gender: null,
-          patient_Id: 484,
-          patient_Name: null,
-          patient_Unique_Id: null,
-          start: dateM,
-          status_Id: 6,
           title: 'Cellfuse',
+          start: dateM,
         },
       ])
     },
@@ -96,35 +105,37 @@ export default {
       this.calendarEventsData = updatedData
     },
     handleDateClick(arg, callback) {
-      const ddddata = [
-        {
-          end: '2021-12-11T14:45:00',
-          globalId: '1cf30c36-13c2-4a9d-866d-43054ca14948',
-          id: 894,
-          patient_Gender: null,
-          patient_Id: 484,
-          patient_Name: null,
-          patient_Unique_Id: null,
-          start: '2021-12-11T13:45:00',
-          status_Id: 6,
-          title: 'George Reece',
-        },
-      ]
-      // const g = [{ title: 'nice event', start: new Date() }]
-      // AppointmentServices.calendarEvents(arg)
-      //   .then((appointments) => {
-      //     callback(appointments.data)
-      //     // console.log(appointments)
-      //     //  callback(g)
-      //   })
-      //   .finally(() => (this.loading = false))
-      callback(ddddata)
+      //   TreatmentAvailabilityServices.getAvailability(arg)
+      //     .then((appointments) => {
+      //       callback(appointments.data)
+      //     })
+      //     .finally(() => (this.loading = false))
     },
     showCalendarOpener(show) {
       this.openDatePicker = show
     },
     handleStartOpenChange(open) {
       this.showCalendarOpener(open)
+    },
+    checkCreated() {
+      const entityId = this.$route.params.id
+      if (this.isGuid(entityId)) {
+        this.entityId = entityId
+        this.isCreated = true
+      }
+    },
+    onSubmit(e) {
+      if (this.isCreated) {
+        TreatmentAvailabilityServices.create(
+          this.entityId,
+          this.calendarEventsData
+        )
+          .then((response) => {
+            this.success(response.message)
+          })
+          .catch(this.error)
+          .finally(() => (this.loading = false))
+      }
     },
   },
 }

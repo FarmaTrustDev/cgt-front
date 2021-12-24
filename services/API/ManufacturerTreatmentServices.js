@@ -16,6 +16,20 @@ function getById(id) {
   })
 }
 
+function getAvailability() {
+  return request({
+    url: `${baseApi}/get-availability`,
+  })
+}
+
+function createAvailability(id, data) {
+  return request({
+    url: `${baseApi}/treatment-availability/${id}`,
+    data,
+    method: 'POST',
+  })
+}
+
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -37,6 +51,8 @@ const ManufacturerTreatmentServices = {
   create,
   getById,
   update,
+  getAvailability,
+  createAvailability,
 }
 
 export default ManufacturerTreatmentServices
