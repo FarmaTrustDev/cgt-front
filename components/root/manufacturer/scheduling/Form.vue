@@ -105,7 +105,8 @@ export default {
     },
     afterUpdate(response) {},
     getEntity(entity) {
-      this.manufacturerTreatment = entity.data
+      this.$emit('getEntity', entity.data)
+      // this.manufacturerTreatment = entity.data
     },
   },
 }

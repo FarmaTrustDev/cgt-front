@@ -34,11 +34,11 @@ export default {
   },
   mixins: [nullHelper, notifications],
   props: {
-    // treatmentType: {
-    //   default: () => ({}),
-    //   type: Object,
-    //   require: true,
-    // },
+    manufacturerTreatment: {
+      default: () => ({}),
+      type: Object,
+      require: true,
+    },
   },
   data() {
     return {
@@ -56,12 +56,12 @@ export default {
         height: 550,
         slotMaxTime: '21:00:00',
         customButtons: {
-          next: {
-            click(a, v) {
-              console.log(a, v)
-              return ''
-            },
-          },
+          // next: {
+          //   click(a, v) {
+          //     console.log(a, v)
+          //     return ''
+          //   },
+          // },
         },
         select(info) {
           alert('selected ' + info.startStr + ' to ' + info.endStr)
@@ -105,9 +105,10 @@ export default {
       this.calendarEventsData = updatedData
     },
     handleDateClick(arg, callback) {
-      if (this.isGuid(this.$route.params.id)) {
+      console.log(this.manufacturerTreatment)
+      if (!this.isEmpty(this.manufacturerTreatment)) {
         TreatmentAvailabilityServices.get(
-          { organizationId: this.entityId },
+          { organizationId: this.manufacturerTreatment.organizationId },
           { ...arg }
         )
           .then((schedules) => {

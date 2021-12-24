@@ -6,9 +6,11 @@
       @change="tabChange"
     >
       <a-tab-pane :key="1" tab="Detail"
-        ><Form :treatment="treatment" />
+        ><Form :treatment="treatment" @getEntity="getEntity" />
       </a-tab-pane>
-      <a-tab-pane :key="2" tab="Availability"><Availability /> </a-tab-pane>
+      <a-tab-pane :key="2" :disabled="!isCreated" tab="Availability"
+        ><Availability v-if="isCreated" :manufacturer-treatment="entity" />
+      </a-tab-pane>
     </a-tabs>
   </div>
 </template>
@@ -26,12 +28,18 @@ export default {
     return {
       activeTab: 1,
       treatment: {},
+      entity: {},
+      isCreated: false,
     }
   },
   mounted() {
     // this.isTreatmentCreate()
   },
   methods: {
+    getEntity(entity) {
+      this.entity = entity
+      this.isCreated = true
+    },
     tabChange(a, b, c) {
       console.log(a, b, c)
     },
