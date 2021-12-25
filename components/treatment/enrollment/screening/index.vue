@@ -6,7 +6,7 @@
       <a-skeleton :loading="loading">
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
-          <FormActionButton />
+          <FormActionButton :disabled="isCreated" />
         </span>
       </a-skeleton>
     </a-form>
@@ -38,9 +38,24 @@ export default {
       }),
       loading: false,
       categories: null,
+      isCreated: false,
     }
   },
+  mounted() {
+    this.isScreeningCompleted()
+  },
   methods: {
+    isScreeningCompleted() {
+      if (this.treatment.screeningStatus) {
+        this.isCreated = true
+        this.fetchTreatmentScreening(this.treatment)
+      }
+    },
+    fetchTreatmentScreening(treatment) {
+      TreatmentScreeningServices.getByTreatmentId(treatment.Id).then(
+        (response) => {}
+      )
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
@@ -69,6 +84,7 @@ export default {
       })
         .then((response) => {
           this.success(response.message)
+          this.isCreated = true
         })
         .catch(this.error)
     },

@@ -50,9 +50,9 @@ export default {
       this.loading = true
       PatientServices.getById(id)
         .then((response) => {
-          console.log('response', response)
           this.patient = response.data
-        }).catch(this.error)
+        })
+        .catch(this.error)
         .finally(() => (this.loading = false))
     },
     onSubmit(e) {

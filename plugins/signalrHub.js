@@ -8,16 +8,15 @@ export default ({ app, store }, inject) => {
 
   inject('hub', hub)
 
-  hub.on('Connected', message => {
+  hub.on('Connected', (message) => {
     console.info('Connected to SignalR Hub.', message)
   })
 
-  hub.on('Disconnected', message => {
+  hub.on('Disconnected', (message) => {
     console.warn('Disconnected from SignalR Hub.', message)
   })
 
-  hub.on('sendToUser', res => {
-    debugger
+  hub.on('sendToUser', (res) => {
     console.log('Received message from signalr', JSON.stringify(res))
     // const { audience, group, action, data } = res
     // const { action, data } = res
@@ -34,7 +33,7 @@ export default ({ app, store }, inject) => {
     // }
   })
 
-  hub.start().catch(function(err) {
+  hub.start().catch(function (err) {
     return console.error(err)
   })
 

@@ -5,6 +5,7 @@
       :loading="loading"
       :type="btnType"
       html-type="submit"
+      :disabled="disabled"
       @click="submit"
     >
       <slot name="icon" />{{ getText() }}</a-button
@@ -23,6 +24,7 @@ export default {
     text: { default: defaultText, type: String },
     btnType: { default: 'primary', type: String },
     loading: { default: false, type: Boolean },
+    disabled: { default: false, type: Boolean },
   },
   data() {
     return {}
