@@ -20,17 +20,19 @@
 </template>
 
 <script>
-import enrollment from '~/components/patient/EnrollmentForm.vue'
+import enrollment from '~/components/patient/enrollment/Form.vue'
 import consent from '~/components/treatment/enrollment/Consent'
 import screening from '~/components/treatment/enrollment/screening'
 import { isEmpty } from '~/services/Utilities'
 import TreatmentServices from '~/services/API/TreatmentServices'
+import notifications from '~/mixins/notifications'
 export default {
   components: {
     enrollment,
     consent,
     screening,
   },
+  mixins: [notifications],
   data() {
     return {
       activeTab: 1,
@@ -50,9 +52,11 @@ export default {
       }
     },
     fetch(treatmentId) {
-      TreatmentServices.getById(treatmentId).then((response) => {
-        this.treatment = response.data
-      })
+      TreatmentServices.getById(treatmentId)
+        .then((response) => {
+          this.treatment = response.data
+        })
+        .catch(this.error)
     },
     tabChange(a, b, c) {
       console.log(a, b, c)

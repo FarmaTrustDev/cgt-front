@@ -1,5 +1,5 @@
 <template>
-  <PagesPatientEnrollment />
+  <RootPatientEnrollment />
 </template>
 <script>
 export default {

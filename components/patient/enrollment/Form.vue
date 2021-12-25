@@ -2,7 +2,7 @@
   <div>
     <a-spin :spinning="loading">
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-        <PatientEnrollmentForm :patient="patient" />
+        <FormFields :patient="patient" />
         <a-form-item>
           <FormActionButton :is-created="isCreated" />
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
@@ -12,11 +12,13 @@
   </div>
 </template>
 <script>
+import FormFields from '~/components/patient/enrollment/FormFields'
 import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 export default {
+  components: { FormFields },
   mixins: [notifications, routeHelpers, nullHelper],
   data() {
     return {
@@ -48,8 +50,9 @@ export default {
       this.loading = true
       PatientServices.getById(id)
         .then((response) => {
+          console.log('response', response)
           this.patient = response.data
-        })
+        }).catch(this.error)
         .finally(() => (this.loading = false))
     },
     onSubmit(e) {

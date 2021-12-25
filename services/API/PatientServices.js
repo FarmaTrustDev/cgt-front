@@ -3,6 +3,13 @@ import { BASE_API } from '../Constant'
 
 const baseApi = `${BASE_API}/patient`
 
+function get(params = {}) {
+  return request({
+    url: `${baseApi}`,
+    params,
+  })
+}
+
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -29,6 +36,7 @@ const PatientServices = {
   create,
   update,
   getById,
+  get,
 }
 
 export default PatientServices
