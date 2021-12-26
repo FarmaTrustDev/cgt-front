@@ -23,6 +23,7 @@ export default {
   },
   methods: {
     handleDateClick(arg, callback) {
+      console.log('handleDateClick ', arg)
       this.loading = true
       TreatmentAvailabilityServices.get({
         ...arg,
