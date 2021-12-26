@@ -52,8 +52,10 @@ export default {
       }
     },
     fetchTreatmentScreening(treatment) {
-      TreatmentScreeningServices.getByTreatmentId(treatment.Id).then(
-        (response) => {}
+      ScreeningCategoryServices.getByTreatmentId(treatment.id).then(
+        (response) => {
+          this.categories = response.data
+        }
       )
     },
     onSubmit(e) {
@@ -70,7 +72,7 @@ export default {
     },
     onTreatmentSelect(treatmentTypeId) {
       this.loading = true
-      ScreeningCategoryServices.getByTreatment(treatmentTypeId)
+      ScreeningCategoryServices.getByTreatmentTypeId(treatmentTypeId)
         .then((response) => {
           this.categories = response.data
         })

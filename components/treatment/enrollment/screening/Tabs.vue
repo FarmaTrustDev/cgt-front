@@ -26,7 +26,6 @@ export default {
       default: () => [],
     },
   },
-
   data() {
     return {
       currentCategoryId: null,
