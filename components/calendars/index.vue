@@ -5,7 +5,6 @@
       :header="{
         left: 'prev,next',
       }"
-      @select="handleSelect"
       @changeDate="handleDateClick"
     />
   </div>
@@ -38,7 +37,7 @@ export default {
         nowIndicator: true,
         editable: false,
         selectable: true,
-        events: this.handleEventClick,
+        events: this.handleDateClick,
         slotMinTime: '08:00:00',
         height: 550,
         slotMaxTime: '21:00:00',
@@ -53,7 +52,7 @@ export default {
         // select(info) {
         //   alert('selected ' + info.startStr + ' to ' + info.endStr)
         // },
-        eventClick: this.handleSelect,
+        eventClick: this.handleEventClick,
         // dateClick: this.handleSelect,
         views: {
           timeGridFourDay: {

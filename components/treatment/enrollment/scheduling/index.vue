@@ -1,15 +1,17 @@
 <template>
   <div>
     <a-spin :spinning="loading">
-      <calendar :handle-date-click="handleDateClick"></calendar>
+      <a-form :form="form" layout="horizontal" @submit="onSubmit">
+        <Form :treatment="treatment" />
+      </a-form>
     </a-spin>
   </div>
 </template>
 <script>
-import calendar from '~/components/calendars/index'
-import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
+import Form from '~/components/treatment/enrollment/scheduling/Form'
+
 export default {
-  components: { calendar },
+  components: { Form },
   props: {
     treatment: {
       type: Object,
@@ -19,22 +21,15 @@ export default {
   data() {
     return {
       loading: false,
+      formLayout: 'horizontal',
+      successResponse: '',
+      error: null,
+      showError: false,
+      form: this.$form.createForm(this, {
+        name: 'TreatmentSchedulingForm',
+      }),
     }
   },
-  methods: {
-    handleDateClick(arg, callback) {
-      console.log('handleDateClick ', arg)
-      this.loading = true
-      TreatmentAvailabilityServices.get({
-        ...arg,
-        treatmentTypeId: this.treatment.treatmentTypeId,
-      })
-        .then((schedules) => {
-          callback(schedules.data)
-        })
-        .catch(this.error)
-        .finally(() => (this.loading = false))
-    },
-  },
+  methods: { onSubmit() {} },
 }
 </script>

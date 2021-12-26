@@ -39,7 +39,7 @@ export default {
   mixins: [notifications],
   data() {
     return {
-      activeTab: 1,
+      activeTab: 4,
       treatment: {},
       haveTreatment: false,
     }

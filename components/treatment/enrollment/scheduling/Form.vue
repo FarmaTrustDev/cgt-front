@@ -1,8 +1,37 @@
 <template>
   <div>
-    <a-form :form="form" layout="horizontal" @submit="onSubmit"></a-form>
+    <calendar :handle-date-click="fetchEvents"></calendar>
+    <FormFields></FormFields>
   </div>
 </template>
 <script>
-export default {}
+import FormFields from '~/components/treatment/enrollment/scheduling/FormFields'
+import calendar from '~/components/calendars/index'
+import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
+export default {
+  components: { FormFields, calendar },
+  props: {
+    treatment: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    fetchEvents(arg, callback) {
+      this.loading = true
+      TreatmentAvailabilityServices.get({
+        ...arg,
+        treatmentTypeId: this.treatment.treatmentTypeId,
+      })
+        .then((schedules) => {
+          callback(schedules.data)
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = false))
+    },
+  },
+}
 </script>
