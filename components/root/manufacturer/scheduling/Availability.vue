@@ -111,13 +111,11 @@ export default {
     handleDateClick(arg, callback) {
       const manufacturerTreatment = this.manufacturerTreatment
       if (!this.isEmpty(manufacturerTreatment)) {
-        TreatmentAvailabilityServices.get(
-          {
-            organizationId: this.manufacturerTreatment.organizationId,
-            treatmentTypeId: manufacturerTreatment.treatmentTypeId,
-          },
-          { ...arg }
-        )
+        TreatmentAvailabilityServices.get({
+          organizationId: this.manufacturerTreatment.organizationId,
+          treatmentTypeId: manufacturerTreatment.treatmentTypeId,
+          ...arg,
+        })
           .then((schedules) => {
             this.savedEvents = schedules.data
             callback(schedules.data)

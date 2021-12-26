@@ -1,6 +1,8 @@
 <template>
   <div>
-    <calendar :handle-date-click="handleDateClick"></calendar>
+    <a-spin :spinning="loading">
+      <calendar :handle-date-click="handleDateClick"></calendar>
+    </a-spin>
   </div>
 </template>
 <script>
@@ -15,10 +17,13 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      loading: false,
+    }
   },
   methods: {
     handleDateClick(arg, callback) {
+      this.loading = true
       TreatmentAvailabilityServices.get({
         ...arg,
         treatmentTypeId: this.treatment.treatmentTypeId,
