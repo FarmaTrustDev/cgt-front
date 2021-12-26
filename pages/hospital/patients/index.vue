@@ -15,19 +15,19 @@ import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
 const column = [
   {
-    title: 'Treatment Name',
-    dataIndex: 'treatmentTypeName',
-    key: 'treatmentTypeName',
+    title: 'Id',
+    dataIndex: 'enrollmentNumber',
+    key: 'enrollmentNumber',
   },
   {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
+    title: 'Name',
+    dataIndex: 'firstName',
+    key: 'firstName',
   },
   {
-    title: 'Description',
-    dataIndex: 'description',
-    key: 'description',
+    title: 'Age',
+    dataIndex: 'dob',
+    key: 'dob',
   },
   {
     title: 'Action',
@@ -35,7 +35,7 @@ const column = [
     scopedSlots: { customRender: 'action' },
   },
 ]
-const ActionLink = '/manufacturer/schedules'
+const ActionLink = '/hospital/patients'
 export default {
   components: { 'page-layout': PageLayout, standardTable },
   data() {
