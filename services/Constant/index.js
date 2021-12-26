@@ -53,3 +53,4 @@ export const GENDER = [
 ]
 
 export const HOSPITAL_ALIAS = 'HOSPITAL';
+export const LOGISTIC_ALIAS = 'LOGISTIC';

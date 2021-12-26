@@ -3,13 +3,7 @@ import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 export default {
   mixins: [routeHelpers, nullHelper, notifications],
-  props: {
-    // loading: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // service: { type: Object, default: () => {}, required: true },
-  },
+
   data() {
     return {
       entityId: null,

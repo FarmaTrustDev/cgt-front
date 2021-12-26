@@ -1,0 +1,71 @@
+<template>
+  <a-form-item label="Logistics Provider">
+    <a-select
+      v-decorator="[
+        'logisticId',
+        {
+          initialValue: logisticId,
+          rules: [
+            {
+              required: true,
+              message: 'Please select your Treatment Type!',
+            },
+          ],
+        },
+      ]"
+      :loading="typeLoading"
+      placeholder="Select Treatment Type"
+      class="default-select w-100"
+      size="large"
+      :disabled="disabled"
+      @change="onchange"
+    >
+      <a-select-option
+        v-for="type in treatmentTypes"
+        :key="type.id"
+        :data-globalId="type.globalId"
+      >
+        {{ type.name }}
+      </a-select-option>
+    </a-select>
+  </a-form-item>
+</template>
+
+<script>
+import OrganizationService from '~/services/API/OrganizationServices'
+import { LOGISTIC_ALIAS } from '~/services/Constant'
+export default {
+  props: {
+    logisticId: { type: Number, default: null },
+    disabled: { type: Boolean, default: false },
+    params: { type: Object, default: () => ({}) },
+  },
+
+  data() {
+    return {
+      LOGISTIC_ALIAS,
+      treatmentTypes: {},
+      typeLoading: false,
+    }
+  },
+  mounted() {
+    this.fetch()
+  },
+  methods: {
+    fetch() {
+      this.typeLoading = true
+      OrganizationService.get({
+        ...this.params,
+        OrganizationTypeAlias: this.LOGISTIC_ALIAS,
+      })
+        .then((response) => {
+          this.treatmentTypes = response.data
+        })
+        .finally(() => (this.typeLoading = false))
+    },
+    onchange(value, e) {
+      this.$emit('onChange', value)
+    },
+  },
+}
+</script>
