@@ -10,8 +10,6 @@ import PageLayout from '~/components/layout/PageLayout'
 export default {
   components: { Enrollment, 'page-layout': PageLayout },
   middleware: 'auth',
-  mounted() {
-    console.log(this.$route)
-  },
+  mounted() {},
 }
 </script>

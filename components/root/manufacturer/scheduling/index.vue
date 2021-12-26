@@ -37,6 +37,7 @@ export default {
   },
   methods: {
     getEntity(entity) {
+      // eneity yahen fetch kar k childs ko pass karni hai 
       this.entity = entity
       this.isCreated = true
     },

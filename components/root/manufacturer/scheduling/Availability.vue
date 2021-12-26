@@ -109,9 +109,13 @@ export default {
       this.calendarEventsData = updatedData
     },
     handleDateClick(arg, callback) {
-      if (!this.isEmpty(this.manufacturerTreatment)) {
+      const manufacturerTreatment = this.manufacturerTreatment
+      if (!this.isEmpty(manufacturerTreatment)) {
         TreatmentAvailabilityServices.get(
-          { organizationId: this.manufacturerTreatment.organizationId },
+          {
+            organizationId: this.manufacturerTreatment.organizationId,
+            treatmentTypeId: manufacturerTreatment.treatmentTypeId,
+          },
           { ...arg }
         )
           .then((schedules) => {

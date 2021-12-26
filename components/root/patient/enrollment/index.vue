@@ -11,10 +11,12 @@
       <a-tab-pane :key="2" tab="Consent"
         ><consent :treatment="treatment" />
       </a-tab-pane>
-      <a-tab-pane :key="3" tab="Screening"
+      <a-tab-pane :key="3" :disabled="!haveTreatment" tab="Screening"
         ><screening :treatment="treatment" />
       </a-tab-pane>
-      <a-tab-pane :key="4" tab="Scheduling"> Content of Tab Pane 4 </a-tab-pane>
+      <a-tab-pane :key="4" :disabled="!haveTreatment" tab="Scheduling">
+        <scheduling :treatment="treatment" />
+      </a-tab-pane>
     </a-tabs>
   </div>
 </template>
@@ -22,6 +24,7 @@
 <script>
 import enrollment from '~/components/patient/enrollment/Form.vue'
 import consent from '~/components/treatment/enrollment/Consent'
+import scheduling from '~/components/treatment/enrollment/scheduling'
 import screening from '~/components/treatment/enrollment/screening'
 import { isEmpty } from '~/services/Utilities'
 import TreatmentServices from '~/services/API/TreatmentServices'
@@ -30,6 +33,7 @@ export default {
   components: {
     enrollment,
     consent,
+    scheduling,
     screening,
   },
   mixins: [notifications],
@@ -37,6 +41,7 @@ export default {
     return {
       activeTab: 1,
       treatment: {},
+      haveTreatment: false,
     }
   },
   mounted() {
@@ -55,6 +60,7 @@ export default {
       TreatmentServices.getById(treatmentId)
         .then((response) => {
           this.treatment = response.data
+          this.haveTreatment = true
         })
         .catch(this.error)
     },
