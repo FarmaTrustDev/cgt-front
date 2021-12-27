@@ -1,7 +1,10 @@
 <template>
   <div>
-    <calendar :handle-date-click="fetchEvents"></calendar>
-    <FormFields></FormFields>
+    <calendar
+      :handle-date-click="fetchEvents"
+      @getEventClick="getEventClick"
+    ></calendar>
+    <FormFields :entity="entity"></FormFields>
     <FormActionButton :is-created="isCreated" />
   </div>
 </template>
@@ -17,11 +20,15 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    form: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
       isCreated: false,
-      
+      entity: {},
       manufacturerTreatment: {},
     }
   },
@@ -37,6 +44,16 @@ export default {
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
+    },
+    getEventClick(detail) {
+      //  this.entity.manufacturerName =
+      console.log(detail.event._def)
+      this.form.setFieldsValue({
+        manufacturerName: detail.event._def.title,
+        treatmentAvailabilityId: detail.event._def.publicId,
+      })
+      // console.log('detail._def', detail)
+      // console.log(detail)
     },
   },
 }

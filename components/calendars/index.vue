@@ -5,6 +5,7 @@
       :header="{
         left: 'prev,next',
       }"
+      @select="handleEventClick"
       @changeDate="handleDateClick"
     />
   </div>
@@ -72,7 +73,7 @@ export default {
   mounted() {},
   methods: {
     handleEventClick(arg) {
-      this.$emit('eventClick', arg)
+      this.$emit('getEventClick', arg)
     },
   },
 }

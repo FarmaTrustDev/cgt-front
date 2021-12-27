@@ -2,7 +2,7 @@
   <div>
     <a-spin :spinning="loading">
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
-        <Form :treatment="treatment" />
+        <Form :form="form" :treatment="treatment" />
       </a-form>
     </a-spin>
   </div>
