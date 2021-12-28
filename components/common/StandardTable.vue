@@ -10,6 +10,9 @@
         <a-icon type="edit" />
       </a-button>
     </span>
+    <span slot="nameTags" slot-scope="tags">
+      <a-tag v-for="tag in tags" :key="tag.id">{{ tag.name }}</a-tag>
+    </span>
   </a-table>
 </template>
 <script>
