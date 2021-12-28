@@ -1,23 +1,21 @@
 <template>
   <div>
-    <a-tabs
-      tab-position="left"
-      :default-active-key="activeTab"
-      @change="tabChange"
-    >
-      <a-tab-pane :key="1" tab="Patient Detail"
-        ><enrollment :treatment="treatment" />
-      </a-tab-pane>
-      <a-tab-pane :key="2" tab="Consent"
-        ><consent :treatment="treatment" />
-      </a-tab-pane>
-      <a-tab-pane :key="3" :disabled="!haveTreatment" tab="Screening"
-        ><screening :treatment="treatment" />
-      </a-tab-pane>
-      <a-tab-pane :key="4" :disabled="!haveTreatment" tab="Scheduling">
-        <scheduling :treatment="treatment" />
-      </a-tab-pane>
-    </a-tabs>
+    <a-spin :spinning="loading">
+      <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
+        <a-tab-pane :key="1" tab="Patient Detail"
+          ><enrollment :treatment="treatment" />
+        </a-tab-pane>
+        <a-tab-pane :key="2" tab="Consent"
+          ><consent :treatment="treatment" />
+        </a-tab-pane>
+        <a-tab-pane :key="3" :disabled="!haveTreatment" tab="Screening"
+          ><screening :treatment="treatment" />
+        </a-tab-pane>
+        <a-tab-pane :key="4" :disabled="!haveTreatment" tab="Scheduling">
+          <scheduling :treatment="treatment" />
+        </a-tab-pane>
+      </a-tabs>
+    </a-spin>
   </div>
 </template>
 
@@ -39,9 +37,10 @@ export default {
   mixins: [notifications],
   data() {
     return {
-      activeTab: 4,
+      activeTab: 1,
       treatment: {},
       haveTreatment: false,
+      loading: true,
     }
   },
   mounted() {
@@ -51,18 +50,25 @@ export default {
   methods: {
     isTreatmentCreate() {
       const query = this.$route.query
+      this.loading = true
       if (!isEmpty(this.$route.query) && !isEmpty(query.treatment_id)) {
-        // console.log(query.treatment_id)
         this.fetch(query.treatment_id)
+      } else {
+        this.loading = false
       }
     },
     fetch(treatmentId) {
+      this.loading = true
       TreatmentServices.getById(treatmentId)
         .then((response) => {
           this.treatment = response.data
           this.haveTreatment = true
         })
         .catch(this.error)
+        .finally(() => {
+          this.loading = false
+          this.activeTab = 4
+        })
     },
     tabChange(a, b, c) {
       console.log(a, b, c)

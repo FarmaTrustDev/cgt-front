@@ -38,12 +38,20 @@ function getEstimation(treatmentAvailabilityId) {
   })
 }
 
+function getByTreatment(id, params = {}) {
+  return request({
+    url: `${baseApi}/treatment/${id}`,
+    params,
+  })
+}
+
 const SchedulingServices = {
   get,
   create,
   getById,
   update,
   getEstimation,
+  getByTreatment,
 }
 
 export default SchedulingServices
