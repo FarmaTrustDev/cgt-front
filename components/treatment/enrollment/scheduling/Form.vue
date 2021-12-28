@@ -4,7 +4,7 @@
       :handle-date-click="fetchEvents"
       @getEventClick="getEventClick"
     ></calendar>
-    <FormFields :entity="entity"></FormFields>
+    <FormFields :treatment="treatment" :entity="entity"></FormFields>
     <FormActionButton :is-created="isCreated" />
   </div>
 </template>
@@ -12,7 +12,8 @@
 import FormFields from '~/components/treatment/enrollment/scheduling/FormFields'
 import calendar from '~/components/calendars/index'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
-
+import SchedulingServices from '~/services/API/SchedulingServices'
+import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 export default {
   components: { FormFields, calendar },
   props: {
@@ -45,13 +46,33 @@ export default {
         .catch(this.error)
         .finally(() => (this.loading = false))
     },
+    getMomentByStandardFormat,
     getEventClick(detail) {
       //  this.entity.manufacturerName =
-      console.log(detail.event._def)
-      this.form.setFieldsValue({
-        manufacturerName: detail.event._def.title,
-        treatmentAvailabilityId: detail.event._def.publicId,
-      })
+
+      SchedulingServices.getEstimation(detail.event._def.publicId).then(
+        (response) => {
+          const data = response.data
+          this.form.setFieldsValue({
+            manufacturerName: detail.event._def.title,
+            treatmentAvailabilityId: detail.event._def.publicId,
+            hospitalCollectionDate: getMomentByStandardFormat(
+              data.hospitalCollectionDate
+            ),
+            pickupDateTime: getMomentByStandardFormat(data.pickupDateTime),
+            deliveryDate: getMomentByStandardFormat(data.deliveryDate),
+            manufacturerTreatmentStartDate: getMomentByStandardFormat(
+              data.manufacturerTreatmentStartDate
+            ),
+            completionDate: getMomentByStandardFormat(data.completionDate),
+            deliveryArrivalDate: getMomentByStandardFormat(
+              data.deliveryArrivalDate
+            ),
+            duration: data.duration,
+          })
+        }
+      )
+
       // console.log('detail._def', detail)
       // console.log(detail)
     },

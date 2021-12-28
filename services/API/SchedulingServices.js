@@ -32,11 +32,18 @@ function update(id, data) {
   })
 }
 
+function getEstimation(treatmentAvailabilityId) {
+  return request({
+    url: `${baseApi}/treatment-availability/${treatmentAvailabilityId}`,
+  })
+}
+
 const SchedulingServices = {
   get,
   create,
   getById,
   update,
+  getEstimation,
 }
 
 export default SchedulingServices

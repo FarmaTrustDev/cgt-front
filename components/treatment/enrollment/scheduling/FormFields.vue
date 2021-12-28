@@ -6,7 +6,7 @@
           'manufacturerName',
           {
             rules: [
-              { required: true, message: 'Please inputmanufacturerName!' },
+              { required: true, message: 'Please input manufacturerName!' },
             ],
             initialValue: entity.manufacturerName,
           },
@@ -15,12 +15,26 @@
         size="large"
         placeholder="Email/Username"
       />
+
       <a-input
         v-decorator="[
           'treatmentAvailabilityId',
           {
             rules: [{ required: true, message: 'Please input your Email!' }],
             initialValue: entity.treatmentAvailabilityId,
+          },
+        ]"
+        type="hidden"
+      />
+
+      <a-input
+        v-decorator="[
+          'treatmentId',
+          {
+            rules: [
+              { required: true, message: 'Please input your treatmentId!' },
+            ],
+            initialValue: treatment.id,
           },
         ]"
         type="hidden"
@@ -33,17 +47,18 @@
         <a-form-item label="Sample Collection Date">
           <a-date-picker
             v-decorator="[
-              'collectionDate',
+              'hospitalCollectionDate',
               {
-                initialValue: entity.collectionDate,
+                initialValue: entity.hospitalCollectionDate,
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please select your Collection Date!',
                   },
                 ],
               },
             ]"
+            :format="dateFormat"
             style="width: 100%"
             size="large"
           >
@@ -53,17 +68,18 @@
         <a-form-item label="Delivery Dispatch Date">
           <a-date-picker
             v-decorator="[
-              'dispatchDate',
+              'pickupDateTime',
               {
-                initialValue: entity.dispatchDate,
+                initialValue: entity.pickupDateTime,
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please select your Dispatch Date!',
                   },
                 ],
               },
             ]"
+            :format="dateFormat"
             style="width: 100%"
             size="large"
           >
@@ -79,11 +95,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please select your Delivery Date!',
                   },
                 ],
               },
             ]"
+            :format="dateFormat"
             style="width: 100%"
             size="large"
           >
@@ -93,24 +110,26 @@
         <a-form-item label="Treatment Start Date" class="pb-0">
           <a-date-picker
             v-decorator="[
-              'treatmentStartDate',
+              'manufacturerTreatmentStartDate',
               {
-                initialValue: entity.treatmentStartDate,
+                initialValue: entity.manufacturerTreatmentStartDate,
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please select your Start Date!',
                   },
                 ],
               },
             ]"
+            :format="dateFormat"
             style="width: 100%"
             size="large"
           >
           </a-date-picker> </a-form-item
       ></a-col>
-      <a-col :span="12"
-        ><a-form-item label="Date of Birth" class="pb-0">
+
+      <a-col :span="12">
+        <a-form-item label="Completion Date" class="pb-0">
           <a-date-picker
             v-decorator="[
               'completionDate',
@@ -119,31 +138,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please select your Completion Date!',
                   },
                 ],
               },
             ]"
-            style="width: 100%"
-            size="large"
-          >
-          </a-date-picker> </a-form-item
-      ></a-col>
-      <a-col :span="12">
-        <a-form-item label="Delivery Arrival Date " class="pb-0">
-          <a-date-picker
-            v-decorator="[
-              'deliveryArrivalDate',
-              {
-                initialValue: entity.dob,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please select your Date of Birth!',
-                  },
-                ],
-              },
-            ]"
+            :format="dateFormat"
             style="width: 100%"
             size="large"
           >
@@ -169,6 +169,27 @@
           ></a-input-number> </a-form-item
       ></a-col>
       <a-col :span="12">
+        <a-form-item label="Delivery Arrival Date " class="pb-0">
+          <a-date-picker
+            v-decorator="[
+              'deliveryArrivalDate',
+              {
+                initialValue: entity.deliveryArrivalDate,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your Delivery Arrival Date Birth!',
+                  },
+                ],
+              },
+            ]"
+            :format="dateFormat"
+            style="width: 100%"
+            size="large"
+          >
+          </a-date-picker> </a-form-item
+      ></a-col>
+      <a-col :span="12">
         <a-form-item label="Notes" class="pb-0">
           <a-textarea
             v-decorator="[
@@ -192,6 +213,7 @@
 </template>
 <script>
 import LogisticLookup from '~/components/lookups/LogisticLookup.vue'
+import { STANDARD_UK_DATE_FORMATE } from '~/services/Constant/DateTime'
 export default {
   components: { LogisticLookup },
   props: {
@@ -199,9 +221,14 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    treatment: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
+      dateFormat: STANDARD_UK_DATE_FORMATE,
       manufacturerName: null,
       formLayout: 'horizontal',
       loading: false,
