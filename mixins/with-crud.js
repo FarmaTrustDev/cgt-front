@@ -62,6 +62,7 @@ export default {
             this.afterCreate(response)
           }
         })
+        .catch(this.error)
         .finally(() => (this.btnLoading = false))
     },
     update(values) {
