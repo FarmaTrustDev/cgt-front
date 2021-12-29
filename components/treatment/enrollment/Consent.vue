@@ -49,7 +49,7 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton />
+      <FormActionButton :disabled="treatment.id" />
     </a-form>
   </div>
 </template>
@@ -98,6 +98,8 @@ export default {
       TreatmentServices.create(values)
         .then((response) => {
           this.success(response.message)
+          this.$emit('getTreatment', response.data)
+          this.$emit('getNextTab', 3)
           this.goto(this.$route.path, { treatment_id: response.data.globalId })
         })
         .catch(this.error)
@@ -108,7 +110,6 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
           this.create(values)
         } else {
           this.loading = false

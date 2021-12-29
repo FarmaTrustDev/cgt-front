@@ -85,7 +85,7 @@ export default {
       PatientServices.create(values)
         .then((response) => {
           this.success(response.message)
-          this.goto(`/hospital/patients/enrollment/${response.data.globalId}`)
+          this.goto(`/hospital/patients/${response.data.globalId}`)
         })
         .catch(this.error)
         .finally(() => (this.loading = false))

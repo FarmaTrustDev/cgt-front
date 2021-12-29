@@ -2,7 +2,7 @@
   <div>
     <a-spin :spinning="loading">
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
-        <Detail :entity="entity" v-if="isScheduled" />
+        <Detail v-if="isScheduled" :entity="entity" />
         <span v-else>
           <Form :form="form" :treatment="treatment" />
         </span>
@@ -16,6 +16,7 @@ import Detail from '~/components/treatment/enrollment/scheduling/Detail'
 import withCrud from '~/mixins/with-crud'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import { isEmpty } from '~/services/Utilities'
+
 export default {
   components: { Form, Detail },
   mixins: [withCrud],
@@ -32,10 +33,9 @@ export default {
         name: 'TreatmentSchedulingForm',
       }),
       apiService: SchedulingServices,
-      gotoLink: '/manufacturer/schedules',
       fetchIdFromParams: false,
       entity: {},
-      isScheduled: true,
+      isScheduled: false,
     }
   },
   mounted() {
@@ -43,7 +43,11 @@ export default {
   },
   methods: {
     validateIsCreated() {
-      if (!isEmpty(this.treatment) && this.treatment.id) {
+      if (
+        !isEmpty(this.treatment) &&
+        this.treatment.id &&
+        this.treatment.IsSchedule
+      ) {
         this.fetchScheduling(this.treatment.id)
       }
     },
@@ -55,6 +59,15 @@ export default {
           this.entity = entity
         }
       })
+    },
+    afterCreate(values) {
+      this.gotoPatient()
+    },
+    afterUpdate(values) {
+      this.gotoPatient()
+    },
+    gotoPatient() {
+      this.goto('/hospital/patients')
     },
   },
 }

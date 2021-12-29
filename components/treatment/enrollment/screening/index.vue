@@ -86,6 +86,8 @@ export default {
       })
         .then((response) => {
           this.success(response.message)
+          this.$emit('getTreatment', response.data)
+          this.$emit('getNextTab', 4)
           this.isCreated = true
         })
         .catch(this.error)

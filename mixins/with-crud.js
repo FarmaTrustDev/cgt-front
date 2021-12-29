@@ -58,6 +58,7 @@ export default {
           if (!this.isEmpty(this.gotoLink)) {
             this.goto(`${this.gotoLink}/${response.data.globalId}`)
           }
+
           if (this.isFunction(this.afterCreate)) {
             this.afterCreate(response)
           }

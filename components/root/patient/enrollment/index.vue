@@ -6,12 +6,24 @@
           ><enrollment :treatment="treatment" />
         </a-tab-pane>
         <a-tab-pane :key="2" tab="Consent"
-          ><consent :treatment="treatment" />
+          ><consent
+            :treatment="treatment"
+            @getNextTab="getNextTab"
+            @getTreatment="updateTreatment"
+          />
         </a-tab-pane>
         <a-tab-pane :key="3" :disabled="!haveTreatment" tab="Screening"
-          ><screening :treatment="treatment" />
+          ><screening
+            @getNextTab="getNextTab"
+            @getTreatment="updateTreatment"
+            :treatment="treatment"
+          />
         </a-tab-pane>
-        <a-tab-pane :key="4" :disabled="!haveTreatment" tab="Scheduling">
+        <a-tab-pane
+          :key="4"
+          :disabled="!treatment.screeningStatus"
+          tab="Scheduling"
+        >
           <scheduling :treatment="treatment" />
         </a-tab-pane>
       </a-tabs>
@@ -20,10 +32,10 @@
 </template>
 
 <script>
-import enrollment from '~/components/patient/enrollment/Form.vue'
+import enrollment from '~/components/patient/enrollment/Form'
 import consent from '~/components/treatment/enrollment/Consent'
-import scheduling from '~/components/treatment/enrollment/scheduling'
 import screening from '~/components/treatment/enrollment/screening'
+import scheduling from '~/components/treatment/enrollment/scheduling'
 import { isEmpty } from '~/services/Utilities'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import notifications from '~/mixins/notifications'
@@ -61,17 +73,22 @@ export default {
       this.loading = true
       TreatmentServices.getById(treatmentId)
         .then((response) => {
-          this.treatment = response.data
-          this.haveTreatment = true
+          this.updateTreatment(response.data)
         })
         .catch(this.error)
         .finally(() => {
           this.loading = false
-          this.activeTab = 4
         })
     },
-    tabChange(a, b, c) {
-      console.log(a, b, c)
+    updateTreatment(treatment) {
+      this.treatment = treatment
+      this.haveTreatment = true
+    },
+    tabChange(key) {
+      this.activeTab = key
+    },
+    getNextTab(key) {
+      this.tabChange(key)
     },
   },
 }
