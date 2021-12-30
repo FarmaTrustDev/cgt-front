@@ -3,7 +3,7 @@
     <template slot="content">
       <standardTable
         :columns="column"
-        :api-service="ManufacturerTreatmentServices"
+        :api-service="SchedulingServices"
         :action-link="ActionLink"
       />
     </template>
@@ -12,23 +12,29 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 import standardTable from '~/components/common/StandardTable'
-import ManufacturerTreatmentServices from '~/services/API/ManufacturerTreatmentServices'
+import SchedulingServices from '~/services/API/SchedulingServices'
 const column = [
   {
-    title: 'Treatment Name',
-    dataIndex: 'treatmentTypeName',
-    key: 'treatmentTypeName',
+    title: 'Patient Id',
+    dataIndex: 'patientEnrollmentId',
+    key: 'patientEnrollmentId',
   },
   {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
+    title: 'Treatment Type',
+    dataIndex: 'treatmentType.name',
+    key: 'TreatmentName',
   },
   {
-    title: 'Description',
-    dataIndex: 'description',
-    key: 'description',
+    title: 'Organization',
+    dataIndex: 'hospital.name',
+    key: 'OrganizationName',
   },
+  {
+    title: 'Collection - Delivery Date',
+    dataIndex: 'collectionDateDeliveryDate',
+    key: 'collectionDateDeliveryDate',
+  },
+
   {
     title: 'Action',
     dataIndex: 'action',
@@ -42,7 +48,7 @@ export default {
     return {
       column,
       loading: false,
-      ManufacturerTreatmentServices,
+      SchedulingServices,
       ActionLink,
     }
   },
