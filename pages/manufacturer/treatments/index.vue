@@ -1,18 +1,51 @@
 <template>
-  <page-layout :loading="loading" title="Treatments">
+  <page-layout :create="false" :loading="loading" title="Treatments">
     <template slot="content">
-      <standardTable
-        :columns="column"
-        :api-service="SchedulingServices"
-        :action-link="ActionLink"
-      />
+      <a-table :loading="loading" :columns="column" :data-source="data">
+        <span slot="action" slot-scope="text, record">
+          <a-button type="primary" dashed @click="showConfirm(record, true)">
+            Accepted
+          </a-button>
+          <a-button type="danger" dashed @click="showConfirm(record, false)">
+            Rejected
+          </a-button>
+        </span>
+      </a-table>
+
+      <a-modal
+        title="Scheduling Request"
+        :visible="showResponseModal"
+        :confirm-loading="confirmLoading"
+        :footer="null"
+        :destroy-on-close="true"
+        :width="700"
+        @ok="submitTreatmentResult"
+        @cancel="handleModal(false)"
+      >
+        <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+          <Form :is-accepted="isAccepted" :data="selectedRow" />
+          <FormActionButton
+            :text="getButtonText()"
+            :btn-type="getButtonType()"
+            :is-created="false"
+            ><span class="mr-5" slot="extra">
+              <a-button @click="handleModal(false)">Cancel</a-button>
+            </span></FormActionButton
+          >
+        </a-form>
+      </a-modal>
     </template>
   </page-layout>
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import standardTable from '~/components/common/StandardTable'
+import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import withTableCrud from '~/mixins/with-table-crud'
+import {
+  _getPastMomentStandardFormatted,
+  _getFutureMomentStandardFormatted,
+} from '~/services/Helpers/MomentHelpers'
 const column = [
   {
     title: 'Patient Id',
@@ -43,15 +76,56 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  components: { 'page-layout': PageLayout, standardTable },
+  components: { 'page-layout': PageLayout, Form },
+  mixins: [withTableCrud],
   data() {
     return {
       column,
       loading: false,
-      SchedulingServices,
+      data: [],
+      apiService: SchedulingServices,
       ActionLink,
+      showResponseModal: false,
+      isAccepted: false,
+      params: {
+        start: _getPastMomentStandardFormatted(2, 'month'),
+        end: _getFutureMomentStandardFormatted(2, 'month'),
+      },
+      selectedRow: {},
+      confirmLoading: false,
+      form: this.$form.createForm(this, {
+        name: 'screeningCategory',
+      }),
+      formLayout: 'vertical',
     }
   },
-  methods: {},
+  methods: {
+    showConfirm(record, isAccepted) {
+      this.isAccepted = isAccepted
+      this.selectedRow = record
+      this.handleModal(true)
+    },
+    getButtonText() {
+      return this.isAccepted ? 'Accepted' : 'Rejected'
+    },
+    getButtonType() {
+      return this.isAccepted ? 'primary' : 'danger'
+    },
+    handleModal(show) {
+      this.showResponseModal = show
+    },
+    submitTreatmentResult() {},
+    onSubmit(e) {
+      this.loading = true
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values)
+          this.fetch()
+        }
+      })
+      this.loading = false
+    },
+  },
 }
 </script>
