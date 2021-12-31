@@ -2,23 +2,49 @@ header.ant-layout-header {
   background-color: white;
   height: auto;
   padding-top: 15px;
+  line-height: 50px;
 
   .user-detail,
   .hospital-detail {
-    max-width: 300px;
+    max-width: 600px;
   }
   .user-detail {
     float: left;
   }
   .hospital-detail {
     float: right;
+    display: flex;
+    .ant-select-selection--single{
+      background-color: #f9f9f9;
+      font-weight: bold;
+      height: 40px;
+    }
+    .ant-select-selection__rendered {
+      line-height: 35px;
+    }
   }
-  .capsule {
+  .login-logo {
+    background-color: #f9f9f9;
+    border-radius: 44px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 10px;
     img {
-      width: 38px;
-      max-height: 38px;
-      border-radius: 52px;
-      margin: 1.3rem;
+      max-width: 100px;
+      max-height: 24px;
+      vertical-align: middle;
+      border-style: none;
+    }
+    .title {
+      font-weight: bold;
+    }
+  }
+  .notifications{
+    margin-right: 20px;
+    color: black;
+    .anticon {
+      font-size: 1.5rem;
+      color: black;
     }
   }
 }
