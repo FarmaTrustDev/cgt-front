@@ -2,23 +2,9 @@
   <a-layout id="components-layout-demo-responsive">
     <sidebar />
     <a-layout class="main-section">
-      <a-layout-header>
-        <div class="user-detail">
-          <div>
-            Welcome <strong>{{ user.userName }}</strong>
-          </div>
-        </div>
+       
+       <Header></Header>
 
-        <div class="hospital-detail">
-          <div class="capsule">
-            <img
-              src="https://demoapi.qmaid.co/Logos/2020_10_22.14_48_51.jpg" logo hendling for temp
-              class="logo"
-            />
-            <span class="title">{{ user.organizationName }}</span>
-          </div>
-        </div>
-      </a-layout-header>
       <a-layout-content style="margin: 0 16px">
         <!-- <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>User</a-breadcrumb-item>
@@ -37,10 +23,12 @@
 
 <script>
 import sidebar from '~/components/layout/Sidebar'
+import Header from '~/components/layout/Header'
 
 export default {
   components: {
     sidebar,
+    Header
   },
   computed: {
     // ...mapGetters(['getUser']),
