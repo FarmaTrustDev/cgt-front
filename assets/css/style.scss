@@ -14,6 +14,7 @@
 @import './components/login';
 @import './components/header';
 @import './components/patient-table';
+@import './components/home';
 
 
 body {
@@ -72,4 +73,21 @@ a {
 	{
 		color: $primary-color;
 	}
+}
+
+.grey-card{
+  background-color: #f9f9f9;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 44px;
+}
+
+.vertical-line {
+	position: absolute;
+    width: 20px;
+    height: 0;
+    border: 1px solid #e9e9e9;
+    transform: rotate(90deg);
+    margin-top: 20px;
+    margin-left: -25px;
 }
