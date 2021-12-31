@@ -88,6 +88,7 @@ export default {
       showResponseModal: false,
       isAccepted: false,
       params: {
+        status: 1,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
       },
@@ -120,8 +121,14 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
-          this.fetch()
+          const data = this.selectedRow
+          SchedulingServices.markScheduleRequest(data.id, values).then(
+            (response) => {
+              this.success(response.message)
+              this.handleModal(false)
+              this.fetch()
+            }
+          )
         }
       })
       this.loading = false

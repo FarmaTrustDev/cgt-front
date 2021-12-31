@@ -52,5 +52,14 @@ export const GENDER = [
   },
 ]
 
-export const HOSPITAL_ALIAS = 'HOSPITAL';
-export const LOGISTIC_ALIAS = 'LOGISTIC';
+export const HOSPITAL_ALIAS = 'HOSPITAL'
+export const LOGISTIC_ALIAS = 'LOGISTIC'
+
+export const SCHEDULING_STATUSES = {
+  new: { id: 1, name: 'New' },
+  accepted: { id: 2, name: 'Accepted' },
+  rejected: { id: 3, name: 'Rejected' },
+  pending: { id: 4, name: 'Pending' },
+  completed: { id: 5, name: 'Completed' },
+  inProcess: { id: 6, name: 'InProcess' },
+}
