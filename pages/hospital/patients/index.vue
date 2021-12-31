@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Treatments">
+  <page-layout :loading="loading" title="Patients List" :bordered="borderCard">
     <template slot="content">
       <standardTable
         :columns="column"
@@ -15,12 +15,12 @@ import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
 const column = [
   {
-    title: 'Id',
+    title: 'Patient ID',
     dataIndex: 'enrollmentNumber',
     key: 'enrollmentNumber',
   },
   {
-    title: 'Name',
+    title: 'Patient Name',
     dataIndex: 'firstName',
     key: 'firstName',
   },
@@ -28,6 +28,18 @@ const column = [
     title: 'Age',
     dataIndex: 'dob',
     key: 'dob',
+  },
+  {
+    title: 'Treatment Type',
+    dataIndex: 'treatment_type',
+    key: 'treatment_type',
+  },
+  {
+    title: 'Treatment Status',
+    dataIndex: 'treatment_status',
+    key: 'treatment_status',
+    slots: { title: 'customTitle' },
+    scopedSlots: { customRender: 'treatment_status' },
   },
   {
     title: 'Action',
@@ -44,6 +56,7 @@ export default {
       loading: false,
       PatientServices,
       ActionLink,
+      borderCard: false
     }
   },
   methods: {},

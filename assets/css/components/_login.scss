@@ -1,10 +1,18 @@
 .login {
-  max-width: 473px;
+  max-width: 450px;
   margin: auto;
   .ant-card {
     box-shadow: 0 26px 120px rgba(0, 0, 0, 0.04);
-    border-radius: 44px;
+    border-radius: 30px;
     padding: 15px;
+  }
+  .ant-form-item
+  {
+    margin-bottom: 5px;
+  }
+  .ant-btn
+  {
+    margin-top: 25px;
   }
 }
 
@@ -19,7 +27,22 @@
     position: fixed;
     right: 0;
     top: 0;
-    border-radius: 44px;
+    border-radius: 30px;
     max-width: 25%;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .half-secondary {
+    &::before {
+      display: none;
+    }
+  }
+  .login {
+    .ant-card-head-title {
+      text-align: center;
+    }
+  }
+}
+
+
