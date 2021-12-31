@@ -10,11 +10,11 @@
 @import './partials/capsules';
 @import './partials/modal';
 @import './partials/formsFields';
+@import './partials/_steps';
 @import './components/sidebar';
 @import './components/login';
 @import './components/header';
 @import './components/patient-table';
-
 
 body {
   background-color: white;
@@ -38,38 +38,37 @@ body {
 }
 
 .ant-form-item-control input {
-	border-radius: 7px;
-	height: 45px;
-	background: #F8F8F8;
+  border-radius: 7px;
+  height: 45px;
+  background: #f8f8f8;
 }
 
 .ant-btn {
-	height: 45px;
+  height: 45px;
 }
 
-.ant-btn-primary{
-	background-color: #2255C2;
-	border-color: #2255C2;
-	&:hover{
-		background-color: #1749b5;
-		border-color: #1749b5;
-	}
+.ant-btn-primary {
+  background-color: #2255c2;
+  border-color: #2255c2;
+  &:hover {
+    background-color: #1749b5;
+    border-color: #1749b5;
+  }
 }
 
 .ant-input {
-	&:hover{
-		border-color: #1749b5;
-	}
-	&:focus{
-		border-color: #2255C2;
-		box-shadow: 0 0 0 2px rgb(34, 85, 194, 0.45);
-	}
+  &:hover {
+    border-color: #1749b5;
+  }
+  &:focus {
+    border-color: #2255c2;
+    box-shadow: 0 0 0 2px rgb(34, 85, 194, 0.45);
+  }
 }
 
 a {
-	color: $primary-color;
-	&:hover
-	{
-		color: $primary-color;
-	}
+  color: $primary-color;
+  &:hover {
+    color: $primary-color;
+  }
 }

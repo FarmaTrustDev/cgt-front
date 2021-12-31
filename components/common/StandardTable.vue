@@ -6,7 +6,6 @@
     :data-source="data"
   >
     <span slot="treatment_status" slot-scope="text, record">
-      {{ text }}
       <!-- <div class="patient-timeline">
         <a class="btn btn-timeline-success btn-icon-sm" href="">Screening</a>
         <span class="sep-line-success"></span>
@@ -22,14 +21,20 @@
         >
       </div> -->
 
-      <a-steps :current="getCurrentStep(record)" size="small">
-        <a-step title="Screening" />
-        <a-step title="Scheduling" />
-        <a-step title="Collection" />
-        <a-step title="Shipment" />
-        <a-step title="Treatment" />
-        <a-step title="After care" />
-      </a-steps>
+      <div class="treatment-steps">
+        <span v-for="treatment in record.treatments" :key="treatment.id">
+          <span class="treatment-name-col">TreatName</span>
+          <span class="step-col"
+            ><a-steps :current="getCurrentStep(treatment)" size="small">
+              <a-step title="Screening" />
+              <a-step title="Scheduling" />
+              <a-step title="Collection" />
+              <a-step title="Shipment" />
+              <a-step title="Treatment" />
+              <a-step title="After care" /> </a-steps
+          ></span>
+        </span>
+      </div>
     </span>
 
     <span slot="action" slot-scope="text, record">
@@ -39,10 +44,12 @@
         </a-button>
         <a-menu slot="overlay">
           <a-menu-item key="0">
-            <a :href="`${actionLink}/${record.globalId}`">Open Ticket</a>
+            <a>Open Ticket</a>
           </a-menu-item>
           <a-menu-item key="1">
-            <a href="http://www.taobao.com/">Add New Treatment</a>
+            <a @click="goto(`/hospital/patients/${record.globalId}`)"
+              >Add New Treatment</a
+            >
           </a-menu-item>
           <a-menu-item key="3"> Hide Patient </a-menu-item>
         </a-menu>

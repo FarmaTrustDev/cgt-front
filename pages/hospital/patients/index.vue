@@ -40,7 +40,7 @@ const column = [
     key: 'treatment_status',
     slots: { title: 'customTitle' },
     scopedSlots: { customRender: 'treatment_status' },
-    width: 200,
+    width: '55%',
   },
   {
     title: 'Action',
