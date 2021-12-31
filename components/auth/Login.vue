@@ -43,6 +43,7 @@
               >Submit</a-button
             >
           </a-form-item>
+          <div class="text-center mt-15"><a href="#"><b>Forgot Password?</b></a></div>
         </a-form>
       </a-card>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <a-card :loading="loading" :title="title">
+  <a-card :loading="loading" :title="title" :bordered="bordered">
     <span slot="extra">
       <a-button v-if="create" type="primary" @click="gotoState('create')"
         >Create</a-button
@@ -23,6 +23,10 @@ export default {
     title: {
       type: String,
       default: '',
+    },
+    bordered: {
+        type: Boolean,
+        default: true
     },
     create: { type: Boolean, default: true },
   },

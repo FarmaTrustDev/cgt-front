@@ -15,7 +15,7 @@
               src="https://demoapi.qmaid.co/Logos/2020_10_22.14_48_51.jpg" logo hendling for temp
               class="logo"
             />
-            <span class="title">{{ user.hospitalName }}</span>
+            <span class="title">{{ user.organizationName }}</span>
           </div>
         </div>
       </a-layout-header>
