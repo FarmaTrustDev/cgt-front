@@ -1,10 +1,10 @@
 <template>
-  <a-card :loading="loading" :title="title" :bordered="bordered">
+  <a-card :loading="loading" :title="title" :bordered="bordered" :classes="[classes]">
     <span slot="extra">
       <a-button v-if="create" type="primary" @click="gotoState('create')"
         >Create</a-button
       >
-      <a-button type="primary" @click="goBack()">Back</a-button>
+      <a-button v-if="back" type="primary" @click="goBack()">Back</a-button>
       <slot name="extra"></slot>
     </span>
     <slot name="content" />
@@ -27,6 +27,14 @@ export default {
     bordered: {
         type: Boolean,
         default: true
+    },
+    back: {
+        type: Boolean,
+        default: true
+    },
+    classes: {
+      type: Array, 
+      default: ()=> { return [] }
     },
     create: { type: Boolean, default: true },
   },

@@ -4,3 +4,45 @@
   border-radius: $default-radius;
 }
 
+.ant-form-item-control {
+  input, textarea, .ant-select-selection--single{
+    border-radius: 22px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 0;
+    font-size: 16px;
+    height: 55px;
+    font-weight: 500;
+  }
+}
+
+.ant-select-selection__rendered, .ant-select-selection-selected-value {
+  line-height: 25px;
+  height: 28px;
+  color: #909090;
+}
+
+.ant-input {
+  &:hover{
+    border-color: #1749b5;
+  }
+  &:focus{
+    border-color: #2255C2;
+    box-shadow: 0 0 0 2px rgb(34, 85, 194, 0.45);
+  }
+}
+
+.ant-form-item-label {
+  label {
+    color: #909090;
+  } 
+}
+
+.ant-checkbox-checked::after {
+  border: 1px solid #2255C2;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #2255C2;
+  border-color: #2255C2;
+}

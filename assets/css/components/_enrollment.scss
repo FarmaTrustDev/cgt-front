@@ -1,0 +1,70 @@
+.enrollment-page {
+  margin-left:45px; margin-right:45px;margin-top:20px;
+  .ant-tabs .ant-tabs-left-content {
+    border-left: unset;
+  }
+  .ant-tabs .ant-tabs-left-bar {
+  	border-right: unset;
+  	width: 23%;
+  }
+  .ant-tabs-tab {
+  	margin-top: 15px;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 22px;
+    font-size: 16px;
+    padding: 15px;
+    color: #233151;
+    background-color: #f9f9f9;
+    &::before{
+      position: inherit;
+      content: "";
+      height: 28px;
+      width: 28px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      background-size: 100%;
+      background-image: url("https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg");
+      border-top: none;
+    }
+  }
+  .ant-tabs-tab-active{
+  	background-color: #f2f5fb;
+  	&::before{
+  	  background-image: url("https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg");
+  	}
+  }
+  .ant-tabs-tab-completed{
+  	background-color: #d1f2dc;
+    &::before{
+      background-image: url("https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg");
+    }
+  }
+  .ant-tabs-ink-bar {
+  	display: none;
+  	background-color: transparent;
+  }
+  .ant-tabs .ant-tabs-left-bar .ant-tabs-tab, .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
+  	text-align: left;
+  	padding: 25px;
+
+  }
+  .page-title{
+    font-size: 25px;
+  }
+  .consent-page{
+  	padding: 0 15px;
+  	form{
+  		text-align: center;
+  	}
+  	.ant-checkbox-wrapper {
+  		font-size: 1.3rem;
+  		color: #919191;
+  		margin-top: 50px;
+  	}
+  	.ant-upload {
+  		margin-top: 30px;
+  	}
+  }
+}

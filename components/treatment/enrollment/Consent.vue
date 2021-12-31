@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="consent-page">
+    <h3 class="page-title">Patient Consent</h3>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <a-upload-dragger
         name="file"
@@ -17,7 +18,7 @@
         </p>
       </a-upload-dragger>
 
-      <a-form-item label="Consent">
+      <a-form-item>
         <a-checkbox
           v-decorator="[
             'consent',

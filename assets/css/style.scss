@@ -15,6 +15,7 @@
 @import './components/header';
 @import './components/patient-table';
 @import './components/home';
+@import './components/enrollment';
 
 
 body {
@@ -38,12 +39,6 @@ body {
   margin-top: 5px;
 }
 
-.ant-form-item-control input {
-	border-radius: 7px;
-	height: 45px;
-	background: #F8F8F8;
-}
-
 .ant-btn {
 	height: 45px;
 }
@@ -54,16 +49,6 @@ body {
 	&:hover{
 		background-color: #1749b5;
 		border-color: #1749b5;
-	}
-}
-
-.ant-input {
-	&:hover{
-		border-color: #1749b5;
-	}
-	&:focus{
-		border-color: #2255C2;
-		box-shadow: 0 0 0 2px rgb(34, 85, 194, 0.45);
 	}
 }
 
@@ -80,6 +65,9 @@ a {
   font-size: 14px;
   font-weight: bold;
   border-radius: 44px;
+  .ant-card{
+    box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+  }
 }
 
 .vertical-line {
