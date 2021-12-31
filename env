@@ -1,4 +1,0 @@
-VUE_APP_BASEURL = 'http://sch-dev-atmps.microsysx.com/'
-VUE_APP_API_ENDPOINT = 'http://sch-dev-atmps.microsysx.com/api'
-#VUE_APP_BASEURL = 'https://localhost:44332/'
-#VUE_APP_API_ENDPOINT = 'https://localhost:44332'

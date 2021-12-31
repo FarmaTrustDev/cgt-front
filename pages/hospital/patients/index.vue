@@ -21,25 +21,26 @@ const column = [
   },
   {
     title: 'Patient Name',
-    dataIndex: 'firstName',
-    key: 'firstName',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
     title: 'Age',
-    dataIndex: 'dob',
-    key: 'dob',
+    dataIndex: 'age',
+    key: 'age',
   },
-  {
-    title: 'Treatment Type',
-    dataIndex: 'treatment_type',
-    key: 'treatment_type',
-  },
+  // {
+  //   title: 'Treatment Type',
+  //   dataIndex: 'treatment_type',
+  //   key: 'treatment_type',
+  // },
   {
     title: 'Treatment Status',
     dataIndex: 'treatment_status',
     key: 'treatment_status',
     slots: { title: 'customTitle' },
     scopedSlots: { customRender: 'treatment_status' },
+    width: '55%',
   },
   {
     title: 'Action',
@@ -56,7 +57,7 @@ export default {
       loading: false,
       PatientServices,
       ActionLink,
-      borderCard: false
+      borderCard: false,
     }
   },
   methods: {},

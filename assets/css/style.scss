@@ -10,14 +10,14 @@
 @import './partials/capsules';
 @import './partials/modal';
 @import './partials/formsFields';
+@import './partials/_steps';
 @import './components/sidebar';
 @import './components/login';
 @import './components/header';
 @import './components/patient-table';
 @import './components/home';
 @import './components/enrollment';
-
-
+@import './partials/_steps';
 body {
   background-color: white;
 }
@@ -40,16 +40,16 @@ body {
 }
 
 .ant-btn {
-	height: 45px;
+  height: 45px;
 }
 
-.ant-btn-primary{
-	background-color: #2255C2;
-	border-color: #2255C2;
-	&:hover{
-		background-color: #1749b5;
-		border-color: #1749b5;
-	}
+.ant-btn-primary {
+  background-color: #2255c2;
+  border-color: #2255c2;
+  &:hover {
+    background-color: #1749b5;
+    border-color: #1749b5;
+  }
 }
 
 a {
@@ -68,14 +68,4 @@ a {
   .ant-card{
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
   }
-}
-
-.vertical-line {
-	position: absolute;
-    width: 20px;
-    height: 0;
-    border: 1px solid #e9e9e9;
-    transform: rotate(90deg);
-    margin-top: 20px;
-    margin-left: -25px;
 }

@@ -1,0 +1,30 @@
+.treatment-steps {
+  .ant-steps-item {
+    border-radius: 20px;
+    padding: 4px;
+    color: #233151;
+  }
+  .ant-steps-item-finish {
+    background: #d1f2dc;
+  }
+  .ant-steps-item-active {
+    background-color: #f2f5fb;
+  }
+  .ant-steps-item-wait {
+    background-color: #f9f9f9;
+  }
+
+  .ant-steps {
+    margin-top: 10px;
+  }
+
+  .treatment-name-col {
+    float: left;
+    vertical-align: middle;
+    margin-top: 16px;
+  }
+  .step-col {
+    display: inline-block;
+    max-width: 650px;
+  }
+}
