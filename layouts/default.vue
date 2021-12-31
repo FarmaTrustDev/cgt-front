@@ -10,7 +10,7 @@
         </div>
 
         <div class="hospital-detail">
-          <div class="">
+          <div class="capsule">
             <img
               src="https://demoapi.qmaid.co/Logos/2020_10_22.14_48_51.jpg" logo hendling for temp
               class="logo"
