@@ -4,6 +4,7 @@
 @import './partials/padding';
 @import './partials/grid';
 @import './partials/background-color';
+@import './partials/btn';
 @import './partials/helpers';
 @import './partials/border';
 @import './partials/cards';
@@ -45,22 +46,6 @@ body {
   border-radius: 22px;
 }
 
-.ant-btn-primary {
-  background-color: #2255c2;
-  border-color: #2255c2;
-  &:hover {
-    background-color: #1749b5;
-    border-color: #1749b5;
-  }
-}
-
-a {
-	color: $primary-color;
-	&:hover
-	{
-		color: $primary-color;
-	}
-}
 
 .square-table .ant-table-content {
   table {
