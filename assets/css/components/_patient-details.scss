@@ -1,0 +1,64 @@
+.patient-details-page {
+  margin-left:35px; 
+  margin-right:35px;
+  margin-top:30px;
+  .qr-section{
+    height: 240px;
+    figure {
+      text-align: center;
+      img {
+        border-radius: 30px;
+        -webkit-box-shadow: 2px 2px 15px 1px #bdb7bd;
+        -moz-box-shadow: 2px 2px 15px 1px #bdb7bd;
+        box-shadow: 2px 2px 15px 1px #bdb7bd;
+        width: 83%;
+        margin-bottom:15px;
+        margin-top: -82px;
+        max-height: 140px;
+        max-width: 140px;
+        padding: 15px;
+        z-index: 1;
+        background-color: #fff;
+      }
+      &::before{
+        border-radius: 30px;
+        content: "";
+        height: 100px;
+        width: 100%;
+        display: inline-block;
+        background-color: #3869d1;
+      }
+    }
+    .ant-card-body{
+      padding: 5px;
+    }
+  }
+  .details-section {
+    height: 240px;
+  }
+  h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 1rem;
+  }
+  .common-detail {
+    margin-bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;  
+    dt, dd {
+      width: 50%;
+      display: inline-block;
+    }
+    dd {
+      color: #000;
+    }
+    dt {
+      color: #909090;
+      font-weight: 700;
+    }
+  }
+}
