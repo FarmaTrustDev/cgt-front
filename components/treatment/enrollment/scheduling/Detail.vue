@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <a-descriptions title="Collection Details">
       <a-descriptions-item label="Sample Collection Date">
         {{ entity.hospitalCollectionDate }}

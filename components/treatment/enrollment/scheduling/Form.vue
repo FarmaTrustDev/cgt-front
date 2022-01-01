@@ -1,9 +1,12 @@
 <template>
   <div>
-    <calendar
-      :handle-date-click="fetchEvents"
-      @getEventClick="getEventClick"
-    ></calendar>
+    <h3 class="page-title">Available slots</h3>
+    <div class="grey-card">
+      <calendar
+        :handle-date-click="fetchEvents"
+        @getEventClick="getEventClick"
+      ></calendar>
+    </div>
     <FormFields :treatment="treatment" :entity="entity"></FormFields>
     <FormActionButton :is-created="isCreated" />
   </div>

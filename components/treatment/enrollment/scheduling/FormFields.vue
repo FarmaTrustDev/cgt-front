@@ -1,5 +1,11 @@
 <template>
   <div>
+    <a-row>
+      <a-col :span="12">
+      </a-col>
+      <a-col :span="12">
+      </a-col>
+    </a-row>
     <a-form-item label="manufacturer">
       <a-input
         v-decorator="[

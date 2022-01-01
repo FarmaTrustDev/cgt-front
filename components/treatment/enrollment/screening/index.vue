@@ -6,6 +6,7 @@
       <a-skeleton :loading="loading">
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
+          <a-button type="primary" class="w-100 btn-complete-category">Complete screening results for {CATEGORYNAME} group</a-button>
           <FormActionButton :disabled="isCreated" />
         </span>
       </a-skeleton>

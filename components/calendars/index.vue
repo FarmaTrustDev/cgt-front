@@ -31,7 +31,8 @@ export default {
     return {
       calendarOptions: {
         headerToolbar: {
-          center: 'dayGridMonth', // buttons for switching between views
+          left: 'prevYear,title,nextYear',
+          right: 'dayGridMonth'
         },
         plugins: [interactionPlugin, timeGridPlugin, dayGridPlugin],
         initialView: 'dayGridMonth',
