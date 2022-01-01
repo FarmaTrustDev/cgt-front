@@ -81,6 +81,7 @@
 <script>
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
+import { isEmpty } from '~/services/Helpers'
 
 export default {
   mixins: [routeHelpers, notifications],
@@ -90,6 +91,7 @@ export default {
     pagination: { type: Boolean, default: false },
     actionLink: { type: String, default: '' },
     apiService: { type: Object, required: true },
+    fetchFrom: { type: Function, required: false },
     params: { type: Object, default: () => ({}) },
   },
   data() {
@@ -104,8 +106,8 @@ export default {
   methods: {
     fetch(params = {}) {
       this.loading = true
-      this.apiService
-        .get(this.params)
+      const fetchFrom = this.getDataApiService()
+      fetchFrom(this.params)
         .then((response) => {
           this.$emit('afterFetch', response)
           if (response.data && response.data.data) {
@@ -119,6 +121,9 @@ export default {
           this.$emit('finally')
           this.loading = false
         })
+    },
+    getDataApiService() {
+      return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
     },
     getCurrentStep(treatment) {
       if (treatment.isSCheduled) {

@@ -46,6 +46,12 @@ function update(id, data) {
   })
 }
 
+function getTreatmentTypes() {
+  return request({
+    url: `${baseApi}/get-treatment-types`,
+  })
+}
+
 const ManufacturerTreatmentServices = {
   get,
   create,
@@ -53,6 +59,7 @@ const ManufacturerTreatmentServices = {
   update,
   getAvailability,
   createAvailability,
+  getTreatmentTypes
 }
 
 export default ManufacturerTreatmentServices

@@ -2,13 +2,14 @@
   <page-layout
     :create="false"
     :loading="loading"
-    title="Patients List"
+    title="Hospital collection process"
     :bordered="borderCard"
   >
     <template slot="content">
       <standardTable
         :columns="column"
-        :api-service="PatientServices"
+        :api-service="ManufacturerTreatmentServices"
+        :fetch-from="ManufacturerTreatmentServices.getTreatmentTypes"
         :action-link="ActionLink"
       />
     </template>
@@ -17,12 +18,12 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 import standardTable from '~/components/common/StandardTable'
-import PatientServices from '~/services/API/PatientServices'
+import ManufacturerTreatmentServices from '~/services/API/ManufacturerTreatmentServices'
 const column = [
   {
-    title: 'Patient ID',
-    dataIndex: 'enrollmentNumber',
-    key: 'enrollmentNumber',
+    title: 'Treatment Name',
+    dataIndex: 'name',
+    key: 'name',
   },
 
   {
@@ -31,14 +32,14 @@ const column = [
     scopedSlots: { customRender: 'action' },
   },
 ]
-const ActionLink = '/hospital/patients'
+const ActionLink = '/manufacturer/administration/collections/hospital'
 export default {
   components: { 'page-layout': PageLayout, standardTable },
   data() {
     return {
       column,
       loading: false,
-      PatientServices,
+      ManufacturerTreatmentServices,
       ActionLink,
       borderCard: false,
     }
