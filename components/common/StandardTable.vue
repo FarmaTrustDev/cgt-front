@@ -23,15 +23,26 @@
 
       <div class="treatment-steps">
         <span v-for="treatment in record.treatments" :key="treatment.id">
-          <span class="treatment-name-col">TreatName</span>
+          <span class="treatment-name-col">{{
+            treatment.treatmentTypeName
+          }}</span>
           <span class="step-col"
             ><a-steps :current="getCurrentStep(treatment)" size="small">
-              <a-step title="Screening" />
-              <a-step title="Scheduling" />
-              <a-step title="Collection" />
-              <a-step title="Shipment" />
-              <a-step title="Treatment" />
-              <a-step title="After care" /> </a-steps
+              <a-step title="Screening" @click="stepClick(record, treatment)" />
+              <a-step
+                title="Scheduling"
+                @click="stepClick(record, treatment)"
+              />
+              <a-step
+                title="Collection"
+                @click="stepClick(record, treatment)"
+              />
+              <a-step title="Shipment" @click="stepClick(record, treatment)" />
+              <a-step title="Treatment" @click="stepClick(record, treatment)" />
+              <a-step
+                title="After care"
+                @click="stepClick(record, treatment)"
+              /> </a-steps
           ></span>
         </span>
       </div>
@@ -108,6 +119,11 @@ export default {
         return 1
       }
       return 3
+    },
+    stepClick(patient, treatment) {
+      this.goto(`/hospital/patients/${patient.globalId}`, {
+        treatment_id: treatment.globalId,
+      })
     },
   },
 }
