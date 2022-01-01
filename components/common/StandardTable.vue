@@ -49,6 +49,12 @@
     </span>
 
     <span slot="action" slot-scope="text, record">
+      <a-button type="link" @click="goto(`${actionLink}/${record.globalId}`)">
+        <a-icon type="edit" />
+      </a-button>
+    </span>
+
+    <span slot="patientAction" slot-scope="text, record">
       <a-dropdown :trigger="['click']">
         <a-button class="action-button" @click="(e) => e.preventDefault()">
           <b><a-icon type="more" /></b>

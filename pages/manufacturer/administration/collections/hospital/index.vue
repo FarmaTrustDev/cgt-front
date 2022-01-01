@@ -1,5 +1,10 @@
 <template>
-  <page-layout :loading="loading" title="Patients List" :bordered="borderCard">
+  <page-layout
+    :create="false"
+    :loading="loading"
+    title="Patients List"
+    :bordered="borderCard"
+  >
     <template slot="content">
       <standardTable
         :columns="column"
@@ -19,33 +24,11 @@ const column = [
     dataIndex: 'enrollmentNumber',
     key: 'enrollmentNumber',
   },
-  {
-    title: 'Patient Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  // {
-  //   title: 'Treatment Type',
-  //   dataIndex: 'treatment_type',
-  //   key: 'treatment_type',
-  // },
-  {
-    title: 'Treatment Status',
-    dataIndex: 'treatment_status',
-    key: 'treatment_status',
-    slots: { title: 'customTitle' },
-    scopedSlots: { customRender: 'treatment_status' },
-    width: '55%',
-  },
+
   {
     title: 'Action',
     dataIndex: 'action',
-    scopedSlots: { customRender: 'patientAction' },
+    scopedSlots: { customRender: 'action' },
   },
 ]
 const ActionLink = '/hospital/patients'
