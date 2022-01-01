@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Patients List" :bordered="borderCard">
+  <page-layout :loading="loading" title="Patients List" :bordered="borderCard" class="patient-page">
     <template slot="content">
       <standardTable
         :columns="column"

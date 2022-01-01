@@ -12,6 +12,7 @@
       :data-source="screenings"
       :pagination="false"
       :loading="loading"
+      class="square-table"
     >
       <template slot="name" slot-scope="name">
         {{ name }}
@@ -47,7 +48,7 @@
                 initialValue: null,
               },
             ]"
-            placeholder="input notes text"
+            placeholder="Note:"
           />
           <a-input
             v-decorator="[

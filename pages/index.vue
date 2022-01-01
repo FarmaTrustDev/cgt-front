@@ -112,7 +112,6 @@
   import  PatientsChart from '~/components/root/home/PatientsChart'
 
   export default {
-    middleware: 'auth',
     components : {PatientsChart},
     data(){
       return{

@@ -1,7 +1,12 @@
-.grey-card {
-  background: $secondary-color;
-  border-radius: 40px;
-  padding: 2rem;
+.grey-card{
+  background-color: #f9f9f9;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 44px;
+  padding: 1.5rem;
+  .ant-card{
+    box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+  }
 }
 
 .avatar-card {

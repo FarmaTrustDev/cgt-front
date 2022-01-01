@@ -1,49 +1,53 @@
 <template>
   <div>
-    <a-form-item label="manufacturer">
-      <a-input
-        v-decorator="[
-          'manufacturerName',
-          {
-            rules: [
-              { required: true, message: 'Please input manufacturerName!' },
-            ],
-            initialValue: entity.manufacturerName,
-          },
-        ]"
-        :disabled="true"
-        size="large"
-        placeholder="Email/Username"
-      />
+    <a-row>
+      <a-col :span="12" class="plr-10">
+        <a-form-item label="Manufacturer">
+          <a-input
+            v-decorator="[
+              'manufacturerName',
+              {
+                rules: [
+                  { required: true, message: 'Please input manufacturerName!' },
+                ],
+                initialValue: entity.manufacturerName,
+              },
+            ]"
+            :disabled="true"
+            size="large"
+            placeholder="Email/Username"
+          />
+          <a-input
+            v-decorator="[
+              'treatmentAvailabilityId',
+              {
+                rules: [{ required: true, message: 'Please input your Email!' }],
+                initialValue: entity.treatmentAvailabilityId,
+              },
+            ]"
+            type="hidden"
+          />
 
-      <a-input
-        v-decorator="[
-          'treatmentAvailabilityId',
-          {
-            rules: [{ required: true, message: 'Please input your Email!' }],
-            initialValue: entity.treatmentAvailabilityId,
-          },
-        ]"
-        type="hidden"
-      />
-
-      <a-input
-        v-decorator="[
-          'treatmentId',
-          {
-            rules: [
-              { required: true, message: 'Please input your treatmentId!' },
-            ],
-            initialValue: treatment.id,
-          },
-        ]"
-        type="hidden"
-      />
-    </a-form-item>
-    <logistic-lookup></logistic-lookup>
-
-    <a-row :gutter="16">
-      <a-col :span="12">
+          <a-input
+            v-decorator="[
+              'treatmentId',
+              {
+                rules: [
+                  { required: true, message: 'Please input your treatmentId!' },
+                ],
+                initialValue: treatment.id,
+              },
+            ]"
+            type="hidden"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12" class="plr-10 mt-5">
+        <logistic-lookup></logistic-lookup>
+      </a-col>
+    </a-row>
+    <a-row>
+      <a-col :span="8" class="plr-10">
         <a-form-item label="Sample Collection Date">
           <a-date-picker
             v-decorator="[
@@ -64,7 +68,7 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
-      <a-col :span="12">
+      <a-col :span="8" class="plr-10">
         <a-form-item label="Delivery Dispatch Date">
           <a-date-picker
             v-decorator="[
@@ -85,7 +89,7 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
-      <a-col :span="12">
+      <a-col :span="8" class="plr-10">
         <a-form-item label="Samples Delivery Date" class="pb-0">
           <a-date-picker
             v-decorator="[
@@ -106,7 +110,9 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
-      <a-col :span="12">
+    </a-row>
+    <a-row>
+      <a-col :span="8" class="plr-10">
         <a-form-item label="Treatment Start Date" class="pb-0">
           <a-date-picker
             v-decorator="[
@@ -128,7 +134,7 @@
           </a-date-picker> </a-form-item
       ></a-col>
 
-      <a-col :span="12">
+      <a-col :span="8" class="plr-10">
         <a-form-item label="Completion Date" class="pb-0">
           <a-date-picker
             v-decorator="[
@@ -149,7 +155,7 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
-      <a-col :span="12">
+      <a-col :span="8" class="plr-10">
         <a-form-item label="Duration" class="pb-0">
           <a-input-number
             v-decorator="[
@@ -168,7 +174,9 @@
             size="large"
           ></a-input-number> </a-form-item
       ></a-col>
-      <a-col :span="12">
+    </a-row>
+    <a-row>
+      <a-col :span="12" class="plr-10">
         <a-form-item label="Delivery Arrival Date " class="pb-0">
           <a-date-picker
             v-decorator="[
@@ -189,7 +197,7 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
-      <a-col :span="12">
+      <a-col :span="12" class="plr-10">
         <a-form-item label="Notes" class="pb-0">
           <a-textarea
             v-decorator="[
