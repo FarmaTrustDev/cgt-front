@@ -21,7 +21,7 @@
         </a-tab-pane>
         <a-tab-pane
           :key="4"
-          :disabled="!!treatment.screeningStatus"
+          :disabled="!treatment.screeningStatus"
           tab="Scheduling"
         >
           <scheduling :treatment="treatment" />
@@ -51,7 +51,7 @@ export default {
     return {
       activeTab: 1,
       treatment: {},
-      haveTreatment: true,
+      haveTreatment: false,
       loading: true,
     }
   },
