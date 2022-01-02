@@ -1,4 +1,4 @@
-.home-page {
+.home-page, .admin-page {
   padding-right: 15px;
   padding-left: 15px;
   margin: 25px;
@@ -7,7 +7,7 @@
     font-size: 25px;
   }
 
-  .home-tab {
+  .home-tab, .admin-tab {
     text-decoration: none;
     margin: 15px auto;
     padding: 25px;
@@ -41,7 +41,7 @@
       }
     }
   
-    .heading-home {
+    .heading-home, .heading-admin {
       display: inline-flex;
       flex-flow: column;
       vertical-align: middle;

@@ -1,6 +1,28 @@
 <template>
-  <div>
-    <a-row :gutter="16" justify="center" align="center">
+  <div class="admin-page">
+
+    <h3 class="page-title">Administration</h3>
+    <a-row :gutter="16" class="grey-card">
+      <a-col :span="10">
+        <div class="admin-tab">
+            <a :href="screeningUrl" >
+              <img src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg">
+              <h4 class="heading-home">Screening Criteria</h4>
+            </a>
+          </div>
+      </a-col>
+      <a-col :span="2"></a-col>
+      <a-col :span="10">
+        <div class="admin-tab">
+            <a :href="logisticsTo" >
+              <img src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg">
+              <h4 class="heading-home">Logistics Partner </strong></h4>
+            </a>
+          </div>
+      </a-col>
+    </a-row>
+
+    <!-- <a-row :gutter="16" justify="center" align="center">
       <a-col
         v-for="menu in navigation"
         :key="menu.heading"
@@ -15,7 +37,7 @@
           <div slot="header" class="bg-gray-100">{{ menu.heading }}</div>
         </a-list>
       </a-col>
-    </a-row>
+    </a-row> -->
   </div>
 </template>
 
@@ -23,6 +45,8 @@
 export default {
   data() {
     return {
+      screeningUrl: '/manufacturer/administration/screening',
+      logisticsTo: '/manufacturer/administration/logistics',
       navigation: [
         {
           heading: 'Screening Adminstration',
