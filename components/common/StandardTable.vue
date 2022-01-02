@@ -64,7 +64,9 @@
             <a-icon type="edit" />Update
           </a-menu-item>
 
-          <a-menu-item key="3"><a-icon type="delete" />Delete</a-menu-item>
+          <a-menu-item key="3" @click="clickDelete(record)"
+            ><a-icon type="delete" />Delete</a-menu-item
+          >
         </a-menu>
       </a-dropdown>
     </span>
@@ -153,6 +155,9 @@ export default {
       })
     },
     clickUpdate(record) {
+      this.$$emit('clickUpdate', record)
+    },
+    clickDelete(record) {
       this.$$emit('clickUpdate', record)
     },
   },

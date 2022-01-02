@@ -1,13 +1,24 @@
 <template>
   <div>
+    <FormActionButton text="Add" @click="addCollection" />
     <standardTable :columns="column" :api-service="PatientServices">
     </standardTable>
+    <a-modal
+      :destroy-on-close="true"
+      :visible="showModal"
+      title="Add Process Step"
+      :footer="null"
+      @cancel="handlesShowModal(false)"
+    >
+      <FormField />
+    </a-modal>
   </div>
 </template>
 
 <script>
 import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
+import FormField from '~/components/root/manufacturer/admin/collection/FormField'
 const column = [
   {
     title: 'name',
@@ -21,9 +32,10 @@ const column = [
   },
 ]
 export default {
-  components: { standardTable },
+  components: { standardTable, FormField },
   data() {
     return {
+      showModal: false,
       column,
       PatientServices,
       data: [],
@@ -35,6 +47,14 @@ export default {
     }
   },
   mounted() {},
-  methods: {},
+  methods: {
+    handlesShowModal(show) {
+      this.showModal = show
+    },
+    addCollection(a, b) {
+      this.handlesShowModal(true)
+      console.log(a, b)
+    },
+  },
 }
 </script>
