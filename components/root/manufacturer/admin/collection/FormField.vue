@@ -30,6 +30,7 @@
           type="hidden"
         />
       </a-form-item>
+      <FormActionButton />
     </a-form>
   </div>
 </template>
@@ -51,9 +52,7 @@ export default {
       isScheduled: false,
     }
   },
-  mounted() {
-    this.validateIsCreated()
-  },
+  mounted() {},
   methods: {},
 }
 </script>

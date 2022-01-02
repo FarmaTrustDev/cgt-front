@@ -2,10 +2,11 @@
   <page-layout
     :create="false"
     :loading="loading"
-    title="Hospital collection process"
+    :title="treatmentName + ' Hospital collection process'"
   >
-
-    <template slot="content"> <create /> </template>
+    <template slot="content">
+      <create @fetchTreatmentName="fetchTreatmentName" />
+    </template>
   </page-layout>
 </template>
 <script>
@@ -16,7 +17,14 @@ export default {
   data() {
     return {
       loading: false,
+      treatmentName: '',
     }
+  },
+  methods: {
+    fetchTreatmentName(treatmentName) {
+      console.log(treatmentName)
+      this.treatmentName = treatmentName
+    },
   },
 }
 </script>

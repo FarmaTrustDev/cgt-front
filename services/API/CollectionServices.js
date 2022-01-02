@@ -32,35 +32,11 @@ function update(id, data) {
   })
 }
 
-function markScheduleRequest(id, data) {
-  return request({
-    url: `${baseApi}/${id}`,
-    method: 'Patch',
-    data,
-  })
-}
-
-function getEstimation(treatmentAvailabilityId) {
-  return request({
-    url: `${baseApi}/treatment-availability/${treatmentAvailabilityId}`,
-  })
-}
-
-function getByTreatment(id, params = {}) {
-  return request({
-    url: `${baseApi}/treatment/${id}`,
-    params,
-  })
-}
-
-const SchedulingServices = {
+const CollectionServices = {
   get,
   create,
   getById,
   update,
-  getEstimation,
-  getByTreatment,
-  markScheduleRequest,
 }
 
-export default SchedulingServices
+export default CollectionServices
