@@ -12,13 +12,17 @@
 @import './partials/modal';
 @import './partials/formsFields';
 @import './partials/tabs';
+@import './partials/buttons';
 @import './partials/_steps';
 @import './components/sidebar';
 @import './components/login';
 @import './components/header';
 @import './components/patient-table';
+@import './components/labels';
 @import './components/home';
 @import './components/enrollment';
+@import './components/patient-details';
+
 
 body {
   background-color: white;
@@ -41,11 +45,13 @@ body {
   margin-top: 5px;
 }
 
-.ant-btn {
-  height: 50px;
-  border-radius: 22px;
+a {
+	color: $primary-color;
+	&:hover
+	{
+		color: $primary-color;
+	}
 }
-
 
 .square-table .ant-table-content {
   table {
@@ -85,4 +91,11 @@ body {
       background: #fff;
     }
   }
+}
+.page-title{
+  font-size: 25px;
+  font-weight: 600;
+}
+.heading {
+  font-size : 25px;
 }
