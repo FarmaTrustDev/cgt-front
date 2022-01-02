@@ -71,3 +71,7 @@ export function isNumeric(value) {
 export function isArray(v) {
   return Array.isArray(v)
 }
+
+export function preventDefault(e) {
+  e.preventDefault()
+}

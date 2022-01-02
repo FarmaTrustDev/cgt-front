@@ -1,37 +1,37 @@
 <template>
   <div>
-    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormActionButton :loading="btnLoading" :is-created="isCreated" />
-    </a-form>
+    <standardTable :columns="column" :api-service="PatientServices">
+    </standardTable>
   </div>
 </template>
 
 <script>
-// import TreatmentService from '~/services/API/TreatmentTypeServices'
-// import OrganizationServices from '~/services/API/OrganizationServices'
-import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
-
-// import withCrud from '~/mixins/with-crud'
-//  mixins: [withCrud],
+import standardTable from '~/components/common/StandardTable'
+import PatientServices from '~/services/API/PatientServices'
+const column = [
+  {
+    title: 'name',
+    dataIndex: 'name',
+    key: 'name',
+    width: '90%',
+  },
+  {
+    title: 'Action',
+    scopedSlots: { customRender: 'upsertDropdown' },
+  },
+]
 export default {
+  components: { standardTable },
   data() {
     return {
-      screeningTemplate: {},
-      entityId: null,
-      isCreated: false,
-      loading: false,
-      treatmentType: {},
-      entity: {},
-      typeLoading: true,
-      hospitalLoading: true,
-      btnLoading: false,
-      form: this.$form.createForm(this, {
-        name: 'screening',
-      }),
-      hospitals: [],
+      column,
+      PatientServices,
+      data: [],
       formLayout: 'vertical',
-      apiService: ScreeningTemplateServices,
-      gotoLink: '/manufacturer/administration/screening',
+      form: this.$form.createForm(this, {
+        name: 'hospitalCollection',
+      }),
+      gotoLink: '/manufacturer/administration/collection/hospital',
     }
   },
   mounted() {},
