@@ -1,45 +1,53 @@
 <template>
   <div>
     
-    <a-list
-      v-if="comments.length"
-      :data-source="comments"
-      :header="`${comments.length} ${
-        comments.length > 1 ? 'replies' : 'reply'
-      }`"
-      item-layout="horizontal"
-    >
-      <a-list-item slot="renderItem" slot-scope="item">
-        <a-comment
-          :author="item.author"
-          :avatar="item.avatar"
-          :content="item.content"
-          :datetime="item.datetime"
-        />
-      </a-list-item>
-    </a-list>
-    <a-comment>
-      <a-avatar
-        slot="avatar"
-        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        alt="Han Solo"
-      />
-      <div slot="content">
+    <a-row>
+      <a-col>
+        <a-list
+          v-if="comments.length"
+          :data-source="comments"
+          :header="`${comments.length} ${
+            comments.length > 1 ? 'replies' : 'reply'
+          }`"
+          item-layout="horizontal"
+          :bordered="false"
+        >
+          <a-list-item slot="renderItem" slot-scope="item" :class="'message-'+ item.type">
+            <a-comment
+              :author="item.author"
+              :content="item.content"
+
+            >
+            <template slot="content"><div class="message-time">Raja Sharif, 29 September 2021 19:33</div></template>
+          </a-comment>
+            
+          </a-list-item>
+        </a-list>
+    </a-col>
+    </a-row>
+    
+    <a-row>
+      <a-col>
         <a-form-item>
-          <a-textarea :rows="4" :value="value" @change="handleChange" />
+          <a-input class="send-message-input" placeholder="Type message here" :value="value" @change="handleChange" />
         </a-form-item>
-        <a-form-item>
+      </a-col>
+    </a-row>
+    <a-row>
+      <a-col class="text-right">
+         <a-form-item>
           <a-button
             html-type="submit"
             :loading="submitting"
             type="primary"
             @click="handleSubmit"
           >
-            Add Comment
+            Submit
           </a-button>
         </a-form-item>
-      </div>
-    </a-comment>
+      </a-col>
+    </a-row>
+
   </div>
 </template>
 <script>
@@ -54,6 +62,7 @@ export default {
             'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content: this.value,
           datetime: moment().fromNow(),
+          type:'sent'
         },
         {
           author: 'Han Solo',
@@ -61,6 +70,7 @@ export default {
             'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content: this.value,
           datetime: moment().fromNow(),
+          type: 'received'
         },
         {
           author: 'Han Solo',
@@ -68,6 +78,7 @@ export default {
             'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
           content: this.value,
           datetime: moment().fromNow(),
+          type: 'sent'
         },
       ],
       submitting: false,

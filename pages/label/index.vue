@@ -7,10 +7,6 @@
     <a-row class="mt-15">
       <Table />
     </a-row>
-
-    {{showViewModal}}
-   
-
   </div>
 </template>
 

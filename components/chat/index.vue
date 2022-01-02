@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <a-row>
-      <a-col :span="8">
-        <a-card title="Messages"><List /></a-card
-      ></a-col>
-      <a-col :span="16">
-        <a-card title="Conversation"><Conversation /></a-card
-      ></a-col>
+  <div class="chat-page">
+    <a-row class="grey-card">
+      <a-col :span="9" class="left-bar">
+        <a-card :bordered="false" class="default-card"><List /></a-card>
+      </a-col>
+      <a-col :span="1"></a-col>
+      <a-col :span="14" class="right-bar">
+        <a-card :bordered="false" class="default-card"><Conversation /></a-card>
+      </a-col>
     </a-row>
   </div>
 </template>
