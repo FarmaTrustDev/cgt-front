@@ -89,7 +89,7 @@
       <a-row :gutter="18" class="mt-15">
         <a-col>
           <a-card :bordered="false" class="default-card">
-            <a-tabs type="card" @change="callback">
+            <a-tabs type="card">
               <a-tab-pane key="1" tab="Hospital">
                 <a-timeline>
                   <a-timeline-item

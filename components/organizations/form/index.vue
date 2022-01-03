@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <formfield />
+      <formField />
       <a-form-item>
         <a-button type="primary" html-type="submit">Submit</a-button>
       </a-form-item>
@@ -14,12 +14,11 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import OrganizationServices from '~/services/API/OrganizationServices'
-import formfield from '~/components/organizations/form/FormField.vue'
+import formField from '~/components/organizations/form/FormField.vue'
 
 export default {
-  components: { formfield },
+  components: { formField },
   mixins: [notifications, routeHelpers, nullHelper, withCrud],
-
   data() {
     return {
       loading: false,
