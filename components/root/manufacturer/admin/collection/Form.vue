@@ -7,8 +7,9 @@
         :columns="column"
         :params="params"
         :api-service="CollectionServices"
-        @getFetch="getFetch"
-        @clickUpdate="update"
+        @getFetch="getFetchListing"
+        @clickDelete="getDelete"
+        @clickUpdate="getUpdate"
       >
       </standardTable>
       <a-modal
@@ -18,11 +19,14 @@
         :footer="null"
         @cancel="handlesShowModal(false)"
       >
-        <FormField
-          :collection="collection"
-          :treatment-type="treatmentType"
-          @handlesShowModal="handlesShowModal"
-        />
+        <a-form :form="form" layout="horizontal" @submit="onSubmit">
+          <FormField
+            :collection="collection"
+            :treatment-type="treatmentType"
+            @handlesShowModal="handlesShowModal"
+          />
+          <FormActionButton :is-created="isCreated" />
+        </a-form>
       </a-modal>
     </a-spin>
   </div>
@@ -35,7 +39,8 @@ import TreatmentTypeServices from '~/services/API/TreatmentTypeServices'
 import nullHelper from '~/mixins/null-helpers'
 import FormField from '~/components/root/manufacturer/admin/collection/FormField'
 import { COLLECTION_TYPE } from '~/services/Constant'
-
+import withCrud from '~/mixins/with-crud'
+// import CollectionServices from '~/services/API/CollectionServices'
 const column = [
   {
     title: 'name',
@@ -50,7 +55,7 @@ const column = [
 ]
 export default {
   components: { standardTable, FormField },
-  mixins: [nullHelper],
+  mixins: [nullHelper, withCrud],
   data() {
     return {
       loading: true,
@@ -60,14 +65,17 @@ export default {
       CollectionServices,
       data: [],
       formLayout: 'vertical',
-      form: this.$form.createForm(this, {
-        name: 'hospitalCollection',
-      }),
       gotoLink: '/manufacturer/administration/collection/hospital',
       treatmentType: {},
       params: { type: COLLECTION_TYPE.hospital.id },
       fetchMethod: null,
       collection: {},
+      form: this.$form.createForm(this, {
+        name: 'CollectionForm',
+      }),
+      apiService: CollectionServices,
+      fetchIdFromParams: false,
+      entity: {},
     }
   },
   mounted() {
@@ -89,6 +97,7 @@ export default {
           this.params = {
             ...this.params,
             treatmentTypeId: this.treatmentType.id,
+            active: true,
           }
           this.showTable = true
           this.$emit('fetchTreatmentName', this.treatmentType.name)
@@ -99,19 +108,28 @@ export default {
     handlesShowModal(show) {
       if (!show) {
         this.fetchMethod(this.params)
+        this.collection = {}
+        this.isCreated = false
       }
       this.showModal = show
     },
-    addCollection(a, b) {
+    addCollection() {
       this.handlesShowModal(true)
     },
-    getFetch(method) {
+    getFetchListing(method) {
       this.fetchMethod = method
     },
-    update(record) {
+    getDelete(method) {
+      this.deleteMethod = method
+    },
+    getUpdate(record) {
       this.handlesShowModal(true)
+
       this.collection = record
-      console.log(record)
+      this.loadEntityExternally(record)
+    },
+    afterCreate(response) {
+      this.handlesShowModal(true)
     },
   },
 }

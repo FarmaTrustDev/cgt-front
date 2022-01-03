@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-form :form="form" layout="horizontal" @submit="onSubmit">
+
       <a-form-item label="Process step">
         <a-input
           v-decorator="[
@@ -30,16 +30,16 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton />
-    </a-form>
+     
+ 
   </div>
 </template>
 <script>
-import withCrud from '~/mixins/with-crud'
-import CollectionServices from '~/services/API/CollectionServices'
+// import withCrud from '~/mixins/with-crud'
+// import CollectionServices from '~/services/API/CollectionServices'
 
 export default {
-  mixins: [withCrud],
+  // mixins: [withCrud],
   props: {
     treatmentType: {
       type: Object,
@@ -56,22 +56,22 @@ export default {
   },
   data() {
     return {
-      form: this.$form.createForm(this, {
-        name: 'CollectionForm',
-      }),
-      apiService: CollectionServices,
-      fetchIdFromParams: false,
-      entity: {},
-      isScheduled: false,
+      // form: this.$form.createForm(this, {
+      //   name: 'CollectionForm',
+      // }),
+      // apiService: CollectionServices,
+      // fetchIdFromParams: false,
+      // entity: {},
+      // isScheduled: false,
     }
   },
-  mounted() {
-    this.loadEntityExternally(this.collection)
-  },
-  methods: {
-    afterCreate(response) {
-      this.$emit('handlesShowModal', false)
-    },
-  },
+  // mounted() {
+  //   this.loadEntityExternally(this.collection)
+  // },
+  // methods: {
+  //   afterCreate(response) {
+  //     this.$emit('handlesShowModal', false)
+  //   },
+  // },
 }
 </script>

@@ -31,6 +31,7 @@ export default {
       }
     },
     upsert(values) {
+      console.log('upsert', values, this.isCreated)
       if (this.isCreated) {
         return this.update(values)
       }
@@ -50,6 +51,7 @@ export default {
         .finally(() => (this.loading = false))
     },
     create(values) {
+      console.log(values)
       this.apiService
         .create(values)
         .then((response) => {
@@ -66,6 +68,7 @@ export default {
         .finally(() => (this.btnLoading = false))
     },
     update(values) {
+      console.log('update', values)
       this.btnLoading = true
       this.apiService
         .update(this.entityId, values)
@@ -91,13 +94,21 @@ export default {
       this.loading = false
     },
     onDelete(e) {
-      console.log('Delete', e)
+      this.apiService
+        .delete(this.entityId)
+        .then((response) => {
+          this.success(response.message)
+          if (this.isFunction(this.afterDelete)) {
+            this.afterDelete(response)
+          }
+        })
+        .catch(this.error)
     },
     loadEntityExternally(model) {
       if (!this.isEmpty(model)) {
         this.entity = model
         this.isCreated = true
-        this.entityId = model
+        this.entityId = model.id
       }
     },
   },
