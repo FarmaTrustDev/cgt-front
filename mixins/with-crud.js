@@ -31,7 +31,6 @@ export default {
       }
     },
     upsert(values) {
-      console.log('upsert', values, this.isCreated)
       if (this.isCreated) {
         return this.update(values)
       }
@@ -51,7 +50,6 @@ export default {
         .finally(() => (this.loading = false))
     },
     create(values) {
-      console.log(values)
       this.apiService
         .create(values)
         .then((response) => {
@@ -68,7 +66,6 @@ export default {
         .finally(() => (this.btnLoading = false))
     },
     update(values) {
-      console.log('update', values)
       this.btnLoading = true
       this.apiService
         .update(this.entityId, values)
