@@ -12,7 +12,31 @@
   }
   .ant-btn
   {
-    margin-top: 25px;
+    margin-bottom: 10px;
+  }
+  .ant-card-head-title{
+    font-weight: 600;
+    color: #233151;
+    font-size: 25px;
+  }
+  .ant-form-item-label label{
+    color: #909090;
+    font-weight: 400;
+    font-size: 1.15em;
+  }
+  .ant-checkbox-wrapper{
+    color: #212529;
+    font-size: 17px;
+  }
+  .forgot-link {
+    padding-left: 5px;
+    font-weight: 400;
+    font-size: 16px;
+    a {
+      &:hover{
+        text-decoration: underline;
+      }
+    }
   }
 }
 

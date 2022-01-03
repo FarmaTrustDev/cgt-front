@@ -34,16 +34,21 @@
             />
           </a-form-item>
           <a-form-item>
+            <a-checkbox>
+              Remember me
+            </a-checkbox>
+          </a-form-item>
+          <a-form-item>
             <a-button
               block
               size="large"
               type="primary"
               html-type="submit"
               :loading="loading"
-              >Submit</a-button
+              >Sign In</a-button
             >
           </a-form-item>
-          <div class="text-center mt-15"><a href="#"><b>Forgot Password?</b></a></div>
+          <div class="forgot-link"><a href="#">Forgot Password?</a></div>
         </a-form>
       </a-card>
     </div>

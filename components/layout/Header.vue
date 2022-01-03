@@ -3,9 +3,7 @@
    <a-layout-header>
 
      <div class="user-detail">
-      <div>
-        Welcome <strong>User Name,</strong>
-      </div>
+        Welcome, User Name
     </div>
 
     <div class="hospital-detail">

@@ -2,7 +2,7 @@
   <a-layout-sider
     v-model="collapsed"
     class="sidebar"
-    width="300"
+    width="265"
     theme="light"
     collapsible
   >

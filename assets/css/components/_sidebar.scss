@@ -95,7 +95,7 @@
   .ant-menu-item {
     font-size: 14px;
     height: auto;
-    padding: 0 15px;
+    padding: 0 30px;
     &:hover{
       color: $primary-color;
     }
@@ -114,7 +114,7 @@
   }
   .menu-container {
     padding: 10px 30px 10px 30px;
-    border-radius: 15px;
+    border-radius: 22px;
   }
   .ant-menu-inline-collapsed {
     .menu-container {
@@ -130,7 +130,7 @@
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: transparent;
     .menu-container {
-      background-color: #f7faff;
+      background-color: #F2F5FB;
     }
   }
 
