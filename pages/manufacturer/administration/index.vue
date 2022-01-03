@@ -1,28 +1,32 @@
 <template>
   <div class="admin-page">
-
     <h3 class="page-title">Administration</h3>
     <a-row :gutter="16" class="grey-card">
       <a-col :span="10">
         <div class="admin-tab">
-            <a :href="screeningUrl" >
-              <img src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg">
-              <h4 class="heading-home">Screening Criteria</h4>
-            </a>
-          </div>
+          <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  --> 
+          <a :href="screeningUrl">
+            <img
+              src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
+            />
+            <h4 class="heading-home">Screening Criteria</h4>
+          </a>
+        </div>
       </a-col>
       <a-col :span="2"></a-col>
       <a-col :span="10">
         <div class="admin-tab">
-            <a :href="logisticsTo" >
-              <img src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg">
-              <h4 class="heading-home">Logistics Partner </strong></h4>
-            </a>
-          </div>
+          <a :href="logisticsTo">
+            <img
+              src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
+            />
+            <h4 class="heading-home">Logistics Partner</h4>
+          </a>
+        </div>
       </a-col>
     </a-row>
 
-    <!-- <a-row :gutter="16" justify="center" align="center">
+    <a-row :gutter="16" justify="center">
       <a-col
         v-for="menu in navigation"
         :key="menu.heading"
@@ -37,7 +41,7 @@
           <div slot="header" class="bg-gray-100">{{ menu.heading }}</div>
         </a-list>
       </a-col>
-    </a-row> -->
+    </a-row>
   </div>
 </template>
 
@@ -46,18 +50,44 @@ export default {
   data() {
     return {
       screeningUrl: '/manufacturer/administration/screening',
-      logisticsTo: '/manufacturer/administration/logistics',
+      logisticsTo: 'logisticsTo',
       navigation: [
         {
           heading: 'Screening Adminstration',
           menus: [
             {
-              icon: null,
+              icon: 'https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg',
               id: 0,
               initial: null,
               key: '1',
               name: 'Screening',
               to: '/manufacturer/administration/screening',
+            },
+          ],
+        },
+        {
+          heading: 'Collection',
+          menus: [
+            {
+              icon: 'https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg',
+              id: 0,
+              initial: null,
+              key: '3',
+              name: 'Hospital',
+              to: '/manufacturer/administration/collections/hospital',
+            },
+          ],
+        },
+        {
+          heading: 'Logistics Partner',
+          menus: [
+            {
+              icon: 'https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg',
+              id: 0,
+              initial: null,
+              key: '3',
+              name: 'Logistics Partner',
+              to: '/manufacturer/administration/logistics',
             },
           ],
         },

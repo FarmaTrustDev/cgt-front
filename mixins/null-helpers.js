@@ -13,5 +13,6 @@ export default {
     isFunction(func) {
       return typeof func === 'function'
     },
+   
   },
 }

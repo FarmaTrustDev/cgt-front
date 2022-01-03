@@ -10,8 +10,14 @@ function get(params = {}) {
   })
 }
 
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+  })
+}
 const TreatmentTypeServices = {
   get,
+  getById,
 }
 
 export default TreatmentTypeServices

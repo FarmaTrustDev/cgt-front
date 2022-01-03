@@ -54,9 +54,26 @@
       </a-button>
     </span>
 
+    <span slot="upsertDropdown" slot-scope="text, record">
+      <a-dropdown>
+        <a-button class="action-button" @click="preventDefault">
+          <b><a-icon type="more" /></b>
+        </a-button>
+        <a-menu slot="overlay">
+          <a-menu-item key="1" @click="clickUpdate(record)">
+            <a-icon type="edit" />Update
+          </a-menu-item>
+
+          <a-menu-item key="3" @click="clickDelete(record)"
+            ><a-icon type="delete" />Delete</a-menu-item
+          >
+        </a-menu>
+      </a-dropdown>
+    </span>
+
     <span slot="patientAction" slot-scope="text, record">
       <a-dropdown :trigger="['click']">
-        <a-button class="action-button" @click="(e) => e.preventDefault()">
+        <a-button class="action-button" @click="preventDefault">
           <b><a-icon type="more" /></b>
         </a-button>
         <a-menu slot="overlay">
@@ -81,7 +98,7 @@
 <script>
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
-import { isEmpty } from '~/services/Helpers'
+import { isEmpty, preventDefault } from '~/services/Helpers'
 
 export default {
   mixins: [routeHelpers, notifications],
@@ -91,6 +108,7 @@ export default {
     pagination: { type: Boolean, default: false },
     actionLink: { type: String, default: '' },
     apiService: { type: Object, required: true },
+    // eslint-disable-next-line vue/require-default-prop
     fetchFrom: { type: Function, required: false },
     params: { type: Object, default: () => ({}) },
   },
@@ -102,8 +120,10 @@ export default {
   },
   mounted() {
     this.fetch()
+    this.getFetchMethod()
   },
   methods: {
+    preventDefault,
     fetch(params = {}) {
       this.loading = true
       const fetchFrom = this.getDataApiService()
@@ -135,6 +155,15 @@ export default {
       this.goto(`/hospital/patients/${patient.globalId}`, {
         treatment_id: treatment.globalId,
       })
+    },
+    clickUpdate(record) {
+      this.$emit('clickUpdate', record)
+    },
+    clickDelete(record) {
+      this.$emit('clickDelete', record)
+    },
+    getFetchMethod() {
+      this.$emit('getFetch', this.fetch)
     },
   },
 }

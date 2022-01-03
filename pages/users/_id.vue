@@ -1,16 +1,15 @@
 <template>
   <page-layout :create="false" :loading="loading" title="Users">
     <template slot="content">
-     <formfield />
+      <formField />
     </template>
   </page-layout>
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-
-import formfield from '~/components/root/user/form/index.vue'
+import formField from '~/components/root/user/form/index'
 export default {
-  components: { 'page-layout': PageLayout,formfield },
+  components: { 'page-layout': PageLayout, formField },
   data() {
     return {
       loading: false,
@@ -18,7 +17,6 @@ export default {
       form: this.$form.createForm(this, {
         name: 'UsersCreate',
       }),
-
     }
   },
   methods: {
