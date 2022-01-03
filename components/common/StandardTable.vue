@@ -157,10 +157,10 @@ export default {
       })
     },
     clickUpdate(record) {
-      this.$$emit('clickUpdate', record)
+      this.$emit('clickUpdate', record)
     },
     clickDelete(record) {
-      this.$$emit('clickUpdate', record)
+      this.$emit('clickDelete', record)
     },
     getFetchMethod() {
       this.$emit('getFetch', this.fetch)

@@ -2,7 +2,7 @@
   <page-layout
     :create="false"
     :loading="loading"
-    :title="treatmentName + ' Hospital collection process'"
+    :title="treatmentName + ' Hospital Collection Process'"
   >
     <template slot="content">
       <create @fetchTreatmentName="fetchTreatmentName" />
