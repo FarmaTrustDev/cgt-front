@@ -1,45 +1,38 @@
 <template>
   <div>
+    <a-form-item label="Process step">
+      <a-input
+        v-decorator="[
+          'name',
+          {
+            rules: [{ required: true, message: 'Please input Process!' }],
+            initialValue: collection.name,
+          },
+        ]"
+        size="large"
+        placeholder="input Process!"
+      />
 
-      <a-form-item label="Process step">
-        <a-input
-          v-decorator="[
-            'name',
-            {
-              rules: [{ required: true, message: 'Please input Process!' }],
-              initialValue: collection.name,
-            },
-          ]"
-          size="large"
-          placeholder="input Process!"
-        />
-
-        <a-input
-          v-decorator="[
-            'treatmentTypeId',
-            {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your treatmentTypeId!',
-                },
-              ],
-              initialValue: treatmentType.id,
-            },
-          ]"
-          type="hidden"
-        />
-      </a-form-item>
-     
- 
+      <a-input
+        v-decorator="[
+          'treatmentTypeId',
+          {
+            rules: [
+              {
+                required: true,
+                message: 'Please input your treatmentTypeId!',
+              },
+            ],
+            initialValue: treatmentType.id,
+          },
+        ]"
+        type="hidden"
+      />
+    </a-form-item>
   </div>
 </template>
 <script>
-// import withCrud from '~/mixins/with-crud'
-// import CollectionServices from '~/services/API/CollectionServices'
-
 export default {
-  // mixins: [withCrud],
   props: {
     treatmentType: {
       type: Object,
@@ -55,23 +48,7 @@ export default {
     },
   },
   data() {
-    return {
-      // form: this.$form.createForm(this, {
-      //   name: 'CollectionForm',
-      // }),
-      // apiService: CollectionServices,
-      // fetchIdFromParams: false,
-      // entity: {},
-      // isScheduled: false,
-    }
+    return {}
   },
-  // mounted() {
-  //   this.loadEntityExternally(this.collection)
-  // },
-  // methods: {
-  //   afterCreate(response) {
-  //     this.$emit('handlesShowModal', false)
-  //   },
-  // },
 }
 </script>

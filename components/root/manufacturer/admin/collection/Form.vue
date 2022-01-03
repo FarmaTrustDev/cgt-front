@@ -65,7 +65,6 @@ export default {
       CollectionServices,
       data: [],
       formLayout: 'vertical',
-      gotoLink: '/manufacturer/administration/collection/hospital',
       treatmentType: {},
       params: { type: COLLECTION_TYPE.hospital.id },
       fetchMethod: null,
@@ -107,7 +106,6 @@ export default {
     },
     handlesShowModal(show) {
       if (!show) {
-        this.fetchMethod(this.params)
         this.collection = {}
         this.isCreated = false
       }
@@ -124,12 +122,20 @@ export default {
     },
     getUpdate(record) {
       this.handlesShowModal(true)
-
       this.collection = record
       this.loadEntityExternally(record)
     },
     afterCreate(response) {
-      this.handlesShowModal(true)
+      this.afterUpsert()
+    },
+    afterUpsert() {
+      this.fetchMethod(this.params)
+      this.collection = {}
+      this.isCreated = false
+      this.handlesShowModal(false)
+    },
+    afterUpdate(response) {
+      this.afterUpsert()
     },
   },
 }
