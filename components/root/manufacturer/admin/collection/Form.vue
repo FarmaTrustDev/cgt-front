@@ -2,7 +2,13 @@
   <div>
     <a-spin :spinning="loading">
       <FormActionButton text="Add" @click="addCollection" />
-      <standardTable :columns="column" :api-service="CollectionServices">
+      <standardTable
+        v-if="showTable"
+        :columns="column"
+        :params="params"
+        :api-service="CollectionServices"
+        @getFetch="getFetch"
+      >
       </standardTable>
       <a-modal
         :destroy-on-close="true"
@@ -11,7 +17,10 @@
         :footer="null"
         @cancel="handlesShowModal(false)"
       >
-        <FormField :treatment-type="treatmentType" />
+        <FormField
+          :treatment-type="treatmentType"
+          @handlesShowModal="handlesShowModal"
+        />
       </a-modal>
     </a-spin>
   </div>
@@ -23,6 +32,7 @@ import CollectionServices from '~/services/API/CollectionServices'
 import TreatmentTypeServices from '~/services/API/TreatmentTypeServices'
 import nullHelper from '~/mixins/null-helpers'
 import FormField from '~/components/root/manufacturer/admin/collection/FormField'
+import { COLLECTION_TYPE } from '~/services/Constant'
 
 const column = [
   {
@@ -37,12 +47,13 @@ const column = [
   },
 ]
 export default {
-  mixins: [nullHelper],
   components: { standardTable, FormField },
+  mixins: [nullHelper],
   data() {
     return {
       loading: true,
       showModal: false,
+      showTable: false,
       column,
       CollectionServices,
       data: [],
@@ -52,6 +63,8 @@ export default {
       }),
       gotoLink: '/manufacturer/administration/collection/hospital',
       treatmentType: {},
+      params: { type: COLLECTION_TYPE.hospital.id },
+      fetchMethod: null,
     }
   },
   mounted() {
@@ -70,16 +83,27 @@ export default {
       TreatmentTypeServices.getById(entityId)
         .then((response) => {
           this.treatmentType = response.data
+          this.params = {
+            ...this.params,
+            treatmentTypeId: this.treatmentType.id,
+          }
+          this.showTable = true
           this.$emit('fetchTreatmentName', this.treatmentType.name)
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
     },
     handlesShowModal(show) {
+      if (!show) {
+        this.fetchMethod(this.params)
+      }
       this.showModal = show
     },
     addCollection(a, b) {
       this.handlesShowModal(true)
+    },
+    getFetch(method) {
+      this.fetchMethod = method
     },
   },
 }

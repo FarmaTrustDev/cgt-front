@@ -119,6 +119,7 @@ export default {
   },
   mounted() {
     this.fetch()
+    this.getFetchMethod();
   },
   methods: {
     preventDefault,
@@ -159,6 +160,9 @@ export default {
     },
     clickDelete(record) {
       this.$$emit('clickUpdate', record)
+    },
+    getFetchMethod() {
+      this.$emit('getFetch', this.fetch)
     },
   },
 }

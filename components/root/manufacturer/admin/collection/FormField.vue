@@ -24,7 +24,7 @@
                   message: 'Please input your treatmentTypeId!',
                 },
               ],
-              initialValue: entity.treatmentTypeId,
+              initialValue: treatmentType.id,
             },
           ]"
           type="hidden"
@@ -36,23 +36,34 @@
 </template>
 <script>
 import withCrud from '~/mixins/with-crud'
-import SchedulingServices from '~/services/API/SchedulingServices'
+import CollectionServices from '~/services/API/CollectionServices'
 
 export default {
   mixins: [withCrud],
-  props: {},
+  props: {
+    treatmentType: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data() {
     return {
       form: this.$form.createForm(this, {
-        name: 'TreatmentSchedulingForm',
+        name: 'CollectionForm',
       }),
-      apiService: SchedulingServices,
+      apiService: CollectionServices,
       fetchIdFromParams: false,
       entity: {},
       isScheduled: false,
     }
   },
   mounted() {},
-  methods: {},
+  methods: {
+    afterCreate(response) {
+      this.$emit('handlesShowModal', false)
+    },
+  },
 }
 </script>

@@ -7,8 +7,7 @@
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-
-import formField from '~/components/root/user/form/index.vue'
+import formField from '~/components/root/user/form/index'
 export default {
   components: { 'page-layout': PageLayout, formField },
   data() {

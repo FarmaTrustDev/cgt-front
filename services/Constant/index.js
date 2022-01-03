@@ -63,3 +63,8 @@ export const SCHEDULING_STATUSES = {
   completed: { id: 5, name: 'Completed' },
   inProcess: { id: 6, name: 'InProcess' },
 }
+
+export const COLLECTION_TYPE = {
+  hospital: { id: 1, name: 'Hospital' },
+  manufacturer: { id: 2, name: 'Manufacturer' },
+}
