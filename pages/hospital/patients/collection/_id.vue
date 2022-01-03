@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import detail from '~/components/root/patient/details'
+import detail from '~/pages/hospital/details'
 import PageLayout from '~/components/layout/PageLayout'
 import withCrud from '~/mixins/with-crud'
 import PatientServices from '~/services/API/PatientServices'
