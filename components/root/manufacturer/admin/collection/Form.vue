@@ -8,8 +8,8 @@
         :params="params"
         :api-service="CollectionServices"
         @getFetch="getFetchListing"
-        @clickDelete="getDelete"
-        @clickUpdate="getUpdate"
+        @clickDelete="deleteClick"
+        @clickUpdate="clickUpdate"
       >
       </standardTable>
       <a-modal
@@ -119,10 +119,11 @@ export default {
     getFetchListing(method) {
       this.fetchMethod = method
     },
-    getDelete(method) {
-      this.deleteMethod = method
+    deleteClick(record) {
+      this.loadEntityExternally(record)
+      this.onDelete()
     },
-    getUpdate(record) {
+    clickUpdate(record) {
       this.handlesShowModal(true)
       this.collection = record
       this.loadEntityExternally(record)
@@ -137,6 +138,9 @@ export default {
       this.handlesShowModal(false)
     },
     afterUpdate(response) {
+      this.afterUpsert()
+    },
+    afterDelete() {
       this.afterUpsert()
     },
   },

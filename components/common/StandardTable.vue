@@ -64,8 +64,15 @@
             <a-icon type="edit" />Update
           </a-menu-item>
 
-          <a-menu-item key="3" @click="clickDelete(record)"
-            ><a-icon type="delete" />Delete</a-menu-item
+          <a-menu-item key="3"
+            ><a-popconfirm
+              title="Are you sure delete this task?"
+              ok-text="Yes"
+              cancel-text="No"
+              @confirm="clickDelete(record)"
+            >
+              <a-icon type="delete" />Delete
+            </a-popconfirm></a-menu-item
           >
         </a-menu>
       </a-dropdown>
