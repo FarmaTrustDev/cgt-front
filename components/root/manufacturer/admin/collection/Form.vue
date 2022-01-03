@@ -21,6 +21,7 @@
       >
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <FormField
+            :type="type"
             :collection="collection"
             :treatment-type="treatmentType"
             @handlesShowModal="handlesShowModal"
@@ -56,6 +57,7 @@ const column = [
 export default {
   components: { standardTable, FormField },
   mixins: [nullHelper, withCrud],
+  props: { type: { type: Number, require: true, default: null } },
   data() {
     return {
       loading: true,

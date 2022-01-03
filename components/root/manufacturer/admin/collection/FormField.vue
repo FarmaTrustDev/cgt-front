@@ -28,6 +28,21 @@
         ]"
         type="hidden"
       />
+      <a-input
+        v-decorator="[
+          'type',
+          {
+            rules: [
+              {
+                required: true,
+                message: 'Please input your treatmentTypeId!',
+              },
+            ],
+            initialValue: type,
+          },
+        ]"
+        type="hidden"
+      />
     </a-form-item>
   </div>
 </template>
