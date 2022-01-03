@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-row :gutter="16" justify="center" align="center">
+    <a-row :gutter="16" justify="center">
       <a-col
         v-for="menu in navigation"
         :key="menu.heading"
@@ -34,6 +34,19 @@ export default {
               key: '1',
               name: 'Screening',
               to: '/manufacturer/administration/screening',
+            },
+          ],
+        },
+        {
+          heading: 'Collection',
+          menus: [
+            {
+              icon: null,
+              id: 0,
+              initial: null,
+              key: '1',
+              name: 'Hospital',
+              to: '/manufacturer/administration/collections/hospital',
             },
           ],
         },
