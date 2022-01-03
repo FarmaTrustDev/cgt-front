@@ -90,9 +90,9 @@ export default {
       })
       this.loading = false
     },
-    onDelete(e) {
+    onDelete() {
       this.apiService
-        .delete(this.entityId)
+        .destroy(this.entityId)
         .then((response) => {
           this.success(response.message)
           if (this.isFunction(this.afterDelete)) {

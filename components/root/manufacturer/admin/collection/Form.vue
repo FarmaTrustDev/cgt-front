@@ -8,8 +8,8 @@
         :params="params"
         :api-service="CollectionServices"
         @getFetch="getFetchListing"
-        @clickDelete="getDelete"
-        @clickUpdate="getUpdate"
+        @clickDelete="deleteClick"
+        @clickUpdate="clickUpdate"
       >
       </standardTable>
       <a-modal
@@ -21,9 +21,9 @@
       >
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <FormField
-            :type="type"
             :collection="collection"
             :treatment-type="treatmentType"
+            :collection-type="collectionType"
             @handlesShowModal="handlesShowModal"
           />
           <FormActionButton :is-created="isCreated" />
@@ -39,12 +39,11 @@ import CollectionServices from '~/services/API/CollectionServices'
 import TreatmentTypeServices from '~/services/API/TreatmentTypeServices'
 import nullHelper from '~/mixins/null-helpers'
 import FormField from '~/components/root/manufacturer/admin/collection/FormField'
-import { COLLECTION_TYPE } from '~/services/Constant'
 import withCrud from '~/mixins/with-crud'
 // import CollectionServices from '~/services/API/CollectionServices'
 const column = [
   {
-    title: 'name',
+    title: 'Name',
     dataIndex: 'name',
     key: 'name',
     width: '90%',
@@ -57,7 +56,7 @@ const column = [
 export default {
   components: { standardTable, FormField },
   mixins: [nullHelper, withCrud],
-  props: { type: { type: Number, require: true, default: null } },
+  props: { collectionType: { type: Number, require: true, default: null } },
   data() {
     return {
       loading: true,
@@ -68,7 +67,7 @@ export default {
       data: [],
       formLayout: 'vertical',
       treatmentType: {},
-      params: { type: COLLECTION_TYPE.hospital.id },
+      params: {},
       fetchMethod: null,
       collection: {},
       form: this.$form.createForm(this, {
@@ -91,6 +90,7 @@ export default {
       }
     },
     fetchTreatmentType(entityId) {
+      console.log(this.collectionType)
       this.loading = true
       TreatmentTypeServices.getById(entityId)
         .then((response) => {
@@ -99,6 +99,7 @@ export default {
             ...this.params,
             treatmentTypeId: this.treatmentType.id,
             active: true,
+            type: this.collectionType,
           }
           this.showTable = true
           this.$emit('fetchTreatmentName', this.treatmentType.name)
@@ -119,10 +120,11 @@ export default {
     getFetchListing(method) {
       this.fetchMethod = method
     },
-    getDelete(method) {
-      this.deleteMethod = method
+    deleteClick(record) {
+      this.loadEntityExternally(record)
+      this.onDelete()
     },
-    getUpdate(record) {
+    clickUpdate(record) {
       this.handlesShowModal(true)
       this.collection = record
       this.loadEntityExternally(record)
@@ -137,6 +139,9 @@ export default {
       this.handlesShowModal(false)
     },
     afterUpdate(response) {
+      this.afterUpsert()
+    },
+    afterDelete() {
       this.afterUpsert()
     },
   },

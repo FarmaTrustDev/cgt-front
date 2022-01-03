@@ -4,7 +4,7 @@
     <a-row :gutter="16" class="grey-card">
       <a-col :span="10">
         <div class="admin-tab">
-          <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  --> 
+          <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
           <a :href="screeningUrl">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
@@ -75,6 +75,14 @@ export default {
               key: '3',
               name: 'Hospital',
               to: '/manufacturer/administration/collections/hospital',
+            },
+            {
+              icon: 'https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg',
+              id: 0,
+              initial: null,
+              key: '4',
+              name: 'Manufacturer',
+              to: '/manufacturer/administration/collections/manufacturer',
             },
           ],
         },

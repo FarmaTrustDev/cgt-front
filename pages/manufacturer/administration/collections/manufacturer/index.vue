@@ -2,7 +2,7 @@
   <page-layout
     :create="false"
     :loading="loading"
-    title="Hospital collection process"
+    title="Manufacturer Collection Process"
     :bordered="borderCard"
   >
     <template slot="content">
@@ -25,13 +25,14 @@ const column = [
     dataIndex: 'name',
     key: 'name',
   },
+
   {
     title: 'Action',
     dataIndex: 'action',
     scopedSlots: { customRender: 'action' },
   },
 ]
-const ActionLink = '/manufacturer/administration/collections/hospital'
+const ActionLink = '/manufacturer/administration/collections/manufacturer'
 export default {
   components: { 'page-layout': PageLayout, standardTable },
   data() {

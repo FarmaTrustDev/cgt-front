@@ -38,7 +38,7 @@
                 message: 'Please input your treatmentTypeId!',
               },
             ],
-            initialValue: type,
+            initialValue: collectionType,
           },
         ]"
         type="hidden"
@@ -61,7 +61,7 @@ export default {
         return {}
       },
     },
-    type: {
+    collectionType: {
       type: Number,
       require: true,
       default: null,
