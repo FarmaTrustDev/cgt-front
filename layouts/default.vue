@@ -2,8 +2,7 @@
   <a-layout id="components-layout-demo-responsive">
     <sidebar />
     <a-layout class="main-section">
-       
-       <Header></Header>
+      <Header></Header>
 
       <a-layout-content style="margin: 0 16px">
         <!-- <a-breadcrumb style="margin: 16px 0">
@@ -15,7 +14,7 @@
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        Scheduling ©2021 Created by ATMPS
+        CGT ©2022 Created by Hataali
       </a-layout-footer>
     </a-layout>
   </a-layout>
@@ -28,7 +27,7 @@ import Header from '~/components/layout/Header'
 export default {
   components: {
     sidebar,
-    Header
+    Header,
   },
   computed: {
     // ...mapGetters(['getUser']),
