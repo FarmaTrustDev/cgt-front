@@ -93,5 +93,12 @@ export default {
     onDelete(e) {
       console.log('Delete', e)
     },
+    loadEntityExternally(model) {
+      if (!this.isEmpty(model)) {
+        this.entity = model
+        this.isCreated = true
+        this.entityId = model
+      }
+    },
   },
 }

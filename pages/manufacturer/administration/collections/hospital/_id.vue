@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     fetchTreatmentName(treatmentName) {
-      console.log(treatmentName)
       this.treatmentName = treatmentName
     },
   },

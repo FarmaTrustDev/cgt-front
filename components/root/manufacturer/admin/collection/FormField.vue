@@ -7,7 +7,7 @@
             'name',
             {
               rules: [{ required: true, message: 'Please input Process!' }],
-              initialValue: entity.name,
+              initialValue: collection.name,
             },
           ]"
           size="large"
@@ -47,6 +47,12 @@ export default {
         return {}
       },
     },
+    collection: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
   },
   data() {
     return {
@@ -59,7 +65,9 @@ export default {
       isScheduled: false,
     }
   },
-  mounted() {},
+  mounted() {
+    this.loadEntityExternally(this.collection)
+  },
   methods: {
     afterCreate(response) {
       this.$emit('handlesShowModal', false)

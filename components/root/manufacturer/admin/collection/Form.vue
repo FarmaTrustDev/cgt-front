@@ -8,6 +8,7 @@
         :params="params"
         :api-service="CollectionServices"
         @getFetch="getFetch"
+        @clickUpdate="update"
       >
       </standardTable>
       <a-modal
@@ -18,6 +19,7 @@
         @cancel="handlesShowModal(false)"
       >
         <FormField
+          :collection="collection"
           :treatment-type="treatmentType"
           @handlesShowModal="handlesShowModal"
         />
@@ -65,6 +67,7 @@ export default {
       treatmentType: {},
       params: { type: COLLECTION_TYPE.hospital.id },
       fetchMethod: null,
+      collection: {},
     }
   },
   mounted() {
@@ -104,6 +107,11 @@ export default {
     },
     getFetch(method) {
       this.fetchMethod = method
+    },
+    update(record) {
+      this.handlesShowModal(true)
+      this.collection = record
+      console.log(record)
     },
   },
 }
