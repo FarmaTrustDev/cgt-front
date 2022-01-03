@@ -108,6 +108,7 @@ export default {
     pagination: { type: Boolean, default: false },
     actionLink: { type: String, default: '' },
     apiService: { type: Object, required: true },
+    // eslint-disable-next-line vue/require-default-prop
     fetchFrom: { type: Function, required: false },
     params: { type: Object, default: () => ({}) },
   },
@@ -119,7 +120,7 @@ export default {
   },
   mounted() {
     this.fetch()
-    this.getFetchMethod();
+    this.getFetchMethod()
   },
   methods: {
     preventDefault,
