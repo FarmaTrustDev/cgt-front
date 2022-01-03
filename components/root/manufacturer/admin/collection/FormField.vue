@@ -61,6 +61,11 @@ export default {
         return {}
       },
     },
+    type: {
+      type: Number,
+      require: true,
+      default: null,
+    },
   },
   data() {
     return {}
