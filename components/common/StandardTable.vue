@@ -66,9 +66,10 @@
 
           <a-menu-item key="3"
             ><a-popconfirm
-              title="Are you sure delete this task?"
+              title="Are you sure delete ?"
               ok-text="Yes"
               cancel-text="No"
+              placement="topLeft"
               @confirm="clickDelete(record)"
             >
               <a-icon type="delete" />Delete
