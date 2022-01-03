@@ -1,5 +1,5 @@
 <template>
-  <a-card :loading="loading" :title="title" :bordered="bordered" :classes="[classes]">
+  <a-card :loading="loading" :title="title" :bordered="bordered" class="plain-header-border">
     <span slot="extra">
       <a-button v-if="create" type="primary" @click="gotoState('create')"
         >Create</a-button
@@ -31,10 +31,6 @@ export default {
     back: {
         type: Boolean,
         default: true
-    },
-    classes: {
-      type: Array, 
-      default: ()=> { return [] }
     },
     create: { type: Boolean, default: true },
   },

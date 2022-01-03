@@ -4,6 +4,7 @@
     :columns="columns"
     :pagination="pagination"
     :data-source="data"
+    :class="{'rounded-table' : rounded}"
   >
     <span slot="treatment_status" slot-scope="text, record">
       <!-- <div class="patient-timeline">
@@ -119,6 +120,7 @@ export default {
     // eslint-disable-next-line vue/require-default-prop
     fetchFrom: { type: Function, required: false },
     params: { type: Object, default: () => ({}) },
+    rounded: { type: Boolean, default: false },
   },
   data() {
     return {

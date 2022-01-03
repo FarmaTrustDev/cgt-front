@@ -6,6 +6,7 @@
       :data-source="data"
       :loading="loading"
       @change="handleTableChange"
+      class="rounded-table"
     >
       <template slot="name" slot-scope="name">
         {{ name.first }} {{ name.last }}

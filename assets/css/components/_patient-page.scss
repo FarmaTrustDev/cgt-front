@@ -1,37 +1,7 @@
 .patient-page {
   .ant-table-content {
-    table {
-      border-collapse: separate;
-      border-spacing: 0 1em;
-      text-align: center;
-      vertical-align: middle;
-    }
-    table thead tr {
-      border-collapse: collapse;
-      border-style: hidden;
-      box-shadow: 0 0 0 1px #e2e2e2;
-      border-radius: 22px;
-      margin-top: 2rem;
-    }
-    .ant-table-thead tr th {
-      padding: 15px;
-      font-weight: bold;
-      text-align: center;
-      &:first-child {
-        border-bottom-left-radius: 40px;
-        border-top-left-radius: 40px;
-      }
-      &:last-child {
-        border-bottom-right-radius: 40px;
-        border-top-right-radius: 40px;
-      }
-    }
+    
     .ant-table-tbody tr {
-      border-collapse: collapse;
-      border-style: hidden;
-      box-shadow: 0 0 0 1px #e2e2e2;
-      border-radius: 44px;
-      margin-top: 2rem;
       &:hover {
         background: #fff;
         box-shadow: 0 26px 60px 0 rgb(0 0 0 / 10%);
@@ -41,18 +11,7 @@
         background-position: left;
         margin-right: 0 !important;
         color: #2255c2;
-      }
-      td {
-        padding: 8px;
-        font-size: 14px;
-        vertical-align: middle;
-        color: #233151;
-        font-weight: 400;
-        &:first-child,&:last-child  {
-          border-bottom-left-radius: 40px;
-          border-top-left-radius: 40px;
-        }
-        
+        border-radius: 44px;
       }
     }
   }

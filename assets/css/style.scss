@@ -13,11 +13,12 @@
 @import './partials/formsFields';
 @import './partials/tabs';
 @import './partials/buttons';
+@import './partials/tables';
 @import './partials/_steps';
 @import './components/sidebar';
 @import './components/login';
 @import './components/header';
-@import './components/patient-table';
+@import './components/patient-page';
 @import './components/labels';
 @import './components/home';
 @import './components/chat';
@@ -100,4 +101,9 @@ a {
 }
 .heading {
   font-size : 25px;
+}
+.plain-header-border{
+ .ant-card-head{
+    border-bottom: none;
+  }
 }

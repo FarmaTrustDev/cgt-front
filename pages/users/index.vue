@@ -1,10 +1,10 @@
 <template>
-  <page-layout :loading="loading" title="Users">
+  <page-layout :loading="loading" title="Users" :bordered="false">
     <template slot="content">
       <a-table
         :columns="columns"
-        :scroll="{ x: true }"
         :data-source="datasource"
+        class="rounded-table"
       >
         <template slot="action" slot-scope="action">
           <a-button type="link" @click="goto(`/users/${action.globalId}`)"

@@ -1,10 +1,11 @@
 <template>
-  <page-layout :loading="loading" title="Patients List" :bordered="borderCard" class="patient-page">
+  <page-layout :loading="loading" title="Patients List" :bordered="borderCard" :back="false" class="patient-page">
     <template slot="content">
       <standardTable
         :columns="column"
         :api-service="PatientServices"
         :action-link="ActionLink"
+        :rounded="true"
       />
     </template>
   </page-layout>
