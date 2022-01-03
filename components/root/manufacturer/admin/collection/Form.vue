@@ -1,40 +1,86 @@
 <template>
   <div>
-    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormActionButton :loading="btnLoading" :is-created="isCreated" />
-    </a-form>
+    <a-spin :spinning="loading">
+      <FormActionButton text="Add" @click="addCollection" />
+      <standardTable :columns="column" :api-service="CollectionServices">
+      </standardTable>
+      <a-modal
+        :destroy-on-close="true"
+        :visible="showModal"
+        title="Add Process Step"
+        :footer="null"
+        @cancel="handlesShowModal(false)"
+      >
+        <FormField :treatment-type="treatmentType" />
+      </a-modal>
+    </a-spin>
   </div>
 </template>
 
 <script>
-// import TreatmentService from '~/services/API/TreatmentTypeServices'
-// import OrganizationServices from '~/services/API/OrganizationServices'
-import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
+import standardTable from '~/components/common/StandardTable'
+import CollectionServices from '~/services/API/CollectionServices'
+import TreatmentTypeServices from '~/services/API/TreatmentTypeServices'
+import nullHelper from '~/mixins/null-helpers'
+import FormField from '~/components/root/manufacturer/admin/collection/FormField'
 
-// import withCrud from '~/mixins/with-crud'
-//  mixins: [withCrud],
+const column = [
+  {
+    title: 'name',
+    dataIndex: 'name',
+    key: 'name',
+    width: '90%',
+  },
+  {
+    title: 'Action',
+    scopedSlots: { customRender: 'upsertDropdown' },
+  },
+]
 export default {
+  mixins: [nullHelper],
+  components: { standardTable, FormField },
   data() {
     return {
-      screeningTemplate: {},
-      entityId: null,
-      isCreated: false,
-      loading: false,
-      treatmentType: {},
-      entity: {},
-      typeLoading: true,
-      hospitalLoading: true,
-      btnLoading: false,
-      form: this.$form.createForm(this, {
-        name: 'screening',
-      }),
-      hospitals: [],
+      loading: true,
+      showModal: false,
+      column,
+      CollectionServices,
+      data: [],
       formLayout: 'vertical',
-      apiService: ScreeningTemplateServices,
-      gotoLink: '/manufacturer/administration/screening',
+      form: this.$form.createForm(this, {
+        name: 'hospitalCollection',
+      }),
+      gotoLink: '/manufacturer/administration/collection/hospital',
+      treatmentType: {},
     }
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.checkCreated()
+  },
+  methods: {
+    checkCreated() {
+      const entityId = this.$route.params.id
+
+      if (this.isGuid(entityId)) {
+        this.fetchTreatmentType(entityId)
+      }
+    },
+    fetchTreatmentType(entityId) {
+      this.loading = true
+      TreatmentTypeServices.getById(entityId)
+        .then((response) => {
+          this.treatmentType = response.data
+          this.$emit('fetchTreatmentName', this.treatmentType.name)
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = false))
+    },
+    handlesShowModal(show) {
+      this.showModal = show
+    },
+    addCollection(a, b) {
+      this.handlesShowModal(true)
+    },
+  },
 }
 </script>

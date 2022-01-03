@@ -46,7 +46,7 @@ export default {
       if (
         !isEmpty(this.treatment) &&
         this.treatment.id &&
-        this.treatment.IsSchedule
+        this.treatment.isSchedule
       ) {
         this.fetchScheduling(this.treatment.id)
       }
