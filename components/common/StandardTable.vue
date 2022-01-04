@@ -4,7 +4,7 @@
     :columns="columns"
     :pagination="pagination"
     :data-source="data"
-    :class="{'rounded-table' : rounded}"
+    :class="{ 'rounded-table': rounded }"
   >
     <span slot="treatment_status" slot-scope="text, record">
       <!-- <div class="patient-timeline">
@@ -38,8 +38,14 @@
                 title="Collection"
                 @click="stepClick(record, treatment)"
               />
-              <a-step title="Shipment" @click="stepClick(record, treatment)" />
-              <a-step title="Treatment" @click="stepClick(record, treatment)" />
+              <a-step
+                title="Shipment"
+                @click="gotoEnrollmentClick(record, treatment)"
+              />
+              <a-step
+                title="Treatment"
+                @click="gotoEnrollmentClick(record, treatment)"
+              />
               <a-step
                 title="After care"
                 @click="stepClick(record, treatment)"
@@ -165,6 +171,13 @@ export default {
       this.goto(`/hospital/patients/${patient.globalId}`, {
         treatment_id: treatment.globalId,
       })
+    },
+    gotoEnrollmentClick(patient, treatment) {
+      if (!isEmpty(treatment)) {
+        this.goto(`/hospital/patients/collection/${treatment.globalId}`, {
+          treatment_id: treatment.globalId,
+        })
+      }
     },
     clickUpdate(record) {
       this.$emit('clickUpdate', record)

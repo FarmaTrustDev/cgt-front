@@ -32,11 +32,18 @@ function update(id, data) {
   })
 }
 
+function detail(id) {
+  return request({
+    url: `${baseApi}/detail/${id}`,
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
   getById,
   update,
+  detail,
 }
 
 export default TreatmentServices

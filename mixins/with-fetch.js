@@ -8,8 +8,8 @@ export default {
       entity: {},
       loading: false,
       params: {},
-      fetchIdFromParams:true,
-      fetchMethod:null,
+      fetchIdFromParams: true,
+      fetchMethod: () => {},
     }
   },
   mounted() {
@@ -28,7 +28,7 @@ export default {
     },
     fetch(id) {
       this.loading = true
-     this.fetchMethod(id)
+      this.fetchMethod(id)
         .then((response) => {
           this.entity = response.data
           if (this.isFunction(this.getEntity)) {
@@ -36,7 +36,7 @@ export default {
           }
         })
         .catch(this.error)
-        .finally(() => (this.loading = true))
+        .finally(() => (this.loading = false))
     },
   },
 }

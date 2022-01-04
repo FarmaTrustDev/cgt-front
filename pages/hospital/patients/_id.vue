@@ -1,11 +1,5 @@
 <template>
-  <page-layout
-    :loading="loading"
-    title="Patients Enrollment"
-    :bordered="borderCard"
-    class="patient-page"
-    :create="false"
-  >
+  <page-layout title="Patients Enrollment" class="patient-page" :create="false">
     <template slot="content">
       <div class="grey-card enrollment-page">
         <a-card :bordered="false" class="default-border-radius">
