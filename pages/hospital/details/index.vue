@@ -24,31 +24,10 @@
       </a-row>
 
       <a-row :gutter="18" class="mt-15">
-        <a-col :span="12">
-          <a-card :bordered="false" class="default-card">
-            <article class="article">
-              <h4 class="heading pl-0">External Entities</h4>
-            </article>
-            <dl class="ant-row common-detail">
-              <dt>Treatment Type:</dt>
-              <dd>{{ treatment.treatmentTypeName }}</dd>
-              <dt>Doctor:</dt>
-              <dd>Dr. Comfort</dd>
-              <dt>Clinician:</dt>
-              <dd>Dr. Ryan Katz</dd>
-              <dt>Hospital:</dt>
-              <dd>Baystate Clinic</dd>
-            </dl>
-          </a-card>
-        </a-col>
-        <a-col :span="12">
-          <a-card :bordered="false" class="default-card">
-            <article class="article">
-              <h4 class="heading pl-0">Treatment Details</h4>
-            </article>
-            <TreatmentDetails :treatment-id="treatment.id" />
-          </a-card>
-        </a-col>
+        <TreatmentDetails
+          v-if="!isEmpty(treatment.patient)"
+          :treatment="treatment"
+        />
       </a-row>
 
       <a-row :gutter="18" class="mt-15">
