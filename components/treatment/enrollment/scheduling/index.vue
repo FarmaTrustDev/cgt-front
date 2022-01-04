@@ -55,8 +55,8 @@ export default {
       SchedulingServices.getByTreatment(id).then((response) => {
         const entity = response.data
         if (!isEmpty(entity)) {
-          this.isScheduled = true
           this.entity = entity
+          this.isScheduled = true
         }
       })
     },

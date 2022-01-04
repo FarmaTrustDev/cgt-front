@@ -29,7 +29,7 @@
           :treatment="treatment"
         />
       </a-row>
-      <status />
+      <status v-if="!isEmpty(treatment.patient)" :treatment="treatment" />
       <TreatmentView />
     </div>
   </div>

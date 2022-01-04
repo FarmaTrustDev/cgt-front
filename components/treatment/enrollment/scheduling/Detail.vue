@@ -44,3 +44,13 @@
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    entity: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+}
+</script>
