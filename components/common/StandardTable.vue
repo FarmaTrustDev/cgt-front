@@ -36,19 +36,19 @@
               />
               <a-step
                 title="Collection"
-                @click="stepClick(record, treatment)"
+                @click="gotoCollectionScreen(record, treatment)"
               />
               <a-step
                 title="Shipment"
-                @click="gotoEnrollmentClick(record, treatment)"
+                @click="gotoCollectionScreen(record, treatment)"
               />
               <a-step
                 title="Treatment"
-                @click="gotoEnrollmentClick(record, treatment)"
+                @click="gotoCollectionScreen(record, treatment)"
               />
               <a-step
                 title="After care"
-                @click="stepClick(record, treatment)"
+                @click="gotoCollectionScreen(record, treatment)"
               /> </a-steps
           ></span>
         </span>
@@ -172,7 +172,7 @@ export default {
         treatment_id: treatment.globalId,
       })
     },
-    gotoEnrollmentClick(patient, treatment) {
+    gotoCollectionScreen(patient, treatment) {
       if (!isEmpty(treatment)) {
         this.goto(`/hospital/patients/collection/${treatment.globalId}`, {
           treatment_id: treatment.globalId,

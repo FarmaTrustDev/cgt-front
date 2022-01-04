@@ -31,8 +31,13 @@ export default {
       this.fetchMethod(id)
         .then((response) => {
           this.entity = response.data
+
           if (this.isFunction(this.getEntity)) {
             this.getEntity(response)
+          }
+
+          if (this.isFunction(this.afterFetch)) {
+            this.afterFetch(response)
           }
         })
         .catch(this.error)

@@ -6,8 +6,7 @@
     :create="false"
   >
     <template slot="content">
-      {{ entity }}
-      <detail :patient="entity" />
+      <detail :treatment="entity" />
     </template>
   </page-layout>
 </template>
@@ -17,6 +16,7 @@ import detail from '~/pages/hospital/details'
 import PageLayout from '~/components/layout/PageLayout'
 import withFetch from '~/mixins/with-fetch'
 import TreatmentServices from '~/services/API/TreatmentServices'
+
 export default {
   components: { detail, 'page-layout': PageLayout },
   mixins: [withFetch],
@@ -28,5 +28,10 @@ export default {
     }
   },
   mounted() {},
+  methods: {
+    afterFetch(data) {
+      console.log(data)
+    },
+  },
 }
 </script>
