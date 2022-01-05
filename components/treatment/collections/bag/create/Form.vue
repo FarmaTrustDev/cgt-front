@@ -4,8 +4,7 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <FormFields :treatment="treatment" />
         <a-form-item>
-          {{ loading }}
-          <FormActionButton :loading="loading" />
+          <FormActionButton :loading="stateLoading" />
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
         </a-form-item>
       </a-form>
@@ -15,6 +14,7 @@
 <script>
 import FormFields from '~/components/treatment/collections/bag/create/FormField'
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
+
 import withCrud from '~/mixins/with-crud'
 
 export default {
@@ -29,18 +29,16 @@ export default {
       }),
       apiService: TreatmentBagServices,
       fetchIdFromParams: false,
-      loading: false,
+      stateLoading: false,
     }
   },
   methods: {
-    beforeUpsert(data) {
-      console.log('beforeUpsert', data)
-      this.loading = true
+    beforeUpsert(data) {    
+      this.stateLoading = true
     },
     afterCreate(response) {
-      console.log('afterCreate', response)
       this.$emit('onCreate', response)
-      this.loading = false
+      this.stateLoading = false
     },
   },
 }

@@ -60,6 +60,7 @@
   </div>
 </template>
 <script>
+import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 const columns = [
   {
     title: 'Details',
@@ -97,6 +98,7 @@ export default {
     handleCollectionSubmit(row) {
       const fields = this.form.getFieldsValue()
       console.log(row, fields)
+      console.log(TreatmentBagServices)
     },
   },
 }
