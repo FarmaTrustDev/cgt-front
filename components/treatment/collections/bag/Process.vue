@@ -60,7 +60,7 @@
   </div>
 </template>
 <script>
-import TreatmentBagServices from '~/services/API/TreatmentBagServices'
+import BagCollectionServices from '~/services/API/BagCollectionServices'
 const columns = [
   {
     title: 'Details',
@@ -95,10 +95,16 @@ export default {
     }
   },
   methods: {
-    handleCollectionSubmit(row) {
+    handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()
-      console.log(row, fields)
-      console.log(TreatmentBagServices)
+      console.log(collection, fields)
+      console.log()
+      const values = fields.collection[`id-${collection.id}`]
+      if (values) {
+        BagCollectionServices.update(collection.id, values).then((response) => {
+          console.log(response)
+        })
+      }
     },
   },
 }
