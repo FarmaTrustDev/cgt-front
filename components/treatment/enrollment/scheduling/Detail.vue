@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <a-descriptions title="Collection Details">
       <a-descriptions-item label="Sample Collection Date">
         {{ entity.hospitalCollectionDate }}
@@ -38,12 +37,13 @@
     </a-descriptions>
 
     <a-descriptions title="Notes">
-      <a-descriptions-item >
+      <a-descriptions-item>
         {{ entity.notes }}
       </a-descriptions-item>
     </a-descriptions>
   </div>
 </template>
+
 <script>
 export default {
   props: {

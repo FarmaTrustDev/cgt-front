@@ -31,6 +31,9 @@ export default {
       }
     },
     upsert(values) {
+      if (this.isFunction(this.beforeUpsert)) {
+        this.beforeUpsert(values)
+      }
       if (this.isCreated) {
         return this.update(values)
       }
@@ -50,6 +53,8 @@ export default {
         .finally(() => (this.loading = false))
     },
     create(values) {
+      this.btnLoading = true
+      this.loading = true
       this.apiService
         .create(values)
         .then((response) => {
@@ -63,7 +68,10 @@ export default {
           }
         })
         .catch(this.error)
-        .finally(() => (this.btnLoading = false))
+        .finally(() => {
+          this.btnLoading = false
+          this.loading = false
+        })
     },
     update(values) {
       this.btnLoading = true
@@ -76,7 +84,10 @@ export default {
           }
         })
         .catch(this.error)
-        .finally(() => (this.btnLoading = false))
+        .finally(() => {
+          this.btnLoading = false
+          this.loading = false
+        })
     },
     onSubmit(e) {
       this.loading = true

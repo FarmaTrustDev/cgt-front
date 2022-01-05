@@ -3,7 +3,7 @@
     :loading="loading"
     :columns="columns"
     :data-source="data"
-    :class="{'rounded-table' : rounded}"
+    :class="{ 'rounded-table': rounded, 'patient-table' : patient }"
   >
 
     <template slot="name" slot-scope="name">
@@ -44,7 +44,15 @@
               <a-step
                 class="ant-steps-item-active"
                 title="Collection"
-                @click="stepClick(record, treatment)"
+                @click="gotoCollectionScreen(record, treatment)"
+              />
+              <a-step
+                title="Shipment"
+                @click="gotoCollectionScreen(record, treatment)"
+              />
+              <a-step
+                title="Treatment"
+                @click="gotoCollectionScreen(record, treatment)"
               />
               <span class="sep-line"></span>
               <a-step title="Shipment" @click="stepClick(record, treatment)" />
@@ -53,7 +61,7 @@
               <span class="sep-line"></span>
               <a-step
                 title="After care"
-                @click="stepClick(record, treatment)"
+                @click="gotoCollectionScreen(record, treatment)"
               /> </a-steps
           >
 
@@ -138,6 +146,7 @@ export default {
     fetchFrom: { type: Function, required: false },
     params: { type: Object, default: () => ({}) },
     rounded: { type: Boolean, default: false },
+    patient: { type: Boolean, default: false },
   },
   data() {
     return {
@@ -182,6 +191,13 @@ export default {
       this.goto(`/hospital/patients/${patient.globalId}`, {
         treatment_id: treatment.globalId,
       })
+    },
+    gotoCollectionScreen(patient, treatment) {
+      if (!isEmpty(treatment)) {
+        this.goto(`/hospital/patients/collection/${treatment.globalId}`, {
+          treatment_id: treatment.globalId,
+        })
+      }
     },
     clickUpdate(record) {
       this.$emit('clickUpdate', record)

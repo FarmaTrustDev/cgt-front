@@ -1,7 +1,7 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
 
-const baseApi = `${BASE_API}/treatment`
+const baseApi = `${BASE_API}/bagCollection`
 
 function get(params = {}) {
   return request({
@@ -9,18 +9,16 @@ function get(params = {}) {
     params,
   })
 }
-
-function getById(id) {
-  return request({
-    url: `${baseApi}/${id}`,
-  })
-}
-
 function create(data) {
   return request({
     url: `${baseApi}`,
     data,
     method: 'POST',
+  })
+}
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
   })
 }
 
@@ -32,18 +30,18 @@ function update(id, data) {
   })
 }
 
-function detail(id) {
+function destroy(id) {
   return request({
-    url: `${baseApi}/detail/${id}`,
+    url: `${baseApi}/${id}`,
+    method: 'DELETE',
   })
 }
-
-const TreatmentServices = {
+const BagCollectionServices = {
   get,
   create,
-  getById,
+  destroy,
   update,
-  detail,
+  getById,
 }
 
-export default TreatmentServices
+export default BagCollectionServices

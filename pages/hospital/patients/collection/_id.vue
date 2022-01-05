@@ -6,8 +6,7 @@
     :create="false"
   >
     <template slot="content">
-      {{ entity }}
-      <detail :patient="entity" />
+      <detail :treatment="entity" />
     </template>
   </page-layout>
 </template>
@@ -15,15 +14,24 @@
 <script>
 import detail from '~/pages/hospital/details'
 import PageLayout from '~/components/layout/PageLayout'
-import withCrud from '~/mixins/with-crud'
-import PatientServices from '~/services/API/PatientServices'
+import withFetch from '~/mixins/with-fetch'
+import TreatmentServices from '~/services/API/TreatmentServices'
+
 export default {
   components: { detail, 'page-layout': PageLayout },
-  mixins: [withCrud],
+  mixins: [withFetch],
   middleware: 'auth',
   data() {
-    return { apiService: PatientServices,fetchMethod:PatientServices.getById }
+    return {
+      apiService: TreatmentServices,
+      fetchMethod: TreatmentServices.detail,
+    }
   },
   mounted() {},
+  methods: {
+    afterFetch(data) {
+      console.log(data)
+    },
+  },
 }
 </script>

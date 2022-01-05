@@ -1,3 +1,5 @@
+import { BASE_URL } from '~/services/Constant/index'
+
 export const isEmpty = (value, depth = 1, level = 0) => {
   if (level === depth) {
     return false
@@ -74,4 +76,8 @@ export function isArray(v) {
 
 export function preventDefault(e) {
   e.preventDefault()
+}
+
+export function getAbsolutePath(url) {
+  return `${BASE_URL}/${url}`
 }

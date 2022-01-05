@@ -43,64 +43,29 @@
     }
   }
 
-  .patient-timeline {
-    text-align: right;
-
-    a.btn {
-      padding: 4px 8px;
-      border: 0;
-      font-size: 12px;
-      color: #233151;
-      border-radius: 22px;
-    }
-    a.btn-timeline-success {
-      background-color: #d1f2dc;
-      &::before {
-        content: '';
-        background-size: 100%;
-        height: 28px;
-        width: 28px;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 5px;
-        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle-background.svg');
-      }
-    }
-    .sep-line,
-    .sep-line-success,
-    .sep-line-disabled {
-      max-width: 20px;
-      width: 100%;
-      height: 1px;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .sep-line-success {
-      background-color: #1bb558;
-    }
-    .sep-line-disabled {
-      background-color: #bebfcb;
-    }
-    .btn-outline-secondary {
-      color: #6c757d;
-      background-image: none;
-      border-color: #6c757d;
-      background-color: #fbfbfb;
-      &::before {
-        margin-right: 5px;
-        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
-        content: '';
-        background-size: 28px;
-        height: 28px;
-        width: 28px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-    }
-  }   
-
   .ant-spin-nested-loading{
     margin-top: 3rem;
   }
 
+  .patient-table {
+    .ant-table{
+      overflow-x: auto;
+    }
+  }
+
+  div::-webkit-scrollbar {
+    background-color: #fff;
+    width: 8px;
+  }
+  div::-webkit-scrollbar-track {
+      background-color: #fff;
+  }
+  div::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 10px;
+    border: 6px solid #fff;
+  }
+  div::-webkit-scrollbar-button {
+    display:none;
+  }
 }
