@@ -91,11 +91,9 @@
           />
         </a-form-item>
       </a-col>
-      <a-col :span="12">
+      <a-col :span="22">
         <a-form-item
           label="Office Address"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
         >
           <a-input
             v-decorator="[

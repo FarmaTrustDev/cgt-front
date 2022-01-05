@@ -1,7 +1,13 @@
 <template>
-  <page-layout :create="false" :loading="loading" title="Users">
+  <page-layout :create="false" :loading="loading" :bordered="false" :back="false">
     <template slot="content">
-      <formField />
+      <div class="grey-card">
+        <a-card :bordered="false" class="default-border-radius">
+          <h2>Add User Details</h2>
+          <formField class="mt-15" />
+        </formField>
+      </a-card>
+    </div>
     </template>
   </page-layout>
 </template>
