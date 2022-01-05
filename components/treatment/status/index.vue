@@ -1,10 +1,12 @@
 <template>
   <a-row :gutter="18" class="mt-15">
     <a-card :bordered="false" class="default-card">
-      <a-tabs type="card" tab-position="left">
-        <a-tab-pane key="1" tab="Scheduling"> Scheduling </a-tab-pane>
+      <a-tabs type="card" active-key="2" tab-position="left">
+        <a-tab-pane key="1" tab="Scheduling">
+          <scheduling :treatment="treatment" />
+        </a-tab-pane>
         <a-tab-pane key="2" tab=" Collect Samples">
-          Collect Samples
+          <collections :treatment="treatment" />
         </a-tab-pane>
         <a-tab-pane key="3" tab=" Shipping Details">
           Shipping Details</a-tab-pane
@@ -18,8 +20,16 @@
   </a-row>
 </template>
 <script>
+import scheduling from '~/components/treatment/enrollment/scheduling'
+import collections from '~/components/treatment/collections'
 export default {
-  props: {},
+  components: { scheduling, collections },
+  props: {
+    treatment: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {}
   },
