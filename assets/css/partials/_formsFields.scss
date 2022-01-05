@@ -55,12 +55,13 @@
 
 .page-search-input {
   width: 20%;
-  border: 1px solid #BEBFCB;
   border-radius: 44px;
   height: 45px;
   right: 20px;
+  margin-top:5px;
   input{
     height: 45px;
+    border: 1px solid #BEBFCB;
   }
   .ant-input-prefix{
     font-size: 16px;

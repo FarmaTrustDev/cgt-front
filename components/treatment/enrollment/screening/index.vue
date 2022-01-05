@@ -7,7 +7,7 @@
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
           <!-- <a-button type="primary" class="w-100 btn-complete-category">Complete screening results for {CATEGORYNAME} group</a-button> -->
-          <FormActionButton :disabled="isCreated" />
+          <FormActionButton :disabled="isCreated" class="mt-15" />
         </span>
       </a-skeleton>
     </a-form>

@@ -11,6 +11,22 @@
       <template slot="name" slot-scope="name">
         {{ name.first }} {{ name.last }}
       </template>
+
+      <template slot="status" slot-scope="status">
+        <span :class="'status status-'+status.toLowerCase()">{{ status }}</span>
+      </template>
+
+      <template slot="supportAction">
+        <a-dropdown :trigger="['click']">
+        <a-button class="action-button">
+         Admin <a-icon type="down" />
+        </a-button>
+        <a-menu slot="overlay">
+          <a-menu-item key="0"><a-icon type="plus" /> Update Ticket </a-menu-item>
+        </a-menu>
+      </a-dropdown>
+      </template>
+
     </a-table>
   </div>
 </template>
@@ -53,13 +69,59 @@
           {
             title: 'Status',
             dataIndex: 'status',
+             scopedSlots: { customRender: 'status' }
           },
           {
             title: 'Actions',
             dataIndex: 'actions',
+            scopedSlots: { customRender: 'supportAction' },
           },
         ],
-        data: [],
+        data: [{
+          'date' : '2021-10-11',
+          'ticketId' : 'CDK-190',
+          'name' : 'John DOE',
+          'bagId' : '123',
+          'issueDetails' : '2021-10-11',
+          'lastUpdate' : '2021-10-11',
+          'status' : 'InProcess'
+        },
+        {
+          'date' : '2021-10-11',
+          'ticketId' : 'CDK-190',
+          'name' : 'John DOE',
+          'bagId' : '123',
+          'issueDetails' : '2021-10-11',
+          'lastUpdate' : '2021-10-11',
+          'status' : 'Cancelled'
+        },
+        {
+          'date' : '2021-10-11',
+          'ticketId' : 'CDK-190',
+          'name' : 'John DOE',
+          'bagId' : '123',
+          'issueDetails' : '2021-10-11',
+          'lastUpdate' : '2021-10-11',
+          'status' : 'Archived'
+        },
+        {
+          'date' : '2021-10-11',
+          'ticketId' : 'CDK-190',
+          'name' : 'John DOE',
+          'bagId' : '123',
+          'issueDetails' : '2021-10-11',
+          'lastUpdate' : '2021-10-11',
+          'status' : 'Pause'
+        },
+        {
+          'date' : '2021-10-11',
+          'ticketId' : 'CDK-190',
+          'name' : 'John DOE',
+          'bagId' : '123',
+          'issueDetails' : '2021-10-11',
+          'lastUpdate' : '2021-10-11',
+          'status' : 'Resolved'
+        }],
         loading: false,
       }
     },

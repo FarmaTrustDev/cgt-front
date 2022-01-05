@@ -1,14 +1,17 @@
 <template>
   <div class="support-page">
 
-    <a-row class="p-10 mt-15 mb-15">
-      <a-col :span="12">
-        <h3 class="page-title">Support Issues</h3>
-      </a-col>
-      <a-col :span="12" class="text-right">
-        <a-button type="primary" @click="showModal()">Add New Ticket</a-button>
-      </a-col>
+    <a-row class="p-10 mb-10">
+      <div class="page-header">
+        <h3 class="page-title float-left">Support Issues</h3>
+        <a-button type="primary" class="mrm-5 float-right" @click="showModal()">Add New Ticket</a-button>
+        <a-input ref="userNameInput" placeholder="Search" class="float-right page-search-input">
+          <a-icon slot="prefix" type="search" />
+        </a-input>
+      </div>
     </a-row>
+
+
 
     <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" tab="All">

@@ -104,6 +104,7 @@
 
       <a-row :gutter="20">
         <a-col :span="12">
+          <a-form-item>
           <a-select
             v-decorator="[
               'status',
@@ -133,6 +134,7 @@
           </a-form-item>
         </a-col>
         <a-col :span="12">
+          <a-form-item>
           <a-select
             v-decorator="[
               'priority',
@@ -164,6 +166,7 @@
       </a-row>
       <a-row :gutter="20" class="mt-15">
         <a-col>
+          <a-form-item>
           <a-select
             v-decorator="[
               'stakholders',

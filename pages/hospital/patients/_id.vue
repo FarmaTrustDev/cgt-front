@@ -1,5 +1,5 @@
 <template>
-  <page-layout title="Patients Enrollment" class="patient-page" :create="false">
+  <page-layout class="patient-page" :create="false" :bordered="false" :back="false">
     <template slot="content">
       <div class="grey-card enrollment-page">
         <a-card :bordered="false" class="default-border-radius">

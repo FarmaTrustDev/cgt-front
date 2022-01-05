@@ -29,3 +29,30 @@
 .float-left{
 	float:left;
 }
+
+.status {
+	padding: 13px 15px;
+	font-size: 14px;
+	border-radius: 10rem;
+}
+
+.status-inprocess{
+	background-color: #ecf6fd;
+}
+
+.status-resolved{
+	background-color: #d1f2dd;
+}
+
+.status-pause{
+	background-color: #ffdd61
+}
+
+.status-archived{
+	background-color: #f3e5f4;
+}
+
+.status-cancelled {
+	background-color: #ff8361;
+}
+

@@ -6,7 +6,7 @@
       <a-col :span="12">
         <h3 class="page-title">Select Treatment Type</h3>
       </a-col>
-
+ 
       <a-col :span="12">
         <a-form-item>
           <a-select
@@ -41,6 +41,12 @@
 
       </a-col>
 
+    </a-row>
+
+    <a-row v-if="!treatmentTypes">
+      <a-col class="empty-message">
+        Select the treatment type to get patient screenings
+      </a-col>
     </a-row>
 
 
