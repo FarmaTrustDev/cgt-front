@@ -1,7 +1,12 @@
 <template>
   <a-row :gutter="18" class="mt-15">
     <a-card :bordered="false" class="default-card">
-      <a-tabs type="card" active-key="2" tab-position="left">
+      <a-tabs
+        :active-key="activeTab"
+        type="card"
+        tab-position="left"
+        @change="callback"
+      >
         <a-tab-pane key="1" tab="Scheduling">
           <scheduling :treatment="treatment" />
         </a-tab-pane>
@@ -31,11 +36,13 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      activeTab: 2,
+    }
   },
   methods: {
     callback(key) {
-      console.log(key)
+      this.activeTab = key
     },
   },
 }

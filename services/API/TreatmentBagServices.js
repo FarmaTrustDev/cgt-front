@@ -34,12 +34,20 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
+
+function getByTreatmentId(id, params = {}) {
+  return request({
+    url: `${baseApi}/treatment/${id}`,
+    params,
+  })
+}
 const TreatmentBagServices = {
   get,
   create,
   destroy,
   put,
-  getById
+  getById,
+  getByTreatmentId,
 }
 
 export default TreatmentBagServices

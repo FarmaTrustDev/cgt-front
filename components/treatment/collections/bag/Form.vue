@@ -15,6 +15,7 @@
 import FormFields from '~/components/treatment/collections/bag/FormField'
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import withCrud from '~/mixins/with-crud'
+
 export default {
   components: { FormFields },
   mixins: [withCrud],
@@ -25,11 +26,10 @@ export default {
       form: this.$form.createForm(this, {
         name: 'bagCreate',
       }),
-      apiService: TreatmentBagServices,
+      apiService: TreatmentBagServices.getByTreatmentId,
       fetchIdFromParams: false,
     }
   },
-  mounted() {},
-  methods: {},
+ 
 }
 </script>
