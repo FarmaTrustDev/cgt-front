@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <a-skeleton :loading="loading">
     <FormActionButton text="Add Sample" @click="addBags" />
     <Bag :bags="bags" :treatment="treatment" />
 
@@ -9,9 +9,9 @@
       title="Add Bag"
       @cancel="handleModal(false)"
     >
-      <BagForm :treatment="treatment" />
+      <BagForm :treatment="treatment" @onCreate="onCreate" />
     </a-modal>
-  </div>
+  </a-skeleton>
 </template>
 <script>
 import BagForm from '~/components/treatment/collections/bag/create/Form'
@@ -28,10 +28,11 @@ export default {
       fetchIdFromParams: false,
       bags: [],
       COLLECTION_TYPE,
+      loading: true,
     }
   },
   mounted() {
-    this.fetchOnMount()
+    this.fetchBags()
   },
   methods: {
     handleModal(show) {
@@ -41,14 +42,21 @@ export default {
       this.handleModal(true)
     },
     isEmpty,
-    fetchOnMount() {
+    fetchBags() {
       if (!isEmpty(this.treatment)) {
+        this.loading = true
         TreatmentBagServices.getByTreatmentId(this.treatment.id, {
           type: COLLECTION_TYPE.hospital.id,
-        }).then((response) => {
-          this.bags = response.data
         })
+          .then((response) => {
+            this.bags = response.data
+          })
+          .finally((this.loading = false))
       }
+    },
+    onCreate(data) {
+      this.handleModal(false)
+      this.fetchBags()
     },
   },
 }

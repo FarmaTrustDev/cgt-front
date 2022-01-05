@@ -4,7 +4,7 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <FormFields :treatment="treatment" />
         <a-form-item>
-          <FormActionButton />
+          <FormActionButton :loading="loading" />
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
         </a-form-item>
       </a-form>
@@ -26,10 +26,14 @@ export default {
       form: this.$form.createForm(this, {
         name: 'bagCreate',
       }),
-      apiService: TreatmentBagServices.getByTreatmentId,
+      apiService: TreatmentBagServices,
       fetchIdFromParams: false,
     }
   },
- 
+  methods: {
+    afterCreate(response) {
+      this.$emit('onCreate', response)
+    },
+  },
 }
 </script>

@@ -5,7 +5,7 @@
       :loading="loading"
       :type="btnType"
       html-type="submit"
-      :disabled="disabled"
+      :disabled="disabled || loading"
       @click="submit"
     >
       <slot name="icon" />{{ getText() }}</a-button
