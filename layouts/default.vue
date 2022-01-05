@@ -13,9 +13,9 @@
           <Nuxt />
         </div>
       </a-layout-content>
-      <a-layout-footer style="text-align: center">
+      <!-- <a-layout-footer style="text-align: center">
         CGT ©2022 Created by Hataali
-      </a-layout-footer>
+      </a-layout-footer> -->
     </a-layout>
   </a-layout>
 </template>

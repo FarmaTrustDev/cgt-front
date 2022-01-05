@@ -4,7 +4,6 @@
     class="sidebar"
     width="265"
     theme="light"
-    collapsible
   >
     <div class="logo-container">
       <nuxt-link to="/">

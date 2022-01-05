@@ -19,7 +19,7 @@
             />
           </a-form-item>
           <a-form-item label="Password">
-            <a-input
+            <a-input-password
               v-decorator="[
                 'password',
                 {
