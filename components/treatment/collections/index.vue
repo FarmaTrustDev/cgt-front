@@ -7,9 +7,10 @@
       :footer="false"
       :visible="showModal"
       title="Add Bag"
+      :destroy-on-close="true"
       @cancel="handleModal(false)"
     >
-      <BagForm :treatment="treatment" @onCreate="onCreate" />
+      <BagForm :loading="loading" :treatment="treatment" @onCreate="onCreate" />
     </a-modal>
   </a-skeleton>
 </template>
@@ -56,7 +57,8 @@ export default {
     },
     onCreate(data) {
       this.handleModal(false)
-      this.fetchBags()
+      // this.fetchBags()
+      this.bags = data.data
     },
   },
 }

@@ -4,6 +4,7 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <FormFields :treatment="treatment" />
         <a-form-item>
+          {{ loading }}
           <FormActionButton :loading="loading" />
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
         </a-form-item>
@@ -28,11 +29,18 @@ export default {
       }),
       apiService: TreatmentBagServices,
       fetchIdFromParams: false,
+      loading: false,
     }
   },
   methods: {
+    beforeUpsert(data) {
+      console.log('beforeUpsert', data)
+      this.loading = true
+    },
     afterCreate(response) {
+      console.log('afterCreate', response)
       this.$emit('onCreate', response)
+      this.loading = false
     },
   },
 }
