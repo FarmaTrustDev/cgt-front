@@ -14,9 +14,9 @@
         </a-tab-pane>
         <a-tab-pane :key="3" :disabled="!haveTreatment" tab="Screening"
           ><screening
+            :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
-            :treatment="treatment"
           />
         </a-tab-pane>
         <a-tab-pane
