@@ -2,41 +2,25 @@
   <div>
     <a-tabs type="card" @change="callback">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
-        {{ bag.collection }}
+        <Process :collections="bag.collection" />
       </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 <script>
-import { isEmpty } from '~/services/Utilities'
-import TreatmentBagServices from '~/services/API/TreatmentBagServices'
-import { COLLECTION_TYPE } from '~/services/Constant'
+import Process from '~/components/treatment/collections/bag/Process'
 export default {
-  props: { treatment: { required: true, type: Object } },
+  components: { Process },
+  props: {
+    treatment: { required: true, type: Object },
+    bags: { required: true, type: Array },
+  },
   data() {
-    return {
-      COLLECTION_TYPE,
-      bags: [],
-      //   apiService: TreatmentBagServices,
-      //   fetchIdFromParams: false,
-    }
+    return {}
   },
-  mounted() {
-    this.fetchOnMount()
-  },
+  mounted() {},
   methods: {
-    callback(key) {
-      console.log(key)
-    },
-    fetchOnMount() {
-      if (!isEmpty(this.treatment)) {
-        TreatmentBagServices.getByTreatmentId(this.treatment.id, {
-          type: COLLECTION_TYPE.hospital.id,
-        }).then((response) => {
-          this.bags = response.data
-        })
-      }
-    },
+    callback(key) {},
   },
 }
 </script>
