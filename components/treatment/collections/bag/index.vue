@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-tabs @change="callback">
+    <a-tabs type="card" @change="callback">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
         {{ bag.collection }}
       </a-tab-pane>

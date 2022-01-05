@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import FormFields from '~/components/treatment/collections/bag/FormField'
+import FormFields from '~/components/treatment/collections/bag/create/FormField'
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import withCrud from '~/mixins/with-crud'
 

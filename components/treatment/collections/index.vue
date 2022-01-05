@@ -2,6 +2,7 @@
   <div>
     <FormActionButton text="Add Sample" @click="addBags" />
     <Bag :treatment="treatment" />
+
     <a-modal
       :footer="false"
       :visible="showModal"
@@ -13,7 +14,7 @@
   </div>
 </template>
 <script>
-import BagForm from '~/components/treatment/collections/bag/Form'
+import BagForm from '~/components/treatment/collections/bag/create/Form'
 import Bag from '~/components/treatment/collections/bag'
 export default {
   components: { BagForm, Bag },
