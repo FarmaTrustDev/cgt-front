@@ -15,7 +15,17 @@
     color: #909090;
     background-color: #fff;
     border-radius: 44px;
-  
+    
+     img {
+      background-color:#f9f9f9;
+      vertical-align: middle;
+      border-style: none;
+      max-width: 72px;
+      max-height: 85px;
+      padding: 13px;
+      border-radius: 22px;
+    }
+
     &::before{
       content: ">";
       right: 20px;
@@ -39,6 +49,10 @@
       h4{
         color: #fff;
       }
+      img{
+        transition: transform .8s ease-in-out,background-color .3s ease-in-out,color .3s ease-in-out;
+        background: #4B7ADF;
+      }
     }
   
     .heading-home, .heading-admin {
@@ -46,26 +60,17 @@
       flex-flow: column;
       vertical-align: middle;
       margin-left: 10px;
-      padding-left: 10px
+      padding-left: 10px;
+      font-size: 15px;
     }
-    img {
-      background-color:#f9f9f9;
-      vertical-align: middle;
-      border-style: none;
-      max-width: 72px;
-      max-height: 85px;
-      padding: 13px;
-      border-radius: 22px;
-      &:hover{
-        transition: transform .8s ease-in-out,background-color .3s ease-in-out,color .3s ease-in-out;
-      }
-    }
+
+
   }
   
   .home-stats-head {
     height: 120px;
     margin: 15px auto;
-    border-radius: 22px;
+    border-radius: 30px;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     transition: transform .8s ease-in-out,background-color .3s ease-in-out,color .3s ease-in-out,background-image .3s ease-in-out;
     background-image: url("https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg");
@@ -142,5 +147,7 @@
   .chartjs-render-monitor{
     height: 80px !important;
   }
-
+  .ant-select-selection__placeholder, .ant-select-search__field__placeholder {
+    left: 10px;
+  }
 }

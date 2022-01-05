@@ -1,17 +1,26 @@
 <template>
-  <page-layout :loading="loading" title="Patients List" :bordered="borderCard" :back="false" class="patient-page">
-    <template slot="content">
+<div>
+
+  <div class="page-header">
+    <h3 class="page-title pl-5 float-left">Patient List</h3>
+    <a-button type="primary" class="mrm-5 float-right">Add New Patient</a-button>
+    <a-input ref="userNameInput" placeholder="Search" class="float-right page-search-input">
+      <a-icon slot="prefix" type="search" />
+    </a-input>
+  </div>
+  <div class="patient-page" >
       <standardTable
         :columns="column"
         :api-service="PatientServices"
         :action-link="ActionLink"
         :rounded="true"
       />
-    </template>
-  </page-layout>
+  </div>
+
+</div>
 </template>
 <script>
-import PageLayout from '~/components/layout/PageLayout'
+
 import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
 const column = [
@@ -24,6 +33,7 @@ const column = [
     title: 'Patient Name',
     dataIndex: 'name',
     key: 'name',
+    scopedSlots : {customRender: 'name'}
   },
   {
     title: 'Age',
@@ -41,7 +51,7 @@ const column = [
     key: 'treatment_status',
     slots: { title: 'customTitle' },
     scopedSlots: { customRender: 'treatment_status' },
-    width: '55%',
+    width:'70%'
   },
   {
     title: 'Action',
@@ -51,7 +61,7 @@ const column = [
 ]
 const ActionLink = '/hospital/patients'
 export default {
-  components: { 'page-layout': PageLayout, standardTable },
+  components: { standardTable },
   data() {
     return {
       column,

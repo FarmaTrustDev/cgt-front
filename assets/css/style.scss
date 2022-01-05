@@ -26,9 +26,12 @@
 @import './components/admin';
 @import './components/patient-details';
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap');
 
 body {
   background-color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
 }
 
 .profile-grey-bg {
@@ -95,6 +98,9 @@ a {
     }
   }
 }
+.page-header {
+  margin-top: 3rem;
+}
 .page-title{
   font-size: 25px;
   font-weight: 600;
@@ -106,4 +112,13 @@ a {
  .ant-card-head{
     border-bottom: none;
   }
+}
+.vertical-line {
+  position: absolute;
+  width: 20px;
+  height: 0;
+  border: 1px solid #e9e9e9;
+  transform: rotate(90deg);
+  margin-top: 20px;
+  margin-left: -20px;
 }

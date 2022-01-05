@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <h1 class="title">My Dashboard</h1>
+    <h1 class="title"><strong>My Dashboard</strong></h1>
     <a-card class="grey-card" :bordered="false">
 
       <a-row>

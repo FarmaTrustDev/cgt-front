@@ -52,3 +52,17 @@
   background-color: #2255C2;
   border-color: #2255C2;
 }
+
+.page-search-input {
+  width: 20%;
+  border: 1px solid #BEBFCB;
+  border-radius: 44px;
+  height: 45px;
+  right: 20px;
+  input{
+    height: 45px;
+  }
+  .ant-input-prefix{
+    font-size: 16px;
+  }
+}

@@ -2,10 +2,14 @@
   <a-table
     :loading="loading"
     :columns="columns"
-    :pagination="pagination"
     :data-source="data"
     :class="{'rounded-table' : rounded}"
   >
+
+    <template slot="name" slot-scope="name">
+      <strong>{{name}}</strong>
+    </template>
+
     <span slot="treatment_status" slot-scope="text, record">
       <!-- <div class="patient-timeline">
         <a class="btn btn-timeline-success btn-icon-sm" href="">Screening</a>
@@ -24,27 +28,40 @@
 
       <div class="treatment-steps">
         <span v-for="treatment in record.treatments" :key="treatment.id">
-          <span class="treatment-name-col">{{
-            treatment.treatmentTypeName
-          }}</span>
-          <span class="step-col"
-            ><a-steps :current="getCurrentStep(treatment)" size="small">
+          <!-- <span class="treatment-name-col">
+
+          </span> -->
+          <span class="step-col">
+            <span class="treatment-name-col">{{treatment.treatmentTypeName}}</span>
+            <a-steps :current="getCurrentStep(treatment)" size="small">
               <a-step title="Screening" @click="stepClick(record, treatment)" />
+              <span class="sep-line sep-line-active"></span>
               <a-step
                 title="Scheduling"
                 @click="stepClick(record, treatment)"
               />
+              <span class="sep-line"></span>
               <a-step
+                class="ant-steps-item-active"
                 title="Collection"
                 @click="stepClick(record, treatment)"
               />
+              <span class="sep-line"></span>
               <a-step title="Shipment" @click="stepClick(record, treatment)" />
+              <span class="sep-line"></span>
               <a-step title="Treatment" @click="stepClick(record, treatment)" />
+              <span class="sep-line"></span>
               <a-step
                 title="After care"
                 @click="stepClick(record, treatment)"
               /> </a-steps
-          ></span>
+          >
+
+          <a-button class="btn-view-timeline" type="primary" size="small">View</a-button>
+        </span>
+
+
+
         </span>
       </div>
     </span>
@@ -83,7 +100,7 @@
     <span slot="patientAction" slot-scope="text, record">
       <a-dropdown :trigger="['click']">
         <a-button class="action-button" @click="preventDefault">
-          <b><a-icon type="more" /></b>
+          Admin <a-icon type="down" />
         </a-button>
         <a-menu slot="overlay">
           <a-menu-item key="0">
