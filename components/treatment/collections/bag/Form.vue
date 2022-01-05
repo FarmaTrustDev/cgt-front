@@ -13,7 +13,7 @@
 </template>
 <script>
 import FormFields from '~/components/treatment/collections/bag/FormField'
-import BagCollectionServices from '~/services/API/BagCollectionServices'
+import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import withCrud from '~/mixins/with-crud'
 export default {
   components: { FormFields },
@@ -25,7 +25,7 @@ export default {
       form: this.$form.createForm(this, {
         name: 'bagCreate',
       }),
-      apiService: BagCollectionServices,
+      apiService: TreatmentBagServices,
       fetchIdFromParams: false,
     }
   },

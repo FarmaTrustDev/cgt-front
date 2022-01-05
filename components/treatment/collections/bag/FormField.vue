@@ -67,6 +67,7 @@
             ],
           },
         ]"
+        type="hidden"
       ></a-input>
     </a-form-item>
   </div>

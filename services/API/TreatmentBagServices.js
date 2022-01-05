@@ -34,7 +34,7 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
-const BagCollectionServices = {
+const TreatmentBagServices = {
   get,
   create,
   destroy,
@@ -42,4 +42,4 @@ const BagCollectionServices = {
   getById
 }
 
-export default BagCollectionServices
+export default TreatmentBagServices
