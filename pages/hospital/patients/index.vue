@@ -24,6 +24,8 @@
 
 import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
+
+
 const column = [
   {
     title: 'Patient ID',
@@ -41,18 +43,14 @@ const column = [
     dataIndex: 'age',
     key: 'age',
   },
-  // {
-  //   title: 'Treatment Type',
-  //   dataIndex: 'treatment_type',
-  //   key: 'treatment_type',
-  // },
   {
-    title: 'Treatment Status',
+    // title: 'Treatment Status',
     dataIndex: 'treatment_status',
     key: 'treatment_status',
     slots: { title: 'customTitle' },
     scopedSlots: { customRender: 'treatment_status' },
-    width:'65%'
+    width:'65%',
+    class : 'treatment-status-col'
   },
   {
     title: 'Action',

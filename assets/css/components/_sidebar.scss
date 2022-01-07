@@ -68,10 +68,20 @@
 
 .logout-menu
 {
+  position: absolute;
+  z-index: 999999999;
+  top: 50px;
+  left: 30px;
   .menu-container{
-    background-color: $primary-color;
+    background-color: #3869d1;
     color: white;
-    margin-top: 25px;
+    padding: 18px 12px;
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    font-size: 14px;
+    border-radius: 22px;
+    max-width: 150px;
   }
 }
 
@@ -165,4 +175,7 @@
 
 .main-section {
   border-left: 1px solid #e8e8e8 !important;
+}
+.ant-layout.ant-layout-has-sider {
+  height: 100vh;
 }

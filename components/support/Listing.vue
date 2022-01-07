@@ -7,6 +7,7 @@
       :loading="loading"
       @change="handleTableChange"
       class="rounded-table"
+      :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
     >
       <template slot="name" slot-scope="name">
         {{ name.first }} {{ name.last }}

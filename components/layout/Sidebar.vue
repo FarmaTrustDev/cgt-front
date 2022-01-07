@@ -25,7 +25,7 @@
         </a-menu-item>
         <a-menu-item key="10" @click="logout" class="logout-menu">
           <div class="menu-container">
-            <a-icon type="logout" /> <span class="title">Logout</span>
+            <img :src="logoutImg"> <span class="title">Logout</span>
           </div>
         </a-menu-item>
       </a-menu>
@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       collapsed: false,
+      logoutImg : "https://cgt-dev-ft.microsysx.com/images/v2/icons/logout.svg?0.229"
     }
   },
   computed: {

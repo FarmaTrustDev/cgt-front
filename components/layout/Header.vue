@@ -11,9 +11,9 @@
       <div class="notifications">
         <a-dropdown :trigger="['click']">
         <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-          <a-icon type="bell" />
+          <a-icon type="bell" theme="filled" />
         </a>
-        <a-menu slot="overlay">
+        <a-menu slot="overlay" class="notifications-dropdown">
           <a-menu-item key="0">
             Notifications here 
           </a-menu-item>

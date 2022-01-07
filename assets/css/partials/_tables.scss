@@ -86,4 +86,30 @@
     font-weight: bold;
   }
 
+  .ant-pagination {
+    width: 100%;
+    .ant-pagination-options {
+      float: left;
+      width: 85%;
+      .ant-select{
+        border-radius: 44px;
+        border: 1px solid #E9E9E9;
+        .ant-select-selection{
+          width: 150px;
+          text-align: center;
+          vertical-align: middle;
+          border-radius: 44px;
+          height: 48px;
+        }
+        .ant-select-selection__rendered{
+          height: 100%;
+          width: 100%;
+          text-align: center;
+          padding-top: 7px;
+          padding-left: 19px;
+        }
+      }
+    }
+  }
+
 }

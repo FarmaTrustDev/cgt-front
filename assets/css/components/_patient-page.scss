@@ -68,4 +68,14 @@
   div::-webkit-scrollbar-button {
     display:none;
   }
+
+  .treatment-status-col{
+    .ant-table-header-column{
+      width: 100%;
+    }
+    .treatment-title {
+      display: inline-block;
+      width: 49%;
+    }
+  }
 }

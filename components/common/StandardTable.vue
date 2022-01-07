@@ -1,30 +1,24 @@
 <template>
   <a-table
     :loading="loading"
+    :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
     :columns="columns"
     :data-source="data"
     :class="{ 'rounded-table': rounded, 'patient-table' : patient }"
   >
+
+    <template slot='customTitle'>
+      <div class="text-left treatment-title" >Treatment Type</div>
+      <div class="text-left treatment-title">Treatment Status</div>
+    </template>
 
     <template slot="name" slot-scope="name">
       <strong>{{name}}</strong>
     </template>
 
     <span slot="treatment_status" slot-scope="text, record">
-      <!-- <div class="patient-timeline">
-        <a class="btn btn-timeline-success btn-icon-sm" href="">Screening</a>
-        <span class="sep-line-success"></span>
-        <a class="btn btn-timeline-success btn-icon-sm" href="">Scheduling</a>
-        <span class="sep-line-disabled"></span>
-        <a class="btn btn-outline-secondary disabled">Collection</a>
+      
 
-        <span class="ml-0 line"></span>
-        <a
-          class="link ml-2 viewBtn p-15 btn-secondry"
-          :href="`${actionLink}/${record.globalId}`"
-          >View</a
-        >
-      </div> -->
 
       <div class="treatment-steps">
         <span v-for="treatment in record.treatments" :key="treatment.id">

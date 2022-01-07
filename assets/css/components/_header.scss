@@ -42,9 +42,16 @@ header.ant-layout-header {
   .notifications{
     margin-right: 20px;
     color: black;
+    padding-top: 3px;
     .anticon {
       font-size: 1.5rem;
       color: black;
     }
+  }
+}
+.notifications-dropdown {
+  .ant-dropdown-menu-item {
+    padding: 0.25rem 1.5rem;
+    width: 300px;
   }
 }

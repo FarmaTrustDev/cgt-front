@@ -5,6 +5,7 @@
         :columns="columns"
         :data-source="datasource"
         class="rounded-table"
+        :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
       >
         <template slot="action" slot-scope="action">
           <a-button type="link" @click="goto(`/users/${action.globalId}`)"
