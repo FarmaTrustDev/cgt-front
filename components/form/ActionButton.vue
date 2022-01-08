@@ -25,6 +25,7 @@ export default {
     btnType: { default: 'primary', type: String },
     loading: { default: false, type: Boolean },
     disabled: { default: false, type: Boolean },
+    customText: {default : null, type: String}
   },
   data() {
     return {}
@@ -37,7 +38,7 @@ export default {
         }
         return 'Update'
       }
-      return this.text
+      return this.customText !== null ? this.customText : this.text
     },
     submit() {
       this.$emit('click')

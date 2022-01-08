@@ -1,14 +1,14 @@
 <template>
   <div>
-    <a-spin :spinning="loading">
+    <!-- <a-spin :spinning="loading"> -->
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <FormFields :patient="patient" />
-        <a-form-item>
-          <FormActionButton :is-created="isCreated" />
+        <a-form-item class="pr-2 mt-15">
+          <FormActionButton :is-created="isCreated" custom-text="Save Patient & Continue" />
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
         </a-form-item>
       </a-form>
-    </a-spin>
+    <!-- </a-spin> -->
   </div>
 </template>
 <script>

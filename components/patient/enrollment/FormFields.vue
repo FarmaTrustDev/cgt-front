@@ -3,9 +3,9 @@
     <a-row>
       <a-col :span="12">
         <a-form-item
-          label="First Name"
+          label="First Name*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -25,9 +25,9 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Last Name"
+          label="Last Name*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -48,9 +48,9 @@
       </a-col>
       <a-col :span="8">
         <a-form-item
-          label="Email address"
+          label="Email address*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -68,9 +68,9 @@
 
       <a-col :span="8">
         <a-form-item
-          label="Phone"
+          label="Phone*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -92,7 +92,7 @@
       </a-col>
       <a-col :span="8">
         <a-form-item
-          label="Date of Birth"
+          label="Date of Birth*:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -120,7 +120,7 @@
         <a-form-item
           label="Gender"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-select
             v-decorator="[
@@ -150,7 +150,7 @@
         <a-form-item
           label="Blood Type"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-select
             v-decorator="[
@@ -202,7 +202,111 @@
       </a-col>
       <a-col :span="24">
         <a-form-item
-          label="Problem"
+          label="Active Problems"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-textarea
+            v-decorator="[
+              'problem',
+              {
+                initialValue: patient.problem,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Problem',
+                  },
+                ],
+              },
+            ]"
+            :auto-size="{ minRows: 3, maxRows: 5 }"
+            placeholder="Please input your Problem"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="24">
+        <a-form-item
+          label="Medication"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-textarea
+            v-decorator="[
+              'problem',
+              {
+                initialValue: patient.problem,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Problem',
+                  },
+                ],
+              },
+            ]"
+            :auto-size="{ minRows: 3, maxRows: 5 }"
+            placeholder="Please input your Problem"
+          />
+        </a-form-item>
+      </a-col>
+
+      <a-col :span="12">
+        <a-form-item
+          label="Post Code:"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+        >
+          <a-input
+            v-decorator="[
+              'postCode',
+              {
+                initialValue: patient.postCode,
+                rules: [
+                  { required: true, message: 'Please input your Post Code!' },
+                ],
+              },
+            ]"
+            placeholder="Please input your Post Code"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="City*:"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+        >
+          <a-input
+            v-decorator="[
+              'City',
+              {
+                initialValue: patient.city,
+                rules: [{ required: true, message: 'Please input your City!' }],
+              },
+            ]"
+            placeholder="Please input your City"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="24">
+        <a-form-item
+          label="Post Code Address:"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+        >
+          <a-input
+            v-decorator="[
+              'postCode',
+              {
+                initialValue: patient.postCode,
+                rules: [
+                  { required: true, message: 'Please input your Post Code!' },
+                ],
+              },
+            ]"
+            placeholder="Please input your Post Code Address"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="24">
+        <a-form-item
+          label="Street Number*:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -226,26 +330,9 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="City"
+          label="County*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-        >
-          <a-input
-            v-decorator="[
-              'City',
-              {
-                initialValue: patient.city,
-                rules: [{ required: true, message: 'Please input your City!' }],
-              },
-            ]"
-            placeholder="Please input your City"
-          /> </a-form-item
-      ></a-col>
-      <a-col :span="12">
-        <a-form-item
-          label="County"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -266,28 +353,9 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Post Code"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-        >
-          <a-input
-            v-decorator="[
-              'postCode',
-              {
-                initialValue: patient.postCode,
-                rules: [
-                  { required: true, message: 'Please input your Post Code!' },
-                ],
-              },
-            ]"
-            placeholder="Please input your Post Code"
-          /> </a-form-item
-      ></a-col>
-      <a-col :span="12">
-        <a-form-item
           label="Country"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
