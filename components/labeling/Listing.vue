@@ -10,7 +10,7 @@
       :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
     >
       <template slot="name" slot-scope="name">
-        {{ name.first }} {{ name.last }}
+        <strong>{{ name }}</strong>
       </template>
 
       <template slot="print" slot-scope="print">
@@ -40,6 +40,7 @@
           {
             title: 'Patient Name',
             dataIndex: 'name',
+            scopedSlots: { customRender: 'name' },
           },
           {
             title: 'Age',
@@ -56,11 +57,11 @@
           }
         ],
         data: [{
-          'uuid' : '12',
-          'patient_id' : 1,
-          'name' : 'Test',
-          'age' : '10',
-          'treatment_type' : 'XYZ',
+          'uuid' : 'DAC61010',
+          'patient_id' : 'DAC61010',
+          'name' : 'Christina Braun',
+          'age' : '1 month',
+          'treatment_type' : 'Zolgenzma',
         }],
         loading: false,
       }

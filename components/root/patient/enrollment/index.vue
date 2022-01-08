@@ -2,7 +2,7 @@
   <div>
     <a-spin :spinning="loading">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
-        <a-tab-pane :key="1" tab="Patient Detail"
+        <a-tab-pane :key="1" tab="Patient Details"
           ><enrollment :treatment="treatment" />
         </a-tab-pane>
         <a-tab-pane :key="2" tab="Consent"

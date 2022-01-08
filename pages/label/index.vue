@@ -1,10 +1,18 @@
 <template>
-  <div>
+  <div class="label-page">
 
-    <a-row>
-      <h3 class="page-title">Label</h3>
+    <a-row class="p-10 mb-10">
+      <div class="page-header">
+        <h3 class="page-title float-left">Label</h3>
+       
+        <a-input ref="userNameInput" placeholder="Search" class="float-right page-search-input">
+          <a-icon slot="prefix" type="search" />
+        </a-input>
+      </div>
     </a-row>
-    <a-row class="mt-15">
+
+
+    <a-row class="">
       <Table />
     </a-row>
   </div>
