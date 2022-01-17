@@ -75,11 +75,19 @@ a {
     padding: 15px;
     font-weight: bold;
     text-align: center;
+
+    // why repeating code ?? check the below line 
     &:first-child {
       border-bottom-left-radius: 40px;
       border-top-left-radius: 40px;
     }
     &:last-child {
+      border-bottom-right-radius: 40px;
+      border-top-right-radius: 40px;
+    }
+
+    // you may use this like in a proper way
+    &:last-child, &:first-child {
       border-bottom-right-radius: 40px;
       border-top-right-radius: 40px;
     }

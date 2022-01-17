@@ -50,7 +50,7 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton :disabled="treatment.id" />
+      <FormActionButton :disabled="!isEmpty(treatment.id)" />
     </a-form>
   </div>
 </template>

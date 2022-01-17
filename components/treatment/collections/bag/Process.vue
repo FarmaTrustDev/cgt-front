@@ -16,7 +16,7 @@
               v-decorator="[
                 `collection[id-${row.id}][collect]`,
                 {
-                  initialValue: false,
+                  initialValue: row.isCollected,
                   valuePropName: 'checked',
                 },
               ]"
@@ -32,7 +32,7 @@
               v-decorator="[
                 `collection[id-${row.id}][notes]`,
                 {
-                  initialValue: null,
+                  initialValue: row.notes,
                 },
               ]"
               placeholder="Note:"
@@ -50,6 +50,7 @@
         </template>
         <template slot="action" slot-scope="name, row">
           <a-button
+            :disabled="row.isCollected"
             shape="round"
             icon="sync"
             @click="handleCollectionSubmit(row)"
@@ -97,8 +98,7 @@ export default {
   methods: {
     handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()
-      console.log(collection, fields)
-      console.log()
+
       const values = fields.collection[`id-${collection.id}`]
       if (values) {
         BagCollectionServices.update(collection.id, values).then((response) => {

@@ -3,6 +3,9 @@
     <a-tabs type="card" @change="callback">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
         <Process :collections="bag.collection" />
+        <a-button type="primary" @click="completeBag"
+          >Complete This Sample</a-button
+        >
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -20,6 +23,9 @@ export default {
   },
   mounted() {},
   methods: {
+    completeBag() {
+      console.log(this.bags)
+    },
     callback(key) {},
   },
 }
