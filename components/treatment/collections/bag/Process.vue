@@ -50,7 +50,7 @@
         </template>
         <template slot="action" slot-scope="name, row">
           <a-button
-            :disabled="row.isCollected"
+            :disabled="row.isCollected || btnLoading"
             shape="round"
             icon="sync"
             @click="handleCollectionSubmit(row)"
@@ -62,6 +62,7 @@
 </template>
 <script>
 import BagCollectionServices from '~/services/API/BagCollectionServices'
+import notifications from '~/mixins/notifications'
 const columns = [
   {
     title: 'Details',
@@ -84,6 +85,7 @@ const columns = [
   },
 ]
 export default {
+  mixins: [notifications],
   props: { collections: { required: true, type: Array } },
   data() {
     return {
@@ -93,17 +95,24 @@ export default {
       form: this.$form.createForm(this, {
         name: 'bagCollectionProcess',
       }),
+      btnLoading: false,
     }
   },
   methods: {
     handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()
-
+      this.btnLoading = true
       const values = fields.collection[`id-${collection.id}`]
       if (values) {
-        BagCollectionServices.update(collection.id, values).then((response) => {
-          console.log(response)
-        })
+        BagCollectionServices.update(collection.id, values)
+          .then((response) => {
+            this.success(response.message)
+            this.$emit('fetchBags')
+            this.btnLoading = false
+          })
+          .catch(() => {
+            this.btnLoading = false
+          })
       }
     },
   },

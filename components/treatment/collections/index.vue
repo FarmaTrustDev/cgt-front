@@ -1,8 +1,9 @@
 <template>
   <a-skeleton :loading="loading">
+    {{ loading }}
     <FormActionButton text="Add Sample" @click="addBags" />
     <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
-    
+
     <a-modal
       :footer="false"
       :visible="showModal"

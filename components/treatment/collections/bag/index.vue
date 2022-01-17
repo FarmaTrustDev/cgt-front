@@ -2,7 +2,7 @@
   <div>
     <a-tabs type="card" @change="callback">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
-        <Process :collections="bag.collection" />
+        <Process @fetchBags="fetchBags" :collections="bag.collection" />
         <a-button type="primary" @click="completeBag"
           >Complete This Sample</a-button
         >
@@ -27,6 +27,9 @@ export default {
       console.log(this.bags)
     },
     callback(key) {},
+    fetchBags() {
+      this.$emit('fetchBags')
+    },
   },
 }
 </script>
