@@ -98,6 +98,7 @@
           class="pb-0"
         >
           <a-date-picker
+            format="DD/MM/YYYY"
             v-decorator="[
               'dOB',
               {

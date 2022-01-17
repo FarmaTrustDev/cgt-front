@@ -57,3 +57,31 @@
   }
 
 }
+
+.footer-btn-label{
+  height: auto;
+  font-size: 1rem;
+  padding: 0.2em 0.85rem;
+}
+.footer-btn-label-cancelled {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.print-btn {
+  font-size: 14px;
+  padding: 10px 15px;
+  background-color: #3869d1;
+  border-radius: 18px;
+  border-color: #3869d1;
+  height: auto;
+}
+
+.label-page {
+  padding-left: 40px;
+  padding-right: 40px;
+  .page-search-input {
+    right: 0;
+  }
+}

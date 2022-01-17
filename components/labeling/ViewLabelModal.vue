@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="view-label-modal">
     
-    <a-modal v-model="visible" title="Sample form" @ok="handleOk" :afterClose="handleCancel" :footer="null">
+    <a-modal v-model="visible" title="Sample form" @ok="handleOk" :afterClose="handleCancel">
       
       <a-row class="sample-form-container">
         <a-col :span="12" class="left">
@@ -62,6 +62,12 @@
           </div>
         </a-col>
       </a-row>
+
+
+      <template #footer>
+        <a-button class="footer-btn-label" key="submit" type="primary" >Print</a-button>
+        <a-button class="footer-btn-label footer-btn-label-cancelled" key="back" >Cancel</a-button>
+      </template>
 
     </a-modal>
 
