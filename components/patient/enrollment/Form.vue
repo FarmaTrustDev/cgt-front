@@ -1,13 +1,17 @@
 <template>
   <div>
     <!-- <a-spin :spinning="loading"> -->
-      <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-        <FormFields :patient="patient" />
-        <a-form-item class="pr-2 mt-15">
-          <FormActionButton :is-created="isCreated" custom-text="Save Patient & Continue" />
-          <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
-        </a-form-item>
-      </a-form>
+    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+      <FormFields :patient="patient" />
+      <a-form-item class="pr-2 mt-15">
+        <FormActionButton
+          :is-created="isCreated"
+          :loading="loading"
+          custom-text="Save Patient & Continue"
+        />
+        <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
+      </a-form-item>
+    </a-form>
     <!-- </a-spin> -->
   </div>
 </template>
@@ -67,6 +71,7 @@ export default {
       })
     },
     upsert(values) {
+      this.loading = true
       if (this.isCreated) {
         return this.update(values)
       }
