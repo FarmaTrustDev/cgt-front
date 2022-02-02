@@ -1,14 +1,22 @@
 <template>
-<div>
-
-  <div class="page-header">
-    <h3 class="page-title pl-5 float-left">Patient List</h3>
-    <a-button type="primary" class="mrm-5 float-right">Add New Patient</a-button>
-    <a-input ref="userNameInput" placeholder="Search" class="float-right page-search-input">
-      <a-icon slot="prefix" type="search" />
-    </a-input>
-  </div>
-  <div class="patient-page" >
+  <div>
+    <div class="page-header">
+      <h3 class="page-title pl-5 float-left">Patient List</h3>
+      <a-button
+        type="primary"
+        class="mrm-5 float-right"
+        @click="goto('patients/enrollment')"
+        >Add New Patient</a-button
+      >
+      <a-input
+        ref="userNameInput"
+        placeholder="Search"
+        class="float-right page-search-input"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
+    </div>
+    <div class="patient-page">
       <standardTable
         :columns="column"
         :api-service="PatientServices"
@@ -16,15 +24,13 @@
         :rounded="true"
         :patient="true"
       />
+    </div>
   </div>
-
-</div>
 </template>
 <script>
-
 import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
-
+import routeHelpers from '~/mixins/route-helpers'
 
 const column = [
   {
@@ -36,7 +42,7 @@ const column = [
     title: 'Patient Name',
     dataIndex: 'name',
     key: 'name',
-    scopedSlots : {customRender: 'name'}
+    scopedSlots: { customRender: 'name' },
   },
   {
     title: 'Age',
@@ -49,8 +55,8 @@ const column = [
     key: 'treatment_status',
     slots: { title: 'customTitle' },
     scopedSlots: { customRender: 'treatment_status' },
-    width:'65%',
-    class : 'treatment-status-col'
+    width: '65%',
+    class: 'treatment-status-col',
   },
   {
     title: 'Action',
@@ -61,6 +67,7 @@ const column = [
 const ActionLink = '/hospital/patients'
 export default {
   components: { standardTable },
+  mixins: [routeHelpers],
   data() {
     return {
       column,

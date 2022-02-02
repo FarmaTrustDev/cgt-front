@@ -98,7 +98,6 @@
           class="pb-0"
         >
           <a-date-picker
-            :disabled-date="disabledDate"
             v-decorator="[
               'dOB',
               {
@@ -111,6 +110,7 @@
                 ],
               },
             ]"
+            :disabled-date="disabledDate"
             format="DD/MM/YYYY"
             style="width: 100%"
             size="large"
