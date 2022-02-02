@@ -344,7 +344,7 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
-          <a-input
+          <!-- <a-input
             v-decorator="[
               'Country',
               {
@@ -359,7 +359,29 @@
               },
             ]"
             placeholder="Please input your Country"
-          />
+          /> -->
+          <a-select
+            v-decorator="[
+              'country',
+              {
+                initialValue: patient.country,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your country!',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Select Country"
+            style="width: 100%"
+            size="large"
+            class="default-select"
+          >
+            <a-select-option v-for="country in countries" :key="country.name">
+              {{ country.name }}
+            </a-select-option>
+          </a-select>
         </a-form-item>
       </a-col>
     </a-row>
@@ -369,6 +391,7 @@
 <script>
 import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
+import CountryServices from '~/services/API/CountryServices'
 export default {
   props: {
     patient: {
@@ -380,10 +403,19 @@ export default {
     return {
       Gender: GENDER,
       bloodType: BLOOD_TYPES,
+      countries: [],
     }
+  },
+  mounted() {
+    this.fetchCountries()
   },
   methods: {
     disabledDate: _disabledFutureDate,
+    fetchCountries() {
+      CountryServices.get().then((response) => {
+        this.countries = response.data
+      })
+    },
   },
 }
 </script>
