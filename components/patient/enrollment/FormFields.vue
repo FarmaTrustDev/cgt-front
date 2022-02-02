@@ -98,7 +98,7 @@
           class="pb-0"
         >
           <a-date-picker
-            format="DD/MM/YYYY"
+            :disabled-date="disabledDate"
             v-decorator="[
               'dOB',
               {
@@ -111,6 +111,7 @@
                 ],
               },
             ]"
+            format="DD/MM/YYYY"
             style="width: 100%"
             size="large"
           >
@@ -188,12 +189,7 @@
               'allergies',
               {
                 initialValue: patient.allergies,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Allergies',
-                  },
-                ],
+                rules: [],
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
@@ -212,12 +208,7 @@
               'problem',
               {
                 initialValue: patient.problem,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Problem',
-                  },
-                ],
+                rules: [],
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
@@ -236,12 +227,7 @@
               'problem',
               {
                 initialValue: patient.problem,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Problem',
-                  },
-                ],
+                rules: [],
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
@@ -382,7 +368,7 @@
 
 <script>
 import { BLOOD_TYPES, GENDER } from '~/services/Constant'
-
+import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 export default {
   props: {
     patient: {
@@ -395,6 +381,9 @@ export default {
       Gender: GENDER,
       bloodType: BLOOD_TYPES,
     }
+  },
+  methods: {
+    disabledDate: _disabledFutureDate,
   },
 }
 </script>
