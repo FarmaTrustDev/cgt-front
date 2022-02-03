@@ -5,7 +5,7 @@
       <a-button
         type="primary"
         class="mrm-5 float-right"
-        @click="goto('patients/enrollment')"
+        @click="goto('patients/create')"
         >Add New Patient</a-button
       >
       <a-input
@@ -31,7 +31,6 @@
 import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
-
 const column = [
   {
     title: 'Patient ID',
