@@ -39,6 +39,8 @@ export default {
   },
   mounted() {
     this.checkCreated()
+  },updated() {
+   
   },
   methods: {
     checkCreated() {

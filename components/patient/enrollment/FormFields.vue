@@ -344,27 +344,11 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
-          <!-- <a-input
-            v-decorator="[
-              'Country',
-              {
-                initialValue: 'United Kingdom',
-
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Country',
-                  },
-                ],
-              },
-            ]"
-            placeholder="Please input your Country"
-          /> -->
           <a-select
             v-decorator="[
-              'country',
+              'countryId',
               {
-                initialValue: patient.country,
+                initialValue: patient.countryId,
                 rules: [
                   {
                     required: true,
@@ -373,12 +357,14 @@
                 ],
               },
             ]"
+            :show-search="true"
+            :filter-option="filterOption"
             placeholder="Select Country"
             style="width: 100%"
             size="large"
             class="default-select"
           >
-            <a-select-option v-for="country in countries" :key="country.name">
+            <a-select-option v-for="country in countries" :key="country.id">
               {{ country.name }}
             </a-select-option>
           </a-select>
@@ -391,6 +377,7 @@
 <script>
 import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
+import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 export default {
   props: {
@@ -409,7 +396,9 @@ export default {
   mounted() {
     this.fetchCountries()
   },
+  updated() {},
   methods: {
+    filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries() {
       CountryServices.get().then((response) => {

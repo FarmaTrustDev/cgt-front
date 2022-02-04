@@ -16,5 +16,6 @@ export default {
   components: { Enrollment, 'page-layout': PageLayout },
   middleware: 'auth',
   mounted() {},
+  
 }
 </script>
