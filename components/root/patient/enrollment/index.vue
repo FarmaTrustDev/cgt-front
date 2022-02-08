@@ -70,7 +70,7 @@ export default {
     },
     fetch(treatmentId) {
       this.loading = true
-      TreatmentServices.getById(treatmentId)
+      TreatmentServices.detail(treatmentId)
         .then((response) => {
           this.updateTreatment(response.data)
         })
