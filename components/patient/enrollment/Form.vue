@@ -2,7 +2,7 @@
   <div>
     <!-- <a-spin :spinning="loading"> -->
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormFields :patient="patient" />
+      <FormFields :is-created="isCreated" :patient="patient" />
       <a-form-item class="pr-2 mt-15">
         <FormActionButton
           :is-created="isCreated"
@@ -39,16 +39,15 @@ export default {
   },
   mounted() {
     this.checkCreated()
-  },updated() {
-   
   },
+  updated() {},
   methods: {
     checkCreated() {
       const patientId = this.$route.params.id
 
       if (this.isGuid(patientId)) {
         this.entityId = patientId
-        this.isCreated = true
+
         this.fetch(patientId)
       }
     },
@@ -57,6 +56,7 @@ export default {
       PatientServices.getById(id)
         .then((response) => {
           this.patient = response.data
+          this.isCreated = true
         })
         .catch(this.error)
         .finally(() => (this.loading = false))

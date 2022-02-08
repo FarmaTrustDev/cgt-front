@@ -363,6 +363,7 @@
             style="width: 100%"
             size="large"
             class="default-select"
+            @search="searchCountries"
           >
             <a-select-option v-for="country in countries" :key="country.id">
               {{ country.name }}
@@ -379,11 +380,16 @@ import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
+// import { isEmpty } from '~/services/Utilities'
 export default {
   props: {
     patient: {
       type: Object,
       default: () => ({}),
+    },
+    isCreated: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -391,19 +397,35 @@ export default {
       Gender: GENDER,
       bloodType: BLOOD_TYPES,
       countries: [],
+      fetchCountry: true,
     }
   },
   mounted() {
-    this.fetchCountries()
+    this.getCountries()
   },
-  updated() {},
+  updated() {
+    if (this.isCreated && this.fetchCountry) {
+      this.fetchCountry = false
+      this.getCountries()
+    }
+  },
   methods: {
     filterOption,
     disabledDate: _disabledFutureDate,
-    fetchCountries() {
-      CountryServices.get().then((response) => {
-        this.countries = response.data
+    fetchCountries(params = {}) {
+      CountryServices.get(params).then((response) => {
+        this.countries = response.data.data
       })
+    },
+    getCountries() {
+      if (this.isCreated) {
+        this.fetchCountries({ Ids: [this.patient.countryId] })
+      } else {
+        this.fetchCountries()
+      }
+    },
+    searchCountries(name, b) {
+      this.fetchCountries({ name })
     },
   },
 }

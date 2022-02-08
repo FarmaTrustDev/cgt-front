@@ -1,12 +1,15 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
-
+const Qs = require('qs')
 const baseApi = `${BASE_API}/country`
 
 function get(params = {}) {
   return request({
     url: `${baseApi}`,
     params,
+    paramsSerializer: (params) => {
+      return Qs.stringify(params, { arrayFormat: 'repeat' })
+    },
   })
 }
 function create(data) {
