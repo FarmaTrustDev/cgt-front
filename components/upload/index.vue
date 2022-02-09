@@ -1,5 +1,10 @@
 <template>
-  <a-upload-dragger list-type="picture" name="file" :action="handleChange">
+  <a-upload-dragger
+    :before-upload="beforeUpload"
+    list-type="picture"
+    name="file"
+    :action="handleChange"
+  >
     <p class="ant-upload-drag-icon">
       <a-icon type="inbox" />
     </p>
@@ -12,14 +17,32 @@
 </template>
 <script>
 export default {
+  props: {
+    extensions: {
+      default: () => [],
+      type: Array,
+    },
+  },
   data() {
     return {
       stateFileList: [],
     }
   },
   methods: {
-    async handleChange(file, fileList) {
-      console.log(file)
+    beforeUpload(file) {
+      const isAllowedExtension = this.extensions.includes(file.type)
+      // extension upload the file @todo work in progess
+      if (!isAllowedExtension) {
+        this.$message.error('Extension not allow')
+        return true
+      }
+      // const isLt2M = file.size / 1024 / 1024 < 2
+      // if (!isLt2M) {
+      //   this.$message.error('Extension')
+      // }
+    },
+    async handleChange(file, fileList) {   
+      // @todo removing work in under construction
       if (file.status === 'remove') {
         await this.removeFromFileList(file)
       } else {

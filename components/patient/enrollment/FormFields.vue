@@ -224,7 +224,7 @@
         >
           <a-textarea
             v-decorator="[
-              'problem',
+              'medication',
               {
                 initialValue: patient.problem,
                 rules: [],
@@ -299,7 +299,7 @@
         >
           <a-textarea
             v-decorator="[
-              'problem',
+              'street',
               {
                 initialValue: patient.problem,
                 rules: [

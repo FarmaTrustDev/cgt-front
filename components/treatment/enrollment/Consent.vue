@@ -3,7 +3,7 @@
     <h3 class="page-title">Patient Consent</h3>
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <Upload @handleChange="handleChange" />
+      <Upload :extensions="allowedExtensions" @handleChange="handleChange" />
       <a-form-item>
         <a-checkbox
           v-decorator="[
@@ -47,9 +47,10 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import Upload from '~/components/upload'
+import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
 export default {
-  mixins: [notifications, routeHelpers, nullHelper],
   components: { Upload },
+  mixins: [notifications, routeHelpers, nullHelper],
   props: {
     treatment: {
       type: Object,
@@ -65,6 +66,7 @@ export default {
       }),
       loading: false,
       fileList: [],
+      allowedExtensions: DOCUMENT_EXTENSIONS,
     }
   },
   mounted() {
