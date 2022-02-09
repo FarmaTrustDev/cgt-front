@@ -17,33 +17,39 @@ export default {
         // ),
       })
     },
+
     error(err) {
-      const genericError = err.response.data.errors
-
       let description = ''
-      if (!isEmpty(genericError)) {
-        for (const key in genericError) {
-          description += `${genericError[key][0]},`
-        }
-      }
-      const genericException = err.response.data
-      if (!isEmpty(genericException)) {
-        description = genericException.message
-      }
 
+      if (err.response) {
+        description = getResponseError(err)
+      } else {
+        description = err
+      }
+      //  this.$confirm({ content: description, type: 'error' })
       this.$notification.open({
         message: `Error`,
         description,
         placement,
         class: 'error-notification',
-        // icon: (
-        //   <a-icon
-        //     type="close-circle"
-        //     theme="twoTone"
-        //     two-tone-color="#f5222d"
-        //   />
-        // ),
+        // icon: <a-icon type="smile" style="color: #108ee9" />,
       })
     },
   },
+}
+
+function getResponseError(err) {
+  if (!isEmpty(err.response) && !isEmpty(err.response.data)) {
+    const genericError = err.response.data.errors
+    let description = ''
+    for (const key in genericError) {
+      description += `${genericError[key][0]},`
+    }
+    return description
+  }
+
+  const genericException = err.response.data
+  if (!isEmpty(genericException)) {
+    return genericException.message
+  }
 }
