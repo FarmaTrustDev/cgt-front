@@ -1,7 +1,6 @@
 export const BASE_URL = process.env.baseUrl
 export const BASE_API = process.env.api
 
-
 export const STATUSES = [
   {
     id: 1,
@@ -69,3 +68,7 @@ export const COLLECTION_TYPE = {
   hospital: { id: 1, name: 'Hospital' },
   manufacturer: { id: 2, name: 'Manufacturer' },
 }
+
+export const PICTURE_UPLOAD_EXTENSIONS = ['.jpg', '.jpeg', '.bmp', '.gif', '.png'];
+export const DOCUMENT_UPLOAD_EXTENSIONS = [".doc", ".docx", ".pdf"];
+export const DOCUMENT_EXTENSIONS = [...PICTURE_UPLOAD_EXTENSIONS,...DOCUMENT_UPLOAD_EXTENSIONS];
