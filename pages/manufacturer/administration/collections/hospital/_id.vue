@@ -6,7 +6,7 @@
   >
     <template slot="content">
       <create
-        :type="COLLECTION_TYPE.hospital.id"
+        :collection-type="COLLECTION_TYPE.hospital.id"
         @fetchTreatmentName="fetchTreatmentName"
       />
     </template>

@@ -28,6 +28,7 @@
         ]"
         type="hidden"
       />
+     
       <a-input
         v-decorator="[
           'type',
