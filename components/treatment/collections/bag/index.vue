@@ -3,9 +3,14 @@
     <a-tabs :active-key="activeTab" type="card" @change="callback">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
         <Process :collections="bag.collection" @fetchBags="fetchBags" />
-        <a-button class="w-100" type="primary" @click="completeBag(bag)"
-          >Complete All Bags</a-button
-        >
+        <div class="text-right mt-15">
+          <!-- <a-button type="primary" @click="completeBag(bag)"
+            >Complete Sample( #{{ bag.puid }})</a-button
+          > -->
+          <a-button type="primary" @click="completeBag(bag)"
+            >Complete this Sample</a-button
+          >
+        </div>
       </a-tab-pane>
     </a-tabs>
     <!-- <a-button type="primary" @click="completeBag(bag)"
@@ -16,6 +21,7 @@
 <script>
 import Process from '~/components/treatment/collections/bag/Process'
 import { isEmpty } from '~/services/Utilities'
+import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import notifications from '~/mixins/notifications'
 export default {
   components: { Process },
@@ -38,7 +44,9 @@ export default {
       this.markComplete(bag)
     },
     markComplete(bag) {
-      console.log(bag)
+      TreatmentBagServices.markCollectionComplete(bag.id).then((response) => {
+        
+      })
     },
     validateCollectionComplete(bags) {
       if (!isEmpty(bags.collection)) {

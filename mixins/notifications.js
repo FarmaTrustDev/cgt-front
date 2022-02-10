@@ -41,11 +41,13 @@ export default {
 function getResponseError(err) {
   if (!isEmpty(err.response) && !isEmpty(err.response.data)) {
     const genericError = err.response.data.errors
-    let description = ''
-    for (const key in genericError) {
-      description += `${genericError[key][0]},`
+    if (!isEmpty(genericError)) {
+      let description = ''
+      for (const key in genericError) {
+        description += `${genericError[key][0]},`
+      }
+      return description
     }
-    return description
   }
 
   const genericException = err.response.data

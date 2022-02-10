@@ -21,13 +21,21 @@ function getById(id) {
     url: `${baseApi}/${id}`,
   })
 }
-function put(data) {
+function put(id, data) {
   return request({
-    url: `${baseApi}`,
+    url: `${baseApi}/${id}`,
     data,
     method: 'put',
   })
 }
+
+function markCollectionComplete(id) {
+  return request({
+    url: `${baseApi}/markCollectionComplete/${id}`,
+    method: 'put',
+  })
+}
+
 function destroy(id) {
   return request({
     url: `${baseApi}/${id}`,
@@ -48,6 +56,7 @@ const TreatmentBagServices = {
   put,
   getById,
   getByTreatmentId,
+  markCollectionComplete,
 }
 
 export default TreatmentBagServices
