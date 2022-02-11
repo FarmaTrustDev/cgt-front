@@ -13,6 +13,7 @@
           <!-- {{ row }} -->
           <a-form-item>
             <a-switch
+              v-if="!row.isCollected"
               v-decorator="[
                 `collection[id-${row.id}][collect]`,
                 {
@@ -24,11 +25,14 @@
               checked-children="Yes"
               un-checked-children="No"
             />
+
+            <a-icon v-else type="check"></a-icon>
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
           <a-form-item>
             <a-input
+              v-if="!row.isCollected"
               v-decorator="[
                 `collection[id-${row.id}][notes]`,
                 {
@@ -37,6 +41,7 @@
               ]"
               placeholder="Note:"
             />
+            <span v-else>{{ row.notes }}</span>
             <a-input
               v-decorator="[
                 `collection[id-${row.id}][id]`,

@@ -1,6 +1,10 @@
 <template>
   <a-skeleton :loading="loading">
-    <FormActionButton text="Add Sample" @click="addBags" />
+    <FormActionButton
+      v-if="bags.isCollectionCompleted"
+      text="Add Sample"
+      @click="addBags"
+    />
     <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
 
     <a-modal

@@ -7,7 +7,11 @@
           <!-- <a-button type="primary" @click="completeBag(bag)"
             >Complete Sample( #{{ bag.puid }})</a-button
           > -->
-          <a-button type="primary" @click="completeBag(bag)"
+
+          <a-button
+            v-if="!bag.isCollectionCompleted"
+            type="primary"
+            @click="completeBag(bag)"
             >Complete this Sample</a-button
           >
         </div>
@@ -44,9 +48,7 @@ export default {
       this.markComplete(bag)
     },
     markComplete(bag) {
-      TreatmentBagServices.markCollectionComplete(bag.id).then((response) => {
-        
-      })
+      TreatmentBagServices.markCollectionComplete(bag.id).then((response) => {})
     },
     validateCollectionComplete(bags) {
       if (!isEmpty(bags.collection)) {
