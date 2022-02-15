@@ -27,6 +27,7 @@
 <script>
 import scheduling from '~/components/treatment/enrollment/scheduling'
 import collections from '~/components/treatment/collections'
+const DEFAULT_ACTIVE_KEY = "2";
 export default {
   components: { scheduling, collections },
   props: {
@@ -37,7 +38,7 @@ export default {
   },
   data() {
     return {
-      activeTab: 2,
+      activeTab: DEFAULT_ACTIVE_KEY,
     }
   },
   methods: {

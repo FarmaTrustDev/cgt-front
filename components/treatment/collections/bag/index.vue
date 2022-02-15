@@ -9,7 +9,7 @@
           > -->
 
           <a-button
-            v-if="!bag.isCollectionCompleted"
+            v-if="!bag.isCollectionCompleted && showCompleteBag"
             type="primary"
             @click="completeBag(bag)"
             >Complete this Sample</a-button
@@ -17,9 +17,6 @@
         </div>
       </a-tab-pane>
     </a-tabs>
-    <!-- <a-button type="primary" @click="completeBag(bag)"
-      >Save & Continue</a-button
-    > -->
   </div>
 </template>
 <script>
@@ -35,7 +32,7 @@ export default {
     bags: { required: true, type: Array },
   },
   data() {
-    return { activeTab: null }
+    return { activeTab: null, showCompleteBag: true }
   },
   mounted() {
     // phela tab active hojae ga
@@ -48,7 +45,9 @@ export default {
       this.markComplete(bag)
     },
     markComplete(bag) {
-      TreatmentBagServices.markCollectionComplete(bag.id).then((response) => {})
+      TreatmentBagServices.markCollectionComplete(bag.id).then((response) => {
+        this.showCompleteBag = false
+      })
     },
     validateCollectionComplete(bags) {
       if (!isEmpty(bags.collection)) {
