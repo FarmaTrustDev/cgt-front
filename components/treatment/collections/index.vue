@@ -6,7 +6,9 @@
       @click="addBags"
     />
     <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
+
     <a-button
+      v-if="!treatment.hospitalCollectionStatus && bags.length > 0"
       class="w-100 mt-15"
       type="primary"
       @click="markHospitalCollectionComplete(bags)"
@@ -31,6 +33,7 @@ import { COLLECTION_TYPE } from '~/services/Constant'
 import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 import TreatmentServices from '~/services/API/TreatmentServices'
+import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 export default {
   components: { BagForm, Bag },
   mixins: [notifications],
@@ -76,7 +79,10 @@ export default {
       if (this.validateAllBagsCompleted(bags)) {
         TreatmentServices.markCompleteCollection(this.treatment.id).then(
           (response) => {
-            // this.fetchBags() fetch treatment
+            this.$nuxt.$emit(
+              EVENT_FETCH_TREATMENT_DETAIL,
+              this.treatment.globalId
+            )
           }
         )
       } else {

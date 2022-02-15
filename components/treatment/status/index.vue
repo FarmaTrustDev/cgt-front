@@ -11,7 +11,7 @@
           <scheduling :treatment="treatment" />
         </a-tab-pane>
         <a-tab-pane key="2" tab=" Collect Samples">
-          <collections :treatment="treatment" />
+          <collections  :treatment="treatment" />
         </a-tab-pane>
         <a-tab-pane key="3" tab=" Shipping Details">
           Shipping Details</a-tab-pane
@@ -27,7 +27,7 @@
 <script>
 import scheduling from '~/components/treatment/enrollment/scheduling'
 import collections from '~/components/treatment/collections'
-const DEFAULT_ACTIVE_KEY = "2";
+const DEFAULT_ACTIVE_KEY = '2'
 export default {
   components: { scheduling, collections },
   props: {
@@ -44,6 +44,9 @@ export default {
   methods: {
     callback(key) {
       this.activeTab = key
+    },
+    fetchTreatment() {
+      this.$emit('fetchTreatment')
     },
   },
 }
