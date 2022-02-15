@@ -40,13 +40,14 @@ export default {
   methods: {
     completeBag(bag) {
       if (this.validateCollectionComplete(bag)) {
-        return this.error('Mark all collection steps')
+        return this.error(`Mark all collection steps of ${bag.id}`)
       }
       this.markComplete(bag)
     },
     markComplete(bag) {
       TreatmentBagServices.markCollectionComplete(bag.id).then((response) => {
         this.showCompleteBag = false
+        this.fetchBags()
       })
     },
     validateCollectionComplete(bags) {

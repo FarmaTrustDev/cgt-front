@@ -30,7 +30,7 @@ export default {
   mounted() {},
   methods: {
     afterFetch(data) {
-      console.log(data)
+      // console.log(data)
     },
   },
 }

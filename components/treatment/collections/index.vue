@@ -1,12 +1,17 @@
 <template>
   <a-skeleton :loading="loading">
     <FormActionButton
-      v-if="bags.isCollectionCompleted"
+      v-if="!bags.isCollectionCompleted"
       text="Add Sample"
       @click="addBags"
     />
     <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
-
+    <a-button
+      class="w-100 mt-15"
+      type="primary"
+      @click="markHospitalCollectionComplete(bags)"
+      >Complete Collection Process</a-button
+    >
     <a-modal
       :footer="false"
       :visible="showModal"
@@ -24,8 +29,11 @@ import Bag from '~/components/treatment/collections/bag'
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import { COLLECTION_TYPE } from '~/services/Constant'
 import { isEmpty } from '~/services/Utilities'
+import notifications from '~/mixins/notifications'
+import TreatmentServices from '~/services/API/TreatmentServices'
 export default {
   components: { BagForm, Bag },
+  mixins: [notifications],
   props: { treatment: { required: true, type: Object } },
   data() {
     return {
@@ -63,6 +71,30 @@ export default {
       this.handleModal(false)
       // this.fetchBags()
       this.bags = data.data
+    },
+    markHospitalCollectionComplete(bags) {
+      if (this.validateAllBagsCompleted(bags)) {
+        TreatmentServices.markCompleteCollection(this.treatment.id).then(
+          (response) => {
+            // this.fetchBags() fetch treatment
+          }
+        )
+      } else {
+        this.error('Complete all the bags')
+      }
+    },
+    validateAllBagsCompleted(bags) {
+      if (!isEmpty(bags)) {
+        for (let bag = 0; bag < bags.length; bag++) {
+          if (!bags[bag].isCollectionCompleted) {
+            // if any bag is inComplete
+
+            return false
+          }
+        }
+        return true
+      }
+      return false
     },
   },
 }

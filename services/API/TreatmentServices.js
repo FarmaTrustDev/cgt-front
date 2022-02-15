@@ -38,12 +38,20 @@ function detail(id) {
   })
 }
 
+function markCompleteCollection(id) {
+  return request({
+    url: `${baseApi}/mark-complete-collection/${id}`,
+    method: 'Put',
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
   getById,
   update,
   detail,
+  markCompleteCollection,
 }
 
 export default TreatmentServices
