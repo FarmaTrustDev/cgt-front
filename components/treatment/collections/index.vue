@@ -1,7 +1,7 @@
 <template>
   <a-skeleton :loading="loading">
     <FormActionButton
-      v-if="!bags.isCollectionCompleted"
+      v-if="!treatment.hospitalCollectionStatus"
       text="Add Sample"
       @click="addBags"
     />
