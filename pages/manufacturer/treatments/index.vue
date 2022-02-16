@@ -28,7 +28,7 @@
             :text="getButtonText()"
             :btn-type="getButtonType()"
             :is-created="false"
-            ><span class="mr-5" slot="extra">
+            ><span slot="extra" class="mr-5">
               <a-button @click="handleModal(false)">Cancel</a-button>
             </span></FormActionButton
           >
