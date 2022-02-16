@@ -88,7 +88,7 @@ export default {
       showResponseModal: false,
       isAccepted: false,
       params: {
-        status: 1,
+        statuses: [1],
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
       },
