@@ -73,16 +73,15 @@ export default {
       },
       selectedRow: {},
       confirmLoading: false,
+     
     }
   },
+  mounted() {},
   methods: {
     stepClick(record) {
       this.goto(`/logistic/shipment/${record.globalId}`)
-      console.log(record)
     },
-    getCurrentStep(record) {
-      console.log(record)
-    },
+    getCurrentStep(record) {},
   },
 }
 </script>
