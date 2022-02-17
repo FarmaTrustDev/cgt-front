@@ -1,11 +1,11 @@
 import moment from 'moment'
-import { STANDARD_FORMATE, DATE_FORMATE } from '~/services/Constant/DateTime'
+import { STANDARD_FORMAT, DATE_FORMAT } from '~/services/Constant/DateTime'
 
 //  using in query params return as string
-export const getFormattedMoment = (moment) => moment.format(STANDARD_FORMATE)
+export const getFormattedMoment = (moment) => moment.format(STANDARD_FORMAT)
 
 export const getMomentByStandardFormat = (string) =>
-  moment(string, STANDARD_FORMATE)
+  moment(string, STANDARD_FORMAT)
 
 // return moment object
 export const _getTodayMoment = () => moment()
@@ -25,7 +25,7 @@ export const _getFutureMomentStandardFormatted = (value, unit) =>
   getFormattedMoment(_getTodayMoment().add(value, unit))
 
 export const _getDefaultDateFormate = (date = _getTodayMoment()) =>
-  moment(date, DATE_FORMATE)
+  moment(date, DATE_FORMAT)
 
 export const _disabledPreviousDate = (current) => {
   return current < moment().endOf('day')
