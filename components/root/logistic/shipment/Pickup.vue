@@ -54,7 +54,7 @@
                 ],
               },
             ]"
-            :format="DEFAULT_DATE_TIME_FORMATE"
+            :format="DEFAULT_DATE_TIME_FORMAT"
             style="width: 100%"
             size="large"
             :show-time="{ defaultValue: _getTodayMoment() }"

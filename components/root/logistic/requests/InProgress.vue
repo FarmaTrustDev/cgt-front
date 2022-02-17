@@ -4,11 +4,8 @@
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div>
-          <a-steps size="small">
-            <a-step
-              title="Pickup Shipment"
-              @click="stepClick(record, treatment)"
-            />
+          <a-steps :current="getCurrentStep(record)" size="small">
+            <a-step title="Pickup Shipment" @click="stepClick(record)" />
 
             <a-step title="Delivery Shipment" />
           </a-steps>
@@ -23,6 +20,7 @@
 import SchedulingServices from '~/services/API/SchedulingServices'
 import withTableCrud from '~/mixins/with-table-crud'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
+import routeHelpers from '~/mixins/route-helpers'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
@@ -57,7 +55,7 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  mixins: [withTableCrud],
+  mixins: [withTableCrud, routeHelpers],
   data() {
     return {
       column,
@@ -78,7 +76,13 @@ export default {
     }
   },
   methods: {
-    stepClick() {},
+    stepClick(record) {
+      this.goto(`/logistic/shipment/${record.globalId}`)
+      console.log(record)
+    },
+    getCurrentStep(record) {
+      console.log(record)
+    },
   },
 }
 </script>
