@@ -6,7 +6,7 @@
     title="Treatments"
   >
     <template slot="content">
-      <a-tabs :animated="false" @change="callback">
+      <a-tabs :animated="false">
         <a-tab-pane key="1" tab="New Requests">
           <newRequests />
         </a-tab-pane>

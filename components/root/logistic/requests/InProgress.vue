@@ -2,12 +2,19 @@
   <div>
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
-        <a-button type="primary" dashed @click="showConfirm(record, true)">
-          Accepted
-        </a-button>
-        <a-button type="danger" dashed @click="showConfirm(record, false)">
-          Rejected
-        </a-button>
+        <!-- //Steps -->
+        <div>
+          <a-steps size="small">
+            <a-step
+              title="Pickup Shipment"
+              @click="stepClick(record, treatment)"
+            />
+
+            <a-step title="Delivery Shipment" />
+          </a-steps>
+        </div>
+
+        <!-- //Steps -->
       </span>
     </a-table>
   </div>
@@ -42,11 +49,11 @@ const column = [
     key: 'collectionDateDeliveryDate',
   },
 
-  //   {
-  //     title: 'Action',
-  //     dataIndex: 'action',
-  //     scopedSlots: { customRender: 'action' },
-  //   },
+  {
+    title: 'Action',
+    dataIndex: 'action',
+    scopedSlots: { customRender: 'action' },
+  },
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
@@ -70,6 +77,8 @@ export default {
       confirmLoading: false,
     }
   },
-  methods: {},
+  methods: {
+    stepClick() {},
+  },
 }
 </script>
