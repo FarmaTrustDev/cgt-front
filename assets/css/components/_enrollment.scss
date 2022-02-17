@@ -1,17 +1,15 @@
 .enrollment-page {
-  margin-left:45px; 
-  margin-right:45px;
-  margin-top:20px;
-  
+  margin: 20px 45px;
+
   .ant-tabs .ant-tabs-left-content {
     border-left: unset;
   }
   .ant-tabs .ant-tabs-left-bar {
-  	border-right: unset;
-  	width: 23%;
+    border-right: unset;
+    width: 23%;
   }
   .ant-tabs-left-bar .ant-tabs-tab {
-  	margin-top: 15px;
+    margin-top: 15px;
     text-decoration: none;
     font-weight: 500;
     border-radius: 22px;
@@ -19,79 +17,79 @@
     padding: 15px;
     color: #233151;
     background-color: #f9f9f9;
-    &::before{
+    &::before {
       position: inherit;
-      content: "";
+      content: '';
       height: 28px;
       width: 28px;
       display: inline-block;
       vertical-align: middle;
       margin-right: 10px;
       background-size: 100%;
-      background-image: url("https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg");
+      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
       border-top: none;
     }
   }
-  .ant-tabs-left-bar .ant-tabs-tab-active{
-  	background-color: #f2f5fb;
-  	&::before{
-  	  background-image: url("https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg");
-  	}
+  .ant-tabs-left-bar .ant-tabs-tab-active {
+    background-color: #f2f5fb;
+    &::before {
+      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg');
+    }
   }
-  .ant-tabs-left-bar .ant-tabs-tab-completed{
-  	background-color: #d1f2dc;
-    &::before{
-      background-image: url("https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg");
+  .ant-tabs-left-bar .ant-tabs-tab-completed {
+    background-color: #d1f2dc;
+    &::before {
+      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg');
     }
   }
   .ant-tabs-ink-bar {
-  	display: none;
-  	background-color: transparent;
+    display: none;
+    background-color: transparent;
   }
-  .ant-tabs .ant-tabs-left-bar .ant-tabs-tab, .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
-  	text-align: left;
-  	padding: 25px;
+  .ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
+  .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
+    text-align: left;
+    padding: 25px;
+  }
 
-  }
-  
-  .consent-page{
-  	padding: 0 15px;
-  	form{
-  		text-align: center;
-  	}
-  	.ant-checkbox-wrapper {
-  		font-size: 1.3rem;
-  		color: #919191;
-  		margin-top: 50px;
-  	}
-  	.ant-upload {
-  		margin-top: 30px;
-  	}
-    .ant-table-content .ant-table-tbody{
-      tr{
+  .consent-page {
+    padding: 0 15px;
+    form {
+      text-align: center;
+    }
+    .ant-checkbox-wrapper {
+      font-size: 1.3rem;
+      color: #919191;
+      margin-top: 50px;
+    }
+    .ant-upload {
+      margin-top: 30px;
+    }
+    .ant-table-content .ant-table-tbody {
+      tr {
         border: unset;
         border-bottom: 1px solid #e2e2e2;
       }
     }
   }
-  .ant-switch{
+  .ant-switch {
     margin-top: 10px;
     height: 40px;
     width: 85px;
     background-color: #fa6363;
     color: #fff;
-    &::after{
-      top:11px;
+    &::after {
+      top: 11px;
       left: 8px;
     }
   }
-  .ant-switch-inner{
+  .ant-switch-inner {
     font-size: 16px;
   }
   .ant-switch-checked {
     background-color: #2255c2;
-    &::after{
-      top:9px;
+    &::after {
+      top: 9px;
       left: 95%;
     }
   }
@@ -99,12 +97,12 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
-  
+
   .fc {
     color: #000;
-    a{
+    a {
       color: #000;
-      &:hover{
+      &:hover {
         color: #000;
       }
     }
@@ -121,7 +119,7 @@
       border-radius: 20px;
       padding: 15px;
     }
-    .fc-col-header-cell{
+    .fc-col-header-cell {
       font-size: 12px;
       padding: 0.75rem 0.5rem;
       font-weight: 500;
@@ -135,7 +133,8 @@
       margin: 15px;
       text-transform: uppercase;
     }
-    .fc-prevYear-button, .fc-nextYear-button {
+    .fc-prevYear-button,
+    .fc-nextYear-button {
       font-size: 14px;
       color: #233151;
       background-color: transparent;
@@ -143,28 +142,29 @@
       border: 1px solid #ebedf2;
       padding: 15px 10px;
       border-radius: 22px;
-      &:hover{
+      &:hover {
         background-color: $primary-color;
       }
     }
     .fc-button-primary:not(.fc-prevYear-button, .fc-nextYear-button) {
       background-color: $primary-color;
       color: #fff;
-      &:hover{
+      &:hover {
         background-color: $primary-color;
       }
     }
   }
-  .fc-theme-standard .fc-scrollgrid, .fc-theme-standard th {
+  .fc-theme-standard .fc-scrollgrid,
+  .fc-theme-standard th {
     border: unset;
   }
   .fc-theme-standard td {
-    &:last-child{
-      border-bottom:unset;
+    &:last-child {
+      border-bottom: unset;
     }
   }
 
-  .empty-message{
+  .empty-message {
     color: #383d41;
     font-size: 14px;
     font-weight: bold;
@@ -176,5 +176,4 @@
     border: 1px solid transparent;
     border-radius: 0.25rem;
   }
-  
 }
