@@ -28,7 +28,7 @@
           >
             <a-input
               v-decorator="[
-                'receiveName',
+                'LogisticUserName',
                 {
                   rules: [
                     { required: true, message: 'Please input Collected by!' },
@@ -73,7 +73,7 @@
           >
             <a-textarea
               v-decorator="[
-                'location',
+                'origin',
                 {
                   rules: [
                     {
@@ -98,8 +98,10 @@ import { _getTodayMoment } from '~/services/Helpers/MomentHelpers'
 import { DEFAULT_DATE_TIME_FORMAT } from '~/services/Constant/DateTime'
 import withFetch from '~/mixins/with-fetch'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import ShipmentServices from '~/services/API/ShipmentServices'
+import notifications from '~/mixins/notifications'
 export default {
-  mixins: [withFetch],
+  mixins: [withFetch, notifications],
   data() {
     return {
       loading: false,
@@ -117,7 +119,13 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
+          console.log(this.entity)
+          ShipmentServices.pickupCreate(this.entity.id, values)
+            .then((response) => {
+              this.success(response.message)
+              console.log(response)
+            })
+            .catch(this.error)
         }
       })
     },
