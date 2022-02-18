@@ -96,12 +96,18 @@
 <script>
 import { _getTodayMoment } from '~/services/Helpers/MomentHelpers'
 import { DEFAULT_DATE_TIME_FORMAT } from '~/services/Constant/DateTime'
-import withFetch from '~/mixins/with-fetch'
-import SchedulingServices from '~/services/API/SchedulingServices'
+
 import ShipmentServices from '~/services/API/ShipmentServices'
 import notifications from '~/mixins/notifications'
 export default {
-  mixins: [withFetch, notifications],
+  mixins: [notifications],
+  props: {
+    scheduling: {
+      default: () => {},
+      require: true,
+      type: Object,
+    },
+  },
   data() {
     return {
       loading: false,
@@ -110,7 +116,6 @@ export default {
       }),
       formLayout: 'vertical',
       DEFAULT_DATE_TIME_FORMAT,
-      fetchMethod: SchedulingServices.getById,
     }
   },
   methods: {
@@ -119,11 +124,9 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(this.entity)
-          ShipmentServices.pickupCreate(this.entity.id, values)
+          ShipmentServices.pickupCreate(this.scheduling.id, values)
             .then((response) => {
               this.success(response.message)
-              console.log(response)
             })
             .catch(this.error)
         }
