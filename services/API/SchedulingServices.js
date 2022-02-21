@@ -18,6 +18,11 @@ function getById(id) {
     url: `${baseApi}/${id}`,
   })
 }
+function getDetailById(id) {
+  return request({
+    url: `${baseApi}/detail/${id}`,
+  })
+}
 
 function create(data) {
   return request({
@@ -64,6 +69,7 @@ const SchedulingServices = {
   getEstimation,
   getByTreatment,
   markScheduleRequest,
+  getDetailById,
 }
 
 export default SchedulingServices

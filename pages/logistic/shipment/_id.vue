@@ -26,7 +26,7 @@ export default {
     return {
       loading: false,
       mode: 'left',
-      fetchMethod: SchedulingServices.getById,
+      fetchMethod: SchedulingServices.getDetailById,
     }
   },
   methods: {},
