@@ -12,7 +12,14 @@
                 :shipment="pickupShipment"
               />
             </a-tab-pane>
-            <a-tab-pane :key="2" tab="Deliver Shipment"> t </a-tab-pane>
+            <a-tab-pane :key="2" tab="Deliver Shipment">
+              <delivery
+                v-if="isEmpty(deliveryShipment)"
+                :shipment="deliveryShipment"
+                :scheduling="entity"
+              />
+              <span v-else>{{ deliveryShipment }}</span>
+            </a-tab-pane>
           </a-tabs>
         </a-card>
       </div>
@@ -22,6 +29,7 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 import pickup from '~/components/root/logistic/shipment/pickup'
+import delivery from '~/components/root/logistic/shipment/delivery'
 import pickupDetail from '~/components/root/logistic/shipment/pickup/Detail'
 import withFetch from '~/mixins/with-fetch'
 import SchedulingServices from '~/services/API/SchedulingServices'
@@ -31,6 +39,7 @@ export default {
     'page-layout': PageLayout,
     'pickup-detail': pickupDetail,
     pickup,
+    delivery,
   },
   mixins: [withFetch],
   data() {

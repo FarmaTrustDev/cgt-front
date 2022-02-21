@@ -27,6 +27,14 @@ function pickupCreate(id, data) {
   })
 }
 
+function deliveryCreate(id, data) {
+  return request({
+    url: `${baseApi}/delivery/${id}`,
+    data,
+    method: 'POST',
+  })
+}
+
 function update(id, data) {
   return request({
     url: `${baseApi}/${id}`,
@@ -40,6 +48,7 @@ const ShipmentServices = {
   pickupCreate,
   update,
   getById,
+  deliveryCreate,
 }
 
 export default ShipmentServices
