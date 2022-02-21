@@ -6,7 +6,11 @@
           <a-tabs :tab-position="mode">
             <a-tab-pane :key="1" tab=" Pickup Shipment">
               <pickup v-if="isEmpty(pickupShipment)" :scheduling="entity" />
-              <pickup-detail v-else :shipment="pickupShipment" />
+              <pickup-detail
+                v-else
+                :scheduling="entity"
+                :shipment="pickupShipment"
+              />
             </a-tab-pane>
             <a-tab-pane :key="2" tab="Deliver Shipment"> t </a-tab-pane>
           </a-tabs>
