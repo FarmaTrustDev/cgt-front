@@ -27,6 +27,9 @@ export default {
       }
     },
     fetch(id) {
+      if (this.isFunction(this.beforeFetch)) {
+        this.beforeFetch()
+      }
       this.loading = true
       this.fetchMethod(id)
         .then((response) => {
