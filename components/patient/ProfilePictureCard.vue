@@ -5,6 +5,7 @@
       :src="getAbsolutePath(patient.qrUrl)"
       alt="Christina Braun"
     />
+
     <figcaption>{{ patient.name }}</figcaption>
   </figure>
 </template>

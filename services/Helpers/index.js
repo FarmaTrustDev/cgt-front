@@ -1,4 +1,4 @@
-import { BASE_URL } from '~/services/Constant/index'
+import { BASE_API } from '~/services/Constant/index'
 
 export const isEmpty = (value, depth = 1, level = 0) => {
   if (level === depth) {
@@ -79,5 +79,5 @@ export function preventDefault(e) {
 }
 
 export function getAbsolutePath(url) {
-  return `${BASE_URL}/${url}`
+  return `${BASE_API}${url}`
 }

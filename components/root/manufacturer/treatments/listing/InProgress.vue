@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     stepClick(record) {
-      this.goto(`/logistic/shipment/${record.globalId}`)
+      this.goto(`/manufacturer/treatments/process/${record.globalId}`)
     },
     getCurrentStep(record) {},
     fetch(params = {}) {

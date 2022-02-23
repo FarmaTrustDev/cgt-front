@@ -6,7 +6,7 @@
     :create="false"
   >
     <template slot="content">
-      <detail @fetchTreatment="fetchMethod" :treatment="entity" />
+      <detail :treatment="entity" @fetchTreatment="fetchMethod" />
     </template>
   </page-layout>
 </template>
