@@ -18,9 +18,8 @@
   </div>
 </template>
 <script>
-import SchedulingServices from '~/services/API/SchedulingServices'
-import withTableCrud from '~/mixins/with-table-crud'
-import { SCHEDULING_STATUSES } from '~/services/Constant'
+import TreatmentServices from '~/services/API/TreatmentServices'
+
 import routeHelpers from '~/mixins/route-helpers'
 import {
   _getPastMomentStandardFormatted,
@@ -56,33 +55,45 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  mixins: [withTableCrud, routeHelpers],
+  mixins: [routeHelpers],
   data() {
     return {
       column,
       loading: false,
       data: [],
-      apiService: SchedulingServices,
+      apiService: TreatmentServices,
       ActionLink,
       showResponseModal: false,
       isAccepted: false,
       params: {
-        statuses: [SCHEDULING_STATUSES.accepted.id, SCHEDULING_STATUSES.new.id],
+        ManufacturerCollectionStatus: true,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
-        manufacturerStatus: SCHEDULING_STATUSES.accepted.id,
-        logisticStatus: SCHEDULING_STATUSES.accepted.id,
       },
       selectedRow: {},
       confirmLoading: false,
     }
   },
-  mounted() {},
+  mounted() {
+    this.fetch()
+  },
   methods: {
     stepClick(record) {
       this.goto(`/logistic/shipment/${record.globalId}`)
     },
     getCurrentStep(record) {},
+    fetch(params = {}) {
+      this.loading = true
+
+      TreatmentServices.manufacturing(this.params)
+        .then((response) => {
+          this.data = response.data
+        })
+        .catch(this.error)
+        .finally(() => {
+          this.loading = false
+        })
+    },
   },
 }
 </script>
