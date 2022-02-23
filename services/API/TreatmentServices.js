@@ -1,6 +1,6 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
-const Qs = require('qs')
+// const Qs = require('qs')
 
 const baseApi = `${BASE_API}/treatment`
 
@@ -45,13 +45,14 @@ function markCompleteCollection(id) {
     method: 'Put',
   })
 }
+
 function manufacturing(params = {}) {
   return request({
     url: `${baseApi}/manufacturing`,
     params,
-    paramsSerializer: (params) => {
-      return Qs.stringify(params, { arrayFormat: 'repeat' })
-    },
+    // paramsSerializer: (params) => {
+    //   return Qs.stringify(params, { arrayFormat: 'repeat' })
+    // },
   })
 }
 

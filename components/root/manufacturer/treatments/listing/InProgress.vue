@@ -66,7 +66,7 @@ export default {
       showResponseModal: false,
       isAccepted: false,
       params: {
-        ManufacturerCollectionStatus: true,
+        isShipmentReceived: true,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
       },
