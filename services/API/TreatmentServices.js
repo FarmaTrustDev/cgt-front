@@ -46,6 +46,13 @@ function markCompleteCollection(id) {
   })
 }
 
+function markManufacturerCollection(id) {
+  return request({
+    url: `${baseApi}/mark-manufacturer-collection/${id}`,
+    method: 'Put',
+  })
+}
+
 function manufacturing(params = {}) {
   return request({
     url: `${baseApi}/manufacturing`,
@@ -64,6 +71,7 @@ const TreatmentServices = {
   detail,
   manufacturing,
   markCompleteCollection,
+  markManufacturerCollection,
 }
 
 export default TreatmentServices

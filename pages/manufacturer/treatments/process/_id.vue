@@ -9,7 +9,7 @@
       <div class="grey-card">
         <profile-picture-and-detail :treatment="entity" />
         <a-card :bordered="false" class="mt-15 default-card">
-          <process :treatment="entity"
+          <process :treatment="entity" @fetchTreatment="fetchTreatment"
         /></a-card>
       </div>
     </template>
@@ -40,6 +40,9 @@ export default {
   methods: {
     afterFetch(data) {
       // console.log(data)
+    },
+    fetchTreatment(treatmentId) {
+      this.fetch(treatmentId)
     },
   },
 }
