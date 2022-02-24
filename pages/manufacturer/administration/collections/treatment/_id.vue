@@ -23,10 +23,6 @@ export default {
       COLLECTION_TYPE,
     }
   },
-  methods: {
-    fetchTreatmentName(treatmentName) {
-      this.treatmentName = treatmentName
-    },
-  },
+  methods: {},
 }
 </script>
