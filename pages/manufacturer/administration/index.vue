@@ -88,7 +88,7 @@ export default {
               icon: 'https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg',
               id: 0,
               initial: null,
-              key: '4',
+              key: '5',
               name: 'Treatment',
               to: '/manufacturer/administration/collections/treatment',
             },
