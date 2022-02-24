@@ -1,10 +1,10 @@
 <template>
   <div class="admin-page">
     <h3 class="page-title">Administration</h3>
-    <a-row :gutter="16" class="grey-card">
+    <!-- <a-row :gutter="16" class="grey-card">
       <a-col :span="10">
         <div class="admin-tab">
-          <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
+          
           <a :href="screeningUrl">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
@@ -24,7 +24,7 @@
           </a>
         </div>
       </a-col>
-    </a-row>
+    </a-row> -->
 
     <a-row :gutter="16" justify="center">
       <a-col
@@ -83,6 +83,14 @@ export default {
               key: '4',
               name: 'Manufacturer',
               to: '/manufacturer/administration/collections/manufacturer',
+            },
+            {
+              icon: 'https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg',
+              id: 0,
+              initial: null,
+              key: '4',
+              name: 'Treatment',
+              to: '/manufacturer/administration/collections/treatment',
             },
           ],
         },
