@@ -1,4 +1,5 @@
 @import './partials/variables';
+@import './partials/color';
 @import './partials/mixin';
 @import './partials/margin';
 @import './partials/padding';
@@ -52,11 +53,10 @@ body {
 }
 
 a {
-	color: $primary-color;
-	&:hover
-	{
-		color: $primary-color;
-	}
+  color: $primary-color;
+  &:hover {
+    color: $primary-color;
+  }
 }
 
 .square-table .ant-table-content {
@@ -71,12 +71,12 @@ a {
     border-radius: 22px;
   }
   .ant-table-thead tr th {
-    border:unset;
+    border: unset;
     padding: 15px;
     font-weight: bold;
     text-align: center;
 
-    // why repeating code ?? check the below line 
+    // why repeating code ?? check the below line
     &:first-child {
       border-bottom-left-radius: 40px;
       border-top-left-radius: 40px;
@@ -87,21 +87,22 @@ a {
     }
 
     // you may use this like in a proper way
-    &:last-child, &:first-child {
+    &:last-child,
+    &:first-child {
       border-bottom-right-radius: 40px;
       border-top-right-radius: 40px;
     }
   }
 }
 
-.ant-form-vertical .ant-form-item { 
+.ant-form-vertical .ant-form-item {
   // padding-bottom: unset;
   // margin-bottom: unset;
 }
 
 .square-table .ant-table-tbody {
-  tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected){
-    td{
+  tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) {
+    td {
       background: #fff;
     }
   }
@@ -109,15 +110,15 @@ a {
 .page-header {
   margin-top: 3rem;
 }
-.page-title{
+.page-title {
   font-size: 25px;
   font-weight: 600;
 }
 .heading {
-  font-size : 25px;
+  font-size: 25px;
 }
-.plain-header-border{
- .ant-card-head{
+.plain-header-border {
+  .ant-card-head {
     border-bottom: none;
   }
 }

@@ -6,22 +6,28 @@
       </article>
       <dl class="ant-row common-detail">
         <dt>Is Received:</dt>
-        <!-- <dd>{{ treatment.treatmentTypeName }}</dd>
+        <dd class="text-success">
+          <a-icon
+            v-if="!isEmpty(shipment)"
+            
+            type="check-circle"
+          />
+          Done
+        </dd>
         <dt>Received by:</dt>
-        <dd>Dr. Comfort</dd>
+        <dd>{{ shipment.receiverName }}</dd>
         <dt>Received Date:</dt>
-        <dd>Dr. Ryan Katz</dd>
+        <dd>{{ getMomentByStandardFormat(shipment.deliveryAt) }}</dd>
         <dt>Receiving Note:</dt>
-        <dd>{{ treatmentData.hospitalName }}</dd> -->
+        <dd>{{ shipment.notes }}</dd>
       </dl>
     </a-card>
-    <pre>
-      {{ shipment }}
-    </pre>
   </div>
 </template>
 
 <script>
+import { isEmpty } from '~/services/Utilities'
+import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 export default {
   props: {
     heading: { default: 'Shipping Details', require: true, type: String },
@@ -34,5 +40,6 @@ export default {
   data() {
     return {}
   },
+  methods: { isEmpty, getMomentByStandardFormat },
 }
 </script>
