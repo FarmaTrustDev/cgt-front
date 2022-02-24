@@ -9,8 +9,14 @@
       <div class="grey-card">
         <profile-picture-and-detail :treatment="entity" />
         <a-card :bordered="false" class="mt-15 default-card">
-          <process :treatment="entity" @fetchTreatment="fetchTreatment"
-        /></a-card>
+          <a-tabs default-active-key="1" @change="callback">
+            <a-tab-pane key="1" tab="Inbound Acceptance Details"> </a-tab-pane>
+            <a-tab-pane key="2" tab="Manufacturing">
+              <process :treatment="entity" @fetchTreatment="fetchTreatment" />
+            </a-tab-pane>
+            <a-tab-pane key="3" tab="Outbound Shipment"> Content of Tab Pane 3 </a-tab-pane>
+          </a-tabs>
+        </a-card>
       </div>
     </template>
   </page-layout>
