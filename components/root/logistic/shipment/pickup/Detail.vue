@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="default-card">
+    <a-card v-if="!isEmpty(shipment)" :bordered="false" class="default-card">
       <article class="article">
         <h4 class="heading pl-0">{{ heading }}</h4>
       </article>
@@ -31,6 +31,7 @@
 
 <script>
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import { isEmpty } from '~/services/Utilities'
 export default {
   props: {
     heading: { default: 'Shipping Details', require: true, type: String },
@@ -50,6 +51,7 @@ export default {
   },
   methods: {
     getMomentByStandardFormat,
+    isEmpty,
   },
 }
 </script>

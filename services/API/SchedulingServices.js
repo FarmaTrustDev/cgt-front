@@ -61,6 +61,13 @@ function getByTreatment(id, params = {}) {
   })
 }
 
+function getDetailByTreatment(id, params = {}) {
+  return request({
+    url: `${baseApi}/detail/treatment/${id}`,
+    params,
+  })
+}
+
 const SchedulingServices = {
   get,
   create,
@@ -70,6 +77,7 @@ const SchedulingServices = {
   getByTreatment,
   markScheduleRequest,
   getDetailById,
+  getDetailByTreatment,
 }
 
 export default SchedulingServices

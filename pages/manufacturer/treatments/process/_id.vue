@@ -9,12 +9,16 @@
       <div class="grey-card">
         <profile-picture-and-detail :treatment="entity" />
         <a-card :bordered="false" class="mt-15 default-card">
-          <a-tabs default-active-key="1" @change="callback">
-            <a-tab-pane key="1" tab="Inbound Acceptance Details"> </a-tab-pane>
+          <a-tabs>
+            <a-tab-pane key="1" tab="Inbound Acceptance Details">
+              <inbound-shipment :treatment="entity" />
+            </a-tab-pane>
             <a-tab-pane key="2" tab="Manufacturing">
               <process :treatment="entity" @fetchTreatment="fetchTreatment" />
             </a-tab-pane>
-            <a-tab-pane key="3" tab="Outbound Shipment"> Content of Tab Pane 3 </a-tab-pane>
+            <a-tab-pane key="3" tab="Outbound Shipment">
+              Content of Tab Pane 3
+            </a-tab-pane>
           </a-tabs>
         </a-card>
       </div>
@@ -28,16 +32,19 @@ import withFetch from '~/mixins/with-fetch'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import ProfilePictureCard from '~/components/patient/profile/ProfileAndDetail'
 import process from '~/components/root/manufacturer/treatments/process'
+import InboundShipment from '~/components/root/manufacturer/scheduling/shipment/Inbound'
 export default {
   components: {
+    process,
     'page-layout': PageLayout,
     'profile-picture-and-detail': ProfilePictureCard,
-    process,
+    'inbound-shipment': InboundShipment,
   },
   mixins: [withFetch],
   middleware: 'auth',
   data() {
     return {
+      loading: true,
       apiService: TreatmentServices,
       fetchMethod: TreatmentServices.detail,
     }
@@ -45,6 +52,7 @@ export default {
   mounted() {},
   methods: {
     afterFetch(data) {
+      this.loading = false
       // console.log(data)
     },
     fetchTreatment(treatmentId) {
