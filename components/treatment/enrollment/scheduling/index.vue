@@ -3,6 +3,7 @@
     <a-spin :spinning="loading">
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
         <Detail v-if="isScheduled" :entity="entity" />
+
         <span v-else>
           <Form :form="form" :treatment="treatment" />
         </span>

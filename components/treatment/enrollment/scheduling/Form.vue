@@ -59,9 +59,7 @@ export default {
           this.form.setFieldsValue({
             manufacturerName: detail.event._def.title,
             treatmentAvailabilityId: detail.event._def.publicId,
-            hospitalCollectionDate: getMomentByStandardFormat(
-              data.hospitalCollectionDate
-            ),
+            collectionDate: getMomentByStandardFormat(data.collectionDate),
             pickupDateTime: getMomentByStandardFormat(data.pickupDateTime),
             deliveryDate: getMomentByStandardFormat(data.deliveryDate),
             manufacturerTreatmentStartDate: getMomentByStandardFormat(

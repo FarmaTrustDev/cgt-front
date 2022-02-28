@@ -16,9 +16,7 @@
             <a-tab-pane key="2" tab="Manufacturing">
               <process :treatment="entity" @fetchTreatment="fetchTreatment" />
             </a-tab-pane>
-            <a-tab-pane key="3" tab="Outbound Shipment">
-              Content of Tab Pane 3
-            </a-tab-pane>
+            <a-tab-pane key="3" tab="Outbound Shipment"> </a-tab-pane>
           </a-tabs>
         </a-card>
       </div>
