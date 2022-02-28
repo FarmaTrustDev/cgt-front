@@ -48,7 +48,7 @@ function getById(id) {
     url: `${baseApi}/${id}`,
   })
 }
-function put(data) {
+function update(data) {
   return request({
     url: `${baseApi}`,
     data,
@@ -69,9 +69,9 @@ const UserServices = {
   profile,
   create,
   getById,
-  put,
+  update,
   destroy,
-  get
+  get,
 }
 
 export default UserServices
