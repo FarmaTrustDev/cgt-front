@@ -8,7 +8,7 @@
           rules: [
             {
               required: true,
-              message: 'Please select your Treatment Type!',
+              message: 'Please select your LogisticProvider!',
             },
           ],
         },

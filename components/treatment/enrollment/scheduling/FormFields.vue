@@ -220,7 +220,7 @@
   </div>
 </template>
 <script>
-import LogisticLookup from '~/components/lookups/LogisticLookup.vue'
+import LogisticLookup from '~/components/lookups/LogisticLookup'
 import { STANDARD_UK_DATE_FORMATE } from '~/services/Constant/DateTime'
 export default {
   components: { LogisticLookup },
