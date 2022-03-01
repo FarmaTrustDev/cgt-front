@@ -93,3 +93,4 @@ sw.*
 .vs/VSWorkspaceState.json
 .vs/cgt-front/v16/.suo
 package-lock.json
+.vscode/settings.json

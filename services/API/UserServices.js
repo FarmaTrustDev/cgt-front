@@ -72,7 +72,7 @@ const UserServices = {
   getById,
   update,
   destroy,
-  get
+  get,
 }
 
 export default UserServices
