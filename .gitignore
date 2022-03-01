@@ -88,3 +88,8 @@ sw.*
 
 # Vim swap files
 *.swp
+.vs/slnx.sqlite
+.vs/ProjectSettings.json
+.vs/VSWorkspaceState.json
+.vs/cgt-front/v16/.suo
+package-lock.json
