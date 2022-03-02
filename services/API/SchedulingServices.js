@@ -68,6 +68,14 @@ function getDetailByTreatment(id, params = {}) {
   })
 }
 
+function createForManufacturer(data) {
+  return request({
+    url: `${baseApi}/create-for-manufacturer`,
+    data,
+    method: 'POST',
+  })
+}
+
 const SchedulingServices = {
   get,
   create,
@@ -78,6 +86,7 @@ const SchedulingServices = {
   markScheduleRequest,
   getDetailById,
   getDetailByTreatment,
+  createForManufacturer,
 }
 
 export default SchedulingServices

@@ -2,9 +2,38 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <LogisticLookup />
+
       <a-row :gutter="16">
         <a-col :span="12">
           <a-form-item label="Sample Collection Date" class="pb-0">
+            <a-input
+              v-decorator="[
+                `treatmentId`,
+                {
+                  initialValue: treatment.id,
+                },
+              ]"
+              type="hidden"
+            />
+
+            <a-input
+              v-decorator="[
+                `hospitalId`,
+                {
+                  initialValue: treatment.hospitalId,
+                },
+              ]"
+              type="hidden"
+            />
+            <a-input
+              v-decorator="[
+                `patientId`,
+                {
+                  initialValue: treatment.patientId,
+                },
+              ]"
+              type="hidden"
+            />
             <a-date-picker
               v-decorator="[
                 'collectionDate',
@@ -56,10 +85,16 @@
 </template>
 <script>
 import LogisticLookup from '~/components/lookups/LogisticLookup'
+import SchedulingServices from '~/services/API/SchedulingServices'
 import { STANDARD_UK_DATE_FORMATE } from '~/services/Constant/DateTime'
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import notifications from '~/mixins/notifications'
 export default {
+  mixins: [notifications],
   components: { LogisticLookup },
+  props: {
+    treatment: { type: Object, required: true },
+  },
   data() {
     return {
       loading: false,
@@ -80,7 +115,11 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
+          SchedulingServices.createForManufacturer(values)
+            .then((response) => {
+              this.success(response.message)
+            })
+            .catch(this.error)
         }
       })
     },
