@@ -3,7 +3,11 @@
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <formfield />
       <a-form-item>
-        <a-button type="primary" html-type="submit">Submit</a-button>
+        <FormActionButton
+          :is-created="isCreated"
+          :loading="loading"
+          custom-text="Save User & Continue"
+        />
       </a-form-item>
     </a-form>
   </div>
@@ -14,7 +18,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import UserServices from '~/services/API/UserServices'
-import formfield from '~/components/root/user/form/FormField.vue'
+import formfield from '~/components/root/user/form/FormField'
 
 export default {
   components: { formfield },
@@ -25,26 +29,19 @@ export default {
       loading: false,
       successResponse: '',
       showError: false,
+      user: {},
+      entityId: null,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
         name: 'usersCreate',
       }),
-      gotoLink: '/user',
+      gotoLink: '/users',
       apiService: UserServices,
     }
   },
+  mounted() {
+  },
   methods: {
-    // onSubmit(e) {
-    //   this.loading = true
-    //   e.preventDefault()
-    //   this.form.validateFields((err, values) => {
-    //     if (!err) {
-    //       console.log(values)
-    //     } else {
-    //       this.loading = false
-    //     }
-    //   })
-    // },
   },
 }
 </script>

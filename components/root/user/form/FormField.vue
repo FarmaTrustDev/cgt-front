@@ -7,11 +7,12 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
+        
           <a-input
             v-decorator="[
               'firstName',
               {
-                initialValue: user.firstName,
+                initialValue: entity.firstName,
                 rules: [
                   {
                     required: true,
@@ -29,11 +30,12 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
+        
           <a-input
             v-decorator="[
-              'LastName',
+              'lastName',
               {
-                initialValue: user.lastName,
+                initialValue: entity.lastName,
                 rules: [
                   {
                     required: true,
@@ -42,7 +44,7 @@
                 ],
               },
             ]"
-            placeholder="Please input your last Name"
+            placeholder="Please input your Last Name"
           />
         </a-form-item>
       </a-col>
@@ -56,7 +58,7 @@
             v-decorator="[
               'email',
               {
-                initialValue: user.email,
+                initialValue: entity.email,
                 rules: [
                   {
                     required: true,
@@ -78,7 +80,7 @@
             v-decorator="[
               'userName',
               {
-                initialValue: user.userName,
+                initialValue: entity.userName,
                 rules: [
                   {
                     required: true,
@@ -99,7 +101,7 @@
             v-decorator="[
               'address',
               {
-                initialValue: user.address,
+                initialValue: entity.address,
                 rules: [
                   {
                     required: true,
@@ -120,9 +122,9 @@
         >
           <a-input
             v-decorator="[
-              'contactNumber',
+              'phone',
               {
-                initialValue: user.contactNumber,
+                initialValue: entity.phone,
                 rules: [
                   {
                     required: true,
@@ -146,7 +148,7 @@
             v-decorator="[
               'What3Words',
               {
-                initialValue: user.What3Words,
+                initialValue: entity.What3Words,
                 rules: [
                   {
                     required: true,
@@ -170,7 +172,7 @@
             v-decorator="[
               'department',
               {
-                initialValue: user.department,
+                initialValue: entity.department,
                 rules: [
                   {
                     required: true,
@@ -185,7 +187,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Postcode"
+          label="Post Code"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -194,7 +196,7 @@
             v-decorator="[
               'postcode',
               {
-                initialValue: user.postcode,
+                initialValue: entity.postCode,
                 rules: [
                   {
                     required: true,
@@ -207,6 +209,7 @@
           />
         </a-form-item>
       </a-col>
+      
       <a-col :span="12">
         <a-form-item
           label="Location"
@@ -218,7 +221,7 @@
             v-decorator="[
               'location',
               {
-                initialValue: user.location,
+                initialValue: entity.location,
                 rules: [
                   {
                     required: true,
@@ -240,9 +243,9 @@
         >
           <a-input
             v-decorator="[
-              'postalAddress:',
+              'address:',
               {
-                initialValue: user.postalAddress,
+                initialValue: entity.address,
                 rules: [
                   {
                     required: true,
@@ -266,7 +269,7 @@
             v-decorator="[
               'county:',
               {
-                initialValue: user.county,
+                initialValue: entity.county,
                 rules: [
                   {
                     required: true,
@@ -290,7 +293,7 @@
             v-decorator="[
               'country:',
               {
-                initialValue: user.country,
+                initialValue: entity.country,
                 rules: [
                   {
                     required: true,
@@ -308,21 +311,27 @@
 </template>
 
 <script>
+import UserServices from '~/services/API/UserServices'
+import withCrud from '~/mixins/with-crud'
 export default {
-  props: {
-    user: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
+  
+  mixins: [withCrud],
+  
   data() {
     return {
-      typeLoading: true,
+      entity:{},
+      entityId: null,
+      loading: false,
+      form: this.$form.createForm(this, {
+        name: 'user',
+      }),
+      formLayout: 'vertical',
+      apiService: UserServices,
     }
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
-    onSubmit() {},
   },
 }
 </script>

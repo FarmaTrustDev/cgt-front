@@ -31,9 +31,10 @@ function profile() {
     url: `${baseApi}/profile`,
   })
 }
-function get() {
+function get(params = {}) {
   return request({
     url: `${baseApi}`,
+    params,
   })
 }
 function create(data) {
@@ -48,11 +49,11 @@ function getById(id) {
     url: `${baseApi}/${id}`,
   })
 }
-function update(data) {
+function update(id,data) {
   return request({
-    url: `${baseApi}`,
+    url: `${baseApi}/${id}`,
     data,
-    method: 'put',
+    method: 'PATCH',
   })
 }
 function destroy(id) {

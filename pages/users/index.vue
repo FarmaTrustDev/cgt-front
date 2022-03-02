@@ -11,12 +11,6 @@
           <a-button type="link" @click="goto(`/users/${action.globalId}`)"
             ><a-icon type="edit"
           /></a-button>
-
-          <!-- <a-button
-            type="link"
-            @click="goto(`/organizations/${action.id}`)"
-            ><a-icon type="edit"
-          /></a-button> -->
         </template>
       </a-table>
     </template>
