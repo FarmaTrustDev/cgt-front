@@ -43,6 +43,7 @@ import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
+import { SCHEDULING_STATUSES } from '~/services/Constant'
 const column = [
   {
     title: 'Patient Id',
@@ -85,7 +86,7 @@ export default {
       showResponseModal: false,
       isAccepted: false,
       params: {
-        statuses: [1],
+        manufacturerStatus: SCHEDULING_STATUSES.new.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
       },
