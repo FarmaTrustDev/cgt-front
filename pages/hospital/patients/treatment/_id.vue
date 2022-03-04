@@ -7,7 +7,7 @@
   >
     <template slot="content">
       <detail :treatment="entity" @fetchTreatment="fetchMethod" />
-      <status v-if="!isEmpty(entity.patient)" :treatment="entity" />
+      <TreatmentView v-if="!isEmpty(entity.patient)" :treatment="entity" />
     </template>
   </page-layout>
 </template>
@@ -18,9 +18,9 @@ import PageLayout from '~/components/layout/PageLayout'
 import withFetch from '~/mixins/with-fetch'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
-import status from '~/components/treatment/status'
+import TreatmentView from '~/components/treatment/view'
 export default {
-  components: { detail, 'page-layout': PageLayout, status },
+  components: { detail, 'page-layout': PageLayout, TreatmentView },
   mixins: [withFetch],
   middleware: 'auth',
   data() {

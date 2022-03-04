@@ -29,8 +29,6 @@
           :treatment="treatment"
         />
       </a-row>
-      <status v-if="!isEmpty(treatment.patient)" :treatment="treatment" />
-      <TreatmentView />
     </div>
   </div>
 </template>
@@ -39,16 +37,13 @@
 import TreatmentDetails from '~/components/scheduling/TreatmentDetails'
 import PatientDetails from '~/components/patient/Detail'
 import ProfilePictureCard from '~/components/patient/ProfilePictureCard'
-import TreatmentView from '~/components/treatment/view'
-import status from '~/components/treatment/status'
+
 import { isEmpty } from '~/services/Helpers'
 export default {
   components: {
     TreatmentDetails,
     PatientDetails,
     ProfilePictureCard,
-    TreatmentView,
-    status,
   },
   props: {
     treatment: { type: Object, required: true },

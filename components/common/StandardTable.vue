@@ -1,32 +1,34 @@
 <template>
   <a-table
     :loading="loading"
-    :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
+    :pagination="{
+      defaultPageSize: 10,
+      showSizeChanger: true,
+      pageSizeOptions: ['10', '20', '30', '50', '100'],
+    }"
     :columns="columns"
     :data-source="data"
-    :class="{ 'rounded-table': rounded, 'patient-table' : patient }"
+    :class="{ 'rounded-table': rounded, 'patient-table': patient }"
   >
-
-    <template slot='customTitle'>
-      <div class="text-left treatment-title" >Treatment Type</div>
+    <template slot="customTitle">
+      <div class="text-left treatment-title">Treatment Type</div>
       <div class="text-left treatment-title">Treatment Status</div>
     </template>
 
     <template slot="name" slot-scope="name">
-      <strong>{{name}}</strong>
+      <strong>{{ name }}</strong>
     </template>
 
     <span slot="treatment_status" slot-scope="text, record">
-      
-
-
       <div class="treatment-steps">
         <span v-for="treatment in record.treatments" :key="treatment.id">
           <!-- <span class="treatment-name-col">
 
           </span> -->
           <span class="step-col">
-            <span class="treatment-name-col">{{treatment.treatmentTypeName}}</span>
+            <span class="treatment-name-col">{{
+              treatment.treatmentTypeName
+            }}</span>
             <a-steps :current="getCurrentStep(treatment)" size="small">
               <a-step title="Screening" @click="stepClick(record, treatment)" />
               <span class="sep-line sep-line-active"></span>
@@ -56,14 +58,17 @@
               <a-step
                 title="After care"
                 @click="gotoCollectionScreen(record, treatment)"
-              /> </a-steps
-          >
+              />
+            </a-steps>
 
-          <a-button class="btn-view-timeline" type="primary" size="small">View</a-button>
-        </span>
-
-
-
+            <a-button
+              class="btn-view-timeline"
+              type="primary"
+              size="small"
+              @click="gotoView(record, treatment)"
+              >View</a-button
+            >
+          </span>
         </span>
       </div>
     </span>
@@ -191,6 +196,11 @@ export default {
         this.goto(`/hospital/patients/collection/${treatment.globalId}`, {
           treatment_id: treatment.globalId,
         })
+      }
+    },
+    gotoView(patient, treatment) {
+      if (!isEmpty(treatment)) {
+        this.goto(`/hospital/patients/treatment/${treatment.globalId}`)
       }
     },
     clickUpdate(record) {
