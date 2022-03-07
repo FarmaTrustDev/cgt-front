@@ -63,6 +63,13 @@ function manufacturing(params = {}) {
   })
 }
 
+function getCustody(id, typeId) {
+  return request({
+    url: `${baseApi}/chain-of-custody/${id}/${typeId}`,
+    method: 'Get',
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
@@ -72,6 +79,7 @@ const TreatmentServices = {
   manufacturing,
   markCompleteCollection,
   markManufacturerCollection,
+  getCustody,
 }
 
 export default TreatmentServices
