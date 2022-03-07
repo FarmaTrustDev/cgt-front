@@ -2,7 +2,7 @@
   <div>
     <a-tabs :active-key="activeTab" type="card" @change="onTabChange">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid"
-        ><Steps
+        ><Steps :bag="bag" :treatment="treatment"
       /></a-tab-pane>
     </a-tabs>
   </div>
@@ -10,6 +10,7 @@
 <script>
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import Steps from '~/components/treatment/view/Steps'
+
 export default {
   components: { Steps },
   props: {
@@ -30,8 +31,8 @@ export default {
         }
       )
     },
-    onTabChange(key) {
-      this.activeTab = key
+    onTabChange(bagId) {
+      this.activeTab = bagId
     },
   },
 }

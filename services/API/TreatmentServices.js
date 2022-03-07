@@ -63,9 +63,9 @@ function manufacturing(params = {}) {
   })
 }
 
-function getCustody(id, typeId) {
+function getCustody(treatmentId, bagId, typeId) {
   return request({
-    url: `${baseApi}/chain-of-custody/${id}/${typeId}`,
+    url: `${baseApi}/chain-of-custody/${treatmentId}/${bagId}/${typeId}`,
     method: 'Get',
   })
 }
