@@ -9,6 +9,12 @@ function detail(data) {
     data,
   })
 }
+function adminMenu(data) {
+  return request({
+    url: `${baseApi}/adminMenu`,
+    data,
+  })
+}
 function users() {
   return request({
     url: `${baseApi}/users`,
@@ -64,6 +70,7 @@ function destroy(id) {
 }
 const UserServices = {
   detail,
+  adminMenu,
   adminSubMenus,
   users,
   hospitals,
