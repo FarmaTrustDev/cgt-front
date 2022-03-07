@@ -3,67 +3,40 @@
     <a-col>
       <a-card :bordered="false" class="default-card">
         <a-tabs type="card">
-          <a-tab-pane key="1" tab="Hospital">
-            <a-timeline>
-              <a-timeline-item
-                ><div>
-                  Create a services site 2015-09-01 <br />Create a services site
-                  2015-09-01
-                </div></a-timeline-item
-              >
-              <a-timeline-item
-                >Solve initial network problems 2015-09-01</a-timeline-item
-              >
-              <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
-              <a-timeline-item
-                >Network problems being solved 2015-09-01</a-timeline-item
-              >
-            </a-timeline>
-          </a-tab-pane>
-          <a-tab-pane key="2" tab="Logistics">
-            <a-timeline>
-              <a-timeline-item
-                >Create a services site 2015-09-01</a-timeline-item
-              >
-              <a-timeline-item
-                >Solve initial network problems 2015-09-01</a-timeline-item
-              >
-              <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
-              <a-timeline-item
-                >Network problems being solved 2015-09-01</a-timeline-item
-              >
-            </a-timeline>
-          </a-tab-pane>
-          <a-tab-pane key="3" tab="Manufacturer">
-            <a-timeline>
-              <a-timeline-item
-                >Create a services site 2015-09-01</a-timeline-item
-              >
-              <a-timeline-item
-                >Solve initial network problems 2015-09-01</a-timeline-item
-              >
-              <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
-              <a-timeline-item
-                >Network problems being solved 2015-09-01</a-timeline-item
-              >
-            </a-timeline>
-          </a-tab-pane>
-          <a-tab-pane key="4" tab="Logistics">
-            <a-timeline>
-              <a-timeline-item
-                >Create a services site 2015-09-01</a-timeline-item
-              >
-              <a-timeline-item
-                >Solve initial network problems 2015-09-01</a-timeline-item
-              >
-              <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
-              <a-timeline-item
-                >Network problems being solved 2015-09-01</a-timeline-item
-              >
-            </a-timeline>
+          <a-tab-pane v-for="step in tabs" :key="step.id" :tab="step.name"
+            ><Timeline
+              :bag="bag"
+              :treatment="treatment"
+              :step-type-id="step.id"
+              step="Timeline"
+            />
           </a-tab-pane>
         </a-tabs>
       </a-card>
     </a-col>
   </a-row>
 </template>
+<script>
+import Timeline from '~/components/treatment/view/Timeline'
+const steps = [
+  { id: 1, name: 'Hospital', alias: 'Hospital' },
+  { id: 2, name: 'Logistics', alias: 'OutBoundLogistic' },
+  { id: 3, name: 'Manufacturer', alias: 'Manufacturer' },
+  { id: 4, name: 'Logistics', alias: 'InBoundLogistic' },
+  { id: 5, name: 'Treatment', alias: 'Treatment' },
+]
+export default {
+  components: { Timeline },
+  props: {
+    treatment: { required: true, type: Object },
+    bag: { required: true, type: Object },
+  },
+  data() {
+    return { tabs: steps }
+  },
+  mounted() {},
+  methods: {
+    fetchSteps() {},
+  },
+}
+</script>
