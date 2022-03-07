@@ -32,6 +32,13 @@ function update(id, data) {
   })
 }
 
+function destroy(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'DELETE',
+  })
+}
+
 function getByTreatmentTypeId(treatmentId) {
   return request({
     url: `${baseApi}/treatment-type/${treatmentId}`,
@@ -51,6 +58,7 @@ const ScreeningCategoryServices = {
   update,
   getByTreatmentTypeId,
   getByTreatmentId,
+  destroy,
 }
 
 export default ScreeningCategoryServices
