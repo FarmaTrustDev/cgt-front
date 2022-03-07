@@ -17,6 +17,7 @@ import detail from '~/components/treatments/details'
 import PageLayout from '~/components/layout/PageLayout'
 import withFetch from '~/mixins/with-fetch'
 import TreatmentServices from '~/services/API/TreatmentServices'
+
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 import TreatmentView from '~/components/treatment/view'
 export default {
@@ -27,6 +28,7 @@ export default {
     return {
       apiService: TreatmentServices,
       fetchMethod: TreatmentServices.detail,
+      bags: null,
     }
   },
   mounted() {
@@ -37,19 +39,21 @@ export default {
   },
   methods: {
     afterFetch(data) {
-      // console.log(data)
+      // TreatmentServices.getCustody(this.entity.id, 1).then((treatment) => {})
     },
     fetchTreatment(id) {
       TreatmentServices.detail(id).then((treatment) => {
         this.entity = treatment.data
       })
     },
+
     registerFetchTreatment() {
       const fetchTreatment = this.fetchTreatment
       this.$nuxt.$on(EVENT_FETCH_TREATMENT_DETAIL, (id) => {
         fetchTreatment(id)
       })
     },
+    chainOfCustody() {},
   },
 }
 </script>
