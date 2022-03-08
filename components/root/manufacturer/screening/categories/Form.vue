@@ -86,6 +86,9 @@ export default {
     afterUpdate(response) {
       this.$emit('upsert', response)
     },
+    afterDelete(response) {
+      this.$emit('upsert', response)
+    },
   },
 }
 </script>
