@@ -50,10 +50,7 @@
                 title="Treatment"
                 @click="gotoCollectionScreen(record, treatment)"
               />
-              <span class="sep-line"></span>
-              <a-step title="Shipment" @click="stepClick(record, treatment)" />
-              <span class="sep-line"></span>
-              <a-step title="Treatment" @click="stepClick(record, treatment)" />
+
               <span class="sep-line"></span>
               <a-step
                 title="After care"
@@ -67,6 +64,13 @@
               size="small"
               @click="gotoView(record, treatment)"
               >View</a-button
+            >
+            <a-button
+              class="btn-view-timeline"
+              type="primary"
+              size="small"
+              @click="gotoView(record, treatment)"
+              >Admin</a-button
             >
           </span>
         </span>

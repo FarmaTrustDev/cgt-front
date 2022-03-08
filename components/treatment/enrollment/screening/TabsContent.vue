@@ -77,7 +77,7 @@
             ]"
             type="hidden"
           />
-           <a-input
+          <a-input
             v-decorator="[
               `screenings[id-${row.id}][manufacturer_id]`,
               {
