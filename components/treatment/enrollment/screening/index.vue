@@ -6,13 +6,15 @@
       @getNextTab="getNextTab"
       @getTreatment="getTreatment"
     />
+    <CollectedList v-else :categories="categories" />
   </div>
 </template>
 <script>
 import Create from '~/components/treatment/enrollment/screening/Create'
+import CollectedList from '~/components/treatment/enrollment/screening/CollectedList'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 export default {
-  components: { Create },
+  components: { Create, CollectedList },
 
   props: {
     treatment: {
