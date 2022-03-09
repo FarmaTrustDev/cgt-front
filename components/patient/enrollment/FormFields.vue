@@ -246,13 +246,15 @@
             v-decorator="[
               'postCode',
               {
-                initialValue: patient.postCode,
+                initialValue: patient.postCode || '',
                 rules: [
                   { required: true, message: 'Please input your Post Code!' },
                 ],
               },
             ]"
+            name="postCode"
             placeholder="Please input your Post Code"
+            id="postCode"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -380,13 +382,10 @@ import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
+// import PatientServices from '~/services/API/PatientServices'
 // import { isEmpty } from '~/services/Utilities'
 export default {
   props: {
-    patient: {
-      type: Object,
-      default: () => ({}),
-    },
     isCreated: {
       type: Boolean,
       default: false,
@@ -395,9 +394,17 @@ export default {
   data() {
     return {
       Gender: GENDER,
+      patient:{},
       bloodType: BLOOD_TYPES,
       countries: [],
       fetchCountry: true,
+      postCode: '',
+      countryId:'',
+      cityName:'',
+      countryName:'',
+      form: this.$form.createForm(this, {
+        name: 'patientEnrollment',
+      }),
     }
   },
   mounted() {
@@ -427,6 +434,19 @@ export default {
     searchCountries(name, b) {
       this.fetchCountries({ name })
     },
+    /* postCodeChange(data) {
+      PatientServices.getMapInfo(data.target.value).then((response) => {
+        // alert(response.result.address_components[1].long_name)
+        if(response.result.address_components[1].long_name){
+          this.form.setFieldsValue(
+            {
+              // aler()
+              // City:response.result.address_components[1].long_name
+            }
+          )
+        }
+      })
+    }, */
   },
 }
 </script>

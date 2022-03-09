@@ -5,7 +5,6 @@
         <a-card :bordered="false" class="default-border-radius">
           <h2>Add User Details</h2>
           <formField class="mt-15" />
-        </formField>
       </a-card>
     </div>
     </template>

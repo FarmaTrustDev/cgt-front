@@ -38,7 +38,7 @@ export default {
         .then((response) => {
           this.userAdminMenu=response.data
         })
-      
+
     },
   },
 }

@@ -243,7 +243,7 @@
         >
           <a-input
             v-decorator="[
-              'address:',
+              'address',
               {
                 initialValue: entity.address,
                 rules: [
@@ -267,7 +267,7 @@
         >
           <a-input
             v-decorator="[
-              'county:',
+              'County',
               {
                 initialValue: entity.county,
                 rules: [
@@ -286,24 +286,33 @@
         <a-form-item
           label="Country"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-          class="pb-0"
+          :wrapper-col="{ span: 22 }"
         >
-          <a-input
+          <a-select
             v-decorator="[
-              'country:',
+              'countryId',
               {
-                initialValue: entity.country,
+                initialValue: entity.countryId,
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Country',
+                    message: 'Please select your country!',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your Country"
-          />
+            :show-search="true"
+            :filter-option="filterOption"
+            placeholder="Select Country"
+            style="width: 100%"
+            size="large"
+            class="default-select"
+            @search="searchCountries"
+          >
+            <a-select-option v-for="country in countries" :key="country.id">
+              {{ country.name }}
+            </a-select-option>
+          </a-select>
         </a-form-item>
       </a-col>
     </a-row>
@@ -312,7 +321,10 @@
 
 <script>
 import UserServices from '~/services/API/UserServices'
+import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import withCrud from '~/mixins/with-crud'
+import { filterOption } from '~/services/Helpers'
+import CountryServices from '~/services/API/CountryServices'
 export default {
   
   mixins: [withCrud],
@@ -322,16 +334,39 @@ export default {
       entity:{},
       entityId: null,
       loading: false,
-      form: this.$form.createForm(this, {
-        name: 'user',
-      }),
+      countries: [],
+      fetchCountry: true,
       formLayout: 'vertical',
       apiService: UserServices,
     }
   },
   mounted() {
+    this.getCountries()
+  },
+  updated() {
+    if (this.isCreated && this.fetchCountry) {
+      this.fetchCountry = false
+      this.getCountries()
+    }
   },
   methods: {
+    filterOption,
+    disabledDate: _disabledFutureDate,
+    fetchCountries(params = {}) {
+      CountryServices.get(params).then((response) => {
+        this.countries = response.data.data
+      })
+    },
+    getCountries() {
+      if (this.isCreated) {
+        this.fetchCountries({ Ids: [this.entity.counryId] })
+      } else {
+        this.fetchCountries()
+      }
+    },
+    searchCountries(name, b) {
+      this.fetchCountries({ name })
+    },
   },
 }
 </script>
