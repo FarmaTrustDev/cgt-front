@@ -86,12 +86,12 @@
 <script>
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import SchedulingServices from '~/services/API/SchedulingServices'
-import { STANDARD_UK_DATE_FORMATE } from '~/services/Constant/DateTime'
+import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import notifications from '~/mixins/notifications'
 export default {
-  mixins: [notifications],
   components: { LogisticLookup },
+  mixins: [notifications],
   props: {
     treatment: { type: Object, required: true },
   },
@@ -102,7 +102,7 @@ export default {
       form: this.$form.createForm(this, {
         name: 'scheduling',
       }),
-      dateFormat: STANDARD_UK_DATE_FORMATE,
+      dateFormat: STANDARD_UK_DATE_FORMAT,
     }
   },
   methods: {

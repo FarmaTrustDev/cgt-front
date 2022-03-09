@@ -51,8 +51,7 @@ export default {
     },
     getMomentByStandardFormat,
     getEventClick(detail) {
-      //  this.entity.manufacturerName =
-
+      console.log(detail)
       SchedulingServices.getEstimation(detail.event._def.publicId).then(
         (response) => {
           const data = response.data

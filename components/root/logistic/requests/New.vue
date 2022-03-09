@@ -86,7 +86,7 @@ export default {
       showResponseModal: false,
       isAccepted: false,
       params: {
-        statuses: [SCHEDULING_STATUSES.new.id],
+        statuses: [SCHEDULING_STATUSES.new.id, SCHEDULING_STATUSES.pending.id],
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
         manufacturerStatus: SCHEDULING_STATUSES.accepted.id,

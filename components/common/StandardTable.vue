@@ -1,11 +1,7 @@
 <template>
   <a-table
     :loading="loading"
-    :pagination="{
-      defaultPageSize: 10,
-      showSizeChanger: true,
-      pageSizeOptions: ['10', '20', '30', '50', '100'],
-    }"
+    :pagination="pagination"
     :columns="columns"
     :data-source="data"
     :class="{ 'rounded-table': rounded, 'patient-table': patient }"
@@ -19,6 +15,22 @@
       <strong>{{ name }}</strong>
     </template>
 
+    <template slot="check" slot-scope="flag">
+      <strong>{{ text }}</strong>
+      <a-icon
+        v-if="flag"
+        type="check-circle"
+        two-tone-color="#52c41a"
+        theme="twoTone"
+      />
+
+      <a-icon
+        v-else
+        type="close-circle"
+        two-tone-color="#eb2f96"
+        theme="twoTone"
+      />
+    </template>
     <span slot="treatment_status" slot-scope="text, record">
       <div class="treatment-steps">
         <span v-for="treatment in record.treatments" :key="treatment.id">
@@ -50,10 +62,7 @@
                 title="Treatment"
                 @click="gotoCollectionScreen(record, treatment)"
               />
-              <span class="sep-line"></span>
-              <a-step title="Shipment" @click="stepClick(record, treatment)" />
-              <span class="sep-line"></span>
-              <a-step title="Treatment" @click="stepClick(record, treatment)" />
+
               <span class="sep-line"></span>
               <a-step
                 title="After care"
@@ -61,13 +70,42 @@
               />
             </a-steps>
 
-            <a-button
+            <!-- <a-button
               class="btn-view-timeline"
               type="primary"
               size="small"
               @click="gotoView(record, treatment)"
               >View</a-button
-            >
+            > -->
+            <a-dropdown>
+              <a-button
+                class="btn-view-timeline"
+                type="primary"
+                size="small"
+                @click="gotoView(record, treatment)"
+                >Admin</a-button
+              >
+              <a-menu slot="overlay">
+                <a-menu-item>
+                  <a href="javascript:;" @click="gotoView(record, treatment)"
+                    ><a-icon type="search" /> View</a
+                  >
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;"
+                    ><a-icon type="minus-circle" /> Pause</a
+                  >
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;"
+                    ><a-icon type="minus-circle" /> Cancel</a
+                  >
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;"><a-icon type="delete" /> Delete</a>
+                </a-menu-item>
+              </a-menu>
+            </a-dropdown>
           </span>
         </span>
       </div>
@@ -137,15 +175,18 @@ export default {
   mixins: [routeHelpers, notifications],
   props: {
     columns: { type: Array, default: () => [] },
-    // data: { type: Array, default: () => [] },
-    pagination: { type: Boolean, default: false },
+    dumpData: { type: Array, default: () => [] },
+    // eslint-disable-next-line vue/require-prop-types
+    pagination: { required: false, default: false },
     actionLink: { type: String, default: '' },
-    apiService: { type: Object, required: true },
+    // eslint-disable-next-line vue/require-default-prop
+    apiService: { type: Object, required: false },
     // eslint-disable-next-line vue/require-default-prop
     fetchFrom: { type: Function, required: false },
     params: { type: Object, default: () => ({}) },
     rounded: { type: Boolean, default: false },
     patient: { type: Boolean, default: false },
+    shouldFetch: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -154,8 +195,12 @@ export default {
     }
   },
   mounted() {
-    this.fetch()
-    this.getFetchMethod()
+    if (this.shouldFetch) {
+      this.fetch()
+      this.getFetchMethod()
+    } else {
+      this.data = this.dumpData
+    }
   },
   methods: {
     preventDefault,
