@@ -21,7 +21,9 @@
             v-decorator="[
               'treatmentAvailabilityId',
               {
-                rules: [{ required: true, message: 'Please input your Email!' }],
+                rules: [
+                  { required: true, message: 'Please input your Email!' },
+                ],
                 initialValue: entity.treatmentAvailabilityId,
               },
             ]"
@@ -51,9 +53,9 @@
         <a-form-item label="Sample Collection Date">
           <a-date-picker
             v-decorator="[
-              'hospitalCollectionDate',
+              'collectionDate',
               {
-                initialValue: entity.hospitalCollectionDate,
+                initialValue: entity.collectionDate,
                 rules: [
                   {
                     required: true,
