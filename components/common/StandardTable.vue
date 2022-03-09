@@ -70,20 +70,42 @@
               />
             </a-steps>
 
-            <a-button
+            <!-- <a-button
               class="btn-view-timeline"
               type="primary"
               size="small"
               @click="gotoView(record, treatment)"
               >View</a-button
-            >
-            <a-button
-              class="btn-view-timeline"
-              type="primary"
-              size="small"
-              @click="gotoView(record, treatment)"
-              >Admin</a-button
-            >
+            > -->
+            <a-dropdown>
+              <a-button
+                class="btn-view-timeline"
+                type="primary"
+                size="small"
+                @click="gotoView(record, treatment)"
+                >Admin</a-button
+              >
+              <a-menu slot="overlay">
+                <a-menu-item>
+                  <a href="javascript:;" @click="gotoView(record, treatment)"
+                    ><a-icon type="search" /> View</a
+                  >
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;"
+                    ><a-icon type="minus-circle" /> Pause</a
+                  >
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;"
+                    ><a-icon type="minus-circle" /> Cancel</a
+                  >
+                </a-menu-item>
+                <a-menu-item>
+                  <a href="javascript:;"><a-icon type="delete" /> Delete</a>
+                </a-menu-item>
+              </a-menu>
+            </a-dropdown>
           </span>
         </span>
       </div>
