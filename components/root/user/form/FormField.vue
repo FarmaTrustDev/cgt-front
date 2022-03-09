@@ -359,7 +359,7 @@ export default {
     },
     getCountries() {
       if (this.isCreated) {
-        this.fetchCountries({ Ids: [this.entity.counryId] })
+        this.fetchCountries({ Ids: [this.entity.coutryId] })
       } else {
         this.fetchCountries()
       }
