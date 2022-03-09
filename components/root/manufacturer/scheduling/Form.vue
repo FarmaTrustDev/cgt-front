@@ -14,14 +14,14 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Category Name!',
+                    message: 'Please input Description!',
                   },
                 ],
                 initialValue: entity.description,
               },
             ]"
             size="large"
-            placeholder="Insert Category Name"
+            placeholder="Insert Description"
           />
         </a-form-item>
         <a-form-item label="Duration">
@@ -33,7 +33,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Address!',
+                    message: 'Please input Duration!',
                   },
                 ],
               },
@@ -41,7 +41,7 @@
             size="large"
             class="default-select w-100"
             type="number"
-            placeholder="Please input your Address"
+            placeholder="Please input Duration"
           >
             <a-icon slot="prefix" type="calendar"
           /></a-input-number>
@@ -55,7 +55,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Address!',
+                    message: 'Please input Price!',
                   },
                 ],
               },
@@ -63,7 +63,7 @@
             size="large"
             type="number"
             class="default-select w-100"
-            placeholder="Please input your Address"
+            placeholder="Please input Price"
           >
             <span slot="prefix">$</span>
           </a-input-number>
