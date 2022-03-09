@@ -399,7 +399,6 @@ export default {
       countries: [],
       fetchCountry: true,
       postCode: '',
-      countryId:'',
       cityName:'',
       countryName:'',
       form: this.$form.createForm(this, {
