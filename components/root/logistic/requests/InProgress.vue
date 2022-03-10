@@ -28,8 +28,8 @@ import {
 const column = [
   {
     title: 'Patient Id',
-    dataIndex: 'patientEnrollmentId',
-    key: 'patientEnrollmentId',
+    dataIndex: 'patientEnrollmentNumber',
+    key: 'patientEnrollmentNumber',
   },
   {
     title: 'Treatment Type',

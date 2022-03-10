@@ -5,7 +5,7 @@
       <span v-if="isAccepted"> {{ modalMessage }}</span>
       <a-descriptions v-else title="Reject Treatment Detail">
         <a-descriptions-item label="Patient ID">
-          {{ data.patientEnrollmentId }}
+          {{ data.patientEnrollmentNumber }}
         </a-descriptions-item>
         <a-descriptions-item :span="2" label="Collection - Delivery Date">
           {{ data.collectionDateDeliveryDate }}

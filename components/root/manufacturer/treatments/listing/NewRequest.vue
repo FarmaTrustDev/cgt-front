@@ -47,8 +47,8 @@ import { SCHEDULING_STATUSES } from '~/services/Constant'
 const column = [
   {
     title: 'Patient Id',
-    dataIndex: 'patientEnrollmentId',
-    key: 'patientEnrollmentId',
+    dataIndex: 'patientEnrollmentNumber',
+    key: 'patientEnrollmentNumber',
   },
   {
     title: 'Treatment Type',
