@@ -27,7 +27,7 @@ export default {
   },
 
   data() {
-    console.log("asd");
+    // console.log("asd");
     return {
       loading: false,
       data: [],
