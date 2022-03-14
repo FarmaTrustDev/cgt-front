@@ -7,7 +7,7 @@
         <FormActionButton
           :is-created="isCreated"
           :loading="loading"
-          custom-text="Save Patient & Continue"
+          text="Save Patient & Continue"
         />
         <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
       </a-form-item>
