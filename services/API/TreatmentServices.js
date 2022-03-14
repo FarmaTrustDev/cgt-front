@@ -53,6 +53,13 @@ function markManufacturerCollection(id) {
   })
 }
 
+function markTreatmentCollection(id) {
+  return request({
+    url: `${baseApi}/mark-treatment-collection/${id}`,
+    method: 'Put',
+  })
+}
+
 function manufacturing(params = {}) {
   return request({
     url: `${baseApi}/manufacturing`,
@@ -79,6 +86,7 @@ const TreatmentServices = {
   manufacturing,
   markCompleteCollection,
   markManufacturerCollection,
+  markTreatmentCollection,
   getCustody,
 }
 
