@@ -390,17 +390,20 @@ export default {
       type: Boolean,
       default: false,
     },
+    patient: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
       Gender: GENDER,
-      patient:{},
       bloodType: BLOOD_TYPES,
       countries: [],
       fetchCountry: true,
       postCode: '',
-      cityName:'',
-      countryName:'',
+      cityName: '',
+      countryName: '',
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }),
