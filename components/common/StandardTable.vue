@@ -41,33 +41,14 @@
             <span class="treatment-name-col">{{
               treatment.treatmentTypeName
             }}</span>
-            <a-steps :current="getCurrentStep(treatment)" size="small">
-              <a-step title="Screening" @click="stepClick(record, treatment)" />
-              <span class="sep-line sep-line-active"></span>
-              <a-step
-                title="Scheduling"
-                @click="stepClick(record, treatment)"
-              />
-              <span class="sep-line"></span>
-              <a-step
-                class="ant-steps-item-active"
-                title="Collection"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
-              <a-step
-                title="Shipment"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
-              <a-step
-                title="Treatment"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
 
-              <span class="sep-line"></span>
+            <a-steps :current="getCurrentStep(treatment)" size="small">
               <a-step
-                title="After care"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
+                v-for="phase in phases"
+                :key="phase.PhaseId"
+                :title="phase.name"
+              >
+              </a-step>
             </a-steps>
 
             <!-- <a-button
@@ -170,7 +151,7 @@
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
 import { isEmpty, preventDefault } from '~/services/Helpers'
-
+import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 export default {
   mixins: [routeHelpers, notifications],
   props: {
@@ -192,6 +173,7 @@ export default {
     return {
       data: [],
       loading: false,
+      phases: PATIENT_TREATMENT_PHASES,
     }
   },
   mounted() {
@@ -226,10 +208,11 @@ export default {
       return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
     },
     getCurrentStep(treatment) {
-      if (treatment.isSCheduled) {
-        return 1
-      }
-      return 3
+      return treatment.phaseId
+      // if (treatment.isSCheduled) {
+      //   return 1
+      // }
+      // return 3
     },
     stepClick(patient, treatment) {
       this.goto(`/hospital/patients/${patient.globalId}`, {
