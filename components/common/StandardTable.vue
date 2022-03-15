@@ -37,6 +37,7 @@
           <!-- <span class="treatment-name-col">
 
           </span> -->
+          <!-- <pre>{{ treatment }}</pre> -->
           <span class="step-col">
             <span class="treatment-name-col">{{
               treatment.treatmentTypeName
@@ -47,6 +48,7 @@
                 v-for="phase in phases"
                 :key="phase.PhaseId"
                 :title="phase.name"
+                @click="stepClick(record, treatment, phase)"
               >
               </a-step>
             </a-steps>
@@ -208,15 +210,25 @@ export default {
       return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
     },
     getCurrentStep(treatment) {
-      return treatment.phaseId
-      // if (treatment.isSCheduled) {
-      //   return 1
-      // }
-      // return 3
+      // this logic is because current state represent the or start with 0
+      return treatment.phaseId === null ? 0 : treatment.phaseId - 1
     },
-    stepClick(patient, treatment) {
-      this.goto(`/hospital/patients/${patient.globalId}`, {
+    stepClick(patient, treatment, phase) {
+      // insane logic
+      //  2 for patient
+      if (
+        phase.id !== 1 &&
+        (treatment.phaseId == null || treatment.phaseId < 2)
+      ) {
+        return false
+      }
+
+      const routeModel =
+        phase.url_type === 1 ? patient.globalId : treatment.globalId
+
+      return this.goto(`${phase.url_slug}${routeModel}`, {
         treatment_id: treatment.globalId,
+        ...phase.params,
       })
     },
     gotoCollectionScreen(patient, treatment) {
