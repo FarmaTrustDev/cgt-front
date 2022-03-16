@@ -156,7 +156,18 @@
               >Add New Treatment</a
             >
           </a-menu-item>
-          <a-menu-item key="3"> Hide Patient </a-menu-item>
+
+          <a-menu-item key="3"> 
+            <a-popconfirm
+              title="Are you to hide patient?"
+              ok-text="Yes"
+              cancel-text="No"
+              placement="topLeft"
+              @confirm="deletePatient(`${record.id}`)"
+            >
+            Hide Patient 
+            </a-popconfirm>
+          </a-menu-item>
         </a-menu>
       </a-dropdown>
     </span>
@@ -170,6 +181,7 @@
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
 import { isEmpty, preventDefault } from '~/services/Helpers'
+import PatientServices from '~/services/API/PatientServices'
 
 export default {
   mixins: [routeHelpers, notifications],
@@ -256,6 +268,9 @@ export default {
     },
     getFetchMethod() {
       this.$emit('getFetch', this.fetch)
+    },
+    deletePatient(record){
+      PatientServices.destroy(record)
     },
   },
 }
