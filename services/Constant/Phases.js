@@ -19,7 +19,7 @@ export const PATIENT_TREATMENT_PHASES = [
         name: 'Scheduling',
         alias: 'SCHEDULING',
         PhaseId: 3,
-        url_slug: '/hospital/patients/collection/',
+        url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'scheduling' }
     },
