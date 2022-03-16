@@ -37,37 +37,20 @@
           <!-- <span class="treatment-name-col">
 
           </span> -->
+          <!-- <pre>{{ treatment }}</pre> -->
           <span class="step-col">
             <span class="treatment-name-col">{{
               treatment.treatmentTypeName
             }}</span>
-            <a-steps :current="getCurrentStep(treatment)" size="small">
-              <a-step title="Screening" @click="stepClick(record, treatment)" />
-              <span class="sep-line sep-line-active"></span>
-              <a-step
-                title="Scheduling"
-                @click="stepClick(record, treatment)"
-              />
-              <span class="sep-line"></span>
-              <a-step
-                class="ant-steps-item-active"
-                title="Collection"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
-              <a-step
-                title="Shipment"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
-              <a-step
-                title="Treatment"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
 
-              <span class="sep-line"></span>
+            <a-steps :current="getCurrentStep(treatment)" size="small">
               <a-step
-                title="After care"
-                @click="gotoCollectionScreen(record, treatment)"
-              />
+                v-for="phase in phases"
+                :key="phase.PhaseId"
+                :title="phase.name"
+                @click="stepClick(record, treatment, phase)"
+              >
+              </a-step>
             </a-steps>
 
             <!-- <a-button
@@ -181,8 +164,15 @@
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
 import { isEmpty, preventDefault } from '~/services/Helpers'
+/* <<<<<<< HEAD
 import PatientServices from '~/services/API/PatientServices'
 
+=======
+import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
+>>>>>>> 5b7558b7fae04c76b6418c22ff0a2b3923fae02e
+*/
+import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
+import PatientServices from '~/services/API/PatientServices'
 export default {
   mixins: [routeHelpers, notifications],
   props: {
@@ -204,6 +194,7 @@ export default {
     return {
       data: [],
       loading: false,
+      phases: PATIENT_TREATMENT_PHASES,
     }
   },
   mounted() {
@@ -238,14 +229,25 @@ export default {
       return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
     },
     getCurrentStep(treatment) {
-      if (treatment.isSCheduled) {
-        return 1
-      }
-      return 3
+      // this logic is because current state represent the or start with 0
+      return treatment.phaseId === null ? 0 : treatment.phaseId - 1
     },
-    stepClick(patient, treatment) {
-      this.goto(`/hospital/patients/${patient.globalId}`, {
+    stepClick(patient, treatment, phase) {
+      // insane logic
+      //  2 for patient
+      if (
+        phase.id !== 1 &&
+        (treatment.phaseId == null || treatment.phaseId < 2)
+      ) {
+        return false
+      }
+
+      const routeModel =
+        phase.url_type === 1 ? patient.globalId : treatment.globalId
+
+      return this.goto(`${phase.url_slug}${routeModel}`, {
         treatment_id: treatment.globalId,
+        ...phase.params,
       })
     },
     gotoCollectionScreen(patient, treatment) {
