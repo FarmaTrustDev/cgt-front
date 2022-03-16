@@ -3,7 +3,7 @@
     :loading="loading"
     :pagination="pagination"
     :columns="columns"
-    :data-source="data"
+    :data-source="[...data]"
     :class="{ 'rounded-table': rounded, 'patient-table': patient }"
   >
     <template slot="customTitle">
@@ -37,16 +37,21 @@
           <!-- <span class="treatment-name-col">
 
           </span> -->
-          <!-- <pre>{{ treatment }}</pre> -->
+          <pre>{{ treatment.phaseId }}</pre>
           <span class="step-col">
             <span class="treatment-name-col">{{
               treatment.treatmentTypeName
             }}</span>
-
-            <a-steps :current="getCurrentStep(treatment)" size="small">
+            {{ getCurrentStep(treatment) }}
+            <a-steps
+              :initial="1"
+              :current="getCurrentStep(treatment)"
+              status="process"
+              size="small"
+            >
               <a-step
                 v-for="phase in phases"
-                :key="phase.PhaseId"
+                :key="phase.phaseId"
                 :title="phase.name"
                 @click="stepClick(record, treatment, phase)"
               >
@@ -164,13 +169,7 @@
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
 import { isEmpty, preventDefault } from '~/services/Helpers'
-/* <<<<<<< HEAD
-import PatientServices from '~/services/API/PatientServices'
 
-=======
-import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
->>>>>>> 5b7558b7fae04c76b6418c22ff0a2b3923fae02e
-*/
 import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 import PatientServices from '~/services/API/PatientServices'
 export default {
@@ -190,6 +189,7 @@ export default {
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
   },
+
   data() {
     return {
       data: [],
@@ -229,8 +229,20 @@ export default {
       return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
     },
     getCurrentStep(treatment) {
+      // Most expensive Operation in whole application
+      if (!isEmpty(treatment.phaseId)) {
+        const closest = this.phases.reduce(function (prev, curr) {
+          return Math.abs(curr.phaseId - treatment.phaseId) <
+            Math.abs(prev.phaseId - treatment.phaseId)
+            ? curr
+            : prev
+        })
+
+        return closest.phaseId
+      }
+      return 1
       // this logic is because current state represent the or start with 0
-      return treatment.phaseId === null ? 0 : treatment.phaseId - 1
+      //  return treatment.phaseId === null ? 1 : treatment.phaseId
     },
     stepClick(patient, treatment, phase) {
       // insane logic
