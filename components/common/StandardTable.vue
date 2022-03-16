@@ -16,7 +16,7 @@
     </template>
 
     <template slot="check" slot-scope="flag">
-      <strong>{{ text }}</strong>
+      <!-- <strong>{{ flag }}</strong> -->
       <a-icon
         v-if="flag"
         type="check-circle"
@@ -140,7 +140,7 @@
             >
           </a-menu-item>
 
-          <a-menu-item key="3"> 
+          <a-menu-item key="3">
             <a-popconfirm
               title="Are you to hide patient?"
               ok-text="Yes"
@@ -148,7 +148,7 @@
               placement="topLeft"
               @confirm="deletePatient(`${record.id}`)"
             >
-            Hide Patient 
+              Hide Patient
             </a-popconfirm>
           </a-menu-item>
         </a-menu>
@@ -271,7 +271,7 @@ export default {
     getFetchMethod() {
       this.$emit('getFetch', this.fetch)
     },
-    deletePatient(record){
+    deletePatient(record) {
       PatientServices.destroy(record)
     },
   },
