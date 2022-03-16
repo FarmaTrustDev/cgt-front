@@ -37,64 +37,14 @@
           <!-- <span class="treatment-name-col">
 
           </span> -->
-          <pre>{{ treatment.phaseId }}</pre>
-          <span class="step-col">
-            <span class="treatment-name-col">{{
-              treatment.treatmentTypeName
-            }}</span>
-            {{ getCurrentStep(treatment) }}
-            <a-steps
-              :initial="1"
-              :current="getCurrentStep(treatment)"
-              status="process"
-              size="small"
-            >
-              <a-step
-                v-for="phase in phases"
-                :key="phase.phaseId"
-                :title="phase.name"
-                @click="stepClick(record, treatment, phase)"
-              >
-              </a-step>
-            </a-steps>
 
-            <!-- <a-button
-              class="btn-view-timeline"
-              type="primary"
-              size="small"
-              @click="gotoView(record, treatment)"
-              >View</a-button
-            > -->
-            <a-dropdown>
-              <a-button
-                class="btn-view-timeline"
-                type="primary"
-                size="small"
-                @click="gotoView(record, treatment)"
-                >Admin</a-button
-              >
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a href="javascript:;" @click="gotoView(record, treatment)"
-                    ><a-icon type="search" /> View</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> Pause</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> Cancel</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;"><a-icon type="delete" /> Delete</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </span>
+          <steps
+            :treatment="treatment"
+            :phases="phases"
+            :current-step="getCurrentStep"
+            :patient="record"
+            :goto-view="stepClick"
+          ></steps>
         </span>
       </div>
     </span>
@@ -169,10 +119,11 @@
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
 import { isEmpty, preventDefault } from '~/services/Helpers'
-
+import steps from '~/components/common/Steps'
 import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 import PatientServices from '~/services/API/PatientServices'
 export default {
+  components: { steps },
   mixins: [routeHelpers, notifications],
   props: {
     columns: { type: Array, default: () => [] },
@@ -241,8 +192,6 @@ export default {
         return closest.phaseId
       }
       return 1
-      // this logic is because current state represent the or start with 0
-      //  return treatment.phaseId === null ? 1 : treatment.phaseId
     },
     stepClick(patient, treatment, phase) {
       // insane logic
