@@ -39,9 +39,12 @@ import notifications from '~/mixins/notifications'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 export default {
-  components: { BagForm, Bag },
+  components: { Bag , BagForm},
   mixins: [notifications],
-  props: { treatment: { required: true, type: Object } },
+  props: {
+    treatment: { required: true, type: Object },
+    showCompleteBtn: { required: true, type: String },
+  },
   data() {
     return {
       showModal: false,
@@ -89,6 +92,11 @@ export default {
             )
           }
         )
+      }
+    },
+    completeAllBags(bags) {
+      if (this.validateAllBagsCompleted(bags)) {
+        this.$emit('completeAllBag', bags)
       } else {
         this.error('Complete all the bags')
       }
@@ -101,6 +109,20 @@ export default {
 
             return false
           }
+          // check each bag related collection should be mark completed or collected
+          if (!isEmpty(bags[bag])) {
+            const tabBag = bags[bag]
+            const nonCollectedBags = tabBag.collection.filter((collection) => {
+              return collection.isCollected === false
+            })
+
+            if (nonCollectedBags.length > 0) {
+              return false
+            }
+          }
+          // if (!bags[bag].isCollected) {
+          //   return false
+          // }
         }
         return true
       }

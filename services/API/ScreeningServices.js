@@ -31,14 +31,12 @@ function update(id, data) {
     data,
   })
 }
-
 function destroy(id) {
   return request({
     url: `${baseApi}/${id}`,
     method: 'DELETE',
   })
 }
-
 const ScreeningServices = {
   get,
   create,
