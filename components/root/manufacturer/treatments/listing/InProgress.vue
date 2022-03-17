@@ -18,13 +18,15 @@
   </div>
 </template>
 <script>
-import TreatmentServices from '~/services/API/TreatmentServices'
-
+import SchedulingServices from '~/services/API/SchedulingServices'
 import routeHelpers from '~/mixins/route-helpers'
+import { SCHEDULING_STATUSES } from '~/services/Constant'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
+
+import withTableCrud from '~/mixins/with-table-crud'
 const column = [
   {
     title: 'Patient Id',
@@ -55,18 +57,19 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  mixins: [routeHelpers],
+  mixins: [routeHelpers, withTableCrud],
   data() {
     return {
       column,
       loading: false,
       data: [],
-      apiService: TreatmentServices,
+      apiService: SchedulingServices,
       ActionLink,
       showResponseModal: false,
       isAccepted: false,
       params: {
-        isShipmentReceived: true,
+        ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
+        LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
       },
@@ -75,25 +78,24 @@ export default {
     }
   },
   mounted() {
-    this.fetch()
+    // // this.fetch()
   },
   methods: {
     stepClick(record) {
-      this.goto(`/manufacturer/treatments/process/${record.globalId}`)
+      this.goto(`/manufacturer/treatments/process/${record.treatment.globalId}`)
     },
     getCurrentStep(record) {},
-    fetch(params = {}) {
-      this.loading = true
+    // fetch(params = {}) {
+    //   this.loading = true
 
-      TreatmentServices.manufacturing(this.params)
-        .then((response) => {
-          this.data = response.data
-        })
-        .catch(this.error)
-        .finally(() => {
-          this.loading = false
-        })
-    },
+    // SchedulingServices.markScheduleRequest(data.id, values).then(
+    //   (response) => {
+    //     this.success(response.message)
+    //     this.handleModal(false)
+    //     this.fetch()
+    //   }
+    // )
+    // },
   },
 }
 </script>
