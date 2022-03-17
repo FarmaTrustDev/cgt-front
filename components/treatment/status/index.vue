@@ -7,19 +7,26 @@
         tab-position="left"
         @change="callback"
       >
-        <a-tab-pane key="1" tab="Scheduling">
+        <a-tab-pane key="scheduling" tab="Scheduling">
           <scheduling :treatment="treatment" />
         </a-tab-pane>
-        <a-tab-pane key="2" tab=" Collect Samples">
+
+        <a-tab-pane key="collection" tab=" Collect Samples">
           <collections :treatment="treatment" />
         </a-tab-pane>
-        <a-tab-pane key="3" tab=" Shipping Details">
-          <treatmentCollection :showCompleteBtn="f" :treatment="treatment"
-        /></a-tab-pane>
-        <a-tab-pane key="4" tab="Deliver Shipment">
+
+        <a-tab-pane key="shipment" tab=" Shipping Details">
+          Shipping Details</a-tab-pane
+        >
+        <a-tab-pane key="5" tab="Deliver Shipment">
           Deliver Shipment</a-tab-pane
-        >s
-        <a-tab-pane key="6" tab="Aftercare"> Aftercare</a-tab-pane>
+        >
+        <a-tab-pane key="treatment" tab=" Treatment Collection">
+          <treatmentCollections :treatment="treatment" />
+        </a-tab-pane>
+
+        <a-tab-pane key="after-care" tab="Aftercare"> Aftercare</a-tab-pane>
+
       </a-tabs></a-card
     >
   </a-row>
@@ -27,10 +34,12 @@
 <script>
 import scheduling from '~/components/treatment/enrollment/scheduling'
 import collections from '~/components/treatment/collections'
-import treatmentCollection from '~/components/treatment/collections/treatment'
+import treatmentCollections from '~/components/treatment/treatment'
+import tabsHelpers from '~/mixins/tabs-helpers'
 const DEFAULT_ACTIVE_KEY = '2'
 export default {
-  components: { scheduling, collections, treatmentCollection },
+  components: { scheduling, collections, treatmentCollections },
+  mixins: [tabsHelpers],
   props: {
     treatment: {
       type: Object,
@@ -41,6 +50,9 @@ export default {
     return {
       activeTab: DEFAULT_ACTIVE_KEY,
     }
+  },
+  mounted() {
+    this.handleActiveTab()
   },
   methods: {
     callback(key) {

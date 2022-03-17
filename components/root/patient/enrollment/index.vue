@@ -1,33 +1,33 @@
 <template>
   <div>
-    <a-spin :spinning="loading">
+    <a-skeleton :loading="loading">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
         <a-tab-pane :key="1" tab="Patient Details"
           ><enrollment :treatment="treatment" />
         </a-tab-pane>
-        <a-tab-pane :key="2" tab="Consent"
+        <a-tab-pane key="2" tab="Consent"
           ><consent
             :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane :key="3" :disabled="!haveTreatment" tab="Screening"
-          ><screening
+        <a-tab-pane key="screening" :disabled="!haveTreatment" tab="Screening">
+          <screening
             :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
         <a-tab-pane
-          :key="4"
+          key="scheduling"
           :disabled="!treatment.screeningStatus"
           tab="Scheduling"
         >
           <scheduling :treatment="treatment" />
         </a-tab-pane>
       </a-tabs>
-    </a-spin>
+    </a-skeleton>
   </div>
 </template>
 
@@ -39,6 +39,7 @@ import scheduling from '~/components/treatment/enrollment/scheduling'
 import { isEmpty } from '~/services/Utilities'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import notifications from '~/mixins/notifications'
+import tabsHelpers from '~/mixins/tabs-helpers'
 export default {
   components: {
     enrollment,
@@ -46,7 +47,7 @@ export default {
     scheduling,
     screening,
   },
-  mixins: [notifications],
+  mixins: [notifications, tabsHelpers],
   data() {
     return {
       activeTab: 1,
@@ -57,8 +58,10 @@ export default {
   },
   mounted() {
     this.isTreatmentCreate()
+    this.handleActiveTab()
   },
   methods: {
+    updatedKey() {},
     isTreatmentCreate() {
       const query = this.$route.query
       this.loading = true

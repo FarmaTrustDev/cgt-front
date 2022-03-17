@@ -3,7 +3,7 @@
     :loading="loading"
     :pagination="pagination"
     :columns="columns"
-    :data-source="data"
+    :data-source="[...data]"
     :class="{ 'rounded-table': rounded, 'patient-table': patient }"
   >
     <template slot="customTitle">
@@ -16,7 +16,7 @@
     </template>
 
     <template slot="check" slot-scope="flag">
-      <strong>{{ text }}</strong>
+      <!-- <strong>{{ flag }}</strong> -->
       <a-icon
         v-if="flag"
         type="check-circle"
@@ -37,59 +37,14 @@
           <!-- <span class="treatment-name-col">
 
           </span> -->
-          <!-- <pre>{{ treatment }}</pre> -->
-          <span class="step-col">
-            <span class="treatment-name-col">{{
-              treatment.treatmentTypeName
-            }}</span>
 
-            <a-steps :current="getCurrentStep(treatment)" size="small">
-              <a-step
-                v-for="phase in phases"
-                :key="phase.PhaseId"
-                :title="phase.name"
-                @click="stepClick(record, treatment, phase)"
-              >
-              </a-step>
-            </a-steps>
-
-            <!-- <a-button
-              class="btn-view-timeline"
-              type="primary"
-              size="small"
-              @click="gotoView(record, treatment)"
-              >View</a-button
-            > -->
-            <a-dropdown>
-              <a-button
-                class="btn-view-timeline"
-                type="primary"
-                size="small"
-                @click="gotoView(record, treatment)"
-                >Admin</a-button
-              >
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a href="javascript:;" @click="gotoView(record, treatment)"
-                    ><a-icon type="search" /> View</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> Pause</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> Cancel</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;"><a-icon type="delete" /> Delete</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </span>
+          <steps
+            :treatment="treatment"
+            :phases="phases"
+            :current-step="getCurrentStep"
+            :patient="record"
+            :goto-view="stepClick"
+          ></steps>
         </span>
       </div>
     </span>
@@ -140,7 +95,7 @@
             >
           </a-menu-item>
 
-          <a-menu-item key="3"> 
+          <a-menu-item key="3">
             <a-popconfirm
               title="Are you to hide patient?"
               ok-text="Yes"
@@ -148,7 +103,7 @@
               placement="topLeft"
               @confirm="deletePatient(`${record.id}`)"
             >
-            Hide Patient 
+              Hide Patient
             </a-popconfirm>
           </a-menu-item>
         </a-menu>
@@ -164,16 +119,11 @@
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
 import { isEmpty, preventDefault } from '~/services/Helpers'
-/* <<<<<<< HEAD
-import PatientServices from '~/services/API/PatientServices'
-
-=======
-import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
->>>>>>> 5b7558b7fae04c76b6418c22ff0a2b3923fae02e
-*/
+import steps from '~/components/common/Steps'
 import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 import PatientServices from '~/services/API/PatientServices'
 export default {
+  components: { steps },
   mixins: [routeHelpers, notifications],
   props: {
     columns: { type: Array, default: () => [] },
@@ -190,6 +140,7 @@ export default {
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
   },
+
   data() {
     return {
       data: [],
@@ -229,8 +180,18 @@ export default {
       return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
     },
     getCurrentStep(treatment) {
-      // this logic is because current state represent the or start with 0
-      return treatment.phaseId === null ? 0 : treatment.phaseId - 1
+      // Most expensive Operation in whole application
+      if (!isEmpty(treatment.phaseId)) {
+        const closest = this.phases.reduce(function (prev, curr) {
+          return Math.abs(curr.phaseId - treatment.phaseId) <
+            Math.abs(prev.phaseId - treatment.phaseId)
+            ? curr
+            : prev
+        })
+
+        return closest.phaseId
+      }
+      return 1
     },
     stepClick(patient, treatment, phase) {
       // insane logic
@@ -271,7 +232,7 @@ export default {
     getFetchMethod() {
       this.$emit('getFetch', this.fetch)
     },
-    deletePatient(record){
+    deletePatient(record) {
       PatientServices.destroy(record)
     },
   },
