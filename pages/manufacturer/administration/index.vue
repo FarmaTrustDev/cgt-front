@@ -9,12 +9,19 @@
         :xs="{ span: 24 }"
         :md="{ span: 8 }"
       >
-        <a-list size="small" bordered :data-source="menue">
+        <a-list v-if="user.organizationTypeAlias == 'MANUFACTURER' && (index!='Collections' || index!='Logistics Partner' || index!='Screening Adminstration')" size="small" bordered :data-source="menue">
           <a-list-item slot="renderItem" slot-scope="item">
             <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>
           </a-list-item>
-          <div slot="header" class="bg-gray-100">{{ index }}</div>
+          <div slot="header"  class="bg-gray-100" >{{ index }}</div>
         </a-list>
+        <a-list v-else-if="user.organizationTypeAlias == 'HOSPITAL' && index=='Screening Adminstration'" size="small" bordered :data-source="menue">
+          <a-list-item slot="renderItem" slot-scope="item">
+            <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>
+          </a-list-item>
+          <div slot="header"  class="bg-gray-100" >{{ index }}</div>
+        </a-list>
+        
       </a-col>
     </a-row>  
     
@@ -28,6 +35,12 @@ export default {
     return {
       userAdminMenu:[],
     }
+  },
+  computed: {
+    // ...mapGetters(['getUser']),
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   mounted() {    
     this.userDetail();
