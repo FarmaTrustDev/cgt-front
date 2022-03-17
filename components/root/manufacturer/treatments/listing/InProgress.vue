@@ -4,11 +4,17 @@
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div>
-          <a-steps :current="getCurrentStep(record)" size="small">
-            <a-step title="Inbound Shipment" @click="stepClick(record)" />
-
-            <a-step title="Manufacturer" />
-            <a-step title="Outbound Shipment" />
+          <a-steps
+            :initial="1"
+            :current="getCurrentStep(record.treatment)"
+            size="small"
+          >
+            <a-step
+              v-for="phase in phases"
+              :key="phase.id"
+              :title="phase.name"
+              @click="stepClick(record, phase)"
+            />
           </a-steps>
         </div>
 
@@ -18,13 +24,17 @@
   </div>
 </template>
 <script>
-import TreatmentServices from '~/services/API/TreatmentServices'
-
+import SchedulingServices from '~/services/API/SchedulingServices'
 import routeHelpers from '~/mixins/route-helpers'
+import { SCHEDULING_STATUSES } from '~/services/Constant'
+import { MANUFACTURER_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
+
+import withTableCrud from '~/mixins/with-table-crud'
+
 const column = [
   {
     title: 'Patient Id',
@@ -55,45 +65,62 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  mixins: [routeHelpers],
+  mixins: [routeHelpers, withTableCrud],
   data() {
     return {
       column,
       loading: false,
       data: [],
-      apiService: TreatmentServices,
+      apiService: SchedulingServices,
       ActionLink,
       showResponseModal: false,
       isAccepted: false,
       params: {
-        isShipmentReceived: true,
+        ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
+        LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
       },
       selectedRow: {},
       confirmLoading: false,
+      phases: MANUFACTURER_TREATMENT_PENDING_PHASES,
     }
   },
   mounted() {
-    this.fetch()
+    // this.fetch()
   },
   methods: {
-    stepClick(record) {
-      this.goto(`/manufacturer/treatments/process/${record.globalId}`)
+    stepClick(record, phase) {
+      this.goto(
+        `/manufacturer/treatments/process/${record.treatment.globalId}`,
+        { ...phase.params }
+      )
     },
-    getCurrentStep(record) {},
-    fetch(params = {}) {
-      this.loading = true
+    getCurrentStep(treatment) {
+      if (treatment.phaseId != null) {
+        const closest = this.phases.reduce(function (prev, curr) {
+          return Math.abs(curr.phaseId - treatment.phaseId) <
+            Math.abs(prev.phaseId - treatment.phaseId)
+            ? curr
+            : prev
+        })
 
-      TreatmentServices.manufacturing(this.params)
-        .then((response) => {
-          this.data = response.data
-        })
-        .catch(this.error)
-        .finally(() => {
-          this.loading = false
-        })
+        return closest.id
+      }
+      return 1
     },
+
+    // fetch(params = {}) {
+    //   this.loading = true
+
+    // SchedulingServices.markScheduleRequest(data.id, values).then(
+    //   (response) => {
+    //     this.success(response.message)
+    //     this.handleModal(false)
+    //     this.fetch()
+    //   }
+    // )
+    // },
   },
 }
 </script>
