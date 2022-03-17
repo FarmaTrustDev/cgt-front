@@ -4,11 +4,17 @@
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div>
-          <a-steps :current="getCurrentStep(record)" size="small">
-            <a-step title="Inbound Shipment" @click="stepClick(record)" />
-
-            <a-step title="Manufacturer" />
-            <a-step title="Outbound Shipment" />
+          <a-steps
+            :initial="1"
+            :current="getCurrentStep(record.treatment)"
+            size="small"
+          >
+            <a-step
+              v-for="phase in phases"
+              :key="phase.id"
+              :title="phase.name"
+              @click="stepClick(record, phase)"
+            />
           </a-steps>
         </div>
 
@@ -21,12 +27,14 @@
 import SchedulingServices from '~/services/API/SchedulingServices'
 import routeHelpers from '~/mixins/route-helpers'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
+import { MANUFACTURER_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
 
 import withTableCrud from '~/mixins/with-table-crud'
+
 const column = [
   {
     title: 'Patient Id',
@@ -75,16 +83,33 @@ export default {
       },
       selectedRow: {},
       confirmLoading: false,
+      phases: MANUFACTURER_TREATMENT_PENDING_PHASES,
     }
   },
   mounted() {
-    // // this.fetch()
+    // this.fetch()
   },
   methods: {
-    stepClick(record) {
-      this.goto(`/manufacturer/treatments/process/${record.treatment.globalId}`)
+    stepClick(record, phase) {
+      this.goto(
+        `/manufacturer/treatments/process/${record.treatment.globalId}`,
+        { ...phase.params }
+      )
     },
-    getCurrentStep(record) {},
+    getCurrentStep(treatment) {
+      if (treatment.phaseId != null) {
+        const closest = this.phases.reduce(function (prev, curr) {
+          return Math.abs(curr.phaseId - treatment.phaseId) <
+            Math.abs(prev.phaseId - treatment.phaseId)
+            ? curr
+            : prev
+        })
+
+        return closest.id
+      }
+      return 1
+    },
+
     // fetch(params = {}) {
     //   this.loading = true
 
