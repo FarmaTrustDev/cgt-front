@@ -10,6 +10,7 @@
         <a-tab-pane key="scheduling" tab="Scheduling">
           <scheduling :treatment="treatment" />
         </a-tab-pane>
+
         <a-tab-pane key="collection" tab=" Collect Samples">
           <collections :treatment="treatment" />
         </a-tab-pane>
@@ -25,6 +26,7 @@
         </a-tab-pane>
 
         <a-tab-pane key="after-care" tab="Aftercare"> Aftercare</a-tab-pane>
+
       </a-tabs></a-card
     >
   </a-row>

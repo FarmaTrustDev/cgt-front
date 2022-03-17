@@ -15,8 +15,15 @@
             <a-icon type="more" />
             <a-menu slot="overlay">
               <a-menu-item key="1"> <a-icon type="edit" />Edit </a-menu-item>
-              <a-menu-item key="2">
-                <a-icon type="delete" />Delete
+              <a-menu-item key="2" >
+                <a-popconfirm
+              title="Are you sure delete ?"
+              ok-text="Yes"
+              cancel-text="No"
+              placement="topLeft"
+              @confirm="deleteScreening(item.id)"
+            >
+                <a-icon type="delete" />Delete</a-popconfirm>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -85,6 +92,10 @@ export default {
     handleUpsert(response) {
       this.fetch()
       this.handleCategoryModal(false)
+    },
+    deleteScreening(id){
+      ScreeningServices.destroy(id)
+      // alert(name)
     },
   },
 }
