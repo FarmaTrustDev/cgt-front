@@ -5,14 +5,18 @@
       text="Add Sample"
       @click="addBags"
     />
-    <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
-
+    <Bag 
+      v-if="treatment.manufacturerCollectionStatus"
+      :bags="bags" 
+      :treatment="treatment" 
+      @fetchBags="fetchBags" />
+    
     <a-button
-      v-if="!treatment.treatmentCollectionStatus && (treatment.hospitalCollectionStatus && treatment.manufacturerCollectionStatus && bags.length > 0)"
+      v-if="!treatment.treatmentCollectionStatus && treatment.manufacturerCollectionStatus && bags.length > 0"
       class="w-100 mt-15"
       type="primary"
-      @click="markTreatmentCollectionComplete(bags)"
-      >Complete Collection Process</a-button
+      @click="markTreatmentCollectionCompletesssss(bags)"
+      >Complete Collection Process {{treatment.treatmentCollectionStatus}} </a-button
     >
     <a-modal
       :footer="false"

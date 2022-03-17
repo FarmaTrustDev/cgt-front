@@ -16,7 +16,15 @@
             <a-menu slot="overlay">
               <a-menu-item key="1"> <a-icon type="edit" />Edit </a-menu-item>
               <a-menu-item key="2">
+                <a-popconfirm
+              title="Are you to hide patient?"
+              ok-text="Yes"
+              cancel-text="No"
+              placement="topLeft"
+              @confirm="deletePatient(item.id)"
+            >
                 <a-icon type="delete" />Delete
+                </a-popconfirm>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -86,6 +94,9 @@ export default {
       this.fetch()
       this.handleCategoryModal(false)
     },
+    deletePatient(record){
+      ScreeningServices.destroy(record)
+    }
   },
 }
 </script>

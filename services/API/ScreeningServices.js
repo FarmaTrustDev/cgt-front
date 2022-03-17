@@ -32,11 +32,19 @@ function update(id, data) {
   })
 }
 
+function destroy(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'DELETE',
+  })
+}
+
 const ScreeningServices = {
   get,
   create,
   getById,
   update,
+  destroy,
 }
 
 export default ScreeningServices
