@@ -65,12 +65,14 @@ export default {
 
           if (this.isFunction(this.afterCreate)) {
             this.afterCreate(response)
+            this.btnLoading = false
+            this.loading = false
           }
         })
         .catch(this.error)
         .finally(() => {
-          this.btnLoading = false
-          this.loading = false
+          // this.btnLoading = false
+          // this.loading = false
         })
     },
     update(values) {
@@ -81,12 +83,13 @@ export default {
           this.success(response.message)
           if (this.isFunction(this.afterUpdate)) {
             this.afterUpdate(response)
+            this.btnLoading = false
+            this.loading = false
           }
         })
         .catch(this.error)
         .finally(() => {
-          this.btnLoading = false
-          this.loading = false
+          
         })
     },
     onSubmit(e) {
@@ -99,7 +102,7 @@ export default {
           this.loading = false
         }
       })
-      this.loading = false
+      // this.loading = false
     },
     onDelete() {
       this.apiService
