@@ -26,7 +26,7 @@
             :collection-type="collectionType"
             @handlesShowModal="handlesShowModal"
           />
-          <FormActionButton :is-created="isCreated" />
+          <FormActionButton :loading="loading" :is-created="isCreated" />
         </a-form>
       </a-modal>
     </a-spin>
@@ -90,7 +90,7 @@ export default {
       }
     },
     fetchTreatmentType(entityId) {
-      console.log(this.collectionType)
+      // console.log(this.collectionType)
       this.loading = true
       TreatmentTypeServices.getById(entityId)
         .then((response) => {
