@@ -55,7 +55,7 @@ function getById(id) {
     url: `${baseApi}/${id}`,
   })
 }
-function update(id,data) {
+function update(id, data) {
   return request({
     url: `${baseApi}/${id}`,
     data,
@@ -66,6 +66,13 @@ function destroy(id) {
   return request({
     url: `${baseApi}/${id}`,
     method: 'DELETE',
+  })
+}
+
+function test(params = {}) {
+  return request({
+    url: `${baseApi}/test`,
+    params,
   })
 }
 const UserServices = {
@@ -80,6 +87,7 @@ const UserServices = {
   update,
   destroy,
   get,
+  test
 }
 
 export default UserServices

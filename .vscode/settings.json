@@ -1,7 +1,8 @@
 {
     "cSpell.words": [
         "nuxt",
-        "PUID"
+        "PUID",
+        "signalr"
     ],
     "nuxt.isNuxtApp": true
 }
