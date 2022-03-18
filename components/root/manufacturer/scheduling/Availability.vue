@@ -15,7 +15,7 @@
       }"
       @changeDate="handleDateClick"
     />
-    <FormActionButton @click="onSubmit"> </FormActionButton>
+    <FormActionButton :loading="loading" @click="onSubmit"> </FormActionButton>
   </div>
 </template>
 <script>

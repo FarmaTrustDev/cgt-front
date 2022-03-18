@@ -36,7 +36,7 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton :disabled="!isEmpty(treatment.id)" />
+      <FormActionButton :loading="loading" :disabled="!isEmpty(treatment.id)" />
     </a-form>
   </div>
 </template>
