@@ -3,8 +3,8 @@
     <h3 class="page-title">Available slots</h3>
     <div class="grey-card">
       <calendar
-        :handle-date-click="fetchEvents"
         :disabled-date="disabledDate"
+        :handle-date-click="fetchEvents"
         @getEventClick="getEventClick"
       ></calendar>
     </div>
@@ -54,7 +54,7 @@ export default {
     },
     getMomentByStandardFormat,
     getEventClick(detail) {
-      // console.log(detail)
+      // console.log(detail.event._def.publicId)
       SchedulingServices.getEstimation(detail.event._def.publicId).then(
         (response) => {
           const data = response.data
