@@ -6,7 +6,7 @@
   >
     <a-list-item slot="renderItem" slot-scope="conversation">
       <a-list-item-meta :description="conversation.message">
-        <a slot="title" @click="getConversation">
+        <a slot="title" @click="getConversation(conversation)">
           <span v-if="conversation.isOwner">{{
             conversation.recipient_Name
           }}</span>
@@ -28,7 +28,9 @@ export default {
     return {}
   },
   methods: {
-    getConversation() {},
+    getConversation(conversation) {
+      this.$emit('getConversation', conversation)
+    },
   },
 }
 </script>
