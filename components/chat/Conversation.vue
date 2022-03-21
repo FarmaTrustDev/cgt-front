@@ -2,24 +2,17 @@
   <div>
     <a-row>
       <a-col>
-        <a-list
-          v-if="comments.length"
-          :data-source="comments"
-          :header="`${comments.length} ${
-            comments.length > 1 ? 'replies' : 'reply'
-          }`"
-          item-layout="horizontal"
-          :bordered="false"
-        >
+        <!-- <pre> {{ data }}</pre> -->
+        <a-list :data-source="data" item-layout="horizontal" :bordered="false">
           <a-list-item
             slot="renderItem"
             slot-scope="item"
-            :class="'message-' + item.type"
+            :class="'message-' + getType(comments.isOwner)"
           >
-            <a-comment :author="item.author" :content="item.content">
+            <a-comment :author="item.ownerName" :content="item.content">
               <template slot="content"
                 ><div class="message-time">
-                  Raja Sharif, 29 September 2021 19:33
+                  {{ item.message }}
                 </div></template
               >
             </a-comment>
@@ -27,7 +20,12 @@
         </a-list>
       </a-col>
     </a-row>
-    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+    <a-form
+      v-if="data.length > 0"
+      :form="form"
+      :layout="formLayout"
+      @submit="onSubmit"
+    >
       <a-row>
         <a-col>
           <a-form-item>
@@ -90,6 +88,7 @@
 import moment from 'moment'
 import ChatServices from '~/services/API/ChatServices'
 export default {
+  props: { data: { type: Array, default: () => {} } },
   data() {
     return {
       comments: [
@@ -127,6 +126,7 @@ export default {
       formLayout: 'vertical',
     }
   },
+  mounted() {},
   methods: {
     onSubmit(e) {
       e.preventDefault()
@@ -146,6 +146,7 @@ export default {
         console.log(response)
       })
     },
+
     handleSubmit() {
       if (!this.value) {
         return
@@ -171,6 +172,9 @@ export default {
     },
     handleChange(e) {
       this.value = e.target.value
+    },
+    getType(type) {
+      return type ? 'received' : 'sent'
     },
   },
 }

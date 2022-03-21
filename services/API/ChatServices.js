@@ -10,6 +10,13 @@ function getConversations(data) {
   })
 }
 
+function get(params = {}) {
+  return request({
+    url: `${baseApi}`,
+    params,
+  })
+}
+
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -19,7 +26,7 @@ function create(data) {
 }
 
 const ChatServices = {
-  getConversations, create
+  getConversations, create, get
 }
 
 export default ChatServices
