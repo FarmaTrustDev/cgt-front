@@ -3,7 +3,7 @@
    <a-layout-header>
 
      <div class="user-detail">
-        Welcome, User Name
+        Welcome, {{user.name}}
     </div>
 
     <div class="hospital-detail">
