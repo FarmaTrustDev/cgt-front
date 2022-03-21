@@ -13,8 +13,19 @@
 </template>
 <script>
 import List from '~/components/chat/List'
-import Conversation from '~/components/chat/Conversation.vue'
+import Conversation from '~/components/chat/Conversation'
+import ChatServices from '~/services/API/ChatServices'
 export default {
   components: { Conversation, List },
+  mounted() {
+    this.fetchConversation()
+  },
+  methods: {
+    fetchConversation() {
+      ChatServices.getConversations().then((conversation) => {
+        console.log('conversation', conversation)
+      })
+    },
+  },
 }
 </script>
