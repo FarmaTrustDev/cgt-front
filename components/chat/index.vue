@@ -2,7 +2,10 @@
   <div class="chat-page">
     <a-row class="grey-card">
       <a-col :span="9" class="left-bar">
-        <a-card :bordered="false" class="default-card"><List /></a-card>
+        <a-card :bordered="false" class="default-card"
+          ><a-skeleton :loading="conversationLoader">
+            <List :conversations="conversations" /></a-skeleton
+        ></a-card>
       </a-col>
       <a-col :span="1"></a-col>
       <a-col :span="14" class="right-bar">
@@ -17,14 +20,19 @@ import Conversation from '~/components/chat/Conversation'
 import ChatServices from '~/services/API/ChatServices'
 export default {
   components: { Conversation, List },
+  data() {
+    return { conversations: [], conversationLoader: true }
+  },
   mounted() {
     this.fetchConversation()
   },
   methods: {
     fetchConversation() {
-      ChatServices.getConversations().then((conversation) => {
-        console.log('conversation', conversation)
-      })
+      ChatServices.getConversations()
+        .then((conversations) => {
+          this.conversations = conversations.data
+        })
+        .finally(() => (this.conversationLoader = false))
     },
   },
 }
