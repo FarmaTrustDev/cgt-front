@@ -30,7 +30,7 @@
         temp
         class="logo"
         />
-        <span class="title">Hospital Name</span>
+        <span class="title">{{ user.organizationName}} </span>
       </div>
       <!-- Header Lang Select -->
       <div>
@@ -57,7 +57,13 @@ export default {
     return{
       langData: ['English', 'German', 'Chinese', 'Arabic']
     }
-  }
+  },
+  computed: {
+    // ...mapGetters(['getUser']),
+    user() {
+      return this.$store.getters.getUser
+    },
+  },
 };
 </script>
 

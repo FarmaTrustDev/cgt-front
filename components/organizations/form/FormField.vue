@@ -133,6 +133,7 @@
                 ],
               },
             ]"
+            :disabled-date="disabledDate"
             style="width: 100%"
             size="large"
           >
@@ -183,6 +184,7 @@
 
 <script>
 import OrganizationTypeServicesServices from '~/services/API/OrganizationTypeServices'
+import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 export default {
   props: {
     organization: {
@@ -200,6 +202,7 @@ export default {
     this.fetchOrganization()
   },
   methods: {
+    disabledDate: _disabledFutureDate,
     fetchOrganization() {
       this.typeLoading = true
       OrganizationTypeServicesServices.get()

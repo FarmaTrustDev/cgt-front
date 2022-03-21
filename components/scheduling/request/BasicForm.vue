@@ -42,12 +42,13 @@
                     {
                       required: true,
                       message:
-                        'Please select your Delivery Arrival Date Birth!',
+                        'Please select your Delivery Arrival Date!',
                     },
                   ],
                 },
               ]"
               :format="dateFormat"
+              :disabled-date="disabledDate"
               style="width: 100%"
               size="large"
               @change="collectionDateChange"
@@ -64,12 +65,13 @@
                     {
                       required: true,
                       message:
-                        'Please select your Delivery Arrival Date Birth!',
+                        'Please select your Delivery Arrival Date!',
                     },
                   ],
                 },
               ]"
               :disabled="true"
+              :disabled-date="disabledDate"
               :format="dateFormat"
               style="width: 100%"
               size="large"
@@ -87,7 +89,7 @@
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
-import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import { getMomentByStandardFormat, _disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
 import notifications from '~/mixins/notifications'
 export default {
   components: { LogisticLookup },
@@ -106,6 +108,7 @@ export default {
     }
   },
   methods: {
+    disabledDate: _disabledPreviousDate,
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
         deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
