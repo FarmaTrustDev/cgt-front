@@ -4,6 +4,7 @@
     <div class="grey-card">
       <calendar
         :handle-date-click="fetchEvents"
+        :disabled-date="disabledDate"
         @getEventClick="getEventClick"
       ></calendar>
     </div>
@@ -16,7 +17,7 @@ import FormFields from '~/components/treatment/enrollment/scheduling/FormFields'
 import calendar from '~/components/calendars/index'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
 import SchedulingServices from '~/services/API/SchedulingServices'
-import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import { getMomentByStandardFormat, _disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
 export default {
   components: { FormFields, calendar },
   props: {
@@ -32,11 +33,13 @@ export default {
   data() {
     return {
       isCreated: false,
+      loading: false,
       entity: {},
       manufacturerTreatment: {},
     }
   },
   methods: {
+    disabledDate: _disabledPreviousDate,
     fetchEvents(arg, callback) {
       this.loading = true
       TreatmentAvailabilityServices.get({
@@ -51,7 +54,7 @@ export default {
     },
     getMomentByStandardFormat,
     getEventClick(detail) {
-      console.log(detail)
+      // console.log(detail)
       SchedulingServices.getEstimation(detail.event._def.publicId).then(
         (response) => {
           const data = response.data

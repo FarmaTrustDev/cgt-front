@@ -7,7 +7,7 @@
     :class="{ 'rounded-table': rounded, 'patient-table': patient }"
   >
     <template slot="customTitle">
-      <div class="text-left treatment-title">Treatment Type</div>
+      
       <div class="text-left treatment-title">Treatment Status</div>
     </template>
 
@@ -34,10 +34,7 @@
     <span slot="treatment_status" slot-scope="text, record">
       <div class="treatment-steps">
         <span v-for="treatment in record.treatments" :key="treatment.id">
-          <!-- <span class="treatment-name-col">
-
-          </span> -->
-
+          
           <steps
             :treatment="treatment"
             :phases="phases"

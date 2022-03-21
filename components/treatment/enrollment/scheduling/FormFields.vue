@@ -65,6 +65,7 @@
               },
             ]"
             :format="dateFormat"
+            :disabled-date="disabledDate"
             style="width: 100%"
             size="large"
           >
@@ -86,6 +87,7 @@
               },
             ]"
             :format="dateFormat"
+            :disabled-date="disabledDate"
             style="width: 100%"
             size="large"
           >
@@ -107,6 +109,7 @@
               },
             ]"
             :format="dateFormat"
+            :disabled-date="disabledDate"
             style="width: 100%"
             size="large"
           >
@@ -130,6 +133,7 @@
               },
             ]"
             :format="dateFormat"
+            :disabled-date="disabledDate"
             style="width: 100%"
             size="large"
           >
@@ -152,6 +156,7 @@
               },
             ]"
             :format="dateFormat"
+            :disabled-date="disabledDate"
             style="width: 100%"
             size="large"
           >
@@ -194,6 +199,7 @@
               },
             ]"
             :format="dateFormat"
+            :disabled-date="disabledDate"
             style="width: 100%"
             size="large"
           >
@@ -223,6 +229,7 @@
 </template>
 <script>
 import LogisticLookup from '~/components/lookups/LogisticLookup'
+import {_disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
 import { STANDARD_UK_DATE_FORMATE } from '~/services/Constant/DateTime'
 export default {
   components: { LogisticLookup },
@@ -250,6 +257,9 @@ export default {
       }),
     }
   },
-  methods: { onSubmit(e) {} },
+  methods: { 
+    disabledDate: _disabledPreviousDate,
+    onSubmit(e) {} 
+    },
 }
 </script>

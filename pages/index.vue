@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <a-button type="primary" @click="trigeer"></a-button>
+    
     <h1 class="title"><strong>My Dashboard</strong></h1>
     <a-card class="grey-card" :bordered="false">
       <a-row>

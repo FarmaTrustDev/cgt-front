@@ -2,6 +2,7 @@
   <div>
     <a-date-picker
       :open="openDatePicker"
+      :disabled-date="disabledDate"
       format="YYYY-MM-DD HH:mm:ss"
       show-time
       @openChange="handleStartOpenChange"
@@ -24,7 +25,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
-import { getFormattedMoment } from '~/services/Helpers/MomentHelpers'
+import { getFormattedMoment,_disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
 import notifications from '~/mixins/notifications'
 // import AppointmentServices from '~/services/API/AppointmentServices'
 import nullHelper from '~/mixins/null-helpers'
@@ -42,6 +43,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       calendarOptions: {
         headerToolbar: {
           center: 'dayGridMonth', // buttons for switching between views
@@ -87,6 +89,7 @@ export default {
   },
   methods: {
     getFormattedMoment,
+    disabledDate: _disabledPreviousDate,
     onDateChange(dateTime) {
       if (dateTime) {
         const dateM = getFormattedMoment(dateTime)

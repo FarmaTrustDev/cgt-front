@@ -40,6 +40,7 @@
                 },
               ]"
               :format="DEFAULT_DATE_TIME_FORMAT"
+              :disabled-date="disabledDate"
               style="width: 100%"
               size="large"
               :show-time="{ defaultValue: _getTodayMoment() }"
@@ -71,9 +72,8 @@
   </div>
 </template>
 <script>
-import { _getTodayMoment } from '~/services/Helpers/MomentHelpers'
+import { _getTodayMoment, _disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
 import { DEFAULT_DATE_TIME_FORMAT } from '~/services/Constant/DateTime'
-
 import ShipmentServices from '~/services/API/ShipmentServices'
 import notifications from '~/mixins/notifications'
 export default {
@@ -96,6 +96,7 @@ export default {
     }
   },
   methods: {
+    disabledDate: _disabledPreviousDate,
     onSubmit(e) {
       // this.loading = true
       e.preventDefault()
