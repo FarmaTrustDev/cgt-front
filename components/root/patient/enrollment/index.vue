@@ -2,17 +2,20 @@
   <div>
     <a-skeleton :loading="loading">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
-        <a-tab-pane :key="1" tab="Patient Details"
-          ><enrollment :treatment="treatment" />
+        <a-tab-pane key="Enrollment" tab="Patient Details"
+          ><enrollment 
+          :treatment="treatment" 
+          @getNextTab="getNextTab"
+          />
         </a-tab-pane>
-        <a-tab-pane key="2" tab="Consent"
+        <a-tab-pane key="Consent" tab="Consent"
           ><consent
             :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="screening" :disabled="!haveTreatment" tab="Screening">
+        <a-tab-pane key="Screening" :disabled="!haveTreatment" tab="Screening">
           <screening
             :treatment="treatment"
             @getNextTab="getNextTab"
@@ -20,7 +23,7 @@
           />
         </a-tab-pane>
         <a-tab-pane
-          key="scheduling"
+          key="Scheduling"
           :disabled="!treatment.screeningStatus"
           tab="Scheduling"
         >
