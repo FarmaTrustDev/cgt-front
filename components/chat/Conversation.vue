@@ -15,6 +15,9 @@
                   {{ item.message }}
                 </div></template
               >
+              <a-tooltip slot="datetime" :title="item.created_at">
+                <span>{{ item.created_at }}</span>
+              </a-tooltip>
             </a-comment>
           </a-list-item>
         </a-list>
