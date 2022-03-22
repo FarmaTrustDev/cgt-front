@@ -14,8 +14,8 @@
         <a-card :bordered="false" class="default-card"
           ><Conversation
             v-if="messageTo != null"
-            :message-to-id="opponentId"
-            :message-to="messageTo"
+            :message-to-id="`${opponentId}`"
+            :message-to="`${messageTo}`"
             :data="endToEndConversation"
         /></a-card>
       </a-col>
@@ -26,7 +26,7 @@
 import List from '~/components/chat/List'
 import Conversation from '~/components/chat/Conversation'
 import ChatServices from '~/services/API/ChatServices'
-
+import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
 export default {
   components: { Conversation, List },
   data() {
@@ -41,6 +41,7 @@ export default {
   mounted() {
     this.fetchConversation()
     this.fetch()
+    this.registerEventNotification()
   },
   methods: {
     fetchConversation() {
@@ -70,6 +71,33 @@ export default {
       }
 
       this.opponentId = conversation.opponentId
+      this.fetch(params)
+    },
+    registerEventNotification() {
+      const getNotification = this.getNotification
+      this.$nuxt.$on(EVENT_CHAT_NOTIFICATION, (notification) => {
+        getNotification(notification.data)
+      })
+    },
+    getNotification(notification) {
+      const opponentId = notification.sender_Id
+      console.log(notification)
+      // ! hot fix need to optimize the code
+      let params = {}
+      if (notification.isGroup) {
+        this.messageTo = 'group_Id'
+        params = {
+          group_Id: notification.group_Id,
+        }
+        this.opponentId = notification.group_Id
+      } else {
+        this.opponentId = opponentId
+        this.messageTo = 'recipient_Id'
+        params = {
+          recipient_Id: opponentId,
+        }
+      }
+      this.fetchConversation()
       this.fetch(params)
     },
   },

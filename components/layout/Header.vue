@@ -44,6 +44,7 @@
 import { HubConnectionBuilder } from '@aspnet/signalr'
 import { isEmpty } from '~/services/Utilities'
 import { isArray } from '~/services/Helpers'
+import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
 const connection = new HubConnectionBuilder()
   .withUrl('http://localhost:22462/NotificationUserHub')
   .build()
@@ -72,15 +73,16 @@ export default {
 
         if (!isEmpty(notify.data) && isArray(notify.data.notify_To)) {
           const notifyTo = notify.data.notify_To
-
+          //  *check if the user is in the notify to
           if (notifyTo.includes(`${this.user.id}`)) {
             this.emitNotification(notification)
           }
         }
-        // console.log('component res', chatResponse)
       })
     },
-    emitNotification(notification) {},
+    emitNotification(notification) {
+      this.$nuxt.$emit(EVENT_CHAT_NOTIFICATION, notification)
+    },
   },
 }
 </script>

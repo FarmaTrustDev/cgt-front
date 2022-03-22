@@ -7,7 +7,7 @@
           <a-list-item
             slot="renderItem"
             slot-scope="item"
-            :class="'message-' + getType(comments.isOwner)"
+            :class="'message-' + getType(item.isOwner)"
           >
             <a-comment :author="item.ownerName" :content="item.content">
               <template slot="content"
@@ -69,12 +69,7 @@
         </a-col>
         <a-col class="text-right">
           <a-form-item>
-            <a-button
-              html-type="submit"
-              :loading="submitting"
-              type="primary"
-              @click="handleSubmit"
-            >
+            <a-button html-type="submit" :loading="submitting" type="primary">
               Submit
             </a-button>
           </a-form-item>
@@ -89,37 +84,11 @@ import ChatServices from '~/services/API/ChatServices'
 export default {
   props: {
     data: { type: Array, default: () => {} },
-    messageToId: { type: Number, default: null, required: true },
+    messageToId: { type: String, default: null, required: true },
     messageTo: { type: String, default: `recipient_Id`, required: true },
   },
   data() {
     return {
-      comments: [
-        {
-          author: 'Han Solo',
-          avatar:
-            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: this.value,
-          datetime: moment().fromNow(),
-          type: 'sent',
-        },
-        {
-          author: 'Han Solo',
-          avatar:
-            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: this.value,
-          datetime: moment().fromNow(),
-          type: 'received',
-        },
-        {
-          author: 'Han Solo',
-          avatar:
-            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: this.value,
-          datetime: moment().fromNow(),
-          type: 'sent',
-        },
-      ],
       submitting: false,
       value: '',
       moment,
@@ -151,33 +120,30 @@ export default {
     },
 
     handleSubmit() {
-      if (!this.value) {
-        return
-      }
-
-      this.submitting = true
-
-      setTimeout(() => {
-        this.submitting = false
-        this.comments = [
-          {
-            author: 'Han Solo',
-            avatar:
-              'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: this.value,
-            datetime: moment().fromNow(),
-          },
-
-          ...this.comments,
-        ]
-        this.value = ''
-      }, 1000)
+      // if (!this.value) {
+      //   return
+      // }
+      // this.submitting = true
+      // setTimeout(() => {
+      //   this.submitting = false
+      //   this.comments = [
+      //     {
+      //       author: 'Han Solo',
+      //       avatar:
+      //         'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+      //       content: this.value,
+      //       datetime: moment().fromNow(),
+      //     },
+      //     ...this.comments,
+      //   ]
+      //   this.value = ''
+      // }, 1000)
     },
     handleChange(e) {
       this.value = e.target.value
     },
-    getType(type) {
-      return type ? 'received' : 'sent'
+    getType(isOwner) {
+      return isOwner ? 'received' : 'sent'
     },
   },
 }
