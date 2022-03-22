@@ -1,5 +1,6 @@
 <template>
   <div class="home-page">
+    
     <h1 class="title"><strong>My Dashboard</strong></h1>
     <a-card class="grey-card" :bordered="false">
       <a-row>
@@ -114,6 +115,7 @@
 </template>
 
 <script>
+// import { HubConnectionBuilder } from '@aspnet/signalr'
 import PatientsChart from '~/components/root/home/PatientsChart'
 import UserServices from '~/services/API/UserServices'
 import routeHelpers from '~/mixins/route-helpers'
@@ -152,7 +154,13 @@ export default {
       },
     }
   },
-  mounted() {},
+  mounted() {
+    // console.log(connection)
+    // this.trigeer()
+    // connection.on('sendToUser', (res) => {
+    //   console.log('component res', res)
+    // })
+  },
   methods: {
     gotoView(uri) {
       this.goto(`/${uri}`)
