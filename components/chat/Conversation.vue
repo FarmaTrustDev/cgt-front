@@ -23,12 +23,7 @@
         </a-list>
       </a-col>
     </a-row>
-    <a-form
-      v-if="data.length > 0"
-      :form="form"
-      :layout="formLayout"
-      @submit="onSubmit"
-    >
+    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <a-row>
         <a-col>
           <a-form-item>
@@ -47,16 +42,17 @@
             />
             <a-input
               v-decorator="[
-                `recipient_Id`,
+                messageTo,
                 {
                   rules: [
                     { required: true, message: 'Please input your name!' },
                   ],
-                  initialValue: 2,
+                  initialValue: `${messageToId}`,
                 },
               ]"
               type="hidden"
             />
+
             <a-input
               v-decorator="[
                 `Recipient_Name`,
@@ -91,7 +87,11 @@
 import moment from 'moment'
 import ChatServices from '~/services/API/ChatServices'
 export default {
-  props: { data: { type: Array, default: () => {} } },
+  props: {
+    data: { type: Array, default: () => {} },
+    messageToId: { type: Number, default: null, required: true },
+    messageTo: { type: String, default: `recipient_Id`, required: true },
+  },
   data() {
     return {
       comments: [
@@ -146,7 +146,7 @@ export default {
     },
     postMessage(params) {
       ChatServices.create(params).then((response) => {
-        console.log(response)
+        // console.log(response)
       })
     },
 

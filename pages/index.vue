@@ -1,6 +1,5 @@
 <template>
   <div class="home-page">
-    
     <h1 class="title"><strong>My Dashboard</strong></h1>
     <a-card class="grey-card" :bordered="false">
       <a-row>
@@ -115,14 +114,9 @@
 </template>
 
 <script>
-import { HubConnectionBuilder } from '@aspnet/signalr'
 import PatientsChart from '~/components/root/home/PatientsChart'
 import UserServices from '~/services/API/UserServices'
 
-const connection = new HubConnectionBuilder()
-  .withUrl('https://demoapi.qmaid.co/NotificationUserHub')
-  .build()
-connection.start()
 export default {
   components: { PatientsChart },
   data() {
@@ -157,13 +151,7 @@ export default {
       },
     }
   },
-  mounted() {
-    // console.log(connection)
-    // this.trigeer()
-    connection.on('sendToUser', (res) => {
-      console.log('component res', res)
-    })
-  },
+  mounted() {},
   methods: {
     trigeer() {
       UserServices.test().then()

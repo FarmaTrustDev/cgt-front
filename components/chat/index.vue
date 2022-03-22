@@ -12,7 +12,11 @@
       <a-col :span="1"></a-col>
       <a-col :span="14" class="right-bar">
         <a-card :bordered="false" class="default-card"
-          ><Conversation :data="endToEndConversation"
+          ><Conversation
+            v-if="messageTo != null"
+            :message-to-id="opponentId"
+            :message-to="messageTo"
+            :data="endToEndConversation"
         /></a-card>
       </a-col>
     </a-row>
@@ -30,6 +34,8 @@ export default {
       conversations: [],
       conversationLoader: true,
       endToEndConversation: [],
+      opponentId: null,
+      messageTo: null,
     }
   },
   mounted() {
@@ -52,14 +58,18 @@ export default {
     getConversation(conversation) {
       let params = {}
       if (conversation.isGroup) {
+        this.messageTo = 'group_Id'
         params = {
           group_Id: conversation.opponentId,
         }
       } else {
+        this.messageTo = 'recipient_Id'
         params = {
           recipient_Id: conversation.opponentId,
         }
       }
+
+      this.opponentId = conversation.opponentId
       this.fetch(params)
     },
   },

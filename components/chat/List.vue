@@ -10,9 +10,7 @@
           <span v-if="conversation.isOwner">{{
             conversation.recipient_Name
           }}</span>
-          <span v-else
-            >{{ conversation.sender_Name }}{{ conversation.group_Image }}</span
-          >
+          <span v-else>{{ conversation.sender_Name }}</span>
         </a>
         <a-avatar slot="avatar" :src="conversation.group_Image" />
       </a-list-item-meta>
