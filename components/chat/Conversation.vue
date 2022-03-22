@@ -116,6 +116,7 @@ export default {
     postMessage(params) {
       ChatServices.create(params).then((response) => {
         // console.log(response)
+        this.$emit('fetch', response)
       })
     },
 

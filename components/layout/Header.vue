@@ -46,7 +46,7 @@ import { isEmpty } from '~/services/Utilities'
 import { isArray } from '~/services/Helpers'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
 const connection = new HubConnectionBuilder()
-  .withUrl('http://localhost:22462/NotificationUserHub')
+  .withUrl('https://demoapi.qmaid.co/NotificationUserHub')
   .build()
 connection.start()
 export default {

@@ -1,16 +1,22 @@
+getUser(users) {},
 <template>
   <page-layout
     :loading="loading"
     title="Chat"
     :bordered="borderCard"
     class="patient-page"
+    :create="false"
   >
-    <template slot="content"><chat /></template>
+    <template slot="headerMenus"
+      ></template
+    >
+    <template slot="content"><chat /> </template>
   </page-layout>
 </template>
 <script>
 import chat from '~/components/chat'
 import PageLayout from '~/components/layout/PageLayout'
+
 export default {
   components: { chat, PageLayout },
   data() {
@@ -19,5 +25,6 @@ export default {
       borderCard: false,
     }
   },
+  methods: {},
 }
 </script>

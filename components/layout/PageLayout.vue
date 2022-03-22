@@ -1,12 +1,18 @@
 <template>
-  <a-card :loading="loading" :title="title" :bordered="bordered" class="plain-header-border">
+  <a-card
+    :loading="loading"
+    :title="title"
+    :bordered="bordered"
+    class="plain-header-border"
+  >
     <span slot="extra">
+      <slot name="headerMenus" />
       <a-button v-if="create" type="primary" @click="gotoState('create')"
         >Create</a-button
       >
       <a-button v-if="back" type="primary" @click="goBack()">Back</a-button>
-      <slot name="extra"></slot>
     </span>
+
     <slot name="content" />
   </a-card>
 </template>
@@ -25,12 +31,12 @@ export default {
       default: '',
     },
     bordered: {
-        type: Boolean,
-        default: true
+      type: Boolean,
+      default: true,
     },
     back: {
-        type: Boolean,
-        default: true
+      type: Boolean,
+      default: true,
     },
     create: { type: Boolean, default: true },
   },

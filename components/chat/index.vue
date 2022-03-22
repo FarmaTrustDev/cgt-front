@@ -1,5 +1,6 @@
 <template>
   <div class="chat-page">
+    <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button>
     <a-row class="grey-card">
       <a-col :span="9" class="left-bar">
         <a-card :bordered="false" class="default-card"
@@ -17,9 +18,18 @@
             :message-to-id="`${opponentId}`"
             :message-to="`${messageTo}`"
             :data="endToEndConversation"
+            @fetch="loadFromChat"
         /></a-card>
       </a-col>
     </a-row>
+    <a-modal
+      :visible="usersModal"
+      title="Add users"
+      :footer="null"
+      @cancel="showUsersModal(false)"
+    >
+      <UserList @getUser="getUser" />
+    </a-modal>
   </div>
 </template>
 <script>
@@ -27,8 +37,9 @@ import List from '~/components/chat/List'
 import Conversation from '~/components/chat/Conversation'
 import ChatServices from '~/services/API/ChatServices'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
+import UserList from '~/components/users/ChatList'
 export default {
-  components: { Conversation, List },
+  components: { Conversation, List, UserList },
   data() {
     return {
       conversations: [],
@@ -36,11 +47,11 @@ export default {
       endToEndConversation: [],
       opponentId: null,
       messageTo: null,
+      usersModal: false,
     }
   },
   mounted() {
     this.fetchConversation()
-    this.fetch()
     this.registerEventNotification()
   },
   methods: {
@@ -79,10 +90,10 @@ export default {
         getNotification(notification.data)
       })
     },
+    // ! hot fix need to optimize the code
     getNotification(notification) {
       const opponentId = notification.sender_Id
-      console.log(notification)
-      // ! hot fix need to optimize the code
+
       let params = {}
       if (notification.isGroup) {
         this.messageTo = 'group_Id'
@@ -99,6 +110,18 @@ export default {
       }
       this.fetchConversation()
       this.fetch(params)
+    },
+    showUsersModal(show) {
+      this.usersModal = show
+    },
+    getUser(users) {
+      this.messageTo = 'recipient_Id'
+      this.opponentId = users.id
+      this.fetch({ recipient_Id: users.id })
+      this.showUsersModal(false)
+    },
+    loadFromChat(notification) {
+      this.getConversation(notification.data)
     },
   },
 }
