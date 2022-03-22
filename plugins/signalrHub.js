@@ -17,7 +17,7 @@ export default ({ app, store }, inject) => {
   })
 
   hub.on('sendToUser', (res) => {
-    console.log('Received message from signalr', JSON.stringify(res))
+    // console.log('Received message from signalr', JSON.stringify(res))
     // const { audience, group, action, data } = res
     // const { action, data } = res
     // switch (action) {
