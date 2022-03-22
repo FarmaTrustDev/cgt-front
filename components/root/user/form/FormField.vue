@@ -67,6 +67,7 @@
                 ],
               },
             ]"
+            :disabled="isCreated"
             placeholder="Please input your Email"
           /> </a-form-item
       ></a-col>
@@ -89,6 +90,7 @@
                 ],
               },
             ]"
+            :disabled="isCreated"
             placeholder="Please input your UserName"
           />
         </a-form-item>
@@ -335,6 +337,7 @@ export default {
       entityId: null,
       loading: false,
       countries: [],
+      // isCreated:true,
       fetchCountry: true,
       formLayout: 'vertical',
       apiService: UserServices,
