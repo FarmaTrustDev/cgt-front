@@ -62,7 +62,6 @@ export default {
           if (!this.isEmpty(this.gotoLink)) {
             this.goto(`${this.gotoLink}/${response.data.globalId}`)
           }
-
           if (this.isFunction(this.afterCreate)) {
             this.afterCreate(response)
             this.btnLoading = false
@@ -81,6 +80,9 @@ export default {
         .update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
+          if (!this.isEmpty(this.gotoLink)) {
+            this.goto(`${this.gotoLink}`)
+          }
           if (this.isFunction(this.afterUpdate)) {
             this.afterUpdate(response)
             this.btnLoading = false

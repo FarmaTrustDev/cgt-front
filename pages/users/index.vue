@@ -22,32 +22,33 @@ import UserServices from '~/services/API/UserServices'
 import routeHelpers from '~/mixins/route-helpers'
 
 import PageLayout from '~/components/layout/PageLayout'
+
 const columns = [
   {
-    title: 'firstName',
-    dataIndex: 'firstName',
-    key: 'firstName',
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name'
   },
   {
-    title: 'Email',
+    title: 'Entity Type',
+    dataIndex: 'organizationTypeAlias',
+    key: 'organizationType',
+  },
+  {
+    title: 'Entity Name',
+    dataIndex: 'organizationName',
+    key: 'organizationId',
+  },
+  {
+    title: 'User Role',
+    dataIndex: 'userName',
+    key: 'userName',
+  },
+  {
+    title: 'Email Address',
     key: 'email',
     dataIndex: 'email',
   }, 
-  {
-    title: 'UserName',
-    key: 'userName',
-    dataIndex: 'userName',
-  },
-  {
-    title: 'Phone',
-    key: 'phone',
-    dataIndex: 'phone',
-  },
-  {
-    title: 'Address',
-    key: 'address',
-    dataIndex: 'address',
-  },
   {
     title: 'Action',
     key: 'action',
@@ -62,14 +63,21 @@ export default {
       datasource: [],
       columns,
       loading: true,
+      fullName:[]
     }
+  },
+  computed: {
+    // ...mapGetters(['getUser']),
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   mounted() {
     this.fetch()
   },
   methods: {
     fetch() {
-      UserServices.get()
+      UserServices.getUser(this.user.organizationId, this.user.organizationTypeId)
         .then((response) => {
           this.datasource = response.data
         })

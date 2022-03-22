@@ -53,7 +53,7 @@ export default {
   mixins: [notifications, tabsHelpers],
   data() {
     return {
-      activeTab: 1,
+      activeTab: "Enrollment",
       treatment: {},
       haveTreatment: false,
       loading: true,
