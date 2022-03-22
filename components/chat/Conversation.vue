@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-row>
-      <a-col>
+      <a-col >
         <!-- <pre> {{ data }}</pre> -->
         <a-list :data-source="data" item-layout="horizontal" :bordered="false">
           <a-list-item
@@ -38,7 +38,6 @@
               ]"
               class="send-message-input"
               placeholder="Type message here"
-              @change="handleSubmit"
             />
             <a-input
               v-decorator="[
@@ -120,26 +119,6 @@ export default {
       })
     },
 
-    handleSubmit() {
-      // if (!this.value) {
-      //   return
-      // }
-      // this.submitting = true
-      // setTimeout(() => {
-      //   this.submitting = false
-      //   this.comments = [
-      //     {
-      //       author: 'Han Solo',
-      //       avatar:
-      //         'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      //       content: this.value,
-      //       datetime: moment().fromNow(),
-      //     },
-      //     ...this.comments,
-      //   ]
-      //   this.value = ''
-      // }, 1000)
-    },
     handleChange(e) {
       this.value = e.target.value
     },

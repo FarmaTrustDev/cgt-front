@@ -13,13 +13,15 @@
       <a-col :span="1"></a-col>
       <a-col :span="14" class="right-bar">
         <a-card :bordered="false" class="default-card"
-          ><Conversation
-            v-if="messageTo != null"
-            :message-to-id="`${opponentId}`"
-            :message-to="`${messageTo}`"
-            :data="endToEndConversation"
-            @fetch="loadFromChat"
-        /></a-card>
+          ><div ref="container" class="max-h-200">
+            <Conversation
+              v-if="messageTo != null"
+              :message-to-id="`${opponentId}`"
+              :message-to="`${messageTo}`"
+              :data="endToEndConversation"
+              @fetch="loadFromChat"
+            /></div
+        ></a-card>
       </a-col>
     </a-row>
     <a-modal
@@ -65,6 +67,7 @@ export default {
     fetch(params = {}) {
       ChatServices.get(params).then((response) => {
         this.endToEndConversation = response.data
+        // this.scrollToElement()
       })
     },
     getConversation(conversation) {
@@ -122,6 +125,10 @@ export default {
     },
     loadFromChat(notification) {
       this.getConversation(notification.data)
+    },
+    scrollToElement() {
+      const content = this.$refs.container
+      content.scrollTop = content.scrollHeight
     },
   },
 }
