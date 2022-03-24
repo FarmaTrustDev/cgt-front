@@ -36,6 +36,9 @@ function getById(id) {
   })
 }
 
+
+
+
 function destroy(id) {
   return request({
     url: `${baseApi}/${id}`,
@@ -50,6 +53,7 @@ const PatientServices = {
   get,
   getMapInfo,
   destroy,
+  
 }
 
 export default PatientServices
