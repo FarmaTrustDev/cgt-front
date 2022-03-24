@@ -2,10 +2,13 @@
   <div>
     <a-skeleton :loading="loading">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
-        <a-tab-pane :key="1" tab="Patient Details"
-          ><enrollment :treatment="treatment" />
+        <a-tab-pane key="enrollment" tab="Patient Details"
+          ><enrollment 
+          :treatment="treatment" 
+          @getNextTab="getNextTab"
+          />
         </a-tab-pane>
-        <a-tab-pane key="2" tab="Consent"
+        <a-tab-pane key="consent" :disabled="!isCreated" tab="Consent"
           ><consent
             :treatment="treatment"
             @getNextTab="getNextTab"
@@ -38,8 +41,10 @@ import screening from '~/components/treatment/enrollment/screening'
 import scheduling from '~/components/treatment/enrollment/scheduling'
 import { isEmpty } from '~/services/Utilities'
 import TreatmentServices from '~/services/API/TreatmentServices'
+import PatientServices from '~/services/API/PatientServices'
 import notifications from '~/mixins/notifications'
 import tabsHelpers from '~/mixins/tabs-helpers'
+import nullHelper from '~/mixins/null-helpers'
 export default {
   components: {
     enrollment,
@@ -47,11 +52,12 @@ export default {
     scheduling,
     screening,
   },
-  mixins: [notifications, tabsHelpers],
+  mixins: [notifications, tabsHelpers, nullHelper],
   data() {
     return {
-      activeTab: 1,
+      activeTab: "enrollment",
       treatment: {},
+      isCreated:false,
       haveTreatment: false,
       loading: true,
     }
@@ -59,9 +65,29 @@ export default {
   mounted() {
     this.isTreatmentCreate()
     this.handleActiveTab()
+    this.isPatientCreated()
   },
   methods: {
     updatedKey() {},
+    isPatientCreated(){
+      const globalId = this.$route.params.id
+
+      if (this.isGuid(globalId)) {
+        this.entityId = globalId
+
+        this.fetchPatient(globalId)
+      }
+    },
+    fetchPatient(id) {
+      this.loading = true
+      PatientServices.getById(id)
+        .then((response) => {
+          this.patient = response.data
+          this.isCreated = true
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = false))
+    },
     isTreatmentCreate() {
       const query = this.$route.query
       this.loading = true

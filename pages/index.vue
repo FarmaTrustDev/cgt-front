@@ -7,7 +7,7 @@
         <!-- left side tabs -->
         <a-col :span="9">
           <div class="home-tab">
-            <a href="">
+            <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
               />
@@ -17,7 +17,7 @@
             </a>
           </div>
           <div class="home-tab">
-            <a href="">
+            <a href="javascript:;" @click="goto(`/hospital/patients`)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
               />
@@ -27,7 +27,7 @@
             </a>
           </div>
           <div class="home-tab with-arrow">
-            <a href="">
+            <a href="javascript:;" @click="goto(`/users`)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
               />
@@ -115,16 +115,13 @@
 </template>
 
 <script>
-import { HubConnectionBuilder } from '@aspnet/signalr'
+// import { HubConnectionBuilder } from '@aspnet/signalr'
 import PatientsChart from '~/components/root/home/PatientsChart'
 import UserServices from '~/services/API/UserServices'
-
-const connection = new HubConnectionBuilder()
-  .withUrl('https://demoapi.qmaid.co/NotificationUserHub')
-  .build()
-connection.start()
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { PatientsChart },
+  mixins: [routeHelpers],
   data() {
     return {
       options: {
@@ -160,11 +157,14 @@ export default {
   mounted() {
     // console.log(connection)
     // this.trigeer()
-    connection.on('sendToUser', (res) => {
-      console.log('component res', res)
-    })
+    // connection.on('sendToUser', (res) => {
+    //   console.log('component res', res)
+    // })
   },
   methods: {
+    gotoView(uri) {
+      this.goto(`/${uri}`)
+    },
     trigeer() {
       UserServices.test().then()
       // connection.invoke('AddTask', {

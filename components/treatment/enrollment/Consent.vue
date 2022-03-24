@@ -92,7 +92,7 @@ export default {
         .then((response) => {
           this.success(response.message)
           this.$emit('getTreatment', response.data)
-          this.$emit('getNextTab', 3)
+          this.$emit('getNextTab', "Screening")
           this.goto(this.$route.path, { treatment_id: response.data.globalId })
         })
         .catch(this.error)

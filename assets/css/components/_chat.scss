@@ -2,13 +2,15 @@
   .ant-list-split .ant-list-item {
     border-bottom: none;
   }
-
+  .ant-comment {
+    min-width: 50%;
+  }
   .left-bar {
     text-decoration: none;
-    .ant-card{
+    .ant-card {
       height: calc(100vh - 100px);
     }
-    .ant-avatar-image{
+    .ant-avatar-image {
       height: 70px;
       width: 70px;
       border: 1.5px solid #f5f6fa;
@@ -23,15 +25,14 @@
       font-size: 20px;
       color: #6c757d;
     }
-    .ant-list-item-meta-description{
+    .ant-list-item-meta-description {
       font-size: 10px;
-      color: #6c757d
+      color: #6c757d;
     }
-  
   }
-  
+
   .right-bar {
-    .send-message-input{
+    .send-message-input {
       background-color: #fff;
       border: 1px solid #bebfcb;
       border-radius: 44px;
@@ -43,30 +44,33 @@
     }
     .message-sent {
       justify-content: right;
-      .ant-comment{
-        background-color: rgba(120,98,255,.14);
+      .ant-comment {
+        background-color: rgba(120, 98, 255, 0.14);
       }
-
     }
     .message-received {
       justify-content: left;
-      .ant-comment{
+      .ant-comment {
         background-color: #f1faff;
       }
     }
-    .ant-comment-content-author-name{
+    .ant-comment-content-author-name {
       font-size: 14px;
     }
     .message-time {
       padding: 10px 5px;
-      color: rgba(35,49,81,.6);
+      color: rgba(35, 49, 81, 0.6);
       font-size: 10px;
     }
-    .ant-list-items{
+    .ant-list-items {
       margin-bottom: 20px;
       overflow-y: auto;
       max-height: 400px;
     }
   }
 
+  .max-h-200 {
+    // max-height: 200px;
+    // overflow-y: auto;
+  }
 }

@@ -73,7 +73,7 @@ export default {
         .then((response) => {
           this.success(response.message)
           this.$emit('getTreatment', response.data)
-          this.$emit('getNextTab', 4)
+          this.$emit('getNextTab', "Scheduling")
           this.isCreated = true
         })
         .catch(this.error)

@@ -7,7 +7,6 @@
     :class="{ 'rounded-table': rounded, 'patient-table': patient }"
   >
     <template slot="customTitle">
-      
       <div class="text-left treatment-title">Treatment Status</div>
     </template>
 
@@ -34,7 +33,6 @@
     <span slot="treatment_status" slot-scope="text, record">
       <div class="treatment-steps">
         <span v-for="treatment in record.treatments" :key="treatment.id">
-          
           <steps
             :treatment="treatment"
             :phases="phases"
@@ -107,8 +105,8 @@
           <a-menu-item key="0">
             <a>Open Ticket</a>
           </a-menu-item>
-          <a-menu-item key="1">
-            <a @click="goto(`/hospital/patients/${record.globalId}`)"
+          <a-menu-item key="consent">
+            <a @click="goto(`/hospital/patients/${record.globalId}?view=consent`)"
               >Add New Treatment</a
             >
           </a-menu-item>

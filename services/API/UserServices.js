@@ -43,6 +43,11 @@ function get(params = {}) {
     params,
   })
 }
+function getUser(organizationId, organizationTypeId) {
+  return request({
+    url: `${baseApi}/${organizationId}/${organizationTypeId}`,
+  })
+}
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -87,6 +92,7 @@ const UserServices = {
   update,
   destroy,
   get,
+  getUser,
   test
 }
 

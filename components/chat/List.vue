@@ -1,38 +1,34 @@
 <template>
- 
-    <a-list item-layout="horizontal" :data-source="data" :bordered="false">
-      <a-list-item slot="renderItem" slot-scope="">
-        <a-list-item-meta description="your recent message">
-          <a slot="title" href="https://www.antdv.com/">User name</a>
-          <a-avatar
-            slot="avatar"
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          />
-        </a-list-item-meta>
-      </a-list-item>
-    </a-list>
-
+  <a-list
+    item-layout="horizontal"
+    :data-source="conversations"
+    :bordered="false"
+  >
+    <a-list-item slot="renderItem" slot-scope="conversation">
+      <a-list-item-meta :description="conversation.message">
+        <a slot="title" @click="getConversation(conversation)">
+          <span v-if="conversation.isOwner">{{
+            conversation.recipient_Name
+          }}</span>
+          <span v-else>{{ conversation.sender_Name }}</span>
+        </a>
+        <a-avatar slot="avatar" :src="conversation.group_Image" />
+      </a-list-item-meta>
+    </a-list-item>
+  </a-list>
 </template>
 <script>
-const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-]
 export default {
+  props: {
+    conversations: { type: Array, default: () => [] },
+  },
   data() {
-    return {
-      data,
-    }
+    return {}
+  },
+  methods: {
+    getConversation(conversation) {
+      this.$emit('getConversation', conversation)
+    },
   },
 }
 </script>

@@ -1,27 +1,23 @@
 <template>
   <div>
     <a-row>
-      <a-col>
-        <a-list
-          v-if="comments.length"
-          :data-source="comments"
-          :header="`${comments.length} ${
-            comments.length > 1 ? 'replies' : 'reply'
-          }`"
-          item-layout="horizontal"
-          :bordered="false"
-        >
+      <a-col >
+        <!-- <pre> {{ data }}</pre> -->
+        <a-list :data-source="data" item-layout="horizontal" :bordered="false">
           <a-list-item
             slot="renderItem"
             slot-scope="item"
-            :class="'message-' + item.type"
+            :class="'message-' + getType(item.isOwner)"
           >
-            <a-comment :author="item.author" :content="item.content">
+            <a-comment :author="item.ownerName" :content="item.content">
               <template slot="content"
                 ><div class="message-time">
-                  Raja Sharif, 29 September 2021 19:33
+                  {{ item.message }}
                 </div></template
               >
+              <a-tooltip slot="datetime" :title="item.created_at">
+                <span>{{ item.created_at }}</span>
+              </a-tooltip>
             </a-comment>
           </a-list-item>
         </a-list>
@@ -42,20 +38,20 @@
               ]"
               class="send-message-input"
               placeholder="Type message here"
-              @change="handleSubmit"
             />
             <a-input
               v-decorator="[
-                `recipient_Id`,
+                messageTo,
                 {
                   rules: [
                     { required: true, message: 'Please input your name!' },
                   ],
-                  initialValue: 2,
+                  initialValue: `${messageToId}`,
                 },
               ]"
               type="hidden"
             />
+
             <a-input
               v-decorator="[
                 `Recipient_Name`,
@@ -72,12 +68,7 @@
         </a-col>
         <a-col class="text-right">
           <a-form-item>
-            <a-button
-              html-type="submit"
-              :loading="submitting"
-              type="primary"
-              @click="handleSubmit"
-            >
+            <a-button html-type="submit" :loading="submitting" type="primary">
               Submit
             </a-button>
           </a-form-item>
@@ -90,34 +81,13 @@
 import moment from 'moment'
 import ChatServices from '~/services/API/ChatServices'
 export default {
+  props: {
+    data: { type: Array, default: () => {} },
+    messageToId: { type: String, default: null, required: true },
+    messageTo: { type: String, default: `recipient_Id`, required: true },
+  },
   data() {
     return {
-      comments: [
-        {
-          author: 'Han Solo',
-          avatar:
-            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: this.value,
-          datetime: moment().fromNow(),
-          type: 'sent',
-        },
-        {
-          author: 'Han Solo',
-          avatar:
-            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: this.value,
-          datetime: moment().fromNow(),
-          type: 'received',
-        },
-        {
-          author: 'Han Solo',
-          avatar:
-            'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-          content: this.value,
-          datetime: moment().fromNow(),
-          type: 'sent',
-        },
-      ],
       submitting: false,
       value: '',
       moment,
@@ -127,6 +97,7 @@ export default {
       formLayout: 'vertical',
     }
   },
+  mounted() {},
   methods: {
     onSubmit(e) {
       e.preventDefault()
@@ -143,34 +114,16 @@ export default {
     },
     postMessage(params) {
       ChatServices.create(params).then((response) => {
-        console.log(response)
+        // console.log(response)
+        this.$emit('fetch', response)
       })
     },
-    handleSubmit() {
-      if (!this.value) {
-        return
-      }
 
-      this.submitting = true
-
-      setTimeout(() => {
-        this.submitting = false
-        this.comments = [
-          {
-            author: 'Han Solo',
-            avatar:
-              'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: this.value,
-            datetime: moment().fromNow(),
-          },
-
-          ...this.comments,
-        ]
-        this.value = ''
-      }, 1000)
-    },
     handleChange(e) {
       this.value = e.target.value
+    },
+    getType(isOwner) {
+      return isOwner ? 'received' : 'sent'
     },
   },
 }
