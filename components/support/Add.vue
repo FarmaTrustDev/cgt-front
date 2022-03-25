@@ -1,12 +1,13 @@
 <template>
   <div>
     <a-modal
-      v-model="visible"
-      title="Add New Ticket"
-      :after-close="handleCancel"
       :footer="null"
       :width="900"
-      @ok="handleOk"
+      title="Add New Ticket"
+      :destroy-on-close="true"
+      :visible="visible"
+      @cancel="showModal(false)"
+      @ok="showModal(false)"
     >
       <a-form :form="form" @submit="onSubmit">
         <a-row :gutter="20">
@@ -18,7 +19,7 @@
             >
               <a-select
                 v-decorator="[
-                  'patientId',
+                  'patient_Id',
                   {
                     initialValue: ticket.patientId,
                     rules: [
@@ -39,7 +40,10 @@
                 @select="onPatientSelect"
                 @search="searchPatient"
               >
-                <a-select-option v-for="patient in patients" :key="patient.id">
+                <a-select-option
+                  v-for="patient in patients"
+                  :key="`${patient.id}`"
+                >
                   {{ patient.name }}
                 </a-select-option>
               </a-select>
@@ -120,9 +124,9 @@
             <a-form-item>
               <a-select
                 v-decorator="[
-                  'status',
+                  'status_Id',
                   {
-                    initialValue: form.status,
+                    initialValue: ticket.status_Id,
                     rules: [
                       {
                         required: true,
@@ -137,7 +141,10 @@
                 size="large"
                 class="default-select"
               >
-                <a-select-option v-for="status in statuses" :key="status.id">
+                <a-select-option
+                  v-for="status in statuses"
+                  :key="`${status.id}`"
+                >
                   {{ status.name }}
                 </a-select-option>
               </a-select>
@@ -149,7 +156,7 @@
                 v-decorator="[
                   'priority',
                   {
-                    initialValue: form.priority,
+                    initialValue: ticket.priority,
                     rules: [
                       {
                         required: true,
@@ -179,28 +186,29 @@
             <a-form-item>
               <a-select
                 v-decorator="[
-                  'stakholders',
+                  'stackHolder',
                   {
-                    initialValue: form.stakholders,
+                    initialValue: ticket.stackHolder,
                     rules: [
                       {
                         required: true,
-                        message: 'Please select Stakholders',
+                        message: 'Please select StackHolder',
                       },
                     ],
                   },
                 ]"
+                mode="tags"
                 :loading="typeLoading"
-                placeholder="Select Stakholders"
+                placeholder="Select StackHolders"
                 style="width: 100%"
                 size="large"
                 class="default-select"
               >
                 <a-select-option
-                  v-for="stakholder in stackHoldersList"
-                  :key="stakholder.id"
+                  v-for="stake in stakeHoldersList"
+                  :key="`${stake.id}`"
                 >
-                  {{ stakholder.name }}
+                  {{ stake.name }}
                 </a-select-option>
               </a-select>
             </a-form-item>
@@ -224,7 +232,10 @@
 <script>
 import { filterOption } from '~/services/Helpers'
 import PatientServices from '~/services/API/PatientServices'
+import SupportServices from '~/services/API/SupportServices'
+import notifications from '~/mixins/notifications'
 export default {
+  mixins: [notifications],
   props: { ticket: { type: Object, default: () => ({}) } },
   data() {
     return {
@@ -234,31 +245,35 @@ export default {
         name: 'patientEnrollment',
       }),
       typeLoading: false,
-      statuses: [{ id: 1, name: 'InProcess' }],
+      statuses: [
+        { id: 1, name: 'Archived' },
+        { id: 2, name: 'In progress' },
+        { id: 3, name: 'Resolved' },
+        { id: 4, name: 'Cancel' },
+        { id: 5, name: 'Pause' },
+      ],
       priorities: [
         { id: 1, name: 'High' },
         { id: 2, name: 'Medium' },
         { id: 3, name: 'Low' },
       ],
-      stackHoldersList: [
-        { id: 1, name: 'Hospital' },
-        { id: 2, name: 'Other' },
-        { id: 3, name: 'Other' },
+      stakeHoldersList: [
+        { id: 1, name: 'HOSPITAL' },
+        { id: 2, name: 'MANUFACTURER' },
+        { id: 3, name: 'LOGISTIC' },
       ],
       loading: false,
       isCreated: false,
     }
   },
+  mounted() {
+    console.log(this.$parent)
+  },
   methods: {
     filterOption,
-    showModal() {
-      this.visible = true
-    },
-    handleOk(e) {
-      this.visible = false
-    },
-    handleCancel(e) {
-      this.$parent.showAddModal = false
+    showModal(show) {
+      this.visible = show
+      this.$parent.showAddModal = show
     },
     searchPatient(keyword) {
       this.fetchPatient({ puid: keyword, name: keyword, email: keyword })
@@ -275,10 +290,19 @@ export default {
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
-      console.log('here')
+
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
+          SupportServices.create(values)
+            .then((response) => {
+              console.log(response)
+              this.success(response.message)
+            })
+            .catch(this.error)
+            .finally(() => {
+              this.loading = false
+              this.showModal(false)
+            })
         } else {
           this.loading = false
         }

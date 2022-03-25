@@ -3,7 +3,10 @@
     <a-row class="p-10 mb-10">
       <div class="page-header">
         <h3 class="page-title float-left">Support Issues</h3>
-        <a-button type="primary" class="mrm-5 float-right" @click="showModal()"
+        <a-button
+          type="primary"
+          class="mrm-5 float-right"
+          @click="showModal(true)"
           >Add New Ticket</a-button
         >
         <a-input
@@ -38,7 +41,7 @@
 
 <script>
 import Table from '~/components/support/Listing'
-import AddNewTicketModal from '~/components/support/AddNewTicket'
+import AddNewTicketModal from '~/components/support/Add'
 export default {
   components: { Table, 'add-new-ticket': AddNewTicketModal },
   data() {
@@ -50,7 +53,7 @@ export default {
     callback(key) {
       console.log(key)
     },
-    showModal() {
+    showModal(value) {
       this.showAddModal = !this.showAddModal
     },
   },
