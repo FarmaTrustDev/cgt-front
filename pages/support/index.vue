@@ -1,58 +1,58 @@
 <template>
   <div class="support-page">
-
     <a-row class="p-10 mb-10">
       <div class="page-header">
         <h3 class="page-title float-left">Support Issues</h3>
-        <a-button type="primary" class="mrm-5 float-right" @click="showModal()">Add New Ticket</a-button>
-        <a-input ref="userNameInput" placeholder="Search" class="float-right page-search-input">
+        <a-button type="primary" class="mrm-5 float-right" @click="showModal()"
+          >Add New Ticket</a-button
+        >
+        <a-input
+          ref="userNameInput"
+          placeholder="Search"
+          class="float-right page-search-input"
+        >
           <a-icon slot="prefix" type="search" />
         </a-input>
       </div>
     </a-row>
 
-
-
     <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" tab="All">
-        <Table type="all"/>
+        <Table type="all" />
       </a-tab-pane>
       <a-tab-pane key="2" tab="Archive">
-        <Table type="archive"/>
+        <Table type="archive" />
       </a-tab-pane>
       <a-tab-pane key="3" tab="In Process">
-        <Table type="inprocess"/>
+        <Table type="inprocess" />
       </a-tab-pane>
       <a-tab-pane key="4" tab="Resolved">
-        <Table type="resolved"/>
+        <Table type="resolved" />
       </a-tab-pane>
     </a-tabs>
 
-
     <!-- Add New Ticket Modal -->
-    <AddNewTicketModal v-if="showAddModal" />
-
+    <add-new-ticket v-if="showAddModal" />
   </div>
 </template>
 
 <script>
-  import Table from '~/components/support/Listing'
-  import AddNewTicketModal from '~/components/support/AddNewTicket'
-  export default{
-    components : { Table, AddNewTicketModal },
-    data(){
-      return{
-        showAddModal: false
-      }
+import Table from '~/components/support/Listing'
+import AddNewTicketModal from '~/components/support/AddNewTicket'
+export default {
+  components: { Table, 'add-new-ticket': AddNewTicketModal },
+  data() {
+    return {
+      showAddModal: false,
+    }
+  },
+  methods: {
+    callback(key) {
+      console.log(key)
     },
-    methods: {
-      callback(key) {
-        console.log(key);
-      },
-      showModal(){
-        this.showAddModal = !this.showAddModal
-      }
-      
+    showModal() {
+      this.showAddModal = !this.showAddModal
     },
-  }
+  },
+}
 </script>
