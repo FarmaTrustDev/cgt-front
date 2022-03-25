@@ -254,7 +254,6 @@
             ]"
             name="postCode"
             placeholder="Please input your Post Code"
-            id="postCode"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
