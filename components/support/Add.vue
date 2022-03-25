@@ -295,7 +295,6 @@ export default {
         if (!err) {
           SupportServices.create(values)
             .then((response) => {
-              console.log(response)
               this.success(response.message)
             })
             .catch(this.error)

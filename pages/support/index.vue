@@ -21,17 +21,21 @@
 
     <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" tab="All">
-        <Table type="all" />
+        <a-table :loading="loading" :data-source="data" :columns="columns">
+          <template slot="tickets" slot-scope="id">
+            <strong>CKD-{{ id }}</strong>
+          </template>
+        </a-table>
       </a-tab-pane>
       <a-tab-pane key="2" tab="Archive">
         <Table type="archive" />
       </a-tab-pane>
-      <a-tab-pane key="3" tab="In Process">
+      <!-- <a-tab-pane key="3" tab="In Process">
         <Table type="inprocess" />
       </a-tab-pane>
       <a-tab-pane key="4" tab="Resolved">
         <Table type="resolved" />
-      </a-tab-pane>
+      </a-tab-pane> -->
     </a-tabs>
 
     <!-- Add New Ticket Modal -->
@@ -42,12 +46,57 @@
 <script>
 import Table from '~/components/support/Listing'
 import AddNewTicketModal from '~/components/support/Add'
+import SupportServices from '~/services/API/SupportServices'
+
+const columns = [
+  {
+    title: 'Date',
+    dataIndex: 'date',
+  },
+  {
+    title: 'TicketID',
+    dataIndex: 'id',
+    scopedSlots: { customRender: 'tickets' },
+  },
+  {
+    title: 'Name(PUID)',
+    dataIndex: 'name',
+  },
+  {
+    title: 'BagId',
+    dataIndex: 'bagId',
+  },
+  {
+    title: 'Issue Details',
+    dataIndex: 'issueDetails',
+  },
+  {
+    title: 'Last Update',
+    dataIndex: 'lastUpdate',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    scopedSlots: { customRender: 'status' },
+  },
+  {
+    title: 'Actions',
+    dataIndex: 'actions',
+    scopedSlots: { customRender: 'supportAction' },
+  },
+]
 export default {
   components: { Table, 'add-new-ticket': AddNewTicketModal },
   data() {
     return {
       showAddModal: false,
+      data: [],
+      columns,
+      loading: true,
     }
+  },
+  mounted() {
+    this.fetch()
   },
   methods: {
     callback(key) {
@@ -55,6 +104,16 @@ export default {
     },
     showModal(value) {
       this.showAddModal = !this.showAddModal
+    },
+    fetch(params = {}) {
+      this.loading = true
+      SupportServices.get(params)
+        .then((response) => {
+          this.data = response.ticket
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
   },
 }
