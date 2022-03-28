@@ -1,23 +1,17 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
-
-const baseApi = `${BASE_API}/patient`
-const baseApiMap = `${BASE_API}/Map/get-location-by-postal-code`
+const Qs = require('qs')
+const baseApi = `${BASE_API}/role`
 
 function get(params = {}) {
   return request({
     url: `${baseApi}`,
     params,
+    paramsSerializer: (params) => {
+      return Qs.stringify(params, { arrayFormat: 'repeat' })
+    },
   })
 }
-
-function search(params = {}) {
-  return request({
-    url: `${baseApi}/search`,
-    params,
-  })
-}
-
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -25,23 +19,17 @@ function create(data) {
     method: 'POST',
   })
 }
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+  })
+}
 
 function update(id, data) {
   return request({
     url: `${baseApi}/${id}`,
-    method: 'PATCH',
+    method: 'Put',
     data,
-  })
-}
-
-function getMapInfo(id) {
-  return request({
-    url: `${baseApiMap}/${id}`,
-  })
-}
-function getById(id) {
-  return request({
-    url: `${baseApi}/${id}`,
   })
 }
 
@@ -51,15 +39,13 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
-
-const PatientServices = {
+const RoleServices = {
+  get,
   create,
+  destroy,
   update,
   getById,
-  get,
-  getMapInfo,
-  destroy,
-  search
 }
 
-export default PatientServices
+export default RoleServices
+

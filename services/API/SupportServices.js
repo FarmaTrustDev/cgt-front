@@ -1,19 +1,11 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
 
-const baseApi = `${BASE_API}/patient`
-const baseApiMap = `${BASE_API}/Map/get-location-by-postal-code`
+const baseApi = `${BASE_API}/support`
 
 function get(params = {}) {
   return request({
     url: `${baseApi}`,
-    params,
-  })
-}
-
-function search(params = {}) {
-  return request({
-    url: `${baseApi}/search`,
     params,
   })
 }
@@ -34,11 +26,6 @@ function update(id, data) {
   })
 }
 
-function getMapInfo(id) {
-  return request({
-    url: `${baseApiMap}/${id}`,
-  })
-}
 function getById(id) {
   return request({
     url: `${baseApi}/${id}`,
@@ -52,14 +39,12 @@ function destroy(id) {
   })
 }
 
-const PatientServices = {
+const SupportServices = {
   create,
   update,
   getById,
   get,
-  getMapInfo,
   destroy,
-  search
 }
 
-export default PatientServices
+export default SupportServices

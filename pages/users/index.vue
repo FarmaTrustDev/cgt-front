@@ -41,8 +41,8 @@ const columns = [
   },
   {
     title: 'User Role',
-    dataIndex: 'userName',
-    key: 'userName',
+    dataIndex: 'roleName',
+    key: 'roleName',
   },
   {
     title: 'Email Address',

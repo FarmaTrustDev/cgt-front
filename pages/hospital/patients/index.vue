@@ -23,6 +23,8 @@
         :action-link="ActionLink"
         :rounded="true"
         :patient="true"
+        @getFetch="getFetch"
+        @deadPatient="deadPatient"
       />
     </div>
   </div>
@@ -74,8 +76,16 @@ export default {
       PatientServices,
       ActionLink,
       borderCard: false,
+      fetchPatientService: {},
     }
   },
-  methods: {},
+  methods: {
+    getFetch(fetch) {
+      this.fetchPatientService = fetch
+    },
+    deadPatient(response) {
+      this.fetchPatientService()
+    },
+  },
 }
 </script>

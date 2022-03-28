@@ -57,10 +57,7 @@
       background-color: #1890ff;
     }
   }
-  .ant-steps-small.ant-steps-horizontal:not(.ant-steps-label-vertical)
-    .ant-steps-item {
-    // margin-right: 0;
-  }
+
   .ant-steps-item-content {
     .ant-steps-item-title {
       color: #233151 !important;
@@ -76,7 +73,17 @@
       background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
     }
   }
-
+  .dead {
+    .ant-steps-item {
+      background: #fafbb6;
+    }
+    .ant-steps-item-content {
+      &::before {
+        content: '';
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+      }
+    }
+  }
   .ant-steps-item-finish {
     background: #d1f2dc;
     .ant-steps-item-content {

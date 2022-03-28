@@ -32,7 +32,11 @@
     </template>
     <span slot="treatment_status" slot-scope="text, record">
       <div class="treatment-steps">
-        <span v-for="treatment in record.treatments" :key="treatment.id">
+        <span
+          v-for="treatment in record.treatments"
+          :key="treatment.id"
+          :class="record.isDead ? 'dead' : ''"
+        >
           <steps
             :treatment="treatment"
             :phases="phases"
@@ -122,6 +126,18 @@
               Hide Patient
             </a-popconfirm>
           </a-menu-item>
+          <a-menu-item key="4">
+            <a-popconfirm
+              title="Are you to hide patient?"
+              ok-text="Yes"
+              cancel-text="No"
+              placement="topLeft"
+              @confirm="deadPatient(record)"
+            >
+              <span v-if="record.isDead"> Undead</span>
+              <span v-else>Mark Dead</span>
+            </a-popconfirm>
+          </a-menu-item>
         </a-menu>
       </a-dropdown>
     </span>
@@ -138,6 +154,7 @@ import { isEmpty, preventDefault } from '~/services/Helpers'
 import steps from '~/components/common/Steps'
 import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 import PatientServices from '~/services/API/PatientServices'
+import TreatmentServices from '~/services/API/TreatmentServices'
 export default {
   components: { steps },
   mixins: [routeHelpers, notifications],
@@ -250,6 +267,12 @@ export default {
     },
     deletePatient(record) {
       PatientServices.destroy(record)
+    },
+    deadPatient(patient) {
+      const isDead = !patient.isDead
+      TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
+        this.$emit('deadPatient', response)
+      })
     },
   },
 }

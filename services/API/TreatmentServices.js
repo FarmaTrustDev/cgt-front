@@ -77,6 +77,13 @@ function getCustody(treatmentId, bagId, typeId) {
   })
 }
 
+function markDead(id, status) {
+  return request({
+    url: `${baseApi}/mark-patient-dead/${id}/${status}`,
+    method: 'PATCH',
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
@@ -88,6 +95,7 @@ const TreatmentServices = {
   markManufacturerCollection,
   markTreatmentCollection,
   getCustody,
+  markDead
 }
 
 export default TreatmentServices

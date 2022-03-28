@@ -21,6 +21,7 @@ import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
+
 export default {
   components: { FormFields },
   mixins: [notifications, routeHelpers, nullHelper],
@@ -84,7 +85,7 @@ export default {
         .then((response) => {
           this.success(response.message)
           // this.goto(`/hospital/patients/${response.data.globalId}`)
-          this.$emit('getNextTab', "Consent")
+          this.$emit('getNextTab', 'Consent')
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
