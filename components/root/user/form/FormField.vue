@@ -95,9 +95,11 @@
           />
         </a-form-item>
       </a-col>
-      <a-col :span="22">
+      <a-col :span="24">
         <a-form-item
           label="Office Address"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -115,6 +117,39 @@
             placeholder="Please input your Office Address"
           /> </a-form-item
       ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Role"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+          <a-select
+            v-decorator="[
+              'roleId',
+              {
+                initialValue: entity.roleId,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your role!',
+                  },
+                ],
+              },
+            ]"
+            :show-search="true"
+            :filter-option="filterOption"
+            placeholder="Select Role"
+            style="width: 100%"
+            size="large"
+            class="default-select"
+            @search="searchCountries"
+          >
+            <a-select-option v-for="role in roles" :key="role.id">
+              {{ role.name }}
+            </a-select-option>
+          </a-select>
+        </a-form-item>
+      </a-col>
       <a-col :span="12">
         <a-form-item
           label="Contact Number"
@@ -288,7 +323,7 @@
         <a-form-item
           label="Country"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
+          :wrapper-col="{ span: 21 }"
         >
           <a-select
             v-decorator="[
@@ -327,6 +362,7 @@ import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import withCrud from '~/mixins/with-crud'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
+import RoleServices from '~/services/API/RoleServices'
 export default {
   
   mixins: [withCrud],
@@ -337,19 +373,26 @@ export default {
       entityId: null,
       loading: false,
       countries: [],
+      roles: [],
       // isCreated:true,
       fetchCountry: true,
+      fetchRole: true,
       formLayout: 'vertical',
       apiService: UserServices,
     }
   },
   mounted() {
     this.getCountries()
+    this.getRoles()
   },
   updated() {
     if (this.isCreated && this.fetchCountry) {
       this.fetchCountry = false
       this.getCountries()
+    }
+    if (this.isCreated && this.fetchRole) {
+      this.fetchRole = false
+      this.getRoles()
     }
   },
   methods: {
@@ -360,6 +403,11 @@ export default {
         this.countries = response.data.data
       })
     },
+    fetchRoles(params = {}) {
+      RoleServices.get(params).then((response) => {
+        this.roles = response.data
+      })
+    },
     getCountries() {
       if (this.isCreated) {
         this.fetchCountries({ Ids: [this.entity.coutryId] })
@@ -367,8 +415,18 @@ export default {
         this.fetchCountries()
       }
     },
+    getRoles() {
+      if (this.isCreated) {
+        this.fetchRoles({ Ids: [this.entity.roleId] })
+      } else {
+        this.fetchRoles()
+      }
+    },
     searchCountries(name, b) {
       this.fetchCountries({ name })
+    },
+    searchRoles(name, b) {
+      this.fetchRoles({ name })
     },
   },
 }
