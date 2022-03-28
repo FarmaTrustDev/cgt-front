@@ -47,6 +47,22 @@
                   {{ patient.name }}
                 </a-select-option>
               </a-select>
+              <a-input
+                v-decorator="[
+                  'reporter_name',
+                  {
+                    initialValue: ticket.reporter_name,
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input Subject !',
+                      },
+                    ],
+                  },
+                ]"
+                type="hidden"
+                placeholder="Subject"
+              />
             </a-form-item>
           </a-col>
           <a-col :span="12">
@@ -149,6 +165,22 @@
                   {{ status.name }}
                 </a-select-option>
               </a-select>
+              <a-input
+                v-decorator="[
+                  'status_Name',
+                  {
+                    initialValue: ticket.status_Name,
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input Subject !',
+                      },
+                    ],
+                  },
+                ]"
+                type="hidden"
+                placeholder="Subject"
+              />
             </a-form-item>
           </a-col>
           <a-col :span="12">
@@ -292,12 +324,17 @@ export default {
       const patient = this.patients.find(
         (patient) => `${patient.id}` === patientId
       )
-
-      this.reporter_name = patient.name //! hot fix stuck in the how fetch the patient name from row(please update if you found a better way )
+      this.form.setFieldsValue({
+        reporter_name: patient.name,
+      })
     },
     getStatusChange(statusId) {
       const status = this.statuses.find((status) => `${status.id}` === statusId)
       this.status_Name = status.name
+
+      this.form.setFieldsValue({
+        status_Name: status.name,
+      })
     },
     fetchBags(patientId) {},
     onSubmit(e) {
@@ -308,12 +345,10 @@ export default {
         if (!err) {
           SupportServices.create({
             ...values,
-            reporter_name: this.reporter_name,
-            status_Name: this.status_Name,
           })
             .then((response) => {
               this.success(response.message)
-              this.$emit("closeModal",response);
+              this.$emit('closeModal', response)
             })
             .catch(this.error)
             .finally(() => {
