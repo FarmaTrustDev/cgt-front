@@ -9,14 +9,14 @@
             slot-scope="item"
             :class="'message-' + getType(item.isOwner)"
           >
-            <a-comment :author="item.ownerName" :content="item.content">
+            <a-comment :author="item.sender_Name" :content="item.content">
               <template slot="content"
                 ><div class="message-time">
                   {{ item.message }}
                 </div></template
               >
-              <a-tooltip slot="datetime" :title="item.created_at">
-                <span>{{ item.created_at }}</span>
+              <a-tooltip slot="datetime" :title="item.read_at">
+                <span>{{ item.read_at }}</span>
               </a-tooltip>
             </a-comment>
           </a-list-item>
@@ -64,6 +64,30 @@
               ]"
               type="hidden"
             />
+            <a-input
+              v-decorator="[
+                `TicketId`,
+                {
+                  rules: [
+                    { required: true, message: 'Please input your name!' },
+                  ],
+                  initialValue: ticket.id,
+                },
+              ]"
+              type="hidden"
+            />
+            <a-input
+              v-decorator="[
+                `Sender_Name`,
+                {
+                  rules: [
+                    { required: true, message: 'Please input your name!' },
+                  ],
+                  initialValue: user.name,
+                },
+              ]"
+              type="hidden"
+            />
           </a-form-item>
         </a-col>
         <a-col class="text-right">
@@ -79,12 +103,13 @@
 </template>
 <script>
 import moment from 'moment'
-// import ChatServices from '~/services/API/ChatServices'
+import SupportServices from '~/services/API/SupportServices'
 export default {
   props: {
     data: { type: Array, default: () => {} },
     messageToId: { type: String, default: null, required: true },
     messageTo: { type: String, default: `recipient_Id`, required: true },
+    ticket: { type: Object, default: () => {}, required: true },
   },
   data() {
     return {
@@ -96,6 +121,12 @@ export default {
       }),
       formLayout: 'vertical',
     }
+  },
+  computed: {
+    // ...mapGetters(['getUser']),
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   mounted() {},
   methods: {
@@ -113,11 +144,12 @@ export default {
       })
     },
     postMessage(params) {
-      console.log(params)
-      //   ChatServices.create(params).then((response) => {
-      //     // console.log(response)
-      //     this.$emit('fetch', response)
-      //   })
+      this.submitting = true
+      SupportServices.postNotification(params).then((response) => {
+        // console.log(response)
+        this.submitting = false
+        this.$emit('fetch', response)
+      })
     },
 
     handleChange(e) {
