@@ -82,6 +82,16 @@
             <a-form-item label="Bags:">
               <a-input
                 v-decorator="[
+                  'id',
+                  {
+                    initialValue: ticket.id,
+                  },
+                ]"
+                type="hidden"
+                placeholder="Subject"
+              />
+              <a-input
+                v-decorator="[
                   'Reference_Id',
                   {
                     initialValue: ticket.Reference_Id,
