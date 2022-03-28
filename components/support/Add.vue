@@ -37,7 +37,7 @@
                 size="large"
                 autocomplete="off"
                 class="default-select"
-                @select="onPatientSelect"
+                @change="onPatientSelect"
                 @search="searchPatient"
               >
                 <a-select-option
@@ -241,6 +241,8 @@ export default {
     return {
       visible: true,
       patients: [],
+      status_Name: null,
+      reporter_name: null,
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }),
@@ -283,8 +285,14 @@ export default {
         this.patients = response.data
       })
     },
-    onPatientSelect(patientId, option) {
+    onPatientSelect(patientId, option, s) {
       this.fetchBags(patientId)
+
+      const patient = this.patients.find(
+        (patient) => `${patient.id}` === patientId
+      )
+
+      this.reporter_name = patient.name //! hot fix stuck in the how fetch the patient name from row(please update if you found a better way )
     },
     fetchBags(patientId) {},
     onSubmit(e) {
@@ -293,7 +301,10 @@ export default {
 
       this.form.validateFields((err, values) => {
         if (!err) {
-          SupportServices.create(values)
+          SupportServices.create({
+            ...values,
+            reporter_name: this.reporter_name,
+          })
             .then((response) => {
               this.success(response.message)
             })

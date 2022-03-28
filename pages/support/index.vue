@@ -51,7 +51,7 @@ import SupportServices from '~/services/API/SupportServices'
 const columns = [
   {
     title: 'Date',
-    dataIndex: 'date',
+    dataIndex: 'created_At',
   },
   {
     title: 'TicketID',
