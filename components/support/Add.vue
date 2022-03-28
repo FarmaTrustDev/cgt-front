@@ -140,6 +140,7 @@
                 style="width: 100%"
                 size="large"
                 class="default-select"
+                @change="getStatusChange"
               >
                 <a-select-option
                   v-for="status in statuses"
@@ -294,6 +295,10 @@ export default {
 
       this.reporter_name = patient.name //! hot fix stuck in the how fetch the patient name from row(please update if you found a better way )
     },
+    getStatusChange(statusId) {
+      const status = this.statuses.find((status) => `${status.id}` === statusId)
+      this.status_Name = status.name
+    },
     fetchBags(patientId) {},
     onSubmit(e) {
       this.loading = true
@@ -304,9 +309,11 @@ export default {
           SupportServices.create({
             ...values,
             reporter_name: this.reporter_name,
+            status_Name: this.status_Name,
           })
             .then((response) => {
               this.success(response.message)
+              this.$emit("closeModal",response);
             })
             .catch(this.error)
             .finally(() => {

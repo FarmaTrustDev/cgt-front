@@ -25,6 +25,11 @@
           <template slot="tickets" slot-scope="id">
             <strong>CKD-{{ id }}</strong>
           </template>
+          <template slot="status" slot-scope="status, record">
+            <span :class="'status status-' + getStatusName(status, record)">{{
+              record.status_Name
+            }}</span>
+          </template>
         </a-table>
       </a-tab-pane>
       <a-tab-pane key="2" tab="Archive">
@@ -39,7 +44,7 @@
     </a-tabs>
 
     <!-- Add New Ticket Modal -->
-    <add-new-ticket v-if="showAddModal" />
+    <add-new-ticket @closeModal="closeModal" v-if="showAddModal" />
   </div>
 </template>
 
@@ -60,7 +65,7 @@ const columns = [
   },
   {
     title: 'Name(PUID)',
-    dataIndex: 'name',
+    dataIndex: 'reporter_name',
   },
   {
     title: 'BagId',
@@ -68,11 +73,11 @@ const columns = [
   },
   {
     title: 'Issue Details',
-    dataIndex: 'issueDetails',
+    dataIndex: 'description',
   },
   {
     title: 'Last Update',
-    dataIndex: 'lastUpdate',
+    dataIndex: 'updated_At',
   },
   {
     title: 'Status',
@@ -104,6 +109,13 @@ export default {
     },
     showModal(value) {
       this.showAddModal = !this.showAddModal
+    },
+    closeModal() {
+      this.fetch();
+    },
+    getStatusName(status, record) {
+      return record.status_Name.toLowerCase()
+      // status_Name.toLowerCase()
     },
     fetch(params = {}) {
       this.loading = true
