@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Organizations">
+  <page-layout :loading="loading" title="Support">
     <template slot="content"
       ><div class="support-page">
         <a-row class="p-10 mb-10">
@@ -24,8 +24,12 @@
         <a-tabs type="card" @change="callback">
           <a-tab-pane key="1" tab="All">
             <a-table :loading="loading" :data-source="data" :columns="columns">
-              <template slot="tickets" slot-scope="id">
-                <strong>CKD-{{ id }}</strong>
+              <template slot="tickets" slot-scope="id, record">
+                <a-button type="link">
+                  <strong @click="goto(`support/${record.global_Id}`)"
+                    >CKD-{{ id }}</strong
+                  ></a-button
+                >
               </template>
               <template slot="status" slot-scope="status, record">
                 <span
@@ -77,6 +81,7 @@ import Table from '~/components/support/Listing'
 import AddNewTicketModal from '~/components/support/Add'
 import SupportServices from '~/services/API/SupportServices'
 import PageLayout from '~/components/layout/PageLayout'
+import routeHelpers from '~/mixins/route-helpers'
 const columns = [
   {
     title: 'Date',
@@ -116,6 +121,7 @@ const columns = [
 ]
 export default {
   components: { Table, 'add-new-ticket': AddNewTicketModal, PageLayout },
+  mixins: [routeHelpers],
   data() {
     return {
       showAddModal: false,
@@ -138,10 +144,13 @@ export default {
       console.log(key)
     },
     showModal(value) {
-      this.showAddModal = !this.showAddModal
-      this.isCreated = false
+      this.showAddModal = value
+      if (!value) {
+        this.isCreated = false
+      }
     },
-    closeModal() {
+    closeModal(value) {
+      this.showModal(value)
       this.fetch()
     },
     getStatusName(status, record) {
