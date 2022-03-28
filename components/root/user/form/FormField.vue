@@ -154,7 +154,7 @@
                 initialValue: entity.userRoleId,
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Please input your First Name',
                   },
                 ],
@@ -386,6 +386,7 @@ export default {
     return {
       entity:{},
       entityId: null,
+      userRoleId:null,
       loading: false,
       countries: [],
       roles: [],
