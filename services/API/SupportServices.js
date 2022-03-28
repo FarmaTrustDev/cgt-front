@@ -18,10 +18,10 @@ function create(data) {
   })
 }
 
-function update(id, data) {
+function update(data) {
   return request({
-    url: `${baseApi}/${id}`,
-    method: 'PATCH',
+    url: `${baseApi}`,
+    method: 'Put',
     data,
   })
 }

@@ -138,10 +138,14 @@ export default {
       console.log(key)
     },
     showModal(value) {
-      this.showAddModal = !this.showAddModal
-      this.isCreated = false
+     
+      this.showAddModal = value
+      if (!value) {
+        this.isCreated = false
+      }
     },
-    closeModal() {
+    closeModal(value) {
+      this.showModal(value)
       this.fetch()
     },
     getStatusName(status, record) {

@@ -76,6 +76,23 @@
                 ]"
                 :disabled="true"
               />
+
+              <a-input
+                v-decorator="[
+                  'patient_Id',
+                  {
+                    initialValue: `${ticket.reporter_Id}`,
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Patient Required',
+                      },
+                    ],
+                  },
+                ]"
+                :disabled="true"
+                type="hidden"
+              />
             </a-form-item>
           </a-col>
           <a-col :span="12">
@@ -318,9 +335,7 @@ export default {
       loading: false,
     }
   },
-  mounted() {
-    console.log(this.$parent)
-  },
+  mounted() {},
   methods: {
     filterOption,
     showModal(show) {
@@ -360,22 +375,43 @@ export default {
 
       this.form.validateFields((err, values) => {
         if (!err) {
-          SupportServices.create({
-            ...values,
-          })
-            .then((response) => {
-              this.success(response.message)
-              this.$emit('closeModal', response)
-            })
-            .catch(this.error)
-            .finally(() => {
-              this.loading = false
-              this.showModal(false)
-            })
+          if (this.isCreated) {
+            this.update(values)
+          } else {
+            this.create(values)
+          }
         } else {
           this.loading = false
         }
       })
+    },
+    update(values) {
+      SupportServices.update({
+        ...values,
+      })
+        .then((response) => {
+          this.success(response.message)
+          this.$emit('closeModal', false)
+        })
+        .catch(this.error)
+        .finally(() => {
+          this.loading = false
+          this.showModal(false)
+        })
+    },
+    create(values) {
+      SupportServices.create({
+        ...values,
+      })
+        .then((response) => {
+          this.success(response.message)
+          this.$emit('closeModal', false)
+        })
+        .catch(this.error)
+        .finally(() => {
+          this.loading = false
+          this.showModal(false)
+        })
     },
   },
 }
