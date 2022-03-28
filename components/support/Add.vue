@@ -12,11 +12,7 @@
       <a-form :form="form" @submit="onSubmit">
         <a-row :gutter="20">
           <a-col :span="12">
-            <a-form-item
-              label="Patient:"
-              :label-col="{ span: 24 }"
-              :wrapper-col="{ span: 24 }"
-            >
+            <a-form-item v-if="!isCreated" label="Patient:">
               <a-select
                 v-decorator="[
                   'patient_Id',
@@ -64,13 +60,26 @@
                 placeholder="Subject"
               />
             </a-form-item>
+            <a-form-item v-else label="Patient:">
+              <a-input
+                v-decorator="[
+                  'reporter_name',
+                  {
+                    initialValue: ticket.reporter_name,
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please input Subject !',
+                      },
+                    ],
+                  },
+                ]"
+                :disabled="true"
+              />
+            </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item
-              label="Bags:"
-              :label-col="{ span: 24 }"
-              :wrapper-col="{ span: 24 }"
-            >
+            <a-form-item label="Bags:">
               <a-input
                 v-decorator="[
                   'Reference_Id',
@@ -250,11 +259,7 @@
 
         <a-row class="mt-15">
           <a-col class="text-right">
-            <FormActionButton
-              :is-created="isCreated"
-              :loading="loading"
-              text="Save"
-            />
+            <FormActionButton :is-created="isCreated" :loading="loading" />
           </a-col>
         </a-row>
       </a-form>
@@ -269,7 +274,10 @@ import SupportServices from '~/services/API/SupportServices'
 import notifications from '~/mixins/notifications'
 export default {
   mixins: [notifications],
-  props: { ticket: { type: Object, default: () => ({}) } },
+  props: {
+    ticket: { type: Object, default: () => ({}) },
+    isCreated: { type: Boolean, default: false },
+  },
   data() {
     return {
       visible: true,
@@ -298,7 +306,6 @@ export default {
         { id: 3, name: 'LOGISTIC' },
       ],
       loading: false,
-      isCreated: false,
     }
   },
   mounted() {

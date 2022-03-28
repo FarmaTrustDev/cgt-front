@@ -230,7 +230,7 @@
 <script>
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import {_disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
-import { STANDARD_UK_DATE_FORMATE } from '~/services/Constant/DateTime'
+import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 export default {
   components: { LogisticLookup },
   props: {
@@ -245,7 +245,7 @@ export default {
   },
   data() {
     return {
-      dateFormat: STANDARD_UK_DATE_FORMATE,
+      dateFormat: STANDARD_UK_DATE_FORMAT,
       manufacturerName: null,
       formLayout: 'horizontal',
       loading: false,
