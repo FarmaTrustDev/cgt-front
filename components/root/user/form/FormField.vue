@@ -7,7 +7,6 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
-        
           <a-input
             v-decorator="[
               'firstName',
@@ -148,8 +147,24 @@
               {{ role.name }}
             </a-select-option>
           </a-select>
+          <a-input
+            v-decorator="[
+              'userRoleId',
+              {
+                initialValue: entity.userRoleId,
+                rules: [
+                  {
+                    required: false,
+                    message: 'Please input your First Name',
+                  },
+                ],
+              },
+            ]"
+            type="hidden"
+          />
         </a-form-item>
       </a-col>
+      
       <a-col :span="12">
         <a-form-item
           label="Contact Number"
@@ -371,6 +386,7 @@ export default {
     return {
       entity:{},
       entityId: null,
+      userRoleId:null,
       loading: false,
       countries: [],
       roles: [],
