@@ -7,24 +7,13 @@
         :key="step.id"
         :color="step.isCompleted ? 'green' : 'grey'"
       >
-        <a-icon
-          v-if="step.isCompleted"
-          slot="dot"
-          type="check-circle-o"
-          style="font-size: 16px"
-        />
-        <a-icon
-          v-else
-          slot="dot"
-          type="clock-circle-o"
-          style="font-size: 16px"
-        />
+        <a-icon v-if="step.isCompleted" slot="dot" type="check-circle-o" />
+        <a-icon v-else slot="dot" type="clock-circle-o" />
         <div class="step-bar">
           <h2></h2>
           <!-- {{ step }} -->
           <a-row>
             <a-col :span="12">
-            
               <span class="left">
                 <strong class="step-title"> {{ step.name }}</strong>
                 <span class="date-time">{{
