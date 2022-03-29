@@ -9,8 +9,14 @@ function hospital(data) {
     data,
   })
 }
+function scheduling(id) {
+  return request({
+    url: `${baseApi}/scheduling/${id}`,
+  })
+}
 const LabelServices = {
   hospital,
+  scheduling,
 }
 
 export default LabelServices
