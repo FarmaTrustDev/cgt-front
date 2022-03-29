@@ -27,7 +27,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 3,
         name: 'Collection',
         alias: 'COLLECTION',
-        phaseId: 5,
+        phaseId: 4,
         url_slug: '/hospital/patients/collection/',
         url_type: URL_TYPE.treatment,
         params: { view: 'collection' }

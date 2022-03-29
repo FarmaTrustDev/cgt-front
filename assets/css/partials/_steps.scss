@@ -121,6 +121,9 @@
 }
 
 .view-screen {
+  .ant-timeline-item-content {
+    margin-left: 30px;
+  }
   .step-bar {
     border: 1px solid #1bb558;
     padding: 10px;
@@ -141,5 +144,14 @@
   }
   .ant-tabs-tabpane-active {
     padding: 5px;
+  }
+  .ant-timeline {
+    .anticon {
+      font-size: 25px !important;
+    }
+  }
+
+  .ant-tabs-content {
+    margin-left: 3px;
   }
 }
