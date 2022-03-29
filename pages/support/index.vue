@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Support">
+  <page-layout :loading="loading" :create="false" title="Support">
     <template slot="content"
       ><div class="support-page">
         <a-row class="p-10 mb-10">
