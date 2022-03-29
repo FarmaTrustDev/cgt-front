@@ -19,12 +19,28 @@
           type="clock-circle-o"
           style="font-size: 16px"
         />
-        <div>
-          <h2>
-            {{ step.name }}
-            <span>{{ step.dateTime }}</span>
-          </h2>
-          {{ step }}
+        <div class="step-bar">
+          <h2></h2>
+          <!-- {{ step }} -->
+          <a-row>
+            <a-col :span="12">
+            
+              <span class="left">
+                <strong class="step-title"> {{ step.name }}</strong>
+                <span class="date-time">{{
+                  isEmpty(step.dateTime) ? 'Pending' : step.dateTime
+                }}</span>
+              </span>
+            </a-col>
+            <a-col :span="12">
+              <div class="right d-block">
+                <strong class="step-title d-block">
+                  by: Schneider Fische</strong
+                >
+                <span class="date-time">Berlin Hospital</span>
+              </div>
+            </a-col>
+          </a-row>
         </div></a-timeline-item
       >
     </a-timeline>
@@ -48,6 +64,7 @@ export default {
     this.fetchSteps()
   },
   methods: {
+    isEmpty,
     fetchSteps() {
       TreatmentServices.getCustody(
         this.treatment.id,

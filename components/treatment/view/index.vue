@@ -2,7 +2,7 @@
   <div>
     <a-tabs :active-key="activeTab" type="card" @change="onTabChange">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid"
-        ><Steps :bag="bag" :treatment="treatment"
+        ><Steps class="view-screen" :bag="bag" :treatment="treatment"
       /></a-tab-pane>
     </a-tabs>
   </div>
