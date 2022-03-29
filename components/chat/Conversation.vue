@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-row>
-      <a-col >
+      <a-col>
         <!-- <pre> {{ data }}</pre> -->
         <a-list :data-source="data" item-layout="horizontal" :bordered="false">
           <a-list-item
@@ -23,6 +23,8 @@
         </a-list>
       </a-col>
     </a-row>
+
+    <!-- /// Form for chat -->
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <a-row>
         <a-col>
@@ -41,12 +43,12 @@
             />
             <a-input
               v-decorator="[
-                messageTo,
+                recipient.type,
                 {
                   rules: [
                     { required: true, message: 'Please input your name!' },
                   ],
-                  initialValue: `${messageToId}`,
+                  initialValue: `${recipient.id}`,
                 },
               ]"
               type="hidden"
@@ -59,7 +61,7 @@
                   rules: [
                     { required: true, message: 'Please input your name!' },
                   ],
-                  initialValue: 'Paige Turner',
+                  initialValue: recipient.name,
                 },
               ]"
               type="hidden"
@@ -75,6 +77,7 @@
         </a-col>
       </a-row>
     </a-form>
+    <!-- /// Form for chat -->
   </div>
 </template>
 <script>
@@ -83,8 +86,9 @@ import ChatServices from '~/services/API/ChatServices'
 export default {
   props: {
     data: { type: Array, default: () => {} },
-    messageToId: { type: String, default: null, required: true },
-    messageTo: { type: String, default: `recipient_Id`, required: true },
+    // messageToId: { type: String, default: null, required: true },
+    // messageTo: { type: String, default: `recipient_Id`, required: true },
+    recipient: { type: Object, default: () => {}, required: true },
   },
   data() {
     return {
