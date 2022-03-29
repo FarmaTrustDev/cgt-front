@@ -25,7 +25,9 @@
           <treatmentCollections :treatment="treatment" />
         </a-tab-pane>
 
-        <a-tab-pane key="after-care" tab="Aftercare"> Aftercare</a-tab-pane>
+        <a-tab-pane key="after-care" tab="Aftercare"> 
+          <afterCare :treatment="treatment" />
+        </a-tab-pane>
 
       </a-tabs></a-card
     >
@@ -34,11 +36,12 @@
 <script>
 import scheduling from '~/components/treatment/enrollment/scheduling'
 import collections from '~/components/treatment/collections'
+import afterCare from '~/components/treatment/enrollment/AfterCare'
 import treatmentCollections from '~/components/treatment/collections/treatment'
 import tabsHelpers from '~/mixins/tabs-helpers'
 const DEFAULT_ACTIVE_KEY = '2'
 export default {
-  components: { scheduling, collections, treatmentCollections },
+  components: { scheduling, collections, treatmentCollections,afterCare },
   mixins: [tabsHelpers],
   props: {
     treatment: {

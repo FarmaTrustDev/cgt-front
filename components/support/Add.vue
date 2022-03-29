@@ -39,6 +39,7 @@
                 <a-select-option
                   v-for="patient in patients"
                   :key="`${patient.id}`"
+                  :data-globalId="patient.globalId"
                 >
                   {{ patient.name }}
                 </a-select-option>
@@ -107,7 +108,7 @@
                 type="hidden"
                 placeholder="Subject"
               />
-              <a-input
+              <!-- <a-input
                 v-decorator="[
                   'Reference_Id',
                   {
@@ -115,7 +116,32 @@
                   },
                 ]"
                 placeholder="Please input your Patient"
-              />
+              /> -->
+              <a-select
+                v-decorator="[
+                  'Reference_Id',
+                  {
+                    initialValue: ticket.reference_Id,
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Patient Required',
+                      },
+                    ],
+                  },
+                ]"
+                :show-search="true"
+                :filter-option="filterOption"
+                style="width: 100%"
+                size="large"
+                autocomplete="off"
+                class="default-select"
+                :disabled="isCreated"
+              >
+                <a-select-option v-for="bag in bags" :key="`${bag.puid}`">
+                  {{ bag.puid }}
+                </a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
         </a-row>
@@ -298,6 +324,7 @@
 import { filterOption } from '~/services/Helpers'
 import PatientServices from '~/services/API/PatientServices'
 import SupportServices from '~/services/API/SupportServices'
+import TreatmentServices from '~/services/API/TreatmentServices'
 import notifications from '~/mixins/notifications'
 export default {
   mixins: [notifications],
@@ -333,6 +360,7 @@ export default {
         { id: 3, name: 'LOGISTIC' },
       ],
       loading: false,
+      bags: [],
     }
   },
   mounted() {},
@@ -350,8 +378,9 @@ export default {
         this.patients = response.data
       })
     },
+
     onPatientSelect(patientId, option, s) {
-      this.fetchBags(patientId)
+      this.fetchBags(option.data.attrs['data-globalId'])
 
       const patient = this.patients.find(
         (patient) => `${patient.id}` === patientId
@@ -368,7 +397,12 @@ export default {
         status_Name: status.name,
       })
     },
-    fetchBags(patientId) {},
+    fetchBags(patientId) {
+      TreatmentServices.getBags(patientId).then((bags) => {
+        console.log(bags)
+        this.bags = bags.data
+      })
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()

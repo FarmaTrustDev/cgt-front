@@ -84,6 +84,12 @@ function markDead(id, status) {
   })
 }
 
+function getBags(id) {
+  return request({
+    url: `${baseApi}/get-patient-bags/${id}`,
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
@@ -95,7 +101,8 @@ const TreatmentServices = {
   markManufacturerCollection,
   markTreatmentCollection,
   getCustody,
-  markDead
+  markDead,
+  getBags
 }
 
 export default TreatmentServices
