@@ -178,7 +178,6 @@
   }
 }
 .default-tabs {
-  border: 1px solid red;
   .ant-tabs {
     .ant-tabs-left-bar,
     .ant-tabs-right-bar {
@@ -190,7 +189,6 @@
         border-radius: 22px !important;
         padding-left: 40px !important;
         margin: auto;
-        // border: 1px solid red;
         &::after {
           content: '';
           position: absolute;
