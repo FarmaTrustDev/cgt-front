@@ -101,6 +101,12 @@
     }
   }
 
+  .treatmentName {
+    font-size: 14px;
+    padding-top: 10px;
+    min-width: 59px;
+    padding-right: 2px;
+  }
   .btn-view-timeline {
     background-color: #3869d1;
     color: white;
@@ -110,5 +116,42 @@
     height: 30px;
     font-size: 12px;
     margin-top: 12px;
+    vertical-align: text-bottom;
+  }
+}
+
+.view-screen {
+  .ant-timeline-item-content {
+    margin-left: 30px;
+  }
+  .step-bar {
+    border: 1px solid #1bb558;
+    padding: 10px;
+    border-radius: $default-radius;
+    .left {
+      .step-title {
+        display: block;
+        font-size: 1.24em;
+      }
+      .date-time {
+        font-size: 16px;
+      }
+    }
+    .right {
+      text-align: right;
+      display: block;
+    }
+  }
+  .ant-tabs-tabpane-active {
+    padding: 5px;
+  }
+  .ant-timeline {
+    .anticon {
+      font-size: 25px !important;
+    }
+  }
+
+  .ant-tabs-content {
+    margin-left: 3px;
   }
 }

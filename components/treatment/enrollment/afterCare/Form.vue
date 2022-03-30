@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import FormFields from '~/components/treatment/enrollment/AfterCare/FormFields'
+import FormFields from '~/components/treatment/enrollment/aftercare/FormFields'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
 export default {
   components: { FormFields},

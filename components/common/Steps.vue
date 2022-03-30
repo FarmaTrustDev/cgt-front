@@ -1,5 +1,4 @@
 <template>
-  
   <span class="step-col" functional>
     <a-steps
       :initial="1"
@@ -7,7 +6,9 @@
       status="process"
       size="small"
     >
-    <div style="font-size:14px; padding-top:10px; width:13%">{{treatment.treatmentTypeName}}</div>
+      <div class="treatmentName">
+        {{ treatment.treatmentTypeName }}
+      </div>
       <a-step
         v-for="phase in phases"
         :key="phase.phaseId"
@@ -16,8 +17,6 @@
       >
       </a-step>
     </a-steps>
-
-   
   </span>
 </template>
 <script>

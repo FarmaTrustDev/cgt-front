@@ -13,31 +13,30 @@
 
       <template slot="print" slot-scope="text, schedule">
         <pre>
-          {{ record }}
-          {{ (treatment, record) }}
+          
       </pre
         >
-
         <a-button
           v-for="bag in schedule.treatment.bags"
-          :key="bag.message - to - id"
+          :key="bag.message"
           class="print-btn"
           type="primary"
           size="small"
           icon="printer"
-          @click="openViewModal(schedule)"
+          @click="openViewModal(schedule.id)"
           >{{ bag.puid }}</a-button
         >
       </template>
     </a-table>
 
     <!-- View the Modal -->
-    <ViewLabelModal v-if="showViewModal" />
+    <ViewLabelModal v-if="showViewModal" :key="schedulingId" />
   </div>
 </template>
 
 <script>
 import ViewLabelModal from '~/components/labeling/ViewLabelModal'
+// import LabelServices from '~/services/API/LabelServices';
 export default {
   components: { ViewLabelModal },
   props: {
@@ -46,23 +45,19 @@ export default {
   data() {
     return {
       showViewModal: false,
+      schedulingId:null,
       columns: [
         {
           title: 'Patient ID',
           dataIndex: 'patientEnrollmentNumber',
         },
-        // {
-        //   title: 'Patient Name',
-        //   dataIndex: 'name',
-        //   scopedSlots: { customRender: 'name' },
-        // },
         {
           title: 'Collection Date - Delivery Date ',
           dataIndex: 'collectionDateDeliveryDate',
         },
         {
           title: 'Treatment Type',
-          dataIndex: 'treatment_type',
+          dataIndex: 'treatmentType.name',
         },
         {
           title: 'Print',
@@ -70,34 +65,14 @@ export default {
           scopedSlots: { customRender: 'print' },
         },
       ],
-      // data: [
-      //   {
-      //     uuid: 'DAC61010',
-      //     patient_id: 'DAC61010',
-      //     name: 'Christina Braun',
-      //     age: '1 month',
-      //     treatment_type: 'Zolgenzma',
-      //   },
-      // ],
       loading: false,
     }
   },
   methods: {
     openViewModal(id) {
-      // console.log(id)
-      this.showViewModal = true
-    },
-    handleTableChange(pagination, filters, sorter) {
-      const pager = { ...this.pagination }
-      pager.current = pagination.current
-      this.pagination = pager
-      // this.fetch({
-      //   results: pagination.pageSize,
-      //   page: pagination.current,
-      //   sortField: sorter.field,
-      //   sortOrder: sorter.order,
-      //   ...filters,
-      // })
+      this.showViewModal = true;
+      this.schedulingId=id;
+      // LabelServices.scheduling(id);
     },
   },
 }

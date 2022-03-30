@@ -6,8 +6,10 @@
     :create="false"
   >
     <template slot="content">
-      <detail :treatment="entity" @fetchTreatment="fetchMethod" />
-      <TreatmentView v-if="!isEmpty(entity.patient)" :treatment="entity" />
+      <div class="grey-card">
+        <detail :treatment="entity" @fetchTreatment="fetchMethod" />
+        <TreatmentView v-if="!isEmpty(entity.patient)" :treatment="entity" />
+      </div>
     </template>
   </page-layout>
 </template>
@@ -46,7 +48,6 @@ export default {
         this.entity = treatment.data
       })
     },
-
     registerFetchTreatment() {
       const fetchTreatment = this.fetchTreatment
       this.$nuxt.$on(EVENT_FETCH_TREATMENT_DETAIL, (id) => {
