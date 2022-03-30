@@ -43,9 +43,9 @@ function get(params = {}) {
     params,
   })
 }
-function getUser(organizationId, organizationTypeId) {
+function getUser() {
   return request({
-    url: `${baseApi}/${organizationId}/${organizationTypeId}`,
+    url: `${baseApi}/organizationSpecificUsers`,
   })
 }
 function create(data) {
