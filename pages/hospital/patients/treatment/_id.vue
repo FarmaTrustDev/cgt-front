@@ -48,7 +48,6 @@ export default {
         this.entity = treatment.data
       })
     },
-
     registerFetchTreatment() {
       const fetchTreatment = this.fetchTreatment
       this.$nuxt.$on(EVENT_FETCH_TREATMENT_DETAIL, (id) => {

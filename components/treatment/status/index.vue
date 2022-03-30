@@ -1,6 +1,6 @@
 <template>
   <a-row :gutter="18" class="mt-15">
-    <a-card :bordered="false" class="default-card">
+    <a-card :bordered="false" class="default-card default-tabs">
       <a-tabs
         :active-key="activeTab"
         type="card"
