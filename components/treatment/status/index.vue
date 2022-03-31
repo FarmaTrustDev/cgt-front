@@ -36,7 +36,7 @@
 <script>
 import scheduling from '~/components/treatment/enrollment/scheduling'
 import collections from '~/components/treatment/collections'
-import afterCare from '~/components/treatment/enrollment/AfterCare'
+import afterCare from '~/components/treatment/enrollment/aftercare'
 import treatmentCollections from '~/components/treatment/collections/treatment'
 import tabsHelpers from '~/mixins/tabs-helpers'
 const DEFAULT_ACTIVE_KEY = '2'
