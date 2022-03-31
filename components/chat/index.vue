@@ -22,7 +22,7 @@
                 @fetch="loadFromChat"
                 @loadScrollMethod="loadScrollMethod"
               />
-              <a-empty v-else>
+              <a-empty v-else class="h-100vh">
                 <span slot="description">
                   Select User to start conversation
                 </span>
@@ -80,11 +80,15 @@ export default {
     isEmpty,
     fetchConversation() {
       this.conversationLoader = true
+
       ChatServices.getConversations()
         .then((conversations) => {
           this.conversations = conversations.data
         })
-        .finally(() => (this.conversationLoader = false))
+        .catch((e) => {})
+        .finally(() => {
+          this.conversationLoader = false
+        })
     },
     fetch(params = {}) {
       // End to End conversation right side
