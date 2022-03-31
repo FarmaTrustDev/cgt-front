@@ -1,30 +1,18 @@
 <template>
   <div class="admin-page">
     <h3 class="page-title">Administration</h3>
-    <a-row :gutter="16" justify="center">
-      <a-col
-        v-for="(menue,index) in userAdminMenu.adminMenus"
-        :key="menue.key"
-        class="mt-15"
-        :xs="{ span: 24 }"
-        :md="{ span: 8 }"
-      >
-        <a-list v-if="user.organizationTypeAlias == 'MANUFACTURER' && (index!='Collections' || index!='Logistics Partner' || index!='Screening Adminstration')" size="small" bordered :data-source="menue">
-          <a-list-item slot="renderItem" slot-scope="item">
-            <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>
-          </a-list-item>
-          <div slot="header"  class="bg-gray-100" >{{ index }}</div>
-        </a-list>
-        <a-list v-else-if="user.organizationTypeAlias == 'HOSPITAL' && index=='Screening Adminstration'" size="small" bordered :data-source="menue">
-          <a-list-item slot="renderItem" slot-scope="item">
-            <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>
-          </a-list-item>
-          <div slot="header"  class="bg-gray-100" >{{ index }}</div>
-        </a-list>
-        
+    <a-row :gutter="16" class="grey-card">
+      <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="10">
+        <nuxt-link :to="menu.to">
+          <div class="admin-tab">
+            <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
+
+            <img :src="menu.icon" />
+            <h4 class="heading-home">{{ menu.name }}</h4>
+          </div>
+        </nuxt-link>
       </a-col>
-    </a-row>  
-    
+    </a-row>
   </div>
 </template>
 
@@ -33,7 +21,7 @@ import UserServices from '~/services/API/UserServices'
 export default {
   data() {
     return {
-      userAdminMenu:[],
+      userAdminMenu: [],
     }
   },
   computed: {
@@ -42,16 +30,14 @@ export default {
       return this.$store.getters.getUser
     },
   },
-  mounted() {    
-    this.userDetail();
+  mounted() {
+    this.userDetail()
   },
-  methods:{
+  methods: {
     userDetail() {
-      UserServices.adminMenu()
-        .then((response) => {
-          this.userAdminMenu=response.data
-        })
-
+      UserServices.adminMenu().then((response) => {
+        this.userAdminMenu = response.data
+      })
     },
   },
 }

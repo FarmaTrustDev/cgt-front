@@ -28,7 +28,7 @@
         background-color: #f9f9f9;
         border-radius: 22px !important;
         padding-left: 40px !important;
-        margin: auto;
+        // margin: auto;
         &::after {
           content: '';
           position: absolute;
@@ -57,6 +57,3 @@
     }
   }
 }
-
-
-

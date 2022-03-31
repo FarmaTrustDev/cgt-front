@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="default-tabs">
     <a-tabs
       tab-position="left"
       :default-active-key="activeTab"
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     getEntity(entity) {
-      // eneity yahen fetch kar k childs ko pass karni hai 
+      // eneity yahen fetch kar k childs ko pass karni hai
       this.entity = entity
       this.isCreated = true
     },
