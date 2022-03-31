@@ -8,10 +8,9 @@ getUser(users) {},
     :create="false"
   >
     <template slot="headerMenus">
-      <a-button type="primary" @click="showModal(true)"
-        >Add Users</a-button
-      ></template
-    >
+      <a-button type="primary" @click="showModal(true)">Add Users</a-button>
+      <a-button type="primary" @click="showModal(true)">Add Users</a-button>
+    </template>
     <template slot="content"><chat @loadShowModal="loadShowModal" /> </template>
   </page-layout>
 </template>
