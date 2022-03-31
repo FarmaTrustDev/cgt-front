@@ -1,6 +1,6 @@
 <template>
   <div class="chat-page">
-    <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button>
+    <!-- <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button> -->
     <a-row class="grey-card">
       <a-col :span="9" class="left-bar">
         <a-card :bordered="false" class="default-card"
@@ -58,6 +58,8 @@ export default {
   mounted() {
     this.fetchConversation()
     this.registerEventNotification()
+
+    this.$emit('loadShowModal', this.showUsersModal)
   },
   methods: {
     loadScrollMethod(method) {

@@ -7,10 +7,12 @@ getUser(users) {},
     class="patient-page"
     :create="false"
   >
-    <template slot="headerMenus"
+    <template slot="headerMenus">
+      <a-button type="primary" @click="showModal(true)"
+        >Add Users</a-button
       ></template
     >
-    <template slot="content"><chat /> </template>
+    <template slot="content"><chat @loadShowModal="loadShowModal" /> </template>
   </page-layout>
 </template>
 <script>
@@ -23,8 +25,13 @@ export default {
     return {
       loading: false,
       borderCard: false,
+      showModal: () => {},
     }
   },
-  methods: {},
+  methods: {
+    loadShowModal(show) {
+      this.showModal = show
+    },
+  },
 }
 </script>
