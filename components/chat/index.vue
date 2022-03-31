@@ -1,6 +1,6 @@
 <template>
   <div class="chat-page">
-    <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button>
+    <!-- <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button> -->
     <a-row class="grey-card">
       <a-col :span="9" class="left-bar">
         <a-card :bordered="false" class="default-card"
@@ -13,13 +13,15 @@
       <a-col :span="1"></a-col>
       <a-col :span="14" class="right-bar">
         <a-card :bordered="false" class="default-card">
-          <div ref="container" class="max-h-200">
+          <div class="max-h-200">
             <Conversation
               v-if="!isEmpty(recipient)"
               :recipient="recipient"
               :data="endToEndConversation"
               @fetch="loadFromChat"
-            /></div
+              @loadScrollMethod="loadScrollMethod"
+            />
+            <a-empty v-else /></div
         ></a-card>
       </a-col>
     </a-row>
@@ -51,13 +53,19 @@ export default {
       messageTo: null,
       usersModal: false,
       recipient: {},
+      scrollMethod: () => {},
     }
   },
   mounted() {
     this.fetchConversation()
     this.registerEventNotification()
+
+    this.$emit('loadShowModal', this.showUsersModal)
   },
   methods: {
+    loadScrollMethod(method) {
+      this.scrollMethod = method
+    },
     isEmpty,
     fetchConversation() {
       ChatServices.getConversations()
@@ -67,13 +75,16 @@ export default {
         .finally(() => (this.conversationLoader = false))
     },
     fetch(params = {}) {
-      ChatServices.get(params).then((response) => {
-        this.endToEndConversation = response.data
-        // this.scrollToElement()
-      })
+      // End to End conversation right side
+      ChatServices.get(params)
+        .then((response) => {
+          this.endToEndConversation = response.data
+        })
+        .then(() => {
+          this.scrollMethod()
+        })
     },
     getConversation(conversation) {
-      console.log('getConversation', conversation)
       let params = {}
       const recipientData = {}
       if (conversation.isGroup) {
@@ -138,10 +149,6 @@ export default {
     },
     loadFromChat(notification) {
       this.getConversation(notification.data)
-    },
-    scrollToElement() {
-      const content = this.$refs.container
-      content.scrollTop = content.scrollHeight
     },
   },
 }
