@@ -20,7 +20,8 @@
               :data="endToEndConversation"
               @fetch="loadFromChat"
               @loadScrollMethod="loadScrollMethod"
-            /></div
+            />
+            <a-empty v-else /></div
         ></a-card>
       </a-col>
     </a-row>
