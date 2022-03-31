@@ -13,7 +13,7 @@
             v-decorator="[
               'treatmentTypeId',
               {
-                initialValue: treatmentTypeId,
+                initialValue: treatmentTypeId || undefined,
                 rules: [
                   {
                     required: true,

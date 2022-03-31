@@ -36,11 +36,12 @@ export default {
       }
     },
     fetchTreatmentScreening(treatment) {
-      ScreeningCategoryServices.getByTreatmentId(treatment.id).then(
-        (response) => {
+      ScreeningCategoryServices.getByTreatmentId(treatment.id)
+      .then((response) => {
           this.categories = response.data
-        }
-      )
+        })
+      .catch(this.error)
+        .finally(() => (this.loading = false))
     },
     getNextTab(data) {
       this.$emit('getNextTab', data)

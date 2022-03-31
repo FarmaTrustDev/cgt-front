@@ -12,7 +12,7 @@ export const PATIENT_TREATMENT_PHASES = [
         phaseId: 2,
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
-        params: { view: 'screening' }
+        params: { view: 'Screening' }
     },
     {
         id: 2,
@@ -21,7 +21,7 @@ export const PATIENT_TREATMENT_PHASES = [
         phaseId: 3,
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
-        params: { view: 'scheduling' }
+        params: { view: 'Scheduling' }
     },
     {
         id: 3,
