@@ -8,7 +8,7 @@
             <img class="img-fluid" :src="bardCode1Url">
           </div>
           <div class="hospital-name">
-            <span class="">{{hospital.name}}</span>
+            <span class="">{{data.from}}</span>
           </div>
           <div class="collection-datetime">
             <span class="collection-time">
@@ -23,7 +23,7 @@
           </div>
 
           <div class="manufacturer">
-            <span class="manufacturer-name from">{{data.manufacturerName}}</span>
+            <span class="manufacturer-name from">{{data.to}}</span>
             <span class="further">For Further Processing </span>
             <span class="manufacturer-detail">Total Volume ml, containing approx ml Citrate Store at 1 to 10 C</span>
           </div>
