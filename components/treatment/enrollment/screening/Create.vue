@@ -2,7 +2,6 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <LookupsTreatmentType @onChange="onTreatmentSelect" />
-
       <a-skeleton :loading="loading">
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
@@ -63,7 +62,7 @@ export default {
           this.categories = response.data
         })
         .finally(() => (this.loading = false))
-        .catch(this.error)
+        .catch(this.error, this.categories=null)
     },
     create(values) {
       TreatmentScreeningServices.create({

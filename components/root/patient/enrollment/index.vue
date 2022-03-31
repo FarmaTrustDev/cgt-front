@@ -8,14 +8,14 @@
           @getNextTab="getNextTab"
           />
         </a-tab-pane>
-        <a-tab-pane key="consent" :disabled="!isCreated" tab="Consent"
+        <a-tab-pane key="Consent" :disabled="!isCreated" tab="Consent"
           ><consent
             :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="screening" :disabled="!haveTreatment" tab="Screening">
+        <a-tab-pane key="Screening" :disabled="!haveTreatment" tab="Screening">
           <screening
             :treatment="treatment"
             @getNextTab="getNextTab"
@@ -23,7 +23,7 @@
           />
         </a-tab-pane>
         <a-tab-pane
-          key="scheduling"
+          key="Scheduling"
           :disabled="!treatment.screeningStatus"
           tab="Scheduling"
         >
@@ -68,7 +68,11 @@ export default {
     this.isPatientCreated()
   },
   methods: {
-    updatedKey() {},
+    handleActiveTab() {
+      if(this.$route.query.view){
+        this.activeTab=this.$route.query.view
+      }
+    },
     isPatientCreated(){
       const globalId = this.$route.params.id
 
