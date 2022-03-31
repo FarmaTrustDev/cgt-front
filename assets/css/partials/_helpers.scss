@@ -14,8 +14,8 @@
   text-transform: capitalize;
 }
 
-.d-block{
-	display: block;
+.d-block {
+  display: block;
 }
 
 .d-none {
@@ -27,39 +27,43 @@
 }
 
 .h-100 {
-    height: 100%;
+  height: 100%;
 }
 
-.float-right{
-	float:right;
+.float-right {
+  float: right;
 }
 
-.float-left{
-	float:left;
+.float-left {
+  float: left;
 }
 
 .status {
-	padding: 13px 15px;
-	font-size: 14px;
-	border-radius: 10rem;
+  padding: 13px 15px;
+  font-size: 14px;
+  border-radius: 10rem;
 }
 
-.status-inprocess{
-	background-color: #ecf6fd;
+.status-inprocess {
+  background-color: #ecf6fd;
 }
 
-.status-resolved{
-	background-color: #d1f2dd;
+.status-resolved {
+  background-color: #d1f2dd;
 }
 
-.status-pause{
-	background-color: #ffdd61
+.status-pause {
+  background-color: #ffdd61;
 }
 
-.status-archived{
-	background-color: #f3e5f4;
+.status-archived {
+  background-color: #f3e5f4;
 }
 
 .status-cancelled {
-	background-color: #ff8361;
+  background-color: #ff8361;
+}
+
+.h-100vh {
+  min-height: 50vh;
 }

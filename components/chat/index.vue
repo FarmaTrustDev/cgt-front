@@ -4,25 +4,35 @@
     <a-row class="grey-card">
       <a-col :span="9" class="left-bar">
         <a-card :bordered="false" class="default-card"
-          ><a-skeleton :loading="conversationLoader">
+          ><a-spin :spinning="conversationLoader">
             <List
               :conversations="conversations"
-              @getConversation="getConversation" /></a-skeleton
+              @getConversation="getConversation" /></a-spin
         ></a-card>
       </a-col>
       <a-col :span="1"></a-col>
       <a-col :span="14" class="right-bar">
         <a-card :bordered="false" class="default-card">
           <div class="max-h-200">
-            <Conversation
-              v-if="!isEmpty(recipient)"
-              :recipient="recipient"
-              :data="endToEndConversation"
-              @fetch="loadFromChat"
-              @loadScrollMethod="loadScrollMethod"
-            />
-            <a-empty v-else /></div
-        ></a-card>
+            <a-spin :spinning="endToEndConversationLoader">
+              <Conversation
+                v-if="!isEmpty(recipient)"
+                :recipient="recipient"
+                :data="endToEndConversation"
+                @fetch="loadFromChat"
+                @loadScrollMethod="loadScrollMethod"
+              />
+              <a-empty v-else class="h-100vh">
+                <span slot="description">
+                  Select User to start conversation
+                </span>
+                <a-button type="primary" @click="showUsersModal(true)">
+                  Start Now
+                </a-button>
+              </a-empty>
+            </a-spin>
+          </div></a-card
+        >
       </a-col>
     </a-row>
     <a-modal
@@ -47,12 +57,13 @@ export default {
   data() {
     return {
       conversations: [],
-      conversationLoader: true,
+      conversationLoader: false,
       endToEndConversation: [],
       opponentId: null,
       messageTo: null,
       usersModal: false,
       recipient: {},
+      endToEndConversationLoader: false,
       scrollMethod: () => {},
     }
   },
@@ -68,14 +79,20 @@ export default {
     },
     isEmpty,
     fetchConversation() {
+      this.conversationLoader = true
+
       ChatServices.getConversations()
         .then((conversations) => {
           this.conversations = conversations.data
         })
-        .finally(() => (this.conversationLoader = false))
+        .catch((e) => {})
+        .finally(() => {
+          this.conversationLoader = false
+        })
     },
     fetch(params = {}) {
       // End to End conversation right side
+      this.endToEndConversationLoader = true
       ChatServices.get(params)
         .then((response) => {
           this.endToEndConversation = response.data
@@ -83,6 +100,7 @@ export default {
         .then(() => {
           this.scrollMethod()
         })
+        .finally(() => (this.endToEndConversationLoader = false))
     },
     getConversation(conversation) {
       let params = {}
