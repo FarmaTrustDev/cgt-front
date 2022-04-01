@@ -12,10 +12,10 @@
       <a-tab-pane key="2" tab="Germany - Cellfuse ">
         <tab />
       </a-tab-pane>
-      <a-tab-pane key="2" tab="Germany - Cellfuse ">
+      <a-tab-pane key="3" tab="Germany - Cellfuse ">
         <tab />
       </a-tab-pane>
-      <a-tab-pane key="2" tab="Germany - Cellfuse ">
+      <a-tab-pane key="4" tab="Germany - Cellfuse ">
         <tab />
       </a-tab-pane>
     </a-tabs>
