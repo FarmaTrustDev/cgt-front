@@ -3,7 +3,6 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    :back="false"
     title="Smart Lab"
   >
     <template slot="content">
