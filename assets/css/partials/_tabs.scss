@@ -7,6 +7,10 @@
     background-color: #f2f5fb;
     @extend .default-border-radius;
   }
+  .ant-tabs-tab {
+    border: 1px solid #e5e4e4;
+    @extend .default-border-radius;
+  }
 }
 
 .no-border-bottom {
