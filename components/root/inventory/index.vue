@@ -1,6 +1,11 @@
 <template>
   <div class="inventory-page">
-    <a-tabs default-active-key="1" @change="callback">
+    <a-tabs
+      :animated="false"
+      class="h-tabs no-border-bottom"
+      default-active-key="1"
+      @change="callback"
+    >
       <a-tab-pane key="1" tab="Germany - Cellfuse ">
         <detail />
         <div class="mt-15 mb-15">
