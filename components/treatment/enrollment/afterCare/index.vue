@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-import Form from '~/components/treatment/enrollment/aftercare/Form'
+import Form from '~/components/treatment/enrollment/afterCare/Form'
 import withCrud from '~/mixins/with-crud'
 import AfterCareServices from '~/services/API/AfterCareServices'
 import { isEmpty } from '~/services/Utilities'

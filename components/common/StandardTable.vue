@@ -109,12 +109,9 @@
           <a-menu-item key="0">
             <a>Open Ticket</a>
           </a-menu-item>
-          <a-menu-item key="consent">
-            <a @click="goto(`/hospital/patients/${record.globalId}?view=consent`)"
-              >Add New Treatment</a
-            >
+          <a-menu-item key="Consent">
+            <a @click="goto(`/hospital/patients/${record.globalId}?view=Consent`)">Add New Treatment</a>
           </a-menu-item>
-
           <a-menu-item key="3">
             <a-popconfirm
               title="Are you to hide patient?"

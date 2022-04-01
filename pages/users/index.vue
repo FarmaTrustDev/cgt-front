@@ -8,9 +8,16 @@
         :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
       >
         <template slot="action" slot-scope="action">
-          <a-button type="link" @click="goto(`/users/${action.globalId}`)"
-            ><a-icon type="edit"
-          /></a-button>
+          <a-dropdown>
+          <a-button class="action-button" @click="preventDefault">
+            Admin <a-icon type="down" />
+          </a-button>
+          <a-menu slot="overlay">
+          <a-menu-item key="userDetail">
+            <a @click="goto(`/users/${action.globalId}`)">Edit</a>
+          </a-menu-item>
+          </a-menu>
+          </a-dropdown>
         </template>
       </a-table>
     </template>
@@ -19,6 +26,7 @@
 <script>
 import UserServices from '~/services/API/UserServices'
 // import { success } from '~/services/Helpers/notifications'
+import { preventDefault } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
 
 import PageLayout from '~/components/layout/PageLayout'
@@ -76,6 +84,7 @@ export default {
     this.fetch()
   },
   methods: {
+    preventDefault,
     fetch() {
       UserServices.getUser(this.user.organizationId, this.user.organizationTypeId)
         .then((response) => {

@@ -1,27 +1,34 @@
 <template>
   <div>
     <a-row>
-      <a-col>
-        <!-- <pre> {{ data }}</pre> -->
-        <a-list :data-source="data" item-layout="horizontal" :bordered="false">
-          <a-list-item
-            slot="renderItem"
-            slot-scope="item"
-            :class="'message-' + getType(item.isOwner)"
+      <div ref="container" class="peer-to-peer-chat-list">
+        <a-col>
+          <!-- <pre> {{ data }}</pre> -->
+          <a-list
+            id="chatListContainer"
+            :data-source="data"
+            item-layout="horizontal"
+            :bordered="false"
           >
-            <a-comment :author="item.ownerName" :content="item.content">
-              <template slot="content"
-                ><div class="message-time">
-                  {{ item.message }}
-                </div></template
-              >
-              <a-tooltip slot="datetime" :title="item.created_at">
-                <span>{{ item.created_at }}</span>
-              </a-tooltip>
-            </a-comment>
-          </a-list-item>
-        </a-list>
-      </a-col>
+            <a-list-item
+              slot="renderItem"
+              slot-scope="item"
+              :class="'message-' + getType(item.isOwner)"
+            >
+              <a-comment :author="item.ownerName" :content="item.content">
+                <template slot="content"
+                  ><div class="message-time">
+                    {{ item.message }}
+                  </div></template
+                >
+                <a-tooltip slot="datetime" :title="item.created_at">
+                  <span>{{ item.created_at }}</span>
+                </a-tooltip>
+              </a-comment>
+            </a-list-item>
+          </a-list>
+        </a-col>
+      </div>
     </a-row>
 
     <!-- /// Form for chat -->
@@ -101,7 +108,9 @@ export default {
       formLayout: 'vertical',
     }
   },
-  mounted() {},
+  mounted() {
+    this.$emit('loadScrollMethod', this.scrollToElement)
+  },
   methods: {
     onSubmit(e) {
       e.preventDefault()
@@ -111,6 +120,7 @@ export default {
         if (!err) {
           this.postMessage(values)
           this.form.resetFields()
+          this.scrollToElement()
         } else {
           this.loading = false
         }
@@ -127,7 +137,12 @@ export default {
       this.value = e.target.value
     },
     getType(isOwner) {
-      return isOwner ? 'received' : 'sent'
+      return !isOwner ? 'received' : 'sent'
+    },
+    scrollToElement() {
+      const content = this.$refs.container
+
+      content.scrollTop = content.scrollHeight
     },
   },
 }
