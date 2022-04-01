@@ -2,6 +2,11 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <LookupsTreatmentType @onChange="onTreatmentSelect" />
+      <a-alert
+      v-if="message"
+      type="info"
+      message="Please select the treatment type to get patient screening"
+    ></a-alert>
       <a-skeleton :loading="loading">
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
@@ -32,6 +37,7 @@ export default {
   data() {
     return {
       patientId: null,
+      message:'true',
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
@@ -60,9 +66,10 @@ export default {
       ScreeningCategoryServices.getByTreatmentTypeId(treatmentTypeId)
         .then((response) => {
           this.categories = response.data
+          this.message=false
         })
         .finally(() => (this.loading = false))
-        .catch(this.error, this.categories=null)
+        .catch(this.error, this.categories=null, this.message='true')
     },
     create(values) {
       TreatmentScreeningServices.create({
