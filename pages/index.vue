@@ -57,17 +57,10 @@ export default {
   components: { treatmentStats },
   mixins: [routeHelpers],
   data() {
-    return {
-    
-     
-    }
+    return {}
   },
   mounted() {
-    // console.log(connection)
-    // this.trigeer()
-    // connection.on('sendToUser', (res) => {
-    //   console.log('component res', res)
-    // })
+    
   },
   methods: {
     gotoView(uri) {
@@ -75,11 +68,7 @@ export default {
     },
     trigeer() {
       UserServices.test().then()
-      // connection.invoke('AddTask', {
-      //   id: 2,
-      //   description: 'starting some thing',
-      //   done: false,
-      // })
+    
     },
   },
 }
