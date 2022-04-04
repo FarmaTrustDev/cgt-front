@@ -1,8 +1,11 @@
 <template>
-  <div class="imageHeading ">
-    <img class="img" :src="getImageUrl(detail.img)" />
-    <span class="heading">
-      {{ detail.heading }}
+  <div>
+    <slot name="extra" />
+    <span class="imageHeading">
+      <img class="img" :src="getImageUrl(detail.img)" />
+      <span class="heading">
+        {{ detail.heading }}
+      </span>
     </span>
   </div>
 </template>
@@ -17,7 +20,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .imageHeading {
- 
   .heading {
     font-size: 12px;
     display: inline-block;
