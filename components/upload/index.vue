@@ -30,7 +30,9 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      const isAllowedExtension = this.extensions.includes(file.type)
+      const strName=file.type
+      const ext=strName.split("/")
+      const isAllowedExtension = this.extensions.includes('.'+ext[1])
       // extension upload the file @todo work in progess
       if (!isAllowedExtension) {
         this.$message.error('Extension not allow')
@@ -48,7 +50,6 @@ export default {
       } else {
         await this.addToFileList(file)
       }
-
       this.$emit('handleChange', this.stateFileList)
     },
 
@@ -56,7 +57,6 @@ export default {
       const files = this.stateFileList
       //    files = JSON.stringify(files);
       //    files = JSON.parse(files);
-
       return await Promise.resolve((this.stateFileList = [...files, file]))
     },
     async removeFromFileList() {},
