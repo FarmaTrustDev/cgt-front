@@ -2,7 +2,12 @@
   <div>
     <slot name="extra" />
     <span class="imageHeading">
-      <img class="img" :src="getImageUrl(detail.img)" />
+      <img
+        :width="imgProperties.width"
+        :height="imgProperties.height"
+        class="img"
+        :src="getImageUrl(detail.img)"
+      />
       <span class="heading">
         {{ detail.heading }}
       </span>
@@ -15,6 +20,10 @@ export default {
   mixins: [imagesHelper],
   props: {
     detail: { type: Object, default: () => ({}), required: true },
+    imgProperties: {
+      type: Object,
+      default: () => ({ width: '25px', height: '25px' }),
+    },
   },
 }
 </script>

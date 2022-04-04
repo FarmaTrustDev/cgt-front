@@ -21,7 +21,24 @@
               </ImageHeading>
             </div></a-tab-pane
           >
-          <a-tab-pane key="2" tab="Countries"></a-tab-pane>
+          <a-tab-pane key="2" tab="Countries">
+            <div
+              v-for="hospital in countriesData"
+              :key="hospital.id"
+              class="stats"
+            >
+              <ImageHeading
+                :detail="{
+                  img: hospital.img,
+                  heading: hospital.name,
+                }"
+              >
+                <span slot="extra">
+                  <span class="count-bar">{{ hospital.count }}</span>
+                </span>
+              </ImageHeading>
+            </div></a-tab-pane
+          >
         </a-tabs>
       </a-col>
     </a-row>
@@ -37,6 +54,14 @@ export default {
   data() {
     return {
       hospitalData: [],
+      countriesData: [
+        {
+          count: 24,
+          id: 1,
+          name: 'Germany',
+          img: 'web/flags/de.svg',
+        },
+      ],
     }
   },
   mounted() {
