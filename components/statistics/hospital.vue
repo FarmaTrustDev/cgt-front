@@ -14,6 +14,9 @@
                   img: hospital.profileImageUrl,
                   heading: hospital.name,
                 }"
+                :img-properties="{
+                  width: '35px',
+                }"
               >
                 <span slot="extra">
                   <span class="count-bar">{{ hospital.count }}</span>

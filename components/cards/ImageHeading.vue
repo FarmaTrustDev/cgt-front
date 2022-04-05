@@ -4,7 +4,6 @@
     <span class="imageHeading">
       <img
         :width="imgProperties.width"
-        :height="imgProperties.height"
         class="img"
         :src="getImageUrl(detail.img)"
       />
