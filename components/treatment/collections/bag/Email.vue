@@ -51,8 +51,11 @@
 </template>
 <script>
 import { validateEmail } from '~/services/Helpers/'
+import TreatmentBagServices from '~/services/API/TreatmentBagServices'
+import notifications from '~/mixins/notifications'
 export default {
   components: {},
+  mixins: [notifications],
   data() {
     return {
       emails: [],
@@ -65,11 +68,14 @@ export default {
   methods: {
     onSubmit(e) {
       e.preventDefault()
-      // this.loading = true
+      this.loading = true
 
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.$emit('submit', values)
+          TreatmentBagServices.sendMail('asd', values).then((response) => {
+            this.$emit('closeModal', false)
+            this.success(response.message)
+          })
         } else {
           this.loading = false
         }

@@ -72,10 +72,11 @@
     <a-modal
       title="Notify"
       :footer="null"
+      :destroy-on-close="true"
       :visible="showEmailModal"
       @cancel="handleEmailModal(false)"
     >
-      <email />
+      <email @closeModal="handleEmailModal" />
     </a-modal>
   </div>
 </template>
