@@ -30,9 +30,9 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      const strName=file.type
-      const ext=strName.split("/")
-      const isAllowedExtension = this.extensions.includes('.'+ext[1])
+      const strName=file.name
+      const ext=strName.split(".").pop()
+      const isAllowedExtension = this.extensions.includes('.'+ext)
       // extension upload the file @todo work in progess
       if (!isAllowedExtension) {
         this.$message.error('Extension not allow')
