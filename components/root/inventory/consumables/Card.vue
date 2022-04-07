@@ -6,14 +6,12 @@
         viewBox="-8 -7 110.063 63.375"
       >
         <path
-          id="progress"
           d="M0,56.1V32.1C0,14.4,14.4,0,32.1,0h23.9c17.8,0,32.1,14.4,32.1,32.1v23.95"
           fill="none"
-          stroke="#2359e8"
+          :stroke="data.color"
           stroke-width="16"
           pathLength="100"
-          stroke-dasharray="46,100"
-          style="stroke: rgb(255, 9, 9)"
+          :stroke-dasharray="(data.threshold, 100)"
         ></path>
       </svg>
       <svg class="static-svg" viewBox="-8 -7 110.063 63.375">
@@ -27,7 +25,7 @@
       </svg>
     </div>
     <figure>
-      <span class="digit top-digit">46</span>
+      <span class="digit top-digit">{{ data.threshold }}</span>
       <div class="slider-beast">
         <svg
           class="slider-svg"
@@ -50,23 +48,38 @@
             stroke-linecap="round"
           ></path>
         </svg>
-
-        <span class="digit">46</span>
-
+        <!-- <span class="digit">46</span> -->
         <span
-          data-value="46"
+          :data-value="data.threshold"
           class="drag-image ui-draggable ui-draggable-handle"
           style="left: 46px"
         >
-          <span class="img-dragger-dots"></span>
+          <span
+            :style="{
+              'background-image':
+                'url(' + getImageUrl('web/inventory/slider-bar.svg') + ')',
+            }"
+            class="img-dragger-dots"
+          ></span>
         </span>
       </div>
     </figure>
-    <h6 class="consumables-heading">Consumables HAS (GIBCO MEM)</h6>
+    <h6 class="consumables-heading">{{ data.heading }}</h6>
   </div>
 </template>
 <script>
+import imagesHelper from '~/mixins/images-helper'
 export default {
-    
+  mixins: [imagesHelper],
+  props: {
+    data: {
+      type: Object,
+      default: () => ({
+        threshold: 8,
+        heading: 'some heading props',
+        color: '#2359e8',
+      }),
+    },
+  },
 }
 </script>
