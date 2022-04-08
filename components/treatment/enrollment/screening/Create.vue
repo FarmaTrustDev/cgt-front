@@ -5,13 +5,13 @@
       <a-alert
       v-if="message"
       type="info"
-      message="Please select the treatment type to get patient screening"
-    ></a-alert>
+      message="Please select the treatment type to get patient screening">
+      </a-alert>
       <a-skeleton :loading="loading">
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
           <!-- <a-button type="primary" class="w-100 btn-complete-category">Complete screening results for {CATEGORYNAME} group</a-button> -->
-          <FormActionButton :disabled="isCreated" class="mt-15" />
+          <FormActionButton text="Save Screening & Conitnue" :disabled="isCreated" class="mt-15" />
         </span>
       </a-skeleton>
     </a-form>

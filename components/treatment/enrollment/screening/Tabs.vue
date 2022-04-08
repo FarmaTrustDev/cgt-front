@@ -2,13 +2,14 @@
   <div>
     <a-tabs v-model="activeKey" hide-add type="editable-card">
       <a-tab-pane
-        v-for="category in categories"
+        v-for="(category) in categories"
         :key="category.globalId"
         :closable="false"
         :tab="category.name"
         :force-render="true"
       >
         <tabContent :screenings="category.screenings" />
+        <FormActionButton :text="getButtonText(category.name)" @click="getNextTab" class="mt-15" />
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -37,14 +38,24 @@ export default {
     }
   },
   mounted() {
-    this.setCurrentTab()
+    this.setCurrentTab(this.newTabIndex)
   },
   methods: {
-    setCurrentTab() {
+    setCurrentTab(key) {
       const categories = this.categories
       if (!this.isEmpty(this.categories)) {
-        this.activeKey = categories[0].globalId
+        this.activeKey = categories[key].globalId
       }
+    },
+    getButtonText(val){
+      return "Complete Screening for "+ val
+    },
+    getNextTab() {
+      this.newTabIndex=this.newTabIndex+1
+      this.setCurrentTab(this.newTabIndex)
+    },
+    tabChange(key) {
+      this.newTabIndex = key+1
     },
   },
 }
