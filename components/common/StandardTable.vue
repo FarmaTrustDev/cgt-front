@@ -149,6 +149,39 @@
         </a-dropdown>
       </span>
 
+      <!-- // filter option -->
+      <div
+        slot="filterDropdown"
+        slot-scope="{ setSelectedKeys, selectedKeys, column, clearFilters }"
+        style="padding: 8px"
+      >
+        <a-input
+          v-ant-ref="(c) => (searchInput = c)"
+          :placeholder="`Search ${column.dataIndex}`"
+          :value="selectedKeys[0]"
+          @change="
+            (e) => setSelectedKeys(e.target.value ? [e.target.value] : [])
+          "
+          @pressEnter="() => handleSearch(selectedKeys, column)"
+        />
+        <a-button
+          type="primary"
+          icon="search"
+          size="small"
+          style="width: 90px; margin-right: 8px"
+          @click="() => handleSearch(selectedKeys, column)"
+        >
+          Search
+        </a-button>
+        <a-button
+          size="small"
+          style="width: 90px"
+          @click="() => handleReset(clearFilters, column)"
+        >
+          Reset
+        </a-button>
+      </div>
+
       <span slot="nameTags" slot-scope="tags">
         <a-tag v-for="tag in tags" :key="tag.id">{{ tag.name }}</a-tag>
       </span>
@@ -188,6 +221,7 @@ export default {
       data: [],
       loading: false,
       phases: PATIENT_TREATMENT_PHASES,
+      filters: {},
     }
   },
   mounted() {
@@ -284,6 +318,21 @@ export default {
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
         this.$emit('deadPatient', response)
       })
+    },
+    handleSearch(value, column) {
+      const filters = this.params
+      filters[column.key] = value[0]
+      this.setFilters(filters)
+    },
+    handleReset(clearFilters, column) {
+      clearFilters()
+      const filters = this.filters
+      delete filters[column.key]
+      this.setFilters(filters)
+    },
+    setFilters(params) {
+      this.filters = params
+      this.fetch(this.filters)
     },
   },
 }
