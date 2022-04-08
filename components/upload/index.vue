@@ -1,9 +1,11 @@
 <template>
   <a-upload-dragger
     :before-upload="beforeUpload"
+    :default-file-list="defaultFileList"
     list-type="picture"
     name="file"
     :action="handleChange"
+    :disabled="disabled"
   >
     <p class="ant-upload-drag-icon">
       <a-icon type="inbox" />
@@ -22,6 +24,14 @@ export default {
       default: () => [],
       type: Array,
     },
+    defaultFileList: {
+      default: () => [],
+      type: Array,
+    },
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -30,9 +40,9 @@ export default {
   },
   methods: {
     beforeUpload(file) {
-      const strName=file.name
-      const ext=strName.split(".").pop()
-      const isAllowedExtension = this.extensions.includes('.'+ext)
+      const strName = file.name
+      const ext = strName.split('.').pop()
+      const isAllowedExtension = this.extensions.includes('.' + ext)
       // extension upload the file @todo work in progess
       if (!isAllowedExtension) {
         this.$message.error('Extension not allow')
@@ -43,7 +53,7 @@ export default {
       //   this.$message.error('Extension')
       // }
     },
-    async handleChange(file, fileList) {   
+    async handleChange(file, fileList) {
       // @todo removing work in under construction
       if (file.status === 'remove') {
         await this.removeFromFileList(file)
