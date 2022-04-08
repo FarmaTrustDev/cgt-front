@@ -90,6 +90,12 @@ function getBags(id) {
   })
 }
 
+function getHospitalCount() {
+  return request({
+    url: `${baseApi}/get-hospital-count`,
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
@@ -102,7 +108,8 @@ const TreatmentServices = {
   markTreatmentCollection,
   getCustody,
   markDead,
-  getBags
+  getBags,
+  getHospitalCount
 }
 
 export default TreatmentServices

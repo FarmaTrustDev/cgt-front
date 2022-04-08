@@ -3,19 +3,20 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    :back="false"
     title="Smart Lab"
   >
     <template slot="content">
       <inventory />
+      <consumables />
     </template>
   </page-layout>
 </template>
 <script>
 import inventory from '~/components/root/inventory'
+import consumables from '~/components/root/inventory/consumables'
 import PageLayout from '~/components/layout/PageLayout'
 export default {
-  components: { 'page-layout': PageLayout, inventory },
+  components: { 'page-layout': PageLayout, inventory, consumables },
   data() {
     return {
       loading: false,

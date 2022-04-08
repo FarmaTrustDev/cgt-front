@@ -7,8 +7,8 @@
       class="w-100 mt-15"
       type="primary"
       @click="completeAllBags(bags)"
-      >Complete Collection Process</a-button
-    >
+      >Complete Collection Process
+    </a-button>
   </a-skeleton>
 </template>
 <script>

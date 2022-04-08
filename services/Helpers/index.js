@@ -81,3 +81,9 @@ export function preventDefault(e) {
 export function getAbsolutePath(url) {
   return `${BASE_API}${url}`
 }
+
+export function validateEmail(email) {
+  const regexForEMail = /\S+@\S+\.\S+/;
+  return regexForEMail
+    .test(email);
+};

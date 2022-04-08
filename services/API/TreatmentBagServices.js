@@ -9,6 +9,7 @@ function get(params = {}) {
     params,
   })
 }
+
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -16,11 +17,13 @@ function create(data) {
     method: 'POST',
   })
 }
+
 function getById(id) {
   return request({
     url: `${baseApi}/${id}`,
   })
 }
+
 function put(id, data) {
   return request({
     url: `${baseApi}/${id}`,
@@ -49,6 +52,15 @@ function getByTreatmentId(id, params = {}) {
     params,
   })
 }
+
+function sendMail(id, data) {
+  return request({
+    url: `${baseApi}/send-email/${id}`,
+    data,
+    method: 'POST',
+  })
+}
+
 const TreatmentBagServices = {
   get,
   create,
@@ -57,6 +69,7 @@ const TreatmentBagServices = {
   getById,
   getByTreatmentId,
   markCollectionComplete,
+  sendMail
 }
 
 export default TreatmentBagServices

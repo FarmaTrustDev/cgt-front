@@ -52,7 +52,7 @@ export const PATIENT_TREATMENT_PHASES = [
     },
     {
         id: 6,
-        name: 'AFTER CARE',
+        name: 'After Care',
         alias: 'AFTER_CARE',
         phaseId: 15,
         url_slug: '/hospital/patients/collection/',

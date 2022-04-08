@@ -60,14 +60,30 @@
             icon="sync"
             @click="handleCollectionSubmit(row)"
           />
+          <a-button
+            v-if="row.isCollected"
+            type="primary"
+            @click="handleEmailModal(true)"
+            >Send Email</a-button
+          >
         </template>
       </a-table>
     </a-form>
+    <a-modal
+      title="Notify"
+      :footer="null"
+      :destroy-on-close="true"
+      :visible="showEmailModal"
+      @cancel="handleEmailModal(false)"
+    >
+      <email @closeModal="handleEmailModal" />
+    </a-modal>
   </div>
 </template>
 <script>
 import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
+import Email from '~/components/treatment/collections/bag/Email'
 const columns = [
   {
     title: 'Details',
@@ -90,6 +106,7 @@ const columns = [
   },
 ]
 export default {
+  components: { Email },
   mixins: [notifications],
   props: { collections: { required: true, type: Array } },
   data() {
@@ -101,6 +118,7 @@ export default {
         name: 'bagCollectionProcess',
       }),
       btnLoading: false,
+      showEmailModal: false,
     }
   },
   methods: {
@@ -119,6 +137,9 @@ export default {
             this.btnLoading = false
           })
       }
+    },
+    handleEmailModal(show) {
+      this.showEmailModal = show
     },
   },
 }

@@ -1,3 +1,24 @@
+.h-tabs {
+  .ant-tabs-bar {
+    border-bottom: 0;
+  }
+  .ant-tabs-tab-active {
+    color: #3869d1;
+    background-color: #f2f5fb;
+    @extend .default-border-radius;
+  }
+  .ant-tabs-tab {
+    border: 1px solid #e5e4e4;
+    @extend .default-border-radius;
+  }
+}
+
+.no-border-bottom {
+  .ant-tabs-ink-bar {
+    display: none !important;
+  }
+}
+
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
   border: 1px solid #ececec;
   border-radius: 30px;

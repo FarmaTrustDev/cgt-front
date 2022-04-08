@@ -17,6 +17,7 @@
 @import './partials/tables';
 @import './partials/_steps';
 @import './partials/calendar';
+@import './partials/shadow';
 @import './components/sidebar';
 @import './components/login';
 @import './components/header';
@@ -27,6 +28,8 @@
 @import './components/enrollment';
 @import './components/admin';
 @import './components/patient-details';
+@import './components/inventory';
+@import './components/consumables';
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap');
 

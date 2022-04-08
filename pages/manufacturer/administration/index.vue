@@ -2,7 +2,7 @@
   <div class="admin-page">
     <h3 class="page-title">Administration</h3>
     <a-row :gutter="16" class="grey-card">
-      <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="10">
+      <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
         <nuxt-link :to="menu.to">
           <div class="admin-tab">
             <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
@@ -12,6 +12,7 @@
           </div>
         </nuxt-link>
       </a-col>
+      
     </a-row>
   </div>
 </template>

@@ -1,25 +1,30 @@
 <template>
-  <div>
-    <a-tabs default-active-key="1" @change="callback">
+  <div class="inventory-page">
+    <a-tabs
+      :animated="false"
+      class="h-tabs no-border-bottom"
+      default-active-key="1"
+      @change="callback"
+    >
       <a-tab-pane key="1" tab="Germany - Cellfuse ">
-        <div>
-          Germany - Cellfuse
-
-          <a-row>
-            <a-col :span="12"
-              >Volmersbachstr. 66 D-55743 Idar-Oberstein Germany</a-col
-            >
-            <a-col :span="12">+49 6781 9855-0</a-col>
-            <a-col :span="12">Head of Lab- Stephen Jones</a-col>
-            <a-col :span="12">info-imfs@cellfuse.de</a-col>
-          </a-row>
-        </div>
+        <tab />
+      </a-tab-pane>
+      <a-tab-pane key="2" tab="Germany - Cellfuse ">
+        <tab />
+      </a-tab-pane>
+      <a-tab-pane key="3" tab="Germany - Cellfuse ">
+        <tab />
+      </a-tab-pane>
+      <a-tab-pane key="4" tab="Germany - Cellfuse ">
+        <tab />
       </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 <script>
+import tab from '~/components/root/inventory/tab'
 export default {
+  components: { tab },
   data() {
     return {}
   },

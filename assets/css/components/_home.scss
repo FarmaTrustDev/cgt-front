@@ -1,13 +1,15 @@
-.home-page, .admin-page {
+.home-page,
+.admin-page {
   padding-right: 15px;
   padding-left: 15px;
   margin: 25px;
 
-  .title{
+  .title {
     font-size: 25px;
   }
 
-  .home-tab, .admin-tab {
+  .home-tab,
+  .admin-tab {
     text-decoration: none;
     margin: 15px auto;
     padding: 25px;
@@ -15,9 +17,9 @@
     color: #909090;
     background-color: #fff;
     border-radius: 44px;
-    
-     img {
-      background-color:#f9f9f9;
+
+    img {
+      background-color: #f9f9f9;
       vertical-align: middle;
       border-style: none;
       max-width: 72px;
@@ -26,8 +28,8 @@
       border-radius: 22px;
     }
 
-    &::before{
-      content: ">";
+    &::before {
+      content: '>';
       right: 20px;
       height: 23px;
       line-height: 1;
@@ -39,23 +41,26 @@
       position: relative;
       left: 95%;
     }
-  
-    &:hover{
-      cursor:pointer;
+
+    &:hover {
+      cursor: pointer;
       color: #fff;
-      transition: transform .8s ease-in-out,background-color .3s ease-in-out,color .3s ease-in-out,background-image .3s ease-in-out;
-      background-image: url("https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg");
+      transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
+        color 0.3s ease-in-out, background-image 0.3s ease-in-out;
+      background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
       background-size: cover;
-      h4{
+      h4 {
         color: #fff;
       }
-      img{
-        transition: transform .8s ease-in-out,background-color .3s ease-in-out,color .3s ease-in-out;
-        background: #4B7ADF;
+      img {
+        transition: transform 0.8s ease-in-out,
+          background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        background: #4b7adf;
       }
     }
-  
-    .heading-home, .heading-admin {
+
+    .heading-home,
+    .heading-admin {
       display: inline-flex;
       flex-flow: column;
       vertical-align: middle;
@@ -63,17 +68,16 @@
       padding-left: 10px;
       font-size: 15px;
     }
-
-
   }
-  
+
   .home-stats-head {
     height: 120px;
     margin: 15px auto;
     border-radius: 30px;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
-    transition: transform .8s ease-in-out,background-color .3s ease-in-out,color .3s ease-in-out,background-image .3s ease-in-out;
-    background-image: url("https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg");
+    transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
+      color 0.3s ease-in-out, background-image 0.3s ease-in-out;
+    background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
     background-size: cover;
   }
   .stats {
@@ -82,8 +86,11 @@
     margin: 15px auto;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     border-radius: 22px;
-  
-    .completed, .in-process, .booked, .spoilage{
+
+    .completed,
+    .in-process,
+    .booked,
+    .spoilage {
       width: 20px;
       height: 22px;
       position: absolute;
@@ -92,22 +99,22 @@
     .completed {
       background: #28ced9;
     }
-    .in-process{
+    .in-process {
       background: #2255c2;
     }
-    .booked{
+    .booked {
       background: #f4b71a;
     }
-    .spoilage{
+    .spoilage {
       background: #fa6363;
     }
-  
-    .number{
+
+    .number {
       margin-left: 1.5rem;
     }
   }
-  
-  .white-card{
+
+  .white-card {
     text-decoration: none;
     margin: 15px auto;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
@@ -116,16 +123,16 @@
     background-color: #fff;
     padding: 0.5rem;
   }
-  
+
   .search-dropdown {
     width: 100%;
   }
 
-  .ant-select-selection--single{
+  .ant-select-selection--single {
     background-color: #f9f9f9;
     height: 55px;
   }
-  
+
   .ant-select-selection__rendered {
     display: block;
     padding-left: 8px;
@@ -133,21 +140,114 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #464E5F;
+    color: #464e5f;
     line-height: 52px;
   }
 
   .chart-container {
     margin-right: 20px;
   }
-  .chart-right-stats{
+  .chart-right-stats {
     padding-top: 25px;
   }
 
-  .chartjs-render-monitor{
+  .chartjs-render-monitor {
     height: 80px !important;
   }
-  .ant-select-selection__placeholder, .ant-select-search__field__placeholder {
+  .ant-select-selection__placeholder,
+  .ant-select-search__field__placeholder {
+    left: 10px;
+  }
+}
+
+.treatment-statistic {
+  .home-stats-head {
+    height: 120px;
+    margin: 15px auto;
+    border-radius: 30px;
+    box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+    transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
+      color 0.3s ease-in-out, background-image 0.3s ease-in-out;
+    background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
+    background-size: cover;
+  }
+  .stats {
+    color: #233151;
+    text-decoration: none;
+    margin: 15px auto;
+    box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+    border-radius: 22px;
+
+    .completed,
+    .in-process,
+    .booked,
+    .spoilage {
+      width: 20px;
+      height: 22px;
+      position: absolute;
+      border-radius: 10px;
+    }
+    .completed {
+      background: #28ced9;
+    }
+    .in-process {
+      background: #2255c2;
+    }
+    .booked {
+      background: #f4b71a;
+    }
+    .spoilage {
+      background: #fa6363;
+    }
+
+    .number {
+      margin-left: 1.5rem;
+    }
+  }
+
+  
+  .white-card {
+    text-decoration: none;
+    margin: 15px auto;
+    box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+    color: #233151;
+    border-radius: 22px;
+    background-color: #fff;
+    padding: 0.5rem;
+  }
+
+  .search-dropdown {
+    width: 100%;
+  }
+
+  .ant-select-selection--single {
+    background-color: #f9f9f9;
+    height: 55px;
+  }
+
+  .ant-select-selection__rendered {
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #464e5f;
+    line-height: 52px;
+  }
+
+  .chart-container {
+    margin-right: 20px;
+  }
+  .chart-right-stats {
+    padding-top: 25px;
+  }
+
+  .chartjs-render-monitor {
+    height: 80px !important;
+  }
+  .ant-select-selection__placeholder,
+  .ant-select-search__field__placeholder {
     left: 10px;
   }
 }

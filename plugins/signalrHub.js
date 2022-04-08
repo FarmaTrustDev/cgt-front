@@ -2,7 +2,7 @@ import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
 
 export default ({ app, store }, inject) => {
   const hub = new HubConnectionBuilder()
-    .withUrl('http://localhost:22462/NotificationUserHub?userId=1')
+    .withUrl('https://demoapi.qmaid.co/NotificationUserHub?userId=1')
     .configureLogging(LogLevel.Information)
     .build()
 

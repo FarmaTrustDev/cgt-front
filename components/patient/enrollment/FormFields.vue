@@ -15,12 +15,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your First Name!',
+                    message: 'required!',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your First Name"
+            placeholder="First"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -37,12 +37,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Last Name',
+                    message: 'required!',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your Last Name"
+            placeholder="Last"
           />
         </a-form-item>
       </a-col>
@@ -58,11 +58,11 @@
               {
                 initialValue: patient.email,
                 rules: [
-                  { required: true, message: 'Please input your Email!' },
+                  { required: true, message: 'required!' },
                 ],
               },
             ]"
-            placeholder="Please input your Email"
+            placeholder="Email"
           /> </a-form-item
       ></a-col>
 
@@ -80,13 +80,13 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Phone',
+                    message: 'required!',
                   },
                 ],
               },
             ]"
             type="number"
-            placeholder="Please input your Phone"
+            placeholder="12345678"
           />
         </a-form-item>
       </a-col>
@@ -105,11 +105,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'required!',
                   },
                 ],
               },
             ]"
+            placeholder="DD/MM/YYYY"
             :disabled-date="disabledDate"
             format="DD/MM/YYYY"
             style="width: 100%"
@@ -132,12 +133,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Gender!',
+                    message: 'required!',
                   },
                 ],
               },
             ]"
-            placeholder="Select gender"
+            placeholder="Select Gender"
             style="width: 100%"
             size="large"
             class="default-select"
@@ -161,8 +162,7 @@
                 initialValue: patient.bloodType,
                 rules: [
                   {
-                    required: true,
-                    message: 'Please select your Gender!',
+                    message: '',
                   },
                 ],
               },
@@ -193,7 +193,7 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Please input your Allergies"
+            placeholder="Allergies"
           />
         </a-form-item>
       </a-col>
@@ -212,7 +212,7 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Please input your Problem"
+            placeholder="Active Problem"
           />
         </a-form-item>
       </a-col>
@@ -231,7 +231,7 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Please input your Problem"
+            placeholder="Medication"
           />
         </a-form-item>
       </a-col>
@@ -248,12 +248,12 @@
               {
                 initialValue: patient.postCode || '',
                 rules: [
-                  { required: true, message: 'Please input your Post Code!' },
+                  { message: '' },
                 ],
               },
             ]"
             name="postCode"
-            placeholder="Please input your Post Code"
+            placeholder="Postal"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -267,10 +267,10 @@
               'City',
               {
                 initialValue: patient.city,
-                rules: [{ required: true, message: 'Please input your City!' }],
+                rules: [{ required: true, message: 'required!' }],
               },
             ]"
-            placeholder="Please input your City"
+            placeholder="City"
           /> </a-form-item
       ></a-col>
       <a-col :span="24">
@@ -285,11 +285,11 @@
               {
                 initialValue: patient.postCode,
                 rules: [
-                  { required: true, message: 'Please input your Post Code!' },
+                  { message: '' },
                 ],
               },
             ]"
-            placeholder="Please input your Post Code Address"
+            placeholder="Address"
           /> </a-form-item
       ></a-col>
       <a-col :span="24">
@@ -306,13 +306,13 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Problem',
+                    message: 'required!',
                   },
                 ],
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Please input your Problem"
+            placeholder="Street Number"
           />
         </a-form-item>
       </a-col>
@@ -330,12 +330,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your County',
+                    message: 'required!',
                   },
                 ],
               },
             ]"
-            placeholder="Please input your County"
+            placeholder="County"
           />
         </a-form-item>
       </a-col>
@@ -353,7 +353,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your country!',
+                    message: 'required!',
                   },
                 ],
               },
