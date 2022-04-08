@@ -197,9 +197,10 @@ import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import pagination from '~/mixins/pagination'
+import filterOption from '~/mixins/filter-options'
 export default {
   components: { steps },
-  mixins: [routeHelpers, notifications, pagination],
+  mixins: [routeHelpers, notifications, pagination, filterOption],
   props: {
     columns: { type: Array, default: () => [] },
     dumpData: { type: Array, default: () => [] },
@@ -221,7 +222,6 @@ export default {
       data: [],
       loading: false,
       phases: PATIENT_TREATMENT_PHASES,
-      filters: {},
     }
   },
   mounted() {
@@ -318,21 +318,6 @@ export default {
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
         this.$emit('deadPatient', response)
       })
-    },
-    handleSearch(value, column) {
-      const filters = this.params
-      filters[column.key] = value[0]
-      this.setFilters(filters)
-    },
-    handleReset(clearFilters, column) {
-      clearFilters()
-      const filters = this.filters
-      delete filters[column.key]
-      this.setFilters(filters)
-    },
-    setFilters(params) {
-      this.filters = params
-      this.fetch(this.filters)
     },
   },
 }
