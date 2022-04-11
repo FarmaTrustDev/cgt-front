@@ -259,7 +259,7 @@ export default {
     },
     getCurrentStep(treatment) {
       // Most expensive Operation in whole application
-      if (!isEmpty(treatment.phaseId)) {    
+      if (!isEmpty(treatment.phaseId)) {
         const phases = this.phases
         let currentPhase = 0
         for (let phase = 0; phase < phases.length; phase++) {
