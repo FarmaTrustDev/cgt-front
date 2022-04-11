@@ -76,7 +76,11 @@
       :visible="showEmailModal"
       @cancel="handleEmailModal(false)"
     >
-      <email :content="{ body }" @closeModal="handleEmailModal" />
+      <email
+        :content="{ body }"
+        :bag-id="bagId"
+        @closeModal="handleEmailModal"
+      />
     </a-modal>
   </div>
 </template>
