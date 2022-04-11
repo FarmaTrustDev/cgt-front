@@ -33,6 +33,7 @@
           v-decorator="[
             'content',
             {
+              initialValue: content.body,
               rules: [
                 {
                   required: true,
@@ -56,6 +57,9 @@ import notifications from '~/mixins/notifications'
 export default {
   components: {},
   mixins: [notifications],
+  props: {
+    content: { type: Object, default: () => ({}) },
+  },
   data() {
     return {
       emails: [],

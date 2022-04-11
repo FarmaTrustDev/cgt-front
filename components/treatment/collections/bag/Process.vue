@@ -63,7 +63,7 @@
           <a-button
             v-if="row.isCollected"
             type="primary"
-            @click="handleEmailModal(true)"
+            @click="handleEmailModal(true, row)"
             >Send Email</a-button
           >
         </template>
@@ -76,7 +76,7 @@
       :visible="showEmailModal"
       @cancel="handleEmailModal(false)"
     >
-      <email @closeModal="handleEmailModal" />
+      <email :content="{ body }" @closeModal="handleEmailModal" />
     </a-modal>
   </div>
 </template>
@@ -108,7 +108,10 @@ const columns = [
 export default {
   components: { Email },
   mixins: [notifications],
-  props: { collections: { required: true, type: Array } },
+  props: {
+    collections: { required: true, type: Array },
+    bagId: { required: true, type: String },
+  },
   data() {
     return {
       columns,
@@ -119,6 +122,7 @@ export default {
       }),
       btnLoading: false,
       showEmailModal: false,
+      body: null,
     }
   },
   methods: {
@@ -138,7 +142,11 @@ export default {
           })
       }
     },
-    handleEmailModal(show) {
+    handleEmailModal(show, data) {
+      if (show) {
+        this.body = `${data.name} has been completed against  by Bag ${this.bagId} `
+        // console.log(message)
+      }
       this.showEmailModal = show
     },
   },

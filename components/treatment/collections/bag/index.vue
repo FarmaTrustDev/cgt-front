@@ -2,7 +2,11 @@
   <div>
     <a-tabs :active-key="activeTab" type="card" @change="callback">
       <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
-        <Process :collections="bag.collection" @fetchBags="fetchBags" />
+        <Process
+          :collections="bag.collection"
+          :bag-id="bag.puid"
+          @fetchBags="fetchBags"
+        />
         <div class="text-right mt-15">
           <!-- <a-button type="primary" @click="completeBag(bag)"
             >Complete Sample( #{{ bag.puid }})</a-button
