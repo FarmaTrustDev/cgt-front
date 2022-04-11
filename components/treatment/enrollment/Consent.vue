@@ -3,7 +3,12 @@
     <h3 class="page-title">Patient Consent</h3>
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <Upload :extensions="allowedExtensions" @handleChange="handleChange" />
+      <Upload
+        :disabled="treatment.id != null"
+        :default-file-list="treatment.consentFiles"
+        :extensions="allowedExtensions"
+        @handleChange="handleChange"
+      />
       <a-form-item>
         <a-checkbox
           v-decorator="[
@@ -92,7 +97,7 @@ export default {
         .then((response) => {
           this.success(response.message)
           this.$emit('getTreatment', response.data)
-          this.$emit('getNextTab', "Screening")
+          this.$emit('getNextTab', 'Screening')
           this.goto(this.$route.path, { treatment_id: response.data.globalId })
         })
         .catch(this.error)

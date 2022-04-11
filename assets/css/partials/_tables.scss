@@ -56,58 +56,58 @@
       border-top-right-radius: 44px;
     }
   }
-  .ant-pagination-item {
-    border-radius: 51px;
-    height: 35px;
-    width: 35px;
-    background-color: #FA6363;
-    color: white;
-    padding: 0.6rem 0.5rem;
-    margin-left: 10px;
-    margin-right: 10px;
-    position: relative;
-    font-size: 1rem;
-    line-height: 1rem;
-    font-weight: 500;
-    min-width: 2.25rem;
-    border: none;
+  // A super stupid person do this code
+  // .ant-pagination-item {
+  //   // border-radius: 51px;
+  //   // height: 35px;
+  //   // width: 35px;
+  //   // background-color: #FA6363;
+  //   // color: white;
+  //   // padding: 0.6rem 0.5rem;
+  //   // margin-left: 10px;
+  //   // margin-right: 10px;
+  //   // position: relative;
+  //   // font-size: 1rem;
+  //   // line-height: 1rem;
+  //   // font-weight: 500;
+  //   // min-width: 2.25rem;
+  //   // border: none;
 
-    a {
-      color: white;
-      vertical-align: middle;
-      text-align: center;
-    }
-  }
-  .ant-pagination-item-link {
-    color: #93a2dd;
-    font-size: 1.15em;
-    border: unset;
-    background: transparent;
-    font-weight: bold;
-  }
+  //   // a {
+  //   //   color: white;
+  //   //   vertical-align: middle;
+  //   //   text-align: center;
+  //   // }
+  // }
+  // .ant-pagination-item-link {
+  //   // color: #93a2dd;
+  //   // font-size: 1.15em;
+  //   // border: unset;
+  //   // background: transparent;
+  //   // font-weight: bold;
+  // }
 
-  .ant-pagination {
-    width: 100%;
-    .ant-pagination-options {
-      float: left;
-      width: 85%;
-      .ant-select{
-        .ant-select-selection{
-          width: 150px;
-          text-align: center;
-          vertical-align: middle;
-          border-radius: 44px;
-          height: 50px;
-        }
-        .ant-select-selection__rendered{
-          height: 100%;
-          width: 100%;
-          text-align: center;
-          padding-top: 7px;
-          padding-left: 19px;
-        }
-      }
-    }
-  }
-
+  // .ant-pagination {
+  //   width: 100%;
+  //   .ant-pagination-options {
+  //     float: left;
+  //     width: 85%;
+  //     .ant-select{
+  //       .ant-select-selection{
+  //         width: 150px;
+  //         text-align: center;
+  //         vertical-align: middle;
+  //         border-radius: 44px;
+  //         height: 50px;
+  //       }
+  //       .ant-select-selection__rendered{
+  //         height: 100%;
+  //         width: 100%;
+  //         text-align: center;
+  //         padding-top: 7px;
+  //         padding-left: 19px;
+  //       }
+  //     }
+  //   }
+  // }
 }

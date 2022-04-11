@@ -37,13 +37,21 @@ const column = [
   {
     title: 'Patient ID',
     dataIndex: 'enrollmentNumber',
-    key: 'enrollmentNumber',
+    key: 'PUID',
+    scopedSlots: {
+      filterDropdown: 'filterDropdown',
+      filterIcon: 'filterIcon',
+    },
   },
   {
     title: 'Patient Name',
     dataIndex: 'name',
     key: 'name',
-    scopedSlots: { customRender: 'name' },
+    scopedSlots: {
+      customRender: 'name',
+      filterDropdown: 'filterDropdown',
+      filterIcon: 'filterIcon',
+    },
   },
   {
     title: 'Age',
