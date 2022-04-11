@@ -259,22 +259,26 @@ export default {
     },
     getCurrentStep(treatment) {
       // Most expensive Operation in whole application
-      if (!isEmpty(treatment.phaseId)) {
-        const closest = this.phases.reduce(function (prev, curr) {
-          return Math.abs(curr.phaseId - treatment.phaseId) <
-            Math.abs(prev.phaseId - treatment.phaseId)
-            ? curr
-            : prev
-        })
+      if (!isEmpty(treatment.phaseId)) {    
+        const phases = this.phases
+        let currentPhase = 0
+        for (let phase = 0; phase < phases.length; phase++) {
+          if (phases[phase].phaseId <= treatment.phaseId) {
+            currentPhase = phases[phase].id
+          } else {
+            currentPhase = phases[phase].id
+            break
+          }
+        }
 
-        return closest.phaseId
+        return currentPhase
       }
       return 1
     },
     stepClick(patient, treatment, phase) {
       // insane logic
       //  2 for patient
-      //  console.log(patient, treatment.phaseId, phase.phaseId)
+      console.log(patient, treatment.phaseId, phase.phaseId)
       // return false
       if (
         phase.id !== 1 &&

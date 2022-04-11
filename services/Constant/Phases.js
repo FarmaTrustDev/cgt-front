@@ -10,6 +10,7 @@ export const PATIENT_TREATMENT_PHASES = [
         name: 'Screening',
         alias: 'SCREENING',
         phaseId: 2,
+
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'Screening' }
