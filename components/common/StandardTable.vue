@@ -141,8 +141,8 @@
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               >
-                <span v-if="record.isDead"> Undead</span>
-                <span v-else>Mark Dead</span>
+                <span v-if="record.isDead"> Resume</span>
+                <span v-else>Cancel</span>
               </a-popconfirm>
             </a-menu-item>
           </a-menu>
