@@ -8,6 +8,7 @@
             placeholder="Select Treatment Type"
             option-filter-prop="children"
             class="search-dropdown"
+            @change="fetchStats"
           >
             <!-- //@todo Zulkarznain bhai task fetch from   api -->
             <a-select-option
@@ -116,6 +117,9 @@ export default {
     this.fetchTreatment()
   },
   methods: {
+    fetchStats(id) {
+      this.fetchTreatmentStats(id)
+    },
     fetchTreatmentStats(id) {
       StatisticsServices.treatment(id).then((response) => {
         this.chartDetail = response.data
