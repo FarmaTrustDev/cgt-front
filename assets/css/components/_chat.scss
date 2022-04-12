@@ -42,35 +42,43 @@
       margin-top: 10px;
       max-width: 85%;
     }
+
+    .content-body {
+      padding: 15px;
+      color: #233151;
+      font-size: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 22px;
+    }
     .message-sent {
       justify-content: right;
       .ant-comment {
-        background-color: rgba(120, 98, 255, 0.14);
+        .content-body {
+          background-color: rgba(120, 98, 255, 0.14);
+        }
       }
     }
     .message-received {
       justify-content: left;
       .ant-comment {
-        background-color: #f1faff;
+        .content-body {
+          background-color: #f1faff;
+        }
       }
     }
     .ant-comment-content-author-name {
       font-size: 14px;
     }
-    .message-time {
-      padding: 10px 5px;
-      color: rgba(35, 49, 81, 0.6);
-      font-size: 10px;
-    }
-    // .ant-list-items {
-    //   margin-bottom: 20px;
-    //   overflow-y: auto;
-    //   max-height: 400px;
-    // }
+
     .peer-to-peer-chat-list {
       margin-bottom: 20px;
       overflow-y: auto;
       max-height: 400px;
+    }
+
+    .ant-comment-inner {
+      padding: 0;
     }
   }
 
