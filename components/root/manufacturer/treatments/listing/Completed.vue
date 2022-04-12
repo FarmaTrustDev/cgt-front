@@ -1,25 +1,19 @@
 <template>
   <div>
     <a-table :loading="loading" :columns="column" :data-source="data">
-      <span slot="action" slot-scope="text, record">
-        <!-- //Steps -->
-        <div>
-          <a-steps
-            :initial="1"
-            :current="getCurrentStep(record.treatment)"
-            size="small"
+      <template slot="name" slot-scope="name, record">
+        <strong>
+          <a-button
+            type="link"
+            @click="
+              goto(
+                `/manufacturer/treatments/process/${record.treatment.globalId}`
+              )
+            "
+            >{{ name }}</a-button
           >
-            <a-step
-              v-for="phase in phases"
-              :key="phase.id"
-              :title="phase.name"
-              @click="stepClick(record, phase)"
-            />
-          </a-steps>
-        </div>
-
-        <!-- //Steps -->
-      </span>
+        </strong>
+      </template>
     </a-table>
   </div>
 </template>
@@ -40,6 +34,7 @@ const column = [
     title: 'Patient Id',
     dataIndex: 'patientEnrollmentNumber',
     key: 'patientEnrollmentNumber',
+    scopedSlots: { customRender: 'name' },
   },
   {
     title: 'Treatment Type',
