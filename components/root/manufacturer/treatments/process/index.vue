@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import manufactureCollection from '~/components/treatment/collections/manufacturer/index'
+import manufactureCollection from '~/components/treatment/collections/manufacturer'
 import TreatmentServices from '~/services/API/TreatmentServices'
 export default {
   components: { manufactureCollection },
