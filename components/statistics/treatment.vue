@@ -10,9 +10,12 @@
             class="search-dropdown"
           >
             <!-- //@todo Zulkarznain bhai task fetch from   api -->
-            <a-select-option selected value="jack"> Kymriah </a-select-option>
-            <a-select-option value="lucy"> Yescarta </a-select-option>
-            <a-select-option value="tom"> Zolgenzma </a-select-option>
+            <a-select-option
+              v-for="treatmentType in treatmentTypes"
+              :key="treatmentType.id"
+            >
+              {{ treatmentType.name }}
+            </a-select-option>
           </a-select>
         </a-row>
         <a-row>
@@ -69,6 +72,8 @@
 </template>
 <script>
 import PatientsChart from '~/components/root/home/PatientsChart'
+import TreatmentTypeServices from '~/services/API/TreatmentTypeServices'
+import StatisticsServices from '~/services/API/StatisticsServices'
 export default {
   components: { PatientsChart },
   data() {
@@ -101,7 +106,27 @@ export default {
           },
         ],
       },
+      treatmentTypes: [],
     }
+  },
+  mounted() {
+    this.fetchTreatment()
+  },
+  methods: {
+    fetchTreatmentStats(id) {
+      StatisticsServices.treatment(id).then((response) => {
+        console.log(response)
+      })
+    },
+    fetchTreatment() {
+      TreatmentTypeServices.get()
+        .then((response) => {
+          this.treatmentTypes = response.data
+        })
+        .then(() => {
+          this.fetchTreatmentStats(this.treatmentTypes[0].id)
+        })
+    },
   },
 }
 </script>
