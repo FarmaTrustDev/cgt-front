@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <a-row>
-      <a-col>
+  <div class="support-chat">
+    <a-row >
+      <a-col  class="chat-list">
         <!-- <pre> {{ data }}</pre> -->
         <a-list :data-source="data" item-layout="horizontal" :bordered="false">
           <a-list-item
