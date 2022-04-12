@@ -7,7 +7,7 @@
         </a-tab-pane>
         <a-tab-pane key="2" tab="Pending"> <in-progress /> </a-tab-pane>
         <a-tab-pane key="3" tab="Complete"><completed /></a-tab-pane>
-        <a-tab-pane key="4" tab="All"> <all/></a-tab-pane></a-tab-pane>
+        <a-tab-pane key="4" tab="All"> <all /></a-tab-pane>
       </a-tabs>
     </template>
   </page-layout>
@@ -23,7 +23,7 @@ export default {
     'page-layout': PageLayout,
     'new-request': newRequests,
     'in-progress': inProgress,
-    'all':All,
+    all: All,
     completed: Completed,
   },
   data() {
