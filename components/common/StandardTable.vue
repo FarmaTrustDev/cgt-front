@@ -141,8 +141,8 @@
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               >
-                <span v-if="record.isDead"> Undead</span>
-                <span v-else>Mark Dead</span>
+                <span v-if="record.isDead"> Resume</span>
+                <span v-else>Cancel</span>
               </a-popconfirm>
             </a-menu-item>
           </a-menu>
@@ -260,30 +260,35 @@ export default {
     getCurrentStep(treatment) {
       // Most expensive Operation in whole application
       if (!isEmpty(treatment.phaseId)) {
-        const closest = this.phases.reduce(function (prev, curr) {
-          return Math.abs(curr.phaseId - treatment.phaseId) <
-            Math.abs(prev.phaseId - treatment.phaseId)
-            ? curr
-            : prev
-        })
+        const phases = this.phases
+        let currentPhase = 0
+        for (let phase = 0; phase < phases.length; phase++) {
+          if (phases[phase].phaseId <= treatment.phaseId) {
+            currentPhase = phases[phase].id
+          } else {
+            currentPhase = phases[phase].id
+            break
+          }
+        }
 
-        return closest.phaseId
+        return currentPhase
       }
       return 1
     },
     stepClick(patient, treatment, phase) {
       // insane logic
       //  2 for patient
+      console.log(patient, treatment.phaseId, phase.phaseId)
+      // return false
       if (
         phase.id !== 1 &&
-        (treatment.phaseId == null || treatment.phaseId < 2)
+        (treatment.phaseId == null || treatment.phaseId < 2) &&
+        treatment.phaseId < phase.phaseId
       ) {
         return false
       }
-
       const routeModel =
         phase.url_type === 1 ? patient.globalId : treatment.globalId
-
       return this.goto(`${phase.url_slug}${routeModel}`, {
         treatment_id: treatment.globalId,
         ...phase.params,

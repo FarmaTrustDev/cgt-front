@@ -3,7 +3,7 @@
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
-        <div>
+        <div class="treatment-steps">
           <a-steps
             :initial="1"
             :current="getCurrentStep(record.treatment)"

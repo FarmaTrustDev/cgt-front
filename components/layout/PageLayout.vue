@@ -2,7 +2,7 @@
   <a-card
     :loading="loading"
     :title="title"
-    :bordered="bordered"
+    :bordered="null"
     class="plain-header-border"
   >
     <span slot="extra">

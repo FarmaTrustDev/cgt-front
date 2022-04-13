@@ -11,6 +11,9 @@
     border: 1px solid #e5e4e4;
     @extend .default-border-radius;
   }
+  .ant-tabs-nav {
+    padding-bottom: 10px;
+  }
 }
 
 .no-border-bottom {
