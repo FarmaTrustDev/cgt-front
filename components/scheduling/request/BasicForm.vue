@@ -41,8 +41,7 @@
                   rules: [
                     {
                       required: true,
-                      message:
-                        'Please select your Delivery Arrival Date!',
+                      message: 'Please select your Delivery Arrival Date!',
                     },
                   ],
                 },
@@ -64,8 +63,7 @@
                   rules: [
                     {
                       required: true,
-                      message:
-                        'Please select your Delivery Arrival Date!',
+                      message: 'Please select your Delivery Arrival Date!',
                     },
                   ],
                 },
@@ -89,11 +87,15 @@
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
-import { getMomentByStandardFormat, _disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
+import {
+  getMomentByStandardFormat,
+  _disabledPreviousDate,
+} from '~/services/Helpers/MomentHelpers'
 import notifications from '~/mixins/notifications'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { LogisticLookup },
-  mixins: [notifications],
+  mixins: [notifications, routeHelpers],
   props: {
     treatment: { type: Object, required: true },
   },
@@ -121,6 +123,7 @@ export default {
           SchedulingServices.createForManufacturer(values)
             .then((response) => {
               this.success(response.message)
+              this.goto('/manufacturer/treatments')
             })
             .catch(this.error)
         }
