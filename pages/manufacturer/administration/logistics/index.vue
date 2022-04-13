@@ -9,20 +9,14 @@
             <a-select
               v-model="value"
               mode="multiple"
-              placeholder="select one country"
+              placeholder=""
               option-label-prop="label"
             >
-            <a-select-option value="china" label="China">
-                China
+            <a-select-option value="fastlink" label="Fastlink">
+                Fastlink
               </a-select-option>
-              <a-select-option value="usa" label="USA">
-                USA
-              </a-select-option>
-              <a-select-option value="japan" label="Japan">
-                Japan
-              </a-select-option>
-              <a-select-option value="korea" label="Korea">
-                Korea
+              <a-select-option value="corten" label="Corten Logistics">
+                Corten Logistics
               </a-select-option>
             </a-select>
             <!-- Apply Checkbox -->
@@ -31,7 +25,7 @@
             </a-checkbox>
 
             <a-col class="text-right mt-15">
-              <a-button type="primary" class="plr-20">Save</a-button>
+              <a-button type="primary" class="plr-20" @click="save">Save</a-button>
             </a-col>
 
           </a-card>
@@ -42,16 +36,23 @@
 </template>
 
 <script>
+import notifications from '~/mixins/notifications'
   export default{
+    mixins: [notifications],
     data() {
       return {
-        value: ['china'],
+        value: ['fastlink'],
       };
     },
     watch: {
       value(val) {
         console.log(`selected:`, val);
       },
+    },
+    methods:{
+      save(){
+        this.success("Contract Added!")
+      }
     },
   }
 </script>
