@@ -84,7 +84,7 @@ export default {
       PatientServices.update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
-          // this.goto(`/hospital/patients/${response.data.globalId}`)
+          // this.goto(`/hospital/patients/${response.data.globalId}?view=Consent`)
           this.$emit('getNextTab', 'Consent')
         })
         .catch(this.error)
@@ -94,8 +94,8 @@ export default {
       PatientServices.create(values)
         .then((response) => {
           this.success(response.message)
-          // this.goto(`/hospital/patients/${response.data.globalId}`)
-          this.$emit('getNextTab', 'Consent')
+          this.goto(`/hospital/patients/${response.data.globalId}?view=Consent`)
+          // this.$emit('getNextTab', 'Consent')
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
