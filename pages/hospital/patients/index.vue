@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page-header">
+    <div class="page-header clearfix">
       <h3 class="page-title pl-5 float-left">Patient List</h3>
       <a-button
         type="primary"

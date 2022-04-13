@@ -11,14 +11,14 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please select your Notes!',
                   },
                 ],
               },
             ]"
             style="width: 100%"
             size="large"
-          ></a-textarea> 
+          ></a-textarea>
           <a-input
             v-decorator="[
               'treatmentId',
@@ -27,14 +27,13 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your First Name',
+                    message: 'Please input your Treatment Id',
                   },
                 ],
               },
             ]"
             type="hidden"
-          />
-          </a-form-item
+          /> </a-form-item
       ></a-col>
     </a-row>
   </div>
@@ -64,8 +63,8 @@ export default {
       }),
     }
   },
-  methods: { 
-    onSubmit(e) {} 
-    },
+  methods: {
+    onSubmit(e) {},
+  },
 }
 </script>
