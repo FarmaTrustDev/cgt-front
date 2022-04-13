@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="support-chat">
     <a-row>
-      <a-col>
+      <a-col class="chat-list">
         <!-- <pre> {{ data }}</pre> -->
         <a-list :data-source="data" item-layout="horizontal" :bordered="false">
           <a-list-item
@@ -91,7 +91,7 @@
           </a-form-item>
         </a-col>
         <a-col class="text-right">
-          <a-form-item>
+          <a-form-item class="p-0 m-0">
             <a-button html-type="submit" :loading="submitting" type="primary">
               Submit
             </a-button>

@@ -1,0 +1,20 @@
+.support-detail {
+  .user-involved {
+    .ant-tabs-tabpane {
+      font-size: 14px;
+      h6 {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.support-chat {
+  min-height: 400px;
+
+  .chat-list {
+    min-height: 350px;
+    max-height: 350px;
+    overflow-y: scroll;
+  }
+}
