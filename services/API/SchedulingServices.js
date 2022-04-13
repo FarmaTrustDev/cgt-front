@@ -68,6 +68,13 @@ function getDetailByTreatment(id, params = {}) {
   })
 }
 
+function getDetailByTreatmentOut(id, params = {}) {
+  return request({
+    url: `${baseApi}/detail/treatment-out/${id}`,
+    params,
+  })
+}
+
 function createForManufacturer(data) {
   return request({
     url: `${baseApi}/create-for-manufacturer`,
@@ -86,6 +93,7 @@ const SchedulingServices = {
   markScheduleRequest,
   getDetailById,
   getDetailByTreatment,
+  getDetailByTreatmentOut,
   createForManufacturer,
 }
 

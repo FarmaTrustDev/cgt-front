@@ -19,7 +19,7 @@
          <shipment :treatment="treatment" /></a-tab-pane
         >
         <a-tab-pane key="5" tab="Treatment Delivery">
-          Treatment Delivery</a-tab-pane
+          <treatmentDelivery :treatment="treatment" /></a-tab-pane
         >
         <a-tab-pane key="treatment" tab=" Treatment Collection">
           <treatmentCollections :treatment="treatment" />
@@ -37,12 +37,13 @@
 import scheduling from '~/components/treatment/enrollment/scheduling'
 import collections from '~/components/treatment/collections'
 import shipment from '~/components/treatment/shipment'
+import treatmentDelivery from '~/components/treatment/treatment'
 import afterCare from '~/components/treatment/enrollment/afterCare'
 import treatmentCollections from '~/components/treatment/collections/treatment'
 import tabsHelpers from '~/mixins/tabs-helpers'
 const DEFAULT_ACTIVE_KEY = '2'
 export default {
-  components: { scheduling, collections, treatmentCollections,afterCare,shipment },
+  components: { scheduling, collections, treatmentCollections,afterCare,shipment,treatmentDelivery },
   mixins: [tabsHelpers],
   props: {
     treatment: {
