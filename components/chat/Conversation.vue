@@ -1,7 +1,9 @@
 <template>
   <div>
     <a-card :bordered="false">
-      <strong slot="title"> {{ recipient.name }} <a-divider></a-divider> </strong>
+      <strong slot="title">
+        {{ recipient.name }} <a-divider></a-divider>
+      </strong>
 
       <a-row>
         <div ref="container" class="peer-to-peer-chat-list">
@@ -9,6 +11,7 @@
             <!-- <pre> {{ data }}</pre> -->
             <a-list
               id="chatListContainer"
+              class="conversation-list"
               :data-source="data"
               item-layout="horizontal"
               :bordered="false"

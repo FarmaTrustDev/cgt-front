@@ -2,13 +2,17 @@
   <div>
     <a-spin :spinning="loading">
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
-          <Form :form="form" :treatment="treatment" />
+        <Form :form="form" :treatment="treatment" />
       </a-form>
       <a-table
         :columns="columns"
         :data-source="datasource"
         class="rounded-table"
-        :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
+        :pagination="{
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: ['10', '20', '30', '50', '100'],
+        }"
       >
       </a-table>
     </a-spin>
@@ -23,7 +27,7 @@ const columns = [
   {
     title: 'Notes',
     dataIndex: 'notes',
-    key: 'notes'
+    key: 'notes',
   },
   {
     title: 'DateTime',
@@ -85,10 +89,14 @@ export default {
       })
     },
     afterCreate(values) {
-      this.gotoPatient()
+      this.fetch()
+      this.form.resetFields()
+      // this.gotoPatient()
     },
     afterUpdate(values) {
-      this.gotoPatient()
+      this.fetch()
+      this.form.resetFields()
+      // this.gotoPatient()
     },
     gotoPatient() {
       this.goto('/hospital/patients/collection/')

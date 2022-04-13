@@ -92,3 +92,8 @@
   height: calc(100vh - 200px);
   overflow-y: scroll;
 }
+
+.chat-container-height {
+  max-height: 600px;
+  overflow-x: auto;
+}

@@ -5,19 +5,24 @@
       text="Add Sample"
       @click="addBags"
     />
-    <Bag 
+    <Bag
       v-if="treatment.manufacturerCollectionStatus"
-      :bags="bags" 
-      :treatment="treatment" 
-      @fetchBags="fetchBags" />
-    
+      :bags="bags"
+      :treatment="treatment"
+      @fetchBags="fetchBags"
+    />
+
     <a-button
-      v-if="!treatment.treatmentCollectionStatus && treatment.manufacturerCollectionStatus && bags.length > 0"
+      v-if="
+        !treatment.treatmentCollectionStatus &&
+        treatment.manufacturerCollectionStatus &&
+        bags.length > 0
+      "
       class="w-100 mt-15"
       type="primary"
-      @click="markTreatmentCollectionCompletesssss(bags)"
-      >Complete Collection Process {{treatment.treatmentCollectionStatus}} </a-button
-    >
+      @click="markTreatmentCollectionComplete(bags)"
+      >Complete Collection Process {{ treatment.treatmentCollectionStatus }}
+    </a-button>
     <a-modal
       :footer="false"
       :visible="showModal"
@@ -39,11 +44,11 @@ import notifications from '~/mixins/notifications'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 export default {
-  components: { Bag , BagForm},
+  components: { Bag, BagForm },
   mixins: [notifications],
   props: {
     treatment: { required: true, type: Object },
-    showCompleteBtn: { required: true, type: String },
+    showCompleteBtn: { required: false, type: String },
   },
   data() {
     return {
