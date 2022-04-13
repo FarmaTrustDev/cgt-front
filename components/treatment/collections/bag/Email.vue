@@ -22,8 +22,8 @@
           style="width: 100%"
           placeholder="Select Email"
         >
-          <a-select-option v-for="email in emails" :key="email" value="email">
-            {{ email }}
+          <a-select-option v-for="user in users" :key="user.email">
+            {{ user.email }}
           </a-select-option>
         </a-select>
       </a-form-item>
@@ -33,6 +33,7 @@
           v-decorator="[
             'content',
             {
+              initialValue: content.body,
               rules: [
                 {
                   required: true,
@@ -53,9 +54,14 @@
 import { validateEmail } from '~/services/Helpers/'
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import notifications from '~/mixins/notifications'
+import UserServices from '~/services/API/UserServices'
 export default {
   components: {},
   mixins: [notifications],
+  props: {
+    content: { type: Object, default: () => ({}) },
+    bagId: { type: String, default: '' },
+  },
   data() {
     return {
       emails: [],
@@ -63,9 +69,19 @@ export default {
       form: this.$form.createForm(this, {
         name: 'collectionEmail',
       }),
+      users: [],
     }
   },
+  mounted() {
+    this.fetchUser()
+  },
   methods: {
+    fetchUser() {
+      UserServices.getByBagId(this.bagId).then((response) => {
+        console.log(response)
+        this.users = response.data
+      })
+    },
     onSubmit(e) {
       e.preventDefault()
       this.loading = true

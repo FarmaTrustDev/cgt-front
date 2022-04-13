@@ -8,11 +8,15 @@
             placeholder="Select Treatment Type"
             option-filter-prop="children"
             class="search-dropdown"
+            @change="fetchStats"
           >
             <!-- //@todo Zulkarznain bhai task fetch from   api -->
-            <a-select-option selected value="jack"> Kymriah </a-select-option>
-            <a-select-option value="lucy"> Yescarta </a-select-option>
-            <a-select-option value="tom"> Zolgenzma </a-select-option>
+            <a-select-option
+              v-for="treatmentType in treatmentTypes"
+              :key="treatmentType.id"
+            >
+              {{ treatmentType.name }}
+            </a-select-option>
           </a-select>
         </a-row>
         <a-row>
@@ -26,7 +30,7 @@
           </a-col>
           <a-col :span="10" class="mr-5 chart-right-stats">
             <span class="vertical-line"></span>
-            <span>100</span>
+            <span>{{ chartDetail.total }}</span>
             <br />
             <span>Total Patients</span>
           </a-col>
@@ -34,14 +38,14 @@
         <a-row>
           <a-col :span="12" class="white-card">
             <span class="completed"></span>
-            <span class="number">20</span>
+            <span class="number">{{ chartDetail.completedTotal }}</span>
             <br />
             <br />
             <span>Total Completed</span>
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="in-process"></span>
-            <span class="number">75</span>
+            <span class="number">{{ chartDetail.productionTotal }}</span>
             <br />
             <br />
             <span>In Production</span>
@@ -50,14 +54,14 @@
         <a-row>
           <a-col :span="12" class="white-card">
             <span class="booked"></span>
-            <span class="number">20</span>
+            <span class="number">{{ chartDetail.total }}</span>
             <br />
             <br />
             <span>Overall Booked</span>
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="spoilage"></span>
-            <span class="number">20</span>
+            <span class="number">{{ chartDetail.spoilage }}</span>
             <br />
             <br />
             <span>Spoilage</span>
@@ -69,10 +73,14 @@
 </template>
 <script>
 import PatientsChart from '~/components/root/home/PatientsChart'
+import TreatmentTypeServices from '~/services/API/TreatmentTypeServices'
+import StatisticsServices from '~/services/API/StatisticsServices'
 export default {
   components: { PatientsChart },
   data() {
     return {
+      dynamicData: [],
+      chartDetail: {},
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -97,11 +105,35 @@ export default {
         datasets: [
           {
             backgroundColor: ['#28ced9', '#2255c2', '#f4b71a', '#fa6363'],
-            data: [1, 5, 3, 5],
+            data: [5, 2, 4, 5],
           },
         ],
       },
+      treatmentTypes: [],
     }
+  },
+  computed: {},
+  mounted() {
+    this.fetchTreatment()
+  },
+  methods: {
+    fetchStats(id) {
+      this.fetchTreatmentStats(id)
+    },
+    fetchTreatmentStats(id) {
+      StatisticsServices.treatment(id).then((response) => {
+        this.chartDetail = response.data
+      })
+    },
+    fetchTreatment() {
+      TreatmentTypeServices.get()
+        .then((response) => {
+          this.treatmentTypes = response.data
+        })
+        .then(() => {
+          this.fetchTreatmentStats(this.treatmentTypes[0].id)
+        })
+    },
   },
 }
 </script>

@@ -80,6 +80,15 @@ function test(params = {}) {
     params,
   })
 }
+
+function getByBagId(bagId) {
+  return request({
+    url: `${baseApi}/bag-puid/${bagId}`
+
+  })
+}
+
+
 const UserServices = {
   detail,
   adminMenu,
@@ -93,6 +102,7 @@ const UserServices = {
   destroy,
   get,
   getUser,
+  getByBagId,
   test
 }
 

@@ -8,8 +8,8 @@
     <template slot="content">
       <div class="grey-card">
         <profile-picture-and-detail :treatment="entity" />
-        <a-card :bordered="false" class="mt-15 default-card">
-          <a-tabs>
+        <a-card :bordered="false" class="mt-15 default-card h-tabs">
+          <a-tabs type="card">
             <a-tab-pane key="1" tab="Inbound Acceptance Details">
               <inbound-shipment :treatment="entity" />
             </a-tab-pane>

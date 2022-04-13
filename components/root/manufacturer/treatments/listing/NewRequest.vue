@@ -3,10 +3,10 @@
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
         <a-button type="primary" dashed @click="showConfirm(record, true)">
-          Accepted
+          Accept
         </a-button>
         <a-button type="danger" dashed @click="showConfirm(record, false)">
-          Rejected
+          Reject
         </a-button>
       </span>
     </a-table>

@@ -1,13 +1,13 @@
 <template>
-  <page-layout :loading="loading" title="Support Detail">
+  <page-layout class="support" :loading="loading" title="Support Detail">
     <template slot="content">
       <div class="grey-card">
         <a-row :gutter="56">
           <a-col :span="12">
             <Detail />
           </a-col>
-          <a-col :span="12" class="chat--listing-container">
-            <a-card class="default-border-radius ">
+          <a-col :span="12" >
+            <a-card class="default-border-radius">
               <div class="max-h-200">
                 <Comment
                   message-to="Recipient_Id"
@@ -24,7 +24,7 @@
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import Detail from '~/components/support/detail/index'
+import Detail from '~/components/support/detail'
 import Comment from '~/components/support/detail/Comment'
 import SupportServices from '~/services/API/SupportServices'
 import withFetch from '~/mixins/with-fetch'
