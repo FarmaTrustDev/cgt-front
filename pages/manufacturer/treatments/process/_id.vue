@@ -16,8 +16,9 @@
             <a-tab-pane key="2" tab="Manufacturing">
               <process :treatment="entity" @fetchTreatment="fetchTreatment" />
             </a-tab-pane>
-            <a-tab-pane key="3" tab="Outbound Shipment"
-              ><scheduling-basic-request
+            <a-tab-pane key="3" tab="Outbound Shipment">
+              <QrViewer :treatment="entity" />
+              <scheduling-basic-request
                 :treatment="entity"
                 @fetchTreatment="fetchTreatment"
               />
@@ -35,6 +36,7 @@ import withFetch from '~/mixins/with-fetch'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import ProfilePictureCard from '~/components/patient/profile/ProfileAndDetail'
 import process from '~/components/root/manufacturer/treatments/process'
+import QrViewer from '~/components/bags/Viewer'
 import InboundShipment from '~/components/root/manufacturer/scheduling/shipment/Inbound'
 import schedulingBasicRequest from '~/components/scheduling/request/BasicForm'
 export default {
@@ -44,6 +46,7 @@ export default {
     'profile-picture-and-detail': ProfilePictureCard,
     'inbound-shipment': InboundShipment,
     'scheduling-basic-request': schedulingBasicRequest,
+    QrViewer,
   },
   mixins: [withFetch],
   middleware: 'auth',
