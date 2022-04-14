@@ -1,6 +1,5 @@
 <template>
   <div>
-    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
     <a-tabs v-model="activeKey" hide-add type="editable-card">
       <a-tab-pane
         v-for="(category) in categories"
@@ -15,7 +14,6 @@
       
       </a-tab-pane>
     </a-tabs>
-    </a-form>  
   </div>
 </template>
 <script>
