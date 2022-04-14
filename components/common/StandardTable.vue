@@ -15,6 +15,15 @@
         <strong>{{ name }}</strong>
       </template>
 
+      <template slot="image" slot-scope="src, record">
+        <img
+          width="50"
+          class="img-responsive"
+          :src="src"
+          @click="clickImage(record)"
+        />
+      </template>
+
       <template slot="check" slot-scope="flag">
         <!-- <strong>{{ flag }}</strong> -->
         <a-icon
@@ -323,6 +332,9 @@ export default {
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
         this.$emit('deadPatient', response)
       })
+    },
+    clickImage(record) {
+      this.$emit('clickImage', record)
     },
   },
 }

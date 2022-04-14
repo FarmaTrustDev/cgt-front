@@ -45,6 +45,17 @@
         ></a-textarea>
       </a-form-item>
       <a-form-item>
+        <a-input
+              v-decorator="[
+                `subject`,
+                {
+                  initialValue: user.organizationTypeAlias + ' Screening Results',
+                },
+              ]"
+              type="hidden"
+            />
+      </a-form-item>
+      <a-form-item>
         <FormActionButton :loading="loading" text="Send" />
       </a-form-item>
     </a-form>
@@ -70,10 +81,17 @@ export default {
         name: 'collectionEmail',
       }),
       users: [],
+      organizationType:'',
     }
   },
   mounted() {
     this.fetchUser()
+  },
+  computed: {
+    // ...mapGetters(['getUser']),
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   methods: {
     fetchUser() {
