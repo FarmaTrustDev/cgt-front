@@ -87,7 +87,6 @@ export default {
     }
   },
   mounted(){
-      alert(this.$route.query.id)
       this.privateKey=this.$route.query.id
       this.checkUserKey(this.privateKey)
   },
@@ -122,6 +121,13 @@ export default {
             UserServices.resetPassword(values.privateKey,values).then((response)=>{
               success(this,{message:response.message})
             })
+            .catch((e) => {
+            if (!isEmpty(e.response)) {
+            this.error = e.response.data.message
+            this.showError = true
+            }
+            })
+            .finally(() => (this.loading = false))
           }else{
             this.error='Confirm Password does not match'
             this.showError=true
