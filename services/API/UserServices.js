@@ -87,7 +87,21 @@ function getByBagId(bagId) {
 
   })
 }
+function activateAccount(id, data) {
+  return request({
+    url: `${baseApi}/send-email/${id}`,
+    data,
+    method: 'POST',
+  })
+}
 
+function resetPassword(id, data) {
+  return request({
+    url: `${baseApi}/reset-password/${id}`,
+    data,
+    method: 'PATCH',
+  })
+}
 
 const UserServices = {
   detail,
@@ -103,7 +117,9 @@ const UserServices = {
   get,
   getUser,
   getByBagId,
-  test
+  test,
+  activateAccount,
+  resetPassword,
 }
 
 export default UserServices
