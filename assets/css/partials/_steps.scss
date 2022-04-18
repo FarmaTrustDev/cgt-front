@@ -144,10 +144,11 @@
       background-color: white;
       border-radius: 22px;
       padding: 5px;
+      color: #1bb559;
     }
   }
   .step-bar {
-    border: 1px solid #1bb558;
+    border: 1px solid #1bb559;
     padding: 10px;
     border-radius: $default-radius;
     margin-left: 10px;
@@ -156,9 +157,11 @@
         display: block;
         font-size: 1.24em;
         color: black;
+        font-weight: 400;
       }
       .date-time {
         font-size: 16px;
+        color: #a7a5a5;
       }
     }
     .right {
@@ -179,6 +182,12 @@
     .anticon {
       font-size: 25px !important;
     }
+  }
+
+  .ant-tabs-tab-active,
+  .ant-tabs-tab {
+    color: #233151 !important;
+    font-weight: 300 !important;
   }
 
   .ant-tabs-content {

@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="default-card">
+  <a-card :bordered="false" class="default-card no-shadow">
     <div>
       <a-tabs :active-key="activeTab" type="card" @change="onTabChange">
         <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">

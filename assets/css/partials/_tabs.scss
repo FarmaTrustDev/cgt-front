@@ -4,7 +4,7 @@
   }
   .ant-tabs-tab-active {
     color: #3869d1;
-    background-color: #f2f5fb;
+    background-color: #f2f5fb !important;
     @extend .default-border-radius;
   }
   .ant-tabs-tab {
@@ -43,6 +43,7 @@
       padding: 16px 58px;
       line-height: initial;
       height: auto;
+      background-color: #f9f9f9 !important;
     }
   }
 }
@@ -64,7 +65,7 @@
 }
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
   color: #3869d1;
-  background-color: #f2f5fb;
+  background-color: #f2f5fb !important;
 }
 
 .ant-tabs-card-bar {

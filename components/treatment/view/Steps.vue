@@ -1,8 +1,12 @@
 <template>
   <a-row :gutter="18" class="mt-15">
     <a-col>
-      <a-card :bordered="false" class="default-card pills-tabs">
-        <a-tabs type="card">
+      <a-card
+        style="margin-top: -30px !important"
+        :bordered="false"
+        class="p-0 mt-0 pt-0 default-card pills-tabs no-shadow"
+      >
+        <a-tabs class="pt-0" type="card">
           <a-tab-pane v-for="step in tabs" :key="step.id" class="border1">
             <!-- todo getting event name from backend -->
             <div slot="tab">{{ step.name }}</div>
