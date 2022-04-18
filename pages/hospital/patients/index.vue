@@ -35,9 +35,10 @@ import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
 const column = [
   {
-    title: 'Patient ID',
+    title: 'PUID',
     dataIndex: 'enrollmentNumber',
     key: 'PUID',
+    width: 105,
     scopedSlots: {
       filterDropdown: 'filterDropdown',
       filterIcon: 'filterIcon',
@@ -47,6 +48,7 @@ const column = [
     title: 'Patient Name',
     dataIndex: 'name',
     key: 'name',
+    width: 150,
     scopedSlots: {
       customRender: 'name',
       filterDropdown: 'filterDropdown',
@@ -54,9 +56,11 @@ const column = [
     },
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Type',
+    dataIndex: 'treatmentTypeId',
+    key: 'treatmentTypeId',
+    width: 100,
+    scopedSlots: { customRender: 'treatmentTypeNameRender' },
   },
   {
     // title: 'Treatment Status',

@@ -1,9 +1,9 @@
 <template>
   <span class="step-col" functional>
     <a-steps :current="getCurrentStep(treatment)" status="process" size="small">
-      <div class="treatmentName">
+      <!-- <div >
         {{ treatment.treatmentTypeName }}
-      </div>
+      </div> -->
       <a-step
         v-for="phase in phases"
         :key="phase.phaseId"

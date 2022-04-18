@@ -15,6 +15,14 @@
         <strong>{{ name }}</strong>
       </template>
 
+      <template slot="treatmentTypeNameRender" slot-scope="name, patient">
+        <strong v-for="treatment in patient.treatments" :key="treatment.id">
+          <span class="treatmentName">{{
+            treatment.treatmentTypeName
+          }}</span>
+        </strong>
+      </template>
+
       <template slot="image" slot-scope="src, record">
         <img
           width="50"

@@ -1,6 +1,10 @@
 .patient-page {
+  .treatmentName {
+    display: inline-block;
+    padding: 10px 0;
+    margin-top: 12px;
+  }
   .ant-table-content {
-    
     .ant-table-tbody tr {
       &:hover {
         background: #fff;
@@ -16,8 +20,8 @@
     }
   }
   .ant-table-tbody
-  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
-  > td {
+    > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+    > td {
     background: none;
   }
 
@@ -37,18 +41,18 @@
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     &:not(:disabled):not(.disabled) {
       cursor: pointer;
     }
   }
 
-  .ant-spin-nested-loading{
+  .ant-spin-nested-loading {
     // margin-top: 3rem;
   }
 
   .patient-table {
-    .ant-table{
+    .ant-table {
       overflow-x: auto;
     }
   }
@@ -58,7 +62,7 @@
     width: 8px;
   }
   div::-webkit-scrollbar-track {
-      background-color: #fff;
+    background-color: #fff;
   }
   div::-webkit-scrollbar-thumb {
     background-color: #babac0;
@@ -66,11 +70,11 @@
     border: 6px solid #fff;
   }
   div::-webkit-scrollbar-button {
-    display:none;
+    display: none;
   }
 
-  .treatment-status-col{
-    .ant-table-header-column{
+  .treatment-status-col {
+    .ant-table-header-column {
       width: 100%;
     }
     .treatment-title {

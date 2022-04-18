@@ -6,6 +6,7 @@
     color: #233151;
     border-radius: 22px;
     cursor: pointer;
+    padding-right: 5px;
   }
 
   .ant-steps-item-wait {
@@ -116,7 +117,7 @@
     height: 30px;
     font-size: 12px;
     margin-top: 12px;
-    vertical-align: text-bottom;
+    // vertical-align: text-bottom;
   }
 }
 
@@ -193,5 +194,22 @@
   .ant-tabs-content {
     margin-left: 3px;
     padding-left: 15px;
+  }
+}
+
+.ant-table-row {
+  // &::before {
+  //   content: '';
+  //   border: 1px solid red;
+  // }
+  td {
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2 !important;
+  }
+  td:first-child {
+    border-left: 1px solid #e2e2e2;
+  }
+  td:last-child {
+    border-right: 1px solid #e2e2e2;
   }
 }
