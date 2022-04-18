@@ -12,6 +12,7 @@
 <script>
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import Steps from '~/components/treatment/view/Steps'
+import { isEmpty } from '~/services/Utilities'
 
 export default {
   components: { Steps },
@@ -30,6 +31,10 @@ export default {
       TreatmentBagServices.get({ treatmentId: this.treatment.id }).then(
         (bags) => {
           this.bags = bags.data
+         
+          if (!isEmpty(this.bags)) {
+            this.onTabChange(this.bags[0].id)
+          }
         }
       )
     },

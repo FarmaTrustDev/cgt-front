@@ -46,6 +46,14 @@ function resetPassword(data) {
     method: 'POST',
   })
 }
+
+function getActivationAuth(id) {
+  return request({
+    url: `${baseApi}/private-key-activation/${id}`,
+    method: 'GET',
+  })
+}
+
 const AuthService = {
   login,
   logout,
@@ -53,6 +61,7 @@ const AuthService = {
   forgetpassword,
   resetPassword,
   getBusEvent,
+  getActivationAuth,
 }
 
 export default AuthService
