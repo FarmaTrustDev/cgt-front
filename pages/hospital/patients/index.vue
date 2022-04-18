@@ -38,7 +38,7 @@ const column = [
     title: 'PUID',
     dataIndex: 'enrollmentNumber',
     key: 'PUID',
-    width: 105,
+    width: 110,
     scopedSlots: {
       filterDropdown: 'filterDropdown',
       filterIcon: 'filterIcon',
