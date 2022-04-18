@@ -8,7 +8,9 @@
     <template slot="content">
       <div class="grey-card">
         <detail :treatment="entity" @fetchTreatment="fetchMethod" />
-        <TreatmentView v-if="!isEmpty(entity.patient)" :treatment="entity" />
+        <div class="grey-card m-0">
+          <TreatmentView v-if="!isEmpty(entity.patient)" :treatment="entity" />
+        </div>
       </div>
     </template>
   </page-layout>

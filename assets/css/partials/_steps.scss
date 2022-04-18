@@ -124,14 +124,38 @@
   .ant-timeline-item-content {
     margin-left: 30px;
   }
+  .ant-timeline-item-head-grey {
+    background-color: #efefef;
+    border-radius: 22px;
+    padding: 5px;
+    margin-top: 20px;
+    .anticon {
+      background-color: white;
+      border-radius: 22px;
+      padding: 5px;
+    }
+  }
+  .ant-timeline-item-head-green {
+    background-color: #d1f2dc;
+    border-radius: 22px;
+    padding: 5px;
+    margin-top: 20px;
+    .anticon {
+      background-color: white;
+      border-radius: 22px;
+      padding: 5px;
+    }
+  }
   .step-bar {
     border: 1px solid #1bb558;
     padding: 10px;
     border-radius: $default-radius;
+    margin-left: 10px;
     .left {
       .step-title {
         display: block;
         font-size: 1.24em;
+        color: black;
       }
       .date-time {
         font-size: 16px;
@@ -140,6 +164,12 @@
     .right {
       text-align: right;
       display: block;
+      .step-title {
+        color: black;
+      }
+      .organization {
+        color: #3869d1;
+      }
     }
   }
   .ant-tabs-tabpane-active {
@@ -153,5 +183,6 @@
 
   .ant-tabs-content {
     margin-left: 3px;
+    padding-left: 15px;
   }
 }

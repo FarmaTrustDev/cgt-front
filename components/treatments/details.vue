@@ -1,6 +1,6 @@
 <template>
   <div class="patient-details-page">
-    <div class="grey-card">
+    <div class="grey-card m-0">
       <a-row :gutter="18">
         <a-col :span="6">
           <a-card :bordered="false" class="qr-section default-card">
