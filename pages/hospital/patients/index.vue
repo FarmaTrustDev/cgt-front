@@ -24,7 +24,7 @@
         :rounded="true"
         :patient="true"
         @getFetch="getFetch"
-        @deadPatient="deadPatient"
+        @fetchParent="fetch"
       />
     </div>
   </div>
@@ -95,7 +95,7 @@ export default {
     getFetch(fetch) {
       this.fetchPatientService = fetch
     },
-    deadPatient(response) {
+    fetch(response) {
       this.fetchPatientService()
     },
   },

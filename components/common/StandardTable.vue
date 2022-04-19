@@ -17,9 +17,7 @@
 
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
-          <span class="treatmentName">{{
-            treatment.treatmentTypeName
-          }}</span>
+          <span class="treatmentName">{{ treatment.treatmentTypeName }}</span>
         </strong>
       </template>
 
@@ -53,7 +51,7 @@
           <span
             v-for="treatment in record.treatments"
             :key="treatment.id"
-            :class="record.isDead ? 'dead' : ''"
+            :class="getTreatmentStepClass(record, treatment)"
           >
             <steps
               :treatment="treatment"
@@ -73,8 +71,11 @@
                   >
                 </a-menu-item>
                 <a-menu-item>
-                  <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> Pause</a
+                  <a
+                    href="javascript:;"
+                    @click="holdTreatment(record, treatment)"
+                    ><a-icon type="minus-circle" />
+                    {{ treatment.isHold ? 'Resume' : 'Pause' }}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
@@ -295,7 +296,7 @@ export default {
     stepClick(patient, treatment, phase) {
       // insane logic
       //  2 for patient
-      console.log(patient, treatment.phaseId, phase.phaseId)
+      // console.log(patient, treatment.phaseId, phase.phaseId)
       // return false
       if (
         phase.id !== 1 &&
@@ -338,11 +339,25 @@ export default {
     deadPatient(patient) {
       const isDead = !patient.isDead
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
-        this.$emit('deadPatient', response)
+        this.$emit('fetchParent', response)
       })
     },
     clickImage(record) {
       this.$emit('clickImage', record)
+    },
+    holdTreatment(patient, treatment) {
+      TreatmentServices.hold(treatment.globalId, !treatment.isHold)
+        .then((response) => {
+          this.$emit('fetchParent', response)
+        })
+        .catch(this.error)
+    },
+    getTreatmentStepClass(patient, treatment) {
+      if (patient.isDead) {
+        return 'dead'
+      } else if (treatment.isHold) {
+        return 'hold'
+      }
     },
   },
 }

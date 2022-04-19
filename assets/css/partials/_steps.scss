@@ -1,3 +1,13 @@
+.blockState {
+  position: relative;
+  &::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+  }
+}
 .treatment-steps {
   .ant-steps-item {
     padding: 5px 2px;
@@ -74,6 +84,7 @@
       background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
     }
   }
+
   .dead {
     .ant-steps-item {
       background: #ffdbdb;
@@ -84,7 +95,26 @@
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
       }
     }
+    .ant-steps {
+      @extend .blockState;
+    }
   }
+
+  .hold {
+    .ant-steps-item {
+      background: #fffbc8;
+    }
+    .ant-steps {
+      @extend .blockState;
+    }
+    .ant-steps-item-content {
+      &::before {
+        content: '';
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+      }
+    }
+  }
+
   .ant-steps-item-finish {
     background: #d1f2dc;
     .ant-steps-item-content {
