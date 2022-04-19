@@ -2,12 +2,19 @@
   <span>
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
-        <a-button type="primary" dashed @click="showConfirm(record, true)">
-          Accept
-        </a-button>
-        <a-button type="danger" dashed @click="showConfirm(record, false)">
-          Reject
-        </a-button>
+        <div v-if="showButton(record)">
+          <a-button type="primary" dashed @click="showConfirm(record, true)">
+            Accept
+          </a-button>
+          <a-button type="danger" dashed @click="showConfirm(record, false)">
+            Reject
+          </a-button>
+        </div>
+        <div v-else>
+          <a-badge>{{
+            record.treatment.isDead ? 'Patient Dead' : 'Treatment is on hold'
+          }}</a-badge>
+        </div>
       </span>
     </a-table>
 
@@ -130,6 +137,9 @@ export default {
         }
       })
       this.loading = false
+    },
+    showButton(schedule) {
+      return !(schedule.treatment.isHold || schedule.treatment.isDead)
     },
   },
 }
