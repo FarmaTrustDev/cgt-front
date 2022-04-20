@@ -53,6 +53,13 @@
             />
           </a-form-item>
         </template>
+
+        <template slot="uploader" slot-scope="name, row">
+          <InstantUpload
+            :saved-list="row.uploads"
+            :action="bagService.uploads(row.id)"
+          />
+        </template>
         <template slot="action" slot-scope="name, row">
           <a-button
             :disabled="row.isCollected || btnLoading"
@@ -88,11 +95,12 @@
 import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
+import InstantUpload from '~/components/upload/InstantUpload'
 const columns = [
   {
     title: 'Details',
     dataIndex: 'name',
-    width: '50%',
+    width: '30%',
   },
   {
     title: 'Checked',
@@ -105,12 +113,16 @@ const columns = [
     scopedSlots: { customRender: 'notes' },
   },
   {
+    title: 'Upload',
+    scopedSlots: { customRender: 'uploader' },
+  },
+  {
     title: 'Action',
     scopedSlots: { customRender: 'action' },
   },
 ]
 export default {
-  components: { Email },
+  components: { Email, InstantUpload },
   mixins: [notifications],
   props: {
     collections: { required: true, type: Array },
@@ -127,6 +139,7 @@ export default {
       btnLoading: false,
       showEmailModal: false,
       body: null,
+      bagService: BagCollectionServices,
     }
   },
   methods: {

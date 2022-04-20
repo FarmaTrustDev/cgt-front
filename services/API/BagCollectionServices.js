@@ -36,12 +36,18 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
+
+function uploads(id) {
+  return `${baseApi}/upload/${id}`
+}
+
 const BagCollectionServices = {
   get,
   create,
   destroy,
   update,
   getById,
+  uploads
 }
 
 export default BagCollectionServices
