@@ -255,7 +255,7 @@ export default {
     fetch(params = {}) {
       this.loading = true
       const fetchFrom = this.getDataApiService()
-      fetchFrom({ ...this.params, ...this.pagination })
+      fetchFrom({ ...this.params, ...this.pagination, ...params })
         .then((response) => {
           this.$emit('afterFetch', response)
           if (response.data && response.data.data) {

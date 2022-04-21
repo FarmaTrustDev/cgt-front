@@ -12,6 +12,7 @@
         ref="userNameInput"
         placeholder="Search"
         class="float-right page-search-input"
+        @change="searchPatent"
       >
         <a-icon slot="prefix" type="search" />
       </a-input>
@@ -95,8 +96,12 @@ export default {
     getFetch(fetch) {
       this.fetchPatientService = fetch
     },
-    fetch(response) {
-      this.fetchPatientService()
+    fetch(params) {
+      this.fetchPatientService(params)
+    },
+    searchPatent(e) {
+      const search = e.target.value
+      this.fetch({ puid: search, name: search,TreatmentTypeName:search })
     },
   },
 }
