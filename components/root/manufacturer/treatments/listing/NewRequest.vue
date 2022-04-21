@@ -1,5 +1,6 @@
 <template>
   <span>
+    <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
         <div v-if="showButton(record)">
@@ -45,6 +46,7 @@
 <script>
 import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import withTableCrud from '~/mixins/with-table-crud'
 import {
   _getPastMomentStandardFormatted,
@@ -81,7 +83,7 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  components: { Form },
+  components: { Form, Filters },
   mixins: [withTableCrud],
   data() {
     return {
@@ -140,6 +142,9 @@ export default {
     },
     showButton(schedule) {
       return !(schedule.treatment.isHold || schedule.treatment.isDead)
+    },
+    getParams(params) {
+      this.fetch(params)
     },
   },
 }
