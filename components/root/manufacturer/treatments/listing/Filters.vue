@@ -1,6 +1,6 @@
 <template>
   <div class="clearfix">
-    <a-range-picker @change="searchDataRange" class="float-right" />
+    <a-range-picker class="float-right" @change="searchDataRange" />
     <a-input
       ref="userNameInput"
       placeholder="Search"
@@ -12,6 +12,7 @@
   </div>
 </template>
 <script>
+import { getFormattedMoment } from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 export default {
   data() {
@@ -27,15 +28,16 @@ export default {
       }
       this.emitParams()
     },
-    searchDataRange(dates, a) {
+    async searchDataRange(dates, dateString) {
       if (!isEmpty(dates)) {
-        this.params = {
-          start: dates[0],
-          end: dates[1],
+        const params = {
           ...this.params,
+          start: getFormattedMoment(dates[0]),
+          end: getFormattedMoment(dates[1]),
         }
+        this.params = params
+        await this.emitParams()
       }
-      this.emitParams()
     },
     emitParams() {
       this.$emit('getParams', this.params)
