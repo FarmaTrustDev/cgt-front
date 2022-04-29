@@ -3,7 +3,7 @@
     <template slot="content">
       <standardTable
         :columns="column"
-        :api-service="LabServices"
+        :api-service="ProductionLineServices"
         :action-link="ActionLink"
       />
     </template>
@@ -12,7 +12,7 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 import standardTable from '~/components/common/StandardTable'
-import LabServices from '~/services/API/LabServices'
+import ProductionLineServices from '~/services/API/ProductionLineServices'
 const ActionLink = '/manufacturer/administration/screening'
 const column = [
   {
@@ -37,7 +37,7 @@ export default {
     return {
       loading: false,
       column,
-      LabServices,
+      ProductionLineServices,
       ActionLink,
     }
   },

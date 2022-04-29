@@ -214,11 +214,11 @@ import steps from '~/components/common/Steps'
 import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
-import pagination from '~/mixins/pagination'
+import paginationHelper from '~/mixins/pagination'
 import filterOption from '~/mixins/filter-options'
 export default {
   components: { steps },
-  mixins: [routeHelpers, notifications, pagination, filterOption],
+  mixins: [routeHelpers, notifications, paginationHelper, filterOption],
   props: {
     columns: { type: Array, default: () => [] },
     dumpData: { type: Array, default: () => [] },
