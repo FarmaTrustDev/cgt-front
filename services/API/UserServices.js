@@ -103,6 +103,13 @@ function resetPassword(id, data) {
   })
 }
 
+function resetPasswordEmail(id){
+  return request({
+    url: `${baseApi}/reset-password-email/${id}`,
+    method: 'GET',
+  })
+}
+
 const UserServices = {
   detail,
   adminMenu,
@@ -120,6 +127,7 @@ const UserServices = {
   test,
   activateAccount,
   resetPassword,
+  resetPasswordEmail,
 }
 
 export default UserServices

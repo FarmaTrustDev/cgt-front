@@ -1,10 +1,11 @@
 <template>
   <div class="half-secondary">
     <div class="login">
-      <a-card :bordered="false" title="Sign In To ATMPS">
+      <a-card :bordered="false" title="Forgot Password">
+      <h3>Enter your email to reset your password </h3>
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
-          <a-form-item label="Username">
+          <a-form-item label="Email">
             <a-input
               v-decorator="[
                 'username',
@@ -15,29 +16,10 @@
                 },
               ]"
               size="large"
-              placeholder="Email/Username"
+              placeholder="Email"
             />
           </a-form-item>
-          <a-form-item label="Password">
-            <a-input-password
-              v-decorator="[
-                'password',
-                {
-                  rules: [
-                    { required: true, message: 'Please input your password' },
-                  ],
-                },
-              ]"
-              size="large"
-              placeholder="Password"
-              type="password"
-            />
-          </a-form-item>
-          <a-form-item>
-            <a-checkbox>
-              Remember me
-            </a-checkbox>
-          </a-form-item>
+          <br>
           <a-form-item>
             <a-button
               block
@@ -45,10 +27,9 @@
               type="primary"
               html-type="submit"
               :loading="loading"
-              >Sign In</a-button
+              >Submit</a-button
             >
           </a-form-item>
-          <div class="forgot-link"><a href="javascript:;" @click="goto(`/forgot`)">Forgot Password?</a></div>
         </a-form>
       </a-card>
     </div>
@@ -56,12 +37,13 @@
 </template>
 
 <script>
+// import UserServices from '~/services/API/UserServices'
 import AuthServices from '~/services/API/AuthServices'
-import UserServices from '~/services/API/UserServices'
 import { setAccessToken, setRefreshToken } from '~/services/Auth'
 import { success } from '~/services/Helpers/notifications'
 import { isEmpty } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
+import UserServices from '~/services/API/UserServices'
 export default {
   mixins: [routeHelpers],
   data() {
@@ -82,14 +64,14 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.login(values)
+          this.resetPasswordEmails(values)
         } else {
           this.loading = false
         }
       })
     },
-    login(params) {
-      AuthServices.login({ email: '', ...params })
+    resetPasswordEmails(params) {
+      AuthServices.getKeyWithEmail(params.username)
         .then((response) => {
           setRefreshToken(response.refreshToken)
           setAccessToken(response.accessToken)
@@ -97,8 +79,10 @@ export default {
             token: response.accessToken,
             status: true,
           })
-          this.userDetail()
-          success(this, { message: response.message })
+          // success(this, { message: response.message })
+          UserServices.resetPasswordEmail(params.username).then((responses)=>{
+            success(this, { message: responses.data })
+          })
         })
         .catch((e) => {
           if (!isEmpty(e.response)) {
@@ -107,16 +91,6 @@ export default {
           }
         })
         .finally(() => (this.loading = false))
-    },
-    userDetail() {
-      UserServices.detail()
-        .then((response) => {
-          this.$store.commit('setUser', response.data)
-        })
-        .then(() => {
-          this.$router.push({ path: '/' })
-          this.loading = false
-        })
     },
   },
 }

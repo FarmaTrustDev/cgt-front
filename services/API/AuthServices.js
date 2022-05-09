@@ -38,7 +38,13 @@ function forgetpassword(data) {
     method: 'POST',
   })
 }
-
+function resetPasswordEmail(data){
+  return request({
+    url: `${baseApi}/reset-password-email`,
+    data,
+    method: 'POST',
+  })
+}
 function resetPassword(data) {
   return request({
     url: `${baseApi}password/reset`,
@@ -54,6 +60,12 @@ function getActivationAuth(id) {
   })
 }
 
+function getKeyWithEmail(id) {
+  return request({
+    url: `${baseApi}/get-key-with-email/${id}`,
+    method: 'GET',
+  })
+}
 const AuthService = {
   login,
   logout,
@@ -62,6 +74,8 @@ const AuthService = {
   resetPassword,
   getBusEvent,
   getActivationAuth,
+  resetPasswordEmail,
+  getKeyWithEmail
 }
 
 export default AuthService
