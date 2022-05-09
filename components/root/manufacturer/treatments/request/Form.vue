@@ -55,17 +55,47 @@
         placeholder="Type note here"
       ></a-textarea
     ></a-form-item>
+    <a-form-item v-if="isAccepted" label="Production Line:">
+      <a-select
+        v-decorator="[
+          `productionLineId`,
+          {
+            rules: [],
+          },
+        ]"
+        placeholder="Production Line"
+      >
+        <a-select-option
+          v-for="productionLine in productionLines"
+          :key="productionLine.id"
+          >{{ productionLine.name }}</a-select-option
+        >
+      </a-select>
+    </a-form-item>
   </div>
 </template>
 <script>
+import ProductionLineServices from '~/services/API/ProductionLineServices'
 export default {
   props: {
     data: { type: Object, required: true },
     isAccepted: { type: Boolean, required: true },
   },
   data() {
-    return { modalMessage: 'Are you sure you want to accept this treatment?' }
+    return {
+      modalMessage: 'Are you sure you want to accept this treatment?',
+      productionLines: [],
+    }
   },
-  methods: {},
+  mounted() {
+    this.fetchProductionLine()
+  },
+  methods: {
+    fetchProductionLine() {
+      ProductionLineServices.get().then((productionLine) => {
+        this.productionLines = productionLine.data
+      })
+    },
+  },
 }
 </script>

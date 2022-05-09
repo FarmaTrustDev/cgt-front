@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Screenings">
+  <page-layout :loading="loading" title="Production Line">
     <template slot="content">
       <standardTable
         :columns="column"
@@ -13,7 +13,7 @@
 import PageLayout from '~/components/layout/PageLayout'
 import standardTable from '~/components/common/StandardTable'
 import ProductionLineServices from '~/services/API/ProductionLineServices'
-const ActionLink = '/manufacturer/administration/screening'
+const ActionLink = '/manufacturer/administration/productionLine'
 const column = [
   {
     title: 'Id',

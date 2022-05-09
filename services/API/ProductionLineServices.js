@@ -10,15 +10,34 @@ function get(params = {}) {
   })
 }
 
-function getById(id) {
+function create(data) {
   return request({
-    url: `${baseApi}/${id}`,
+    url: `${baseApi}`,
+    data,
+    method: 'POST',
   })
 }
 
-const LabServices = {
-  get,
-  getById,
+function getById(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+
+  })
 }
 
-export default LabServices
+function update(id, data) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'PUT',
+    data,
+  })
+}
+
+const ProductionLineService = {
+  get,
+  getById,
+  create,
+  update
+}
+
+export default ProductionLineService
