@@ -31,6 +31,7 @@
     >
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <Form :is-accepted="isAccepted" :data="selectedRow" />
+
         <FormActionButton
           :text="getButtonText()"
           :btn-type="getButtonType()"
@@ -120,6 +121,9 @@ export default {
       return this.isAccepted ? 'primary' : 'danger'
     },
     handleModal(show) {
+      if (!show) {
+        this.isAccepted = false
+      }
       this.showResponseModal = show
     },
     submitTreatmentResult() {},
