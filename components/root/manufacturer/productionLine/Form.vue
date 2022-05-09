@@ -19,21 +19,13 @@
 
       <FormActionButton :loading="btnLoading" :is-created="isCreated" />
     </a-form>
-
-    <span v-if="isCreated">
-      <a-divider>Associate Screening</a-divider>
-
-      <CategoryTabs v-if="entity.id" :template-id="entity.id"
-    /></span>
   </div>
 </template>
 
 <script>
 import ProductionLineServices from '~/services/API/ProductionLineServices'
-import CategoryTabs from '~/components/root/manufacturer/screening/categories/Tabs'
 import withCrud from '~/mixins/with-crud'
 export default {
-  components: { CategoryTabs },
   mixins: [withCrud],
   data() {
     return {

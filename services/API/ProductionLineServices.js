@@ -25,10 +25,19 @@ function getById(id) {
   })
 }
 
-const LabServices = {
-  get,
-  getById,
-  create
+function update(id, data) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'PUT',
+    data,
+  })
 }
 
-export default LabServices
+const ProductionLineService = {
+  get,
+  getById,
+  create,
+  update
+}
+
+export default ProductionLineService
