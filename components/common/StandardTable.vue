@@ -2,7 +2,7 @@
   <div>
     <a-table
       :loading="loading"
-      :pagination="pagination"
+      :pagination="getPagination()"
       :columns="columns"
       :data-source="[...data]"
       :class="{ 'rounded-table': rounded, 'patient-table': patient }"
@@ -233,6 +233,7 @@ export default {
     rounded: { type: Boolean, default: false },
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
+    showPagination: { type: Boolean, default: true },
   },
 
   data() {
@@ -240,6 +241,7 @@ export default {
       data: [],
       loading: false,
       phases: PATIENT_TREATMENT_PHASES,
+      // pagination: {},
     }
   },
   mounted() {
@@ -358,6 +360,12 @@ export default {
       } else if (treatment.isHold) {
         return 'hold'
       }
+    },
+    getPagination() {
+      if (!this.showPagination) {
+        return false
+      }
+      return this.pagination
     },
   },
 }
