@@ -49,6 +49,11 @@ const column = [
     key: 'TreatmentName',
   },
   {
+    title: 'Production Line',
+    dataIndex: 'productionLine.name',
+    key: 'productionLine',
+  },
+  {
     title: 'Organization',
     dataIndex: 'hospital.name',
     key: 'OrganizationName',
