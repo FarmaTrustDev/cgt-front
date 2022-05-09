@@ -10,15 +10,25 @@ function get(params = {}) {
   })
 }
 
+function create(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'POST',
+  })
+}
+
 function getById(id) {
   return request({
     url: `${baseApi}/${id}`,
+
   })
 }
 
 const LabServices = {
   get,
   getById,
+  create
 }
 
 export default LabServices
