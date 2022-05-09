@@ -1,5 +1,5 @@
 <template>
-  <page-layout :create="false" :loading="loading" title="Screening Group">
+  <page-layout :create="false" :loading="loading" title="Production Line">
     <template slot="content"> <productionLineCreate /> </template>
   </page-layout>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Screenings">
+  <page-layout :loading="loading" title="Production Line">
     <template slot="content">
       <standardTable
         :columns="column"
