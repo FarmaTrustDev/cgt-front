@@ -24,6 +24,7 @@
         :action-link="ActionLink"
         :rounded="true"
         :patient="true"
+        :params="{ active: true }"
         @getFetch="getFetch"
         @fetchParent="fetch"
       />
@@ -101,7 +102,7 @@ export default {
     },
     searchPatent(e) {
       const search = e.target.value
-      this.fetch({ puid: search, name: search,TreatmentTypeName:search })
+      this.fetch({ puid: search, name: search, TreatmentTypeName: search })
     },
   },
 }
