@@ -46,14 +46,14 @@
       </a-form-item>
       <a-form-item>
         <a-input
-              v-decorator="[
-                `subject`,
-                {
-                  initialValue: user.organizationTypeAlias + ' Screening Results',
-                },
-              ]"
-              type="hidden"
-            />
+          v-decorator="[
+            `subject`,
+            {
+              initialValue: user.organizationTypeAlias + ' Screening Results',
+            },
+          ]"
+          type="hidden"
+        />
       </a-form-item>
       <a-form-item>
         <FormActionButton :loading="loading" text="Send" />
@@ -81,11 +81,8 @@ export default {
         name: 'collectionEmail',
       }),
       users: [],
-      organizationType:'',
+      organizationType: '',
     }
-  },
-  mounted() {
-    this.fetchUser()
   },
   computed: {
     // ...mapGetters(['getUser']),
@@ -93,10 +90,12 @@ export default {
       return this.$store.getters.getUser
     },
   },
+  mounted() {
+    this.fetchUser()
+  },
   methods: {
     fetchUser() {
       UserServices.getByBagId(this.bagId).then((response) => {
-        console.log(response)
         this.users = response.data
       })
     },
@@ -104,7 +103,7 @@ export default {
       e.preventDefault()
       this.loading = true
 
-      this.form.validateFields((err, values) => {
+      this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           TreatmentBagServices.sendMail('asd', values).then((response) => {
             this.$emit('closeModal', false)
