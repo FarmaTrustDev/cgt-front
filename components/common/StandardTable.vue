@@ -336,7 +336,9 @@ export default {
       this.$emit('getFetch', this.fetch)
     },
     deletePatient(record) {
-      PatientServices.destroy(record)
+      PatientServices.destroy(record).then(() => {
+        this.fetch()
+      })
     },
     deadPatient(patient) {
       const isDead = !patient.isDead
