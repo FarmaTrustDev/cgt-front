@@ -103,6 +103,13 @@ function hold(id, status) {
   })
 }
 
+function destroy(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'DELETE',
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
@@ -117,7 +124,8 @@ const TreatmentServices = {
   markDead,
   getBags,
   getHospitalCount,
-  hold
+  hold,
+  destroy
 }
 
 export default TreatmentServices

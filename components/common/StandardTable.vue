@@ -84,7 +84,11 @@
                   >
                 </a-menu-item>
                 <a-menu-item>
-                  <a href="javascript:;"><a-icon type="delete" /> Delete</a>
+                  <a
+                    href="javascript:;"
+                    @click="deleteTreatment(record, treatment)"
+                    ><a-icon type="delete" /> Delete</a
+                  >
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -336,7 +340,8 @@ export default {
       this.$emit('getFetch', this.fetch)
     },
     deletePatient(record) {
-      PatientServices.destroy(record).then(() => {
+      PatientServices.destroy(record).then((response) => {
+        this.success(response.message)
         this.fetch()
       })
     },
@@ -368,6 +373,13 @@ export default {
         return false
       }
       return this.pagination
+    },
+    deleteTreatment(patient, treatment) {
+      TreatmentServices.destroy(treatment.id).then((response) => {
+        this.success(response.message)
+        this.fetch()
+      })
+      // console.log(patient, treatment)
     },
   },
 }
