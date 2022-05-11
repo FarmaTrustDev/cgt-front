@@ -281,15 +281,15 @@
         >
           <a-input
             v-decorator="[
-              'postCode',
+              'address',
               {
-                initialValue: patient.postCode,
+                initialValue: patient.address,
                 rules: [
                   { message: '' },
                 ],
               },
             ]"
-            placeholder="Address"
+            placeholder="Post Code Address"
           /> </a-form-item
       ></a-col>
       <a-col :span="24">

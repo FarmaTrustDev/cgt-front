@@ -39,7 +39,11 @@
         <!-- #end left side tabs -->
         <a-col :span="2"></a-col>
         <a-col :span="3"></a-col>
-        <a-col :span="9">
+
+        <a-col v-if="isManufacturer()" :span="9">
+          <TimeAndTreatmentList />
+        </a-col>
+        <a-col v-else-if="isHospital()" :span="9">
           <treatment-stats />
         </a-col>
       </a-row>
@@ -49,26 +53,20 @@
 
 <script>
 // import { HubConnectionBuilder } from '@aspnet/signalr'
-
-import UserServices from '~/services/API/UserServices'
+import userDetail from '~/mixins/user-detail'
 import routeHelpers from '~/mixins/route-helpers'
 import treatmentStats from '~/components/statistics/treatment'
+import TimeAndTreatmentList from '~/components/statistics/TimeAndTreatmentList'
 export default {
-  components: { treatmentStats },
-  mixins: [routeHelpers],
+  components: { treatmentStats, TimeAndTreatmentList },
+  mixins: [routeHelpers, userDetail],
   data() {
     return {}
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     gotoView(uri) {
       this.goto(`/${uri}`)
-    },
-    trigeer() {
-      UserServices.test().then()
-    
     },
   },
 }
