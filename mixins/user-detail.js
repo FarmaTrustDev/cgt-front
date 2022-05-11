@@ -12,5 +12,20 @@ export default {
                     // this.$router.go()
                 })
         },
+        isManufacturer() {
+            const user = this.getStoreUserDetails();
+            return user.organizationTypeAlias === "MANUFACTURER";
+        },
+        isHospital() {
+            const user = this.getStoreUserDetails();
+            return user.organizationTypeAlias === "HOSPITAL";
+        },
+        isLogistic() {
+            const user = this.getStoreUserDetails();
+            return user.organizationTypeAlias === "MANUFACTURER";
+        },
+        getStoreUserDetails() {
+            return this.$store.getters.getUser
+        }
     },
 }
