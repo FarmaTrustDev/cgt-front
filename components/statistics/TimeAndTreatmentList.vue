@@ -30,7 +30,7 @@
               ><a-list-item-meta>
                 <a
                   slot="title"
-                  @click="goto(`/hospital/patients/treatment/${item.globalId}`)"
+                  @click="goto(`/manufacturer/treatments/process/${item.globalId}`)"
                   >{{ item.patientPUID }}</a
                 >
               </a-list-item-meta></a-list-item
