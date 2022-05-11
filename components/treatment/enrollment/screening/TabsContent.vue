@@ -46,7 +46,7 @@
                 rules: [
                   {
                     required: !notesRequired[row.id],
-                    message: 'Please input your Email!',
+                    message: 'Please input your Notes',
                   },
                 ],
               },
@@ -126,6 +126,7 @@ export default {
       loading: false,
       columns,
       notesRequired: {},
+      filledData:0,
     }
   },
   mounted() {},
@@ -134,7 +135,20 @@ export default {
       const notesRequired = this.notesRequired
       notesRequired[rowId] = value
       this.notesRequired = notesRequired
+      if(value===true){
+        this.filledData=this.filledData+1
+      }else{
+        this.filledData=this.filledData-1
+      }
+      if(this.filledData<0){
+        this.filledData=0
+      }
+      this.sendData(this.filledData)
     },
+    sendData(totVals){
+      // alert(totVals)
+      this.$emit('getFilledDatas',totVals);
+    }
   },
 }
 </script>
