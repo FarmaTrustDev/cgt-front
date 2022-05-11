@@ -39,6 +39,10 @@
         <!-- #end left side tabs -->
         <a-col :span="2"></a-col>
         <a-col :span="3"></a-col>
+
+        <a-col :span="9">
+          <TimeAndTreatmentList />
+        </a-col>
         <a-col :span="9">
           <treatment-stats />
         </a-col>
@@ -50,25 +54,19 @@
 <script>
 // import { HubConnectionBuilder } from '@aspnet/signalr'
 
-import UserServices from '~/services/API/UserServices'
 import routeHelpers from '~/mixins/route-helpers'
 import treatmentStats from '~/components/statistics/treatment'
+import TimeAndTreatmentList from '~/components/statistics/TimeAndTreatmentList'
 export default {
-  components: { treatmentStats },
+  components: { treatmentStats, TimeAndTreatmentList },
   mixins: [routeHelpers],
   data() {
     return {}
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     gotoView(uri) {
       this.goto(`/${uri}`)
-    },
-    trigeer() {
-      UserServices.test().then()
-    
     },
   },
 }

@@ -4,5 +4,6 @@
         "PUID",
         "signalr"
     ],
-    "nuxt.isNuxtApp": true
+    "nuxt.isNuxtApp": true,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
