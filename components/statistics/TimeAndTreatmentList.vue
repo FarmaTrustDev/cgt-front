@@ -28,7 +28,11 @@
           <a-list :data-source="treatments">
             <a-list-item slot="renderItem" slot-scope="item"
               ><a-list-item-meta>
-                <a slot="title" href="#">{{ item.patientPUID }}</a>
+                <a
+                  slot="title"
+                  @click="goto(`/hospital/patients/treatment/${item.globalId}`)"
+                  >{{ item.patientPUID }}</a
+                >
               </a-list-item-meta></a-list-item
             >
           </a-list>
@@ -40,7 +44,9 @@
 <script>
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
+  mixins: [routeHelpers],
   data() {
     return {
       treatments: [],
