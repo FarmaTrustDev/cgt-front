@@ -1,8 +1,8 @@
 .patient-details-page {
-  margin-left:35px; 
-  margin-right:35px;
-  margin-top:30px;
-  .qr-section{
+  // margin-left:35px;
+  // margin-right:35px;
+  // margin-top:30px;
+  .qr-section {
     height: 240px;
     figure {
       text-align: center;
@@ -12,7 +12,7 @@
         -moz-box-shadow: 2px 2px 15px 1px #bdb7bd;
         box-shadow: 2px 2px 15px 1px #bdb7bd;
         width: 83%;
-        margin-bottom:15px;
+        margin-bottom: 15px;
         margin-top: -82px;
         max-height: 140px;
         max-width: 140px;
@@ -20,16 +20,16 @@
         z-index: 1;
         background-color: #fff;
       }
-      &::before{
+      &::before {
         border-radius: 30px;
-        content: "";
+        content: '';
         height: 100px;
         width: 100%;
         display: inline-block;
         background-color: #3869d1;
       }
     }
-    .ant-card-body{
+    .ant-card-body {
       padding: 5px;
     }
   }
@@ -48,8 +48,9 @@
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap;  
-    dt, dd {
+    flex-wrap: wrap;
+    dt,
+    dd {
       width: 50%;
       display: inline-block;
     }

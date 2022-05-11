@@ -96,6 +96,20 @@ function getHospitalCount() {
   })
 }
 
+function hold(id, status) {
+  return request({
+    url: `${baseApi}/hold/${id}/${status}`,
+    method: 'PATCH',
+  })
+}
+
+function destroy(id) {
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'DELETE',
+  })
+}
+
 const TreatmentServices = {
   get,
   create,
@@ -109,7 +123,9 @@ const TreatmentServices = {
   getCustody,
   markDead,
   getBags,
-  getHospitalCount
+  getHospitalCount,
+  hold,
+  destroy
 }
 
 export default TreatmentServices

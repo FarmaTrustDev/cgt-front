@@ -10,6 +10,7 @@
           :columns="column"
           :dump-data="category.screenings"
           :should-fetch="false"
+          :show-pagination="false"
         />
       </a-tab-pane> </a-tabs
   ></span>

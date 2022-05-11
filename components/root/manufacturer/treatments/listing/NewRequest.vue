@@ -1,13 +1,21 @@
 <template>
   <span>
+    <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
-        <a-button type="primary" dashed @click="showConfirm(record, true)">
-          Accept
-        </a-button>
-        <a-button type="danger" dashed @click="showConfirm(record, false)">
-          Reject
-        </a-button>
+        <div v-if="showButton(record)">
+          <a-button type="primary" dashed @click="showConfirm(record, true)">
+            Accept
+          </a-button>
+          <a-button type="danger" dashed @click="showConfirm(record, false)">
+            Reject
+          </a-button>
+        </div>
+        <div v-else>
+          <a-badge>{{
+            record.treatment.isDead ? 'Patient Dead' : 'Treatment is on hold'
+          }}</a-badge>
+        </div>
       </span>
     </a-table>
 
@@ -23,6 +31,7 @@
     >
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <Form :is-accepted="isAccepted" :data="selectedRow" />
+
         <FormActionButton
           :text="getButtonText()"
           :btn-type="getButtonType()"
@@ -38,6 +47,7 @@
 <script>
 import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import withTableCrud from '~/mixins/with-table-crud'
 import {
   _getPastMomentStandardFormatted,
@@ -74,7 +84,7 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  components: { Form },
+  components: { Form, Filters },
   mixins: [withTableCrud],
   data() {
     return {
@@ -111,6 +121,9 @@ export default {
       return this.isAccepted ? 'primary' : 'danger'
     },
     handleModal(show) {
+      if (!show) {
+        this.isAccepted = false
+      }
       this.showResponseModal = show
     },
     submitTreatmentResult() {},
@@ -130,6 +143,12 @@ export default {
         }
       })
       this.loading = false
+    },
+    showButton(schedule) {
+      return !(schedule.treatment.isHold || schedule.treatment.isDead)
+    },
+    getParams(params) {
+      this.fetch(params)
     },
   },
 }

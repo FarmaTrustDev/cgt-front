@@ -72,6 +72,7 @@ export default {
         .finally(() => {
           // this.btnLoading = false
           // this.loading = false
+          this.loading = false
         })
     },
     update(values) {
@@ -91,7 +92,7 @@ export default {
         })
         .catch(this.error)
         .finally(() => {
-          
+          this.loading = false
         })
     },
     onSubmit(e) {

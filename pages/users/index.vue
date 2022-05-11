@@ -1,6 +1,22 @@
 <template>
-  <page-layout :loading="loading" title="Users" :bordered="false">
-    <template slot="content">
+    <div>
+    <div class="page-header clearfix">
+    <h3 class="page-title pl-5 float-left">User New List</h3>
+      <a-button
+        type="primary"
+        class="mrm-5 float-right"
+        @click="goto('users/create')"
+        >Add User</a-button
+      >
+    <a-input
+      class="float-right page-search-input"
+      ref="userNameInput"
+      placeholder="Search User"
+      @change="searchUser"
+    >
+      <a-icon slot="prefix" type="search" />
+    </a-input>
+    </div>      
       <a-table
         :columns="columns"
         :data-source="datasource"
@@ -20,8 +36,7 @@
           </a-dropdown>
         </template>
       </a-table>
-    </template>
-  </page-layout>
+    </div>  
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
@@ -29,7 +44,7 @@ import UserServices from '~/services/API/UserServices'
 import { preventDefault } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
 
-import PageLayout from '~/components/layout/PageLayout'
+// import PageLayout from '~/components/layout/PageLayout'
 
 const columns = [
   {
@@ -64,14 +79,13 @@ const columns = [
   },
 ]
 export default {
-  components: { 'page-layout': PageLayout },
   mixins: [routeHelpers],
   data() {
     return {
       datasource: [],
       columns,
       loading: true,
-      fullName:[]
+      fullName:[],
     }
   },
   computed: {
@@ -91,6 +105,23 @@ export default {
           this.datasource = response.data
         })
         .finally(() => (this.loading = false))
+    },
+    fetchSearch(params) {
+      // alert(params.name)
+      UserServices.getSearchUser(params)
+        .then((response) => {
+          this.datasource = response.data
+        })
+        .finally(() => (this.loading = false))
+    },
+    searchUser(e) {
+      const search = e.target.value
+      // alert(search)
+      if(search!==''){
+        this.fetchSearch({ userName: search, roleName: search,email:search})
+      }else{
+        this.fetch()
+      }
     },
     // remove(id) {
     //   OrganizationServicesServices.destroy(id).then((response) => {

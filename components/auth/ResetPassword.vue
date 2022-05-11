@@ -57,7 +57,7 @@
               type="primary"
               html-type="submit"
               :loading="loading"
-              >Activate Account</a-button
+              >Submit</a-button
             >
           </a-form-item>
         </a-form>
@@ -119,7 +119,10 @@ export default {
           const confirmPass=values.confirmPassword
           if(pass===confirmPass){
             UserServices.resetPassword(values.privateKey,values).then((response)=>{
-              success(this,{message:response.message})
+              success(this,{message:response.data})
+            }).then(()=>{
+              this.$router.push({ path: '/login' })
+              this.loading = false
             })
             .catch((e) => {
             if (!isEmpty(e.response)) {

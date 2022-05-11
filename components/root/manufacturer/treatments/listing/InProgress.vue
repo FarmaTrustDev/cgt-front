@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
@@ -28,6 +29,7 @@ import SchedulingServices from '~/services/API/SchedulingServices'
 import routeHelpers from '~/mixins/route-helpers'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
 import { MANUFACTURER_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
+import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
@@ -45,6 +47,11 @@ const column = [
     title: 'Treatment Type',
     dataIndex: 'treatmentType.name',
     key: 'TreatmentName',
+  },
+  {
+    title: 'Production Line',
+    dataIndex: 'productionLine.name',
+    key: 'productionLine',
   },
   {
     title: 'Organization',
@@ -65,6 +72,7 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
+  components: { Filters },
   mixins: [routeHelpers, withTableCrud],
   data() {
     return {
@@ -109,7 +117,9 @@ export default {
       }
       return 1
     },
-
+    getParams(params) {
+      this.fetch(params)
+    },
     // fetch(params = {}) {
     //   this.loading = true
 

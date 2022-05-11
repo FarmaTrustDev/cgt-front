@@ -12,6 +12,7 @@
         ref="userNameInput"
         placeholder="Search"
         class="float-right page-search-input"
+        @change="searchPatent"
       >
         <a-icon slot="prefix" type="search" />
       </a-input>
@@ -23,8 +24,9 @@
         :action-link="ActionLink"
         :rounded="true"
         :patient="true"
+        :params="{ active: true }"
         @getFetch="getFetch"
-        @deadPatient="deadPatient"
+        @fetchParent="fetch"
       />
     </div>
   </div>
@@ -35,9 +37,10 @@ import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
 const column = [
   {
-    title: 'Patient ID',
+    title: 'PUID',
     dataIndex: 'enrollmentNumber',
     key: 'PUID',
+    width: 110,
     scopedSlots: {
       filterDropdown: 'filterDropdown',
       filterIcon: 'filterIcon',
@@ -47,6 +50,7 @@ const column = [
     title: 'Patient Name',
     dataIndex: 'name',
     key: 'name',
+    width: 150,
     scopedSlots: {
       customRender: 'name',
       filterDropdown: 'filterDropdown',
@@ -54,9 +58,11 @@ const column = [
     },
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Type',
+    dataIndex: 'treatmentTypeId',
+    key: 'treatmentTypeId',
+    width: 100,
+    scopedSlots: { customRender: 'treatmentTypeNameRender' },
   },
   {
     // title: 'Treatment Status',
@@ -91,8 +97,12 @@ export default {
     getFetch(fetch) {
       this.fetchPatientService = fetch
     },
-    deadPatient(response) {
-      this.fetchPatientService()
+    fetch(params) {
+      this.fetchPatientService(params)
+    },
+    searchPatent(e) {
+      const search = e.target.value
+      this.fetch({ puid: search, name: search, TreatmentTypeName: search })
     },
   },
 }

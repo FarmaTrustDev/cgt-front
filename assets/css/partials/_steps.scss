@@ -1,3 +1,13 @@
+.blockState {
+  position: relative;
+  &::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+  }
+}
 .treatment-steps {
   .ant-steps-item {
     padding: 5px 2px;
@@ -6,6 +16,7 @@
     color: #233151;
     border-radius: 22px;
     cursor: pointer;
+    padding-right: 5px;
   }
 
   .ant-steps-item-wait {
@@ -73,6 +84,7 @@
       background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
     }
   }
+
   .dead {
     .ant-steps-item {
       background: #ffdbdb;
@@ -83,7 +95,26 @@
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
       }
     }
+    .ant-steps {
+      @extend .blockState;
+    }
   }
+
+  .hold {
+    .ant-steps-item {
+      background: #fffbc8;
+    }
+    .ant-steps {
+      @extend .blockState;
+    }
+    .ant-steps-item-content {
+      &::before {
+        content: '';
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+      }
+    }
+  }
+
   .ant-steps-item-finish {
     background: #d1f2dc;
     .ant-steps-item-content {
@@ -116,7 +147,7 @@
     height: 30px;
     font-size: 12px;
     margin-top: 12px;
-    vertical-align: text-bottom;
+    // vertical-align: text-bottom;
   }
 }
 
@@ -124,22 +155,55 @@
   .ant-timeline-item-content {
     margin-left: 30px;
   }
+  .ant-timeline-item-head-grey {
+    background-color: #efefef;
+    border-radius: 22px;
+    padding: 5px;
+    margin-top: 20px;
+    .anticon {
+      background-color: white;
+      border-radius: 22px;
+      padding: 5px;
+    }
+  }
+  .ant-timeline-item-head-green {
+    background-color: #d1f2dc;
+    border-radius: 22px;
+    padding: 5px;
+    margin-top: 20px;
+    .anticon {
+      background-color: white;
+      border-radius: 22px;
+      padding: 5px;
+      color: #1bb559;
+    }
+  }
   .step-bar {
-    border: 1px solid #1bb558;
+    border: 1px solid #1bb559;
     padding: 10px;
     border-radius: $default-radius;
+    margin-left: 10px;
     .left {
       .step-title {
         display: block;
         font-size: 1.24em;
+        color: black;
+        font-weight: 400;
       }
       .date-time {
         font-size: 16px;
+        color: #a7a5a5;
       }
     }
     .right {
       text-align: right;
       display: block;
+      .step-title {
+        color: black;
+      }
+      .organization {
+        color: #3869d1;
+      }
     }
   }
   .ant-tabs-tabpane-active {
@@ -151,7 +215,31 @@
     }
   }
 
+  .ant-tabs-tab-active,
+  .ant-tabs-tab {
+    color: #233151 !important;
+    font-weight: 300 !important;
+  }
+
   .ant-tabs-content {
     margin-left: 3px;
+    padding-left: 15px;
+  }
+}
+
+.ant-table-row {
+  // &::before {
+  //   content: '';
+  //   border: 1px solid red;
+  // }
+  td {
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2 !important;
+  }
+  td:first-child {
+    border-left: 1px solid #e2e2e2;
+  }
+  td:last-child {
+    border-right: 1px solid #e2e2e2;
   }
 }

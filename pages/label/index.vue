@@ -8,6 +8,7 @@
           ref="userNameInput"
           placeholder="Search"
           class="float-right page-search-input"
+          @change="searchLabel"
         >
           <a-icon slot="prefix" type="search" />
         </a-input>
@@ -44,6 +45,10 @@ export default {
           this.data = response.data
         })
         .finally(() => (this.loading = false))
+    },
+    searchLabel(e) {
+      const search = e.target.value
+      this.fetch({ patientEnrollmentNumber: search, TreatmentTypeName:search })
     },
   },
 }

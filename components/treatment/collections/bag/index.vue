@@ -25,6 +25,7 @@
 </template>
 <script>
 import Process from '~/components/treatment/collections/bag/Process'
+
 import { isEmpty } from '~/services/Utilities'
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import notifications from '~/mixins/notifications'

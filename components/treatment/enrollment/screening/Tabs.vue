@@ -2,15 +2,15 @@
   <div>
     <a-tabs v-model="activeKey" hide-add type="editable-card">
       <a-tab-pane
-        v-for="(category) in categories"
+        v-for="(category, index) in categories"
         :key="category.globalId"
         :closable="false"
         :tab="category.name"
         :force-render="true"
       >
       
-        <tabContent :screenings="category.screenings" />
-        <FormActionButton :disabled="disabled" :text="getButtonText(category.name)" @click="getNextTab" class="mt-15" />
+        <tabContent :screenings="category.screenings" @getFilledDatas="getFilledData" />
+        <FormActionButton :disabled="disabled" :text="getButtonText(category.name)" @click="getNextTab(index,category.screenings)" class="mt-15" />
       
       </a-tab-pane>
     </a-tabs>
@@ -42,6 +42,7 @@ export default {
       showCategoryModal: false,
       loading: true,
       disabled:false,
+      filledData:0
     }
   },
   mounted() {
@@ -71,9 +72,15 @@ export default {
     getButtonText(val){
       return "Complete Screening for "+ val
     },
-    getNextTab() {
-      this.newTabIndex=this.newTabIndex+1
-      this.setCurrentTab(this.newTabIndex)
+    getNextTab(index,screening) {
+      // this.newTabIndex=this.newTabIndex+1
+      if(this.filledData===screening.length){
+        this.setCurrentTab(index+1)
+      }    
+    },
+    getFilledData(vals){
+      console.log(vals)
+      this.filledData=vals
     },
     tabChange(key) {
       this.newTabIndex = key+1

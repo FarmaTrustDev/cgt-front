@@ -15,6 +15,7 @@
               ref="userNameInput"
               placeholder="Search"
               class="float-right page-search-input"
+              @change="searchSupport"
             >
               <a-icon slot="prefix" type="search" />
             </a-input>
@@ -178,6 +179,10 @@ export default {
         .finally(() => {
           this.loadingTicket = false
         })
+    },
+    searchSupport(e) {
+      const search = e.target.value
+      this.fetch({ status_Name: search, description: search})
     },
   },
 }

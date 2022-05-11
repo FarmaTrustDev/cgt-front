@@ -48,6 +48,12 @@ function getUser() {
     url: `${baseApi}/organizationSpecificUsers`,
   })
 }
+function getSearchUser(params = {}) {
+  return request({
+    url: `${baseApi}/search`,
+    params,
+  })
+}
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -103,6 +109,13 @@ function resetPassword(id, data) {
   })
 }
 
+function resetPasswordEmail(id){
+  return request({
+    url: `${baseApi}/reset-password-email/${id}`,
+    method: 'GET',
+  })
+}
+
 const UserServices = {
   detail,
   adminMenu,
@@ -120,6 +133,8 @@ const UserServices = {
   test,
   activateAccount,
   resetPassword,
+  resetPasswordEmail,
+  getSearchUser,
 }
 
 export default UserServices

@@ -2,7 +2,7 @@
   <div>
     <a-table
       :loading="loading"
-      :pagination="pagination"
+      :pagination="getPagination()"
       :columns="columns"
       :data-source="[...data]"
       :class="{ 'rounded-table': rounded, 'patient-table': patient }"
@@ -13,6 +13,12 @@
 
       <template slot="name" slot-scope="name">
         <strong>{{ name }}</strong>
+      </template>
+
+      <template slot="treatmentTypeNameRender" slot-scope="name, patient">
+        <strong v-for="treatment in patient.treatments" :key="treatment.id">
+          <span class="treatmentName">{{ treatment.treatmentTypeName }}</span>
+        </strong>
       </template>
 
       <template slot="image" slot-scope="src, record">
@@ -45,7 +51,7 @@
           <span
             v-for="treatment in record.treatments"
             :key="treatment.id"
-            :class="record.isDead ? 'dead' : ''"
+            :class="getTreatmentStepClass(record, treatment)"
           >
             <steps
               :treatment="treatment"
@@ -65,8 +71,11 @@
                   >
                 </a-menu-item>
                 <a-menu-item>
-                  <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> Pause</a
+                  <a
+                    href="javascript:;"
+                    @click="holdTreatment(record, treatment)"
+                    ><a-icon type="minus-circle" />
+                    {{ treatment.isHold ? 'Resume' : 'Pause' }}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
@@ -75,7 +84,11 @@
                   >
                 </a-menu-item>
                 <a-menu-item>
-                  <a href="javascript:;"><a-icon type="delete" /> Delete</a>
+                  <a
+                    href="javascript:;"
+                    @click="deleteTreatment(record, treatment)"
+                    ><a-icon type="delete" /> Delete</a
+                  >
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -205,11 +218,11 @@ import steps from '~/components/common/Steps'
 import { PATIENT_TREATMENT_PHASES } from '~/services/Constant/Phases'
 import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
-import pagination from '~/mixins/pagination'
+import paginationHelper from '~/mixins/pagination'
 import filterOption from '~/mixins/filter-options'
 export default {
   components: { steps },
-  mixins: [routeHelpers, notifications, pagination, filterOption],
+  mixins: [routeHelpers, notifications, paginationHelper, filterOption],
   props: {
     columns: { type: Array, default: () => [] },
     dumpData: { type: Array, default: () => [] },
@@ -224,6 +237,7 @@ export default {
     rounded: { type: Boolean, default: false },
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
+    showPagination: { type: Boolean, default: true },
   },
 
   data() {
@@ -231,6 +245,7 @@ export default {
       data: [],
       loading: false,
       phases: PATIENT_TREATMENT_PHASES,
+      // pagination: {},
     }
   },
   mounted() {
@@ -246,7 +261,7 @@ export default {
     fetch(params = {}) {
       this.loading = true
       const fetchFrom = this.getDataApiService()
-      fetchFrom({ ...this.params, ...this.pagination })
+      fetchFrom({ ...this.params, ...this.pagination, ...params })
         .then((response) => {
           this.$emit('afterFetch', response)
           if (response.data && response.data.data) {
@@ -287,7 +302,7 @@ export default {
     stepClick(patient, treatment, phase) {
       // insane logic
       //  2 for patient
-      console.log(patient, treatment.phaseId, phase.phaseId)
+      // console.log(patient, treatment.phaseId, phase.phaseId)
       // return false
       if (
         phase.id !== 1 &&
@@ -325,16 +340,46 @@ export default {
       this.$emit('getFetch', this.fetch)
     },
     deletePatient(record) {
-      PatientServices.destroy(record)
+      PatientServices.destroy(record).then((response) => {
+        this.success(response.message)
+        this.fetch()
+      })
     },
     deadPatient(patient) {
       const isDead = !patient.isDead
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
-        this.$emit('deadPatient', response)
+        this.$emit('fetchParent', response)
       })
     },
     clickImage(record) {
       this.$emit('clickImage', record)
+    },
+    holdTreatment(patient, treatment) {
+      TreatmentServices.hold(treatment.globalId, !treatment.isHold)
+        .then((response) => {
+          this.$emit('fetchParent', response)
+        })
+        .catch(this.error)
+    },
+    getTreatmentStepClass(patient, treatment) {
+      if (patient.isDead) {
+        return 'dead'
+      } else if (treatment.isHold) {
+        return 'hold'
+      }
+    },
+    getPagination() {
+      if (!this.showPagination) {
+        return false
+      }
+      return this.pagination
+    },
+    deleteTreatment(patient, treatment) {
+      TreatmentServices.destroy(treatment.id).then((response) => {
+        this.success(response.message)
+        this.fetch()
+      })
+      // console.log(patient, treatment)
     },
   },
 }

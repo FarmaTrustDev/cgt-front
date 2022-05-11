@@ -76,3 +76,11 @@
   max-width: 100%;
   height: auto;
 }
+
+.danger-time {
+  background-color: $danger;
+  padding: 15px;
+  border-radius: 15px;
+  color: white;
+  font-size: 25px;
+}

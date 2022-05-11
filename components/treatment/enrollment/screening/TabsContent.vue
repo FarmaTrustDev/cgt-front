@@ -24,18 +24,15 @@
             v-decorator="[
               `screenings[id-${row.id}][isCheck]`,
               {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Check is required!',
-                  },
-                ],
+                rules: [],
                 valuePropName: 'checked',
               },
             ]"
+            :data-rowId="row.id"
             size="large"
             checked-children="Yes"
             un-checked-children="No"
+            @change="(value) => handleCheck(value, row.id)"
           />
         </a-form-item>
       </template>
@@ -46,6 +43,12 @@
               `screenings[id-${row.id}][notes]`,
               {
                 initialValue: null,
+                rules: [
+                  {
+                    required: !notesRequired[row.id],
+                    message: 'Please input your Notes',
+                  },
+                ],
               },
             ]"
             placeholder="Note:"
@@ -89,7 +92,6 @@
         </a-form-item>
       </template>
     </a-table>
-    
   </div>
 </template>
 <script>
@@ -123,9 +125,30 @@ export default {
     return {
       loading: false,
       columns,
+      notesRequired: {},
+      filledData:0,
     }
   },
   mounted() {},
-  methods: {},
+  methods: {
+    handleCheck(value, rowId) {
+      const notesRequired = this.notesRequired
+      notesRequired[rowId] = value
+      this.notesRequired = notesRequired
+      if(value===true){
+        this.filledData=this.filledData+1
+      }else{
+        this.filledData=this.filledData-1
+      }
+      if(this.filledData<0){
+        this.filledData=0
+      }
+      this.sendData(this.filledData)
+    },
+    sendData(totVals){
+      // alert(totVals)
+      this.$emit('getFilledDatas',totVals);
+    }
+  },
 }
 </script>

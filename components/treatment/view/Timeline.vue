@@ -10,12 +10,11 @@
         <a-icon v-if="step.isCompleted" slot="dot" type="check-circle-o" />
         <a-icon v-else slot="dot" type="clock-circle-o" />
         <div class="step-bar">
-          <h2></h2>
           <!-- {{ step }} -->
           <a-row>
             <a-col :span="12">
               <span class="left">
-                <strong class="step-title"> {{ step.name }}</strong>
+                <span class="step-title"> {{ step.name }}</span>
                 <span class="date-time">{{
                   isEmpty(step.dateTime) ? 'Pending' : step.dateTime
                 }}</span>
@@ -26,7 +25,7 @@
                 <strong class="step-title d-block">
                   by: Schneider Fische</strong
                 >
-                <span class="date-time">Berlin Hospital</span>
+                <span class="organization">Berlin Hospital</span>
               </div>
             </a-col>
           </a-row>
