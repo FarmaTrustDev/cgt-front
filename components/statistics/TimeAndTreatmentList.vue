@@ -3,12 +3,20 @@
     <div class="halfNHalf">
       <a-card class="white-card" :bordered="false">
         <a-row>
-          <a-col :span="12"><span class="danger-time"> 16:58</span></a-col>
+          <a-col :span="12"
+            ><span class="danger-time">
+              {{ _getFormatMoment().format('HH:mm') }}</span
+            ></a-col
+          >
           <a-col :span="12">
             <div class="dateTimeBox">
-              <span class="daysName">Wednesday</span>
+              <span class="daysName">{{
+                _getFormatMoment().format('dddd')
+              }}</span>
               <br />
-              <span class="TodaysDate">11th May 2022</span>
+              <span class="TodaysDate">{{
+                _getFormatMoment().format('Do MMM YYYY')
+              }}</span>
             </div>
           </a-col>
         </a-row>
@@ -31,6 +39,7 @@
 </template>
 <script>
 import TreatmentServices from '~/services/API/TreatmentServices'
+import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 export default {
   data() {
     return {
@@ -46,6 +55,7 @@ export default {
         this.treatments = response.data
       })
     },
+    _getFormatMoment,
   },
 }
 </script>
