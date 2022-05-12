@@ -9,7 +9,13 @@
       <div class="grey-card">
         <detail :treatment="entity" @fetchTreatment="fetchMethod" />
         <div class="grey-card m-0 pt-0">
-          <TreatmentView v-if="!isEmpty(entity.patient)" :treatment="entity" />
+          <TreatmentView
+            v-if="!isEmpty(entity.patient) && entity.screeningStatus"
+            :treatment="entity"
+          />
+          <a-card v-else class="text-center default-card p-0"
+            ><h2  class="m-0">Treatment type has not been selected yet</h2></a-card
+          >
         </div>
       </div>
     </template>

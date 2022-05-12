@@ -1,6 +1,6 @@
 <template>
   <div class="patient-details-page">
-    <div class="grey-card m-0 ">
+    <div class="grey-card m-0">
       <a-row :gutter="18">
         <a-col :span="6">
           <a-card :bordered="false" class="qr-section default-card">
@@ -23,7 +23,11 @@
         </a-col>
       </a-row>
 
-      <a-row :gutter="18" class="mt-15">
+      <a-row
+        v-if="!isEmpty(treatment.patient) && treatment.screeningStatus"
+        :gutter="18"
+        class="mt-15"
+      >
         <TreatmentDetails
           v-if="!isEmpty(treatment.patient)"
           :treatment="treatment"
