@@ -44,8 +44,10 @@
   border-radius: 10rem;
 }
 
-.status-inprocess {
+.status-inprocess,
+.status-in {
   background-color: #ecf6fd;
+  white-space: nowrap;
 }
 
 .status-resolved {

@@ -1,12 +1,17 @@
 <template>
-  <page-layout class="support" :loading="loading" title="Support Detail">
+  <page-layout
+    class="support"
+    :create="false"
+    :loading="loading"
+    title="Support Detail"
+  >
     <template slot="content">
       <div class="grey-card">
         <a-row :gutter="56">
           <a-col :span="12">
             <Detail />
           </a-col>
-          <a-col :span="12" >
+          <a-col :span="12">
             <a-card class="default-border-radius">
               <div class="max-h-200">
                 <Comment
