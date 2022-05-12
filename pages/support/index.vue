@@ -24,7 +24,7 @@
 
         <a-tabs type="card" @change="callback">
           <a-tab-pane key="1" tab="All">
-            <a-table :loading="loading" :data-source="data" :columns="columns">
+            <a-table class="rounded-table" :loading="loading" :data-source="data" :columns="columns">
               <template slot="tickets" slot-scope="id, record">
                 <a-button type="link">
                   <strong @click="goto(`support/${record.global_Id}`)"
