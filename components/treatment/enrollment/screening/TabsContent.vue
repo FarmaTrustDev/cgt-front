@@ -52,6 +52,7 @@
               },
             ]"
             placeholder="Note:"
+            @blur="(e) => handleInput(row.id,e)"
           />
           <a-input
             v-decorator="[
@@ -127,9 +128,10 @@ export default {
       columns,
       notesRequired: {},
       filledData:0,
+      noteItem:[],
     }
   },
-  mounted() {},
+  mounted() {this.filledData=0},
   methods: {
     handleCheck(value, rowId) {
       const notesRequired = this.notesRequired
@@ -144,6 +146,21 @@ export default {
         this.filledData=0
       }
       this.sendData(this.filledData)
+    },
+    handleInput(rowId,e) {
+      if(this.noteItem.includes(rowId)){
+        this.noteItem.splice(this.noteItem.indexOf(rowId),1);
+        this.filledData=this.filledData - 1
+      }
+      if(this.filledData<0){
+        this.filledData=0
+      }
+      if(!this.notesRequired[rowId] && e.target.value!==null){
+        console.log(this.noteItem)
+        this.noteItem.push(rowId)
+        this.filledData=this.filledData + 1
+        this.sendData(this.filledData)
+      }
     },
     sendData(totVals){
       this.$emit('getFilledDatas',totVals);
