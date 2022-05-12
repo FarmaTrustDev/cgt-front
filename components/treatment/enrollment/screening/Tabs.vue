@@ -10,7 +10,7 @@
       >
       
         <tabContent :screenings="category.screenings" @getFilledDatas="getFilledData" />
-        <FormActionButton :disabled="disabled" :text="getButtonText(category.name)" @click="getNextTab(index,category.screenings)" class="mt-15" />
+        <FormActionButton :disabled="filledData==category.screenings.length && category.name==catName" :text="getButtonText(category.name)" @click="getNextTab(index,category.screenings,category.name)" class="mt-15" />
       
       </a-tab-pane>
     </a-tabs>
@@ -42,7 +42,8 @@ export default {
       showCategoryModal: false,
       loading: true,
       disabled:false,
-      filledData:0
+      filledData:0,
+      catName:'',
     }
   },
   mounted() {
@@ -72,14 +73,13 @@ export default {
     getButtonText(val){
       return "Complete Screening for "+ val
     },
-    getNextTab(index,screening) {
-      // this.newTabIndex=this.newTabIndex+1
+    getNextTab(index,screening, categoryName) {
       if(this.filledData===screening.length){
         this.setCurrentTab(index+1)
+        this.catName=categoryName
       }    
     },
     getFilledData(vals){
-      console.log(vals)
       this.filledData=vals
     },
     tabChange(key) {

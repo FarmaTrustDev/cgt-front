@@ -146,7 +146,6 @@ export default {
       this.sendData(this.filledData)
     },
     sendData(totVals){
-      // alert(totVals)
       this.$emit('getFilledDatas',totVals);
     }
   },
