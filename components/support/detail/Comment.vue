@@ -1,8 +1,15 @@
 <template>
   <div class="support-chat">
+    <div class="border-bottom">
+      Ticket CKD-{{ ticket.id }}
+      <br />
+      Subject: <span class="text-capitalize">{{ ticket.subject }}</span>
+    </div>
+    <a-divider></a-divider>
     <a-row>
       <a-col class="chat-list">
         <!-- <pre> {{ data }}</pre> -->
+
         <a-list :data-source="data" item-layout="horizontal" :bordered="false">
           <a-list-item
             slot="renderItem"

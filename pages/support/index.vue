@@ -1,10 +1,12 @@
 <template>
-  <page-layout :loading="loading" :create="false" title="Support">
+  <page-layout :loading="false" :create="false" title="Support">
     <template slot="content"
       ><div class="support-page">
         <a-row class="p-10 mb-10">
           <div class="page-header">
-            <h3 class="page-title float-left">Support Issues</h3>
+            <h3 class="page-title float-left">
+              Support Issues {{ showAddModal }}
+            </h3>
             <a-button
               type="primary"
               class="mrm-5 float-right"
@@ -24,7 +26,12 @@
 
         <a-tabs type="card" @change="callback">
           <a-tab-pane key="1" tab="All">
-            <a-table :loading="loading" :data-source="data" :columns="columns">
+            <a-table
+              class="rounded-table"
+              :loading="loading"
+              :data-source="data"
+              :columns="columns"
+            >
               <template slot="tickets" slot-scope="id, record">
                 <a-button type="link">
                   <strong @click="goto(`support/${record.global_Id}`)"
@@ -99,7 +106,7 @@ const columns = [
   },
   {
     title: 'BagId',
-    dataIndex: 'bagId',
+    dataIndex: 'reference_Id',
   },
   {
     title: 'Issue Details',
@@ -107,7 +114,7 @@ const columns = [
   },
   {
     title: 'Last Update',
-    dataIndex: 'updated_At',
+    dataIndex: 'last_Updated_At',
   },
   {
     title: 'Status',
@@ -182,7 +189,7 @@ export default {
     },
     searchSupport(e) {
       const search = e.target.value
-      this.fetch({ status_Name: search, description: search})
+      this.fetch({ status_Name: search, description: search })
     },
   },
 }
