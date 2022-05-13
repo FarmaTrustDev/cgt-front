@@ -10,7 +10,7 @@
       >
       
         <tabContent :screenings="category.screenings" @getFilledDatas="getFilledData" />
-        <FormActionButton :disabled="filledData==category.screenings.length && category.name==catName" :text="getButtonText(category.name)" @click="getNextTab(index,category.screenings,category.name)" class="mt-15" />
+        <FormActionButton v-if="isHidden" :text="getButtonText(category.name)" @click="getNextTab(index,category.screenings,category.name)" class="mt-15" />
       
       </a-tab-pane>
     </a-tabs>
@@ -44,39 +44,30 @@ export default {
       disabled:false,
       filledData:0,
       catName:'',
+      isHidden:true,
     }
   },
   mounted() {
     this.setCurrentTab(this.newTabIndex)
   },
   methods: {
-    onSubmit(e) {
-      this.loading = true
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          this.disabled=true
-        } else {
-          this.loading = false
-        }
-        this.loading = false
-      })
-    },
+
     setCurrentTab(key) {
       const categories = this.categories
       if (!this.isEmpty(this.categories)) {
         if(!this.isEmpty(this.categories[key])){
           this.activeKey = categories[key].globalId
+          this.isHidden=true
         }
       }
     },
     getButtonText(val){
       return "Complete Screening for "+ val
     },
-    getNextTab(index,screening, categoryName) {
+    getNextTab(index,screening) {
       if(this.filledData===screening.length){
+        this.isHidden=false
         this.setCurrentTab(index+1)
-        this.catName=categoryName
       }    
     },
     getFilledData(vals){

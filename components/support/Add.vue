@@ -70,7 +70,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please input Subject !',
+                        message: 'Please input Reporter Name !',
                       },
                     ],
                   },
@@ -122,12 +122,6 @@
                   'Reference_Id',
                   {
                     initialValue: ticket.reference_Id,
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Patient Required',
-                      },
-                    ],
                   },
                 ]"
                 :show-search="true"
@@ -369,6 +363,7 @@ export default {
     showModal(show) {
       this.visible = show
       this.$parent.showAddModal = show
+      this.$emit('closeModal', show)
     },
     searchPatient(keyword) {
       this.fetchPatient({ puid: keyword, name: keyword, email: keyword })
@@ -378,7 +373,6 @@ export default {
         this.patients = response.data
       })
     },
-
     onPatientSelect(patientId, option, s) {
       this.fetchBags(option.data.attrs['data-globalId'])
 
@@ -399,7 +393,6 @@ export default {
     },
     fetchBags(patientId) {
       TreatmentServices.getBags(patientId).then((bags) => {
-        console.log(bags)
         this.bags = bags.data
       })
     },
