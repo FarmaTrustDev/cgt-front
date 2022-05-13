@@ -294,8 +294,6 @@ export default {
             break
           }
         }
-
-        console.log(currentPhase)
         return currentPhase
       }
       return 1
