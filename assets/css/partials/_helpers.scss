@@ -81,8 +81,9 @@
 
 .danger-time {
   background-color: $danger;
-  padding: 15px;
+  padding: 15px 30px;
   border-radius: 15px;
   color: white;
   font-size: 25px;
+  @extend .light-shadow;
 }
