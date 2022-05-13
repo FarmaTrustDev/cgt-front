@@ -1,6 +1,11 @@
 <template>
   <span class="step-col" functional>
-    <a-steps :current="getCurrentStep(treatment)" status="process" size="small">
+    <a-steps
+      :current="getCurrentStep(treatment)"
+      :initial="1"
+      status="process"
+      size="small"
+    >
       <!-- <div >
         {{ treatment.treatmentTypeName }}
       </div> -->
