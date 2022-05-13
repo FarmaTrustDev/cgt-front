@@ -13,7 +13,7 @@
         v-for="phase in phases"
         :key="phase.phaseId"
         :title="phase.name"
-        @click="(a) => gotoView(patient, treatment, phase)"
+        @click="(a) => emitGotoView(patient, treatment, phase)"
       >
       </a-step>
     </a-steps>
@@ -28,14 +28,22 @@ export default {
     currentStep: { type: Function, default: () => [] },
     gotoView: { type: Function, default: () => [] },
   },
-
+  data() {
+    return { current: 0 }
+  },
   methods: {
     getCurrentStep(treatment) {
-      return this.currentStep(treatment)
+      this.current = this.currentStep(treatment)
+      return this.current
     },
-
     emitGotoView(patient, treatment, phase) {
-      this.gotoView(patient, treatment, phase)
+      if (this.current >= phase.id) {
+        return this.gotoView(patient, treatment, phase)
+      } else {
+        return false
+      }
+
+      // this.gotoView(patient, treatment, phase)
     },
   },
 }
