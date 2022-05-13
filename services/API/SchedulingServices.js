@@ -95,6 +95,7 @@ const SchedulingServices = {
   getDetailByTreatment,
   getDetailByTreatmentOut,
   createForManufacturer,
+  
 }
 
 export default SchedulingServices
