@@ -249,6 +249,7 @@
         @handleChange="handleChange"
       />
       <span v-if="entity.profileImageUrl && !newSelected"><img :src="entity.profileImageUrl['name']" width="60px" height="60px"/>{{entity.profileImageUrl['name']}}</span>
+      <span v-if="defaultImage && entity.profileImageUrl==null"><img src="https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg" width="60px" height="60px"/></span>
       </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -413,6 +414,7 @@ export default {
       apiService: UserServices,
       allowedExtensions: DOCUMENT_EXTENSIONS,
       newSelected:false,
+      defaultImage:true,
     }
   },
   mounted() {
@@ -432,6 +434,7 @@ export default {
   methods: {
     handleChange(info) {
       this.newSelected=true
+      this.defaultImage=false
       this.fileList = info
       this.$emit('handleChange',this.fileList)
     },
