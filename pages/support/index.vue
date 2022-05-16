@@ -46,9 +46,7 @@
                   <a-icon type="edit" />
                 </a-button> -->
             <a-dropdown>
-              <a-button class="btn-view-timeline" type="primary" size="small"
-                >Admin</a-button
-              >
+              <a-button class="action-button" size="small">Admin</a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="showUpdate(record)"
