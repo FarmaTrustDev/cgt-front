@@ -151,7 +151,7 @@
             v-decorator="[
               'userRoleId',
               {
-                initialValue: entity.userRoleId,
+                initialValue: entity.userRoleId== undefined ? 0 : entity.userRoleId ,
                 rules: [
                   {
                     required: false,
@@ -237,6 +237,20 @@
           />
         </a-form-item>
       </a-col>
+            <a-col :span="12">
+        <a-form-item
+          label="Image"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+        >
+      <Upload
+        :default-file-list="entity.profileImageUrl"
+        :extensions="allowedExtensions"
+        @handleChange="handleChange"
+      />
+      <span v-if="entity.profileImageUrl && !newSelected"><img :src="entity.profileImageUrl['name']" width="60px" height="60px"/>{{entity.profileImageUrl['name']}}</span>
+      </a-form-item
+      ></a-col>
       <a-col :span="12">
         <a-form-item
           label="Post Code"
@@ -378,15 +392,17 @@ import withCrud from '~/mixins/with-crud'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 import RoleServices from '~/services/API/RoleServices'
+import Upload from '~/components/upload'
+import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
 export default {
-  
+  components: { Upload },
   mixins: [withCrud],
   
   data() {
     return {
       entity:{},
       entityId: null,
-      userRoleId:null,
+      userRoleId:0,
       loading: false,
       countries: [],
       roles: [],
@@ -395,6 +411,8 @@ export default {
       fetchRole: true,
       formLayout: 'vertical',
       apiService: UserServices,
+      allowedExtensions: DOCUMENT_EXTENSIONS,
+      newSelected:false,
     }
   },
   mounted() {
@@ -412,6 +430,11 @@ export default {
     }
   },
   methods: {
+    handleChange(info) {
+      this.newSelected=true
+      this.fileList = info
+      this.$emit('handleChange',this.fileList)
+    },
     filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries(params = {}) {
@@ -433,6 +456,8 @@ export default {
     },
     getRoles() {
       if (this.isCreated) {
+        // alert(this.entity.userRoleId)
+        // this.userRoleId=this.entity.userRoleId
         this.fetchRoles({ Ids: [this.entity.roleId] })
       } else {
         this.fetchRoles()

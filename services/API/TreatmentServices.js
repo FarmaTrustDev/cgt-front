@@ -110,6 +110,15 @@ function destroy(id) {
   })
 }
 
+
+function getInboundScheduling(treatmentId, params = {}) {
+  return request({
+    url: `${baseApi}/getInboundScheduling/${treatmentId}`,
+    params,
+  })
+}
+
+
 const TreatmentServices = {
   get,
   create,
@@ -125,7 +134,8 @@ const TreatmentServices = {
   getBags,
   getHospitalCount,
   hold,
-  destroy
+  destroy,
+  getInboundScheduling
 }
 
 export default TreatmentServices

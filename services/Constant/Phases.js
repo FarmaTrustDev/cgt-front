@@ -10,7 +10,6 @@ export const PATIENT_TREATMENT_PHASES = [
         name: 'Screening',
         alias: 'SCREENING',
         phaseId: 2,
-
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'Screening' }
@@ -28,7 +27,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 3,
         name: 'Collection',
         alias: 'COLLECTION',
-        phaseId: 4,
+        phaseId: 5,
         url_slug: '/hospital/patients/collection/',
         url_type: URL_TYPE.treatment,
         params: { view: 'collection' }
