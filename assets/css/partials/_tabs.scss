@@ -113,3 +113,36 @@
     }
   }
 }
+
+.large-tabs {
+  .ant-layout {
+    // text-align: center;
+  }
+  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-nav-container {
+    height: auto;
+  }
+  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    font-size: 18px;
+    height: auto !important;
+    font-weight: 400;
+    padding: 5px 30px;
+    border-radius: 22px;
+    margin-right: 20px;
+    &::after {
+      content: '';
+      background-color: #e9e9e9;
+      width: 1px;
+      height: 60%;
+      position: absolute;
+      right: -13px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+  }
+}

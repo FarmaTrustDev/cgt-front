@@ -14,7 +14,7 @@
         >
       </a-select>
     </div>
-    <div class="h-tabs">
+    <div class="h-tabs large-tabs">
       <a-tabs type="card" :animated="false">
         <a-tab-pane key="1" tab="New Treatment">
           <new-request />
