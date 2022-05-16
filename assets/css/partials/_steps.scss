@@ -17,6 +17,7 @@
     border-radius: 22px;
     cursor: pointer;
     padding-right: 5px;
+    margin: auto 8px;
   }
 
   .ant-steps-item-wait {
@@ -35,6 +36,19 @@
   }
   .step-col {
     display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 90%;
+      top: 8px;
+      bottom: 0;
+      margin: auto;
+      height: 1px;
+      left: 15px;
+      background-color: #bebfcb;
+    }
   }
   .ant-steps-small .ant-steps-item-title {
     font-size: 1em;
