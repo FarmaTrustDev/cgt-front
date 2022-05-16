@@ -25,17 +25,24 @@
       <!-- // treatment list -->
       <div>
         <a-card class="white-card" :bordered="false">
-          <a-list :data-source="treatments">
-            <a-list-item slot="renderItem" slot-scope="item"
-              ><a-list-item-meta>
-                <a
-                  slot="title"
-                  @click="goto(`/manufacturer/treatments/process/${item.globalId}`)"
-                  >{{ item.patientPUID }}</a
-                >
-              </a-list-item-meta></a-list-item
-            >
-          </a-list>
+          <div>
+            Treatments <span class="float-right">Collection/Delivery</span>
+          </div>
+          <div class="default-border-radius border p-10 mt-15">
+            <a-list :data-source="treatments">
+              <a-list-item slot="renderItem" slot-scope="item"
+                ><a-list-item-meta>
+                  <a
+                    slot="title"
+                    @click="
+                      goto(`/manufacturer/treatments/process/${item.globalId}`)
+                    "
+                    >{{ item.patientPUID }}</a
+                  >
+                </a-list-item-meta></a-list-item
+              >
+            </a-list>
+          </div>
         </a-card>
       </div>
     </div>
