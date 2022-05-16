@@ -4,6 +4,7 @@
 
     <manufacturerHome v-if="isManufacturer()" />
     <hospitalHome v-if="isHospital()" />
+    <logisticHome v-if="isLogistic()" />
   </div>
 </template>
 
@@ -13,8 +14,9 @@ import userDetail from '~/mixins/user-detail'
 import routeHelpers from '~/mixins/route-helpers'
 import manufacturerHome from '~/components/root/manufacturer/home'
 import hospitalHome from '~/components/root/hospital/home'
+import logisticHome from '~/components/root/logistic/home'
 export default {
-  components: { manufacturerHome, hospitalHome },
+  components: { manufacturerHome, hospitalHome, logisticHome },
   mixins: [routeHelpers, userDetail],
   data() {
     return {}
