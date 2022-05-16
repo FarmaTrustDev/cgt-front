@@ -7,29 +7,52 @@
         tab-position="left"
         @change="callback"
       >
-        <a-tab-pane key="scheduling" tab="Scheduling">
+        <a-tab-pane
+          key="scheduling"
+          :disabled="!tabs.scheduling"
+          tab="Scheduling"
+        >
           <scheduling :treatment="treatment" />
         </a-tab-pane>
 
-        <a-tab-pane key="collection" tab=" Collect Samples">
+        <a-tab-pane
+          key="collection"
+          :disabled="!tabs.collectSamples"
+          tab=" Collect Samples"
+        >
           <collections :treatment="treatment" />
         </a-tab-pane>
 
-        <a-tab-pane key="shipment" tab=" Sample Shipping Detail">
+        <a-tab-pane
+          key="shipment"
+          :disabled="!tabs.shippingDetails"
+          tab=" Sample Shipping Detail"
+        >
           <article class="article">
             <h4 class="heading pl-0">Sample Shipping Detail</h4>
           </article>
           <Viewer :treatment="treatment" />
           <shipment :treatment="treatment"
         /></a-tab-pane>
-        <a-tab-pane key="5" tab="Treatment Delivery">
+        <a-tab-pane
+          key="5"
+          :disabled="!tabs.treatmentDelivery"
+          tab="Treatment Delivery"
+        >
           <treatmentDelivery :treatment="treatment"
         /></a-tab-pane>
-        <a-tab-pane key="treatment" tab=" Treatment Collection">
-          <treatmentCollections :treatment="treatment" />
+        <a-tab-pane
+          key="treatment"
+          :disabled="!tabs.TreatmentCollection"
+          tab=" Treatment Collection"
+        >
+          <treatmentCollections
+          
+            :treatment="treatment"
+          />
         </a-tab-pane>
 
-        <a-tab-pane key="after-care" tab="Aftercare">
+        <a-tab-pane key="after-care"   :disabled="!tabs.AfterCare"  tab="Aftercare">
           <afterCare :treatment="treatment" />
         </a-tab-pane> </a-tabs
     ></a-card>
@@ -44,7 +67,9 @@ import afterCare from '~/components/treatment/enrollment/afterCare'
 import Viewer from '~/components/bags/Viewer'
 import treatmentCollections from '~/components/treatment/collections/treatment'
 import tabsHelpers from '~/mixins/tabs-helpers'
-const DEFAULT_ACTIVE_KEY = '2'
+import TreatmentServices from '~/services/API/TreatmentServices'
+import { isEmpty } from '~/services/Utilities'
+const DEFAULT_ACTIVE_KEY = 'scheduling'
 export default {
   components: {
     scheduling,
@@ -65,10 +90,13 @@ export default {
   data() {
     return {
       activeTab: DEFAULT_ACTIVE_KEY,
+      manufacturerAccepted: false,
+      tabs: {},
     }
   },
   mounted() {
     this.handleActiveTab()
+    this.fetchScheduling()
   },
   methods: {
     callback(key) {
@@ -76,6 +104,15 @@ export default {
     },
     fetchTreatment() {
       this.$emit('fetchTreatment')
+    },
+    fetchScheduling() {
+      if (!isEmpty(this.treatment)) {
+        TreatmentServices.getInboundScheduling(this.treatment.id)
+          .then((response) => {
+            this.tabs = response.data
+          })
+          .finally((this.loading = false))
+      }
     },
   },
 }

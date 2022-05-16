@@ -39,9 +39,17 @@ export default {
   data() {
     return { activeTab: null, showCompleteBag: true }
   },
-  mounted() {
-    // phela tab active hojae ga
+  watch: {
+    bags(newBags, oldVal) {
+      // watch it
+      if (newBags !== oldVal) {
+        if (!isEmpty(newBags)) {
+          this.activeTab = newBags[0].id
+        }
+      }
+    },
   },
+  mounted() {},
   methods: {
     completeBag(bag) {
       if (this.validateCollectionComplete(bag)) {

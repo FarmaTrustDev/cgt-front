@@ -61,9 +61,9 @@
               :goto-view="stepClick"
             ></steps>
             <a-dropdown>
-              <a-button class="btn-view-timeline" type="primary" size="small"
-                >Admin</a-button
-              >
+              <a-button class="btn-view-timeline" type="primary" size="small">
+                Admin
+              </a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="gotoView(record, treatment)"
@@ -294,7 +294,6 @@ export default {
             break
           }
         }
-
         return currentPhase
       }
       return 1

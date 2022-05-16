@@ -57,12 +57,14 @@ export default {
   methods: {
     fetchByTreatmentId(id) {
       if (!isEmpty(id)) {
-        this.loading = true
-        SchedulingServices.getByTreatment(id)
-          .then((response) => {
-            this.treatmentData = response.data
-          })
-          .finally(() => (this.loading = false))
+        if (this.treatment.isSchedule) {
+          this.loading = true
+          SchedulingServices.getByTreatment(id)
+            .then((response) => {
+              this.treatmentData = response.data
+            })
+            .finally(() => (this.loading = false))
+        }
       }
     },
   },
