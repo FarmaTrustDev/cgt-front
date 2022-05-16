@@ -1,94 +1,86 @@
 <template>
-  <page-layout :loading="false" :create="false" title="Support">
-    <template slot="content"
-      ><div class="support-page">
-        <a-row class="p-10 mb-10">
-          <div class="page-header">
-            <h3 class="page-title float-left">
-              Support Issues {{ showAddModal }}
-            </h3>
-            <a-button
-              type="primary"
-              class="mrm-5 float-right"
-              @click="showModal(true)"
-              >Add New Ticket</a-button
-            >
-            <a-input
-              ref="userNameInput"
-              placeholder="Search"
-              class="float-right page-search-input"
-              @change="searchSupport"
-            >
-              <a-icon slot="prefix" type="search" />
-            </a-input>
-          </div>
-        </a-row>
+  <div class="support-page">
+    <a-row class="p-10 mb-10">
+      <div class="page-header">
+        <h3 class="page-title float-left">Support Issues</h3>
+        <a-button
+          type="primary"
+          class="mrm-5 float-right"
+          @click="showModal(true)"
+          >Add New Ticket</a-button
+        >
+        <a-input
+          ref="userNameInput"
+          placeholder="Search"
+          class="float-right page-search-input"
+          @change="searchSupport"
+        >
+          <a-icon slot="prefix" type="search" />
+        </a-input>
+      </div>
+    </a-row>
 
-        <a-tabs type="card" @change="callback">
-          <a-tab-pane key="1" tab="All">
-            <a-table
-              class="rounded-table"
-              :loading="loading"
-              :data-source="data"
-              :columns="columns"
+    <a-tabs type="card" @change="callback">
+      <a-tab-pane key="1" tab="All">
+        <a-table
+          class="rounded-table"
+          :loading="loading"
+          :data-source="data"
+          :columns="columns"
+        >
+          <template slot="tickets" slot-scope="id, record">
+            <a-button type="link">
+              <strong @click="goto(`support/${record.global_Id}`)"
+                >CKD-{{ id }}</strong
+              ></a-button
             >
-              <template slot="tickets" slot-scope="id, record">
-                <a-button type="link">
-                  <strong @click="goto(`support/${record.global_Id}`)"
-                    >CKD-{{ id }}</strong
-                  ></a-button
-                >
-              </template>
-              <template slot="status" slot-scope="status, record">
-                <span
-                  :class="'status status-' + getStatusName(status, record)"
-                  >{{ record.status_Name }}</span
-                >
-              </template>
+          </template>
+          <template slot="status" slot-scope="status, record">
+            <span :class="'status status-' + getStatusName(status, record)">{{
+              record.status_Name
+            }}</span>
+          </template>
 
-              <span slot="action" slot-scope="text, record">
-                <!-- <a-button type="link">
+          <span slot="action" slot-scope="text, record">
+            <!-- <a-button type="link">
                   <a-icon type="edit" />
                 </a-button> -->
-                <a-dropdown>
-                  <a-button
-                    class="btn-view-timeline"
-                    type="primary"
-                    size="small"
-                    >Admin</a-button
+            <a-dropdown>
+              <a-button class="btn-view-timeline" type="primary" size="small"
+                >Admin</a-button
+              >
+              <a-menu slot="overlay">
+                <a-menu-item>
+                  <a href="javascript:;" @click="showUpdate(record)"
+                    ><a-icon type="search" /> update Ticket</a
                   >
-                  <a-menu slot="overlay">
-                    <a-menu-item>
-                      <a href="javascript:;" @click="showUpdate(record)"
-                        ><a-icon type="search" /> update Ticket</a
-                      >
-                    </a-menu-item>
-                  </a-menu>
-                </a-dropdown>
-              </span>
-            </a-table>
-          </a-tab-pane>
-          <a-tab-pane key="2" tab="Archive">
-            <Table type="archive" />
-          </a-tab-pane>
-        </a-tabs>
+                </a-menu-item>
+              </a-menu>
+            </a-dropdown>
+          </span>
+        </a-table>
+      </a-tab-pane>
+      <a-tab-pane key="2" tab="Archive">
+        <Table type="archive" />
+      </a-tab-pane>
+    </a-tabs>
 
-        <!-- Add New Ticket Modal -->
-        <a-skeleton :loading="loadingTicket">
-          <add-new-ticket
-            v-if="showAddModal"
-            :ticket="ticket"
-            :is-created="isCreated"
-            @closeModal="closeModal"
-        /></a-skeleton></div></template
-  ></page-layout>
+    <!-- Add New Ticket Modal -->
+    <a-skeleton :loading="loadingTicket">
+      <add-new-ticket
+        v-if="showAddModal"
+        :ticket="ticket"
+        :is-created="isCreated"
+        @closeModal="closeModal"
+    /></a-skeleton>
+  </div>
 </template>
 
 <script>
 import Table from '~/components/support/Listing'
 import AddNewTicketModal from '~/components/support/Add'
 import SupportServices from '~/services/API/SupportServices'
-import PageLayout from '~/components/layout/PageLayout'
+// import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
 const columns = [
   {
@@ -128,7 +120,11 @@ const columns = [
   },
 ]
 export default {
-  components: { Table, 'add-new-ticket': AddNewTicketModal, PageLayout },
+  components: {
+    Table,
+    'add-new-ticket': AddNewTicketModal,
+    // PageLayout
+  },
   mixins: [routeHelpers],
   data() {
     return {
