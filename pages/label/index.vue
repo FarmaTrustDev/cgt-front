@@ -46,9 +46,21 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    fetchSearch(params) {
+      this.loading = true
+      LabelServices.hospital(params)
+        .then((response) => {
+          this.data = response.data
+        })
+        .finally(() => (this.loading = false))
+    },    
     searchLabel(e) {
       const search = e.target.value
-      this.fetch({ patientEnrollmentNumber: search, TreatmentTypeName:search })
+      if(search!==''){
+        this.fetchSearch({patientEnrollmentNumber: search, TreatmentTypeName:search})
+      }else{
+        this.fetch()
+      }
     },
   },
 }

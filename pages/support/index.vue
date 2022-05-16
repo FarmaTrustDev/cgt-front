@@ -160,6 +160,7 @@ export default {
       // status_Name.toLowerCase()
     },
     fetch(params = {}) {
+      // console.log(params.reference_Id)
       this.loading = true
       SupportServices.get(params)
         .then((response) => {
@@ -183,7 +184,7 @@ export default {
     },
     searchSupport(e) {
       const search = e.target.value
-      this.fetch({ status_Name: search, description: search })
+      this.fetch({statusName: search, generalSearch: search})
     },
   },
 }
