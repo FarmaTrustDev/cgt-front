@@ -8,7 +8,7 @@
     :disabled="disabled"
   >
     <p class="ant-upload-drag-icon">
-      <a-icon type="inbox" />
+      <a-icon type="camera" theme="filled" />
     </p>
     <p class="ant-upload-text">Click or drag file to this area to upload</p>
     <p class="ant-upload-hint">
