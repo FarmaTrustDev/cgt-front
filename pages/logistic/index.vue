@@ -25,7 +25,7 @@ export default {
     newRequests,
     'in-progress': inProgress,
   },
-
+  middleware: 'auth',
   data() {
     // console.log("asd");
     return {

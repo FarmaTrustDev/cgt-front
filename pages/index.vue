@@ -18,6 +18,7 @@ import logisticHome from '~/components/root/logistic/home'
 export default {
   components: { manufacturerHome, hospitalHome, logisticHome },
   mixins: [routeHelpers, userDetail],
+  middleware: 'auth',
   data() {
     return {}
   },
