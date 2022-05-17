@@ -3,10 +3,10 @@ import { BASE_API } from '../Constant'
 
 const baseApi = `${BASE_API}/label`
 
-function hospital(data) {
+function hospital(params = {}) {
   return request({
     url: `${baseApi}/hospital`,
-    data,
+    params,
   })
 }
 function scheduling(id) {
