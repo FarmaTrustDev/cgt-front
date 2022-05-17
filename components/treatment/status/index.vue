@@ -20,7 +20,7 @@
           :disabled="!tabs.collectSamples"
           tab=" Collect Samples"
         >
-          <collections :treatment="treatment" />
+          <collections :enabled="tabs.collectSamples" :treatment="treatment" />
         </a-tab-pane>
 
         <a-tab-pane
@@ -46,13 +46,14 @@
           :disabled="!tabs.TreatmentCollection"
           tab=" Treatment Collection"
         >
-          <treatmentCollections
-          
-            :treatment="treatment"
-          />
+          <treatmentCollections :treatment="treatment" />
         </a-tab-pane>
 
-        <a-tab-pane key="after-care"   :disabled="!tabs.AfterCare"  tab="Aftercare">
+        <a-tab-pane
+          key="after-care"
+          :disabled="!tabs.AfterCare"
+          tab="Aftercare"
+        >
           <afterCare :treatment="treatment" />
         </a-tab-pane> </a-tabs
     ></a-card>
