@@ -99,6 +99,7 @@ export default {
         manufacturerStatus: SCHEDULING_STATUSES.pending.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
+        active: true,
       },
       selectedRow: {},
       confirmLoading: false,

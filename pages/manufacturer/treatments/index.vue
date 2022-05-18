@@ -30,7 +30,6 @@
 </template>
 <script>
 import newRequests from '~/components/root/manufacturer/treatments/listing/NewRequest'
-
 import All from '~/components/root/manufacturer/treatments/listing/All'
 import Completed from '~/components/root/manufacturer/treatments/listing/Completed'
 import inProgress from '~/components/root/manufacturer/treatments/listing/InProgress'
