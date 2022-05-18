@@ -72,7 +72,10 @@
   </div>
 </template>
 <script>
-import { _getTodayMoment, _disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
+import {
+  _getTodayMoment,
+  _disabledPreviousDate,
+} from '~/services/Helpers/MomentHelpers'
 import { DEFAULT_DATE_TIME_FORMAT } from '~/services/Constant/DateTime'
 import ShipmentServices from '~/services/API/ShipmentServices'
 import notifications from '~/mixins/notifications'
@@ -105,6 +108,7 @@ export default {
           ShipmentServices.deliveryCreate(this.scheduling.id, values)
             .then((response) => {
               this.success(response.message)
+              this.$emit('onCreate', response)
             })
             .catch(this.error)
         }
