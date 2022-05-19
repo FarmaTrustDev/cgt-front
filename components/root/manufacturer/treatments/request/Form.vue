@@ -55,7 +55,7 @@
         placeholder="Type note here"
       ></a-textarea
     ></a-form-item>
-    <a-form-item v-if="isAccepted" label="Production Line:">
+    <a-form-item v-if="isAccepted && isManufacturer()" label="Production Line:">
       <a-select
         v-decorator="[
           `productionLineId`,
@@ -76,7 +76,9 @@
 </template>
 <script>
 import ProductionLineServices from '~/services/API/ProductionLineServices'
+import userDetail from '~/mixins/user-detail'
 export default {
+  mixins: [userDetail],
   props: {
     data: { type: Object, required: true },
     isAccepted: { type: Boolean, required: true },
