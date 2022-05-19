@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
@@ -17,6 +18,7 @@
   </div>
 </template>
 <script>
+import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import withTableCrud from '~/mixins/with-table-crud'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
@@ -55,6 +57,7 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
+  components: { Filters, },
   mixins: [withTableCrud, routeHelpers],
   data() {
     return {
@@ -82,6 +85,10 @@ export default {
       this.goto(`/logistic/shipment/${record.globalId}`)
     },
     getCurrentStep(record) {},
+    getParams(params) {
+      this.fetch(params)
+    },
+
   },
 }
 </script>
