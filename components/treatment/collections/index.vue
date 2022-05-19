@@ -1,28 +1,35 @@
 <template>
   <a-skeleton :loading="loading">
-    <FormActionButton
-      v-if="!treatment.hospitalCollectionStatus"
-      text="Add Sample"
-      @click="addBags"
-    />
-    <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
+    <div v-if="enabled">
+      <FormActionButton
+        v-if="!treatment.hospitalCollectionStatus"
+        text="Add Sample"
+        @click="addBags"
+      />
+      <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
 
-    <a-button
-      v-if="!treatment.hospitalCollectionStatus && bags.length > 0"
-      class="w-100 mt-15"
-      type="primary"
-      @click="markHospitalCollectionComplete(bags)"
-      >Complete Collection Process</a-button
-    >
-    <a-modal
-      :footer="false"
-      :visible="showModal"
-      title="Add Bag"
-      :destroy-on-close="true"
-      @cancel="handleModal(false)"
-    >
-      <BagForm :loading="loading" :treatment="treatment" @onCreate="onCreate" />
-    </a-modal>
+      <a-button
+        v-if="!treatment.hospitalCollectionStatus && bags.length > 0"
+        class="w-100 mt-15"
+        type="primary"
+        @click="markHospitalCollectionComplete(bags)"
+        >Complete Collection Process
+      </a-button>
+      <a-modal
+        :footer="false"
+        :visible="showModal"
+        title="Add Bag"
+        :destroy-on-close="true"
+        @cancel="handleModal(false)"
+      >
+        <BagForm
+          :loading="loading"
+          :treatment="treatment"
+          @onCreate="onCreate"
+        />
+      </a-modal>
+    </div>
+    <a-alert v-else message="Collection is on request"></a-alert>
   </a-skeleton>
 </template>
 <script>
@@ -37,7 +44,10 @@ import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 export default {
   components: { BagForm, Bag },
   mixins: [notifications],
-  props: { treatment: { required: true, type: Object } },
+  props: {
+    treatment: { required: true, type: Object },
+    enabled: { required: true, type: Boolean, default: false },
+  },
   data() {
     return {
       showModal: false,

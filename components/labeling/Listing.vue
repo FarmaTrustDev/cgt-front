@@ -12,10 +12,6 @@
       </template>
 
       <template slot="print" slot-scope="text, schedule">
-        <pre>
-          
-      </pre
-        >
         <a-button
           v-for="bag in schedule.treatment.bags"
           :key="bag.message"
@@ -45,7 +41,7 @@ export default {
   data() {
     return {
       showViewModal: false,
-      schedulingId:null,
+      schedulingId: null,
       columns: [
         {
           title: 'Patient ID',
@@ -70,8 +66,8 @@ export default {
   },
   methods: {
     openViewModal(id) {
-      this.showViewModal = true;
-      this.schedulingId=id;
+      this.showViewModal = true
+      this.schedulingId = id
       // LabelServices.scheduling(id);
     },
   },

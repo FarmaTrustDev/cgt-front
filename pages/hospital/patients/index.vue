@@ -83,6 +83,7 @@ const ActionLink = '/hospital/patients'
 export default {
   components: { standardTable },
   mixins: [routeHelpers],
+  middleware: 'auth',
   data() {
     return {
       column,

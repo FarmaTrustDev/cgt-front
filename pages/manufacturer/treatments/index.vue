@@ -14,7 +14,7 @@
         >
       </a-select>
     </div>
-    <div class="h-tabs">
+    <div class="h-tabs large-tabs">
       <a-tabs type="card" :animated="false">
         <a-tab-pane key="1" tab="New Treatment">
           <new-request />
@@ -30,7 +30,6 @@
 </template>
 <script>
 import newRequests from '~/components/root/manufacturer/treatments/listing/NewRequest'
-
 import All from '~/components/root/manufacturer/treatments/listing/All'
 import Completed from '~/components/root/manufacturer/treatments/listing/Completed'
 import inProgress from '~/components/root/manufacturer/treatments/listing/InProgress'

@@ -3,9 +3,17 @@
     <template slot="content">
       <div class="grey-card enrollment-page">
         <a-card class="default-border-radius ant-card">
-          <a-tabs :tab-position="mode">
+          <a-tabs
+            :active-key="activeKey"
+            @change="changeTabs"
+            :tab-position="mode"
+          >
             <a-tab-pane :key="1" tab=" Pickup Shipment">
-              <pickup v-if="isEmpty(pickupShipment)" :scheduling="entity" />
+              <pickup
+                v-if="isEmpty(pickupShipment)"
+                :scheduling="entity"
+                @onCreate="fetchList"
+              />
 
               <pickup-detail
                 v-else
@@ -18,6 +26,7 @@
                 v-if="isEmpty(deliveryShipment)"
                 :shipment="deliveryShipment"
                 :scheduling="entity"
+                @onCreate="fetchList"
               />
 
               <delivery-detail
@@ -58,9 +67,13 @@ export default {
       schedule: null,
       pickupShipment: null,
       deliveryShipment: null,
+      activeKey: 1,
     }
   },
   methods: {
+    changeTabs(tabs) {
+      this.activeKey = tabs
+    },
     beforeFetch() {
       this.loading = true
     },
@@ -68,11 +81,15 @@ export default {
       this.schedule = this.entity
       this.markShipmentFlags()
     },
+    fetchList() {
+      this.fetch(this.entity.globalId)
+    },
     markShipmentFlags() {
       const schedule = this.schedule
 
       if (!isEmpty(schedule)) {
         schedule.shipments.forEach((shipment) => {
+          this.activeKey = this.activeKey === 1 ? 2 : this.activeKey
           if (!isEmpty(shipment.pickupAt)) {
             this.pickupShipment = shipment
           }

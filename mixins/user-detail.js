@@ -22,7 +22,7 @@ export default {
         },
         isLogistic() {
             const user = this.getStoreUserDetails();
-            return user.organizationTypeAlias === "MANUFACTURER";
+            return user.organizationTypeAlias === "LOGISTIC";
         },
         getStoreUserDetails() {
             return this.$store.getters.getUser

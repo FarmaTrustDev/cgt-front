@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
         <a-button type="primary" dashed @click="showConfirm(record, true)">
@@ -36,6 +37,7 @@
   </div>
 </template>
 <script>
+import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import withTableCrud from '~/mixins/with-table-crud'
@@ -74,7 +76,7 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  components: { Form },
+  components: { Form, Filters, },
   mixins: [withTableCrud],
   data() {
     return {
@@ -132,6 +134,10 @@ export default {
       })
       this.loading = false
     },
+    getParams(params) {
+      this.fetch(params)
+    },
+
   },
 }
 </script>
