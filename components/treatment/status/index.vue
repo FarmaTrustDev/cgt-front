@@ -20,7 +20,11 @@
           :disabled="!tabs.collectSamples"
           tab=" Collect Samples"
         >
-          <collections :enabled="tabs.collectSamples" :treatment="treatment" />
+          <collections
+            v-if="tabs.collectSamples"
+            :enabled="tabs.collectSamples"
+            :treatment="treatment"
+          />
         </a-tab-pane>
 
         <a-tab-pane

@@ -13,8 +13,8 @@
         class="w-100 mt-15"
         type="primary"
         @click="markHospitalCollectionComplete(bags)"
-        >Complete Collection Process</a-button
-      >
+        >Complete Collection Process
+      </a-button>
       <a-modal
         :footer="false"
         :visible="showModal"
