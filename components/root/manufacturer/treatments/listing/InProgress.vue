@@ -88,6 +88,7 @@ export default {
         LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
+        active: true,
       },
       selectedRow: {},
       confirmLoading: false,
@@ -106,14 +107,17 @@ export default {
     },
     getCurrentStep(treatment) {
       if (treatment.phaseId != null) {
-        const closest = this.phases.reduce(function (prev, curr) {
-          return Math.abs(curr.phaseId - treatment.phaseId) <
-            Math.abs(prev.phaseId - treatment.phaseId)
-            ? curr
-            : prev
-        })
-
-        return closest.id
+        const phases = this.phases
+        let currentPhase = 0
+        for (let phase = 0; phase < phases.length; phase++) {
+          if (phases[phase].phaseId < treatment.phaseId) {
+            currentPhase = phases[phase].id
+          } else {
+            currentPhase = phases[phase].id
+            break
+          }
+        }
+        return currentPhase
       }
       return 1
     },
