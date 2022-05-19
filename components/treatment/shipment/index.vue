@@ -1,10 +1,9 @@
 <template>
   <a-skeleton :loading="isEmpty(schedule)">
-   
-    <a-row>
+    <a-row :gutter="16">
       <a-col :span="12">
-        <pickup-detail :scheduling="schedule" :shipment="pickupShipment"
-      /></a-col>
+        <pickup-detail :scheduling="schedule" :shipment="pickupShipment" />
+      </a-col>
       <a-col :span="12">
         <delivery-detail :scheduling="schedule" :shipment="deliveryShipment"
       /></a-col>
@@ -17,6 +16,7 @@ import shipmentHelpers from '~/mixins/shipment-helpers'
 import pickupDetail from '~/components/treatment/shipment/pickup/Detail'
 import deliveryDetail from '~/components/treatment/shipment/delivery/Detail'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import { isEmpty } from '~/services/Helpers'
 
 export default {
   components: { pickupDetail, deliveryDetail },
@@ -42,6 +42,7 @@ export default {
           this.markShipmentFlags()
         })
     },
+    isEmpty,
   },
 }
 </script>
