@@ -27,7 +27,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 3,
         name: 'Collection',
         alias: 'COLLECTION',
-        phaseId: 5,
+        phaseId: 6,
         url_slug: '/hospital/patients/collection/',
         url_type: URL_TYPE.treatment,
         params: { view: 'collection' }
@@ -77,7 +77,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         id: 2,
         name: 'Manufacturer',
         alias: 'MANUFACTURER',
-        phaseId: 9,
+        phaseId: 10,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'MANUFACTURER' }
@@ -86,7 +86,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         id: 3,
         name: 'Outbound Shipment',
         alias: 'OUTBOUND_SHIPMENT',
-        phaseId: 10,
+        phaseId: 14,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.treatment,
         params: { view: 'OUTBOUND_SHIPMENT' }

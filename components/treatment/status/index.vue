@@ -20,7 +20,11 @@
           :disabled="!tabs.collectSamples"
           tab=" Collect Samples"
         >
-          <collections :enabled="tabs.collectSamples" :treatment="treatment" />
+          <collections
+            v-if="tabs.collectSamples != null"
+            :enabled="tabs.collectSamples"
+            :treatment="treatment"
+          />
         </a-tab-pane>
 
         <a-tab-pane
@@ -28,12 +32,15 @@
           :disabled="!tabs.shippingDetails"
           tab=" Sample Shipping Detail"
         >
-          <article class="article">
-            <h4 class="heading pl-0">Sample Shipping Detail</h4>
-          </article>
-          <Viewer :treatment="treatment" />
-          <shipment :treatment="treatment"
-        /></a-tab-pane>
+          <div v-if="!tabs.shippingDetails">
+            <article class="article">
+              <h4 class="heading pl-0">Sample Shipping Detail</h4>
+            </article>
+            <Viewer :treatment="treatment" />
+            <shipment :treatment="treatment" />
+          </div>
+          <alert v-else message="Shipping not process" type="info"></alert>
+        </a-tab-pane>
         <a-tab-pane
           key="5"
           :disabled="!tabs.treatmentDelivery"
