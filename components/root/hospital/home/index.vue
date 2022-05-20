@@ -7,7 +7,7 @@
           <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
             <div class="home-tab">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="100" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Check <strong class="strong">New Patient </strong>
@@ -17,7 +17,7 @@
           <a href="javascript:;" @click="goto(`/hospital/patients`)">
             <div class="home-tab">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="100" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Enroll <strong class="strong">Patient Status </strong>
@@ -27,7 +27,7 @@
           <a href="javascript:;" @click="goto(`/users`)">
             <div class="home-tab with-arrow">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="100" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Manage <strong class="strong">Users </strong>
