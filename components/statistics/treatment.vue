@@ -7,15 +7,17 @@
             show-search
             placeholder="Select Treatment Type"
             option-filter-prop="children"
+            style="width: 100%"
             class="search-dropdown"
             @change="fetchStats"
+            v-model="defaultValue"
           >
             <!-- //@todo Zulkarznain bhai task fetch from   api -->
             <a-select-option
               v-for="treatmentType in treatmentTypes"
-              :key="treatmentType.id"
+              :key="treatmentType.id"             
             >
-              {{ treatmentType.name }}
+              <p style="margin-top:10px">{{ treatmentType.name }}</p>
             </a-select-option>
           </a-select>
         </a-row>
@@ -92,6 +94,7 @@ export default {
         },
         cutoutPercentage: 65,
       },
+      defaultValue:1,
       chartData: {
         labels: [],
         layout: {
