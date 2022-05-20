@@ -2,11 +2,11 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import auth from './modules/auth'
 import user from './modules/user'
-
+import translations from './modules/translations'
 export const strict = false
 
 const persistedStateOptions = {
-  paths: ['user', 'auth'],
+  paths: ['user', 'auth', 'translations'],
 }
 
 const store = () =>
@@ -15,7 +15,7 @@ const store = () =>
     mutations: {},
     actions: {},
     getters: {},
-    modules: { auth, user },
+    modules: { auth, user, translations },
     plugins: [createPersistedState(persistedStateOptions)],
   })
 

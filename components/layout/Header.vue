@@ -29,6 +29,7 @@
         </div>
         <!-- Header Lang Select -->
         <div>
+          {{ translation.first }}
           <a-select :default-value="langData[0]" style="width: 120px">
             <a-select-option v-for="lang in langData" :key="lang">
               {{ lang }}
@@ -45,16 +46,26 @@ import { HubConnectionBuilder } from '@aspnet/signalr'
 import { isEmpty } from '~/services/Utilities'
 import { isArray } from '~/services/Helpers'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
+import TranslationServices from '~/services/API/TranslationServices'
+import translationHelpers from '~/mixins/translation-helpers'
 const connection = new HubConnectionBuilder()
   .withUrl('https://demoapi.qmaid.co/NotificationUserHub')
   .build()
 connection.start()
 export default {
+  mixins: [translationHelpers],
   name: 'Header',
   data() {
     return {
       langData: ['English', 'German', 'Chinese', 'Arabic'],
+      lang: null,
     }
+  },
+  async fetch() {
+    await TranslationServices.get().then((translations) => {
+      this.$store.commit('setTranslation', translations.data)
+      this.lang = translations.data
+    })
   },
   computed: {
     // ...mapGetters(['getUser']),
