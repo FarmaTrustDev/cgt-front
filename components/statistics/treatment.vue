@@ -95,6 +95,10 @@ export default {
         cutoutPercentage: 65,
       },
       defaultValue:1,
+      completedTotal:0,
+      productionTotal:0,
+      total:0,
+      spoilage:0,
       chartData: {
         labels: [],
         layout: {
@@ -107,8 +111,8 @@ export default {
         },
         datasets: [
           {
-            backgroundColor: ['#28ced9', '#2255c2', '#f4b71a', '#fa6363'],
-            data: [5, 2, 4, 5],
+            backgroundColor: [],
+            data: [],
           },
         ],
       },
@@ -123,9 +127,20 @@ export default {
     fetchStats(id) {
       this.fetchTreatmentStats(id)
     },
+    intializeData(detail){
+      this.chartData.datasets[0].data[0]=detail.completedTotal
+      this.chartData.datasets[0].backgroundColor[0]='#28ced9'
+      this.chartData.datasets[0].data[1]=detail.productionTotal
+      this.chartData.datasets[0].backgroundColor[1]='#2255c2'
+      this.chartData.datasets[0].data[2]=detail.total
+      this.chartData.datasets[0].backgroundColor[2]='#f4b71a'
+      this.chartData.datasets[0].data[3]=detail.spoilage
+      this.chartData.datasets[0].backgroundColor[3]='#fa6363'
+    },
     fetchTreatmentStats(id) {
       StatisticsServices.treatment(id).then((response) => {
         this.chartDetail = response.data
+        this.intializeData(this.chartDetail)
       })
     },
     fetchTreatment() {
