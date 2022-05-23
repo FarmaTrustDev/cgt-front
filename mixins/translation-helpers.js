@@ -1,11 +1,18 @@
 
 export default {
     data() {
-        return { translation: this.$store.getters.getTranslation }
+        return {
+            // translation: this.$store.getters.getTranslation
+        }
     },
     methods: {
         getTranslations() {
             return this.$store.getters.getTranslation
         },
     },
+    computed: {
+        translation() {
+            return this.$store.getters.getTranslation
+        },
+    }
 }
