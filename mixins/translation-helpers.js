@@ -14,5 +14,8 @@ export default {
         translation() {
             return this.$store.getters.getTranslation
         },
+        selectedLanguage() {
+            return this.$store.getters.getSelectedLanguage
+        }
     }
 }

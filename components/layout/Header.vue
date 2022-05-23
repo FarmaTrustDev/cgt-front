@@ -31,7 +31,7 @@
         <div>
           {{ translation.first }}
           <a-select
-            :default-value="languages[0].id"
+            :default-value="selectedLanguage"
             style="width: 120px"
             @change="selectLanguage"
           >
@@ -71,7 +71,12 @@ export default {
     }
   },
   async fetch() {
-    await this.fetchLanguages('en')
+    let language = this.selectedLanguage
+
+    if (isEmpty(language)) {
+      language = 'en'
+    }
+    await this.fetchLanguages(language)
   },
   computed: {
     // ...mapGetters(['getUser']),
@@ -106,6 +111,7 @@ export default {
     async fetchLanguages(language) {
       await TranslationServices.get({ [language]: true }).then(
         (translations) => {
+          this.$store.commit('setSelectedLanguage', language)
           this.$store.commit('setTranslation', translations.data)
           this.lang = translations.data
         }

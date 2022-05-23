@@ -1,16 +1,23 @@
 const state = {
-    patient: {},
+    translation: {},
+    selectedLanguage: {}
 }
 
 const mutations = {
     setTranslation(state, payload) {
-        state.patient = payload
+        state.translation = payload
+    },
+    setSelectedLanguage(state, payload) {
+        state.selectedLanguage = payload
     },
 }
 
 const getters = {
     getTranslation(state) {
-        return state.patient
+        return state.translation
+    },
+    getSelectedLanguage(state) {
+        return state.selectedLanguage
     },
 }
 
