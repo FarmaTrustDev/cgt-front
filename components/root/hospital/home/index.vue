@@ -4,36 +4,36 @@
       <a-row>
         <!-- left side tabs -->
         <a-col :span="9">
-          <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
+          <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
+            <div class="home-tab">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Check <strong class="strong">New Patient </strong>
               </h4>
-            </a>
-          </div>
-          <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/hospital/patients`)">
+            </div>
+          </a>
+          <a href="javascript:;" @click="goto(`/hospital/patients`)">
+            <div class="home-tab">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Enroll <strong class="strong">Patient Status </strong>
               </h4>
-            </a>
-          </div>
-          <div class="home-tab with-arrow">
-            <a href="javascript:;" @click="goto(`/users`)">
+            </div>
+          </a>
+          <a href="javascript:;" @click="goto(`/users`)">
+            <div class="home-tab with-arrow">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Manage <strong class="strong">Users </strong>
               </h4>
-            </a>
-          </div>
+            </div>
+          </a>
         </a-col>
         <!-- #end left side tabs -->
         <a-col :span="2"></a-col>

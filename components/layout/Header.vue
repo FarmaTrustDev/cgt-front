@@ -29,9 +29,14 @@
         </div>
         <!-- Header Lang Select -->
         <div>
-          <a-select :default-value="langData[0]" style="width: 120px">
-            <a-select-option v-for="lang in langData" :key="lang">
-              {{ lang }}
+          {{ translation.first }}
+          <a-select
+            :default-value="selectedLanguage"
+            style="width: 120px"
+            @change="selectLanguage"
+          >
+            <a-select-option v-for="language in languages" :key="language.id">
+              {{ language.name }}
             </a-select-option>
           </a-select>
         </div>
@@ -45,16 +50,33 @@ import { HubConnectionBuilder } from '@aspnet/signalr'
 import { isEmpty } from '~/services/Utilities'
 import { isArray } from '~/services/Helpers'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
+import TranslationServices from '~/services/API/TranslationServices'
+import translationHelpers from '~/mixins/translation-helpers'
 const connection = new HubConnectionBuilder()
   .withUrl('https://demoapi.qmaid.co/NotificationUserHub')
   .build()
 connection.start()
 export default {
   name: 'Header',
+  mixins: [translationHelpers],
   data() {
     return {
-      langData: ['English', 'German', 'Chinese', 'Arabic'],
+      languages: [
+        { id: 'en', name: 'English' },
+        { id: 'de', name: 'German' },
+        { id: 'za', name: 'Chinese' },
+        { id: 'ar', name: 'Arabic' },
+      ],
+      lang: null,
     }
+  },
+  async fetch() {
+    let language = this.selectedLanguage
+
+    if (isEmpty(language)) {
+      language = 'en'
+    }
+    await this.fetchLanguages(language)
   },
   computed: {
     // ...mapGetters(['getUser']),
@@ -82,6 +104,18 @@ export default {
     },
     emitNotification(notification) {
       this.$nuxt.$emit(EVENT_CHAT_NOTIFICATION, notification)
+    },
+    selectLanguage(language) {
+      this.fetchLanguages(language)
+    },
+    async fetchLanguages(language) {
+      await TranslationServices.get({ [language]: true }).then(
+        (translations) => {
+          this.$store.commit('setSelectedLanguage', language)
+          this.$store.commit('setTranslation', translations.data)
+          this.lang = translations.data
+        }
+      )
     },
   },
 }

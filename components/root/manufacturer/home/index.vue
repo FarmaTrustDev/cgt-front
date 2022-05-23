@@ -7,7 +7,7 @@
           <div class="home-tab">
             <a href="javascript:;" @click="goto(`/manufacturer/schedules`)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Manufacturing <strong class="strong"> Schedule </strong>
@@ -17,7 +17,7 @@
           <div class="home-tab">
             <a href="javascript:;" @click="goto(`/manufacturer/treatments`)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Manage <strong class="strong"> Treatments </strong>
@@ -27,7 +27,7 @@
           <div class="home-tab with-arrow">
             <a href="javascript:;" @click="goto(`/users`)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
                 Manage <strong class="strong"> Users </strong>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-header clearfix">
-      <h3 class="page-title pl-5 float-left">Patient List</h3>
+      <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3>
       <a-button
         type="primary"
         class="mrm-5 float-right"
@@ -35,6 +35,7 @@
 import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
+import translationHelpers from '~/mixins/translation-helpers'
 const column = [
   {
     title: 'PUID',
@@ -82,7 +83,7 @@ const column = [
 const ActionLink = '/hospital/patients'
 export default {
   components: { standardTable },
-  mixins: [routeHelpers],
+  mixins: [routeHelpers, translationHelpers],
   middleware: 'auth',
   data() {
     return {
