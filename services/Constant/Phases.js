@@ -1,5 +1,23 @@
 
-export const TREATMENT_PHASES = []
+export const TREATMENT_PHASES = {
+    CONSENT: { id: 1, order: 1 },
+    SCREENING: { id: 2, order: 2 },
+    SCHEDULING: { id: 3, order: 3 },
+    MANUFACTURER_REQUEST_LISTING: { id: 4, order: 4 },
+    HOSPITAL_COLLECTION: { id: 5, order: 5 },
+    LOGISTIC_REQUEST: { id: 6, order: 6 },
+    LOGISTIC_PICKUP: { id: 7, order: 7 },
+    LOGISTIC_DELIVERY: { id: 8, order: 8 },
+    MANUFACTURER_SAMPLE_COLLECTION: { id: 9, order: 9 },
+    OUTBOUND_SCHEDULING: { id: 10, order: 10 },
+    OUTBOUND_LOGISTIC_REQUEST: { id: 11, order: 11 },
+    OUTBOUND_LOGISTIC_PICKUP: { id: 12, order: 12 },
+    OUTBOUND_LOGISTIC_DELIVERY: { id: 13, order: 13 },
+    HOSPITAL_TREATMENT: { id: 14, order: 14 },
+    AFTER_CARE: { id: 15, order: 15 },
+}
+
+
 const URL_TYPE = {
     patient: 1,
     treatment: 2
@@ -95,3 +113,4 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         params: { view: 'OUTBOUND_SHIPMENT' }
     },
 ]
+
