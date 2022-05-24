@@ -69,6 +69,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         name: 'Inbound Shipment',
         alias: 'INBOUND_SHIPMENT',
         phaseId: 8,
+        enablePageId: 6,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'INBOUND_SHIPMENT' }
@@ -78,6 +79,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         name: 'Manufacturer',
         alias: 'MANUFACTURER',
         phaseId: 10,
+        enablePageId: 10,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'MANUFACTURER' }
@@ -87,6 +89,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         name: 'Outbound Shipment',
         alias: 'OUTBOUND_SHIPMENT',
         phaseId: 14,
+        enablePageId: 14,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.treatment,
         params: { view: 'OUTBOUND_SHIPMENT' }

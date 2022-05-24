@@ -85,7 +85,7 @@ export default {
       isAccepted: false,
       params: {
         ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
-        logisticStatus: SCHEDULING_STATUSES.accepted.id,
+        LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
         active: true,
@@ -100,10 +100,13 @@ export default {
   },
   methods: {
     stepClick(record, phase) {
-      this.goto(
-        `/manufacturer/treatments/process/${record.treatment.globalId}`,
-        { ...phase.params }
-      )
+      if (record.treatment.phaseId >= phase.enablePageId) {
+        return this.goto(
+          `/manufacturer/treatments/process/${record.treatment.globalId}`,
+          { ...phase.params }
+        )
+      }
+      return false
     },
     getCurrentStep(treatment) {
       if (treatment.phaseId != null) {
