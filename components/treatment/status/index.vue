@@ -32,7 +32,7 @@
           :disabled="!tabs.shippingDetails"
           tab=" Sample Shipping Detail"
         >
-          <div v-if="!tabs.shippingDetails">
+          <div v-if="tabs.shippingDetails">
             <article class="article">
               <h4 class="heading pl-0">Sample Shipping Detail</h4>
             </article>

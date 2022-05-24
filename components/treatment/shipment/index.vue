@@ -2,10 +2,17 @@
   <a-skeleton :loading="isEmpty(schedule)">
     <a-row :gutter="16">
       <a-col :span="12">
-        <pickup-detail :scheduling="schedule" :shipment="pickupShipment" />
+        <pickup-detail
+          :scheduling="schedule"
+          heading="Pickup Detail"
+          :shipment="pickupShipment"
+        />
       </a-col>
       <a-col :span="12">
-        <delivery-detail :scheduling="schedule" :shipment="deliveryShipment"
+        <delivery-detail
+          heading="Delivery Detail"
+          :scheduling="schedule"
+          :shipment="deliveryShipment"
       /></a-col>
     </a-row>
   </a-skeleton>
