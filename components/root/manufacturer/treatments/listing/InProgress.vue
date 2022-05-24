@@ -85,7 +85,7 @@ export default {
       isAccepted: false,
       params: {
         ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
-        LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
+        logisticStatus: SCHEDULING_STATUSES.accepted.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
         active: true,
