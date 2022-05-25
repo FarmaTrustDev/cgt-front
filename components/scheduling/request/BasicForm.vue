@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form
-      v-if="treatment.phaseId >= TREATMENT_PHASES.OUTBOUND_SCHEDULING"
+      v-if="treatment.phaseId >= TREATMENT_PHASES.OUTBOUND_SCHEDULING.id"
       :form="form"
       :layout="formLayout"
       @submit="onSubmit"

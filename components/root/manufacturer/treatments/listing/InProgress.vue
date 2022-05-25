@@ -100,7 +100,6 @@ export default {
   },
   methods: {
     stepClick(record, phase) {
-      console.log(record.treatment.phaseId, phase.enablePageId)
       if (record.treatment.phaseId >= phase.enablePageId) {
         return this.goto(
           `/manufacturer/treatments/process/${record.treatment.globalId}`,

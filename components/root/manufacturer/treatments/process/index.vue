@@ -2,7 +2,7 @@
   <div>
     <manufactureCollection
       v-if="
-        treatment.phaseId >= TREATMENT_PHASES.MANUFACTURER_SAMPLE_COLLECTION
+        treatment.phaseId >= TREATMENT_PHASES.MANUFACTURER_SAMPLE_COLLECTION.id
       "
       :treatment="treatment"
       show-complete-btn="manufacturerCollectionStatus"
