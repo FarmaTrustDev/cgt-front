@@ -73,7 +73,7 @@
                   ],
                 },
               ]"
-              :disabled="true"
+             
               :disabled-date="disabledDate"
               :format="dateFormat"
               style="width: 100%"
