@@ -100,6 +100,7 @@ export default {
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
         active: true,
+        direction: 1,
       },
       selectedRow: {},
       confirmLoading: false,
