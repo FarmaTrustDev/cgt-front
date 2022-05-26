@@ -122,6 +122,7 @@ export default {
   computed: {},
   mounted() {
     this.fetchTreatment()
+    window.dispatchEvent(new Event('resize'));
   },
   methods: {
     fetchStats(id) {
