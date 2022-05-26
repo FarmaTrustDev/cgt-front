@@ -11,7 +11,7 @@
         <a-card :bordered="false" class="mt-15 default-card h-tabs">
           <a-tabs type="card">
             <a-tab-pane key="1" tab="Inbound Acceptance Details">
-              <inbound-shipment :treatment="entity" />
+              <shipment :treatment="entity" />
             </a-tab-pane>
             <a-tab-pane key="2" tab="Manufacturing">
               <process :treatment="entity" @fetchTreatment="fetchTreatment" />
@@ -37,14 +37,14 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import ProfilePictureCard from '~/components/patient/profile/ProfileAndDetail'
 import process from '~/components/root/manufacturer/treatments/process'
 import QrViewer from '~/components/bags/Viewer'
-import InboundShipment from '~/components/root/manufacturer/scheduling/shipment/Inbound'
+import shipment from '~/components/treatment/shipment'
 import schedulingBasicRequest from '~/components/scheduling/request/BasicForm'
 export default {
   components: {
     process,
     'page-layout': PageLayout,
     'profile-picture-and-detail': ProfilePictureCard,
-    'inbound-shipment': InboundShipment,
+    shipment,
     'scheduling-basic-request': schedulingBasicRequest,
     QrViewer,
   },

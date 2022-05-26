@@ -22,10 +22,8 @@
             </a-col>
             <a-col :span="12">
               <div class="right d-block">
-                <strong class="step-title d-block">
-                  by: Schneider Fische</strong
-                >
-                <span class="organization">Berlin Hospital</span>
+                <strong class="step-title d-block"> by:{{ step.by }}</strong>
+                <span class="organization">{{ step.organizationName }}</span>
               </div>
             </a-col>
           </a-row>

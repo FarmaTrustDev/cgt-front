@@ -1,6 +1,11 @@
 <template>
   <div>
-    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+    <a-form
+      v-if="treatment.phaseId >= TREATMENT_PHASES.OUTBOUND_SCHEDULING.id"
+      :form="form"
+      :layout="formLayout"
+      @submit="onSubmit"
+    >
       <LogisticLookup />
 
       <a-row :gutter="16">
@@ -68,7 +73,7 @@
                   ],
                 },
               ]"
-              :disabled="true"
+             
               :disabled-date="disabledDate"
               :format="dateFormat"
               style="width: 100%"
@@ -81,9 +86,11 @@
         <FormActionButton :loading="loading" custom-text="Submit" />
       </a-form-item>
     </a-form>
+    <alert v-else message="Collection not completed" />
   </div>
 </template>
 <script>
+import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
@@ -93,8 +100,9 @@ import {
 } from '~/services/Helpers/MomentHelpers'
 import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
+import alert from '~/components/alert'
 export default {
-  components: { LogisticLookup },
+  components: { LogisticLookup, alert },
   mixins: [notifications, routeHelpers],
   props: {
     treatment: { type: Object, required: true },
@@ -107,6 +115,7 @@ export default {
         name: 'scheduling',
       }),
       dateFormat: STANDARD_UK_DATE_FORMAT,
+      TREATMENT_PHASES,
     }
   },
   methods: {

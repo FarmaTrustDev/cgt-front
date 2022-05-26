@@ -13,9 +13,9 @@
             v-if="!isEmpty(entity.patient) && entity.screeningStatus"
             :treatment="entity"
           />
-          <a-card v-else class="text-center default-card p-0"
-            ><h2  class="m-0">Treatment type has not been selected yet</h2></a-card
-          >
+          <a-card v-else class="text-center default-card p-0">
+            <h2 class="m-0">Treatment type has not been selected yet</h2>
+          </a-card>
         </div>
       </div>
     </template>

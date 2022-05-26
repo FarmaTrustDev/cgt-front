@@ -32,7 +32,7 @@
           :disabled="!tabs.shippingDetails"
           tab=" Sample Shipping Detail"
         >
-          <div v-if="!tabs.shippingDetails">
+          <div v-if="tabs.shippingDetails">
             <article class="article">
               <h4 class="heading pl-0">Sample Shipping Detail</h4>
             </article>
@@ -50,7 +50,7 @@
         /></a-tab-pane>
         <a-tab-pane
           key="treatment"
-          :disabled="!tabs.TreatmentCollection"
+          :disabled="!tabs.treatmentCollection"
           tab=" Treatment Collection"
         >
           <treatmentCollections :treatment="treatment" />
@@ -58,7 +58,7 @@
 
         <a-tab-pane
           key="after-care"
-          :disabled="!tabs.AfterCare"
+          :disabled="!tabs.afterCare"
           tab="Aftercare"
         >
           <afterCare :treatment="treatment" />
