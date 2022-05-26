@@ -10,8 +10,23 @@ function get(params = {}) {
   })
 }
 
+function getTranslation(){
+  return request({
+    url: `${baseApi}/translate`,
+  })
+}
+
+function getTranslationFile(){
+  return request({
+    url: `${baseApi}/getTranslations`,
+    responseType: 'blob',
+    method:'get'
+  })
+}
 const TranslationServices = {
   get,
+  getTranslation,
+  getTranslationFile,
 }
 
 export default TranslationServices

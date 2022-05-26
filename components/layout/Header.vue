@@ -86,9 +86,24 @@ export default {
   },
   mounted() {
     this.notificationHandler()
+    this.uploadTranslations()
+    // this.downloadTranslations()
   },
   methods: {
     isEmpty,
+    uploadTranslations(){
+      TranslationServices.getTranslation()
+    },
+    downloadTranslations(){
+      TranslationServices.getTranslationFile().then((response)=>{
+        const fileURL = window.URL.createObjectURL(new Blob([response]));
+        const fileLink = document.createElement('a');
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', 'translationData.xlsx');
+        document.body.appendChild(fileLink);
+        fileLink.click();
+      })
+    },
     notificationHandler() {
       connection.on('Notification', (notification) => {
         const notify = notification
