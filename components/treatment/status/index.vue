@@ -50,7 +50,7 @@
         /></a-tab-pane>
         <a-tab-pane
           key="treatment"
-          :disabled="!tabs.TreatmentCollection"
+          :disabled="!tabs.treatmentCollection"
           tab=" Treatment Collection"
         >
           <treatmentCollections :treatment="treatment" />
@@ -58,7 +58,7 @@
 
         <a-tab-pane
           key="after-care"
-          :disabled="!tabs.AfterCare"
+          :disabled="!tabs.afterCare"
           tab="Aftercare"
         >
           <afterCare :treatment="treatment" />

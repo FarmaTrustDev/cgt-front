@@ -17,11 +17,11 @@ export const TREATMENT_PHASES = {
     AFTER_CARE: { id: 15, order: 15 },
 }
 
-
 const URL_TYPE = {
     patient: 1,
     treatment: 2
 }
+
 export const PATIENT_TREATMENT_PHASES = [
     {
         id: 1,
@@ -72,7 +72,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 6,
         name: 'After Care',
         alias: 'AFTER_CARE',
-        phaseId: 15,
+        phaseId: 16,
         url_slug: '/hospital/patients/collection/',
         url_type: URL_TYPE.treatment,
         params: { view: 'after-care' }
