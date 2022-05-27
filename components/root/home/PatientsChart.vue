@@ -12,6 +12,7 @@ export default {
   },
   mounted () {
     this.renderChart(this.chartData, this.options)
+    window.dispatchEvent(new Event('resize'));
   }
 };
 </script>
