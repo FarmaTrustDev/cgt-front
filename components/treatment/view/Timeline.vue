@@ -1,6 +1,5 @@
 <template>
   <div>
-    <pre></pre>
     <a-timeline>
       <a-timeline-item
         v-for="step in steps"
@@ -21,14 +20,18 @@
               </span>
             </a-col>
             <a-col :span="12">
-              <div class="right d-block">
+              <div v-if="step.isCompleted" class="right d-block">
                 <strong class="step-title d-block"> by:{{ step.by }}</strong>
                 <span class="organization">{{ step.organizationName }}</span>
+                <a-upload
+                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  :default-file-list="uploadedFiles(step.uploads)"
+                >
+                </a-upload>
               </div>
             </a-col>
-          </a-row>
-        </div></a-timeline-item
-      >
+          </a-row></div
+      ></a-timeline-item>
     </a-timeline>
   </div>
 </template>
@@ -36,8 +39,9 @@
 <script>
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { isEmpty } from '~/services/Utilities'
-
+import imagesHelper from '~/mixins/images-helper'
 export default {
+  mixins: [imagesHelper],
   props: {
     treatment: { required: true, type: Object },
     bag: { required: true, type: Object },
