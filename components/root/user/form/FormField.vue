@@ -198,9 +198,9 @@
         >
           <a-input
             v-decorator="[
-              'What3Words',
+              'what3Words',
               {
-                initialValue: entity.What3Words,
+                initialValue: entity.what3Words,
                 rules: [
                   {
                     required: true,
@@ -237,7 +237,7 @@
           />
         </a-form-item>
       </a-col>
-            <a-col :span="12">
+      <a-col :span="12">
         <a-form-item
           label="Image"
           :label-col="{ span: 24 }"
@@ -248,8 +248,8 @@
         :extensions="allowedExtensions"
         @handleChange="handleChange"
       />
-      <span v-if="entity.profileImageUrl && !newSelected"><img :src="entity.profileImageUrl['name']" width="60px" height="60px"/>{{entity.profileImageUrl['name']}}</span>
-      <span v-if="defaultImage && entity.profileImageUrl==null"><img src="https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg" width="60px" height="60px"/></span>
+      <span v-if="entity.profileImageUrl && !newSelected"><img :src="entity.profileImageUrl['name']" width="80px" height="80px"/></span>
+      <span v-if="defaultImage && entity.profileImageUrl==null"><img src="https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg" width="80px" height="80px"/></span>
       </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -393,7 +393,7 @@ import withCrud from '~/mixins/with-crud'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 import RoleServices from '~/services/API/RoleServices'
-import Upload from '~/components/upload'
+import Upload from '~/components/upload/userUpload.vue'
 import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
 export default {
   components: { Upload },
