@@ -50,7 +50,7 @@ export default {
           file.url = this.getImageUrl(file.url)
           return file
         })
-        console.log(uploadedFiles)
+
         this.defaultList = uploadedFiles
       }
     },
