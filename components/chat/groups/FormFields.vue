@@ -40,16 +40,16 @@
         <a-button type="primary" @click="addRow">+ Add Organizations</a-button>
       </a-col>
     </a-row>
-    <a-row v-for="org in organizationKeys" :key="org.id">
+    <a-row :gutter="16" v-for="org in organizationKeys" :key="org.id">
       <a-col :span="11">
         <a-form-item
           label="Organizations Type:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
-          <a-input
+          <a-select
             v-decorator="[
-              'Name',
+              'organizationType',
               {
                 rules: [
                   {
@@ -59,18 +59,25 @@
                 ],
               },
             ]"
-            placeholder="Organizations Type"
-          /> </a-form-item
-      ></a-col>
+            class="w-100"
+          >
+            <a-select-option
+              v-for="orgType in organizationTypes"
+              :key="orgType.id"
+              >{{ orgType.name }}</a-select-option
+            >
+          </a-select>
+        </a-form-item></a-col
+      >
       <a-col :span="11">
         <a-form-item
           label="Organizations:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
-          <a-input
+          <a-select
             v-decorator="[
-              'Name',
+              'organization',
               {
                 rules: [
                   {
@@ -80,13 +87,18 @@
                 ],
               },
             ]"
-            placeholder="Organizations"
-          /> </a-form-item
-      ></a-col>
+            class="w-100"
+          >
+            <a-select-option
+              v-for="orgType in organizationTypes"
+              :key="orgType.id"
+              >{{ orgType.name }}</a-select-option
+            >
+          </a-select>
+        </a-form-item></a-col
+      >
       <a-col :span="2">
-        <a-button type="danger" @click="removeRow(org.id)"
-          >-</a-button
-        ></a-col
+        <a-button type="danger" @click="removeRow(org.id)">-</a-button></a-col
       >
     </a-row>
   </div>
@@ -95,6 +107,7 @@
 <script>
 import Upload from '~/components/upload/profile'
 import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
+import OrganizationTypeServices from '~/services/API/OrganizationTypeServices'
 export default {
   components: { Upload },
   data() {
@@ -102,7 +115,11 @@ export default {
       allowedExtensions: DOCUMENT_EXTENSIONS,
       currentId: 0,
       organizationKeys: [],
+      organizationTypes: [],
     }
+  },
+  mounted() {
+    this.fetchOrganization()
   },
   methods: {
     getImage(files) {
@@ -118,11 +135,17 @@ export default {
         ...this.organizationKeys,
         { id: this.generateUuid() },
       ]
-      console.log(this.organizationKeys)
     },
     removeRow(id) {
       const org = this.organizationKeys
       this.organizationKeys = org.filter((o) => o.id !== id)
+    },
+    fetchOrganization() {
+      OrganizationTypeServices.get({ withOrganization: true }).then(
+        (response) => {
+          this.organizationTypes = response.data
+        }
+      )
     },
   },
 }
