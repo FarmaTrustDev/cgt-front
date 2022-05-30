@@ -7,13 +7,13 @@
       name="file"
       :action="handleChange"
       :disabled="disabled"
-      >
-        <div v-if="stateFileList.length < 3">
-          <a-icon type="camera" theme="filled" style="font-size:60px" />
-        </div>
+    >
+      <div v-if="stateFileList.length < 3">
+        <a-icon type="camera" theme="filled" style="font-size: 60px" />
+      </div>
     </a-upload>
     <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-      <img alt="example" style="width: 100%" :src="previewImage" />
+      <img alt="example" style="width: 100%" />
     </a-modal>
   </div>
 </template>
@@ -63,7 +63,7 @@ export default {
       }
       this.$emit('handleChange', this.stateFileList)
     },
-    handleCancel () {
+    handleCancel() {
       this.previewVisible = false
     },
     async addToFileList(file) {

@@ -36,7 +36,7 @@
       </a-col>
     </a-row>
     <a-modal
-      :width="700"
+      :width="1200"
       :visible="groupModal"
       title="Add users"
       :footer="null"

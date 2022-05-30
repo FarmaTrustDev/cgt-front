@@ -2,7 +2,7 @@
   <a-upload-dragger
     :before-upload="beforeUpload"
     :default-file-list="defaultFileList"
-    list-type="picture"
+     list-type="picture-card"
     name="file"
     :action="handleChange"
     :disabled="disabled"
@@ -18,6 +18,7 @@
   </a-upload-dragger>
 </template>
 <script>
+
 export default {
   props: {
     extensions: {
