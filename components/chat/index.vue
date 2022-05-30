@@ -36,6 +36,15 @@
       </a-col>
     </a-row>
     <a-modal
+      :width="700"
+      :visible="groupModal"
+      title="Add users"
+      :footer="null"
+      @cancel="handleGroupModal(false)"
+    >
+      <Group />
+    </a-modal>
+    <a-modal
       :visible="usersModal"
       title="Add users"
       :footer="null"
@@ -48,12 +57,13 @@
 <script>
 import List from '~/components/chat/List'
 import Conversation from '~/components/chat/Conversation'
+import Group from '~/components/chat/groups'
 import ChatServices from '~/services/API/ChatServices'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
 import UserList from '~/components/users/ChatList'
 import { isEmpty } from '~/services/Helpers'
 export default {
-  components: { Conversation, List, UserList },
+  components: { Conversation, List, UserList, Group },
   data() {
     return {
       conversations: [],
@@ -65,6 +75,7 @@ export default {
       recipient: {},
       endToEndConversationLoader: false,
       scrollMethod: () => {},
+      groupModal: false,
     }
   },
   mounted() {
@@ -72,6 +83,7 @@ export default {
     this.registerEventNotification()
 
     this.$emit('loadShowModal', this.showUsersModal)
+    this.$emit('handleGroupModal', this.handleGroupModal)
   },
   methods: {
     loadScrollMethod(method) {
@@ -128,6 +140,7 @@ export default {
         getNotification(notification.data)
       })
     },
+    /// this method works when auto message generate
     // ! hot fix need to optimize the code
     getNotification(notification) {
       const opponentId = notification.sender_Id
@@ -154,6 +167,9 @@ export default {
     },
     showUsersModal(show) {
       this.usersModal = show
+    },
+    handleGroupModal(show) {
+      this.groupModal = show
     },
     getUser(users) {
       this.recipient = {

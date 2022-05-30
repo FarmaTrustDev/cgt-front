@@ -11,10 +11,16 @@ getUser(users) {},
       <a-button type="primary" @click="showZoomModal(true)"
         >Zoom Meeting</a-button
       >
+      <a-button type="primary" @click="showGroupModal(true)"
+        >Add group</a-button
+      >
       <a-button type="primary" @click="showModal(true)">Add Users</a-button>
     </template>
     <template slot="content">
-      <chat @loadShowModal="loadShowModal" />
+      <chat
+        @loadShowModal="loadShowModal"
+        @handleGroupModal="handleGroupModal"
+      />
       <zoom @showZoomModal="loadZoomModal" />
     </template>
   </page-layout>
@@ -30,8 +36,10 @@ export default {
     return {
       loading: false,
       borderCard: false,
+      showGroup: false,
       showModal: () => {},
       showZoomModal: () => {},
+      showGroupModal: () => {},
     }
   },
   methods: {
@@ -40,6 +48,9 @@ export default {
     },
     loadZoomModal(zoomModal) {
       this.showZoomModal = zoomModal
+    },
+    handleGroupModal(method) {
+      this.showGroupModal = method
     },
   },
 }
