@@ -40,7 +40,7 @@
         <a-button type="primary" @click="addRow">+ Add Organizations</a-button>
       </a-col>
     </a-row>
-    <a-row v-for="org in organizationKeys" :key="org.id" :gutter="16">
+    <a-row v-for="(org, index) in organizationKeys" :key="org.id" :gutter="16">
       <a-col :span="11">
         <a-form-item
           label="Organizations Type:"
@@ -49,7 +49,7 @@
         >
           <a-select
             v-decorator="[
-              'organizationType',
+              `[organizationType]${index}`,
               {
                 rules: [
                   {
@@ -78,7 +78,7 @@
         >
           <a-select
             v-decorator="[
-              'organization',
+              `organizations[${index}]`,
               {
                 rules: [
                   {

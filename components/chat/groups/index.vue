@@ -16,7 +16,10 @@
       title="Create Group"
       @cancel="handleGroupModal(false)"
     >
-      <FormFields />
+      <a-form :form="form" @submit="onSubmit">
+        <FormFields />
+        <FormActionButton :loading="loading" custom-text="Create Group" />
+      </a-form>
     </a-modal>
   </div>
 </template>
@@ -27,8 +30,12 @@ export default {
   components: { FormFields },
   data() {
     return {
+      loading: false,
       groupModal: false,
       data: [],
+      form: this.$form.createForm(this, {
+        name: 'createForm',
+      }),
     }
   },
   mounted() {},
@@ -40,6 +47,17 @@ export default {
     },
     handleGroupModal(show) {
       this.groupModal = show
+    },
+    onSubmit(e) {
+      // this.loading = true
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values)
+        } else {
+          this.loading = false
+        }
+      })
     },
   },
 }
