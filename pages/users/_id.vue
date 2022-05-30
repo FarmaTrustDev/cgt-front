@@ -3,7 +3,7 @@
     <template slot="content">
       <div class="grey-card">
         <a-card :bordered="false" class="default-border-radius">
-          <h2>Add User Details</h2>
+          <h2>{{translation.AddUser_3_418}}</h2>
           <formField class="mt-15" />
       </a-card>
     </div>
@@ -23,6 +23,11 @@ export default {
         name: 'UsersCreate',
       }),
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },    
   },
   methods: {
     // onSubmit(e) {

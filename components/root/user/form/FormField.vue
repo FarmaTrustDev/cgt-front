@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="12">
         <a-form-item
-          label="First Name"
+          :label="translation.FirstName_2_420 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -20,12 +20,12 @@
                 ],
               },
             ]"
-            placeholder="Please input your First Name"
+            :placeholder="translation.FirstName_2_420"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Last Name"
+          :label="translation.LastName_2_422+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -43,13 +43,13 @@
                 ],
               },
             ]"
-            placeholder="Please input your Last Name"
+            :placeholder="translation.LastName_2_422"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Email"
+          :label="translation.EmailAddre_2_140+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -67,12 +67,12 @@
               },
             ]"
             :disabled="isCreated"
-            placeholder="Please input your Email"
+            :placeholder="translation.EmailAddre_2_140"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="User Name"
+          :label="translation.Usern_1_400"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -90,13 +90,13 @@
               },
             ]"
             :disabled="isCreated"
-            placeholder="Please input your UserName"
+            :placeholder="translation.Usern_1_400"
           />
         </a-form-item>
       </a-col>
       <a-col :span="24">
         <a-form-item
-          label="Office Address"
+          :label="translation.OfficAddre_2_428"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -113,12 +113,12 @@
                 ],
               },
             ]"
-            placeholder="Please input your Office Address"
+            :placeholder="translation.OfficAddre_2_428"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Role"
+          :label="translation.Roles_1_442"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -137,7 +137,7 @@
             ]"
             :show-search="true"
             :filter-option="filterOption"
-            placeholder="Select Role"
+            :placeholder="translation.Roles_1_442"
             style="width: 100%"
             size="large"
             class="default-select"
@@ -167,7 +167,7 @@
       
       <a-col :span="12">
         <a-form-item
-          label="Contact Number"
+          :label="translation.ContaNumbe_2_430"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -185,13 +185,13 @@
                 ],
               },
             ]"
-            placeholder="Please input your Contact Number"
+            :placeholder="translation.ContaNumbe_2_430"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="What3Words"
+          :label="translation.What3_1_432"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -209,13 +209,13 @@
                 ],
               },
             ]"
-            placeholder="Please input your What3Words"
+            :placeholder="translation.What3_1_432"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Department"
+          :label="translation.Depar_1_436"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -233,13 +233,13 @@
                 ],
               },
             ]"
-            placeholder="Please input your Department"
+            :placeholder="translation.Depar_1_436"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Image"
+          :label="translation.Image_1_438"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -254,7 +254,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Post Code"
+          :label="translation.Postc_1_444"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -272,14 +272,14 @@
                 ],
               },
             ]"
-            placeholder="Please input your Postcode"
+            :placeholder="translation.Postc_1_444"
           />
         </a-form-item>
       </a-col>
       
       <a-col :span="12">
         <a-form-item
-          label="Location"
+          :label="translation.Locat_1_448"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -297,13 +297,13 @@
                 ],
               },
             ]"
-            placeholder="Please input your Location"
+            :placeholder="translation.Locat_1_448"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Postal Address"
+          :label="translation.PostaAddre_2_450"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -321,13 +321,13 @@
                 ],
               },
             ]"
-            placeholder="Please input your Postal Address"
+            :placeholder="translation.PostaAddre_2_450"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="County"
+          :label="translation.Count_1_452"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -345,13 +345,13 @@
                 ],
               },
             ]"
-            placeholder="Please input your County"
+            :placeholder="translation.Count_1_452"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Country"
+          :label="translation.Count_1_49"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -370,7 +370,7 @@
             ]"
             :show-search="true"
             :filter-option="filterOption"
-            placeholder="Select Country"
+            :placeholder="translation.Count_1_49"
             style="width: 100%"
             size="large"
             class="default-select"
@@ -430,6 +430,11 @@ export default {
       this.fetchRole = false
       this.getRoles()
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     handleChange(info) {

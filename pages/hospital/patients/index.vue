@@ -6,7 +6,7 @@
         type="primary"
         class="mrm-5 float-right"
         @click="goto('patients/create')"
-        >Add New Patient</a-button
+        >{{translation['AddNew_3_631']}}</a-button
       >
       <a-input
         ref="userNameInput"
@@ -95,6 +95,11 @@ export default {
       fetchPatientService: {},
     }
   },
+  /* computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }, */ 
   methods: {
     getFetch(fetch) {
       this.fetchPatientService = fetch

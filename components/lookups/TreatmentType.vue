@@ -4,7 +4,7 @@
     <a-row class="pt-10">
 
       <a-col :span="12">
-        <h3 class="page-title">Select Treatment Type</h3>
+        <h3 class="page-title">{{translation.Selectreat_3_262}}</h3>
       </a-col>
  
       <a-col :span="12">
@@ -23,7 +23,7 @@
               },
             ]"
             :loading="typeLoading"
-            placeholder="Select Treatment Type"
+            :placeholder="translation.Selectreat_3_262"
             class="default-select w-100"
             size="large"
             :disabled="disabled"
@@ -45,7 +45,7 @@
 
     <a-row v-if="!treatmentTypes">
       <a-col class="empty-message">
-        Select the treatment type to get patient screenings
+        {{translation.Pleasselec_8_548}}
       </a-col>
     </a-row>
 
@@ -69,6 +69,11 @@ export default {
   },
   mounted() {
     this.fetchTreatmentTypes()
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     fetchTreatmentTypes() {

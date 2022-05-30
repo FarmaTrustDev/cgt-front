@@ -33,6 +33,9 @@ export default {
     user() {
       return this.$store.getters.getUser
     },
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.userDetail()

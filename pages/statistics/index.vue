@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card :bordered="false" class="default-border-radius pb-15">
-      <h2>Statistic</h2>
+      <h2>{{translation.Stati_1_19}}</h2>
 
       <a-row class="grey-card">
         <a-col :span="2"> </a-col>
@@ -28,5 +28,10 @@ export default {
     }
   },
   methods: {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
 }
 </script>

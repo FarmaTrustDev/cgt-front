@@ -5,7 +5,7 @@
       <a-alert
       v-if="message"
       type="info"
-      message="Please select the treatment type to get patient screening">
+      :message="translation.Pleasselec_8_548">
       </a-alert>
       <a-skeleton :loading="loading">
         <span v-if="categories">
@@ -48,6 +48,11 @@ export default {
     }
   },
   mounted() {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     onSubmit(e) {
       this.loading = true

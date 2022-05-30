@@ -24,7 +24,7 @@
               />
               <a-empty v-else class="h-100vh">
                 <span slot="description">
-                  Select User to start conversation
+                  {{translation.SelecUser_5_117}}
                 </span>
                 <a-button type="primary" @click="showUsersModal(true)">
                   Start Now
@@ -37,7 +37,7 @@
     </a-row>
     <a-modal
       :visible="usersModal"
-      title="Add users"
+      :title="translation.adduser_2_464"
       :footer="null"
       @cancel="showUsersModal(false)"
     >
@@ -73,6 +73,11 @@ export default {
 
     this.$emit('loadShowModal', this.showUsersModal)
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     loadScrollMethod(method) {
       this.scrollMethod = method

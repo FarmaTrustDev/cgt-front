@@ -2,7 +2,7 @@
   <div class="label-page">
     <a-row class="p-10 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left">Label</h3>
+        <h3 class="page-title float-left">{{translation.Label_1_27}}</h3>
 
         <a-input
           ref="userNameInput"
@@ -37,6 +37,11 @@ export default {
   mounted() {
     this.fetch()
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   methods: {
     fetch() {
       this.loading = true

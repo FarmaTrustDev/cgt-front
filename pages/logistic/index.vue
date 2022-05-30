@@ -10,7 +10,7 @@
         <a-tab-pane key="1" tab="New Requests">
           <newRequests />
         </a-tab-pane>
-        <a-tab-pane key="3" tab="In Progress"> <in-progress /> </a-tab-pane>
+        <a-tab-pane key="3" :tab="translation.Inprogr_2_204"> <in-progress /> </a-tab-pane>
       </a-tabs>
     </template>
   </page-layout>
@@ -34,6 +34,11 @@ export default {
       showResponseModal: false,
       isAccepted: false,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {},
 }

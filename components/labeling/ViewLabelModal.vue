@@ -65,7 +65,7 @@
 
       <template #footer>
         <a-button key="submit" class="footer-btn-label" type="primary" >Print</a-button>
-        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled" >Cancel</a-button>
+        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled" >{{translation.cance_1_296}}</a-button>
       </template>
 
     </a-modal>
@@ -96,6 +96,11 @@
     mounted() {
       // alert(this.$parent.schedulingId)
       this.fetch(this.$parent.schedulingId)
+    },
+    computed:{
+      translation() {
+        return this.$store.getters.getTranslation
+      },
     },
     methods: {
       showModal(e) {

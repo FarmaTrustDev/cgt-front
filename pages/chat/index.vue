@@ -2,16 +2,16 @@ getUser(users) {},
 <template>
   <page-layout
     :loading="loading"
-    title="Chat"
+    :title="translation.Chat_1_31"
     :bordered="borderCard"
     class="patient-page"
     :create="false"
   >
     <template slot="headerMenus">
       <a-button type="primary" @click="showZoomModal(true)"
-        >Zoom Meeting</a-button
+        >{{translation.Newzoom_3_119}}</a-button
       >
-      <a-button type="primary" @click="showModal(true)">Add Users</a-button>
+      <a-button type="primary" @click="showModal(true)">{{translation.adduser_2_464}}</a-button>
     </template>
     <template slot="content">
       <chat @loadShowModal="loadShowModal" />
@@ -33,6 +33,11 @@ export default {
       showModal: () => {},
       showZoomModal: () => {},
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     loadShowModal(show) {

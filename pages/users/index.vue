@@ -1,17 +1,17 @@
 <template>
     <div>
     <div class="page-header clearfix">
-    <h3 class="page-title pl-5 float-left">User New List</h3>
+    <h3 class="page-title pl-5 float-left">{{translation.UserNew_3_136}}</h3>
       <a-button
         type="primary"
         class="mrm-5 float-right"
         @click="goto('users/create')"
-        >Add User</a-button
+        >{{translation.adduser_2_464}}</a-button
       >
     <a-input
       class="float-right page-search-input"
       ref="userNameInput"
-      placeholder="Search User"
+      :placeholder="translation.Searcuser_2_404"
       @change="searchUser"
     >
       <a-icon slot="prefix" type="search" />
@@ -26,7 +26,7 @@
         <template slot="action" slot-scope="action">
           <a-dropdown>
           <a-button class="action-button" @click="preventDefault">
-            Admin <a-icon type="down" />
+            {{translation['Admin_1_142']}} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
           <a-menu-item key="userDetail">
@@ -93,6 +93,9 @@ export default {
     user() {
       return this.$store.getters.getUser
     },
+    translation() {
+      return this.$store.getters.getTranslation
+    },    
   },
   mounted() {
     this.fetch()

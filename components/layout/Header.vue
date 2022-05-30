@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-layout-header>
-      <div class="user-detail">Welcome, {{ user.name }}</div>
+      <div class="user-detail">{{translation['Welco_1_1']}}, {{ user.name }}</div>
 
       <div class="hospital-detail">
         <!-- Header notifications -->
@@ -86,7 +86,7 @@ export default {
   },
   mounted() {
     this.notificationHandler()
-    this.uploadTranslations()
+    // this.uploadTranslations()
     // this.downloadTranslations()
   },
   methods: {

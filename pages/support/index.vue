@@ -46,7 +46,7 @@
                   <a-icon type="edit" />
                 </a-button> -->
             <a-dropdown>
-              <a-button class="action-button" size="small">Admin</a-button>
+              <a-button class="action-button" size="small">{{translation.Admin_1_142}}</a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="showUpdate(record)"
@@ -137,6 +137,11 @@ export default {
   },
   mounted() {
     this.fetch()
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     showUpdate(record) {

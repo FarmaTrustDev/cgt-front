@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <h1 class="title"><strong>My Dashboard</strong></h1>
+    <h1 class="title"><strong>{{translation['Mydashb_2_7']}}</strong></h1>
 
     <manufacturerHome v-if="isManufacturer()" />
     <hospitalHome v-if="isHospital()" />
@@ -23,6 +23,11 @@ export default {
     return {}
   },
   mounted() {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   methods: {
     gotoView(uri) {
       this.goto(`/${uri}`)
