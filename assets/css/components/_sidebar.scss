@@ -125,6 +125,29 @@
   .menu-container {
     padding: 10px 30px 10px 30px;
     border-radius: 22px;
+    img{
+      // opacity: 0.5;
+      color: $primary-color;
+      // background: $primary-color;
+      filter: grayscale(100%) opacity(0.4);
+    }
+    &:hover {
+      cursor: pointer;
+      color: $primary-color;
+      // transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
+      // color 0.3s ease-in-out, background-image 0.3s ease-in-out;
+      // background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
+      // background-size: cover;
+      img {
+        // transition: transform 0.1s ease-in-out,
+        // background-color 0.1s ease-in-out, color 0.1s ;
+        // background: $primary-color;
+        color: rgb(29, 187, 100);
+        fill:#3869d1;
+        text-shadow: 1px 1px 1px rgb(244, 4, 4);
+        filter: grayscale(0%) drop-shadow(0 0 0 blue);
+      }
+    }
   }
   .ant-menu-inline-collapsed {
     .menu-container {
@@ -141,6 +164,9 @@
     background-color: transparent;
     .menu-container {
       background-color: #F2F5FB;
+      img{
+        filter:grayscale(0%);
+      }
     }
   }
 

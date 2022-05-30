@@ -20,7 +20,8 @@
           @click="goto(menu.to)"
         >
           <div class="menu-container">
-            <img :src="menu.icon" style=" max-width: 28px; " /> <span class="title">{{ menu.name }}</span>
+            <img :src="menu.icon" style=" max-width: 28px; " /> 
+            <span class="title">{{ menu.name }}</span>
           </div>
         </a-menu-item>
         <a-menu-item key="10" @click="logout" class="logout-menu">
