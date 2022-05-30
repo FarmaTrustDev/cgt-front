@@ -40,7 +40,7 @@
         <a-button type="primary" @click="addRow">+ Add Organizations</a-button>
       </a-col>
     </a-row>
-    <a-row :gutter="16" v-for="org in organizationKeys" :key="org.id">
+    <a-row v-for="org in organizationKeys" :key="org.id" :gutter="16">
       <a-col :span="11">
         <a-form-item
           label="Organizations Type:"
@@ -60,6 +60,7 @@
               },
             ]"
             class="w-100"
+            @change="(e) => handleOrganizationType(e, org.id)"
           >
             <a-select-option
               v-for="orgType in organizationTypes"
@@ -90,7 +91,7 @@
             class="w-100"
           >
             <a-select-option
-              v-for="orgType in organizationTypes"
+              v-for="orgType in organizations[org.id]"
               :key="orgType.id"
               >{{ orgType.name }}</a-select-option
             >
@@ -116,6 +117,7 @@ export default {
       currentId: 0,
       organizationKeys: [],
       organizationTypes: [],
+      organizations: {},
     }
   },
   mounted() {
@@ -146,6 +148,14 @@ export default {
           this.organizationTypes = response.data
         }
       )
+    },
+    handleOrganizationType(id, key) {
+      const typeOrg = this.organizationTypes.find((orgKey) => orgKey.id === id)
+
+      let organization = this.organizations
+      organization[key] = typeOrg.organizations
+      organization = JSON.stringify(organization)
+      this.organizations = JSON.parse(organization)
     },
   },
 }
