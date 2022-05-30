@@ -2,7 +2,7 @@
   <div>
     <a-table :data-source="data" :columns="column">
       <template slot="message" slot-scope="text, record">
-        <a-button type="" @click="handleView(text, record)"> view</a-button>
+        <a-button type="" @click="getUser(text, record)"> view</a-button>
       </template>
     </a-table>
   </div>
@@ -30,7 +30,7 @@ export default {
     this.fetch()
   },
   methods: {
-    handleView(user) {
+    getUser(user) {
       this.$emit('getUser', user)
     },
     fetch() {

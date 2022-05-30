@@ -29,7 +29,6 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
-        
           <a-input
             v-decorator="[
               'lastName',
@@ -151,7 +150,8 @@
             v-decorator="[
               'userRoleId',
               {
-                initialValue: entity.userRoleId== undefined ? 0 : entity.userRoleId ,
+                initialValue:
+                  entity.userRoleId == undefined ? 0 : entity.userRoleId,
                 rules: [
                   {
                     required: false,
@@ -164,7 +164,7 @@
           />
         </a-form-item>
       </a-col>
-      
+
       <a-col :span="12">
         <a-form-item
           :label="translation.ContaNumbe_2_430"
@@ -243,14 +243,23 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
-      <Upload
-        :default-file-list="entity.profileImageUrl"
-        :extensions="allowedExtensions"
-        @handleChange="handleChange"
-      />
-      <span v-if="entity.profileImageUrl && !newSelected"><img :src="entity.profileImageUrl['name']" width="80px" height="80px"/></span>
-      <span v-if="defaultImage && entity.profileImageUrl==null"><img src="https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg" width="80px" height="80px"/></span>
-      </a-form-item
+          <Upload
+            :default-file-list="entity.profileImageUrl"
+            :extensions="allowedExtensions"
+            @handleChange="handleChange"
+          />
+          <span v-if="entity.profileImageUrl && !newSelected"
+            ><img
+              :src="entity.profileImageUrl['name']"
+              width="80px"
+              height="80px"
+          /></span>
+          <span v-if="defaultImage && entity.profileImageUrl == null"
+            ><img
+              src="https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg"
+              width="80px"
+              height="80px"
+          /></span> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
@@ -276,7 +285,7 @@
           />
         </a-form-item>
       </a-col>
-      
+
       <a-col :span="12">
         <a-form-item
           :label="translation.Locat_1_448"
@@ -393,17 +402,17 @@ import withCrud from '~/mixins/with-crud'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 import RoleServices from '~/services/API/RoleServices'
-import Upload from '~/components/upload/userUpload.vue'
+import Upload from '~/components/upload/userUpload'
 import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
 export default {
   components: { Upload },
   mixins: [withCrud],
-  
+
   data() {
     return {
-      entity:{},
+      entity: {},
       entityId: null,
-      userRoleId:0,
+      userRoleId: 0,
       loading: false,
       countries: [],
       roles: [],
@@ -413,8 +422,8 @@ export default {
       formLayout: 'vertical',
       apiService: UserServices,
       allowedExtensions: DOCUMENT_EXTENSIONS,
-      newSelected:false,
-      defaultImage:true,
+      newSelected: false,
+      defaultImage: true,
     }
   },
   mounted() {
@@ -438,10 +447,10 @@ export default {
   },
   methods: {
     handleChange(info) {
-      this.newSelected=true
-      this.defaultImage=false
+      this.newSelected = true
+      this.defaultImage = false
       this.fileList = info
-      this.$emit('handleChange',this.fileList)
+      this.$emit('handleChange', this.fileList)
     },
     filterOption,
     disabledDate: _disabledFutureDate,
