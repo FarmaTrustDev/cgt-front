@@ -3,7 +3,7 @@
     <a-modal
       :footer="null"
       :width="900"
-      title="Add New Ticket"
+      :title="translation.AddNew_3_182"
       :destroy-on-close="true"
       :visible="visible"
       @cancel="showModal(false)"
@@ -12,7 +12,7 @@
       <a-form :form="form" @submit="onSubmit">
         <a-row :gutter="20">
           <a-col :span="12">
-            <a-form-item v-if="!isCreated" label="Patient:">
+            <a-form-item v-if="!isCreated" :label="translation.Patie_1_184">
               <a-select
                 v-decorator="[
                   'patient_Id',
@@ -28,7 +28,7 @@
                 ]"
                 :show-search="true"
                 :filter-option="filterOption"
-                placeholder="Search By Name, Id, Email"
+                :placeholder="translation.searc_1_488+' By Name, Id, Email'"
                 style="width: 100%"
                 size="large"
                 autocomplete="off"
@@ -61,7 +61,7 @@
                 placeholder="Subject"
               />
             </a-form-item>
-            <a-form-item v-else label="Patient:">
+            <a-form-item v-else :label="translation.Patie_1_184">
               <a-input
                 v-decorator="[
                   'reporter_name',
@@ -106,7 +106,7 @@
                   },
                 ]"
                 type="hidden"
-                placeholder="Subject"
+                :placeholder="translation.Subje_1_190"
               />
               <!-- <a-input
                 v-decorator="[
@@ -142,7 +142,7 @@
         <a-row :gutter="20">
           <a-col :span="24">
             <a-form-item
-              label="Subject:"
+              :label="translation.Subje_1_190"
               :label-col="{ span: 24 }"
               :wrapper-col="{ span: 24 }"
             >
@@ -159,7 +159,7 @@
                     ],
                   },
                 ]"
-                placeholder="Subject"
+                :placeholder="translation.Subje_1_190"
               />
             </a-form-item>
           </a-col>
@@ -167,7 +167,7 @@
         <a-row :gutter="20">
           <a-col :span="24">
             <a-form-item
-              label="Description:"
+              :label="translation.Descr_1_69+':'"
               :label-col="{ span: 24 }"
               :wrapper-col="{ span: 24 }"
             >
@@ -184,7 +184,7 @@
                     ],
                   },
                 ]"
-                placeholder="Description"
+                :placeholder="translation.Descr_1_69"
                 :auto-size="{ minRows: 3, maxRows: 6 }"
               />
             </a-form-item>
@@ -235,7 +235,7 @@
                   },
                 ]"
                 type="hidden"
-                placeholder="Subject"
+                :placeholder="translation.subject"
               />
             </a-form-item>
           </a-col>
@@ -255,7 +255,7 @@
                   },
                 ]"
                 :loading="typeLoading"
-                placeholder="Select Priority"
+                :placeholder="translation.Seleca_3_194"
                 style="width: 100%"
                 size="large"
                 class="default-select"
@@ -358,6 +358,11 @@ export default {
     }
   },
   mounted() {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }, 
   methods: {
     filterOption,
     showModal(show) {

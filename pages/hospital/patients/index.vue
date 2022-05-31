@@ -10,7 +10,7 @@
       >
       <a-input
         ref="userNameInput"
-        placeholder="Search"
+        :placeholder="translation.searc_1_488"
         class="float-right page-search-input"
         @change="searchPatent"
       >

@@ -4,7 +4,7 @@
       <a-row>
         <a-col :span="12">
           <a-form-item
-            label="Received by*:"
+            :label="translation['Receiby:_2_330']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -17,13 +17,13 @@
                   ],
                 },
               ]"
-              placeholder="Received by"
+              :placeholder="translation['Receiby:_2_330']"
             /> </a-form-item
         ></a-col>
 
         <a-col :span="12">
           <a-form-item
-            label="Pickup Date Time:"
+            :label="translation['PickuDate:_2_386']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -50,7 +50,7 @@
 
         <a-col :span="24">
           <a-form-item
-            label="Receiving Notes:"
+            :label="translation['ReceiNote:_2_334']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -61,7 +61,7 @@
                   rules: [],
                 },
               ]"
-              placeholder="Receiving Notes:"
+              :placeholder="translation['ReceiNote:_2_334']"
             /> </a-form-item
         ></a-col>
         <a-col :span="24"
@@ -97,6 +97,11 @@ export default {
       formLayout: 'vertical',
       DEFAULT_DATE_TIME_FORMAT,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     disabledDate: _disabledPreviousDate,

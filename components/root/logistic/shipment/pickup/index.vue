@@ -4,7 +4,7 @@
       <a-row>
         <a-col :span="12">
           <a-form-item
-            label="Handled by*:"
+            :label="translation['Handlby:_2_384']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -17,12 +17,12 @@
                   ],
                 },
               ]"
-              placeholder="Handled by"
+              :placeholder="translation['Handlby:_2_384']"
             /> </a-form-item
         ></a-col>
         <a-col :span="12">
           <a-form-item
-            label="Collected by*:"
+            :label="translation['Colleby:_2_390']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -35,13 +35,13 @@
                   ],
                 },
               ]"
-              placeholder="Handled by"
+              :placeholder="translation['Colleby:_2_390']"
             /> </a-form-item
         ></a-col>
 
         <a-col :span="24">
           <a-form-item
-            label="Pickup Date Time:"
+            :label="translation['PickuDate:_2_386']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -68,7 +68,7 @@
 
         <a-col :span="24">
           <a-form-item
-            label="Pickup location*:"
+            :label="translation.PickuLocat_2_792"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -84,7 +84,7 @@
                   ],
                 },
               ]"
-              placeholder="Pickup location"
+              :placeholder="translation.PickuLocat_2_792"
             /> </a-form-item
         ></a-col>
         <a-col :span="24"
@@ -120,6 +120,11 @@ export default {
       formLayout: 'vertical',
       DEFAULT_DATE_TIME_FORMAT,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     disabledDate: _disabledPreviousDate,

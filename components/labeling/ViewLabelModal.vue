@@ -1,7 +1,7 @@
 <template>
   <div class="view-label-modal">
     
-    <a-modal v-model="visible" title="Sample form" :after-close="handleCancel" @ok="handleOk" >
+    <a-modal v-model="visible" :title="translation.Samplfrom_2_87" :after-close="handleCancel" @ok="handleOk" >
       <a-row class="sample-form-container">
         <a-col :span="12" class="left">
           <div class="bar-code-container">
@@ -12,37 +12,37 @@
           </div>
           <div class="collection-datetime">
             <span class="collection-time">
-                Collection Date and Time
+                {{translation.ColleDate_4_99}}
             </span>
 
             <span class="_collectionDate">{{data.collectionDate}}</span>
           </div>
-          <h6 class="text-center irradiate"><strong>Do Not Irradiate</strong></h6>
+          <h6 class="text-center irradiate"><strong>{{translation.DoNot_3_101}}</strong></h6>
           <div class="bar-code-container sec-barcode">
             <img class="img-fluid" :src="bardCode2Url">
           </div>
 
           <div class="manufacturer">
             <span class="manufacturer-name from">{{data.to}}</span>
-            <span class="further">For Further Processing </span>
+            <span class="further">{{translation.ForFurth_3_103}} </span>
             <span class="manufacturer-detail">Total Volume ml, containing approx ml Citrate Store at 1 to 10 C</span>
           </div>
         </a-col>
         <a-col :span="12" class="right">
           <div class="usage right_to">
-              For Clinical trail Use only 
+              {{translation.ForClini_5_91}} 
           </div>
 
           <div class="patient-detail">
               <strong>
-                  Patient ID  : <span class="patient_id">{{data.patientEnrollmentNumber}}</span>
+                  {{translation.PatieID_2_264}}  : <span class="patient_id">{{data.patientEnrollmentNumber}}</span>
               </strong>
-              <div>Patient Name: <span class="patient_name">{{patient.name}}</span></div>
-              <div>Patient DOB:<span class="patient_dob">{{patient.dob}}</span></div>
+              <div>{{translation.PatieName_2_93}}: <span class="patient_name">{{patient.name}}</span></div>
+              <div>{{translation.AddNew_3_631}} DOB:<span class="patient_dob">{{patient.dob}}</span></div>
           </div>
 
           <div class="Expiration-detail">
-              <span>Expiration Date/Time  </span>
+              <span>{{translation.ExpirDate/_2_95}}  </span>
               ()
           </div>
 

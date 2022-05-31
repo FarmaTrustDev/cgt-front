@@ -1,5 +1,5 @@
 <template>
-  <page-layout :create="false" :loading="loading" title="Shipment Status">
+  <page-layout :create="false" :loading="loading" :title="translation.Shipm_1_756+' '+translation.Statu_1_202">
     <template slot="content">
       <div class="grey-card enrollment-page">
         <a-card class="default-border-radius ant-card">
@@ -8,7 +8,7 @@
             @change="changeTabs"
             :tab-position="mode"
           >
-            <a-tab-pane :key="1" tab=" Pickup Shipment">
+            <a-tab-pane :key="1" :tab="translation.PickuShipm_2_861">
               <pickup
                 v-if="isEmpty(pickupShipment)"
                 :scheduling="entity"
@@ -21,7 +21,7 @@
                 :shipment="pickupShipment"
               />
             </a-tab-pane>
-            <a-tab-pane :key="2" tab="Deliver Shipment">
+            <a-tab-pane :key="2" :tab="translation.DelivShipm_2_863">
               <delivery
                 v-if="isEmpty(deliveryShipment)"
                 :shipment="deliveryShipment"
@@ -69,6 +69,11 @@ export default {
       deliveryShipment: null,
       activeKey: 1,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     changeTabs(tabs) {
