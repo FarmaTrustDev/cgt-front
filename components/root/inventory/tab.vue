@@ -4,7 +4,7 @@
       <a-col :span="2"></a-col>
       <a-col :span="20">
         <detail />
-        <h2 class="mt-15">Equipment</h2>
+        <h2 class="mt-15">{{translation.Equip_1_568}}</h2>
       </a-col>
       <a-col :span="2"></a-col>
     </a-row>
@@ -23,7 +23,7 @@
               :bordered="false"
               title=""
             >
-              <h4><a-button type="link">Cold Storage</a-button></h4>
+              <h4><a-button type="link">{{translation.ColdStora_2_588}}</a-button></h4>
               <ImageHeading
                 :detail="{
                   img: 'web/inventory/Group-1000002120.svg',
@@ -40,7 +40,7 @@
             >
               <h4>
                 <a-button type="link"
-                  >Support Equipment outside Clean Room</a-button
+                  >{{translation.SuppoEquip_5_584}}</a-button
                 >
               </h4>
               <span v-for="(cl, index) in outsideEquipment" :key="index">
@@ -73,5 +73,10 @@ export default {
       ],
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }
 }
 </script>

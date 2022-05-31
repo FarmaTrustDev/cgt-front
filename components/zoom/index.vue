@@ -17,7 +17,7 @@
             </a-descriptions-item>
           </a-descriptions>
           <a-button type="primary" @click="gotoMail(data)">
-            Share by Email
+            {{translation.Shareby_3_127}}
           </a-button>
         </div>
       </a-spin>
@@ -64,5 +64,10 @@ export default {
       window.location = `mailto:?subject=You%20have%20been%20invited%20to%20the%20following%20event.&body=Join%20with%20Zoom%20Meet%20${data.join_url}`
     },
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }
 }
 </script>

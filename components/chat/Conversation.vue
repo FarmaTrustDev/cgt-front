@@ -84,7 +84,7 @@
           <a-col class="text-right">
             <a-form-item>
               <a-button html-type="submit" :loading="submitting" type="primary">
-                Submit
+                {{translation.Submi_1_248}}
               </a-button>
             </a-form-item>
           </a-col>
@@ -152,5 +152,10 @@ export default {
       content.scrollTop = content.scrollHeight
     },
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }
 }
 </script>

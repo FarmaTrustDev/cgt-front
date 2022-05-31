@@ -26,7 +26,7 @@
       <div>
         <a-card class="white-card" :bordered="false">
           <div>
-            Treatments <span class="float-right">Collection/Delivery</span>
+            {{translation.Treat_1_29}} <span class="float-right">{{translation.Colle_1_23}}</span>
           </div>
           <div class="default-border-radius border p-10 mt-15">
             <a-list :data-source="treatments">
@@ -69,6 +69,11 @@ export default {
       })
     },
     _getFormatMoment,
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
 }
 </script>

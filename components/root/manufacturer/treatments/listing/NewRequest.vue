@@ -5,10 +5,10 @@
       <span slot="action" slot-scope="text, record">
         <div v-if="showButton(record)">
           <a-button type="primary" dashed @click="showConfirm(record, true)">
-            Accept
+            {{translation.Accep_1_278}}
           </a-button>
           <a-button type="danger" dashed @click="showConfirm(record, false)">
-            Reject
+            {{translation.Rejec_1_280}}
           </a-button>
         </div>
         <div v-else>
@@ -37,7 +37,7 @@
           :btn-type="getButtonType()"
           :is-created="false"
           ><span slot="extra" class="mr-5">
-            <a-button @click="handleModal(false)">Cancel</a-button>
+            <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
           </span></FormActionButton
         >
       </a-form>
@@ -153,5 +153,10 @@ export default {
       this.fetch(params)
     },
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }
 }
 </script>
