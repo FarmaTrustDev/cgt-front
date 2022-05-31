@@ -86,7 +86,7 @@ export default {
   },
   mounted() {
     this.notificationHandler()
-    this.uploadTranslations()
+    // this.uploadTranslations()
     // this.downloadTranslations()
   },
   methods: {
