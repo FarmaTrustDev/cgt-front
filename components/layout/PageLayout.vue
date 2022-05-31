@@ -4,9 +4,9 @@
     <span slot="extra">
       <slot name="headerMenus" />
       <a-button v-if="create" type="primary" @click="gotoState('create')"
-        >Create</a-button
+        >{{translation.Creat_1_123}}</a-button
       >
-      <a-button v-if="back" type="primary" @click="goBack()">Back</a-button>
+      <a-button v-if="back" type="primary" @click="goBack()">{{translation.Back_1_538}}</a-button>
     </span>
 
     <slot name="content" />
@@ -41,5 +41,10 @@ export default {
       this.goto(`${this.$route.path}/${id}`, query)
     },
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }
 }
 </script>

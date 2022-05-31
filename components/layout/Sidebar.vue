@@ -25,7 +25,7 @@
         </a-menu-item>
         <a-menu-item key="10" @click="logout" class="logout-menu">
           <div class="menu-container">
-            <img :src="logoutImg"> <span class="title">Logout</span>
+            <img :src="logoutImg"> <span class="title">{{translation.Logou_1_37}}</span>
           </div>
         </a-menu-item>
       </a-menu>
@@ -46,6 +46,9 @@ export default {
   },
   computed: {
     // ...mapGetters(['getUser']),
+    translation() {
+      return this.$store.getters.getTranslation
+    },
     user() {
       return this.$store.getters.getUser
     },
