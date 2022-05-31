@@ -89,6 +89,7 @@ export default {
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
         active: true,
+        direction: 1,
       },
       selectedRow: {},
       confirmLoading: false,
@@ -100,10 +101,13 @@ export default {
   },
   methods: {
     stepClick(record, phase) {
-      this.goto(
-        `/manufacturer/treatments/process/${record.treatment.globalId}`,
-        { ...phase.params }
-      )
+      if (record.treatment.phaseId >= phase.enablePageId) {
+        return this.goto(
+          `/manufacturer/treatments/process/${record.treatment.globalId}`,
+          { ...phase.params }
+        )
+      }
+      return false
     },
     getCurrentStep(treatment) {
       if (treatment.phaseId != null) {

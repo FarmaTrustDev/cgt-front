@@ -8,7 +8,7 @@
       :class="{ 'rounded-table': rounded, 'patient-table': patient }"
     >
       <template slot="customTitle">
-        <div class="text-left treatment-title">Treatment Status</div>
+        <div class="text-left treatment-title">{{translation['TreatStatu_2_748']}}</div>
       </template>
 
       <template slot="name" slot-scope="name">
@@ -62,7 +62,7 @@
             ></steps>
             <a-dropdown>
               <a-button class="btn-view-timeline" type="primary" size="small">
-                Admin
+                {{translation['Admin_1_142']}}
               </a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
@@ -80,7 +80,7 @@
                 </a-menu-item>
                 <a-menu-item>
                   <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> Cancel</a
+                    ><a-icon type="minus-circle" /> {{translation.cance_1_296}}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
@@ -130,18 +130,18 @@
       <span slot="patientAction" slot-scope="text, record">
         <a-dropdown :trigger="['click']">
           <a-button class="action-button" @click="preventDefault">
-            Admin <a-icon type="down" />
+            {{translation['Admin_1_142']}} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">
-              <a>Open Ticket</a>
+              <a>{{translation.OpenTicke_2_800}}</a>
             </a-menu-item>
             <a-menu-item key="Consent">
               <a
                 @click="
                   goto(`/hospital/patients/${record.globalId}?view=Consent`)
                 "
-                >Add New Treatment</a
+                >{{translation.Addnew_3_75}}</a
               >
             </a-menu-item>
             <a-menu-item key="3">
@@ -152,7 +152,7 @@
                 placement="topLeft"
                 @confirm="deletePatient(`${record.id}`)"
               >
-                Hide Patient
+                {{translation.HidePatie_2_804}}
               </a-popconfirm>
             </a-menu-item>
             <a-menu-item key="4">
@@ -164,7 +164,7 @@
                 @confirm="deadPatient(record)"
               >
                 <span v-if="record.isDead"> Resume</span>
-                <span v-else>Cancel</span>
+                <span v-else>{{translation.cance_1_296}}</span>
               </a-popconfirm>
             </a-menu-item>
           </a-menu>
@@ -255,6 +255,11 @@ export default {
     } else {
       this.data = this.dumpData
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     preventDefault,

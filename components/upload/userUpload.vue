@@ -1,24 +1,23 @@
 <template>
-  <a-upload-dragger
-    :before-upload="beforeUpload"
-    :default-file-list="defaultFileList"
-     list-type="picture-card"
-    name="file"
-    :action="handleChange"
-    :disabled="disabled"
-  >
-    <p class="ant-upload-drag-icon">
-      <a-icon type="camera" theme="filled" />
-    </p>
-    <p class="ant-upload-text">Click or drag file to this area to upload</p>
-    <p class="ant-upload-hint">
-      Support for a single or bulk upload. Strictly prohibit from uploading
-      company data or other band files
-    </p>
-  </a-upload-dragger>
+  <div class="clearfix">
+    <a-upload
+      :before-upload="beforeUpload"
+      :default-file-list="defaultFileList"
+      list-type="picture"
+      name="file"
+      :action="handleChange"
+      :disabled="disabled"
+    >
+      <div v-if="stateFileList.length < 3">
+        <a-icon type="camera" theme="filled" style="font-size: 60px" />
+      </div>
+    </a-upload>
+    <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
+      <img alt="example" style="width: 100%" />
+    </a-modal>
+  </div>
 </template>
 <script>
-
 export default {
   props: {
     extensions: {
@@ -37,6 +36,7 @@ export default {
   data() {
     return {
       stateFileList: [],
+      previewVisible: false,
     }
   },
   methods: {
@@ -63,7 +63,9 @@ export default {
       }
       this.$emit('handleChange', this.stateFileList)
     },
-
+    handleCancel() {
+      this.previewVisible = false
+    },
     async addToFileList(file) {
       const files = this.stateFileList
       //    files = JSON.stringify(files);

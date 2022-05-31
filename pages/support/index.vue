@@ -2,16 +2,16 @@
   <div class="support-page">
     <a-row class="p-10 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left">Support Issues</h3>
+        <h3 class="page-title float-left">{{translation.suppoissue_2_176}}</h3>
         <a-button
           type="primary"
           class="mrm-5 float-right"
           @click="showModal(true)"
-          >Add New Ticket</a-button
+          >{{translation.AddNew_3_182}}</a-button
         >
         <a-input
           ref="userNameInput"
-          placeholder="Search"
+          :placeholder="translation.searc_1_488"
           class="float-right page-search-input"
           @change="searchSupport"
         >
@@ -21,7 +21,7 @@
     </a-row>
 
     <a-tabs type="card" @change="callback">
-      <a-tab-pane key="1" tab="All">
+      <a-tab-pane key="1" :tab="translation.All_1_210">
         <a-table
           class="rounded-table"
           :loading="loading"
@@ -46,11 +46,11 @@
                   <a-icon type="edit" />
                 </a-button> -->
             <a-dropdown>
-              <a-button class="action-button" size="small">Admin</a-button>
+              <a-button class="action-button" size="small">{{translation.Admin_1_142}}</a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="showUpdate(record)"
-                    ><a-icon type="search" /> update Ticket</a
+                    ><a-icon type="search" /> {{translation.Updatticke_2_222}}</a
                   >
                 </a-menu-item>
               </a-menu>
@@ -58,7 +58,7 @@
           </span>
         </a-table>
       </a-tab-pane>
-      <a-tab-pane key="2" tab="Archive">
+      <a-tab-pane key="2" :tab="translation.Archi_1_226">
         <Table type="archive" />
       </a-tab-pane>
     </a-tabs>
@@ -137,6 +137,11 @@ export default {
   },
   mounted() {
     this.fetch()
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     showUpdate(record) {

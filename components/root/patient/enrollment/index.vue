@@ -2,20 +2,20 @@
   <div>
     <a-skeleton :loading="loading">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
-        <a-tab-pane key="enrollment" tab="Patient Details"
+        <a-tab-pane key="enrollment" :tab="translation['PatieDetai_2_673']"
           ><enrollment 
           :treatment="treatment" 
           @getNextTab="getNextTab"
           />
         </a-tab-pane>
-        <a-tab-pane key="Consent" :disabled="!isCreated" tab="Consent"
+        <a-tab-pane key="Consent" :disabled="!isCreated" :tab="translation['Conse_1_677']"
           ><consent
             :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Screening" :disabled="!haveTreatment" tab="Screening">
+        <a-tab-pane key="Screening" :disabled="!haveTreatment" :tab="translation['Scree_1_679']">
           <screening
             :treatment="treatment"
             @getNextTab="getNextTab"
@@ -25,7 +25,7 @@
         <a-tab-pane
           key="Scheduling"
           :disabled="!treatment.screeningStatus"
-          tab="Scheduling"
+          :tab="translation['Sched_1_681']"
         >
           <scheduling :treatment="treatment" />
         </a-tab-pane>
@@ -67,6 +67,11 @@ export default {
     this.handleActiveTab()
     this.isPatientCreated()
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     handleActiveTab() {
       if(this.$route.query.view){

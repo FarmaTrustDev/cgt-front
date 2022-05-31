@@ -10,7 +10,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Check <strong class="strong">New Patient </strong>
+                Check <strong class="strong">{{translation['new_1_276']}} {{translation['Patie_1_184']}} </strong>
               </h4>
             </a>
           </div>
@@ -20,7 +20,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong">Users </strong>
+                Manage <strong class="strong">{{translation.ManagUsers_2_17}} </strong>
               </h4>
             </a>
           </div>
@@ -47,6 +47,11 @@ export default {
   mixins: [routeHelpers, userDetail],
   data() {
     return {}
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {},
   methods: {

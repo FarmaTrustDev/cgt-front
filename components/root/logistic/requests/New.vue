@@ -76,7 +76,7 @@ const column = [
 ]
 const ActionLink = '/manufacturer/schedules'
 export default {
-  components: { Form, Filters, },
+  components: { Form, Filters },
   mixins: [withTableCrud],
   data() {
     return {
@@ -92,6 +92,7 @@ export default {
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
         manufacturerStatus: SCHEDULING_STATUSES.accepted.id,
+        hospitalCollectionStatus: true,
       },
       selectedRow: {},
       confirmLoading: false,
@@ -137,7 +138,6 @@ export default {
     getParams(params) {
       this.fetch(params)
     },
-
   },
 }
 </script>

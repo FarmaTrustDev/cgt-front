@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="12">
         <a-form-item
-          label="First Name*:"
+          :label="translation.FirstName_2_420 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -20,12 +20,12 @@
                 ],
               },
             ]"
-            placeholder="First"
+            :placeholder="translation.FirstName_2_420"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Last Name*:"
+          :label="translation.LastName_2_422+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -42,13 +42,13 @@
                 ],
               },
             ]"
-            placeholder="Last"
+            :placeholder="translation.LastName_2_422"
           />
         </a-form-item>
       </a-col>
       <a-col :span="8">
         <a-form-item
-          label="Email address*:"
+          :label="translation.EmailAddre_2_140+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -62,13 +62,13 @@
                 ],
               },
             ]"
-            placeholder="Email"
+            :placeholder="translation.EmailAddre_2_140"
           /> </a-form-item
       ></a-col>
 
       <a-col :span="8">
         <a-form-item
-          label="Phone*:"
+          :label="translation.Phone_1_63+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -92,7 +92,7 @@
       </a-col>
       <a-col :span="8">
         <a-form-item
-          label="Date of Birth*:"
+          :label="translation.DateOf_3_633"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -121,7 +121,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Gender"
+          :label="translation.Gende_1_637"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -138,7 +138,7 @@
                 ],
               },
             ]"
-            placeholder="Select Gender"
+            :placeholder="translation.Gende_1_637"
             style="width: 100%"
             size="large"
             class="default-select"
@@ -151,7 +151,7 @@
       >
       <a-col :span="12">
         <a-form-item
-          label="Blood Type"
+          :label="translation.BloodType_2_635"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -167,7 +167,7 @@
                 ],
               },
             ]"
-            placeholder="Select Blood Type"
+            :placeholder="translation.BloodType_2_635"
             style="width: 100%"
             size="large"
             class="default-select"
@@ -180,7 +180,7 @@
       >
       <a-col :span="24">
         <a-form-item
-          label="Allergies"
+          :label="translation.Aller_1_643"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -193,13 +193,13 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Allergies"
+            :placeholder="translation.Aller_1_643"
           />
         </a-form-item>
       </a-col>
       <a-col :span="24">
         <a-form-item
-          label="Active Problems"
+          :label="translation.ActivProbl_2_645"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -212,13 +212,13 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Active Problem"
+            :placeholder="translation.ActivProbl_2_645"
           />
         </a-form-item>
       </a-col>
       <a-col :span="24">
         <a-form-item
-          label="Medication"
+          :label="translation.Medic_1_647"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -231,14 +231,14 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Medication"
+            :placeholder="translation.Medic_1_647"
           />
         </a-form-item>
       </a-col>
 
       <a-col :span="12">
         <a-form-item
-          label="Post Code:"
+          :label="translation['PostaCode:_2_649']"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -253,12 +253,12 @@
               },
             ]"
             name="postCode"
-            placeholder="Postal"
+            :placeholder="translation['PostaCode:_2_649']"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="City*:"
+          :label="translation.City_1_446+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -270,12 +270,12 @@
                 rules: [{ required: true, message: 'required!' }],
               },
             ]"
-            placeholder="City"
+            :placeholder="translation.City_1_446"
           /> </a-form-item
       ></a-col>
       <a-col :span="24">
         <a-form-item
-          label="Post Code Address:"
+          :label="translation.PostaCode_3_651"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -289,12 +289,12 @@
                 ],
               },
             ]"
-            placeholder="Post Code Address"
+            :placeholder="translation.PostaCode_3_651"
           /> </a-form-item
       ></a-col>
       <a-col :span="24">
         <a-form-item
-          label="Street Number*:"
+          :label="translation.StreeNumbe_2_653"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -312,13 +312,13 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Street Number"
+            :placeholder="translation.StreeNumbe_2_653"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="County*:"
+          :label="translation.Count_1_657+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -335,13 +335,13 @@
                 ],
               },
             ]"
-            placeholder="County"
+            :placeholder="translation.Count_1_657"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Country"
+          :label="translation.Count_1_49"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -360,7 +360,7 @@
             ]"
             :show-search="true"
             :filter-option="filterOption"
-            placeholder="Select Country"
+            :placeholder="translation.Count_1_49"
             style="width: 100%"
             size="large"
             class="default-select"
@@ -416,6 +416,11 @@ export default {
       this.fetchCountry = false
       this.getCountries()
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     filterOption,

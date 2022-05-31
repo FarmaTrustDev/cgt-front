@@ -104,7 +104,11 @@ export default {
       this.apiService
         .create(values)
         .then((response) => {
-          this.success(response.message)
+          if(response.message===true){
+            this.success(response.message)
+          }else{
+            this.success(response.errorMessage)
+          }
           if (!this.isEmpty(this.gotoLink)) {
             this.goto(`${this.gotoLink}/${response.data.globalId}`)
           }

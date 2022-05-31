@@ -34,7 +34,7 @@
             <span class="vertical-line"></span>
             <span>{{ chartDetail.total }}</span>
             <br />
-            <span>Total Patients</span>
+            <span>Total {{translation['Patie_1_184']}}</span>
           </a-col>
         </a-row>
         <a-row>
@@ -43,14 +43,14 @@
             <span class="number">{{ chartDetail.completedTotal }}</span>
             <br />
             <br />
-            <span>Total Completed</span>
+            <span>{{translation['TotalCompl_2_53']}}</span>
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="in-process"></span>
             <span class="number">{{ chartDetail.productionTotal }}</span>
             <br />
             <br />
-            <span>In Production</span>
+            <span>{{translation['InProdu_2_57']}}</span>
           </a-col>
         </a-row>
         <a-row>
@@ -59,14 +59,14 @@
             <span class="number">{{ chartDetail.total }}</span>
             <br />
             <br />
-            <span>Overall Booked</span>
+            <span>{{translation['OveraBooke_2_59']}}</span>
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="spoilage"></span>
             <span class="number">{{ chartDetail.spoilage }}</span>
             <br />
             <br />
-            <span>Spoilage</span>
+            <span>{{translation['Spoil_1_61']}}</span>
           </a-col>
         </a-row>
       </a-card>
@@ -119,9 +119,14 @@ export default {
       treatmentTypes: [],
     }
   },
-  computed: {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   mounted() {
     this.fetchTreatment()
+    window.dispatchEvent(new Event('resize'));
   },
   methods: {
     fetchStats(id) {

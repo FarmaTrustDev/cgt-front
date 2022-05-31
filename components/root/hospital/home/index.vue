@@ -10,7 +10,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Check <strong class="strong">New Patient </strong>
+                Check <strong class="strong">{{translation['new_1_276']}} {{translation['Patie_1_184']}} </strong>
               </h4>
             </div>
           </a>
@@ -20,7 +20,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Enroll <strong class="strong">Patient Status </strong>
+                Enroll <strong class="strong">{{translation['Patie_1_184']}} {{translation['Statu_1_202']}} </strong>
               </h4>
             </div>
           </a>
@@ -30,7 +30,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong">Users </strong>
+                Manage <strong class="strong">{{translation['Users_1_504']}} </strong>
               </h4>
             </div>
           </a>
@@ -59,6 +59,11 @@ export default {
     return {}
   },
   mounted() {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   methods: {
     gotoView(uri) {
       this.goto(`/${uri}`)
