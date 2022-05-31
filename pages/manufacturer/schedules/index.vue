@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Treatments">
+  <page-layout :loading="loading" :title="translation.Treat_1_29">
     <template slot="content">
       <standardTable
         :columns="column"
@@ -46,6 +46,11 @@ export default {
       ActionLink,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {},
 }
 </script>

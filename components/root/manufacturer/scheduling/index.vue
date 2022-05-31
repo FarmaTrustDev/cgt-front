@@ -5,10 +5,10 @@
       :default-active-key="activeTab"
       @change="tabChange"
     >
-      <a-tab-pane :key="1" tab="Detail"
+      <a-tab-pane :key="1" :tab="translation.Detai_1_346"
         ><Form :treatment="treatment" @getEntity="getEntity" />
       </a-tab-pane>
-      <a-tab-pane :key="2" :disabled="!isCreated" tab="Availability"
+      <a-tab-pane :key="2" :disabled="!isCreated" :tab="translation.Avail_1_450"
         ><Availability v-if="isCreated" :manufacturer-treatment="entity" />
       </a-tab-pane>
     </a-tabs>
@@ -35,6 +35,11 @@ export default {
   mounted() {
     // this.isTreatmentCreate()
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     getEntity(entity) {
       // eneity yahen fetch kar k childs ko pass karni hai
