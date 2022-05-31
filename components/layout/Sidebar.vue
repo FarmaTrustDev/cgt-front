@@ -46,9 +46,6 @@ export default {
   },
   computed: {
     // ...mapGetters(['getUser']),
-    translation() {
-      return this.$store.getters.getTranslation
-    },
     user() {
       return this.$store.getters.getUser
     },
