@@ -4,16 +4,16 @@
       <a-col :span="12">
         <a-card :bordered="false" class="default-card">
           <article class="article">
-            <h4 class="heading pl-0">External Entities</h4>
+            <h4 class="heading pl-0">{{translation.ExterEntit_2_760}}</h4>
           </article>
           <dl class="ant-row common-detail">
-            <dt>Treatment Type:</dt>
+            <dt>{{translation.TreatType_2_67}}:</dt>
             <dd>{{ treatment.treatmentTypeName }}</dd>
-            <dt>Doctor:</dt>
+            <dt>{{translation.Docto_1_236}}:</dt>
             <dd>Dr. Comfort</dd>
-            <dt>Clinician:</dt>
+            <dt>{{translation.Clini_1_762}}:</dt>
             <dd>Dr. Ryan Katz</dd>
-            <dt>Hospital:</dt>
+            <dt>{{translation.Hospi_1_47}}:</dt>
             <dd>{{ treatmentData.hospitalName }}</dd>
           </dl>
         </a-card>
@@ -21,16 +21,16 @@
       <a-col :span="12">
         <a-card :bordered="false" class="default-card">
           <article class="article">
-            <h4 class="heading pl-0">Treatment Details</h4>
+            <h4 class="heading pl-0">{{translation.TreatDetai_2_304}}</h4>
           </article>
           <dl class="row common-detail">
-            <dt>Manufacturer:</dt>
+            <dt>{{translation.Manuf_1_89}}:</dt>
             <dd>{{ treatmentData.manufacturerName }}</dd>
-            <dt>Contact:</dt>
+            <dt>{{translation.ContaNumbe_2_404}}:</dt>
             <dd>{{ treatmentData.manufacturerContact }}</dd>
-            <dt>Logistic:</dt>
+            <dt>{{translation.Logis_1_146}}:</dt>
             <dd>{{ treatmentData.logisticName }}</dd>
-            <dt>Contact:</dt>
+            <dt>{{translation.ContaNumbe_2_404}}:</dt>
             <dd>{{ treatmentData.logisticContact }}</dd>
           </dl>
         </a-card>
@@ -54,6 +54,11 @@ export default {
   mounted() {
     this.fetchByTreatmentId(this.treatment.id)
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     fetchByTreatmentId(id) {
       if (!isEmpty(id)) {
