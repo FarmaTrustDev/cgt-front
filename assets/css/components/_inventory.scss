@@ -1,9 +1,26 @@
 .inventory-page {
-  
   .icon-text {
     border: 1px solid red;
   }
-  .ant-tabs{
+  .ant-tabs {
     color: black;
+  }
+}
+
+.fridge-tile {
+  padding: 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 22px;
+  background-color: white;
+  margin-top: 20px;
+  .img {
+    text-align: center;
+  }
+  .location {
+    color: #7a7575;
+    font-size: 14px;
+  }
+  .title {
+    color: #000;
   }
 }
