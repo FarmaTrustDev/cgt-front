@@ -125,6 +125,20 @@
   .menu-container {
     padding: 10px 30px 10px 30px;
     border-radius: 22px;
+    img{
+      color: $primary-color;
+      filter: grayscale(100%) opacity(0.4);
+    }
+    &:hover {
+      cursor: pointer;
+      color: $primary-color;
+      img {
+        color: rgb(29, 187, 100);
+        fill:#3869d1;
+        text-shadow: 1px 1px 1px rgb(244, 4, 4);
+        filter: grayscale(0%) drop-shadow(0 0 0 blue);
+      }
+    }
   }
   .ant-menu-inline-collapsed {
     .menu-container {
@@ -141,6 +155,9 @@
     background-color: transparent;
     .menu-container {
       background-color: #F2F5FB;
+    }
+    img{
+      filter:grayscale(0%);
     }
   }
 
