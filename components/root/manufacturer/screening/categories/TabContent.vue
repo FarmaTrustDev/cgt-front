@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormActionButton text="Add Screening" @click="handleCategoryModal(true)" />
+    <FormActionButton :text="translation.Add_1_488+' '+translation.Scree_1_679" @click="handleCategoryModal(true)" />
     <a-alert
       v-if="data.length <= 0"
       type="info"
@@ -17,7 +17,7 @@
               <a-menu-item key="1"> <a-icon type="edit" />{{translation.Edit_1_450}} </a-menu-item>
               <a-menu-item key="2" >
                 <a-popconfirm
-              title="Are you sure delete ?"
+              :title="translation.Areyou_4_484"
               :ok-text="translation.yes_1_654"
               :cancel-text="translation.no_1_656"
               placement="topLeft"
