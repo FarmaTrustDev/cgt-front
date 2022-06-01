@@ -3,22 +3,22 @@
     <a-table :data-source="data" :columns="[]">
       <template slot="title">
         <a-button type="primary" @click="handleGroupModal(true)">
-          create group</a-button
+          {{translation.CreatGroup_2_479}}</a-button
         >
       </template>
       <template slot="message" slot-scope="text, record">
-        <a-button type="" @click="getUser(text, record)"> view</a-button>
+        <a-button type="" @click="getUser(text, record)"> {{translation.view_1_750}}</a-button>
       </template>
     </a-table>
     <a-modal
       :width="800"
       :visible="groupModal"
-      title="Create Group"
+      :title="translation.CreatGroup_2_479"
       @cancel="handleGroupModal(false)"
     >
       <a-form :form="form" @submit="onSubmit">
         <FormFields />
-        <FormActionButton :loading="loading" custom-text="Create Group" />
+        <FormActionButton :loading="loading" :custom-text="translation.CreatGroup_2_479" />
       </a-form>
     </a-modal>
   </div>
@@ -39,6 +39,11 @@ export default {
     }
   },
   mounted() {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     fetch() {
       ChatServices.fetchGroup().then((response) => {

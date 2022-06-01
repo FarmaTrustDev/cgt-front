@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-spin :spinning="loading">
-      <FormActionButton text="Add" @click="addCollection" />
+      <FormActionButton :text="translation.Add_1_488" @click="addCollection" />
       <standardTable
         v-if="showTable"
         :columns="column"
@@ -15,7 +15,7 @@
       <a-modal
         :destroy-on-close="true"
         :visible="showModal"
-        title="Add Process Step"
+        :title="translation.AddProce_3_483"
         :footer="null"
         @cancel="handlesShowModal(false)"
       >
@@ -41,18 +41,7 @@ import nullHelper from '~/mixins/null-helpers'
 import FormField from '~/components/root/manufacturer/admin/collection/FormField'
 import withCrud from '~/mixins/with-crud'
 // import CollectionServices from '~/services/API/CollectionServices'
-const column = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    width: '90%',
-  },
-  {
-    title: 'Action',
-    scopedSlots: { customRender: 'upsertDropdown' },
-  },
-]
+
 export default {
   components: { standardTable, FormField },
   mixins: [nullHelper, withCrud],
@@ -62,7 +51,18 @@ export default {
       loading: true,
       showModal: false,
       showTable: false,
-      column,
+      column:[
+  {
+    title: `${this.$store.getters.getTranslation.Name_1_138}`,
+    dataIndex: 'name',
+    key: 'name',
+    width: '90%',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+    scopedSlots: { customRender: 'upsertDropdown' },
+  },
+],
       CollectionServices,
       data: [],
       formLayout: 'vertical',
@@ -81,6 +81,11 @@ export default {
   mounted() {
     this.checkCreated()
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     checkCreated() {
       const entityId = this.$route.params.id

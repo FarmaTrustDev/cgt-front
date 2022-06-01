@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Screenings">
+  <page-layout :loading="loading" :title="translation.Scree_1_679">
     <template slot="content">
       <standardTable
         :columns="column"
@@ -14,39 +14,43 @@ import PageLayout from '~/components/layout/PageLayout'
 import standardTable from '~/components/common/StandardTable'
 import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 const ActionLink = '/manufacturer/administration/screening'
-const column = [
+export default {
+  components: { 'page-layout': PageLayout, standardTable },
+  data() {
+    return {
+      loading: false,
+      column:[
   {
     title: 'Id',
     dataIndex: 'id',
     key: 'id',
   },
   {
-    title: 'Hospitals',
+    title: `${this.$store.getters.getTranslation.Hospi_1_47}`,
     dataIndex: 'hospitals',
     key: 'hospitals',
        scopedSlots: { customRender: 'nameTags' },
   },
   {
-    title: 'Treatment Type',
+    title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
     dataIndex: 'treatmentType.name',
     key: 'treatmentType.Name',
   },
   {
-    title: 'Action',
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
     dataIndex: 'action',
     scopedSlots: { customRender: 'action' },
   },
-]
-export default {
-  components: { 'page-layout': PageLayout, standardTable },
-  data() {
-    return {
-      loading: false,
-      column,
+],
       ScreeningTemplateServices,
       ActionLink,
     }
   },
   methods: {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
 }
 </script>

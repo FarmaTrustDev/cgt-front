@@ -13,7 +13,7 @@ getUser(users) {},
       >
       <a-button type="primary" @click="showModal(true)">{{translation.adduser_2_464}}</a-button>
       <a-button type="primary" @click="showGroupModal(true)"
-        >Add group</a-button
+        >{{translation.AddGroup_2_456}}</a-button
       >
     </template>
     <template slot="content">

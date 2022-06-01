@@ -1,8 +1,8 @@
 <template>
   <a-popconfirm
     placement="topLeft"
-    ok-text="Yes"
-    cancel-text="No"
+    :ok-text="translation.yes_1_654"
+    :cancel-text="translation.no_1_656"
     @confirm="confirm"
   >
     <template slot="title">
@@ -24,6 +24,11 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },    
+  },  
   methods: {
     confirm() {
       this.$emit('delete')

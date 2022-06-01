@@ -46,41 +46,40 @@ import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
-const column = [
-  {
-    title: 'Patient Id',
-    dataIndex: 'patientEnrollmentNumber',
-    key: 'patientEnrollmentNumber',
-  },
-  {
-    title: 'Treatment Type',
-    dataIndex: 'treatmentType.name',
-    key: 'TreatmentName',
-  },
-  {
-    title: 'Organization',
-    dataIndex: 'hospital.name',
-    key: 'OrganizationName',
-  },
-  {
-    title: 'Collection - Delivery Date',
-    dataIndex: 'collectionDateDeliveryDate',
-    key: 'collectionDateDeliveryDate',
-  },
-
-  {
-    title: 'Action',
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
-]
 const ActionLink = '/manufacturer/schedules'
 export default {
   components: { Form, Filters },
   mixins: [withTableCrud],
   data() {
     return {
-      column,
+      column:[
+  {
+    title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
+    dataIndex: 'patientEnrollmentNumber',
+    key: 'patientEnrollmentNumber',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
+    dataIndex: 'treatmentType.name',
+    key: 'TreatmentName',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Organ_1_166}`,
+    dataIndex: 'hospital.name',
+    key: 'OrganizationName',
+  },
+  {
+    title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+    dataIndex: 'collectionDateDeliveryDate',
+    key: 'collectionDateDeliveryDate',
+  },
+
+  {
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+    dataIndex: 'action',
+    scopedSlots: { customRender: 'action' },
+  },
+],
       loading: false,
       data: [],
       apiService: SchedulingServices,

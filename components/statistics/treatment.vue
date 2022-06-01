@@ -34,7 +34,7 @@
             <span class="vertical-line"></span>
             <span>{{ chartDetail.total }}</span>
             <br />
-            <span>Total {{translation['Patie_1_184']}}</span>
+            <span>{{translation['TotalPatie_2_460']}}</span>
           </a-col>
         </a-row>
         <a-row>

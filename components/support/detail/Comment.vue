@@ -44,7 +44,7 @@
                 },
               ]"
               class="send-message-input"
-              placeholder="Type message here"
+              :placeholder="translation.Typemessa_3_246"
             />
             <a-input
               v-decorator="[
@@ -134,6 +134,9 @@ export default {
     user() {
       return this.$store.getters.getUser
     },
+    translation() {
+      return this.$store.getters.getTranslation
+    },    
   },
   mounted() {},
   methods: {

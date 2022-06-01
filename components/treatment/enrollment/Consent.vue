@@ -27,7 +27,7 @@
           @change="checkChecked($event)"
           :disabled="treatment.consent"
         >
-          Patient Consent Form Registered
+          {{translation.PatieConse_4_465}}
         </a-checkbox>
       <h1 v-if="checkBoxError" style="color:#f00; font-weight:bold">
         {{translation.Consecheck_4_840}}

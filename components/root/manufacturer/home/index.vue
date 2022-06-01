@@ -20,7 +20,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> {{translation.Treat_1_29}} </strong>
+                {{translation.Manag_1_455}} <strong class="strong"> {{translation.Treat_1_29}} </strong>
               </h4>
             </a>
           </div>
@@ -30,7 +30,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> {{translation.ManagUsers_2_17}} </strong>
+                {{translation.Manag_1_455}} <strong class="strong"> {{translation.ManagUsers_2_17}} </strong>
               </h4>
             </a>
           </div>

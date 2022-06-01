@@ -3,7 +3,7 @@
     <a-modal
       :footer="null"
       :visible="visible"
-      :title="loaded ? 'Meeting Created' : 'New Zoom Meeting'"
+      :title="loaded ? 'Meeting Created' : translation.Newzoom_3_119 "
       @cancel="showModal(false)"
     >
       <a-spin :spinning="loading">

@@ -27,7 +27,7 @@
                   {{translation.SelecUser_5_117}}
                 </span>
                 <a-button type="primary" @click="showUsersModal(true)">
-                  Start Now
+                  {{translation.StartNow_2_457}}
                 </a-button>
               </a-empty>
             </a-spin>
@@ -38,7 +38,7 @@
     <a-modal
       :width="1200"
       :visible="groupModal"
-      title="Add users"
+      :title="translation.adduser_2_464"
       :footer="null"
       @cancel="handleGroupModal(false)"
     >

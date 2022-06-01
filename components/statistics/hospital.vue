@@ -3,7 +3,7 @@
     <a-row>
       <a-col class="default-tabs" :span="24">
         <a-tabs type="card">
-          <a-tab-pane key="1" tab="Hospital">
+          <a-tab-pane key="1" :tab="translation.Hospi_1_47">
             <div
               v-for="hospital in hospitalData"
               :key="hospital.id"
@@ -24,7 +24,7 @@
               </ImageHeading>
             </div></a-tab-pane
           >
-          <a-tab-pane key="2" tab="Countries">
+          <a-tab-pane key="2" :tab="translation.Count_1_487">
             <div
               v-for="hospital in countriesData"
               :key="hospital.id"
@@ -67,6 +67,11 @@ export default {
       ],
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   mounted() {
     this.fetchHospital()
   },

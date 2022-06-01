@@ -5,7 +5,7 @@
 
       <a-select
         class="float-right page-search-input"
-        placeholder="search  Treatment Type"
+        :placeholder="translation.TreatType_2_67"
       >
         <a-select-option
           v-for="treatmentType in treatmentTypes"

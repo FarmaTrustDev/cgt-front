@@ -22,8 +22,8 @@
                 },
               ]"
               size="large"
-              checked-children="Yes"
-              un-checked-children="No"
+              :checked-children="translation.yes_1_654"
+              :un-checked-children="translation.no_1_656"
             />
 
             <a-icon v-else type="check"></a-icon>
@@ -39,7 +39,7 @@
                   initialValue: row.notes,
                 },
               ]"
-              placeholder="Note:"
+              :placeholder="translation.Enternote_3_546+':'"
             />
             <span v-else>{{ row.notes }}</span>
             <a-input
@@ -96,31 +96,6 @@ import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
 import InstantUpload from '~/components/upload/InstantUpload'
-const columns = [
-  {
-    title: 'Details',
-    dataIndex: 'name',
-    width: '30%',
-  },
-  {
-    title: 'Checked',
-    dataIndex: 'collected',
-    scopedSlots: { customRender: 'collected' },
-  },
-  {
-    title: 'Notes',
-    dataIndex: 'notes',
-    scopedSlots: { customRender: 'notes' },
-  },
-  {
-    title: 'Upload',
-    scopedSlots: { customRender: 'uploader' },
-  },
-  {
-    title: 'Action',
-    scopedSlots: { customRender: 'action' },
-  },
-]
 export default {
   components: { Email, InstantUpload },
   mixins: [notifications],
@@ -130,7 +105,31 @@ export default {
   },
   data() {
     return {
-      columns,
+      columns:[
+  {
+    title: 'Details',
+    dataIndex: 'name',
+    width: '30%',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Check_1_454}`,
+    dataIndex: 'collected',
+    scopedSlots: { customRender: 'collected' },
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Notes_1_350}`,
+    dataIndex: 'notes',
+    scopedSlots: { customRender: 'notes' },
+  },
+  {
+    title: 'Upload',
+    scopedSlots: { customRender: 'uploader' },
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+    scopedSlots: { customRender: 'action' },
+  },
+],
       loading: false,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
@@ -141,6 +140,11 @@ export default {
       body: null,
       bagService: BagCollectionServices,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     handleCollectionSubmit(collection) {
