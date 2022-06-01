@@ -1,18 +1,26 @@
 <template>
-  <div>
-    <a-row :gutter="16">
-      <a-col v-for="storage in storages" :span="6" :key="storage.id">
-        <Tile :storage="storage" />
-      </a-col>
-    </a-row>
-    >
-  </div>
+  <page-layout
+    class="bg-grey"
+    :create="false"
+    :loading="loading"
+    :bordered="false"
+    title="Smart Lab"
+  >
+    <div slot="content">
+      <a-row :gutter="16">
+        <a-col v-for="storage in storages" :key="storage.id" :span="6">
+          <Tile :storage="storage" />
+        </a-col>
+      </a-row>
+    </div>
+  </page-layout>
 </template>
 
 <script>
 import Tile from '~/components/inventory/storage/Tile'
+import PageLayout from '~/components/layout/PageLayout'
 export default {
-  components: { Tile },
+  components: { Tile, PageLayout },
   data() {
     return {
       storages: [
@@ -41,6 +49,7 @@ export default {
           location: 'Storage Suite 3, Germany - Cellfuse',
         },
       ],
+      loading: false,
     }
   },
 }
