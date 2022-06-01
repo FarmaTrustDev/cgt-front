@@ -47,7 +47,7 @@ export default {
     return {
       column: [
         {
-          title: `${this.$store.getters.getTranslation.searc_1_488}`,
+          title: `PUID`,
           dataIndex: 'enrollmentNumber',
           key: 'PUID',
           width: 110,
@@ -57,7 +57,7 @@ export default {
           },
         },
         {
-          title: 'Patient Name',
+          title: `${this.$store.getters.getTranslation.PatieName_2_93}`,
           dataIndex: 'name',
           key: 'name',
           width: 150,
@@ -68,7 +68,7 @@ export default {
           },
         },
         {
-          title: 'Type',
+          title: `${this.$store.getters.getTranslation._1_442}`,
           dataIndex: 'treatmentTypeId',
           key: 'treatmentTypeId',
           width: 100,
@@ -84,7 +84,7 @@ export default {
           class: 'treatment-status-col',
         },
         {
-          title: 'Action',
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'action',
           scopedSlots: { customRender: 'patientAction' },
         },

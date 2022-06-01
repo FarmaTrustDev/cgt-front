@@ -64,7 +64,7 @@
 
 
       <template #footer>
-        <a-button key="submit" class="footer-btn-label" type="primary" >Print</a-button>
+        <a-button key="submit" class="footer-btn-label" type="primary" >{{translation.Print_1_111}}</a-button>
         <a-button key="back" class="footer-btn-label footer-btn-label-cancelled" >{{translation.cance_1_296}}</a-button>
       </template>
 

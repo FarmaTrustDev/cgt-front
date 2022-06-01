@@ -1,6 +1,6 @@
 <template>
   <div class="consent-page">
-    <h3 class="page-title">Patient Consent</h3>
+    <h3 class="page-title">{{translation.PatieConse_2_685}}</h3>
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <Upload
@@ -17,7 +17,7 @@
               rules: [
                 {
                   required: true,
-                  message: 'Consent check is mandatory',
+                  message: `${translation.Consecheck_4_840}`,
                 },
               ],
               initialValue: treatment.consent,
@@ -29,9 +29,9 @@
         >
           Patient Consent Form Registered
         </a-checkbox>
-        <h1 v-if="checkBoxError" style="color: #f00; font-weight: bold">
-          Consent check is mandatory
-        </h1>
+      <h1 v-if="checkBoxError" style="color:#f00; font-weight:bold">
+        {{translation.Consecheck_4_840}}
+      </h1>
         <a-input
           v-decorator="[
             `patientId`,
@@ -45,11 +45,7 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton
-        :loading="loading"
-        text="Save Consent & Continue"
-        :disabled="!isEmpty(treatment.id)"
-      />
+      <FormActionButton :loading="loading" :text="translation.SaveConse_4_695" :disabled="!isEmpty(treatment.id)" />
     </a-form>
   </div>
 </template>
@@ -82,6 +78,11 @@ export default {
       allowedExtensions: DOCUMENT_EXTENSIONS,
       checkBoxError: false,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.patientId = this.$route.params.id

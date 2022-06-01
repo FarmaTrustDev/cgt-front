@@ -10,7 +10,7 @@
 
               <img width="55px" :src="menu.icon" />
               <h4 style="font-size: 18px" class="heading-home">
-                {{ menu.name }}
+                {{ translation[menu.name] }}
               </h4>
             </div>
           </nuxt-link>

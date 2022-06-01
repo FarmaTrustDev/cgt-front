@@ -4,13 +4,13 @@
     <span>
       <span v-if="isAccepted"> {{ modalMessage }}</span>
       <a-descriptions v-else title="Reject Treatment Detail">
-        <a-descriptions-item label="Patient ID">
+        <a-descriptions-item :label="translation.PatieID_2_264">
           {{ data.patientEnrollmentNumber }}
         </a-descriptions-item>
-        <a-descriptions-item :span="2" label="Collection - Delivery Date">
+        <a-descriptions-item :span="2" :label="translation['Colle-_4_268']">
           {{ data.collectionDateDeliveryDate }}
         </a-descriptions-item>
-        <a-descriptions-item label="Hospital ">
+        <a-descriptions-item :label="translation.Hospi_1_47">
           {{ data.hospital.name }}
         </a-descriptions-item>
       </a-descriptions>
@@ -44,7 +44,7 @@
         class="d-none"
       />
     </a-form-item>
-    <a-form-item v-if="!isAccepted" label="Note for Rejection:">
+    <a-form-item v-if="!isAccepted" :label="translation.Notefor_3_292+':'">
       <a-textarea
         v-decorator="[
           `reason`,
@@ -52,7 +52,7 @@
             rules: [],
           },
         ]"
-        placeholder="Type note here"
+        :placeholder="translation.Typenote_3_294"
       ></a-textarea
     ></a-form-item>
     <a-form-item v-if="isAccepted && isManufacturer()" label="Production Line:">
@@ -91,6 +91,11 @@ export default {
   },
   mounted() {
     this.fetchProductionLine()
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     fetchProductionLine() {

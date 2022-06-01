@@ -446,5 +446,5 @@ export default {
         })
     },
   },
-}
+  }
 </script>

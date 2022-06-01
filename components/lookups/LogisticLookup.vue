@@ -1,5 +1,5 @@
 <template>
-  <a-form-item label="Logistics Provider">
+  <a-form-item :label="translation.LogisProvi_2_380">
     <a-select
       v-decorator="[
         'logisticId',
@@ -51,6 +51,11 @@ export default {
   mounted() {
     this.fetch()
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     fetch() {
       this.typeLoading = true

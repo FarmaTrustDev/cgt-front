@@ -10,7 +10,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manufacturing <strong class="strong"> Schedule </strong>
+                {{translation.Manuf_1_342}} <strong class="strong"> {{translation.Sched_1_21}} </strong>
               </h4>
             </a>
           </div>
@@ -20,7 +20,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> Treatments </strong>
+                Manage <strong class="strong"> {{translation.Treat_1_29}} </strong>
               </h4>
             </a>
           </div>
@@ -30,7 +30,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> Users </strong>
+                Manage <strong class="strong"> {{translation.ManagUsers_2_17}} </strong>
               </h4>
             </a>
           </div>
