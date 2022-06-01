@@ -45,7 +45,7 @@
 
     <a-row v-if="!treatmentTypes">
       <a-col class="empty-message">
-        {{translation.Pleasselec_8_548}}
+        {{translation.Selecthe_8_476}}
       </a-col>
     </a-row>
 

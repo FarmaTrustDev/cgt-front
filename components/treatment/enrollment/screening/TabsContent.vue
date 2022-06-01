@@ -3,7 +3,7 @@
     <a-alert
       v-if="screenings <= 0"
       type="info"
-      message="No Screenings available"
+      :message="translation.NoScree_3_475"
     ></a-alert>
 
     <a-table
@@ -30,8 +30,8 @@
             ]"
             :data-rowId="row.id"
             size="large"
-            checked-children="Yes"
-            un-checked-children="No"
+            :checked-children="translation.yes_1_654"
+            :un-checked-children="translation.no_1_656"
             @change="(value) => handleCheck(value, row.id)"
           />
         </a-form-item>
@@ -51,7 +51,7 @@
                 ],
               },
             ]"
-            placeholder="Note:"
+            :placeholder="translation.Enternote_3_546+':'"
             @blur="(e) => handleInput(row.id,e)"
           />
           <a-input
@@ -96,24 +96,6 @@
   </div>
 </template>
 <script>
-const columns = [
-  {
-    title: 'Detail',
-    dataIndex: 'name',
-    scopedSlots: { customRender: 'name' },
-    width: '40%',
-  },
-  {
-    title: 'Action',
-    dataIndex: 'gender',
-    scopedSlots: { customRender: 'action' },
-  },
-  {
-    title: 'Notes',
-    dataIndex: 'notes',
-    scopedSlots: { customRender: 'notes' },
-  },
-]
 export default {
   props: {
     screenings: {
@@ -125,11 +107,33 @@ export default {
   data() {
     return {
       loading: false,
-      columns,
+      columns:[
+  {
+    title:`${this.$store.getters.getTranslation.Detai_1_346}`,
+    dataIndex: 'name',
+    scopedSlots: { customRender: 'name' },
+    width: '40%',
+  },
+  {
+    title:`${this.$store.getters.getTranslation.Actio_1_220}`,
+    dataIndex: 'gender',
+    scopedSlots: { customRender: 'action' },
+  },
+  {
+    title:`${this.$store.getters.getTranslation.Notes_1_350}`,
+    dataIndex: 'notes',
+    scopedSlots: { customRender: 'notes' },
+  },
+],
       notesRequired: {},
       filledData:0,
       noteItem:[],
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {this.filledData=0},
   methods: {

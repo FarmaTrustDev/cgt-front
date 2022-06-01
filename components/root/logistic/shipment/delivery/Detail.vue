@@ -5,20 +5,20 @@
         <h4 class="heading pl-0">{{ heading }}</h4>
       </article>
       <dl class="ant-row common-detail">
-        <dt>Is Received:</dt>
+        <dt>{{translation.IsRecei_2_328}}:</dt>
         <dd class="text-success">
           <a-icon
             v-if="!isEmpty(shipment)"
             
             type="check-circle"
           />
-          Done
+          {{translation.Done_1_340}}
         </dd>
-        <dt>Received by:</dt>
+        <dt>{{translation['Receiby:_2_330']}}:</dt>
         <dd>{{ shipment.receiverName }}</dd>
-        <dt>Received Date:</dt>
+        <dt>{{translation['ReceiDate:_2_332']}}:</dt>
         <dd>{{ getMomentByStandardFormat(shipment.deliveryAt) }}</dd>
-        <dt>Receiving Note:</dt>
+        <dt>{{translation['ReceiNote:_2_334']}}:</dt>
         <dd>{{ shipment.notes }}</dd>
       </dl>
     </a-card>
@@ -40,6 +40,11 @@ export default {
   data() {
     return {}
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   methods: { isEmpty, getMomentByStandardFormat },
 }
 </script>

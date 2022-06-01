@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="page-title">Available slots</h3>
+    <h3 class="page-title">{{translation.Availslots_2_724}}</h3>
     <div class="grey-card">
       <calendar
         :disabled-date="disabledDate"
@@ -38,6 +38,11 @@ export default {
       manufacturerTreatment: {},
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   methods: {
     disabledDate: _disabledPreviousDate,
     fetchEvents(arg, callback) {

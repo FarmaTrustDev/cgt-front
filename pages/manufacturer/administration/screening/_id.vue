@@ -1,5 +1,5 @@
 <template>
-  <page-layout :create="false" :loading="loading" title="Screening Group">
+  <page-layout :create="false" :loading="loading" :title="translation.ScreeGroup_2_462">
     <template slot="content"> <create /> </template>
   </page-layout>
 </template>
@@ -12,6 +12,11 @@ export default {
     return {
       loading: false,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
 }
 </script>

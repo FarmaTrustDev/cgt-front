@@ -1,8 +1,8 @@
 <template>
   <div class="half-secondary">
     <div class="login">
-      <a-card :bordered="false" title="Forgot Password">
-      <h3>Enter your email to reset your password </h3>
+      <a-card :bordered="false" :title="translation.ForgoPassw_2_471">
+      <h3>{{translation.Enteryour_7_470}}</h3>
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
           <a-form-item label="Email">
@@ -58,6 +58,11 @@ export default {
       }),
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     onSubmit(e) {
       this.loading = true

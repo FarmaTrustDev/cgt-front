@@ -1,7 +1,7 @@
 <template>
   <page-layout
     :loading="loading"
-    title="Treatment Status"
+    :title="translation.TreatStatu_2_748"
     class="patient-page"
     :create="false"
   >
@@ -14,7 +14,7 @@
             :treatment="entity"
           />
           <a-card v-else class="text-center default-card p-0">
-            <h2 class="m-0">Treatment type has not been selected yet</h2>
+            <h2 class="m-0">{{translation.Treattype_7_477}}</h2>
           </a-card>
         </div>
       </div>
@@ -47,6 +47,11 @@ export default {
   beforeDestroy() {
     this.$nuxt.$off(EVENT_FETCH_TREATMENT_DETAIL)
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     afterFetch(data) {
       // TreatmentServices.getCustody(this.entity.id, 1).then((treatment) => {})

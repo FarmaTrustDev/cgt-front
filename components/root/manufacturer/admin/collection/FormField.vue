@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-form-item label="Process step">
+    <a-form-item :label="translation.ProceStep_2_486">
       <a-input
         v-decorator="[
           'name',
@@ -71,5 +71,10 @@ export default {
   data() {
     return {}
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
 }
 </script>

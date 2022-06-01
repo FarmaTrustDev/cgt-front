@@ -3,8 +3,11 @@
     <a-table :data-source="data" :loading="loading" :columns="columns">
       <template slot="title">
         <a-button type="primary" @click="handleGroupModal(true)">
-          create group</a-button
+          {{translation.CreatGroup_2_479}}</a-button
         >
+      </template>
+      <template slot="message" slot-scope="text, record">
+        <a-button type="" @click="getUser(text, record)"> {{translation.view_1_750}}</a-button>
       </template>
     </a-table>
     <a-modal
@@ -12,12 +15,13 @@
       :width="800"
       :visible="groupModal"
       :footer="false"
-      title="Create Group"
+      :title="translation.CreatGroup_2_479"
       @cancel="handleGroupModal(false)"
     >
       <a-form :form="form" @submit="onSubmit">
         <FormFields @getImage="getImage" />
-        <FormActionButton :loading="loading" custom-text="Create Group" />
+        <FormActionButton :loading="loading" :custom-text="translation.CreatGroup_2_479"
+      @cancel="handleGroupModal(false)" />
       </a-form>
     </a-modal>
   </div>
@@ -53,6 +57,11 @@ export default {
       }),
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   mounted() {
     this.fetch()
   },

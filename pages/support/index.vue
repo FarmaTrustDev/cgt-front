@@ -80,43 +80,6 @@ import AddNewTicketModal from '~/components/support/Add'
 import SupportServices from '~/services/API/SupportServices'
 // import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
-const columns = [
-  {
-    title: 'Date',
-    dataIndex: 'created_At',
-  },
-  {
-    title: 'TicketID',
-    dataIndex: 'id',
-    scopedSlots: { customRender: 'tickets' },
-  },
-  {
-    title: 'Name(PUID)',
-    dataIndex: 'reporter_name',
-  },
-  {
-    title: 'BagId',
-    dataIndex: 'reference_Id',
-  },
-  {
-    title: 'Issue Details',
-    dataIndex: 'description',
-  },
-  {
-    title: 'Last Update',
-    dataIndex: 'last_Updated_At',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    scopedSlots: { customRender: 'status' },
-  },
-  {
-    title: 'Actions',
-    dataIndex: 'actions',
-    scopedSlots: { customRender: 'action' },
-  },
-]
 export default {
   components: {
     Table,
@@ -128,7 +91,43 @@ export default {
     return {
       showAddModal: false,
       data: [],
-      columns,
+      columns:[
+  {
+    title: `${this.$store.getters.getTranslation.date_1_510}`,
+    dataIndex: 'created_At',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.TickeID_2_212}`,
+    dataIndex: 'id',
+    scopedSlots: { customRender: 'tickets' },
+  },
+  {
+    title: 'Name(PUID)',
+    dataIndex: 'reporter_name',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.BagID_2_540}`,
+    dataIndex: 'reference_Id',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.IssueDetai_2_214}`,
+    dataIndex: 'description',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.LastUpdat_2_216}`,
+    dataIndex: 'last_Updated_At',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
+    dataIndex: 'status',
+    scopedSlots: { customRender: 'status' },
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+    dataIndex: 'actions',
+    scopedSlots: { customRender: 'action' },
+  },
+],
       loading: true,
       ticket: {},
       isCreated: false,

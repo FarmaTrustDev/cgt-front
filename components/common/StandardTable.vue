@@ -67,7 +67,7 @@
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="gotoView(record, treatment)"
-                    ><a-icon type="search" /> View</a
+                    ><a-icon type="search" /> {{translation.view_1_750}}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
@@ -75,7 +75,7 @@
                     href="javascript:;"
                     @click="holdTreatment(record, treatment)"
                     ><a-icon type="minus-circle" />
-                    {{ treatment.isHold ? 'Resume' : 'Pause' }}</a
+                    {{ treatment.isHold ? translation.Resum_1_463 : translation.Pause_1_452 }}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
@@ -87,7 +87,7 @@
                   <a
                     href="javascript:;"
                     @click="deleteTreatment(record, treatment)"
-                    ><a-icon type="delete" /> Delete</a
+                    ><a-icon type="delete" /> {{translation.Delet_1_451}}</a
                   >
                 </a-menu-item>
               </a-menu>
@@ -109,18 +109,18 @@
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="1" @click="clickUpdate(record)">
-              <a-icon type="edit" />Update
+              <a-icon type="edit" />{{translation.Updat_1_208}}
             </a-menu-item>
 
             <a-menu-item key="3"
               ><a-popconfirm
                 title="Are you sure delete ?"
-                ok-text="Yes"
-                cancel-text="No"
+                :ok-text="translation.yes_1_654"
+                :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="clickDelete(record)"
               >
-                <a-icon type="delete" />Delete
+                <a-icon type="delete" />{{translation.Delet_1_451}}
               </a-popconfirm></a-menu-item
             >
           </a-menu>
@@ -147,8 +147,8 @@
             <a-menu-item key="3">
               <a-popconfirm
                 title="Are you to hide patient?"
-                ok-text="Yes"
-                cancel-text="No"
+                :ok-text="translation.yes_1_654"
+                :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deletePatient(`${record.id}`)"
               >
@@ -158,12 +158,12 @@
             <a-menu-item key="4">
               <a-popconfirm
                 title="Are you to hide patient?"
-                ok-text="Yes"
-                cancel-text="No"
+                :ok-text="translation.yes_1_654"
+                :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               >
-                <span v-if="record.isDead"> Resume</span>
+                <span v-if="record.isDead"> {{translation.Resum_1_463}}</span>
                 <span v-else>{{translation.cance_1_296}}</span>
               </a-popconfirm>
             </a-menu-item>
@@ -193,14 +193,14 @@
           style="width: 90px; margin-right: 8px"
           @click="() => handleSearch(selectedKeys, column)"
         >
-          Search
+          {{translation.searc_1_488}}
         </a-button>
         <a-button
           size="small"
           style="width: 90px"
           @click="() => handleReset(clearFilters, column)"
         >
-          Reset
+          {{translation.Reset_1_464}}
         </a-button>
       </div>
 

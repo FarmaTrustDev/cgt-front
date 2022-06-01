@@ -52,7 +52,7 @@
                   },
                 ]"
                 class="send-message-input"
-                placeholder="Type message here"
+                :placeholder="translation.Typemessa_3_246"
               />
               <a-input
                 v-decorator="[

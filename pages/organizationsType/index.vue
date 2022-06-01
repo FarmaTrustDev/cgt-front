@@ -27,9 +27,17 @@ import OrganizationServicesServices from '~/services/API/OrganizationTypeService
 import routeHelpers from '~/mixins/route-helpers'
 
 import PageLayout from '~/components/layout/PageLayout'
-const columns = [
+
+
+export default {
+  components: { 'page-layout': PageLayout },
+  mixins: [routeHelpers],
+  data() {
+    return {
+      datasource: [],
+      columns:[
   {
-    title: 'Name',
+    title: `${this.$store.getters.getTranslation.Name_1_138}`,
     dataIndex: 'name',
     key: 'name',
   },
@@ -49,18 +57,11 @@ const columns = [
   //   dataIndex: 'address',
   // },
   {
-    title: 'Action',
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
     key: 'action',
     scopedSlots: { customRender: 'action' },
   },
-]
-export default {
-  components: { 'page-layout': PageLayout },
-  mixins: [routeHelpers],
-  data() {
-    return {
-      datasource: [],
-      columns,
+],
       loading: true,
     }
   },

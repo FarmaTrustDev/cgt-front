@@ -30,7 +30,7 @@
           </a-button>
           <a-menu slot="overlay">
           <a-menu-item key="userDetail">
-            <a @click="goto(`/users/${action.globalId}`)">Edit</a>
+            <a @click="goto(`/users/${action.globalId}`)">{{translation.Edit_1_450}}</a>
           </a-menu-item>
           </a-menu>
           </a-dropdown>
@@ -45,45 +45,43 @@ import { preventDefault } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
 
 // import PageLayout from '~/components/layout/PageLayout'
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name'
-  },
-  {
-    title: 'Entity Type',
-    dataIndex: 'organizationTypeAlias',
-    key: 'organizationType',
-  },
-  {
-    title: 'Entity Name',
-    dataIndex: 'organizationName',
-    key: 'organizationId',
-  },
-  {
-    title: 'User Role',
-    dataIndex: 'roleName',
-    key: 'roleName',
-  },
-  {
-    title: 'Email Address',
-    key: 'email',
-    dataIndex: 'email',
-  }, 
-  {
-    title: 'Action',
-    key: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
-]
 export default {
   mixins: [routeHelpers],
   data() {
     return {
       datasource: [],
-      columns,
+      columns:[
+        {
+          title: `${this.$store.getters.getTranslation.Name_1_138}`,
+          dataIndex: 'name',
+          key: 'name'
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Entittype_2_406}`,
+          dataIndex: 'organizationTypeAlias',
+          key: 'organizationType',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.EntitName_2_408}`,
+          dataIndex: 'organizationName',
+          key: 'organizationId',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.UserRole_2_410}`,
+          dataIndex: 'roleName',
+          key: 'roleName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.EmailAddre_2_140}`,
+          key: 'email',
+          dataIndex: 'email',
+        }, 
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          key: 'action',
+          scopedSlots: { customRender: 'action' },
+        },
+    ],
       loading: true,
       fullName:[],
     }

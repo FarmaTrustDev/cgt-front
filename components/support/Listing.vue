@@ -23,7 +23,7 @@
          Admin <a-icon type="down" />
         </a-button>
         <a-menu slot="overlay">
-          <a-menu-item key="0"><a-icon type="plus" /> Update Ticket </a-menu-item>
+          <a-menu-item key="0"><a-icon type="plus" /> {{this.$store.getters.getTranslation.Updatticke_2_222}} </a-menu-item>
         </a-menu>
       </a-dropdown>
       </template>
@@ -44,11 +44,11 @@
       return{
         columns :  [
           {
-            title: 'Date',
+            title: `${this.$store.getters.getTranslation.date_1_510}`,
             dataIndex: 'date',
           },
           {
-            title: 'TicketID',
+            title: `${this.$store.getters.getTranslation.TickeID_2_212}`, 
             dataIndex: 'ticketId',
           },
           {
@@ -56,24 +56,24 @@
             dataIndex: 'name',
           },
           {
-            title: 'BagId',
+            title: `${this.$store.getters.getTranslation.BagID_2_540}`,
             dataIndex: 'bagId',
           },
           {
-            title: 'Issue Details',
+            title: `${this.$store.getters.getTranslation.IssueDetai_2_214}`, 
             dataIndex: 'issueDetails',
           },
           {
-            title: 'Last Update',
+            title: `${this.$store.getters.getTranslation.LastUpdat_2_216}`, 
             dataIndex: 'lastUpdate',
           },
           {
-            title: 'Status',
+            title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`, 
             dataIndex: 'status',
              scopedSlots: { customRender: 'status' }
           },
           {
-            title: 'Actions',
+            title: `${this.$store.getters.getTranslation.Actio_1_220}`,
             dataIndex: 'actions',
             scopedSlots: { customRender: 'supportAction' },
           },

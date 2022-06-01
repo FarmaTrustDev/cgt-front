@@ -44,19 +44,19 @@ export default {
       schedulingId: null,
       columns: [
         {
-          title: 'Patient ID',
+          title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
           dataIndex: 'patientEnrollmentNumber',
         },
         {
-          title: 'Collection Date - Delivery Date ',
+          title: `${this.$store.getters.getTranslation.ColleDate_3_290 + this.$store.getters.getTranslation['Colle-_4_268']}`,
           dataIndex: 'collectionDateDeliveryDate',
         },
         {
-          title: 'Treatment Type',
+          title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
           dataIndex: 'treatmentType.name',
         },
         {
-          title: 'Print',
+          title: `${this.$store.getters.getTranslation.Print_1_111}`,
           dataIndex: 'print',
           scopedSlots: { customRender: 'print' },
         },

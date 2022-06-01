@@ -7,7 +7,7 @@
         <FormActionButton
           :is-created="isCreated"
           :loading="loading"
-          text="Save Patient & Continue"
+          :text="translation.SavePatie_4_665"
         />
         <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
       </a-form-item>
@@ -40,6 +40,11 @@ export default {
   },
   mounted() {
     this.checkCreated()
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   updated() {},
   methods: {

@@ -20,7 +20,7 @@
           ]"
           mode="tags"
           style="width: 100%"
-          placeholder="Select Email"
+          :placeholder="translation.SelecEmail_2_478"
         >
           <a-select-option v-for="user in users" :key="user.email">
             {{ user.email }}
@@ -89,6 +89,9 @@ export default {
     user() {
       return this.$store.getters.getUser
     },
+    translation() {
+      return this.$store.getters.getTranslation
+    },    
   },
   mounted() {
     this.fetchUser()
