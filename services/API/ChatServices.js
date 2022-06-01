@@ -32,8 +32,16 @@ function fetchGroup(params = {}) {
   })
 }
 
+function createGroup(data) {
+  return request({
+    url: `${baseApi}/groups`,
+    data,
+    method: 'POST',
+  })
+}
+
 const ChatServices = {
-  getConversations, create, get, fetchGroup
+  getConversations, create, get, fetchGroup, createGroup
 }
 
 export default ChatServices

@@ -11,13 +11,14 @@
       </template>
     </a-table>
     <a-modal
+      :destroy-on-close="true"
       :width="800"
       :visible="groupModal"
       title="Create Group"
       @cancel="handleGroupModal(false)"
     >
       <a-form :form="form" @submit="onSubmit">
-        <FormFields />
+        <FormFields @getImage="getImage" />
         <FormActionButton :loading="loading" custom-text="Create Group" />
       </a-form>
     </a-modal>
@@ -26,6 +27,7 @@
 <script>
 import ChatServices from '~/services/API/ChatServices'
 import FormFields from '~/components/chat/groups/FormFields'
+import { isEmpty } from '~/services/Utilities'
 export default {
   components: { FormFields },
   data() {
@@ -33,12 +35,15 @@ export default {
       loading: false,
       groupModal: false,
       data: [],
+      files: [],
       form: this.$form.createForm(this, {
         name: 'createForm',
       }),
     }
   },
-  mounted() {},
+  mounted() {
+    this.fetch()
+  },
   methods: {
     fetch() {
       ChatServices.fetchGroup().then((response) => {
@@ -48,12 +53,29 @@ export default {
     handleGroupModal(show) {
       this.groupModal = show
     },
+    getImage(files) {
+      if (!isEmpty(files)) {
+        this.files = files
+      }
+    },
     onSubmit(e) {
       // this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(values)
+          const formData = new FormData()
+
+          for (const key in values) {
+            formData.append(key, values[key])
+          }
+
+          this.files.forEach((files) => {
+            formData.append('files', files)
+          })
+
+          ChatServices.createGroup(formData).then((response) => {
+            console.log(response)
+          })
         } else {
           this.loading = false
         }

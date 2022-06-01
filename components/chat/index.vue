@@ -24,7 +24,7 @@
               />
               <a-empty v-else class="h-100vh">
                 <span slot="description">
-                  {{translation.SelecUser_5_117}}
+                  {{ translation.SelecUser_5_117 }}
                 </span>
                 <a-button type="primary" @click="showUsersModal(true)">
                   Start Now
@@ -40,6 +40,7 @@
       :visible="groupModal"
       title="Add users"
       :footer="null"
+      :destroy-on-close="true"
       @cancel="handleGroupModal(false)"
     >
       <Group />
@@ -78,6 +79,11 @@ export default {
       groupModal: false,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     this.fetchConversation()
     this.registerEventNotification()
@@ -85,11 +91,6 @@ export default {
     this.$emit('loadShowModal', this.showUsersModal)
     this.$emit('handleGroupModal', this.handleGroupModal)
   },
-  computed:{
-    translation() {
-      return this.$store.getters.getTranslation
-    },
-  },  
   methods: {
     loadScrollMethod(method) {
       this.scrollMethod = method

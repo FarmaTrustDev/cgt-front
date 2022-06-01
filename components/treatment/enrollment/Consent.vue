@@ -29,9 +29,9 @@
         >
           Patient Consent Form Registered
         </a-checkbox>
-      <h1 v-if="checkBoxError" style="color:#f00; font-weight:bold">
-        Consent check is mandatory
-      </h1>
+        <h1 v-if="checkBoxError" style="color: #f00; font-weight: bold">
+          Consent check is mandatory
+        </h1>
         <a-input
           v-decorator="[
             `patientId`,
@@ -45,7 +45,11 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton :loading="loading" text="Save Consent & Continue" :disabled="!isEmpty(treatment.id)" />
+      <FormActionButton
+        :loading="loading"
+        text="Save Consent & Continue"
+        :disabled="!isEmpty(treatment.id)"
+      />
     </a-form>
   </div>
 </template>
@@ -76,7 +80,7 @@ export default {
       loading: false,
       fileList: [],
       allowedExtensions: DOCUMENT_EXTENSIONS,
-      checkBoxError:false,
+      checkBoxError: false,
     }
   },
   mounted() {
@@ -86,11 +90,12 @@ export default {
 
   methods: {
     handleChange(info) {
+      console.log(info)
       this.fileList = info
     },
-    checkChecked(e){
-      if(e.target.checked){
-        this.checkBoxError=false
+    checkChecked(e) {
+      if (e.target.checked) {
+        this.checkBoxError = false
       }
     },
     create(values) {
@@ -118,11 +123,11 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          if(values.consent===true){
+          if (values.consent === true) {
             this.create(values)
-          }else{
-            this.checkBoxError=true
-            this.loading=false
+          } else {
+            this.checkBoxError = true
+            this.loading = false
           }
         } else {
           this.loading = false
