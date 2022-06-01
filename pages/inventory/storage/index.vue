@@ -6,10 +6,10 @@
     title="Storage Services"
   >
     <div slot="content">
-      <div class="w-800 margin-auto">
+      <div class="w-800 p-15 default-border-radius ">
         <a-row :gutter="16">
           <a-col v-for="storage in storages" :key="storage.id" :span="6">
-            <Tile :storage="storage" />
+            <Tile class="light-shadow" :storage="storage" />
           </a-col>
         </a-row>
       </div>
