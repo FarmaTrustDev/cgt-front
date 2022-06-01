@@ -1,19 +1,17 @@
 <template>
   <div>
-    <a-table :data-source="data" :columns="[]">
+    <a-table :data-source="data" :loading="loading" :columns="columns">
       <template slot="title">
         <a-button type="primary" @click="handleGroupModal(true)">
           create group</a-button
         >
-      </template>
-      <template slot="message" slot-scope="text, record">
-        <a-button type="" @click="getUser(text, record)"> view</a-button>
       </template>
     </a-table>
     <a-modal
       :destroy-on-close="true"
       :width="800"
       :visible="groupModal"
+      :footer="false"
       title="Create Group"
       @cancel="handleGroupModal(false)"
     >
@@ -28,6 +26,19 @@
 import ChatServices from '~/services/API/ChatServices'
 import FormFields from '~/components/chat/groups/FormFields'
 import { isEmpty } from '~/services/Utilities'
+
+const columns = [
+  {
+    title: 'Id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+]
 export default {
   components: { FormFields },
   data() {
@@ -35,6 +46,7 @@ export default {
       loading: false,
       groupModal: false,
       data: [],
+      columns,
       files: [],
       form: this.$form.createForm(this, {
         name: 'createForm',
@@ -46,9 +58,12 @@ export default {
   },
   methods: {
     fetch() {
-      ChatServices.fetchGroup().then((response) => {
-        console.log(response)
-      })
+      this.loading = true
+      ChatServices.fetchGroup()
+        .then((response) => {
+          this.data = response.groups
+        })
+        .finally(() => (this.loading = false))
     },
     handleGroupModal(show) {
       this.groupModal = show
@@ -74,7 +89,8 @@ export default {
           })
 
           ChatServices.createGroup(formData).then((response) => {
-            console.log(response)
+            this.handleGroupModal(false)
+            this.fetch()
           })
         } else {
           this.loading = false
