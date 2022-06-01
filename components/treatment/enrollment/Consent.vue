@@ -76,7 +76,7 @@ export default {
       loading: false,
       fileList: [],
       allowedExtensions: DOCUMENT_EXTENSIONS,
-      checkBoxError:false,
+      checkBoxError: false,
     }
   },
   computed: {
@@ -91,11 +91,12 @@ export default {
 
   methods: {
     handleChange(info) {
+      console.log(info)
       this.fileList = info
     },
-    checkChecked(e){
-      if(e.target.checked){
-        this.checkBoxError=false
+    checkChecked(e) {
+      if (e.target.checked) {
+        this.checkBoxError = false
       }
     },
     create(values) {
@@ -123,11 +124,11 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          if(values.consent===true){
+          if (values.consent === true) {
             this.create(values)
-          }else{
-            this.checkBoxError=true
-            this.loading=false
+          } else {
+            this.checkBoxError = true
+            this.loading = false
           }
         } else {
           this.loading = false

@@ -78,7 +78,7 @@
         >
           <a-select
             v-decorator="[
-              `organizations[${index}]`,
+              `OrganizationsId[${index}]`,
               {
                 rules: [
                   {
@@ -109,6 +109,7 @@
 import Upload from '~/components/upload/profile'
 import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
 import OrganizationTypeServices from '~/services/API/OrganizationTypeServices'
+import { isEmpty } from '~/services/Utilities'
 export default {
   components: { Upload },
   data() {
@@ -130,7 +131,9 @@ export default {
   },
   methods: {
     getImage(files) {
-      console.log(files)
+      if (!isEmpty(files)) {
+        this.$emit('getImage', files)
+      }
     },
     generateUuid() {
       this.currentId = this.currentId + 1
