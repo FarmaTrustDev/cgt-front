@@ -1,18 +1,24 @@
 <template>
-  <div>
-    <div class="img"><fridge :color="color" /></div>
-    <div class="location">Storage Suite 3, Germany - Cellfuse</div>
-    <div class="title">Fridge Atara 001</div>
+  <div class="fridge-tile">
+    <div class="img"><fridge :color="storage.color" /></div>
+    <div class="location">
+      <a-icon type="environment" theme="filled" />{{ storage.location }}>
+    </div>
+    <div class="title">{{ storage.title }}</div>
   </div>
 </template>
 <script>
 import fridge from '~/components/inventory/fridge'
 export default {
   components: { fridge },
+  props: {
+    storage: { type: Object, default: () => ({}) },
+    title: { type: String, default: 'Storage Suite 3, Germany - Cellfuse' },
+    location: { type: String, default: 'Fridge Atara 001' },
+    color: { type: String, default: '#1943AE' },
+  },
   data() {
-    return {
-      color: '#1943AE',
-    }
+    return {}
   },
 }
 </script>
