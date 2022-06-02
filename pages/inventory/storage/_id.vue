@@ -5,14 +5,16 @@
     :bordered="false"
     title="Storage Services"
   >
-    <div slot="content">
-      <a-row>
+    <div slot="content" class="w-1200 margin-auto">
+      <a-row :gutter="24">
         <a-col :span="8">
           <TileCenter
             heading="Fridge Atara 001"
             footer="Storage Suite 3, Germany - Cellfuse"
           >
-            <div slot="center" class="text-center"><fridge /></div>
+            <div slot="center" class="text-center">
+              <fridge style="zoom: 2.5" />
+            </div>
           </TileCenter>
         </a-col>
         <a-col :span="8">
@@ -26,7 +28,7 @@
         ></a-col>
         <a-col :span="8">
           <TileCenter
-            heading="Fridge Atara 001"
+            heading=" Fridge Atara 001, Shelf 3 "
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
