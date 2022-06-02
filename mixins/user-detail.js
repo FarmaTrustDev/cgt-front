@@ -24,6 +24,10 @@ export default {
             const user = this.getStoreUserDetails();
             return user.organizationTypeAlias === "LOGISTIC";
         },
+        isSmartLab(){
+            const user = this.getStoreUserDetails();
+            return user.organizationTypeAlias === "SMARTLAB";
+        },
         getStoreUserDetails() {
             return this.$store.getters.getUser
         }

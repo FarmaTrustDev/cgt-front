@@ -114,7 +114,7 @@
 
             <a-menu-item key="3"
               ><a-popconfirm
-                title="Are you sure delete ?"
+                :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
@@ -146,7 +146,7 @@
             </a-menu-item>
             <a-menu-item key="3">
               <a-popconfirm
-                title="Are you to hide patient?"
+                :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
@@ -157,7 +157,7 @@
             </a-menu-item>
             <a-menu-item key="4">
               <a-popconfirm
-                title="Are you to hide patient?"
+                :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"

@@ -20,7 +20,7 @@
         </a-tab-pane>
         <!-- // adding button -->
         <a-button slot="tabBarExtraContent" type="primary" @click="add">
-          Add Category
+          {{translation.AddCateg_2_490}}
         </a-button>
       </a-tabs>
 
@@ -67,6 +67,11 @@ export default {
   mounted() {
     this.fetchList()
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   methods: {
     tabClick() {},
     handleCategoryModal(show) {

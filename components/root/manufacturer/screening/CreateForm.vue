@@ -59,7 +59,7 @@
     </a-form>
 
     <span v-if="isCreated">
-      <a-divider>Associate Screening</a-divider>
+      <a-divider>{{translation.AssocScree_2_489}}</a-divider>
 
       <CategoryTabs v-if="entity.id" :template-id="entity.id"
     /></span>
@@ -96,6 +96,11 @@ export default {
       gotoLink: '/manufacturer/administration/screening',
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   mounted() {
     this.fetchTreatmentTypes()
     this.fetchOrganization()

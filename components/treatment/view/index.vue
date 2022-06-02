@@ -7,7 +7,7 @@
         </a-tab-pane>
       </a-tabs>
     </div>
-    <alert v-else message="Create sample bags to view treatment steps" />
+    <alert v-else :message="translation.Creatsampl_7_489" />
   </a-card>
 </template>
 <script>
@@ -28,6 +28,11 @@ export default {
   mounted() {
     this.fetchBags()
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     fetchBags() {
       TreatmentBagServices.get({ treatmentId: this.treatment.id }).then(
