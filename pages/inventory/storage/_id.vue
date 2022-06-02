@@ -23,9 +23,10 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <Shelf />
-            </div> </TileCenter
-        ></a-col>
+              <racks :count="4" />
+            </div>
+          </TileCenter>
+        </a-col>
         <a-col :span="8">
           <TileCenter
             heading=" Fridge Atara 001, Shelf 3 "
@@ -44,12 +45,14 @@
 import PageLayout from '~/components/layout/PageLayout'
 import fridge from '~/components/inventory/fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
-import Shelf from '~/components/inventory/assets/Shelf'
+import racks from '~/components/inventory/storage/racks'
 import TestTube from '~/components/inventory/assets/TestTube'
 export default {
-  components: { PageLayout, Shelf, TestTube, fridge, TileCenter },
+  components: { PageLayout, racks, TestTube, fridge, TileCenter },
   data() {
-    return {}
+    return {
+      loading: false,
+    }
   },
 }
 </script>
