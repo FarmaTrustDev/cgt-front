@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-header clearfix">
-      <h3 class="page-title pl-5 float-left">{{translation['All-_3_400']}}</h3>
+      <h3 class="page-title pl-5 float-left">{{translation['TreatList_2_258']}}</h3>
 
       <a-select
         class="float-right page-search-input"
