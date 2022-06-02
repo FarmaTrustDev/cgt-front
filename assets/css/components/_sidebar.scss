@@ -155,6 +155,9 @@
     background-color: transparent;
     .menu-container {
       background-color: #F2F5FB;
+      img{
+        filter:grayscale(0%);
+      }
     }
     img{
       filter:grayscale(0%);
