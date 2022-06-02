@@ -33,7 +33,7 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <TestTube />
+              <Trays />
             </div> </TileCenter
         ></a-col>
       </a-row>
@@ -46,9 +46,9 @@ import PageLayout from '~/components/layout/PageLayout'
 import fridge from '~/components/inventory/fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
-import TestTube from '~/components/inventory/assets/TestTube'
+import Trays from '~/components/inventory/storage/trays'
 export default {
-  components: { PageLayout, racks, TestTube, fridge, TileCenter },
+  components: { PageLayout, racks, Trays, fridge, TileCenter },
   data() {
     return {
       loading: false,
