@@ -2,7 +2,7 @@
   <div>
     <table class="testTubeTable border">
       <tr v-for="tray in trays" :key="tray.id">
-        <td class="border" v-for="tube in tray.tubes" :key="tube.id">
+        <td v-for="tube in tray.tubes" :key="tube.id" class="border">
           <tray />
         </td>
       </tr>
@@ -48,11 +48,6 @@ const t = {
       active: true,
       name: '5A',
     },
-    {
-      id: 7,
-      active: true,
-      name: '5A',
-    },
   ],
 }
 export default {
@@ -67,7 +62,8 @@ export default {
 <style lang="scss" scoped>
 .testTubeTable {
   td {
-    padding: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
   }
 }
 </style>

@@ -23,7 +23,7 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <racks :count="4" />
+              <racks :count="5" />
             </div>
           </TileCenter>
         </a-col>

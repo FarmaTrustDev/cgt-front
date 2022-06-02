@@ -17,9 +17,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tileCenter {
-  min-height: 350px;
+  min-height: 400px;
   padding-bottom: 25px;
   font-size: 14px;
+  border-radius: 10px;
   .footer {
     color: #7a7575;
     position: absolute;
