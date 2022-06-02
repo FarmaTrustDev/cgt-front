@@ -1,5 +1,5 @@
 <template>
-  <span class="rack" :class="active ? 'active' : ''"></span>
+  <span class="rack light-shadow" :class="active ? 'active' : ''"></span>
 </template>
 
 <script>
