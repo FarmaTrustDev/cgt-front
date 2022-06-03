@@ -8,6 +8,7 @@
 }
 
 .fridge-tile {
+  cursor: pointer;
   padding: 15px;
   border-radius: 22px;
   background-color: white;
@@ -21,5 +22,6 @@
   }
   .title {
     color: #000;
+    padding-top: 10px;
   }
 }
