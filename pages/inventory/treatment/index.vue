@@ -10,7 +10,7 @@
     <div class="h-tabs large-tabs">
         <a-tabs type="card" :animated="false">
             <a-tab-pane key="1" :tab="translation.NewTreat_2_260">
-                <standard-table :columns="[{
+                <standard-table class="rounded-table" :columns="[{
     title: `Patient ID`,
     dataIndex: 'patientEnrollmentNumber',
     key: 'patientEnrollmentNumber',
@@ -41,7 +41,7 @@
   :dump-data="[{patientEnrollmentNumber: 1, treatmentType: 'ABC', hospital: 'Agha Khan Hospital', collectionDateDeliveryDate: '12/12/2022' }]" :should-fetch="false" />
             </a-tab-pane>
             <a-tab-pane key="2" :tab="translation.PendiTreat_2_300">
-                <standard-table :columns="[{
+                <standard-table class="rounded-table" :columns="[{
                   title: `Patient ID`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
@@ -74,7 +74,7 @@
               ]" :dump-data="[{patientEnrollmentNumber: 1,treatmentName: 'abc', productionLine: 'Prod', hospital: 'CellFuse', collectionDateDeliveryDate: '12/10/2022'}]" :should-fetch="false" />
             </a-tab-pane>
             <a-tab-pane key="3" :tab="translation.ComplTreat_2_844">
-                <standard-table :columns="[{
+                <standard-table class="rounded-table" :columns="[{
                   title: `Patient ID`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
@@ -98,7 +98,7 @@
               />
             </a-tab-pane>
             <a-tab-pane key="4" :tab="translation['All-_3_400']">
-                <standard-table :columns="[
+                <standard-table class="rounded-table" :columns="[
   {
     title: `Patient ID`,
     dataIndex: 'patientEnrollmentNumber',
