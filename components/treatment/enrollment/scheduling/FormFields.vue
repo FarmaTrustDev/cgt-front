@@ -134,7 +134,7 @@
             ]"
             :format="dateFormat"
             :disabled-date="disabledDate"
-            style="width: 100%"
+           
             size="large"
           >
           </a-date-picker> </a-form-item
@@ -157,7 +157,7 @@
             ]"
             :format="dateFormat"
             :disabled-date="disabledDate"
-            style="width: 100%"
+            
             size="large"
           >
           </a-date-picker> </a-form-item
