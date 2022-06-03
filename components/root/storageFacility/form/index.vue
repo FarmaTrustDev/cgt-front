@@ -2,13 +2,7 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <formfield @handleChange="handleChange" />
-      <a-form-item>
-        <FormActionButton
-          :is-created="isCreated"
-          :loading="loading"
-          :custom-text="translation['Save&_3_453']"
-        />
-      </a-form-item>
+
     </a-form>
   </div>
 </template>
@@ -17,7 +11,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import UserServices from '~/services/API/UserServices'
-import formfield from '~/components/root/user/form/FormField'
+import formfield from '~/components/root/storageFacility/form/FormField'
 
 export default {
   components: { formfield },
