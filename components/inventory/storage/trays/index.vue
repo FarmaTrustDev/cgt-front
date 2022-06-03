@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="testTubeTable border">
+    <table class="testTubeTable border w-100">
       <tr v-for="tray in trays" :key="tray.id">
         <td v-for="tube in tray.tubes" :key="tube.id" class="border">
           <tray />
