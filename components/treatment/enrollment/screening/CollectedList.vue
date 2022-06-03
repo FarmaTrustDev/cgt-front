@@ -17,24 +17,6 @@
 </template>
 <script>
 import standardTable from '~/components/common/StandardTable'
-const column = [
-  {
-    title: 'Details',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Notes',
-    dataIndex: 'notes',
-    key: 'notes',
-  },
-  {
-    title: 'Actions',
-    dataIndex: 'isCheck',
-    key: 'isCheck',
-    scopedSlots: { customRender: 'check' },
-  },
-]
 export default {
   components: { standardTable },
   props: {
@@ -45,7 +27,24 @@ export default {
   },
   data() {
     return {
-      column,
+      column:[
+  {
+    title:`${this.$store.getters.getTranslation.Detai_1_346}`,
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title:`${this.$store.getters.getTranslation.Notes_1_350}`,
+    dataIndex: 'notes',
+    key: 'notes',
+  },
+  {
+    title:`${this.$store.getters.getTranslation.Actio_1_220}`,
+    dataIndex: 'isCheck',
+    key: 'isCheck',
+    scopedSlots: { customRender: 'check' },
+  },
+],
     }
   },
 }

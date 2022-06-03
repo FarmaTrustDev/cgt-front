@@ -66,13 +66,12 @@
 
 ///////////////Sidebar updated
 
-.logout-menu
-{
+.logout-menu {
   position: absolute;
   z-index: 999999999;
   top: 50px;
   left: 30px;
-  .menu-container{
+  .menu-container {
     background-color: #3869d1;
     color: white;
     padding: 18px 12px;
@@ -106,12 +105,9 @@
     font-size: 14px;
     height: auto;
     padding: 0 30px;
-    &:hover{
+    &:hover {
       color: $primary-color;
     }
-  }
-  .ant-menu-item-selected{
-    color: $primary-color;
   }
   .ant-menu {
     font-weight: 500;
@@ -125,7 +121,7 @@
   .menu-container {
     padding: 10px 30px 10px 30px;
     border-radius: 22px;
-    img{
+    img {
       color: $primary-color;
       filter: grayscale(100%) opacity(0.4);
     }
@@ -134,7 +130,7 @@
       color: $primary-color;
       img {
         color: rgb(29, 187, 100);
-        fill:#3869d1;
+        fill: #3869d1;
         text-shadow: 1px 1px 1px rgb(244, 4, 4);
         filter: grayscale(0%) drop-shadow(0 0 0 blue);
       }
@@ -142,7 +138,7 @@
   }
   .ant-menu-inline-collapsed {
     .menu-container {
-       padding: 10px 25px 10px 25px;
+      padding: 10px 25px 10px 25px;
       .title {
         display: none;
       }
@@ -153,10 +149,14 @@
   }
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: transparent;
+    color: $primary-color;
+    img {
+      filter: grayscale(0%);
+    }
     .menu-container {
-      background-color: #F2F5FB;
-      img{
-        filter:grayscale(0%);
+      background-color: #f2f5fb;
+      img {
+        filter: grayscale(0%);
       }
     }
   }
@@ -167,27 +167,24 @@
     border: 0;
   }
 
-  .ant-menu-inline 
-  .ant-menu-item
-    {
-      line-height: 35px;
-      &::after{
-        content: "";
-        width: 5px;
-        display: block;
-        height: 25px;
-        background-color: #FA6363;
-        position: absolute;
-        right: 0;
-        margin: auto;
-        top: 0;
-        bottom: 0;
-        border-top-left-radius: 50%;
-        border-bottom-left-radius: 50%;
-        border-right: none;
+  .ant-menu-inline .ant-menu-item {
+    line-height: 35px;
+    &::after {
+      content: '';
+      width: 5px;
+      display: block;
+      height: 25px;
+      background-color: #fa6363;
+      position: absolute;
+      right: 0;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-right: none;
     }
   }
-
 }
 
 .main-section {

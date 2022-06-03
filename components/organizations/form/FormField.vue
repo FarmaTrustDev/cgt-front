@@ -48,7 +48,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Email"
+          :label="translation.EmailAddre_2_140"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >

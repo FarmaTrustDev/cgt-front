@@ -80,6 +80,7 @@ a {
     padding: 15px;
     font-weight: bold;
     text-align: center;
+    border-radius: 22px;
 
     // why repeating code ?? check the below line
     &:first-child {
@@ -113,7 +114,8 @@ a {
   }
 }
 .page-header {
-  margin-top: 3rem;
+  margin-top: -1rem;
+  margin-bottom: 20px;
 }
 .page-title {
   font-size: 25px;

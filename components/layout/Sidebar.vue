@@ -1,10 +1,5 @@
 <template>
-  <a-layout-sider
-    v-model="collapsed"
-    class="sidebar"
-    width="265"
-    theme="light"
-  >
+  <a-layout-sider v-model="collapsed" class="sidebar" width="265" theme="light">
     <div class="logo-container">
       <nuxt-link to="/">
         <img
@@ -20,19 +15,21 @@
           @click="goto(menu.to)"
         >
           <div class="menu-container">
-            <img :src="menu.icon" style=" max-width: 28px; " /> 
-            <span class="title">{{ menu.name }}</span>
+            <img :src="menu.icon" style="max-width: 28px" />
+            <span class="title">{{ translation[menu.name] }}</span>
           </div>
         </a-menu-item>
-        <a-menu-item key="10" @click="logout" class="logout-menu">
+        <a-menu-item key="10" class="logout-menu" @click="logout">
           <div class="menu-container">
-            <img :src="logoutImg"> <span class="title">Logout</span>
+            <img :src="logoutImg" />
+            <span class="title">{{ translation.Logou_1_37 }}</span>
           </div>
         </a-menu-item>
       </a-menu>
     </a-skeleton>
   </a-layout-sider>
 </template>
+
 <script>
 // import { mapGetters } from 'vuex'
 import { setAccessToken, setRefreshToken } from '~/services/Auth'
@@ -42,13 +39,17 @@ export default {
   data() {
     return {
       collapsed: false,
-      logoutImg : "https://cgt-dev-ft.microsysx.com/images/v2/icons/logout.svg?0.229"
+      logoutImg:
+        'https://cgt-dev-ft.microsysx.com/images/v2/icons/logout.svg?0.229',
     }
   },
   computed: {
     // ...mapGetters(['getUser']),
     user() {
       return this.$store.getters.getUser
+    },
+    translation() {
+      return this.$store.getters.getTranslation
     },
   },
   mounted() {
@@ -68,14 +69,18 @@ export default {
     },
     isEmpty,
     goto(url) {
-      this.$router.push({ path: url })
+      this.$router.push({
+        path: url,
+      })
     },
     logout() {
       setRefreshToken('')
       setAccessToken('')
       this.$store.commit('setToken', {})
       this.$store.commit('setUser', {})
-      this.$router.push({ path: '/login' })
+      this.$router.push({
+        path: '/login',
+      })
     },
   },
 }

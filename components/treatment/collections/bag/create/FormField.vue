@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-form-item label="Collection Date" class="pb-0">
+    <a-form-item :label="translation.ColleDate_3_290" class="pb-0">
       <a-date-picker
         v-decorator="[
           'collectionDate',
@@ -18,7 +18,7 @@
       >
       </a-date-picker>
     </a-form-item>
-    <a-form-item label="Collection Time" class="pb-0">
+    <a-form-item :label="translation.ColleTime_2_772" class="pb-0">
       <a-time-picker
         v-decorator="[
           'collectionTime',
@@ -38,7 +38,7 @@
       >
       </a-time-picker>
     </a-form-item>
-    <a-form-item label="Collection Time" class="pb-0">
+    <a-form-item :label="translation.ColleTime_2_772" class="pb-0">
       <a-textarea
         v-decorator="[
           'notes',
@@ -78,5 +78,10 @@ export default {
   data() {
     return {}
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
 }
 </script>

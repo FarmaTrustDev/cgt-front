@@ -62,15 +62,15 @@ export default {
       loading: true,
     }
   },
-  mounted() {
-    this.isTreatmentCreate()
-    this.handleActiveTab()
-    this.isPatientCreated()
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.isTreatmentCreate()
+    this.handleActiveTab()
+    this.isPatientCreated()
   },  
   methods: {
     handleActiveTab() {

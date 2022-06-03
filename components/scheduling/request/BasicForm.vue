@@ -10,7 +10,7 @@
 
       <a-row :gutter="16">
         <a-col :span="12">
-          <a-form-item label="Sample Collection Date" class="pb-0">
+          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
             <a-input
               v-decorator="[
                 `treatmentId`,
@@ -60,7 +60,7 @@
             </a-date-picker> </a-form-item
         ></a-col>
         <a-col :span="12">
-          <a-form-item label="Sample Collection Date" class="pb-0">
+          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
             <a-date-picker
               v-decorator="[
                 'deliveryDate',
@@ -117,6 +117,11 @@ export default {
       dateFormat: STANDARD_UK_DATE_FORMAT,
       TREATMENT_PHASES,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     disabledDate: _disabledPreviousDate,

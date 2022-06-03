@@ -337,21 +337,21 @@ export default {
       }),
       typeLoading: false,
       statuses: [
-        { id: 1, name: 'Archived' },
-        { id: 2, name: 'In progress' },
-        { id: 3, name: 'Resolved' },
-        { id: 4, name: 'Cancel' },
-        { id: 5, name: 'Pause' },
+        { id: 1, name: `${this.$store.getters.getTranslation.Archi_1_226}`},
+        { id: 2, name: `${this.$store.getters.getTranslation.Inprogr_2_204}`},
+        { id: 3, name: `${this.$store.getters.getTranslation.Resol_1_230}`},
+        { id: 4, name: `${this.$store.getters.getTranslation.cance_1_296}`},
+        { id: 5, name: `${this.$store.getters.getTranslation.Pause_1_452}`},
       ],
       priorities: [
-        { id: 1, name: 'High' },
-        { id: 2, name: 'Medium' },
-        { id: 3, name: 'Low' },
+        { id: 1, name: `${this.$store.getters.getTranslation.high_1_200}`},
+        { id: 2, name: `${this.$store.getters.getTranslation.mediu_1_198}`},
+        { id: 3, name: `${this.$store.getters.getTranslation.low_1_196}`},
       ],
       stakeHoldersList: [
-        { id: 1, name: 'HOSPITAL' },
-        { id: 2, name: 'MANUFACTURER' },
-        { id: 3, name: 'LOGISTIC' },
+        { id: 1, name: `${this.$store.getters.getTranslation.Hospi_1_47}`},
+        { id: 2, name: `${this.$store.getters.getTranslation.Manuf_1_89}`},
+        { id: 3, name: `${this.$store.getters.getTranslation.Logis_1_146}`},
       ],
       loading: false,
       bags: [],
@@ -446,5 +446,5 @@ export default {
         })
     },
   },
-}
+  }
 </script>

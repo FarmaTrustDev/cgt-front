@@ -2,11 +2,12 @@
   <div>
     <div class="page-header clearfix">
       <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3>
+
       <a-button
         type="primary"
         class="mrm-5 float-right"
         @click="goto('patients/create')"
-        >{{translation['AddNew_3_631']}}</a-button
+        >{{ translation['AddNew_3_631'] }}</a-button
       >
       <a-input
         ref="userNameInput"
@@ -36,50 +37,7 @@ import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
 import translationHelpers from '~/mixins/translation-helpers'
-const column = [
-  {
-    title: 'PUID',
-    dataIndex: 'enrollmentNumber',
-    key: 'PUID',
-    width: 110,
-    scopedSlots: {
-      filterDropdown: 'filterDropdown',
-      filterIcon: 'filterIcon',
-    },
-  },
-  {
-    title: 'Patient Name',
-    dataIndex: 'name',
-    key: 'name',
-    width: 150,
-    scopedSlots: {
-      customRender: 'name',
-      filterDropdown: 'filterDropdown',
-      filterIcon: 'filterIcon',
-    },
-  },
-  {
-    title: 'Type',
-    dataIndex: 'treatmentTypeId',
-    key: 'treatmentTypeId',
-    width: 100,
-    scopedSlots: { customRender: 'treatmentTypeNameRender' },
-  },
-  {
-    // title: 'Treatment Status',
-    dataIndex: 'treatment_status',
-    key: 'treatment_status',
-    slots: { title: 'customTitle' },
-    scopedSlots: { customRender: 'treatment_status' },
-    width: '65%',
-    class: 'treatment-status-col',
-  },
-  {
-    title: 'Action',
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'patientAction' },
-  },
-]
+
 const ActionLink = '/hospital/patients'
 export default {
   components: { standardTable },
@@ -87,7 +45,50 @@ export default {
   middleware: 'auth',
   data() {
     return {
-      column,
+      column: [
+        {
+          title: `PUID`,
+          dataIndex: 'enrollmentNumber',
+          key: 'PUID',
+          width: 110,
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+          },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.PatieName_2_93}`,
+          dataIndex: 'name',
+          key: 'name',
+          width: 150,
+          scopedSlots: {
+            customRender: 'name',
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+          },
+        },
+        {
+          title: `${this.$store.getters.getTranslation._1_442}`,
+          dataIndex: 'treatmentTypeId',
+          key: 'treatmentTypeId',
+          width: 100,
+          scopedSlots: { customRender: 'treatmentTypeNameRender' },
+        },
+        {
+          // title: 'Treatment Status',
+          dataIndex: 'treatment_status',
+          key: 'treatment_status',
+          slots: { title: 'customTitle' },
+          scopedSlots: { customRender: 'treatment_status' },
+          width: '65%',
+          class: 'treatment-status-col',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'action',
+          scopedSlots: { customRender: 'patientAction' },
+        },
+      ],
       loading: false,
       PatientServices,
       ActionLink,
@@ -99,7 +100,7 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-  }, */ 
+  }, */
   methods: {
     getFetch(fetch) {
       this.fetchPatientService = fetch

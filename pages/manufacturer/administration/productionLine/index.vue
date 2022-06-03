@@ -14,29 +14,30 @@ import PageLayout from '~/components/layout/PageLayout'
 import standardTable from '~/components/common/StandardTable'
 import ProductionLineServices from '~/services/API/ProductionLineServices'
 const ActionLink = '/manufacturer/administration/productionLine'
-const column = [
+
+export default {
+  components: { 'page-layout': PageLayout, standardTable },
+  data() {
+    return {
+      loading: false,
+      column:[
   {
     title: 'Id',
     dataIndex: 'id',
     key: 'id',
   },
   {
-    title: 'Name',
+    title: `${this.$store.getters.getTranslation.Name_1_138}`,
     dataIndex: 'name',
     key: 'name',
   },
   {
-    title: 'Action',
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
     dataIndex: 'action',
     scopedSlots: { customRender: 'action' },
   },
 ]
-export default {
-  components: { 'page-layout': PageLayout, standardTable },
-  data() {
-    return {
-      loading: false,
-      column,
+,
       ProductionLineServices,
       ActionLink,
     }

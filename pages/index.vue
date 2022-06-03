@@ -1,11 +1,12 @@
 <template>
-  <div class="home-page">
+<div class="home-page">
     <h1 class="title"><strong>{{translation['Mydashb_2_7']}}</strong></h1>
 
     <manufacturerHome v-if="isManufacturer()" />
     <hospitalHome v-if="isHospital()" />
     <logisticHome v-if="isLogistic()" />
-  </div>
+    <smartlabHome v-if="isSmartLab()" />
+</div>
 </template>
 
 <script>
@@ -15,23 +16,29 @@ import routeHelpers from '~/mixins/route-helpers'
 import manufacturerHome from '~/components/root/manufacturer/home'
 import hospitalHome from '~/components/root/hospital/home'
 import logisticHome from '~/components/root/logistic/home'
+import smartlabHome from '~/components/root/smartlab/home'
 export default {
-  components: { manufacturerHome, hospitalHome, logisticHome },
-  mixins: [routeHelpers, userDetail],
-  middleware: 'auth',
-  data() {
-    return {}
-  },
-  mounted() {},
-  computed:{
-    translation() {
-      return this.$store.getters.getTranslation
+    components: {
+        manufacturerHome,
+        hospitalHome,
+        logisticHome,
+        smartlabHome
     },
-  },
-  methods: {
-    gotoView(uri) {
-      this.goto(`/${uri}`)
+    mixins: [routeHelpers, userDetail],
+    middleware: 'auth',
+    data() {
+        return {}
     },
-  },
+    mounted() {},
+    computed: {
+        translation() {
+            return this.$store.getters.getTranslation
+        },
+    },
+    methods: {
+        gotoView(uri) {
+            this.goto(`/${uri}`)
+        },
+    },
 }
 </script>

@@ -3,9 +3,9 @@
     <a-row :gutter="16" class="grey-card">
       <a-col>
         <a-card :bordered="false" class="default-card logistic-container">
-            <h2>Select Partners </h2>
+            <h2>{{translation.SelecPartn_2_458}} </h2>
             <br>
-            <h3>Logistics:</h3>
+            <h3>{{translation.Logis_1_146}}:</h3>
             <a-select
               v-model="value"
               mode="multiple"
@@ -21,11 +21,11 @@
             </a-select>
             <!-- Apply Checkbox -->
             <a-checkbox @change="onChange">
-              <h2><b>Apply to partner</b></h2>
+              <h2><b>{{translation.Applyto_3_459}}</b></h2>
             </a-checkbox>
 
             <a-col class="text-right mt-15">
-              <a-button type="primary" class="plr-20" @click="save">Save</a-button>
+              <a-button type="primary" class="plr-20" @click="save">{{translation.save_1_462}}</a-button>
             </a-col>
 
           </a-card>
@@ -47,6 +47,11 @@ import notifications from '~/mixins/notifications'
     watch: {
       value(val) {
         console.log(`selected:`, val);
+      },
+    },
+    computed:{
+      translation() {
+        return this.$store.getters.getTranslation
       },
     },
     methods:{

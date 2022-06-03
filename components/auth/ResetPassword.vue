@@ -1,7 +1,7 @@
 <template>
   <div class="half-secondary">
     <div class="login">
-      <a-card :bordered="false" title="Reset Password">
+      <a-card :bordered="false" :title="translation.ResetPassw_2_472">
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
           <a-form-item label="Password">
@@ -19,7 +19,7 @@
               type="password"
             />
           </a-form-item>
-          <a-form-item label="Confirm Password">
+          <a-form-item :label="translation.ConfiPassw_2_473">
             <a-input-password
               v-decorator="[
                 'confirmPassword',
@@ -30,7 +30,7 @@
                 },
               ]"
               size="large"
-              placeholder="Confirm Password"
+              :placeholder="translation.ConfiPassw_2_473"
               type="password"
             />
           </a-form-item>
@@ -90,6 +90,11 @@ export default {
       this.privateKey=this.$route.query.id
       this.checkUserKey(this.privateKey)
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   methods: {
     checkUserKey(key) {
       AuthServices.getActivationAuth(key)

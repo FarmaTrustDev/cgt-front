@@ -3,7 +3,7 @@
     <a-range-picker class="float-right" @change="searchDataRange" />
     <a-input
       ref="userNameInput"
-      placeholder="Search"
+      :placeholder="translation.searc_1_488"
       class="float-right page-search-input"
       @change="searchTreatment"
     >
@@ -17,6 +17,11 @@ import { isEmpty } from '~/services/Utilities'
 export default {
   data() {
     return { params: {} }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     searchTreatment(e) {

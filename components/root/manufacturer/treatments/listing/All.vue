@@ -31,25 +31,31 @@ import {
 
 import withTableCrud from '~/mixins/with-table-crud'
 
-const column = [
+const ActionLink = '/manufacturer/schedules'
+export default {
+  components: { Filters },
+  mixins: [routeHelpers, withTableCrud],
+  data() {
+    return {
+      column:[
   {
-    title: 'Patient Id',
+    title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
     dataIndex: 'patientEnrollmentNumber',
     key: 'patientEnrollmentNumber',
     scopedSlots: { customRender: 'name' },
   },
   {
-    title: 'Treatment Type',
+    title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
     dataIndex: 'treatmentType.name',
     key: 'TreatmentName',
   },
   {
-    title: 'Organization',
+   title: `${this.$store.getters.getTranslation.Organ_1_166}`,
     dataIndex: 'hospital.name',
     key: 'OrganizationName',
   },
   {
-    title: 'Collection - Delivery Date',
+    title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
     dataIndex: 'collectionDateDeliveryDate',
     key: 'collectionDateDeliveryDate',
   },
@@ -59,14 +65,7 @@ const column = [
   //   dataIndex: 'action',
   //   scopedSlots: { customRender: 'action' },
   // },
-]
-const ActionLink = '/manufacturer/schedules'
-export default {
-  components: { Filters },
-  mixins: [routeHelpers, withTableCrud],
-  data() {
-    return {
-      column,
+],
       loading: false,
       data: [],
       apiService: SchedulingServices,

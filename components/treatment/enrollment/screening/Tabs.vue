@@ -62,7 +62,7 @@ export default {
       }
     },
     getButtonText(val){
-      return "Complete Screening for "+ val
+      return this.$store.getters.getTranslation.ComplScree_3_469 + val
     },
     getNextTab(index,screening) {
       if(this.filledData===screening.length){

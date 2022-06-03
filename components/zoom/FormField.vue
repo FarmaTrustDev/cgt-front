@@ -2,7 +2,7 @@
   <a-row>
     <a-col :span="24">
       <a-form-item
-        label="Description"
+        :label="translation.Descr_1_69"
         :label-col="{ span: 24 }"
         :wrapper-col="{ span: 24 }"
       >
@@ -25,5 +25,11 @@
   </a-row>
 </template>
 <script>
-export default {}
+export default {
+    computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
+}
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="consent-page">
-    <h3 class="page-title">Patient Consent</h3>
+    <h3 class="page-title">{{translation.PatieConse_2_685}}</h3>
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <Upload
@@ -17,7 +17,7 @@
               rules: [
                 {
                   required: true,
-                  message: 'Consent check is mandatory',
+                  message: `${translation.Consecheck_4_840}`,
                 },
               ],
               initialValue: treatment.consent,
@@ -27,10 +27,10 @@
           @change="checkChecked($event)"
           :disabled="treatment.consent"
         >
-          Patient Consent Form Registered
+          {{translation.PatieConse_4_465}}
         </a-checkbox>
       <h1 v-if="checkBoxError" style="color:#f00; font-weight:bold">
-        Consent check is mandatory
+        {{translation.Consecheck_4_840}}
       </h1>
         <a-input
           v-decorator="[
@@ -45,7 +45,7 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton :loading="loading" text="Save Consent & Continue" :disabled="!isEmpty(treatment.id)" />
+      <FormActionButton :loading="loading" :text="translation.SaveConse_4_695" :disabled="!isEmpty(treatment.id)" />
     </a-form>
   </div>
 </template>
@@ -76,8 +76,13 @@ export default {
       loading: false,
       fileList: [],
       allowedExtensions: DOCUMENT_EXTENSIONS,
-      checkBoxError:false,
+      checkBoxError: false,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.patientId = this.$route.params.id
@@ -86,11 +91,12 @@ export default {
 
   methods: {
     handleChange(info) {
+      console.log(info)
       this.fileList = info
     },
-    checkChecked(e){
-      if(e.target.checked){
-        this.checkBoxError=false
+    checkChecked(e) {
+      if (e.target.checked) {
+        this.checkBoxError = false
       }
     },
     create(values) {
@@ -118,11 +124,11 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          if(values.consent===true){
+          if (values.consent === true) {
             this.create(values)
-          }else{
-            this.checkBoxError=true
-            this.loading=false
+          } else {
+            this.checkBoxError = true
+            this.loading = false
           }
         } else {
           this.loading = false

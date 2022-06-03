@@ -88,7 +88,7 @@
             /> </a-form-item
         ></a-col>
         <a-col :span="24"
-          ><FormActionButton :loading="loading" custom-text="Save & Continue"
+          ><FormActionButton :loading="loading" :custom-text="translation['Save&_3_453']"
         /></a-col>
       </a-row>
     </a-form>

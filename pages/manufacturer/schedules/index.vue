@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Treatments">
+  <page-layout :loading="loading" :title="translation.Treat_1_29">
     <template slot="content">
       <standardTable
         :columns="column"
@@ -13,39 +13,44 @@
 import PageLayout from '~/components/layout/PageLayout'
 import standardTable from '~/components/common/StandardTable'
 import ManufacturerTreatmentServices from '~/services/API/ManufacturerTreatmentServices'
-const column = [
-  {
-    title: 'Treatment Name',
-    dataIndex: 'treatmentTypeName',
-    key: 'treatmentTypeName',
-  },
-  {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    key: 'description',
-  },
-  {
-    title: 'Action',
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
-]
+
 const ActionLink = '/manufacturer/schedules'
 export default {
   components: { 'page-layout': PageLayout, standardTable },
   data() {
     return {
-      column,
+      column:[
+  {
+    title: `${this.$store.getters.getTranslation.Treat_1_29}`,
+    dataIndex: 'treatmentTypeName',
+    key: 'treatmentTypeName',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Price_1_73}`,
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Descr_1_69}`,
+    dataIndex: 'description',
+    key: 'description',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+    dataIndex: 'action',
+    scopedSlots: { customRender: 'action' },
+  },
+],
       loading: false,
       ManufacturerTreatmentServices,
       ActionLink,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {},
 }
 </script>

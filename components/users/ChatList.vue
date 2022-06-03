@@ -9,22 +9,23 @@
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
-const column = [
+
+export default {
+  data() {
+    return { column:[
   {
-    title: 'Name',
+    title: `${this.$store.getters.getTranslation.Name_1_138}`,
     dataIndex: 'userName',
     key: 'name',
     width: '90%',
   },
   {
-    title: 'Action',
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
     scopedSlots: { customRender: 'message' },
   },
-]
-
-export default {
-  data() {
-    return { column, UserServices, data: [] }
+], 
+UserServices, 
+data: [] }
   },
   mounted() {
     this.fetch()

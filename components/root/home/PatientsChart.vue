@@ -7,7 +7,9 @@ export default {
   props:['chartData','options'],
   methods: {
     update() {
+      window.dispatchEvent(new Event('resize'));
       this.$data._chart.update()
+      window.dispatchEvent(new Event('resize'));
     }
   },
   mounted () {

@@ -27,40 +27,42 @@ import OrganizationServicesServices from '~/services/API/OrganizationServices'
 import routeHelpers from '~/mixins/route-helpers'
 
 import PageLayout from '~/components/layout/PageLayout'
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Email',
-    key: 'email',
-    dataIndex: 'email',
-  },
-  {
-    title: 'Phone',
-    key: 'phone',
-    dataIndex: 'phone',
-  },
-  {
-    title: 'Address',
-    key: 'address',
-    dataIndex: 'address',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
-]
+
+
+
 export default {
   components: { 'page-layout': PageLayout },
   mixins: [routeHelpers],
   data() {
     return {
       datasource: [],
-      columns,
+      columns:[
+  {
+    title: `${this.$store.getters.getTranslation.Name_1_138}`,
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.EmailAddre_2_140}`,
+    key: 'email',
+    dataIndex: 'email',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Phone_1_63}`,
+    key: 'phone',
+    dataIndex: 'phone',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.PostaAddre_2_450}`,
+    key: 'address',
+    dataIndex: 'address',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+    key: 'action',
+    scopedSlots: { customRender: 'action' },
+  },
+],
       loading: true,
     }
   },

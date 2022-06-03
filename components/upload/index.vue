@@ -10,10 +10,9 @@
     <p class="ant-upload-drag-icon">
       <a-icon type="camera" theme="filled" />
     </p>
-    <p class="ant-upload-text">Click or drag file to this area to upload</p>
+    <p class="ant-upload-text">{{translation.Clickor_9_466}}</p>
     <p class="ant-upload-hint">
-      Support for a single or bulk upload. Strictly prohibit from uploading
-      company data or other band files
+      {{translation.Suppofor_17_467}}
     </p>
   </a-upload-dragger>
 </template>
@@ -39,6 +38,11 @@ export default {
       stateFileList: [],
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     beforeUpload(file) {
       const strName = file.name

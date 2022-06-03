@@ -2,7 +2,7 @@
   <div>
     <a-row>
       <a-col :span="12" class="plr-10">
-        <a-form-item label="Manufacturer">
+        <a-form-item :label="translation.Manuf_1_89">
           <a-input
             v-decorator="[
               'manufacturerName',
@@ -50,7 +50,7 @@
     </a-row>
     <a-row>
       <a-col :span="8" class="plr-10">
-        <a-form-item label="Sample Collection Date">
+        <a-form-item :label="translation.SamplColle_3_518">
           <a-date-picker
             v-decorator="[
               'collectionDate',
@@ -72,7 +72,7 @@
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
-        <a-form-item label="Delivery Dispatch Date">
+        <a-form-item :label="translation.DelivDispa_3_728">
           <a-date-picker
             v-decorator="[
               'pickupDateTime',
@@ -94,7 +94,7 @@
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
-        <a-form-item label="Samples Delivery Date" class="pb-0">
+        <a-form-item :label="translation.SamplDeliv_3_730" class="pb-0">
           <a-date-picker
             v-decorator="[
               'deliveryDate',
@@ -118,7 +118,7 @@
     </a-row>
     <a-row>
       <a-col :span="8" class="plr-10">
-        <a-form-item label="Treatment Start Date" class="pb-0">
+        <a-form-item :label="translation.TreatStart_3_732" class="pb-0">
           <a-date-picker
             v-decorator="[
               'manufacturerTreatmentStartDate',
@@ -134,14 +134,14 @@
             ]"
             :format="dateFormat"
             :disabled-date="disabledDate"
-            style="width: 100%"
+           
             size="large"
           >
           </a-date-picker> </a-form-item
       ></a-col>
 
       <a-col :span="8" class="plr-10">
-        <a-form-item label="Completion Date" class="pb-0">
+        <a-form-item :label="translation.ComplDate_3_734" class="pb-0">
           <a-date-picker
             v-decorator="[
               'completionDate',
@@ -157,13 +157,13 @@
             ]"
             :format="dateFormat"
             :disabled-date="disabledDate"
-            style="width: 100%"
+            
             size="large"
           >
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
-        <a-form-item label="Duration" class="pb-0">
+        <a-form-item :label="translation.Durat_1_484" class="pb-0">
           <a-input-number
             v-decorator="[
               'duration',
@@ -184,7 +184,7 @@
     </a-row>
     <a-row>
       <a-col :span="12" class="plr-10">
-        <a-form-item label="Delivery Arrival Date " class="pb-0">
+        <a-form-item :label="translation.DelivArriv_4_736 " class="pb-0">
           <a-date-picker
             v-decorator="[
               'deliveryArrivalDate',
@@ -206,7 +206,7 @@
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="12" class="plr-10">
-        <a-form-item label="Notes" class="pb-0">
+        <a-form-item :label="translation.Notes_1_350" class="pb-0">
           <a-textarea
             v-decorator="[
               'notes',
@@ -255,6 +255,11 @@ export default {
         name: 'TreatmentSchedulingForm',
       }),
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: { 
     disabledDate: _disabledPreviousDate,

@@ -3,8 +3,8 @@
     <a-upload
       list-type="picture-card"
       :file-list="fileList"
+      :action="handleChange"
       @preview="handlePreview"
-      @change="handleChange"
     >
       <div v-if="fileList.length < 1">
         <a-icon type="plus" />
@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import { isEmpty } from '~/services/Helpers'
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -34,6 +35,7 @@ export default {
     }
   },
   methods: {
+    isEmpty,
     handleCancel() {
       this.previewVisible = false
     },
@@ -44,9 +46,9 @@ export default {
       this.previewImage = file.url || file.preview
       this.previewVisible = true
     },
-    handleChange({ fileList }) {
-      this.$emit('handleChange', fileList)
-      this.fileList = fileList
+    handleChange(file, fileList) {
+      this.$emit('handleChange', [file])
+      this.fileList = [file]
     },
   },
 }

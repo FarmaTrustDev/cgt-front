@@ -6,7 +6,7 @@
           :disabled="isCreated"
           :treatment-type-id="entity.treatmentTypeId"
         />
-        <a-form-item label="Description">
+        <a-form-item :label="translation.Descr_1_69">
           <a-textarea
             v-decorator="[
               'description',
@@ -24,7 +24,7 @@
             placeholder="Insert Description"
           />
         </a-form-item>
-        <a-form-item label="Duration">
+        <a-form-item :label="translation.Durat_1_71">
           <a-input-number
             v-decorator="[
               'duration',
@@ -46,7 +46,7 @@
             <a-icon slot="prefix" type="calendar"
           /></a-input-number>
         </a-form-item>
-        <a-form-item label="Price">
+        <a-form-item :label="translation.Price_1_73">
           <a-input-number
             v-decorator="[
               'price',
@@ -100,6 +100,11 @@ export default {
       gotoLink: '/manufacturer/schedules',
       manufacturerTreatment: {},
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {},
   methods: {

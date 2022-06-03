@@ -1,12 +1,12 @@
 <template>
   <div>
-    <FormActionButton text="Add Screening" @click="handleCategoryModal(true)" />
-
+    <FormActionButton :text="translation.Add_1_488+' '+translation.Scree_1_679" @click="handleCategoryModal(true)" />
     <a-alert
       v-if="data.length <= 0"
       type="info"
-      message="No Screenings available"
-    ></a-alert>
+      :message="translation.NoScree_3_475"
+    >
+    </a-alert>
     <a-list v-else item-layout="horizontal" :data-source="data">
       <a-list-item slot="renderItem" slot-scope="item"
         >{{ item.name }}
@@ -14,16 +14,16 @@
           <a-dropdown>
             <a-icon type="more" />
             <a-menu slot="overlay">
-              <a-menu-item key="1"> <a-icon type="edit" />Edit </a-menu-item>
+              <a-menu-item key="1"> <a-icon type="edit" />{{translation.Edit_1_450}} </a-menu-item>
               <a-menu-item key="2" >
                 <a-popconfirm
-              title="Are you sure delete ?"
-              ok-text="Yes"
-              cancel-text="No"
+              :title="translation.Areyou_4_484"
+              :ok-text="translation.yes_1_654"
+              :cancel-text="translation.no_1_656"
               placement="topLeft"
               @confirm="deleteScreening(item.id)"
             >
-                <a-icon type="delete" />Delete</a-popconfirm>
+                <a-icon type="delete" />{{translation.Delet_1_451}}</a-popconfirm>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -77,6 +77,11 @@ export default {
       this.fetch()
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     fetch() {
       this.loading = true

@@ -1,10 +1,37 @@
-.ant-input,
-.ant-select-selection,
-.ant-time-picker-input,
+// .ant-input,
+.ant-select-selection {
+  margin-bottom: 20px;
+  border-radius: $default-radius;
+  padding: 9px 1px 43px 1px;
+}.ant-input,
+.page-search-input{
+  border-radius: 22px;
+  padding-top:20px 20px 20px 20px; 
+  font-size: 15px;
+  // color: black;
+}
+.ant-time-picker-input{
+  border-radius: $default-radius;
+}
 .ant-input-number {
   border-radius: $default-radius;
 }
-
+.ant-calendar-picker-input.ant-input {
+  border-radius: 22px;
+  padding-bottom: 50px;
+}
+.ant-calendar-picker-input{
+  margin-top:3px;
+  margin-bottom: 9px;
+}
+.ant-table-body {   
+  border-radius: 22px;
+  // border: 1px solid gray;
+}
+.ant-calendar-range-picker-input {
+  padding-top: 25px;
+  padding-bottom: 20px;
+}
 .ant-form-item-control {
   input, textarea, .ant-select-selection--single{
     border-radius: 18px;
@@ -15,6 +42,12 @@
     height: 55px;
     font-weight: 400;
     color: #495057;
+  }
+  .ant-table-empty .ant-table-body{
+    border-radius: 60px;
+    border: .1px solid gray;
+    margin-bottom: 1px;
+    margin-top: 5px;
   }
   .ant-input-number{
     height: 57px;
@@ -60,11 +93,12 @@
   right: 20px;
   margin-top:5px;
   input{
-    height: 45px;
+    height: 57px;
     border: 1px solid #BEBFCB;
   }
   .ant-input-prefix{
     font-size: 16px;
+   
   }
 }
 

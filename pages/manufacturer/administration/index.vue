@@ -1,6 +1,6 @@
 <template>
   <div class="admin-page p-15">
-    <h3 class="page-title">Administration</h3>
+    <h3 class="page-title">{{translation._1_438}}</h3>
     <div>
       <a-row :gutter="15" class="grey-card m-auto">
         <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
@@ -10,7 +10,7 @@
 
               <img width="55px" :src="menu.icon" />
               <h4 style="font-size: 18px" class="heading-home">
-                {{ menu.name }}
+                {{ translation[menu.name] }}
               </h4>
             </div>
           </nuxt-link>

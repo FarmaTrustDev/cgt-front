@@ -6,7 +6,7 @@
         <FormActionButton
           :is-created="isCreated"
           :loading="loading"
-          custom-text="Save User & Continue"
+          :custom-text="translation['Save&_3_453']"
         />
       </a-form-item>
     </a-form>
@@ -44,6 +44,11 @@ export default {
   mounted() {
     this.checkCreated()
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
       handleChange(info) {
         this.fileList = info
