@@ -37,6 +37,15 @@
             </div> </TileCenter
         ></a-col>
       </a-row>
+
+      <a-card
+        :bordered="false"
+        title="Provenance Data - Platelet Lycate Asset DEC123"
+      >
+        <div class="view-screen">
+          <TimeLine :steps="steps" />
+        </div>
+      </a-card>
     </div>
   </page-layout>
 </template>
@@ -47,11 +56,26 @@ import fridge from '~/components/inventory/fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
+import TimeLine from '~/components/timeline'
 export default {
-  components: { PageLayout, racks, Trays, fridge, TileCenter },
+  components: { PageLayout, racks, Trays, fridge, TileCenter, TimeLine },
   data() {
     return {
       loading: false,
+      steps: [
+        {
+          title: 'Jack Black',
+          date: 26.33,
+          by: 'Received Date',
+          detail: '21 Feb 2022',
+        },
+        {
+          title: 'Jack Black',
+          date: 26.33,
+          by: 'Received Date',
+          detail: '21 Feb 2022',
+        },
+      ],
     }
   },
 }
