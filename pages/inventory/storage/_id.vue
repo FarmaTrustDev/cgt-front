@@ -70,10 +70,34 @@ export default {
           detail: '21 Feb 2022',
         },
         {
-          title: 'Jack Black',
+          title: ' Simon Smith',
+          date: 26.33,
+          by: 'Opened',
+          detail: '23 March 2022',
+        },
+        {
+          title: 'Ahmed Salaam',
+          date: 26.33,
+          by: 'Opened',
+          detail: '15 April 2022',
+        },
+        {
+          title: 'Claire Jones',
           date: 26.33,
           by: 'Received Date',
-          detail: '21 Feb 2022',
+          detail: '19 April 2022',
+        },
+        {
+          title: 'Dwayne Morgan',
+          date: 26.33,
+          by: 'Packaging Depot',
+          detail: '19 April 2022',
+        },
+        {
+          title: 'RT456',
+          date: 26.33,
+          by: 'Courier Pick Up',
+          detail: '19 April 2022',
         },
       ],
     }
