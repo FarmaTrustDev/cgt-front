@@ -11,7 +11,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import UserServices from '~/services/API/UserServices'
-import formfield from '~/components/root/configureLabs/form/FormField'
+import formfield from '~/components/root/inventory/configureLabs/form/FormField'
 
 export default {
   components: { formfield },

@@ -12,7 +12,7 @@
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import formField from '~/components/root/configureLabs/form'
+import formField from '~/components/root/inventory/configureLabs/form'
 export default {
   components: { 'page-layout': PageLayout, formField },
   data() {

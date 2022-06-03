@@ -199,10 +199,10 @@
           </a-select>
         </a-form-item>
       </a-col>
-      <a-col :span="12">      
+      <a-col :span="24">      
       <a-form-item
         :label-col="{ span: 24 }"
-        :wrapper-col="{ span: 21 }"      
+        :wrapper-col="{ span: 22 }"      
       >
         <FormActionButton
           :is-created="isCreated"

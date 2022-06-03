@@ -5,7 +5,7 @@
       <a-button
         type="primary"
         class="mrm-5 float-right"
-        @click="goto('configureLab/create')"
+        @click="goto('lab/create')"
         >Add Lab</a-button
       >
     <a-input
@@ -30,7 +30,7 @@
           </a-button>
           <a-menu slot="overlay">
           <a-menu-item key="userDetail">
-            <a @click="goto(`/configureLab/${action.globalId}`)">{{translation.Edit_1_450}}</a>
+            <a @click="goto(`/inventory/lab/${action.globalId}`)">{{translation.Edit_1_450}}</a>
           </a-menu-item>
           </a-menu>
           </a-dropdown>
