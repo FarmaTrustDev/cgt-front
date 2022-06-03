@@ -6,6 +6,11 @@
     title="Storage Services"
   >
     <div slot="content">
+      <a-row>
+        <a-col class="mb-15" :span="24">
+          <detail />
+        </a-col>
+      </a-row>
       <div class="w-1200 margin-auto p-15 default-border-radius">
         <a-row :gutter="16">
           <a-col v-for="storage in storages" :key="storage.id" :span="6">
@@ -20,11 +25,12 @@
 </template>
 
 <script>
+import detail from '~/components/root/inventory/detail'
 import Tile from '~/components/inventory/storage/Tile'
 import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
-  components: { Tile, PageLayout },
+  components: { Tile, PageLayout, detail },
   mixins: [routeHelpers],
   data() {
     return {

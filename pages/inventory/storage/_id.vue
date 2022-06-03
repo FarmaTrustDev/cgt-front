@@ -6,6 +6,11 @@
     title="Storage Services"
   >
     <div slot="content" class="w-1200 margin-auto">
+      <a-row>
+        <a-col class="mb-15" :span="24">
+          <detail />
+        </a-col>
+      </a-row>
       <a-row :gutter="24">
         <a-col :span="8">
           <TileCenter
@@ -51,6 +56,7 @@
 </template>
 
 <script>
+import detail from '~/components/root/inventory/detail'
 import PageLayout from '~/components/layout/PageLayout'
 import fridge from '~/components/inventory/fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
@@ -58,7 +64,15 @@ import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
 import TimeLine from '~/components/timeline'
 export default {
-  components: { PageLayout, racks, Trays, fridge, TileCenter, TimeLine },
+  components: {
+    PageLayout,
+    racks,
+    Trays,
+    fridge,
+    TileCenter,
+    TimeLine,
+    detail,
+  },
   data() {
     return {
       loading: false,
