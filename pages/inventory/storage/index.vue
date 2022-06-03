@@ -6,10 +6,12 @@
     title="Storage Services"
   >
     <div slot="content">
-      <div class="w-800 p-15 default-border-radius ">
+      <div class="w-1200 p-15 default-border-radius">
         <a-row :gutter="16">
           <a-col v-for="storage in storages" :key="storage.id" :span="6">
-            <Tile class="light-shadow" :storage="storage" />
+            <span @click="goto(`/inventory/storage/1`)">
+              <Tile class="light-shadow" :storage="storage"
+            /></span>
           </a-col>
         </a-row>
       </div>
@@ -20,8 +22,10 @@
 <script>
 import Tile from '~/components/inventory/storage/Tile'
 import PageLayout from '~/components/layout/PageLayout'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { Tile, PageLayout },
+  mixins: [routeHelpers],
   data() {
     return {
       storages: [

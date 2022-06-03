@@ -8,7 +8,9 @@
       :class="{ 'rounded-table': rounded, 'patient-table': patient }"
     >
       <template slot="customTitle">
-        <div class="text-left treatment-title">{{translation['TreatStatu_2_748']}}</div>
+        <div class="text-left treatment-title">
+          {{ translation['TreatStatu_2_748'] }}
+        </div>
       </template>
 
       <template slot="name" slot-scope="name">
@@ -62,12 +64,12 @@
             ></steps>
             <a-dropdown>
               <a-button class="btn-view-timeline" type="primary" size="small">
-                {{translation['Admin_1_142']}}
+                {{ translation['Admin_1_142'] }}
               </a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="gotoView(record, treatment)"
-                    ><a-icon type="search" /> {{translation.view_1_750}}</a
+                    ><a-icon type="search" /> {{ translation.view_1_750 }}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
@@ -75,19 +77,24 @@
                     href="javascript:;"
                     @click="holdTreatment(record, treatment)"
                     ><a-icon type="minus-circle" />
-                    {{ treatment.isHold ? translation.Resum_1_463 : translation.Pause_1_452 }}</a
+                    {{
+                      treatment.isHold
+                        ? translation.Resum_1_463
+                        : translation.Pause_1_452
+                    }}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
                   <a href="javascript:;"
-                    ><a-icon type="minus-circle" /> {{translation.cance_1_296}}</a
+                    ><a-icon type="minus-circle" />
+                    {{ translation.cance_1_296 }}</a
                   >
                 </a-menu-item>
                 <a-menu-item>
                   <a
                     href="javascript:;"
                     @click="deleteTreatment(record, treatment)"
-                    ><a-icon type="delete" /> {{translation.Delet_1_451}}</a
+                    ><a-icon type="delete" /> {{ translation.Delet_1_451 }}</a
                   >
                 </a-menu-item>
               </a-menu>
@@ -109,18 +116,18 @@
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="1" @click="clickUpdate(record)">
-              <a-icon type="edit" />{{translation.Updat_1_208}}
+              <a-icon type="edit" />{{ translation.Updat_1_208 }}
             </a-menu-item>
 
             <a-menu-item key="3"
               ><a-popconfirm
-                title="Are you sure delete ?"
+                :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="clickDelete(record)"
               >
-                <a-icon type="delete" />{{translation.Delet_1_451}}
+                <a-icon type="delete" />{{ translation.Delet_1_451 }}
               </a-popconfirm></a-menu-item
             >
           </a-menu>
@@ -130,41 +137,41 @@
       <span slot="patientAction" slot-scope="text, record">
         <a-dropdown :trigger="['click']">
           <a-button class="action-button" @click="preventDefault">
-            {{translation['Admin_1_142']}} <a-icon type="down" />
+            {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">
-              <a>{{translation.OpenTicke_2_800}}</a>
+              <a>{{ translation.OpenTicke_2_800 }}</a>
             </a-menu-item>
             <a-menu-item key="Consent">
               <a
                 @click="
                   goto(`/hospital/patients/${record.globalId}?view=Consent`)
                 "
-                >{{translation.Addnew_3_75}}</a
+                >{{ translation.Addnew_3_75 }}</a
               >
             </a-menu-item>
             <a-menu-item key="3">
               <a-popconfirm
-                title="Are you to hide patient?"
+                :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deletePatient(`${record.id}`)"
               >
-                {{translation.HidePatie_2_804}}
+                {{ translation.HidePatie_2_804 }}
               </a-popconfirm>
             </a-menu-item>
             <a-menu-item key="4">
               <a-popconfirm
-                title="Are you to hide patient?"
+                :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               >
-                <span v-if="record.isDead"> {{translation.Resum_1_463}}</span>
-                <span v-else>{{translation.cance_1_296}}</span>
+                <span v-if="record.isDead"> {{ translation.Resum_1_463 }}</span>
+                <span v-else>{{ translation.cance_1_296 }}</span>
               </a-popconfirm>
             </a-menu-item>
           </a-menu>
@@ -193,14 +200,14 @@
           style="width: 90px; margin-right: 8px"
           @click="() => handleSearch(selectedKeys, column)"
         >
-          {{translation.searc_1_488}}
+          {{ translation.searc_1_488 }}
         </a-button>
         <a-button
           size="small"
           style="width: 90px"
           @click="() => handleReset(clearFilters, column)"
         >
-          {{translation.Reset_1_464}}
+          {{ translation.Reset_1_464 }}
         </a-button>
       </div>
 
@@ -248,6 +255,11 @@ export default {
       // pagination: {},
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     if (this.shouldFetch) {
       this.fetch()
@@ -255,11 +267,6 @@ export default {
     } else {
       this.data = this.dumpData
     }
-  },
-  computed:{
-    translation() {
-      return this.$store.getters.getTranslation
-    },
   },
   methods: {
     preventDefault,
