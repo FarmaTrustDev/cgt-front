@@ -5,22 +5,22 @@
         <!-- left side tabs -->
         <a-col :span="9">
           <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/manufacturer/schedules`)">
+            <a href="javascript:;" @click="goto(`/inventory/treatment`)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                {{translation.Manuf_1_342}} <strong class="strong"> {{translation.Sched_1_21}} </strong>
+                {{translation.Manuf_1_342}} <strong class="strong"> {{translation.Tasks_1_494}} </strong>
               </h4>
             </a>
           </div>
           <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/manufacturer/treatments`)">
+            <a href="javascript:;" @click="goto(`/inventory/storage`)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> {{translation.Treat_1_29}} </strong>
+                Manage <strong class="strong"> {{translation.Inven_1_538}} </strong>
               </h4>
             </a>
           </div>
