@@ -1,18 +1,18 @@
 <template>
   <div>
-    <a-card :bordered="false" class="default-border-radius pb-15">
+    <a-card :bordered="false" class="default-border-radius pb-15" style="width: 80%; margin-left:10%">
       <h2>{{translation.Stati_1_19}}</h2>
 
       <a-row class="grey-card">
-        <a-col :span="2"> </a-col>
-        <a-col :span="8">
+        <a-col :span="1"> </a-col>
+        <a-col :span="10" style="margin-bottom:40px;">
           <treatmentStats />
         </a-col>
-        <a-col :span="4"> </a-col>
-        <a-col :span="8">
-          <div><hospitalStats /></div>
+        <a-col :span="1"> </a-col>
+        <a-col :span="10" style="margin-top:20px;">
+          <hospitalStats />
         </a-col>
-        <a-col :span="2"> </a-col>
+        <a-col :span="1"></a-col>
       </a-row>
     </a-card>
   </div>
@@ -25,10 +25,14 @@ export default {
   data() {
     return {
       loading: false,
+      organizationType:`${this.$store.getters.getUser}`,
     }
   },
   methods: {},
   computed:{
+    user() {
+      return this.$store.getters.getUser
+    },
     translation() {
       return this.$store.getters.getTranslation
     },

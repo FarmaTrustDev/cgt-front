@@ -5,27 +5,70 @@
         <h4 class="heading pl-0">{{ heading }}</h4>
       </article>
       <div v-if="!isEmpty(shipment)">
-        <dl class="ant-row common-detail">
-          <dt>Logistics Provider:</dt>
-          <dd>{{ scheduling.logisticName }}</dd>
-          <dt>Sample Collection Date:</dt>
-          <dd>{{ scheduling.collectionDate }}</dd>
-          <dt>Expected Delivery Date</dt>
-          <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
-          <dt>Estimated Arrival Date:</dt>
-          <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
-        </dl>
-
-        <dl class="ant-row common-detail">
-          <dt>Handled by:</dt>
-          <dd>{{ shipment.senderName }}</dd>
-          <dt>Collected by:</dt>
-          <dd>{{ shipment.logisticUserName }}</dd>
-          <dt>Pickup At</dt>
-          <dd>{{ getMomentByStandardFormat(shipment.pickupAt) }}</dd>
-          <dt>Pickup Location:</dt>
-          <dd>{{ shipment.origin }}</dd>
-        </dl>
+      <a-row>
+        <a-col :span="8">
+          Logistics Provider:
+        </a-col>
+        <a-col :span="8">
+          {{ scheduling.logisticName }}
+        </a-col>        
+      </a-row>
+      <a-row>
+        <a-col :span="8">
+          Sample Collection Date:
+        </a-col>
+        <a-col :span="8">
+          {{ scheduling.collectionDate }}
+        </a-col>        
+      </a-row>          
+      <a-row>
+        <a-col :span="8">
+          Expected Delivery Date:
+        </a-col>
+        <a-col :span="8">
+          {{ getMomentByStandardFormat(scheduling.deliveryDate) }}
+        </a-col>        
+      </a-row>
+      <a-row>
+        <a-col :span="8">
+          Estimated Arrival Date:
+        </a-col>
+        <a-col :span="8">
+          {{ getMomentByStandardFormat(scheduling.deliveryDate) }}
+        </a-col>        
+      </a-row>                    
+      <a-row>
+        <a-col :span="8">
+          Handled by:
+        </a-col>
+        <a-col :span="8">
+          {{ shipment.senderName }}
+        </a-col>        
+      </a-row> 
+      <a-row>
+        <a-col :span="8">
+          Collected by:
+        </a-col>
+        <a-col :span="8">
+          {{ shipment.logisticUserName }}
+        </a-col>        
+      </a-row>
+      <a-row>
+        <a-col :span="8">
+          Pickup At:
+        </a-col>
+        <a-col :span="8">
+          {{ getMomentByStandardFormat(shipment.pickupAt) }}
+        </a-col>        
+      </a-row>      
+      <a-row>
+        <a-col :span="8">
+          Pickup Location:
+        </a-col>
+        <a-col :span="8">
+          {{ shipment.origin }}
+        </a-col>        
+      </a-row>
       </div>
       <alert v-else message="Sample has not been picked by the logistic" />
     </a-card>
