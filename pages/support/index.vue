@@ -61,6 +61,12 @@
       <a-tab-pane key="2" :tab="translation.Archi_1_226">
         <Table type="archive" />
       </a-tab-pane>
+      <a-tab-pane key="3" tab="InProgress">
+        <InProgress type="inProgress" />
+      </a-tab-pane>
+      <a-tab-pane key="4" tab="Resolved">
+        <Resolved type="resolved" />
+      </a-tab-pane>
     </a-tabs>
 
     <!-- Add New Ticket Modal -->
@@ -78,11 +84,15 @@
 import Table from '~/components/support/Listing'
 import AddNewTicketModal from '~/components/support/Add'
 import SupportServices from '~/services/API/SupportServices'
+import InProgress from '~/components/support/InProgress.vue'
+import Resolved from '~/components/support/Resolved.vue'
 // import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: {
     Table,
+    InProgress,
+    Resolved,
     'add-new-ticket': AddNewTicketModal,
     // PageLayout
   },
