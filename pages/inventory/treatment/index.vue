@@ -41,7 +41,7 @@
   :dump-data="[{patientEnrollmentNumber: 1, treatmentType: 'ABC', hospital: 'Agha Khan Hospital', collectionDateDeliveryDate: '12/12/2022' }]" :should-fetch="false" />
             </a-tab-pane>
             <a-tab-pane key="2" :tab="translation.PendiTreat_2_300">
-                <standard-table class="rounded-table" :columns="[{
+                <a-table class="rounded-table" :columns="[{
                   title: `Patient ID`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
@@ -66,12 +66,32 @@
                   dataIndex: 'collectionDateDeliveryDate',
                   key: 'collectionDateDeliveryDate',
                 },
-                {
-                  title: `Action`,
-                  dataIndex: 'action',
+                 {
+                  title: 'Action',
+                  key:'action',
                   scopedSlots: { customRender: 'action' },
-                },
-              ]" :dump-data="[{patientEnrollmentNumber: 1,treatmentName: 'abc', productionLine: 'Prod', hospital: 'CellFuse', collectionDateDeliveryDate: '12/10/2022'}]" :should-fetch="false" />
+                 },
+              ]" :data-source="[{patientEnrollmentNumber: 1,treatmentName: 'abc', productionLine: 'Prod', hospital: 'CellFuse', collectionDateDeliveryDate: '12/10/2022'}]" >
+<span slot="action" slot-scope="record">
+        <!-- //Steps -->
+        <div class="treatment-steps">
+          <a-steps
+            :initial="1"
+            :current="1"
+            size="small"
+          >
+            <a-step
+              v-for="phase in phases"
+              :key="phase.id"
+              :title="phase.name"
+              @click="stepClick(record)"
+            />
+          </a-steps>
+        </div>
+
+        <!-- //Steps -->
+      </span>
+                </a-table>
             </a-tab-pane>
             <a-tab-pane key="3" :tab="translation.ComplTreat_2_844">
                 <standard-table class="rounded-table" :columns="[{
@@ -141,8 +161,11 @@
 // import Completed from '~/components/root/manufacturer/treatments/listing/Completed'
 // import inProgress from '~/components/root/manufacturer/treatments/listing/InProgress'
 import StandardTable from '~/components/common/StandardTable'
+import { MANUFACTURER_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
+import routeHelpers from '~/mixins/route-helpers'
 // @todo for Naveed here optimize in 1 table single component can handle the calls
 export default {
+  
     components: {
         // 'new-request': newRequests,
         // 'in-progress': inProgress,
@@ -150,10 +173,12 @@ export default {
         // completed: Completed,
         StandardTable,
     },
-    data() {
+    mixins: [routeHelpers],    
+    data() {      
         return {
             loading: false,
             treatmentTypes: [],
+            phases: MANUFACTURER_TREATMENT_PENDING_PHASES,
         }
     },
     computed: {
@@ -163,6 +188,9 @@ export default {
     },
     methods: {
         searchTreatment() {},
+        stepClick(record) {
+            this.goto(`/inventory/treatment/process`)
+        },
     },
 }
 </script>
