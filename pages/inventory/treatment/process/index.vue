@@ -131,6 +131,7 @@
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
                 @fetchBags="() => {}"
+                @updateId="updateId"
               />
             </a-tab-pane>
             <a-tab-pane key="3" tab="Outbound Shipment"></a-tab-pane>
@@ -157,17 +158,52 @@ export default {
     return {
       dummyCollection: [
         { id: 1, isCollected: false, name: 'Package receipt' },
-        { id: 2, isCollected: false, name: 'Does package match advance notificatoin slip?' },
-        { id: 3, isCollected: false, name: 'Is there any visual package damage?' },
+        {
+          id: 2,
+          isCollected: false,
+          name: 'Does package match advance notificatoin slip?',
+        },
+        {
+          id: 3,
+          isCollected: false,
+          name: 'Is there any visual package damage?',
+        },
         { id: 4, isCollected: false, name: 'Status issues?' },
-        { id: 5, isCollected: false, name: 'Does the package need to be put in quarantine?' },
-        { id: 6, isCollected: false, name: 'Is item safe for storage in facility?' },
-        { id: 7, isCollected: false, name: 'Is there any new packing or repackaging required?' },
-          { id: 8, isCollected: false, name: 'Specify freezer location, shelf number rack number, box number' },
+        {
+          id: 5,
+          isCollected: false,
+          name: 'Does the package need to be put in quarantine?',
+        },
+        {
+          id: 6,
+          isCollected: false,
+          name: 'Is item safe for storage in facility?',
+        },
+        {
+          id: 7,
+          isCollected: false,
+          name: 'Is there any new packing or repackaging required?',
+        },
+        {
+          id: 8,
+          isCollected: false,
+          name: 'Specify freezer location, shelf number rack number, box number',
+        },
       ],
     }
   },
   mounted() {},
-  methods: {},
+  methods: {
+    updateId(collectionId) {
+      const dumCollection = this.dummyCollection.map((collection) => {
+        if (collection.id === collectionId) {
+          collection.isCollected = true
+        }
+        return collection
+      })
+
+      this.dummyCollection = dumCollection
+    },
+  },
 }
 </script>

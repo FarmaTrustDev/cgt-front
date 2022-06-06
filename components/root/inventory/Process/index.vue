@@ -151,15 +151,18 @@ export default {
       this.btnLoading = true
       const values = fields.collection[`id-${collection.id}`]
       if (values) {
-        BagCollectionServices.update(collection.id, values)
-          .then((response) => {
-            this.success(response.message)
-            this.$emit('fetchBags')
-            this.btnLoading = false
-          })
-          .catch(() => {
-            this.btnLoading = false
-          })
+        this.success('Update Successfully')
+        this.$emit('updateId', collection.id)
+        // BagCollectionServices.update(collection.id, values)
+        //   .then((response) => {
+        //     this.success("Update Successfully")
+        //     this.$emit('fetchBags')
+        //     this.btnLoading = false
+        //   })
+        //   .catch(() => {
+        //     this.btnLoading = false
+        //   })
+        this.btnLoading = false
       }
     },
     handleEmailModal(show, data) {
