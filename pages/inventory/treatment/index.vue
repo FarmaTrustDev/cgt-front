@@ -23,7 +23,27 @@
                 <a-table class="rounded-table" :columns="newSampleColumns" :data-source="newSampleData" :should-fetch="false" />
             </a-tab-pane>
             <a-tab-pane key="2" tab="Pending Sample">
-                <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" :should-fetch="false" />
+                <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" :should-fetch="false">
+                <span slot="action" slot-scope="record">
+        <!-- //Steps -->
+        <div class="treatment-steps">
+          <a-steps
+            :initial="1"
+            :current="1"
+            size="small"
+          >
+            <a-step
+              v-for="phase in phases"
+              :key="phase.id"
+              :title="phase.name"
+              @click="stepClick(record)"
+            />
+          </a-steps>
+        </div>
+
+        <!-- //Steps -->
+      </span>
+                </a-table>  
             </a-tab-pane>
             <a-tab-pane key="3" tab="Completed Sample">
                 <a-table class="rounded-table" :columns="completedColumns" :data-source="completedSampleData" />
@@ -37,6 +57,9 @@
 </template>
 
 <script>
+import { MANUFACTURER_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
+import routeHelpers from '~/mixins/route-helpers'
+
 export default {
     components: {
         // 'new-request': newRequests,
@@ -45,10 +68,12 @@ export default {
         // completed: Completed,
         // StandardTable,
     },
+    mixins: [routeHelpers], 
     data() {
         return {
             loading: false,
             treatmentTypes: [],
+            phases: MANUFACTURER_TREATMENT_PENDING_PHASES,
             completedColumns:[
                 {
                   title: `Patient ID`,
@@ -166,14 +191,13 @@ export default {
                   dataIndex: 'collectionDateDeliveryDate',
                   key: 'collectionDateDeliveryDate',
                 },
-                {
-                  title: `Action`,
-                  dataIndex: 'action',
+                 {
+                  title: 'Action',
+                  key:'action',
                   scopedSlots: { customRender: 'action' },
                 },
               ],
-              allSampleColumns:[
-                {
+              allSampleColumns:[{
                   title: `Patient ID`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
@@ -212,17 +236,11 @@ export default {
             return this.$store.getters.getTranslation
         },
     },
-    methods: {
+        methods: {
         searchTreatment() {},
-        showConfirm(record, isAccepted) {
-            this.isAccepted = isAccepted
-            this.selectedRow = record
-            this.handleModal(true)
-        },
-         showButton(schedule) {
-            return !(schedule.treatment.isHold || schedule.treatment.isDead)
+        stepClick(record) {
+            this.goto(`/inventory/treatment/process`)
         },
     },
-    
 }
 </script>
