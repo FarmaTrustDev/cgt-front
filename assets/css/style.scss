@@ -73,14 +73,12 @@ a {
   table thead tr {
     border-collapse: collapse;
     border-style: hidden;
-    border-radius: 22px;
   }
   .ant-table-thead tr th {
     border: unset;
     padding: 15px;
     font-weight: bold;
     text-align: center;
-    border-radius: 22px;
 
     // why repeating code ?? check the below line
     &:first-child {
@@ -95,8 +93,8 @@ a {
     // you may use this like in a proper way
     &:last-child,
     &:first-child {
-      border-bottom-right-radius: 40px;
-      border-top-right-radius: 40px;
+      // border-bottom-right-radius: 40px;
+      // border-top-right-radius: 40px;
     }
   }
 }
