@@ -4,22 +4,20 @@
     title="Treatment Status"
     class="patient-page"
   >
-    <template slot="content">
-     
+    <template slot="content"> 
       <div class="grey-card" style="width:90%; margin-left:5%">
       <div class="patient-details-page">
         <a-row :gutter="18">
           <a-col :span="6">
             <a-card :bordered="false" class="qr-section default-card">
-  <figure class="m-0">
-    <img
-      class="img-fluid"
-      :src="`https://demoapi.qmaid.co/Uploads/patient/10/qr/637880405174699096.png`"
-      alt="Christina Braun"
-    />
-
-    <figcaption>Patient ID: XYZ</figcaption>
-  </figure>
+            <figure class="m-0">
+              <img
+                class="img-fluid"
+                :src="`https://demoapi.qmaid.co/Uploads/patient/10/qr/637880405174699096.png`"
+                alt="Christina Braun"
+              />
+              <figcaption>Patient ID: XYZ</figcaption>
+            </figure>
             </a-card>
           </a-col>
           <a-col :span="18">
@@ -71,8 +69,7 @@
           <a-tabs type="card">
             <a-tab-pane key="1" tab="Inbound Acceptance Details">
             <a-row>
-              <a-col :span="12">                                
-
+              <a-col :span="11">
               <a-card :bordered="false" class="default-card">
                 <article class="article">
                   <h4 class="heading pl-0">Shipping Details</h4>         
@@ -95,7 +92,8 @@
               </div>
               </a-card>
               </a-col>
-              <a-col :span="12">
+              <a-col :span="2"></a-col>
+              <a-col :span="11">
               <a-card :bordered="false" class="default-card">
                 <article class="article">
                   <h4 class="heading pl-0">Treatment Receiving</h4>
