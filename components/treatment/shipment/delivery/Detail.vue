@@ -5,19 +5,38 @@
         <h4 class="heading pl-0">{{ heading }}</h4>
       </article>
       <div v-if="!isEmpty(shipment)">
-        <dl class="ant-row common-detail">
-          <dt>{{translation.IsRecei_2_328}}:</dt>
-          <dd class="text-success">
-            <a-icon type="check-circle" />
-           {{translation.Done_1_340}}
-          </dd>
-          <dt>{{translation['Receiby:_2_330']}}:</dt>
-          <dd>{{ shipment.receiverName }}</dd>
-          <dt>{{translation['ReceiDate:_2_332']}}:</dt>
-          <dd>{{ getMomentByStandardFormat(shipment.deliveryAt) }}</dd>
-          <dt>{{translation['ReceiNote:_2_334']}}:</dt>
-          <dd>{{ shipment.notes }}</dd>
-        </dl>
+      <a-row>
+        <a-col :span="8">
+          {{translation.IsRecei_2_328}}:
+        </a-col>
+        <a-col :span="8">
+          {{translation.Done_1_340}}
+        </a-col>        
+      </a-row>
+      <a-row>
+        <a-col :span="8">
+          {{translation['Receiby:_2_330']}}:
+        </a-col>
+        <a-col :span="8">
+          {{ shipment.receiverName }}
+        </a-col>        
+      </a-row>          
+      <a-row>
+        <a-col :span="8">
+          {{translation['ReceiDate:_2_332']}}:
+        </a-col>
+        <a-col :span="8">
+          {{ getMomentByStandardFormat(shipment.deliveryAt) }}
+        </a-col>        
+      </a-row>
+      <a-row>
+        <a-col :span="8">
+          {{translation['ReceiNote:_2_334']}}:
+        </a-col>
+        <a-col :span="8">
+          {{ shipment.notes }}
+        </a-col>        
+      </a-row>
       </div>
       <alert v-else message="Sample has not been Delivered by the logistic" />
     </a-card>

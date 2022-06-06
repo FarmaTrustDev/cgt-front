@@ -1,8 +1,8 @@
 <template>
   <div class="treatment-statistic">
     <a-card :bordered="false" class="home-stats-head">
-      <a-card class="stats" :bordered="false">
-        <a-row>
+      <a-card class="stats" :bordered="false" v-if="user.organizationTypeAlias!='SMARTLAB'">
+        <a-row >
           <a-select
             show-search
             placeholder="Select Treatment Type"
@@ -70,6 +70,77 @@
           </a-col>
         </a-row>
       </a-card>
+
+
+      <a-card class="stats" :bordered="false" v-if="user.organizationTypeAlias=='SMARTLAB'">
+        <a-row >
+          <a-select
+            show-search
+            placeholder="Select Labs"
+            option-filter-prop="children"
+            style="width: 100%"
+            class="search-dropdown"
+            @change="fetchStats"
+            v-model="defaultValue"
+          >
+            <!-- //@todo Zulkarznain bhai task fetch from   api -->
+            <a-select-option
+              v-for="treatmentType in labsData"
+              :key="treatmentType.id"             
+            >
+              <p>{{ treatmentType.name }}</p>
+            </a-select-option>
+          </a-select>
+        </a-row>
+        <a-row>
+          <a-col :span="6" class="chart-container">
+            <PatientsChart
+              ref="patients_chart"
+              :chart-data="smartChartData"
+              :options="options"
+            >
+            </PatientsChart>
+          </a-col>
+          <a-col :span="10" class="mr-5 chart-right-stats">
+            <span class="vertical-line"></span>
+            <span>{{ smartChartDetail.total }}</span>
+            <br />
+            <span>{{translation['TotalPatie_2_460']}}</span>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="12" class="white-card">
+            <span class="completed"></span>
+            <span class="number">{{ smartChartDetail.completedTotal }}</span>
+            <br />
+            <br />
+            <span>{{translation['TotalCompl_2_53']}}</span>
+          </a-col>
+          <a-col :span="12" class="text-right white-card">
+            <span class="in-process"></span>
+            <span class="number">{{ smartChartDetail.productionTotal }}</span>
+            <br />
+            <br />
+            <span>{{translation['InProdu_2_57']}}</span>
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="12" class="white-card">
+            <span class="booked"></span>
+            <span class="number">{{ smartChartDetail.total }}</span>
+            <br />
+            <br />
+            <span>{{translation['OveraBooke_2_59']}}</span>
+          </a-col>
+          <a-col :span="12" class="text-right white-card">
+            <span class="spoilage"></span>
+            <span class="number">{{ smartChartDetail.spoilage }}</span>
+            <br />
+            <br />
+            <span>{{translation['Spoil_1_61']}}</span>
+          </a-col>
+        </a-row>
+      </a-card>
     </a-card>
   </div>
 </template>
@@ -82,7 +153,14 @@ export default {
   data() {
     return {
       dynamicData: [],
+      labsData:[{id:1, name:'Berlin-Cellfuse'},{id:2, name:'Vienna-Cellfuse R&D'},{id:3, name:'Gaithersburg-Cellfuse USA'}],
       chartDetail: {},
+      smartChartDetail:{
+        total:22,
+        completedTotal:5,
+        productionTotal:10,
+        spoilage:7,
+      },
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -116,10 +194,30 @@ export default {
           },
         ],
       },
+      smartChartData: {
+        labels: [],
+        layout: {
+          padding: {
+            left: 50,
+            right: 0,
+            top: 0,
+            bottom: 0,
+          },
+        },
+        datasets: [
+          {
+            backgroundColor: ['#28ced9','#2255c2','#f4b71a','#fa6363'],
+            data: [5,10,22,7],
+          },
+        ],
+      },
       treatmentTypes: [],
     }
   },
   computed:{
+    user() {
+      return this.$store.getters.getUser
+    },
     translation() {
       return this.$store.getters.getTranslation
     },
