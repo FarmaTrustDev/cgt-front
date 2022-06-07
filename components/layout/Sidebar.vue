@@ -3,7 +3,7 @@
     <div class="logo-container">
       <nuxt-link to="/">
         <img
-          src="http://localhost:22462/Logos/logo.svg"
+          src="https://demoapi.qmaid.co/Logos/logo.svg"
           class="logo"
       /></nuxt-link>
     </div>
