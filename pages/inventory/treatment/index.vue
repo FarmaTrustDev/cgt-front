@@ -17,9 +17,9 @@
                 </a-button>
             </div>
         </span>    
-    <div class="h-tabs large-tabs">
+    <div class="h-tabs large-tabs" style="margin-left:3%">
         <a-tabs type="card" :animated="false">
-            <a-tab-pane key="1" tab="New Sample">
+            <a-tab-pane key="1" tab="Inbound">
                 <a-table class="rounded-table" :columns="newSampleColumns" :data-source="newSampleData" :should-fetch="false" >
                       <template slot="print" slot-scope="record">
         <a-button
@@ -39,11 +39,11 @@
       @cancel="handleModal(false)"
       @ok="handleModal(false)"
     >
-      <img class="img-responsive" :src="qrUrl" />
+      <img class="img-responsive" :src="getImageUrl(qrUrl)" />
     </a-modal>                 
             </a-tab-pane>
 
-            <a-tab-pane key="2" tab="Pending Sample">
+            <a-tab-pane key="2" tab="Process Sample">
                 <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" :should-fetch="false">
                 <span slot="action" slot-scope="record">
         <!-- //Steps -->
@@ -81,7 +81,7 @@
 <script>
 import { SMART_LAB_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
 import routeHelpers from '~/mixins/route-helpers'
-
+import imagesHelper from '~/mixins/images-helper'
 export default {
     components: {
         // 'new-request': newRequests,
@@ -90,7 +90,7 @@ export default {
         // completed: Completed,
         // StandardTable,
     },
-    mixins: [routeHelpers], 
+    mixins: [routeHelpers, imagesHelper], 
     data() {
         return {
             loading: false,
@@ -130,11 +130,11 @@ export default {
                   key: 'dispatchedBy'
                 }
               ],
-              newSampleData:[{patientEnrollmentNumber: 'DAC7993', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'http://localhost:22462/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '10/06/2022 - 14/06/2022' },
-              {patientEnrollmentNumber: 'DAC7986', treatmentType: 'Platelet Lycate ', hospital: 'Royal Hospital', print:'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg',  collectionDateDeliveryDate: '15/06/2022 - 20/06/2023' }, 
-              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Kings College', print:'http://localhost:22462/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '21/06/2022 - 26/06/2024' },
-              {patientEnrollmentNumber: 'DAC7996', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg', collectionDateDeliveryDate: '25/06/2022 - 29/06/2025' },
-              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'http://localhost:22462/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '28/06/2022 - 03/07/2026' },
+              newSampleData:[{patientEnrollmentNumber: 'DAC7993', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '10/06/2022 - 14/06/2022' },
+              {patientEnrollmentNumber: 'DAC7986', treatmentType: 'Platelet Lycate ', hospital: 'Royal Hospital', print:'Uploads/DocumentURL/shipping notice.jpg',  collectionDateDeliveryDate: '15/06/2022 - 20/06/2023' }, 
+              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Kings College', print:'Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '21/06/2022 - 26/06/2024' },
+              {patientEnrollmentNumber: 'DAC7996', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'Uploads/DocumentURL/shipping notice.jpg', collectionDateDeliveryDate: '25/06/2022 - 29/06/2025' },
+              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '28/06/2022 - 03/07/2026' },
               ],
               completedSampleData:[
               {patientEnrollmentNumber: 'DAC65198',treatmentType: 'Platelet Lycate ',productionLine:'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '25/04/2022 - 28/04/2022', dispatchedBy: 'Ben Hawkins'  }, 
@@ -168,7 +168,7 @@ export default {
                   key: 'treatmentType',
                 },
                 {
-                  title: `Serial`,
+                  title: `Client`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },

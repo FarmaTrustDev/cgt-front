@@ -4,6 +4,7 @@
     :loading="loading"
     :bordered="false"
     title="Storage Services"
+    class="specific-storage"
   >
     <div slot="content" class="w-1200 margin-auto">
       <a-row>
