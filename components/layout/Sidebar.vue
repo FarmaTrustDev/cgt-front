@@ -3,7 +3,7 @@
     <div class="logo-container">
       <nuxt-link to="/">
         <img
-          src="https://demoapi.qmaid.co/Logos/logo.svg"
+          :src="getImageUrl('Logos/logo.svg')"
           class="logo"
       /></nuxt-link>
     </div>
@@ -35,7 +35,9 @@
 import { setAccessToken, setRefreshToken } from '~/services/Auth'
 import { isEmpty } from '~/services/Helpers'
 import AuthServices from '~/services/API/AuthServices'
+import imagesHelper from '~/mixins/images-helper'
 export default {
+  mixins: [imagesHelper],
   data() {
     return {
       collapsed: false,
