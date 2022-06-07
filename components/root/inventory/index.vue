@@ -1,27 +1,26 @@
 <template>
   <div class="inventory-page">
-    <a-tabs
-      :animated="false"
-      class="h-tabs no-border-bottom"
-      default-active-key="1"
-      @change="callback"
-    >
-      <a-tab-pane v-for="d in data" :key="d.id">
-        <template slot="tab"
-          >{{ d.title }} <img width="20" :src="getImageUrl(d.flag)"
-        /></template>
-        <tab :data="d" />
-      </a-tab-pane>
-      <!-- <a-tab-pane key="2" tab="Germany - Cellfuse ">
-        <tab />
-      </a-tab-pane>
-      <a-tab-pane key="3" tab="Germany - Cellfuse ">
-        <tab />
-      </a-tab-pane>
-      <a-tab-pane key="4" tab="Germany - Cellfuse ">
-        <tab />
-      </a-tab-pane> -->
-    </a-tabs>
+    <a-row>
+      <a-col :span="1"></a-col>
+      <a-col :span="22">
+        <a-tabs
+          :animated="false"
+          class="h-tabs no-border-bottom"
+          :default-active-key="1"
+          @change="callback"
+        >
+          <a-tab-pane v-for="d in data" :key="d.id">
+            <template slot="tab">
+              <span
+                >{{ d.title }} <img width="20" :src="getImageUrl(d.flag)"
+              /></span>
+            </template>
+            <tab :data="d" />
+          </a-tab-pane>
+        </a-tabs>
+      </a-col>
+      <a-col :span="1"></a-col>
+    </a-row>
   </div>
 </template>
 <script>

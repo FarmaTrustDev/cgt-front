@@ -1,20 +1,20 @@
 <template>
   <div>
     <a-row>
-      <a-col :span="2"></a-col>
-      <a-col :span="20">
+      <a-col :span="1"></a-col>
+      <a-col :span="22">
         <detail :data="data.description" />
         <h2 class="mt-15">{{ translation.Equip_1_568 }}</h2>
       </a-col>
-      <a-col :span="2"></a-col>
+      <a-col :span="1"></a-col>
     </a-row>
     <div class="mt-15 mb-15">
       <a-row :gutter="20">
-        <a-col :span="2"></a-col>
+        <a-col :span="1"></a-col>
         <a-col :span="8">
           <suite />
         </a-col>
-        <a-col :span="2"></a-col>
+        <a-col :span="1"></a-col>
         <a-col :span="8">
           <div class="">
             <a-card
@@ -33,6 +33,7 @@
                   heading:
                     '1x Class II cabinets, Grade A in Grade B background',
                 }"
+                :img-properties="{ width: '50px', height: '50px' }"
               />
             </a-card>
           </div>
@@ -47,7 +48,11 @@
                 }}</a-button>
               </h4>
               <span v-for="(cl, index) in outsideEquipment" :key="index">
-                <ImageHeading class="mt-15" :detail="cl" />
+                <ImageHeading
+                  :img-properties="{ width: '50px', height: '50px' }"
+                  class="mt-15"
+                  :detail="cl"
+                />
               </span>
             </a-card>
           </div>
