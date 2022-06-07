@@ -113,4 +113,37 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         params: { view: 'OUTBOUND_SHIPMENT' }
     },
 ]
+// These Phases has to bee changed for Smart_Lab_Demo_Purpose
+export const SMART_LAB_TREATMENT_PENDING_PHASES = [
+    {
+        id: 1,
+        name: 'Inbound Shipment',
+        alias: 'INBOUND_SHIPMENT',
+        phaseId: 8,
+        enablePageId: 5,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.patient,
+        params: { view: 'INBOUND_SHIPMENT' }
+    },
+    {
+        id: 2,
+        name: 'Process Sample',
+        alias: 'PRCEOSS_SAMPLE',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.patient,
+        params: { view: 'MANUFACTURER' }
+    },
+    {
+        id: 3,
+        name: 'Outbound Process',
+        alias: 'OUTBOUND_PROCESS',
+        phaseId: 14,
+        enablePageId: 14,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'OUTBOUND_SHIPMENT' }
+    },
+]
 

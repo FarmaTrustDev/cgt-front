@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  props: { steps: { required: true, type: Object, default: () => {} } },
+  props: { steps: { required: true, type: Array, default: () => [] } },
   data() {
     return {}
   },

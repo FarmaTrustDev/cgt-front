@@ -79,21 +79,21 @@
           },
         ],
         data: [{
-          'date' : '2021-10-11',
+          'date' : '11-10-2021',
           'ticketId' : 'CDK-190',
           'name' : 'John DOE',
           'bagId' : '123',
-          'issueDetails' : '2021-10-11',
-          'lastUpdate' : '2021-10-11',
+          'issueDetails' : '10-11-2021',
+          'lastUpdate' : '10-11-2021',
           'status' : 'InProcess'
         },
         {
-          'date' : '2021-10-11',
+          'date' : '10-11-2021',
           'ticketId' : 'CDK-190',
           'name' : 'John DOE',
           'bagId' : '123',
-          'issueDetails' : '2021-10-11',
-          'lastUpdate' : '2021-10-11',
+          'issueDetails' : '10-11-2021',
+          'lastUpdate' : '10-11-2021',
           'status' : 'InProcess'
         },
         ],

@@ -89,12 +89,16 @@ a {
       border-bottom-right-radius: 40px;
       border-top-right-radius: 40px;
     }
+  }
 
-    // you may use this like in a proper way
-    &:last-child,
+  .ant-table-row td {
     &:first-child {
-      // border-bottom-right-radius: 40px;
-      // border-top-right-radius: 40px;
+      border-bottom-left-radius: 40px;
+      border-top-left-radius: 40px;
+    }
+    &:last-child {
+      border-bottom-right-radius: 40px;
+      border-top-right-radius: 40px;
     }
   }
 }
@@ -135,4 +139,11 @@ a {
   transform: rotate(90deg);
   margin-top: 20px;
   margin-left: -20px;
+}
+.specific{  // for treatment process
+  .page-title {
+    font-size: 25px;
+    font-weight: 600;
+    margin-left: 5%;
+  }
 }
