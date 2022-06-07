@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div class="racks">
-      <span v-for="rack in data" :key="rack.id" @click="getRack(rack)">
+      <span v-for="(rack, index) in data" :key="index" @click="getRack(rack)">
         <rack />
       </span>
     </div>

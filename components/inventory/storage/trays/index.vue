@@ -2,8 +2,10 @@
   <div>
     <table class="testTubeTable border w-100">
       <tr v-for="tray in trays" :key="tray.id">
-        <td v-for="tube in tray.tubes" :key="tube.id" class="border">
-          <tray @click="getTube" />
+        <td v-for="(tube, index) in tray.tubes" :key="index" class="border">
+          <span @click="getTube(tube)">
+            <tray />
+          </span>
         </td>
       </tr>
     </table>
@@ -20,7 +22,7 @@ export default {
   },
   methods: {
     getTube(tube) {
-      console.log(tube)
+      this.$emit('getTube', tube)
     },
   },
 }

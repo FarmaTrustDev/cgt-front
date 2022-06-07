@@ -38,7 +38,11 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <Trays v-if="!isEmpty(trayData)" :trays="trayData" />
+              <Trays
+                v-if="!isEmpty(trayData)"
+                :trays="trayData"
+                @getTube="getTube"
+              />
               <a-empty v-else description=" select the rack" />
             </div> </TileCenter
         ></a-col>
@@ -162,6 +166,9 @@ export default {
     isEmpty,
     getRack(rack) {
       this.trayData = rack.trays
+    },
+    getTube(tube) {
+      this.steps = tube.steps
     },
   },
 }
