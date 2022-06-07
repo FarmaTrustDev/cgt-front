@@ -4,6 +4,7 @@
     :loading="loading"
     :bordered="false"
     title="Storage Services"
+    class="specific-storage"
   >
     <div slot="content" class="w-1200 margin-auto">
       <a-row>
@@ -48,13 +49,14 @@
         ></a-col>
       </a-row>
 
+        <!-- 
+        title="Provenance Data - Asset DEC123" -->
       <a-card
-        :bordered="false"
-        title="Provenance Data - Asset DEC123"
+      :bordered="false"
       >
         <div class="view-screen">
           <span v-if="!isEmpty(steps)">
-            <h2 slot="title">Provenance Data - Platelet Lycate Asset DEC123</h2>
+            <h2 slot="title" class="padd-bot">Provenance Data  -  Asset DEC123</h2>
             <TimeLine :steps="steps" />
           </span>
           <a-empty v-else description="No tube selected" />

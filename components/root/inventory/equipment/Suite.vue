@@ -8,6 +8,7 @@
             :key="index"
             class="mt-15"
             :detail="c"
+            :img-properties="{ width: '50px', height: '50px' }"
           />
         </a-tab-pane>
         <a-tab-pane key="2" tab="Class C Suite">

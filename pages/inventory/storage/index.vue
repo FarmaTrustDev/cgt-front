@@ -4,10 +4,11 @@
     :loading="loading"
     :bordered="false"
     title="Storage Services"
+    class="specific-storage"
   >
     <div slot="content">
       <a-row>
-        <a-col class="mb-15" :span="24">
+        <a-col class="mb-15" style="margin-left:12%" :span="24">
           <detail />
         </a-col>
       </a-row>
