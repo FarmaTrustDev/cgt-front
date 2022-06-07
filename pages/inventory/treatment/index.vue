@@ -17,9 +17,9 @@
                 </a-button>
             </div>
         </span>    
-    <div class="h-tabs large-tabs">
+    <div class="h-tabs large-tabs" style="margin-left:3%">
         <a-tabs type="card" :animated="false">
-            <a-tab-pane key="1" tab="New Sample">
+            <a-tab-pane key="1" tab="Inbound">
                 <a-table class="rounded-table" :columns="newSampleColumns" :data-source="newSampleData" :should-fetch="false" >
                       <template slot="print" slot-scope="record">
         <a-button
@@ -43,7 +43,7 @@
     </a-modal>                 
             </a-tab-pane>
 
-            <a-tab-pane key="2" tab="Pending Sample">
+            <a-tab-pane key="2" tab="Process Sample">
                 <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" :should-fetch="false">
                 <span slot="action" slot-scope="record">
         <!-- //Steps -->
@@ -168,7 +168,7 @@ export default {
                   key: 'treatmentType',
                 },
                 {
-                  title: `Serial`,
+                  title: `Client`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
