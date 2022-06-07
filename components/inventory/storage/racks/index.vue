@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <div class="racks"><rack v-for="rack in count" :key="rack" /></div>
+    <div class="racks"><rack v-for="rack in data" :key="rack.id" /></div>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import rack from '~/components/inventory/storage/racks/rack'
 export default {
   components: { rack },
-  props: { count: { type: Number, default: 0 } },
+  props: { data: { type: Array, default: () => [{}] } },
 }
 </script>
 <style lang="scss" scoped>

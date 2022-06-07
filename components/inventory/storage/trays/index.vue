@@ -52,9 +52,10 @@ const t = {
 }
 export default {
   components: { tray },
+  props: { trays: { type: Array, default: () => [] } },
   data() {
     return {
-      trays: [t, t, t, t],
+      trays1: [t, t, t, t],
     }
   },
 }
