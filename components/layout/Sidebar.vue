@@ -3,7 +3,7 @@
     <div class="logo-container">
       <nuxt-link to="/">
         <img
-          src="http://cgt-dev-ft.microsysx.com/images/v2/logo.svg"
+          src="http://localhost:22462/Logos/logo.svg"
           class="logo"
       /></nuxt-link>
     </div>

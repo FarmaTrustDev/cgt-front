@@ -25,8 +25,7 @@
                 height="100"
               />
               <h4 class="heading-home">
-                Manage
-                <strong class="strong"> {{ translation.Inven_1_538 }} </strong>
+                Today's <strong class="strong"> Tasks </strong>
               </h4>
             </a>
           </div>
@@ -38,10 +37,7 @@
                 height="100"
               />
               <h4 class="heading-home">
-                Manage
-                <strong class="strong">
-                  {{ translation.ManagUsers_2_17 }}
-                </strong>
+                Manage <strong class="strong"> Users </strong>
               </h4>
             </a>
           </div>
