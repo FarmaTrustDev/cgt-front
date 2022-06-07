@@ -130,11 +130,11 @@ export default {
                   key: 'dispatchedBy'
                 }
               ],
-              newSampleData:[{patientEnrollmentNumber: 'DAC7993', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'http://localhost:22462/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '10/06/2022 - 14/06/2022' },
-              {patientEnrollmentNumber: 'DAC7986', treatmentType: 'Platelet Lycate ', hospital: 'Royal Hospital', print:'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg',  collectionDateDeliveryDate: '15/06/2022 - 20/06/2023' }, 
-              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Kings College', print:'http://localhost:22462/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '21/06/2022 - 26/06/2024' },
-              {patientEnrollmentNumber: 'DAC7996', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg', collectionDateDeliveryDate: '25/06/2022 - 29/06/2025' },
-              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'http://localhost:22462/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '28/06/2022 - 03/07/2026' },
+              newSampleData:[{patientEnrollmentNumber: 'DAC7993', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'https://demoapi.qmaid.co/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '10/06/2022 - 14/06/2022' },
+              {patientEnrollmentNumber: 'DAC7986', treatmentType: 'Platelet Lycate ', hospital: 'Royal Hospital', print:'https://demoapi.qmaid.co/Uploads/DocumentURL/shipping notice.jpg',  collectionDateDeliveryDate: '15/06/2022 - 20/06/2023' }, 
+              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Kings College', print:'https://demoapi.qmaid.co/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '21/06/2022 - 26/06/2024' },
+              {patientEnrollmentNumber: 'DAC7996', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'https://demoapi.qmaid.co/Uploads/DocumentURL/shipping notice.jpg', collectionDateDeliveryDate: '25/06/2022 - 29/06/2025' },
+              {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic', print:'https://demoapi.qmaid.co/Uploads/DocumentURL/label1.jpg', collectionDateDeliveryDate: '28/06/2022 - 03/07/2026' },
               ],
               completedSampleData:[
               {patientEnrollmentNumber: 'DAC65198',treatmentType: 'Platelet Lycate ',productionLine:'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '25/04/2022 - 28/04/2022', dispatchedBy: 'Ben Hawkins'  }, 
