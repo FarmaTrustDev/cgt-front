@@ -26,6 +26,18 @@
 import imagesHelper from '~/mixins/images-helper'
 export default {
   mixins: [imagesHelper],
-  props: { data: { type: Object, default: () => ({}) } },
+  props: {
+    data: {
+      type: Object,
+      default: () => ({
+        countryName: 'Germany - Cellfuse',
+        address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
+        flag: 'web/flags/de.svg',
+        global: ' Head of Lab- Stephen Jones',
+        phone: '49 6781 9855-0',
+        email: 'info-imfs@cellfuse.de',
+      }),
+    },
+  },
 }
 </script>
