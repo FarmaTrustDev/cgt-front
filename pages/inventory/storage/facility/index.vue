@@ -5,7 +5,7 @@
       <a-button
         type="primary"
         class="mrm-5 float-right"
-        @click="goto('storageFacility/create')"
+        @click="goto('facility/create')"
         >Add Storage Facility</a-button
       >
     <a-input
@@ -30,7 +30,7 @@
           </a-button>
           <a-menu slot="overlay">
           <a-menu-item key="userDetail">
-            <a @click="goto(`/storageFacility/${action.globalId}`)">{{translation.Edit_1_450}}</a>
+            <a @click="goto(`/inventory/storage/facility/${action.globalId}`)">{{translation.Edit_1_450}}</a>
           </a-menu-item>
           </a-menu>
           </a-dropdown>

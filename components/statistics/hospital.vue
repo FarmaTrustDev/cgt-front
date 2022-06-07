@@ -46,7 +46,7 @@
       </a-col>
     </a-row>
     <a-row v-if="user.organizationTypeAlias=='SMARTLAB'">
-      <a-col class="stats" :span="24">
+      <a-col :span="24">
         <a-tabs type="card" >
           <a-tab-pane key="1" :tab="translation.Hospi_1_47">
             <div
