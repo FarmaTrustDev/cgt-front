@@ -1,10 +1,10 @@
 <template>
 <div>
     <div class="page-header clearfix">
-        <h3 class="page-title pl-5 float-left">Task List</h3>
-        <a-select class="float-right page-search-input" :placeholder="translation.TreatType_2_67">
+        <h3 class="page-title pl-5 float-left">Today's Task</h3>
+        <!-- <a-select class="float-right page-search-input" placeholder="Search">
             <a-select-option v-for="treatmentType in treatmentTypes" :key="treatmentType.id">{{ treatmentType.name }}</a-select-option>
-        </a-select>
+        </a-select> -->
     </div>
    
         <span slot="action" slot-scope="text, record">
@@ -17,13 +17,14 @@
                 </a-button>
             </div>
         </span>
-    <div class="h-tabs large-tabs">
+    <div class="h-tabs large-tabs ">
         <a-tabs type="card" :animated="false">
-            <a-tab-pane key="1" tab="New Sample">
-                <a-table class="rounded-table" :columns="newSampleColumns" :data-source="newSampleData" :should-fetch="false" />
+            <a-tab-pane key="1" tab="Inbound">
+                <a-table class="rounded-table" :columns="newSampleColumns" :data-source="newSampleData" >
+                </a-table>
             </a-tab-pane>
-            <a-tab-pane key="2" tab="Pending Sample">
-                <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" :should-fetch="false">
+            <a-tab-pane key="2" tab="Process Sample">
+                <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" >
                 <span slot="action" slot-scope="record">
         <!-- //Steps -->
         <div class="treatment-steps">
@@ -45,7 +46,7 @@
       </span>
                 </a-table>  
             </a-tab-pane>
-            <a-tab-pane key="3" tab="Completed Sample">
+            <a-tab-pane key="3" tab="Outbound Sample">
                 <a-table class="rounded-table" :columns="completedColumns" :data-source="completedSampleData" />
             </a-tab-pane>
             <a-tab-pane key="4" tab="All Samples">
@@ -76,7 +77,7 @@ export default {
             phases: MANUFACTURER_TREATMENT_PENDING_PHASES,
             completedColumns:[
                 {
-                  title: `Patient ID`,
+                  title: `Sample ID`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                 },
@@ -86,12 +87,12 @@ export default {
                   key: 'treatmentType',
                 },
                 {
-                  title: `Production Line`,
+                  title: `Storage Area`,
                   dataIndex: 'productionLine',
                   key: 'productionLine',
                 },
                 {
-                  title: `Hospital`,
+                  title: `Client`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
@@ -113,28 +114,28 @@ export default {
               {patientEnrollmentNumber: 'DAC9874', treatmentType: 'Platelet Lycate ', hospital: 'Baystate Clinic',notes: 'N/A', collectionDateDeliveryDate: '28/06/2022 - 03/07/2026' },
               ],
               completedSampleData:[
-              {patientEnrollmentNumber: 'DAC65198',treatmentType: 'Platelet Lycate ',productionLine:'Line 2', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '25/04/2022 - 28/04/2022', dispatchedBy: 'Ben Hawkins'  }, 
-              {patientEnrollmentNumber: 'DAC2237',treatmentType: 'Platelet Lycate ',productionLine:'Line 3', hospital: 'Royal Hospital', collectionDateDeliveryDate: '08/04/2022 - 11/04/2022', dispatchedBy: 'Shawn David'  }, 
-              {patientEnrollmentNumber: 'DAC85597',treatmentType: 'Platelet Lycate ',productionLine:'Line 2', hospital: 'Kings College', collectionDateDeliveryDate: '09/02/2022 - 12/02/2022', dispatchedBy: 'Chris Murphy'  },
-              {patientEnrollmentNumber: 'DAC39647',treatmentType: 'Platelet Lycate ',productionLine:'Line 2', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '08/02/2022 - 11/02/2022', dispatchedBy: 'Allen Braun'  }, 
+              {patientEnrollmentNumber: 'DAC65198',treatmentType: 'Platelet Lycate ',productionLine:'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '25/04/2022 - 28/04/2022', dispatchedBy: 'Ben Hawkins'  }, 
+              {patientEnrollmentNumber: 'DAC2237',treatmentType: 'Platelet Lycate ',productionLine:'Zone C', hospital: 'Royal Hospital', collectionDateDeliveryDate: '08/04/2022 - 11/04/2022', dispatchedBy: 'Shawn David'  }, 
+              {patientEnrollmentNumber: 'DAC85597',treatmentType: 'Platelet Lycate ',productionLine:'Zone A', hospital: 'Kings College', collectionDateDeliveryDate: '09/02/2022 - 12/02/2022', dispatchedBy: 'Chris Murphy'  },
+              {patientEnrollmentNumber: 'DAC39647',treatmentType: 'Platelet Lycate ',productionLine:'Zone C', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '08/02/2022 - 11/02/2022', dispatchedBy: 'Allen Braun'  }, 
               ],
               pendingSampleData:[
-              {patientEnrollmentNumber: 'DAC7986',treatmentName: 'Platelet Lycate ', productionLine: 'Line 2', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '10/06/2022 - 14/06/2022'},
-              {patientEnrollmentNumber: 'DAC9874',treatmentName: 'Platelet Lycate ', productionLine: 'Line 3', hospital: 'Royal Hospital', collectionDateDeliveryDate: '15/06/2022 - 20/06/2023'}, 
-              {patientEnrollmentNumber: 'DAC9875',treatmentName: 'Platelet Lycate ', productionLine: 'Line 4', hospital: 'Kings College', collectionDateDeliveryDate: '21/06/2022 - 26/06/2024'},
-              {patientEnrollmentNumber: 'DAC9876',treatmentName: 'Platelet Lycate ', productionLine: 'Line 5', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '25/06/2022 - 29/06/2025'},
-              {patientEnrollmentNumber: 'DAC9876',treatmentName: 'Platelet Lycate ', productionLine: 'Line 6', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '28/06/2022 - 03/07/2026'}
+              {patientEnrollmentNumber: 'DAC7986',treatmentName: 'Platelet Lycate ', productionLine: 'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '10/06/2022 - 14/06/2022'},
+              {patientEnrollmentNumber: 'DAC9874',treatmentName: 'Platelet Lycate ', productionLine: 'Zone C', hospital: 'Royal Hospital', collectionDateDeliveryDate: '15/06/2022 - 20/06/2023'}, 
+              {patientEnrollmentNumber: 'DAC9875',treatmentName: 'Platelet Lycate ', productionLine: 'Zone C', hospital: 'Kings College', collectionDateDeliveryDate: '21/06/2022 - 26/06/2024'},
+              {patientEnrollmentNumber: 'DAC9876',treatmentName: 'Platelet Lycate ', productionLine: 'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '25/06/2022 - 29/06/2025'},
+              {patientEnrollmentNumber: 'DAC9876',treatmentName: 'Platelet Lycate ', productionLine: 'Zone C', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '28/06/2022 - 03/07/2026'}
               ],
               allSampleData:[
-              {patientEnrollmentNumber: 'DAC7993', treatmentType: 'Platelet Lycate ', productionLine: 'Line 1',  hospital: 'Baystate Clinic', collectionDateDeliveryDate: '05/06/2022 - 08/06/2022', dispatchedBy: 'In Progress'}, 
-              {patientEnrollmentNumber: 'DAC21362', treatmentType: 'Platelet Lycate ', productionLine: 'Line 2', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '30/05/2022 - 02/06/2022', dispatchedBy: 'In Progress'}, 
-              {patientEnrollmentNumber: 'DAC59736', treatmentType: 'Platelet Lycate ', productionLine: 'Line 3', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '29/05/2022 - 01/06/2022', dispatchedBy: 'Jake Paul'},
-              {patientEnrollmentNumber: 'DAC48959', treatmentType: 'Platelet Lycate ', productionLine: 'Line 4',  hospital: 'Baystate Clinic', collectionDateDeliveryDate: '29/05/2022 - 01/06/2022', dispatchedBy: 'In Progress'}, 
-              {patientEnrollmentNumber: 'DAC31900', treatmentType: 'Platelet Lycate', productionLine: 'Line 1', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '26/05/2022 - 29/05/2022', dispatchedBy: 'cgt_hospital'}, 
-              {patientEnrollmentNumber: 'DAC53835', treatmentType: 'Platelet Lycate', productionLine: 'Line 2', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '26/05/2022 - 29/05/2022', dispatchedBy: 'In Progress'}
+              {patientEnrollmentNumber: 'DAC7993', treatmentType: 'Platelet Lycate ', productionLine: 'Zone C',  hospital: 'Baystate Clinic', collectionDateDeliveryDate: '05/06/2022 - 08/06/2022', dispatchedBy: 'In Progress'}, 
+              {patientEnrollmentNumber: 'DAC21362', treatmentType: 'Platelet Lycate ', productionLine: 'Zone C', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '30/05/2022 - 02/06/2022', dispatchedBy: 'In Progress'}, 
+              {patientEnrollmentNumber: 'DAC59736', treatmentType: 'Platelet Lycate ', productionLine: 'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '29/05/2022 - 01/06/2022', dispatchedBy: 'Jake Paul'},
+              {patientEnrollmentNumber: 'DAC48959', treatmentType: 'Platelet Lycate ', productionLine: 'Zone C',  hospital: 'Baystate Clinic', collectionDateDeliveryDate: '29/05/2022 - 01/06/2022', dispatchedBy: 'In Progress'}, 
+              {patientEnrollmentNumber: 'DAC31900', treatmentType: 'Platelet Lycate', productionLine: 'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '26/05/2022 - 29/05/2022', dispatchedBy: 'cgt_hospital'}, 
+              {patientEnrollmentNumber: 'DAC53835', treatmentType: 'Platelet Lycate', productionLine: 'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '26/05/2022 - 29/05/2022', dispatchedBy: 'In Progress'}
               ],
               newSampleColumns:[{
-                  title: `Patient ID`,
+                  title: `Serial Number`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                 },
@@ -144,7 +145,7 @@ export default {
                   key: 'treatmentType',
                 },
                 {
-                  title: `Hospital`,
+                  title: `Serial`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
@@ -159,7 +160,7 @@ export default {
                   key: 'collectionDateDeliveryDate',
                 },
                 {
-                  title: `Actions`,
+                  title: `Notes`,
                   dataIndex: 'action',
                   scopedSlots: {
                     customRender: 'action'
@@ -167,7 +168,7 @@ export default {
                 },
                 ],
                  pendingColumns:[{
-                  title: `Patient ID`,
+                  title: `Sample ID`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                 },
@@ -177,12 +178,12 @@ export default {
                   key: 'treatmentName',
                 },
                 {
-                  title: `Production Line`,
+                  title: `Storage Area`,
                   dataIndex: 'productionLine',
                   key: 'productionLine',
                 },
                 {
-                  title: `Hospital`,
+                  title: `Client`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
@@ -192,13 +193,13 @@ export default {
                   key: 'collectionDateDeliveryDate',
                 },
                  {
-                  title: 'Action',
+                  title: 'Notes',
                   key:'action',
                   scopedSlots: { customRender: 'action' },
-                },
+                 },
               ],
               allSampleColumns:[{
-                  title: `Patient ID`,
+                  title: `Sample ID`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                   scopedSlots: { customRender: 'name' },
@@ -209,12 +210,12 @@ export default {
                   key: 'treatmentType',
                 },
                 {
-                  title: `Production Line`,
+                  title: `Storage Area`,
                   dataIndex: 'productionLine',
                   key: 'productionLine',
                 },
                 {
-                title: `Hospital`,
+                title: `Client`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
