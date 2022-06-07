@@ -20,7 +20,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> {{translation.Inven_1_538}} </strong>
+                Today's <strong class="strong"> Tasks </strong>
               </h4>
             </a>
           </div>
@@ -30,7 +30,7 @@
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> {{translation.ManagUsers_2_17}} </strong>
+                Manage <strong class="strong"> Users </strong>
               </h4>
             </a>
           </div>

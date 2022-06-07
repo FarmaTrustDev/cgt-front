@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="false" title="Treatment Status" class="patient-page">
+  <page-layout :loading="false" title="Sample Status" class="specific" :create="false">
     <template slot="content">
       <div class="grey-card" style="width: 90%; margin-left: 5%">
         <div class="patient-details-page">
@@ -13,39 +13,39 @@
                     alt="Christina Braun"
                   />
 
-                  <figcaption>Patient ID: XYZ</figcaption>
+                  <figcaption>Sample ID: DAC48694</figcaption>
                 </figure>
               </a-card>
             </a-col>
             <a-col :span="18">
               <a-card :bordered="false" class="default-card details-section">
                 <article class="article">
-                  <h2 class="heading pl-0">Patient Details</h2>
+                  <h2 class="heading pl-0">Sample Details</h2>
                 </article>
                 <div>
                   <a-row :gutter="20" dir="ltr">
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="2" class="mt-15">
                       <h6>
-                        <span class="text-muted"> Hospital: </span>
+                        <span class="text-muted"> Client: </span>
                       </h6>
                     </a-col>
-                    <a-col :span="6" class="mt-15">
+                    <a-col :span="10" class="mt-15">
                       <h6>
                         <span class="text-muted"> Baystate Clinic</span>
                       </h6>
                     </a-col>
-                    <a-col :span="4" class="mt-15">
-                      <h6><span class="text-muted">Treatment Type:</span></h6>
+                    <a-col :span="3" class="mt-15">
+                      <h6><span class="text-muted">Asset Type:</span></h6>
                     </a-col>
-                    <a-col :span="4" class="mt-15">
-                      <h6><span class="text-muted">Yescarta</span></h6>
+                    <a-col :span="9" class="mt-15">
+                      <h6><span class="text-muted">Cell Sample</span></h6>
                     </a-col>
                   </a-row>
                   <a-row :gutter="20" dir="ltr">
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="2" class="mt-15">
                       <h6><span class="text-muted"> Email:</span></h6>
                     </a-col>
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="10" class="mt-15">
                       <h6>
                         <span class="text-muted">
                           baystateclinic@gmail.com</span
@@ -54,10 +54,10 @@
                     </a-col>
                   </a-row>
                   <a-row :gutter="20" dir="ltr">
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="2" class="mt-15">
                       <h6><span class="text-muted"> Phone:</span></h6>
                     </a-col>
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="10" class="mt-15">
                       <h6><span class="text-muted"> +44 12345 1234</span></h6>
                     </a-col>
                   </a-row>
@@ -100,7 +100,7 @@
                 <a-col :span="12">
                   <a-card :bordered="false" class="default-card">
                     <article class="article">
-                      <h4 class="heading pl-0">Treatment Receiving</h4>
+                      <h4 class="heading pl-0">Sample Receiving</h4>
                     </article>
                     <div>
                       <table width="100%">
@@ -126,7 +126,7 @@
                 </a-col>
               </a-row>
             </a-tab-pane>
-            <a-tab-pane key="2" tab="Manufacturing">
+            <a-tab-pane key="2" tab="Inbound Process">
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
@@ -134,7 +134,7 @@
                 @updateId="updateId"
               />
             </a-tab-pane>
-            <a-tab-pane key="3" tab="Outbound Shipment"></a-tab-pane>
+            <a-tab-pane key="3" tab="Outbound Process"></a-tab-pane>
           </a-tabs>
         </a-card>
       </div>
