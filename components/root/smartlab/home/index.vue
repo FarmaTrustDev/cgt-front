@@ -7,17 +7,22 @@
           <div class="home-tab">
             <a href="javascript:;" @click="goto(`/inventory/treatment`)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
+                width="120"
+                height="100"
               />
               <h4 class="heading-home">
-                {{translation.Manuf_1_342}} <strong class="strong"> {{translation.Tasks_1_494}} </strong>
+                {{ translation.Manuf_1_342 }}
+                <strong class="strong"> {{ translation.Tasks_1_494 }} </strong>
               </h4>
             </a>
           </div>
           <div class="home-tab">
             <a href="javascript:;" @click="goto(`/inventory/storage`)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
+                width="120"
+                height="100"
               />
               <h4 class="heading-home">
                 Today's <strong class="strong"> Tasks </strong>
@@ -27,7 +32,9 @@
           <div class="home-tab with-arrow">
             <a href="javascript:;" @click="goto(`/users`)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
+                width="120"
+                height="100"
               />
               <h4 class="heading-home">
                 Manage <strong class="strong"> Users </strong>
@@ -39,9 +46,9 @@
         <a-col :span="2"></a-col>
         <a-col :span="3"></a-col>
 
-        <!-- <a-col :span="9">
-          <TimeAndTreatmentList />
-        </a-col> -->
+        <a-col :span="9">
+          <TimeAndTreatmentList :remove-list="false" />
+        </a-col>
       </a-row>
     </a-card>
   </div>
@@ -51,14 +58,14 @@
 // import { HubConnectionBuilder } from '@aspnet/signalr'
 import userDetail from '~/mixins/user-detail'
 import routeHelpers from '~/mixins/route-helpers'
-// import TimeAndTreatmentList from '~/components/statistics/TimeAndTreatmentList'
+import TimeAndTreatmentList from '~/components/statistics/TimeAndTreatmentList'
 export default {
-//   components: { TimeAndTreatmentList },
+  components: { TimeAndTreatmentList },
   mixins: [routeHelpers, userDetail],
   data() {
     return {}
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },

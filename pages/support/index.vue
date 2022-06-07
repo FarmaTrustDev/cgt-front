@@ -2,12 +2,15 @@
   <div class="support-page">
     <a-row class="p-10 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left">{{translation.suppoissue_2_176}}</h3>
+        <h3 class="page-title float-left">
+          {{ translation.suppoissue_2_176 }}
+        </h3>
         <a-button
           type="primary"
-          class="mrm-5 float-right"
+          class="mrm-5 mrt float-right"
           @click="showModal(true)"
-          >{{translation.AddNew_3_182}}</a-button
+          >{{ translation.AddNew_3_182 }}
+          </a-button
         >
         <a-input
           ref="userNameInput"
@@ -46,11 +49,14 @@
                   <a-icon type="edit" />
                 </a-button> -->
             <a-dropdown>
-              <a-button class="action-button" size="small">{{translation.Admin_1_142}}</a-button>
+              <a-button class="action-button" size="small">{{
+                translation.Admin_1_142
+              }}</a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="showUpdate(record)"
-                    ><a-icon type="search" /> {{translation.Updatticke_2_222}}</a
+                    ><a-icon type="search" />
+                    {{ translation.Updatticke_2_222 }}</a
                   >
                 </a-menu-item>
               </a-menu>
@@ -101,43 +107,43 @@ export default {
     return {
       showAddModal: false,
       data: [],
-      columns:[
-  {
-    title: `${this.$store.getters.getTranslation.date_1_510}`,
-    dataIndex: 'created_At',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.TickeID_2_212}`,
-    dataIndex: 'id',
-    scopedSlots: { customRender: 'tickets' },
-  },
-  {
-    title: 'Name(PUID)',
-    dataIndex: 'reporter_name',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.BagID_2_540}`,
-    dataIndex: 'reference_Id',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.IssueDetai_2_214}`,
-    dataIndex: 'description',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.LastUpdat_2_216}`,
-    dataIndex: 'last_Updated_At',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
-    dataIndex: 'status',
-    scopedSlots: { customRender: 'status' },
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'actions',
-    scopedSlots: { customRender: 'action' },
-  },
-],
+      columns: [
+        {
+          title: `${this.$store.getters.getTranslation.date_1_510}`,
+          dataIndex: 'created_At',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.TickeID_2_212}`,
+          dataIndex: 'id',
+          scopedSlots: { customRender: 'tickets' },
+        },
+        {
+          title: 'Name(PUID)',
+          dataIndex: 'reporter_name',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.BagID_2_540}`,
+          dataIndex: 'reference_Id',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.IssueDetai_2_214}`,
+          dataIndex: 'description',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.LastUpdat_2_216}`,
+          dataIndex: 'last_Updated_At',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
+          dataIndex: 'status',
+          scopedSlots: { customRender: 'status' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'actions',
+          scopedSlots: { customRender: 'action' },
+        },
+      ],
       loading: true,
       ticket: {},
       isCreated: false,
@@ -147,7 +153,7 @@ export default {
   mounted() {
     this.fetch()
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -170,7 +176,10 @@ export default {
       this.fetch()
     },
     getStatusName(status, record) {
-      return record.status_Name.toLowerCase()
+      if (record.status_Name) {
+        return record.status_Name.toLowerCase()
+      }
+      return record.status_Name
       // status_Name.toLowerCase()
     },
     fetch(params = {}) {
@@ -198,7 +207,7 @@ export default {
     },
     searchSupport(e) {
       const search = e.target.value
-      this.fetch({statusName: search, generalSearch: search})
+      this.fetch({ statusName: search, generalSearch: search })
     },
   },
 }

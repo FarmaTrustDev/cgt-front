@@ -25,3 +25,15 @@
     padding-top: 10px;
   }
 }
+
+.collection-processing-steps {
+  .ant-form-item-children button {
+    zoom: 1.3;
+  }
+  .ant-switch {
+    background-color: $danger;
+  }
+  .ant-switch-checked {
+    background-color: $primary-color;
+  }
+}

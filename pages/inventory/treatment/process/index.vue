@@ -66,7 +66,7 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card :bordered="false" class="mt-15 default-card h-tabs pills-tabs">
           <a-tabs type="card">
             <a-tab-pane key="1" tab="Inbound Acceptance Details">
               <a-row>
@@ -134,7 +134,13 @@
                 @updateId="updateId"
               />
             </a-tab-pane>
-            <a-tab-pane key="3" tab="Outbound Process"></a-tab-pane>
+            <a-tab-pane key="3" tab="Outbound Process">
+              <Process
+                :collections="dummyOutBoundCollection"
+                :bag-id="'BUID-123'"
+                @fetchBags="() => {}"
+                @updateId="updateId"
+            /></a-tab-pane>
           </a-tabs>
         </a-card>
       </div>
@@ -188,6 +194,34 @@ export default {
           id: 8,
           isCollected: false,
           name: 'Specify freezer location, shelf number rack number, box number',
+        },
+      ],
+      dummyOutBoundCollection: [
+        { id: 1, isCollected: false, name: 'The Outbound Process Steps are' },
+        {
+          id: 2,
+          isCollected: false,
+          name: 'Remove From Freezer?',
+        },
+        {
+          id: 3,
+          isCollected: false,
+          name: 'Is Package Undamaged?',
+        },
+        {
+          id: 3,
+          isCollected: false,
+          name: 'Is Sample Ready for Outbound Packaging',
+        },
+        {
+          id: 3,
+          isCollected: false,
+          name: 'Sample has been Packaged',
+        },
+        {
+          id: 3,
+          isCollected: false,
+          name: 'Ready for Courier Pick Up',
         },
       ],
     }
