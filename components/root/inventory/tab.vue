@@ -3,19 +3,22 @@
     <a-row>
       <a-col :span="1"></a-col>
       <a-col :span="22">
-        <detail :data="data.description" />
-        <h2 class="mt-15">{{ translation.Equip_1_568 }}</h2>
+        <detail class="mb-15" :data="data.description" />
+        <br />
+        <h2 class="mt-15">
+          <strong>{{ translation.Equip_1_568 }}</strong>
+        </h2>
       </a-col>
       <a-col :span="1"></a-col>
     </a-row>
     <div class="mt-15 mb-15">
       <a-row :gutter="20">
         <a-col :span="1"></a-col>
-        <a-col :span="8">
+        <a-col :span="10">
           <suite />
         </a-col>
         <a-col :span="1"></a-col>
-        <a-col :span="8">
+        <a-col :span="10">
           <div class="">
             <a-card
               class="shadow mb-15 default-border-radius"
