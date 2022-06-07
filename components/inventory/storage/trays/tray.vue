@@ -1,14 +1,14 @@
 <template>
   <div @mouseenter="onHover(true)" @mouseleave="onHover(false)">
     <img
-      class="tube-image"
       v-if="!isHover"
-      :src="getImageUrl('/web/inventory/storage/tube.svg')"
+      class="tube-image"
+      :src="getImageUrl('web/inventory/storage/tube.svg')"
     />
     <img
-      class="tube-image"
       v-else
-      :src="getImageUrl('/web/inventory/storage/selected-tube.svg')"
+      class="tube-image"
+      :src="getImageUrl('web/inventory/storage/selected-tube.svg')"
     />
   </div>
 </template>

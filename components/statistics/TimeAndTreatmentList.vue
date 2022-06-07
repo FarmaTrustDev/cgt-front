@@ -23,10 +23,11 @@
       </a-card>
 
       <!-- // treatment list -->
-      <div>
+      <div v-if="removeList">
         <a-card class="white-card" :bordered="false">
           <div>
-            {{translation.Treat_1_29}} <span class="float-right">{{translation.Colle_1_23}}</span>
+            {{ translation.Treat_1_29 }}
+            <span class="float-right">{{ translation.Colle_1_23 }}</span>
           </div>
           <div class="default-border-radius border p-10 mt-15">
             <a-list :data-source="treatments">
@@ -54,13 +55,21 @@ import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
   mixins: [routeHelpers],
+  props: { removeList: { type: Boolean, default: true } },
   data() {
     return {
       treatments: [],
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
-    this.fetchTreatments()
+    if (this.removeList) {
+      this.fetchTreatments()
+    }
   },
   methods: {
     fetchTreatments() {
@@ -69,11 +78,6 @@ export default {
       })
     },
     _getFormatMoment,
-  },
-  computed:{
-    translation() {
-      return this.$store.getters.getTranslation
-    },
   },
 }
 </script>
