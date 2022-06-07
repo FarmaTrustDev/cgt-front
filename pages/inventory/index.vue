@@ -15,6 +15,7 @@
 import inventory from '~/components/root/inventory'
 import consumables from '~/components/root/inventory/consumables'
 import PageLayout from '~/components/layout/PageLayout'
+
 export default {
   components: { 'page-layout': PageLayout, inventory, consumables },
   data() {
