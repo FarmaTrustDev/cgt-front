@@ -25,7 +25,12 @@
               :un-checked-children="translation.no_1_656"
             />
 
-            <a-icon v-else type="check"></a-icon>
+            <a-icon
+              v-else
+              class="text-success"
+              style="font-size: 16px"
+              type="check"
+            ></a-icon>
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
