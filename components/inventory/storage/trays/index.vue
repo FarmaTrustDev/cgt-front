@@ -3,7 +3,7 @@
     <table class="testTubeTable border w-100">
       <tr v-for="tray in trays" :key="tray.id">
         <td v-for="tube in tray.tubes" :key="tube.id" class="border">
-          <tray />
+          <tray @click="getTube" />
         </td>
       </tr>
     </table>
@@ -11,52 +11,17 @@
 </template>
 <script>
 import tray from '~/components/inventory/storage/trays/tray'
-const t = {
-  tubes: [
-    {
-      id: 2,
-      active: true,
-      name: '5A',
-    },
-    {
-      id: 1,
-      active: true,
-      name: '5A',
-    },
-    {
-      id: 8,
-      active: true,
-      name: '5A',
-    },
-    {
-      id: 3,
-      active: true,
-      name: '5A',
-    },
-    {
-      id: 4,
-      active: true,
-      name: '5A',
-    },
-    {
-      id: 5,
-      active: true,
-      name: '5A',
-    },
-    {
-      id: 6,
-      active: true,
-      name: '5A',
-    },
-  ],
-}
+
 export default {
   components: { tray },
   props: { trays: { type: Array, default: () => [] } },
   data() {
-    return {
-      trays1: [t, t, t, t],
-    }
+    return {}
+  },
+  methods: {
+    getTube(tube) {
+      console.log(tube)
+    },
   },
 }
 </script>
