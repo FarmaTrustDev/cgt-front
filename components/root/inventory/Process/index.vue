@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="collection-processing-steps">
     <a-form :form="form" layout="horizontal">
       <a-table
         :columns="columns"
@@ -21,7 +21,6 @@
                   valuePropName: 'checked',
                 },
               ]"
-              size="large"
               :checked-children="translation.yes_1_654"
               :un-checked-children="translation.no_1_656"
             />
@@ -175,5 +174,3 @@ export default {
   },
 }
 </script>
-
-

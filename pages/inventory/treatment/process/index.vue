@@ -66,7 +66,7 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card :bordered="false" class="mt-15 default-card h-tabs pills-tabs">
           <a-tabs type="card">
             <a-tab-pane key="1" tab="Inbound Acceptance Details">
               <a-row>
