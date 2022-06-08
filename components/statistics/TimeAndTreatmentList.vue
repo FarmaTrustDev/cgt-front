@@ -24,7 +24,7 @@
 
       <!-- // treatment list -->
       <div v-if="removeList">
-        <a-card class="white-card" :bordered="false">
+        <a-card class="white-card" :bordered="false" v-if="user.organizationTypeAlias!='SMARTLAB'">
           <div>
             {{ translation.Treat_1_29 }}
             <span class="float-right">{{ translation.Colle_1_23 }}</span>
@@ -45,6 +45,27 @@
             </a-list>
           </div>
         </a-card>
+        <a-card class="white-card" :bordered="false" v-if="user.organizationTypeAlias=='SMARTLAB'">
+          <div>
+            Samples
+            <span class="float-right">Inbound/Outbound</span>
+          </div>
+          <div class="default-border-radius border p-10 mt-15">
+            <a-list :data-source="treatments">
+              <a-list-item  slot="renderItem" slot-scope="item">
+                <a-list-item-meta>
+                  <a
+                    slot="title"
+                    @click="
+                      goto(`/manufacturer/treatments/process/${item.globalId}`)
+                    "
+                    >{{ item.patientPUID }}</a
+                  >
+                </a-list-item-meta>
+                </a-list-item>
+            </a-list>
+          </div>
+        </a-card>
       </div>
     </div>
   </div>
@@ -62,6 +83,9 @@ export default {
     }
   },
   computed: {
+    user() {
+      return this.$store.getters.getUser
+    },
     translation() {
       return this.$store.getters.getTranslation
     },

@@ -56,7 +56,7 @@
       >
         <div class="view-screen">
           <span v-if="!isEmpty(steps)">
-            <h2 slot="title" class="padd-bot">Provenance Data  -  Asset DEC123</h2>
+            <h2 slot="title" class="pad-bottom">Provenance Data  -  Asset DEC123</h2>
             <TimeLine :steps="steps" />
           </span>
           <a-empty v-else description="No tube selected" />

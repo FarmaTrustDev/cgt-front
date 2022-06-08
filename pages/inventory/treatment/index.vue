@@ -44,7 +44,7 @@
             </a-tab-pane>
 
             <a-tab-pane key="2" tab="Process Sample">
-                <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" :should-fetch="false">
+                <a-table class="rounded-table" :columns="pendingColumns"  :data-source="pendingSampleData" :should-fetch="false">
                 <span slot="action" slot-scope="record">
         <!-- //Steps -->
         <div class="treatment-steps">
@@ -67,10 +67,13 @@
                 </a-table>  
             </a-tab-pane>
             <a-tab-pane key="3" tab="Outbound Sample">
-                <a-table class="rounded-table" :columns="completedColumns" :data-source="completedSampleData" />
+                <a-table class="rounded-table" :columns="completedColumns" @rowClick="stepClick('hello')" :data-source="completedSampleData">
+
+                </a-table>
             </a-tab-pane>
             <a-tab-pane key="4" tab="All Samples">
-                <a-table class="rounded-table" :columns="allSampleColumns" :data-source="allSampleData" :should-fetch="false" />
+                <a-table class="rounded-table" :columns="allSampleColumns" @rowClick="stepClick('hello')" :data-source="allSampleData" :should-fetch="false">
+                </a-table>
             </a-tab-pane>
         </a-tabs>
     </div>
@@ -282,4 +285,5 @@ export default {
     },
   },
 }
+
 </script>
