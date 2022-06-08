@@ -274,3 +274,82 @@
     padding-left: 15px;
   }
 }
+
+.pad-bottom{
+  padding-bottom: 20px;
+  .view-screen {
+    .ant-timeline-item-content {
+      margin-left: 30px;
+    }
+    .ant-timeline-item-head-grey {
+      background-color: #efefef;
+      border-radius: 22px;
+      padding: 5px;
+      margin-top: 20px;
+      .anticon {
+        background-color: white;
+        border-radius: 22px;
+        padding: 5px;
+      }
+    }
+    .ant-timeline-item-head-green {
+      background-color: #d1f2dc;
+      border-radius: 22px;
+      padding: 5px;
+      margin-top: 20px;
+      .anticon {
+        background-color: white;
+        border-radius: 22px;
+        padding: 5px;
+        color: #1bb559;
+      }
+    }
+    .step-bar {
+      border: 1px solid #1bb559;
+      padding: 10px;
+      border-radius: $default-radius;
+      margin-left: 10px;
+      .left {
+        .step-title {
+          display: block;
+          font-size: 1.24em;
+          color: black;
+          font-weight: 400;
+        }
+        .date-time {
+          font-size: 16px;
+          color: #a7a5a5;
+        }
+      }
+      .right {
+        text-align: right;
+        display: block;
+        .step-title {
+          color: black;
+        }
+        .organization {
+          color: #3869d1;
+        }
+      }
+    }
+    .ant-tabs-tabpane-active {
+      padding: 5px;
+    }
+    .ant-timeline {
+      .anticon {
+        font-size: 25px !important;
+      }
+    }
+  
+    .ant-tabs-tab-active,
+    .ant-tabs-tab {
+      color: #233151 !important;
+      font-weight: 300 !important;
+    }
+  
+    .ant-tabs-content {
+      margin-left: 3px;
+      padding-left: 15px;
+    }
+  }
+}

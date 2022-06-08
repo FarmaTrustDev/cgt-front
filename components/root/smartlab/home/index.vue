@@ -12,8 +12,8 @@
                 height="100"
               />
               <h4 class="heading-home">
-                {{ translation.Manuf_1_342 }}
-                <strong class="strong"> {{ translation.Tasks_1_494 }} </strong>
+                Today's 
+                <strong class="strong"> Tasks </strong>
               </h4>
             </a>
           </div>
@@ -25,7 +25,7 @@
                 height="100"
               />
               <h4 class="heading-home">
-                Today's <strong class="strong"> Tasks </strong>
+                Manage <strong class="strong"> Inventory </strong>
               </h4>
             </a>
           </div>
@@ -47,7 +47,7 @@
         <a-col :span="3"></a-col>
 
         <a-col :span="9">
-          <TimeAndTreatmentList :remove-list="false" />
+          <TimeAndTreatmentList />
         </a-col>
       </a-row>
     </a-card>
