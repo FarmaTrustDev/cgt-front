@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="page-header clearfix">
-        <h3 class="page-title pl-5 float-left">Today's Task</h3>
+        <h3 class="page-title pl-5 float-left">{{translation.Today_1_497}} {{translation.Tasks_1_494}}</h3>
         <!-- <a-select class="float-right page-search-input" placeholder="Search">
             <a-select-option v-for="treatmentType in treatmentTypes" :key="treatmentType.id">{{ treatmentType.name }}</a-select-option>
         </a-select> -->
@@ -19,7 +19,7 @@
         </span>    
     <div class="h-tabs large-tabs" style="margin-left:3%">
         <a-tabs type="card" :animated="false">
-            <a-tab-pane key="1" tab="Inbound">
+            <a-tab-pane key="1" :tab="translation.Inbou_1_498">
                 <a-table class="rounded-table" :columns="newSampleColumns" :data-source="newSampleData" :should-fetch="false" >
                       <template slot="print" slot-scope="record">
         <a-button
@@ -28,14 +28,14 @@
           size="small"
           icon="printer"
           @click="openViewModal(record)"
-          >View Document</a-button
+          >{{translation.ViewDocum_2_508}}</a-button
         >
       </template>
     
                 </a-table>
      <a-modal
       :visible="showModal"
-      title="Document"
+      :title="translation.Docum_1_507"
       @cancel="handleModal(false)"
       @ok="handleModal(false)"
     >
@@ -43,7 +43,7 @@
     </a-modal>                 
             </a-tab-pane>
 
-            <a-tab-pane key="2" tab="Process Sample">
+            <a-tab-pane key="2" :tab="translation.ProceSampl_2_499">
                 <a-table class="rounded-table" :columns="pendingColumns"  :data-source="pendingSampleData" :should-fetch="false">
                 <span slot="action" slot-scope="record">
         <!-- //Steps -->
@@ -66,12 +66,12 @@
       </span>
                 </a-table>  
             </a-tab-pane>
-            <a-tab-pane key="3" tab="Outbound Sample">
+            <a-tab-pane key="3" :tab="translation.OutboSampl_2_500">
                 <a-table class="rounded-table" :columns="completedColumns" @rowClick="stepClick('hello')" :data-source="completedSampleData">
 
                 </a-table>
             </a-tab-pane>
-            <a-tab-pane key="4" tab="All Samples">
+            <a-tab-pane key="4" :tab="translation.AllSampl_2_501">
                 <a-table class="rounded-table" :columns="allSampleColumns" @rowClick="stepClick('hello')" :data-source="allSampleData" :should-fetch="false">
                 </a-table>
             </a-tab-pane>
@@ -103,32 +103,32 @@ export default {
             phases: SMART_LAB_TREATMENT_PENDING_PHASES,
             completedColumns:[
                 {
-                  title: `Sample ID`,
+                  title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                 },
                 {
-                  title: `Sample Name`,
+                  title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
                   dataIndex: 'treatmentType',
                   key: 'treatmentType',
                 },
                 {
-                  title: `Storage Area`,
+                  title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
                   dataIndex: 'productionLine',
                   key: 'productionLine',
                 },
                 {
-                  title: `Client`,
+                  title: `${this.$store.getters.getTranslation.Clien_1_505}`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
                 {
-                  title: `Collection - Delivery Date`,
+                  title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
                   dataIndex: 'collectionDateDeliveryDate',
                   key: 'collectionDateDeliveryDate',
                 },
                 {
-                  title: `Dispatched By`,
+                  title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
                   dataIndex: 'dispatchedBy',
                   key: 'dispatchedBy'
                 }
@@ -161,33 +161,33 @@ export default {
               {patientEnrollmentNumber: 'DAC53835', treatmentType: 'Platelet Lycate', productionLine: 'Zone A', hospital: 'Baystate Clinic', collectionDateDeliveryDate: '26/05/2022 - 29/05/2022', dispatchedBy: 'In Progress'}
               ],
               newSampleColumns:[{
-                  title: `Serial Number`,
+                  title: `${this.$store.getters.getTranslation.SeriaNumbe_2_506}`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                 },
                 {
-                  title: `Sample Name`,
+                  title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
                   dataIndex: 'treatmentType',
                   key: 'treatmentType',
                 },
                 {
-                  title: `Client`,
+                  title: `${this.$store.getters.getTranslation.Clien_1_505}`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
                 {
-                  title: `Documents`,
+                  title: `${this.$store.getters.getTranslation.Docum_1_507}`,
                   dataIndex: 'print',
                   key: 'print',
                   scopedSlots: { customRender: 'print' },
                 },
                 {
-                  title: `Collection - Delivery Date`,
+                  title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
                   dataIndex: 'collectionDateDeliveryDate',
                   key: 'collectionDateDeliveryDate',
                 },
                 {
-                  title: `Notes`,
+                  title: `${this.$store.getters.getTranslation.Actio_1_220}`,
                   dataIndex: 'action',
                   scopedSlots: {
                     customRender: 'action'
@@ -195,64 +195,64 @@ export default {
                 },
                 ],
                  pendingColumns:[{
-                  title: `Sample ID`,
+                  title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                 },
                 {
-                  title: `Sample Name`,
+                  title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
                   dataIndex: 'treatmentName',
                   key: 'treatmentName',
                 },
                 {
-                  title: `Storage Area`,
+                  title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
                   dataIndex: 'productionLine',
                   key: 'productionLine',
                 },
                 {
-                  title: `Client`,
+                  title: `${this.$store.getters.getTranslation.Clien_1_505}`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
                 {
-                  title: `Collection - Delivery Date`,
+                  title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
                   dataIndex: 'collectionDateDeliveryDate',
                   key: 'collectionDateDeliveryDate',
                 },
                  {
-                  title: 'Notes',
+                  title: `${this.$store.getters.getTranslation.Actio_1_220}`,
                   key:'action',
                   scopedSlots: { customRender: 'action' },
                  },
               ],
               allSampleColumns:[{
-                  title: `Sample ID`,
+                  title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
                   dataIndex: 'patientEnrollmentNumber',
                   key: 'patientEnrollmentNumber',
                   scopedSlots: { customRender: 'name' },
                 },
                 {
-                  title: `Sample Name`,
+                  title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
                   dataIndex: 'treatmentType',
                   key: 'treatmentType',
                 },
                 {
-                  title: `Storage Area`,
+                  title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
                   dataIndex: 'productionLine',
                   key: 'productionLine',
                 },
                 {
-                title: `Client`,
+                title: `${this.$store.getters.getTranslation.Clien_1_505}`,
                   dataIndex: 'hospital',
                   key: 'hospital',
                 },
                 {
-                  title: `Collection - Delivery Date`,
+                  title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
                   dataIndex: 'collectionDateDeliveryDate',
                   key: 'collectionDateDeliveryDate',
                 },
                 {
-                  title: `Dispatched By`,
+                  title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
                   dataIndex: 'dispatchedBy',
                   key: 'dispatchedBy'
                 }

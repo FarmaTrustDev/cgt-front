@@ -3,7 +3,7 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    title="Smart Lab"
+    :title="translation._1_440"
   >
     <template slot="content">
       <inventory />
@@ -24,5 +24,10 @@ export default {
     }
   },
   methods: {},
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
 }
 </script>

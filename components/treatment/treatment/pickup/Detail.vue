@@ -5,11 +5,11 @@
         <h4 class="heading pl-0">Sample Shipping Details</h4>
       </article>
       <dl class="ant-row common-detail">
-        <dt>Dispatch Date:</dt>
+        <dt>{{translation.DispaDate_2_316}}:</dt>
         <dd>{{ scheduling.collectionDateDeliveryDate }}</dd>
-        <dt>Carrier Status:</dt>
+        <dt>{{translation.CarriStatu_2_320}}:</dt>
         <dd>-</dd>
-        <dt>Estimated Arrival Date</dt>
+        <dt>{{translation.EstimArriv_3_322}}</dt>
         <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
       </dl>
     </a-card>
@@ -36,6 +36,11 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    translation() {
+        return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     getMomentByStandardFormat,
     isEmpty,

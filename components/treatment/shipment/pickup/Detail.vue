@@ -31,7 +31,7 @@
       </a-row>
       <a-row>
         <a-col :span="8">
-          Estimated Arrival Date:
+          {{translation.EstimArriv_3_322}}
         </a-col>
         <a-col :span="8">
           {{ getMomentByStandardFormat(scheduling.deliveryDate) }}
@@ -97,6 +97,11 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    translation() {
+        return this.$store.getters.getTranslation
+    },
+  },   
   methods: {
     getMomentByStandardFormat,
     isEmpty,

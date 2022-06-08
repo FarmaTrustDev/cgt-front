@@ -67,10 +67,10 @@
       <a-tab-pane key="2" :tab="translation.Archi_1_226">
         <Table type="archive" />
       </a-tab-pane>
-      <a-tab-pane key="3" tab="InProgress">
+      <a-tab-pane key="3" :tab="translation.InPro_1_533">
         <InProgress type="inProgress" />
       </a-tab-pane>
-      <a-tab-pane key="4" tab="Resolved">
+      <a-tab-pane key="4" :tab="translation.Resol_1_230">
         <Resolved type="resolved" />
       </a-tab-pane>
     </a-tabs>
