@@ -2,7 +2,7 @@
   <div class="fridge-tile">
     <div class="img"><fridge :color="storage.color" /></div>
     <div class="location">
-      <a-icon type="environment" theme="filled" />{{ storage.location }}>
+      <a-icon type="environment" theme="filled" />{{ storage.location }}
     </div>
     <div class="title">{{ storage.title }}</div>
   </div>
