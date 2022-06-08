@@ -50,21 +50,19 @@
             {{translation.Sampl_1_310}}
             <span class="float-right">{{translation.Inbound}}/{{translation.OutboProce_2_514}}</span>
           </div>
-          <div class="default-border-radius border p-10 mt-15">
-            <a-list :data-source="treatments">
-              <a-list-item  slot="renderItem" slot-scope="item">
-                <a-list-item-meta>
-                  <a
-                    slot="title"
-                    @click="
-                      goto(`/manufacturer/treatments/process/${item.globalId}`)
-                    "
-                    >{{ item.patientPUID }}</a
-                  >
-                </a-list-item-meta>
+          <div class="default-border-radius border  mt-15">
+            <a-list>
+              <a-list-item>
+               <div @click="goto(`/inventory/treatment/process`)"  style="cursor: pointer">
+                <p class="text-center ml-15 mb-15 mb-8 float-left">  DAC48694 </p>
+                <p class="float-right mb-15 ml-110 mb-8 text-center">  07/06/2022 - 10/06/2022 </p>
+                </div>
                 </a-list-item>
+               
             </a-list>
           </div>
+          <div class="text-center p-15 red-div-size" style="cursor: pointer;" @click="goto(`/inventory/treatment/process`)">Show more</div>
+                
         </a-card>
       </div>
     </div>
@@ -76,7 +74,9 @@ import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
   mixins: [routeHelpers],
-  props: { removeList: { type: Boolean, default: true } },
+  props: { removeList: { type: Boolean, default: true },
+   type: { type: String, required: false, default: 'info' },
+  },
   data() {
     return {
       treatments: [],

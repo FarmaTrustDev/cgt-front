@@ -1,18 +1,16 @@
 <template>
   <div>
     <a-row>
-      <a-col :span="1"></a-col>
-      <a-col :span="22">
+      <a-col :span="24">
         <detail class="mb-15" :data="data.description" />
         <br />
         <h2 class="mt-15">
           <strong>{{ translation.Equip_1_568 }}</strong>
         </h2>
       </a-col>
-      <a-col :span="1"></a-col>
     </a-row>
     <div class="mt-15 mb-15">
-      <a-row :gutter="20">
+      <a-row :gutter="24">
         <a-col :span="1"></a-col>
         <a-col :span="10">
           <suite />

@@ -1,8 +1,7 @@
 <template>
   <div class="inventory-page">
     <a-row>
-      <a-col :span="1"></a-col>
-      <a-col :span="22">
+      <a-col :span="24">
         <a-tabs
           :animated="false"
           class="h-tabs no-border-bottom"
@@ -11,15 +10,14 @@
         >
           <a-tab-pane v-for="d in data" :key="d.id">
             <template slot="tab">
-              <span
-                >{{ d.title }} <img width="20" :src="getImageUrl(d.flag)"
-              /></span>
+              <span class="flag-title">
+                <img width="40" :src="getImageUrl(d.flag)" />{{ d.title }}</span
+              >
             </template>
             <tab :data="d" />
           </a-tab-pane>
         </a-tabs>
       </a-col>
-      <a-col :span="1"></a-col>
     </a-row>
   </div>
 </template>

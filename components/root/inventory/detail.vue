@@ -3,7 +3,7 @@
     <div class="mb-15">
       <h2 class="color-black">
         {{ data.countryName }}
-        <img height="30" width="30" :src="getImageUrl(data.flag)" />
+        <img height="25" width="40" :src="getImageUrl(data.flag)" />
       </h2>
     </div>
     <a-row :gutter="16">
