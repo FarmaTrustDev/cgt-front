@@ -4,33 +4,37 @@
       <a-row>
         <!-- left side tabs -->
         <a-col :span="9">
-          <div class="home-tab">
+          
             <a href="javascript:;" @click="goto(`/inventory/treatment`)">
+            <div class="home-tab">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
                 width="120"
                 height="100"
               />
               <h4 class="heading-home">
-                {{ translation.Manuf_1_342 }}
-                <strong class="strong"> {{ translation.Tasks_1_494 }} </strong>
+                Today's 
+                <strong class="strong"> Tasks </strong>
               </h4>
+            </div>
             </a>
-          </div>
-          <div class="home-tab">
+          
             <a href="javascript:;" @click="goto(`/inventory/storage`)">
+            <div class="home-tab">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
                 width="120"
                 height="100"
               />
               <h4 class="heading-home">
-                Today's <strong class="strong"> Tasks </strong>
+                Manage <strong class="strong"> Inventory </strong>
               </h4>
+            </div>
             </a>
-          </div>
-          <div class="home-tab with-arrow">
+          
+          
             <a href="javascript:;" @click="goto(`/users`)">
+            <div class="home-tab with-arrow">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
                 width="120"
@@ -39,15 +43,16 @@
               <h4 class="heading-home">
                 Manage <strong class="strong"> Users </strong>
               </h4>
+            </div>
             </a>
-          </div>
+          
         </a-col>
         <!-- #end left side tabs -->
         <a-col :span="2"></a-col>
         <a-col :span="3"></a-col>
 
         <a-col :span="9">
-          <TimeAndTreatmentList :remove-list="false" />
+          <TimeAndTreatmentList />
         </a-col>
       </a-row>
     </a-card>

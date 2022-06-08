@@ -34,10 +34,10 @@
                         <span class="text-muted"> Baystate Clinic</span>
                       </h6>
                     </a-col>
-                    <a-col :span="3" class="mt-15">
+                    <a-col :span="4" class="mt-15">
                       <h6><span class="text-muted">Asset Type:</span></h6>
                     </a-col>
-                    <a-col :span="9" class="mt-15">
+                    <a-col :span="8" class="mt-15">
                       <h6><span class="text-muted">Cell Sample</span></h6>
                     </a-col>
                   </a-row>
@@ -76,24 +76,38 @@
                       <h4 class="heading pl-0">Shipping Details</h4>
                     </article>
                     <div>
-                      <table width="100%">
-                        <tr>
-                          <td width="50%">Dispatch Date</td>
-                          <td>09/01/2022</td>
-                        </tr>
-                        <tr>
-                          <td>Dispatch By</td>
-                          <td>Sadaan Shahid</td>
-                        </tr>
-                        <tr>
-                          <td>Carrier Status</td>
-                          <td>In-Process</td>
-                        </tr>
-                        <tr>
-                          <td>Estimated Arrival Date</td>
-                          <td>12/01/2022</td>
-                        </tr>
-                      </table>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> Dispatch Date:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> 09/01/2022</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> Dispatch By:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> 09/01/2022</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> Carrier Status:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> In-Process</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> Estimated Arrival Date:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> 12/01/2022</span>
+                      </a-col>
+                    </a-row>
                     </div>
                   </a-card>
                 </a-col>
@@ -103,24 +117,39 @@
                       <h4 class="heading pl-0">Sample Receiving</h4>
                     </article>
                     <div>
-                      <table width="100%">
-                        <tr>
-                          <td width="50%">Is Received</td>
-                          <td>Done</td>
-                        </tr>
-                        <tr>
-                          <td>Received By</td>
-                          <td>Sadaan Shahid</td>
-                        </tr>
-                        <tr>
-                          <td>Received Date</td>
-                          <td>09/01/2022</td>
-                        </tr>
-                        <tr>
-                          <td>Receiving Note</td>
-                          <td>12/01/2022</td>
-                        </tr>
-                      </table>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted">Is Received:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> Done</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> Received By:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted">Sadaan Shahid</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> Received Date:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> 12/01/2022</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted">Receiving Note:</span>
+                      </a-col>
+                      <a-col :span="8" class="mt-15">
+                        <span class="text-muted"> 12/01/2022</span>
+                      </a-col>
+                    </a-row>
+
                     </div>
                   </a-card>
                 </a-col>
