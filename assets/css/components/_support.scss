@@ -9,12 +9,13 @@
   }
 }
 
+$chatHeight: 255px;
 .support-chat {
   min-height: 400px;
 
   .chat-list {
-    min-height: 255px;
-    max-height: 255px;
+    min-height: $chatHeight;
+    max-height: $chatHeight;
     overflow-y: scroll;
   }
 }

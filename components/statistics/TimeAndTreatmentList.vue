@@ -4,10 +4,10 @@
       <a-card class="white-card" :bordered="false">
         <a-row>
           <a-col :span="12"
-            ><span class="danger-time">
+            ><span class="date-time">
               {{ _getFormatMoment().format('HH:mm') }}</span
-            ></a-col
-          >
+            >
+          </a-col>
           <a-col :span="12">
             <div class="dateTimeBox">
               <span class="daysName">{{
@@ -24,7 +24,11 @@
 
       <!-- // treatment list -->
       <div v-if="removeList">
-        <a-card class="white-card" :bordered="false" v-if="user.organizationTypeAlias!='SMARTLAB'">
+        <a-card
+          class="white-card"
+          :bordered="false"
+          v-if="user.organizationTypeAlias != 'SMARTLAB'"
+        >
           <div>
             {{ translation.Treat_1_29 }}
             <span class="float-right">{{ translation.Colle_1_23 }}</span>
@@ -45,24 +49,37 @@
             </a-list>
           </div>
         </a-card>
-        <a-card class="white-card" :bordered="false" v-if="user.organizationTypeAlias=='SMARTLAB'">
+        <a-card
+          class="white-card"
+          :bordered="false"
+          v-if="user.organizationTypeAlias == 'SMARTLAB'"
+        >
           <div>
             Samples
             <span class="float-right">Inbound/Outbound</span>
           </div>
-          <div class="default-border-radius border  mt-15">
+          <div class="default-border-radius border mt-15">
             <a-list>
-              <a-list-item>
-               <div @click="goto(`/inventory/treatment/process`)"  style="cursor: pointer">
-                <p class="text-center ml-15 mb-15 mb-8 float-left">  DAC48694 </p>
-                <p class="float-right mb-15 ml-110 mb-8 text-center">  07/06/2022 - 10/06/2022 </p>
+              <a-list-item style="cursor: pointer">
+                <div
+                  @click="goto(`/inventory/treatment/process`)"
+                  class="mb-11"
+                >
+                  <p class="text-center ml-15 float-left">DAC48694</p>
+                  <p class="float-right ml-110 text-center">
+                    07/06/2022 - 10/06/2022
+                  </p>
                 </div>
-                </a-list-item>
-               
+              </a-list-item>
             </a-list>
           </div>
-          <div class="text-center p-15 red-div-size" style="cursor: pointer;" @click="goto(`/inventory/treatment/process`)">Show more</div>
-                
+          <div
+            class="text-center p-15 red-div-size"
+            style="cursor: pointer"
+            @click="goto(`/inventory/treatment`)"
+          >
+            Show more
+          </div>
         </a-card>
       </div>
     </div>
@@ -74,8 +91,9 @@ import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
   mixins: [routeHelpers],
-  props: { removeList: { type: Boolean, default: true },
-   type: { type: String, required: false, default: 'info' },
+  props: {
+    removeList: { type: Boolean, default: true },
+    type: { type: String, required: false, default: 'info' },
   },
   data() {
     return {

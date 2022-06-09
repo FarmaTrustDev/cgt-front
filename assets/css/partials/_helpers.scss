@@ -88,6 +88,16 @@
   @extend .light-shadow;
 }
 
+.date-time{
+  background-color: $danger;
+  padding: 14px 37px;
+  border-radius: 22px;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  @extend .light-shadow;
+}
+
 .w-1200 {
   max-width: 1200px;
 }
