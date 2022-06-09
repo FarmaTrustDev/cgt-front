@@ -23,11 +23,11 @@ export default {
       loading: false,
     }
   },
-  methods: {},
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
   },
+  methods: {},
 }
 </script>

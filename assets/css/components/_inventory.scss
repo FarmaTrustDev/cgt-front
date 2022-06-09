@@ -17,8 +17,38 @@
   }
 
   .imageHeading {
+    margin-bottom: 15px;
+    display: inline-block;
+    padding: 15px;
     .image-container {
       background-color: $secondary-color;
+      display: inline-block;
+      padding: 10px;
+      border-radius: 22px;
+      vertical-align: middle;
+      figcaption {
+        vertical-align: middle;
+        padding-left: 15px;
+        display: inline-block;
+      }
+    }
+    .heading {
+      font-size: 14px;
+      display: inline-block;
+      max-width: 74%;
+      color: #909090;
+      padding-left: 20px;
+      vertical-align: middle;
+    }
+  }
+
+  .suit {
+    .imageHeading {
+      border-bottom: 1px solid $grey;
+      width: 100%;
+      figure {
+        margin: 0;
+      }
     }
   }
 }
