@@ -3,7 +3,7 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    title="Storage Services"
+    :title="translation.StoraServi_2_532"
     class="specific-storage"
   >
     <div slot="content">
@@ -33,6 +33,11 @@ import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { Tile, PageLayout, detail },
   mixins: [routeHelpers],
+  computed: {
+        translation() {
+            return this.$store.getters.getTranslation
+        },
+  },
   data() {
     return {
       storages: [

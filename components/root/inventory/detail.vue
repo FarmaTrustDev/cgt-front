@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div class="mb-15">
+  <div class="mt-15">
+    <div class="mb-15 mt-15">
       <h2 class="color-black">
         {{ data.countryName }}
         <img height="25" width="40" :src="getImageUrl(data.flag)" />
       </h2>
     </div>
     <a-row :gutter="16">
-      <a-col :span="12"
+      <a-col :span="12" class="icon"
         ><a-icon type="pushpin" theme="filled" />{{ data.address }}</a-col
       >
       <a-col :span="12"

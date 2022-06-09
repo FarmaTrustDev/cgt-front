@@ -10,7 +10,7 @@
         <profile-picture-and-detail :treatment="entity" />
         <a-card :bordered="false" class="mt-15 default-card h-tabs">
           <a-tabs type="card">
-            <a-tab-pane key="1" tab="Inbound Acceptance Details">
+            <a-tab-pane key="1" :tab="translation.InbouAccep_3_834">
               <shipment :treatment="entity" />
             </a-tab-pane>
             <a-tab-pane key="2" tab="Manufacturing">
@@ -58,6 +58,11 @@ export default {
     }
   },
   mounted() {},
+  computed: {
+        translation() {
+            return this.$store.getters.getTranslation
+        },
+  },
   methods: {
     afterFetch(data) {
       this.loading = false

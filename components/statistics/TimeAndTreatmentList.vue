@@ -55,8 +55,8 @@
           v-if="user.organizationTypeAlias == 'SMARTLAB'"
         >
           <div>
-            Samples
-            <span class="float-right">Inbound/Outbound</span>
+            {{translation.Sampl_1_310}}
+            <span class="float-right">{{translation.Inbound}}/{{translation.OutboProce_2_514}}</span>
           </div>
           <div class="default-border-radius border mt-15">
             <a-list>

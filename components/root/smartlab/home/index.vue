@@ -13,8 +13,8 @@
                 height="100"
               />
               <h4 class="heading-home">
-                Today's 
-                <strong class="strong"> Tasks </strong>
+                {{translation.Today_1_497}} 
+                <strong class="strong"> {{translation.Tasks_1_494}} </strong>
               </h4>
             </div>
             </a>
@@ -27,7 +27,7 @@
                 height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> Inventory </strong>
+                {{translation.Manag_1_455}} <strong class="strong"> {{translation.Inven_1_538}} </strong>
               </h4>
             </div>
             </a>
@@ -41,7 +41,7 @@
                 height="100"
               />
               <h4 class="heading-home">
-                Manage <strong class="strong"> Users </strong>
+                {{translation.Manag_1_455}} <strong class="strong"> {{translation.Users_1_504}} </strong>
               </h4>
             </div>
             </a>
