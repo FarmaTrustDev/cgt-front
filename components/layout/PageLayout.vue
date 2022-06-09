@@ -36,14 +36,14 @@ export default {
     },
     create: { type: Boolean, default: true },
   },
-  methods: {
-    gotoState(id, query = {}) {
-      this.goto(`${this.$route.path}/${id}`, query)
-    },
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
+    },
+  },
+  methods: {
+    gotoState(id, query = {}) {
+      this.goto(`${this.$route.path}/${id}`, query)
     },
   }
 }
