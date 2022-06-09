@@ -129,11 +129,11 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         id: 2,
         name: 'Store Sample',
         alias: 'STORE_SAMPLE',
-        phaseId: 10,
-        enablePageId: 10,
+        phaseId: 14,
+        enablePageId: 14,
         url_slug: '/inventory/treatment/process/',
-        url_type: URL_TYPE.patient,
-        params: { view: 'MANUFACTURER' }
+        url_type: URL_TYPE.treatment,
+        params: { view: 'STORE_SAMPLE' }
     },
     {
         id: 3,

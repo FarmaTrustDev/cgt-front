@@ -1,10 +1,10 @@
 <template>
     <div>
-    <div class="page-header clearfix">
+    <div class="clearfix mt-15">
     <h3 class="page-title pl-5 float-left">{{translation.UserNew_3_136}}</h3>
       <a-button
         type="primary"
-        class="mrm-5 float-right"
+        class="mrm-5 float-right mt-5"
         @click="goto('users/create')"
         >{{translation.adduser_2_464}}</a-button
       >
@@ -20,7 +20,7 @@
       <a-table
         :columns="columns"
         :data-source="datasource"
-        class="rounded-table"
+        class="rounded-table pt-10"
         :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
       >
         <template slot="action" slot-scope="action">

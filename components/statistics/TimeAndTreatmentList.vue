@@ -4,7 +4,7 @@
       <a-card class="white-card" :bordered="false">
         <a-row>
           <a-col :span="12"
-            ><span class="date-time">
+            ><span class="dated-time">
               {{ _getFormatMoment().format('HH:mm') }}</span
             >
           </a-col>
@@ -56,7 +56,7 @@
         >
           <div>
             {{translation.Sampl_1_310}}
-            <span class="float-right">{{translation.Inbound}}/{{translation.OutboProce_2_514}}</span>
+            <span class="float-right">{{translation.Inbou_1_498}}/{{translation.OutboProce_2_514}}</span>
           </div>
           <div class="default-border-radius border mt-15">
             <a-list>
@@ -66,6 +66,21 @@
                   @click="goto(`/inventory/treatment/process`)"
                 >
                   <p class="text-center ml-15 float-left">DAC48694</p>
+                  <p class="float-right ml-110 text-center">
+                    07/06/2022 - 10/06/2022
+                  </p>
+                </div>
+              </a-list-item>
+            </a-list>
+          </div>
+          <div class="default-border-radius border mt-15">
+            <a-list>
+              <a-list-item style="cursor: pointer">
+                <div
+                  @click="goto(`/inventory/treatment/process`)"
+                  class="mb-11"
+                >
+                  <p class="text-center ml-15 float-left">DAC43057</p>
                   <p class="float-right ml-110 text-center">
                     07/06/2022 - 10/06/2022
                   </p>

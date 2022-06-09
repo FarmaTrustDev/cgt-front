@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="page-header clearfix">
-      <h3 class="page-title pl-5 float-left">
-        {{ translation.Today_1_497 }} {{ translation.Tasks_1_494 }}
-      </h3>
+    <div class="mt-15 clearfix">
+      <h3 class="page-title pl-5 float-left">Tasks List</h3>
       <!-- <a-select class="float-right page-search-input" placeholder="Search">
             <a-select-option v-for="treatmentType in treatmentTypes" :key="treatmentType.id">{{ treatmentType.name }}</a-select-option>
         </a-select> -->
@@ -137,7 +135,7 @@ export default {
           key: 'hospital',
         },
         {
-          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+          title: `Arrival Date - Expiry Date`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
@@ -328,7 +326,7 @@ export default {
           scopedSlots: { customRender: 'print' },
         },
         {
-          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+          title: `Arrival Date - Expiry Date`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
@@ -362,7 +360,7 @@ export default {
           key: 'hospital',
         },
         {
-          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+          title: `Arrival Date - Expiry Date`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
@@ -395,7 +393,7 @@ export default {
           key: 'hospital',
         },
         {
-          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+          title: `Arrival Date - Expiry Date`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },

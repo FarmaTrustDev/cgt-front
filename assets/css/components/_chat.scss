@@ -74,7 +74,8 @@
     .peer-to-peer-chat-list {
       margin-bottom: 20px;
       overflow-y: auto;
-      max-height: 400px;
+      max-height: 200px;
+      height: 100%;
     }
 
     .ant-comment-inner {
@@ -88,12 +89,30 @@
   }
 }
 
+.fixedButton {
+  position: fixed;
+  bottom: 1px;
+  right: 1px;
+  // padding: 20px;
+}
+.chat-margin {
+  .ant-card-head-title {
+    margin-bottom: -50px;
+  }
+}
+
 .chat--listing-container {
   height: calc(100vh - 200px);
   overflow-y: scroll;
 }
 
 .chat-container-height {
-  max-height: 600px;
+  max-height: 660px;
   overflow-x: auto;
+}
+
+.reduce-margin{
+  .ant-card-body{
+    padding-left: -5px;
+  }
 }
