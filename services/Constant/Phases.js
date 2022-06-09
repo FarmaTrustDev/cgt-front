@@ -125,10 +125,21 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         url_type: URL_TYPE.patient,
         params: { view: 'INBOUND_SHIPMENT' }
     },
+
+    {
+        id: 2,
+        name: 'Store Sample',
+        alias: 'STORE_SAMPLE',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.patient,
+        params: { view: 'MANUFACTURER' }
+    },
     {
         id: 2,
         name: 'Process Sample',
-        alias: 'PRCEOSS_SAMPLE',
+        alias: 'PROCESS_SAMPLE',
         phaseId: 10,
         enablePageId: 10,
         url_slug: '/manufacturer/treatments/process/',
