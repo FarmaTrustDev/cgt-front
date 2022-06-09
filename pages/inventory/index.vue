@@ -7,7 +7,10 @@
   >
     <template slot="content">
       <inventory />
-      <consumables />
+      <a-card :bordered="false" class="default-border-radius shadow">
+        <h2 slot="title">Consumables</h2>
+        <consumables />
+      </a-card>
     </template>
   </page-layout>
 </template>
@@ -23,7 +26,7 @@ export default {
       loading: false,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
