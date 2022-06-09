@@ -121,7 +121,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'INBOUND_SHIPMENT',
         phaseId: 8,
         enablePageId: 5,
-        url_slug: '/manufacturer/treatments/process/',
+        url_slug: '/inventory/treatment/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'INBOUND_SHIPMENT' }
     },
@@ -131,27 +131,27 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'STORE_SAMPLE',
         phaseId: 10,
         enablePageId: 10,
-        url_slug: '/manufacturer/treatments/process/',
-        url_type: URL_TYPE.patient,
-        params: { view: 'MANUFACTURER' }
-    },
-    {
-        id: 2,
-        name: 'Process Sample',
-        alias: 'PROCESS_SAMPLE',
-        phaseId: 10,
-        enablePageId: 10,
-        url_slug: '/manufacturer/treatments/process/',
+        url_slug: '/inventory/treatment/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'MANUFACTURER' }
     },
     {
         id: 3,
+        name: 'Process Sample',
+        alias: 'PROCESS_SAMPLE',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '/inventory/storage/',
+        url_type: URL_TYPE.patient,
+        params: { view: 'MANUFACTURER' }
+    },
+    {
+        id: 4,
         name: 'Outbound Process',
         alias: 'OUTBOUND_PROCESS',
         phaseId: 14,
         enablePageId: 14,
-        url_slug: '/manufacturer/treatments/process/',
+        url_slug: '/inventory/treatment/process/',
         url_type: URL_TYPE.treatment,
         params: { view: 'OUTBOUND_SHIPMENT' }
     },

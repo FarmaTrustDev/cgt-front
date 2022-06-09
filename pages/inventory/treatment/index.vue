@@ -56,7 +56,7 @@
             :data-source="pendingSampleData"
             :should-fetch="false"
           >
-            <span slot="action" slot-scope="record">
+            <span slot="action" slot-scope="text, record">
               <!-- //Steps -->
               <div class="treatment-steps">
                 <a-steps :initial="1" :current="1" size="small">
@@ -64,7 +64,7 @@
                     v-for="phase in phases"
                     :key="phase.id"
                     :title="phase.name"
-                    @click="stepClick(record)"
+                    @click="stepClick(record, phase)"
                   />
                 </a-steps>
               </div>
@@ -78,7 +78,6 @@
             class="rounded-table"
             :columns="completedColumns"
             :data-source="completedSampleData"
-            @rowClick="stepClick('hello')"
           >
           </a-table>
         </a-tab-pane>
@@ -88,7 +87,6 @@
             :columns="allSampleColumns"
             :should-fetch="false"
             :data-source="allSampleData"
-            @rowClick="stepClick('hello')"
           >
           </a-table>
         </a-tab-pane>
@@ -416,8 +414,8 @@ export default {
   },
   methods: {
     searchTreatment() {},
-    stepClick(record) {
-      this.goto(`/inventory/treatment/process`)
+    stepClick(record, phase) {
+      this.goto(phase.url_slug)
     },
     clickImage(record) {
       this.qrUrl = record.qrUrl
