@@ -8,8 +8,47 @@
   >
     <div slot="content">
       <a-row>
-        <a-col class="mb-15" style="margin-left: 12%" :span="24">
-          <detail />
+        <a-col class="mb-15" :span="24">
+          <detail v-if="false" />
+
+          <a-form
+            class="filter-search"
+            :form="form"
+            layout="inline"
+            @submit="onSubmit"
+          >
+            <a-form-item>
+              <a-input
+                v-decorator="['quantity']"
+                size="large"
+                placeholder="Quantity of vials"
+              />
+            </a-form-item>
+            <a-form-item>
+              <a-select
+                v-decorator="[`temperature`]"
+                class="w-min-200"
+                placeholder="temperature"
+              >
+                <a-select-option
+                  v-for="temperature in temperatures"
+                  :key="temperature.id"
+                  >{{ temperature.name }}</a-select-option
+                >
+              </a-select>
+            </a-form-item>
+            <a-form-item>
+              <a-select
+                placeholder=" Storage Zone"
+                v-decorator="[`zone`]"
+                class="w-min-200"
+              >
+                <a-select-option v-for="zone in zones" :key="zone.id">{{
+                  zone.name
+                }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-form>
         </a-col>
       </a-row>
       <div class="w-1200 margin-auto p-15 default-border-radius">
@@ -30,116 +69,179 @@ import detail from '~/components/root/inventory/detail'
 import Tile from '~/components/inventory/storage/Tile'
 import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
+
+const baseStorage = [
+  {
+    id: 1,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 20,
+    temperatureId: 1,
+    zoneId: 1,
+  },
+  {
+    id: 2,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 20,
+    temperatureId: 2,
+    zoneId: 3,
+  },
+  {
+    id: 3,
+    color: '#FA6363',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 20,
+    temperatureId: 2,
+    zoneId: 1,
+  },
+  {
+    id: 4,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 20,
+    temperatureId: 3,
+    zoneId: 1,
+  },
+  {
+    id: 5,
+    color: '#FA6363',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 20,
+    temperatureId: 1,
+    zoneId: 2,
+  },
+  {
+    id: 6,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 20,
+    temperatureId: 2,
+    zoneId: 2,
+  },
+  {
+    id: 5,
+    color: '#FA6363',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 20,
+    temperatureId: 3,
+    zoneId: 2,
+  },
+  {
+    id: 6,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 14,
+    temperatureId: 2,
+    zoneId: 1,
+  },
+  {
+    id: 5,
+    color: '#FA6363',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 11,
+    temperatureId: 3,
+    zoneId: 1,
+  },
+  {
+    id: 6,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 18,
+    temperatureId: 2,
+    zoneId: 2,
+  },
+  {
+    id: 5,
+    color: '#FA6363',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 8,
+    temperatureId: 1,
+    zoneId: 1,
+  },
+  {
+    id: 6,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 16,
+    temperatureId: 2,
+    zoneId: 3,
+  },
+  {
+    id: 5,
+    color: '#FA6363',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 18,
+    temperatureId: 2,
+    zoneId: 2,
+  },
+  {
+    id: 6,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 14,
+    temperatureId: 3,
+    zoneId: 1,
+  },
+  {
+    id: 5,
+    color: '#FA6363',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 14,
+    temperatureId: 2,
+    zoneId: 1,
+  },
+  {
+    id: 6,
+    color: '#1943AE',
+    title: 'Freezer Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    quantity: 14,
+    temperatureId: 2,
+    zoneId: 1,
+  },
+]
 export default {
   components: { Tile, PageLayout, detail },
   mixins: [routeHelpers],
+  data() {
+    return {
+      storages: baseStorage,
+      loading: false,
+      zones: [
+        { id: 1, name: 'Zone A' },
+        { id: 2, name: 'Zone B' },
+        { id: 3, name: 'Zone C' },
+      ],
+      temperatures: [
+        { id: 1, name: '-20C' },
+        { id: 2, name: '-80°C' },
+        { id: 3, name: 'LN2' },
+      ],
+      form: this.$form.createForm(this, {
+        name: 'login',
+      }),
+    }
+  },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },
-  data() {
-    return {
-      storages: [
-        {
-          id: 1,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 2,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 3,
-          color: '#FA6363',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 4,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 5,
-          color: '#FA6363',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 6,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 5,
-          color: '#FA6363',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 6,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 5,
-          color: '#FA6363',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 6,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 5,
-          color: '#FA6363',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 6,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 5,
-          color: '#FA6363',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 6,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 5,
-          color: '#FA6363',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-        {
-          id: 6,
-          color: '#1943AE',
-          title: 'Freezer Atara 001',
-          location: 'Storage Suite 3, Germany - Cellfuse',
-        },
-      ],
-      loading: false,
-    }
   },
 }
 </script>
