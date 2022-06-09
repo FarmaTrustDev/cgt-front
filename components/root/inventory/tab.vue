@@ -11,11 +11,11 @@
     </a-row>
     <div class="mt-15 mb-15">
       <a-row class="p-15" :gutter="24">
-        <a-col :span="11">
+        <a-col class="suit" :span="12">
           <suite />
         </a-col>
-        <a-col :span="1"></a-col>
-        <a-col :span="11">
+
+        <a-col v-if="false" :span="11">
           <div class="">
             <a-card
               class="shadow mb-15 default-border-radius"

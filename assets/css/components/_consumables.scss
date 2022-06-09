@@ -4,7 +4,7 @@
   text-align: center;
   padding: 15px;
   border-radius: 20px;
-  box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+  @extend .shadow;
   .svg-container {
     max-width: 117px;
     margin: auto;

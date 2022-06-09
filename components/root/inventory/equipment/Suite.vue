@@ -6,7 +6,6 @@
           <ImageHeading
             v-for="(c, index) in classB"
             :key="index"
-            class="mt-15"
             :detail="c"
             :img-properties="{ width: '50px', height: '50px' }"
           />

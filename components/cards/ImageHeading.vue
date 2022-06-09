@@ -30,15 +30,3 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-.imageHeading {
-  margin-bottom: 15px;
-  display: inline-block;
-  .heading {
-    font-size: 14px;
-    display: inline-block;
-    max-width: 74%;
-    color: #909090;
-  }
-}
-</style>

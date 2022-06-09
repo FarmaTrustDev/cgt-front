@@ -7,53 +7,35 @@
         </a-select> -->
     </div>
 
-    <div class="h-tabs large-tabs pt-10" style="margin-left: 3%">
+    <span slot="action" slot-scope="text, record">
+      <div v-if="showButton(record)">
+        <a-button type="primary">
+          {{ translation.Accep_1_278 }}
+        </a-button>
+        <a-button type="danger">
+          {{ translation.Rejec_1_280 }}
+        </a-button>
+      </div>
+    </span>
+    <div class="h-tabs large-tabs" style="margin-left: 3%">
       <a-tabs type="card" :animated="false">
-        <!-- <a-tab-pane key="1" :tab="translation.Inbou_1_498">
-                <a-table class="rounded-table" :columns="pendingColumns" :data-source="pendingSampleData" :should-fetch="false" >
-                      <template slot="print" slot-scope="record">
-        <a-button
-          class="print-btn"
-          type="primary"
-          size="small"
-          icon="printer"
-          @click="openViewModal(record)"
-          >{{translation.ViewDocum_2_508}}</a-button
-        >
-      </template>
-    
-                </a-table>
-     <a-modal
-      :visible="showModal"
-      :title="translation.Docum_1_507"
-      @cancel="handleModal(false)"
-      @ok="handleModal(false)"
-    >
-      <img class="img-responsive" :src="getImageUrl(qrUrl)" />
-    </a-modal>                 
-            </a-tab-pane> -->
         <a-tab-pane key="1" :tab="translation.Inbou_1_498">
           <a-table
             class="rounded-table"
-            :columns="pendingColumns"
-            :data-source="pendingSampleData"
+            :columns="newSampleColumns"
+            :data-source="newSampleData"
             :should-fetch="false"
           >
-            <span slot="action" slot-scope="record">
-              <!-- //Steps -->
-              <div class="treatment-steps">
-                <a-steps :initial="1" :current="1" size="small">
-                  <a-step
-                    v-for="phase in phases"
-                    :key="phase.id"
-                    :title="phase.name"
-                    @click="stepClick(record)"
-                  />
-                </a-steps>
-              </div>
-
-              <!-- //Steps -->
-            </span>
+            <template slot="print" slot-scope="record">
+              <a-button
+                class="print-btn"
+                type="primary"
+                size="small"
+                icon="printer"
+                @click="openViewModal(record)"
+                >{{ translation.ViewDocum_2_508 }}</a-button
+              >
+            </template>
           </a-table>
           <a-modal
             :visible="showModal"
@@ -64,13 +46,15 @@
             <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           </a-modal>
         </a-tab-pane>
-        <a-tab-pane key="2" tab="Outbound">
+
+        <a-tab-pane key="2" :tab="translation.ProceSampl_2_499">
           <a-table
             class="rounded-table"
             :columns="pendingColumns"
             :data-source="pendingSampleData"
+            :should-fetch="false"
           >
-            <span slot="action" slot-scope="record">
+            <span slot="action" slot-scope="text, record">
               <!-- //Steps -->
               <div class="treatment-steps">
                 <a-steps :initial="1" :current="1" size="small">
@@ -78,7 +62,7 @@
                     v-for="phase in phases"
                     :key="phase.id"
                     :title="phase.name"
-                    @click="stepClick(record)"
+                    @click="stepClick(record, phase)"
                   />
                 </a-steps>
               </div>
@@ -87,18 +71,20 @@
             </span>
           </a-table>
         </a-tab-pane>
-        <!-- <a-tab-pane key="3" :tab="translation.OutboSampl_2_500">
-                <a-table class="rounded-table" :columns="completedColumns" @rowClick="stepClick('hello')" :data-source="completedSampleData">
-
-                </a-table>
-            </a-tab-pane> -->
+        <a-tab-pane key="3" :tab="translation.OutboSampl_2_500">
+          <a-table
+            class="rounded-table"
+            :columns="completedColumns"
+            :data-source="completedSampleData"
+          >
+          </a-table>
+        </a-tab-pane>
         <a-tab-pane key="4" :tab="translation.AllSampl_2_501">
           <a-table
             class="rounded-table"
             :columns="allSampleColumns"
-            @rowClick="stepClick('hello')"
-            :data-source="allSampleData"
             :should-fetch="false"
+            :data-source="allSampleData"
           >
           </a-table>
         </a-tab-pane>
@@ -426,11 +412,10 @@ export default {
   },
   methods: {
     searchTreatment() {},
-    stepClick(record) {
-      this.goto(`/inventory/treatment/process`)
+    stepClick(record, phase) {
+      this.goto(phase.url_slug)
     },
     clickImage(record) {
-      console.log(record)
       this.qrUrl = record.qrUrl
       this.handleModal(true)
     },
@@ -438,7 +423,6 @@ export default {
       this.showModal = show
     },
     openViewModal(id) {
-      console.log(id)
       this.showModal = true
       this.qrUrl = id
       // LabelServices.scheduling(id);

@@ -8,7 +8,7 @@
   >
     <div slot="content">
       <a-row>
-        <a-col class="mb-15" style="margin-left:12%" :span="24">
+        <a-col class="mb-15" style="margin-left: 12%" :span="24">
           <detail />
         </a-col>
       </a-row>
@@ -34,9 +34,9 @@ export default {
   components: { Tile, PageLayout, detail },
   mixins: [routeHelpers],
   computed: {
-        translation() {
-            return this.$store.getters.getTranslation
-        },
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   data() {
     return {
