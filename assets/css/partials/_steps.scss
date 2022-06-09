@@ -26,6 +26,18 @@
 }
 
 .treatment-steps {
+  position: relative;
+  &::before {
+    content: '';
+    height: 1px;
+    position: absolute;
+    width: 80%;
+    margin: auto;
+    left: 0;
+    top: 15px;
+    right: 0;
+    background-color: #e2e2e2;
+  }
   .ant-steps-item {
     padding: 5px 2px;
     border: 0;
@@ -275,7 +287,7 @@
   }
 }
 
-.pad-bottom{
+.pad-bottom {
   padding-bottom: 20px;
   .view-screen {
     .ant-timeline-item-content {
@@ -340,13 +352,13 @@
         font-size: 25px !important;
       }
     }
-  
+
     .ant-tabs-tab-active,
     .ant-tabs-tab {
       color: #233151 !important;
       font-weight: 300 !important;
     }
-  
+
     .ant-tabs-content {
       margin-left: 3px;
       padding-left: 15px;
