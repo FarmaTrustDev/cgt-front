@@ -11,7 +11,7 @@
           :stroke="data.color"
           stroke-width="16"
           pathLength="100"
-          :stroke-dasharray="(data.threshold, 100)"
+          :style="{ strokeDasharray: `${data.threshold}, 100` }"
         ></path>
       </svg>
       <svg class="static-svg" viewBox="-8 -7 110.063 63.375">
