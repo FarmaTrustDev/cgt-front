@@ -25,9 +25,9 @@
       <!-- // treatment list -->
       <div v-if="removeList">
         <a-card
+          v-if="user.organizationTypeAlias != 'SMARTLAB'"
           class="white-card"
           :bordered="false"
-          v-if="user.organizationTypeAlias != 'SMARTLAB'"
         >
           <div>
             {{ translation.Treat_1_29 }}
@@ -50,9 +50,9 @@
           </div>
         </a-card>
         <a-card
+          v-if="user.organizationTypeAlias == 'SMARTLAB'"
           class="white-card"
           :bordered="false"
-          v-if="user.organizationTypeAlias == 'SMARTLAB'"
         >
           <div>
             {{translation.Sampl_1_310}}
@@ -62,8 +62,8 @@
             <a-list>
               <a-list-item style="cursor: pointer">
                 <div
-                  @click="goto(`/inventory/treatment/process`)"
                   class="mb-11"
+                  @click="goto(`/inventory/treatment/process`)"
                 >
                   <p class="text-center ml-15 float-left">DAC48694</p>
                   <p class="float-right ml-110 text-center">
