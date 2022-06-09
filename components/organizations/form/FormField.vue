@@ -70,7 +70,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Phone"
+          :label="Phone_1_63"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >

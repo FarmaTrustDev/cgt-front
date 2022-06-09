@@ -3,7 +3,7 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    title="Storage Services"
+    :title="translation.StoraServi_2_532"
     class="specific-storage"
   >
     <div slot="content" class="w-1200 margin-auto">
@@ -203,6 +203,11 @@ export default {
       trayData: [],
     }
   },
+  computed: {
+        translation() {
+            return this.$store.getters.getTranslation
+        },
+  },  
   methods: {
     isEmpty,
     getRack(rack) {

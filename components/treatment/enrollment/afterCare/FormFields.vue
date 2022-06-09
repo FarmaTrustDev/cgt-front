@@ -2,7 +2,7 @@
   <div>
     <a-row>
       <a-col :span="24" class="plr-10">
-        <a-form-item label="Notes" class="pb-0">
+        <a-form-item :label="translation.Notes_1_350" class="pb-0">
           <a-textarea
             v-decorator="[
               'notes',
@@ -66,5 +66,10 @@ export default {
   methods: {
     onSubmit(e) {},
   },
+  computed: {
+        translation() {
+            return this.$store.getters.getTranslation
+        },
+    },
 }
 </script>

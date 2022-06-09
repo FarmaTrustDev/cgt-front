@@ -9,9 +9,9 @@ getUser(users) {},
   >
     <template slot="headerMenus">
       <a-button type="primary" @click="showZoomModal(true)"
-        >New Zoom Meeting</a-button
+        >{{translation.Newzoom_3_119}}</a-button
       >
-      <a-button type="primary" @click="showModal(true)">Add User</a-button>
+      <a-button type="primary" @click="showModal(true)">{{translation.adduser_2_464}}</a-button>
       <a-button type="primary" @click="showGroupModal(true)"
         >{{translation.AddGroup_2_456}}</a-button
       >

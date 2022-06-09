@@ -110,7 +110,7 @@ export default {
     return {
       columns: [
         {
-          title: 'Details',
+          title: `${this.$store.getters.getTranslation.Detai_1_346}`,
           dataIndex: 'name',
           width: '30%',
         },
