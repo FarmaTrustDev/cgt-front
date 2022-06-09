@@ -1,12 +1,12 @@
 <template>
   <div>
-    <a-card :bordered="false">
-      <strong slot="title">
+    <a-card :bordered="false" class="chat-margin fix-chat-size">
+      <strong slot="title" >
         {{ recipient.name }} <a-divider></a-divider>
       </strong>
 
       <a-row>
-        <div ref="container" class="peer-to-peer-chat-list">
+        <div ref="container" class="peer-to-peer-chat-list ">
           <a-col>
             <!-- <pre> {{ data }}</pre> -->
             <a-list
@@ -40,8 +40,9 @@
       <!-- /// Form for chat -->
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <a-row>
-          <a-col>
-            <a-form-item>
+          <a-col >
+            <a-form-item class="pt-50">
+              <div class="pt-50 mt-5">
               <a-input
                 v-decorator="[
                   'message',
@@ -54,6 +55,7 @@
                 class="send-message-input"
                 :placeholder="translation.Typemessa_3_246"
               />
+              </div>
               <a-input
                 v-decorator="[
                   recipient.type,

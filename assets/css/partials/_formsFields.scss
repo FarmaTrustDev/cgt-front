@@ -2,7 +2,8 @@
 .ant-select-selection {
   margin-bottom: 20px;
   border-radius: $default-radius;
-  padding: 9px 1px 43px 1px;
+  padding: 9px 1px 40px 1px;
+  border: none;
 }.ant-input,
 .page-search-input{
   border-radius: 22px;
@@ -10,6 +11,16 @@
   font-size: 15px;
   // color: black;
 }
+
+// .language-select{
+//   .ant-select-selection{
+//     margin-bottom: 20px;
+//     border-radius: $default-radius;
+//     padding: 10px 2px 35px 5px;
+//     border: none;
+//   }
+// }
+
 .ant-time-picker-input{
   border-radius: $default-radius;
 }

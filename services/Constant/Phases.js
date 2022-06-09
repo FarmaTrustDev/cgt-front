@@ -137,6 +137,17 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
     },
     {
         id: 3,
+        name: 'Store Sample',
+        alias: 'STORE_SAMPLE',
+        phaseId: 14,
+        enablePageId: 14,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'STORE_SAMPLE' }
+
+    },
+    {
+        id: 4,
         name: 'Outbound Process',
         alias: 'OUTBOUND_PROCESS',
         phaseId: 14,

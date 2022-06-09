@@ -3,6 +3,7 @@
     item-layout="horizontal"
     :data-source="conversations"
     :bordered="false"
+    class="reduce-margin"
   >
     <a-list-item slot="renderItem" slot-scope="conversation">
       <a-list-item-meta :description="conversation.message">
