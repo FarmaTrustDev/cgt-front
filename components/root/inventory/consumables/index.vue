@@ -21,53 +21,53 @@ export default {
       consumables: [
         {
           threshold: 46,
-          heading: 'Consumables HAS (GIBCO MEM)',
+          heading: '5ml EDTA blood collection tube (minimum order 500)',
           color: color.red,
         },
         {
           threshold: 50,
-          heading: ' Cells stacks  (MSC culture)',
+          heading: ' 10ml SST blood collection tubes (minimum order 500)',
           color: color.red,
         },
         {
           threshold: 90,
-          heading: ' Platelet lysate ',
+          heading: ' Vacutainer holder (minimum order 500) ',
           color: color.blue,
         },
         {
           threshold: 46,
-          heading: ' Pipette A size 1',
+          heading: ' 21g Eclipse blood collection needle (minimum order 500)',
           color: '#2359e8',
         },
         {
           threshold: 46,
-          heading: ' Platelet lysate (luer lock)',
+          heading: ' alcohol skin swabs',
           color: '#ff0909',
         },
         {
           threshold: 50,
-          heading: '(luer lock) (CD34, CD45)',
+          heading: 'cotton wool balls',
           color: '#ff0909',
         },
         {
           threshold: 90,
-          heading: '(CD34, CD45) B',
+          heading: 'disposable tourniquet',
           color: '#2359e8',
         },
         {
           threshold: 46,
-          heading: 'BSA',
+          heading: 'small Band-Aid plasters',
           color: '#2359e8',
         },
 
         {
           threshold: 46,
-          heading: ' Pipette Tip A ',
+          heading: ' leakproof tamper-proof sample bag (approx. 6” x 10”) ',
           color: '#ff0909',
         },
         {
           threshold: 50,
-          heading: ' Pippette Ti',
+          heading: 'absorbent pad',
           color: '#ff0909',
         },
         {
