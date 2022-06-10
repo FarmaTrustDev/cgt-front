@@ -12,20 +12,20 @@
         <span>
           <img
             class="mr-5"
-            :src="getImageUrl('web/inventory/storage/frozen.svg')"
-          />{{ storage.quantity }}% full
+            :src="getImageUrl('web/inventory/storage/full-screen.svg')"
+          />{{ storage.quantity }} % full
         </span>
         <span>
           <img
             class="mr-5"
-            :src="getImageUrl('web/inventory/storage/full-screen.svg')"
-          />{{ storage.quantity }}
+            :src="getImageUrl('web/inventory/storage/frozen.svg')"
+          />{{ storage.temperature }} °C
         </span>
       </div>
     </div>
     <div class="location">
       <a-icon type="environment" theme="filled" />
-      {{ storage.location }}
+      <span class="text"> {{ storage.location }}</span>
     </div>
   </div>
 </template>
