@@ -3,12 +3,12 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    :title="translation._1_440"
+    title="Smart Store"
   >
     <template slot="content">
       <inventory />
       <a-card :bordered="false" class="default-border-radius">
-        <h2 slot="title">Consumables</h2>
+        <h2 slot="title">Components</h2>
         <consumables />
       </a-card>
     </template>
@@ -27,6 +27,7 @@ export default {
     }
   },
   computed: {
+    
     translation() {
       return this.$store.getters.getTranslation
     },

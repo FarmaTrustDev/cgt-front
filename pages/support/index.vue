@@ -1,6 +1,6 @@
 <template>
   <div class="support-page">
-    <a-row class="p-10 mb-10">
+    <a-row class="p-30 mb-10">
       <div class="page-header">
         <h3 class="page-title float-left">
           {{ translation.suppoissue_2_176 }}
@@ -10,8 +10,7 @@
           class="mrm-5 mrt float-right"
           @click="showModal(true)"
           >{{ translation.AddNew_3_182 }}
-          </a-button
-        >
+        </a-button>
         <a-input
           ref="userNameInput"
           :placeholder="translation.searc_1_488"

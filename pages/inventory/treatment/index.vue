@@ -19,7 +19,7 @@
     </span>
     <div class="h-tabs large-tabs" style="margin-left: 3%">
       <a-tabs type="card" :animated="false">
-        <a-tab-pane key="1" :tab="translation.Inbou_1_498">
+        <!-- <a-tab-pane key="1" :tab="translation.Inbou_1_498">
           <a-table
             class="rounded-table"
             :columns="newSampleColumns"
@@ -45,9 +45,15 @@
           >
             <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           </a-modal>
-        </a-tab-pane>
+        </a-tab-pane> -->
 
-        <a-tab-pane key="2" :tab="translation.ProceSampl_2_499">
+        <a-tab-pane key="1" :tab="translation.Inbou_1_498">
+          <a-input
+          :placeholder="translation.searc_1_488"
+          class="float-right page-search-input mb-15"
+        >
+          <a-icon slot="prefix" type="search" />
+        </a-input>
           <a-table
             class="rounded-table"
             :columns="pendingColumns"
@@ -71,7 +77,15 @@
             </span>
           </a-table>
         </a-tab-pane>
-        <a-tab-pane key="3" :tab="translation.OutboSampl_2_500">
+        <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
+           <a-input
+          ref="userNameInput"
+          :placeholder="translation.searc_1_488"
+          class="float-right page-search-input mb-15"
+          @change="searchSupport"
+        >
+          <a-icon slot="prefix" type="search" />
+        </a-input>
           <a-table
             class="rounded-table"
             :columns="completedColumns"
@@ -79,7 +93,15 @@
           >
           </a-table>
         </a-tab-pane>
-        <a-tab-pane key="4" :tab="translation.AllSampl_2_501">
+        <a-tab-pane key="3" :tab="translation.AllSampl_2_501">
+           <a-input
+          ref="userNameInput"
+          :placeholder="translation.searc_1_488"
+          class="float-right page-search-input mb-15"
+          @change="searchSupport"
+        >
+          <a-icon slot="prefix" type="search" />
+        </a-input>
           <a-table
             class="rounded-table"
             :columns="allSampleColumns"

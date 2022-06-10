@@ -5,7 +5,8 @@
         <detail class="mb-15" :data="data.description" />
         <br />
         <h2 class="mt-15">
-          <strong>{{ translation.Equip_1_568 }}</strong>
+          <strong v-if="user.organizationTypeAlias!='SMARTLAB'">{{ translation.Equip_1_568 }}</strong>
+          <strong v-if="user.organizationTypeAlias=='SMARTLAB'">Kits</strong>
         </h2>
       </a-col>
     </a-row>
@@ -83,6 +84,9 @@ export default {
     }
   },
   computed: {
+     user() {
+      return this.$store.getters.getUser
+    },
     translation() {
       return this.$store.getters.getTranslation
     },
