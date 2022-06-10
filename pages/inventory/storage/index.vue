@@ -6,72 +6,31 @@
     :title="translation.StoraServi_2_532"
     class="specific-storage"
   >
-    <div slot="content">
-      <a-row>
-        <a-col class="mb-15" :span="24">
-          <detail v-if="false" />
+    <div slot="content" class="h-tabs large-tabs">
+      <a-tabs class="" type="card">
+        <a-tab-pane key="storages" tab="Explorer storage units"
+          ><Listing />
+        </a-tab-pane>
+        <a-tab-pane key="products" tab="List all products">
 
-          <a-form class="filter-search" :form="form" layout="inline">
-            <a-form-item>
-              <a-input
-                v-decorator="['quantity']"
-                :allow-clear="true"
-                size="large"
-                placeholder="Quantity of Vials"
-                @change="(e) => search(e.target.value, 'quantity')"
-              />
-            </a-form-item>
-            <a-form-item>
-              <a-select
-                v-decorator="[`temperature`]"
-                class="w-min-200"
-                placeholder="Temperature"
-                :allow-clear="true"
-                @change="(e) => search(e, 'temperatureId')"
-              >
-                <a-select-option
-                  v-for="temperature in temperatures"
-                  :key="temperature.id"
-                  >{{ temperature.name }}</a-select-option
-                >
-              </a-select>
-            </a-form-item>
-            <a-form-item>
-              <a-select
-                v-decorator="[`zone`]"
-                placeholder=" Storage Zone"
-                class="w-min-200"
-                :allow-clear="true"
-                @change="(e) => search(e, 'zoneId')"
-              >
-                <a-select-option v-for="zone in zones" :key="zone.id">{{
-                  zone.name
-                }}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-form>
-        </a-col>
-      </a-row>
-      <div class="margin-auto p-15 default-border-radius">
-        <a-row :gutter="16">
-          <a-col v-for="storage in storages" :key="storage.id" :span="6">
-            <span @click="goto(`/inventory/storage/1`)">
-              <Tile class="light-shadow" :storage="storage"
-            /></span>
-          </a-col>
-        </a-row>
-      </div>
+          <StandardTable
+            :should-fetch="false"
+            :dump-data="productsData"
+            :columns="productsColumn"
+            :pagination="false"
+          />
+        </a-tab-pane>
+      </a-tabs>
     </div>
   </page-layout>
 </template>
 
 <script>
-import detail from '~/components/root/inventory/detail'
-import Tile from '~/components/inventory/storage/Tile'
 import PageLayout from '~/components/layout/PageLayout'
-import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Utilities'
 import { isNumber } from '~/services/Helpers'
+import StandardTable from '~/components/common/StandardTable'
+import Listing from '~/components/inventory/storage/Listing'
 
 const baseStorage = [
   {
@@ -252,26 +211,72 @@ const baseStorage = [
   },
 ]
 export default {
-  components: { Tile, PageLayout, detail },
-  mixins: [routeHelpers],
+  components: { PageLayout, StandardTable, Listing },
+
   data() {
     return {
-      storages: baseStorage,
       loading: false,
-      filters: {},
-      zones: [
-        { id: 1, name: 'Zone A' },
-        { id: 2, name: 'Zone B' },
-        { id: 3, name: 'Zone C' },
+      productsColumn: [
+        {
+          title: 'Product',
+          dataIndex: 'product',
+          key: 'product',
+        },
+        {
+          title: 'Product Description',
+          dataIndex: 'description',
+          key: 'description',
+        },
+        {
+          title: 'Client Name',
+          dataIndex: 'clientName',
+          key: 'clientName',
+        },
+        {
+          title: 'Product Location',
+          dataIndex: 'productLocation',
+          key: 'productLocation',
+        },
+        {
+          title: 'Storage Documents',
+          dataIndex: 'storageDocument',
+          key: 'storageDocument',
+        },
+        {
+          title: 'Expiry Date',
+          dataIndex: 'expiryDate',
+          key: 'expiryDate',
+        },
+        {
+          title: 'Product Quality',
+          dataIndex: 'productQuality',
+          key: 'productQuality',
+        },
+        {
+          title: 'Project Manager',
+          dataIndex: 'projectManager',
+          key: 'projectManager',
+        },
+        {
+          title: 'Project Code',
+          dataIndex: 'projectCode',
+          key: 'projectCode',
+        },
       ],
-      temperatures: [
-        { id: 1, name: '-20C' },
-        { id: 2, name: '-80°C' },
-        { id: 3, name: 'LN2' },
+      productsData: [
+        {
+          title: 'Product',
+          product: 'DAC12345',
+          description: 'Human platelet lysate (or hPL)...',
+          clientName: 'Cellfuse',
+          productLocation: 'location',
+          storageDocument: 'document',
+          expiryDate: '10/10/2022',
+          productQuality: 'quality',
+          projectManager: 'manager',
+          projectCode: 'projectCode',
+        },
       ],
-      form: this.$form.createForm(this, {
-        name: 'login',
-      }),
     }
   },
   computed: {

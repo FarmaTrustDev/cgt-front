@@ -2,9 +2,7 @@
   <a-layout-sider v-model="collapsed" class="sidebar" width="265" theme="light">
     <div class="logo-container">
       <nuxt-link to="/">
-        <img
-          :src="getImageUrl('Logos/logo.svg')"
-          class="logo"
+        <img :src="getImageUrl('Logos/logo.svg')" class="logo"
       /></nuxt-link>
     </div>
     <a-skeleton :loading="isEmpty(user)" :paragraph="{ rows: 10 }">
@@ -19,6 +17,7 @@
             <span class="title">{{ translation[menu.name] }}</span>
           </div>
         </a-menu-item>
+
         <a-menu-item key="10" class="logout-menu" @click="logout">
           <div class="menu-container">
             <img :src="logoutImg" />

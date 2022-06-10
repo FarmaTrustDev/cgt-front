@@ -5,7 +5,8 @@
       :pagination="getPagination()"
       :columns="columns"
       :data-source="[...data]"
-      :class="{ 'rounded-table': rounded, 'patient-table': patient }"
+      class="rounded-table"
+      :class="{ 'patient-table': patient }"
     >
       <template slot="customTitle">
         <div class="text-left treatment-title">
