@@ -49,14 +49,14 @@
         ></a-col>
       </a-row>
 
-        <!-- 
+      <!-- 
         title="Provenance Data - Asset DEC123" -->
-      <a-card
-      :bordered="false"
-      >
+      <a-card :bordered="false">
         <div class="view-screen">
           <span v-if="!isEmpty(steps)">
-            <h2 slot="title" class="pad-bottom">Provenance Data  -  Asset DEC123</h2>
+            <h2 slot="title" class="pad-bottom">
+              Provenance Data - Asset DEC123
+            </h2>
             <TimeLine :steps="steps" />
           </span>
           <a-empty v-else description="No tube selected" />
@@ -83,37 +83,37 @@ const tube = {
   steps: [
     {
       title: 'Jack Black',
-      date: 26.33,
-      by: 'Received Date',
+      date: '9:00',
+      by: 'Inbound Date',
       detail: '21 Feb 2022',
     },
     {
       title: ' Simon Smith',
-      date: 26.33,
-      by: 'Opened',
-      detail: '23 March 2022',
+      date: '9:30',
+      by: 'Inbound Process',
+      detail: '21 Feb 2022',
     },
     {
       title: 'Ahmed Salaam',
-      date: 26.33,
-      by: 'Opened',
-      detail: '15 April 2022',
+      date: '10:00',
+      by: 'Storage',
+      detail: '21 Feb 2022',
     },
     {
       title: 'Claire Jones',
-      date: 26.33,
-      by: 'Received Date',
-      detail: '19 April 2022',
+      date: '14:00',
+      by: 'Visual Check',
+      detail: '28 Feb 2022',
     },
     {
       title: 'Dwayne Morgan',
-      date: 26.33,
+      date: '15:00',
       by: 'Packaging Depot',
       detail: '19 April 2022',
     },
     {
       title: 'RT456',
-      date: 26.33,
+      date: '16:00',
       by: 'Courier Pick Up',
       detail: '19 April 2022',
     },
@@ -204,10 +204,10 @@ export default {
     }
   },
   computed: {
-        translation() {
-            return this.$store.getters.getTranslation
-        },
-  },  
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   methods: {
     isEmpty,
     getRack(rack) {

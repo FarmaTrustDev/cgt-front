@@ -1,8 +1,8 @@
 <template>
   <div class="tileCenter border p-15">
-    <div class="heading">{{ heading }}</div>
+    <div class="heading text-center">{{ heading }}</div>
     <slot name="center"></slot>
-    <div class="footer">
+    <div class="footer text-center w-100 clearfix">
       <a-icon type="environment" theme="filled" />{{ footer }}
     </div>
   </div>
