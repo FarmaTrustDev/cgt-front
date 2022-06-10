@@ -52,6 +52,13 @@
       }
     }
   }
+
+  .filter-search {
+    border: 1px solid red;
+    .ant-form-inline .ant-form-item > .ant-form-item-label {
+      vertical-align: middle;
+    }
+  }
 }
 
 .fridge-tile {
@@ -60,16 +67,30 @@
   border-radius: 22px;
   background-color: white;
   margin-top: 20px;
+  transition: all 0.5s ease-out;
+  &:hover {
+    @extend .shadow;
+  }
   .img {
     text-align: center;
   }
   .location {
     color: #7a7575;
     font-size: 14px;
+    padding: 15px;
+    .anticon {
+      margin-right: 5px;
+    }
   }
   .title {
     color: #000;
-    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .icons span {
+    @extend .w-50;
+    @extend .display-inline-block;
+    @extend .float-left;
+    @extend .text-center;
   }
 }
 

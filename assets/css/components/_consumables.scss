@@ -4,7 +4,10 @@
   text-align: center;
   padding: 15px;
   border-radius: 20px;
-  @extend .shadow;
+  background-color: white;
+  min-height: 80%;
+  //@extend .light-shadow;
+  box-shadow: 0 26px 120px rgb(0 0 0 / 4%); // custom shadow because raja need dito design
   .svg-container {
     max-width: 117px;
     margin: auto;

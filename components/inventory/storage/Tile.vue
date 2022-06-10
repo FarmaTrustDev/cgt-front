@@ -1,16 +1,40 @@
 <template>
   <div class="fridge-tile">
-    <div class="img"><fridge :color="storage.color" /></div>
-    <div class="location">
-      <a-icon type="environment" theme="filled" />{{ storage.location }}
+    <div class="title text-center mb-10">
+      {{ storage.title }}
     </div>
-    <div class="title">{{ storage.title }}</div>
+    <div class="img">
+      <fridge :color="storage.color" />
+    </div>
+
+    <div class="icons">
+      <div class="clearfix" style="max-width: 70%; margin: auto">
+        <span>
+          <img
+            class="mr-5"
+            :src="getImageUrl('web/inventory/storage/frozen.svg')"
+          />{{ storage.quantity }}% full
+        </span>
+        <span>
+          <img
+            class="mr-5"
+            :src="getImageUrl('web/inventory/storage/full-screen.svg')"
+          />{{ storage.quantity }}
+        </span>
+      </div>
+    </div>
+    <div class="location">
+      <a-icon type="environment" theme="filled" />
+      {{ storage.location }}
+    </div>
   </div>
 </template>
 <script>
 import fridge from '~/components/inventory/fridge'
+import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { fridge },
+  mixins: [imagesHelper],
   props: {
     storage: { type: Object, default: () => ({}) },
     title: { type: String, default: 'Storage Suite 3, Germany - Cellfuse' },
@@ -20,5 +44,6 @@ export default {
   data() {
     return {}
   },
+  methods: {},
 }
 </script>
