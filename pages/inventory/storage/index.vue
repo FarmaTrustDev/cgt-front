@@ -93,7 +93,7 @@ const baseStorage = [
     quantity: 20,
     temperatureId: 2,
     zoneId: 3,
-    temperature: '-20C',
+    temperature: '-80°C',
     zone: 'Zone C',
   },
   {
