@@ -8,7 +8,7 @@
     </div>
 
     <div class="icons">
-      <div class="clearfix" style="max-width: 70%; margin: auto">
+      <div class="clearfix">
         <span>
           <img
             class="mr-5"

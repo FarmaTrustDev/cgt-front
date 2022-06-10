@@ -68,6 +68,7 @@
   background-color: white;
   margin-top: 20px;
   transition: all 0.5s ease-out;
+
   &:hover {
     @extend .shadow;
   }
@@ -77,13 +78,14 @@
   .location {
     color: #7a7575;
     font-size: 14px;
-    padding: 15px;
+    padding: 5px 15px 0;
+
     .anticon {
       margin-right: 5px;
     }
     i {
-      padding: 15px 0;
-      vertical-align: text-bottom;
+      padding: 5px 0 15px;
+      vertical-align: top;
     }
     .text {
       max-width: 80%;
@@ -95,10 +97,10 @@
     padding-bottom: 10px;
   }
   .icons span {
+    padding: 10px 15px 0;
     @extend .w-50;
     @extend .display-inline-block;
     @extend .float-left;
-    @extend .text-center;
   }
 }
 

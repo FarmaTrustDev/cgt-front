@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <div class="mt-15 clearfix">
-      <h3 class="page-title pl-5 float-left">Tasks List</h3>
+  <page-layout
+    :create="false"
+    :loading="false"
+    :bordered="false"
+    title="Tasks List"
+    class="specific-storage"
+  >
+  <div slot="content">
+       <div class="mt-15 clearfix">
       <!-- <a-select class="float-right page-search-input" placeholder="Search">
             <a-select-option v-for="treatmentType in treatmentTypes" :key="treatmentType.id">{{ treatmentType.name }}</a-select-option>
         </a-select> -->
@@ -49,11 +55,11 @@
 
         <a-tab-pane key="1" :tab="translation.Inbou_1_498">
           <a-input
-          :placeholder="translation.searc_1_488"
-          class="float-right page-search-input mb-15"
-        >
-          <a-icon slot="prefix" type="search" />
-        </a-input>
+            :placeholder="translation.searc_1_488"
+            class="float-right page-search-input mb-15"
+          >
+            <a-icon slot="prefix" type="search" />
+          </a-input>
           <a-table
             class="rounded-table"
             :columns="pendingColumns"
@@ -78,14 +84,14 @@
           </a-table>
         </a-tab-pane>
         <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
-           <a-input
-          ref="userNameInput"
-          :placeholder="translation.searc_1_488"
-          class="float-right page-search-input mb-15"
-          @change="searchSupport"
-        >
-          <a-icon slot="prefix" type="search" />
-        </a-input>
+          <a-input
+            ref="userNameInput"
+            :placeholder="translation.searc_1_488"
+            class="float-right page-search-input mb-15"
+            @change="searchSupport"
+          >
+            <a-icon slot="prefix" type="search" />
+          </a-input>
           <a-table
             class="rounded-table"
             :columns="completedColumns"
@@ -94,14 +100,14 @@
           </a-table>
         </a-tab-pane>
         <a-tab-pane key="3" :tab="translation.AllSampl_2_501">
-           <a-input
-          ref="userNameInput"
-          :placeholder="translation.searc_1_488"
-          class="float-right page-search-input mb-15"
-          @change="searchSupport"
-        >
-          <a-icon slot="prefix" type="search" />
-        </a-input>
+          <a-input
+            ref="userNameInput"
+            :placeholder="translation.searc_1_488"
+            class="float-right page-search-input mb-15"
+            @change="searchSupport"
+          >
+            <a-icon slot="prefix" type="search" />
+          </a-input>
           <a-table
             class="rounded-table"
             :columns="allSampleColumns"
@@ -113,9 +119,12 @@
       </a-tabs>
     </div>
   </div>
+ 
+  </page-layout>
 </template>
 
 <script>
+import PageLayout from '~/components/layout/PageLayout'
 import { SMART_LAB_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
@@ -126,6 +135,7 @@ export default {
     // all: All,
     // completed: Completed,
     // StandardTable,
+    PageLayout,
   },
   mixins: [routeHelpers, imagesHelper],
   data() {
