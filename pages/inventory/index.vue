@@ -8,7 +8,7 @@
     <template slot="content">
       <inventory />
       <a-card :bordered="false" class="default-border-radius">
-        <h2 slot="title">Consumables</h2>
+        <h2 slot="title"><strong>Consumables</strong></h2>
         <consumables />
       </a-card>
     </template>

@@ -21,14 +21,14 @@
               <a-input
                 v-decorator="['quantity']"
                 size="large"
-                placeholder="Quantity of vials"
+                placeholder="Quantity of Vials"
               />
             </a-form-item>
             <a-form-item>
               <a-select
                 v-decorator="[`temperature`]"
                 class="w-min-200"
-                placeholder="temperature"
+                placeholder="Temperature"
               >
                 <a-select-option
                   v-for="temperature in temperatures"
@@ -39,8 +39,8 @@
             </a-form-item>
             <a-form-item>
               <a-select
-                placeholder=" Storage Zone"
                 v-decorator="[`zone`]"
+                placeholder=" Storage Zone"
                 class="w-min-200"
               >
                 <a-select-option v-for="zone in zones" :key="zone.id">{{
