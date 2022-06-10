@@ -52,7 +52,7 @@
           </a-form>
         </a-col>
       </a-row>
-      <div class="w-1200 margin-auto p-15 default-border-radius">
+      <div class="margin-auto p-15 default-border-radius">
         <a-row :gutter="16">
           <a-col v-for="storage in storages" :key="storage.id" :span="6">
             <span @click="goto(`/inventory/storage/1`)">
