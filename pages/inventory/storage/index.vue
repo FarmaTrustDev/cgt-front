@@ -82,7 +82,7 @@ const baseStorage = [
     quantity: 20,
     temperatureId: 1,
     zoneId: 1,
-    temperature: '-20C',
+    temperature: '-20',
     zone: 'Zone A',
   },
   {
@@ -93,7 +93,7 @@ const baseStorage = [
     quantity: 20,
     temperatureId: 2,
     zoneId: 3,
-    temperature: '-20C',
+    temperature: '-20',
     zone: 'Zone C',
   },
   {
@@ -104,7 +104,7 @@ const baseStorage = [
     quantity: 20,
     temperatureId: 2,
     zoneId: 1,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone A',
   },
   {
@@ -137,7 +137,7 @@ const baseStorage = [
     quantity: 20,
     temperatureId: 2,
     zoneId: 2,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone B',
   },
   {
@@ -159,7 +159,7 @@ const baseStorage = [
     quantity: 14,
     temperatureId: 2,
     zoneId: 1,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone A',
   },
   {
@@ -181,7 +181,7 @@ const baseStorage = [
     quantity: 18,
     temperatureId: 2,
     zoneId: 2,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone B',
   },
   {
@@ -192,7 +192,7 @@ const baseStorage = [
     quantity: 8,
     temperatureId: 1,
     zoneId: 1,
-    temperature: '-20C',
+    temperature: '-20',
     zone: 'Zone A',
   },
   {
@@ -203,7 +203,7 @@ const baseStorage = [
     quantity: 16,
     temperatureId: 2,
     zoneId: 3,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone C',
   },
   {
@@ -214,7 +214,7 @@ const baseStorage = [
     quantity: 18,
     temperatureId: 2,
     zoneId: 2,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone B',
   },
   {
@@ -236,7 +236,7 @@ const baseStorage = [
     quantity: 14,
     temperatureId: 2,
     zoneId: 1,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone A',
   },
   {
@@ -247,7 +247,7 @@ const baseStorage = [
     quantity: 14,
     temperatureId: 2,
     zoneId: 1,
-    temperature: '-80°C',
+    temperature: '-80',
     zone: 'Zone A',
   },
 ]
