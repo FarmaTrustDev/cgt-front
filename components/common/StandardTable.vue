@@ -33,6 +33,17 @@
         />
       </template>
 
+      <template slot="icon" slot-scope="icon, record">
+        <a-icon type="cloud-upload" @click="clickIcon(record)" />
+      </template>
+
+      <template slot="popupOver" slot-scope="text">
+        <a-popover>
+          <template slot="content"> {{ text }} </template>
+          <span type="primary"> {{ text }}</span>
+        </a-popover>
+      </template>
+
       <template slot="check" slot-scope="flag">
         <!-- <strong>{{ flag }}</strong> -->
         <a-icon
@@ -365,6 +376,9 @@ export default {
     },
     clickImage(record) {
       this.$emit('clickImage', record)
+    },
+    clickIcon(record) {
+      this.$emit('clickIcon', record)
     },
     holdTreatment(patient, treatment) {
       TreatmentServices.hold(treatment.globalId, !treatment.isHold)

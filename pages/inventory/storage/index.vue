@@ -12,7 +12,6 @@
           ><Listing />
         </a-tab-pane>
         <a-tab-pane key="products" tab="List all products">
-
           <StandardTable
             :should-fetch="false"
             :dump-data="productsData"
@@ -236,11 +235,15 @@ export default {
           title: 'Product Location',
           dataIndex: 'productLocation',
           key: 'productLocation',
+
+          scopedSlots: { customRender: 'popupOver' },
+          ellipsis: true,
         },
         {
           title: 'Storage Documents',
           dataIndex: 'storageDocument',
           key: 'storageDocument',
+          scopedSlots: { customRender: 'icon' },
         },
         {
           title: 'Expiry Date',
@@ -265,16 +268,87 @@ export default {
       ],
       productsData: [
         {
-          title: 'Product',
           product: 'DAC12345',
           description: 'Human platelet lysate (or hPL)...',
           clientName: 'Cellfuse',
-          productLocation: 'location',
+          productLocation: 'Zone A, Storage Suite 3',
           storageDocument: 'document',
           expiryDate: '10/10/2022',
-          productQuality: 'quality',
-          projectManager: 'manager',
-          projectCode: 'projectCode',
+          productQuality: 'Optimum',
+          projectManager: 'Paige Turner',
+          projectCode: '4788',
+        },
+
+        {
+          product: 'DAC17899',
+          description: 'platelet lysate...',
+          clientName: 'Royal Hospital',
+          productLocation: 'Zone C, Storage Suite 2',
+          storageDocument: 'document',
+          expiryDate: '08/10/2025',
+          productQuality: 'Optimum',
+          projectManager: 'Chris Hales',
+          projectCode: '4721',
+        },
+
+        {
+          product: 'DAC12333',
+          description: 'Human platelet lysate (or hPL)...',
+          clientName: 'Cellfuse',
+          productLocation: 'Zone B, Storage Suite 3',
+          storageDocument: 'document',
+          expiryDate: '10/10/2024',
+          productQuality: 'Optimum',
+          projectManager: 'Paige Turner',
+          projectCode: '4788',
+        },
+
+        {
+          product: 'DAC12321',
+          description: 'Human platelet lysate (or hPL)...',
+          clientName: 'Cellfuse',
+          productLocation: 'Zone A, Storage Suite 3',
+          storageDocument: 'document',
+          expiryDate: '10/08/2024',
+          productQuality: 'Optimum',
+          projectManager: 'Henry Peterson',
+          projectCode: '5488',
+        },
+
+        {
+          product: 'DAC12667',
+          description: 'Human platelet lysate (or hPL)...',
+          clientName: 'Baystate',
+          productLocation: 'Zone C, Storage Suite 1',
+          storageDocument: 'document',
+          expiryDate: '28/12/2022',
+          productQuality: 'Optimum',
+          projectManager: 'David James',
+          projectCode: '4897',
+        },
+
+        {
+          product: 'DAC12455',
+          description: 'Human platelet lysate (or hPL)...',
+          clientName: 'BioNTech',
+          productLocation: 'Zone C, Storage Suite 2',
+          storageDocument: 'document',
+          expiryDate: '10/10/2022',
+          productQuality: 'Optimum',
+          projectManager: 'Paige Turner',
+          projectCode: '5478',
+        },
+
+        {
+          product: 'DAC12345',
+          description: 'Human platelet lysate (or hPL)...',
+          clientName: 'Cellfuse',
+          productLocation: 'Zone A, Storage Suite 3',
+          storageDocument: 'document',
+          expiryDate: '10/10/2022',
+          productQuality: 'Optimum',
+          projectManager: 'Paige Turner',
+          projectCode: '4788',
         },
       ],
     }
