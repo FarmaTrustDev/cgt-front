@@ -11,17 +11,14 @@
         <a-col class="mb-15" :span="24">
           <detail v-if="false" />
 
-          <a-form
-            class="filter-search"
-            :form="form"
-            layout="inline"
-            @submit="onSubmit"
-          >
+          <a-form class="filter-search" :form="form" layout="inline">
             <a-form-item>
               <a-input
                 v-decorator="['quantity']"
+                :allow-clear="true"
                 size="large"
                 placeholder="Quantity of Vials"
+                @change="(e) => search(e.target.value, 'quantity')"
               />
             </a-form-item>
             <a-form-item>
@@ -29,6 +26,8 @@
                 v-decorator="[`temperature`]"
                 class="w-min-200"
                 placeholder="Temperature"
+                :allow-clear="true"
+                @change="(e) => search(e, 'temperatureId')"
               >
                 <a-select-option
                   v-for="temperature in temperatures"
@@ -42,6 +41,8 @@
                 v-decorator="[`zone`]"
                 placeholder=" Storage Zone"
                 class="w-min-200"
+                :allow-clear="true"
+                @change="(e) => search(e, 'zoneId')"
               >
                 <a-select-option v-for="zone in zones" :key="zone.id">{{
                   zone.name
@@ -69,6 +70,8 @@ import detail from '~/components/root/inventory/detail'
 import Tile from '~/components/inventory/storage/Tile'
 import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
+import { isEmpty } from '~/services/Utilities'
+import { isNumber } from '~/services/Helpers'
 
 const baseStorage = [
   {
@@ -126,7 +129,7 @@ const baseStorage = [
     zoneId: 2,
   },
   {
-    id: 5,
+    id: 7,
     color: '#FA6363',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -135,7 +138,7 @@ const baseStorage = [
     zoneId: 2,
   },
   {
-    id: 6,
+    id: 8,
     color: '#1943AE',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -144,7 +147,7 @@ const baseStorage = [
     zoneId: 1,
   },
   {
-    id: 5,
+    id: 9,
     color: '#FA6363',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -153,7 +156,7 @@ const baseStorage = [
     zoneId: 1,
   },
   {
-    id: 6,
+    id: 10,
     color: '#1943AE',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -162,7 +165,7 @@ const baseStorage = [
     zoneId: 2,
   },
   {
-    id: 5,
+    id: 11,
     color: '#FA6363',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -171,7 +174,7 @@ const baseStorage = [
     zoneId: 1,
   },
   {
-    id: 6,
+    id: 12,
     color: '#1943AE',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -180,7 +183,7 @@ const baseStorage = [
     zoneId: 3,
   },
   {
-    id: 5,
+    id: 13,
     color: '#FA6363',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -189,7 +192,7 @@ const baseStorage = [
     zoneId: 2,
   },
   {
-    id: 6,
+    id: 14,
     color: '#1943AE',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -198,7 +201,7 @@ const baseStorage = [
     zoneId: 1,
   },
   {
-    id: 5,
+    id: 15,
     color: '#FA6363',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -207,7 +210,7 @@ const baseStorage = [
     zoneId: 1,
   },
   {
-    id: 6,
+    id: 16,
     color: '#1943AE',
     title: 'Freezer Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
@@ -223,6 +226,7 @@ export default {
     return {
       storages: baseStorage,
       loading: false,
+      filters: {},
       zones: [
         { id: 1, name: 'Zone A' },
         { id: 2, name: 'Zone B' },
@@ -241,6 +245,35 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+  },
+  methods: {
+    search(value, key) {
+      let filters = this.filters
+      filters[key] = value
+      filters = JSON.stringify(filters)
+      filters = JSON.parse(filters)
+      this.filters = filters
+
+      if (!isEmpty(filters)) {
+        let storages = []
+        for (const filter in filters) {
+          const filterValue = filters[filter]
+
+          storages = baseStorage.filter((storage) => {
+            if (isEmpty(filterValue) && !isNumber(filterValue)) {
+              return storage
+            }
+            // eslint-disable-next-line eqeqeq
+            return storage[filter] == filterValue
+          })
+        }
+
+        storages = JSON.stringify(storages)
+        this.storages = JSON.parse(storages)
+      } else {
+        this.storages = baseStorage
+      }
     },
   },
 }
