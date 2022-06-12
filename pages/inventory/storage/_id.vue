@@ -29,7 +29,10 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <racks :data="fridgeData.racks" @getRack="getRack" />
+              <racks
+                :data="fridgeData.racks"
+                @getRackPortion="getRackPortion"
+              />
             </div>
           </TileCenter>
         </a-col>
@@ -119,40 +122,64 @@ const tube = {
     },
   ],
 }
-const portion = [
-  {
-    id: 1,
-    color: 'red',
-    trays: [
-      {
-        tubes: [tube, tube, tube, tube, tube, tube],
-      },
-      {
-        tubes: [tube, tube, tube, tube, tube, tube],
-      },
-      {
-        tubes: [tube, tube, tube, tube, tube, tube],
-      },
-      {
-        tubes: [tube, tube, tube, tube, tube, tube],
-      },
-      {
-        tubes: [tube, tube, tube, tube, tube, tube],
-      },
-      {
-        tubes: [tube, tube, tube, tube, tube, tube],
-      },
-    ],
-  },
-]
+const portion = {
+  id: 1,
+  color: 'red',
+  active: true,
+  trays: [
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+  ],
+}
+const portion2 = {
+  id: 2,
+  color: 'red',
+  active: true,
+  trays: [
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+    {
+      tubes: [tube, tube, tube, tube, tube, tube],
+    },
+  ],
+}
 const rack = {
   id: 1,
-  portions: [portion, portion, portion],
+  portions: [portion, portion2, portion],
 }
 
 const rack2 = {
   id: 1,
-  portions: [portion, portion, portion, portion],
+  portions: [portion, portion2, portion, portion2],
 }
 const fridgeData = {
   name: 'Fridge Atara 001',
@@ -222,8 +249,9 @@ export default {
   },
   methods: {
     isEmpty,
-    getRack(rack) {
-      this.trayData = rack.trays
+    getRackPortion(portions) {
+      console.log(portions)
+      this.trayData = portions.trays
     },
     getTube(tube) {
       this.steps = tube.steps

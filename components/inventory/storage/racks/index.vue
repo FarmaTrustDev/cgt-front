@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
     <div class="racks">
-      <span v-for="(rack, index) in data" :key="index" @click="getRack(rack)">
-        <rack :portions="rack.portions" />
+      <span v-for="(rack, index) in data" :key="index">
+        <rack :portions="rack.portions" @getRackPortion="getRackPortion" />
       </span>
     </div>
   </div>
@@ -14,8 +14,8 @@ export default {
   components: { rack },
   props: { data: { type: Array, default: () => [{}] } },
   methods: {
-    getRack(rack) {
-      this.$emit('getRack', rack)
+    getRackPortion(portion) {
+      this.$emit('getRackPortion', portion)
     },
   },
 }
