@@ -119,33 +119,45 @@ const tube = {
     },
   ],
 }
+const portion = [
+  {
+    id: 1,
+    color: 'red',
+    trays: [
+      {
+        tubes: [tube, tube, tube, tube, tube, tube],
+      },
+      {
+        tubes: [tube, tube, tube, tube, tube, tube],
+      },
+      {
+        tubes: [tube, tube, tube, tube, tube, tube],
+      },
+      {
+        tubes: [tube, tube, tube, tube, tube, tube],
+      },
+      {
+        tubes: [tube, tube, tube, tube, tube, tube],
+      },
+      {
+        tubes: [tube, tube, tube, tube, tube, tube],
+      },
+    ],
+  },
+]
 const rack = {
   id: 1,
-  trays: [
-    {
-      tubes: [tube, tube, tube, tube, tube, tube],
-    },
-    {
-      tubes: [tube, tube, tube, tube, tube, tube],
-    },
-    {
-      tubes: [tube, tube, tube, tube, tube, tube],
-    },
-    {
-      tubes: [tube, tube, tube, tube, tube, tube],
-    },
-    {
-      tubes: [tube, tube, tube, tube, tube, tube],
-    },
-    {
-      tubes: [tube, tube, tube, tube, tube, tube],
-    },
-  ],
+  portions: [portion, portion, portion],
+}
+
+const rack2 = {
+  id: 1,
+  portions: [portion, portion, portion, portion],
 }
 const fridgeData = {
   name: 'Fridge Atara 001',
   location: 'Storage Suite 3, Germany - Cellfuse',
-  racks: [rack, rack, rack, rack, rack],
+  racks: [rack, rack2, rack, rack2, rack],
 }
 export default {
   components: {
