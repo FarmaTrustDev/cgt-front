@@ -6,26 +6,26 @@
     title="Tasks List"
     class="specific-storage"
   >
-  <div slot="content">
-       <div class="mt-15 clearfix">
-      <!-- <a-select class="float-right page-search-input" placeholder="Search">
+    <div slot="content">
+      <div class="mt-15 clearfix">
+        <!-- <a-select class="float-right page-search-input" placeholder="Search">
             <a-select-option v-for="treatmentType in treatmentTypes" :key="treatmentType.id">{{ treatmentType.name }}</a-select-option>
         </a-select> -->
-    </div>
-
-    <span slot="action" slot-scope="text, record">
-      <div v-if="showButton(record)">
-        <a-button type="primary">
-          {{ translation.Accep_1_278 }}
-        </a-button>
-        <a-button type="danger">
-          {{ translation.Rejec_1_280 }}
-        </a-button>
       </div>
-    </span>
-    <div class="h-tabs large-tabs" style="margin-left: 3%">
-      <a-tabs type="card" :animated="false">
-        <!-- <a-tab-pane key="1" :tab="translation.Inbou_1_498">
+
+      <span slot="action" slot-scope="text, record">
+        <div v-if="showButton(record)">
+          <a-button type="primary">
+            {{ translation.Accep_1_278 }}
+          </a-button>
+          <a-button type="danger">
+            {{ translation.Rejec_1_280 }}
+          </a-button>
+        </div>
+      </span>
+      <div class="h-tabs large-tabs" style="margin-left: 3%">
+        <a-tabs type="card" :animated="false">
+          <!-- <a-tab-pane key="1" :tab="translation.Inbou_1_498">
           <a-table
             class="rounded-table"
             :columns="newSampleColumns"
@@ -53,79 +53,96 @@
           </a-modal>
         </a-tab-pane> -->
 
-        <a-tab-pane key="1" :tab="translation.Inbou_1_498">
-          <a-input
-            :placeholder="translation.searc_1_488"
-            class="float-right page-search-input mb-15"
-          >
-            <a-icon slot="prefix" type="search" />
-          </a-input>
-          <a-table
-            class="rounded-table"
-            :columns="pendingColumns"
-            :data-source="pendingSampleData"
-            :should-fetch="false"
-          >
-            <span slot="action" slot-scope="text, record">
-              <!-- //Steps -->
-              <div class="treatment-steps">
-                <a-steps :initial="1" :current="1" size="small">
-                  <a-step
-                    v-for="phase in phases"
-                    :key="phase.id"
-                    :title="phase.name"
-                    @click="stepClick(record, phase)"
-                  />
-                </a-steps>
-              </div>
+          <a-tab-pane key="1" :tab="translation.Inbou_1_498">
+            <a-input
+              :placeholder="translation.searc_1_488"
+              class="float-right page-search-input mb-15"
+            >
+              <a-icon slot="prefix" type="search" />
+            </a-input>
+            <a-table
+              class="rounded-table"
+              :columns="pendingColumns"
+              :data-source="pendingSampleData"
+              :should-fetch="false"
+            >
+              <span slot="action" slot-scope="text, record">
+                <!-- //Steps -->
+                <div class="treatment-steps">
+                  <a-steps :initial="1" :current="1" size="small">
+                    <a-step
+                      v-for="phase in phases"
+                      :key="phase.id"
+                      :title="phase.name"
+                      @click="stepClick(record, phase)"
+                    />
+                  </a-steps>
+                </div>
 
-              <!-- //Steps -->
-            </span>
-          </a-table>
-        </a-tab-pane>
-        <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
-          <a-input
-            ref="userNameInput"
-            :placeholder="translation.searc_1_488"
-            class="float-right page-search-input mb-15"
-            @change="searchSupport"
-          >
-            <a-icon slot="prefix" type="search" />
-          </a-input>
-          <a-table
-            class="rounded-table"
-            :columns="completedColumns"
-            :data-source="completedSampleData"
-          >
-          </a-table>
-        </a-tab-pane>
-        <a-tab-pane key="3" :tab="translation.AllSampl_2_501">
-          <a-input
-            ref="userNameInput"
-            :placeholder="translation.searc_1_488"
-            class="float-right page-search-input mb-15"
-            @change="searchSupport"
-          >
-            <a-icon slot="prefix" type="search" />
-          </a-input>
-          <a-table
-            class="rounded-table"
-            :columns="allSampleColumns"
-            :should-fetch="false"
-            :data-source="allSampleData"
-          >
-          </a-table>
-        </a-tab-pane>
-      </a-tabs>
+                <!-- //Steps -->
+              </span>
+            </a-table>
+          </a-tab-pane>
+          <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
+            <a-input
+              ref="userNameInput"
+              :placeholder="translation.searc_1_488"
+              class="float-right page-search-input mb-15"
+              @change="searchSupport"
+            >
+              <a-icon slot="prefix" type="search" />
+            </a-input>
+            <a-table
+              class="rounded-table"
+              :columns="completedColumns"
+              :data-source="completedSampleData"
+            >
+              <!-- ==== steps === -->
+              <span slot="status-steps" slot-scope="text, record">
+                <div class="treatment-steps">
+                  <a-steps :initial="1" :current="1" size="small">
+                    <a-step
+                      v-for="phase in outboundSteps"
+                      :key="phase.id"
+                      :title="phase.name"
+                      @click="stepClick(record, phase)"
+                    />
+                  </a-steps>
+                </div>
+              </span>
+
+              <!-- ==== steps === -->
+            </a-table>
+          </a-tab-pane>
+          <a-tab-pane key="3" :tab="translation.AllSampl_2_501">
+            <a-input
+              ref="userNameInput"
+              :placeholder="translation.searc_1_488"
+              class="float-right page-search-input mb-15"
+              @change="searchSupport"
+            >
+              <a-icon slot="prefix" type="search" />
+            </a-input>
+            <a-table
+              class="rounded-table"
+              :columns="allSampleColumns"
+              :should-fetch="false"
+              :data-source="allSampleData"
+            >
+            </a-table>
+          </a-tab-pane>
+        </a-tabs>
+      </div>
     </div>
-  </div>
- 
   </page-layout>
 </template>
 
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import { SMART_LAB_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
+import {
+  SMART_LAB_TREATMENT_PENDING_PHASES,
+  INVENTORY_OUTBOUND_STATUS_STEPS,
+} from '~/services/Constant/Phases'
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
 export default {
@@ -145,6 +162,7 @@ export default {
       qrUrl: 'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg',
       showModal: false,
       phases: SMART_LAB_TREATMENT_PENDING_PHASES,
+      outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
       completedColumns: [
         {
           title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
@@ -175,6 +193,7 @@ export default {
           title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
           dataIndex: 'dispatchedBy',
           key: 'dispatchedBy',
+          scopedSlots: { customRender: 'status-steps' },
         },
       ],
       newSampleData: [

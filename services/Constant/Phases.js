@@ -21,7 +21,32 @@ const URL_TYPE = {
     patient: 1,
     treatment: 2
 }
-
+export const INVENTORY_OUTBOUND_STATUS_STEPS = [
+    {
+        id: 1,
+        name: 'Store Sample',
+        alias: 'STORE_SAMPLE',
+        phaseId: 1,
+        url_slug: '/hospital/patients/',
+        params: {}
+    },
+    {
+        id: 2,
+        name: 'Outbound Process',
+        alias: 'OUTBOUND_PROCESS',
+        phaseId: 2,
+        url_slug: '/hospital/patients/',
+        params: {}
+    },
+    {
+        id: 3,
+        name: 'Courier',
+        alias: 'COURIER',
+        phaseId: 3,
+        url_slug: '/hospital/patients/',
+        params: {}
+    },
+];
 export const PATIENT_TREATMENT_PHASES = [
     {
         id: 1,
