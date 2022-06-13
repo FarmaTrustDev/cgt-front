@@ -294,7 +294,6 @@ export default {
   methods: {
     isEmpty,
     getRackPortion(portions) {
-      console.log(portions)
       this.trayData = portions.trays
     },
     getTube(tube) {
