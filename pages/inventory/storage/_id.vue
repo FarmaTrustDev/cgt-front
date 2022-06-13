@@ -150,7 +150,7 @@ const portion = {
 const portion2 = {
   id: 2,
   color: 'red',
-  active: true,
+  active: false,
   trays: [
     {
       tubes: [tube, tube, tube, tube, tube, tube],
