@@ -1,6 +1,5 @@
 <template>
   <div>
-    <pre></pre>
     <div class="rack light-shadow" :class="active ? 'active' : ''">
       <div
         v-for="portion in portions"

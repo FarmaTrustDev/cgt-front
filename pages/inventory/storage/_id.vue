@@ -122,6 +122,49 @@ const tube = {
     },
   ],
 }
+const tube2 = {
+  id: 3,
+  active: false,
+  name: '5A',
+  steps: [
+    {
+      title: 'Jack Black',
+      date: '9:00',
+      by: 'Inbound Date',
+      detail: '21 Feb 2022',
+    },
+    {
+      title: ' Simon Smith',
+      date: '9:30',
+      by: 'Inbound Process',
+      detail: '21 Feb 2022',
+    },
+    {
+      title: 'Ahmed Salaam',
+      date: '10:00',
+      by: 'Storage',
+      detail: '21 Feb 2022',
+    },
+    {
+      title: 'Claire Jones',
+      date: '14:00',
+      by: 'Visual Check',
+      detail: '28 Feb 2022',
+    },
+    {
+      title: 'Dwayne Morgan',
+      date: '15:00',
+      by: 'Packaging Depot',
+      detail: '19 April 2022',
+    },
+    {
+      title: 'RT456',
+      date: '16:00',
+      by: 'Courier Pick Up',
+      detail: '19 April 2022',
+    },
+  ],
+}
 const portion = {
   id: 1,
   color: 'red',
@@ -153,7 +196,7 @@ const portion2 = {
   active: false,
   trays: [
     {
-      tubes: [tube, tube, tube, tube, tube, tube],
+      tubes: [tube2, tube, tube, tube2, tube, tube],
     },
     {
       tubes: [tube, tube, tube, tube, tube, tube],
