@@ -21,7 +21,6 @@ export default {
   },
   methods: {
     getRackPortion(portion) {
-      console.log(portion)
       this.$emit('getRackPortion', portion)
     },
   },

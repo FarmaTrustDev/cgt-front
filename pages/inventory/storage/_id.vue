@@ -181,6 +181,7 @@ const rack2 = {
   id: 1,
   portions: [portion, portion2, portion, portion2],
 }
+
 const fridgeData = {
   name: 'Fridge Atara 001',
   location: 'Storage Suite 3, Germany - Cellfuse',
