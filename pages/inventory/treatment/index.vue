@@ -3,7 +3,7 @@
     :create="false"
     :loading="false"
     :bordered="false"
-    title="Tasks List"
+    :title="translation.TasksList_2_558"
     class="specific-storage"
   >
     <div slot="content">
@@ -185,7 +185,7 @@ export default {
           key: 'hospital',
         },
         {
-          title: `Arrival Date - Expiry Date`,
+          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
@@ -377,7 +377,7 @@ export default {
           scopedSlots: { customRender: 'print' },
         },
         {
-          title: `Arrival Date - Expiry Date`,
+          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
@@ -411,7 +411,7 @@ export default {
           key: 'hospital',
         },
         {
-          title: `Arrival Date - Expiry Date`,
+          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
@@ -444,7 +444,7 @@ export default {
           key: 'hospital',
         },
         {
-          title: `Arrival Date - Expiry Date`,
+          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },

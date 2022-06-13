@@ -93,7 +93,7 @@
             style="cursor: pointer"
             @click="goto(`/inventory/treatment`)"
           >
-            Show more
+            {{translation.Showmore_2_534}}
           </div>
         </a-card>
       </div>

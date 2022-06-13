@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="12">
         <a-form-item
-          label="Equipment Type"
+          :label="translation.EquipType_2_552"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >

@@ -5,7 +5,7 @@
         <detail v-if="false" />
 
         <a-form class="filter-search mt-15" :form="form" layout="inline">
-          <a-form-item> <h2 class="mt-5">Search</h2></a-form-item>
+          <a-form-item> <h2 class="mt-5">{{translation.searc_1_488}}</h2></a-form-item>
           <a-form-item>
             <a-input
               v-decorator="['quantity']"
