@@ -6,19 +6,12 @@
         <table class="testTubeTable w-100">
           <tr>
             <td v-for="c in getColumns()" :key="c" class="fake-column">
-              <span class="">{{ c }} </span>
+              <span class="">{{ toLetters(c) }} </span>
             </td>
           </tr>
         </table>
       </a-col>
       <a-col :span="4">
-        <!-- <table class="testTubeTable w-100">
-          <tr v-for="c in getColumns()" :key="c">
-            <td class="border fake-column">
-              <span class="">{{ c }} </span>
-            </td>
-          </tr>
-        </table> -->
         <div v-for="c in getRows()" :key="c" class="fake-row">
           <span class="">{{ c }} </span>
         </div>
@@ -39,7 +32,7 @@
 </template>
 <script>
 import tray from '~/components/inventory/storage/trays/tray'
-import { isEmpty } from '~/services/Helpers'
+import { isEmpty, toLetters } from '~/services/Helpers'
 export default {
   components: { tray },
   props: { trays: { type: Array, default: () => [] } },
@@ -50,6 +43,7 @@ export default {
     }
   },
   methods: {
+    toLetters,
     getTube(tube) {
       this.$emit('getTube', tube)
     },
