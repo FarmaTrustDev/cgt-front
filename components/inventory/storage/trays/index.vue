@@ -1,10 +1,10 @@
 <template>
   <div>
     <table class="testTubeTable border w-100">
-      <tr v-for="tray in trays" :key="tray.id">
+      <tr v-for="(tray, indexParent) in trays" :key="indexParent">
         <td v-for="(tube, index) in tray.tubes" :key="index" class="border">
           <span @click="getTube(tube)">
-            <tray />
+            <tray :tube="tube" />
           </span>
         </td>
       </tr>
