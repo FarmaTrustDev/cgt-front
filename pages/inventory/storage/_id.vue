@@ -210,9 +210,6 @@ const portion2 = {
     {
       tubes: [tube, tube, tube, tube, tube, tube],
     },
-    {
-      tubes: [tube, tube, tube, tube, tube, tube],
-    },
   ],
 }
 const rack = {
