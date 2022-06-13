@@ -3,7 +3,7 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    title="Smart Store"
+    :title="translation.SmartStore_2_548"
   >
     <template slot="content">
       <inventory />
