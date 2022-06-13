@@ -13,7 +13,7 @@
         </a-col>
       </a-row>
       <a-row :gutter="24">
-        <a-col :span="8">
+        <a-col v-if="false" :span="8">
           <TileCenter
             heading="Freezer Atara 001"
             footer="Storage Suite 3, Germany - Cellfuse"
@@ -23,7 +23,7 @@
             </div>
           </TileCenter>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12">
           <TileCenter
             heading="Shelf Atara 001"
             footer="Storage Suite 3, Germany - Cellfuse"
@@ -36,7 +36,7 @@
             </div>
           </TileCenter>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12">
           <TileCenter
             heading=" Box Atara 001, Shelf 3 "
             footer="Storage Suite 3, Germany - Cellfuse"
