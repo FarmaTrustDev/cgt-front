@@ -3,13 +3,13 @@
     <slot name="extra" />
     <span class="imageHeading">
       <figure>
-        <span class="image-container">
+        <!-- <span class="image-container">
           <img
             :width="imgProperties.width"
             class="img"
             :src="getImageUrl(detail.img)"
           />
-        </span>
+        </span> -->
         <figcaption class="heading">
           {{ detail.heading }}
         </figcaption>

@@ -3,12 +3,12 @@
     <img
       v-if="!isHover"
       class="tube-image"
-      :src="getImageUrl('web/inventory/storage/tube.svg')"
+      src="https://demoapi.qmaid.co/web/inventory/storage/tube.svg"
     />
     <img
       v-else
       class="tube-image"
-      :src="getImageUrl('web/inventory/storage/selected-tube.svg')"
+      src="https://demoapi.qmaid.co/web/inventory/storage/selected-tube.svg"
     />
   </div>
 </template>
