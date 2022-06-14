@@ -11,7 +11,7 @@
       </a-col>
     </a-row>
     <div class="mt-15 mb-15">
-      <a-row class="p-15" :gutter="24">
+      <a-row class="p-15 w-135" :gutter="24">
         <a-col class="suit" :span="12">
           <suite />
         </a-col>
