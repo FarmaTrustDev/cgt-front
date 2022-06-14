@@ -1,14 +1,16 @@
 <template>
   <div>
-    <pre></pre>
-    <div class="rack light-shadow" :class="active ? 'active' : ''">
-      <div
-        v-for="portion in portions"
-        :key="portion.id"
-        class="portion"
-        :class="portion.active ? 'active' : ''"
-        @click="getRackPortion(portion)"
-      ></div>
+    <div class="counter">Shelf {{ counter }}</div>
+    <div class="rack-container">
+      <div class="rack light-shadow" :class="active ? 'active' : ''">
+        <div
+          v-for="(portion, index) in portions"
+          :key="index"
+          class="portion"
+          :class="portion.active ? 'active' : ''"
+          @click="getRackPortion(portion)"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,10 +20,10 @@ export default {
   props: {
     active: { type: Boolean },
     portions: { type: Array, default: () => [{}] },
+    counter: { type: Number, default: 0 },
   },
   methods: {
     getRackPortion(portion) {
-      console.log(portion)
       this.$emit('getRackPortion', portion)
     },
   },
@@ -46,14 +48,24 @@ export default {
 .rack {
   background-color: #2f78e366;
   height: 35px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
-  width: 100%;
+  width: 90%;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   cursor: pointer;
 }
 .active {
   background-color: #eb101066;
+}
+.counter {
+  float: left;
+  width: 60px;
+  font-weight: bold;
+  margin-top: 9px;
+}
+.rack-container {
+  float: left;
+  width: 80%;
 }
 </style>

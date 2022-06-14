@@ -195,65 +195,65 @@ export default {
   data() {
     return {
       dummyCollection: [
-        { id: 1, isCollected: false, name: 'Package receipt' },
+        { id: 1, isCollected: false, name: `${this.$store.getters.getTranslation.Packarecei_2_518}` },
         {
           id: 2,
           isCollected: false,
-          name: 'Does package match advance notificatoin slip?',
+          name: `${this.$store.getters.getTranslation.Doespacka_6_519}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: 'Is there any visual package damage?',
+          name: `${this.$store.getters.getTranslation.Isthere_6_520}`,
         },
-        { id: 4, isCollected: false, name: 'Status issues?' },
+        { id: 4, isCollected: false, name: `${this.$store.getters.getTranslation.Statuissue_2_521}`},
         {
           id: 5,
           isCollected: false,
-          name: 'Does the package need to be put in quarantine?',
+          name: `${this.$store.getters.getTranslation.Doesthe_9_522}`,
         },
         {
           id: 6,
           isCollected: false,
-          name: 'Is item safe for storage in facility?',
+          name: `${this.$store.getters.getTranslation.Isitem_7_523}`,
         },
         {
           id: 7,
           isCollected: false,
-          name: 'Is there any new packing or repackaging required?',
+          name: `${this.$store.getters.getTranslation.Isthere_8_524}`,
         },
         {
           id: 8,
           isCollected: false,
-          name: 'Specify freezer location, shelf number rack number, box number',
+          name: `${this.$store.getters.getTranslation.Specifreez_9_525}`,
         },
       ],
       dummyOutBoundCollection: [
-        { id: 1, isCollected: false, name: 'The Outbound Process Steps are' },
+        { id: 1, isCollected: false, name: `${this.$store.getters.getTranslation.TheOutbo_5_526}` },
         {
           id: 2,
           isCollected: false,
-          name: 'Remove From Freezer?',
+          name: `${this.$store.getters.getTranslation.RemovFrom_3_527}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: 'Is Package Undamaged?',
+          name: `${this.$store.getters.getTranslation.IsPacka_3_528}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: 'Is Sample Ready for Outbound Packaging',
+          name: `${this.$store.getters.getTranslation.IsSampl_6_529}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: 'Sample has been Packaged',
+          name: `${this.$store.getters.getTranslation.Samplhas_4_530}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: 'Ready for Courier Pick Up',
+          name: `${this.$store.getters.getTranslation.Readyfor_5_531}`,
         },
       ],
     }

@@ -1,17 +1,17 @@
 <template>
     <div>
     <div class="page-header clearfix">
-    <h3 class="page-title pl-5 float-left">Lab List</h3>
+    <h3 class="page-title pl-5 float-left">{{translation.LabList_2_551}}</h3>
       <a-button
         type="primary"
         class="mrm-5 float-right"
         @click="goto('lab/create')"
-        >Add Lab</a-button
+        >{{translation.AddLab_2_562}}</a-button
       >
     <a-input
       class="float-right page-search-input"
       ref="userNameInput"
-      placeholder="Search Lab"
+      :placeholder="translation.SearcLab_2_561"
       @change="searchUser"
     >
       <a-icon slot="prefix" type="search" />
@@ -77,27 +77,27 @@ export default {
       ],
       columns:[
         {
-          title: `Lab`,
+          title: `${this.$store.getters.getTranslation.Lab_1_566}`,
           dataIndex: 'name',
           key: 'name'
         },
         {
-          title: `Address`,
+          title: `${this.$store.getters.getTranslation.Addre_1_559}`,
           dataIndex: 'organizationTypeAlias',
           key: 'organizationType',
         },
         {
-          title: `Head of Lab`,
+          title: `${this.$store.getters.getTranslation.Headof_3_549}`,
           dataIndex: 'organizationName',
           key: 'organizationId',
         },
         {
-          title: `City`,
+          title: `${this.$store.getters.getTranslation.City_1_446}`,
           dataIndex: 'city',
           key: 'city',
         },
         {
-          title: `Country`,
+          title: `${this.$store.getters.getTranslation.Count_1_49}`,
           dataIndex: 'country',
           key: 'country',
         },

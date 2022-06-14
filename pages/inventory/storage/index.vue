@@ -8,17 +8,19 @@
   >
     <div slot="content" class="h-tabs large-tabs">
       <a-tabs class="" type="card">
-        <a-tab-pane key="storages" tab="Explorer storage units"
-          ><Listing />
+        <a-tab-pane key="storages" :tab="translation.Explostora_3_536"
+          >
+          <Listing />
         </a-tab-pane>
-        <a-tab-pane key="products" tab="List all products">
+        <a-tab-pane key="products" :tab="translation.Listall_3_537">
           <StandardTable
             :should-fetch="false"
             :dump-data="productsData"
             :columns="productsColumn"
             :pagination="false"
-          />
+          />         
         </a-tab-pane>
+
       </a-tabs>
     </div>
   </page-layout>
@@ -217,22 +219,22 @@ export default {
       loading: false,
       productsColumn: [
         {
-          title: 'Product',
+          title: `${this.$store.getters.getTranslation.Produ_1_538}`,
           dataIndex: 'product',
           key: 'product',
         },
         {
-          title: 'Product Description',
+          title: `${this.$store.getters.getTranslation.ProduDescr_2_539}`,
           dataIndex: 'description',
           key: 'description',
         },
         {
-          title: 'Client Name',
+          title: `${this.$store.getters.getTranslation.ClienName_2_540}`,
           dataIndex: 'clientName',
           key: 'clientName',
         },
         {
-          title: 'Product Location',
+          title: `${this.$store.getters.getTranslation.ProduLocat_2_541}`,
           dataIndex: 'productLocation',
           key: 'productLocation',
 
@@ -240,28 +242,28 @@ export default {
           ellipsis: true,
         },
         {
-          title: 'Storage Documents',
+          title: `${this.$store.getters.getTranslation.StoraDocum_2_542}`,
           dataIndex: 'storageDocument',
           key: 'storageDocument',
           scopedSlots: { customRender: 'icon' },
         },
         {
-          title: 'Expiry Date',
+          title: `${this.$store.getters.getTranslation.ExpirDate_2_543}`,
           dataIndex: 'expiryDate',
           key: 'expiryDate',
         },
         {
-          title: 'Product Quality',
+          title: `${this.$store.getters.getTranslation.ProduQuali_2_544}`,
           dataIndex: 'productQuality',
           key: 'productQuality',
         },
         {
-          title: 'Project Manager',
+          title: `${this.$store.getters.getTranslation.ProjeManag_2_545}`,
           dataIndex: 'projectManager',
           key: 'projectManager',
         },
         {
-          title: 'Project Code',
+          title: `${this.$store.getters.getTranslation.ProjeCode_2_546}`,
           dataIndex: 'projectCode',
           key: 'projectCode',
         },

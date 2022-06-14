@@ -2,7 +2,11 @@
   <div class="text-center">
     <div class="racks">
       <span v-for="(rack, index) in data" :key="index">
-        <rack :portions="rack.portions" @getRackPortion="getRackPortion" />
+        <rack
+          :portions="rack.portions"
+          :counter="index + 1"
+          @getRackPortion="getRackPortion"
+        />
       </span>
     </div>
   </div>
@@ -23,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .racks {
   width: 100%;
-  max-width: 270px;
+  max-width: 320px;
   margin: auto;
 }
 </style>
