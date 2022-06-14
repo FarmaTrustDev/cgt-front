@@ -27,7 +27,6 @@ export default {
     }
   },
   computed: {
-    
     translation() {
       return this.$store.getters.getTranslation
     },
