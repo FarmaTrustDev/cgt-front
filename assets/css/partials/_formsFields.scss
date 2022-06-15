@@ -119,7 +119,9 @@
     margin-bottom: 10px;
   }
 }
-
+::placeholder {
+  padding-left: 15px;
+}
 .ant-form-item-required {
   &::before {
     display: none;
@@ -133,8 +135,8 @@
     content: '*';
   }
 }
-.suite-pg{
-  padding: 20px;
+.suite-pg {
+  padding: 18px;
   background-color: #e9f3ff;
-  // border-radius: 50px;
+  border-radius: 10px;
 }
