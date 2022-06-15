@@ -31,14 +31,14 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span class="text-muted"> Baystate Clinic</span>
+                        <span> Baystate Clinic</span>
                       </h6>
                     </a-col>
                     <a-col :span="4" class="mt-15">
                       <h6><span class="text-muted">{{translation.AssetType_2_512}}:</span></h6>
                     </a-col>
                     <a-col :span="8" class="mt-15">
-                      <h6><span class="text-muted">Cell Sample</span></h6>
+                      <h6><span>Cell Sample</span></h6>
                     </a-col>
                   </a-row>
                   <a-row :gutter="20" dir="ltr">
@@ -47,7 +47,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span class="text-muted">
+                        <span>
                           baystateclinic@gmail.com</span
                         >
                       </h6>
@@ -58,7 +58,7 @@
                       <h6><span class="text-muted"> {{translation.Phone_1_63}}:</span></h6>
                     </a-col>
                     <a-col :span="9" class="mt-15">
-                      <h6><span class="text-muted"> +44 12345 1234</span></h6>
+                      <h6><span> +44 12345 1234</span></h6>
                     </a-col>
                   </a-row>
                 </div>
@@ -70,7 +70,7 @@
           <a-tabs type="card">
             <a-tab-pane key="1" :tab="translation.InbouAccep_3_834">
               <a-row>
-                
+               
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
                     <article class="article">
@@ -158,7 +158,8 @@
                 </a-col>
               </a-row>
             </a-tab-pane>
-            <a-tab-pane key="2" :tab="translation.InbouProce_2_513">
+            <a-tab-pane key="2" tab="Inbound Storage Process">
+               <a-head class="heading">Quality Assurance Checklist</a-head>
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
@@ -166,7 +167,7 @@
                 @updateId="updateId"
               />
             </a-tab-pane>
-            <a-tab-pane key="3" :tab="translation.OutboProce_2_514">
+            <a-tab-pane key="3" :tab="translation.OutboShipm_2_376">
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
@@ -206,7 +207,7 @@ export default {
           isCollected: false,
           name: `${this.$store.getters.getTranslation.Isthere_6_520}`,
         },
-        { id: 4, isCollected: false, name: `${this.$store.getters.getTranslation.Statuissue_2_521}`},
+        { id: 4, isCollected: false, name: `Are there any status issues ?`},
         {
           id: 5,
           isCollected: false,
