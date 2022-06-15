@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import fridge from '~/components/inventory/freezers/fridge'
+import fridge from '~/components/inventory/freezers/Fridge'
 import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { fridge },
