@@ -72,7 +72,7 @@
 <script>
 import detail from '~/components/root/inventory/detail'
 import PageLayout from '~/components/layout/PageLayout'
-import fridge from '~/components/inventory/fridge'
+import fridge from '~/components/inventory/freezers/fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
