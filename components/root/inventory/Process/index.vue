@@ -92,6 +92,15 @@
         @closeModal="handleEmailModal"
       />
     </a-modal>
+    <a-modal
+      :footer="null"
+      :visible="showQuarantine"
+      title="Select quarantine storage:"
+      @cancel="handleQuarantineModal"
+    >
+      <!-- <showQuarantine /> -->
+      <div></div>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -99,6 +108,7 @@ import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
 import InstantUpload from '~/components/upload/InstantUpload'
+import { QUARANTINE_STORAGE } from '~/services/Constant'
 export default {
   components: { Email, InstantUpload },
   mixins: [notifications],
@@ -142,6 +152,7 @@ export default {
       showEmailModal: false,
       body: null,
       bagService: BagCollectionServices,
+      showQuarantine: false,
     }
   },
   computed: {
@@ -151,6 +162,10 @@ export default {
   },
   methods: {
     handleCollectionSubmit(collection) {
+      if (collection.alias === QUARANTINE_STORAGE) {
+        this.handleQuarantineModal(true)
+        return false
+      }
       const fields = this.form.getFieldsValue()
       this.btnLoading = true
       const values = fields.collection[`id-${collection.id}`]
@@ -175,6 +190,9 @@ export default {
         // console.log(message)
       }
       this.showEmailModal = show
+    },
+    handleQuarantineModal(show) {
+      this.showQuarantine = show
     },
   },
 }
