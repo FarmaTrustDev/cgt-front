@@ -6,7 +6,7 @@
         <br />
         <h2 class="mt-15">
           <strong v-if="user.organizationTypeAlias!='SMARTLAB'">{{ translation.Equip_1_568 }}</strong>
-          <strong v-if="user.organizationTypeAlias=='SMARTLAB'">{{translation.Kits_1_547}}</strong>
+          <strong v-if="user.organizationTypeAlias=='SMARTLAB'" class="ml-20">{{translation.Kits_1_547}}</strong>
         </h2>
       </a-col>
     </a-row>

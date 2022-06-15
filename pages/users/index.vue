@@ -1,7 +1,7 @@
 <template>
     <div>
     <div class="clearfix mt-15">
-    <h3 class="page-title pl-5 float-left">{{translation.UserNew_3_136}}</h3>
+    <h3 class="page-title ml-80 float-left">{{translation.UserNew_3_136}}</h3>
       <a-button
         type="primary"
         class="mrm-5 float-right mt-5"

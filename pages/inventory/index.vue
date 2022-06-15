@@ -4,6 +4,7 @@
     :loading="loading"
     :bordered="false"
     :title="translation.SmartStore_2_548"
+    class="specific-storage"
   >
     <template slot="content">
       <inventory />
