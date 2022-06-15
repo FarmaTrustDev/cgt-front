@@ -11,7 +11,7 @@
           :stroke="data.color"
           stroke-width="16"
           pathLength="100"
-          :style="{ strokeDasharray: `${data.threshold}, 100` }"
+          :style="{ strokeDasharray: `${threshold}, 100` }"
         ></path>
       </svg>
       <svg class="static-svg" viewBox="-8 -7 110.063 63.375">
@@ -25,8 +25,8 @@
       </svg>
     </div>
     <figure>
-      <span class="digit top-digit">{{ data.threshold }}</span>
-      <div class="slider-beast">
+      <span class="digit top-digit">{{ threshold }}</span>
+      <div class="slider-beast" @drag="sliderDrag">
         <svg
           class="slider-svg"
           width="158"
@@ -58,6 +58,7 @@
             :style="{
               'background-image':
                 'url(' + getImageUrl('web/inventory/slider-bar.svg') + ')',
+              'background-position': `${threshold}px,0px`,
             }"
             class="img-dragger-dots"
           ></span>
@@ -79,6 +80,26 @@ export default {
         heading: 'some heading props',
         color: '#2359e8',
       }),
+    },
+  },
+  data() {
+    return {
+      threshold: 0,
+    }
+  },
+  mounted() {
+    this.threshold = this.data.threshold
+  },
+  methods: {
+    sliderDrag(e) {
+      if (e.x !== 0) {
+        const threshold = e.layerX
+        if (threshold >= 0 && e.layerX <= 100) {
+          this.threshold = threshold
+        }
+      } else {
+        this.threshold = 0
+      }
     },
   },
 }

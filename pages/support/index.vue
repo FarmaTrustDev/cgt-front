@@ -2,8 +2,8 @@
   <div class="support-page">
     <a-row class="p-30 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left">
-          {{ translation.suppoissue_2_176 }}
+        <h3 class="page-title float-left ml-80">
+          Support Issues
         </h3>
         <a-button
           type="primary"

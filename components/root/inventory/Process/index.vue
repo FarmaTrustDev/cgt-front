@@ -43,7 +43,7 @@
                   initialValue: row.notes,
                 },
               ]"
-              :placeholder="translation.Enternote_3_546 + ':'"
+              :placeholder="translation.Enternote_3_546"
             />
             <span v-else>{{ row.notes }}</span>
             <a-input
@@ -65,7 +65,7 @@
             :show-button="false"
           >
             <a-button slot="button" type="">
-              <a-icon type="upload" /> sign
+              <a-icon type="upload" /> Upload
             </a-button>
           </InstantUpload>
         </template>

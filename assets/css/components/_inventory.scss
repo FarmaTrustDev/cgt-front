@@ -53,6 +53,16 @@
     }
   }
 
+  .border-bottom-none {
+    .imageHeading {
+      border-bottom: none;
+    }
+  }
+
+  .border-bottom-line {
+    border-bottom: 1px solid $grey;
+  }
+
   .filter-search {
     border: 1px solid red;
     .ant-form-inline .ant-form-item > .ant-form-item-label {
