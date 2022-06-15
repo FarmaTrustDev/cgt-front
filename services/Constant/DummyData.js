@@ -13,7 +13,7 @@ export const baseStorage = [
     {
         id: 2,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 002',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 20,
         temperatureId: 2,
@@ -24,7 +24,7 @@ export const baseStorage = [
     {
         id: 3,
         color: '#FA6363',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 003',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 20,
         temperatureId: 2,
@@ -35,7 +35,7 @@ export const baseStorage = [
     {
         id: 4,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 004',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 20,
         temperatureId: 3,
@@ -46,7 +46,7 @@ export const baseStorage = [
     {
         id: 5,
         color: '#FA6363',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 005',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 20,
         temperatureId: 1,
@@ -57,7 +57,7 @@ export const baseStorage = [
     {
         id: 6,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 006',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 20,
         temperatureId: 2,

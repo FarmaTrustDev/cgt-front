@@ -4,7 +4,7 @@
       <a-col class="mb-15" :span="24">
         <detail v-if="false" />
 
-        <a-form class="filter-search mt-15" :form="form" layout="inline">
+        <a-form class="filter-search mt-15" :form="form" layout="inline" v-if="false">
           <a-form-item> <h2 class="mt-5">{{translation.searc_1_488}}</h2></a-form-item>
           <a-form-item>
             <a-input
@@ -62,14 +62,17 @@
 import Tile from '~/components/inventory/storage/Tile'
 import detail from '~/components/root/inventory/detail'
 import routeHelpers from '~/mixins/route-helpers'
-import { baseStorage } from '~/services/Constant/DummyData'
+
 
 export default {
   components: { Tile, detail },
   mixins: [routeHelpers],
+  props: {
+    storages: { type: Array, default: () => [] },
+  },
   data() {
     return {
-      storages: baseStorage,
+      // storages: baseStorage,
       loading: false,
       filters: {},
       zones: [

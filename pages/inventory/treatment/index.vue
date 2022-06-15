@@ -56,16 +56,18 @@
           <a-tab-pane key="1" tab="Inbound Sample">
             <a-input
               :placeholder="translation.searc_1_488"
-              class="float-right page-search-input mb-15"
+              class="float-right inventory-search mb-15"
+              @change="(e) => inboundSearch(e.target.value,'patientEnrollmentNumber')"
             >
               <a-icon slot="prefix" type="search" />
             </a-input>
             <a-table
               class="rounded-table"
-              :columns="pendingColumns"
-              :data-source="pendingSampleData"
+              :columns="newSampleColumns"
+              :data-source="inbound"
               :should-fetch="false"
             >
+            
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
@@ -87,15 +89,15 @@
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
-              class="float-right page-search-input mb-15"
-              @change="searchSupport"
+              class="float-right inventory-search mb-15"
+              @change="(e) => outboundSearch(e.target.value,'patientEnrollmentNumber')"
             >
               <a-icon slot="prefix" type="search" />
             </a-input>
             <a-table
               class="rounded-table"
               :columns="completedColumns"
-              :data-source="completedSampleData"
+              :data-source="outbound"
             >
               <!-- ==== steps === -->
               <span slot="status-steps" slot-scope="text, record">
@@ -118,8 +120,8 @@
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
-              class="float-right page-search-input mb-15"
-              @change="searchSupport"
+              class="float-right inventory-search mb-15"
+              @change="(e) => allSampleSearch(e.target.value,'patientEnrollmentNumber')"
             >
               <a-icon slot="prefix" type="search" />
             </a-input>
@@ -127,7 +129,7 @@
               class="rounded-table"
               :columns="allSampleColumns"
               :should-fetch="false"
-              :data-source="allSampleData"
+              :data-source="allSample"
             >
             </a-table>
           </a-tab-pane>
@@ -145,59 +147,10 @@ import {
 } from '~/services/Constant/Phases'
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
-export default {
-  components: {
-    // 'new-request': newRequests,
-    // 'in-progress': inProgress,
-    // all: All,
-    // completed: Completed,
-    // StandardTable,
-    PageLayout,
-  },
-  mixins: [routeHelpers, imagesHelper],
-  data() {
-    return {
-      loading: false,
-      treatmentTypes: [],
-      qrUrl: 'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg',
-      showModal: false,
-      phases: SMART_LAB_TREATMENT_PENDING_PHASES,
-      outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
-      completedColumns: [
-        {
-          title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
-          dataIndex: 'productionLine',
-          key: 'productionLine',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
-          dataIndex: 'dispatchedBy',
-          key: 'dispatchedBy',
-          scopedSlots: { customRender: 'status-steps' },
-        },
-      ],
-      newSampleData: [
-        {
+import { isEmpty } from '~/services/Utilities'
+import { isNumber } from '~/services/Helpers'
+export const newSampleData=[
+   {
           patientEnrollmentNumber: 'DAC7993',
           treatmentType: 'Platelet Lycate ',
           hospital: 'Baystate Clinic',
@@ -232,8 +185,8 @@ export default {
           print: 'Uploads/DocumentURL/label1.jpg',
           collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
         },
-      ],
-      completedSampleData: [
+]
+export const completedSampleData= [
         {
           patientEnrollmentNumber: 'DAC65198',
           treatmentType: 'Platelet Lycate ',
@@ -266,45 +219,8 @@ export default {
           collectionDateDeliveryDate: '08/02/2022 - 11/02/2022',
           dispatchedBy: 'Allen Braun',
         },
-      ],
-      pendingSampleData: [
-        {
-          patientEnrollmentNumber: 'DAC7986',
-          treatmentName: 'Platelet Lycate ',
-          productionLine: 'Zone A',
-          hospital: 'Baystate Clinic',
-          collectionDateDeliveryDate: '10/06/2022 - 14/06/2022',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9874',
-          treatmentName: 'Platelet Lycate ',
-          productionLine: 'Zone C',
-          hospital: 'Royal Hospital',
-          collectionDateDeliveryDate: '15/06/2022 - 20/06/2023',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9875',
-          treatmentName: 'Platelet Lycate ',
-          productionLine: 'Zone C',
-          hospital: 'Kings College',
-          collectionDateDeliveryDate: '21/06/2022 - 26/06/2024',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9876',
-          treatmentName: 'Platelet Lycate ',
-          productionLine: 'Zone A',
-          hospital: 'Baystate Clinic',
-          collectionDateDeliveryDate: '25/06/2022 - 29/06/2025',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9876',
-          treatmentName: 'Platelet Lycate ',
-          productionLine: 'Zone C',
-          hospital: 'Baystate Clinic',
-          collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
-        },
-      ],
-      allSampleData: [
+      ]
+export const allSampleData= [
         {
           patientEnrollmentNumber: 'DAC7993',
           treatmentType: 'Platelet Lycate ',
@@ -353,7 +269,99 @@ export default {
           collectionDateDeliveryDate: '26/05/2022 - 29/05/2022',
           dispatchedBy: 'In Progress',
         },
+      ]    
+export default {
+  components: {
+    // 'new-request': newRequests,
+    // 'in-progress': inProgress,
+    // all: All,
+    // completed: Completed,
+    // StandardTable,
+    PageLayout,
+  },
+  mixins: [routeHelpers, imagesHelper],
+  data() {
+    return {
+      loading: false,
+      treatmentTypes: [],
+      filters:{},
+      qrUrl: 'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg',
+      showModal: false,
+      phases: SMART_LAB_TREATMENT_PENDING_PHASES,
+      outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
+      completedColumns: [
+        {
+          title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
+          dataIndex: 'patientEnrollmentNumber',
+          key: 'patientEnrollmentNumber',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+          dataIndex: 'treatmentType',
+          key: 'treatmentType',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
+          dataIndex: 'productionLine',
+          key: 'productionLine',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Clien_1_505}`,
+          dataIndex: 'hospital',
+          key: 'hospital',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
+          dataIndex: 'collectionDateDeliveryDate',
+          key: 'collectionDateDeliveryDate',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
+          dataIndex: 'dispatchedBy',
+          key: 'dispatchedBy',
+          scopedSlots: { customRender: 'status-steps' },
+        },
       ],
+      
+      
+      pendingSampleData: [
+        {
+          patientEnrollmentNumber: 'DAC7986',
+          treatmentName: 'Platelet Lycate ',
+          productionLine: 'Zone A',
+          hospital: 'Baystate Clinic',
+          collectionDateDeliveryDate: '10/06/2022 - 14/06/2022',
+        },
+        {
+          patientEnrollmentNumber: 'DAC9874',
+          treatmentName: 'Platelet Lycate ',
+          productionLine: 'Zone C',
+          hospital: 'Royal Hospital',
+          collectionDateDeliveryDate: '15/06/2022 - 20/06/2023',
+        },
+        {
+          patientEnrollmentNumber: 'DAC9875',
+          treatmentName: 'Platelet Lycate ',
+          productionLine: 'Zone C',
+          hospital: 'Kings College',
+          collectionDateDeliveryDate: '21/06/2022 - 26/06/2024',
+        },
+        {
+          patientEnrollmentNumber: 'DAC9876',
+          treatmentName: 'Platelet Lycate ',
+          productionLine: 'Zone A',
+          hospital: 'Baystate Clinic',
+          collectionDateDeliveryDate: '25/06/2022 - 29/06/2025',
+        },
+        {
+          patientEnrollmentNumber: 'DAC9876',
+          treatmentName: 'Platelet Lycate ',
+          productionLine: 'Zone C',
+          hospital: 'Baystate Clinic',
+          collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
+        },
+      ],
+      
       newSampleColumns: [
         {
           title: `${this.$store.getters.getTranslation.SeriaNumbe_2_506}`,
@@ -454,6 +462,9 @@ export default {
           key: 'dispatchedBy',
         },
       ],
+      inbound:newSampleData,
+      outbound:completedSampleData,
+      allSample:allSampleData,
     }
   },
   computed: {
@@ -477,6 +488,93 @@ export default {
       this.showModal = true
       this.qrUrl = id
       // LabelServices.scheduling(id);
+    },
+
+    inboundSearch(value, key) {
+      // console.log(key)
+      let filters = this.filters
+      filters[key] = value
+      filters = JSON.stringify(filters)
+      filters = JSON.parse(filters)
+      this.filters = filters
+
+      if (!isEmpty(filters)) {
+        let storages = []
+        for (const filter in filters) {
+          const filterValue = filters[filter]
+
+          storages = newSampleData.filter((storage) => {
+            if (isEmpty(filterValue) && !isNumber(filterValue)) {
+              // console.log(storage)
+              return storage[filter].match(value)
+            }
+            // eslint-disable-next-line eqeqeq
+            return storage[filter].match(value) == filterValue
+          })
+        }
+        storages = JSON.stringify(storages)
+        this.inbound = JSON.parse(storages)
+      } else {
+        this.inbound = newSampleData
+      }
+    },    
+    outboundSearch(value, key) {
+      // console.log(key)
+      let filters = this.filters
+      filters[key] = value
+      filters = JSON.stringify(filters)
+      filters = JSON.parse(filters)
+      this.filters = filters
+
+      if (!isEmpty(filters)) {
+        let storages = []
+        for (const filter in filters) {
+          const filterValue = filters[filter]
+
+          storages = completedSampleData.filter((storage) => {
+            if (isEmpty(filterValue) && !isNumber(filterValue)) {
+              // console.log(storage)
+              return storage[filter].match(value)
+            }
+            // eslint-disable-next-line eqeqeq
+            return storage[filter].match(value) == filterValue
+          })
+        }
+
+        storages = JSON.stringify(storages)
+        this.outbound = JSON.parse(storages)
+      } else {
+        this.outbound = completedSampleData
+      }
+    },
+    allSampleSearch(value, key) {
+      // console.log(key)
+      let filters = this.filters
+      filters[key] = value
+      filters = JSON.stringify(filters)
+      filters = JSON.parse(filters)
+      this.filters = filters
+
+      if (!isEmpty(filters)) {
+        let storages = []
+        for (const filter in filters) {
+          const filterValue = filters[filter]
+
+          storages = allSampleData.filter((storage) => {
+            if (isEmpty(filterValue) && !isNumber(filterValue)) {
+              // console.log(storage)
+              return storage[filter].match(value)
+            }
+            // eslint-disable-next-line eqeqeq
+            return storage[filter].match(value) == filterValue
+          })
+        }
+
+        storages = JSON.stringify(storages)
+        this.allSample = JSON.parse(storages)
+      } else {
+        this.allSample = allSampleData
+      }
     },
   },
 }
