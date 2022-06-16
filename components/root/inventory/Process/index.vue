@@ -171,7 +171,7 @@ export default {
   },
   methods: {
     submit() {
-      this.goto('/inventory/storage/tasks');
+      this.goto('/inventory/storage/tasks')
     },
     handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()
