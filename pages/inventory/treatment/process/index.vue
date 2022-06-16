@@ -196,8 +196,8 @@
                 </a-col>
               </a-row>
             </a-tab-pane>
-            <a-tab-pane key="2" tab="Inbound Storage Process">
-              <h3>Quality Assurance Checklist</h3>
+            <a-tab-pane key="2" :tab="translation.InbouStora_3_564">
+              <h3>{{translation.QualiAssur_3_565}}</h3>
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
@@ -307,12 +307,12 @@ export default {
       ],
     }
   },
-  mounted() {},
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
+  mounted() {},
   methods: {
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {

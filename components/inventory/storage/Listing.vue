@@ -63,7 +63,6 @@ import Tile from '~/components/inventory/storage/Tile'
 import detail from '~/components/root/inventory/detail'
 import routeHelpers from '~/mixins/route-helpers'
 
-
 export default {
   components: { Tile, detail },
   mixins: [routeHelpers],

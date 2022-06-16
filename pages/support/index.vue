@@ -3,7 +3,7 @@
     <a-row class="p-30 mb-10">
       <div class="page-header">
         <h3 class="page-title float-left ml-80">
-          Support Issues
+          {{translation.suppoissue_2_176}}
         </h3>
         <a-button
           type="primary"
