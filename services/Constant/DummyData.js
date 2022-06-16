@@ -477,7 +477,7 @@ export const consumables = [
 export const baseStorageQuarantine = [
     {
         id: 1,
-        type: 3,
+        type: 1,
         color: '#1943AE',
         title: 'Quarantine 001',
         location: 'Storage Suite 3, Germany - Cellfuse',
@@ -503,7 +503,7 @@ export const baseStorageQuarantine = [
     },
     {
         id: 3,
-        color: '#FA6363',
+        color: '#1943AE',
         title: 'Quarantine 003',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 20,
