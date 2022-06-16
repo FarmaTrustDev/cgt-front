@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <span class="ml-80 pg-head">Task/Store Sample</span>
-    <span class="ml-150 pg-head">ID: DAC53827</span>
-    <span class="ml-150 pg-head">Name: Platelet Lycate</span>
-    <span class="ml-150 pg-head">Client: Royal Hospital</span>
+  <div class="">
+    <span class="mt-25 ml-80 pg-head">Task/Store Sample</span>
+    <span class="mt-25 ml-150 pg-head">ID: DAC53827</span>
+    <span class="mt-25 ml-150 pg-head">Name: Platelet Lycate</span>
+    <span class="mt-25 ml-150 pg-head">Client: Royal Hospital</span>
     <div class="pt-10 float-left icons">
       <span class="ml-80 pg-head">Fridge: Kings 123</span>
       <span class="ml-150 pg-head"
@@ -15,7 +15,7 @@
         ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Zone A,
         Storage Suite 3, Germany - Cellfuse</span
       >
-      <span class="ml-150 pg-head"
+      <span class="ml-110 pg-head"
         ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Shelf 5,
         Rack 2</span
       >
@@ -37,11 +37,11 @@
           >Print Label</a-button
         >
       </template>
-      <template slot="confirm">
+      <template slot="confirm" slot-scope="confirm, index">
         <a-button
-          class="print-btn"
-          style="background-color: gray; color: white"
+          :class="confirm ? 'blue': 'gray'"
           size="small"
+          @click="handleClick(confirm,index)"
           >Confirm placement</a-button
         >
       </template>
@@ -49,16 +49,25 @@
     <a-modal
       :visible="showModal"
       :title="translation.Docum_1_507"
-      @cancel="handleModal(false)"
-      @ok="handleModal(false)"
     >
       <img class="img-responsive" :src="getImageUrl(qrUrl)" />
-    </a-modal>
+      <template slot="footer">
+        <a-button @click="handleModal(false)">Cancel</a-button>
+        <a-button @click="printWindow()">Print</a-button>     
+      </template>
+</a-modal>
+
+
   </div>
 </template>
 <script>
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
+// import { newSampleData } from '../treatment/index.vue'
+// import { isEmpty } from '~/services/Utilities'
+// import { isNumber } from '~/services/Helpers'
+
+// import { newSampleData } from '../treatment/index.vue'
 export default {
   components: {},
   mixins: [routeHelpers, imagesHelper],
@@ -66,6 +75,9 @@ export default {
   data() {
     return {
       showModal: false,
+      clicked:false,
+      greenDisk : 'g',
+      blueDisk : 'b',
       qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
       newTasksColumns: [
         {
@@ -116,6 +128,8 @@ export default {
           client: 'Baystate Clinic',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:0,
         },
         {
           sampleId: 'DAC7986',
@@ -123,6 +137,8 @@ export default {
           client: 'Royal Hospital',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:1,
         },
         {
           sampleId: 'DAC9874',
@@ -130,6 +146,8 @@ export default {
           client: 'Royal Hospital',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:2,
         },
         {
           sampleId: 'DAC7996',
@@ -137,6 +155,8 @@ export default {
           client: 'Royal Hospital',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:3,
         },
         {
           sampleId: 'DAC9874',
@@ -144,6 +164,8 @@ export default {
           client: 'Royal Hospital',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:4,
         },
         {
           sampleId: 'DAC9874',
@@ -151,6 +173,8 @@ export default {
           client: 'Royal Hospital',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:5,
         },
         {
           sampleId: 'DAC9874',
@@ -158,6 +182,8 @@ export default {
           client: 'Royal Hospital',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:6,
         },
         {
           sampleId: 'DAC9874',
@@ -165,6 +191,8 @@ export default {
           client: 'Royal Hospital',
           fridge: 'Kings 123',
           position: 'Rack 21A',
+          confirm: false,
+          index:7,
         },
       ],
     }
@@ -180,8 +208,15 @@ export default {
     },
     openViewModal(id) {
       this.showModal = true
-      // this.qrUrl = id
-      // LabelServices.scheduling(id);
+    },
+    handleClick(confirm,index){
+      for(let i = 0; i < this.newTasksData.length; i++){
+        if(this.newTasksData[i].index===index.index)
+          this.newTasksData[i].confirm=!this.newTasksData[i].confirm
+      }
+    },
+    printWindow(){
+      window.print()
     },
   },
 }
