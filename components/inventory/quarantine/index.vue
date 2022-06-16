@@ -1,15 +1,13 @@
 <template>
   <div>
     <a-row :gutter="24">
-      <a-col :span="6">
-        <TileCenter
-          heading="Freezer Atara 001"
-          footer="Storage Suite 3, Germany - Cellfuse"
-        >
-          <div slot="center" class="text-center">
-            <fridge style="zoom: 2.5" />
-          </div>
-        </TileCenter>
+      <a-col
+        v-for="(consume, index) in consumables"
+        :key="index"
+        class="text-center"
+        :span="8"
+      >
+        <card :data="consume" />
       </a-col>
     </a-row>
     <a-row class="mt-15" :gutter="24">
@@ -42,12 +40,11 @@
 </template>
 
 <script>
-import fridge from '~/components/inventory/freezers/Fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
-
-import { fridgeData } from '~/services/Constant/DummyData'
+import { fridgeData, consumables } from '~/services/Constant/DummyData'
+import card from '~/components/root/inventory/consumables/Card'
 
 import { isEmpty } from '~/services/Helpers'
 
@@ -55,12 +52,13 @@ export default {
   components: {
     racks,
     Trays,
-    fridge,
     TileCenter,
+    card,
   },
   data() {
     return {
       fridgeData,
+      consumables,
       loading: false,
       steps: [
         // {

@@ -6,46 +6,48 @@
     :title="translation.StoraServi_2_532"
     class="specific-storage"
   >
-    
     <div slot="content" class="h-tabs large-tabs">
       <a-tabs class="" type="card">
-        <a-tab-pane key="storages" :tab="translation.Explostora_3_536"
+        <a-tab-pane key="storages" :tab="translation.Explostora_3_536">
+          <a-input
+            v-decorator="['quantity']"
+            :allow-clear="true"
+            size="large"
+            placeholder="Search Product"
+            class="float-right inventory-search"
+            @change="(e) => search(e.target.value, 'title')"
           >
-      <a-input
-        v-decorator="['quantity']"
-        :allow-clear="true"
-        size="large"
-        placeholder="Search Product"
-        class="float-right inventory-search"
-        
-        @change="(e) => search(e.target.value,'title')"
-      >
-        <a-icon slot="prefix" type="search" />
-      </a-input>          
+            <a-icon slot="prefix" type="search" />
+          </a-input>
           <Listing :storages="storage" />
         </a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
-      <a-input
-        v-decorator="['quantity']"
-        :allow-clear="true"
-        size="large"
-        placeholder="Search Product"
-        class="float-right inventory-search"
-        
-        @change="(e) => productSearch(e.target.value,'product,productLocation,clientName,description')"
-      >
-        <a-icon slot="prefix" type="search" />
-      </a-input>
+          <a-input
+            v-decorator="['quantity']"
+            :allow-clear="true"
+            size="large"
+            placeholder="Search Product"
+            class="float-right inventory-search"
+            @change="
+              (e) =>
+                productSearch(
+                  e.target.value,
+                  'product,productLocation,clientName,description'
+                )
+            "
+          >
+            <a-icon slot="prefix" type="search" />
+          </a-input>
           <StandardTable
             :should-update="shouldUpdate"
             :should-fetch="false"
             :dump-data="data"
             :columns="productsColumn"
             :pagination="false"
-          />         
+          />
         </a-tab-pane>
       </a-tabs>
-      </div>
+    </div>
   </page-layout>
 </template>
 
@@ -56,195 +58,18 @@ import { isNumber } from '~/services/Helpers'
 import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
 import { baseStorage } from '~/services/Constant/DummyData'
-/* const baseStorage = [
-  {
-    id: 1,
-    color: '#1943AE',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 20,
-    temperatureId: 1,
-    zoneId: 1,
-    temperature: '-20',
-    zone: 'Zone A',
-  },
-  {
-    id: 2,
-    color: '#1943AE',
-    title: 'Freezer Atara 002',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 20,
-    temperatureId: 2,
-    zoneId: 3,
-    temperature: '-80',
-    zone: 'Zone C',
-  },
-  {
-    id: 3,
-    color: '#FA6363',
-    title: 'Freezer Atara 003',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 20,
-    temperatureId: 2,
-    zoneId: 1,
-    temperature: '-80',
-    zone: 'Zone A',
-  },
-  {
-    id: 4,
-    color: '#1943AE',
-    title: 'Freezer Atara 004',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 20,
-    temperatureId: 3,
-    zoneId: 1,
-    temperature: 'LN2',
-    zone: 'Zone A',
-  },
-  {
-    id: 5,
-    color: '#FA6363',
-    title: 'Freezer Atara 005',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 20,
-    temperatureId: 1,
-    zoneId: 2,
-    temperature: '-20',
-    zone: 'Zone B',
-  },
-  {
-    id: 6,
-    color: '#1943AE',
-    title: 'Freezer Atara 006',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 20,
-    temperatureId: 2,
-    zoneId: 2,
-    temperature: '-80',
-    zone: 'Zone B',
-  },
-  {
-    id: 7,
-    color: '#FA6363',
-    title: 'Freezer Atara 007',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 20,
-    temperatureId: 3,
-    zoneId: 2,
-    temperature: 'LN2',
-    zone: 'Zone B',
-  },
-  {
-    id: 8,
-    color: '#1943AE',
-    title: 'Freezer Atara 008',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 14,
-    temperatureId: 2,
-    zoneId: 1,
-    temperature: '-80',
-    zone: 'Zone A',
-  },
-  {
-    id: 9,
-    color: '#FA6363',
-    title: 'Freezer Atara 009',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 11,
-    temperatureId: 3,
-    zoneId: 1,
-    temperature: 'LN2',
-    zone: 'Zone A',
-  },
-  {
-    id: 10,
-    color: '#1943AE',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 18,
-    temperatureId: 2,
-    zoneId: 2,
-    temperature: '-80',
-    zone: 'Zone B',
-  },
-  {
-    id: 11,
-    color: '#FA6363',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 8,
-    temperatureId: 1,
-    zoneId: 1,
-    temperature: '-20',
-    zone: 'Zone A',
-  },
-  {
-    id: 12,
-    color: '#1943AE',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 16,
-    temperatureId: 2,
-    zoneId: 3,
-    temperature: '-80',
-    zone: 'Zone C',
-  },
-  {
-    id: 13,
-    color: '#FA6363',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 18,
-    temperatureId: 2,
-    zoneId: 2,
-    temperature: '-80',
-    zone: 'Zone B',
-  },
-  {
-    id: 14,
-    color: '#1943AE',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 14,
-    temperatureId: 3,
-    zoneId: 1,
-    temperature: 'LN2',
-    zone: 'Zone A',
-  },
-  {
-    id: 15,
-    color: '#FA6363',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 14,
-    temperatureId: 2,
-    zoneId: 1,
-    temperature: '-80',
-    zone: 'Zone A',
-  },
-  {
-    id: 16,
-    color: '#1943AE',
-    title: 'Freezer Atara 001',
-    location: 'Storage Suite 3, Germany - Cellfuse',
-    quantity: 14,
-    temperatureId: 2,
-    zoneId: 1,
-    temperature: '-80',
-    zone: 'Zone A',
-  },
-] */
+
 export default {
   components: { PageLayout, StandardTable, Listing },
 
   data() {
     return {
       productFilters: {},
-      filters:{},
+      filters: {},
       loading: false,
-      data:[],
-      shouldUpdate:true,
-      storage:baseStorage,
+      data: [],
+      shouldUpdate: true,
+      storage: baseStorage,
       productsColumn: [
         {
           title: `${this.$store.getters.getTranslation.Produ_1_538}`,
@@ -388,15 +213,15 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted(){
-    this.data=this.productsData
+  mounted() {
+    this.data = this.productsData
   },
   methods: {
-    productSearch(value,key){
+    productSearch(value, key) {
       // console.log(value)
       let filters = this.productFilters
-      const keys=key.split(',')
-      for(let i=0;i<keys.length;i++){
+      const keys = key.split(',')
+      for (let i = 0; i < keys.length; i++) {
         filters[keys[i]] = value
       }
       filters = JSON.stringify(filters)
@@ -415,22 +240,22 @@ export default {
             }
             return storage[filter] === filterValue
           })
-          if(products.length>0) break
+          if (products.length > 0) break
           // console.log(products.length)
         }
-        
+
         products = JSON.stringify(products)
         // this.updateData(products)
         this.data = JSON.parse(products)
-        this.shouldUpdate=true
+        this.shouldUpdate = true
       } else {
-        this.data=this.productsData
-        this.shouldUpdate=true
+        this.data = this.productsData
+        this.shouldUpdate = true
         // this.data = this.productsData
       }
       // console.log(this.data)
     },
-    updateData(str){
+    updateData(str) {
       // alert('hello')
       console.log(str)
     },
