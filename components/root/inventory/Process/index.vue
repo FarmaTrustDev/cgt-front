@@ -78,11 +78,10 @@
           />
         </template>
       </a-table>
-      <a-form-item class="mt-15">
-        <FormActionButton />
-      </a-form-item>
     </a-form>
-
+    <a-form-item class="mt-15">
+      <FormActionButton :disabled="buttonEnable" />
+    </a-form-item>
     <a-modal
       title="Notify"
       :footer="null"
@@ -105,7 +104,7 @@
     >
       <!-- <showQuarantine /> -->
       <div>
-        <Quarantine />
+        <Quarantine @submit="handleQuarantineSubmit" />
       </div>
     </a-modal>
   </div>
@@ -161,6 +160,7 @@ export default {
       body: null,
       bagService: BagCollectionServices,
       showQuarantine: false,
+      buttonEnable: false,
     }
   },
   computed: {
@@ -170,13 +170,15 @@ export default {
   },
   methods: {
     handleCollectionSubmit(collection) {
-      if (collection.alias === QUARANTINE_STORAGE) {
+      const fields = this.form.getFieldsValue()
+
+      const values = fields.collection[`id-${collection.id}`]
+
+      if (collection.alias === QUARANTINE_STORAGE && values.collect) {
         this.handleQuarantineModal(true)
         return false
       }
-      const fields = this.form.getFieldsValue()
       this.btnLoading = true
-      const values = fields.collection[`id-${collection.id}`]
       if (values) {
         this.success('Update Successfully')
         this.$emit('updateId', collection.id)
@@ -201,6 +203,10 @@ export default {
     },
     handleQuarantineModal(show) {
       this.showQuarantine = show
+    },
+    handleQuarantineSubmit() {
+      this.handleQuarantineModal(false)
+      this.buttonEnable = true
     },
   },
 }
