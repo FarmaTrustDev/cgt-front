@@ -53,7 +53,7 @@
           </a-modal>
         </a-tab-pane> -->
 
-          <a-tab-pane key="1" tab="Inbound Sample">
+          <a-tab-pane key="1" :tab="translation.InbouSampl_2_306">
             <a-input
               :placeholder="translation.searc_1_488"
               class="float-right inventory-search mb-15"
