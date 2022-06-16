@@ -307,12 +307,12 @@ export default {
       ],
     }
   },
-  mounted() {},
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
+  mounted() {},
   methods: {
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {

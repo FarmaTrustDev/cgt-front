@@ -78,7 +78,11 @@
           />
         </template>
       </a-table>
+      <a-form-item class="mt-15">
+        <FormActionButton />
+      </a-form-item>
     </a-form>
+
     <a-modal
       title="Notify"
       :footer="null"
