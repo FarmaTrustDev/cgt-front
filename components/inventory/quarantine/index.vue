@@ -38,6 +38,9 @@
           </div> </TileCenter
       ></a-col>
     </a-row>
+    <a-form-item class="mt-15">
+      <FormActionButton @click="submit" />
+    </a-form-item>
   </div>
 </template>
 
@@ -85,6 +88,9 @@ export default {
     },
     getTube(tube) {
       this.steps = tube.steps
+    },
+    submit() {
+      this.$emit('submit', true)
     },
   },
 }

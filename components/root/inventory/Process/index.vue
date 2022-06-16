@@ -78,11 +78,10 @@
           />
         </template>
       </a-table>
-      <a-form-item class="mt-15">
-        <FormActionButton />
-      </a-form-item>
     </a-form>
-
+    <a-form-item class="mt-15">
+      <FormActionButton @click="submit" :disabled="buttonEnable" />
+    </a-form-item>
     <a-modal
       title="Notify"
       :footer="null"
@@ -105,7 +104,7 @@
     >
       <!-- <showQuarantine /> -->
       <div>
-        <Quarantine />
+        <Quarantine @submit="handleQuarantineSubmit" />
       </div>
     </a-modal>
   </div>
@@ -117,9 +116,10 @@ import Email from '~/components/treatment/collections/bag/Email'
 import Quarantine from '~/components/inventory/quarantine'
 import InstantUpload from '~/components/upload/InstantUpload'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { Email, InstantUpload, Quarantine },
-  mixins: [notifications],
+  mixins: [notifications, routeHelpers],
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
@@ -161,6 +161,7 @@ export default {
       body: null,
       bagService: BagCollectionServices,
       showQuarantine: false,
+      buttonEnable: false,
     }
   },
   computed: {
@@ -169,14 +170,21 @@ export default {
     },
   },
   methods: {
+    submit() {
+      this.goto('/inventory/storage/tasks')
+    },
     handleCollectionSubmit(collection) {
-      if (collection.alias === QUARANTINE_STORAGE) {
+      const fields = this.form.getFieldsValue()
+
+      const values = fields.collection[`id-${collection.id}`]
+
+      if (collection.alias === QUARANTINE_STORAGE && values.collect) {
         this.handleQuarantineModal(true)
+        // this.$emit('updateId', collection.id)
         return false
       }
-      const fields = this.form.getFieldsValue()
+      this.buttonEnable = false
       this.btnLoading = true
-      const values = fields.collection[`id-${collection.id}`]
       if (values) {
         this.success('Update Successfully')
         this.$emit('updateId', collection.id)
@@ -201,6 +209,10 @@ export default {
     },
     handleQuarantineModal(show) {
       this.showQuarantine = show
+    },
+    handleQuarantineSubmit() {
+      this.handleQuarantineModal(false)
+      this.buttonEnable = true
     },
   },
 }
