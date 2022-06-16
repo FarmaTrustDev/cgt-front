@@ -93,13 +93,16 @@
       />
     </a-modal>
     <a-modal
+      :width="1200"
       :footer="null"
       :visible="showQuarantine"
       title="Select quarantine storage:"
-      @cancel="handleQuarantineModal"
+      @cancel="handleQuarantineModal(false)"
     >
       <!-- <showQuarantine /> -->
-      <div></div>
+      <div>
+        <Quarantine />
+      </div>
     </a-modal>
   </div>
 </template>
@@ -107,10 +110,11 @@
 import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
+import Quarantine from '~/components/inventory/quarantine'
 import InstantUpload from '~/components/upload/InstantUpload'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
 export default {
-  components: { Email, InstantUpload },
+  components: { Email, InstantUpload, Quarantine },
   mixins: [notifications],
   props: {
     collections: { required: true, type: Array },

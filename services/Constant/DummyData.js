@@ -176,3 +176,225 @@ export const baseStorage = [
         zone: 'Zone A',
     },
 ]
+
+
+
+
+
+// ==================== inventory data ============
+const tube = {
+    id: 2,
+    active: true,
+    name: '5A',
+    steps: [
+        {
+            title: 'Jack Black',
+            date: '9:00',
+            by: 'Inbound Date',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: ' Simon Smith',
+            date: '9:30',
+            by: 'Inbound Process',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: 'Ahmed Salaam',
+            date: '10:00',
+            by: 'Storage',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: 'Claire Jones',
+            date: '14:00',
+            by: 'Visual Check',
+            detail: '28 Feb 2022',
+        },
+        {
+            title: 'Dwayne Morgan',
+            date: '15:00',
+            by: 'Packaging Depot',
+            detail: '19 April 2022',
+        },
+        {
+            title: 'RT456',
+            date: '16:00',
+            by: 'Courier Pick Up',
+            detail: '19 April 2022',
+        },
+    ],
+}
+const tube2 = {
+    id: 3,
+    active: false,
+    name: '5A',
+    steps: [
+        {
+            title: 'Jack Black',
+            date: '9:00',
+            by: 'Inbound Date',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: ' Simon Smith',
+            date: '9:30',
+            by: 'Inbound Process',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: 'Ahmed Salaam',
+            date: '10:00',
+            by: 'Storage',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: 'Claire Jones',
+            date: '14:00',
+            by: 'Visual Check',
+            detail: '28 Feb 2022',
+        },
+        {
+            title: 'Dwayne Morgan',
+            date: '15:00',
+            by: 'Packaging Depot',
+            detail: '19 April 2022',
+        },
+        {
+            title: 'RT456',
+            date: '16:00',
+            by: 'Courier Pick Up',
+            detail: '19 April 2022',
+        },
+    ],
+}
+const tube3 = {
+    id: 3,
+    active: false,
+    name: '5A',
+    steps: [
+        {
+            title: 'Jack Black',
+            date: '9:00',
+            by: 'Inbound Date',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: ' Simon Smith',
+            date: '9:30',
+            by: 'Inbound Process',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: 'Ahmed Salaam',
+            date: '10:00',
+            by: 'Storage',
+            detail: '21 Feb 2022',
+        },
+        {
+            title: 'Claire Jones',
+            date: '14:00',
+            by: 'Visual Check',
+            detail: '28 Feb 2022',
+        },
+        {
+            title: 'Dwayne Morgan',
+            date: '15:00',
+            by: 'Packaging Depot',
+            detail: '19 April 2022',
+        },
+        {
+            title: 'RT456',
+            date: '16:00',
+            by: 'Courier Pick Up',
+            detail: '19 April 2022',
+        },
+    ],
+}
+const portion = {
+    id: 1,
+    color: 'red',
+    active: true,
+    trays: [
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+    ],
+}
+const portion2 = {
+    id: 2,
+    color: 'red',
+    active: false,
+    trays: [
+        {
+            tubes: [tube2, tube3, tube, tube2, tube, tube],
+        },
+        {
+            tubes: [tube, tube2, tube, tube, tube, tube],
+        },
+        {
+            tubes: [tube, tube, tube, tube, tube, tube],
+        },
+        {
+            tubes: [tube, tube, tube, tube, tube, tube],
+        },
+        {
+            tubes: [tube, tube, tube, tube, tube, tube],
+        },
+    ],
+}
+const portion3 = {
+    id: 2,
+    color: 'red',
+    active: false,
+    trays: [
+        {
+            tubes: [tube2, tube3, tube2, tube2, tube2, tube],
+        },
+        {
+            tubes: [tube2, tube, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube, tube],
+        },
+    ],
+}
+const rack = {
+    id: 1,
+    portions: [portion, portion2, portion3],
+}
+const rack2 = {
+    id: 1,
+    portions: [portion, portion2, portion, portion2],
+}
+const rack3 = {
+    id: 1,
+    portions: [portion, portion2, portion3, portion2],
+}
+
+export const fridgeData = {
+    name: 'Fridge Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    racks: [rack, rack2, rack3, rack2, rack],
+}
