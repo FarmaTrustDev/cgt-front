@@ -2,12 +2,12 @@
   <div>
     <a-row :gutter="24">
       <a-col
-        v-for="(consume, index) in consumables"
+        v-for="(storage, index) in storages"
         :key="index"
         class="text-center"
         :span="8"
       >
-        <card :data="consume" />
+        <Tile class="light-shadow border" :storage="storage" />
       </a-col>
     </a-row>
     <a-row class="mt-15" :gutter="24">
@@ -43,8 +43,11 @@
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
-import { fridgeData, consumables } from '~/services/Constant/DummyData'
-import card from '~/components/root/inventory/consumables/Card'
+import {
+  fridgeData,
+  baseStorageQuarantine,
+} from '~/services/Constant/DummyData'
+import Tile from '~/components/inventory/storage/Tile'
 
 import { isEmpty } from '~/services/Helpers'
 
@@ -53,12 +56,12 @@ export default {
     racks,
     Trays,
     TileCenter,
-    card,
+    Tile,
   },
   data() {
     return {
       fridgeData,
-      consumables,
+      storages: baseStorageQuarantine,
       loading: false,
       steps: [
         // {

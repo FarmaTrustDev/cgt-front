@@ -178,7 +178,41 @@ export const baseStorage = [
 ]
 
 
-
+export const baseStorageQuarantine = [
+    {
+        id: 1,
+        color: '#1943AE',
+        title: 'Quarantine 001',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 1,
+        zoneId: 1,
+        temperature: '-20',
+        zone: 'Zone A',
+    },
+    {
+        id: 2,
+        color: '#1943AE',
+        title: 'Quarantine 002',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        zoneId: 3,
+        temperature: '-80',
+        zone: 'Zone C',
+    },
+    {
+        id: 3,
+        color: '#FA6363',
+        title: 'Quarantine 003',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        zoneId: 1,
+        temperature: '-80',
+        zone: 'Zone A',
+    },
+]
 
 
 // ==================== inventory data ============
