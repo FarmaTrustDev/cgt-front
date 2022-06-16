@@ -152,16 +152,6 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
     },
     {
         id: 2,
-        name: 'Store Sample',
-        alias: 'STORE_SAMPLE',
-        phaseId: 14,
-        enablePageId: 14,
-        url_slug: '/inventory/treatment/process/',
-        url_type: URL_TYPE.treatment,
-        params: { view: 'STORE_SAMPLE' }
-    },
-    {
-        id: 3,
         name: 'Process Sample',
         alias: 'PROCESS_SAMPLE',
         phaseId: 10,
@@ -171,14 +161,24 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         params: { view: 'MANUFACTURER' }
     },
     {
-        id: 4,
-        name: 'Outbound Process',
-        alias: 'OUTBOUND_PROCESS',
+        id: 3,
+        name: 'Store Sample',
+        alias: 'STORE_SAMPLE',
         phaseId: 14,
         enablePageId: 14,
         url_slug: '/inventory/treatment/process/',
         url_type: URL_TYPE.treatment,
-        params: { view: 'OUTBOUND_SHIPMENT' }
+        params: { view: 'STORE_SAMPLE' }
     },
+    // {
+    //     id: 4,
+    //     name: 'Outbound Process',
+    //     alias: 'OUTBOUND_PROCESS',
+    //     phaseId: 14,
+    //     enablePageId: 14,
+    //     url_slug: '/inventory/treatment/process/',
+    //     url_type: URL_TYPE.treatment,
+    //     params: { view: 'OUTBOUND_SHIPMENT' }
+    // },
 ]
 
