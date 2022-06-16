@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <span class="ml-80 pg-head">Task/Store Sample</span>
-    <span class="ml-150 pg-head">ID: DAC53827</span>
-    <span class="ml-150 pg-head">Name: Platelet Lycate</span>
-    <span class="ml-150 pg-head">Client: Royal Hospital</span>
+  <div class="">
+    <span class="mt-25 ml-80 pg-head">Task/Store Sample</span>
+    <span class="mt-25 ml-150 pg-head">ID: DAC53827</span>
+    <span class="mt-25 ml-150 pg-head">Name: Platelet Lycate</span>
+    <span class="mt-25 ml-150 pg-head">Client: Royal Hospital</span>
     <div class="pt-10 float-left icons">
       <span class="ml-80 pg-head">Fridge: Kings 123</span>
       <span class="ml-150 pg-head"
@@ -15,7 +15,7 @@
         ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Zone A,
         Storage Suite 3, Germany - Cellfuse</span
       >
-      <span class="ml-150 pg-head"
+      <span class="ml-110 pg-head"
         ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Shelf 5,
         Rack 2</span
       >
