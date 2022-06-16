@@ -6,23 +6,46 @@
     :title="translation.StoraServi_2_532"
     class="specific-storage"
   >
+    
     <div slot="content" class="h-tabs large-tabs">
       <a-tabs class="" type="card">
         <a-tab-pane key="storages" :tab="translation.Explostora_3_536"
           >
-          <Listing />
+      <a-input
+        v-decorator="['quantity']"
+        :allow-clear="true"
+        size="large"
+        placeholder="Search Product"
+        class="float-right inventory-search"
+        
+        @change="(e) => search(e.target.value,'title')"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>          
+          <Listing :storages="storage" />
         </a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
+      <a-input
+        v-decorator="['quantity']"
+        :allow-clear="true"
+        size="large"
+        placeholder="Search Product"
+        class="float-right inventory-search"
+        
+        @change="(e) => productSearch(e.target.value,'product,productLocation,clientName,description')"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
           <StandardTable
+            :should-update="shouldUpdate"
             :should-fetch="false"
-            :dump-data="productsData"
+            :dump-data="data"
             :columns="productsColumn"
             :pagination="false"
           />         
         </a-tab-pane>
-
       </a-tabs>
-    </div>
+      </div>
   </page-layout>
 </template>
 
@@ -32,8 +55,8 @@ import { isEmpty } from '~/services/Utilities'
 import { isNumber } from '~/services/Helpers'
 import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
-
-const baseStorage = [
+import { baseStorage } from '~/services/Constant/DummyData'
+/* const baseStorage = [
   {
     id: 1,
     color: '#1943AE',
@@ -48,7 +71,7 @@ const baseStorage = [
   {
     id: 2,
     color: '#1943AE',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 002',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 20,
     temperatureId: 2,
@@ -59,7 +82,7 @@ const baseStorage = [
   {
     id: 3,
     color: '#FA6363',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 003',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 20,
     temperatureId: 2,
@@ -70,7 +93,7 @@ const baseStorage = [
   {
     id: 4,
     color: '#1943AE',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 004',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 20,
     temperatureId: 3,
@@ -81,7 +104,7 @@ const baseStorage = [
   {
     id: 5,
     color: '#FA6363',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 005',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 20,
     temperatureId: 1,
@@ -92,7 +115,7 @@ const baseStorage = [
   {
     id: 6,
     color: '#1943AE',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 006',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 20,
     temperatureId: 2,
@@ -103,7 +126,7 @@ const baseStorage = [
   {
     id: 7,
     color: '#FA6363',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 007',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 20,
     temperatureId: 3,
@@ -114,7 +137,7 @@ const baseStorage = [
   {
     id: 8,
     color: '#1943AE',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 008',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 14,
     temperatureId: 2,
@@ -125,7 +148,7 @@ const baseStorage = [
   {
     id: 9,
     color: '#FA6363',
-    title: 'Freezer Atara 001',
+    title: 'Freezer Atara 009',
     location: 'Storage Suite 3, Germany - Cellfuse',
     quantity: 11,
     temperatureId: 3,
@@ -210,13 +233,18 @@ const baseStorage = [
     temperature: '-80',
     zone: 'Zone A',
   },
-]
+] */
 export default {
   components: { PageLayout, StandardTable, Listing },
 
   data() {
     return {
+      productFilters: {},
+      filters:{},
       loading: false,
+      data:[],
+      shouldUpdate:true,
+      storage:baseStorage,
       productsColumn: [
         {
           title: `${this.$store.getters.getTranslation.Produ_1_538}`,
@@ -360,8 +388,54 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  mounted(){
+    this.data=this.productsData
+  },
   methods: {
+    productSearch(value,key){
+      // console.log(value)
+      let filters = this.productFilters
+      const keys=key.split(',')
+      for(let i=0;i<keys.length;i++){
+        filters[keys[i]] = value
+      }
+      filters = JSON.stringify(filters)
+      filters = JSON.parse(filters)
+      this.filters = filters
+      if (!isEmpty(value)) {
+        let products = []
+        for (const filter in filters) {
+          // console.log(filters)
+          const filterValue = filters[filter]
+          // console.log(filterValue)
+          products = this.productsData.filter((storage) => {
+            if (isEmpty(filterValue) && !isNumber(filterValue)) {
+              // console.log(storage)
+              return filterValue
+            }
+            return storage[filter] === filterValue
+          })
+          if(products.length>0) break
+          // console.log(products.length)
+        }
+        
+        products = JSON.stringify(products)
+        // this.updateData(products)
+        this.data = JSON.parse(products)
+        this.shouldUpdate=true
+      } else {
+        this.data=this.productsData
+        this.shouldUpdate=true
+        // this.data = this.productsData
+      }
+      // console.log(this.data)
+    },
+    updateData(str){
+      // alert('hello')
+      console.log(str)
+    },
     search(value, key) {
+      // console.log(key)
       let filters = this.filters
       filters[key] = value
       filters = JSON.stringify(filters)
@@ -375,17 +449,18 @@ export default {
 
           storages = baseStorage.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              return storage
+              // console.log(storage)
+              return storage[filter].match(value)
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter] == filterValue
+            return storage[filter].match(value) == filterValue
           })
         }
 
         storages = JSON.stringify(storages)
-        this.storages = JSON.parse(storages)
+        this.storage = JSON.parse(storages)
       } else {
-        this.storages = baseStorage
+        this.storage = baseStorage
       }
     },
   },

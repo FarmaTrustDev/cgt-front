@@ -9,12 +9,12 @@
     >
       <path
         d="M4.94067 0.5H45.0595C46.9925 0.5 48.5595 2.067 48.5595 4V37.9951H1.44067V4.00001C1.44067 2.06701 3.00768 0.5 4.94067 0.5Z"
-        fill="#D9D9D9"
+        :fill="getUpperPortion(type)"
         :stroke="color"
       />
       <path
         d="M1.44067 38.9951H48.5595V72.9901C48.5595 74.9231 46.9925 76.4901 45.0595 76.4901H4.94068C3.00768 76.4901 1.44067 74.9231 1.44067 72.9901V38.9951Z"
-        fill="#D9D9D9"
+        :fill="getLowerPortion(type)"
         :stroke="color"
       />
       <path
@@ -41,12 +41,37 @@
   </div>
 </template>
 <script>
+// const types = [1, 2, 3, 4]
+const colors = {
+  red: '#FC1212',
+  blue: '#2F79E3',
+  yellow: '#FE9418',
+  grey: '#D9D9D9',
+}
 export default {
   props: {
     color: { type: String, default: '#1943AE' },
+    type: { type: Number, default: 1 },
   },
   data() {
     return {}
+  },
+  methods: {
+    getUpperPortion(type) {
+      if (this.type > 1) {
+        return colors.red
+      }
+      return colors.grey
+    },
+    getLowerPortion(type) {
+      if (this.type > 1) {
+        return colors.red
+      }
+      if (this.type === 1) {
+        return colors.yellow
+      }
+      return colors.grey
+    },
   },
 }
 </script>

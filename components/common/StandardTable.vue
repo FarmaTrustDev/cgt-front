@@ -4,7 +4,7 @@
       :loading="loading"
       :pagination="getPagination()"
       :columns="columns"
-      :data-source="[...data]"
+      :data-source="shouldUpdate ? [...dumpData] : [...data]"
       class="rounded-table"
       :class="{ 'patient-table': patient }"
     >
@@ -257,6 +257,7 @@ export default {
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
     showPagination: { type: Boolean, default: true },
+    shouldUpdate: {type: Boolean, default: true},
   },
 
   data() {
