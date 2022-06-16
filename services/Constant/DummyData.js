@@ -178,42 +178,6 @@ export const baseStorage = [
 ]
 
 
-export const baseStorageQuarantine = [
-    {
-        id: 1,
-        color: '#1943AE',
-        title: 'Quarantine 001',
-        location: 'Storage Suite 3, Germany - Cellfuse',
-        quantity: 20,
-        temperatureId: 1,
-        zoneId: 1,
-        temperature: '-20',
-        zone: 'Zone A',
-    },
-    {
-        id: 2,
-        color: '#1943AE',
-        title: 'Quarantine 002',
-        location: 'Storage Suite 3, Germany - Cellfuse',
-        quantity: 20,
-        temperatureId: 2,
-        zoneId: 3,
-        temperature: '-80',
-        zone: 'Zone C',
-    },
-    {
-        id: 3,
-        color: '#FA6363',
-        title: 'Quarantine 003',
-        location: 'Storage Suite 3, Germany - Cellfuse',
-        quantity: 20,
-        temperatureId: 2,
-        zoneId: 1,
-        temperature: '-80',
-        zone: 'Zone A',
-    },
-]
-
 
 // ==================== inventory data ============
 const tube = {
@@ -433,7 +397,6 @@ export const fridgeData = {
     racks: [rack, rack2, rack3, rack2, rack],
 }
 
-
 export const fridges = [fridgeData]
 
 const colors = {
@@ -441,6 +404,7 @@ const colors = {
     red: '#ff0909',
     yellow: '#ffbf00',
 }
+
 export const consumables = [
     {
         threshold: 46,
@@ -509,3 +473,45 @@ export const consumables = [
         color: '#2359e8',
     },
 ];
+
+export const baseStorageQuarantine = [
+    {
+        id: 1,
+        type: 3,
+        color: '#1943AE',
+        title: 'Quarantine 001',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 1,
+        zoneId: 1,
+        temperature: '-20',
+        zone: 'Zone A',
+        racks: [rack, rack2, rack3, rack2, rack],
+    },
+    {
+        id: 2,
+        color: '#1943AE',
+        type: 0,
+        title: 'Quarantine 002',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        zoneId: 3,
+        temperature: '-80',
+        zone: 'Zone C',
+        racks: [rack2, rack2, rack3, rack2, rack,],
+    },
+    {
+        id: 3,
+        color: '#FA6363',
+        title: 'Quarantine 003',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        type: 1,
+        zoneId: 1,
+        temperature: '-80',
+        zone: 'Zone A',
+        racks: [rack, rack3, rack, rack2, rack3,],
+    },
+]

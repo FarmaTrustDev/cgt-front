@@ -7,7 +7,9 @@
         class="text-center"
         :span="8"
       >
-        <Tile class="light-shadow border" :storage="storage" />
+        <div @click="getRacks(storage)">
+          <Tile class="light-shadow border" :storage="storage" />
+        </div>
       </a-col>
     </a-row>
     <a-row class="mt-15" :gutter="24">
@@ -17,7 +19,7 @@
           footer="Storage Suite 3, Germany - Cellfuse"
         >
           <div slot="center" class="text-center">
-            <racks :data="fridgeData.racks" @getRackPortion="getRackPortion" />
+            <racks :data="racks" @getRackPortion="getRackPortion" />
           </div>
         </TileCenter>
       </a-col>
@@ -43,11 +45,11 @@
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
+import Tile from '~/components/inventory/storage/Tile'
 import {
   fridgeData,
   baseStorageQuarantine,
 } from '~/services/Constant/DummyData'
-import Tile from '~/components/inventory/storage/Tile'
 
 import { isEmpty } from '~/services/Helpers'
 
@@ -63,44 +65,7 @@ export default {
       fridgeData,
       storages: baseStorageQuarantine,
       loading: false,
-      steps: [
-        // {
-        //   title: 'Jack Black',
-        //   date: '9:00',
-        //   by: 'Inbound Date',
-        //   detail: '21 Feb 2022',
-        // },
-        // {
-        //   title: ' Simon Smith',
-        //   date: '9:30',
-        //   by: 'Inbound Process',
-        //   detail: '21 Feb 2022',
-        // },
-        // {
-        //   title: 'Ahmed Salaam',
-        //   date: '10:00',
-        //   by: 'Storage',
-        //   detail: '21 Feb 2022',
-        // },
-        // {
-        //   title: 'Claire Jones',
-        //   date: '14:00',
-        //   by: 'Visual Check',
-        //   detail: '28 Feb 2022',
-        // },
-        // {
-        //   title: 'Dwayne Morgan',
-        //   date: '15:00',
-        //   by: 'Packaging Depot',
-        //   detail: '19 April 2022',
-        // },
-        // {
-        //   title: 'RT456',
-        //   date: '16:00',
-        //   by: 'Courier Pick Up',
-        //   detail: '19 April 2022',
-        // },
-      ],
+      racks: [],
       tubes: [],
       trayData: [],
     }
@@ -112,6 +77,9 @@ export default {
   },
   methods: {
     isEmpty,
+    getRacks(fridge) {
+      this.racks = fridge.racks
+    },
     getRackPortion(portions) {
       this.trayData = portions.trays
     },

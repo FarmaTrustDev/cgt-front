@@ -4,7 +4,7 @@
       {{ storage.title }}
     </div>
     <div class="img">
-      <fridge :color="storage.color" />
+      <fridge :color="storage.color" :type="storage.type" />
     </div>
 
     <div class="icons">
