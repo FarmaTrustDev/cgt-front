@@ -27,7 +27,7 @@ export const INVENTORY_OUTBOUND_STATUS_STEPS = [
         name: 'Store Sample',
         alias: 'STORE_SAMPLE',
         phaseId: 1,
-        url_slug: '/hospital/patients/',
+        url_slug: '/inventory/storage/location',
         params: {}
     },
     {
@@ -166,7 +166,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'STORE_SAMPLE',
         phaseId: 14,
         enablePageId: 14,
-        url_slug: '/inventory/treatment/process/',
+        url_slug: '/inventory/storage/location',
         url_type: URL_TYPE.treatment,
         params: { view: 'STORE_SAMPLE' }
     },
