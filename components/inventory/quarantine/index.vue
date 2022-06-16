@@ -1,0 +1,122 @@
+<template>
+  <div>
+    <a-row :gutter="24">
+      <a-col :span="6">
+        <TileCenter
+          heading="Freezer Atara 001"
+          footer="Storage Suite 3, Germany - Cellfuse"
+        >
+          <div slot="center" class="text-center">
+            <fridge style="zoom: 2.5" />
+          </div>
+        </TileCenter>
+      </a-col>
+    </a-row>
+    <a-row class="mt-15" :gutter="24">
+      <a-col :span="12">
+        <TileCenter
+          heading="Shelf Atara 001"
+          footer="Storage Suite 3, Germany - Cellfuse"
+        >
+          <div slot="center" class="text-center">
+            <racks :data="fridgeData.racks" @getRackPortion="getRackPortion" />
+          </div>
+        </TileCenter>
+      </a-col>
+      <a-col :span="12">
+        <TileCenter
+          heading=" Box Atara 001, Shelf 3 "
+          footer="Storage Suite 3, Germany - Cellfuse"
+        >
+          <div slot="center" class="text-center">
+            <Trays
+              v-if="!isEmpty(trayData)"
+              :trays="trayData"
+              @getTube="getTube"
+            />
+            <a-empty v-else description=" select the rack" />
+          </div> </TileCenter
+      ></a-col>
+    </a-row>
+  </div>
+</template>
+
+<script>
+import fridge from '~/components/inventory/freezers/Fridge'
+import TileCenter from '~/components/inventory/storage/TileCenter'
+import racks from '~/components/inventory/storage/racks'
+import Trays from '~/components/inventory/storage/trays'
+
+import { fridgeData } from '~/services/Constant/DummyData'
+
+import { isEmpty } from '~/services/Helpers'
+
+export default {
+  components: {
+    racks,
+    Trays,
+    fridge,
+    TileCenter,
+  },
+  data() {
+    return {
+      fridgeData,
+      loading: false,
+      steps: [
+        // {
+        //   title: 'Jack Black',
+        //   date: '9:00',
+        //   by: 'Inbound Date',
+        //   detail: '21 Feb 2022',
+        // },
+        // {
+        //   title: ' Simon Smith',
+        //   date: '9:30',
+        //   by: 'Inbound Process',
+        //   detail: '21 Feb 2022',
+        // },
+        // {
+        //   title: 'Ahmed Salaam',
+        //   date: '10:00',
+        //   by: 'Storage',
+        //   detail: '21 Feb 2022',
+        // },
+        // {
+        //   title: 'Claire Jones',
+        //   date: '14:00',
+        //   by: 'Visual Check',
+        //   detail: '28 Feb 2022',
+        // },
+        // {
+        //   title: 'Dwayne Morgan',
+        //   date: '15:00',
+        //   by: 'Packaging Depot',
+        //   detail: '19 April 2022',
+        // },
+        // {
+        //   title: 'RT456',
+        //   date: '16:00',
+        //   by: 'Courier Pick Up',
+        //   detail: '19 April 2022',
+        // },
+      ],
+      tubes: [],
+      trayData: [],
+    }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
+  methods: {
+    isEmpty,
+    getRackPortion(portions) {
+      this.trayData = portions.trays
+    },
+    getTube(tube) {
+      this.steps = tube.steps
+    },
+  },
+}
+</script>
