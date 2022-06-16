@@ -17,7 +17,7 @@
             class="float-right inventory-search"
             @change="(e) => search(e.target.value, 'title')"
           >
-            <a-icon slot="prefix" type="search" />
+            <a-icon slot="prefix" type="search" class="mb-5" />
           </a-input>
           <Listing :storages="storage" />
         </a-tab-pane>
@@ -36,7 +36,7 @@
                 )
             "
           >
-            <a-icon slot="prefix" type="search" />
+            <a-icon slot="prefix" type="search" class="mb-5" />
           </a-input>
           <StandardTable
             :should-update="shouldUpdate"
