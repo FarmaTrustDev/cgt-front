@@ -59,7 +59,7 @@
               class="float-right inventory-search mb-15"
               @change="(e) => inboundSearch(e.target.value,'patientEnrollmentNumber')"
             >
-              <a-icon slot="prefix" type="search" />
+              <a-icon slot="prefix" type="search" class="mb-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -92,7 +92,7 @@
               class="float-right inventory-search mb-15"
               @change="(e) => outboundSearch(e.target.value,'patientEnrollmentNumber')"
             >
-              <a-icon slot="prefix" type="search" />
+              <a-icon slot="prefix" type="search" class="mb-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -123,7 +123,7 @@
               class="float-right inventory-search mb-15"
               @change="(e) => allSampleSearch(e.target.value,'patientEnrollmentNumber')"
             >
-              <a-icon slot="prefix" type="search" />
+              <a-icon slot="prefix" type="search" class="mb-5" />
             </a-input>
             <a-table
               class="rounded-table"
