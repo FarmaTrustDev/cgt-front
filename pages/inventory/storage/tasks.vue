@@ -1,63 +1,60 @@
 <template>
-  <a-tabs :animated="false" class="border-bottom-none">
-    <div>
-      <span class="ml-80 pg-head">Task/Store Sample</span>
-      <span class="ml-150 pg-head">ID: DAC53827</span>
-      <span class="ml-150 pg-head">Name: Platelet Lycate</span>
-      <span class="ml-150 pg-head">Client: Royal Hospital</span>
-      <div class="pt-10 float-left icons">
-        <span class="ml-80 pg-head">Fridge: Kings 123</span>
-        <span class="ml-150 pg-head"
-          ><img
-            :src="getImageUrl('web/inventory/storage/frozen.svg')"
-          />-80°C</span
-        >
-        <span class="ml-150 pg-head"
-          ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Zone A,
-          Storage Suite 3, Germany - Cellfuse</span
-        >
-        <span class="ml-150 pg-head"
-          ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Shelf 5,
-          Rack 2</span
-        >
-      </div>
+  <div>
+    <span class="ml-80 pg-head">Task/Store Sample</span>
+    <span class="ml-150 pg-head">ID: DAC53827</span>
+    <span class="ml-150 pg-head">Name: Platelet Lycate</span>
+    <span class="ml-150 pg-head">Client: Royal Hospital</span>
+    <div class="pt-10 float-left icons">
+      <span class="ml-80 pg-head">Fridge: Kings 123</span>
+      <span class="ml-150 pg-head"
+        ><img
+          :src="getImageUrl('web/inventory/storage/frozen.svg')"
+        />-80°C</span
+      >
+      <span class="ml-150 pg-head"
+        ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Zone A,
+        Storage Suite 3, Germany - Cellfuse</span
+      >
+      <span class="ml-150 pg-head"
+        ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Shelf 5,
+        Rack 2</span
+      >
     </div>
-    <a-tab-pane>
-      <a-table
-        class="rounded-table"
-        :columns="newTasksColumns"
-        :data-source="newTasksData"
-        :should-fetch="false"
-      >
-        <template slot="print" slot-scope="print">
-          <a-button
-            class="print-btn"
-            type="primary"
-            size="small"
-            icon="printer"
-            @click="openViewModal(print)"
-            >Print Label</a-button
-          >
-        </template>
-        <template slot="confirm" >
-            <a-button
-            class="print-btn"
-            type="primary"
-            size="small"
-            >Confirm placement</a-button>
-        </template>
-        
-      </a-table>
-      <a-modal
-        :visible="showModal"
-        :title="translation.Docum_1_507"
-        @cancel="handleModal(false)"
-        @ok="handleModal(false)"
-      >
-        <img class="img-responsive" :src="getImageUrl(qrUrl)" />
-      </a-modal>
-    </a-tab-pane>
-  </a-tabs>
+
+    <a-table
+      class="rounded-table"
+      :columns="newTasksColumns"
+      :data-source="newTasksData"
+      :should-fetch="false"
+    >
+      <template slot="print" slot-scope="print">
+        <a-button
+          class="print-btn"
+          type="primary"
+          size="small"
+          icon="printer"
+          @click="openViewModal(print)"
+          >Print Label</a-button
+        >
+      </template>
+      <template slot="confirm">
+        <a-button
+          class="print-btn"
+          style="background-color: gray; color: white"
+          size="small"
+          >Confirm placement</a-button
+        >
+      </template>
+    </a-table>
+    <a-modal
+      :visible="showModal"
+      :title="translation.Docum_1_507"
+      @cancel="handleModal(false)"
+      @ok="handleModal(false)"
+    >
+      <img class="img-responsive" :src="getImageUrl(qrUrl)" />
+    </a-modal>
+  </div>
 </template>
 <script>
 import routeHelpers from '~/mixins/route-helpers'
@@ -69,7 +66,7 @@ export default {
   data() {
     return {
       showModal: false,
-      qrUrl: 'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg',
+      qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
       newTasksColumns: [
         {
           title: `Sample ID`,
@@ -183,7 +180,7 @@ export default {
     },
     openViewModal(id) {
       this.showModal = true
-      this.qrUrl = id
+      // this.qrUrl = id
       // LabelServices.scheduling(id);
     },
   },
