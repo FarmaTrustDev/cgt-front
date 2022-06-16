@@ -80,7 +80,7 @@
       </a-table>
     </a-form>
     <a-form-item class="mt-15">
-      <FormActionButton :disabled="buttonEnable" />
+      <FormActionButton @click="submit" :disabled="buttonEnable" />
     </a-form-item>
     <a-modal
       title="Notify"
@@ -116,9 +116,10 @@ import Email from '~/components/treatment/collections/bag/Email'
 import Quarantine from '~/components/inventory/quarantine'
 import InstantUpload from '~/components/upload/InstantUpload'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { Email, InstantUpload, Quarantine },
-  mixins: [notifications],
+  mixins: [notifications, routeHelpers],
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
@@ -169,6 +170,9 @@ export default {
     },
   },
   methods: {
+    submit() {
+      this.goto('/inventory/storage/tasks');
+    },
     handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()
 
@@ -176,8 +180,10 @@ export default {
 
       if (collection.alias === QUARANTINE_STORAGE && values.collect) {
         this.handleQuarantineModal(true)
+        // this.$emit('updateId', collection.id)
         return false
       }
+      this.buttonEnable = false
       this.btnLoading = true
       if (values) {
         this.success('Update Successfully')
