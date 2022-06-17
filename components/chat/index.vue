@@ -11,11 +11,12 @@
         ></a-card>
       </a-col>
       <a-col :span="1"></a-col>
-      <a-col :span="14" class="right-bar">
+      <a-col  :span="14" class="right-bar">
         <a-card :bordered="false" class="default-card">
-          <div class="max-h-200">
-            <a-spin class="p-0" :spinning="endToEndConversationLoader">
+          <div class="max-h-200" >
+            <a-spin class="p-0"  :spinning="endToEndConversationLoader">
               <Conversation
+               
                 v-if="!isEmpty(recipient)"
                 :recipient="recipient"
                 :data="endToEndConversation"

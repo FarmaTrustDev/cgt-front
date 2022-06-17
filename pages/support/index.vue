@@ -1,17 +1,16 @@
 <template>
   <div class="support-page">
-    <a-row class="p-10 mb-10">
+    <a-row class="p-30 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left">
-          {{ translation.suppoissue_2_176 }}
+        <h3 class="page-title float-left ml-80">
+          {{translation.suppoissue_2_176}}
         </h3>
         <a-button
           type="primary"
           class="mrm-5 mrt float-right"
           @click="showModal(true)"
           >{{ translation.AddNew_3_182 }}
-          </a-button
-        >
+        </a-button>
         <a-input
           ref="userNameInput"
           :placeholder="translation.searc_1_488"
@@ -67,10 +66,10 @@
       <a-tab-pane key="2" :tab="translation.Archi_1_226">
         <Table type="archive" />
       </a-tab-pane>
-      <a-tab-pane key="3" tab="InProgress">
+      <a-tab-pane key="3" :tab="translation.InPro_1_533">
         <InProgress type="inProgress" />
       </a-tab-pane>
-      <a-tab-pane key="4" tab="Resolved">
+      <a-tab-pane key="4" :tab="translation.Resol_1_230">
         <Resolved type="resolved" />
       </a-tab-pane>
     </a-tabs>

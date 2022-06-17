@@ -1,3 +1,4 @@
+
 .blockState {
   position: relative;
   &::before {
@@ -26,6 +27,18 @@
 }
 
 .treatment-steps {
+  position: relative;
+  &::before {
+    content: '';
+    height: 1px;
+    position: absolute;
+    width: 80%;
+    margin: auto;
+    left: 0;
+    top: 15px;
+    right: 0;
+    background-color: #e2e2e2;
+  }
   .ant-steps-item {
     padding: 5px 2px;
     border: 0;
@@ -161,10 +174,10 @@
     }
   }
   .ant-steps-item-active {
-    background-color: #f2f5fb;
+    background-color: #d1f2dc;
     .ant-steps-item-content {
       &::before {
-        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
     }
   }
@@ -275,7 +288,7 @@
   }
 }
 
-.pad-bottom{
+.pad-bottom {
   padding-bottom: 20px;
   .view-screen {
     .ant-timeline-item-content {
@@ -340,13 +353,13 @@
         font-size: 25px !important;
       }
     }
-  
+
     .ant-tabs-tab-active,
     .ant-tabs-tab {
       color: #233151 !important;
       font-weight: 300 !important;
     }
-  
+
     .ant-tabs-content {
       margin-left: 3px;
       padding-left: 15px;

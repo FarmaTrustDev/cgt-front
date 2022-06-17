@@ -11,7 +11,7 @@
         <dd>Dr. Comfort</dd>
         <dt>Expected Delivery Date</dt>
         <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
-        <dt>Estimated Arrival Date:</dt>
+        <dt>{{translation.EstimArriv_3_322}}</dt>
         <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
       </dl>
 
@@ -49,6 +49,11 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    translation() {
+        return this.$store.getters.getTranslation
+    },
+  }, 
   methods: {
     getMomentByStandardFormat,
     isEmpty,

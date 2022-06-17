@@ -4,8 +4,9 @@
       :loading="loading"
       :pagination="getPagination()"
       :columns="columns"
-      :data-source="[...data]"
-      :class="{ 'rounded-table': rounded, 'patient-table': patient }"
+      :data-source="shouldUpdate ? [...dumpData] : [...data]"
+      class="rounded-table"
+      :class="{ 'patient-table': patient }"
     >
       <template slot="customTitle">
         <div class="text-left treatment-title">
@@ -30,6 +31,17 @@
           :src="src"
           @click="clickImage(record)"
         />
+      </template>
+
+      <template slot="icon" slot-scope="icon, record">
+        <a-icon type="cloud-upload" @click="clickIcon(record)" />
+      </template>
+
+      <template slot="popupOver" slot-scope="text">
+        <a-popover>
+          <template slot="content"> {{ text }} </template>
+          <span type="primary"> {{ text }}</span>
+        </a-popover>
       </template>
 
       <template slot="check" slot-scope="flag">
@@ -245,6 +257,7 @@ export default {
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
     showPagination: { type: Boolean, default: true },
+    shouldUpdate: {type: Boolean, default: true},
   },
 
   data() {
@@ -364,6 +377,9 @@ export default {
     },
     clickImage(record) {
       this.$emit('clickImage', record)
+    },
+    clickIcon(record) {
+      this.$emit('clickIcon', record)
     },
     holdTreatment(patient, treatment) {
       TreatmentServices.hold(treatment.globalId, !treatment.isHold)

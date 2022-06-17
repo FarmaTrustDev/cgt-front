@@ -3,7 +3,7 @@
     <template slot="content">
       <div class="grey-card">
         <a-card :bordered="false" class="default-border-radius">
-          <h2>Add Storage Facility</h2>
+          <h2>{{translation.AddStora_3_557}}</h2>
           <formField class="mt-15" />
       </a-card>
     </div>

@@ -6,7 +6,7 @@
       <a-button v-if="create" type="primary" @click="gotoState('create')"
         >{{translation.Creat_1_123}}</a-button
       >
-      <a-button v-if="back" type="primary" @click="goBack()">{{translation.Back_1_538}}</a-button>
+      <a-button v-if="back" type="primary" class="mr-10" @click="goBack()">{{translation.Back_1_538}}</a-button>
     </span>
 
     <slot name="content" />
@@ -36,14 +36,14 @@ export default {
     },
     create: { type: Boolean, default: true },
   },
-  methods: {
-    gotoState(id, query = {}) {
-      this.goto(`${this.$route.path}/${id}`, query)
-    },
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
+    },
+  },
+  methods: {
+    gotoState(id, query = {}) {
+      this.goto(`${this.$route.path}/${id}`, query)
     },
   }
 }

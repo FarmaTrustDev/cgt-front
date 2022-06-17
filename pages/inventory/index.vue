@@ -3,11 +3,15 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    title="Smart Lab"
+    :title="translation.SmartStore_2_548"
+    class="specific-storage"
   >
     <template slot="content">
       <inventory />
-      <consumables />
+      <a-card :bordered="false" class="default-border-radius">
+        <h2 slot="title">Components</h2>
+        <consumables />
+      </a-card>
     </template>
   </page-layout>
 </template>
@@ -22,6 +26,11 @@ export default {
     return {
       loading: false,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {},
 }

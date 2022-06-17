@@ -1,17 +1,17 @@
 <template>
     <div>
     <div class="page-header clearfix">
-    <h3 class="page-title pl-5 float-left">Storage Facilites</h3>
+    <h3 class="page-title pl-5 float-left">{{translation.AddStora_3_557}}</h3>
       <a-button
         type="primary"
         class="mrm-5 float-right"
         @click="goto('facility/create')"
-        >Add Storage Facility</a-button
+        >{{translation.AddStora_3_557}}</a-button
       >
     <a-input
       class="float-right page-search-input"
       ref="userNameInput"
-      placeholder="Search Storage Facility"
+      :placeholder="translation.SearcStora_3_560"
       @change="searchUser"
     >
       <a-icon slot="prefix" type="search" />
@@ -77,32 +77,32 @@ export default {
       ],
       columns:[
         {
-          title: `Equipment Type`,
+          title: `${this.$store.getters.getTranslation.EquipType_2_552}`,
           dataIndex: 'name',
           key: 'name'
         },
         {
-          title: `Equipment Name`,
+          title: `${this.$store.getters.getTranslation.EquipName_2_553}`,
           dataIndex: 'organizationTypeAlias',
           key: 'organizationType',
         },
         {
-          title: `Lab`,
+          title: `${this.$store.getters.getTranslation.Lab_1_566}`,
           dataIndex: 'organizationName',
           key: 'organizationId',
         },
         {
-          title: `Lab Zone`,
+          title: `${this.$store.getters.getTranslation.LabZone_2_554}`,
           dataIndex: 'city',
           key: 'city',
         },
         {
-          title: `Number of Shelves`,
+          title: `${this.$store.getters.getTranslation.Numbeof_3_555}`,
           dataIndex: 'country',
           key: 'country',
         },
         {
-          title: 'Number of Racks',
+          title: `${this.$store.getters.getTranslation.Numbeof_3_556}`,
           key: 'email',
           dataIndex: 'email',
         }, 

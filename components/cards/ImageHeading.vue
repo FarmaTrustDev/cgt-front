@@ -2,14 +2,18 @@
   <div>
     <slot name="extra" />
     <span class="imageHeading">
-      <img
-        :width="imgProperties.width"
-        class="img"
-        :src="getImageUrl(detail.img)"
-      />
-      <span class="heading">
-        {{ detail.heading }}
-      </span>
+      <figure>
+        <!-- <span class="image-container">
+          <img
+            :width="imgProperties.width"
+            class="img"
+            :src="getImageUrl(detail.img)"
+          />
+        </span> -->
+        <figcaption class="heading">
+          {{ detail.heading }}
+        </figcaption>
+      </figure>
     </span>
   </div>
 </template>
@@ -26,15 +30,3 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-.imageHeading {
-  margin-bottom: 15px;
-  display: inline-block;
-  .heading {
-    font-size: 14px;
-    display: inline-block;
-    max-width: 74%;
-    color: #909090;
-  }
-}
-</style>

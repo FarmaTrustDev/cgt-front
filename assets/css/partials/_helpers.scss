@@ -88,8 +88,22 @@
   @extend .light-shadow;
 }
 
+.dated-time{
+  background-color: $danger;
+  padding: 14px 40px;
+  border-radius: 22px;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  @extend .light-shadow;
+}
+
 .w-1200 {
   max-width: 1200px;
+}
+
+.w-min-200 {
+  min-width: 200px;
 }
 
 .imageHeading {
@@ -97,3 +111,8 @@
     vertical-align: top;
   }
 }
+
+.display-inline-block {
+  display: inline-block;
+}
+

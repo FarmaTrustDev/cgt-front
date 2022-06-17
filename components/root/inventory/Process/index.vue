@@ -43,7 +43,7 @@
                   initialValue: row.notes,
                 },
               ]"
-              :placeholder="translation.Enternote_3_546 + ':'"
+              :placeholder="translation.Enternote_3_546"
             />
             <span v-else>{{ row.notes }}</span>
             <a-input
@@ -65,7 +65,7 @@
             :show-button="false"
           >
             <a-button slot="button" type="">
-              <a-icon type="upload" /> sign
+              <a-icon type="upload" /> Upload
             </a-button>
           </InstantUpload>
         </template>
@@ -79,6 +79,9 @@
         </template>
       </a-table>
     </a-form>
+    <a-form-item class="mt-15">
+      <FormActionButton @click="submit" :disabled="buttonEnable" text="Submit" />
+    </a-form-item>
     <a-modal
       title="Notify"
       :footer="null"
@@ -92,25 +95,41 @@
         @closeModal="handleEmailModal"
       />
     </a-modal>
+    <a-modal
+      :width="1200"
+      :footer="null"
+      :visible="showQuarantine"
+      title="Select quarantine storage:"
+      @cancel="handleQuarantineModal(false)"
+    >
+      <!-- <showQuarantine /> -->
+      <div>
+        <Quarantine @submit="handleQuarantineSubmit" />
+      </div>
+    </a-modal>
   </div>
 </template>
 <script>
 import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
+import Quarantine from '~/components/inventory/quarantine'
 import InstantUpload from '~/components/upload/InstantUpload'
+import { QUARANTINE_STORAGE } from '~/services/Constant'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
-  components: { Email, InstantUpload },
-  mixins: [notifications],
+  components: { Email, InstantUpload, Quarantine },
+  mixins: [notifications, routeHelpers],
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
+    activeTab:{type: String},
   },
   data() {
     return {
       columns: [
         {
-          title: 'Details',
+          title: `${this.$store.getters.getTranslation.Detai_1_346}`,
           dataIndex: 'name',
           width: '30%',
         },
@@ -142,6 +161,8 @@ export default {
       showEmailModal: false,
       body: null,
       bagService: BagCollectionServices,
+      showQuarantine: false,
+      buttonEnable: false,
     }
   },
   computed: {
@@ -150,10 +171,21 @@ export default {
     },
   },
   methods: {
+    submit() {
+      this.$emit('handleActiveTab','courier');
+    },
     handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()
-      this.btnLoading = true
+
       const values = fields.collection[`id-${collection.id}`]
+
+      if (collection.alias === QUARANTINE_STORAGE && values.collect) {
+        this.handleQuarantineModal(true)
+        // this.$emit('updateId', collection.id)
+        return false
+      }
+      this.buttonEnable = false
+      this.btnLoading = true
       if (values) {
         this.success('Update Successfully')
         this.$emit('updateId', collection.id)
@@ -175,6 +207,13 @@ export default {
         // console.log(message)
       }
       this.showEmailModal = show
+    },
+    handleQuarantineModal(show) {
+      this.showQuarantine = show
+    },
+    handleQuarantineSubmit() {
+      this.handleQuarantineModal(false)
+      this.buttonEnable = true
     },
   },
 }

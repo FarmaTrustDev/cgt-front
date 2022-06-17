@@ -1,6 +1,6 @@
 <template>
 <div class="home-page">
-    <h1 class="title" style="margin:3%"><strong>{{translation['Mydashb_2_7']}}</strong></h1>
+    <h1 class="title ml-80" ><strong>{{translation['Mydashb_2_7']}}</strong></h1>
 
     <manufacturerHome v-if="isManufacturer()" />
     <hospitalHome v-if="isHospital()" />

@@ -1,8 +1,12 @@
 <template>
   <div class="text-center">
     <div class="racks">
-      <span v-for="(rack, index) in data" :key="index" @click="getRack(rack)">
-        <rack />
+      <span v-for="(rack, index) in data" :key="index">
+        <rack
+          :portions="rack.portions"
+          :counter="index + 1"
+          @getRackPortion="getRackPortion"
+        />
       </span>
     </div>
   </div>
@@ -14,8 +18,8 @@ export default {
   components: { rack },
   props: { data: { type: Array, default: () => [{}] } },
   methods: {
-    getRack(rack) {
-      this.$emit('getRack', rack)
+    getRackPortion(portion) {
+      this.$emit('getRackPortion', portion)
     },
   },
 }
@@ -23,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .racks {
   width: 100%;
-  max-width: 200px;
+  max-width: 320px;
   margin: auto;
 }
 </style>
