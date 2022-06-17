@@ -62,3 +62,39 @@
     right: 0;
   }
 }
+
+.client-hub-tile {
+  margin-top: 15px;
+  background-color: white;
+  text-align: center;
+  padding: 15px;
+  @extend .default-border-radius;
+  @extend .border;
+  .icons {
+    span {
+      padding: 15px;
+    }
+  }
+  figure {
+    img {
+      @extend .default-border-radius;
+    }
+  }
+  .list {
+    ul {
+      li {
+        list-style: none;
+        padding: 15px;
+        margin: 15px auto;
+        @extend .default-border-radius;
+        @extend .border;
+        .date {
+          float: left;
+        }
+        .title {
+          float: right;
+        }
+      }
+    }
+  }
+}
