@@ -42,29 +42,18 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <Trays
-                v-if="!isEmpty(trayData)"
-                :trays="trayData"
-                @getTube="getTube"
-              />
+              <Trays v-if="!isEmpty(trayData)" :trays="trayData" />
               <a-empty v-else description=" select the rack" />
             </div> </TileCenter
         ></a-col>
       </a-row>
 
-      <!-- 
-        title="Provenance Data - Asset DEC123" -->
-      <a-card :bordered="false">
-        <div class="view-screen">
-          <span v-if="!isEmpty(steps)">
-            <h2 slot="title" class="pad-bottom">
-              Provenance Data - Asset DEC123
-            </h2>
-            <TimeLine :steps="steps" />
-          </span>
-          <a-empty v-else description="No tube selected" />
-        </div>
-      </a-card>
+      <FormActionButton
+        class="mt-15"
+        :loading="loading"
+        custom-text="Submit"
+        @click="goto('/inventory/storage/tasks')"
+      />
     </div>
   </page-layout>
 </template>
@@ -76,10 +65,9 @@ import fridge from '~/components/inventory/freezers/Fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
-import TimeLine from '~/components/timeline'
 import { isEmpty } from '~/services/Helpers'
 import { fridgeData } from '~/services/Constant/DummyData'
-
+import routeHelpers from '~/mixins/route-helpers'
 /// The code on the page is total no tolerated
 export default {
   components: {
@@ -88,9 +76,9 @@ export default {
     Trays,
     fridge,
     TileCenter,
-    TimeLine,
     detail,
   },
+  mixins: [routeHelpers],
   data() {
     return {
       fridgeData,
@@ -105,23 +93,11 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {
-    const m = this.getRackPortion
-    const g = this.getTube
-    setTimeout(function () {
-      m()
-      g()
-    }, 100)
-  },
+  mounted() {},
   methods: {
     isEmpty,
     getRackPortion(portions) {
-      if (!isEmpty(this.fridgeData.racks[0])) {
-        this.trayData = this.fridgeData.racks[0].portions[0].trays
-      }
-    },
-    getTube(tube) {
-      this.steps = this.fridgeData.racks[0].portions[0].trays[0].tubes[0].steps
+      this.trayData = portions.trays
     },
   },
 }
