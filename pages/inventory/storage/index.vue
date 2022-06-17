@@ -38,13 +38,16 @@
           >
             <a-icon slot="prefix" type="search" class="mb-5" />
           </a-input>
-          <StandardTable
+          <a-table
+            class="rounded-table"
             :should-update="shouldUpdate"
             :should-fetch="false"
-            :dump-data="data"
+            :data-source="data"
             :columns="productsColumn"
-            :pagination="false"
-          />
+            :customRow="customRow"
+          >
+            <!-- :pagination="false" -->
+          </a-table>
         </a-tab-pane>
       </a-tabs>
     </div>
@@ -55,13 +58,14 @@
 import PageLayout from '~/components/layout/PageLayout'
 import { isEmpty } from '~/services/Utilities'
 import { isNumber } from '~/services/Helpers'
-import StandardTable from '~/components/common/StandardTable'
+import routeHelpers from '~/mixins/route-helpers'
+// import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
 import { baseStorage } from '~/services/Constant/DummyData'
 
 export default {
-  components: { PageLayout, StandardTable, Listing },
-
+  components: { PageLayout, Listing },
+mixins: [routeHelpers],
   data() {
     return {
       productFilters: {},
@@ -217,8 +221,16 @@ export default {
     this.data = this.productsData
   },
   methods: {
+        customRow(record) {
+      return {
+        on: {
+          click: event => {
+            this.goto('/inventory/storage/location')
+          }
+        }
+      };
+    },
     productSearch(value, key) {
-      // console.log(value)
       let filters = this.productFilters
       const keys = key.split(',')
       for (let i = 0; i < keys.length; i++) {

@@ -80,7 +80,7 @@
       </a-table>
     </a-form>
     <a-form-item class="mt-15">
-      <FormActionButton @click="submit" :disabled="buttonEnable" />
+      <FormActionButton @click="submit" :disabled="buttonEnable" text="Submit" />
     </a-form-item>
     <a-modal
       title="Notify"

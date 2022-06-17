@@ -196,8 +196,8 @@
                 </a-col>
               </a-row>
             </a-tab-pane>
-            <a-tab-pane key="2" :tab="translation.InbouStora_3_564">
-              <h3>{{translation.QualiAssur_3_565}}</h3>
+            <a-tab-pane key="process" :tab="translation.InbouStora_3_564">
+              <h3>{{ translation.QualiAssur_3_565 }}</h3>
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
@@ -217,16 +217,18 @@ import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
 // import shipment from '~/components/inventory/treatment/shipment'
-
+import tabsHelpers from '~/mixins/tabs-helpers'
 export default {
   components: {
     'page-layout': PageLayout,
     Process,
     // shipment,
   },
+  mixins: [tabsHelpers],
   middleware: 'auth',
   data() {
     return {
+      activeTab: 'inbound',
       dummyCollection: [
         {
           id: 1,
@@ -267,20 +269,20 @@ export default {
         },
       ],
       dummyOutBoundCollection: [
-        {
-          id: 1,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
-        },
+        // {
+        //   id: 1,
+        //   isCollected: false,
+        //   name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
+        // },
         {
           id: 2,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.RemovFrom_3_527}`,
+          name: `Has sample been removed from freezer ?`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.IsPacka_3_528}`,
+          name: `Does sample packaging pass visual check ?`,
         },
         {
           id: 3,
@@ -290,12 +292,12 @@ export default {
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Samplhas_4_530}`,
+          name: `Has sample been packaged for courier ?`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Readyfor_5_531}`,
+          name: `Is documentation completed and ready for courier pick up ?`,
         },
       ],
     }
@@ -305,7 +307,9 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {},
+  mounted() {
+    this.handleActiveTab()
+  },
   methods: {
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {

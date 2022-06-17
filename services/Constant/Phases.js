@@ -156,7 +156,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'PROCESS_SAMPLE',
         phaseId: 10,
         enablePageId: 10,
-        url_slug: '/inventory/storage/',
+        url_slug: '/inventory/treatment/process?view=process',
         url_type: URL_TYPE.patient,
         params: { view: 'MANUFACTURER' }
     },
@@ -166,7 +166,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'STORE_SAMPLE',
         phaseId: 14,
         enablePageId: 14,
-        url_slug: '/inventory/storage/location',
+        url_slug: '/inventory/storage/',
         url_type: URL_TYPE.treatment,
         params: { view: 'STORE_SAMPLE' }
     },
