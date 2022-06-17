@@ -88,17 +88,19 @@
           </a-row>
         </div>
         <a-card :bordered="false" class="mt-25 default-card h-tabs pills-tabs">
-          <a-tabs tab-position="left">
-            <a-tab-pane key="1" :tab="translation.OutboShipm_2_376">
+          <a-tabs tab-position="left" :active-key="activeTab">
+            <a-tab-pane key="outbound" :tab="translation.OutboShipm_2_376">
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
                 @fetchBags="() => {}"
                 @updateId="updateId"
+                :active-tab="activeTab"
+                @handleActiveTab="handleActiveTab"
             />
           
             </a-tab-pane>
-            <a-tab-pane key="2" tab="Courier">
+            <a-tab-pane key="courier" tab="Courier">
                 <div>
     <a-skeleton :loading="loading">
       <a-table
@@ -115,7 +117,17 @@
           :src="src"
           @click="clickImage(record)"
         />
-      </template>        
+      </template>
+      <template slot="print" slot-scope="print, record">
+        <a-button
+          class="print-btn"
+          type="primary"
+          size="small"
+          icon="printer"
+          @click="clickImage(record)"
+          >Print</a-button
+        >
+      </template>              
       </a-table>
     </a-skeleton>
     <a-modal
@@ -240,6 +252,7 @@ export default {
   middleware: 'auth',
   data() {
     return {
+      activeTab:'outbound',
       qrUrl: null,
       loading: false,
       showModal: false,
@@ -252,15 +265,21 @@ export default {
 ],
       columns : [
   {
+    title: 'Sample',
+    dataIndex: 'qrUrl',
+    key: 'qrUrl',
+    scopedSlots: { customRender: 'image' },
+  },
+{
     title: 'Sample ID',
     dataIndex: 'puid',
     key: 'puid',
   },
-  {
-    title: 'Image',
-    dataIndex: 'qrUrl',
-    key: 'qrUrl',
-    scopedSlots: { customRender: 'image' },
+{
+    title: 'Print QR',
+    dataIndex: 'print',
+    key: 'print',
+    scopedSlots: { customRender: 'print' },
   },
 ],
 
@@ -342,9 +361,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {},
+  mounted() {
+    // this.handleActiveTab()
+  },
   methods: {
     disabledDate: _disabledPreviousDate,
+    handleActiveTab() {
+      this.setActiveTab()
+    },
+    setActiveTab(){
+      console.log('parent')
+      this.activeTab='courier'
+    },
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
         deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),

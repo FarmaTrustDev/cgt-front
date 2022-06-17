@@ -89,7 +89,7 @@
         </div>
         <a-card :bordered="false" class="mt-15 default-card h-tabs pills-tabs">
           <a-tabs tab-position="left">
-            <a-tab-pane key="1" :tab="translation.InbouAccep_3_834">
+            <a-tab-pane key="inbound" :tab="translation.InbouAccep_3_834">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">

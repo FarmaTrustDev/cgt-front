@@ -129,7 +129,7 @@
               <!-- ==== steps === -->
             </a-table>
           </a-tab-pane>
-          <a-tab-pane key="3" :tab="translation.AllSampl_2_501">
+          <a-tab-pane key="allSample" :tab="translation.AllSampl_2_501">
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"

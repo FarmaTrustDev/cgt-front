@@ -123,6 +123,7 @@ export default {
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
+    activeTab:{type: String},
   },
   data() {
     return {
@@ -171,7 +172,7 @@ export default {
   },
   methods: {
     submit() {
-      this.goto('/inventory/storage/tasks')
+      this.$emit('handleActiveTab','courier');
     },
     handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()
