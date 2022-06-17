@@ -89,7 +89,7 @@
         </div>
         <a-card :bordered="false" class="mt-25 default-card h-tabs pills-tabs">
           <a-tabs tab-position="left">
-            <a-tab-pane key="3" :tab="translation.OutboShipm_2_376">
+            <a-tab-pane key="outbound" :tab="translation.OutboShipm_2_376">
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"

@@ -89,16 +89,18 @@
         </div>
         <a-card :bordered="false" class="mt-25 default-card inbound-accept-tabs">
           <a-tabs tab-position="left">
-            <a-tab-pane key="1" :tab="translation.OutboShipm_2_376">
+            <a-tab-pane key="outbound" :tab="translation.OutboShipm_2_376">
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
                 @fetchBags="() => {}"
                 @updateId="updateId"
+                :active-tab="activeTab"
+                @handleActiveTab="handleActiveTab"
             />
           
             </a-tab-pane>
-            <a-tab-pane key="2" tab="Courier">
+            <a-tab-pane key="couriers" tab="Courier">
                 <div>
     <a-skeleton :loading="loading">
       <a-table
@@ -115,16 +117,28 @@
           :src="src"
           @click="clickImage(record)"
         />
-      </template>        
+      </template>
+      <template slot="print" slot-scope="print, record">
+        <a-button
+          class="print-btn"
+          type="primary"
+          size="small"
+          icon="printer"
+          @click="clickImage(record)"
+          >Print</a-button
+        >
+      </template>              
       </a-table>
     </a-skeleton>
     <a-modal
       :visible="showModal"
-      title="Qr Code"
-      @cancel="handleModal(false)"
-      @ok="handleModal(false)"
+      title="Print"
     >
       <img class="img-responsive" :src="qrUrl" />
+      <template slot="footer">
+        <a-button @click="handleModal(false)">Cancel</a-button>
+        <a-button @click="printWindow()">Print</a-button>     
+      </template>      
     </a-modal>
   </div>
     <a-form
@@ -184,7 +198,7 @@
             </a-date-picker> </a-form-item
         ></a-col>
         <a-col :span="12">
-          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
+          <a-form-item :label="translation.ExpecDeliv_3_388" class="pb-0">
             <a-date-picker
               v-decorator="[
                 'deliveryDate',
@@ -240,6 +254,7 @@ export default {
   middleware: 'auth',
   data() {
     return {
+      activeTab:'outbound',
       qrUrl: null,
       loading: false,
       showModal: false,
@@ -252,15 +267,21 @@ export default {
 ],
       columns : [
   {
+    title: 'Sample',
+    dataIndex: 'qrUrl',
+    key: 'qrUrl',
+    scopedSlots: { customRender: 'image' },
+  },
+{
     title: 'Sample ID',
     dataIndex: 'puid',
     key: 'puid',
   },
-  {
-    title: 'Image',
-    dataIndex: 'qrUrl',
-    key: 'qrUrl',
-    scopedSlots: { customRender: 'image' },
+{
+    title: 'Print QR',
+    dataIndex: 'print',
+    key: 'print',
+    scopedSlots: { customRender: 'print' },
   },
 ],
 
@@ -342,9 +363,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {},
+  mounted() {
+    // this.handleActiveTab()
+  },
   methods: {
     disabledDate: _disabledPreviousDate,
+    handleActiveTab() {
+      this.setActiveTab()
+    },
+    setActiveTab(){
+      console.log('parent')
+      this.activeTab='couriers'
+    },
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
         deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
@@ -367,7 +397,10 @@ export default {
     },
     handleModal(show) {
       this.showModal = show
-    },    
+    },
+    printWindow(){
+      window.print()
+    },       
   },
 }
 </script>
