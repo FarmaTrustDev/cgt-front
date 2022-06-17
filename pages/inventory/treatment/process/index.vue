@@ -201,6 +201,7 @@
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
+                :typeId="type"
                 @fetchBags="() => {}"
                 @updateId="updateId"
               />
@@ -229,6 +230,7 @@ export default {
   data() {
     return {
       activeTab: 'inbound',
+      type:'inbound',
       dummyCollection: [
         {
           id: 1,

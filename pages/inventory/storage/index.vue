@@ -19,7 +19,7 @@
           >
             <a-icon slot="prefix" type="search" class="mb-5" />
           </a-input>
-          <Listing :storages="storage" />
+          <Listing :storages="storage" :typeId="inbound" />
         </a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
           <a-input
@@ -72,6 +72,7 @@ mixins: [routeHelpers],
       filters: {},
       loading: false,
       data: [],
+      isInbound:false,
       shouldUpdate: true,
       storage: baseStorage,
       productsColumn: [
@@ -219,6 +220,9 @@ mixins: [routeHelpers],
   },
   mounted() {
     this.data = this.productsData
+    if(this.$route.query.inbound){
+      this.inbound=true
+    }
   },
   methods: {
         customRow(record) {

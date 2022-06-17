@@ -93,6 +93,7 @@
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
+                :typeId="type"
                 @fetchBags="() => {}"
                 @updateId="updateId"
                 :active-tab="activeTab"
@@ -255,6 +256,7 @@ export default {
   data() {
     return {
       activeTab:'outbound',
+      type:'outbound',
       qrUrl: null,
       loading: false,
       showModal: false,
