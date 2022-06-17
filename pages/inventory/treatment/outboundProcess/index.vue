@@ -87,123 +87,129 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-15 default-card h-tabs pills-tabs">
+        <a-card :bordered="false" class="mt-25 default-card h-tabs pills-tabs">
           <a-tabs tab-position="left">
-            <a-tab-pane key="1" :tab="translation.InbouAccep_3_834">
-              <a-row>
-                <a-col :span="11">
-                  <a-card :bordered="false" class="default-card">
-                    <article class="article">
-                      <h4 class="heading pl-0">
-                        {{ translation.ShippDetai_2_314 }}
-                      </h4>
-                    </article>
-                    <div>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.DispaDate_2_316 }}:</span
-                          >
-                        </a-col>
-                        <a-col :span="14" class="mt-15">
-                          <span class="text-muted"> 09/01/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.DispaBy_2_516 }}:</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 09/01/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.CarriStatu_2_320 }}</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> In-Process</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation.EstimArriv_3_322
-                          }}</span>
-                        </a-col>
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
-                        </a-col>
-                      </a-row>
-                    </div>
-                  </a-card>
-                </a-col>
-                <a-col :span="1"></a-col>
-                <a-col :span="12">
-                  <a-card :bordered="false" class="default-card">
-                    <article class="article">
-                      <h4 class="heading pl-0">
-                        {{ translation.SamplRecei_2_515 }}
-                      </h4>
-                    </article>
-                    <div>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation.IsRecei_2_328
-                          }}</span>
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> Done</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation['Receiby:_2_330'] }}</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted">Sadaan Shahid</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation['ReceiDate:_2_332'] }}</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation['ReceiNote:_2_334']
-                          }}</span>
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
-                        </a-col>
-                      </a-row>
-                    </div>
-                  </a-card>
-                </a-col>
-              </a-row>
-            </a-tab-pane>
-            <a-tab-pane key="2" :tab="translation.InbouStora_3_564">
-              <h3>{{translation.QualiAssur_3_565}}</h3>
+            <a-tab-pane key="1" :tab="translation.OutboShipm_2_376">
               <Process
-                :collections="dummyCollection"
+                :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
                 @fetchBags="() => {}"
                 @updateId="updateId"
-              />
+            />
+          
+            </a-tab-pane>
+            <a-tab-pane key="2" tab="Courier">
+                <div>
+    <a-skeleton :loading="loading">
+      <a-table
+        :should-fetch="false"
+        :pagination="true"
+        :columns="columns"
+        :data-source="bagData"
+        @clickImage="clickImage"
+      >
+      <template slot="image" slot-scope="src, record">
+        <img
+          width="50"
+          class="img-responsive"
+          :src="src"
+          @click="clickImage(record)"
+        />
+      </template>        
+      </a-table>
+    </a-skeleton>
+    <a-modal
+      :visible="showModal"
+      title="Qr Code"
+      @cancel="handleModal(false)"
+      @ok="handleModal(false)"
+    >
+      <img class="img-responsive" :src="qrUrl" />
+    </a-modal>
+  </div>
+    <a-form
+
+     
+    >
+<LogisticLookup />
+      <a-row :gutter="16">
+        <a-col :span="12">
+          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
+            <a-input
+              v-decorator="[
+                `treatmentId`,
+                {
+                  initialValue: '',
+                },
+              ]"
+              type="hidden"
+            />
+
+            <a-input
+              v-decorator="[
+                `hospitalId`,
+                {
+                  initialValue: '',
+                },
+              ]"
+              type="hidden"
+            />
+            <a-input
+              v-decorator="[
+                `patientId`,
+                {
+                  initialValue: '',
+                },
+              ]"
+              type="hidden"
+            />
+            <a-date-picker
+              v-decorator="[
+                'collectionDate',
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please select your Delivery Arrival Date!',
+                    },
+                  ],
+                },
+              ]"
+              :format="dateFormat"
+              :disabled-date="disabledDate"
+              style="width: 100%"
+              size="large"
+              
+            >
+            </a-date-picker> </a-form-item
+        ></a-col>
+        <a-col :span="12">
+          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
+            <a-date-picker
+              v-decorator="[
+                'deliveryDate',
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please select your Delivery Arrival Date!',
+                    },
+                  ],
+                },
+              ]"
+             
+              :disabled-date="disabledDate"
+              :format="dateFormat"
+              style="width: 100%"
+              size="large"
+            >
+            </a-date-picker> </a-form-item
+        ></a-col>
+      </a-row>
+      <a-form-item>
+        <FormActionButton :loading="loading" custom-text="Submit" />
+      </a-form-item>
+    </a-form>  
             </a-tab-pane>
           </a-tabs>
         </a-card>
@@ -216,17 +222,48 @@
 import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
+import LogisticLookup from '~/components/lookups/LogisticLookup'
+import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
+import {
+  getMomentByStandardFormat,
+  _disabledPreviousDate,
+} from '~/services/Helpers/MomentHelpers'
 // import shipment from '~/components/inventory/treatment/shipment'
 
 export default {
   components: {
     'page-layout': PageLayout,
     Process,
+    LogisticLookup,
     // shipment,
   },
   middleware: 'auth',
   data() {
     return {
+      qrUrl: null,
+      loading: false,
+      showModal: false,
+      dateFormat: STANDARD_UK_DATE_FORMAT,
+      bagData:[
+  {
+      puid: 'DAC7993',
+      qrUrl: 'https://demoapi.qmaid.co/Uploads/patient/12/qr/637882805424838187.png',
+  },
+],
+      columns : [
+  {
+    title: 'Sample ID',
+    dataIndex: 'puid',
+    key: 'puid',
+  },
+  {
+    title: 'Image',
+    dataIndex: 'qrUrl',
+    key: 'qrUrl',
+    scopedSlots: { customRender: 'image' },
+  },
+],
+
       dummyCollection: [
         {
           id: 1,
@@ -307,6 +344,12 @@ export default {
   },
   mounted() {},
   methods: {
+    disabledDate: _disabledPreviousDate,
+    collectionDateChange(value, date) {
+      this.form.setFieldsValue({
+        deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
+      })
+    },    
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {
         if (collection.id === collectionId) {
@@ -317,6 +360,14 @@ export default {
 
       this.dummyCollection = dumCollection
     },
+    clickImage(record) {
+      console.log(record)
+      this.qrUrl = record.qrUrl
+      this.handleModal(true)
+    },
+    handleModal(show) {
+      this.showModal = show
+    },    
   },
 }
 </script>

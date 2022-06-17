@@ -87,124 +87,15 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-15 default-card h-tabs pills-tabs">
+        <a-card :bordered="false" class="mt-25 default-card h-tabs pills-tabs">
           <a-tabs tab-position="left">
-            <a-tab-pane key="1" :tab="translation.InbouAccep_3_834">
-              <a-row>
-                <a-col :span="11">
-                  <a-card :bordered="false" class="default-card">
-                    <article class="article">
-                      <h4 class="heading pl-0">
-                        {{ translation.ShippDetai_2_314 }}
-                      </h4>
-                    </article>
-                    <div>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.DispaDate_2_316 }}:</span
-                          >
-                        </a-col>
-                        <a-col :span="14" class="mt-15">
-                          <span class="text-muted"> 09/01/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.DispaBy_2_516 }}:</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 09/01/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.CarriStatu_2_320 }}</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> In-Process</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation.EstimArriv_3_322
-                          }}</span>
-                        </a-col>
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
-                        </a-col>
-                      </a-row>
-                    </div>
-                  </a-card>
-                </a-col>
-                <a-col :span="1"></a-col>
-                <a-col :span="12">
-                  <a-card :bordered="false" class="default-card">
-                    <article class="article">
-                      <h4 class="heading pl-0">
-                        {{ translation.SamplRecei_2_515 }}
-                      </h4>
-                    </article>
-                    <div>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation.IsRecei_2_328
-                          }}</span>
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> Done</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation['Receiby:_2_330'] }}</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted">Sadaan Shahid</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation['ReceiDate:_2_332'] }}</span
-                          >
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation['ReceiNote:_2_334']
-                          }}</span>
-                        </a-col>
-                        <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
-                        </a-col>
-                      </a-row>
-                    </div>
-                  </a-card>
-                </a-col>
-              </a-row>
-            </a-tab-pane>
-            <a-tab-pane key="2" :tab="translation.InbouStora_3_564">
-              <h3>{{translation.QualiAssur_3_565}}</h3>
+            <a-tab-pane key="3" :tab="translation.OutboShipm_2_376">
               <Process
-                :collections="dummyCollection"
+                :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
                 @fetchBags="() => {}"
                 @updateId="updateId"
-              />
-            </a-tab-pane>
+            /></a-tab-pane>
           </a-tabs>
         </a-card>
       </div>

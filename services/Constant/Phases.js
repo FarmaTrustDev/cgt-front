@@ -35,7 +35,7 @@ export const INVENTORY_OUTBOUND_STATUS_STEPS = [
         name: 'Outbound Process',
         alias: 'OUTBOUND_PROCESS',
         phaseId: 2,
-        url_slug: '/hospital/patients/',
+        url_slug: '/inventory/treatment/outboundProcess/',
         params: {}
     },
     {
@@ -43,7 +43,7 @@ export const INVENTORY_OUTBOUND_STATUS_STEPS = [
         name: 'Courier',
         alias: 'COURIER',
         phaseId: 3,
-        url_slug: '/hospital/patients/',
+        url_slug: '/inventory/treatment/outboundProcess/',
         params: {}
     },
 ];
