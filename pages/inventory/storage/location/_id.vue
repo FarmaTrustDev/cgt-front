@@ -80,6 +80,7 @@ import TimeLine from '~/components/timeline'
 import { isEmpty } from '~/services/Helpers'
 import { fridgeData } from '~/services/Constant/DummyData'
 
+/// The code on the page is total no tolerated
 export default {
   components: {
     PageLayout,
@@ -105,15 +106,22 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.query.open)
+    const m = this.getRackPortion
+    const g = this.getTube
+    setTimeout(function () {
+      m()
+      g()
+    }, 100)
   },
   methods: {
     isEmpty,
     getRackPortion(portions) {
-      this.trayData = portions.trays
+      if (!isEmpty(this.fridgeData.racks[0])) {
+        this.trayData = this.fridgeData.racks[0].portions[0].trays
+      }
     },
     getTube(tube) {
-      this.steps = tube.steps
+      this.steps = this.fridgeData.racks[0].portions[0].trays[0].tubes[0].steps
     },
   },
 }

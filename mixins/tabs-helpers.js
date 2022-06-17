@@ -5,7 +5,6 @@ export default {
         handleActiveTab() {
             const view = this.$route
             if (!isEmpty(view.query.view)) {
-
                 this.activeTab = view.query.view
             }
         },
