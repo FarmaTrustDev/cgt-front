@@ -14,7 +14,7 @@
         },
       ]"
       :loading="typeLoading"
-      placeholder="Select Treatment Type"
+      placeholder="Select LogisticProvider"
       class="default-select w-100"
       size="large"
       :disabled="disabled"

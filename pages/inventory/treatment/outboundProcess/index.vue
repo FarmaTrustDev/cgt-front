@@ -100,7 +100,7 @@
             />
           
             </a-tab-pane>
-            <a-tab-pane key="courier" tab="Courier">
+            <a-tab-pane key="couriers" tab="Courier">
                 <div>
     <a-skeleton :loading="loading">
       <a-table
@@ -132,11 +132,13 @@
     </a-skeleton>
     <a-modal
       :visible="showModal"
-      title="Qr Code"
-      @cancel="handleModal(false)"
-      @ok="handleModal(false)"
+      title="Print"
     >
       <img class="img-responsive" :src="qrUrl" />
+      <template slot="footer">
+        <a-button @click="handleModal(false)">Cancel</a-button>
+        <a-button @click="printWindow()">Print</a-button>     
+      </template>      
     </a-modal>
   </div>
     <a-form
@@ -196,7 +198,7 @@
             </a-date-picker> </a-form-item
         ></a-col>
         <a-col :span="12">
-          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
+          <a-form-item :label="translation.ExpecDeliv_3_388" class="pb-0">
             <a-date-picker
               v-decorator="[
                 'deliveryDate',
@@ -371,7 +373,7 @@ export default {
     },
     setActiveTab(){
       console.log('parent')
-      this.activeTab='courier'
+      this.activeTab='couriers'
     },
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
@@ -395,7 +397,10 @@ export default {
     },
     handleModal(show) {
       this.showModal = show
-    },    
+    },
+    printWindow(){
+      window.print()
+    },       
   },
 }
 </script>
