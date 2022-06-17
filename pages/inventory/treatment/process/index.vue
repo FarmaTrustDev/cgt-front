@@ -274,20 +274,20 @@ export default {
         },
       ],
       dummyOutBoundCollection: [
-        {
-          id: 1,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
-        },
+        // {
+        //   id: 1,
+        //   isCollected: false,
+        //   name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
+        // },
         {
           id: 2,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.RemovFrom_3_527}`,
+          name: `Has sample been removed from freezer ?`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.IsPacka_3_528}`,
+          name: `Does sample packaging pass visual check ?`,
         },
         {
           id: 3,
@@ -297,12 +297,12 @@ export default {
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Samplhas_4_530}`,
+          name: `Has sample been packaged for courier ?`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Readyfor_5_531}`,
+          name: `Is documentation completed and ready for courier pick up ?`,
         },
       ],
     }
