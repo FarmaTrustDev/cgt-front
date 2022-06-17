@@ -103,9 +103,9 @@
       @cancel="handleQuarantineModal(false)"
     >
       <!-- <showQuarantine /> -->
-      <div>
-        <Quarantine @submit="handleQuarantineSubmit" />
-      </div>
+      <a-form-item>
+        <Quarantine @submit="handleQuarantineSubmit" text="Submit" />
+      </a-form-item>
     </a-modal>
   </div>
 </template>

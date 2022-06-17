@@ -76,7 +76,7 @@
           size="small"
           icon="printer"
           @click="openViewModal(print)"
-          >Print Label</a-button
+          >View</a-button
         >
       </template>
               <span slot="action" slot-scope="text, record">

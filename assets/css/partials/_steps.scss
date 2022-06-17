@@ -366,3 +366,20 @@
     }
   }
 }
+.inbound-accept-tabs {
+  .ant-tabs-nav{ 
+    .ant-tabs-tab{
+      padding-top: 25px;
+      padding-bottom: 25px;
+      font-size: 16px;
+      text-align: center;
+      border-radius: 22px;
+      background-color: #d1f2dc;
+    }
+    .ant-tabs-tab-active{
+      &::after{
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
+      }
+    }
+  }
+}

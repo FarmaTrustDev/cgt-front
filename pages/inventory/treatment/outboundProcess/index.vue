@@ -87,7 +87,7 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-25 default-card h-tabs pills-tabs">
+        <a-card :bordered="false" class="mt-25 default-card inbound-accept-tabs">
           <a-tabs tab-position="left">
             <a-tab-pane key="1" :tab="translation.OutboShipm_2_376">
               <Process
@@ -303,21 +303,21 @@ export default {
           name: `${this.$store.getters.getTranslation.Specifreez_9_525}`,
         },
       ],
-      dummyOutBoundCollection: [
-        {
-          id: 1,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
-        },
+        dummyOutBoundCollection: [
+        // {
+        //   id: 1,
+        //   isCollected: false,
+        //   name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
+        // },
         {
           id: 2,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.RemovFrom_3_527}`,
+          name: `Has sample been removed from freezer ?`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.IsPacka_3_528}`,
+          name: `Does sample packaging pass visual check ?`,
         },
         {
           id: 3,
@@ -327,12 +327,12 @@ export default {
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Samplhas_4_530}`,
+          name: `Has sample been packaged for courier ?`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Readyfor_5_531}`,
+          name: `Is documentation completed and ready for courier pick up ?`,
         },
       ],
     }
