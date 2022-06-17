@@ -103,9 +103,9 @@
       @cancel="handleQuarantineModal(false)"
     >
       <!-- <showQuarantine /> -->
-      <div>
-        <Quarantine @submit="handleQuarantineSubmit" />
-      </div>
+      <a-form-item>
+        <Quarantine @submit="handleQuarantineSubmit" text="Submit" />
+      </a-form-item>
     </a-modal>
   </div>
 </template>
@@ -124,6 +124,7 @@ export default {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
     activeTab:{type: String},
+    typeId:{type: String},
   },
   data() {
     return {
@@ -172,7 +173,12 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit('handleActiveTab','courier');
+      if(this.typeId==='inbound'){
+        this.goto('/inventory/storage?inbound=true')
+      }
+      if(this.typeId==='outbound'){
+        this.$emit('handleActiveTab','courier');
+      }
     },
     handleCollectionSubmit(collection) {
       const fields = this.form.getFieldsValue()

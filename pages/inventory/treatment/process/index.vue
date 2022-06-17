@@ -87,9 +87,9 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-15 default-card h-tabs pills-tabs">
-          <a-tabs tab-position="left">
-            <a-tab-pane key="inbound" :tab="translation.InbouAccep_3_834">
+        <a-card :bordered="false" class="mt-15 default-card inbound-accept-tabs" >
+          <a-tabs tab-position="left" >
+            <a-tab-pane key="inbound"  :tab="translation.InbouAccep_3_834">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
@@ -201,6 +201,7 @@
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
+                :typeId="type"
                 @fetchBags="() => {}"
                 @updateId="updateId"
               />
@@ -229,6 +230,7 @@ export default {
   data() {
     return {
       activeTab: 'inbound',
+      type:'inbound',
       dummyCollection: [
         {
           id: 1,
