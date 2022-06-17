@@ -46,16 +46,34 @@
             :columns="productsColumn"
             :customRow="customRow"
           >
+           <!-- <template slot="print" slot-scope="print">
+        <span
+          class="print-btn color-white default-cursor"
+          type="primary"
+          size="small"
+          @click="openViewModal(print)"
+          >Document</span
+        >
+      </template> -->
             <!-- :pagination="false" -->
+
           </a-table>
         </a-tab-pane>
       </a-tabs>
+       <a-modal :visible="showModal" :title="translation.Docum_1_507">
+          <img class="img-responsive" :src="getImageUrl(qrUrl)" />
+          <template slot="footer">
+            <a-button @click="handleModal(false)">Cancel</a-button>
+            <a-button @click="printWindow()">Print</a-button>
+          </template>
+        </a-modal>
     </div>
   </page-layout>
 </template>
 
 <script>
 import PageLayout from '~/components/layout/PageLayout'
+import imagesHelper from '~/mixins/images-helper'
 import { isEmpty } from '~/services/Utilities'
 import { isNumber } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
@@ -65,7 +83,7 @@ import { baseStorage } from '~/services/Constant/DummyData'
 
 export default {
   components: { PageLayout, Listing },
-mixins: [routeHelpers],
+mixins: [routeHelpers, imagesHelper],
   data() {
     return {
       productFilters: {},
@@ -100,12 +118,6 @@ mixins: [routeHelpers],
           ellipsis: true,
         },
         {
-          title: `${this.$store.getters.getTranslation.StoraDocum_2_542}`,
-          dataIndex: 'storageDocument',
-          key: 'storageDocument',
-          scopedSlots: { customRender: 'icon' },
-        },
-        {
           title: `${this.$store.getters.getTranslation.ExpirDate_2_543}`,
           dataIndex: 'expiryDate',
           key: 'expiryDate',
@@ -125,6 +137,12 @@ mixins: [routeHelpers],
           dataIndex: 'projectCode',
           key: 'projectCode',
         },
+        // {
+        //   title: `${this.$store.getters.getTranslation.StoraDocum_2_542}`,
+        //   dataIndex: 'print',
+        //   key: 'print',
+        //   scopedSlots: { customRender: 'print' },
+        // },
       ],
       productsData: [
         {
@@ -233,6 +251,18 @@ mixins: [routeHelpers],
           }
         }
       };
+    },
+    clickImage(record) {
+      this.qrUrl = record.qrUrl
+      this.handleModal(true)
+    },
+    handleModal(show) {
+      this.showModal = show
+    },
+    openViewModal(id) {
+      this.showModal = true
+      this.qrUrl = id
+      // LabelServices.scheduling(id);
     },
     productSearch(value, key) {
       let filters = this.productFilters
