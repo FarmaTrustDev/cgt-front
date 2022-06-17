@@ -130,7 +130,7 @@
               :columns="allSampleColumns"
               :should-fetch="false"
               :data-source="allSample"
-            >
+              :customRow="customRow">
             </a-table>
           </a-tab-pane>
         </a-tabs>
@@ -149,6 +149,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
 import { isEmpty } from '~/services/Utilities'
 import { isNumber } from '~/services/Helpers'
+
 export const newSampleData=[
    {
           patientEnrollmentNumber: 'DAC7993',
@@ -279,7 +280,9 @@ export default {
     // StandardTable,
     PageLayout,
   },
+  
   mixins: [routeHelpers, imagesHelper],
+  
   data() {
     return {
       loading: false,
@@ -575,6 +578,18 @@ export default {
       } else {
         this.allSample = allSampleData
       }
+    },
+    redirect(){
+      this.goto('/inventory/storage/location')
+    },
+    customRow(record) {
+      return {
+        on: {
+          click: event => {
+            this.goto('/inventory/storage/location')
+          }
+        }
+      };
     },
   },
 }
