@@ -87,8 +87,11 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-25 default-card inbound-accept-tabs">
-          <a-tabs tab-position="left" :active-key="activeTab">
+        <a-card
+          :bordered="false"
+          class="mt-25 default-card inbound-accept-tabs"
+        >
+          <a-tabs tab-position="left" :default-active-key="activeTab">
             <a-tab-pane key="outbound" :tab="translation.OutboShipm_2_376">
               <Process
                 :collections="dummyOutBoundCollection"
@@ -96,135 +99,134 @@
                 :type-id="type"
                 :active-tab="activeTab"
                 @fetchBags="() => {}"
-                @updateId="updateId"
+                @updateId="updateDummyOutBoundCollectionId"
                 @handleActiveTab="handleActiveTab"
-            />
-          
+              />
             </a-tab-pane>
             <a-tab-pane key="couriers" tab="Courier">
-                <div>
-    <a-skeleton :loading="loading">
-      <a-table
-        :should-fetch="false"
-        :pagination="true"
-        :columns="columns"
-        :data-source="bagData"
-        @clickImage="clickImage"
-      >
-      <template slot="image" slot-scope="src, record">
-        <img
-          width="50"
-          class="img-responsive"
-          :src="src"
-          @click="clickImage(record)"
-        />
-      </template>
-      <template slot="print" slot-scope="print, record">
-        <a-button
-          class="print-btn"
-          type="primary"
-          size="small"
-          icon="printer"
-          @click="clickImage(record)"
-          >Print</a-button
-        >
-      </template>              
-      </a-table>
-    </a-skeleton>
-    <a-modal
-      :visible="showModal"
-      title="Print"
-    >
-      <img class="img-responsive" :src="qrUrl" />
-      <template slot="footer">
-        <a-button @click="handleModal(false)">Cancel</a-button>
-        <a-button @click="printWindow()">Print</a-button>     
-      </template>      
-    </a-modal>
-  </div>
-    <a-form
+              <div>
+                <a-skeleton :loading="loading">
+                  <a-table
+                    :should-fetch="false"
+                    :pagination="true"
+                    :columns="columns"
+                    :data-source="bagData"
+                    @clickImage="clickImage"
+                  >
+                    <template slot="image" slot-scope="src, record">
+                      <img
+                        width="50"
+                        class="img-responsive"
+                        :src="src"
+                        @click="clickImage(record)"
+                      />
+                    </template>
+                    <template slot="print" slot-scope="print, record">
+                      <a-button
+                        class="print-btn"
+                        type="primary"
+                        size="small"
+                        icon="printer"
+                        @click="clickImage(record)"
+                        >Print</a-button
+                      >
+                    </template>
+                  </a-table>
+                </a-skeleton>
+                <a-modal :visible="showModal" title="Print">
+                  <img class="img-responsive" :src="qrUrl" />
+                  <template slot="footer">
+                    <a-button @click="handleModal(false)">Cancel</a-button>
+                    <a-button @click="printWindow()">Print</a-button>
+                  </template>
+                </a-modal>
+              </div>
+              <a-form>
+                <LogisticLookup />
+                <a-row :gutter="16">
+                  <a-col :span="12">
+                    <a-form-item
+                      :label="translation.SamplColle_3_518"
+                      class="pb-0"
+                    >
+                      <a-input
+                        v-decorator="[
+                          `treatmentId`,
+                          {
+                            initialValue: '',
+                          },
+                        ]"
+                        type="hidden"
+                      />
 
-     
-    >
-<LogisticLookup />
-      <a-row :gutter="16">
-        <a-col :span="12">
-          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
-            <a-input
-              v-decorator="[
-                `treatmentId`,
-                {
-                  initialValue: '',
-                },
-              ]"
-              type="hidden"
-            />
-
-            <a-input
-              v-decorator="[
-                `hospitalId`,
-                {
-                  initialValue: '',
-                },
-              ]"
-              type="hidden"
-            />
-            <a-input
-              v-decorator="[
-                `patientId`,
-                {
-                  initialValue: '',
-                },
-              ]"
-              type="hidden"
-            />
-            <a-date-picker
-              v-decorator="[
-                'collectionDate',
-                {
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please select your Delivery Arrival Date!',
-                    },
-                  ],
-                },
-              ]"
-              :format="dateFormat"
-              :disabled-date="disabledDate"
-              style="width: 100%"
-              size="large"
-              
-            >
-            </a-date-picker> </a-form-item
-        ></a-col>
-        <a-col :span="12">
-          <a-form-item :label="translation.ExpecDeliv_3_388" class="pb-0">
-            <a-date-picker
-              v-decorator="[
-                'deliveryDate',
-                {
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please select your Delivery Arrival Date!',
-                    },
-                  ],
-                },
-              ]"
-             
-              :disabled-date="disabledDate"
-              :format="dateFormat"
-              style="width: 100%"
-              size="large"
-            >
-            </a-date-picker> </a-form-item
-        ></a-col>
-      </a-row>
-      <a-form-item>
-        <FormActionButton :loading="loading" custom-text="Submit" />
-      </a-form-item>
-    </a-form>  
+                      <a-input
+                        v-decorator="[
+                          `hospitalId`,
+                          {
+                            initialValue: '',
+                          },
+                        ]"
+                        type="hidden"
+                      />
+                      <a-input
+                        v-decorator="[
+                          `patientId`,
+                          {
+                            initialValue: '',
+                          },
+                        ]"
+                        type="hidden"
+                      />
+                      <a-date-picker
+                        v-decorator="[
+                          'collectionDate',
+                          {
+                            rules: [
+                              {
+                                required: true,
+                                message:
+                                  'Please select your Delivery Arrival Date!',
+                              },
+                            ],
+                          },
+                        ]"
+                        :format="dateFormat"
+                        :disabled-date="disabledDate"
+                        style="width: 100%"
+                        size="large"
+                      >
+                      </a-date-picker> </a-form-item
+                  ></a-col>
+                  <a-col :span="12">
+                    <a-form-item
+                      :label="translation.ExpecDeliv_3_388"
+                      class="pb-0"
+                    >
+                      <a-date-picker
+                        v-decorator="[
+                          'deliveryDate',
+                          {
+                            rules: [
+                              {
+                                required: true,
+                                message:
+                                  'Please select your Delivery Arrival Date!',
+                              },
+                            ],
+                          },
+                        ]"
+                        :disabled-date="disabledDate"
+                        :format="dateFormat"
+                        style="width: 100%"
+                        size="large"
+                      >
+                      </a-date-picker> </a-form-item
+                  ></a-col>
+                </a-row>
+                <a-form-item>
+                  <FormActionButton :loading="loading" custom-text="Submit" />
+                </a-form-item>
+              </a-form>
             </a-tab-pane>
           </a-tabs>
         </a-card>
@@ -255,37 +257,38 @@ export default {
   middleware: 'auth',
   data() {
     return {
-      activeTab:'outbound',
-      type:'outbound',
+      activeTab: 'outbound',
+      type: 'outbound',
       qrUrl: null,
       loading: false,
       showModal: false,
       dateFormat: STANDARD_UK_DATE_FORMAT,
-      bagData:[
-  {
-      puid: 'DAC7993',
-      qrUrl: 'https://demoapi.qmaid.co/Uploads/patient/12/qr/637882805424838187.png',
-  },
-],
-      columns : [
-  {
-    title: 'Sample',
-    dataIndex: 'qrUrl',
-    key: 'qrUrl',
-    scopedSlots: { customRender: 'image' },
-  },
-{
-    title: 'Sample ID',
-    dataIndex: 'puid',
-    key: 'puid',
-  },
-{
-    title: 'Print QR',
-    dataIndex: 'print',
-    key: 'print',
-    scopedSlots: { customRender: 'print' },
-  },
-],
+      bagData: [
+        {
+          puid: 'DAC7993',
+          qrUrl:
+            'https://demoapi.qmaid.co/Uploads/patient/12/qr/637882805424838187.png',
+        },
+      ],
+      columns: [
+        {
+          title: 'Sample',
+          dataIndex: 'qrUrl',
+          key: 'qrUrl',
+          scopedSlots: { customRender: 'image' },
+        },
+        {
+          title: 'Sample ID',
+          dataIndex: 'puid',
+          key: 'puid',
+        },
+        {
+          title: 'Print QR',
+          dataIndex: 'print',
+          key: 'print',
+          scopedSlots: { customRender: 'print' },
+        },
+      ],
 
       dummyCollection: [
         {
@@ -326,7 +329,7 @@ export default {
           name: `${this.$store.getters.getTranslation.Specifreez_9_525}`,
         },
       ],
-        dummyOutBoundCollection: [
+      dummyOutBoundCollection: [
         // {
         //   id: 1,
         //   isCollected: false,
@@ -343,17 +346,17 @@ export default {
           name: `Does sample packaging pass visual check ?`,
         },
         {
-          id: 3,
+          id: 4,
           isCollected: false,
           name: `${this.$store.getters.getTranslation.IsSampl_6_529}`,
         },
         {
-          id: 3,
+          id: 5,
           isCollected: false,
           name: `Has sample been packaged for courier ?`,
         },
         {
-          id: 3,
+          id: 6,
           isCollected: false,
           name: `Is documentation completed and ready for courier pick up ?`,
         },
@@ -373,15 +376,15 @@ export default {
     handleActiveTab() {
       this.setActiveTab()
     },
-    setActiveTab(){
+    setActiveTab() {
       console.log('parent')
-      this.activeTab='couriers'
+      this.activeTab = 'couriers'
     },
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
         deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
       })
-    },    
+    },
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {
         if (collection.id === collectionId) {
@@ -392,6 +395,16 @@ export default {
 
       this.dummyCollection = dumCollection
     },
+    updateDummyOutBoundCollectionId(collectionId) {
+      const dumCollection = this.dummyOutBoundCollection.map((collection) => {
+        if (collection.id === collectionId) {
+          collection.isCollected = true
+        }
+        return collection
+      })
+
+      this.dummyOutBoundCollection = dumCollection
+    },
     clickImage(record) {
       console.log(record)
       this.qrUrl = record.qrUrl
@@ -400,9 +413,9 @@ export default {
     handleModal(show) {
       this.showModal = show
     },
-    printWindow(){
+    printWindow() {
       window.print()
-    },       
+    },
   },
 }
 </script>
