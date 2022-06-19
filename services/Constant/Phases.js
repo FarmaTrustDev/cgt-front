@@ -166,7 +166,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'STORE_SAMPLE',
         phaseId: 14,
         enablePageId: 14,
-        url_slug: '/inventory/storage/',
+        url_slug: '/inventory/storage/ColorFridge',
         url_type: URL_TYPE.treatment,
         params: { view: 'STORE_SAMPLE' }
     },

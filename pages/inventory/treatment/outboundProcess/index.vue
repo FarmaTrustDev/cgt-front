@@ -93,10 +93,10 @@
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
-                :typeId="type"
+                :type-id="type"
+                :active-tab="activeTab"
                 @fetchBags="() => {}"
                 @updateId="updateId"
-                :active-tab="activeTab"
                 @handleActiveTab="handleActiveTab"
             />
           
