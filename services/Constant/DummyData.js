@@ -309,6 +309,50 @@ const tube3 = {
         },
     ],
 }
+const tubeActive = {
+    id: 3,
+    active: true,
+    name: '5A',
+    isHover: true,
+    steps: [
+        {
+            title: 'Jack Black',
+            date: '21 Feb, 2022 9:00',
+            by: 'Inbound Date',
+            detail: 'Cellfuse',
+        },
+        {
+            title: ' Simon Smith',
+            date: '21 Feb, 2022 9:30',
+            by: 'Inbound Process',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Ahmed Salaam',
+            date: '21 Feb, 2022 10:00',
+            by: 'Storage',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Claire Jones',
+            date: '28 Feb, 2022 14:00',
+            by: 'Visual Check',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Dwayne Morgan',
+            date: '19 Apr, 2022 15:00',
+            by: 'Packaging Depot',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'RT456',
+            date: '19 Apr, 2022 16:00',
+            by: 'Courier Pick Up',
+            detail: 'Cellfuse',
+        },
+    ],
+}
 const portion = {
     id: 1,
     color: 'red',
@@ -316,6 +360,32 @@ const portion = {
     trays: [
         {
             tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+    ],
+}
+
+const activePortion = {
+    id: 1,
+    color: 'red',
+    active: true,
+    trays: [
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tubeActive],
         },
         {
             tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
@@ -391,10 +461,21 @@ const rack3 = {
     portions: [portion, portion2, portion3, portion2],
 }
 
+const rackActive = {
+    id: 1,
+    portions: [activePortion, portion, portion2, portion3],
+}
+
 export const fridgeData = {
     name: 'Fridge Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
     racks: [rack, rack2, rack3, rack2, rack],
+}
+
+export const fridgeDataStatic = {
+    name: 'Fridge Atara 001',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    racks: [rackActive, rack, rack2, rack2, rack],
 }
 
 export const fridges = [fridgeData]

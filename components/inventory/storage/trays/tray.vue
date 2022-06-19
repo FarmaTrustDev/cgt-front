@@ -1,7 +1,7 @@
 <template>
   <div @mouseenter="onHover(true)" @mouseleave="onHover(false)">
     <img
-      v-if="isHover"
+      v-if="isHover || tube.isHover"
       class="tube-image"
       :src="getImageUrl('web/inventory/storage/selected-tube.svg')"
     />
@@ -28,6 +28,9 @@ export default {
     return {
       isHover: false,
     }
+  },
+  mounted() {
+    console.log(this.tube)
   },
   methods: {
     onHover(show) {
