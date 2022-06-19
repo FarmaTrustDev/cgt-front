@@ -7,6 +7,11 @@
     class="specific-storage"
   >
     <div slot="content" class="h-tabs large-tabs">
+      <a-row>
+        <a-col class="mb-15" :span="24">
+          <detail />
+        </a-col>
+      </a-row>
       <a-tabs class="" type="card">
         <a-tab-pane key="storages" :tab="translation.Explostora_3_536">
           <a-input
@@ -46,7 +51,7 @@
             :columns="productsColumn"
             :customRow="customRow"
           >
-           <!-- <template slot="print" slot-scope="print">
+            <!-- <template slot="print" slot-scope="print">
         <span
           class="print-btn color-white default-cursor"
           type="primary"
@@ -56,17 +61,16 @@
         >
       </template> -->
             <!-- :pagination="false" -->
-
           </a-table>
         </a-tab-pane>
       </a-tabs>
-       <a-modal :visible="showModal" :title="translation.Docum_1_507">
-          <img class="img-responsive" :src="getImageUrl(qrUrl)" />
-          <template slot="footer">
-            <a-button @click="handleModal(false)">Cancel</a-button>
-            <a-button @click="printWindow()">Print</a-button>
-          </template>
-        </a-modal>
+      <a-modal :visible="showModal" :title="translation.Docum_1_507">
+        <img class="img-responsive" :src="getImageUrl(qrUrl)" />
+        <template slot="footer">
+          <a-button @click="handleModal(false)">Cancel</a-button>
+          <a-button @click="printWindow()">Print</a-button>
+        </template>
+      </a-modal>
     </div>
   </page-layout>
 </template>
@@ -80,17 +84,18 @@ import routeHelpers from '~/mixins/route-helpers'
 // import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
 import { baseStorage } from '~/services/Constant/DummyData'
+import detail from '~/components/root/inventory/detail'
 
 export default {
-  components: { PageLayout, Listing },
-mixins: [routeHelpers, imagesHelper],
+  components: { PageLayout, Listing, detail },
+  mixins: [routeHelpers, imagesHelper],
   data() {
     return {
       productFilters: {},
       filters: {},
       loading: false,
       data: [],
-      isInbound:false,
+      isInbound: false,
       shouldUpdate: true,
       storage: baseStorage,
       productsColumn: [
@@ -238,19 +243,19 @@ mixins: [routeHelpers, imagesHelper],
   },
   mounted() {
     this.data = this.productsData
-    if(this.$route.query.inbound){
-      this.inbound=true
+    if (this.$route.query.inbound) {
+      this.inbound = true
     }
   },
   methods: {
-        customRow(record) {
+    customRow(record) {
       return {
         on: {
-          click: event => {
+          click: (event) => {
             this.goto('/inventory/storage/location')
-          }
-        }
-      };
+          },
+        },
+      }
     },
     clickImage(record) {
       this.qrUrl = record.qrUrl
