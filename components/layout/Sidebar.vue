@@ -6,11 +6,11 @@
       /></nuxt-link>
     </div>
     <a-skeleton :loading="isEmpty(user)" :paragraph="{ rows: 10 }">
-      <a-menu :default-selected-keys="['1']" mode="inline">
+      <a-menu :selected-keys="selectedKey" mode="inline">
         <a-menu-item
           v-for="menu in user.menus"
           :key="menu.key"
-          @click="goto(menu.to)"
+          @click="goto(menu)"
         >
           <div class="menu-container">
             <img :src="menu.icon" style="max-width: 28px" />
@@ -52,6 +52,9 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    selectedKey() {
+      return this.$store.getters.getSelectedMenu
+    },
   },
   mounted() {
     const bus = AuthServices.getBusEvent()
@@ -69,9 +72,10 @@ export default {
       }
     },
     isEmpty,
-    goto(url) {
+    goto(menu) {
+      this.$store.commit('setSelectedMenu', [`${menu.key}`])
       this.$router.push({
-        path: url,
+        path: menu.to,
       })
     },
     logout() {
