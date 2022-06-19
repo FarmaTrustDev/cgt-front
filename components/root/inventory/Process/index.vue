@@ -80,7 +80,11 @@
       </a-table>
     </a-form>
     <a-form-item class="mt-15">
-      <FormActionButton @click="submit" :disabled="buttonEnable" text="Submit" />
+      <FormActionButton
+        :disabled="buttonEnable"
+        text="Submit"
+        @click="submit"
+      />
     </a-form-item>
     <a-modal
       title="Notify"
@@ -104,7 +108,7 @@
     >
       <!-- <showQuarantine /> -->
       <a-form-item>
-        <Quarantine @submit="handleQuarantineSubmit" text="Submit" />
+        <Quarantine text="Submit" @submit="handleQuarantineSubmit" />
       </a-form-item>
     </a-modal>
   </div>
@@ -123,8 +127,8 @@ export default {
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
-    activeTab:{type: String},
-    typeId:{type: String},
+    activeTab: { type: String },
+    typeId: { type: String },
   },
   data() {
     return {
@@ -173,11 +177,11 @@ export default {
   },
   methods: {
     submit() {
-      if(this.typeId==='inbound'){
+      if (this.typeId === 'inbound') {
         this.goto('/inventory/storage?inbound=true')
       }
-      if(this.typeId==='outbound'){
-        this.$emit('handleActiveTab','courier');
+      if (this.typeId === 'outbound') {
+        this.$emit('handleActiveTab', 'courier')
       }
     },
     handleCollectionSubmit(collection) {

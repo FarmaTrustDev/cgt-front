@@ -201,7 +201,7 @@
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
-                :typeId="type"
+                :type-id="type"
                 @fetchBags="() => {}"
                 @updateId="updateId"
               />
