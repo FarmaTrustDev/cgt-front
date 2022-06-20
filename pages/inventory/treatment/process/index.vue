@@ -87,9 +87,13 @@
             </a-col>
           </a-row>
         </div>
-        <a-card :bordered="false" class="mt-15 default-card inbound-accept-tabs" >
-          <a-tabs tab-position="left" >
-            <a-tab-pane key="inbound"  :tab="translation.InbouAccep_3_834">
+        <a-card
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs"
+        >
+        <div class="h-tabs large-tabs">
+          <a-tabs tab-position="left">
+            <a-tab-pane key="inbound" :tab="translation.InbouAccep_3_834">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
@@ -106,7 +110,7 @@
                           >
                         </a-col>
                         <a-col :span="14" class="mt-15">
-                          <span class="text-muted"> 09/01/2022</span>
+                          <span class="text-muted"> 20/01/2022</span>
                         </a-col>
                       </a-row>
                       <a-row :gutter="20" dir="ltr">
@@ -116,7 +120,7 @@
                           >
                         </a-col>
                         <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 09/01/2022</span>
+                          <span class="text-muted"> 20/01/2022</span>
                         </a-col>
                       </a-row>
                       <a-row :gutter="20" dir="ltr">
@@ -178,7 +182,7 @@
                           >
                         </a-col>
                         <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
+                          <span class="text-muted"> 21/01/2022</span>
                         </a-col>
                       </a-row>
                       <a-row :gutter="20" dir="ltr">
@@ -188,7 +192,7 @@
                           }}</span>
                         </a-col>
                         <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
+                          <span class="text-muted"> 21/01/2022</span>
                         </a-col>
                       </a-row>
                     </div>
@@ -207,6 +211,7 @@
               />
             </a-tab-pane>
           </a-tabs>
+          </div>
         </a-card>
       </div>
     </template>
@@ -230,7 +235,7 @@ export default {
   data() {
     return {
       activeTab: 'inbound',
-      type:'inbound',
+      type: 'inbound',
       dummyCollection: [
         {
           id: 1,

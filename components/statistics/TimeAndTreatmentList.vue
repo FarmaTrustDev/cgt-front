@@ -67,7 +67,7 @@
                 >
                   <p class="text-center ml-15 float-left">DAC48694</p>
                   <p class="float-right ml-110 text-center">
-                    07/06/2022 - 10/06/2022
+                    20/06/2022 - 24/06/2022
                   </p>
                 </div>
               </a-list-item>
@@ -82,7 +82,7 @@
                 >
                   <p class="text-center ml-15 float-left">DAC43057</p>
                   <p class="float-right ml-110 text-center">
-                    07/06/2022 - 10/06/2022
+                    20/06/2022 - 24/06/2022
                   </p>
                 </div>
               </a-list-item>
