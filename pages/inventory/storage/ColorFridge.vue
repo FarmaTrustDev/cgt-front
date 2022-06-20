@@ -12,7 +12,7 @@
           <detail />
         </a-col>
       </a-row>
-      <a-tabs class="" type="card">
+      <!--<a-tabs class="" type="card">
         <a-tab-pane key="storages" :tab="translation.Explostora_3_536">
           <a-input
             v-decorator="['quantity']"
@@ -23,9 +23,51 @@
             @change="(e) => search(e.target.value, 'title')"
           >
             <a-icon slot="prefix" type="search" class="mb-5" />
-          </a-input>
-          <Listing :storages="storage" :typeId="inbound" />
-        </a-tab-pane>
+          </a-input>-->
+        <a-row><a-col>
+          <a-form class="filter-search" :form="form" layout="inline">
+            <a-form-item>
+              <a-input
+                v-decorator="['quantity']"
+                :allow-clear="true"
+                size="large"
+                placeholder="Quantity of Vials"
+                @change="(e) => search(e.target.value, 'quantity')"
+              />
+            </a-form-item>
+            <a-form-item>
+              <a-select
+                v-decorator="[`temperature`]"
+                class="w-min-200"
+                placeholder="Temperature"
+                :allow-clear="true"
+                @change="(e) => search(e, 'temperatureId')"
+              >
+                <a-select-option
+                  v-for="temperature in temperatures"
+                  :key="temperature.id"
+                  >{{ temperature.name }}</a-select-option
+                >
+              </a-select>
+            </a-form-item>
+            <a-form-item>
+              <a-select
+                v-decorator="[`zone`]"
+                placeholder=" Storage Zone"
+                class="w-min-200"
+                :allow-clear="true"
+                @change="(e) => search(e, 'zoneId')"
+              >
+                <a-select-option v-for="zone in zones" :key="zone.id">{{
+                  zone.name
+                }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-form>
+        </a-col>
+      </a-row>          
+          <Listing :storages="storage" :typeId="isInbound" />
+        <!--</a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
           <a-input
             v-decorator="['quantity']"
@@ -50,7 +92,7 @@
             :data-source="data"
             :columns="productsColumn"
             :customRow="customRow"
-          >
+          >-->
             <!-- <template slot="print" slot-scope="print">
         <span
           class="print-btn color-white default-cursor"
@@ -61,9 +103,9 @@
         >
       </template> -->
             <!-- :pagination="false" -->
-          </a-table>
+          <!--</a-table>
         </a-tab-pane>
-      </a-tabs>
+      </a-tabs>-->
       <a-modal :visible="showModal" :title="translation.Docum_1_507">
         <img class="img-responsive" :src="getImageUrl(qrUrl)" />
         <template slot="footer">
@@ -97,7 +139,22 @@ export default {
       data: [],
       isInbound: false,
       shouldUpdate: true,
+      qrUrl:null,
+      showModal:false,
       storage: baseStorageQuarantine2,
+      zones: [
+        { id: 1, name: 'Zone A' },
+        { id: 2, name: 'Zone B' },
+        { id: 3, name: 'Zone C' },
+      ],
+      temperatures: [
+        { id: 1, name: '-20C' },
+        { id: 2, name: '-80Â°C' },
+        { id: 3, name: 'LN2' },
+],
+      form: this.$form.createForm(this, {
+        name: 'login',
+      }),            
       productsColumn: [
         {
           title: `${this.$store.getters.getTranslation.Produ_1_538}`,
@@ -244,7 +301,7 @@ export default {
   mounted() {
     this.data = this.productsData
     if (this.$route.query.inbound) {
-      this.inbound = true
+      this.isInbound = true
     }
   },
   methods: {
@@ -311,7 +368,9 @@ export default {
       console.log(str)
     },
     search(value, key) {
-      // console.log(key)
+      // console.log(value)
+      this.storage=null
+      this.storage=baseStorageQuarantine2
       let filters = this.filters
       filters[key] = value
       filters = JSON.stringify(filters)
@@ -322,15 +381,16 @@ export default {
         let storages = []
         for (const filter in filters) {
           const filterValue = filters[filter]
-
-          storages = this.storage.filter((storage) => {
+          // console.log(filterValue)
+          storages = this.storage.filter((strg) => {
+            // console.log(strg.zoneId.match(value))
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              return storage[filter].match(value)
+              
+              return strg[filter]
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) == filterValue
-          })
+            return strg[filter]== filterValue
+          }  )
         }
 
         storages = JSON.stringify(storages)

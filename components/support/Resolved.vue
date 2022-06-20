@@ -83,8 +83,8 @@
           'date' : '10-11-2021',
           'ticketId' : 'CDK-190',
           'name' : 'John DOE',
-          'bagId' : '123',
-          'issueDetails' : '10-11-2021',
+          'bagId' : 'BG000014',
+          'issueDetails' : 'Delay at logistics end',
           'lastUpdate' : '10-11-2021',
           'status' : 'Resolved'
         },
@@ -92,8 +92,8 @@
           'date' : '10-11-2021',
           'ticketId' : 'CDK-190',
           'name' : 'John DOE',
-          'bagId' : '123',
-          'issueDetails' : '10-11-2021',
+          'bagId' : 'BG0000M7',
+          'issueDetails' : 'Bag seems to have been damaged',
           'lastUpdate' : '10-11-2021',
           'status' : 'Resolved'
         }],

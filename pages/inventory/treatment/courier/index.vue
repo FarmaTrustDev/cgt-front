@@ -174,17 +174,17 @@ export default {
           name: `${this.$store.getters.getTranslation.IsPacka_3_528}`,
         },
         {
-          id: 3,
+          id: 4,
           isCollected: false,
           name: `${this.$store.getters.getTranslation.IsSampl_6_529}`,
         },
         {
-          id: 3,
+          id: 5,
           isCollected: false,
           name: `${this.$store.getters.getTranslation.Samplhas_4_530}`,
         },
         {
-          id: 3,
+          id: 6,
           isCollected: false,
           name: `${this.$store.getters.getTranslation.Readyfor_5_531}`,
         },

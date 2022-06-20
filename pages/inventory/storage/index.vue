@@ -24,7 +24,7 @@
           >
             <a-icon slot="prefix" type="search" class="mb-5" />
           </a-input>
-          <Listing :storages="storage" :typeId="inbound" />
+          <Listing :storages="storage" :typeId="isInbound" />
         </a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
           <a-input
@@ -84,7 +84,7 @@ import routeHelpers from '~/mixins/route-helpers'
 // import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
 import { baseStorage } from '~/services/Constant/DummyData'
-import detail from '~/components/root/inventory/detail'
+import detail from '~/pages/inventory/storage/detail'
 
 export default {
   components: { PageLayout, Listing, detail },
@@ -98,6 +98,8 @@ export default {
       isInbound: false,
       shouldUpdate: true,
       storage: baseStorage,
+      qrUrl:null,
+      showModal:false,
       productsColumn: [
         {
           title: `${this.$store.getters.getTranslation.Produ_1_538}`,
@@ -244,7 +246,7 @@ export default {
   mounted() {
     this.data = this.productsData
     if (this.$route.query.inbound) {
-      this.inbound = true
+      this.isInbound = true
     }
   },
   methods: {

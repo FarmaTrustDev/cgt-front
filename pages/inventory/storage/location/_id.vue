@@ -38,7 +38,7 @@
         </a-col>
         <a-col :span="12">
           <TileCenter
-            heading=" Box Atara 001, Shelf 3 "
+            heading=" Box Atara 001"
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">

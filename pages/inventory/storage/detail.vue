@@ -16,7 +16,7 @@
       <a-col :span="12" class="color-black mt-15 icon-col"
         ><a-icon type="global" />{{ data.global }}
       </a-col>
-      <a-col class="color-black mt-15 icon-col" :span="12"
+      <a-col :span="12" class="color-black mt-15 icon-col"
         ><strong>@</strong> {{ data.email }}</a-col
       >
     </a-row>
