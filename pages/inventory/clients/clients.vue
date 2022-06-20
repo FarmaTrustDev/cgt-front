@@ -45,23 +45,11 @@
       :data-source="newTasksData"
       :should-fetch="false"
     >
-      <template slot="print" slot-scope="print">
-        <a-button
-          class="print-btn"
-          type="primary"
-          size="small"
-          icon="printer"
-          @click="openViewModal(print)"
-          >Print Label</a-button
-        >
+      <template slot="productLocation" slot-scope="">
+          <img :src="getImageUrl('web/inventory/storage/pin.svg')" />
       </template>
-      <template slot="confirm" slot-scope="confirm, index">
-        <a-button
-          :class="confirm ? 'blue': 'gray'"
-          size="small"
-          @click="handleClick(confirm,index)"
-          >Confirm placement</a-button
-        >
+      <template slot="storageDocument" slot-scope="">
+          <img :src="getImageUrl('web/inventory/storage/upload.jpeg')" />
       </template>
     </a-table>
     <a-modal
@@ -105,118 +93,60 @@ export default {
         },
         {
           title: `Product Description`,
-          dataIndex: 'sampleName',
-          key: 'sampleName',
+          dataIndex: 'productDescription',
+          key: 'productDescription',
         },
         {
           title: `Product Location`,
-          dataIndex: 'client',
-          key: 'client',
+          dataIndex: 'productLocation',
+          key: 'productLocation',
+          scopedSlots: { customRender: 'productLocation' },
         },
         {
           title: `Storage Documents`,
-          dataIndex: 'fridge',
-          key: 'fridge',
+          dataIndex: 'storageDocument',
+          key: 'storageDocument',
+          scopedSlots: { customRender: 'storageDocument' },
         },
         {
           title: `Expiry Date`,
-          dataIndex: 'position',
-          key: 'position',
-          scopedSlots: {
-            customRender: 'position',
-          },
+          dataIndex: 'expiryDate',
+          key: 'expiryDate',
         },
         {
           title: `Product Quality`,
-          dataIndex: 'print',
-          key: 'print',
-          scopedSlots: { customRender: 'print' },
+          dataIndex: 'productQuality',
+          key: 'productQuality',
         },
         {
           title: `Shipping Address`,
           dataIndex: 'shippingAddress',
           key: 'shippingAddress',
-          scopedSlots: { customRender: 'confirm' },
+          
         },
         {
           title: `Project Manager`,
-          dataIndex: 'confirm',
+          dataIndex: 'projectManager',
           key: 'confirm',
-          scopedSlots: { customRender: 'confirm' },
+          
         },        
       ],
       newTasksData: [
         {
-          sampleId: 'DAC7993',
-          sampleName: 'Platelet Lycate ',
-          client: 'Baystate Clinic',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:0,
+          sampleId: 'DAC12576',
+          productDescription: 'Pluripotent stem cells (PSCs)',
+          expiryDate: '31/10/2022',
+          productQuality:'Optimum',
+          shippingAddress:'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
+          projectManager:'Paige Turner',
         },
         {
-          sampleId: 'DAC7986',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:1,
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:2,
-        },
-        {
-          sampleId: 'DAC7996',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:3,
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:4,
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:5,
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:6,
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index:7,
+          sampleId: 'DAC12576',
+          productDescription: 'Aphaeresis',
+          expiryDate: '31/10/2022',
+          productQuality:'Optimum',
+          shippingAddress:'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
+          projectManager:'Paige Turner',
         },
       ],
     }
