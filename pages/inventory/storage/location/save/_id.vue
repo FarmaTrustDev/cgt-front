@@ -51,9 +51,25 @@
       <FormActionButton
         class="mt-15"
         :loading="loading"
-        custom-text="Submit"
-        @click="goto('/inventory/storage/tasks')"
+        custom-text="Submit" 
+        @click="clickImage"
       />
+      <!-- @click="goto('/inventory/storage/tasks')"-->
+      <a-modal
+      :visible="showModal"
+      title="Confirm sample storage"
+      >
+      <div>
+        <a-row><a-col>Freezer : Atara 001</a-col></a-row>
+        <a-row><a-col>Shelf : Shelf 01</a-col></a-row>
+        <a-row><a-col>Box location : 1A</a-col></a-row>
+      </div>
+      <!--<img class="img-responsive" :src="qrUrl" />-->
+      <template slot="footer">
+        <a-button @click="handleModal(false)">Cancel</a-button>
+        <a-button @click="confirm(false)" type="primary">Confirm</a-button>     
+      </template>        
+    </a-modal>
     </div>
   </page-layout>
 </template>
@@ -68,6 +84,7 @@ import Trays from '~/components/inventory/storage/trays'
 import { isEmpty } from '~/services/Helpers'
 import { fridgeData } from '~/services/Constant/DummyData'
 import routeHelpers from '~/mixins/route-helpers'
+import notifications from '~/mixins/notifications'
 /// The code on the page is total no tolerated
 export default {
   components: {
@@ -78,7 +95,7 @@ export default {
     TileCenter,
     detail,
   },
-  mixins: [routeHelpers],
+  mixins: [routeHelpers,notifications],
   data() {
     return {
       fridgeData,
@@ -86,6 +103,7 @@ export default {
       steps: [],
       tubes: [],
       trayData: [],
+      showModal: false,
     }
   },
   computed: {
@@ -99,6 +117,17 @@ export default {
     getRackPortion(portions) {
       this.trayData = portions.trays
     },
+    clickImage() {
+      this.handleModal(true)
+    },    
+    handleModal(show) {
+      this.showModal = show
+    },
+    confirm(show) {
+      this.showModal = show
+      this.success('Sample stored successfully')
+      this.goto('/inventory/storage/tasks')
+    },         
   },
 }
 </script>

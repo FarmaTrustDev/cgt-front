@@ -222,12 +222,29 @@
         ></a-col>
       </a-row>
       <a-form-item>
-        <FormActionButton :loading="loading" custom-text="Submit" />
+        <FormActionButton :loading="loading" @click="clickSubmit" custom-text="Submit" />    
+    <a-modal
+      :visible="showLogisticsModal"
+      title="Confirm sample collection"
+      >
+      <div>
+        <a-row><a-col>Logistics : Fast Link</a-col></a-row>
+        <a-row><a-col>Sample ID : DAC48694</a-col></a-row>
+        <a-row><a-col>Sample Collection Date : </a-col></a-row>
+        <a-row><a-col>Expected Delivery Date : </a-col></a-row>
+      </div>
+      <!--<img class="img-responsive" :src="qrUrl" />-->
+      <template slot="footer">
+        <a-button @click="handleLogisticsModal(false)">Cancel</a-button>
+        <a-button @click="confirm(false)" type="primary">Confirm</a-button>     
+      </template>        
+    </a-modal> 
       </a-form-item>
-    </a-form>  
+      </a-form>  
+        
             </a-tab-pane>
           </a-tabs>
-        </a-card>
+        </a-card>         
       </div>
     </template>
   </page-layout>
@@ -243,6 +260,8 @@ import {
   getMomentByStandardFormat,
   _disabledPreviousDate,
 } from '~/services/Helpers/MomentHelpers'
+import notifications from '~/mixins/notifications'
+import routeHelpers from '~/mixins/route-helpers'
 // import shipment from '~/components/inventory/treatment/shipment'
 
 export default {
@@ -253,6 +272,7 @@ export default {
     // shipment,
   },
   middleware: 'auth',
+  mixins: [routeHelpers,notifications],
   data() {
     return {
       activeTab:'outbound',
@@ -260,6 +280,7 @@ export default {
       qrUrl: null,
       loading: false,
       showModal: false,
+      showLogisticsModal:false,
       dateFormat: STANDARD_UK_DATE_FORMAT,
       bagData:[
   {
@@ -343,17 +364,17 @@ export default {
           name: `Does sample packaging pass visual check ?`,
         },
         {
-          id: 3,
+          id: 4,
           isCollected: false,
           name: `${this.$store.getters.getTranslation.IsSampl_6_529}`,
         },
         {
-          id: 3,
+          id: 5,
           isCollected: false,
           name: `Has sample been packaged for courier ?`,
         },
         {
-          id: 3,
+          id: 6,
           isCollected: false,
           name: `Is documentation completed and ready for courier pick up ?`,
         },
@@ -402,6 +423,18 @@ export default {
     },
     printWindow(){
       window.print()
+    },
+    clickSubmit() {
+      this.handleLogisticsModal(true)
+    },     
+    handleLogisticsModal(show){
+      this.showLogisticsModal = show
+      console.log(this.showLogisticsModal)
+    },
+    confirm(show) {
+      this.showLogisticsModal = show
+      this.success('Request sent to logistics')
+      this.goto('/inventory/storage/tasks')
     },       
   },
 }
