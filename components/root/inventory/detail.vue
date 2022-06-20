@@ -7,16 +7,16 @@
       </h2>
     </div>
     <a-row :gutter="16">
-      <a-col class="icon-col"
+      <a-col :span="12" class="icon-col"
         ><a-icon type="pushpin" theme="filled" /> {{ data.address }}</a-col
       >
-      <a-col class="icon-col mt-15">
+      <a-col :span="12" class="icon-col">
         <a-icon type="phone" theme="filled" /> {{ data.phone }}
         </a-col>
-      <a-col class="color-black mt-15 icon-col"
+      <a-col :span="12" class="color-black mt-15 icon-col"
         ><a-icon type="global" />{{ data.global }}
       </a-col>
-      <a-col class="color-black mt-15 icon-col"
+      <a-col class="color-black mt-15 icon-col" :span="12"
         ><strong>@</strong> {{ data.email }}</a-col
       >
     </a-row>

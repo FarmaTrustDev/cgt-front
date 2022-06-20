@@ -403,7 +403,7 @@ export default {
       })
     },    
     updateId(collectionId) {
-      const dumCollection = this.dummyCollection.map((collection) => {
+      const dumCollection = this.dummyOutBoundCollection.map((collection) => {
         if (collection.id === collectionId) {
           collection.isCollected = true
         }
