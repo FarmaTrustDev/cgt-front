@@ -369,6 +369,7 @@ export default {
     },
     search(value, key) {
       // console.log(value)
+      this.storage=null
       this.storage=baseStorageQuarantine2
       let filters = this.filters
       filters[key] = value

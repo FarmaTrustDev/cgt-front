@@ -106,9 +106,10 @@
     <a-skeleton :loading="loading">
       <a-table
         :should-fetch="false"
-        :pagination="true"
+        :pagination="false"
         :columns="columns"
         :data-source="bagData"
+        class="rounded-table"
         @clickImage="clickImage"
       >
       <template slot="image" slot-scope="src, record">
@@ -228,10 +229,8 @@
       title="Confirm sample collection"
       >
       <div>
-        <a-row><a-col>Logistics : Fast Link</a-col></a-row>
-        <a-row><a-col>Sample ID : DAC48694</a-col></a-row>
-        <a-row><a-col>Sample Collection Date : </a-col></a-row>
-        <a-row><a-col>Expected Delivery Date : </a-col></a-row>
+        <a-row><a-col :span="12">Logistics : Fast Link</a-col><a-col :span="12">Sample Collection Date : </a-col></a-row>
+        <a-row><a-col :span="12">Sample ID : DAC48694</a-col><a-col :span="12">Expected Delivery Date : </a-col></a-row>
       </div>
       <!--<img class="img-responsive" :src="qrUrl" />-->
       <template slot="footer">
