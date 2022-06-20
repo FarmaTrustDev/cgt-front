@@ -84,7 +84,7 @@ import routeHelpers from '~/mixins/route-helpers'
 // import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
 import { baseStorage } from '~/services/Constant/DummyData'
-import detail from '~/components/root/inventory/detail'
+import detail from '~/pages/inventory/storage/detail'
 
 export default {
   components: { PageLayout, Listing, detail },
