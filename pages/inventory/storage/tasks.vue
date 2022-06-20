@@ -39,9 +39,9 @@
       </template>
       <template slot="confirm" slot-scope="confirm, index">
         <a-button
-          :class="confirm ? 'blue': 'gray'"
+          :class="confirm ? 'blue' : 'gray'"
           size="small"
-          @click="handleClick(confirm,index)"
+          @click="handleClick(confirm, index)"
           >Confirm placement</a-button
         >
       </template>
@@ -49,15 +49,17 @@
     <a-modal
       :visible="showModal"
       :title="translation.Docum_1_507"
+      ok-text="Print"
+      cancel-text="Cancel"
+      @ok="printWindow()"
+      @cancel="handleModal(false)"
     >
       <img class="img-responsive" :src="getImageUrl(qrUrl)" />
-      <template slot="footer">
+      <!-- <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
-        <a-button @click="printWindow()">Print</a-button>     
-      </template>
-</a-modal>
-
-
+        <a-button @click="printWindow()">Print</a-button>
+      </template> -->
+    </a-modal>
   </div>
 </template>
 <script>
@@ -75,9 +77,9 @@ export default {
   data() {
     return {
       showModal: false,
-      clicked:false,
-      greenDisk : 'g',
-      blueDisk : 'b',
+      clicked: false,
+      greenDisk: 'g',
+      blueDisk: 'b',
       qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
       newTasksColumns: [
         {
@@ -126,73 +128,73 @@ export default {
           sampleId: 'DAC7993',
           sampleName: 'Platelet Lycate ',
           client: 'Baystate Clinic',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
+          fridge: 'Freezers 12',
+          position: 'Rack 20A',
           confirm: false,
-          index:0,
+          index: 0,
         },
         {
           sampleId: 'DAC7986',
           sampleName: 'Platelet Lycate ',
           client: 'Royal Hospital',
-          fridge: 'Kings 123',
+          fridge: 'Freezers 13',
           position: 'Rack 21A',
           confirm: false,
-          index:1,
+          index: 1,
         },
         {
           sampleId: 'DAC9874',
           sampleName: 'Platelet Lycate ',
           client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
+          fridge: 'Freezers 14',
+          position: 'Rack 23A',
           confirm: false,
-          index:2,
+          index: 2,
         },
         {
           sampleId: 'DAC7996',
           sampleName: 'Platelet Lycate ',
           client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
+          fridge: 'Freezers 15',
+          position: 'Rack 27A',
           confirm: false,
-          index:3,
+          index: 3,
         },
         {
           sampleId: 'DAC9874',
           sampleName: 'Platelet Lycate ',
           client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
+          fridge: 'Freezers 13',
+          position: 'Rack 28A',
           confirm: false,
-          index:4,
+          index: 4,
         },
         {
           sampleId: 'DAC9874',
           sampleName: 'Platelet Lycate ',
           client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
+          fridge: 'Freezers 14',
+          position: 'Rack 29A',
           confirm: false,
-          index:5,
+          index: 5,
         },
         {
           sampleId: 'DAC9874',
           sampleName: 'Platelet Lycate ',
           client: 'Royal Hospital',
-          fridge: 'Kings 123',
+          fridge: 'Freezers 123',
           position: 'Rack 21A',
           confirm: false,
-          index:6,
+          index: 6,
         },
         {
           sampleId: 'DAC9874',
           sampleName: 'Platelet Lycate ',
           client: 'Royal Hospital',
-          fridge: 'Kings 123',
-          position: 'Rack 21A',
+          fridge: 'Freezers 19',
+          position: 'Rack 10A',
           confirm: false,
-          index:7,
+          index: 7,
         },
       ],
     }
@@ -209,13 +211,13 @@ export default {
     openViewModal(id) {
       this.showModal = true
     },
-    handleClick(confirm,index){
-      for(let i = 0; i < this.newTasksData.length; i++){
-        if(this.newTasksData[i].index===index.index)
-          this.newTasksData[i].confirm=!this.newTasksData[i].confirm
+    handleClick(confirm, index) {
+      for (let i = 0; i < this.newTasksData.length; i++) {
+        if (this.newTasksData[i].index === index.index)
+          this.newTasksData[i].confirm = !this.newTasksData[i].confirm
       }
     },
-    printWindow(){
+    printWindow() {
       window.print()
     },
   },

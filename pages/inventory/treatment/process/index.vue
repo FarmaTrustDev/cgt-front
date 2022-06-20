@@ -110,7 +110,7 @@
                           >
                         </a-col>
                         <a-col :span="14" class="mt-15">
-                          <span class="text-muted"> 20/01/2022</span>
+                          <span class="text-muted"> 20/06/2022</span>
                         </a-col>
                       </a-row>
                       <a-row :gutter="20" dir="ltr">
@@ -120,7 +120,7 @@
                           >
                         </a-col>
                         <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 20/01/2022</span>
+                          <span class="text-muted"> 20/06/2022</span>
                         </a-col>
                       </a-row>
                       <a-row :gutter="20" dir="ltr">
@@ -140,7 +140,7 @@
                           }}</span>
                         </a-col>
                         <a-col :span="10" class="mt-15">
-                          <span class="text-muted"> 12/01/2022</span>
+                          <span class="text-muted"> 21/06/2022</span>
                         </a-col>
                       </a-row>
                     </div>
@@ -182,7 +182,7 @@
                           >
                         </a-col>
                         <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 21/01/2022</span>
+                          <span class="text-muted"> 21/06/2022</span>
                         </a-col>
                       </a-row>
                       <a-row :gutter="20" dir="ltr">
@@ -192,7 +192,7 @@
                           }}</span>
                         </a-col>
                         <a-col :span="12" class="mt-15">
-                          <span class="text-muted"> 21/01/2022</span>
+                          <span class="text-muted"> Received</span>
                         </a-col>
                       </a-row>
                     </div>

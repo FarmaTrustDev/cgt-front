@@ -58,6 +58,10 @@
       <a-modal
       :visible="showModal"
       title="Confirm sample storage"
+      ok-text="Confirm"
+      cancel-text="Cancel"
+      @ok="confirm(false)"
+      @cancel="handleModal(false)"
       >
       <div>
         <a-row><a-col>Freezer : Atara 001</a-col></a-row>
@@ -65,10 +69,10 @@
         <a-row><a-col>Box location : 1A</a-col></a-row>
       </div>
       <!--<img class="img-responsive" :src="qrUrl" />-->
-      <template slot="footer">
+      <!-- <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
         <a-button @click="confirm(false)" type="primary">Confirm</a-button>     
-      </template>        
+      </template>         -->
     </a-modal>
     </div>
   </page-layout>
