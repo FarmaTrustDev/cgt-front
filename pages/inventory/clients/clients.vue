@@ -1,44 +1,42 @@
 <template>
   <div class="">
     <div>
-        <div>
+      <div>
+        <!-- // make its component -->
+        <a-row>
+          <a-col :span="4">
+            <figure>
+              <img
+                class="img-responsive"
+                :src="getImageUrl('web/inventory/storage/hub/clients/1.png')"
+              />
+              <figcaption></figcaption>
+            </figure>
+          </a-col>
+          <a-col :span="16">
             <a-row>
-                <a-col :span="4">
-                    <figure>
-                        <img
-                            :src="
-                            getImageUrl(
-                                'web/inventory/storage/hub/clients/1.png'
-                            )
-                            "
-                            height="85px"
-                            width="250px"
-                        />
-                        <figcaption></figcaption>
-                    </figure>
-                </a-col>
-                <a-col :span="16">
-                    <a-row>
-                    <a-col :span="5" style="font-weight:bold">Client:</a-col>
-                    <a-col :span="11">Novartis</a-col>
-                    </a-row>
-                    <a-row>
-                    <a-col :span="5" style="font-weight:bold">Contact Name:</a-col>
-                    <a-col :span="11">Lucas Sinclair</a-col>
-                    </a-row>
-                    <a-row>
-                    <a-col :span="5" style="font-weight:bold">Contact Number:</a-col>
-                    <a-col :span="11">+44 1286 132475</a-col>
-                    </a-row>
-                    <a-row>
-                    <a-col :span="5" style="font-weight:bold">Address:</a-col>
-                    <a-col :span="11">The WestWorks, 195 Wood Ln, London W12 7FQ</a-col>
-                    </a-row>
-                </a-col>
+              <a-col :span="5" style="font-weight: bold">Client:</a-col>
+              <a-col :span="11">Novartis</a-col>
             </a-row>
-        </div>
+            <a-row>
+              <a-col :span="5" style="font-weight: bold">Contact Name:</a-col>
+              <a-col :span="11">Lucas Sinclair</a-col>
+            </a-row>
+            <a-row>
+              <a-col :span="5" style="font-weight: bold">Contact Number:</a-col>
+              <a-col :span="11">+44 1286 132475</a-col>
+            </a-row>
+            <a-row>
+              <a-col :span="5" style="font-weight: bold">Address:</a-col>
+              <a-col :span="11"
+                >The WestWorks, 195 Wood Ln, London W12 7FQ</a-col
+              >
+            </a-row>
+          </a-col>
+        </a-row>
+      </div>
     </div>
-                    
+
     <a-table
       class="rounded-table"
       :columns="newTasksColumns"
@@ -46,24 +44,19 @@
       :should-fetch="false"
     >
       <template slot="productLocation" slot-scope="">
-          <img :src="getImageUrl('web/inventory/storage/pin.svg')" />
+        <img :src="getImageUrl('web/inventory/storage/pin.svg')" />
       </template>
       <template slot="storageDocument" slot-scope="">
-          <img :src="getImageUrl('web/inventory/storage/upload.jpeg')" />
+        <img :src="getImageUrl('web/inventory/storage/upload.jpeg')" />
       </template>
     </a-table>
-    <a-modal
-      :visible="showModal"
-      :title="translation.Docum_1_507"
-    >
+    <a-modal :visible="showModal" :title="translation.Docum_1_507">
       <img class="img-responsive" :src="getImageUrl(qrUrl)" />
       <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
-        <a-button @click="printWindow()">Print</a-button>     
+        <a-button @click="printWindow()">Print</a-button>
       </template>
-</a-modal>
-
-
+    </a-modal>
   </div>
 </template>
 <script>
@@ -81,9 +74,9 @@ export default {
   data() {
     return {
       showModal: false,
-      clicked:false,
-      greenDisk : 'g',
-      blueDisk : 'b',
+      clicked: false,
+      greenDisk: 'g',
+      blueDisk: 'b',
       qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
       newTasksColumns: [
         {
@@ -122,31 +115,31 @@ export default {
           title: `Shipping Address`,
           dataIndex: 'shippingAddress',
           key: 'shippingAddress',
-          
         },
         {
           title: `Project Manager`,
           dataIndex: 'projectManager',
           key: 'confirm',
-          
-        },        
+        },
       ],
       newTasksData: [
         {
           sampleId: 'DAC12576',
           productDescription: 'Pluripotent stem cells (PSCs)',
           expiryDate: '31/10/2022',
-          productQuality:'Optimum',
-          shippingAddress:'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
-          projectManager:'Paige Turner',
+          productQuality: 'Optimum',
+          shippingAddress:
+            'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
+          projectManager: 'Paige Turner',
         },
         {
           sampleId: 'DAC12576',
           productDescription: 'Aphaeresis',
           expiryDate: '31/10/2022',
-          productQuality:'Optimum',
-          shippingAddress:'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
-          projectManager:'Paige Turner',
+          productQuality: 'Optimum',
+          shippingAddress:
+            'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
+          projectManager: 'Paige Turner',
         },
       ],
     }
@@ -163,13 +156,13 @@ export default {
     openViewModal(id) {
       this.showModal = true
     },
-    handleClick(confirm,index){
-      for(let i = 0; i < this.newTasksData.length; i++){
-        if(this.newTasksData[i].index===index.index)
-          this.newTasksData[i].confirm=!this.newTasksData[i].confirm
+    handleClick(confirm, index) {
+      for (let i = 0; i < this.newTasksData.length; i++) {
+        if (this.newTasksData[i].index === index.index)
+          this.newTasksData[i].confirm = !this.newTasksData[i].confirm
       }
     },
-    printWindow(){
+    printWindow() {
       window.print()
     },
   },
