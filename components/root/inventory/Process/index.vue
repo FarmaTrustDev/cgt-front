@@ -178,7 +178,7 @@ export default {
   methods: {
     submit() {
       if (this.typeId === 'inbound') {
-        this.goto('/inventory/storage?inbound=true')
+        this.goto('/inventory/storage/ColorFridge?inbound=true')
       }
       if (this.typeId === 'outbound') {
         this.$emit('handleActiveTab', 'courier')
