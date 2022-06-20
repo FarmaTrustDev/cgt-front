@@ -201,7 +201,7 @@
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
-                :typeId="type"
+                :type-id="type"
                 @fetchBags="() => {}"
                 @updateId="updateId"
               />
@@ -287,17 +287,17 @@ export default {
           name: `Does sample packaging pass visual check ?`,
         },
         {
-          id: 3,
+          id: 4,
           isCollected: false,
           name: `${this.$store.getters.getTranslation.IsSampl_6_529}`,
         },
         {
-          id: 3,
+          id: 5,
           isCollected: false,
           name: `Has sample been packaged for courier ?`,
         },
         {
-          id: 3,
+          id: 6,
           isCollected: false,
           name: `Is documentation completed and ready for courier pick up ?`,
         },

@@ -24,7 +24,7 @@
           >
             <a-icon slot="prefix" type="search" class="mb-5" />
           </a-input>
-          <Listing :storages="storage" :typeId="isInbound" />
+          <Listing :storages="storage" :typeId="inbound" />
         </a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
           <a-input
@@ -83,7 +83,7 @@ import { isNumber } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
 // import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
-import { baseStorage } from '~/services/Constant/DummyData'
+import { baseStorageQuarantine2 } from '~/services/Constant/DummyData'
 import detail from '~/components/root/inventory/detail'
 
 export default {
@@ -97,9 +97,7 @@ export default {
       data: [],
       isInbound: false,
       shouldUpdate: true,
-      storage: baseStorage,
-      qrUrl:null,
-      showModal:false,
+      storage: baseStorageQuarantine2,
       productsColumn: [
         {
           title: `${this.$store.getters.getTranslation.Produ_1_538}`,
@@ -246,7 +244,7 @@ export default {
   mounted() {
     this.data = this.productsData
     if (this.$route.query.inbound) {
-      this.isInbound = true
+      this.inbound = true
     }
   },
   methods: {
@@ -325,7 +323,7 @@ export default {
         for (const filter in filters) {
           const filterValue = filters[filter]
 
-          storages = baseStorage.filter((storage) => {
+          storages = this.storage.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
               // console.log(storage)
               return storage[filter].match(value)
@@ -338,7 +336,7 @@ export default {
         storages = JSON.stringify(storages)
         this.storage = JSON.parse(storages)
       } else {
-        this.storage = baseStorage
+        this.storage = baseStorageQuarantine2
       }
     },
   },

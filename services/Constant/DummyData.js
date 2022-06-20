@@ -68,7 +68,7 @@ export const baseStorage = [
     {
         id: 7,
         color: '#FA6363',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 007',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 20,
         temperatureId: 3,
@@ -79,7 +79,7 @@ export const baseStorage = [
     {
         id: 8,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 008',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 14,
         temperatureId: 2,
@@ -90,7 +90,7 @@ export const baseStorage = [
     {
         id: 9,
         color: '#FA6363',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 009',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 11,
         temperatureId: 3,
@@ -101,7 +101,7 @@ export const baseStorage = [
     {
         id: 10,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 010',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 18,
         temperatureId: 2,
@@ -112,7 +112,7 @@ export const baseStorage = [
     {
         id: 11,
         color: '#FA6363',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 011',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 8,
         temperatureId: 1,
@@ -123,7 +123,7 @@ export const baseStorage = [
     {
         id: 12,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 012',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 16,
         temperatureId: 2,
@@ -134,7 +134,7 @@ export const baseStorage = [
     {
         id: 13,
         color: '#FA6363',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 013',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 18,
         temperatureId: 2,
@@ -145,7 +145,7 @@ export const baseStorage = [
     {
         id: 14,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 014',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 14,
         temperatureId: 3,
@@ -156,7 +156,7 @@ export const baseStorage = [
     {
         id: 15,
         color: '#FA6363',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 015',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 14,
         temperatureId: 2,
@@ -167,7 +167,7 @@ export const baseStorage = [
     {
         id: 16,
         color: '#1943AE',
-        title: 'Freezer Atara 001',
+        title: 'Freezer Atara 016',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 14,
         temperatureId: 2,
@@ -189,37 +189,37 @@ const tube = {
             title: 'Jack Black',
             date: '21 Feb, 2022 9:00',
             by: 'Inbound Date',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: ' Simon Smith',
             date: '21 Feb, 2022 9:30',
             by: 'Inbound Process',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Ahmed Salaam',
             date: '21 Feb, 2022  10:00',
             by: 'Storage',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Claire Jones',
             date: '28 Feb, 2022  14:00',
             by: 'Visual Check',
-            detail: '28 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Dwayne Morgan',
             date: '19 Apr, 2022  15:00',
             by: 'Packaging Depot',
-            detail: '19 April 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'RT456',
             date: '19 Apr, 2022 16:00',
             by: 'Courier Pick Up',
-            detail: '19 April 2022',
+            detail: 'Cellfuse',
         },
     ],
 }
@@ -232,37 +232,37 @@ const tube2 = {
             title: 'Jack Black',
             date: '21 Feb, 2022 9:00',
             by: 'Inbound Date',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: ' Simon Smith',
             date: '21 Feb, 2022 9:30',
             by: 'Inbound Process',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Ahmed Salaam',
             date: '21 Feb, 2022 10:00',
             by: 'Storage',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Claire Jones',
             date: '28 Feb, 2022 14:00',
             by: 'Visual Check',
-            detail: '28 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Dwayne Morgan',
             date: '19 Apr, 2022 15:00',
             by: 'Packaging Depot',
-            detail: '19 April 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'RT456',
             date: '19 Apr, 2022 16:00',
             by: 'Courier Pick Up',
-            detail: '19 April 2022',
+            detail: 'Cellfuse',
         },
     ],
 }
@@ -275,37 +275,81 @@ const tube3 = {
             title: 'Jack Black',
             date: '21 Feb, 2022 9:00',
             by: 'Inbound Date',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: ' Simon Smith',
             date: '21 Feb, 2022 9:30',
             by: 'Inbound Process',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Ahmed Salaam',
             date: '21 Feb, 2022 10:00',
             by: 'Storage',
-            detail: '21 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Claire Jones',
             date: '28 Feb, 2022 14:00',
             by: 'Visual Check',
-            detail: '28 Feb 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'Dwayne Morgan',
             date: '19 Apr, 2022 15:00',
             by: 'Packaging Depot',
-            detail: '19 April 2022',
+            detail: 'Cellfuse',
         },
         {
             title: 'RT456',
             date: '19 Apr, 2022 16:00',
             by: 'Courier Pick Up',
-            detail: '19 April 2022',
+            detail: 'Cellfuse',
+        },
+    ],
+}
+const tubeActive = {
+    id: 3,
+    active: true,
+    name: '5A',
+    isHover: true,
+    steps: [
+        {
+            title: 'Jack Black',
+            date: '21 Feb, 2022 9:00',
+            by: 'Inbound Date',
+            detail: 'Cellfuse',
+        },
+        {
+            title: ' Simon Smith',
+            date: '21 Feb, 2022 9:30',
+            by: 'Inbound Process',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Ahmed Salaam',
+            date: '21 Feb, 2022 10:00',
+            by: 'Storage',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Claire Jones',
+            date: '28 Feb, 2022 14:00',
+            by: 'Visual Check',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Dwayne Morgan',
+            date: '19 Apr, 2022 15:00',
+            by: 'Packaging Depot',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'RT456',
+            date: '19 Apr, 2022 16:00',
+            by: 'Courier Pick Up',
+            detail: 'Cellfuse',
         },
     ],
 }
@@ -316,6 +360,32 @@ const portion = {
     trays: [
         {
             tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+        },
+    ],
+}
+
+const activePortion = {
+    id: 1,
+    color: 'red',
+    active: true,
+    trays: [
+        {
+            tubes: [tube2, tube2, tube2, tube2, tube2, tubeActive],
         },
         {
             tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
@@ -391,10 +461,21 @@ const rack3 = {
     portions: [portion, portion2, portion3, portion2],
 }
 
+const rackActive = {
+    id: 1,
+    portions: [activePortion, portion, portion2, portion3],
+}
+
 export const fridgeData = {
     name: 'Fridge Atara 001',
     location: 'Storage Suite 3, Germany - Cellfuse',
     racks: [rack, rack2, rack3, rack2, rack],
+}
+
+export const fridgeDataStatic = {
+    name: 'Fridge Atara 002',
+    location: 'Storage Suite 3, Germany - Cellfuse',
+    racks: [rackActive, rack, rack2, rack2, rack],
 }
 
 export const fridges = [fridgeData]
@@ -503,6 +584,104 @@ export const baseStorageQuarantine = [
     },
     {
         id: 3,
+        color: '#1943AE',
+        title: 'Quarantine 003',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        type: 1,
+        zoneId: 1,
+        temperature: '-80',
+        zone: 'Zone A',
+        racks: [rack, rack3, rack, rack2, rack3,],
+    },
+]
+
+
+
+export const baseStorageQuarantine2 = [
+    {
+        id: 1,
+        type: 3,
+        color: '#1943AE',
+        title: 'Quarantine 001',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 1,
+        zoneId: 1,
+        temperature: '-20',
+        zone: 'Zone A',
+        racks: [rack, rack2, rack3, rack2, rack],
+    },
+    {
+        id: 2,
+        color: '#1943AE',
+        type: 0,
+        title: 'Quarantine 002',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        zoneId: 3,
+        temperature: '-80',
+        zone: 'Zone C',
+        racks: [rack2, rack2, rack3, rack2, rack,],
+    },
+    {
+        id: 3,
+        color: '#1943AE',
+        title: 'Quarantine 003',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        type: 1,
+        zoneId: 1,
+        temperature: '-80',
+        zone: 'Zone A',
+        racks: [rack, rack3, rack, rack2, rack3,],
+    },
+
+    {
+        id: 7,
+        color: '#1943AE',
+        type: 0,
+        title: 'Quarantine 002',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        zoneId: 3,
+        temperature: '-80',
+        zone: 'Zone C',
+        racks: [rack2, rack2, rack3, rack2, rack,],
+    },
+    {
+        id: 4,
+        color: '#1943AE',
+        title: 'Quarantine 003',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        type: 1,
+        zoneId: 1,
+        temperature: '-80',
+        zone: 'Zone A',
+        racks: [rack, rack3, rack, rack2, rack3,],
+    },
+
+    {
+        id: 5,
+        color: '#1943AE',
+        type: 0,
+        title: 'Quarantine 002',
+        location: 'Storage Suite 3, Germany - Cellfuse',
+        quantity: 20,
+        temperatureId: 2,
+        zoneId: 3,
+        temperature: '-80',
+        zone: 'Zone C',
+        racks: [rack2, rack2, rack3, rack2, rack,],
+    },
+    {
+        id: 6,
         color: '#1943AE',
         title: 'Quarantine 003',
         location: 'Storage Suite 3, Germany - Cellfuse',
