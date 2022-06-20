@@ -11,7 +11,7 @@
                                 'web/inventory/storage/hub/clients/1.png'
                             )
                             "
-                            height="90px"
+                            height="85px"
                             width="250px"
                         />
                         <figcaption></figcaption>
