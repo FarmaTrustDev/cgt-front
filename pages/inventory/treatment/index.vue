@@ -96,7 +96,7 @@
               </span>
             </a-table>
           </a-tab-pane>
-          <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
+          <a-tab-pane key="2" tab="Outbound Samples">
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
