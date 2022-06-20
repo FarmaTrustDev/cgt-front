@@ -83,7 +83,7 @@ import { isNumber } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
 // import StandardTable from '~/components/common/StandardTable'
 import Listing from '~/components/inventory/storage/Listing'
-import { baseStorage } from '~/services/Constant/DummyData'
+import { baseStorageQuarantine2 } from '~/services/Constant/DummyData'
 import detail from '~/components/root/inventory/detail'
 
 export default {
@@ -97,7 +97,7 @@ export default {
       data: [],
       isInbound: false,
       shouldUpdate: true,
-      storage: baseStorage,
+      storage: baseStorageQuarantine2,
       productsColumn: [
         {
           title: `${this.$store.getters.getTranslation.Produ_1_538}`,
@@ -323,7 +323,7 @@ export default {
         for (const filter in filters) {
           const filterValue = filters[filter]
 
-          storages = baseStorage.filter((storage) => {
+          storages = this.storage.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
               // console.log(storage)
               return storage[filter].match(value)
@@ -336,7 +336,7 @@ export default {
         storages = JSON.stringify(storages)
         this.storage = JSON.parse(storages)
       } else {
-        this.storage = baseStorage
+        this.storage = baseStorageQuarantine2
       }
     },
   },

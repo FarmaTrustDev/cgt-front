@@ -78,7 +78,7 @@ import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
 import TimeLine from '~/components/timeline'
 import { isEmpty } from '~/services/Helpers'
-import { fridgeData } from '~/services/Constant/DummyData'
+import { fridgeDataStatic } from '~/services/Constant/DummyData'
 
 /// The code on the page is total no tolerated
 export default {
@@ -93,7 +93,7 @@ export default {
   },
   data() {
     return {
-      fridgeData,
+      fridgeData: fridgeDataStatic,
       loading: false,
       steps: [],
       tubes: [],

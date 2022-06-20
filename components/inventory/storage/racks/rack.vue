@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="clearfix">
     <div class="counter">Shelf {{ counter }}</div>
     <div class="rack-container">
       <div class="rack light-shadow" :class="active ? 'active' : ''">
@@ -62,7 +62,6 @@ export default {
   float: left;
   width: 60px;
   font-weight: bold;
-  margin-top: 9px;
 }
 .rack-container {
   float: left;
