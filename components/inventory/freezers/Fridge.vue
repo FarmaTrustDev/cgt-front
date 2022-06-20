@@ -51,7 +51,7 @@ const colors = {
 export default {
   props: {
     color: { type: String, default: '#1943AE' },
-    type: { type: Number, default: 1 },
+    type: { type: Number, default: 0 },
   },
   data() {
     return {}

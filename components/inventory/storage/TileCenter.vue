@@ -18,9 +18,10 @@ export default {
 <style lang="scss" scoped>
 .tileCenter {
   min-height: 400px;
-  padding-bottom: 25px;
   font-size: 14px;
   border-radius: 10px;
+  padding-bottom: 51px;
+
   .footer {
     color: #7a7575;
     position: absolute;
