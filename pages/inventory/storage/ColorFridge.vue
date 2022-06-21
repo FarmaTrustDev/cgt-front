@@ -3,7 +3,7 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    :title="translation.StoraServi_2_532"
+    title="Filter Storage Facilities"
     class="specific-storage"
   >
     <div slot="content" class="h-tabs large-tabs">
@@ -24,8 +24,11 @@
           >
             <a-icon slot="prefix" type="search" class="mb-5" />
           </a-input>-->
-        <a-row><a-col>
-          <a-form class="filter-search" :form="form" layout="inline">
+
+        <a-form class="filter-search" :form="form" layout="inline">
+        <a-row class="ml-10">
+          
+          <a-col :span="5" class="img-responsive">
             <a-form-item>
               <a-input
                 v-decorator="['quantity']"
@@ -35,6 +38,9 @@
                 @change="(e) => search(e.target.value, 'quantity')"
               />
             </a-form-item>
+          </a-col>
+          
+          <a-col :span="4" class="img-responsive">  
             <a-form-item>
               <a-select
                 v-decorator="[`temperature`]"
@@ -50,6 +56,9 @@
                 >
               </a-select>
             </a-form-item>
+          </a-col>
+          
+          <a-col :span="6" class="img-responsive">  
             <a-form-item>
               <a-select
                 v-decorator="[`zone`]"
@@ -63,9 +72,10 @@
                 }}</a-select-option>
               </a-select>
             </a-form-item>
-          </a-form>
         </a-col>
-      </a-row>          
+      </a-row>
+      </a-form>
+      <h3 class="page-title ml-40">Select Storage Facility</h3>  
           <Listing :storages="storage" :typeId="isInbound" />
         <!--</a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">

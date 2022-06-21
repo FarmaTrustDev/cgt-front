@@ -4,6 +4,7 @@
       v-if="isHover || tube.isHover"
       class="tube-image"
       :src="getImageUrl('web/inventory/storage/selected-tube.svg')"
+      @click="handleHoverDisable(true)"
     />
     <span v-else>
       <img
@@ -27,6 +28,7 @@ export default {
   data() {
     return {
       isHover: false,
+      makeHoverDisable: false,
     }
   },
   mounted() {
@@ -34,7 +36,12 @@ export default {
   },
   methods: {
     onHover(show) {
-      this.isHover = show
+      if (!this.makeHoverDisable) {
+        this.isHover = show
+      }
+    },
+    handleHoverDisable(result) {
+      this.makeHoverDisable = result
     },
   },
 }
