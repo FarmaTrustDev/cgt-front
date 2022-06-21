@@ -10,7 +10,7 @@
       <div class="grey-card">
         
         <a-row :gutter="16">
-          <a-col v-for="c in [1, 2, 3, 4, 5, 6]" :key="c" :span="8">
+          <a-col v-for="c in [6,1,2,3,4,5]" :key="c" :span="8">
             
             <div class="client-hub-tile">
               <figure>

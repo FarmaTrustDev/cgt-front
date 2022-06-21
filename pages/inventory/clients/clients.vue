@@ -4,18 +4,19 @@
       <div>
         <!-- // make its component -->
         <a-row>
-          <a-col :span="4">
+          <a-col :span="3">
             <figure>
               <img
-                class="img-responsive"
-                :src="getImageUrl('web/inventory/storage/hub/clients/1.png')"
+                class="responsive_img"
+                :src="getImageUrl('web/inventory/storage/hub/clients/6.png')"
               />
               <figcaption></figcaption>
             </figure>
           </a-col>
-          <a-col :span="16">
+
+          <a-col :span="16">    
             <a-row>
-              <a-col :span="5" style="font-weight: bold">Client:</a-col>
+              <a-col :span="5" style="font-weight: bold; line-height:20px">Client:</a-col>
               <a-col :span="11">Novartis</a-col>
             </a-row>
             <a-row>
@@ -42,13 +43,18 @@
       :columns="newTasksColumns"
       :data-source="newTasksData"
       :should-fetch="false"
+      style="white-space:pre"
     >
-      <template slot="productLocation" slot-scope="">
-        <img :src="getImageUrl('web/inventory/storage/pin.svg')" />
-      </template>
       <template slot="storageDocument" slot-scope="">
-        <img :src="getImageUrl('web/inventory/storage/upload.jpeg')" />
+        <img :src="getImageUrl('web/inventory/storage/upload.jpeg')" @click="openViewModal" />
       </template>
+<a-modal :visible="showModal" :title="translation.Docum_1_507">
+          <img class="img-responsive" :src="getImageUrl(qrUrl)" />
+          <template slot="footer">
+            <a-button @click="handleModal(false)">Cancel</a-button>
+            <a-button @click="printWindow()">Print</a-button>
+          </template>
+        </a-modal>      
     </a-table>
     <a-modal :visible="showModal" :title="translation.Docum_1_507">
       <img class="img-responsive" :src="getImageUrl(qrUrl)" />
@@ -77,7 +83,7 @@ export default {
       clicked: false,
       greenDisk: 'g',
       blueDisk: 'b',
-      qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
+      qrUrl: 'Uploads/DocumentURL/label1.jpg',
       newTasksColumns: [
         {
           title: `Sample ID`,
@@ -93,7 +99,6 @@ export default {
           title: `Product Location`,
           dataIndex: 'productLocation',
           key: 'productLocation',
-          scopedSlots: { customRender: 'productLocation' },
         },
         {
           title: `Storage Documents`,
@@ -125,22 +130,58 @@ export default {
       newTasksData: [
         {
           sampleId: 'DAC12576',
-          productDescription: 'Pluripotent stem cells (PSCs)',
+          productDescription: 'Pluripotent stem cells \n (PSCs)',
+          productLocation:'Zone A, Storage Suite 3',
           expiryDate: '31/10/2022',
           productQuality: 'Optimum',
-          shippingAddress:
-            'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
+          shippingAddress:'Christopher Ingold Building, 29 \n Gordon Square, London WC1H 0PP',
           projectManager: 'Paige Turner',
         },
         {
-          sampleId: 'DAC12576',
+          sampleId: 'DAC12577',
           productDescription: 'Aphaeresis',
+          productLocation:'Zone B, Storage Suite 2',
           expiryDate: '31/10/2022',
           productQuality: 'Optimum',
-          shippingAddress:
-            'Christopher Ingold Building, 29 Gordon Square, London WC1H 0PP',
-          projectManager: 'Paige Turner',
+          shippingAddress:'Christopher Ingold Building, 29 \n Christ Square, Christ Church',
+          projectManager: 'Jacob Hales',
         },
+        {
+          sampleId: 'DAC12578',
+          productDescription: 'Cancer Stem cells \n (CSCs)',
+          productLocation:'Zone C, Storage Suite 3',
+          expiryDate: '31/10/2023',
+          productQuality: 'Medium',
+          shippingAddress:'Christopher Ingold Building, 29 \n Gordon Square, London WC1H 0PP',
+          projectManager: 'Chris Murphy',
+        },
+        {
+          sampleId: 'DAC12579',
+          productDescription: 'Adult stem cells \n (ASCs)',
+          productLocation:'Zone B, Storage Suite 3',
+          expiryDate: '30/09/2022',
+          productQuality: 'Medium',
+          shippingAddress:'Christopher Ingold Building, 29 \n Christ Square, Christ Church',
+          projectManager: 'Andrew Hales',
+        },
+        {
+          sampleId: 'DAC12580',
+          productDescription: 'Aphaeresis',
+          productLocation:'Zone A, Storage Suite 2',
+          expiryDate: '31/08/2023',
+          productQuality: 'Optimum',
+          shippingAddress:'Christopher Ingold Building, 29 \n Gordon Square, London WC1H 0PP',
+          projectManager: 'Frank Jones',
+        },
+        {
+          sampleId: 'DAC12581',
+          productDescription: 'Aphaeresis',
+          productLocation:'Zone B, Storage Suite 3',
+          expiryDate: '31/10/2022',
+          productQuality: 'Optimum',
+          shippingAddress:'Christopher Ingold Building, 29 \n Christ Square, Christ Church',
+          projectManager: 'Paige Turner',
+        },                        
       ],
     }
   },

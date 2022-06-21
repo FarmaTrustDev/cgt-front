@@ -73,6 +73,12 @@
 .position-relative {
   position: relative !important;
 }
+// client hub
+.responsive_img, .img-responsive {
+  max-width: 100%;
+  height: 90px;
+  border-radius: 20px;
+}
 
 .img-responsive {
   max-width: 100%;

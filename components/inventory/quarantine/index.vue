@@ -39,8 +39,27 @@
       ></a-col>
     </a-row>
     <a-form-item class="mt-15">
-      <FormActionButton @click="submit" />
+      <FormActionButton @click="clickImage" custom-text="Submit" />
     </a-form-item>
+      <a-modal
+      :visible="showModal"
+      title="Confirm sample storage"
+      ok-text="Confirm"
+      cancel-text="Cancel"
+      @ok="confirm(false)"
+      @cancel="handleModal(false)"
+      >
+      <div>
+        <a-row><a-col>Freezer : Atara 001</a-col></a-row>
+        <a-row><a-col>Shelf : Shelf 01</a-col></a-row>
+        <a-row><a-col>Box location : 1A</a-col></a-row>
+      </div>
+      <!--<img class="img-responsive" :src="qrUrl" />-->
+      <!-- <template slot="footer">
+        <a-button @click="handleModal(false)">Cancel</a-button>
+        <a-button @click="confirm(false)" type="primary">Confirm</a-button>     
+      </template>         -->
+    </a-modal>    
   </div>
 </template>
 
@@ -49,6 +68,8 @@ import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
 import Tile from '~/components/inventory/storage/Tile'
+import notifications from '~/mixins/notifications'
+import routeHelpers from '~/mixins/route-helpers'
 import {
   fridgeData,
   baseStorageQuarantine,
@@ -63,6 +84,7 @@ export default {
     TileCenter,
     Tile,
   },
+  mixins: [routeHelpers,notifications],
   data() {
     return {
       fridgeData,
@@ -71,6 +93,7 @@ export default {
       racks: [],
       tubes: [],
       trayData: [],
+      showModal: false,
     }
   },
   computed: {
@@ -92,6 +115,17 @@ export default {
     submit() {
       this.$emit('submit', true)
     },
+    clickImage() {
+      this.handleModal(true)
+    },    
+    handleModal(show) {
+      this.showModal = show
+    },
+    confirm(show) {
+      this.showModal = show
+      this.success('Sample stored successfully')
+      this.goto('/inventory/storage/tasks')
+    },     
   },
 }
 </script>
