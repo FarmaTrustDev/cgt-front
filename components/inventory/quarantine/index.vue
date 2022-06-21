@@ -124,7 +124,7 @@ export default {
     confirm(show) {
       this.showModal = show
       this.success('Sample stored successfully')
-      this.goto('/inventory/storage/tasks')
+      // this.goto('/inventory/storage/tasks')
     },     
   },
 }
