@@ -1,12 +1,12 @@
 <template>
   <div class="bg-grey p-15">
     <!-- // make its component -->
-    <alert
+    <!-- <alert
       type="warning"
       message="  Zularkarnain bhai make its component and use it in clients/clients
           pages and change this url name and then remove this alert "
     >
-    </alert>
+    </alert> -->
     <a-row>
       <a-col :span="4">
         <figure>
@@ -43,15 +43,15 @@
           <table class="w-100">
             <thead>
               <th>Services</th>
-              <th>units</th>
+              <th class="pr-5">units</th>
               <th>price per unit</th>
               <th>total</th>
             </thead>
             <tr v-for="detail in details" :key="detail.id">
-              <td>{{ detail.service }}</td>
-              <td>{{ detail.unit }}</td>
-              <td>{{ detail.prices }}</td>
-              <td>{{ detail.total }}</td>
+              <td class="pt-10">{{ detail.service }}</td>
+              <td class="pt-10">{{ detail.unit }}</td>
+              <td class="pt-10">{{ detail.prices }}</td>
+              <td class="pt-10">{{ detail.total }}</td>
             </tr>
           </table></a-card
         >
@@ -86,6 +86,67 @@ export default {
           prices: '$152',
           total: '$1,216',
         },
+         {
+          service: '-80°C storage',
+          unit: 12,
+          prices: '$200',
+          total: '$2,400',
+        },
+         {
+          service: 'LN2 storage',
+          unit: 4,
+          prices: '$234',
+          total: '$936',
+        },
+        {
+          service: 'Service Fees',
+          unit: '',
+          prices: '',
+          total: '$143'
+        },
+        {
+          service: 'Utility Fees',
+          unit: '',
+          prices: '',
+          total: '$134'
+        },
+        {
+          service: 'Additional Fees',
+          unit: '',
+          prices: '',
+          total: '$124'
+        },
+        {
+          service: 'Professional Service Fees',
+          unit: '',
+          prices: '',
+          total: '$426'
+        },
+        {
+          service: '',
+          unit: '',
+          prices: '<b>Subtotal</b>',
+          total: '$5235'
+        },
+        {
+          service: '',
+          unit: '',
+          prices: 'Tax Rate',
+          total: '10%'
+        },
+        {
+          service: '',
+          unit: '',
+          prices: 'Total Tax',
+          total: '$524'
+        },
+        {
+          service: '',
+          unit: '',
+          prices: 'Balance Due',
+          total: '$5759'
+        },
+
       ],
     }
   },
