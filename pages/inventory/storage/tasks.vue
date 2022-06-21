@@ -98,7 +98,7 @@ export default {
           key: 'client',
         },
         {
-          title: `Fridge`,
+          title: `Freezer`,
           dataIndex: 'fridge',
           key: 'fridge',
         },
