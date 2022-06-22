@@ -82,12 +82,14 @@
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
-                  <a-steps :initial="1" :current="1" size="small">
+                  <a-steps :initial="1" :current="1" size="default">
                     <a-step
                       v-for="phase in phases"
                       :key="phase.id"
                       :title="phase.name"
-                      @click="stepClick(record, phase)"
+                      :status="(phase.id===2 && record.processSample=='red') ? 'wait' : (phase.id===2 && record.processSample=='green') ? 'finish' : 'wait'"
+                      :class="(phase.id===2 && record.processSample=='red') ? 'ant-steps-item-error': ''"
+                      @click="(phase.id===2 && record.processSample=='red') ? stepClick('error', '/inventory/storage/quarantine/status') : stepClick(record, phase)"
                     />
                   </a-steps>
                 </div>
@@ -115,7 +117,7 @@
               <!-- ==== steps === -->
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
-                  <a-steps :initial="1" :current="1" size="small">
+                  <a-steps :initial="1" :current="1" size="default">
                     <a-step
                       v-for="phase in outboundSteps"
                       :key="phase.id"
@@ -181,6 +183,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '10/06/2022 - 14/06/2022',
     print: 'Uploads/DocumentURL/label1.jpg',
+    processSample:'green',
   },
   {
     patientEnrollmentNumber: 'DAC7986',
@@ -188,6 +191,7 @@ export const newSampleData = [
     hospital: 'Royal Hospital',
     collectionDateDeliveryDate: '15/06/2022 - 20/06/2023',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
+    processSample:'green',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -195,6 +199,7 @@ export const newSampleData = [
     hospital: 'Kings College',
     collectionDateDeliveryDate: '21/06/2022 - 26/06/2024',
     print: 'Uploads/DocumentURL/label1.jpg',
+    processSample:'red',
   },
   {
     patientEnrollmentNumber: 'DAC7996',
@@ -202,6 +207,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '25/06/2022 - 29/06/2025',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
+    processSample:'default',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -209,6 +215,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
     print: 'Uploads/DocumentURL/label1.jpg',
+    processSample:'default',
   },
 ]
 export const completedSampleData = [
@@ -501,7 +508,11 @@ export default {
   methods: {
     searchTreatment() {},
     stepClick(record, phase) {
-      this.goto(phase.url_slug)
+      if(record==='error'){
+        this.goto(phase)
+      }else{
+        this.goto(phase.url_slug)
+      }
     },
     clickImage(record) {
       this.qrUrl = record.qrUrl

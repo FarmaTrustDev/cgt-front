@@ -92,7 +92,7 @@
           class="mt-15 default-card inbound-accept-tabs"
         >
         <div class="h-tabs large-tabs">
-          <a-tabs tab-position="left">
+          <a-tabs>
             <a-tab-pane key="inbound" :tab="translation.InbouAccep_3_834">
               <a-row>
                 <a-col :span="11">
@@ -240,39 +240,39 @@ export default {
         {
           id: 1,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Packarecei_2_518}`,
+          name: `Has the package been received with at Inbound depot?`,
         },
         {
           id: 2,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Doespacka_6_519}`,
+          name: `Does the package match Advance Shipment Notice?`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Isthere_6_520}`,
+          name: `Confirm there is no visual package damage?`,
         },
-        { id: 4, isCollected: false, name: `Are there any status issues ?` },
+        { id: 4, isCollected: false, name: `Confirm packaging has been removed without any issues?` },
         {
           id: 5,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Doesthe_9_522}`,
-          alias: QUARANTINE_STORAGE,
+          name: `Confirm the item is safe to be placed in the relevant Freezer temperature?`,
         },
         {
           id: 6,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Isitem_7_523}`,
+          name: `Confirm no repacking is required?`,
         },
         {
           id: 7,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Isthere_8_524}`,
+          name: `Confirm there are no status issues?`,
         },
         {
           id: 8,
           isCollected: false,
-          name: `${this.$store.getters.getTranslation.Specifreez_9_525}`,
+          name: `Confirm that the package does not need to be placed in Quarantine`,
+          alias: QUARANTINE_STORAGE,
         },
       ],
       dummyOutBoundCollection: [
