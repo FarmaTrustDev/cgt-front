@@ -21,7 +21,7 @@
            
         <a-tab-pane key="1" tab="all">
             
-          <a-card class="mt-15">
+          <a-card class="mt-15 mr-30">
             <span class="message-heading"> Sample requested by NTU</span>
               <div class="mt-15">
                 <span class="message-span"> Steve Harrington </span>
@@ -97,7 +97,7 @@
       </a-tabs>
       
       </div >
-        <a-card class="ml-35 h-tabs large-tabs mt-15">
+        <a-card class="ml-2 mr-2 h-tabs large-tabs mt-15">
             <span class="message-heading"> Sample requested by NTU</span>
                 <div class="mt-15">
                 <span class="message-span"> Steve Harrington </span>

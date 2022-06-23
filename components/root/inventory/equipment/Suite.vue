@@ -19,7 +19,7 @@
             :detail="c"
           >
             <span slot="extra">
-              <span class="count-bar suite-pg">78</span>
+              <span class="count-bar suite-pg">68</span>
             </span></ImageHeading
           >
           <!-- :img-properties="{ width: '50px', height: '50px' }" -->
@@ -31,7 +31,7 @@
         >
           <ImageHeading v-for="(c, index) in classB" :key="index" :detail="c">
             <span slot="extra">
-              <span class="count-bar suite-pg">78</span>
+              <span class="count-bar suite-pg">70</span>
             </span></ImageHeading
           ></a-tab-pane
         >
@@ -40,7 +40,7 @@
           <ImageHeading v-for="(c, index) in classB" :key="index" :detail="c">
             <!-- :img-properties="{ width: '50px', height: '50px' }" -->
             <span slot="extra">
-              <span class="count-bar suite-pg">78</span>
+              <span class="count-bar suite-pg">98</span>
             </span>
           </ImageHeading></a-tab-pane
         >
