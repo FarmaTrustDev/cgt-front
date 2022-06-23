@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-15">
+  <div class="mt-15 ml-10">
     <div class="mb-15 mt-15">
       <h2 class="color-black">
         {{ data.countryName }}

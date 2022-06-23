@@ -88,7 +88,7 @@
                       :key="phase.id"
                       :title="phase.name"
                       :status="(phase.id===2 && record.processSample=='red') ? 'wait' : (phase.id===2 && record.processSample=='green') ? 'finish' : 'wait'"
-                      :class="(phase.id===2 && record.processSample=='red') ? 'ant-steps-item-error': ''"
+                      :class="(phase.id===2 && record.processSample=='red') ? 'ant-steps-item-error': (phase.id===2 && record.processSample!='red') ? 'ant-steps-item-active-blue' : ''"
                       @click="(phase.id===2 && record.processSample=='red') ? stepClick('error', '/inventory/storage/quarantine/status') : stepClick(record, phase)"
                     />
                   </a-steps>
@@ -122,6 +122,7 @@
                       v-for="phase in outboundSteps"
                       :key="phase.id"
                       :title="phase.name"
+                      :class="(phase.id===2) ? 'ant-steps-item-active-blue' : ''"
                       @click="stepClick(record, phase)"
                     />
                   </a-steps>
@@ -330,7 +331,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+          title: `Human Cells`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -402,7 +403,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+          title: `Human Cells`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -470,7 +471,7 @@ export default {
           scopedSlots: { customRender: 'name' },
         },
         {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+          title: `Human Cells`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },

@@ -1,8 +1,8 @@
 <template>
-  <div class="support-page">
-    <a-row class="p-30 mb-10">
+  <div class="support-page ml-30 mr-30">
+    <a-row class="mt-25 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left ml-80">
+        <h3 class="page-title float-left ">
           Support Issues
         </h3>
         <a-button

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-row :gutter="80" class="flex-child-container">
-      <a-col v-for="consume in consumables" :key="consume.heading" :span="8">
+      <a-col v-for="consume in consumables" :key="consume.heading" :span="6">
         <card :data="consume" />
       </a-col>
     </a-row>

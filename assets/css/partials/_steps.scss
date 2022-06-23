@@ -178,13 +178,13 @@
 
   .ant-steps-item-error {
     background: #f2e2d1;
-    margin-left: 20px;
+    margin-left: 10px;
     .ant-steps-item-content {
-      margin-left: 20px;
+      margin-left: 10px;
       
       &::before {
         content: '';       
-        background-image: url(http://localhost:22462/web/icons/alarm.png);
+        background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
       }
     }
   }
@@ -199,7 +199,7 @@
       margin-top: 3px;
       &::before {
         content: '';       
-        background-image: url(http://localhost:22462/web/icons/alarm.png);
+        background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
       }
     }
   }
@@ -228,6 +228,16 @@
     }
   }
 
+
+  .ant-steps-item-active-blue {
+    background-color: #d1e8f2;
+    .ant-steps-item-content {
+      margin-left: 20px;
+      &::before {
+        background-image: url(http://demoapi.qmaid.co/web/icons/blue.png);
+      }
+    }
+  }
   .treatmentName {
     font-size: 14px;
     padding-top: 10px;
