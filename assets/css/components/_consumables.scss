@@ -39,6 +39,12 @@
     position: relative;
     max-width: 161px;
     overflow: hidden;
+    :hover {
+      cursor: move; /* fallback if grab cursor is unsupported */
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
   }
   .consumables-heading {
     font-size: 16px;
