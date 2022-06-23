@@ -123,7 +123,7 @@ export default {
     },
     confirm(show) {
       this.showModal = show
-      this.success('Sample stored successfully')
+      this.success('Sample quarantined successfully')
       // this.goto('/inventory/storage/tasks')
     },     
   },
