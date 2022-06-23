@@ -330,7 +330,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `Human Sample`,
+          title: `Human Cells`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -402,7 +402,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `Human Sample`,
+          title: `Human Cells`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -470,7 +470,7 @@ export default {
           scopedSlots: { customRender: 'name' },
         },
         {
-          title: `Human Sample`,
+          title: `Human Cells`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
