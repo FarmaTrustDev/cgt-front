@@ -10,7 +10,12 @@
       <inventory />
       <a-card :bordered="false" class="default-border-radius">
         <h2 slot="title">Components</h2>
-        <consumables />
+        <a-row gutter="16">
+          <consumables />
+          <!-- <a-col :span="2"> </a-col>
+          <a-col :span="20"> </a-col>
+          <a-col :span="2"> </a-col> -->
+        </a-row>
       </a-card>
     </template>
   </page-layout>

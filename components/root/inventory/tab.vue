@@ -4,22 +4,26 @@
       <a-col :span="24">
         <detail class="mb-15" :data="data.description" />
         <br />
-        <h2 class="mt-15">
-          <strong v-if="user.organizationTypeAlias!='SMARTLAB'">{{ translation.Equip_1_568 }}</strong>
-          <strong v-if="user.organizationTypeAlias=='SMARTLAB'" class="ml-20">{{translation.Kits_1_547}}</strong>
-        </h2>
       </a-col>
     </a-row>
-    <div class="mt-15 mb-15">
-      <a-row class="p-15 w-125 display-inline-block" :gutter="24">
-        <a-col class="suit" :span="12">
+    <div class="mt-15 mb-15 pr-15 clearfix">
+      <h2 class="mt-15">
+        <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">{{
+          translation.Equip_1_568
+        }}</strong>
+        <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="ml-20">{{
+          translation.Kits_1_547
+        }}</strong>
+      </h2>
+      <a-row class="p-15 w-125 display-inline-block" :gutter="16">
+        <a-col class="suit" :span="20">
           <suite />
         </a-col>
 
         <a-col v-if="false" :span="11">
           <div class="">
             <a-card
-              class="shadow mb-15 default-border-radius"
+              class="r-shadow mb-15 "
               :bordered="false"
               title=""
             >
@@ -41,7 +45,7 @@
           <div class="">
             <a-card
               :bordered="false"
-              class="shadow mb-15 default-border-radius"
+              class="r-shadow mb-15 default-border-radius"
             >
               <h4>
                 <a-button type="link">{{
@@ -84,7 +88,7 @@ export default {
     }
   },
   computed: {
-     user() {
+    user() {
       return this.$store.getters.getUser
     },
     translation() {
