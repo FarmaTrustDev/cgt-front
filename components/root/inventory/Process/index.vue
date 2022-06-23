@@ -19,6 +19,7 @@
                 {
                   initialValue: row.isCollected,
                   valuePropName: 'checked',
+                  required : true,
                 },
               ]"
               :checked-children="translation.yes_1_654"
@@ -78,7 +79,7 @@
           />
         </template>
       </a-table>
-    </a-form>
+
     <a-form-item class="mt-15">
       <FormActionButton
         :disabled="buttonEnable"
@@ -86,6 +87,7 @@
         @click="submit"
       />
     </a-form-item>
+    </a-form>
     <a-modal
       title="Notify"
       :footer="null"
