@@ -489,22 +489,22 @@ const colors = {
 export const consumables = [
     {
         threshold: 46,
-        heading: '5ml EDTA blood collection tube (minimum order 500)',
+        heading: '5ml EDTA blood collection tube ',
         color: colors.red,
     },
     {
         threshold: 50,
-        heading: ' 10ml SST blood collection tubes (minimum order 500)',
+        heading: ' 10ml SST blood collection tubes ',
         color: colors.red,
     },
     {
         threshold: 90,
-        heading: ' Vacutainer holder (minimum order 500) ',
+        heading: ' Vacutainer holder ',
         color: colors.blue,
     },
     {
         threshold: 46,
-        heading: ' 21g Eclipse blood collection needle (minimum order 500)',
+        heading: ' 21g Eclipse blood collection needle ',
         color: '#2359e8',
     },
     {

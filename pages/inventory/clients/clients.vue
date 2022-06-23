@@ -1,43 +1,6 @@
 <template>
-  <div class="">
-    <div>
-      <div>
-        <!-- // make its component -->
-        <a-row>
-          <a-col :span="3">
-            <figure>
-              <img
-                class="responsive_img"
-                :src="getImageUrl('web/inventory/storage/hub/clients/6.png')"
-              />
-              <figcaption></figcaption>
-            </figure>
-          </a-col>
-
-          <a-col :span="16">    
-            <a-row>
-              <a-col :span="5" style="font-weight: bold; line-height:20px">Client:</a-col>
-              <a-col :span="11">Novartis</a-col>
-            </a-row>
-            <a-row>
-              <a-col :span="5" style="font-weight: bold">Contact Name:</a-col>
-              <a-col :span="11">Lucas Sinclair</a-col>
-            </a-row>
-            <a-row>
-              <a-col :span="5" style="font-weight: bold">Contact Number:</a-col>
-              <a-col :span="11">+44 1286 132475</a-col>
-            </a-row>
-            <a-row>
-              <a-col :span="5" style="font-weight: bold">Address:</a-col>
-              <a-col :span="11"
-                >The WestWorks, 195 Wood Ln, London W12 7FQ</a-col
-              >
-            </a-row>
-          </a-col>
-        </a-row>
-      </div>
-    </div>
-
+  <div>
+      <Header :url="'web/inventory/storage/hub/clients/6.png'" :show-button="false" />
     <a-table
       class="rounded-table"
       :columns="newTasksColumns"
@@ -68,13 +31,14 @@
 <script>
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
+import Header from '~/components/inventory/clients/header.vue'
 // import { newSampleData } from '../treatment/index.vue'
 // import { isEmpty } from '~/services/Utilities'
 // import { isNumber } from '~/services/Helpers'
 
 // import { newSampleData } from '../treatment/index.vue'
 export default {
-  components: {},
+  components: {Header},
   mixins: [routeHelpers, imagesHelper],
   setup() {},
   data() {
