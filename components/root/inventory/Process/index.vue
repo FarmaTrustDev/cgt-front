@@ -22,7 +22,7 @@
                   rules: [
                     {
                       required: !notesRequired[row.id],
-                      message: 'Please Check to Yes',
+                      message: '',
                     },
                   ],
                 },
@@ -50,8 +50,8 @@
                   initialValue: row.notes,
                   rules: [
                     {
-                      required: row.alias!='QUARANTINE_STORAGE'? !notesRequired[row.id] : notesRequired[row.id],
-                      message: 'Please input your Notes',
+                      required: !notesRequired[row.id],
+                      message: '',
                     },
                   ],
                 },
@@ -114,6 +114,23 @@
         @closeModal="handleEmailModal"
       />
     </a-modal>
+
+
+
+
+<a-modal
+      title="Error! You have left option(s) 'No'."
+      :visible="showErrorModal"
+    >
+      <p>Do you want to quarantine the sample?</p>
+      <template #footer>
+        <a-button key="back" @click="handleErrorShowModal(false)">Return</a-button>
+        <a-button key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Submit</a-button>
+      </template>      
+    </a-modal>
+
+
+
     <a-modal
       :width="1200"
       :footer="null"
@@ -167,10 +184,10 @@ export default {
           title: 'Sign',
           scopedSlots: { customRender: 'email' },
         },
-        {
+        /* {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           scopedSlots: { customRender: 'action' },
-        },
+        }, */
       ],
       loading: false,
       formLayout: 'vertical',
@@ -185,7 +202,8 @@ export default {
       buttonEnable: false,
       notesRequired: {},
       filledData:0,
-      noteItem:[],      
+      noteItem:[],
+      showErrorModal:false,      
     }
   },
   computed: {
@@ -195,27 +213,22 @@ export default {
   },
   methods: {
     submit() {
-
-this.form.validateFields((err, values) => {
-  console.log(err)
-  if(!err){
-    if (this.typeId === 'inbound') {
-      this.goto('/inventory/storage/ColorFridge?inbound=true')
-    }
-    if (this.typeId === 'outbound') {
-      this.$emit('handleActiveTab', 'courier')
-    }
-  }
-})
-        /* if (this.typeId === 'inbound') {
-          this.goto('/inventory/storage/ColorFridge?inbound=true')
+      this.form.validateFields((err,values)=>{
+        if(!err){
+          if (this.typeId === 'inbound') {
+            this.goto('/inventory/storage/ColorFridge?inbound=true')
+          }
+          if (this.typeId === 'outbound') {
+            this.$emit('handleActiveTab', 'courier')
+          }
+        }else{
+          this.showErrorModal=true
+          // alert("You have missed the option(s) 'No'. Do you want to quarantine the sample?")
         }
-        if (this.typeId === 'outbound') {
-          this.$emit('handleActiveTab', 'courier')
-        } */
+      })
     },
     handleCollectionSubmit(collection) {
-      console.log(collection.alias)
+      // console.log(collection.alias)
       const fields = this.form.getFieldsValue()
 
       const values = fields.collection[`id-${collection.id}`]
@@ -281,6 +294,9 @@ this.form.validateFields((err, values) => {
     },
     handleQuarantineModal(show) {
       this.showQuarantine = show
+    },
+    handleErrorShowModal(show){
+      this.showErrorModal=show
     },
     handleQuarantineSubmit() {
       this.handleQuarantineModal(false)
