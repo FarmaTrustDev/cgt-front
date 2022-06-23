@@ -11,7 +11,7 @@
       <template slot="storageDocument" slot-scope="">
         <img :src="getImageUrl('web/inventory/storage/upload.jpeg')" @click="openViewModal" />
       </template>
-<a-modal :visible="showModal" :title="translation.Docum_1_507">
+      <a-modal :visible="showModal" :title="translation.Docum_1_507">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
             <a-button @click="handleModal(false)">Cancel</a-button>
@@ -19,12 +19,12 @@
           </template>
         </a-modal>      
     </a-table>
-    <a-modal :visible="showModal" :title="translation.Docum_1_507">
+    <a-modal :visible="showModal" ok-text="Print" cancel-text="Cancel" @ok="printWindow()" @cancel="handleModal(false)" :title="translation.Docum_1_507">
       <img class="img-responsive" :src="getImageUrl(qrUrl)" />
-      <template slot="footer">
+      <!-- <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
         <a-button @click="printWindow()">Print</a-button>
-      </template>
+      </template> -->
     </a-modal>
   </div>
 </template>
