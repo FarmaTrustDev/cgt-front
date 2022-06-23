@@ -30,15 +30,16 @@
   position: relative;
   &::before {
     content: '';
-    height: 1px;
+    height: 3px;
     position: absolute;
     width: 80%;
     margin: auto;
     left: 0;
-    top: 15px;
+    top: 20px;
     right: 0;
     background-color: #e2e2e2;
   }
+  
   .ant-steps-item {
     padding: 5px 2px;
     border: 0;
@@ -119,7 +120,7 @@
   }
 
   .ant-steps-item-content {
-    .ant-steps-item-title {
+    .ant-steps-item-title {    
       color: #233151 !important;
     }
     &::before {
@@ -128,6 +129,7 @@
       width: 20px;
       margin-left: 3px;
       margin-right: 3px;
+      margin-top: -5px;
       display: inline-block;
       vertical-align: middle;
       background-size: 100%;
@@ -169,13 +171,57 @@
     background: #d1f2dc;
     .ant-steps-item-content {
       &::before {
-        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle-background.svg);
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
     }
   }
+
+  .ant-steps-item-error {
+    background: #f2e2d1;
+    margin-left: 20px;
+    .ant-steps-item-content {
+      margin-left: 20px;
+      
+      &::before {
+        content: '';       
+        background-image: url(http://localhost:22462/web/icons/alarm.png);
+      }
+    }
+  }
+
+  .ant-steps-item-error-large {
+    background: #f2e2d1;
+    margin-left: 20px;
+    border-radius: 5px;
+    height: 50px;
+    .ant-steps-item-content {
+      margin-left: 20px;
+      margin-top: 3px;
+      &::before {
+        content: '';       
+        background-image: url(http://localhost:22462/web/icons/alarm.png);
+      }
+    }
+  }
+
+  .ant-steps-item-active-large {
+    background-color: #d1f2dc;
+    margin-left: 20px;
+    border-radius: 5px;
+    height: 50px;    
+    .ant-steps-item-content {
+      margin-left: 20px;
+      margin-top: 3px;
+      &::before {
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+      }
+    }
+  }
+
   .ant-steps-item-active {
     background-color: #d1f2dc;
     .ant-steps-item-content {
+      margin-left: 20px;
       &::before {
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
@@ -202,9 +248,20 @@
 
   .ant-steps-horizontal {
     & .ant-steps-item:last-child {
-      padding-right: 8px;
+      padding-right: 25px;
+      padding-left: 25px;
     }
   }
+
+  .ant-steps-horizontal-large {
+    border-radius: 5px;
+    height: 50px;
+    & .ant-steps-item:last-child {
+      padding-right: 25px;
+      padding-left: 25px;
+    }
+  }
+
   .ant-table-thead > tr > th,
   .ant-table-tbody > tr > td {
     padding-top: 0;

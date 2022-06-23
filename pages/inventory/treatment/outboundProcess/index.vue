@@ -91,7 +91,7 @@
           :bordered="false"
           class="mt-25 default-card inbound-accept-tabs"
         >
-          <a-tabs tab-position="left" :active-key="activeTab">
+          <a-tabs :active-key="activeTab">
             <a-tab-pane key="outbound" :tab="translation.OutboShipm_2_376">
               <Process
                 :collections="dummyOutBoundCollection"

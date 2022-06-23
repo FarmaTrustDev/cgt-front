@@ -11,7 +11,7 @@
       style="white-space:pre"
     >
     <template slot="stage" slot-scope="record, text">
-        <div style="float:left" class="ml-40"><img :src="getImageUrl(text.url)" width="26" height="26" class="img-responsive" style="border-radius:5px" /></div> <div class="ml-10" style="float:left;">{{record}}</div>
+        <div style="float:left" class="ml-20"><img :src="getImageUrl(text.url)" width="26" height="26" class="img-responsive" style="border-radius:5px" /></div> <div class="ml-40" style="float:left;">{{record}}</div>
     </template>
     </a-table>
   </div>

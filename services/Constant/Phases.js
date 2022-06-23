@@ -138,6 +138,38 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         params: { view: 'OUTBOUND_SHIPMENT' }
     },
 ]
+export const QUARANTINE_RESOLUTION_PHASES = [
+    {
+        id: 1,
+        name: 'Inbound Acceptance Details',
+        alias: 'INBOUND_ACCEPTANCE_DETAILS',
+        phaseId: 8,
+        enablePageId: 5,
+        url_slug: '',
+        url_type: URL_TYPE.patient,
+        params: { view: 'INBOUND_ACCEPTANCE_DETAILS' }
+    },
+    {
+        id: 2,
+        name: 'Process Sample',
+        alias: 'PROCESS_SAMPLE',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '',
+        url_type: URL_TYPE.patient,
+        params: { view: 'PROCESS_SAMPLE' }
+    },
+    {
+        id: 3,
+        name: 'Store sample',
+        alias: 'STORE_SAMPLE',
+        phaseId: 14,
+        enablePageId: 14,
+        url_slug: '',
+        url_type: URL_TYPE.patient,
+        params: { view: 'STORE_SAMPLE' }
+    },
+]
 // These Phases has to bee changed for Smart_Lab_Demo_Purpose
 export const SMART_LAB_TREATMENT_PENDING_PHASES = [
     {
