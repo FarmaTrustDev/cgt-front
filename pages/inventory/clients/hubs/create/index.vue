@@ -27,7 +27,7 @@
               </figure>
               
               <div class="icons">
-                <span><img :src="getImageUrl('web/icons/inbox.svg')" /></span>
+                <span><a href="/inventory/clients/messages"><img :src="getImageUrl('web/icons/inbox.svg')" /></a></span>
                 <span><a href="/inventory/clients/clients"> <img :src="getImageUrl('web/icons/stock.svg')" /></a></span>
                 <span> <img :src="getImageUrl('web/icons/bill1.svg')" /></span>
               </div>
