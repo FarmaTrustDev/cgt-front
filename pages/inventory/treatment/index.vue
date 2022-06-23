@@ -330,7 +330,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+          title: `Human Sample`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -402,7 +402,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+          title: `Human Sample`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -470,7 +470,7 @@ export default {
           scopedSlots: { customRender: 'name' },
         },
         {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+          title: `Human Sample`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
