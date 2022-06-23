@@ -1,12 +1,12 @@
 <template>
   <div>
     <a-card :bordered="false" class="chat-margin fix-chat-size">
-      <strong slot="title" >
+      <strong slot="title">
         {{ recipient.name }} <a-divider></a-divider>
       </strong>
 
       <a-row>
-        <div ref="container" class="peer-to-peer-chat-list ">
+        <div ref="container" class="peer-to-peer-chat-list">
           <a-col>
             <!-- <pre> {{ data }}</pre> -->
             <a-list
@@ -40,21 +40,21 @@
       <!-- /// Form for chat -->
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <a-row>
-          <a-col >
-            <a-form-item class="pt-50">
-              <div class="pt-50 mt-5">
-              <a-input
-                v-decorator="[
-                  'message',
-                  {
-                    rules: [
-                      { required: true, message: 'Empty message not allow' },
-                    ],
-                  },
-                ]"
-                class="send-message-input"
-                :placeholder="translation.Typemessa_3_246"
-              />
+          <a-col>
+            <a-form-item class="">
+              <div class="mt-5">
+                <a-input
+                  v-decorator="[
+                    'message',
+                    {
+                      rules: [
+                        { required: true, message: 'Empty message not allow' },
+                      ],
+                    },
+                  ]"
+                  class="send-message-input"
+                  :placeholder="translation.Typemessa_3_246"
+                />
               </div>
               <a-input
                 v-decorator="[
@@ -86,7 +86,7 @@
           <a-col class="text-right">
             <a-form-item>
               <a-button html-type="submit" :loading="submitting" type="primary">
-                {{translation.Submi_1_248}}
+                {{ translation.Submi_1_248 }}
               </a-button>
             </a-form-item>
           </a-col>
@@ -154,10 +154,10 @@ export default {
       content.scrollTop = content.scrollHeight
     },
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  }
+  },
 }
 </script>

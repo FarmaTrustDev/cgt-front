@@ -15,8 +15,7 @@
         <a-card :bordered="false" class="default-card">
           <div class="max-h-200" >
             <a-spin class="p-0"  :spinning="endToEndConversationLoader">
-              <Conversation
-               
+              <Conversation               
                 v-if="!isEmpty(recipient)"
                 :recipient="recipient"
                 :data="endToEndConversation"

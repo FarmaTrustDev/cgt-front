@@ -11,8 +11,9 @@
           <a-tab-pane v-for="d in data" :key="d.id">
             <template slot="tab">
               <span class="flag-title">
-                <img width="40" :src="getImageUrl(d.flag)" />{{ d.title }}</span
-              >
+                <img width="40" :src="getImageUrl(d.flag)" />
+                <span class="title">{{ d.title }}</span>
+              </span>
             </template>
             <tab :data="d" />
           </a-tab-pane>

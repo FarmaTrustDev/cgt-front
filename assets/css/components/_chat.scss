@@ -1,3 +1,4 @@
+$defaultHeight: calc(100vh - 100px);
 .chat-page {
   .ant-list-split .ant-list-item {
     border-bottom: none;
@@ -42,7 +43,9 @@
       margin-top: 10px;
       max-width: 85%;
     }
-
+    .default-card {
+      min-height: $defaultHeight;
+    }
     .content-body {
       padding: 15px;
       color: #233151;
@@ -102,7 +105,7 @@
 }
 
 .chat--listing-container {
-  height: calc(100vh - 200px);
+  min-height: $defaultHeight;
   overflow-y: scroll;
 }
 
@@ -111,8 +114,8 @@
   overflow-x: auto;
 }
 
-.reduce-margin{
-  .ant-card-body{
+.reduce-margin {
+  .ant-card-body {
     padding-left: -5px;
   }
 }
