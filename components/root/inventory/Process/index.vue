@@ -19,11 +19,17 @@
                 {
                   initialValue: row.isCollected,
                   valuePropName: 'checked',
-                  required : true,
+                  rules: [
+                    {
+                      required: !notesRequired[row.id],
+                      message: 'Please Check to Yes',
+                    },
+                  ],
                 },
               ]"
               :checked-children="translation.yes_1_654"
               :un-checked-children="translation.no_1_656"
+              @change="(value) => handleCheck(value, row.id)"
             />
 
             <a-icon
@@ -42,9 +48,16 @@
                 `collection[id-${row.id}][notes]`,
                 {
                   initialValue: row.notes,
+                  rules: [
+                    {
+                      required: row.alias!='QUARANTINE_STORAGE'? !notesRequired[row.id] : notesRequired[row.id],
+                      message: 'Please input your Notes',
+                    },
+                  ],
                 },
               ]"
               :placeholder="translation.Enternote_3_546"
+              @blur="(e) => handleInput(row.id,e)"
             />
             <span v-else>{{ row.notes }}</span>
             <a-input
@@ -170,6 +183,9 @@ export default {
       bagService: BagCollectionServices,
       showQuarantine: false,
       buttonEnable: false,
+      notesRequired: {},
+      filledData:0,
+      noteItem:[],      
     }
   },
   computed: {
@@ -179,14 +195,27 @@ export default {
   },
   methods: {
     submit() {
-      if (this.typeId === 'inbound') {
-        this.goto('/inventory/storage/ColorFridge?inbound=true')
-      }
-      if (this.typeId === 'outbound') {
-        this.$emit('handleActiveTab', 'courier')
-      }
+
+this.form.validateFields((err, values) => {
+  console.log(err)
+  if(!err){
+    if (this.typeId === 'inbound') {
+      this.goto('/inventory/storage/ColorFridge?inbound=true')
+    }
+    if (this.typeId === 'outbound') {
+      this.$emit('handleActiveTab', 'courier')
+    }
+  }
+})
+        /* if (this.typeId === 'inbound') {
+          this.goto('/inventory/storage/ColorFridge?inbound=true')
+        }
+        if (this.typeId === 'outbound') {
+          this.$emit('handleActiveTab', 'courier')
+        } */
     },
     handleCollectionSubmit(collection) {
+      console.log(collection.alias)
       const fields = this.form.getFieldsValue()
 
       const values = fields.collection[`id-${collection.id}`]
@@ -213,6 +242,36 @@ export default {
         this.btnLoading = false
       }
     },
+    handleCheck(value, rowId,alias) {
+      console.log(alias)
+      const notesRequired = this.notesRequired
+      notesRequired[rowId] = value
+      this.notesRequired = notesRequired
+      if(value===true){
+        this.filledData=this.filledData+1
+      }else{
+        this.filledData=this.filledData-1
+      }
+      if(this.filledData<0){
+        this.filledData=0
+      }
+      // this.sendData(this.filledData)
+    },
+    handleInput(rowId,e) {
+      if(this.noteItem.includes(rowId)){
+        this.noteItem.splice(this.noteItem.indexOf(rowId),1);
+        this.filledData=this.filledData - 1
+      }
+      if(this.filledData<0){
+        this.filledData=0
+      }
+      if(!this.notesRequired[rowId] && e.target.value!==null){
+        console.log(this.noteItem)
+        this.noteItem.push(rowId)
+        this.filledData=this.filledData + 1
+        // this.sendData(this.filledData)
+      }
+    },        
     handleEmailModal(show, data) {
       if (show) {
         this.body = `${data.name} has been completed against  by Bag ${this.bagId} `
