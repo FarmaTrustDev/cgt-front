@@ -5,94 +5,103 @@
         {{ recipient.name }} <a-divider></a-divider>
       </strong>
 
-      <a-row>
-        <div ref="container" class="peer-to-peer-chat-list">
-          <a-col>
-            <!-- <pre> {{ data }}</pre> -->
-            <a-list
-              id="chatListContainer"
-              class="conversation-list"
-              :data-source="data"
-              item-layout="horizontal"
-              :bordered="false"
-            >
-              <a-list-item
-                slot="renderItem"
-                slot-scope="item"
-                :class="'message-' + getType(item.isOwner)"
-              >
-                <a-comment :author="item.ownerName" :content="item.content">
-                  <template slot="content"
-                    ><div class="content-body">
-                      {{ item.message }}
-                    </div></template
-                  >
-                  <a-tooltip slot="datetime" :title="item.created_at">
-                    <span>{{ item.created_at }}</span>
-                  </a-tooltip>
-                </a-comment>
-              </a-list-item>
-            </a-list>
-          </a-col>
-        </div>
-      </a-row>
-
-      <!-- /// Form for chat -->
-      <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+      <div class="chat-conversation-container">
         <a-row>
-          <a-col>
-            <a-form-item class="">
-              <div class="mt-5">
+          <div ref="container" class="peer-to-peer-chat-list">
+            <a-col>
+              <!-- <pre> {{ data }}</pre> -->
+              <a-list
+                id="chatListContainer"
+                class="conversation-list"
+                :data-source="data"
+                item-layout="horizontal"
+                :bordered="false"
+              >
+                <a-list-item
+                  slot="renderItem"
+                  slot-scope="item"
+                  :class="'message-' + getType(item.isOwner)"
+                >
+                  <a-comment :author="item.ownerName" :content="item.content">
+                    <template slot="content"
+                      ><div class="content-body">
+                        {{ item.message }}
+                      </div></template
+                    >
+                    <a-tooltip slot="datetime" :title="item.created_at">
+                      <span>{{ item.created_at }}</span>
+                    </a-tooltip>
+                  </a-comment>
+                </a-list-item>
+              </a-list>
+            </a-col>
+          </div>
+        </a-row>
+
+        <!-- /// Form for chat -->
+        <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+          <a-row>
+            <a-col>
+              <a-form-item class="">
+                <div class="mt-5">
+                  <a-input
+                    v-decorator="[
+                      'message',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Empty message not allowed',
+                          },
+                        ],
+                      },
+                    ]"
+                    class="send-message-input"
+                    :placeholder="translation.Typemessa_3_246"
+                  />
+                </div>
                 <a-input
                   v-decorator="[
-                    'message',
+                    recipient.type,
                     {
                       rules: [
-                        { required: true, message: 'Empty message not allow' },
+                        { required: true, message: 'Please input your name!' },
                       ],
+                      initialValue: `${recipient.id}`,
                     },
                   ]"
-                  class="send-message-input"
-                  :placeholder="translation.Typemessa_3_246"
+                  type="hidden"
                 />
-              </div>
-              <a-input
-                v-decorator="[
-                  recipient.type,
-                  {
-                    rules: [
-                      { required: true, message: 'Please input your name!' },
-                    ],
-                    initialValue: `${recipient.id}`,
-                  },
-                ]"
-                type="hidden"
-              />
 
-              <a-input
-                v-decorator="[
-                  `Recipient_Name`,
-                  {
-                    rules: [
-                      { required: true, message: 'Please input your name!' },
-                    ],
-                    initialValue: recipient.name,
-                  },
-                ]"
-                type="hidden"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col class="text-right">
-            <a-form-item>
-              <a-button html-type="submit" :loading="submitting" type="primary">
-                {{ translation.Submi_1_248 }}
-              </a-button>
-            </a-form-item>
-          </a-col>
-        </a-row>
-      </a-form>
-      <!-- /// Form for chat -->
+                <a-input
+                  v-decorator="[
+                    `Recipient_Name`,
+                    {
+                      rules: [
+                        { required: true, message: 'Please input your name!' },
+                      ],
+                      initialValue: recipient.name,
+                    },
+                  ]"
+                  type="hidden"
+                />
+              </a-form-item>
+            </a-col>
+            <a-col class="text-right">
+              <a-form-item>
+                <a-button
+                  html-type="submit"
+                  :loading="submitting"
+                  type="primary"
+                >
+                  {{ translation.Submi_1_248 }}
+                </a-button>
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-form>
+        <!-- /// Form for chat -->
+      </div>
     </a-card>
   </div>
 </template>
