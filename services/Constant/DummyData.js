@@ -9,6 +9,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-20',
         zone: 'Zone A',
+        type: 3,
     },
     {
         id: 2,
@@ -20,6 +21,7 @@ export const baseStorage = [
         zoneId: 3,
         temperature: '-80',
         zone: 'Zone C',
+        type: 1,
     },
     {
         id: 3,
@@ -31,6 +33,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 3,
     },
     {
         id: 4,
@@ -42,6 +45,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: 'LN2',
         zone: 'Zone A',
+        type: 0,
     },
     {
         id: 5,
@@ -53,6 +57,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: '-20',
         zone: 'Zone B',
+        type: 3,
     },
     {
         id: 6,
@@ -64,6 +69,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: '-80',
         zone: 'Zone B',
+        type: 2,
     },
     {
         id: 7,
@@ -75,6 +81,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: 'LN2',
         zone: 'Zone B',
+        type: 1,
     },
     {
         id: 8,
@@ -86,6 +93,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 3,
     },
     {
         id: 9,
@@ -97,6 +105,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: 'LN2',
         zone: 'Zone A',
+        type: 2,
     },
     {
         id: 10,
@@ -108,6 +117,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: '-80',
         zone: 'Zone B',
+        type: 3,
     },
     {
         id: 11,
@@ -119,6 +129,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-20',
         zone: 'Zone A',
+        type: 1,
     },
     {
         id: 12,
@@ -130,6 +141,7 @@ export const baseStorage = [
         zoneId: 3,
         temperature: '-80',
         zone: 'Zone C',
+        type: 2,
     },
     {
         id: 13,
@@ -141,6 +153,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: '-80',
         zone: 'Zone B',
+        type: 3,
     },
     {
         id: 14,
@@ -152,6 +165,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: 'LN2',
         zone: 'Zone A',
+        type: 2,
     },
     {
         id: 15,
@@ -163,6 +177,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 2,
     },
     {
         id: 16,
@@ -174,6 +189,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 3,
     },
 ]
 
