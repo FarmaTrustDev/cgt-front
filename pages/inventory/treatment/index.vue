@@ -398,7 +398,7 @@ export default {
 
       newSampleColumns: [
         {
-          title: `${this.$store.getters.getTranslation.SeriaNumbe_2_506}`,
+          title: `Sample ID`,
           dataIndex: 'patientEnrollmentNumber',
           key: 'patientEnrollmentNumber',
         },

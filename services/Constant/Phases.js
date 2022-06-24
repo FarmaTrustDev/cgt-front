@@ -43,7 +43,7 @@ export const INVENTORY_OUTBOUND_STATUS_STEPS = [
         name: 'Courier',
         alias: 'COURIER',
         phaseId: 3,
-        url_slug: '/inventory/treatment/outboundProcess/',
+        // url_slug: '/inventory/treatment/outboundProcess/',
         params: {}
     },
 ];
@@ -178,7 +178,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'INBOUND_SHIPMENT',
         phaseId: 8,
         enablePageId: 5,
-        url_slug: '/inventory/treatment/process/',
+        url_slug: '/inventory/treatment/process?view=inbound',
         url_type: URL_TYPE.patient,
         params: { view: 'INBOUND_SHIPMENT' }
     },
@@ -198,7 +198,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'STORE_SAMPLE',
         phaseId: 14,
         enablePageId: 14,
-        url_slug: '/inventory/storage/ColorFridge?inbound=true',
+        // url_slug: '/inventory/storage/ColorFridge?inbound=true',
         url_type: URL_TYPE.treatment,
         params: { view: 'STORE_SAMPLE' }
     },
