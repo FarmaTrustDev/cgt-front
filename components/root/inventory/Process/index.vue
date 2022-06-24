@@ -1,5 +1,5 @@
 <template>
-  <div class="collection-processing-steps">
+  <div class="collection-processing-steps" style="margin-top:10px">
     <a-form :form="form" layout="horizontal">
       <a-table
         :columns="columns"
@@ -116,21 +116,17 @@
     </a-modal>
 
 
-
-
-<a-modal
+    <a-modal
       title="Error! You have left option(s) 'No'."
-      :visible="showErrorModal"
+      :visible="showQuaranitineModal"
+      @cancel="handleErrorShowModal(false)"
     >
-      <p>Do you want to quarantine the sample?</p>
+      <p v-if="inboundCheck">Do you want to quarantine the sample?</p>
       <template #footer>
-        <a-button key="back" @click="handleErrorShowModal(false)">Return</a-button>
-        <a-button key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Submit</a-button>
+        <a-button key="back" @click="handleErrorShowModal(false)">No</a-button>
+        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Yes</a-button>
       </template>      
     </a-modal>
-
-
-
     <a-modal
       :width="1200"
       :footer="null"
@@ -166,7 +162,7 @@ export default {
     return {
       columns: [
         {
-          title: `${this.$store.getters.getTranslation.Detai_1_346}`,
+          title: `Questions`,
           dataIndex: 'name',
           width: '30%',
         },
@@ -203,7 +199,8 @@ export default {
       notesRequired: {},
       filledData:0,
       noteItem:[],
-      showErrorModal:false,      
+      showQuaranitineModal:false,
+      inboundCheck:false,      
     }
   },
   computed: {
@@ -215,14 +212,23 @@ export default {
     submit() {
       this.form.validateFields((err,values)=>{
         if(!err){
-          if (this.typeId === 'inbound') {
+          // console.log(this.typeId)
+          if ((this.typeId === 'inbound') || (this.typeId === 'quarantine')) {
             this.goto('/inventory/storage/ColorFridge?inbound=true')
           }
           if (this.typeId === 'outbound') {
             this.$emit('handleActiveTab', 'courier')
           }
         }else{
-          this.showErrorModal=true
+          if(this.typeId==='inbound'){
+            this.inboundCheck=true
+            this.showQuaranitineModal=true
+          }
+          if(this.typeId!=='inbound'){
+            this.error()
+          }
+          
+          // console.log(this.typeId)
           // alert("You have missed the option(s) 'No'. Do you want to quarantine the sample?")
         }
       })
@@ -256,7 +262,7 @@ export default {
       }
     },
     handleCheck(value, rowId,alias) {
-      console.log(alias)
+      // console.log(alias)
       const notesRequired = this.notesRequired
       notesRequired[rowId] = value
       this.notesRequired = notesRequired
@@ -279,7 +285,7 @@ export default {
         this.filledData=0
       }
       if(!this.notesRequired[rowId] && e.target.value!==null){
-        console.log(this.noteItem)
+        // console.log(this.noteItem)
         this.noteItem.push(rowId)
         this.filledData=this.filledData + 1
         // this.sendData(this.filledData)
@@ -296,11 +302,17 @@ export default {
       this.showQuarantine = show
     },
     handleErrorShowModal(show){
-      this.showErrorModal=show
+      this.showQuaranitineModal=show
     },
     handleQuarantineSubmit() {
       this.handleQuarantineModal(false)
       this.buttonEnable = true
+    },
+    error() {
+    this.$error({
+      title: 'The checklist will not proceed with the No answer(s).Correct them.',
+      // content: 'some messages...some messages...',
+    });
     },
   },
 }

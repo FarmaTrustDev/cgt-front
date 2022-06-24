@@ -15,7 +15,6 @@
       <a-input-search
         placeholder="Search"
         class=" search-field-msg ml-90 pt-15"
-        @search="onSearch"
       />
       <a-tabs type="card" :animated="false">
            

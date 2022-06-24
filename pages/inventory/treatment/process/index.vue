@@ -7,7 +7,7 @@
   >
     <template slot="content">
       <div class="grey-card" style="width: 90%; margin-left: 5%">
-        <div class="patient-details-page">
+        <div class="patient-details-page" style="width:95%; margin-left:2%">
           <a-row :gutter="18">
             <a-col :span="6">
               <a-card :bordered="false" class="qr-section default-card">
@@ -90,10 +90,33 @@
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
+          style="width:95%; margin-left:2%"
         >
-        <div class="h-tabs large-tabs">
-          <a-tabs>
-            <a-tab-pane key="inbound" :tab="translation.InbouAccep_3_834">
+          <span>
+            <!-- //Steps -->
+            <div class="treatment-steps" style="width:95%">
+              <a-steps size="default">
+                <a-step
+                  v-for="phase in phases"
+                  :key="phase.id"
+                  :title="phase.name"
+                  :class="(phase.id==1) ? 'ant-steps-item-active-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
+                  @click="reDirect(phase.url_slug,phase.alias)"
+                />
+              </a-steps>
+            </div>
+            <!-- //Steps -->
+          </span> 
+        </a-card>
+
+        <a-card
+          v-if="activeTab=='INBOUND_ACCEPTANCE_DETAILS'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs"
+          style="width:95%; margin-left:2%"
+        >
+
+        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
@@ -199,9 +222,18 @@
                   </a-card>
                 </a-col>
               </a-row>
-            </a-tab-pane>
-            <a-tab-pane key="process" :tab="translation.InbouStora_3_564">
-              <h3>{{ translation.QualiAssur_3_565 }}</h3>
+        </div>
+        </a-card>
+        <a-card
+          v-if="activeTab=='PROCESS_SAMPLE'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs"
+          style="width:95%; margin-left:2%"
+        >
+
+        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">              
+              <div>
+              <strong style="font-size:20px">{{ translation.QualiAssur_3_565 }}</strong>
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
@@ -209,8 +241,7 @@
                 @fetchBags="() => {}"
                 @updateId="updateId"
               />
-            </a-tab-pane>
-          </a-tabs>
+              </div>
           </div>
         </a-card>
       </div>
@@ -221,21 +252,27 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
+import {
+  QUARANTINE_RESOLUTION_PHASES
+} from '~/services/Constant/Phases'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
 // import shipment from '~/components/inventory/treatment/shipment'
 import tabsHelpers from '~/mixins/tabs-helpers'
+import routeHelpers from '~/mixins/route-helpers'
+import { isEmpty } from '~/services/Helpers'
 export default {
   components: {
     'page-layout': PageLayout,
     Process,
     // shipment,
   },
-  mixins: [tabsHelpers],
+  mixins: [tabsHelpers,routeHelpers],
   middleware: 'auth',
   data() {
     return {
       activeTab: 'inbound',
       type: 'inbound',
+      phases:QUARANTINE_RESOLUTION_PHASES,
       dummyCollection: [
         {
           id: 1,
@@ -318,6 +355,9 @@ export default {
     this.handleActiveTab()
   },
   methods: {
+    handleActiveTab(){
+      this.activeTab=this.$route.query.view
+    },
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {
         if (collection.id === collectionId) {
@@ -327,6 +367,15 @@ export default {
       })
 
       this.dummyCollection = dumCollection
+    },
+    setActiveTav(tab){
+      this.activeTab=tab
+    },
+    reDirect(url,alias){
+      if(!isEmpty(url)){
+        this.activeTab=alias
+        this.goto(url)
+      }
     },
   },
 }
