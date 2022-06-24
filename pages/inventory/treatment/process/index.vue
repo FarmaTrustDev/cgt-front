@@ -92,8 +92,8 @@
           class="mt-15 default-card inbound-accept-tabs"
         >
         <div class="h-tabs large-tabs">
-          <a-tabs>
-            <a-tab-pane key="inbound" :tab="translation.InbouAccep_3_834">
+          <a-tabs :active-key="activeTab">
+            <a-tab-pane key="inbound" :tab="translation.InbouAccep_3_834" @click="setActiveTav('inbound')">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
@@ -200,7 +200,7 @@
                 </a-col>
               </a-row>
             </a-tab-pane>
-            <a-tab-pane key="process" :tab="translation.InbouStora_3_564">
+            <a-tab-pane key="process" :tab="translation.InbouStora_3_564" @click="setActiveTav('process')">
               <h3>{{ translation.QualiAssur_3_565 }}</h3>
               <Process
                 :collections="dummyCollection"
@@ -318,6 +318,9 @@ export default {
     this.handleActiveTab()
   },
   methods: {
+    handleActiveTab(){
+      this.activeTab=this.$route.query.view
+    },
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {
         if (collection.id === collectionId) {
@@ -327,6 +330,9 @@ export default {
       })
 
       this.dummyCollection = dumCollection
+    },
+    setActiveTav(tab){
+      this.activeTab=tab
     },
   },
 }

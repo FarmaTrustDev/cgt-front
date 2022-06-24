@@ -118,14 +118,15 @@
 
 
 
-<a-modal
+    <a-modal
       title="Error! You have left option(s) 'No'."
       :visible="showErrorModal"
+      @cancel="handleErrorShowModal(false)"
     >
-      <p>Do you want to quarantine the sample?</p>
+      <p v-if="inboundCheck">Do you want to quarantine the sample?</p>
       <template #footer>
         <a-button key="back" @click="handleErrorShowModal(false)">Return</a-button>
-        <a-button key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Submit</a-button>
+        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Submit</a-button>
       </template>      
     </a-modal>
 
@@ -203,7 +204,8 @@ export default {
       notesRequired: {},
       filledData:0,
       noteItem:[],
-      showErrorModal:false,      
+      showErrorModal:false,
+      inboundCheck:false,      
     }
   },
   computed: {
@@ -215,14 +217,19 @@ export default {
     submit() {
       this.form.validateFields((err,values)=>{
         if(!err){
-          if (this.typeId === 'inbound') {
+          // console.log(this.typeId)
+          if ((this.typeId === 'inbound') || (this.typeId === 'quarantine')) {
             this.goto('/inventory/storage/ColorFridge?inbound=true')
           }
           if (this.typeId === 'outbound') {
             this.$emit('handleActiveTab', 'courier')
           }
         }else{
+          if(this.typeId==='inbound'){
+            this.inboundCheck=true
+          }
           this.showErrorModal=true
+          // console.log(this.typeId)
           // alert("You have missed the option(s) 'No'. Do you want to quarantine the sample?")
         }
       })
@@ -256,7 +263,7 @@ export default {
       }
     },
     handleCheck(value, rowId,alias) {
-      console.log(alias)
+      // console.log(alias)
       const notesRequired = this.notesRequired
       notesRequired[rowId] = value
       this.notesRequired = notesRequired
@@ -279,7 +286,7 @@ export default {
         this.filledData=0
       }
       if(!this.notesRequired[rowId] && e.target.value!==null){
-        console.log(this.noteItem)
+        // console.log(this.noteItem)
         this.noteItem.push(rowId)
         this.filledData=this.filledData + 1
         // this.sendData(this.filledData)
