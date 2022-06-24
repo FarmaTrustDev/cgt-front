@@ -1,5 +1,5 @@
 <template>
-  <div class="collection-processing-steps">
+  <div class="collection-processing-steps" style="margin-top:10px">
     <a-form :form="form" layout="horizontal">
       <a-table
         :columns="columns"
@@ -116,22 +116,17 @@
     </a-modal>
 
 
-
-
     <a-modal
       title="Error! You have left option(s) 'No'."
-      :visible="showErrorModal"
+      :visible="showQuaranitineModal"
       @cancel="handleErrorShowModal(false)"
     >
       <p v-if="inboundCheck">Do you want to quarantine the sample?</p>
       <template #footer>
-        <a-button key="back" @click="handleErrorShowModal(false)">Return</a-button>
-        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Submit</a-button>
+        <a-button key="back" @click="handleErrorShowModal(false)">No</a-button>
+        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Yes</a-button>
       </template>      
     </a-modal>
-
-
-
     <a-modal
       :width="1200"
       :footer="null"
@@ -167,7 +162,7 @@ export default {
     return {
       columns: [
         {
-          title: `${this.$store.getters.getTranslation.Detai_1_346}`,
+          title: `Questions`,
           dataIndex: 'name',
           width: '30%',
         },
@@ -204,7 +199,7 @@ export default {
       notesRequired: {},
       filledData:0,
       noteItem:[],
-      showErrorModal:false,
+      showQuaranitineModal:false,
       inboundCheck:false,      
     }
   },
@@ -227,8 +222,12 @@ export default {
         }else{
           if(this.typeId==='inbound'){
             this.inboundCheck=true
+            this.showQuaranitineModal=true
           }
-          this.showErrorModal=true
+          if(this.typeId!=='inbound'){
+            this.error()
+          }
+          
           // console.log(this.typeId)
           // alert("You have missed the option(s) 'No'. Do you want to quarantine the sample?")
         }
@@ -303,11 +302,17 @@ export default {
       this.showQuarantine = show
     },
     handleErrorShowModal(show){
-      this.showErrorModal=show
+      this.showQuaranitineModal=show
     },
     handleQuarantineSubmit() {
       this.handleQuarantineModal(false)
       this.buttonEnable = true
+    },
+    error() {
+    this.$error({
+      title: 'The checklist will not proceed with the No answer(s).Correct them.',
+      // content: 'some messages...some messages...',
+    });
     },
   },
 }

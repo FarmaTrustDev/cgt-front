@@ -192,14 +192,14 @@
     margin-top: 10px;
   }
 }
-.btn-btn-msg-scren{
-  .ant-btn{
+.btn-btn-msg-scren {
+  .ant-btn {
     padding-left: 30px;
     padding-right: 30px;
-    margin-left:20px;
-    background: #8B8B8B;
+    margin-left: 20px;
+    background: #8b8b8b;
     color: white;
-    padding-top:2px;
+    padding-top: 2px;
   }
 }
 .message-heading {
@@ -209,26 +209,26 @@
   line-height: 28px;
   color: #000;
 }
-.message-span{
+.message-span {
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
   color: #000;
 }
-.message-span-light-text{
-    color: #8B8B8B;
-    font-style: normal;
+.message-span-light-text {
+  color: #8b8b8b;
+  font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
 }
-.message-paragraph{
+.message-paragraph {
   font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 28px;
-color: #000;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: #000;
 }
 .screen-bg-color {
   background-color: #f5f5f5;
@@ -250,5 +250,28 @@ color: #000;
   .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
     color: #3869d1;
     background-color: #f2f5fb !important;
+  }
+}
+.schedule-task-fields {
+  border-radius: 5px;
+  .ant-btn {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .ant-btn-group {
+    padding-left: 20px;
+    width: 30%;
+  }
+  input.ant-calendar-picker-input.ant-input {
+    padding-top: 20px;
+    border-radius: 5px;
+    width: 250px;
+  }
+  .ant-calendar-picker-icon {
+    top: 35%;
+  }
+  .ant-input {
+    border-radius: 5px;
+    margin-bottom: 20px;
   }
 }
