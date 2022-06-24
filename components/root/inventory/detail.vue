@@ -7,16 +7,16 @@
       </h2>
     </div>
     <a-row :gutter="16">
-      <a-col :span="9" class="icon-col ml-10"
+      <a-col :span="11" class="icon-col"
         ><a-icon type="pushpin" theme="filled" /> {{ data.address }}</a-col
       >
-      <a-col :span="4" class="icon-col">
+      <a-col :span="11" class="icon-col">
         <a-icon type="phone" theme="filled" /> {{ data.phone }}
-        </a-col>
-      <a-col :span="6" class="color-black icon-col"
+      </a-col>
+      <a-col :span="11" class="color-black icon-col"
         ><a-icon type="global" />{{ data.global }}
       </a-col>
-      <a-col class="color-black icon-col" :span="4"
+      <a-col class="color-black icon-col" :span="11"
         ><strong>@</strong> {{ data.email }}</a-col
       >
     </a-row>
@@ -44,6 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .icon-col {
+  padding: 15px;
   .anticon {
     padding-right: 5px;
   }

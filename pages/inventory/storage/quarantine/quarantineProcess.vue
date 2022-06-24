@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       activeTab: 'inbound',
-      type: 'inbound',
+      type: 'quarantine',
       phases: QUARANTINE_RESOLUTION_PHASES,
       dummyCollection: [
         {

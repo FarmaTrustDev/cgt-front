@@ -8,10 +8,6 @@
   min-height: 80%;
   //@extend .light-shadow;
   box-shadow: 0 26px 120px rgb(0 0 0 / 4%); // custom shadow because raja need dito design
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-top: 25px;
-  padding-bottom: 15px;
   .svg-container {
     max-width: 117px;
     margin: auto;
@@ -39,6 +35,12 @@
     position: relative;
     max-width: 161px;
     overflow: hidden;
+    :hover {
+      cursor: move; /* fallback if grab cursor is unsupported */
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
   }
   .consumables-heading {
     font-size: 16px;

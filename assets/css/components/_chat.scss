@@ -1,3 +1,16 @@
+$defaultHeight: calc(100vh - 100px);
+.chat-margin {
+  .ant-card-head-title {
+    margin-bottom: -50px;
+  }
+}
+
+.reduce-margin {
+  .ant-card-body {
+    padding-left: -5px;
+  }
+}
+
 .chat-page {
   .ant-list-split .ant-list-item {
     border-bottom: none;
@@ -32,6 +45,17 @@
   }
 
   .right-bar {
+    .height-100 {
+      .ant-card-body {
+        height: calc(100vh - 220px);
+      }
+      // position: absolute;
+      // width: 100%;
+      // min-height: 100%;
+      // .ant-card-body {
+      //   min-height: 100%;
+      // }
+    }
     .send-message-input {
       background-color: #fff;
       border: 1px solid #bebfcb;
@@ -42,7 +66,9 @@
       margin-top: 10px;
       max-width: 85%;
     }
-
+    .default-card {
+      min-height: $defaultHeight;
+    }
     .content-body {
       padding: 15px;
       color: #233151;
@@ -72,20 +98,14 @@
     }
 
     .peer-to-peer-chat-list {
+      height: calc(100vh - 426px);
       margin-bottom: 20px;
       overflow-y: auto;
-      max-height: 200px;
-      height: 100%;
     }
 
     .ant-comment-inner {
       padding: 0;
     }
-  }
-
-  .max-h-200 {
-    // max-height: 200px;
-    // overflow-y: auto;
   }
 }
 
@@ -95,24 +115,13 @@
   right: 1px;
   // padding: 20px;
 }
-.chat-margin {
-  .ant-card-head-title {
-    margin-bottom: -50px;
-  }
-}
 
 .chat--listing-container {
-  height: calc(100vh - 200px);
+  min-height: $defaultHeight;
   overflow-y: scroll;
 }
 
 .chat-container-height {
   max-height: 660px;
   overflow-x: auto;
-}
-
-.reduce-margin{
-  .ant-card-body{
-    padding-left: -5px;
-  }
 }
