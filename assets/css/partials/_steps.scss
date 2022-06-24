@@ -25,12 +25,11 @@
     border-right: 1px solid #e2e2e2;
   }
 }
-
 .treatment-steps {
   position: relative;
   &::before {
     content: '';
-    height: 3px;
+    height: 4px;
     position: absolute;
     width: 80%;
     margin: auto;
@@ -177,7 +176,7 @@
   }
 
   .ant-steps-item-error {
-    background: #f2e2d1;
+    background: #ffd8d8;
     margin-left: 10px;
     .ant-steps-item-content {
       margin-left: 10px;
@@ -190,15 +189,18 @@
   }
 
   .ant-steps-item-error-large {
-    background: #f2e2d1;
-    margin-left: 20px;
-    border-radius: 5px;
-    height: 50px;
+    background: #ffd8d8;
+    margin-left: 5%;
+    border-radius: 20px;
+    height: 60px;
+    min-width: 20%;
     .ant-steps-item-content {
       margin-left: 20px;
-      margin-top: 3px;
+      margin-top: 10px;
+      font-weight: 400;
+      font-size: 20px;
       &::before {
-        content: '';       
+        margin-top: 1px;     
         background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
       }
     }
@@ -206,13 +208,17 @@
 
   .ant-steps-item-active-large {
     background-color: #d1f2dc;
-    margin-left: 20px;
-    border-radius: 5px;
-    height: 50px;    
+    margin-left: 5%;
+    border-radius: 20px;
+    height: 60px;
+    min-width: 20%;
     .ant-steps-item-content {
       margin-left: 20px;
-      margin-top: 3px;
+      margin-top: 10px;
+      font-weight: 400;
+      font-size: 20px;
       &::before {
+        margin-top: 3px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
     }
@@ -228,6 +234,22 @@
     }
   }
 
+  .ant-steps-item-active-blue-large {
+    background-color: #d1e8f2;
+    margin-left: 5%;
+    border-radius: 20px;
+    height: 60px;
+    min-width: 20%;
+    .ant-steps-item-content {
+      margin-left: 20px;
+      margin-top: 10px;
+      font-weight: 400;
+      font-size: 20px;
+      &::before {
+        background-image: url(http://demoapi.qmaid.co/web/icons/blue.png);
+      }
+    }
+  }
 
   .ant-steps-item-active-blue {
     background-color: #d1e8f2;
@@ -264,11 +286,21 @@
   }
 
   .ant-steps-horizontal-large {
-    border-radius: 5px;
-    height: 50px;
+    border-radius: 20px;
+    height: 60px;
+    min-width: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
+    .ant-steps-item-content {
+      margin-left: 5px;
+      margin-top: 10px;
+      font-weight: 400;
+      font-size: 20px;
     & .ant-steps-item:last-child {
       padding-right: 25px;
       padding-left: 25px;
+      padding-top: 3px;
+    }
     }
   }
 

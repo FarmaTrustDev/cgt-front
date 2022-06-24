@@ -35,7 +35,7 @@ export const INVENTORY_OUTBOUND_STATUS_STEPS = [
         name: 'Outbound Process',
         alias: 'OUTBOUND_PROCESS',
         phaseId: 2,
-        url_slug: '/inventory/treatment/outboundProcess/',
+        url_slug: '/inventory/treatment/outboundProcess?view=OUTBOUND_PROCESS',
         params: {}
     },
     {
@@ -145,8 +145,8 @@ export const QUARANTINE_RESOLUTION_PHASES = [
         alias: 'INBOUND_ACCEPTANCE_DETAILS',
         phaseId: 8,
         enablePageId: 5,
-        url_slug: '',
-        url_type: URL_TYPE.patient,
+        url_slug: '/inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS',
+        url_type: URL_TYPE.treatment,
         params: { view: 'INBOUND_ACCEPTANCE_DETAILS' }
     },
     {
@@ -155,8 +155,8 @@ export const QUARANTINE_RESOLUTION_PHASES = [
         alias: 'PROCESS_SAMPLE',
         phaseId: 10,
         enablePageId: 10,
-        url_slug: '',
-        url_type: URL_TYPE.patient,
+        url_slug: '/inventory/treatment/process?view=PROCESS_SAMPLE',
+        url_type: URL_TYPE.treatment,
         params: { view: 'PROCESS_SAMPLE' }
     },
     {
@@ -166,7 +166,7 @@ export const QUARANTINE_RESOLUTION_PHASES = [
         phaseId: 14,
         enablePageId: 14,
         url_slug: '',
-        url_type: URL_TYPE.patient,
+        url_type: URL_TYPE.treatment,
         params: { view: 'STORE_SAMPLE' }
     },
 ]
@@ -178,7 +178,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'INBOUND_SHIPMENT',
         phaseId: 8,
         enablePageId: 5,
-        url_slug: '/inventory/treatment/process?view=inbound',
+        url_slug: '/inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS',
         url_type: URL_TYPE.patient,
         params: { view: 'INBOUND_SHIPMENT' }
     },
@@ -188,7 +188,7 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         alias: 'PROCESS_SAMPLE',
         phaseId: 10,
         enablePageId: 10,
-        url_slug: '/inventory/treatment/process?view=process',
+        url_slug: '/inventory/treatment/process?view=PROCESS_SAMPLE',
         url_type: URL_TYPE.patient,
         params: { view: 'MANUFACTURER' }
     },

@@ -7,7 +7,7 @@
   >
     <template slot="content">
       <div class="grey-card" style="width: 90%; margin-left: 5%">
-        <div class="patient-details-page">
+        <div class="patient-details-page" style="width: 90%; margin-left: 5%">
           <a-row :gutter="18">
             <a-col :span="6">
               <a-card :bordered="false" class="qr-section default-card">
@@ -87,12 +87,38 @@
             </a-col>
           </a-row>
         </div>
+
+
         <a-card
           :bordered="false"
-          class="mt-25 default-card inbound-accept-tabs"
+          class="mt-15 default-card inbound-accept-tabs"
+          style="width:90%; margin-left:5%"
         >
-          <a-tabs :active-key="activeTab">
-            <a-tab-pane key="outbound" :tab="translation.OutboShipm_2_376">
+          <span>
+            <!-- //Steps -->
+            <div class="treatment-steps" style="width:95%">
+              <a-steps size="default">
+                <a-step
+                  v-for="phase in phases"
+                  :key="phase.id"
+                  :title="phase.name"
+                  :class="(phase.id==1) ? 'ant-steps-item-active-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
+                  @click="reDirect(phase.url_slug,phase.alias)"
+                />
+              </a-steps>
+            </div>
+            <!-- //Steps -->
+          </span> 
+        </a-card>
+
+        <a-card
+          v-if="activeTab=='OUTBOUND_PROCESS'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs"
+          style="width:90%; margin-left:5%"
+        >
+
+        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
@@ -102,8 +128,18 @@
                 @updateId="updateDummyOutBoundCollectionId"
                 @handleActiveTab="handleActiveTab"
               />
-            </a-tab-pane>
-            <a-tab-pane key="couriers" tab="Courier">
+
+        </div>
+        </a-card>
+        <a-card
+          v-if="activeTab=='COURIER'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs"
+          style="width:90%; margin-left:5%"
+        >
+
+        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+
               <div>
                 <a-skeleton :loading="loading">
                   <a-table
@@ -260,8 +296,7 @@
                   </a-modal>
                 </a-form-item>
               </a-form>
-            </a-tab-pane>
-          </a-tabs>
+        </div>
         </a-card>
       </div>
     </template>
@@ -280,6 +315,10 @@ import {
 } from '~/services/Helpers/MomentHelpers'
 import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
+import { isEmpty } from '~/services/Helpers'
+import {
+  INVENTORY_OUTBOUND_STATUS_STEPS
+} from '~/services/Constant/Phases'
 // import shipment from '~/components/inventory/treatment/shipment'
 
 export default {
@@ -293,13 +332,14 @@ export default {
   mixins: [routeHelpers,notifications],
   data() {
     return {
-      activeTab: 'outbound',
+      activeTab: 'OUTBOUND_PROCESS',
       type: 'outbound',
       qrUrl: null,
       loading: false,
       showModal: false,
       showLogisticsModal:false,
       dateFormat: STANDARD_UK_DATE_FORMAT,
+      phases:INVENTORY_OUTBOUND_STATUS_STEPS,
       bagData: [
         {
           puid: 'DAC7993',
@@ -406,7 +446,7 @@ export default {
     },
   },
   mounted() {
-    // this.handleActiveTab()
+    this.handleActiveTab()
   },
   methods: {
     disabledDate: _disabledPreviousDate,
@@ -414,8 +454,9 @@ export default {
       this.setActiveTab()
     },
     setActiveTab() {
-      console.log('parent')
-      this.activeTab = 'couriers'
+      // console.log('parent')
+      // this.activeTab = 'couriers'
+      this.activeTab=this.$route.query.view
     },
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
@@ -465,6 +506,12 @@ export default {
       this.success('Request sent to logistics')
       this.goto('/inventory/storage/tasks')
     },
+    reDirect(url,alias){
+      if(!isEmpty(url)){
+        this.activeTab=alias
+        this.goto(url)
+      }
+    },    
   },
 }
 </script>
