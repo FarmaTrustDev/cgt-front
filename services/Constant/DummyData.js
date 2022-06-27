@@ -10,6 +10,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-20',
         zone: 'Zone A',
+
     },
     {
         id: 2,
@@ -22,6 +23,7 @@ export const baseStorage = [
         zoneId: 3,
         temperature: '-80',
         zone: 'Zone C',
+
     },
     {
         id: 3,
@@ -33,6 +35,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 3,
     },
     {
         id: 4,
@@ -45,6 +48,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: 'LN2',
         zone: 'Zone A',
+
     },
     {
         id: 5,
@@ -52,11 +56,12 @@ export const baseStorage = [
         title: 'Freezer Baystate 051',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 90,
-        type: 4,
+        type: 2,
         temperatureId: 1,
         zoneId: 2,
         temperature: '-20',
         zone: 'Zone B',
+
     },
     {
         id: 6,
@@ -68,6 +73,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: '-80',
         zone: 'Zone B',
+        type: 2,
     },
     {
         id: 7,
@@ -75,11 +81,12 @@ export const baseStorage = [
         title: 'Freezer Kings 123',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 50,
-        type: 1,
+
         temperatureId: 3,
         zoneId: 2,
         temperature: 'LN2',
         zone: 'Zone B',
+        type: 1,
     },
     {
         id: 8,
@@ -91,6 +98,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 3,
     },
     {
         id: 9,
@@ -98,11 +106,12 @@ export const baseStorage = [
         title: 'Freezer Bayer 091',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 50,
-        type: 1,
+
         temperatureId: 3,
         zoneId: 1,
         temperature: 'LN2',
         zone: 'Zone A',
+        type: 2,
     },
     {
         id: 10,
@@ -114,6 +123,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: '-80',
         zone: 'Zone B',
+        type: 3,
     },
     {
         id: 11,
@@ -125,6 +135,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-20',
         zone: 'Zone A',
+        type: 1,
     },
     {
         id: 12,
@@ -132,11 +143,11 @@ export const baseStorage = [
         title: 'Freezer Atara 035',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 50,
-        type: 1,
         temperatureId: 2,
         zoneId: 3,
         temperature: '-80',
         zone: 'Zone C',
+        type: 2,
     },
     {
         id: 13,
@@ -148,6 +159,7 @@ export const baseStorage = [
         zoneId: 2,
         temperature: '-80',
         zone: 'Zone B',
+        type: 3,
     },
     {
         id: 14,
@@ -155,11 +167,11 @@ export const baseStorage = [
         title: 'Freezer Royal 222',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 90,
-        type: 2,
         temperatureId: 3,
         zoneId: 1,
         temperature: 'LN2',
         zone: 'Zone A',
+        type: 2,
     },
     {
         id: 15,
@@ -171,6 +183,7 @@ export const baseStorage = [
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 2,
     },
     {
         id: 16,
@@ -178,11 +191,11 @@ export const baseStorage = [
         title: 'Freezer Atara 009',
         location: 'Storage Suite 3, Germany - Cellfuse',
         quantity: 50,
-        type: 1,
         temperatureId: 2,
         zoneId: 1,
         temperature: '-80',
         zone: 'Zone A',
+        type: 3,
     },
 ]
 
