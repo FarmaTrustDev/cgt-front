@@ -1,27 +1,30 @@
 <template>
   <div>
     <div class="halfNHalf">
-      <a-card class="white-card" :bordered="false">
-        <a-row>
-          <a-col :span="12"
-            ><span class="dated-time">
-              {{ _getFormatMoment().format('HH:mm') }}</span
-            >
-          </a-col>
-          <a-col :span="12">
-            <div class="dateTimeBox">
-              <span class="daysName">{{
-                _getFormatMoment().format('dddd')
-              }}</span>
-              <br />
-              <span class="TodaysDate">{{
-                _getFormatMoment().format('Do MMM YYYY')
-              }}</span>
-            </div>
-          </a-col>
-        </a-row>
-      </a-card>
-
+      <a-row>
+        <a-col :span="12" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+          <a-card class="white-card" :bordered="false">
+            <a-row>
+              <a-col :span="12" :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
+                ><span class="dated-time">
+                  {{ _getFormatMoment().format('HH:mm') }}</span
+                >
+              </a-col>
+              <a-col :span="12" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+                <div class="dateTimeBox">
+                  <span class="daysName">{{
+                    _getFormatMoment().format('dddd')
+                  }}</span>
+                  <br />
+                  <span class="TodaysDate">{{
+                    _getFormatMoment().format('Do MMM YYYY')
+                  }}</span>
+                </div>
+              </a-col>
+            </a-row>
+          </a-card>
+        </a-col>
+      </a-row>
       <!-- // treatment list -->
       <div v-if="removeList">
         <a-card
@@ -55,20 +58,22 @@
           :bordered="false"
         >
           <div>
-            {{translation.Sampl_1_310}}
-            <span class="float-right">{{translation.Inbou_1_498}}/{{translation.OutboProce_2_514}}</span>
+            {{ translation.Sampl_1_310 }}
+            <span class="float-right"
+              >{{ translation.Inbou_1_498 }}/{{
+                translation.OutboProce_2_514
+              }}</span
+            >
           </div>
           <div class="default-border-radius border mt-15">
             <a-list>
               <a-list-item style="cursor: pointer">
                 <div
-                  class="mb-11"
+                  class="mb-11 display-flex"
                   @click="goto(`/inventory/treatment/process`)"
                 >
-                  <p class="text-center ml-15 float-left">DAC48694</p>
-                  <p class="float-right ml-110 text-center">
-                    20/06/2022 - 24/06/2022
-                  </p>
+                  <p class="ml-15 float-left">DAC48694</p>
+                  <p class="float-right ml-110">20/06/2022 - 24/06/2022</p>
                 </div>
               </a-list-item>
             </a-list>
@@ -78,7 +83,7 @@
               <a-list-item style="cursor: pointer">
                 <div
                   @click="goto(`/inventory/treatment/process`)"
-                  class="mb-11"
+                  class="mb-11 display-flex"
                 >
                   <p class="text-center ml-15 float-left">DAC43057</p>
                   <p class="float-right ml-110 text-center">
@@ -93,7 +98,7 @@
             style="cursor: pointer"
             @click="goto(`/inventory/treatment`)"
           >
-            {{translation.Showmore_2_534}}
+            {{ translation.Showmore_2_534 }}
           </div>
         </a-card>
       </div>

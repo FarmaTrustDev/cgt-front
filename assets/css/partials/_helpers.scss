@@ -40,7 +40,7 @@
 
 .status {
   padding: 13px 15px;
-  font-size: 14px;
+  font-size: 0.875rem;
   border-radius: 10rem;
 }
 
@@ -90,16 +90,16 @@
   padding: 15px 30px;
   border-radius: 15px;
   color: white;
-  font-size: 25px;
+  font-size: 	1.5625rem;
   @extend .light-shadow;
 }
 
 .dated-time{
   background-color: $danger;
-  padding: 14px 40px;
+  padding: 7% 20%;
   border-radius: 22px;
   color: white;
-  font-size: 28px;
+  font-size: 1.75rem;
   cursor: pointer;
   @extend .light-shadow;
 }
@@ -121,4 +121,6 @@
 .display-inline-block {
   display: inline-block;
 }
-
+.display-flex{
+  display: flex;
+}
