@@ -38,7 +38,7 @@ export default {
 <style lang="scss" scoped>
 // using on home page if other place used would be change on demand
 .capsule {
-  font-size: 28px;
+  font-size: 1.75rem;
   padding: 15px 25px;
   margin-right: 10px;
 }

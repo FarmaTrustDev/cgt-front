@@ -48,7 +48,7 @@
                     <a-col :span="4" class="mt-15">
                       <h6>
                         <span class="text-muted"
-                          >{{ translation.AssetType_2_512 }}:</span
+                          >{{ translation.SamplName_2_503 }}:</span
                         >
                       </h6>
                     </a-col>

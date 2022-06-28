@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 .tileCenter {
   min-height: 400px;
-  font-size: 14px;
+  font-size: 0.875rem;
   border-radius: 10px;
   padding-bottom: 51px;
 

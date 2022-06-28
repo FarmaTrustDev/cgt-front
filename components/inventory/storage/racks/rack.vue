@@ -7,8 +7,8 @@
           v-for="(portion, index) in portions"
           :key="index"
           class="portion"
-          :class="portion.active ? 'active' : ''"
-          @click="getRackPortion(portion)"
+          :class="(portion.active && (activeIndex===index) && (currentCounter===counter)) ? 'active-clicked' : portion.active  ? 'active' : ((activeIndex===index) && (currentCounter===counter) ) ? 'active-clicked': ''"
+          @click="getRackPortion(portion, index, counter)"
         ></div>
       </div>
     </div>
@@ -21,10 +21,18 @@ export default {
     active: { type: Boolean },
     portions: { type: Array, default: () => [{}] },
     counter: { type: Number, default: 0 },
+    currentCounter:{ type: Number },
+    activeIndex: { type: Number },
   },
+  data() {
+    return {
+      // activeIndex:null,
+      // currentCounter:null,
+    }
+  },  
   methods: {
-    getRackPortion(portion) {
-      this.$emit('getRackPortion', portion)
+    getRackPortion(portion,index,counter) {
+      this.$emit('getRackPortion', portion, index, counter)
     },
   },
 }
@@ -57,6 +65,12 @@ export default {
 }
 .active {
   background-color: #eb101066;
+}
+.active-clicked {
+  // background-color: #eb101066;
+  border: 3px solid;
+  padding: 2px;
+  // box-shadow: 2px 5px red;
 }
 .counter {
   float: left;

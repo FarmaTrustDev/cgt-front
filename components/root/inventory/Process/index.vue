@@ -35,7 +35,7 @@
             <a-icon
               v-else
               class="text-success"
-              style="font-size: 16px"
+              style="font-size: 1rem"
               type="check"
             ></a-icon>
           </a-form-item>
@@ -79,7 +79,7 @@
             :show-button="false"
           >
             <a-button slot="button" type="">
-              <a-icon type="upload" /> Upload
+              <a-icon type="upload" />
             </a-button>
           </InstantUpload>
         </template>
@@ -117,7 +117,7 @@
 
 
     <a-modal
-      title="Error! You have left option(s) 'No'."
+      title="You have left option(s) 'No'."
       :visible="showQuaranitineModal"
       @cancel="handleErrorShowModal(false)"
     >
@@ -177,7 +177,7 @@ export default {
           scopedSlots: { customRender: 'notes' },
         },
         {
-          title: 'Sign',
+          title: 'Supporting Documents',
           scopedSlots: { customRender: 'email' },
         },
         /* {

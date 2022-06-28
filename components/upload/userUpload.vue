@@ -9,7 +9,7 @@
       :disabled="disabled"
     >
       <div v-if="stateFileList.length < 3">
-        <a-icon type="camera" theme="filled" style="font-size: 60px" />
+        <a-icon type="camera" theme="filled" style="font-size: 3.75rem" />
       </div>
     </a-upload>
     <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
