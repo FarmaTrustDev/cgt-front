@@ -2,15 +2,15 @@
   <div>
     <div class="halfNHalf">
       <a-row>
-        <a-col :span="12" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+        <a-col :span="24">
           <a-card class="white-card" :bordered="false">
             <a-row>
-              <a-col :span="12" :xs="12" :sm="12" :md="12" :lg="12" :xl="12"
+              <a-col :span="14"
                 ><span class="dated-time">
                   {{ _getFormatMoment().format('HH:mm') }}</span
                 >
               </a-col>
-              <a-col :span="12" :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+              <a-col :span="10">
                 <div class="dateTimeBox">
                   <span class="daysName">{{
                     _getFormatMoment().format('dddd')
@@ -52,55 +52,78 @@
             </a-list>
           </div>
         </a-card>
-        <a-card
-          v-if="user.organizationTypeAlias == 'SMARTLAB'"
-          class="white-card"
-          :bordered="false"
-        >
-          <div>
-            {{ translation.Sampl_1_310 }}
-            <span class="float-right"
-              >{{ translation.Inbou_1_498 }}/{{
-                translation.OutboProce_2_514
-              }}</span
-            >
-          </div>
-          <div class="default-border-radius border mt-15">
-            <a-list>
-              <a-list-item style="cursor: pointer">
-                <div
-                  class="mb-11 display-flex"
-                  @click="goto(`/inventory/treatment/process`)"
-                >
-                  <p class="ml-15 float-left">DAC48694</p>
-                  <p class="float-right ml-110">20/06/2022 - 24/06/2022</p>
-                </div>
-              </a-list-item>
-            </a-list>
-          </div>
-          <div class="default-border-radius border mt-15">
-            <a-list>
-              <a-list-item style="cursor: pointer">
-                <div
-                  @click="goto(`/inventory/treatment/process`)"
-                  class="mb-11 display-flex"
-                >
-                  <p class="text-center ml-15 float-left">DAC43057</p>
-                  <p class="float-right ml-110 text-center">
-                    20/06/2022 - 24/06/2022
-                  </p>
-                </div>
-              </a-list-item>
-            </a-list>
-          </div>
-          <div
-            class="text-center p-15 red-div-size"
-            style="cursor: pointer"
-            @click="goto(`/inventory/treatment`)"
+        <a-col :span="24">
+          <a-card
+            v-if="user.organizationTypeAlias == 'SMARTLAB'"
+            class="white-card"
+            :bordered="false"
           >
-            {{ translation.Showmore_2_534 }}
-          </div>
-        </a-card>
+            <a-row>
+              <a-col :span="24">
+                <div>
+                  <a-col :span="12">
+                  <span class="float-left">
+                  {{ translation.Sampl_1_310 }}
+                  </span>
+                  </a-col>
+                  <a-col :span="12">
+                  <span class="float-right"
+                    >{{ translation.Inbou_1_498 }} / {{
+                      translation.OutboProce_2_514
+                    }}</span
+                  ></a-col>
+                </div>
+              </a-col>
+            </a-row>
+            <a-row>
+              <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                <div class="default-border-radius border mt-15 timebox">
+                  <a-list>
+                    <a-list-item
+                      style="cursor: pointer"
+                      class=" mt-3"
+                      @click="goto(`/inventory/treatment/process`)"
+                    >
+                      <a-col :span="12">
+                        <p class="ml-6">DAC48694</p>
+                      </a-col>
+                      <a-col :span="12">
+                        <p class="float-right mr-6">20/06/2022 - 24/06/2022</p>
+                      </a-col>
+                    </a-list-item>
+                  </a-list>
+                </div>
+              </a-col>
+            </a-row>
+            <a-row>
+              <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                <div class="default-border-radius border mt-15 timebox">
+                  <a-list>
+                    <a-list-item
+                      style="cursor: pointer"
+                      class=" mt-3"
+                      @click="goto(`/inventory/treatment/process`)"
+                    >
+                      <a-col :span="12">
+                        <p class="ml-6">DAC43057</p>
+                      </a-col>
+                      <a-col :span="12">
+                        <p class="float-right mr-6">20/06/2022 - 24/06/2022</p>
+                      </a-col>
+                    </a-list-item>
+                  </a-list>
+                </div>
+              </a-col>
+            </a-row>
+            <div
+              class="text-center p-15 red-div-size"
+              style="cursor: pointer"
+              @click="goto(`/inventory/treatment`)"
+            >
+              {{ translation.Showmore_2_534 }}
+            </div>
+          </a-card>
+        </a-col>
       </div>
     </div>
   </div>
