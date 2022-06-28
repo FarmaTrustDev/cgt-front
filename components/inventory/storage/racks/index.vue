@@ -5,6 +5,8 @@
         <rack
           :portions="rack.portions"
           :counter="index + 1"
+          :current-counter="currentCounter"
+          :active-index="activeIndex"
           @getRackPortion="getRackPortion"
         />
       </span>
@@ -17,8 +19,16 @@ import rack from '~/components/inventory/storage/racks/rack'
 export default {
   components: { rack },
   props: { data: { type: Array, default: () => [{}] } },
+  data(){
+    return{
+      currentCounter:null,
+      activeIndex:null,
+    }
+  },
   methods: {
-    getRackPortion(portion) {
+    getRackPortion(portion,index,counter) {
+      this.currentCounter=counter
+      this.activeIndex=index
       this.$emit('getRackPortion', portion)
     },
   },
