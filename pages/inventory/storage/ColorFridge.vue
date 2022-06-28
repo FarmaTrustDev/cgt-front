@@ -158,8 +158,8 @@ export default {
         { id: 3, name: 'Zone C' },
       ],
       temperatures: [
-        { id: 1, name: '-20C' },
-        { id: 2, name: '-80Â°C' },
+        { id: 1, name: '-20°C' },
+        { id: 2, name: '-80°C' },
         { id: 3, name: 'LN2' },
 ],
       form: this.$form.createForm(this, {

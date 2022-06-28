@@ -59,7 +59,7 @@
               <a-button class="ml-5">Add Internal Note</a-button>
               <a-button class="ml-5">Reply</a-button>
               <a-button class="ml-5">Schedule Task</a-button>
-              <a-button class="ml-5">Srchive</a-button>
+              <a-button class="ml-5">Archive</a-button>
             </span>
           </a-card>
         </a-tab-pane>

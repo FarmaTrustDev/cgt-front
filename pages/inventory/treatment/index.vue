@@ -71,12 +71,9 @@
             >
             <template slot="print" slot-scope="print">
         <a-button
-          class="print-btn"
-          type="primary"
-          size="small"
-          icon="printer"
           @click="openViewModal(print)"
-          >View</a-button
+          >
+        <img :src="getImageUrl('Icons/Union.svg')" ></a-button
         >
       </template>
               <span slot="action" slot-scope="text, record">

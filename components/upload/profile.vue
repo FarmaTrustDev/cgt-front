@@ -56,7 +56,7 @@ export default {
 <style>
 /* you can make up upload button and sample style by using stylesheets */
 .ant-upload-select-picture-card i {
-  font-size: 32px;
+  font-size: 2rem;
   color: #999;
 }
 

@@ -47,7 +47,7 @@
                     <a-col :span="4" class="mt-15">
                       <h6>
                         <span class="text-muted"
-                          >{{ translation.AssetType_2_512 }}:</span
+                          >{{ translation.SamplName_2_503 }}:</span
                         >
                       </h6>
                     </a-col>
@@ -114,7 +114,7 @@
         <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
           
           <div>        
-          <strong style="font-size:20px;">Quality Assurance Checklist</strong>
+          <strong style="font-size:1.25rem;">Quality Assurance Checklist</strong>
           </div>
           <Process
             :collections="dummyCollection"
