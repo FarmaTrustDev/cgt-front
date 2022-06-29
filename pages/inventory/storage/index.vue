@@ -32,7 +32,7 @@
             :allow-clear="true"
             size="large"
             placeholder="Search Product"
-            class="float-right inventory-search"
+            class="float-right inventory-search placeholder-alignment"
             @change="
               (e) =>
                 productSearch(
@@ -41,7 +41,7 @@
                 )
             "
           >
-            <a-icon slot="prefix" type="search" class="mb-5" />
+            <a-icon slot="prefix" type="search" class="mb-5 " />
           </a-input>
           <a-table
             class="rounded-table"

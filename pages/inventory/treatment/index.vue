@@ -4,7 +4,7 @@
     :loading="false"
     :bordered="false"
     :title="translation.TasksList_2_558"
-    class="specific-storage"
+    class="specific"
   >
     <div slot="content">
       <div class="mt-15 clearfix">
@@ -177,7 +177,7 @@ import { isNumber } from '~/services/Helpers'
 export const newSampleData = [
   {
     patientEnrollmentNumber: 'DAC7993',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '10/06/2022 - 14/06/2022',
     print: 'Uploads/DocumentURL/label1.jpg',
@@ -185,7 +185,7 @@ export const newSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC7986',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells ',
     hospital: 'Royal Hospital',
     collectionDateDeliveryDate: '15/06/2022 - 20/06/2023',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
@@ -193,7 +193,7 @@ export const newSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC9874',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells',
     hospital: 'Kings College',
     collectionDateDeliveryDate: '21/06/2022 - 26/06/2024',
     print: 'Uploads/DocumentURL/label1.jpg',
@@ -201,7 +201,7 @@ export const newSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC7996',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '25/06/2022 - 29/06/2025',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
@@ -209,7 +209,7 @@ export const newSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC9874',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
     print: 'Uploads/DocumentURL/label1.jpg',
@@ -219,7 +219,7 @@ export const newSampleData = [
 export const completedSampleData = [
   {
     patientEnrollmentNumber: 'DAC65198',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '25/04/2022 - 28/04/2022',
@@ -227,7 +227,7 @@ export const completedSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC2237',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells',
     productionLine: 'Zone C',
     hospital: 'Royal Hospital',
     collectionDateDeliveryDate: '08/04/2022 - 11/04/2022',
@@ -235,7 +235,7 @@ export const completedSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC85597',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Kings College',
     collectionDateDeliveryDate: '09/02/2022 - 12/02/2022',
@@ -243,7 +243,7 @@ export const completedSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC39647',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells ',
     productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '08/02/2022 - 11/02/2022',
@@ -253,7 +253,7 @@ export const completedSampleData = [
 export const allSampleData = [
   {
     patientEnrollmentNumber: 'DAC7993',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells ',
     productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '05/06/2022 - 08/06/2022',
@@ -261,7 +261,7 @@ export const allSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC21362',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells ',
     productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '30/05/2022 - 02/06/2022',
@@ -269,7 +269,7 @@ export const allSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC59736',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells ',
     productionLine: 'Zone A',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '29/05/2022 - 01/06/2022',
@@ -277,7 +277,7 @@ export const allSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC48959',
-    treatmentType: 'Platelet Lycate ',
+    treatmentType: 'Human Cells ',
     productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '29/05/2022 - 01/06/2022',
@@ -285,7 +285,7 @@ export const allSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC31900',
-    treatmentType: 'Platelet Lycate',
+    treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '26/05/2022 - 29/05/2022',
@@ -293,7 +293,7 @@ export const allSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC53835',
-    treatmentType: 'Platelet Lycate',
+    treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '26/05/2022 - 29/05/2022',
@@ -328,7 +328,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `Human Cells`,
+          title: `Sample Name`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -358,35 +358,35 @@ export default {
       pendingSampleData: [
         {
           patientEnrollmentNumber: 'DAC7986',
-          treatmentName: 'Platelet Lycate ',
+          treatmentName: 'Human Cells',
           productionLine: 'Zone A',
           hospital: 'Baystate Clinic',
           collectionDateDeliveryDate: '10/06/2022 - 14/06/2022',
         },
         {
           patientEnrollmentNumber: 'DAC9874',
-          treatmentName: 'Platelet Lycate ',
+          treatmentName: 'Human Cells',
           productionLine: 'Zone C',
           hospital: 'Royal Hospital',
           collectionDateDeliveryDate: '15/06/2022 - 20/06/2023',
         },
         {
           patientEnrollmentNumber: 'DAC9875',
-          treatmentName: 'Platelet Lycate ',
+          treatmentName: 'Human Cells',
           productionLine: 'Zone C',
           hospital: 'Kings College',
           collectionDateDeliveryDate: '21/06/2022 - 26/06/2024',
         },
         {
           patientEnrollmentNumber: 'DAC9876',
-          treatmentName: 'Platelet Lycate ',
+          treatmentName: 'Human Cells',
           productionLine: 'Zone A',
           hospital: 'Baystate Clinic',
           collectionDateDeliveryDate: '25/06/2022 - 29/06/2025',
         },
         {
           patientEnrollmentNumber: 'DAC9876',
-          treatmentName: 'Platelet Lycate ',
+          treatmentName: 'Human Cells ',
           productionLine: 'Zone C',
           hospital: 'Baystate Clinic',
           collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
@@ -400,7 +400,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `Human Cells`,
+          title: `Sample Name`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -468,7 +468,7 @@ export default {
           scopedSlots: { customRender: 'name' },
         },
         {
-          title: `Human Cells`,
+          title: `Sample Name`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
