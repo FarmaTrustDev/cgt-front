@@ -217,7 +217,8 @@ export default {
             this.goto('/inventory/storage/ColorFridge?inbound=true')
           }
           if (this.typeId === 'outbound') {
-            this.$emit('handleActiveTab', 'courier')
+            this.$emit('handleActiveTab', 'COURIER')
+            // this.goto('/inventory/treatment/outboundProcess?view=COURIER')
           }
         }else{
           if(this.typeId==='inbound'){

@@ -29,9 +29,9 @@
               <div class="icons">
                 <span><a href="/inventory/clients/messages"><img :src="getImageUrl('web/icons/inbox.svg')" /></a></span>
                 <span><a href="/inventory/clients/clients"> <img :src="getImageUrl('web/icons/stock.svg')" /></a></span>
-                <span> <img :src="getImageUrl('web/icons/bill1.svg')" /></span>
+                <span @click="goto(`status`)"> <img :src="getImageUrl('web/icons/bill1.svg')" /></span>
               </div>
-              <div>Upcoming Tasks: </div>
+              <div style="width:210px">Upcoming Tasks: </div>
               <div class="list">
                 <ul>
                   <li

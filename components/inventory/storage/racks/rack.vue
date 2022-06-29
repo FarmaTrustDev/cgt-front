@@ -3,11 +3,12 @@
     <div class="counter">Shelf {{ counter }}</div>
     <div class="rack-container">
       <div class="rack light-shadow" :class="active ? 'active' : ''">
+        
         <div
           v-for="(portion, index) in portions"
           :key="index"
           class="portion"
-          :class="(portion.active && (activeIndex===index) && (currentCounter===counter)) ? 'active-clicked' : portion.active  ? 'active' : ((activeIndex===index) && (currentCounter===counter) ) ? 'active-clicked': ''"
+          :class="(portion.active && (activeIndex===index) && (currentCounter===counter)) ? 'active-clicked' : portion.active  ? 'active' : (((activeIndex===index) && (currentCounter===counter))) ? 'active-clicked': ((autoSelect!==null) && (activeIndex===null) && (counter===1) && (index===1)) ? 'active-clicked' :''"
           @click="getRackPortion(portion, index, counter)"
         ></div>
       </div>
@@ -23,9 +24,11 @@ export default {
     counter: { type: Number, default: 0 },
     currentCounter:{ type: Number },
     activeIndex: { type: Number },
+    autoSelect: {type: Number},
   },
   data() {
     return {
+      autoSelectData:this.autoSelect
       // activeIndex:null,
       // currentCounter:null,
     }
