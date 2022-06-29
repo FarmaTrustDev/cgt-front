@@ -160,7 +160,7 @@ export default {
       newTasksData: [
         {
           sampleId: 'DAC7993',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells ',
           client: 'Baystate Clinic',
           fridge: 'Freezers 12',
           position: 'Rack 20A',
@@ -169,7 +169,7 @@ export default {
         },
         {
           sampleId: 'DAC7986',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells ',
           client: 'Royal Hospital',
           fridge: 'Freezers 13',
           position: 'Rack 21A',
@@ -178,7 +178,7 @@ export default {
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells',
           client: 'Royal Hospital',
           fridge: 'Freezers 14',
           position: 'Rack 23A',
@@ -187,7 +187,7 @@ export default {
         },
         {
           sampleId: 'DAC7996',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells ',
           client: 'Royal Hospital',
           fridge: 'Freezers 15',
           position: 'Rack 27A',
@@ -196,7 +196,7 @@ export default {
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells',
           client: 'Royal Hospital',
           fridge: 'Freezers 13',
           position: 'Rack 28A',
@@ -205,7 +205,7 @@ export default {
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells',
           client: 'Royal Hospital',
           fridge: 'Freezers 14',
           position: 'Rack 29A',
@@ -214,7 +214,7 @@ export default {
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells',
           client: 'Royal Hospital',
           fridge: 'Freezers 123',
           position: 'Rack 21A',
@@ -223,7 +223,7 @@ export default {
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells',
           client: 'Royal Hospital',
           fridge: 'Freezers 19',
           position: 'Rack 10A',

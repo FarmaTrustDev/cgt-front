@@ -4,7 +4,7 @@
     :loading="loading"
     :bordered="false"
     :title="translation.StoraServi_2_532"
-    class="specific-storage"
+    class="inventory-storage-title"
   >
     <div slot="content" class="w-1200 margin-auto">
       <a-row>
