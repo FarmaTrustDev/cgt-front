@@ -24,15 +24,15 @@
 import imagesHelper from '~/mixins/images-helper'
 export default {
   mixins: [imagesHelper],
-  props: { tube: { type: Object, default: () => ({}) } },
+  props: { tube: { type: Object, default: () => ({}) }, isHovers:{type: Boolean}, },
   data() {
     return {
-      isHover: false,
+      isHover: this.isHovers,
       makeHoverDisable: false,
     }
   },
   mounted() {
-    console.log(this.tube)
+    // console.log(this.tube)
   },
   methods: {
     onHover(show) {
@@ -41,6 +41,7 @@ export default {
       }
     },
     handleHoverDisable(result) {
+      // console.log(this.tube)
       this.makeHoverDisable = result
     },
   },

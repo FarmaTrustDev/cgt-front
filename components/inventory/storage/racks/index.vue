@@ -7,6 +7,7 @@
           :counter="index + 1"
           :current-counter="currentCounter"
           :active-index="activeIndex"
+          :autoSelect="autoSelect"
           @getRackPortion="getRackPortion"
         />
       </span>
@@ -18,7 +19,7 @@
 import rack from '~/components/inventory/storage/racks/rack'
 export default {
   components: { rack },
-  props: { data: { type: Array, default: () => [{}] } },
+  props: { data: { type: Array, default: () => [{}] }, autoSelect: {type: Number} },
   data(){
     return{
       currentCounter:null,

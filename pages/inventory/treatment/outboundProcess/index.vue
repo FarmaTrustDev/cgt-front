@@ -450,13 +450,15 @@ export default {
   },
   methods: {
     disabledDate: _disabledPreviousDate,
-    handleActiveTab() {
-      this.setActiveTab()
+    handleActiveTab(view) {
+      this.setActiveTab(view)
     },
-    setActiveTab() {
-      // console.log('parent')
-      // this.activeTab = 'couriers'
-      this.activeTab=this.$route.query.view
+    setActiveTab(view) {
+      if(!isEmpty(view)){
+        this.activeTab=view
+      }else{
+        this.activeTab=this.$route.query.view
+      }
     },
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
