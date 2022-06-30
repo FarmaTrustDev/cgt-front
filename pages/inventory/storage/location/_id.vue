@@ -45,6 +45,7 @@
               <Trays
                 v-if="!isEmpty(trayData)"
                 :trays="trayData"
+                :autoSelect="autoSelect"
                 @getTube="getTube"
               />
               <a-empty v-else description=" select the rack" />
@@ -98,6 +99,7 @@ export default {
       steps: [],
       tubes: [],
       trayData: [],
+      autoSelect:null,
     }
   },
   computed: {
@@ -115,7 +117,9 @@ export default {
   },
   methods: {
     isEmpty,
-    getRackPortion(portions) {
+    getRackPortion(portions,autoSelect) {
+      // console.log(autoSelect)
+      this.autoSelect=autoSelect
       if (!isEmpty(this.fridgeData.racks[0])) {
         this.trayData = this.fridgeData.racks[0].portions[0].trays
       }

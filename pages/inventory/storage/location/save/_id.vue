@@ -51,7 +51,7 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <Trays v-if="!isEmpty(trayData)" :numVials="numVials" :trays="trayData" />
+              <Trays v-if="!isEmpty(trayData)" :numVials="numVials" :autoSelect="autoSelect" :trays="trayData" />
               <a-empty v-else description=" select the rack" />
             </div> </TileCenter
         ></a-col>
@@ -137,7 +137,15 @@ export default {
   },
   methods: {
     isEmpty,
-    getRackPortion(portions) {
+    getRackPortion(portions, autoSelect) {
+      
+      if(isEmpty(autoSelect))
+      {
+        this.autoSelect=-1
+      }else{
+        this.autoSelect=autoSelect
+      }
+      // console.log(this.autoSelect)
       this.trayData = portions.trays
     },
     clickImage() {
@@ -152,7 +160,7 @@ export default {
       this.goto('/inventory/storage/tasks')
     },
     getAutoSelect(){
-      this.autoSelect=this.numVials
+      this.autoSelect=1
       this.trayData=fridgeData.racks[1].portions[3].trays
     },        
   },

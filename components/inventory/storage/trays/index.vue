@@ -20,8 +20,9 @@
         <table class="testTubeTable w-100">
           <tr v-for="(tray, indexParent) in trays" :key="indexParent">
             <td v-for="(tube, index) in tray.tubes" :key="index" class="border">
-              <span @click="getTube(tube)"><div v-if="(count<=totCount) ? increment() : ''"></div>
-                <tray :tube="tube" :isHovers="(count<=totCount) ? true : false" />
+              <span @click="getTube(tube)">
+                <tray :tube="tube" :isHovers="((autoSelect==-1)) ? false : (count<=totCount) ? true : false" />
+                <div v-if="(count<=totCount) ? increment() : ''"></div>
               </span>
             </td>
           </tr>
@@ -35,19 +36,21 @@ import tray from '~/components/inventory/storage/trays/tray'
 import { isEmpty, toLetters } from '~/services/Helpers'
 export default {
   components: { tray },
-  props: { trays: { type: Array, default: () => [] }, numVials:{type: Number}, },
+  props: { trays: { type: Array, default: () => [] }, numVials:{type: Number}, autoSelect: { type: Number}, },
   data() {
     return {
       row: 0,
       column: 0,
-      count: 0,
-      totCount: this.numVials
+      count: 1,
+      // autoSelects: this.autoSelect,
+      totCount: this.numVials,
     }
   },
   methods: {
     toLetters,
     getTube(tube) {
       // console.log(tube)
+      // this.autoSelects=null
       this.$emit('getTube', tube)
     },
     getRows() {
@@ -63,6 +66,7 @@ export default {
       return 0
     },
     increment(){
+      console.log(this.count)
       this.count=this.count+1
     }
   },
