@@ -105,7 +105,7 @@ export default {
       blueDisk: 'b',
       checkAll:false,
       selectedRowKeys: [],
-      qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
+      qrUrl: 'Uploads/DocumentURL/shipping notice.png',
       newTasksColumns: [
         {
           title: `Sample ID`,

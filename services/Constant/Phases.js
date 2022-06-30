@@ -141,7 +141,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
 export const QUARANTINE_RESOLUTION_PHASES = [
     {
         id: 1,
-        name: 'Inbound Acceptance Details',
+        name: 'Inbound Acceptance',
         alias: 'INBOUND_ACCEPTANCE_DETAILS',
         phaseId: 8,
         enablePageId: 5,

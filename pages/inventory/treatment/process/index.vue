@@ -277,12 +277,12 @@ export default {
         {
           id: 1,
           isCollected: false,
-          name: `Has the package been received with at Inbound depot?`,
+          name: `Has the package been received at Inbound depot?`,
         },
         {
           id: 2,
           isCollected: false,
-          name: `Does the package match Advance Shipment Notice?`,
+          name: `Does the package match the Advance Shipment Notice?`,
         },
         {
           id: 3,

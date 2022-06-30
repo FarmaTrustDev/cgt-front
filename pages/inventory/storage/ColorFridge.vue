@@ -40,7 +40,7 @@
             </a-form-item>
           </a-col>
           
-          <a-col :span="4" class="img-responsive">  
+          <a-col :span="5" class="img-responsive">  
             <a-form-item>
               <a-select
                 v-decorator="[`temperature`]"
@@ -58,7 +58,7 @@
             </a-form-item>
           </a-col>
           
-          <a-col :span="6" class="img-responsive">  
+          <a-col :span="5" class="img-responsive">  
             <a-form-item>
               <a-select
                 v-decorator="[`zone`]"

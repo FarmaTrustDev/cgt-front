@@ -45,13 +45,13 @@
         class="modal-design"
         >
           <p class="align-left font-size">You are registering a temporary release of sample ID DAC12356</p>
-          <p class="mt-15 font-size">Please Provide detail about temporary release:</p>
+          <p class="mt-15 font-size">Please provide detail about temporary release:</p>
           <p class="mt-15">Why does the sample requrie the temporary release ?</p>
           <template>
           <a-textarea placeholder="Write notes here" :rows="4" style="width: 100%"
             size="large" />
           </template>
-          <p class="mt-15">What actions be/have been taken during the temporary release ?</p>
+          <p class="mt-15">What actions have been taken during the temporary release ?</p>
           <a-textarea placeholder="Write notes here" :rows="4"/>
           <p class="align-left mt-15">Upload Supporting Documents <a-upload> <a-icon class="ml-5 upload-button" type="upload" /></a-upload></p>
         </a-modal>

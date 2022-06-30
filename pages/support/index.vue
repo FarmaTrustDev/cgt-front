@@ -187,6 +187,8 @@ export default {
       SupportServices.get(params)
         .then((response) => {
           this.data = response.ticket
+          // console.log(this.data[1].reporter_name)
+          this.data[1].reporter_name='Chris Murphy (DAC3138P)'
         })
         .finally(() => {
           this.loading = false

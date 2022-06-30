@@ -172,11 +172,6 @@ export default {
           isCollected: false,
           name: `Is there any new packing or repackaging required?`,
         },
-        {
-          id: 6,
-          isCollected: false,
-          name: `Will the package be incinerated?`,
-        },
       ],
     }
   },
