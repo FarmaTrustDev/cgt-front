@@ -167,7 +167,7 @@ export default {
         {
           product: 'DAC17899',
           description: 'platelet lysate...',
-          clientName: 'Royal Hospital',
+          clientName: 'Novartis',
           productLocation: 'Zone C, Storage Suite 2',
           storageDocument: 'document',
           expiryDate: '08/10/2025',

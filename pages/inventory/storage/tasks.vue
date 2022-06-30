@@ -4,7 +4,7 @@
       <a-col :span="6">Task/Store Sample</a-col>
       <a-col :span="6">ID: DAC53827</a-col>
       <a-col :span="8">Name: Platelet Lycate</a-col>
-      <a-col :span="4">Client: Royal Hospital</a-col>
+      <a-col :span="4">Client: Novartis</a-col>
     </a-row>
     <a-row style="height:35px; margin-left:10px">
       <a-col :span="6">Fridge: Kings 123</a-col>
@@ -179,7 +179,7 @@ export default {
         {
           sampleId: 'DAC7986',
           sampleName: 'Human Cells ',
-          client: 'Royal Hospital',
+          client: 'Novartis',
           fridge: 'Freezers 13',
           position: 'Rack 21A',
           confirm: false,
@@ -189,7 +189,7 @@ export default {
         {
           sampleId: 'DAC9874',
           sampleName: 'Human Cells',
-          client: 'Royal Hospital',
+          client: 'Novartis',
           fridge: 'Freezers 14',
           position: 'Rack 23A',
           confirm: false,
@@ -199,7 +199,7 @@ export default {
         {
           sampleId: 'DAC7996',
           sampleName: 'Human Cells ',
-          client: 'Royal Hospital',
+          client: 'Novartis',
           fridge: 'Freezers 15',
           position: 'Rack 27A',
           confirm: false,
@@ -209,7 +209,7 @@ export default {
         {
           sampleId: 'DAC9874',
           sampleName: 'Human Cells',
-          client: 'Royal Hospital',
+          client: 'Novartis',
           fridge: 'Freezers 13',
           position: 'Rack 28A',
           confirm: false,
@@ -219,7 +219,7 @@ export default {
         {
           sampleId: 'DAC9874',
           sampleName: 'Human Cells',
-          client: 'Royal Hospital',
+          client: 'Novartis',
           fridge: 'Freezers 14',
           position: 'Rack 29A',
           confirm: false,
@@ -229,7 +229,7 @@ export default {
         {
           sampleId: 'DAC9874',
           sampleName: 'Human Cells',
-          client: 'Royal Hospital',
+          client: 'Novartis',
           fridge: 'Freezers 123',
           position: 'Rack 21A',
           confirm: false,
@@ -239,7 +239,7 @@ export default {
         {
           sampleId: 'DAC9874',
           sampleName: 'Human Cells',
-          client: 'Royal Hospital',
+          client: 'Novartis',
           fridge: 'Freezers 19',
           position: 'Rack 10A',
           confirm: false,

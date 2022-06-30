@@ -186,7 +186,7 @@ export const newSampleData = [
   {
     patientEnrollmentNumber: 'DAC7986',
     treatmentType: 'Human Cells ',
-    hospital: 'Royal Hospital',
+    hospital: 'Novartis',
     collectionDateDeliveryDate: '15/06/2022 - 20/07/2023',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample:'green',
@@ -229,7 +229,7 @@ export const completedSampleData = [
     patientEnrollmentNumber: 'DAC2237',
     treatmentType: 'Human Cells',
     productionLine: 'Zone C',
-    hospital: 'Royal Hospital',
+    hospital: 'Novartis',
     collectionDateDeliveryDate: '08/04/2022 - 11/08/2022',
     dispatchedBy: 'Shawn David',
   },
@@ -367,7 +367,7 @@ export default {
           patientEnrollmentNumber: 'DAC9874',
           treatmentName: 'Human Cells',
           productionLine: 'Zone C',
-          hospital: 'Royal Hospital',
+          hospital: 'Novartis',
           collectionDateDeliveryDate: '15/06/2022 - 20/07/2023',
         },
         {
