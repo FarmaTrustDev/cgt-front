@@ -132,7 +132,7 @@
                             {{ translation.DispaDate_2_316 }}:</span
                           >
                         </a-col>
-                        <a-col :span="14" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted"> 20/06/2022</span>
                         </a-col>
                       </a-row>
@@ -142,7 +142,7 @@
                             {{ translation.DispaBy_2_516 }}:</span
                           >
                         </a-col>
-                        <a-col :span="12" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted"> 20/06/2022</span>
                         </a-col>
                       </a-row>
@@ -152,7 +152,7 @@
                             {{ translation.CarriStatu_2_320 }}</span
                           >
                         </a-col>
-                        <a-col :span="12" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted"> In-Process</span>
                         </a-col>
                       </a-row>
@@ -162,7 +162,7 @@
                             translation.EstimArriv_3_322
                           }}</span>
                         </a-col>
-                        <a-col :span="10" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted"> 21/06/2022</span>
                         </a-col>
                       </a-row>
@@ -184,7 +184,7 @@
                             translation.IsRecei_2_328
                           }}</span>
                         </a-col>
-                        <a-col :span="12" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted"> Done</span>
                         </a-col>
                       </a-row>
@@ -194,7 +194,7 @@
                             {{ translation['Receiby:_2_330'] }}</span
                           >
                         </a-col>
-                        <a-col :span="12" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted">Sadaan Shahid</span>
                         </a-col>
                       </a-row>
@@ -204,7 +204,7 @@
                             {{ translation['ReceiDate:_2_332'] }}</span
                           >
                         </a-col>
-                        <a-col :span="12" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted"> 21/06/2022</span>
                         </a-col>
                       </a-row>
@@ -214,7 +214,7 @@
                             translation['ReceiNote:_2_334']
                           }}</span>
                         </a-col>
-                        <a-col :span="12" class="mt-15">
+                        <a-col :span="6" class="mt-15 float-right">
                           <span class="text-muted"> Received</span>
                         </a-col>
                       </a-row>
