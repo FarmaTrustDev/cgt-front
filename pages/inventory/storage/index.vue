@@ -321,7 +321,7 @@ export default {
               return storage[filter].match(value)
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) === filterValue
+            return storage[filter].match(value) == filterValue
           })
         }
 

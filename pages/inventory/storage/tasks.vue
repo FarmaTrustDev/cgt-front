@@ -47,15 +47,17 @@
       </template>
       <template slot="confirm" slot-scope="confirm, index">
         <a-button
-          :class="((index.index===8) | confirm | checkAll) ? 'blue' : 'gray'"
-          :style="(index.index===8) ? 'width:180px' : '' "
+          :class="( confirm | checkAll) ? 'blue' : 'gray'"
           size="small"
-          @click="(index.index!=8) ? handleClick(confirm, index) : goto('/inventory/treatment')"
-          ><span v-if="(index.index!=8)">Confirm placement</span><span v-else>Finish</span></a-button
+          @click="handleClick(confirm, index)"
+          ><span>Confirm placement</span></a-button
         >
       </template>     
     </a-table>
-
+    <a-row style="margin-top:30px">
+      <a-col :span="20"></a-col>
+      <a-col :span="4"><a-button style="width:100%; font-size:20px" type="primary" @click="goto('/inventory/treatment')">Finish</a-button></a-col>
+    </a-row>
     <a-modal
       :visible="showAllModal"
       :title="translation.Docum_1_507"
@@ -244,7 +246,7 @@ export default {
           index: 7,
           url: 'Uploads/DocumentURL/4.jpeg',
         },
-        {
+       /* {
           sampleId: '',
           sampleName: '',
           client: '',
@@ -252,7 +254,7 @@ export default {
           position: '',
           index: 8,
           url: '/inventory/treatment',
-        },        
+        }, */        
       ],
     }
   },
