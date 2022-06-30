@@ -24,7 +24,7 @@
                 <span class="message-span-light-text">
                   steve@novartis.com
                 </span>
-                <span class="float-right">22/06/2022</span>
+                <span class="float-right">22/07/2022</span>
               </div>
 
               <a-card class="mt-15">
@@ -105,7 +105,7 @@
         <div class="mt-15">
           <span class="message-span"> Steve Harrington </span>
           <span class="message-span-light-text"> steve@novartis.com </span>
-          <span class="float-right">22/06/2022</span>
+          <span class="float-right">22/07/2022</span>
         </div>
 
         <a-card class="mt-15">

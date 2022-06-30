@@ -188,7 +188,7 @@ export default {
         .then((response) => {
           this.data = response.ticket
           for(const dat in this.data){
-            console.log(this.data[dat].reporter_name)
+            console.log(this.data[dat])
             if(this.data[dat].reporter_name==='Test User (DAC3138N)'){
               this.data[dat].reporter_name='Chris Murphy (DAC3138P)'
             }

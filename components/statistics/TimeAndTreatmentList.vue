@@ -88,7 +88,7 @@
                         <p class="ml-6">DAC48694</p>
                       </a-col>
                       <a-col :span="12">
-                        <p class="float-right mr-6">20/06/2022 - 24/06/2022</p>
+                        <p class="float-right mr-6">30/06/2022 - 03/07/2022</p>
                       </a-col>
                     </a-list-item>
                   </a-list>
@@ -108,7 +108,7 @@
                         <p class="ml-6">DAC43057</p>
                       </a-col>
                       <a-col :span="12">
-                        <p class="float-right mr-6">20/06/2022 - 24/06/2022</p>
+                        <p class="float-right mr-6">30/06/2022 - 03/07/2022</p>
                       </a-col>
                     </a-list-item>
                   </a-list>
