@@ -38,7 +38,7 @@
     </a-row>
 
     <a-row :gutter="16">
-      <a-col :span="19">
+      <a-col :span="21">
         <a-card class="white-card">
           <table class="w-100">
             <thead>
@@ -47,11 +47,11 @@
               <th>price per unit</th>
               <th>total</th>
             </thead>
-            <tr v-for="detail in details" :key="detail.id">
+            <tr v-for="detail in details" :key="detail.id" >
               <td class="pt-10">{{ detail.service }}</td>
               <td class="pt-10">{{ detail.unit }}</td>
-              <td class="pt-10">{{ detail.prices }}</td>
-              <td class="pt-10">{{ detail.total }}</td>
+              <td class="pt-10" v-html="$options.filters.hashBold(detail.prices)">{{ detail.prices }}</td>
+              <td class="pt-10" v-html="$options.filters.hashBold(detail.total)">{{ detail.total }}</td>
             </tr>
           </table></a-card
         >
@@ -70,6 +70,15 @@ import imagesHelper from '~/mixins/images-helper'
 // import { newSampleData } from '../treatment/index.vue'
 export default {
   components: {},
+        filters: {
+    hashBold(value) {
+      if (!value) return "";
+      value = value.toString();
+      const hashReg = /\w+/gm;
+      value = value.replace(hashReg, "$&");
+      return value;
+    }
+  },
   mixins: [routeHelpers, imagesHelper],
   setup() {},
   data() {
@@ -125,31 +134,32 @@ export default {
         {
           service: '',
           unit: '',
-          prices: '<b>Subtotal</b>',
-          total: '$5235'
+          prices: '<b>Subtotal<b>',
+          total: '<b>$5235</b>'
         },
         {
           service: '',
           unit: '',
-          prices: 'Tax Rate',
+          prices: '<b>Tax Rate</b>',
           total: '10%'
         },
         {
           service: '',
           unit: '',
-          prices: 'Total Tax',
+          prices: '<b>Total Tax</b>',
           total: '$524'
         },
         {
           service: '',
           unit: '',
-          prices: 'Balance Due',
-          total: '$5759'
+          prices: '<b>Balance Due</b>',
+          total: '<b>$5759</b>'
         },
 
       ],
     }
   },
+
   computed: {
     translation() {
       return this.$store.getters.getTranslation
