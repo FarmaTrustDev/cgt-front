@@ -8,7 +8,8 @@
           v-for="(portion, index) in portions"
           :key="index"
           class="portion"
-          :class="(portion.active && (activeIndex===index) && (currentCounter===counter)) ? 'active-clicked' : portion.active  ? 'active' : (((activeIndex===index) && (currentCounter===counter))) ? 'active-clicked': ((autoSelect!==null) && (activeIndex===null) && (counter===1) && (index===1)) ? 'active-clicked' :''"
+          :class="portion.active  ? 'active' : ''"
+          :style="(portion.active && (activeIndex===index) && (currentCounter===counter)) ? 'border: 3px solid;' : portion.active  ? '' : (((activeIndex===index) && (currentCounter===counter))) ? 'border: 3px solid;': ((autoSelect!==null) && (activeIndex===null) && (counter===1) && (index===1)) ? 'border: 3px solid;' :''"
           @click="getRackPortion(portion, index, counter)"
         ></div>
       </div>
@@ -35,7 +36,8 @@ export default {
   },  
   methods: {
     getRackPortion(portion,index,counter) {
-      this.$emit('getRackPortion', portion, index, counter)
+      this.autoSelectData=null
+      this.$emit('getRackPortion', portion, index, counter, this.autoSelectData)
     },
   },
 }
@@ -53,7 +55,9 @@ export default {
   display: flex;
   flex: 1;
   &:hover {
-    background-color: #eb101066;
+  border: 3px solid;
+  padding: 2px;    
+    //background-color: #eb101066;
   }
 }
 .rack {

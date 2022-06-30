@@ -170,7 +170,7 @@
                     </template>
                   </a-table>
                 </a-skeleton>
-                <a-modal :visible="showModal" title="Print">
+                <a-modal :visible="showModal" title="Print" @cancel="handleModal(false)" >
                   <img class="img-responsive" :src="qrUrl" />
                   <template slot="footer">
                     <a-button @click="handleModal(false)">Cancel</a-button>
@@ -268,21 +268,13 @@
                   />
                   <a-modal
                     :visible="showLogisticsModal"
-                    title="Confirm sample collection"
+                    title="Confirm Courier"
+                    @cancel="handleLogisticsModal(false)"
                   >
                     <div>
-                      <a-row
-                        ><a-col :span="12">Logistics : Fast Link</a-col
-                        ><a-col :span="12"
-                          >Sample Collection Date :
-                        </a-col></a-row
-                      >
-                      <a-row
-                        ><a-col :span="12">Sample ID : DAC48694</a-col
-                        ><a-col :span="12"
-                          >Expected Delivery Date :
-                        </a-col></a-row
-                      >
+                      <a-row>
+                        <a-col :span="24">Are you sure you want to request courier?</a-col>
+                        </a-row>
                     </div>
                     <!--<img class="img-responsive" :src="qrUrl" />-->
                     <template slot="footer">

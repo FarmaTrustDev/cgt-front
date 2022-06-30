@@ -55,9 +55,10 @@
     <a-modal
       :visible="showAllModal"
       :title="translation.Docum_1_507"
+      id="printAll"
       ok-text="Print All"
       cancel-text="Cancel"
-      @ok="printWindow()"
+      @ok="printWindow('printAll')"
       @cancel="handlePrintModal(false)"
     >
       <img v-for="newTask in newTasksData" :key="newTask.index" class="img-responsive" :src="getImageUrl(qrUrl)" />
@@ -70,8 +71,9 @@
       :visible="showModal"
       :title="translation.Docum_1_507"
       ok-text="Print"
+      id="printOne"
       cancel-text="Cancel"
-      @ok="printWindow()"
+      @ok="printWindow('printOne')"
       @cancel="handleModal(false)"
     >
       <img class="img-responsive" :src="getImageUrl(qrUrl)" />
@@ -264,8 +266,18 @@ export default {
         }
       }
     },
-    printWindow() {
-      window.print()
+    printWindow(id) {
+
+      const prtContent = document.getElementById(id);
+      const WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+      WinPrint.document.write(prtContent.innerHTML);
+      WinPrint.document.close();
+      WinPrint.focus();
+      WinPrint.print();
+      WinPrint.close();
+
+
+      // window.print()
     },
     editTitle(){
 
