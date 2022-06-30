@@ -151,7 +151,7 @@
             </a-table>
           </a-tab-pane>
         </a-tabs>
-        <a-modal :visible="showModal" :title="translation.Docum_1_507">
+        <a-modal :visible="showModal" :title="translation.Docum_1_507" @cancel="handleModal(false)">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
             <a-button @click="handleModal(false)">Cancel</a-button>
