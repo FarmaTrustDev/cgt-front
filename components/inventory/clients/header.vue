@@ -46,7 +46,7 @@
         >
           <p class="align-left font-size">You are registering a temporary release of sample ID DAC12356</p>
           <p class="mt-15 font-size">Please provide detail about temporary release:</p>
-          <p class="mt-15">Why does the sample requrie the temporary release ?</p>
+          <p class="mt-15">Why does the sample require the temporary release ?</p>
           <template>
           <a-textarea placeholder="Write notes here" :rows="4" style="width: 100%"
             size="large" />

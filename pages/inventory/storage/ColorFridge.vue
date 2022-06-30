@@ -58,7 +58,7 @@
             </a-form-item>
           </a-col>
           
-          <a-col :span="5" class="img-responsive">  
+          <a-col :span="5" class="img-responsive" style="margin-left:-1%">  
             <a-form-item>
               <a-select
                 v-decorator="[`zone`]"
