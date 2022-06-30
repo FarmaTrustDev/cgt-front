@@ -26,6 +26,7 @@
       :columns="newTasksColumns"
       :data-source="newTasksData"
       :should-fetch="false"
+      
     >
       <span slot='customTitle'>
         <div><a-button type="primary" block size="large" html-type="submit" @click="openViewAllModal()">Print All</a-button></div>
@@ -33,25 +34,30 @@
       <span slot='customConfirmTitle'>
         <div><a-button type="primary" block size="large" html-type="submit" @click="handleClick('all',0)">Confirm All</a-button></div>
       </span>
-      <template slot="print" slot-scope="print">
+      <template slot="print" slot-scope="print, index">
         <a-button
           class="print-btn"
           type="primary"
           size="small"
           icon="printer"
-          @click="openViewModal(print)"
+          v-if="(index.index!=8)"
+          @click="openViewModal(print, index)"
           >Print Label</a-button
         >
       </template>
       <template slot="confirm" slot-scope="confirm, index">
         <a-button
-          :class="(confirm | checkAll) ? 'blue' : 'gray'"
+          :class="( confirm | checkAll) ? 'blue' : 'gray'"
           size="small"
           @click="handleClick(confirm, index)"
-          >Confirm placement</a-button
+          ><span>Confirm placement</span></a-button
         >
-      </template>
+      </template>     
     </a-table>
+    <a-row style="margin-top:30px">
+      <a-col :span="20"></a-col>
+      <a-col :span="4"><a-button style="width:100%; font-size:20px" type="primary" @click="goto('/inventory/treatment')">Finish</a-button></a-col>
+    </a-row>
     <a-modal
       :visible="showAllModal"
       :title="translation.Docum_1_507"
@@ -61,7 +67,7 @@
       @ok="printWindow('printAll')"
       @cancel="handlePrintModal(false)"
     >
-      <img v-for="newTask in newTasksData" :key="newTask.index" class="img-responsive" :src="getImageUrl(qrUrl)" />
+      <img v-for="newTask in newTasksData" :key="newTask.index" class="img-responsive" :src="getImageUrl(newTask.url)" />
       <!-- <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
         <a-button @click="printWindow()">Print</a-button>
@@ -76,7 +82,7 @@
       @ok="printWindow('printOne')"
       @cancel="handleModal(false)"
     >
-      <img class="img-responsive" :src="getImageUrl(qrUrl)" />
+      <img class="img-responsive" :src="getImageUrl(qrUrl)" width="100%" />
       <!-- <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
         <a-button @click="printWindow()">Print</a-button>
@@ -105,7 +111,7 @@ export default {
       blueDisk: 'b',
       checkAll:false,
       selectedRowKeys: [],
-      qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
+      qrUrl: 'Uploads/DocumentURL/shipping notice.png',
       newTasksColumns: [
         {
           title: `Sample ID`,
@@ -168,6 +174,7 @@ export default {
           position: 'Rack 20A',
           confirm: false,
           index: 0,
+          url: 'Uploads/DocumentURL/1.jpeg',
         },
         {
           sampleId: 'DAC7986',
@@ -177,6 +184,7 @@ export default {
           position: 'Rack 21A',
           confirm: false,
           index: 1,
+          url: 'Uploads/DocumentURL/2.jpeg',
         },
         {
           sampleId: 'DAC9874',
@@ -186,6 +194,7 @@ export default {
           position: 'Rack 23A',
           confirm: false,
           index: 2,
+          url: 'Uploads/DocumentURL/3.jpeg',
         },
         {
           sampleId: 'DAC7996',
@@ -195,6 +204,7 @@ export default {
           position: 'Rack 27A',
           confirm: false,
           index: 3,
+          url: 'Uploads/DocumentURL/4.jpeg',
         },
         {
           sampleId: 'DAC9874',
@@ -204,6 +214,7 @@ export default {
           position: 'Rack 28A',
           confirm: false,
           index: 4,
+          url: 'Uploads/DocumentURL/1.jpeg',
         },
         {
           sampleId: 'DAC9874',
@@ -213,6 +224,7 @@ export default {
           position: 'Rack 29A',
           confirm: false,
           index: 5,
+          url: 'Uploads/DocumentURL/2.jpeg',
         },
         {
           sampleId: 'DAC9874',
@@ -222,6 +234,7 @@ export default {
           position: 'Rack 21A',
           confirm: false,
           index: 6,
+          url: 'Uploads/DocumentURL/3.jpeg',
         },
         {
           sampleId: 'DAC9874',
@@ -231,7 +244,17 @@ export default {
           position: 'Rack 10A',
           confirm: false,
           index: 7,
+          url: 'Uploads/DocumentURL/4.jpeg',
         },
+       /* {
+          sampleId: '',
+          sampleName: '',
+          client: '',
+          fridge: '',
+          position: '',
+          index: 8,
+          url: '/inventory/treatment',
+        }, */        
       ],
     }
   },
@@ -247,7 +270,8 @@ export default {
     handlePrintModal(show) {
       this.showAllModal = show
     },    
-    openViewModal(id) {
+    openViewModal(id,index) {
+      this.qrUrl=index.url
       this.showModal = true
     },
     openViewAllModal(id) {

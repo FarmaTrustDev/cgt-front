@@ -223,18 +223,6 @@ export default {
           projectManager: 'Paige Turner',
           projectCode: '5478',
         },
-
-        {
-          product: 'DAC12345',
-          description: 'Human platelet lysate (or hPL)...',
-          clientName: 'Cellfuse',
-          productLocation: 'Zone A, Storage Suite 3',
-          storageDocument: 'document',
-          expiryDate: '10/10/2022',
-          productQuality: 'Optimum',
-          projectManager: 'Paige Turner',
-          projectCode: '4788',
-        },
       ],
     }
   },
@@ -289,8 +277,10 @@ export default {
           products = this.productsData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
               // console.log(storage)
+              // return storage[filter].match(value)
               return filterValue
             }
+            // return storage[filter].match(value) === filterValue
             return storage[filter] === filterValue
           })
           if (products.length > 0) break

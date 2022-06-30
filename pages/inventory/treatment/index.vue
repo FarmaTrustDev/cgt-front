@@ -129,7 +129,7 @@
               <!-- ==== steps === -->
             </a-table>
           </a-tab-pane>
-          <a-tab-pane key="allSample" :tab="translation.AllSampl_2_501">
+          <a-tab-pane v-if="false" key="allSample" :tab="translation.AllSampl_2_501">
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
@@ -180,7 +180,7 @@ export const newSampleData = [
     treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '10/06/2022 - 14/06/2022',
-    print: 'Uploads/DocumentURL/label1.jpg',
+    print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample:'green',
   },
   {
@@ -196,7 +196,7 @@ export const newSampleData = [
     treatmentType: 'Human Cells',
     hospital: 'Kings College',
     collectionDateDeliveryDate: '21/06/2022 - 26/06/2024',
-    print: 'Uploads/DocumentURL/label1.jpg',
+    print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample:'red',
   },
   {
@@ -212,7 +212,7 @@ export const newSampleData = [
     treatmentType: 'Human Cells',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
-    print: 'Uploads/DocumentURL/label1.jpg',
+    print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample:'default',
   },
 ]
@@ -317,7 +317,7 @@ export default {
       loading: false,
       treatmentTypes: [],
       filters: {},
-      qrUrl: 'http://localhost:22462/Uploads/DocumentURL/shipping notice.jpg',
+      qrUrl: '/Uploads/DocumentURL/shipping notice.png',
       showModal: false,
       phases: SMART_LAB_TREATMENT_PENDING_PHASES,
       outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
