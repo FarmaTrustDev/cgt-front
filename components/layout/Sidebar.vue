@@ -13,8 +13,12 @@
           @click="goto(menu)"
         >
           <div class="menu-container">
-            <img :src="menu.icon" style="max-width: 28px" />
+          <div>
+            <img :src="menu.icon" style="width: 20px" />
+          </div>
+          <div>
             <span class="title">{{ translation[menu.name] }}</span>
+          </div>
           </div>
         </a-menu-item>
 

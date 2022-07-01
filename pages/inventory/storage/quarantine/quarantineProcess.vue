@@ -47,12 +47,12 @@
                     <a-col :span="4" class="mt-15">
                       <h6>
                         <span class="text-muted"
-                          >{{ translation.AssetType_2_512 }}:</span
+                          >{{ translation.SamplName_2_503 }}:</span
                         >
                       </h6>
                     </a-col>
                     <a-col :span="8" class="mt-15">
-                      <h6><span>Cell Sample</span></h6>
+                      <h6><span>Human Cells</span></h6>
                     </a-col>
                   </a-row>
                   <a-row :gutter="20" dir="ltr">
@@ -114,7 +114,7 @@
         <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
           
           <div>        
-          <strong style="font-size:20px;">Quality Assurance Checklist</strong>
+          <strong style="font-size:1.25rem;">Quality Assurance Checklist</strong>
           </div>
           <Process
             :collections="dummyCollection"
@@ -171,11 +171,6 @@ export default {
           id: 5,
           isCollected: false,
           name: `Is there any new packing or repackaging required?`,
-        },
-        {
-          id: 6,
-          isCollected: false,
-          name: `Will the package be incinerated?`,
         },
       ],
     }

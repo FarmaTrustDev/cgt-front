@@ -13,7 +13,7 @@
     text-decoration: none;
     font-weight: 500;
     border-radius: 22px;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 15px;
     color: #233151;
     background-color: #f9f9f9;
@@ -73,7 +73,7 @@
     }
   }
   .ant-upload-select-picture-card i {
-      font-size: 32px;
+      font-size: 2rem;
       color: #999;
   }
   .ant-upload-select-picture-card .ant-upload-text {
@@ -92,7 +92,7 @@
     }
   }
   .ant-switch-inner {
-    font-size: 16px;
+    font-size: 1rem;
   }
   .ant-switch-checked {
     background-color: #2255c2;
@@ -128,7 +128,7 @@
       padding: 15px;
     }
     .fc-col-header-cell {
-      font-size: 12px;
+      font-size: 	0.75rem;
       padding: 0.75rem 0.5rem;
       font-weight: 500;
     }
@@ -137,13 +137,13 @@
     }
     .fc-toolbar-title {
       display: inline-block;
-      font-size: 18px;
+      font-size: 	1.125rem;
       margin: 15px;
       text-transform: uppercase;
     }
     .fc-prevYear-button,
     .fc-nextYear-button {
-      font-size: 14px;
+      font-size: 	0.875rem;
       color: #233151;
       background-color: transparent;
       box-shadow: none;
@@ -174,7 +174,7 @@
 
   .empty-message {
     color: #383d41;
-    font-size: 14px;
+    font-size: 	0.875rem;
     font-weight: bold;
     margin-top: 0.5rem;
     background-color: #e2e3e5;

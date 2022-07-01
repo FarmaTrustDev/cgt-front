@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="page-header clearfix">
-      <h3 class="page-title pl-5 float-left">{{translation['TreatList_2_258']}}</h3>
+    <div class="page-header clearfix ">
+      <h3 class="page-title pl-10 float-left">{{translation['TreatList_2_258']}}</h3>
 
       <a-select
         class="float-right page-search-input"
@@ -14,7 +14,7 @@
         >
       </a-select>
     </div>
-    <div class="h-tabs large-tabs">
+    <div class="h-tabs large-tabs rounded-table manf-treatment-body">
       <a-tabs type="card" :animated="false">
         <a-tab-pane key="1" :tab="translation.NewTreat_2_260">
           <new-request />

@@ -1,9 +1,11 @@
 <template>
   <div class="home-page">
+    <a-row>
+      <a-col :span="24" :xs="24" :md="24" :sm="24" :lg="24" :xl="24">
     <a-card class="grey-card" :bordered="false">
       <a-row>
         <!-- left side tabs -->
-        <a-col :span="9">
+        <a-col :span="9" :xs="9" :sm="9" :md="9" :lg="9" :xl="9">
           
             <a href="javascript:;" @click="goto(`/inventory/treatment`)">
             <div class="home-tab">
@@ -51,11 +53,13 @@
         <a-col :span="2"></a-col>
         <a-col :span="3"></a-col>
 
-        <a-col :span="9">
+        <a-col :span="9" :xs="9" :sm="9" :md="9" :lg="9" :xl="9">
           <TimeAndTreatmentList />
         </a-col>
       </a-row>
     </a-card>
+    </a-col>
+    </a-row>
   </div>
 </template>
 

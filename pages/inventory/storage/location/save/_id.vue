@@ -4,7 +4,7 @@
     :loading="loading"
     :bordered="false"
     :title="translation.StoraServi_2_532"
-    class="specific-storage"
+    class="inventory-storage-title"
   >
     <div slot="content" class="w-1200 margin-auto">
       <a-row>
@@ -12,6 +12,14 @@
           <detail />
         </a-col>
       </a-row>
+      <a-row>
+        <a-col class="mb-15" :span="21">
+        </a-col>
+        <a-col class="mb-15" :span="3">
+          <a-button type="primary" @click="getAutoSelect">Auto Select</a-button>
+        </a-col>
+      </a-row>
+      
       <a-row :gutter="24">
         <a-col v-if="false" :span="8">
           <TileCenter
@@ -31,6 +39,7 @@
             <div slot="center" class="text-center">
               <racks
                 :data="fridgeData.racks"
+                :autoSelect="autoSelect"
                 @getRackPortion="getRackPortion"
               />
             </div>
@@ -42,7 +51,7 @@
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <Trays v-if="!isEmpty(trayData)" :trays="trayData" />
+              <Trays v-if="!isEmpty(trayData)" :numVials="numVials" :autoSelect="autoSelect" :trays="trayData" />
               <a-empty v-else description=" select the rack" />
             </div> </TileCenter
         ></a-col>
@@ -108,6 +117,8 @@ export default {
       tubes: [],
       trayData: [],
       showModal: false,
+      autoSelect:null,
+      numVials:null,
     }
   },
   computed: {
@@ -115,10 +126,26 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {},
+  mounted() {
+    // console.log(isEmpty(this.$route.query.vial))
+    if(isEmpty(this.$route.query.vial)){
+      this.numVials=1
+    }else{
+      this.numVials=parseInt(this.$route.query.vial)
+    }
+    // console.log(this.numVials)
+  },
   methods: {
     isEmpty,
-    getRackPortion(portions) {
+    getRackPortion(portions, autoSelect) {
+      
+      if(isEmpty(autoSelect))
+      {
+        this.autoSelect=-1
+      }else{
+        this.autoSelect=autoSelect
+      }
+      // console.log(this.autoSelect)
       this.trayData = portions.trays
     },
     clickImage() {
@@ -131,7 +158,11 @@ export default {
       this.showModal = show
       this.success('Sample stored successfully')
       this.goto('/inventory/storage/tasks')
-    },         
+    },
+    getAutoSelect(){
+      this.autoSelect=1
+      this.trayData=fridgeData.racks[1].portions[3].trays
+    },        
   },
 }
 </script>

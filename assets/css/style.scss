@@ -124,11 +124,11 @@ a {
   margin-bottom: 20px;
 }
 .page-title {
-  font-size: 25px;
+  font-size: 	1.5625rem;
   font-weight: 600;
 }
 .heading {
-  font-size: 25px;
+  font-size: 	1.5625rem;
 }
 .plain-header-border {
   .ant-card-head {
@@ -147,7 +147,7 @@ a {
 .specific {
   // for treatment process
   .page-title {
-    font-size: 25px;
+    font-size: 	1.5625rem;
     font-weight: 600;
     margin-left: 5%;
   }
@@ -155,8 +155,13 @@ a {
 .specific-storage {
   // for Smart-Lab-Storage
   .page-title {
-    font-size: 25px;
+    font-size: 	1.5625rem;
     font-weight: 600;
     margin-left: 10px;
+  }
+}
+.inventory-storage-title{
+  .page-title{
+    margin-left: 12.5%;
   }
 }

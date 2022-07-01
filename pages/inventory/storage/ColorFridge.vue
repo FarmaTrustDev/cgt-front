@@ -40,7 +40,7 @@
             </a-form-item>
           </a-col>
           
-          <a-col :span="4" class="img-responsive">  
+          <a-col :span="5" class="img-responsive">  
             <a-form-item>
               <a-select
                 v-decorator="[`temperature`]"
@@ -58,7 +58,7 @@
             </a-form-item>
           </a-col>
           
-          <a-col :span="6" class="img-responsive">  
+          <a-col :span="5" class="img-responsive" style="margin-left:-1%">  
             <a-form-item>
               <a-select
                 v-decorator="[`zone`]"
@@ -76,7 +76,7 @@
       </a-row>
       </a-form>
       <h3 class="page-title ml-40">Select Storage Facility</h3>  
-          <Listing :storages="storage" :typeId="isInbound" />
+          <Listing :storages="storage" :selectedVials="vials" :typeId="isInbound" />
         <!--</a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
           <a-input
@@ -152,14 +152,15 @@ export default {
       qrUrl:null,
       showModal:false,
       storage: baseStorageQuarantine2,
+      vials:'',
       zones: [
         { id: 1, name: 'Zone A' },
         { id: 2, name: 'Zone B' },
         { id: 3, name: 'Zone C' },
       ],
       temperatures: [
-        { id: 1, name: '-20C' },
-        { id: 2, name: '-80Â°C' },
+        { id: 1, name: '-20°C' },
+        { id: 2, name: '-80°C' },
         { id: 3, name: 'LN2' },
 ],
       form: this.$form.createForm(this, {
@@ -232,7 +233,7 @@ export default {
         {
           product: 'DAC17899',
           description: 'platelet lysate...',
-          clientName: 'Royal Hospital',
+          clientName: 'Novartis',
           productLocation: 'Zone C, Storage Suite 2',
           storageDocument: 'document',
           expiryDate: '08/10/2025',
@@ -379,6 +380,7 @@ export default {
     },
     search(value, key) {
       // console.log(value)
+      this.vials=value
       this.storage=null
       this.storage=baseStorageQuarantine2
       let filters = this.filters

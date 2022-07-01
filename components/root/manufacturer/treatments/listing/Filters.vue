@@ -1,6 +1,6 @@
 <template>
   <div class="clearfix">
-    <a-range-picker class="float-right" @change="searchDataRange" />
+    <a-range-picker class="float-right calendar-range-picker-field" @change="searchDataRange" />
     <a-input
       ref="userNameInput"
       :placeholder="translation.searc_1_488"

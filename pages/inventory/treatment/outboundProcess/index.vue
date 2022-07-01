@@ -48,12 +48,12 @@
                     <a-col :span="4" class="mt-15">
                       <h6>
                         <span class="text-muted"
-                          >{{ translation.AssetType_2_512 }}:</span
+                          >{{ translation.SamplName_2_503 }}:</span
                         >
                       </h6>
                     </a-col>
                     <a-col :span="8" class="mt-15">
-                      <h6><span>Cell Sample</span></h6>
+                      <h6><span>Human Cells</span></h6>
                     </a-col>
                   </a-row>
                   <a-row :gutter="20" dir="ltr">
@@ -170,7 +170,7 @@
                     </template>
                   </a-table>
                 </a-skeleton>
-                <a-modal :visible="showModal" title="Print">
+                <a-modal :visible="showModal" title="Print" @cancel="handleModal(false)" >
                   <img class="img-responsive" :src="qrUrl" />
                   <template slot="footer">
                     <a-button @click="handleModal(false)">Cancel</a-button>
@@ -268,21 +268,13 @@
                   />
                   <a-modal
                     :visible="showLogisticsModal"
-                    title="Confirm sample collection"
+                    title="Confirm Courier"
+                    @cancel="handleLogisticsModal(false)"
                   >
                     <div>
-                      <a-row
-                        ><a-col :span="12">Logistics : Fast Link</a-col
-                        ><a-col :span="12"
-                          >Sample Collection Date :
-                        </a-col></a-row
-                      >
-                      <a-row
-                        ><a-col :span="12">Sample ID : DAC48694</a-col
-                        ><a-col :span="12"
-                          >Expected Delivery Date :
-                        </a-col></a-row
-                      >
+                      <a-row>
+                        <a-col :span="24">Are you sure you want to request courier?</a-col>
+                        </a-row>
                     </div>
                     <!--<img class="img-responsive" :src="qrUrl" />-->
                     <template slot="footer">
@@ -450,13 +442,15 @@ export default {
   },
   methods: {
     disabledDate: _disabledPreviousDate,
-    handleActiveTab() {
-      this.setActiveTab()
+    handleActiveTab(view) {
+      this.setActiveTab(view)
     },
-    setActiveTab() {
-      // console.log('parent')
-      // this.activeTab = 'couriers'
-      this.activeTab=this.$route.query.view
+    setActiveTab(view) {
+      if(!isEmpty(view)){
+        this.activeTab=view
+      }else{
+        this.activeTab=this.$route.query.view
+      }
     },
     collectionDateChange(value, date) {
       this.form.setFieldsValue({

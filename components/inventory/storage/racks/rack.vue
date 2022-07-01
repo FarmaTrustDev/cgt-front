@@ -3,12 +3,14 @@
     <div class="counter">Shelf {{ counter }}</div>
     <div class="rack-container">
       <div class="rack light-shadow" :class="active ? 'active' : ''">
+        
         <div
           v-for="(portion, index) in portions"
           :key="index"
           class="portion"
-          :class="portion.active ? 'active' : ''"
-          @click="getRackPortion(portion)"
+          :class="portion.active  ? 'active' : ''"
+          :style="(portion.active && (activeIndex===index) && (currentCounter===counter)) ? 'border: 3px solid;' : portion.active  ? '' : (((activeIndex===index) && (currentCounter===counter))) ? 'border: 3px solid;': ((autoSelect!==null) && (activeIndex===null) && (counter===1) && (index===1)) ? 'border: 3px solid;' :''"
+          @click="getRackPortion(portion, index, counter)"
         ></div>
       </div>
     </div>
@@ -21,10 +23,21 @@ export default {
     active: { type: Boolean },
     portions: { type: Array, default: () => [{}] },
     counter: { type: Number, default: 0 },
+    currentCounter:{ type: Number },
+    activeIndex: { type: Number },
+    autoSelect: {type: Number},
   },
+  data() {
+    return {
+      autoSelectData:this.autoSelect
+      // activeIndex:null,
+      // currentCounter:null,
+    }
+  },  
   methods: {
-    getRackPortion(portion) {
-      this.$emit('getRackPortion', portion)
+    getRackPortion(portion,index,counter) {
+      this.autoSelectData=null
+      this.$emit('getRackPortion', portion, index, counter, this.autoSelectData)
     },
   },
 }
@@ -42,7 +55,9 @@ export default {
   display: flex;
   flex: 1;
   &:hover {
-    background-color: #eb101066;
+  border: 3px solid;
+  padding: 2px;    
+    //background-color: #eb101066;
   }
 }
 .rack {
@@ -57,6 +72,12 @@ export default {
 }
 .active {
   background-color: #eb101066;
+}
+.active-clicked {
+  // background-color: #eb101066;
+  border: 3px solid;
+  padding: 2px;
+  // box-shadow: 2px 5px red;
 }
 .counter {
   float: left;

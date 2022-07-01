@@ -4,7 +4,7 @@
     :loading="loading"
     :bordered="false"
     :title="translation.StoraServi_2_532"
-    class="specific-storage"
+    class="inventory-storage-title"
   >
     <div slot="content" class="w-1200 margin-auto">
       <a-row>
@@ -45,6 +45,7 @@
               <Trays
                 v-if="!isEmpty(trayData)"
                 :trays="trayData"
+                :autoSelect="autoSelect"
                 @getTube="getTube"
               />
               <a-empty v-else description=" select the rack" />
@@ -97,6 +98,7 @@ export default {
       steps: [],
       tubes: [],
       trayData: [],
+      autoSelect:null,
     }
   },
   computed: {
@@ -109,7 +111,8 @@ export default {
   },
   methods: {
     isEmpty,
-    getRackPortion(portions) {
+    getRackPortion(portions,autoSelect) {
+      this.autoSelect=autoSelect
       this.trayData = portions.trays
     },
     getTube(tube) {

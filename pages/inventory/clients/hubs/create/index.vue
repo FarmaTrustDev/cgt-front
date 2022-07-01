@@ -29,9 +29,9 @@
               <div class="icons">
                 <span><a href="/inventory/clients/messages"><img :src="getImageUrl('web/icons/inbox.svg')" /></a></span>
                 <span><a href="/inventory/clients/clients"> <img :src="getImageUrl('web/icons/stock.svg')" /></a></span>
-                <span> <img :src="getImageUrl('web/icons/bill1.svg')" /></span>
+                <span @click="goto(`status`)" style="cursor:pointer"> <img :src="getImageUrl('web/icons/bill1.svg')" /></span>
               </div>
-              <div>Upcoming Tasks: </div>
+              <div style="width:210px">Upcoming Tasks: </div>
               <div class="list">
                 <ul>
                   <li
@@ -63,8 +63,8 @@ export default {
       loading: false,
       formLayout: 'vertical',
       tasks: [
-        { id: 1, name: 'Store Sample', date: '14/06/2022', url:'/inventory/storage/ColorFridge?inbound=true' },
-        { id: 2, name: 'Outbound Process', date: '17/06/2022', url:'/inventory/treatment/outboundProcess/' },
+        { id: 1, name: 'Store Sample', date: '14/07/2022', url:'/inventory/storage/ColorFridge?inbound=true' },
+        { id: 2, name: 'Outbound Process', date: '17/07/2022', url:'/inventory/treatment/outboundProcess/' },
         { id: 3, name: 'Inbound Shipment', date: '11/08/2022', url:'/inventory/treatment/process/' },
       ],
     }

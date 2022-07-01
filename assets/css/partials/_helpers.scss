@@ -40,7 +40,7 @@
 
 .status {
   padding: 13px 15px;
-  font-size: 14px;
+  font-size: 0.875rem;
   border-radius: 10rem;
 }
 
@@ -74,7 +74,8 @@
   position: relative !important;
 }
 // client hub
-.responsive_img, .img-responsive {
+.responsive_img,
+.img-responsive {
   max-width: 100%;
   height: 90px;
   border-radius: 20px;
@@ -90,22 +91,22 @@
   padding: 15px 30px;
   border-radius: 15px;
   color: white;
-  font-size: 25px;
+  font-size: 1.5625rem;
   @extend .light-shadow;
 }
 
-.dated-time{
+.dated-time {
   background-color: $danger;
-  padding: 14px 40px;
+  padding: 7% 20%;
   border-radius: 22px;
   color: white;
-  font-size: 28px;
+  font-size: 1.75rem;
   cursor: pointer;
   @extend .light-shadow;
 }
 
 .w-1200 {
-  max-width: 1200px;
+  max-width: 76%;
 }
 
 .w-min-200 {
@@ -121,4 +122,11 @@
 .display-inline-block {
   display: inline-block;
 }
-
+.display-flex {
+  display: flex;
+}
+.timebox {
+  .ant-list-item {
+    padding: 3px 0;
+  }
+}

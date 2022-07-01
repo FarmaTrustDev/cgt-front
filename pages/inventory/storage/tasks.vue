@@ -1,60 +1,88 @@
 <template>
   <div class="">
-    <span class="mt-25 ml-80 pg-head">Task/Store Sample</span>
-    <span class="mt-25 ml-150 pg-head">ID: DAC53827</span>
-    <span class="mt-25 ml-150 pg-head">Name: Platelet Lycate</span>
-    <span class="mt-25 ml-150 pg-head">Client: Royal Hospital</span>
-    <div class="pt-10 float-left icons">
-      <span class="ml-80 pg-head">Fridge: Kings 123</span>
-      <span class="ml-150 pg-head"
-        ><img
+    <a-row style="height:35px; margin-left:10px">
+      <a-col :span="6">Task/Store Sample</a-col>
+      <a-col :span="6">ID: DAC53827</a-col>
+      <a-col :span="8">Name: Platelet Lycate</a-col>
+      <a-col :span="4">Client: Novartis</a-col>
+    </a-row>
+    <a-row style="height:35px; margin-left:10px">
+      <a-col :span="6">Fridge: Kings 123</a-col>
+      <a-col :span="6"><img
           :src="getImageUrl('web/inventory/storage/frozen.svg')"
-        />-80°C</span
-      >
-      <span class="ml-150 pg-head"
-        ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Zone A,
-        Storage Suite 3, Germany - Cellfuse</span
-      >
-      <span class="ml-110 pg-head"
-        ><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Shelf 5,
-        Rack 2</span
-      >
-    </div>
-
+        />-80°C</a-col>
+      <a-col :span="8"><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Zone A,
+        Storage Suite 3, Germany - Cellfuse</a-col>
+      <a-col :span="4"><img :src="getImageUrl('web/inventory/storage/pin.svg')" />Shelf 5,
+        Rack 2</a-col>
+    </a-row>
+    <template>    
+      <div>        
+        <div v-for="column in newTasksColumns" :key="column.title" @click="clickOnColumn(column)" />    
+      </div>
+    </template>    
     <a-table
       class="rounded-table"
       :columns="newTasksColumns"
       :data-source="newTasksData"
       :should-fetch="false"
+      
     >
-      <template slot="print" slot-scope="print">
+      <span slot='customTitle'>
+        <div><a-button type="primary" block size="large" html-type="submit" @click="openViewAllModal()">Print All</a-button></div>
+      </span>
+      <span slot='customConfirmTitle'>
+        <div><a-button type="primary" block size="large" html-type="submit" @click="handleClick('all',0)">Confirm All</a-button></div>
+      </span>
+      <template slot="print" slot-scope="print, index">
         <a-button
           class="print-btn"
           type="primary"
           size="small"
           icon="printer"
-          @click="openViewModal(print)"
+          v-if="(index.index!=8)"
+          @click="openViewModal(print, index)"
           >Print Label</a-button
         >
       </template>
       <template slot="confirm" slot-scope="confirm, index">
         <a-button
-          :class="confirm ? 'blue' : 'gray'"
+          :class="( confirm | checkAll) ? 'blue' : 'gray'"
           size="small"
           @click="handleClick(confirm, index)"
-          >Confirm placement</a-button
+          ><span>Confirm placement</span></a-button
         >
-      </template>
+      </template>     
     </a-table>
+    <a-row style="margin-top:30px">
+      <a-col :span="20"></a-col>
+      <a-col :span="4"><a-button style="width:100%; font-size:20px" type="primary" @click="goto('/inventory/treatment')">Finish</a-button></a-col>
+    </a-row>
+    <a-modal
+      :visible="showAllModal"
+      :title="translation.Docum_1_507"
+      id="printAll"
+      ok-text="Print All"
+      cancel-text="Cancel"
+      @ok="printWindow('printAll')"
+      @cancel="handlePrintModal(false)"
+    >
+      <img v-for="newTask in newTasksData" :key="newTask.index" class="img-responsive" :src="getImageUrl(newTask.url)" />
+      <!-- <template slot="footer">
+        <a-button @click="handleModal(false)">Cancel</a-button>
+        <a-button @click="printWindow()">Print</a-button>
+      </template> -->
+    </a-modal>    
     <a-modal
       :visible="showModal"
       :title="translation.Docum_1_507"
       ok-text="Print"
+      id="printOne"
       cancel-text="Cancel"
-      @ok="printWindow()"
+      @ok="printWindow('printOne')"
       @cancel="handleModal(false)"
     >
-      <img class="img-responsive" :src="getImageUrl(qrUrl)" />
+      <img class="img-responsive" :src="getImageUrl(qrUrl)" width="100%" />
       <!-- <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
         <a-button @click="printWindow()">Print</a-button>
@@ -77,10 +105,13 @@ export default {
   data() {
     return {
       showModal: false,
+      showAllModal:false,
       clicked: false,
       greenDisk: 'g',
       blueDisk: 'b',
-      qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
+      checkAll:false,
+      selectedRowKeys: [],
+      qrUrl: 'Uploads/DocumentURL/shipping notice.png',
       newTasksColumns: [
         {
           title: `Sample ID`,
@@ -111,91 +142,119 @@ export default {
           },
         },
         {
-          title: `Print`,
+          // title: `Print All`,
+          // dataIndex: 'print',
+          // key: 'print',
+          // slots: {
+          //   title: {customRender:'<button></button>'}
+          // },
           dataIndex: 'print',
           key: 'print',
+          slots: {
+            title: 'customTitle',
+          },
           scopedSlots: { customRender: 'print' },
         },
         {
-          title: `Confirm all`,
+          // title: `Confirm All`,
           dataIndex: 'confirm',
           key: 'confirm',
+          slots:{
+            title:'customConfirmTitle',
+          },
           scopedSlots: { customRender: 'confirm' },
         },
       ],
       newTasksData: [
         {
           sampleId: 'DAC7993',
-          sampleName: 'Platelet Lycate ',
+          sampleName: 'Human Cells ',
           client: 'Baystate Clinic',
           fridge: 'Freezers 12',
           position: 'Rack 20A',
           confirm: false,
           index: 0,
+          url: 'Uploads/DocumentURL/1.jpeg',
         },
         {
           sampleId: 'DAC7986',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
+          sampleName: 'Human Cells ',
+          client: 'Novartis',
           fridge: 'Freezers 13',
           position: 'Rack 21A',
           confirm: false,
           index: 1,
+          url: 'Uploads/DocumentURL/2.jpeg',
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
+          sampleName: 'Human Cells',
+          client: 'Novartis',
           fridge: 'Freezers 14',
           position: 'Rack 23A',
           confirm: false,
           index: 2,
+          url: 'Uploads/DocumentURL/3.jpeg',
         },
         {
           sampleId: 'DAC7996',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
+          sampleName: 'Human Cells ',
+          client: 'Novartis',
           fridge: 'Freezers 15',
           position: 'Rack 27A',
           confirm: false,
           index: 3,
+          url: 'Uploads/DocumentURL/4.jpeg',
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
+          sampleName: 'Human Cells',
+          client: 'Novartis',
           fridge: 'Freezers 13',
           position: 'Rack 28A',
           confirm: false,
           index: 4,
+          url: 'Uploads/DocumentURL/1.jpeg',
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
+          sampleName: 'Human Cells',
+          client: 'Novartis',
           fridge: 'Freezers 14',
           position: 'Rack 29A',
           confirm: false,
           index: 5,
+          url: 'Uploads/DocumentURL/2.jpeg',
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
+          sampleName: 'Human Cells',
+          client: 'Novartis',
           fridge: 'Freezers 123',
           position: 'Rack 21A',
           confirm: false,
           index: 6,
+          url: 'Uploads/DocumentURL/3.jpeg',
         },
         {
           sampleId: 'DAC9874',
-          sampleName: 'Platelet Lycate ',
-          client: 'Royal Hospital',
+          sampleName: 'Human Cells',
+          client: 'Novartis',
           fridge: 'Freezers 19',
           position: 'Rack 10A',
           confirm: false,
           index: 7,
+          url: 'Uploads/DocumentURL/4.jpeg',
         },
+       /* {
+          sampleId: '',
+          sampleName: '',
+          client: '',
+          fridge: '',
+          position: '',
+          index: 8,
+          url: '/inventory/treatment',
+        }, */        
       ],
     }
   },
@@ -208,17 +267,48 @@ export default {
     handleModal(show) {
       this.showModal = show
     },
-    openViewModal(id) {
+    handlePrintModal(show) {
+      this.showAllModal = show
+    },    
+    openViewModal(id,index) {
+      this.qrUrl=index.url
       this.showModal = true
     },
+    openViewAllModal(id) {
+      this.showAllModal = true
+    },    
     handleClick(confirm, index) {
-      for (let i = 0; i < this.newTasksData.length; i++) {
-        if (this.newTasksData[i].index === index.index)
-          this.newTasksData[i].confirm = !this.newTasksData[i].confirm
+      // console.log(confirm)
+      if(confirm==='all'){
+        this.checkAll=true
+      }
+      else
+      {
+        for (let i = 0; i < this.newTasksData.length; i++) {
+          if (this.newTasksData[i].index === index.index)
+            this.newTasksData[i].confirm = !this.newTasksData[i].confirm
+        }
       }
     },
-    printWindow() {
-      window.print()
+    printWindow(id) {
+
+      const prtContent = document.getElementById(id);
+      const WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+      WinPrint.document.write(prtContent.innerHTML);
+      WinPrint.document.close();
+      WinPrint.focus();
+      WinPrint.print();
+      WinPrint.close();
+
+
+      // window.print()
+    },
+    editTitle(){
+
+    },
+    onSelectChange(selectedRowKeys) {
+      console.log('selectedRowKeys changed: ', selectedRowKeys);
+      this.selectedRowKeys = selectedRowKeys;
     },
   },
 }
