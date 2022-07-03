@@ -1,7 +1,9 @@
 <template>
   <div>
     <a-layout-header>
-      <div class="user-detail">{{translation['Welco_1_1']}}, {{ user.name }}</div>
+      <div class="user-detail">
+        {{ translation['Welco_1_1'] }}, {{ user.name }}
+      </div>
 
       <div class="hospital-detail">
         <!-- Header notifications -->
@@ -52,10 +54,14 @@ import { isArray } from '~/services/Helpers'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
 import TranslationServices from '~/services/API/TranslationServices'
 import translationHelpers from '~/mixins/translation-helpers'
+import { BASE_URL } from '~/services/Constant/index'
+
 const connection = new HubConnectionBuilder()
-  .withUrl('https://demoapi.qmaid.co/NotificationUserHub')
+  .withUrl(`${BASE_URL}NotificationUserHub`)
   .build()
+
 connection.start()
+
 export default {
   name: 'Header',
   mixins: [translationHelpers],
@@ -86,22 +92,23 @@ export default {
   },
   mounted() {
     this.notificationHandler()
+    this.genericNotificationHandler()
     // this.uploadTranslations()
     // this.downloadTranslations()
   },
   methods: {
     isEmpty,
-    uploadTranslations(){
+    uploadTranslations() {
       TranslationServices.getTranslation()
     },
-    downloadTranslations(){
-      TranslationServices.getTranslationFile().then((response)=>{
-        const fileURL = window.URL.createObjectURL(new Blob([response]));
-        const fileLink = document.createElement('a');
-        fileLink.href = fileURL;
-        fileLink.setAttribute('download', 'translationData.xlsx');
-        document.body.appendChild(fileLink);
-        fileLink.click();
+    downloadTranslations() {
+      TranslationServices.getTranslationFile().then((response) => {
+        const fileURL = window.URL.createObjectURL(new Blob([response]))
+        const fileLink = document.createElement('a')
+        fileLink.href = fileURL
+        fileLink.setAttribute('download', 'translationData.xlsx')
+        document.body.appendChild(fileLink)
+        fileLink.click()
       })
     },
     notificationHandler() {
@@ -115,6 +122,11 @@ export default {
             this.emitNotification(notification)
           }
         }
+      })
+    },
+    genericNotificationHandler() {
+      connection.on('GenericNotification', (notification) => {
+        console.log(notification)
       })
     },
     emitNotification(notification) {
