@@ -88,7 +88,7 @@
                         <p class="ml-6">DAC48694</p>
                       </a-col>
                       <a-col :span="12">
-                        <p class="float-right mr-6">30/06/2022 - 03/07/2022</p>
+                        <p class="float-right mr-6">{{_getFormatMoment().format('DD/MM/YYYY')}} - {{ _getFormatMoment(getMomentByStandardFormat(new Date()).add(3, 'day')).format('DD/MM/YYYY')  }}</p>
                       </a-col>
                     </a-list-item>
                   </a-list>
@@ -108,7 +108,7 @@
                         <p class="ml-6">DAC43057</p>
                       </a-col>
                       <a-col :span="12">
-                        <p class="float-right mr-6">30/06/2022 - 03/07/2022</p>
+                        <p class="float-right mr-6">{{_getFormatMoment().format('DD/MM/YYYY')}} - {{ _getFormatMoment(getMomentByStandardFormat(new Date()).add(3, 'day')).format('DD/MM/YYYY')  }}</p>
                       </a-col>
                     </a-list-item>
                   </a-list>
@@ -130,7 +130,7 @@
 </template>
 <script>
 import TreatmentServices from '~/services/API/TreatmentServices'
-import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
+import { _getFormatMoment, getMomentByStandardFormat, } from '~/services/Helpers/MomentHelpers'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
   mixins: [routeHelpers],
@@ -162,7 +162,9 @@ export default {
         this.treatments = response.data
       })
     },
+
     _getFormatMoment,
+    getMomentByStandardFormat,
   },
 }
 </script>
