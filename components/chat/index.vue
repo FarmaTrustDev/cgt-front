@@ -77,6 +77,7 @@ export default {
       endToEndConversationLoader: false,
       scrollMethod: () => {},
       groupModal: false,
+      newConversations:[],
     }
   },
   computed: {
@@ -101,7 +102,14 @@ export default {
 
       ChatServices.getConversations()
         .then((conversations) => {
-          this.conversations = conversations.data
+          for(const dat in conversations.data){
+            if(conversations.data[dat].id === 925 || conversations.data[dat].id === 913){console.log('hello')}else{
+              this.newConversations.push(conversations.data[dat])
+              this.conversations.push(conversations.data[dat])
+            }
+          }
+          console.log(this.newConversations)
+          // this.conversations = conversations.data
         })
         .catch((e) => {})
         .finally(() => {
