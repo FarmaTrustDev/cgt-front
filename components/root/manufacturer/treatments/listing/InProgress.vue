@@ -1,7 +1,7 @@
 <template>
   <div>
     <Filters @getParams="getParams" />
-    <a-table :loading="loading" :columns="column" :data-source="data">
+    <a-table :loading="loading" class="page-footer" :columns="column" :data-source="data" :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}">
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div class="treatment-steps">

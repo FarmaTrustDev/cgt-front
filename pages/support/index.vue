@@ -110,37 +110,45 @@ export default {
         {
           title: `${this.$store.getters.getTranslation.date_1_510}`,
           dataIndex: 'created_At',
+          width: 100,
         },
         {
           title: `${this.$store.getters.getTranslation.TickeID_2_212}`,
           dataIndex: 'id',
           scopedSlots: { customRender: 'tickets' },
+          width:100,
         },
         {
           title: 'Name(PUID)',
           dataIndex: 'reporter_name',
+          width:100,
         },
         {
           title: `${this.$store.getters.getTranslation.BagID_2_540}`,
           dataIndex: 'reference_Id',
+          width:100,
         },
         {
           title: `${this.$store.getters.getTranslation.IssueDetai_2_214}`,
           dataIndex: 'description',
+          width:300,
         },
         {
           title: `${this.$store.getters.getTranslation.LastUpdat_2_216}`,
           dataIndex: 'last_Updated_At',
+          width:100,
         },
         {
           title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' },
+          width:100,
         },
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'actions',
           scopedSlots: { customRender: 'action' },
+          width:100,
         },
       ],
       loading: true,
@@ -188,7 +196,10 @@ export default {
         .then((response) => {
           this.data = response.ticket
           for(const dat in this.data){
-            console.log(this.data[dat].reporter_name)
+            // console.log(this.data[dat])
+            const dates=this.data[dat].created_At.split('T')[0]
+            this.data[dat].created_At=dates
+            console.log(dates)
             if(this.data[dat].reporter_name==='Test User (DAC3138N)'){
               this.data[dat].reporter_name='Chris Murphy (DAC3138P)'
             }

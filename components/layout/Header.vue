@@ -31,12 +31,12 @@
         <div>
           {{ translation.first }}
           <a-select
-            :default-value="selectedLanguage"
+            :default-value="isEmpty(selectedLanguage) ? 'en': selectedLanguage"
             style="width: 120px"
             @change="selectLanguage"
           >
             <a-select-option v-for="language in languages" :key="language.id">
-              {{ language.name }}
+              {{ language.name}}
             </a-select-option>
           </a-select>
         </div>

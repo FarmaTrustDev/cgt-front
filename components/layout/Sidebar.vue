@@ -87,6 +87,7 @@ export default {
       setAccessToken('')
       this.$store.commit('setToken', {})
       this.$store.commit('setUser', {})
+      this.$store.commit('setSelectedMenu',["1"])
       this.$router.push({
         path: '/login',
       })

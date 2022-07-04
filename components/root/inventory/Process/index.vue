@@ -7,11 +7,11 @@
         :data-source="collections"
         :pagination="false"
         :loading="loading"
-        class="square-table"
+        class="rounded-table"
       >
         <template slot="collected" slot-scope="name, row">
           <!-- {{ row }} -->
-          <a-form-item>
+          <a-form-item class="mt-20">
             <a-switch
               v-if="!row.isCollected"
               v-decorator="[
@@ -41,7 +41,7 @@
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
-          <a-form-item>
+          <a-form-item class="mt-20">
             <a-input
               v-if="!row.isCollected"
               v-decorator="[

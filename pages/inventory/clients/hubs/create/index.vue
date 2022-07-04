@@ -63,8 +63,8 @@ export default {
       loading: false,
       formLayout: 'vertical',
       tasks: [
-        { id: 1, name: 'Store Sample', date: '14/06/2022', url:'/inventory/storage/ColorFridge?inbound=true' },
-        { id: 2, name: 'Outbound Process', date: '17/06/2022', url:'/inventory/treatment/outboundProcess/' },
+        { id: 1, name: 'Store Sample', date: '14/07/2022', url:'/inventory/storage/ColorFridge?inbound=true' },
+        { id: 2, name: 'Outbound Process', date: '17/07/2022', url:'/inventory/treatment/outboundProcess/' },
         { id: 3, name: 'Inbound Shipment', date: '11/08/2022', url:'/inventory/treatment/process/' },
       ],
     }

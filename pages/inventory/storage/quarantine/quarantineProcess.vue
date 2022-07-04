@@ -89,11 +89,11 @@
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
-          style="width:95%; margin-left:2%"
+          style="width:95%; margin-left:2%;"
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:95%">
+            <div class="treatment-steps" style="width:100%; margin-left:-3%; padding-right:2%">
               <a-steps :initial="1" :current="1" size="default">
                 <a-step
                   v-for="phase in phases"
@@ -111,7 +111,7 @@
           class="mt-15 default-card inbound-accept-tabs"
           style="width:95%; margin-left:2%"
         >
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%;">
           
           <div>        
           <strong style="font-size:1.25rem;">Quality Assurance Checklist</strong>
