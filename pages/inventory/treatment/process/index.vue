@@ -94,7 +94,7 @@
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:95%">
+            <div class="treatment-steps" style="width:100%;  margin-left:-3%; padding-right:2%">
               <a-steps size="default">
                 <a-step
                   v-for="phase in phases"
@@ -116,7 +116,7 @@
           style="width:95%; margin-left:2%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%; margin-left:-3%">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
@@ -231,7 +231,7 @@
           style="width:95%; margin-left:2%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">              
+        <div class="h-tabs large-tabs" style="width:100%;">              
               <div>
               <strong style="font-size:1.25rem">{{ translation.QualiAssur_3_565 }}</strong>
               <Process

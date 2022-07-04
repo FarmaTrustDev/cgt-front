@@ -87,8 +87,6 @@
             </a-col>
           </a-row>
         </div>
-
-
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
@@ -96,7 +94,7 @@
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:95%">
+            <div class="treatment-steps" style="width:100%; margin-left:-3%; padding-right:2%">
               <a-steps size="default">
                 <a-step
                   v-for="phase in phases"
@@ -118,7 +116,7 @@
           style="width:90%; margin-left:5%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%; margin-left:-1%">
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
@@ -138,7 +136,7 @@
           style="width:90%; margin-left:5%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%;">
 
               <div>
                 <a-skeleton :loading="loading">
