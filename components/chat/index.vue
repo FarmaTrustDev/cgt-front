@@ -10,7 +10,7 @@
               @getConversation="getConversation" /></a-spin
         ></a-card>
       </a-col>
-      <a-col :span="1"></a-col>
+     <a-col :span="1"></a-col>
       <a-col  :span="14" class="right-bar clearfix">
         <a-card :bordered="false" class="default-card height-100">
           <div class="max-h-200" >

@@ -3,7 +3,7 @@
     <div class="page-header clearfix ">
       <h3 class="page-title pl-10 float-left">{{translation['TreatList_2_258']}}</h3>
       <a-select
-        class="float-right page-search-input mr-12 ant-selection-placeholder selection-tab pr-5"
+        class="float-right page-search-input mr-6 ant-selection-placeholder selection-tab pr-5"
         :placeholder="translation.TreatType_2_67"
       >
         <a-select-option
@@ -22,7 +22,7 @@
           <in-progress />
         </a-tab-pane>
         <a-tab-pane key="3" :tab="translation.ComplTreat_2_844"><completed /></a-tab-pane>
-        <a-tab-pane key="4" :tab="translation['All-_3_400']"> <all /></a-tab-pane>
+        <a-tab-pane key="4" tab="All Treatments"> <all /></a-tab-pane>
       </a-tabs>
     </div>
   </div>
