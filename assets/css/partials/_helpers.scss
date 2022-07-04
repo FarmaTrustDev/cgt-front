@@ -130,3 +130,8 @@
     padding: 3px 0;
   }
 }
+.page-footer {
+  .ant-table-pagination.ant-pagination {
+    float: left;
+  }
+}

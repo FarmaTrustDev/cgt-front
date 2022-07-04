@@ -1,10 +1,13 @@
 <template>
   <div class="clearfix">
-    <a-range-picker class="float-right calendar-range-picker-field" @change="searchDataRange" />
+    <a-range-picker class="float-right calendar-range-picker-field"
+    :default-value="[moment('2015-06-06',dateFormat), moment('2015-06-06',dateFormat)]"
+     @change="searchDataRange"
+     :format="dateFormat" />
     <a-input
       ref="userNameInput"
       :placeholder="translation.searc_1_488"
-      class="float-right page-search-input"
+      class="float-right page-search-input pb-10"
       @change="searchTreatment"
     >
       <a-icon slot="prefix" type="search" />
@@ -12,11 +15,13 @@
   </div>
 </template>
 <script>
+import moment from 'moment';
 import { getFormattedMoment } from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 export default {
   data() {
-    return { params: {} }
+    return { params: {},
+    dateFormat: 'YYYY/MM/DD', }
   },
   computed:{
     translation() {
@@ -24,6 +29,7 @@ export default {
     },
   },
   methods: {
+    moment,
     searchTreatment(e) {
       const search = e.target.value
       this.params = {
