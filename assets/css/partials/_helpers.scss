@@ -132,6 +132,27 @@
 }
 .page-footer {
   .ant-table-pagination.ant-pagination {
-    float: left;
+    // float: left;
+    display: inline-block;
+    .ant-pagination-prev {
+      // margin-left: 10%;
+    }
+    .ant-pagination-next {
+      //  margin-left: 130%;
+    }
+    .ant-pagination-item-active {
+      //  margin-left: 1%;
+    }
+    .ant-pagination-options {
+      float: left;
+      .ant-select-selection--single{
+        float:left;
+      }
+  } 
   }
+  .ant-pagination-options-size-changer.ant-select {
+    display: inline-block;
+    width: auto;
+    margin-right: 1140px;
+}
 }
