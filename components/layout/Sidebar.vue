@@ -61,12 +61,16 @@ export default {
     },
   },
   mounted() {
-    const bus = AuthServices.getBusEvent()
-    const logout = this.logout
-    bus.$on('UNAUTHORIZE', function (data) {
-      logout()
-    })
-    this.showCollapse()
+    if(isEmpty(this.user)){
+      this.logout()
+    }else{
+      const bus = AuthServices.getBusEvent()
+        const logout = this.logout
+      bus.$on('UNAUTHORIZE', function (data) {
+        logout()
+      })
+      this.showCollapse()
+    }
   },
 
   methods: {

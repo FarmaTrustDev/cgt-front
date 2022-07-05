@@ -29,13 +29,10 @@
           :loading="loading"
           :data-source="data"
           :columns="columns"
+          :customRow="customRowReDirect"
         >
-          <template slot="tickets" slot-scope="id, record">
-            <a-button type="link">
-              <strong @click="goto(`support/${record.global_Id}`)"
-                >CKD-{{ id }}</strong
-              ></a-button
-            >
+          <template slot="tickets" slot-scope="id">
+              CKD-{{ id }}
           </template>
           <template slot="status" slot-scope="status, record">
             <span :class="'status status-' + getStatusName(status, record)">{{
@@ -64,13 +61,13 @@
         </a-table>
       </a-tab-pane>
       <a-tab-pane key="2" :tab="translation.Archi_1_226">
-        <Table type="archive" />
+        <Table type="archive" :dumpData="archivedData" />
       </a-tab-pane>
       <a-tab-pane key="3" :tab="translation.InPro_1_533">
-        <InProgress type="inProgress" />
+        <InProgress type="inProgress" :dumpData="inprogressData" />
       </a-tab-pane>
       <a-tab-pane key="4" :tab="translation.Resol_1_230">
-        <Resolved type="resolved" />
+        <Resolved type="resolved" :dumpData="resolvedData"  />
       </a-tab-pane>
     </a-tabs>
 
@@ -106,6 +103,9 @@ export default {
     return {
       showAddModal: false,
       data: [],
+      inprogressData: [],
+      resolvedData:[],
+      archivedData:[],
       columns: [
         {
           title: `${this.$store.getters.getTranslation.date_1_510}`,
@@ -155,6 +155,7 @@ export default {
       ticket: {},
       isCreated: false,
       loadingTicket: false,
+      globalId:'',
     }
   },
   mounted() {
@@ -166,11 +167,23 @@ export default {
     },
   },
   methods: {
+    customRowReDirect(record) {
+      // alert(record)
+      // console.log(record)
+      return {
+        on: {
+          click: (event) => {
+            // console.log(record)
+            this.goto(`support/${record.global_Id}`)
+          },
+        },
+      }
+    },    
     showUpdate(record) {
       this.fetchTicket(record.id)
     },
     callback(key) {
-      console.log(key)
+      // console.log(key)
     },
     showModal(value) {
       this.showAddModal = value
@@ -199,12 +212,21 @@ export default {
             // console.log(this.data[dat])
             const dates=this.data[dat].created_At.split('T')[0]
             this.data[dat].created_At=dates
-            console.log(dates)
+            // console.log(dates)
             if(this.data[dat].reporter_name==='Test User (DAC3138N)'){
               this.data[dat].reporter_name='Chris Murphy (DAC3138P)'
             }
+            if(this.data[dat].status_Name==='In progress'){
+              this.inprogressData.push(this.data[dat])
+            }
+            if(this.data[dat].status_Name==='Resolved'){
+              this.resolvedData.push(this.data[dat])
+            }
+            if(this.data[dat].status_Name==='Archived'){
+              this.archivedData.push(this.data[dat])
+            }                        
           }
-          // console.log(this.data)
+          // console.log(this.resolvedData)
           // this.data[1].reporter_name='Chris Murphy (DAC3138P)'
         })
         .finally(() => {

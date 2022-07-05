@@ -94,7 +94,7 @@
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:100%;  margin-left:-3%; padding-right:2%">
+            <div class="treatment-steps" style="width:100%; margin-top:30px;  margin-left:-3%; padding-right:2%">
               <a-steps size="default">
                 <a-step
                   v-for="phase in phases"
