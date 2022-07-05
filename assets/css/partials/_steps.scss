@@ -34,7 +34,7 @@
     width: 80%;
     margin: auto;
     left: 0;
-    top: 20px;
+    top: 50%;
     right: 0;
     background-color: #e2e2e2;
   }
@@ -97,8 +97,8 @@
     &::after {
       margin-top: 16px;
       display: inline-block;
-      height: 1px;
-      background: #e8e8e8;
+      // height: 1px;
+      // background: #e8e8e8;
       content: '';
       width: 10px;
       margin-left: 0;
@@ -120,7 +120,8 @@
 
   .ant-steps-item-content {
     .ant-steps-item-title {    
-      color: #233151 !important;
+      // color: #233151 !important;
+      // width: -1px;
     }
     &::before {
       content: '';
@@ -195,12 +196,18 @@
     height: 60px;
     min-width: 35%;
     .ant-steps-item-content {
-      margin-left: 20px;
-      margin-top: 10px;
+      margin-left: 5%;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.80rem;
+      .ant-steps-item-title {
+        font-size: large;
+        font-weight: 400;
+        margin-left: 4%;
+      }      
       &::before {
-        margin-top: 1px;     
+        margin-top: 1px;   
+        width: 30px;
+        height: 30px;          
         background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
       }
     }
@@ -213,12 +220,17 @@
     height: 60px;
     min-width: 35%;
     .ant-steps-item-content {
-      margin-left: 20px;
-      margin-top: 10px;
-      font-weight: 400;
-      font-size: 1.25rem;
+      font-weight: 600;
+      font-size: 1.80rem;
+      .ant-steps-item-title {
+        font-size: large;
+        font-weight: 400;
+        margin-left: 4%;
+      }
       &::before {
         margin-top: 3px;
+        width: 35px;
+        height: 35px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
     }
@@ -242,11 +254,19 @@
     min-width: 35%;
     .ant-steps-item-content {
       margin-left: 20px;
-      margin-top: 10px;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1.80rem;
+      .ant-steps-item-title {
+        font-size: large;
+        font-weight: 400;
+        margin-left: 4%;
+        color: #000;
+      }
       &::before {
-        background-image: url(http://demoapi.qmaid.co/web/icons/blue.png);
+      margin-top: 2px;
+      width: 35px;
+      height: 35px;
+      background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
       }
     }
   }
@@ -256,7 +276,7 @@
     .ant-steps-item-content {
       margin-left: 20px;
       &::before {
-        background-image: url(http://demoapi.qmaid.co/web/icons/blue.png);
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
       }
     }
   }
@@ -288,21 +308,33 @@
   .ant-steps-horizontal-large {
     border-radius: 20px;
     height: 60px;
-    min-width: 20%;
+    min-width: 25%;
     margin-left: 2%;
     margin-right: 5%;
     .ant-steps-item-content {
       margin-left: 5px;
       margin-top: 10px;
-      font-weight: 400;
+      font-weight: 200;
       font-size: 1.25rem;
-    & .ant-steps-item:last-child {
-      padding-right: 25px;
-      padding-left: 25px;
-      padding-top: 3px;
-    }
+      .ant-steps-item-title {
+        font-size: large;
+        font-weight: 400;
+        margin-left: 4%;
+      }   
+      & .ant-steps-item:last-child {
+        padding-right: 25px;
+        padding-left: 25px;
+        padding-top: 3px;
+      }
+      &::before {
+        width: 35px;
+        height: 35px;          
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
+      }
     }
   }
+
+
 
   .ant-table-thead > tr > th,
   .ant-table-tbody > tr > td {
