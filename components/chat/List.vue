@@ -5,9 +5,9 @@
     :bordered="false"
     class="reduce-margin"
   >
-    <a-list-item slot="renderItem" slot-scope="conversation">
+    <a-list-item slot="renderItem" slot-scope="conversation" @click="getConversation(conversation)" style="cursor:pointer">
       <a-list-item-meta :description="conversation.message">
-        <a slot="title" @click="getConversation(conversation)">
+        <a slot="title" >
           <span v-if="conversation.isOwner">{{
             conversation.recipient_Name
           }}</span>
