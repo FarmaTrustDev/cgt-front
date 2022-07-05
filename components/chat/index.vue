@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-page">
+  <div class="chat-page chat-card-padding">
     <!-- <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button> -->
     <a-row class="grey-card">
       <a-col :span="9" class="left-bar">
