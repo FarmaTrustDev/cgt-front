@@ -95,6 +95,7 @@
           <span>
             <!-- //Steps -->
             <div class="treatment-steps" style="width:100%; margin-left:-3%; padding-right:2%">
+              <span class="step-col-large">
               <a-steps size="small">
                 <a-step
                   v-for="phase in phases"
@@ -104,6 +105,7 @@
                   @click="reDirect(phase.url_slug,phase.alias)"
                 />
               </a-steps>
+              </span>
             </div>
             <!-- //Steps -->
           </span> 

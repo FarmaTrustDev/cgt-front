@@ -1,5 +1,5 @@
 <template>
-  <span class="step-col" functional>
+  <span class="step-col">
     <a-steps
       :current="getCurrentStep(treatment)"
       :initial="1"
