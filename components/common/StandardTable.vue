@@ -257,7 +257,7 @@ export default {
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
     showPagination: { type: Boolean, default: true },
-    shouldUpdate: {type: Boolean, default: true},
+    shouldUpdate: {type: Boolean, default: false},
   },
 
   data() {
