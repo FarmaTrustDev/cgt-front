@@ -79,7 +79,7 @@
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
-                  <a-steps :initial="1" :current="1" size="default">
+                  <a-steps :initial="1" :current="1" size="small">
                     <a-step
                       v-for="phase in phases"
                       :key="phase.id"
@@ -114,7 +114,7 @@
               <!-- ==== steps === -->
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
-                  <a-steps :initial="1" :current="1" size="default">
+                  <a-steps :initial="1" :current="1" size="small">
                     <a-step
                       v-for="phase in outboundSteps"
                       :key="phase.id"

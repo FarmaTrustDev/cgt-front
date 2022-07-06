@@ -52,13 +52,14 @@ import { isArray } from '~/services/Helpers'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
 import TranslationServices from '~/services/API/TranslationServices'
 import translationHelpers from '~/mixins/translation-helpers'
+import routeHelpers from '~/mixins/route-helpers'
 const connection = new HubConnectionBuilder()
   .withUrl('https://demoapi.qmaid.co/NotificationUserHub')
   .build()
 connection.start()
 export default {
   name: 'Header',
-  mixins: [translationHelpers],
+  mixins: [translationHelpers, routeHelpers],
   data() {
     return {
       languages: [
@@ -122,6 +123,7 @@ export default {
     },
     selectLanguage(language) {
       this.fetchLanguages(language)
+      // this.goto(`${this.$route.path}`)
     },
     async fetchLanguages(language) {
       await TranslationServices.get({ [language]: true }).then(

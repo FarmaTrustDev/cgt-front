@@ -95,7 +95,7 @@
           <span>
             <!-- //Steps -->
             <div class="treatment-steps" style="width:100%; margin-left:-3%; padding-right:2%">
-              <a-steps size="default">
+              <a-steps size="small">
                 <a-step
                   v-for="phase in phases"
                   :key="phase.id"

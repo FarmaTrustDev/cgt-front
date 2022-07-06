@@ -20,7 +20,7 @@
       <a-table
         :columns="columns"
         :data-source="datasource"
-        class="rounded-table pt-10 page-footer"
+        class="rounded-table pt-10"
         :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
       >
         <template slot="action" slot-scope="action">

@@ -1,8 +1,11 @@
 <template>
   <div>
-    <a-table :data-source="data" :columns="column">
+    <a-table :data-source="data" :columns="column" class="rounded-table">
+      <template slot="userName" slot-scope="text, record">
+        <p> {{record.firstName}} {{record.lastName}}</p>
+      </template>
       <template slot="message" slot-scope="text, record">
-        <a-button type="" @click="getUser(text, record)"> view</a-button>
+        <a-button type="primary" @click="getUser(text, record)"> Message</a-button>
       </template>
     </a-table>
   </div>
@@ -15,9 +18,16 @@ export default {
     return { column:[
   {
     title: `${this.$store.getters.getTranslation.Name_1_138}`,
-    dataIndex: 'userName',
+    // dataIndex: ['firstName',"lastName"],
     key: 'name',
-    width: '90%',
+    width: '40%',
+    scopedSlots: { customRender: 'userName' },
+  },
+  {
+    title: `Email Address`,
+    dataIndex: 'email',
+    key: 'email',
+    width: '40%',
   },
   {
     title: `${this.$store.getters.getTranslation.Actio_1_220}`,

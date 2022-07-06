@@ -76,6 +76,7 @@
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
   color: #3869d1;
   background-color: #f2f5fb !important;
+  border: 0.1px solid #a3c9ff;
 }
 
 .ant-tabs-card-bar {
@@ -134,7 +135,7 @@
   .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
     font-size: 1.125rem;
     height: 1%;
-    font-weight: 400;
+    font-weight: 350;
     padding: 0.5% 7%;
     border-radius: 22px;
     margin-right: 30px;
@@ -144,7 +145,7 @@
       width: 3px;
       height: 60%;
       position: absolute;
-      right: -6%;
+      right: -8%;
       top: 0;
       bottom: 0;
       margin: auto;
@@ -158,7 +159,7 @@
 }
 .selection-tab {
   .ant-select-selection {
-    padding: 15px 1px 40px 1px;
+    padding: 19px 5px 43px 10px;
   }
   .ant-select-selection__rendered {
     line-height: 25px;
