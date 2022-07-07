@@ -79,6 +79,7 @@
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
+                  <span class="step-col" functional>
                   <a-steps :initial="1" :current="1" size="small">
                     <a-step
                       v-for="phase in phases"
@@ -89,6 +90,7 @@
                       @click="(phase.id===2 && record.processSample=='red') ? stepClick('error', '/inventory/storage/quarantine/status') : stepClick(record, phase)"
                     />
                   </a-steps>
+                  </span>
                 </div>
 
                 <!-- //Steps -->
@@ -114,6 +116,7 @@
               <!-- ==== steps === -->
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
+                  <span class="step-col" functional>
                   <a-steps :initial="1" :current="1" size="small">
                     <a-step
                       v-for="phase in outboundSteps"
@@ -123,6 +126,7 @@
                       @click="stepClick(record, phase)"
                     />
                   </a-steps>
+                  </span>
                 </div>
               </span>
 

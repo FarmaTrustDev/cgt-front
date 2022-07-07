@@ -93,15 +93,19 @@
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:100%; margin-left:-3%; padding-right:2%">
+            <div class="treatment-steps" style="width:100%; margin-left:-3%;">
+              <span class="step-col-large" functional>
               <a-steps :initial="1" :current="1" size="small">
+                
                 <a-step
                   v-for="phase in phases"
                   :key="phase.id"
                   :title="phase.name"
                   :class="(phase.id===1) ? 'ant-steps-item-active-large': (phase.id===2) ? 'ant-steps-item-error-large' : 'ant-steps-horizontal-large'"
                 />
+                
               </a-steps>
+              </span>
             </div>
             <!-- //Steps -->
           </span> 

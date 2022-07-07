@@ -277,7 +277,7 @@
         <a-form-item
           :label="translation.PostaCode_3_651"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
+          :wrapper-col="{ span: 23 }"
         >
           <a-input
             v-decorator="[
@@ -344,8 +344,10 @@
           :label="translation.Count_1_49"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
+         
         >
           <a-select
+
             v-decorator="[
               'countryId',
               {
@@ -363,10 +365,10 @@
             :placeholder="translation.Count_1_49"
             style="width: 100%"
             size="large"
-            class="default-select"
+            class="default-select pt-2"
             @search="searchCountries"
           >
-            <a-select-option v-for="country in countries" :key="country.id">
+            <a-select-option v-for="country in countries" :key="country.id" >
               {{ country.name }}
             </a-select-option>
           </a-select>
