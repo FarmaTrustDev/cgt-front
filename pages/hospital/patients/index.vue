@@ -50,28 +50,19 @@ export default {
           title: `PUID`,
           dataIndex: 'enrollmentNumber',
           key: 'PUID',
-          width: 110,
-          scopedSlots: {
-            filterDropdown: 'filterDropdown',
-            filterIcon: 'filterIcon',
-          },
+          width: '5%',
         },
         {
           title: `${this.$store.getters.getTranslation.PatieName_2_93}`,
           dataIndex: 'name',
           key: 'name',
-          width: 150,
-          scopedSlots: {
-            customRender: 'name',
-            filterDropdown: 'filterDropdown',
-            filterIcon: 'filterIcon',
-          },
+          width: '10%',
         },
         {
           title: `${this.$store.getters.getTranslation._1_442}`,
           dataIndex: 'treatmentTypeId',
           key: 'treatmentTypeId',
-          width: 100,
+          width: '10%',
           scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {
@@ -86,6 +77,7 @@ export default {
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'action',
+          width: '10%',
           scopedSlots: { customRender: 'patientAction' },
         },
       ],

@@ -20,7 +20,7 @@
 
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
-          <span class="treatmentName">{{ treatment.treatmentTypeName }}</span>
+          <span  style="margin-top:3px;" class="treatmentName">{{ treatment.treatmentTypeName }}</span>
         </strong>
       </template>
 
@@ -60,13 +60,16 @@
           theme="twoTone"
         />
       </template>
+
       <span slot="treatment_status" slot-scope="text, record">
-        <div class="treatment-steps">
+        
           <span
             v-for="treatment in record.treatments"
             :key="treatment.id"
             :class="getTreatmentStepClass(record, treatment)"
           >
+          <div style="display:flex; width:100%">
+          <div class="treatment-steps" style="width:96%; margin-top:3px; display:flex1">
             <steps
               :treatment="treatment"
               :phases="phases"
@@ -74,8 +77,12 @@
               :patient="record"
               :goto-view="stepClick"
             ></steps>
+          </div>
+          <div style="width:1%; margin-top:1px; display:flex2"><span class="vertical-line"></span></div>
+          <div style="width:3%; height:100%; margin-top:8px; margin-bottom:7px">
+            
             <a-dropdown>
-              <a-button class="btn-view-timeline" type="primary" size="small">
+              <a-button class="btn-view-timeline" style="height: 25px; border-radius: 9px;" type="primary" size="small">
                 {{ translation['Admin_1_142'] }}
               </a-button>
               <a-menu slot="overlay">
@@ -111,8 +118,9 @@
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
+          </div>
+          </div>
           </span>
-        </div>
       </span>
 
       <span slot="action" slot-scope="text, record">
@@ -257,7 +265,7 @@ export default {
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
     showPagination: { type: Boolean, default: true },
-    shouldUpdate: {type: Boolean, default: true},
+    shouldUpdate: {type: Boolean, default: false},
   },
 
   data() {
