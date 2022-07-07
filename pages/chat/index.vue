@@ -4,7 +4,7 @@ getUser(users) {},
     :loading="loading"
     :title="translation.Chat_1_31"
     :bordered="borderCard"
-    class=" specific"
+    class="specific"
     :create="false"
   >
     <template slot="headerMenus">
