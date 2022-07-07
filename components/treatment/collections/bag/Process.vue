@@ -58,6 +58,7 @@
           <InstantUpload
             :saved-list="row.uploads"
             :action="bagService.uploads(row.id)"
+            :show-button="false"
           />
         </template>
         <template slot="action" slot-scope="name, row">

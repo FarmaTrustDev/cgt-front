@@ -2,7 +2,7 @@
   <div>
     <a-table
       :loading="loading"
-      :pagination="getPagination()"
+      :pagination="showPagination"
       :columns="columns"
       :data-source="shouldUpdate ? [...dumpData] : [...data]"
       class="rounded-table"
