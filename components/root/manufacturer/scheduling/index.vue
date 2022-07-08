@@ -1,17 +1,20 @@
 <template>
-  <div class="default-tabs">
+  <div class="grey-card enrollment-page">
+    <a-skeleton :loading="loading" >
     <a-tabs
+      class="ant-card schedule-create-tabs"
       tab-position="left"
       :default-active-key="activeTab"
       @change="tabChange"
     >
-      <a-tab-pane :key="1" :tab="translation.Detai_1_346"
+      <a-tab-pane :key="1" :tab="translation.Detai_1_346" class="m-3"
         ><Form :treatment="treatment" @getEntity="getEntity" />
       </a-tab-pane>
-      <a-tab-pane :key="2" :disabled="!isCreated" :tab="translation.Avail_1_450"
+      <a-tab-pane :key="2" :disabled="!isCreated" :tab="translation.Avail_1_450" class="m-3"
         ><Availability v-if="isCreated" :manufacturer-treatment="entity" />
       </a-tab-pane>
     </a-tabs>
+    </a-skeleton>
   </div>
 </template>
 

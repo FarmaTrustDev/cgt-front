@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormActionButton :text="translation.Add_1_488+' '+translation.Scree_1_679" @click="handleCategoryModal(true)" />
+    <FormActionButton text="Add Question" @click="handleCategoryModal(true)" />
     <a-alert
       v-if="data.length <= 0"
       type="info"
