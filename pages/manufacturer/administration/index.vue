@@ -8,7 +8,7 @@
             <div class="admin-tab">
               <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
 
-              <img width="55px" :src="menu.icon" />
+              <img width="75px" :src="menu.icon" />
               <h4 style="font-size: 1.125rem" class="heading-home">
                 {{ translation[menu.name] }}
               </h4>

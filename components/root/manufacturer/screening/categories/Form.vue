@@ -30,7 +30,7 @@
             type="hidden"
           />
         </a-form-item>
-        <FormActionButton :loading="btnLoading" :is-created="isCreated">
+        <FormActionButton :loading="btnLoading" text="Submit" :is-created="isCreated">
           <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" />
         </FormActionButton>
       </a-form>
