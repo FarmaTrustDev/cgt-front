@@ -5,6 +5,7 @@
         :columns="column"
         :api-service="ManufacturerTreatmentServices"
         :action-link="ActionLink"
+        :button-name = "`Manage Availabililty`"
       />
     </template>
   </page-layout>
@@ -37,8 +38,8 @@ export default {
   },
   {
     title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'action' },
+    dataIndex: 'btn',
+    scopedSlots: { customRender: 'btn' },
   },
 ],
       loading: false,

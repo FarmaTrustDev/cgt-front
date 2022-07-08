@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-skeleton :loading="loading">
+    <!-- <a-skeleton :loading="loading"> -->
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <LookupsTreatmentType
           :disabled="isCreated"
@@ -24,6 +24,8 @@
             placeholder="Insert Description"
           />
         </a-form-item>
+        <a-row>
+        <a-col :span="11">
         <a-form-item :label="translation.Durat_1_71">
           <a-input-number
             v-decorator="[
@@ -39,13 +41,16 @@
               },
             ]"
             size="large"
-            class="default-select w-100"
+            class="default-select w-100 float-left"
             type="number"
             placeholder="Please input Duration"
           >
             <a-icon slot="prefix" type="calendar"
           /></a-input-number>
         </a-form-item>
+        </a-col>
+        <a-col :span="2"></a-col>
+        <a-col :span="11">
         <a-form-item :label="translation.Price_1_73">
           <a-input-number
             v-decorator="[
@@ -62,16 +67,18 @@
             ]"
             size="large"
             type="number"
-            class="default-select w-100"
+            class="default-select w-100 float-right"
             placeholder="Please input Price"
           >
             <span slot="prefix">$</span>
           </a-input-number>
         </a-form-item>
-        <FormActionButton :loading="btnLoading" :is-created="isCreated">
+        </a-col>
+        </a-row>
+        <FormActionButton text="Next" :loading="btnLoading" :is-created="isCreated">
         </FormActionButton>
       </a-form>
-    </a-skeleton>
+    <!-- </a-skeleton> -->
   </div>
 </template>
 <script>

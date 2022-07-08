@@ -15,7 +15,7 @@
                   heading: hospital.name,
                 }"
                 :img-properties="{
-                  width: '35px',
+                  width: '30px',
                 }"
               >
                 <span slot="extra">

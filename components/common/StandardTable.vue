@@ -124,8 +124,13 @@
       </span>
 
       <span slot="action" slot-scope="text, record">
-        <a-button type="link" @click="goto(`${actionLink}/${record.globalId}`)">
+        <a-button type="link" @click="goto(`${actionLink}/${record.globalId}`)" >
           <a-icon type="edit" />
+        </a-button>
+      </span>
+      <span slot="btn" slot-scope="text, record">
+        <a-button type="primary" @click="goto(`${actionLink}/${record.globalId}`)">
+          {{buttonName}}
         </a-button>
       </span>
 
@@ -256,6 +261,7 @@ export default {
     // eslint-disable-next-line vue/require-prop-types
     // pagination: { required: false, default: false },
     actionLink: { type: String, default: '' },
+    buttonName: {type:String, default:''},
     // eslint-disable-next-line vue/require-default-prop
     apiService: { type: Object, required: false },
     // eslint-disable-next-line vue/require-default-prop
