@@ -54,6 +54,7 @@ import { isArray } from '~/services/Helpers'
 import { EVENT_CHAT_NOTIFICATION } from '~/services/Constant/Events'
 import TranslationServices from '~/services/API/TranslationServices'
 import translationHelpers from '~/mixins/translation-helpers'
+import ChatServices from '~/services/API/ChatServices'
 import { BASE_URL } from '~/services/Constant/index'
 
 const connection = new HubConnectionBuilder()
@@ -127,6 +128,12 @@ export default {
     genericNotificationHandler() {
       connection.on('GenericNotification', (notification) => {
         console.log(notification)
+        this.fetchUnreadMessages()
+      })
+    },
+    fetchUnreadMessages() {
+      ChatServices.fetchUnreadMessages((messages) => {
+        console.log(messages)
       })
     },
     emitNotification(notification) {
