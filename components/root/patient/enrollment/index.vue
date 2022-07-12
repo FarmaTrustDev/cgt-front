@@ -8,7 +8,7 @@
           @getNextTab="getNextTab"
           />
         </a-tab-pane>
-        <a-tab-pane key="Consent" :disabled="!isCreated" :tab="translation['Conse_1_677']"
+        <a-tab-pane key="Consent" :disabled="!isCreated" :tab="translation['Conse_1_677']" 
           ><consent
             :treatment="treatment"
             @getNextTab="getNextTab"

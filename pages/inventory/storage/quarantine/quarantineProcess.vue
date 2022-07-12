@@ -89,19 +89,23 @@
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
-          style="width:95%; margin-left:2%"
+          style="width:95%; margin-left:2%;"
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:95%">
-              <a-steps :initial="1" :current="1" size="default">
+            <div class="treatment-steps" style="width:100%; margin-left:-3%;">
+              <span class="step-col-large" functional>
+              <a-steps :initial="1" :current="1" size="small">
+                
                 <a-step
                   v-for="phase in phases"
                   :key="phase.id"
                   :title="phase.name"
                   :class="(phase.id===1) ? 'ant-steps-item-active-large': (phase.id===2) ? 'ant-steps-item-error-large' : 'ant-steps-horizontal-large'"
                 />
+                
               </a-steps>
+              </span>
             </div>
             <!-- //Steps -->
           </span> 
@@ -111,7 +115,7 @@
           class="mt-15 default-card inbound-accept-tabs"
           style="width:95%; margin-left:2%"
         >
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%;">
           
           <div>        
           <strong style="font-size:1.25rem;">Quality Assurance Checklist</strong>

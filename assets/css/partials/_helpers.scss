@@ -23,6 +23,7 @@
 }
 
 .text-muted {
+  font-weight: 400;
   color: #6c757d;
 }
 
@@ -129,4 +130,21 @@
   .ant-list-item {
     padding: 3px 0;
   }
+}
+.page-footer {
+  .ant-table-pagination.ant-pagination {
+    // float: left;
+    display: inline-block;
+    .ant-pagination-options {
+      float: left;
+      .ant-select-selection--single{
+        float:left;
+      }
+  } 
+  }
+  .ant-pagination-options-size-changer.ant-select {
+    display: inline-block;
+    width: auto;
+    margin-right: 1140px;
+}
 }

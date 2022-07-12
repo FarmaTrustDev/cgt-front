@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-spin :spinning="loading">
-      <FormActionButton :text="translation.Add_1_488" @click="addCollection" />
+      <FormActionButton text="Add Process Steps" @click="addCollection" />
       <standardTable
         v-if="showTable"
         :columns="column"
@@ -53,7 +53,7 @@ export default {
       showTable: false,
       column:[
   {
-    title: `${this.$store.getters.getTranslation.Name_1_138}`,
+    title: `Process Steps`,
     dataIndex: 'name',
     key: 'name',
     width: '90%',

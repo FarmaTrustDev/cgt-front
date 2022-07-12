@@ -5,6 +5,7 @@
         :columns="column"
         :api-service="ScreeningTemplateServices"
         :action-link="ActionLink"
+        :button-name="`Process Admin`"
       />
     </template>
   </page-layout>
@@ -38,8 +39,8 @@ export default {
   },
   {
     title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'action' },
+    dataIndex: 'btn',
+    scopedSlots: { customRender: 'btn' },
   },
 ],
       ScreeningTemplateServices,

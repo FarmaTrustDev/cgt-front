@@ -12,8 +12,13 @@ $defaultHeight: calc(100vh - 100px);
 }
 
 .chat-page {
+  .ant-avatar {
+    width: 70px;
+    height: 70px;
+}
   .ant-list-split .ant-list-item {
     border-bottom: none;
+    padding-top: 3%;
   }
   .ant-comment {
     min-width: 50%;
@@ -37,10 +42,19 @@ $defaultHeight: calc(100vh - 100px);
     .ant-list-item-meta-title {
       font-size: 	1.25rem;
       color: #6c757d;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
+    .ant-list-item-meta-content{
+      padding-top:2%;
     }
     .ant-list-item-meta-description {
-      font-size: 	0.625rem;
+      font-size: 	0.675rem;
       color: #6c757d;
+      white-space: nowrap;
+      width: 44%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -76,6 +90,7 @@ $defaultHeight: calc(100vh - 100px);
       font-size:	0.875rem;
       font-weight: bold;
       border-radius: 22px;
+      
     }
     .message-sent {
       justify-content: right;
@@ -122,6 +137,16 @@ $defaultHeight: calc(100vh - 100px);
 }
 
 .chat-container-height {
-  max-height: 660px;
-  overflow-x: auto;
+  max-height: 100%;
+  overflow-x: hidden;
+}
+.chat-card-padding{
+  .grey-card{
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
 }

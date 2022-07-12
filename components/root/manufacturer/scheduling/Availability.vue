@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-date-picker
+    class="availability-calender"
       :open="openDatePicker"
       :disabled-date="disabledDate"
       format="YYYY-MM-DD HH:mm:ss"

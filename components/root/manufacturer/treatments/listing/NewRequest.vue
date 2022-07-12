@@ -1,7 +1,7 @@
 <template>
 <span>
     <Filters @getParams="getParams" />
-    <a-table :loading="loading" :columns="column" :data-source="data">
+    <a-table :loading="loading" :columns="column" :data-source="data" :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}">
         <span slot="action" slot-scope="text, record">
             <div v-if="showButton(record)">
                 <a-button type="primary" dashed @click="showConfirm(record, true)">
@@ -27,7 +27,7 @@
                     <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
                 </span></FormActionButton>
         </a-form>
-    </a-modal>
+    </a-modal> 
 </span>
 </template>
 

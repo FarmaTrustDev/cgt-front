@@ -4,6 +4,7 @@
     :api-service="ManufacturerTreatmentServices"
     :fetch-from="ManufacturerTreatmentServices.getTreatmentTypes"
     :action-link="actionLink"
+    :button-name="`Process Admin`"
   />
 </template>
 <script>
@@ -24,20 +25,19 @@ export default {
     return {
       column:[
   {
-    title: `${this.$store.getters.getTranslation.Treat_1_29}`,
+    title: `Process Steps`,
     dataIndex: 'name',
     key: 'name',
   },
 
   {
     title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'action' },
+    dataIndex: 'btn',
+    scopedSlots: { customRender: 'btn' },
   },
 ],
       loading: false,
       ManufacturerTreatmentServices,
-
       borderCard: false,
     }
   },

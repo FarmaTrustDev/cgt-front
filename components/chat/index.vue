@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-page">
+  <div class="chat-page chat-card-padding">
     <!-- <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button> -->
     <a-row class="grey-card">
       <a-col :span="9" class="left-bar">
@@ -10,7 +10,7 @@
               @getConversation="getConversation" /></a-spin
         ></a-card>
       </a-col>
-      <a-col :span="1"></a-col>
+     <a-col :span="1"></a-col>
       <a-col  :span="14" class="right-bar clearfix">
         <a-card :bordered="false" class="default-card height-100">
           <div class="max-h-200" >
@@ -47,8 +47,9 @@
     </a-modal>
     <a-modal
       :visible="usersModal"
-      :title="translation.adduser_2_464"
+      title="Users List"
       :footer="null"
+      width="40%"
       @cancel="showUsersModal(false)"
     >
       <UserList @getUser="getUser" />
@@ -77,6 +78,7 @@ export default {
       endToEndConversationLoader: false,
       scrollMethod: () => {},
       groupModal: false,
+      newConversations:[],
     }
   },
   computed: {
@@ -101,7 +103,14 @@ export default {
 
       ChatServices.getConversations()
         .then((conversations) => {
-          this.conversations = conversations.data
+          for(const dat in conversations.data){
+            if(conversations.data[dat].id === 925 || conversations.data[dat].id === 913){console.log('hello')}else{
+              this.newConversations.push(conversations.data[dat])
+              this.conversations.push(conversations.data[dat])
+            }
+          }
+          console.log(this.newConversations)
+          // this.conversations = conversations.data
         })
         .catch((e) => {})
         .finally(() => {

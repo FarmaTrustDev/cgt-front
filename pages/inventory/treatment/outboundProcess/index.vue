@@ -87,8 +87,6 @@
             </a-col>
           </a-row>
         </div>
-
-
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
@@ -96,19 +94,23 @@
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:95%">
-              <a-steps size="default">
-                <a-step
-                  v-for="phase in phases"
-                  :key="phase.id"
-                  :title="phase.name"
-                  :class="(phase.id==1) ? 'ant-steps-item-active-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
-                  @click="reDirect(phase.url_slug,phase.alias)"
-                />
-              </a-steps>
+            
+            <div class="treatment-steps" style="width:100%; margin-left:-3%;">
+              <span class="step-col-large">
+              <a-steps size="small">
+                  <a-step
+                    v-for="phase in phases"
+                    :key="phase.id"
+                    :title="phase.name"
+                    :class="(phase.id==1) ? 'ant-steps-item-active-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
+                    @click="reDirect(phase.url_slug,phase.alias)"
+                  />
+                </a-steps>
+              </span> 
             </div>
+            </span>
             <!-- //Steps -->
-          </span> 
+          
         </a-card>
 
         <a-card
@@ -118,7 +120,7 @@
           style="width:90%; margin-left:5%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%; margin-left:-1%">
               <Process
                 :collections="dummyOutBoundCollection"
                 :bag-id="'BUID-123'"
@@ -138,7 +140,7 @@
           style="width:90%; margin-left:5%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%;">
 
               <div>
                 <a-skeleton :loading="loading">

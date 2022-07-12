@@ -94,8 +94,9 @@
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:95%">
-              <a-steps size="default">
+            <div class="treatment-steps" style="width:100%; margin-left:-3%; padding-right:2%">
+              <span class="step-col-large">
+              <a-steps size="small">
                 <a-step
                   v-for="phase in phases"
                   :key="phase.id"
@@ -104,6 +105,7 @@
                   @click="reDirect(phase.url_slug,phase.alias)"
                 />
               </a-steps>
+              </span>
             </div>
             <!-- //Steps -->
           </span> 
@@ -116,7 +118,7 @@
           style="width:95%; margin-left:2%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">
+        <div class="h-tabs large-tabs" style="width:100%; margin-left:-3%">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
@@ -231,7 +233,7 @@
           style="width:95%; margin-left:2%"
         >
 
-        <div class="h-tabs large-tabs" style="width:90%; margin-left:5%">              
+        <div class="h-tabs large-tabs" style="width:100%;">              
               <div>
               <strong style="font-size:1.25rem">{{ translation.QualiAssur_3_565 }}</strong>
               <Process

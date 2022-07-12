@@ -4,14 +4,14 @@ getUser(users) {},
     :loading="loading"
     :title="translation.Chat_1_31"
     :bordered="borderCard"
-    class="patient-page specific"
+    class="specific"
     :create="false"
   >
     <template slot="headerMenus">
       <a-button type="primary" @click="showZoomModal(true)"
         >{{translation.Newzoom_3_119}}</a-button
       >
-      <a-button type="primary" @click="showModal(true)">{{translation.adduser_2_464}}</a-button>
+      <a-button type="primary" @click="showModal(true)">Users</a-button>
       <a-button type="primary" @click="showGroupModal(true)"
         >{{translation.AddGroup_2_456}}</a-button
       >

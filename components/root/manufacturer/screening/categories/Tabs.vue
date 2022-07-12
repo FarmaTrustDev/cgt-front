@@ -20,7 +20,7 @@
         </a-tab-pane>
         <!-- // adding button -->
         <a-button slot="tabBarExtraContent" type="primary" @click="add">
-          {{translation.AddCateg_2_490}}
+          Pre Screening Questions
         </a-button>
       </a-tabs>
 
@@ -29,7 +29,7 @@
     <a-modal
       v-model="showCategoryModal"
       :destroy-on-close="true"
-      title="Category"
+      title="Add Group Name"
       :footer="null"
       @cancel="handleCategoryModal(false)"
     >

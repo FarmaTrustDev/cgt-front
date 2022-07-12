@@ -33,12 +33,12 @@
         <div>
           {{ translation.first }}
           <a-select
-            :default-value="selectedLanguage"
+            :default-value="isEmpty(selectedLanguage) ? 'en': selectedLanguage"
             style="width: 120px"
             @change="selectLanguage"
           >
             <a-select-option v-for="language in languages" :key="language.id">
-              {{ language.name }}
+              {{ language.name}}
             </a-select-option>
           </a-select>
         </div>
@@ -57,6 +57,7 @@ import translationHelpers from '~/mixins/translation-helpers'
 import ChatServices from '~/services/API/ChatServices'
 import { BASE_URL } from '~/services/Constant/index'
 
+import routeHelpers from '~/mixins/route-helpers'
 const connection = new HubConnectionBuilder()
   .withUrl(`${BASE_URL}NotificationUserHub`)
   .build()
@@ -65,7 +66,7 @@ connection.start()
 
 export default {
   name: 'Header',
-  mixins: [translationHelpers],
+  mixins: [translationHelpers, routeHelpers],
   data() {
     return {
       languages: [
@@ -141,6 +142,7 @@ export default {
     },
     selectLanguage(language) {
       this.fetchLanguages(language)
+      // this.goto(`${this.$route.path}`)
     },
     async fetchLanguages(language) {
       await TranslationServices.get({ [language]: true }).then(

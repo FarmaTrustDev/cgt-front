@@ -1,5 +1,5 @@
 .enrollment-page {
-  margin: 20px 45px;
+  margin: 2% 2%;
 
   .ant-tabs .ant-tabs-left-content {
     border-left: unset;
@@ -50,6 +50,7 @@
   .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
     text-align: left;
     padding: 25px;
+    margin-left: 3%;
   }
 
   .consent-page {
@@ -183,5 +184,15 @@
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
+  }
+}
+.schedule-create-tabs{
+  .enrollment-page{
+    .ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
+    .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
+      text-align: left;
+      padding: 10px;
+      margin-left: 3%;
+    }
   }
 }
