@@ -19,7 +19,12 @@
               <a-menu-item
                 v-for="notification in notifications"
                 :key="notification.id"
-                >{{ notification.message }}
+                ><strong
+                  ><p class="m-0">{{ notification.recipient_Name }}</p></strong
+                >
+                <span class="ellipsis border-bottom">{{
+                  notification.message
+                }}</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
