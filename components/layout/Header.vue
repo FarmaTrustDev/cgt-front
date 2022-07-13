@@ -16,7 +16,11 @@
               /></a-badge>
             </a>
             <a-menu slot="overlay" class="notifications-dropdown">
-              <a-menu-item key="0"> Notifications here </a-menu-item>
+              <a-menu-item
+                v-for="notification in notifications"
+                :key="notification.id"
+                >{{ notification.message }}
+              </a-menu-item>
             </a-menu>
           </a-dropdown>
         </div>
@@ -80,6 +84,7 @@ export default {
       ],
       lang: null,
       notificationCount: 0,
+      notifications: [],
     }
   },
   async fetch() {
@@ -140,6 +145,7 @@ export default {
     fetchUnreadMessages() {
       ChatServices.fetchUnreadMessages().then((response) => {
         this.notificationCount = response.count
+        this.notifications = response.data
       })
     },
     emitNotification(notification) {
