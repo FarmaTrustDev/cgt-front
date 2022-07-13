@@ -157,7 +157,7 @@ import { isEmpty } from '~/services/Helpers'
 import { _getFormatMoment, getMomentByStandardFormat, } from '~/services/Helpers/MomentHelpers'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
-  istreatment : true,
+  
   mixins: [routeHelpers],
   props: {
     removeList: { type: Boolean, default: true },
@@ -166,6 +166,7 @@ export default {
   data() {
     return {
       treatments: [],
+      istreatment : true,
     }
   },
   computed: {

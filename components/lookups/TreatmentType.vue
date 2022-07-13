@@ -13,7 +13,7 @@
             v-decorator="[
               'treatmentTypeId',
               {
-                initialValue: treatmentTypeId || undefined,
+                initialValue: treatmentTypeName || undefined,
                 rules: [
                   {
                     required: true,
@@ -58,7 +58,9 @@ import TreatmentService from '~/services/API/TreatmentTypeServices'
 export default {
   props: {
     treatmentTypeId: { type: Number, default: null },
+    treatmentTypeName: { type: String, default: null},
     disabled: { type: Boolean, default: false },
+    active:{ type: Boolean, default: false},
   },
 
   data() {
@@ -78,11 +80,19 @@ export default {
   methods: {
     fetchTreatmentTypes() {
       this.typeLoading = true
-      TreatmentService.get()
-        .then((response) => {
-          this.treatmentTypes = response.data
-        })
-        .finally(() => (this.typeLoading = false))
+      if(this.active){
+        TreatmentService.getWithScreening()
+          .then((response) => {
+            this.treatmentTypes = response.data
+          })
+          .finally(() => (this.typeLoading = false))
+      }else{
+        TreatmentService.getRemaining()
+          .then((response) => {
+            this.treatmentTypes = response.data
+          })
+          .finally(() => (this.typeLoading = false))
+      }
     },
     onchange(value, e) {
       this.$emit('onChange', value)

@@ -30,8 +30,8 @@
           :is-created="false"
           ><span slot="extra" class="mr-5">
             <a-button @click="handleModal(false)">Cancel</a-button>
-          </span></FormActionButton
-        >
+          </span>
+        </FormActionButton>
       </a-form>
     </a-modal>
   </div>
@@ -135,6 +135,7 @@ export default {
               this.fetch()
             }
           )
+          this.goto(`/logistic/shipment/${data.globalId}`)
         }
       })
       this.loading = false
