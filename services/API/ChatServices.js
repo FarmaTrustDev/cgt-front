@@ -40,8 +40,15 @@ function createGroup(data) {
   })
 }
 
+function fetchUnreadMessages(params = {}) {
+  return request({
+    url: `${baseApi}/get-unread-notifications`,
+    params,
+  })
+}
+
 const ChatServices = {
-  getConversations, create, get, fetchGroup, createGroup
+  getConversations, create, get, fetchGroup, createGroup, fetchUnreadMessages
 }
 
 export default ChatServices
