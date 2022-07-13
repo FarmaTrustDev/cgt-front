@@ -10,7 +10,10 @@
         <div class="notifications">
           <a-dropdown :trigger="['click']">
             <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
-              <a-icon type="bell" theme="filled" />
+              <!-- <a-icon type="bell" theme="filled" /> -->
+              <a-badge :count="notificationCount"
+                ><a-avatar shape="square" icon="bell"
+              /></a-badge>
             </a>
             <a-menu slot="overlay" class="notifications-dropdown">
               <a-menu-item key="0"> Notifications here </a-menu-item>
@@ -33,12 +36,12 @@
         <div>
           {{ translation.first }}
           <a-select
-            :default-value="isEmpty(selectedLanguage) ? 'en': selectedLanguage"
+            :default-value="isEmpty(selectedLanguage) ? 'en' : selectedLanguage"
             style="width: 120px"
             @change="selectLanguage"
           >
             <a-select-option v-for="language in languages" :key="language.id">
-              {{ language.name}}
+              {{ language.name }}
             </a-select-option>
           </a-select>
         </div>
@@ -76,6 +79,7 @@ export default {
         { id: 'ar', name: 'Arabic' },
       ],
       lang: null,
+      notificationCount: 0,
     }
   },
   async fetch() {
@@ -95,6 +99,7 @@ export default {
   mounted() {
     this.notificationHandler()
     this.genericNotificationHandler()
+    this.fetchUnreadMessages()
     // this.uploadTranslations()
     // this.downloadTranslations()
   },
@@ -127,14 +132,14 @@ export default {
       })
     },
     genericNotificationHandler() {
+      const fetchUnreadMessages = this.fetchUnreadMessages
       connection.on('GenericNotification', (notification) => {
-        console.log(notification)
-        this.fetchUnreadMessages()
+        fetchUnreadMessages()
       })
     },
     fetchUnreadMessages() {
-      ChatServices.fetchUnreadMessages((messages) => {
-        console.log(messages)
+      ChatServices.fetchUnreadMessages().then((response) => {
+        this.notificationCount = response.count
       })
     },
     emitNotification(notification) {
