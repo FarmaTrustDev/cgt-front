@@ -32,6 +32,7 @@ import newRequests from '~/components/root/manufacturer/treatments/listing/NewRe
 import All from '~/components/root/manufacturer/treatments/listing/All'
 import Completed from '~/components/root/manufacturer/treatments/listing/Completed'
 import inProgress from '~/components/root/manufacturer/treatments/listing/InProgress'
+import TreatmentService from '~/services/API/TreatmentTypeServices'
 // @todo for Naveed here optimize in 1 table single component can handle the calls
 export default {
   components: {
@@ -44,6 +45,7 @@ export default {
     return {
       loading: false,
       treatmentTypes: [],
+      typeLoading: false,
     }
   },
   computed: {
@@ -51,8 +53,19 @@ export default {
       return this.$store.getters.getTranslation
     },
   }, 
+  mounted() {
+    this.fetchTreatmentTypes()
+  },  
   methods: {
     searchTreatment() {},
+    fetchTreatmentTypes() {
+      this.typeLoading = true
+        TreatmentService.getActive()
+          .then((response) => {
+            this.treatmentTypes = response.data
+          })
+          .finally(() => (this.typeLoading = false))    
+    },
   },
 }
 </script>

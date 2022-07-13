@@ -10,12 +10,12 @@
               @getConversation="getConversation" /></a-spin
         ></a-card>
       </a-col>
-     <a-col :span="1"></a-col>
-      <a-col  :span="14" class="right-bar clearfix">
+      <a-col :span="1"></a-col>
+      <a-col :span="14" class="right-bar clearfix">
         <a-card :bordered="false" class="default-card height-100">
-          <div class="max-h-200" >
-            <a-spin class="p-0"  :spinning="endToEndConversationLoader">
-              <Conversation               
+          <div class="max-h-200">
+            <a-spin class="p-0" :spinning="endToEndConversationLoader">
+              <Conversation
                 v-if="!isEmpty(recipient)"
                 :recipient="recipient"
                 :data="endToEndConversation"
@@ -27,7 +27,7 @@
                   {{ translation.SelecUser_5_117 }}
                 </span>
                 <a-button type="primary" @click="showUsersModal(true)">
-                  {{translation.StartNow_2_457}}
+                  {{ translation.StartNow_2_457 }}
                 </a-button>
               </a-empty>
             </a-spin>
@@ -78,7 +78,7 @@ export default {
       endToEndConversationLoader: false,
       scrollMethod: () => {},
       groupModal: false,
-      newConversations:[],
+      newConversations: [],
     }
   },
   computed: {
@@ -103,13 +103,18 @@ export default {
 
       ChatServices.getConversations()
         .then((conversations) => {
-          for(const dat in conversations.data){
-            if(conversations.data[dat].id === 925 || conversations.data[dat].id === 913){console.log('hello')}else{
+          for (const dat in conversations.data) {
+            if (
+              conversations.data[dat].id === 925 ||
+              conversations.data[dat].id === 913
+            ) {
+              console.log('hello remove tis if printed')
+            } else {
               this.newConversations.push(conversations.data[dat])
               this.conversations.push(conversations.data[dat])
             }
           }
-          console.log(this.newConversations)
+
           // this.conversations = conversations.data
         })
         .catch((e) => {})

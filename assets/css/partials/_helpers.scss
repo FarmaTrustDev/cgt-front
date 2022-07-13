@@ -137,14 +137,22 @@
     display: inline-block;
     .ant-pagination-options {
       float: left;
-      .ant-select-selection--single{
-        float:left;
+      .ant-select-selection--single {
+        float: left;
       }
-  } 
+    }
   }
   .ant-pagination-options-size-changer.ant-select {
     display: inline-block;
     width: auto;
     margin-right: 1140px;
+  }
 }
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <LookupsTreatmentType @onChange="onTreatmentSelect" />
+      <LookupsTreatmentType @onChange="onTreatmentSelect" :active="true" />
       <a-alert
       v-if="message"
       type="info"
