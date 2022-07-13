@@ -21,6 +21,7 @@
     <div class="patient-page">
       <standardTable
         :columns="column"
+        :pagination="showPagination"
         :api-service="PatientServices"
         :action-link="ActionLink"
         :rounded="true"
@@ -66,7 +67,6 @@ export default {
           scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {
-          // title: 'Treatment Status',
           dataIndex: 'treatment_status',
           key: 'treatment_status',
           slots: { title: 'customTitle' },
@@ -86,6 +86,7 @@ export default {
       ActionLink,
       borderCard: false,
       fetchPatientService: {},
+      showPagination:true,
     }
   },
   /* computed:{
