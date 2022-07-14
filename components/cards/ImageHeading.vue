@@ -8,15 +8,14 @@
           <a-col :span="4" >
         <span>
           <img
-            style="margin-top: -40%; margin-bottom: -5%"
             :width="imgProperties.width"
-            class="img ml-5"
+            class="img ml-5 stat-image"
             :src="getImageUrl(detail.img)"
           />
         </span>
        </a-col>
           <a-col :span="16">
-        <figcaption style="margin-top:-10%">
+        <figcaption style="margin-top:-40px">
           {{ detail.heading }}
         </figcaption>
         </a-col>

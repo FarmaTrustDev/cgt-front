@@ -1,7 +1,7 @@
 <template>
   <div class="mt-3">
     <div class="page-header clearfix ">
-      <h3 class="page-title pl-10 float-left">{{translation['TreatList_2_258']}}</h3>
+      <h3 class="page-title pl-5 float-left">{{translation['TreatList_2_258']}}</h3>
       <a-select
         class="float-right page-search-input mr-6 ant-selection-placeholder selection-tab pr-5"
         :placeholder="translation.TreatType_2_67"

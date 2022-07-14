@@ -146,7 +146,7 @@ export default {
   margin-top: 15px;
   padding-left: 15px;
   .count-bar {
-    padding: 15px;
+    padding: 25px;
     display: inline-block;
     background-color: #e9f3ff;
     border-radius: 15px;

@@ -1,10 +1,8 @@
 <template>
-  <div class="support-page ml-30 mr-30">
+  <div class="specific-page">
     <a-row class="mt-25 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left ">
-          Support Issues
-        </h3>
+        <h3 class="page-title float-left">Support Issues</h3>
         <a-button
           type="primary"
           class="mrm-5 mrt float-right"
@@ -21,21 +19,16 @@
         </a-input>
       </div>
     </a-row>
-  <a-row>
-    <a-col >
-    <a-tabs type="card" @change="callback" >
+    <a-tabs type="card" @change="callback">
       <a-tab-pane key="1" :tab="translation.All_1_210">
         <a-table
-          :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }"
           class="rounded-table"
           :loading="loading"
           :data-source="data"
           :columns="columns"
-          :customRow="customRowReDirect"
+          :custom-row="customRowReDirect"
         >
-          <template slot="tickets" slot-scope="id">
-              CKD-{{ id }}
-          </template>
+          <template slot="tickets" slot-scope="id"> CKD-{{ id }} </template>
           <template slot="status" slot-scope="status, record">
             <span :class="'status status-' + getStatusName(status, record)">{{
               record.status_Name
@@ -63,17 +56,15 @@
         </a-table>
       </a-tab-pane>
       <a-tab-pane key="2" :tab="translation.Archi_1_226">
-        <Table type="archive" :dumpData="archivedData" />
+        <Table type="archive" :dump-data="archivedData" />
       </a-tab-pane>
       <a-tab-pane key="3" :tab="translation.InPro_1_533">
-        <InProgress type="inProgress" :dumpData="inprogressData" />
+        <InProgress type="inProgress" :dump-data="inprogressData" />
       </a-tab-pane>
       <a-tab-pane key="4" :tab="translation.Resol_1_230">
-        <Resolved type="resolved" :dumpData="resolvedData"  />
+        <Resolved type="resolved" :dump-data="resolvedData" />
       </a-tab-pane>
     </a-tabs>
-    </a-col>
-  </a-row>
     <!-- Add New Ticket Modal -->
     <a-skeleton :loading="loadingTicket">
       <add-new-ticket
@@ -107,8 +98,8 @@ export default {
       showAddModal: false,
       data: [],
       inprogressData: [],
-      resolvedData:[],
-      archivedData:[],
+      resolvedData: [],
+      archivedData: [],
       columns: [
         {
           title: `${this.$store.getters.getTranslation.date_1_510}`,
@@ -119,55 +110,55 @@ export default {
           title: `${this.$store.getters.getTranslation.TickeID_2_212}`,
           dataIndex: 'id',
           scopedSlots: { customRender: 'tickets' },
-          width:100,
+          width: 100,
         },
         {
           title: 'Name(PUID)',
           dataIndex: 'reporter_name',
-          width:100,
+          width: 100,
         },
         {
           title: `${this.$store.getters.getTranslation.BagID_2_540}`,
           dataIndex: 'reference_Id',
-          width:100,
+          width: 100,
         },
         {
           title: `${this.$store.getters.getTranslation.IssueDetai_2_214}`,
           dataIndex: 'description',
-          width:300,
+          width: 300,
         },
         {
           title: `${this.$store.getters.getTranslation.LastUpdat_2_216}`,
           dataIndex: 'last_Updated_At',
-          width:100,
+          width: 100,
         },
         {
           title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' },
-          width:100,
+          width: 100,
         },
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'actions',
           scopedSlots: { customRender: 'action' },
-          width:100,
+          width: 100,
         },
       ],
       loading: true,
       ticket: {},
       isCreated: false,
       loadingTicket: false,
-      globalId:'',
+      globalId: '',
     }
-  },
-  mounted() {
-    this.fetch()
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.fetch()
   },
   methods: {
     customRowReDirect(record) {
@@ -181,7 +172,7 @@ export default {
           },
         },
       }
-    },    
+    },
     showUpdate(record) {
       this.fetchTicket(record.id)
     },
@@ -211,23 +202,23 @@ export default {
       SupportServices.get(params)
         .then((response) => {
           this.data = response.ticket
-          for(const dat in this.data){
+          for (const dat in this.data) {
             // console.log(this.data[dat])
-            const dates=this.data[dat].created_At.split('T')[0]
-            this.data[dat].created_At=dates
+            const dates = this.data[dat].created_At.split('T')[0]
+            this.data[dat].created_At = dates
             // console.log(dates)
-            if(this.data[dat].reporter_name==='Test User (DAC3138N)'){
-              this.data[dat].reporter_name='Chris Murphy (DAC3138P)'
+            if (this.data[dat].reporter_name === 'Test User (DAC3138N)') {
+              this.data[dat].reporter_name = 'Chris Murphy (DAC3138P)'
             }
-            if(this.data[dat].status_Name==='In progress'){
+            if (this.data[dat].status_Name === 'In progress') {
               this.inprogressData.push(this.data[dat])
             }
-            if(this.data[dat].status_Name==='Resolved'){
+            if (this.data[dat].status_Name === 'Resolved') {
               this.resolvedData.push(this.data[dat])
             }
-            if(this.data[dat].status_Name==='Archived'){
+            if (this.data[dat].status_Name === 'Archived') {
               this.archivedData.push(this.data[dat])
-            }                        
+            }
           }
           // console.log(this.resolvedData)
           // this.data[1].reporter_name='Chris Murphy (DAC3138P)'

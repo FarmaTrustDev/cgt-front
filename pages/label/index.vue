@@ -1,6 +1,6 @@
 <template>
-  <div class="label-page">
-    <a-row class="p-10 mb-10">
+  <div class="label-page ">
+    <a-row class="p-10 mb-10 specific-card">
       <div class="page-header">
         <h3 class="page-title float-left">{{translation.Label_1_27}}</h3>
 
@@ -16,7 +16,7 @@
     </a-row>
 
     <a-row class="">
-      <a-skeleton :loading="loading">
+      <a-skeleton :loading="loading" class="specific-card">
         <Table :data="data"></Table>
       </a-skeleton>
     </a-row>

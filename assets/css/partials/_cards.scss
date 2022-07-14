@@ -1,4 +1,4 @@
-.grey-card{
+.grey-card {
   background-color: #f9f9f9;
   font-size: 0.875rem;
   font-weight: bold;
@@ -8,12 +8,12 @@
   padding-top: 4%;
   padding-bottom: 4%;
 
-  .ant-card{
+  .ant-card {
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     border-radius: 30px;
   }
-  .ant-card-body{
-    padding:5%;
+  .ant-card-body {
+    padding: 5%;
   }
 }
 
@@ -26,7 +26,7 @@
   }
   .ant-card-meta-description,
   .ant-card-meta-title {
-    font-size: 1rem ;
+    font-size: 1rem;
     font-weight: bold;
   }
   .anticon-right {
@@ -36,7 +36,7 @@
     margin: auto;
     bottom: 0;
     height: 18px;
-    font-size: 	1.5rem;
+    font-size: 1.5rem;
   }
   //
   &.bg-danger.white,
@@ -61,4 +61,8 @@
   border-radius: 22px;
   padding: 10px 15px;
   box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+}
+.specific-card {
+  padding-left: 70px;
+  padding-right: 70px;
 }
