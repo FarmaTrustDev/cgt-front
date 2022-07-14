@@ -17,6 +17,7 @@
                 :img-properties="{
                   width: '30px',
                 }"
+                class="mt-6"
               >
                 <span slot="extra">
                   <span class="count-bar">{{ hospital.count }}</span>
@@ -35,6 +36,7 @@
                   img: hospital.img,
                   heading: hospital.name,
                 }"
+                class="mt-6"
               >
                 <span slot="extra">
                   <span class="count-bar">{{ hospital.count }}</span>
@@ -81,7 +83,7 @@
                   heading: hospital.name,
                 }"
               >
-                <span slot="extra">
+                <span slot="extra" >
                   <span class="count-bar">{{ hospital.count }}</span>
                 </span>
               </ImageHeading>
@@ -142,7 +144,7 @@ export default {
   border: 1px solid #e2e2e2;
   border-radius: 15px;
   margin-top: 15px;
-  padding: 15px;
+  padding-left: 15px;
   .count-bar {
     padding: 15px;
     display: inline-block;
