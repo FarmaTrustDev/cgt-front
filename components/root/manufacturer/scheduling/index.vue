@@ -33,6 +33,7 @@ export default {
       treatment: {},
       entity: {},
       isCreated: false,
+      loading:false,
     }
   },
   mounted() {

@@ -21,6 +21,7 @@
     <div class="patient-page">
       <standardTable
         :columns="column"
+        :pagination="showPagination"
         :api-service="PatientServices"
         :action-link="ActionLink"
         :rounded="true"
@@ -50,7 +51,7 @@ export default {
           title: `PUID`,
           dataIndex: 'enrollmentNumber',
           key: 'PUID',
-          width: '5%',
+          width: '10%',
         },
         {
           title: `${this.$store.getters.getTranslation.PatieName_2_93}`,
@@ -62,22 +63,21 @@ export default {
           title: `${this.$store.getters.getTranslation._1_442}`,
           dataIndex: 'treatmentTypeId',
           key: 'treatmentTypeId',
-          width: '10%',
+          width: '5%',
           scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {
-          // title: 'Treatment Status',
           dataIndex: 'treatment_status',
           key: 'treatment_status',
           slots: { title: 'customTitle' },
           scopedSlots: { customRender: 'treatment_status' },
-          width: '65%',
+          width: '63%',
           class: 'treatment-status-col',
         },
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'action',
-          width: '10%',
+          width: '12%',
           scopedSlots: { customRender: 'patientAction' },
         },
       ],
@@ -86,6 +86,7 @@ export default {
       ActionLink,
       borderCard: false,
       fetchPatientService: {},
+      showPagination:true,
     }
   },
   /* computed:{

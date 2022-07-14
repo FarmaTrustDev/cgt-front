@@ -53,9 +53,8 @@
           :disabled="!tabs.treatmentCollection"
           tab=" Treatment Collection"
         >
-          <treatmentCollections :treatment="treatment" />
+          <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
-
         <a-tab-pane
           key="after-care"
           :disabled="!tabs.afterCare"
@@ -108,6 +107,7 @@ export default {
   },
   methods: {
     callback(key) {
+      console.log(key)
       this.activeTab = key
     },
     fetchTreatment() {

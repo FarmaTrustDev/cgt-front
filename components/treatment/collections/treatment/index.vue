@@ -43,9 +43,10 @@ import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { Bag, BagForm },
-  mixins: [notifications],
+  mixins: [notifications,routeHelpers],
   props: {
     treatment: { required: true, type: Object },
     showCompleteBtn: { required: false, type: String },
@@ -97,6 +98,10 @@ export default {
             )
           }
         )
+        this.goto(`/hospital/patients/collection/${this.treatment.globalId}`, {
+          treatment_id: this.treatment.globalId, view: 'after-care'
+        })
+        this.$emit('callback','after-care')
       }
     },
     completeAllBags(bags) {

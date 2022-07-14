@@ -5,6 +5,7 @@
         <LookupsTreatmentType
           :disabled="isCreated"
           :treatment-type-id="entity.treatmentTypeId"
+          :treatment-type-name="entity.treatmentTypeName"
         />
         <a-form-item :label="translation.Descr_1_69">
           <a-textarea
