@@ -5,6 +5,7 @@
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div class="treatment-steps">
+          <span class="step-col">
           <a-steps
             :initial="1"
             :current="getCurrentStep(record.treatment)"
@@ -17,6 +18,7 @@
               @click="stepClick(record, phase)"
             />
           </a-steps>
+          </span>
         </div>
 
         <!-- //Steps -->

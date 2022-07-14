@@ -20,8 +20,10 @@ import { getFormattedMoment } from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 export default {
   data() {
-    return { params: {},
-    dateFormat: 'YYYY/MM/DD', }
+    return { 
+      params: {},
+      dateFormat: 'YYYY/MM/DD', 
+    }
   },
   computed:{
     translation() {
@@ -31,13 +33,15 @@ export default {
   methods: {
     moment,
     searchTreatment(e) {
+      // console.log(e.target.value)
       const search = e.target.value
       this.params = {
+        ...this.params,
         puid: search,
         treatmentTypeName: search,
-        ...this.params,
       }
-      this.emitParams()
+      console.log(this.params)
+      this.emitParams(this.params)
     },
     async searchDataRange(dates, dateString) {
       if (!isEmpty(dates)) {
@@ -47,11 +51,11 @@ export default {
           end: getFormattedMoment(dates[1]),
         }
         this.params = params
-        await this.emitParams()
+        await this.emitParams(this.params)
       }
     },
-    emitParams() {
-      this.$emit('getParams', this.params)
+    emitParams(params) {
+      this.$emit('getParams', params)
     },
   },
 }
