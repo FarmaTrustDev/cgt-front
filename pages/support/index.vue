@@ -90,10 +90,7 @@ import InProgress from '~/components/support/InProgress.vue'
 import Resolved from '~/components/support/Resolved.vue'
 // import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
-import {
-  _getPastMomentStandardFormatted,
-  _getFutureMomentStandardFormatted,
-} from '~/services/Helpers/MomentHelpers'
+
 export default {
   components: {
     Table,
