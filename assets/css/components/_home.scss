@@ -180,7 +180,7 @@
     border-radius: 30px;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
-      color 0.3s ease-in-out, background-image 0.3s ease-in-out;
+    color 0.3s ease-in-out, background-image 0.3s ease-in-out;
     background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
     background-size: cover;
   }
@@ -190,7 +190,7 @@
     margin: 15px auto;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     border-radius: 22px;
-
+    height: 370px;
     .completed,
     .in-process,
     .booked,
@@ -253,4 +253,13 @@
     left: 10px;
     color:black;
   }
+}
+.administration-tab{
+  .home-page{
+    .home-tab,
+    .admin-page,
+  .admin-tab{
+    margin:3% !important;
+  }
+}
 }

@@ -37,7 +37,7 @@
             <span>{{translation['TotalPatie_2_460']}}</span>
           </a-col>
         </a-row>
-        <a-row>
+        <a-row class="mt-4 m-3">
           <a-col :span="12" class="white-card">
             <span class="completed"></span>
             <span class="number">{{ chartDetail.completedTotal }}</span>
@@ -53,7 +53,7 @@
             <span>{{translation['InProdu_2_57']}}</span>
           </a-col>
         </a-row>
-        <a-row>
+        <a-row class="mt-6 m-3">
           <a-col :span="12" class="white-card">
             <span class="booked"></span>
             <span class="number">{{ chartDetail.total }}</span>

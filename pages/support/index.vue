@@ -21,10 +21,12 @@
         </a-input>
       </div>
     </a-row>
-
-    <a-tabs type="card" @change="callback">
+  <a-row>
+    <a-col >
+    <a-tabs type="card" @change="callback" >
       <a-tab-pane key="1" :tab="translation.All_1_210">
         <a-table
+          :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }"
           class="rounded-table"
           :loading="loading"
           :data-source="data"
@@ -70,7 +72,8 @@
         <Resolved type="resolved" :dumpData="resolvedData"  />
       </a-tab-pane>
     </a-tabs>
-
+    </a-col>
+  </a-row>
     <!-- Add New Ticket Modal -->
     <a-skeleton :loading="loadingTicket">
       <add-new-ticket

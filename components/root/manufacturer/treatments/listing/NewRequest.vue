@@ -7,7 +7,7 @@
                 <a-button type="primary" dashed @click="showConfirm(record, true)">
                     {{translation.Accep_1_278}}
                 </a-button>
-                <a-button type="danger" dashed @click="showConfirm(record, false)">
+                <a-button class="new-treatment-btn" dashed @click="showConfirm(record, false)">
                     {{translation.Rejec_1_280}}
                 </a-button>
             </div>
@@ -17,9 +17,17 @@
           }}</a-badge>
             </div>
         </span>
+        <span slot="status" slot-scope="text, record">
+            <div v-if="showButton(record)">
+                <a-button class="new-treatment-status-btn">
+                    New
+                </a-button>
+            </div>
+        </span>
     </a-table>
 
-    <a-modal title="Scheduling Request" :visible="showResponseModal" :confirm-loading="confirmLoading" :footer="null" :destroy-on-close="true" :width="700" @ok="submitTreatmentResult" @cancel="handleModal(false)">
+    <a-modal :title="isAccepted?'Accept Scheduling Request':'Reject Scheduling Request'" :visible="showResponseModal" :confirm-loading="confirmLoading" :footer="null" :destroy-on-close="true" :width="700" @ok="submitTreatmentResult" @cancel="handleModal(false)">
+        {{isAccepted}}
         <a-form :form="form" :layout="formLayout" @submit="onSubmit">
             <Form :is-accepted="isAccepted" :data="selectedRow" />
 
@@ -72,7 +80,13 @@ export default {
                     dataIndex: 'collectionDateDeliveryDate',
                     key: 'collectionDateDeliveryDate',
                 },
-
+                {
+                    title: `Status`,
+                    dataIndex: 'status',
+                    scopedSlots:{
+                        customRender: 'status'
+                    },
+                },
                 {
                     title: `${this.$store.getters.getTranslation.Actio_1_220}`,
                     dataIndex: 'action',
