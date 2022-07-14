@@ -90,6 +90,10 @@ import InProgress from '~/components/support/InProgress.vue'
 import Resolved from '~/components/support/Resolved.vue'
 // import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
+import {
+  _getPastMomentStandardFormatted,
+  _getFutureMomentStandardFormatted,
+} from '~/services/Helpers/MomentHelpers'
 export default {
   components: {
     Table,
@@ -208,6 +212,9 @@ export default {
       SupportServices.get(params)
         .then((response) => {
           this.data = response.ticket
+          this.archivedData.splice(0)
+          this.inprogressData.splice(0)
+          this.resolvedData.splice(0)
           for(const dat in this.data){
             // console.log(this.data[dat])
             const dates=this.data[dat].created_At.split('T')[0]

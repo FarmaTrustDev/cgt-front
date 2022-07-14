@@ -6,66 +6,66 @@
       </article>
       <div v-if="!isEmpty(shipment)">
       <a-row>
-        <a-col :span="8">
-          Logistics Provider:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">Logistics Provider:</span>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12" class="mt-15">
           {{ scheduling.logisticName }}
         </a-col>        
       </a-row>
       <a-row>
-        <a-col :span="8">
-          Sample Collection Date:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">Sample Collection Date:</span>
         </a-col>
-        <a-col :span="8">
-          {{ scheduling.collectionDate }}
+        <a-col :span="12" class="mt-15">
+          {{ _getFormatMoment(getMomentByStandardFormat(scheduling.collectionDate )).format('DD/MM/YYYY')}}
         </a-col>        
       </a-row>          
       <a-row>
-        <a-col :span="8">
-          Expected Delivery Date:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">Expected Delivery Date:</span>
         </a-col>
-        <a-col :span="8">
-          {{ getMomentByStandardFormat(scheduling.deliveryDate) }}
+        <a-col :span="12" class="mt-15">
+          {{ _getFormatMoment(getMomentByStandardFormat(scheduling.deliveryDate)).format('DD/MM/YYYY') }}
         </a-col>        
       </a-row>
       <a-row>
-        <a-col :span="8">
-          {{translation.EstimArriv_3_322}}
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">{{translation.EstimArriv_3_322}}</span>
         </a-col>
-        <a-col :span="8">
-          {{ getMomentByStandardFormat(scheduling.deliveryDate) }}
+        <a-col :span="12" class="mt-15">
+          {{ _getFormatMoment(getMomentByStandardFormat(scheduling.deliveryDate)).format('DD/MM/YYYY') }}
         </a-col>        
       </a-row>                    
       <a-row>
-        <a-col :span="8">
-          Handled by:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">Handled by:</span>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12" class="mt-15">
           {{ shipment.senderName }}
         </a-col>        
       </a-row> 
       <a-row>
-        <a-col :span="8">
-          Collected by:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">Collected by:</span>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12" class="mt-15">
           {{ shipment.logisticUserName }}
         </a-col>        
       </a-row>
       <a-row>
-        <a-col :span="8">
-          Pickup At:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">Pickup At:</span>
         </a-col>
-        <a-col :span="8">
-          {{ getMomentByStandardFormat(shipment.pickupAt) }}
+        <a-col :span="12" class="mt-15">
+          {{ _getFormatMoment(getMomentByStandardFormat(shipment.pickupAt)).format('DD/MM/YYYY') }}
         </a-col>        
       </a-row>      
       <a-row>
-        <a-col :span="8">
-          Pickup Location:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">Pickup Location:</span>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12" class="mt-15">
           {{ shipment.origin }}
         </a-col>        
       </a-row>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import {_getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 import alert from '~/components/alert'
 export default {
@@ -104,6 +104,7 @@ export default {
   },   
   methods: {
     getMomentByStandardFormat,
+    _getFormatMoment,
     isEmpty,
   },
 }
