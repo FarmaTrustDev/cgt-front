@@ -4,7 +4,15 @@
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
         <Form :form="form" :treatment="treatment" />
       </a-form>
-      <a-table
+      <a-list :data-source="datasource" item-layout="horizontal" :bordered="false">
+        <template #renderItem="{ notes, createdAt }">
+          <a-list-item style="margin-left:2%; margin-right:2%;">
+            <div><h3 style="font-weight:bold">{{ notes }}</h3></div>
+            <div><h3 style="font-style:italic">{{createdAt}}</h3></div>
+          </a-list-item>
+      </template>
+      </a-list>
+      <!-- <a-table
         :columns="columns"
         :data-source="datasource"
         class="rounded-table"
@@ -14,7 +22,7 @@
           pageSizeOptions: ['10', '20', '30', '50', '100'],
         }"
       >
-      </a-table>
+      </a-table> -->
     </a-spin>
   </div>
 </template>
