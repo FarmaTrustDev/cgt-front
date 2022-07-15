@@ -4,7 +4,6 @@
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <Upload
-        :disabled="treatment.id != null"
         :default-file-list="treatment.consentFiles"
         :extensions="allowedExtensions"
         @handleChange="handleChange"
@@ -45,7 +44,7 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton :loading="loading" :text="translation.SaveConse_4_695" :disabled="!isEmpty(treatment.id)" />
+      <FormActionButton :text="translation.SaveConse_4_695" />
     </a-form>
   </div>
 </template>
@@ -119,13 +118,44 @@ export default {
         .catch(this.error)
         .finally(() => (this.loading = false))
     },
+
+
+    updateConcent(values) {
+      const formData = new FormData()
+      for (const key in values) {
+        formData.append(key, values[key])
+      }
+
+      this.fileList.forEach((files) => {
+        formData.append('files', files)
+      })
+
+      TreatmentServices.updateConcent(formData)
+        .then((response) => {
+          this.success(response.message)
+          this.$emit('getTreatment', response.data)
+          this.$emit('getNextTab', 'Screening')
+          this.goto(this.$route.path, { treatment_id: response.data.globalId })
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = false))
+    },
+
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
           if (values.consent === true) {
-            this.create(values)
+            if(this.treatment.id==null)
+            {
+              this.create(values)
+            }else{
+              values.globalId=this.treatment.globalId
+              this.updateConcent(values)
+              // console.log(this.treatment.globalId)
+              // this.goto(this.$route.path, { treatment_id: response.data.globalId })
+            }
           } else {
             this.checkBoxError = true
             this.loading = false

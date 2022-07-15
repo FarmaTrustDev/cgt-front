@@ -25,6 +25,14 @@ function create(data) {
   })
 }
 
+function updateConcent(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'Put',
+  })
+}
+
 function update(id, data) {
   return request({
     url: `${baseApi}/${id}`,
@@ -122,6 +130,7 @@ function getInboundScheduling(treatmentId, params = {}) {
 const TreatmentServices = {
   get,
   create,
+  updateConcent,
   getById,
   update,
   detail,
