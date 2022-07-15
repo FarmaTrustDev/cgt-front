@@ -49,7 +49,7 @@
           <div class="default-border-radius border mt-15 timebox">
             <a-list v-if="this.istreatment==false">
               <a-list-item >
-              <div class="pl-5 pt-2">  <p class="pt-1">There are no treatment for today</p></div>
+              <div class="pl-5">  <p class="pt-1 mt-15">There are no treatment for today</p></div>
               </a-list-item>
             </a-list>
             <a-list v-if="this.istreatment==true" :data-source="treatments">
@@ -157,7 +157,7 @@ import { isEmpty } from '~/services/Helpers'
 import { _getFormatMoment, getMomentByStandardFormat, } from '~/services/Helpers/MomentHelpers'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
-  istreatment : true,
+  
   mixins: [routeHelpers],
   props: {
     removeList: { type: Boolean, default: true },
@@ -166,6 +166,7 @@ export default {
   data() {
     return {
       treatments: [],
+      istreatment : true,
     }
   },
   computed: {

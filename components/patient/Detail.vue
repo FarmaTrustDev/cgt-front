@@ -8,7 +8,7 @@
         </h6>
       </a-col>
       <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted">{{translation.Gende_1_637}}:</span> {{ patient.gender }}</h6>
+        <h6><span class="text-muted">{{translation.Gende_1_637}}:</span> {{ patient.gender==1 ? 'Male': 'Female' }}</h6>
       </a-col>
       <a-col :span="8" class="mt-15">
         <h6><span class="text-muted"> {{translation.Age_1_746}}:</span> {{ patient.age }}</h6>
@@ -16,10 +16,10 @@
     </a-row>
     <a-row :gutter="20" dir="ltr">
       <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted">{{translation['Heigh(cm)*_2_641']}}:</span> {{ patient.height }}</h6>
+        <h6><span class="text-muted">{{translation['Heigh(cm)*_2_641']}}</span> {{ patient.height }}</h6>
       </a-col>
       <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted"> {{translation['Weigh(kg)*_2_639']}}:</span>{{ patient.weight }} kg</h6>
+        <h6><span class="text-muted"> {{translation['Weigh(kg)*_2_639']}}</span>{{ patient.weight }} kg</h6>
       </a-col>
       <a-col :span="8" class="mt-15">
         <h6>

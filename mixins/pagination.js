@@ -4,7 +4,7 @@ export default {
         return {
             pagination: {
                 // current: 1,
-                pageSize: 10,
+                pageSize: 50,
                 // total: 0,
                 // showTotal: () => `Total ${this.pagination.total}`,
                 onChange: (current, pageSize) =>

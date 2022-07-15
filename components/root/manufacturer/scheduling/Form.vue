@@ -5,6 +5,7 @@
         <LookupsTreatmentType
           :disabled="isCreated"
           :treatment-type-id="entity.treatmentTypeId"
+          :treatment-type-name="entity.treatmentTypeName"
         />
         <a-form-item :label="translation.Descr_1_69">
           <a-textarea
@@ -35,15 +36,15 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input Duration!',
+                    message: 'Please Enter Duration',
                   },
                 ],
               },
             ]"
-            size="large"
-            class="default-select w-100 float-left"
+            
+            class="default-select border-none w-100 float-left"
             type="number"
-            placeholder="Please input Duration"
+            placeholder="Please Enter Duration"
           >
             <a-icon slot="prefix" type="calendar"
           /></a-input-number>
@@ -60,15 +61,15 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input Price!',
+                    message: 'Please Enter Price',
                   },
                 ],
               },
             ]"
             size="large"
             type="number"
-            class="default-select w-100 float-right"
-            placeholder="Please input Price"
+            class="default-select border-none w-100 float-right"
+            placeholder="Please Enter Price"
           >
             <span slot="prefix">$</span>
           </a-input-number>

@@ -48,7 +48,7 @@ export default {
           dataIndex: 'patientEnrollmentNumber',
         },
         {
-          title: `${this.$store.getters.getTranslation.ColleDate_3_290 + this.$store.getters.getTranslation['Colle-_4_268']}`,
+          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
           dataIndex: 'collectionDateDeliveryDate',
         },
         {

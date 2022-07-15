@@ -6,7 +6,7 @@
           v-decorator="[
             'treatmentTypeId',
             {
-              initialValue: entity.treatmentTypeId,
+              initialValue: entity.treatmentTypeName,
               rules: [
                 {
                   required: true,
@@ -108,7 +108,7 @@ export default {
   methods: {
     fetchTreatmentTypes() {
       this.typeLoading = true
-      TreatmentService.get()
+      TreatmentService.getActiveWithOutScreening()
         .then((response) => {
           this.treatmentType = response.data
         })

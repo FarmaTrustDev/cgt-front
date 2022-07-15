@@ -29,6 +29,7 @@
               :loading="loading"
               >Submit</a-button
             >
+            <h3 > <a @click="goto('/login')"> Back To Login</a> </h3>
           </a-form-item>
         </a-form>
       </a-card>

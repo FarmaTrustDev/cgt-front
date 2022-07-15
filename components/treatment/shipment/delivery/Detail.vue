@@ -6,34 +6,34 @@
       </article>
       <div v-if="!isEmpty(shipment)">
       <a-row>
-        <a-col :span="8">
-          {{translation.IsRecei_2_328}}:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">{{translation.IsRecei_2_328}}</span>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12"  class="mt-15">
           {{translation.Done_1_340}}
         </a-col>        
       </a-row>
       <a-row>
-        <a-col :span="8">
-          {{translation['Receiby:_2_330']}}:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">{{translation['Receiby:_2_330']}}</span>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12" class="mt-15">
           {{ shipment.receiverName }}
         </a-col>        
       </a-row>          
       <a-row>
-        <a-col :span="8">
-          {{translation['ReceiDate:_2_332']}}:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">{{translation['ReceiDate:_2_332']}}</span>
         </a-col>
-        <a-col :span="8">
-          {{ getMomentByStandardFormat(shipment.deliveryAt) }}
+        <a-col :span="12" class="mt-15">
+          {{ _getFormatMoment(getMomentByStandardFormat(shipment.deliveryAt)).format('DD/MM/YYYY') }}
         </a-col>        
       </a-row>
       <a-row>
-        <a-col :span="8">
-          {{translation['ReceiNote:_2_334']}}:
+        <a-col :span="12" class="mt-15">
+          <span class="text-muted">{{translation['ReceiNote:_2_334']}}</span>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="12" class="mt-15">
           {{ shipment.notes }}
         </a-col>        
       </a-row>
@@ -45,7 +45,7 @@
 
 <script>
 import { isEmpty } from '~/services/Utilities'
-import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import { _getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import alert from '~/components/alert'
 export default {
   components: { alert },
@@ -65,6 +65,6 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  methods: { isEmpty, getMomentByStandardFormat },
+  methods: { isEmpty, getMomentByStandardFormat, _getFormatMoment, },
 }
 </script>

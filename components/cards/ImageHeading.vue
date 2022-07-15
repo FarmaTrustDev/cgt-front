@@ -3,16 +3,23 @@
     <slot name="extra" />
     <span class="imageHeading">
       <figure>
-        <!-- <span class="image-container">
+         <a-row>
+          <a-col :span="4"></a-col>
+          <a-col :span="4" >
+        <span>
           <img
             :width="imgProperties.width"
-            class="img"
+            class="img ml-5 stat-image"
             :src="getImageUrl(detail.img)"
           />
-        </span> -->
-        <figcaption class="heading">
+        </span>
+       </a-col>
+          <a-col :span="16">
+        <figcaption style="margin-top:-40px">
           {{ detail.heading }}
         </figcaption>
+        </a-col>
+        </a-row>
       </figure>
     </span>
   </div>
