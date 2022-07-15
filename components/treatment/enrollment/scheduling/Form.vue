@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h3 class="page-title">{{translation.Availslots_2_724}}</h3>
+    <h3 class="page-title">{{ translation.Availslots_2_724 }}</h3>
     <div class="grey-card">
       <calendar
-        :disabled-date="disabledDate"
         :handle-date-click="fetchEvents"
+        :disabled-date="disabledDate"
         @getEventClick="getEventClick"
       ></calendar>
     </div>
@@ -17,7 +17,10 @@ import FormFields from '~/components/treatment/enrollment/scheduling/FormFields'
 import calendar from '~/components/calendars/index'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
 import SchedulingServices from '~/services/API/SchedulingServices'
-import { getMomentByStandardFormat, _disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
+import {
+  getMomentByStandardFormat,
+  _disabledPreviousDate,
+} from '~/services/Helpers/MomentHelpers'
 export default {
   components: { FormFields, calendar },
   props: {
@@ -38,11 +41,11 @@ export default {
       manufacturerTreatment: {},
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },   
+  },
   methods: {
     disabledDate: _disabledPreviousDate,
     fetchEvents(arg, callback) {
