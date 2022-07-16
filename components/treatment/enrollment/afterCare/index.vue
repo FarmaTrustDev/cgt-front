@@ -6,7 +6,7 @@
       </a-form>
       <a-list :data-source="datasource" item-layout="horizontal" :bordered="false">
         <template #renderItem="{ notes, createdAt }">
-          <a-list-item style="margin-left:2%; margin-right:2%;">
+          <a-list-item class="ml-15 mr-15">
             <div><h3 style="font-weight:bold">{{ notes }}</h3></div>
             <div><h3 style="font-style:italic">{{createdAt}}</h3></div>
           </a-list-item>
