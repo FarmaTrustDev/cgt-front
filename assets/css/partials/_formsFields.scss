@@ -233,6 +233,9 @@
   line-height: 28px;
   color: #000;
 }
+.list-contents-font-style {
+  font-style: italic;
+}
 .message-span {
   font-style: normal;
   font-weight: 600;
@@ -259,6 +262,9 @@
 }
 .font-wt {
   font-weight: 500;
+}
+.font-wt-600 {
+  font-weight: 600;
 }
 .message-scr-tabs {
   border-radius: 1px;

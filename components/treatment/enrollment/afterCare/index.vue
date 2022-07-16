@@ -7,8 +7,8 @@
       <a-list :data-source="datasource" item-layout="horizontal" :bordered="false">
         <template #renderItem="{ notes, createdAt }">
           <a-list-item class="ml-15 mr-15">
-            <div><h3 style="font-weight:bold">{{ notes }}</h3></div>
-            <div><h3 style="font-style:italic">{{createdAt}}</h3></div>
+            <div><h3 class="font-wt-600">{{ notes }}</h3></div>
+            <div><h3 class="list-contents-font-style">{{createdAt}}</h3></div>
           </a-list-item>
       </template>
       </a-list>
