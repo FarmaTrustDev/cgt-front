@@ -47,12 +47,12 @@
           </a-col>
           </a-row>
           <div class="default-border-radius border mt-15 timebox">
-            <a-list v-if="this.istreatment==false">
+            <a-list v-if="this.isTreatment==false">
               <a-list-item >
               <div class="pl-5">  <p class="pt-1 mt-15">There are no treatment for today</p></div>
               </a-list-item>
             </a-list>
-            <a-list v-if="this.istreatment==true" :data-source="treatments">
+            <a-list v-if="this.isTreatment==true" :data-source="treatments">
              <a-list-item slot="renderItem" slot-scope="item" 
                 ><a-list-item-meta>
                   <a 
@@ -166,7 +166,7 @@ export default {
   data() {
     return {
       treatments: [],
-      istreatment : true,
+      isTreatment : true,
     }
   },
   computed: {
@@ -187,7 +187,7 @@ export default {
       TreatmentServices.get({ onlyTodayTreatment: true }).then((response) => {
         this.treatments = response.data
         if(isEmpty(this.treatments)){
-          this.istreatment =  false
+          this.isTreatment =  false
         }
       })
     },

@@ -56,7 +56,7 @@
   }
 
   .ant-steps {
-    // margin-top: 10px;
+    margin-top: 8px;
   }
 
   .treatment-name-col {
@@ -268,6 +268,7 @@
     .ant-steps-item-content {
       margin-left: 5px;
       &::before {
+        margin-left: 15px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
     }
@@ -328,8 +329,8 @@
 
   .ant-steps-horizontal {
     & .ant-steps-item:last-child {
-      padding-right: 25px;
-      padding-left: 5px;
+      padding-right: 5px;
+      padding-left: 0;
     }
   }
 

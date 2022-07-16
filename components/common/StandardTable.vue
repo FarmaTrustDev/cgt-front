@@ -68,8 +68,9 @@
             :key="treatment.id"
             :class="getTreatmentStepClass(record, treatment)"
           >
-          <div style="display:flex; width:100%">
-          <div class="treatment-steps" style="width:96%; margin-top:3px; display:flex1">
+          <div class="container-div">
+          <div class="container-steps-div">  
+          <div class="treatment-steps">
             <steps
               :treatment="treatment"
               :phases="phases"
@@ -78,11 +79,11 @@
               :goto-view="stepClick"
             ></steps>
           </div>
-          <div style="width:1%; margin-top:1px; display:flex2"><span class="vertical-line"></span></div>
-          <div style="width:3%; height:100%; margin-top:8px; margin-bottom:7px">
-            
+          </div>
+          <div class="container-drop-down-div">
+            <span class="vertical-line-standard-table"></span>
             <a-dropdown>
-              <a-button class="btn-view-timeline" style="height: 25px; border-radius: 9px;" type="primary" size="small">
+              <a-button type="primary" class="ant-btn-drop-down">
                 {{ translation['Admin_1_142'] }}
               </a-button>
               <a-menu slot="overlay">

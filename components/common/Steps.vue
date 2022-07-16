@@ -1,8 +1,8 @@
 <template>
-  <span class="step-col">
+  <span class="step-col" functional>
     <a-steps
-      :current="getCurrentStep(treatment)"
       :initial="1"
+      :current="getCurrentStep(treatment)"
       status="process"
       size="small"
     >
