@@ -63,7 +63,11 @@
         />
       </template>
 
-      <span slot="treatment_status" slot-scope="text, record">
+      <span
+        slot="treatment_status"
+        class="treatment-steps"
+        slot-scope="text, record"
+      >
         <span
           v-for="treatment in record.treatments"
           :key="treatment.id"
@@ -71,7 +75,7 @@
         >
           <div class="container-div">
             <div class="container-steps-div">
-              <div class="treatment-steps">
+              <div>
                 <steps
                   :treatment="treatment"
                   :phases="phases"
@@ -110,7 +114,11 @@
                       href="javascript:;"
                       @click="cancelTreatment(record, treatment)"
                       ><a-icon type="minus-circle" />
-                      {{ translation.cance_1_296 }}</a
+                      {{
+                        treatment.isCancel
+                          ? 'continue'
+                          : translation.cance_1_296
+                      }}</a
                     >
                   </a-menu-item>
                   <a-menu-item>
@@ -431,6 +439,7 @@ export default {
       this.showCancelTreatmentModal = show
     },
     submitCancelResponse() {
+      /// ANy how need to optimize on high priority
       const treatment = this.treatmentForCancellation
       this.loading = true
       TreatmentServices.cancel(treatment.globalId, !treatment.isCancel, {
@@ -438,6 +447,8 @@ export default {
       })
         .then((response) => {
           this.handleCancelTreatmentModal(false)
+          this.success(response.message)
+          this.treatmentCancelReason = false
           this.$emit('fetchParent', response)
         })
         .catch(this.error)
@@ -457,7 +468,7 @@ export default {
     getTreatmentStepClass(patient, treatment) {
       if (patient.isDead) {
         return 'dead'
-      } else if (treatment.isHold) {
+      } else if (treatment.isHold || treatment.isCancel) {
         return 'hold'
       }
     },
