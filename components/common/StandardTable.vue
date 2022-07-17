@@ -20,7 +20,9 @@
 
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
-          <span  style="margin-top:3px;" class="treatmentName">{{ treatment.treatmentTypeName }}</span>
+          <span style="margin-top: 3px" class="treatmentName">{{
+            treatment.treatmentTypeName
+          }}</span>
         </strong>
       </template>
 
@@ -62,76 +64,80 @@
       </template>
 
       <span slot="treatment_status" slot-scope="text, record">
-        
-          <span
-            v-for="treatment in record.treatments"
-            :key="treatment.id"
-            :class="getTreatmentStepClass(record, treatment)"
-          >
+        <span
+          v-for="treatment in record.treatments"
+          :key="treatment.id"
+          :class="getTreatmentStepClass(record, treatment)"
+        >
           <div class="container-div">
-          <div class="container-steps-div">  
-          <div class="treatment-steps">
-            <steps
-              :treatment="treatment"
-              :phases="phases"
-              :current-step="getCurrentStep"
-              :patient="record"
-              :goto-view="stepClick"
-            ></steps>
+            <div class="container-steps-div">
+              <div class="treatment-steps">
+                <steps
+                  :treatment="treatment"
+                  :phases="phases"
+                  :current-step="getCurrentStep"
+                  :patient="record"
+                  :goto-view="stepClick"
+                ></steps>
+              </div>
+            </div>
+            <div class="container-drop-down-div">
+              <span class="vertical-line-standard-table"></span>
+              <a-dropdown>
+                <a-button type="primary" class="ant-btn-drop-down">
+                  {{ translation['Admin_1_142'] }}
+                </a-button>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a href="javascript:;" @click="gotoView(record, treatment)"
+                      ><a-icon type="search" /> {{ translation.view_1_750 }}</a
+                    >
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a
+                      href="javascript:;"
+                      @click="holdTreatment(record, treatment)"
+                      ><a-icon type="minus-circle" />
+                      {{
+                        treatment.isHold
+                          ? translation.Resum_1_463
+                          : translation.Pause_1_452
+                      }}</a
+                    >
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a
+                      href="javascript:;"
+                      @click="cancelTreatment(record, treatment)"
+                      ><a-icon type="minus-circle" />
+                      {{ translation.cance_1_296 }}</a
+                    >
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a
+                      href="javascript:;"
+                      @click="deleteTreatment(record, treatment)"
+                      ><a-icon type="delete" /> {{ translation.Delet_1_451 }}</a
+                    >
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </div>
           </div>
-          </div>
-          <div class="container-drop-down-div">
-            <span class="vertical-line-standard-table"></span>
-            <a-dropdown>
-              <a-button type="primary" class="ant-btn-drop-down">
-                {{ translation['Admin_1_142'] }}
-              </a-button>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a href="javascript:;" @click="gotoView(record, treatment)"
-                    ><a-icon type="search" /> {{ translation.view_1_750 }}</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a
-                    href="javascript:;"
-                    @click="holdTreatment(record, treatment)"
-                    ><a-icon type="minus-circle" />
-                    {{
-                      treatment.isHold
-                        ? translation.Resum_1_463
-                        : translation.Pause_1_452
-                    }}</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;"
-                    ><a-icon type="minus-circle" />
-                    {{ translation.cance_1_296 }}</a
-                  >
-                </a-menu-item>
-                <a-menu-item>
-                  <a
-                    href="javascript:;"
-                    @click="deleteTreatment(record, treatment)"
-                    ><a-icon type="delete" /> {{ translation.Delet_1_451 }}</a
-                  >
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </div>
-          </div>
-          </span>
+        </span>
       </span>
 
       <span slot="action" slot-scope="text, record">
-        <a-button type="link" @click="goto(`${actionLink}/${record.globalId}`)" >
+        <a-button type="link" @click="goto(`${actionLink}/${record.globalId}`)">
           <a-icon type="edit" />
         </a-button>
       </span>
       <span slot="btn" slot-scope="text, record">
-        <a-button type="primary" @click="goto(`${actionLink}/${record.globalId}`)">
-          {{buttonName}}
+        <a-button
+          type="primary"
+          @click="goto(`${actionLink}/${record.globalId}`)"
+        >
+          {{ buttonName }}
         </a-button>
       </span>
 
@@ -241,6 +247,28 @@
         <a-tag v-for="tag in tags" :key="tag.id">{{ tag.name }}</a-tag>
       </span>
     </a-table>
+
+    <!-- Todo cancel treatment modal (Remove patient table work) have to complete
+    the sprint cannot segregate the patient -->
+    <a-modal
+      :visible="showCancelTreatmentModal"
+      title="Cancel Treatment"
+      :footer="null"
+    >
+      <a-textarea
+        v-model="treatmentCancelReason"
+        placeholder="Controlled autosize"
+        :auto-size="{ minRows: 3, maxRows: 5 }"
+      />
+
+      <a-button
+        :loading="loading"
+        type="primary"
+        @click="submitCancelResponse"
+        @cancel="handleCancelTreatmentModal(false)"
+        >submit</a-button
+      >
+    </a-modal>
   </div>
 </template>
 <script>
@@ -262,7 +290,7 @@ export default {
     // eslint-disable-next-line vue/require-prop-types
     // pagination: { required: false, default: false },
     actionLink: { type: String, default: '' },
-    buttonName: {type:String, default:''},
+    buttonName: { type: String, default: '' },
     // eslint-disable-next-line vue/require-default-prop
     apiService: { type: Object, required: false },
     // eslint-disable-next-line vue/require-default-prop
@@ -272,7 +300,7 @@ export default {
     patient: { type: Boolean, default: false },
     shouldFetch: { type: Boolean, default: true },
     showPagination: { type: Boolean, default: true },
-    shouldUpdate: {type: Boolean, default: false},
+    shouldUpdate: { type: Boolean, default: false },
   },
 
   data() {
@@ -280,6 +308,9 @@ export default {
       data: [],
       loading: false,
       phases: PATIENT_TREATMENT_PHASES,
+      treatmentCancelReason: '',
+      showCancelTreatmentModal: false,
+      treatmentForCancellation: {},
       // pagination: {},
     }
   },
@@ -395,6 +426,26 @@ export default {
     },
     clickIcon(record) {
       this.$emit('clickIcon', record)
+    },
+    handleCancelTreatmentModal(show) {
+      this.showCancelTreatmentModal = show
+    },
+    submitCancelResponse() {
+      const treatment = this.treatmentForCancellation
+      this.loading = true
+      TreatmentServices.cancel(treatment.globalId, !treatment.isCancel, {
+        notes: this.treatmentCancelReason,
+      })
+        .then((response) => {
+          this.handleCancelTreatmentModal(false)
+          this.$emit('fetchParent', response)
+        })
+        .catch(this.error)
+        .finally(() => (this.loading = true))
+    },
+    cancelTreatment(patient, treatment) {
+      this.treatmentForCancellation = treatment
+      this.handleCancelTreatmentModal(true)
     },
     holdTreatment(patient, treatment) {
       TreatmentServices.hold(treatment.globalId, !treatment.isHold)

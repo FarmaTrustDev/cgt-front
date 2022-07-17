@@ -126,6 +126,13 @@ function getInboundScheduling(treatmentId, params = {}) {
   })
 }
 
+function cancel(id, status, data = {}) {
+  return request({
+    url: `${baseApi}/cancel/${id}/${status}`,
+    method: 'PATCH',
+    data,
+  })
+}
 
 const TreatmentServices = {
   get,
@@ -144,7 +151,8 @@ const TreatmentServices = {
   getHospitalCount,
   hold,
   destroy,
-  getInboundScheduling
+  getInboundScheduling,
+  cancel
 }
 
 export default TreatmentServices
