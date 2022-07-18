@@ -1,11 +1,12 @@
 <template>
-  <page-layout :loading="loading" :title="translation.Treat_1_29">
+  <page-layout :loading="loading" :title="translation.Treat_1_29" class="specific-card">
     <template slot="content">
       <standardTable
         :columns="column"
         :api-service="ManufacturerTreatmentServices"
         :action-link="ActionLink"
         :button-name = "`Manage Availabililty`"
+        
       />
     </template>
   </page-layout>

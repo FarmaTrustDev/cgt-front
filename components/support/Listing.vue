@@ -5,7 +5,7 @@
       :row-key="(record) => record.uuid"
       :data-source="dumpData"
       :loading="loading"
-      
+      :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }"
       class="rounded-table"
       :customRow="customRowReDirect"
       

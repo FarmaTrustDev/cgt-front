@@ -1,13 +1,12 @@
 <template>
-  <div class="admin-page p-15">
-    <h3 class="page-title ml-40">{{translation._1_438}}</h3>
+  <div class="admin-page">
+    <h3 class="page-title ml-40">{{ translation._1_438 }}</h3>
     <div>
       <a-row :gutter="15" class="grey-card m-auto">
         <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
           <nuxt-link :to="menu.to">
             <div class="admin-tab">
               <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
-
               <img width="75px" :src="menu.icon" />
               <h4 style="font-size: 1.125rem" class="heading-home">
                 {{ translation[menu.name] }}

@@ -1,11 +1,16 @@
 .support-detail {
   .user-involved {
     .ant-tabs-tabpane {
-      font-size: 	0.875rem;
+      font-size: 0.875rem;
       h6 {
-        font-size: 	0.875rem;
+        font-size: 0.875rem;
       }
     }
+  }
+}
+.support-page {
+  .ant-tabs {
+    overflow: inherit;
   }
 }
 

@@ -138,6 +138,40 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         params: { view: 'OUTBOUND_SHIPMENT' }
     },
 ]
+// for Pending_Phases
+export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
+    {
+        id: 1,
+        name: 'Inbound Accepance Details',
+        alias: 'INBOUND_SHIPMENT',
+        phaseId: 8,
+        enablePageId: 5,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.patient,
+        params: { view: 'INBOUND_SHIPMENT' }
+    },
+    {
+        id: 2,
+        name: 'Manufacturing',
+        alias: 'MANUFACTURER',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.patient,
+        params: { view: 'MANUFACTURER' }
+    },
+    {
+        id: 3,
+        name: 'Outbound Shipment',
+        alias: 'OUTBOUND_SHIPMENT',
+        phaseId: 14,
+        enablePageId: 14,
+        url_slug: '/manufacturer/treatments/process/',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'OUTBOUND_SHIPMENT' }
+    },
+]
+
 export const QUARANTINE_RESOLUTION_PHASES = [
     {
         id: 1,

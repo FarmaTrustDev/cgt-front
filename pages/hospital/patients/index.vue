@@ -51,19 +51,19 @@ export default {
           title: `PUID`,
           dataIndex: 'enrollmentNumber',
           key: 'PUID',
-          width: '10%',
+          width: 100,
         },
         {
           title: `${this.$store.getters.getTranslation.PatieName_2_93}`,
           dataIndex: 'name',
           key: 'name',
-          width: '10%',
+          width: 150,
         },
         {
           title: `${this.$store.getters.getTranslation._1_442}`,
           dataIndex: 'treatmentTypeId',
           key: 'treatmentTypeId',
-          width: '5%',
+          width: 100,
           scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {
@@ -71,13 +71,13 @@ export default {
           key: 'treatment_status',
           slots: { title: 'customTitle' },
           scopedSlots: { customRender: 'treatment_status' },
-          width: '63%',
+          width: 640,
           class: 'treatment-status-col',
         },
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'action',
-          width: '12%',
+          width: 100,
           scopedSlots: { customRender: 'patientAction' },
         },
       ],
@@ -99,7 +99,8 @@ export default {
       this.fetchPatientService = fetch
     },
     fetch(params) {
-      this.fetchPatientService(params)
+      // this.fetchPatientService(params) this was creating error of bad request after pause or resume
+      this.fetchPatientService()
     },
     searchPatent(e) {
       const search = e.target.value

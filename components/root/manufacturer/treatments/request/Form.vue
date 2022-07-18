@@ -2,8 +2,8 @@
   <div>
     <!-- // DEtail view -->
     <span>
-      <span v-if="isAccepted"> {{ modalMessage }}</span>
-      <a-descriptions v-else title="Reject Treatment Detail">
+      <!-- <span v-if="isAccepted"> {{ modalMessage }}</span> -->
+      <a-descriptions>
         <a-descriptions-item :label="translation.PatieID_2_264">
           {{ data.patientEnrollmentNumber }}
         </a-descriptions-item>

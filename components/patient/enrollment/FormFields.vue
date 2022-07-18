@@ -25,7 +25,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.LastName_2_422+'*:'"
+          :label="translation.LastName_2_422 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -48,7 +48,7 @@
       </a-col>
       <a-col :span="8">
         <a-form-item
-          :label="translation.EmailAddre_2_140+'*:'"
+          :label="translation.EmailAddre_2_140 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -57,9 +57,7 @@
               'Email',
               {
                 initialValue: patient.email,
-                rules: [
-                  { required: true, message: 'required!' },
-                ],
+                rules: [{ required: true, message: 'required!' }],
               },
             ]"
             :placeholder="translation.EmailAddre_2_140"
@@ -68,7 +66,7 @@
 
       <a-col :span="8">
         <a-form-item
-          :label="translation.Phone_1_63+'*:'"
+          :label="translation.Phone_1_63 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -178,6 +176,76 @@
           </a-select>
         </a-form-item></a-col
       >
+      <a-col :span="12">
+        <a-form-item
+          label="Height(cm)*"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+        >
+          <a-input
+            v-decorator="[
+              'height',
+              {
+                initialValue: patient.height,
+                rules: [
+                  {
+                    required: true,
+                    message: 'required!',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Height(cm)"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Weight(Kg)*"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+        >
+          <a-input
+            v-decorator="[
+              'weight',
+              {
+                initialValue: patient.weight,
+                rules: [
+                  {
+                    required: true,
+                    message: 'required!',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Weight(kg)"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          :label="translation.What3_1_432 + '*'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'what3Words',
+              {
+                initialValue: patient.what3Words,
+                rules: [
+                  {
+                    required: true,
+                    message: 'required!',
+                  },
+                ],
+              },
+            ]"
+            :placeholder="translation.What3_1_432"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12"></a-col>
       <a-col :span="24">
         <a-form-item
           :label="translation.Aller_1_643"
@@ -247,9 +315,7 @@
               'postCode',
               {
                 initialValue: patient.postCode || '',
-                rules: [
-                  { message: '' },
-                ],
+                rules: [{ message: '' }],
               },
             ]"
             name="postCode"
@@ -258,7 +324,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.City_1_446+'*:'"
+          :label="translation.City_1_446 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -284,9 +350,7 @@
               'address',
               {
                 initialValue: patient.address,
-                rules: [
-                  { message: '' },
-                ],
+                rules: [{ message: '' }],
               },
             ]"
             :placeholder="translation.PostaCode_3_651"
@@ -318,7 +382,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Count_1_657+'*:'"
+          :label="translation.Count_1_657 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -344,10 +408,8 @@
           :label="translation.Count_1_49"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
-         
         >
           <a-select
-
             v-decorator="[
               'countryId',
               {
@@ -368,7 +430,7 @@
             class="default-select pt-2"
             @search="searchCountries"
           >
-            <a-select-option v-for="country in countries" :key="country.id" >
+            <a-select-option v-for="country in countries" :key="country.id">
               {{ country.name }}
             </a-select-option>
           </a-select>
@@ -410,6 +472,11 @@ export default {
       }),
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     this.getCountries()
   },
@@ -418,11 +485,6 @@ export default {
       this.fetchCountry = false
       this.getCountries()
     }
-  },
-  computed:{
-    translation() {
-      return this.$store.getters.getTranslation
-    },
   },
   methods: {
     filterOption,

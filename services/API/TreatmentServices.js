@@ -25,6 +25,14 @@ function create(data) {
   })
 }
 
+function updateConcent(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'Put',
+  })
+}
+
 function update(id, data) {
   return request({
     url: `${baseApi}/${id}`,
@@ -118,10 +126,18 @@ function getInboundScheduling(treatmentId, params = {}) {
   })
 }
 
+function cancel(id, status, data = {}) {
+  return request({
+    url: `${baseApi}/cancel/${id}/${status}`,
+    method: 'PATCH',
+    data,
+  })
+}
 
 const TreatmentServices = {
   get,
   create,
+  updateConcent,
   getById,
   update,
   detail,
@@ -135,7 +151,8 @@ const TreatmentServices = {
   getHospitalCount,
   hold,
   destroy,
-  getInboundScheduling
+  getInboundScheduling,
+  cancel
 }
 
 export default TreatmentServices
