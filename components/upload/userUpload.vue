@@ -2,13 +2,13 @@
   <div class="clearfix">
     <a-upload
       :before-upload="beforeUpload"
-      :default-file-list="defaultFileList"
-      list-type="picture"
+      :file-list="defaultFileList? defaultFileList : stateFileList"
+      list-type="picture-card"
       name="file"
       :action="handleChange"
       :disabled="disabled"
     >
-      <div v-if="stateFileList.length < 3">
+      <div v-if="defaultFileList.length < 2">
         <a-icon type="camera" theme="filled" style="font-size: 3.75rem" />
       </div>
     </a-upload>
@@ -37,6 +37,7 @@ export default {
     return {
       stateFileList: [],
       previewVisible: false,
+      fileList:this.defaultFileList,
     }
   },
   methods: {
@@ -55,6 +56,7 @@ export default {
       // }
     },
     async handleChange(file, fileList) {
+      console.log(file.status)
       // @todo removing work in under construction
       if (file.status === 'remove') {
         await this.removeFromFileList(file)

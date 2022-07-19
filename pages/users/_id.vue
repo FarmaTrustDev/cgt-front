@@ -1,10 +1,10 @@
 <template>
   <page-layout :create="false" :loading="loading" :bordered="false" :back="false">
     <template slot="content">
-      <div class="grey-card">
-        <a-card :bordered="false" class="default-border-radius">
+      <div class="grey-card mtminus-4">
+        <a-card :bordered="false" class="default-border-radius mtminus-4">
           <h2>{{translation.AddUser_3_418}}</h2>
-          <formField class="mt-15" />
+          <formField />
       </a-card>
     </div>
     </template>
