@@ -4,55 +4,57 @@
   .ant-tabs .ant-tabs-left-content {
     border-left: unset;
   }
-  .ant-tabs .ant-tabs-left-bar {
+
+  .ant-tabs-left-bar {
     border-right: unset;
     width: 23%;
-  }
-  .ant-tabs-left-bar .ant-tabs-tab {
-    margin-top: 15px;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: 22px;
-    font-size: 1rem;
-    padding: 15px;
-    color: #233151;
-    background-color: #f9f9f9;
-    &::before {
-      position: inherit;
-      content: '';
-      height: 28px;
-      width: 28px;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 10px;
-      background-size: 100%;
-      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
-      border-top: none;
+    .tab-title {
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 22px;
+      font-size: 1rem;
+      padding: 25px;
+      color: #233151;
+      background-color: #f9f9f9;
+      &::before {
+        position: inherit;
+        content: '';
+        height: 28px;
+        width: 28px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        background-size: 100%;
+        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
+        border-top: none;
+      }
+    }
+    .ant-tabs-tab-completed {
+      background-color: #d1f2dc;
+      &::before {
+        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg');
+      }
+    }
+    .ant-tabs-tab-active {
+      .tab-title {
+        background-color: #f2f5fb;
+        &::before {
+          background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg');
+        }
+      }
+    }
+
+    .ant-tabs-tab {
+      text-align: left;
+      margin-top: 15px;
+      padding: 0;
     }
   }
-  .ant-tabs-left-bar .ant-tabs-tab-active {
-    background-color: #f2f5fb;
-    &::before {
-      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg');
-    }
-  }
-  .ant-tabs-left-bar .ant-tabs-tab-completed {
-    background-color: #d1f2dc;
-    &::before {
-      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg');
-    }
-  }
+
   .ant-tabs-ink-bar {
     display: none;
     background-color: transparent;
   }
-  .ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
-  .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
-    text-align: left;
-    padding: 25px;
-    margin-left: 3%;
-  }
-
   .consent-page {
     padding: 0 15px;
     form {
@@ -74,12 +76,12 @@
     }
   }
   .ant-upload-select-picture-card i {
-      font-size: 2rem;
-      color: #999;
+    font-size: 2rem;
+    color: #999;
   }
   .ant-upload-select-picture-card .ant-upload-text {
-      margin-top: 8px;
-      color: #666;
+    margin-top: 8px;
+    color: #666;
   }
   .ant-switch {
     margin-top: 10px;
@@ -129,7 +131,7 @@
       padding: 15px;
     }
     .fc-col-header-cell {
-      font-size: 	0.75rem;
+      font-size: 0.75rem;
       padding: 0.75rem 0.5rem;
       font-weight: 500;
     }
@@ -138,13 +140,13 @@
     }
     .fc-toolbar-title {
       display: inline-block;
-      font-size: 	1.125rem;
+      font-size: 1.125rem;
       margin: 15px;
       text-transform: uppercase;
     }
     .fc-prevYear-button,
     .fc-nextYear-button {
-      font-size: 	0.875rem;
+      font-size: 0.875rem;
       color: #233151;
       background-color: transparent;
       box-shadow: none;
@@ -175,7 +177,7 @@
 
   .empty-message {
     color: #383d41;
-    font-size: 	0.875rem;
+    font-size: 0.875rem;
     font-weight: bold;
     margin-top: 0.5rem;
     background-color: #e2e3e5;
@@ -186,8 +188,8 @@
     border-radius: 0.25rem;
   }
 }
-.schedule-create-tabs{
-  .enrollment-page{
+.schedule-create-tabs {
+  .enrollment-page {
     .ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
     .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
       text-align: left;

@@ -30,6 +30,25 @@
       </a-modal>
     </div>
     <a-alert v-else message="Collection is on request"></a-alert>
+    <a-modal
+      :visible="visibleModal"
+      ok-text="Ok"
+      :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
+    >
+      <center>
+        <p>
+          <img
+            :src="getImageUrl('Icons/cross-letter.jpg')"
+            width="50%"
+            height="50%"
+          />
+        </p>
+        <h4><p>Please select today/futre date </p></h4>
+        <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
+      </center>
+    </a-modal>
   </a-skeleton>
 </template>
 <script>
@@ -41,9 +60,10 @@ import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
+import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { BagForm, Bag },
-  mixins: [notifications],
+  mixins: [notifications, imagesHelper],
   props: {
     treatment: { required: true, type: Object },
     enabled: { required: true, type: Boolean, default: false },
@@ -51,6 +71,7 @@ export default {
   data() {
     return {
       showModal: false,
+      visibleModal: false,
       fetchIdFromParams: false,
       bags: [],
       COLLECTION_TYPE,
@@ -85,6 +106,10 @@ export default {
       // this.fetchBags()
       this.bags = data.data
     },
+    // for handle modal
+    handleOk() {
+      this.visibleModal = false
+    },
     markHospitalCollectionComplete(bags) {
       if (this.validateAllBagsCompleted(bags)) {
         TreatmentServices.markCompleteCollection(this.treatment.id).then(
@@ -96,7 +121,8 @@ export default {
           }
         )
       } else {
-        this.error('Complete all the bags')
+        this.visibleModal = true
+        // this.error('Complete all the bags')
       }
     },
     validateAllBagsCompleted(bags) {
