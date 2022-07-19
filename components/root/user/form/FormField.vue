@@ -71,7 +71,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Usern_1_400"
+          :label="translation.Usern_1_400+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -141,7 +141,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.What3_1_432"
+          :label="translation.What3_1_432+':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -165,7 +165,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Apply*"
+          label="Apply*:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -190,21 +190,21 @@
       
       <a-col :span="12">
         <a-form-item
-          label="Image*"
+          label="Image:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
         >
           <Upload
-            :default-file-list="entity.profileImageUrl"
-            :extensions="allowedExtensions"
-            @handleChange="handleChange"
+        :default-file-list="entity.profileImageUrl"
+        :extensions="allowedExtensions"
+        @handleChange="handleChange"
           />
         </a-form-item>
            </a-col>
       <a-col :span="24">
         <a-form-item
-          :label="translation.Roles_1_442"
+          :label="translation.Roles_1_442+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -253,7 +253,7 @@
       </a-col>      
       <a-col :span="12">
         <a-form-item
-          :label="translation.Postc_1_444"
+          :label="translation.Postc_1_444+':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -277,7 +277,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="City"
+          label="City*:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -289,7 +289,7 @@
                 initialValue: entity.city,
                 rules: [
                   {
-                    required: false,
+                    required: true,
                     message: 'Please input your City',
                   },
                 ],
@@ -301,7 +301,7 @@
       </a-col>
       <a-col :span="24">
         <a-form-item
-          :label="translation.Locat_1_448"
+          :label="translation.Locat_1_448+':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
           class="pb-0"
@@ -325,7 +325,7 @@
       </a-col>
       <a-col :span="24">
         <a-form-item
-          :label="translation.PostaAddre_2_450"
+          :label="translation.PostaAddre_2_450+':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
           class="pb-0"
@@ -349,7 +349,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Count_1_452"
+          label="County*:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -361,7 +361,7 @@
                 initialValue: entity.county,
                 rules: [
                   {
-                    required: false,
+                    required: true,
                     message: 'Please input your County',
                   },
                 ],
@@ -373,7 +373,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Count_1_49"
+          label="Country*:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -381,7 +381,7 @@
             v-decorator="[
               'countryId',
               {
-                initialValue: entity.countryId,
+                initialValue: entity.country,
                 rules: [
                   {
                     required: true,
@@ -441,18 +441,8 @@ export default {
     }
   },
   mounted() {
-    this.getCountries()
-    this.getRoles()
-  },
-  updated() {
-    if (this.isCreated && this.fetchCountry) {
-      this.fetchCountry = false
-      this.getCountries()
-    }
-    if (this.isCreated && this.fetchRole) {
-      this.fetchRole = false
-      this.getRoles()
-    }
+    this.updated()
+    // this.getRoles()
   },
   computed:{
     translation() {
@@ -460,6 +450,16 @@ export default {
     },
   },
   methods: {
+    updated() {
+      if (this.isCreated && this.fetchCountry) {
+        this.fetchCountry = false
+        this.getCountries()
+      }
+      if (this.isCreated && this.fetchRole) {
+        this.fetchRole = false
+        this.getRoles()
+      }
+    },    
     handleChange(info) {
       console.log(info)
       this.fileList = info
