@@ -10,19 +10,45 @@
     </div>
     <FormFields :treatment="treatment" :entity="entity"></FormFields>
     <FormActionButton :is-created="isCreated" />
+    <a-modal
+      :visible="visibleModal"
+      ok-text="Ok"
+      :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
+    >
+      <center>
+        <p>
+          <img
+            :src="getImageUrl('Icons/cross-letter.jpg')"
+            width="50%"
+            height="50%"
+          />
+        </p>
+        <h3><p>Please Select Today/Future Date</p></h3>
+        <footer>
+          <a-button class="ant-btn ant-btn-primary" @click="handleOk()"
+            >Ok</a-button
+          >
+        </footer>
+      </center>
+    </a-modal>
   </div>
 </template>
 <script>
+import moment from 'moment';
 import FormFields from '~/components/treatment/enrollment/scheduling/FormFields'
 import calendar from '~/components/calendars/index'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import imagesHelper from '~/mixins/images-helper'
 import {
   getMomentByStandardFormat,
   _disabledPreviousDate,
 } from '~/services/Helpers/MomentHelpers'
 export default {
   components: { FormFields, calendar },
+  mixins: [imagesHelper],
   props: {
     treatment: {
       type: Object,
@@ -33,10 +59,12 @@ export default {
       default: () => ({}),
     },
   },
+
   data() {
     return {
       isCreated: false,
       loading: false,
+      visibleModal: false,
       entity: {},
       manufacturerTreatment: {},
     }
@@ -66,26 +94,36 @@ export default {
       SchedulingServices.getEstimation(detail.event._def.publicId).then(
         (response) => {
           const data = response.data
-          this.form.setFieldsValue({
-            manufacturerName: detail.event._def.title,
-            treatmentAvailabilityId: detail.event._def.publicId,
-            collectionDate: getMomentByStandardFormat(data.collectionDate),
-            pickupDateTime: getMomentByStandardFormat(data.pickupDateTime),
-            deliveryDate: getMomentByStandardFormat(data.deliveryDate),
-            manufacturerTreatmentStartDate: getMomentByStandardFormat(
-              data.manufacturerTreatmentStartDate
-            ),
-            completionDate: getMomentByStandardFormat(data.completionDate),
-            deliveryArrivalDate: getMomentByStandardFormat(
-              data.deliveryArrivalDate
-            ),
-            duration: data.duration,
-          })
+          const datetime = getMomentByStandardFormat(
+            data.manufacturerTreatmentStartDate
+          )
+          // To prevent selecting past date
+          if (moment(datetime._d, 'dd-mm-yyyy') < moment(Date() , 'dd-mm-yyyy')) {
+            this.visibleModal = true
+          } else {
+            this.form.setFieldsValue({
+              manufacturerName: detail.event._def.title,
+              treatmentAvailabilityId: detail.event._def.publicId,
+              collectionDate: getMomentByStandardFormat(data.collectionDate),
+              pickupDateTime: getMomentByStandardFormat(data.pickupDateTime),
+              deliveryDate: getMomentByStandardFormat(data.deliveryDate),
+              manufacturerTreatmentStartDate: getMomentByStandardFormat(
+                data.manufacturerTreatmentStartDate
+              ),
+              completionDate: getMomentByStandardFormat(data.completionDate),
+              deliveryArrivalDate: getMomentByStandardFormat(
+                data.deliveryArrivalDate
+              ),
+              duration: data.duration,
+            })
+          }
         }
       )
-
       // console.log('detail._def', detail)
       // console.log(detail)
+    },
+    handleOk() {
+      this.visibleModal = false
     },
   },
 }
