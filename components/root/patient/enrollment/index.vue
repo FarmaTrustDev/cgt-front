@@ -2,31 +2,40 @@
   <div>
     <a-skeleton :loading="loading">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
-        <a-tab-pane key="enrollment" :tab="translation['PatieDetai_2_673']"
-          ><enrollment 
-          :treatment="treatment" 
-          @getNextTab="getNextTab"
-          />
+        <a-tab-pane key="enrollment">
+          <div slot="tab" class="tab-title" :class="isCompleted(isCreated)">
+            {{ translation['PatieDetai_2_673'] }}
+          </div>
+          <enrollment :treatment="treatment" @getNextTab="getNextTab" />
         </a-tab-pane>
-        <a-tab-pane key="Consent" :disabled="!isCreated" :tab="translation['Conse_1_677']" 
-          ><consent
+        <a-tab-pane key="Consent" :disabled="!isCreated">
+          <div slot="tab" class="tab-title" :class="isCompleted(isCreated)">
+            {{ translation['Conse_1_677'] }}
+          </div>
+          <consent
             :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Screening" :disabled="!haveTreatment" :tab="translation['Scree_1_679']">
+        <a-tab-pane key="Screening" :disabled="!haveTreatment">
+          <div slot="tab" :class="isCompleted(haveTreatment)" class="tab-title">
+            {{ translation['Scree_1_679'] }}
+          </div>
           <screening
             :treatment="treatment"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane
-          key="Scheduling"
-          :disabled="!treatment.screeningStatus"
-          :tab="translation['Sched_1_681']"
-        >
+        <a-tab-pane key="Scheduling" :disabled="!treatment.screeningStatus">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(treatment.screeningStatus)"
+          >
+            {{ translation['Sched_1_681'] }}
+          </div>
           <scheduling :treatment="treatment" />
         </a-tab-pane>
       </a-tabs>
@@ -55,14 +64,14 @@ export default {
   mixins: [notifications, tabsHelpers, nullHelper],
   data() {
     return {
-      activeTab: "enrollment",
+      activeTab: 'enrollment',
       treatment: {},
-      isCreated:false,
+      isCreated: false,
       haveTreatment: false,
       loading: true,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -71,14 +80,14 @@ export default {
     this.isTreatmentCreate()
     this.handleActiveTab()
     this.isPatientCreated()
-  },  
+  },
   methods: {
     handleActiveTab() {
-      if(this.$route.query.view){
-        this.activeTab=this.$route.query.view
+      if (this.$route.query.view) {
+        this.activeTab = this.$route.query.view
       }
     },
-    isPatientCreated(){
+    isPatientCreated() {
       const globalId = this.$route.params.id
 
       if (this.isGuid(globalId)) {
@@ -126,6 +135,9 @@ export default {
     },
     getNextTab(key) {
       this.tabChange(key)
+    },
+    isCompleted(flag) {
+      return flag ? 'ant-tabs-tab-completed' : ''
     },
   },
 }
