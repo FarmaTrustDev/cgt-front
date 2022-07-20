@@ -198,7 +198,6 @@
           <Upload
         :default-file-list="entity.profileImageUrl"
         :extensions="allowedExtensions"
-        @handleChange="handleChange"
           />
         </a-form-item>
            </a-col>
