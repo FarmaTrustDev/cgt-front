@@ -38,13 +38,13 @@ export default {
       }),
     }
   },
-  mounted() {
-    this.checkCreated()
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.checkCreated()
   },
   updated() {},
   methods: {

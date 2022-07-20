@@ -8,10 +8,17 @@
         :tab="category.name"
         :force-render="true"
       >
-      
-        <tabContent :screenings="category.screenings" @getFilledDatas="getFilledData" />
-        <FormActionButton v-if="isHidden" :text="getButtonText(category.name)" @click="getNextTab(index,category.screenings,category.name)" class="mt-15" />
-      
+        <tabContent
+          :screenings="category.screenings"
+          @getFilledDatas="getFilledData"
+        />
+        <FormActionButton
+          v-if="isHidden"
+          html-type="button"
+          :text="getButtonText(category.name)"
+          class="mt-15"
+          @click="getNextTab(index, category.screenings, category.name)"
+        />
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -41,40 +48,39 @@ export default {
       formLayout: 'vertical',
       showCategoryModal: false,
       loading: true,
-      disabled:false,
-      filledData:0,
-      catName:'',
-      isHidden:true,
+      disabled: false,
+      filledData: 0,
+      catName: '',
+      isHidden: true,
     }
   },
   mounted() {
     this.setCurrentTab(this.newTabIndex)
   },
   methods: {
-
     setCurrentTab(key) {
       const categories = this.categories
       if (!this.isEmpty(this.categories)) {
-        if(!this.isEmpty(this.categories[key])){
+        if (!this.isEmpty(this.categories[key])) {
           this.activeKey = categories[key].globalId
-          this.isHidden=true
+          this.isHidden = true
         }
       }
     },
-    getButtonText(val){
+    getButtonText(val) {
       return this.$store.getters.getTranslation.ComplScree_3_469 + val
     },
-    getNextTab(index,screening) {
-      if(this.filledData===screening.length){
-        this.isHidden=false
-        this.setCurrentTab(index+1)
-      }    
+    getNextTab(index, screening) {
+      if (this.filledData === screening.length) {
+        this.isHidden = false
+        this.setCurrentTab(index + 1)
+      }
     },
-    getFilledData(vals){
-      this.filledData=vals
+    getFilledData(vals) {
+      this.filledData = vals
     },
     tabChange(key) {
-      this.newTabIndex = key+1
+      this.newTabIndex = key + 1
     },
   },
 }
