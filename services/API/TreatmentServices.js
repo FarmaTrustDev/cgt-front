@@ -46,6 +46,11 @@ function detail(id) {
     url: `${baseApi}/detail/${id}`,
   })
 }
+function schedule(id, directionId) {
+  return request({
+    url: `${baseApi}/schedule/${id}/${directionId}`,
+  })
+}
 
 function markCompleteCollection(id) {
   return request({
@@ -141,6 +146,7 @@ const TreatmentServices = {
   getById,
   update,
   detail,
+  schedule,
   manufacturing,
   markCompleteCollection,
   markManufacturerCollection,

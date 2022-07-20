@@ -120,6 +120,15 @@ export default {
       TreatmentServices.detail(treatmentId)
         .then((response) => {
           this.updateTreatment(response.data)
+          console.log(response.data, 'treatmentresponse')
+        })
+        .catch(this.error)
+        .finally(() => {
+          this.loading = false
+        })
+      TreatmentServices.schedule(treatmentId, 1)
+        .then((response) => {
+          console.log(response.data, 'treatmentdetailresponse')
         })
         .catch(this.error)
         .finally(() => {
