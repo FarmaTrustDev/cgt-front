@@ -2,7 +2,10 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <formfield @handleChange="handleChange" />
-      <a-form-item>
+      <a-form-item
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+      >
         <FormActionButton
           :is-created="isCreated"
           :loading="loading"
@@ -67,7 +70,6 @@ export default {
         .getById(id)
         .then((response) => {
           this.entity = response.data
-
           if (this.isFunction(this.getEntity)) {
             this.getEntity(response)
           }
@@ -115,7 +117,7 @@ export default {
             this.success(response.errorMessage)
           }
           if (!this.isEmpty(this.gotoLink)) {
-            this.goto(`${this.gotoLink}/${response.data.globalId}`)
+            this.goto(`${this.gotoLink}`)
           }
           if (this.isFunction(this.afterCreate)) {
             this.afterCreate(response)

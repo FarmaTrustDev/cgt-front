@@ -5,7 +5,7 @@
         <a-form-item
           :label="translation.FirstName_2_420 + '*:'"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -27,7 +27,7 @@
         <a-form-item
           :label="translation.LastName_2_422+'*:'"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -50,7 +50,7 @@
         <a-form-item
           :label="translation.EmailAddre_2_140+'*:'"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -71,9 +71,9 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Usern_1_400"
+          :label="translation.Usern_1_400+'*:'"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -97,7 +97,7 @@
         <a-form-item
           :label="translation.OfficAddre_2_428"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
+          :wrapper-col="{ span: 23 }"
         >
           <a-input
             v-decorator="[
@@ -106,7 +106,7 @@
                 initialValue: entity.address,
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Please input your Office Address',
                   },
                 ],
@@ -117,9 +117,96 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Roles_1_442"
+          :label="translation.ContaNumbe_2_430"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'phone',
+              {
+                initialValue: entity.phone,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Contact Number',
+                  },
+                ],
+              },
+            ]"
+            :placeholder="translation.ContaNumbe_2_430"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          :label="translation.What3_1_432+':'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'what3Words',
+              {
+                initialValue: entity.what3Words,
+                rules: [
+                  {
+                    required: false,
+                    message: 'Please input your What3Words',
+                  },
+                ],
+              },
+            ]"
+            :placeholder="translation.What3_1_432"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="12">
+        <a-form-item
+          label="Apply*:"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'department',
+              {
+                initialValue: entity.department,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your Department',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Department"
+          />
+        </a-form-item>
+      </a-col>
+      
+      <a-col :span="12">
+        <a-form-item
+          label="Image:"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+          class="pb-0"
+        >
+          <Upload
+        :default-file-list="entity.profileImageUrl"
+        :extensions="allowedExtensions"
+        @handleChange="handleChange"
+          />
+        </a-form-item>
+           </a-col>
+      <a-col :span="24">
+        <a-form-item
+          :label="translation.Roles_1_442+'*:'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
         >
           <a-select
             v-decorator="[
@@ -163,109 +250,12 @@
             type="hidden"
           />
         </a-form-item>
-      </a-col>
-
+      </a-col>      
       <a-col :span="12">
         <a-form-item
-          :label="translation.ContaNumbe_2_430"
+          :label="translation.Postc_1_444+':'"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-          class="pb-0"
-        >
-          <a-input
-            v-decorator="[
-              'phone',
-              {
-                initialValue: entity.phone,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Contact Number',
-                  },
-                ],
-              },
-            ]"
-            :placeholder="translation.ContaNumbe_2_430"
-          />
-        </a-form-item>
-      </a-col>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.What3_1_432"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-          class="pb-0"
-        >
-          <a-input
-            v-decorator="[
-              'what3Words',
-              {
-                initialValue: entity.what3Words,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your What3Words',
-                  },
-                ],
-              },
-            ]"
-            :placeholder="translation.What3_1_432"
-          />
-        </a-form-item>
-      </a-col>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.Depar_1_436"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-          class="pb-0"
-        >
-          <a-input
-            v-decorator="[
-              'department',
-              {
-                initialValue: entity.department,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Department',
-                  },
-                ],
-              },
-            ]"
-            :placeholder="translation.Depar_1_436"
-          />
-        </a-form-item>
-      </a-col>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.Image_1_438"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-        >
-          <Upload
-            :default-file-list="entity.profileImageUrl"
-            :extensions="allowedExtensions"
-            @handleChange="handleChange"
-          />
-          <span v-if="entity.profileImageUrl && !newSelected"
-            ><img
-              :src="entity.profileImageUrl['name']"
-              width="80px"
-              height="80px"
-          /></span>
-          <span v-if="defaultImage && entity.profileImageUrl == null"
-            ><img
-              src="https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg"
-              width="80px"
-              height="80px"
-          /></span> </a-form-item
-      ></a-col>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.Postc_1_444"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
           class="pb-0"
         >
           <a-input
@@ -275,7 +265,7 @@
                 initialValue: entity.postCode,
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Please input your Postcode',
                   },
                 ],
@@ -285,12 +275,35 @@
           />
         </a-form-item>
       </a-col>
-
       <a-col :span="12">
         <a-form-item
-          :label="translation.Locat_1_448"
+          label="City*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
+          class="pb-0"
+        >
+          <a-input
+            v-decorator="[
+              'city',
+              {
+                initialValue: entity.city,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your City',
+                  },
+                ],
+              },
+            ]"
+            placeholder="City"
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="24">
+        <a-form-item
+          :label="translation.Locat_1_448+':'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
           class="pb-0"
         >
           <a-input
@@ -300,7 +313,7 @@
                 initialValue: entity.location,
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Please input your Location',
                   },
                 ],
@@ -310,11 +323,11 @@
           />
         </a-form-item>
       </a-col>
-      <a-col :span="12">
+      <a-col :span="24">
         <a-form-item
-          :label="translation.PostaAddre_2_450"
+          :label="translation.PostaAddre_2_450+':'"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 23 }"
           class="pb-0"
         >
           <a-input
@@ -324,7 +337,7 @@
                 initialValue: entity.address,
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Please input your Postal Address',
                   },
                 ],
@@ -336,9 +349,9 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Count_1_452"
+          label="County*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
           class="pb-0"
         >
           <a-input
@@ -360,15 +373,15 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Count_1_49"
+          label="Country*:"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-select
             v-decorator="[
               'countryId',
               {
-                initialValue: entity.countryId,
+                initialValue: entity.country,
                 rules: [
                   {
                     required: true,
@@ -424,21 +437,12 @@ export default {
       allowedExtensions: DOCUMENT_EXTENSIONS,
       newSelected: false,
       defaultImage: true,
+      // defaultFIleList:{uid:null, name:'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', status:null, response: null, url: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg'},
     }
   },
   mounted() {
-    this.getCountries()
-    this.getRoles()
-  },
-  updated() {
-    if (this.isCreated && this.fetchCountry) {
-      this.fetchCountry = false
-      this.getCountries()
-    }
-    if (this.isCreated && this.fetchRole) {
-      this.fetchRole = false
-      this.getRoles()
-    }
+    this.updated()
+    // this.getRoles()
   },
   computed:{
     translation() {
@@ -446,11 +450,19 @@ export default {
     },
   },
   methods: {
+    updated() {
+      if (this.isCreated && this.fetchCountry) {
+        this.fetchCountry = false
+        this.getCountries()
+      }
+      if (this.isCreated && this.fetchRole) {
+        this.fetchRole = false
+        this.getRoles()
+      }
+    },    
     handleChange(info) {
-      this.newSelected = true
-      this.defaultImage = false
+      console.log(info)
       this.fileList = info
-      this.$emit('handleChange', this.fileList)
     },
     filterOption,
     disabledDate: _disabledFutureDate,
