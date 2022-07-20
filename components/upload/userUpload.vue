@@ -4,10 +4,11 @@
       :before-upload="beforeUpload"
       listType="picture-card"
       :fileList="isChanged ? fileList : defaultFileList"
+      name="file"
       @preview="handlePreview"
       @change="handleChange"
     >
-      <div v-if="isChanged || fileList.length==0">
+      <div>
         <a-icon type="camera" />
         <div class="ant-upload-text">Upload</div>
       </div>
@@ -31,7 +32,7 @@ export default {
     return {
       previewVisible: false,
       previewImage: '',
-      fileList:[{status: 'done',uid: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', name: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', url:'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg'}],
+      fileList:[],
       isChanged:false,
     }
   },
@@ -57,9 +58,19 @@ export default {
       this.previewImage = file.url || file.thumbUrl
       this.previewVisible = true
     },
+
+    /* handleChange(file) {
+      // console.log(file)
+      this.isChanged=true
+      // this.fileList=file
+      // @todo removing work in under construction
+      this.fileList = file
+      this.$emit('handleChange', file)
+    }, */ 
     handleChange ({ fileList }) {
       this.isChanged=true
       this.fileList = fileList
+      this.$emit('handleChange', this.fileList)
     },
   },
 }
