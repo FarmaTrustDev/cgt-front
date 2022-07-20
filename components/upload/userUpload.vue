@@ -7,7 +7,7 @@
       @preview="handlePreview"
       @change="handleChange"
     >
-      <div v-if="isChanged">
+      <div v-if="isChanged || fileList.length==0">
         <a-icon type="camera" />
         <div class="ant-upload-text">Upload</div>
       </div>
@@ -31,7 +31,7 @@ export default {
     return {
       previewVisible: false,
       previewImage: '',
-      fileList:[],
+      fileList:[{status: 'done',uid: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', name: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', url:'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg'}],
       isChanged:false,
     }
   },
