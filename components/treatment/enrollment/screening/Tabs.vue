@@ -19,6 +19,11 @@
           class="mt-15"
           @click="getNextTab(index, category.screenings, category.name)"
         />
+        <alert
+          v-if="showValidationError"
+          type="warning"
+          message="All fields are Required"
+        />
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -26,8 +31,9 @@
 <script>
 import tabContent from '~/components/treatment/enrollment/screening/TabsContent'
 import nullHelper from '~/mixins/null-helpers'
+import alert from '~/components/alert'
 export default {
-  components: { tabContent },
+  components: { tabContent, alert },
   mixins: [nullHelper],
   props: {
     categories: {
@@ -52,6 +58,7 @@ export default {
       filledData: 0,
       catName: '',
       isHidden: true,
+      showValidationError: false,
     }
   },
   mounted() {
@@ -71,9 +78,11 @@ export default {
       return this.$store.getters.getTranslation.ComplScree_3_469 + val
     },
     getNextTab(index, screening) {
+      this.showValidationError = true
       if (this.filledData === screening.length) {
         this.isHidden = false
         this.setCurrentTab(index + 1)
+        this.showValidationError = false
       }
     },
     getFilledData(vals) {
