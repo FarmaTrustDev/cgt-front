@@ -40,7 +40,11 @@
     @extend .float-left;
   }
 }
-
+.flex-display {
+  position: absolute;
+  display: inline-flex;
+  width: 200px;
+}
 .inventory-page {
   .icon-text {
     border: 1px solid red;

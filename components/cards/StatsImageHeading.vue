@@ -2,8 +2,13 @@
   <div>
     <slot name="extra" />
     <span class="imageHeading">
-      <figure>
-        <figcaption>
+      <figure class="ml-80 mtminus-10">
+          <img
+            :src="getImageUrl(detail.img)"
+            :width="imgProperties.width"
+            :height="imgProperties.height"
+          />
+        <figcaption class="flex-display ml-15">
           {{ detail.heading }}
         </figcaption>
       </figure>
