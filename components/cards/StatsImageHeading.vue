@@ -2,7 +2,7 @@
   <div>
     <slot name="extra" />
     <span class="imageHeading">
-      <figure class="ml-80 mtminus-10">
+      <figure class="ml-80 mtminus-60">
           <img
             :src="getImageUrl(detail.img)"
             :width="imgProperties.width"

@@ -82,8 +82,8 @@ export default {
           scopedSlots: { customRender: 'action' },
         },
     ],
-      loading: true,
-      fullName:[],
+    loading: true,
+    fullName:[],
     }
   },
   computed: {
