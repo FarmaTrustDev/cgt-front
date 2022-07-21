@@ -198,3 +198,13 @@
     }
   }
 }
+.enrollment-title{
+  .ant-card-head-title {
+    display: inline-block;
+    flex: 1;
+    padding: 20px 45px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+}

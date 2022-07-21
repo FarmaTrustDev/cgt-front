@@ -40,6 +40,16 @@
         </a-tab-pane>
       </a-tabs>
     </a-skeleton>
+    <a-modal v-model="visible" title="Rejection by user and organization"> 
+      <div v-for="(data,index) in rejectedData" :key="index">
+        <p>This treatment was rejected by {{ data.organization }} by {{data.username}} for this reason : {{data.rejectionReason}}</p>
+      </div>
+      <template slot="footer">
+        <a-button key="back" @click="handleCancel()">
+          Ok
+        </a-button>
+      </template>
+    </a-modal>
   </div>
 </template>
 
@@ -67,6 +77,8 @@ export default {
       activeTab: 'enrollment',
       treatment: {},
       isCreated: false,
+      visible: false,
+      rejectedData : [],
       haveTreatment: false,
       loading: true,
     }
@@ -120,7 +132,6 @@ export default {
       TreatmentServices.detail(treatmentId)
         .then((response) => {
           this.updateTreatment(response.data)
-          console.log(response.data, 'treatmentresponse')
         })
         .catch(this.error)
         .finally(() => {
@@ -128,7 +139,13 @@ export default {
         })
       TreatmentServices.schedule(treatmentId, 1)
         .then((response) => {
-          console.log(response.data, 'treatmentdetailresponse')
+          this.rejectedData = response.data;
+          // eslint-disable-next-line eqeqeq
+          if(this.rejectedData.length != 0)
+          {
+            this.visible = true
+            console.log(this.rejectedData, 'rejected data')
+          }
         })
         .catch(this.error)
         .finally(() => {
@@ -147,6 +164,9 @@ export default {
     },
     isCompleted(flag) {
       return flag ? 'ant-tabs-tab-completed' : ''
+    },
+      handleCancel() {
+      this.visible = false;
     },
   },
 }

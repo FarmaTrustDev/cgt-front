@@ -7,7 +7,7 @@
         @click="addBags"
       />
       <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
-
+      
       <a-button
         v-if="!treatment.hospitalCollectionStatus && bags.length > 0"
         class="w-100 mt-15"
@@ -45,7 +45,7 @@
             height="50%"
           />
         </p>
-        <h4><p>Please select today/futre date </p></h4>
+        <h4><p>Please select today/future date </p></h4>
         <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
       </center>
     </a-modal>
@@ -76,6 +76,7 @@ export default {
       bags: [],
       COLLECTION_TYPE,
       loading: true,
+      schedule:[],
     }
   },
   mounted() {
