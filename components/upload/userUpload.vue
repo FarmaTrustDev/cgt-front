@@ -2,32 +2,27 @@
   <div class="clearfix">
     <a-upload
       :before-upload="beforeUpload"
-      :file-list="defaultFileList? defaultFileList : stateFileList"
-      list-type="picture-card"
+      listType="picture-card"
+      :fileList="isChanged ? fileList : defaultFileList"
       name="file"
-      :action="handleChange"
-      :disabled="disabled"
+      @preview="handlePreview"
+      @change="handleChange"
     >
-      <div v-if="defaultFileList.length < 2">
-        <a-icon type="camera" theme="filled" style="font-size: 3.75rem" />
+      <div>
+        <a-icon type="camera" />
+        <div class="ant-upload-text">Upload</div>
       </div>
     </a-upload>
     <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-      <img alt="example" style="width: 100%" />
+      <img alt="example" style="width: 100%" :src="previewImage" />
     </a-modal>
   </div>
 </template>
 <script>
 export default {
   props: {
-    extensions: {
-      default: () => [],
-      type: Array,
-    },
-    defaultFileList: {
-      default: () => [],
-      type: Array,
-    },
+    extensions: { type: Array, default: () => [] },
+    defaultFileList: { type: Array, default: () => [] },
     disabled: {
       default: false,
       type: Boolean,
@@ -35,10 +30,14 @@ export default {
   },
   data() {
     return {
-      stateFileList: [],
       previewVisible: false,
-      fileList:this.defaultFileList,
+      previewImage: '',
+      fileList:[],
+      isChanged:false,
     }
+  },
+  mounted(){
+    this.fileList=this.defaultFileList
   },
   methods: {
     beforeUpload(file) {
@@ -48,33 +47,31 @@ export default {
       // extension upload the file @todo work in progess
       if (!isAllowedExtension) {
         this.$message.error('Extension not allow')
+        this.fileList=[]
         return true
       }
-      // const isLt2M = file.size / 1024 / 1024 < 2
-      // if (!isLt2M) {
-      //   this.$message.error('Extension')
-      // }
     },
-    async handleChange(file, fileList) {
-      console.log(file.status)
-      // @todo removing work in under construction
-      if (file.status === 'remove') {
-        await this.removeFromFileList(file)
-      } else {
-        await this.addToFileList(file)
-      }
-      this.$emit('handleChange', this.stateFileList)
-    },
-    handleCancel() {
+    handleCancel () {
       this.previewVisible = false
     },
-    async addToFileList(file) {
-      const files = this.stateFileList
-      //    files = JSON.stringify(files);
-      //    files = JSON.parse(files);
-      return await Promise.resolve((this.stateFileList = [...files, file]))
+    handlePreview (file) {
+      this.previewImage = file.url || file.thumbUrl
+      this.previewVisible = true
     },
-    async removeFromFileList() {},
+
+    /* handleChange(file) {
+      // console.log(file)
+      this.isChanged=true
+      // this.fileList=file
+      // @todo removing work in under construction
+      this.fileList = file
+      this.$emit('handleChange', file)
+    }, */ 
+    handleChange ({ fileList }) {
+      this.isChanged=true
+      this.fileList = fileList
+      this.$emit('handleChange', this.fileList)
+    },
   },
 }
 </script>

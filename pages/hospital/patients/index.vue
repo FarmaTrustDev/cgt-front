@@ -99,12 +99,14 @@ export default {
       this.fetchPatientService = fetch
     },
     fetch(params) {
-      // this.fetchPatientService(params) this was creating error of bad request after pause or resume
       this.fetchPatientService()
     },
+    fetchSearch(params) {
+      this.fetchPatientService(params)
+    },    
     searchPatent(e) {
       const search = e.target.value
-      this.fetch({ puid: search, name: search, TreatmentTypeName: search })
+      this.fetchSearch({ puid: search, name: search, TreatmentTypeName: search })
     },
   },
 }

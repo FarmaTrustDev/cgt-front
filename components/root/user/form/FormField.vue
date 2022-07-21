@@ -195,7 +195,7 @@
           :wrapper-col="{ span: 22 }"
           class="pb-0"
         >
-          <Upload
+      <Upload
         :default-file-list="entity.profileImageUrl"
         :extensions="allowedExtensions"
         @handleChange="handleChange"
@@ -381,7 +381,7 @@
             v-decorator="[
               'countryId',
               {
-                initialValue: entity.country,
+                initialValue: entity.countryId,
                 rules: [
                   {
                     required: true,
@@ -437,32 +437,34 @@ export default {
       allowedExtensions: DOCUMENT_EXTENSIONS,
       newSelected: false,
       defaultImage: true,
+      fileList:[],
       // defaultFIleList:{uid:null, name:'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', status:null, response: null, url: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg'},
     }
   },
   mounted() {
-    this.updated()
-    // this.getRoles()
+    this.getCountries()
+    this.getRoles()
   },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
   },
-  methods: {
-    updated() {
-      if (this.isCreated && this.fetchCountry) {
-        this.fetchCountry = false
-        this.getCountries()
-      }
-      if (this.isCreated && this.fetchRole) {
-        this.fetchRole = false
-        this.getRoles()
-      }
-    },    
+  updated() {
+    if (this.isCreated && this.fetchCountry) {
+      this.fetchCountry = false
+      this.getCountries()
+    }
+    if (this.isCreated && this.fetchRole) {
+      this.fetchRole = false
+      this.getRoles()
+    }
+  },
+  methods: {    
     handleChange(info) {
-      console.log(info)
+      // console.log(info)
       this.fileList = info
+      this.$emit('handleChange', this.fileList)
     },
     filterOption,
     disabledDate: _disabledFutureDate,
