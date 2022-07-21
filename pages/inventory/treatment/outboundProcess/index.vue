@@ -508,6 +508,7 @@ export default {
         this.goto(url)
       }
     },    
+
   },
 }
 </script>

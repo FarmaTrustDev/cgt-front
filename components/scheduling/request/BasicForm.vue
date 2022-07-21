@@ -73,7 +73,6 @@
                   ],
                 },
               ]"
-             
               :disabled-date="disabledDate"
               :format="dateFormat"
               style="width: 100%"
@@ -87,12 +86,21 @@
       </a-form-item>
     </a-form>
     <alert v-else message="Collection not completed" />
+    <a-modal v-model="visible" title="Rejection by user and organization">
+      <div v-for="(data, index) in rejectedData" :key="index">
+        <p>This treatment was rejected by {{ data.organization }} by {{data.username}} for this reason : {{data.rejectionReason}}</p>
+      </div>
+      <template slot="footer">
+        <a-button key="back" @click="handleCancel(false)"> Ok </a-button>
+      </template>
+    </a-modal>
   </div>
 </template>
 <script>
 import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import TreatmentServices from '~/services/API/TreatmentServices'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import {
   getMomentByStandardFormat,
@@ -110,7 +118,10 @@ export default {
   data() {
     return {
       loading: false,
+      visible: false,
+      rejectedData: [],
       formLayout: 'vertical',
+      treatmentId: this.$route.params.id,
       form: this.$form.createForm(this, {
         name: 'scheduling',
       }),
@@ -123,11 +134,26 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  mounted() {
+    this.GetRejectionDetail(this.treatmentId)
+  },
   methods: {
     disabledDate: _disabledPreviousDate,
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
         deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
+      })
+    },
+
+    GetRejectionDetail(treatmentId) {
+      TreatmentServices.schedule(treatmentId, 2).then((response) => {
+        this.rejectedData = response.data
+        // eslint-disable-next-line eqeqeq
+          if(this.rejectedData.length != 0)
+          {
+            this.visible = true
+            console.log(this.rejectedData, 'rejected data')
+          }
       })
     },
     onSubmit(e) {
@@ -142,6 +168,9 @@ export default {
             .catch(this.error)
         }
       })
+    },
+    handleCancel() {
+      this.visible = false
     },
   },
 }
