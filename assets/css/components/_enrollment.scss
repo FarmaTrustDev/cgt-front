@@ -190,12 +190,20 @@
 }
 .schedule-create-tabs {
   .enrollment-page {
+    padding: 10%;
+    background-color: #f9f9f9;
+    border-radius: 24px;
     .ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
     .ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
       text-align: left;
-      padding: 10px;
       margin-left: 3%;
     }
+    .enrollment-page .ant-tabs-left-bar .ant-tabs-tab {
+      text-align: left;
+      margin-top: 15px;
+      padding: 10%;
+      border-radius: 24px;
+  }
   }
 }
 .enrollment-title{

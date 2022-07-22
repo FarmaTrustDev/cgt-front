@@ -27,7 +27,6 @@
     </a-table>
 
     <a-modal :title="isAccepted?'Accept Scheduling Request':'Reject Scheduling Request'" :visible="showResponseModal" :confirm-loading="confirmLoading" :footer="null" :destroy-on-close="true" :width="700" @ok="submitTreatmentResult" @cancel="handleModal(false)">
-        {{isAccepted}}
         <a-form :form="form" :layout="formLayout" @submit="onSubmit">
             <Form :is-accepted="isAccepted" :data="selectedRow" />
 
