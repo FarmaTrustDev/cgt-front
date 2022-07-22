@@ -98,6 +98,7 @@ export default {
         .update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
+          this.$store.commit('setUser', response.data)
           if (!this.isEmpty(this.gotoLink)) {
             this.goto(`${this.gotoLink}`)
           }

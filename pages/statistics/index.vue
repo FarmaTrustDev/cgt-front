@@ -3,18 +3,14 @@
     <div class="page-header clearfix">
     <div class="page-title ml-6">{{translation.Stati_1_19}}</div>
     </div>
-    <a-card :bordered="false" class="default-border-radius pb-15">
-      <a-row class="grey-card">
-        <a-col :span="1"> </a-col>
-        <a-col :span="10" style="margin-bottom:40px;">
+    <a-card :bordered="false" class="grey-card">
+        <a-col :span="11" class="mtminus-6">
           <treatmentStats />
         </a-col>
-        <a-col :span="1"> </a-col>
-        <a-col :span="10" style="margin-top:20px;">
+        <a-col :span="2"></a-col>
+        <a-col :span="11" class="mtminus-5">
           <hospitalStats />
         </a-col>
-        <a-col :span="1"></a-col>
-      </a-row>
     </a-card>
   </div>
 </template>

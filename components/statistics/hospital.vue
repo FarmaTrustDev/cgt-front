@@ -7,7 +7,7 @@
             <div
               v-for="hospital in hospitalData"
               :key="hospital.id"
-              class="stats"
+              class="stats mb-15"
             >
               <ImageHeading
                 :detail="{
@@ -15,12 +15,12 @@
                   heading: hospital.name,
                 }"
                 :img-properties="{
-                  width: '30px',
+                  width: '25px',
                 }"
-                class="mt-6"
+                class="mt-15"
               >
                 <span slot="extra">
-                  <span class="count-bar">{{ hospital.count }}</span>
+                  <span class="count-bar mb-15">{{ hospital.count }}</span>
                 </span>
               </ImageHeading>
             </div></a-tab-pane
@@ -36,10 +36,10 @@
                   img: hospital.img,
                   heading: hospital.name,
                 }"
-                class="mt-6"
+                class="mt-15"
               >
                 <span slot="extra">
-                  <span class="count-bar">{{ hospital.count }}</span>
+                  <span class="count-bar mb-15">{{ hospital.count }}</span>
                 </span>
               </ImageHeading>
             </div></a-tab-pane
@@ -98,7 +98,7 @@
 
 
 <script>
-import ImageHeading from '~/components/cards/ImageHeading'
+import ImageHeading from '~/components/cards/StatsImageHeading'
 import TreatmentServices from '~/services/API/TreatmentServices'
 export default {
   components: {
@@ -145,6 +145,7 @@ export default {
   border-radius: 15px;
   margin-top: 15px;
   padding-left: 15px;
+  height: 100px;
   .count-bar {
     padding: 25px;
     display: inline-block;

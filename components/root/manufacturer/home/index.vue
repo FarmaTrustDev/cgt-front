@@ -3,7 +3,7 @@
     <a-card class="grey-card" :bordered="false">
       <a-row>
         <!-- left side tabs -->
-        <a-col :span="9">
+        <a-col :span="12">
           <div class="home-tab">
             <a href="javascript:;" @click="goto(`/manufacturer/schedules`)">
               <img
@@ -37,9 +37,7 @@
         </a-col>
         <!-- #end left side tabs -->
         <a-col :span="2"></a-col>
-        <a-col :span="3"></a-col>
-
-        <a-col :span="9">
+        <a-col :span="10">
           <TimeAndTreatmentList />
         </a-col>
       </a-row>
