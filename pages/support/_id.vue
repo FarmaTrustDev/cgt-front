@@ -9,7 +9,10 @@
       <div class="grey-card">
         <a-row :gutter="56">
           <a-col :span="12">
-            <Detail />
+            <Detail
+            :data ="data"
+            :ticket="entity"
+             />
           </a-col>
           <a-col :span="12">
             <a-card class="default-border-radius">
