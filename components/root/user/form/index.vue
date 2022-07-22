@@ -49,6 +49,9 @@ export default {
     this.checkCreated()
   },
   computed:{
+    users() {
+      return this.$store.getters.getUser
+    },
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -98,8 +101,8 @@ export default {
         .update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
-          this.$store.commit('setUser', response.data)
           if (!this.isEmpty(this.gotoLink)) {
+            this.userDetail()
             this.goto(`${this.gotoLink}`)
           }
           if (this.isFunction(this.afterUpdate)) {
@@ -162,6 +165,17 @@ export default {
       })
       // this.loading = false
     },
+    userDetail() {
+      UserServices.detail()
+        .then((response) => {
+          console.log(response)
+          this.$store.commit('setUser', response.data)
+        })
+        .then(() => {
+          this.$router.push({ path: '/users' })
+          this.loading = false
+        })
+    },  
   },
 }
 </script>
