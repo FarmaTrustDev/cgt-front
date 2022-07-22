@@ -165,7 +165,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Apply*:"
+          label="Department*:"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"

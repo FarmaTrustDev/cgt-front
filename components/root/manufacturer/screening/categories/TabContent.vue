@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormActionButton text="Add Question" @click="handleCategoryModal(true)" />
+    <FormActionButton text="Add Question" class="mt-5" @click="handleCategoryModal(true)" />
     <a-alert
       v-if="data.length <= 0"
       type="info"
