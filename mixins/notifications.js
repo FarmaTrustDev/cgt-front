@@ -35,6 +35,12 @@ export default {
         // icon: <a-icon type="smile" style="color: #108ee9" />,
       })
     },
+    confirm(content, type = 'error') {
+      this.$confirm({
+        content,
+        type,
+      })
+    }
   },
 }
 

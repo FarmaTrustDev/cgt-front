@@ -32,9 +32,10 @@
 import tabContent from '~/components/treatment/enrollment/screening/TabsContent'
 import nullHelper from '~/mixins/null-helpers'
 import alert from '~/components/alert'
+import notifications from '~/mixins/notifications'
 export default {
   components: { tabContent, alert },
-  mixins: [nullHelper],
+  mixins: [nullHelper, notifications],
   props: {
     categories: {
       required: true,
@@ -48,10 +49,6 @@ export default {
       activeKey: null,
       panes: [],
       newTabIndex: 0,
-      form: this.$form.createForm(this, {
-        name: 'patientEnrollment',
-      }),
-      formLayout: 'vertical',
       showCategoryModal: false,
       loading: true,
       disabled: false,
@@ -78,11 +75,14 @@ export default {
       return this.$store.getters.getTranslation.ComplScree_3_469 + val
     },
     getNextTab(index, screening) {
-      this.showValidationError = true
       if (this.filledData === screening.length) {
         this.isHidden = false
         this.setCurrentTab(index + 1)
         this.showValidationError = false
+      } else {
+        this.confirm(
+          'The screening checklist will not proceed with the No answer(s).Correct them.'
+        )
       }
     },
     getFilledData(vals) {
