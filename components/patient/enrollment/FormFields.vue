@@ -221,7 +221,7 @@
           />
         </a-form-item>
       </a-col>
-      <a-col :span="12">
+      <!-- <a-col :span="12">
         <a-form-item
           :label="translation.What3_1_432 + '*'"
           :label-col="{ span: 24 }"
@@ -244,7 +244,7 @@
             :placeholder="translation.What3_1_432"
           />
         </a-form-item>
-      </a-col>
+      </a-col> -->
       <a-col :span="12"></a-col>
       <a-col :span="24">
         <a-form-item

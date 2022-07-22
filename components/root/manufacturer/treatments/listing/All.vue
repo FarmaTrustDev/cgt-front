@@ -1,7 +1,7 @@
 <template>
   <div>
     <Filters @getParams="getParams" />
-    <a-table :loading="loading" :columns="column" :data-source="data">
+    <a-table :loading="loading" :columns="column" :data-source="data" :custom-row="customRowReDirect">
       <template slot="name" slot-scope="name, record">
         <strong>
           <a-button
@@ -88,6 +88,15 @@ export default {
     // this.fetch()
   },
   methods: {
+        customRowReDirect(record) {
+      return {
+        on: {
+          click: (event) => {
+            this.goto(`/manufacturer/treatments/process/${record.treatment.globalId}`)
+          },
+        },
+      }
+    },
     stepClick(record, phase) {
       this.goto(
         `/manufacturer/treatments/process/${record.treatment.globalId}`,

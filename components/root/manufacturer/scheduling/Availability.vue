@@ -53,6 +53,7 @@ export default {
         initialView: 'dayGridMonth',
         nowIndicator: true,
         editable: false,
+        displayEventTime : false,
         selectable: true,
         events: this.handleDateClick,
         slotMinTime: '08:00:00',

@@ -1,13 +1,13 @@
 <template>
   <div class="support-detail">
     <a-card class="default-border-radius">
-      <p class="mb-4 BagID float-right">BagID: BG0000M7</p>
+      <p class="mb-4 BagID float-right">BagID: {{ticket.reference_Id}}</p>
       <p class="mb-4 PUID">PUID: Emma Wilbrouke</p>
       <!-- ============ -->
       <a-card class="p-4 default-border-radius">
-        <p class="SubjectMsg">The patient is too sick for further treatments</p>
-        <p><span class="patientName">By: Emma Wilbrouke</span></p>
-        <p><span class="Date">date: 17:47:16 12 January 2022 </span></p>
+        <p class="SubjectMsg">{{ ticket.description }}</p>
+        <p><span class="patientName">By: {{ticket.reporter_name}}</span></p>
+        <p><span class="Date">date: {{getDateFormat(ticket.created_At)}} </span></p>
         <p>
           <span class="StackHolder">StakeHolder(s): Manufacturer,Courier</span>
         </p>
@@ -21,6 +21,7 @@
           default-active-key="1"
           :animated="false"
         >
+        
           <a-tab-pane key="1" tab="Hospital">
             <a-row>
               <a-col :span="12">
@@ -80,3 +81,18 @@
     </a-card>
   </div>
 </template>
+<script>
+import moment from 'moment';
+export default {
+  props: {
+    data: { type: Array, default: () => {} },
+    ticket: { type: Object, default: () => {}, required: true },
+  },
+  methods:{
+    getDateFormat(date){
+      console.log(date, 'date')
+     return moment(String(date)).format('hh:mm MM/DD/YYYY')
+    }
+  },
+}
+</script>

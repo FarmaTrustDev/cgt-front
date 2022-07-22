@@ -1,20 +1,29 @@
 <template>
-  <div class="grey-card enrollment-page">
+  <div class="grey-card enrollment-page schedule-create-tabs">
+    <a-card :bordered="false" class="default-border-radius  pt-0">
     <a-skeleton :loading="loading" >
     <a-tabs
-      class="ant-card schedule-create-tabs"
       tab-position="left"
       :default-active-key="activeTab"
       @change="tabChange"
     >
-      <a-tab-pane :key="1" :tab="translation.Detai_1_346" class="m-3"
-        ><Form :treatment="treatment" @getEntity="getEntity" />
+      <a-tab-pane :key="detail" class="m-3"
+        >
+        <div slot="tab" class="tab-title">
+            {{ translation['Detai_1_346'] }}
+          </div>
+        <Form :treatment="treatment" @getEntity="getEntity" />
       </a-tab-pane>
-      <a-tab-pane :key="2" :disabled="!isCreated" :tab="translation.Avail_1_450" class="m-3"
-        ><Availability v-if="isCreated" :manufacturer-treatment="entity" />
+      <a-tab-pane :key="2" :disabled="!isCreated" class="m-3"
+        >
+        <div slot="tab" class="tab-title">
+            {{ translation['Avail_1_450'] }}
+          </div>
+        <Availability v-if="isCreated" :manufacturer-treatment="entity" />
       </a-tab-pane>
     </a-tabs>
     </a-skeleton>
+    </a-card>
   </div>
 </template>
 

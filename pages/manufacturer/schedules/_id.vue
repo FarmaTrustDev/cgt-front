@@ -1,6 +1,13 @@
 <template>
-  <page-layout :create="false" :loading="loading" title="Treatment Setup">
-    <template slot="content"> <create /> </template>
+  <page-layout
+    :create="false"
+    class="patient-page enrollment-title"
+    :loading="loading"
+    title="Treatment Setup"
+  >
+    <template slot="content"> 
+          <create />
+    </template>
   </page-layout>
 </template>
 <script>
