@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <LookupsTreatmentType @onChange="onTreatmentSelect" :active="true" />
+      <LookupsTreatmentType :active="true" @onChange="onTreatmentSelect" />
       <a-alert
       v-if="message"
       type="info"
@@ -47,12 +47,12 @@ export default {
       isCreated: false,
     }
   },
-  mounted() {},
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  },
+  mounted() {},  
   methods: {
     onSubmit(e) {
       this.loading = true

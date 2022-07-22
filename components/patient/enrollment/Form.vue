@@ -12,6 +12,25 @@
         <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
       </a-form-item>
     </a-form>
+    <a-modal
+      :visible="visibleModal"
+      ok-text="Ok"
+      :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
+    >
+      <center>
+        <p>
+          <img
+            :src="getImageUrl('Icons/cross-letter.jpg')"
+            width="50%"
+            height="50%"
+          />
+        </p>
+        <h2><p>There are some errors in your submission. Please correct them.</p></h2>
+        <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
+      </center>
+    </a-modal>
     <!-- </a-spin> -->
   </div>
 </template>
@@ -21,14 +40,15 @@ import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
-
+import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { FormFields },
-  mixins: [notifications, routeHelpers, nullHelper],
+  mixins: [notifications, routeHelpers, nullHelper,imagesHelper],
   data() {
     return {
       loading: false,
       successResponse: '',
+      visibleModal: false,
       formLayout: 'vertical',
       patient: {},
       entityId: null,
@@ -38,13 +58,13 @@ export default {
       }),
     }
   },
-  mounted() {
-    this.checkCreated()
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.checkCreated()
   },
   updated() {},
   methods: {
@@ -74,9 +94,13 @@ export default {
         if (!err) {
           this.upsert(values)
         } else {
+          this.visibleModal = true
           this.loading = false
         }
       })
+    },
+        handleOk() {
+      this.visibleModal = false
     },
     upsert(values) {
       this.loading = true

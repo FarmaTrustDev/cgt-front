@@ -175,9 +175,9 @@
 
 .treatment-statistic {
   .home-stats-head {
-    height: 120px;
+    height: 150px;
     margin: 15px auto;
-    border-radius: 30px;
+    border-radius: 10px;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
     color 0.3s ease-in-out, background-image 0.3s ease-in-out;
@@ -187,10 +187,11 @@
   .stats {
     color: #233151;
     text-decoration: none;
-    margin: 15px auto;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
-    border-radius: 22px;
-    height: 370px;
+    border-radius: 15px;
     .completed,
     .in-process,
     .booked,

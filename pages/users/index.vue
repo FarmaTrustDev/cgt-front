@@ -31,6 +31,16 @@
           <a-menu slot="overlay">
           <a-menu-item key="userDetail">
             <a @click="goto(`/users/${action.globalId}`)">{{translation.Edit_1_450}}</a>
+            <a-popconfirm
+                :title="translation.Areyou_4_484"
+                :ok-text="translation.yes_1_654"
+                :cancel-text="translation.no_1_656"
+                placement="topLeft"
+                @confirm="deleteUser(`${action.globalId}`)"
+              >
+                {{ translation.Delet_1_451 }}
+              </a-popconfirm>
+            
           </a-menu-item>
           </a-menu>
           </a-dropdown>
@@ -40,13 +50,13 @@
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
-// import { success } from '~/services/Helpers/notifications'
+import notifications from '~/mixins/notifications'
 import { preventDefault } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
 
 // import PageLayout from '~/components/layout/PageLayout'
 export default {
-  mixins: [routeHelpers],
+  mixins: [routeHelpers, notifications],
   data() {
     return {
       datasource: [],
@@ -82,8 +92,8 @@ export default {
           scopedSlots: { customRender: 'action' },
         },
     ],
-      loading: true,
-      fullName:[],
+    loading: true,
+    fullName:[],
     }
   },
   computed: {
@@ -101,6 +111,7 @@ export default {
   methods: {
     preventDefault,
     fetch() {
+      // alert('hello')
       UserServices.getUser(this.user.organizationId, this.user.organizationTypeId)
         .then((response) => {
           this.datasource = response.data
@@ -124,12 +135,15 @@ export default {
         this.fetch()
       }
     },
-    // remove(id) {
-    //   OrganizationServicesServices.destroy(id).then((response) => {
-    //     success(this, { message: response.message })
-    //     this.fetch()
-    //   })
-    // },
+    deleteUser(record) {
+      UserServices.destroy(record).then((response) => {
+        // console.log(response)
+        this.success(response.message)
+        this.fetch()
+        this.$router.push({path:'/users'})
+      })
+      .finally(() => (this.loading = false))
+    },
   },
 }
 </script>

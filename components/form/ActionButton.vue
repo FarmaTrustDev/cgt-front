@@ -4,7 +4,7 @@
     <a-button
       :loading="loading"
       :type="btnType"
-      html-type="submit"
+      :html-type="htmlType"
       :disabled="disabled || loading"
       @click="submit"
     >
@@ -25,7 +25,8 @@ export default {
     btnType: { default: 'primary', type: String },
     loading: { default: false, type: Boolean },
     disabled: { default: false, type: Boolean },
-    customText: {default : null, type: String}
+    customText: { default: null, type: String },
+    htmlType: { default: 'submit', type: String },
   },
   data() {
     return {}

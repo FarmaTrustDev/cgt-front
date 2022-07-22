@@ -1,9 +1,8 @@
 <template>
   <div class="home-page">
     <a-card class="grey-card" :bordered="false">
-      <a-row>
         <!-- left side tabs -->
-        <a-col :span="9">
+        <a-col :span="12" class="mtminus-7">
           <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
             <div class="home-tab">
               <img
@@ -36,13 +35,10 @@
           </a>
         </a-col>
         <!-- #end left side tabs -->
-        <a-col :span="2"></a-col>
-        <a-col :span="3"></a-col>
-
-        <a-col :span="9">
+        <a-col :span="1"></a-col>
+        <a-col :span="11" class="mtminus-6">
           <treatment-stats />
         </a-col>
-      </a-row>
     </a-card>
   </div>
 </template>

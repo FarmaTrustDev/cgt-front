@@ -41,6 +41,7 @@ export default {
       apiService: UserServices,
       fileList: [],
       isCreated: false,
+      file:[],
       
     }
   },
@@ -54,7 +55,12 @@ export default {
   },  
   methods: {
       handleChange(info) {
+        // console.log(info)
         this.fileList = info
+        console.log(this.fileList)
+        // this.file=this.fileList[0].originFileObj
+        // console.log(this.fileList[0].originFileObj)
+        // this.$emit('handleChange', this.fileList)
     },
     checkCreated() {
       const entityId = this.$route.params.id
@@ -86,11 +92,13 @@ export default {
       return this.create(values)
     },
     update(values) {
+      // console.log(values)
       this.btnLoading = true
       this.apiService
         .update(this.entityId, values)
         .then((response) => {
           this.success(response.message)
+          this.$store.commit('setUser', response.data)
           if (!this.isEmpty(this.gotoLink)) {
             this.goto(`${this.gotoLink}`)
           }
@@ -139,11 +147,14 @@ export default {
         if (!err) {
           const formData = new FormData()
           for (const key in values) {
+            // console.log(this.fileList)
             formData.append(key, values[key])
           }
           this.fileList.forEach((files) => {
+            console.log(files)
             formData.append('profileImageUrl', files)
-          })        
+          })
+          // console.log(formData)        
           this.upsert(formData)
         } else {
           this.loading = false
