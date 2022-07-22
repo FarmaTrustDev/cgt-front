@@ -15,7 +15,7 @@
                 {{translation.ColleDate_4_99}}
             </span>
 
-            <span class="_collectionDate">{{data.collectionDate}}</span>
+            <span class="_collectionDate">{{_getFormatMoment(getMomentByStandardFormat(data.collectionDate)).format('DD/MM/YYYY')}}</span>
           </div>
           <h6 class="text-center irradiate"><strong>{{translation.DoNot_3_101}}</strong></h6>
           <div class="bar-code-container sec-barcode">
@@ -38,11 +38,11 @@
                   {{translation.PatieID_2_264}}  : <span class="patient_id">{{data.patientEnrollmentNumber}}</span>
               </strong>
               <div>{{translation.PatieName_2_93}}: <span class="patient_name">{{patient.name}}</span></div>
-              <div>{{translation.AddNew_3_631}} DOB:<span class="patient_dob">{{patient.dob}}</span></div>
+              <div>{{translation.AddNew_3_631}} DOB:<span class="patient_dob">{{_getFormatMoment(getMomentByStandardFormat(patient.dob)).format('DD/MM/YYYY')}}</span></div>
           </div>
 
           <div class="Expiration-detail">
-              <span>{{translation.ExpirDate/_2_95}}  </span>
+              <span>{{translation['ExpirDate/_2_95']}}  </span>
               ()
           </div>
 
@@ -65,7 +65,7 @@
 
       <template #footer>
         <a-button key="submit" class="footer-btn-label" type="primary" >{{translation.Print_1_111}}</a-button>
-        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled" >{{translation.cance_1_296}}</a-button>
+        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled" @click="handleCancel" >{{translation.cance_1_296}}</a-button>
       </template>
 
     </a-modal>
@@ -75,6 +75,7 @@
 
 <script>
   import LabelServices from '~/services/API/LabelServices'
+  import {_getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
   export default {
     props: {
     // data: { type: Object, default: () => ({}) },
@@ -103,6 +104,8 @@
       },
     },
     methods: {
+      getMomentByStandardFormat,
+      _getFormatMoment,
       showModal(e) {
         this.visible = true;
       },
