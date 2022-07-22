@@ -39,7 +39,8 @@ export default {
         nowIndicator: true,
         editable: false,
         selectable: true,
-        events: this.handleDateClick,
+        displayEventTime : false,
+        events:this.handleDateClick,
         slotMinTime: '08:00:00',
         height: 550,
         slotMaxTime: '21:00:00',
@@ -71,7 +72,8 @@ export default {
       savedEvents: [],
     }
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     handleEventClick(arg) {
       this.$emit('getEventClick', arg)

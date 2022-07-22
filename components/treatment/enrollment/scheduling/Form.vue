@@ -66,6 +66,7 @@ export default {
       loading: false,
       visibleModal: false,
       entity: {},
+      events :[],
       manufacturerTreatment: {},
     }
   },
