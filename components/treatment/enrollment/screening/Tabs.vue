@@ -5,8 +5,8 @@
         v-for="(category, index) in categories"
         :key="category.globalId"
         :closable="false"
-        :tab="category.name"
         :force-render="true"
+        :tab="category.name"
       >
         <tabContent
           :screenings="category.screenings"
@@ -16,7 +16,7 @@
           v-if="!tabsSubmitButton[`${index}`]"
           html-type="button"
           :text="getButtonText(category.name) + '-' + index"
-          class="mt-15"
+          class="mt-15 screening-btn"
           @click="getNextTab(index, category.screenings, category.name)"
         />
         <alert

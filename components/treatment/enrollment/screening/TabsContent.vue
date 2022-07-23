@@ -12,7 +12,7 @@
       :data-source="screenings"
       :pagination="false"
       :loading="loading"
-      class="square-table"
+      class="square-table "
     >
       <template slot="name" slot-scope="name">
         {{ name }}
@@ -51,7 +51,7 @@
                 ],
               },
             ]"
-            :placeholder="translation.Enternote_3_546 + ':'"
+            placeholder="Please input your notes"
             @blur="(e) => handleInput(row.id, e)"
           />
           <a-input
