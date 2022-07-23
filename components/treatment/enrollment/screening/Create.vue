@@ -2,16 +2,17 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <LookupsTreatmentType :active="true" @onChange="onTreatmentSelect" />
-      <a-alert
-      v-if="message"
-      type="info"
-      :message="translation.Selecthe_8_476">
+      <a-alert v-if="message" type="info" :message="translation.Selecthe_8_476">
       </a-alert>
       <a-skeleton :loading="loading">
         <span v-if="categories">
           <CategoryTabs :categories="categories" />
           <!-- <a-button type="primary" class="w-100 btn-complete-category">Complete screening results for {CATEGORYNAME} group</a-button> -->
-          <FormActionButton :text=" translation.SaveScree_4_468" :disabled="isCreated" class="mt-15" />
+          <FormActionButton
+            :text="translation.SaveScree_4_468"
+            :disabled="isCreated"
+            class="mt-15"
+          />
         </span>
       </a-skeleton>
     </a-form>
@@ -37,7 +38,7 @@ export default {
   data() {
     return {
       patientId: null,
-      message:'true',
+      message: 'true',
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
@@ -47,12 +48,12 @@ export default {
       isCreated: false,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {},  
+  mounted() {},
   methods: {
     onSubmit(e) {
       this.loading = true
@@ -61,6 +62,9 @@ export default {
         if (!err) {
           this.create(values)
         } else {
+          this.confirm(
+            'The screening checklist will not proceed with the No answer(s).Correct them.'
+          )
           this.loading = false
         }
         this.loading = false
@@ -71,10 +75,10 @@ export default {
       ScreeningCategoryServices.getByTreatmentTypeId(treatmentTypeId)
         .then((response) => {
           this.categories = response.data
-          this.message=false
+          this.message = false
         })
         .finally(() => (this.loading = false))
-        .catch(this.error, this.categories=null, this.message='true')
+        .catch(this.error, (this.categories = null), (this.message = 'true'))
     },
     create(values) {
       TreatmentScreeningServices.create({
@@ -84,7 +88,7 @@ export default {
         .then((response) => {
           this.success(response.message)
           this.$emit('getTreatment', response.data)
-          this.$emit('getNextTab', "Scheduling")
+          this.$emit('getNextTab', 'Scheduling')
           this.isCreated = true
         })
         .catch(this.error)
