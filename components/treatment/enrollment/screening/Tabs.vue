@@ -13,9 +13,9 @@
           @getFilledDatas="getFilledData"
         />
         <FormActionButton
-          v-if="isHidden"
+          v-if="!tabsSubmitButton[`${index}`]"
           html-type="button"
-          :text="getButtonText(category.name)"
+          :text="getButtonText(category.name) + '-' + index"
           class="mt-15"
           @click="getNextTab(index, category.screenings, category.name)"
         />
@@ -56,6 +56,7 @@ export default {
       catName: '',
       isHidden: true,
       showValidationError: false,
+      tabsSubmitButton: {},
     }
   },
   mounted() {
@@ -67,7 +68,7 @@ export default {
       if (!this.isEmpty(this.categories)) {
         if (!this.isEmpty(this.categories[key])) {
           this.activeKey = categories[key].globalId
-          this.isHidden = true
+          // this.isHidden = true this button active
         }
       }
     },
@@ -79,11 +80,16 @@ export default {
         this.isHidden = false
         this.setCurrentTab(index + 1)
         this.showValidationError = false
+
+        this.tabsSubmitButton = JSON.stringify(this.tabsSubmitButton)
+        this.tabsSubmitButton = JSON.parse(this.tabsSubmitButton)
+        this.tabsSubmitButton[index] = true
       } else {
         this.confirm(
           'The screening checklist will not proceed with the No answer(s).Correct them.'
         )
       }
+      
     },
     getFilledData(vals) {
       this.filledData = vals
