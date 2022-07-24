@@ -15,14 +15,9 @@
         <FormActionButton
           v-if="!tabsSubmitButton[`${index}`]"
           html-type="button"
-          :text="getButtonText(category.name) + '-' + index"
+          :text="getButtonText(category.name)"
           class="mt-15"
           @click="getNextTab(index, category.screenings, category.name)"
-        />
-        <alert
-          v-if="showValidationError"
-          type="warning"
-          message="All fields are Required"
         />
       </a-tab-pane>
     </a-tabs>
@@ -31,10 +26,9 @@
 <script>
 import tabContent from '~/components/treatment/enrollment/screening/TabsContent'
 import nullHelper from '~/mixins/null-helpers'
-import alert from '~/components/alert'
 import notifications from '~/mixins/notifications'
 export default {
-  components: { tabContent, alert },
+  components: { tabContent },
   mixins: [nullHelper, notifications],
   props: {
     categories: {
@@ -55,7 +49,7 @@ export default {
       filledData: 0,
       catName: '',
       isHidden: true,
-      showValidationError: false,
+
       tabsSubmitButton: {},
     }
   },
@@ -79,8 +73,6 @@ export default {
       if (this.filledData === screening.length) {
         this.isHidden = false
         this.setCurrentTab(index + 1)
-        this.showValidationError = false
-
         this.tabsSubmitButton = JSON.stringify(this.tabsSubmitButton)
         this.tabsSubmitButton = JSON.parse(this.tabsSubmitButton)
         this.tabsSubmitButton[index] = true
@@ -89,7 +81,6 @@ export default {
           'The screening checklist will not proceed with the No answer(s).Correct them.'
         )
       }
-      
     },
     getFilledData(vals) {
       this.filledData = vals

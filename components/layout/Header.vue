@@ -17,6 +17,7 @@
             </a>
             <a-menu slot="overlay" class="notifications-dropdown">
               <a-menu-item
+                
                 v-for="notification in notifications"
                 :key="notification.id"
                 ><strong

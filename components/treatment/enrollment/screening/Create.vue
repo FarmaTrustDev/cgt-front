@@ -63,7 +63,7 @@ export default {
           this.create(values)
         } else {
           this.confirm(
-            'The screening checklist will not proceed with the No answer(s).Correct them.'
+            'Complete the patient screenings first!'
           )
           this.loading = false
         }
