@@ -171,9 +171,13 @@ export default {
       )
     },
     markRead(notification) {
-      ChatServices.markAsRead(notification.id).then((response) => {
-        this.fetchUnreadMessages()
-      })
+      ChatServices.markAsRead(notification.id)
+        .then((response) => {
+          this.fetchUnreadMessages()
+        })
+        .then(() => {
+          this.goto(`/chat`)
+        })
     },
   },
 }
