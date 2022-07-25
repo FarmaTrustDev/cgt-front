@@ -364,7 +364,11 @@ export default {
         })
     },
     getDataApiService() {
-      return isEmpty(this.fetchFrom) ? this.isHospital ? this.apiService.getHospitalScreening : this.apiService.get : this.fetchFrom
+      return isEmpty(this.fetchFrom)
+        ? this.isHospital
+          ? this.apiService.getHospitalScreening
+          : this.apiService.get
+        : this.fetchFrom
     },
     getCurrentStep(treatment) {
       // Most expensive Operation in whole application
