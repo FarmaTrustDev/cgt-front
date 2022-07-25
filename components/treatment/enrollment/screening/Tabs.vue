@@ -5,24 +5,19 @@
         v-for="(category, index) in categories"
         :key="category.globalId"
         :closable="false"
-        :tab="category.name"
         :force-render="true"
+        :tab="category.name"
       >
         <tabContent
           :screenings="category.screenings"
           @getFilledDatas="getFilledData"
         />
         <FormActionButton
-          v-if="isHidden"
+          v-if="!tabsSubmitButton[`${index}`]"
           html-type="button"
-          :text="getButtonText(category.name)"
-          class="mt-15"
+          :text="getButtonText(category.name) + '-' + index"
+          class="mt-15 screening-btn"
           @click="getNextTab(index, category.screenings, category.name)"
-        />
-        <alert
-          v-if="showValidationError"
-          type="warning"
-          message="All fields are Required"
         />
       </a-tab-pane>
     </a-tabs>
@@ -31,10 +26,10 @@
 <script>
 import tabContent from '~/components/treatment/enrollment/screening/TabsContent'
 import nullHelper from '~/mixins/null-helpers'
-import alert from '~/components/alert'
+import notifications from '~/mixins/notifications'
 export default {
-  components: { tabContent, alert },
-  mixins: [nullHelper],
+  components: { tabContent },
+  mixins: [nullHelper, notifications],
   props: {
     categories: {
       required: true,
@@ -48,17 +43,14 @@ export default {
       activeKey: null,
       panes: [],
       newTabIndex: 0,
-      form: this.$form.createForm(this, {
-        name: 'patientEnrollment',
-      }),
-      formLayout: 'vertical',
       showCategoryModal: false,
       loading: true,
       disabled: false,
       filledData: 0,
       catName: '',
       isHidden: true,
-      showValidationError: false,
+
+      tabsSubmitButton: {},
     }
   },
   mounted() {
@@ -70,7 +62,7 @@ export default {
       if (!this.isEmpty(this.categories)) {
         if (!this.isEmpty(this.categories[key])) {
           this.activeKey = categories[key].globalId
-          this.isHidden = true
+          // this.isHidden = true this button active
         }
       }
     },
@@ -78,11 +70,16 @@ export default {
       return this.$store.getters.getTranslation.ComplScree_3_469 + val
     },
     getNextTab(index, screening) {
-      this.showValidationError = true
       if (this.filledData === screening.length) {
         this.isHidden = false
         this.setCurrentTab(index + 1)
-        this.showValidationError = false
+        this.tabsSubmitButton = JSON.stringify(this.tabsSubmitButton)
+        this.tabsSubmitButton = JSON.parse(this.tabsSubmitButton)
+        this.tabsSubmitButton[index] = true
+      } else {
+        this.confirm(
+          'The screening checklist will not proceed with the No answer(s).Correct them.'
+        )
       }
     },
     getFilledData(vals) {

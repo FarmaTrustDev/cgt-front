@@ -163,3 +163,8 @@
   width: 50%;
   height: 50%;
 }
+
+.notifications-dropdown {
+  max-height: 80vh;
+  overflow-y: scroll;
+}

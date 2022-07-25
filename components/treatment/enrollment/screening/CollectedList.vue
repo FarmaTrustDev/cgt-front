@@ -1,6 +1,7 @@
 <template>
   <span>
-    <a-tabs>
+      <!-- <h3>Treatment Type: {{categories.treatmentTypeName}}</h3> -->
+    <a-tabs class="screening-tabs">
       <a-tab-pane
         v-for="category in categories"
         :key="category.id"
@@ -12,7 +13,8 @@
           :should-fetch="false"
           :show-pagination="false"
         />
-      </a-tab-pane> </a-tabs
+      </a-tab-pane>
+       </a-tabs
   ></span>
 </template>
 <script>
@@ -27,24 +29,24 @@ export default {
   },
   data() {
     return {
-      column:[
-  {
-    title:`${this.$store.getters.getTranslation.Detai_1_346}`,
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title:`${this.$store.getters.getTranslation.Notes_1_350}`,
-    dataIndex: 'notes',
-    key: 'notes',
-  },
-  {
-    title:`${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'isCheck',
-    key: 'isCheck',
-    scopedSlots: { customRender: 'check' },
-  },
-],
+      column: [
+        {
+          title: `${this.$store.getters.getTranslation.Detai_1_346}`,
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Notes_1_350}`,
+          dataIndex: 'notes',
+          key: 'notes',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'isCheck',
+          key: 'isCheck',
+          scopedSlots: { customRender: 'check' },
+        },
+      ],
     }
   },
 }

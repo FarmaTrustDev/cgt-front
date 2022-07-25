@@ -10,6 +10,13 @@ function get(params = {}) {
   })
 }
 
+function getHospitalScreening(params = {}) {
+  return request({
+    url: `${baseApi}/getHospitalScreeningTemplate`,
+    params,
+  })
+}
+
 function getById(id) {
   return request({
     url: `${baseApi}/${id}`,
@@ -35,6 +42,7 @@ function update(id, data) {
 
 const ScreeningTemplateServices = {
   get,
+  getHospitalScreening,
   create,
   getById,
   update

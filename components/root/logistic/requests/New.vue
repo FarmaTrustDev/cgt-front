@@ -2,6 +2,9 @@
   <div>
     <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
+      <span slot="organizationName" slot-scope="record">
+        {{record.direction==1? record.hospital.name: record.manufacturerName}}
+      </span>
       <span slot="action" slot-scope="text, record">
         <a-button type="primary" dashed @click="showConfirm(record, true)">
           {{translation.Accep_1_278}}
@@ -11,7 +14,6 @@
         </a-button>
       </span>
     </a-table>
-
     <a-modal
       title="Scheduling Request"
       :visible="showResponseModal"
@@ -65,8 +67,8 @@ export default {
   },
   {
     title: `${this.$store.getters.getTranslation.Organ_1_166}`,
-    dataIndex: 'hospital.name',
-    key: 'OrganizationName',
+    key: 'organizationName',
+    scopedSlots: { customRender: 'organizationName' },
   },
   {
     title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,

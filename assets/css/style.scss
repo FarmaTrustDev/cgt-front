@@ -67,7 +67,11 @@ a {
 .w-125 {
   width: 123%;
 }
-
+.border-space{
+  .table{
+    border-spacing: 0 1em;
+  }
+}
 .square-table .ant-table-content {
   table {
     border-collapse: separate;

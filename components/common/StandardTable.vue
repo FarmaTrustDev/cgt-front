@@ -251,7 +251,11 @@
         </a-button>
       </div>
 
-      <span slot="nameTags" slot-scope="tags">
+      <span v-if="isHospital" slot="nameTags" slot-scope="tags">
+        <a-tag>{{ tags.name }}</a-tag>
+      </span>
+
+      <span v-else slot="nameTags" slot-scope="tags">
         <a-tag v-for="tag in tags" :key="tag.id">{{ tag.name }}</a-tag>
       </span>
     </a-table>
@@ -309,6 +313,8 @@ export default {
     shouldFetch: { type: Boolean, default: true },
     showPagination: { type: Boolean, default: true },
     shouldUpdate: { type: Boolean, default: false },
+    isHospital: { type: Boolean, default: false },
+    isManufacturer: { type: Boolean, default: false },
   },
 
   data() {
@@ -358,7 +364,7 @@ export default {
         })
     },
     getDataApiService() {
-      return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
+      return isEmpty(this.fetchFrom) ? this.isHospital ? this.apiService.getHospitalScreening : this.apiService.get : this.fetchFrom
     },
     getCurrentStep(treatment) {
       // Most expensive Operation in whole application

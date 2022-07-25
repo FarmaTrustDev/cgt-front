@@ -19,6 +19,7 @@
               <a-menu-item
                 v-for="notification in notifications"
                 :key="notification.id"
+                @click="markRead(notification)"
                 ><strong
                   ><p class="m-0">{{ notification.recipient_Name }}</p></strong
                 >
@@ -168,6 +169,15 @@ export default {
           this.lang = translations.data
         }
       )
+    },
+    markRead(notification) {
+      ChatServices.markAsRead(notification.id)
+        .then((response) => {
+          this.fetchUnreadMessages()
+        })
+        .then(() => {
+          this.goto(`/chat`)
+        })
     },
   },
 }
