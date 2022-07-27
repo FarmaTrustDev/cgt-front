@@ -5,7 +5,7 @@
   margin: 25px;
 
   .title {
-    font-size: 	1.5625rem;
+    font-size: 1.5625rem;
   }
 
   .home-tab,
@@ -37,7 +37,7 @@
       top: 0;
       bottom: 0;
       margin: auto;
-      font-size: 	1.5rem;
+      font-size: 1.5rem;
       font-weight: bold;
       position: relative;
       left: 90%;
@@ -67,7 +67,7 @@
       vertical-align: middle;
       margin-left: 10px;
       padding-left: 10px;
-      font-size: 	0.9375rem;
+      font-size: 0.9375rem;
     }
   }
 
@@ -125,18 +125,18 @@
     padding: 0.5rem;
   }
 
-  .red-div-size{
+  .red-div-size {
     margin-bottom: -20px;
-  .white-card {
-    text-decoration: none;
-    margin: 3% auto;
-    box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
-    color: #233151;
-    border-radius: 22px;
-    background-color: #fff;
-    padding: 0.5rem;
+    .white-card {
+      text-decoration: none;
+      margin: 3% auto;
+      box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
+      color: #233151;
+      border-radius: 22px;
+      background-color: #fff;
+      padding: 0.5rem;
+    }
   }
-}
   .search-dropdown {
     width: 100%;
   }
@@ -180,7 +180,7 @@
     border-radius: 10px;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
-    color 0.3s ease-in-out, background-image 0.3s ease-in-out;
+      color 0.3s ease-in-out, background-image 0.3s ease-in-out;
     background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
     background-size: cover;
   }
@@ -252,15 +252,10 @@
   .ant-select-selection__placeholder,
   .ant-select-search__field__placeholder {
     left: 10px;
-    color:black;
+    color: black;
   }
 }
-.administration-tab{
-  .home-page{
-    .home-tab,
-    .admin-page,
-  .admin-tab{
-    margin:3% !important;
-  }
-}
+.administration-tab {  
+      margin: 2% !important;
+
 }

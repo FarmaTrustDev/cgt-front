@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div v-for="(data, index) in rejection" :key="index">abc</div>
+    <span>Data : {{ rejection }}</span>
     <h3 class="page-title">{{ translation.Availslots_2_724 }}</h3>
     <div class="grey-card">
       <calendar
@@ -36,7 +38,7 @@
   </div>
 </template>
 <script>
-import moment from 'moment';
+import moment from 'moment'
 import FormFields from '~/components/treatment/enrollment/scheduling/FormFields'
 import calendar from '~/components/calendars/index'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
@@ -58,6 +60,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    rejection: {
+      type: Array,
+      default: () => {},
+    },
   },
 
   data() {
@@ -66,7 +72,7 @@ export default {
       loading: false,
       visibleModal: false,
       entity: {},
-      events :[],
+      events: [],
       manufacturerTreatment: {},
     }
   },
@@ -99,7 +105,9 @@ export default {
             data.manufacturerTreatmentStartDate
           )
           // To prevent selecting past date
-          if (moment(datetime._d, 'dd-mm-yyyy') < moment(Date() , 'dd-mm-yyyy')) {
+          if (
+            moment(datetime._d, 'dd-mm-yyyy') < moment(Date(), 'dd-mm-yyyy')
+          ) {
             this.visibleModal = true
           } else {
             this.form.setFieldsValue({

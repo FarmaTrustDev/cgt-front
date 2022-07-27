@@ -22,26 +22,25 @@
     background-color: #f2f5fb !important;
     border: 0.1px solid #a3c9ff;
     border-radius: 24px;
-    padding-left: 10%;
- 
   }
   .ant-tabs-tab {
     background-color: #f2f5fb !important;
     // border: 0.1px solid #a3c9ff;
     border-radius: 24px;
   }
-  .ant-table-tbody td{
+  .ant-table-tbody td {
     border-color: #1bb558;
     border-bottom: 1px solid #1bb558 !important ;
-    &:first-child{
+    &:first-child {
       border-color: #1bb558;
     }
-    &:last-child{
+    &:last-child {
       border-color: #1bb558;
     }
   }
-
-
+  .ant-tabs-bar {
+    border-bottom: 1px solid white;
+  }
 }
 .pills-tabs {
   .ant-tabs-card-bar .ant-tabs-nav-container {
@@ -102,7 +101,7 @@
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
   color: #3869d1;
   background-color: #f2f5fb !important;
-  border: 0.1px solid #a3c9ff;
+  // border: 0.1px solid #a3c9ff;
 }
 
 .ant-tabs-card-bar {
@@ -188,5 +187,11 @@
   }
   .ant-select-selection__rendered {
     line-height: 25px;
+  }
+}
+.treatment-cancel-placeholder {
+  textarea.ant-input {
+    height: auto;
+    border-radius: 12px;
   }
 }
