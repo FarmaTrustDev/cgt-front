@@ -15,6 +15,7 @@ $defaultHeight: calc(100vh - 100px);
   .ant-avatar {
     width: 70px;
     height: 70px;
+    background: none !important;
   }
   .ant-list-split .ant-list-item {
     border-bottom: none;
