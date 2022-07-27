@@ -137,7 +137,11 @@ export default {
               this.fetch()
             }
           )
-          this.goto(`/logistic/shipment/${data.globalId}`)
+          if(values.accepted===true){
+            this.goto(`/logistic/shipment/${data.globalId}`)
+          }else{
+            this.goto(`/logistic/`)
+          }
         }
       })
       this.loading = false
