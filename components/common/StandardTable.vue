@@ -70,8 +70,8 @@
 
       <span
         slot="treatment_status"
-        class="treatment-steps"
         slot-scope="text, record"
+        class="treatment-steps"
       >
         <span
           v-for="treatment in record.treatments"
@@ -382,7 +382,6 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
           // eslint-disable-next-line no-unused-expressions
           this.submitCancelResponse()
           this.handleCancelTreatmentModal(false)
@@ -488,10 +487,8 @@ export default {
       }
       // eslint-disable-next-line eqeqeq
       else if (e == true && isHold == true) {
-        console.log(this.recordData, 'treatment')
         this.showFlagModal = false
         this.holdTreatment(this.patientData, this.recordData)
-        console.log(this.recordData, 'treatment data after cancellation')
         this.recordData.isHold = false
         this.cancelTreatment(this.patientData, this.recordData)
       }
@@ -571,13 +568,10 @@ export default {
     {
       this.patientData = record
       this.recordData = treatment
-      console.log(this.recordData , 'handle cancel modal')
       this.showPauseModal = e
     },
     handleOk()
     {
-      console.log(this.patientData, 'Patient Data')
-      console.log(this.recordData, 'Record Data')
       this.holdTreatment(this.patientData, this.recordData)
       this.showPauseModal = false
     }

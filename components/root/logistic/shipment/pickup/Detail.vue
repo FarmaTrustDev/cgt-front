@@ -6,13 +6,13 @@
       </article>
       <dl class="ant-row common-detail">
         <dt>Logistics Provider:</dt>
-        <dd>{{ shipment.treatmentTypeName }}</dd>
+        <dd>{{ scheduling.logisticName }}</dd>
         <dt>Sample Collection Date:</dt>
-        <dd>Dr. Comfort</dd>
+        <dd>{{getDateFormat(scheduling.collectionDate)}}</dd>
         <dt>Expected Delivery Date</dt>
-        <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
+        <dd>{{ getDateFormat(scheduling.deliveryDate) }}</dd>
         <dt>{{translation.EstimArriv_3_322}}</dt>
-        <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
+        <dd>{{ getDateFormat(scheduling.deliveryDate) }}</dd>
       </dl>
 
       <dl class="ant-row common-detail">
@@ -21,7 +21,7 @@
         <dt>Collected by:</dt>
         <dd>{{ shipment.logisticUserName }}</dd>
         <dt>Pickup At</dt>
-        <dd>{{ getMomentByStandardFormat(shipment.pickupAt) }}</dd>
+        <dd>{{ getDateFormat(shipment.pickupAt) }}</dd>
         <dt>Pickup Location:</dt>
         <dd>{{ shipment.origin }}</dd>
       </dl>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 export default {
@@ -47,7 +48,7 @@ export default {
     },
   },
   data() {
-    return {}
+    return {moment,}
   },
   computed: {
     translation() {
@@ -57,6 +58,9 @@ export default {
   methods: {
     getMomentByStandardFormat,
     isEmpty,
+      getDateFormat(date) {
+      return moment(String(date)).format('dddd DD MM YYYY')
+    },
   },
 }
 </script>

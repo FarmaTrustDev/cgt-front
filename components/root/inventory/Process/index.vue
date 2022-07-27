@@ -98,6 +98,7 @@
         :disabled="buttonEnable"
         text="Submit"
         @click="submit"
+        :loading="loading"
       />
     </a-form-item>
     </a-form>

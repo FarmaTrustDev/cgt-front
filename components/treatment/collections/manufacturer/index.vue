@@ -6,6 +6,7 @@
       v-if="!treatment[`${showCompleteBtn}`] && bags.length > 0"
       class="w-100 mt-15"
       type="primary"
+      :loading="loading"
       @click="completeAllBags(bags)"
       >Complete Collection Process
     </a-button>
