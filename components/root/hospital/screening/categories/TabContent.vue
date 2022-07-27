@@ -1,6 +1,11 @@
 <template>
   <div>
-    <a-table :data-source="data" :pagination="false" class="rounded-table" :columns="column" />
+    <a-list item-layout="horizontal" :data-source="data" class="admin-screenging-questions">
+      <a-list-item slot="renderItem" slot-scope="item"
+        >
+        {{ item.name }}
+      </a-list-item>
+    </a-list>    
   </div>
 </template>
 <script>
