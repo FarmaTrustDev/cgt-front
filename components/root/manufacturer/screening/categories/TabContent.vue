@@ -7,9 +7,10 @@
       :message="translation.NoScree_3_475"
     >
     </a-alert>
-    <a-list v-else item-layout="horizontal" :data-source="data">
+    <a-list v-else item-layout="horizontal" :data-source="data" class="admin-screenging-questions">
       <a-list-item slot="renderItem" slot-scope="item"
-        >{{ item.name }}
+        >
+        {{ item.name }}
         <a slot="actions">
           <a-dropdown>
             <a-icon type="more" />
