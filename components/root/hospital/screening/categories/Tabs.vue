@@ -14,6 +14,7 @@
           :tab="pane.name"
         >
           <TabContent :category="pane" />
+          <a-form-item class="text-right"><a-button type="primary" class="w-min-200" v-if="!active" @click="markAcceptance">Accept</a-button></a-form-item>
         </a-tab-pane>
         <!-- // adding button -->
       </a-tabs>
@@ -25,10 +26,22 @@
 <script>
 import TabContent from '~/components/root/hospital/screening/categories/TabContent'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
+import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
+import routeHelpers from '~/mixins/route-helpers'
+import notifications from '~/mixins/notifications'
 export default {
+  mixins:[routeHelpers,notifications],
   components: { TabContent },
   props: {
     templateId: {
+      required: true,
+      type: Number,
+    },
+    manufacturerId: {
+      required: true,
+      type: Number,
+    },
+    treatmentTypeId: {
       required: true,
       type: Number,
     },
@@ -41,10 +54,12 @@ export default {
       newTabIndex: 0,
       showCategoryModal: false,
       loading: true,
+      active:false,
     }
   },
   mounted() {
     this.fetchList()
+    this.getScreeningTempStatus()
   },
   computed:{
     translation() {
@@ -88,6 +103,27 @@ export default {
         .finally(() => {
           this.loading = false
         })
+    },
+    getScreeningTempStatus() {
+      this.loading = true
+      ScreeningTemplateServices.getHospitalTempStatus(this.templateId, this.treatmentTypeId, this.manufacturerId)
+        .then((response) => {
+          this.active = response.data
+        })
+        .finally(() => {
+          this.loading = false
+        }) 
+    },
+    markAcceptance() {
+      this.loading = true
+      ScreeningTemplateServices.markAcceptance(this.templateId, this.treatmentTypeId, this.manufacturerId)
+        .then((response) => {
+          this.success(response.message)
+          this.goto('/hospital/administration/screening')
+        })
+        .finally(() => {
+          this.loading = false
+        }) 
     },
   },
 }

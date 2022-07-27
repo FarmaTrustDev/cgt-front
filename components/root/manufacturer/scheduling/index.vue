@@ -7,7 +7,7 @@
       :default-active-key="activeTab"
       @change="tabChange"
     >
-      <a-tab-pane :key="detail" class="m-3"
+      <a-tab-pane :key="1" class="m-3"
         >
         <div slot="tab" class="tab-title">
             {{ translation['Detai_1_346'] }}

@@ -34,7 +34,10 @@
           @click="clickImage(record)"
         />
       </template>
-
+      <template slot="active" slot-scope="record">
+        <span v-if="record">Accepted</span>
+        <span v-else>New Changes Submitted</span>
+      </template>
       <template slot="icon" slot-scope="icon, record">
         <a-icon type="cloud-upload" @click="clickIcon(record)" />
       </template>

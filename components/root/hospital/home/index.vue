@@ -2,7 +2,7 @@
   <div class="home-page">
     <a-card class="grey-card" :bordered="false">
         <!-- left side tabs -->
-        <a-col :span="12" class="mtminus-7">
+        <a-col :span="12" class="mtminus-5 mml-40">
           <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
             <div class="home-tab">
               <img
@@ -36,7 +36,7 @@
         </a-col>
         <!-- #end left side tabs -->
         <a-col :span="1"></a-col>
-        <a-col :span="11" class="mtminus-6">
+        <a-col :span="11" class="mtminus-5">  
           <treatment-stats />
         </a-col>
     </a-card>

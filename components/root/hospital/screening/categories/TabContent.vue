@@ -1,10 +1,6 @@
 <template>
   <div>
-    <a-list item-layout="horizontal" :data-source="data">
-      <a-list-item slot="renderItem" class="ml-80" slot-scope="item"
-        >{{ item.name }}
-      </a-list-item>
-    </a-list>
+    <a-table :data-source="data" :pagination="false" class="rounded-table" :columns="column" />
   </div>
 </template>
 <script>
@@ -27,6 +23,13 @@ export default {
   data() {
     return {
       data,
+      column:[
+        {
+          title:'Questions',
+          dataIndex: 'name',
+          key: 'name',
+        },
+      ],      
       showScreeningModal: false,
     }
   },

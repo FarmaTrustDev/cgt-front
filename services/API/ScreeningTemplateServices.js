@@ -17,6 +17,20 @@ function getHospitalScreening(params = {}) {
   })
 }
 
+function getHospitalTempStatus(templateId, treatmentTypeId, manufacturerId) {
+  return request({
+    url: `${baseApi}/${templateId}/${treatmentTypeId}/${manufacturerId}`,
+    method:'GET',
+  })
+}
+
+function markAcceptance(templateId, treatmentTypeId, manufacturerId) {
+  return request({
+    url: `${baseApi}/markAcceptance/${templateId}/${treatmentTypeId}/${manufacturerId}`,
+    method:'GET',
+  })
+}
+
 function getById(id) {
   return request({
     url: `${baseApi}/${id}`,
@@ -43,6 +57,8 @@ function update(id, data) {
 const ScreeningTemplateServices = {
   get,
   getHospitalScreening,
+  getHospitalTempStatus,
+  markAcceptance,
   create,
   getById,
   update
