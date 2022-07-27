@@ -2,6 +2,7 @@
   <div>
     <div class="page-header clearfix">
       <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3>
+      <h3 class="page-title pl-5 float-left">Patient List</h3>
 
       <a-button
         type="primary"
@@ -86,7 +87,7 @@ export default {
       ActionLink,
       borderCard: false,
       fetchPatientService: {},
-      showPagination:true,
+      showPagination: true,
     }
   },
   /* computed:{
@@ -103,10 +104,14 @@ export default {
     },
     fetchSearch(params) {
       this.fetchPatientService(params)
-    },    
+    },
     searchPatent(e) {
       const search = e.target.value
-      this.fetchSearch({ puid: search, name: search, TreatmentTypeName: search })
+      this.fetchSearch({
+        puid: search,
+        name: search,
+        TreatmentTypeName: search,
+      })
     },
   },
 }

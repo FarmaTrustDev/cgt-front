@@ -1,19 +1,22 @@
 .home-page,
 .admin-page {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin: 25px;
+  // padding-right: 15px;
+  // padding-left: 15px;
+  // margin: 25px;
 
   .title {
     font-size: 1.5625rem;
+    padding-left: 15px;
+    margin-left: 10px;
   }
 
   .home-tab,
   .admin-tab {
     text-decoration: none;
     margin: 5% auto;
-    padding-top: 7%;
-    padding-bottom: 6%;
+    padding: 25px 12px;
+    // padding-top: 7%;
+    // padding-bottom: 6%;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     color: #909090;
     background-color: #fff;
@@ -40,7 +43,7 @@
       font-size: 1.5rem;
       font-weight: bold;
       position: relative;
-      left: 90%;
+      left: 95%;
     }
 
     &:hover {
@@ -174,10 +177,16 @@
 }
 
 .treatment-statistic {
+  background: #3869d1 !important;
+  border-radius: 22px;
+  height: 120px;
+  width: 97%;
+  margin: auto;
   .home-stats-head {
-    height: 150px;
+    padding: 18px;
+    height: 120px;
     margin: 15px auto;
-    border-radius: 10px;
+    background-color: transparent !important;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     transition: transform 0.8s ease-in-out, background-color 0.3s ease-in-out,
       color 0.3s ease-in-out, background-image 0.3s ease-in-out;
@@ -187,9 +196,10 @@
   .stats {
     color: #233151;
     text-decoration: none;
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 0;
+    // margin-top: 10px;
+    // margin-left: 20px;
+    // margin-right: 20px;
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     border-radius: 15px;
     .completed,
@@ -255,7 +265,12 @@
     color: black;
   }
 }
-.administration-tab {  
-      margin: 2% !important;
-
+.administration-tab {
+  .home-page {
+    .home-tab,
+    .admin-page,
+    .admin-tab {
+      margin: 3% !important;
+    }
+  }
 }

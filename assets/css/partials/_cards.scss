@@ -3,17 +3,18 @@
   font-size: 0.875rem;
   font-weight: bold;
   border-radius: 44px;
-  padding-left: 4%;
-  padding-right: 4%;
+  padding-left: 2%;
+  padding-right: 2%;
   padding-top: 4%;
-  padding-bottom: 4%;
+  padding-bottom: 2%;
 
   .ant-card {
     box-shadow: 0 26px 120px rgb(0 0 0 / 4%);
     border-radius: 30px;
   }
-  .ant-card-body{
-    padding:2%;
+  .ant-card-body {
+    padding: 12px;
+    padding-top: 4%;
   }
 }
 

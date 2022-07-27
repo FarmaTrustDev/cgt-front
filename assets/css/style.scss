@@ -40,13 +40,25 @@ body {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
 }
-
+.container {
+  max-width: 1140px;
+  margin: auto;
+}
 .profile-grey-bg {
   background-color: #ececec;
   padding: 20px;
   border-radius: 35px;
 }
-
+.ant-select-focused .ant-select-selection,
+.ant-select-selection:focus,
+.ant-select-selection:active {
+  border: none !important;
+  box-shadow: none !important;
+}
+.ant-select-open .ant-select-selection {
+  border: none !important;
+  box-shadow: none !important;
+}
 .default-select {
   .ant-select-selection {
     margin-top: -8px;
@@ -225,5 +237,21 @@ a {
     a {
       color: white;
     }
+  }
+}
+.home-page {
+  .home-tab {
+    width: 97% !important;
+  }
+}
+.org-title {
+  margin-left: 8px;
+  margin-right: 8px;
+
+  .login-logo-x {
+    line-height: 14px;
+    padding: 15px 10px;
+    border-radius: 22px;
+    background-color: #f9f9f9;
   }
 }

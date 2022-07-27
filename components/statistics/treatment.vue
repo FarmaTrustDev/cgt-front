@@ -1,6 +1,6 @@
 <template>
-  <div class="treatment-statistic mmr-90">
-    <a-card :bordered="false" class="home-stats-head grey-card">
+  <div class="treatment-statistic">
+    <a-card :bordered="false" class="home-stats-head grey-card-x">
       <a-card class="stats" :bordered="false">
         <a-row >
           <a-select
