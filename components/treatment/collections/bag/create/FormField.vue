@@ -34,11 +34,11 @@
         use12-hours
         style="width: 100%"
         size="large"
-        format="h:mm:ss A"
+        format="h:mm A"
       >
       </a-time-picker>
     </a-form-item>
-    <a-form-item :label="translation.ColleTime_2_772" class="pb-0">
+    <a-form-item label="Description" class="pb-0">
       <a-textarea
         v-decorator="[
           'notes',

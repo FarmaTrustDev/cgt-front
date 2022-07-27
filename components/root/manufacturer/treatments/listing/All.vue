@@ -6,6 +6,7 @@
         <strong>
           <a-button
             type="link"
+            class="btn-color"
             @click="
               goto(
                 `/manufacturer/treatments/process/${record.treatment.globalId}`

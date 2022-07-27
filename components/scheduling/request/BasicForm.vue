@@ -1,5 +1,8 @@
 <template>
   <div>
+        <div v-for="(data, index) in rejectedData" :key="index" class="mb-5">
+      <a-alert :message="'The treatment was rejected by ' + data.organization +  '. Re-schedule the treatment from available slots below.'" type="success" />
+      </div>
     <a-form
       v-if="treatment.phaseId >= TREATMENT_PHASES.OUTBOUND_SCHEDULING.id"
       :form="form"
@@ -85,14 +88,6 @@
       </a-form-item>
     </a-form>
     <alert v-else message="Collection not completed" />
-    <a-modal v-model="visible" title="Rejection by user and organization">
-      <div v-for="(data, index) in rejectedData" :key="index">
-        <p>This treatment was rejected by {{ data.organization }} by {{data.username}} for this reason : {{data.rejectionReason}}</p>
-      </div>
-      <template slot="footer">
-        <a-button key="back" @click="handleCancel(false)"> Ok </a-button>
-      </template>
-    </a-modal>
   </div>
 </template>
 <script>
