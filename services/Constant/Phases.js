@@ -52,7 +52,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 1,
         name: 'Screening',
         alias: 'SCREENING',
-        phaseId: 2,
+        phaseId: 3,
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'Screening' }
@@ -61,7 +61,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 2,
         name: 'Scheduling',
         alias: 'SCHEDULING',
-        phaseId: 4,// requesting manufacturer reject
+        phaseId: 5,// requesting manufacturer reject
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'Scheduling' }
@@ -70,7 +70,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 3,
         name: 'Collection',
         alias: 'COLLECTION',
-        phaseId: 6,
+        phaseId: 7,
         url_slug: '/hospital/patients/collection/',
         url_type: URL_TYPE.treatment,
         params: { view: 'collection' }

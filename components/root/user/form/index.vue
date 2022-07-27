@@ -122,24 +122,20 @@ export default {
       this.apiService
         .create(values)
         .then((response) => {
-          if(response.message===true){
             this.success(response.message)
-          }else{
-            this.success(response.errorMessage)
-          }
-          if (!this.isEmpty(this.gotoLink)) {
-            this.goto(`${this.gotoLink}`)
-          }
-          if (this.isFunction(this.afterCreate)) {
-            this.afterCreate(response)
-            this.btnLoading = false
-            this.loading = false
-          }
+            if (!this.isEmpty(this.gotoLink)) {
+              this.goto(`${this.gotoLink}`)
+            }
+            if (this.isFunction(this.afterCreate)) {
+              this.afterCreate(response)
+              this.btnLoading = false
+              this.loading = false
+            }
         })
         .catch(this.error)
         .finally(() => {
-          // this.btnLoading = false
-          // this.loading = false
+          this.btnLoading = false
+          this.loading = false
           this.loading = false
         })
     },  

@@ -1,5 +1,5 @@
 <template>
-  <div class="treatment-statistic">
+  <div class="treatment-statistic mmr-90">
     <a-card :bordered="false" class="home-stats-head grey-card">
       <a-card class="stats" :bordered="false">
         <a-row >
