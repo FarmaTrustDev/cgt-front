@@ -25,6 +25,13 @@ function create(data) {
   })
 }
 
+function markAsRead(id) {
+  return request({
+    url: `${baseApi}/mark-as-read/${id}`,
+    method: 'PUT',
+  })
+}
+
 function fetchGroup(params = {}) {
   return request({
     url: `${baseApi}/groups`,
@@ -48,7 +55,13 @@ function fetchUnreadMessages(params = {}) {
 }
 
 const ChatServices = {
-  getConversations, create, get, fetchGroup, createGroup, fetchUnreadMessages
+  getConversations,
+  create,
+  get,
+  fetchGroup,
+  createGroup,
+  fetchUnreadMessages,
+  markAsRead
 }
 
 export default ChatServices

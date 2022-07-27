@@ -3,8 +3,8 @@
     <a-card class="grey-card" :bordered="false">
       <!-- left side tabs -->
       <a-col :md="10" class="mtminus-7">
-        <div class="home-tab">
-          <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
+        <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
+          <div class="home-tab">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
               width="120"
@@ -16,10 +16,10 @@
                 >{{ translation['new_1_276'] }} {{ translation['Patie_1_184'] }}
               </strong>
             </h4>
-          </a>
-        </div>
-        <div class="home-tab">
-          <a href="javascript:;" @click="goto(`/hospital/patients`)">
+          </div>
+        </a>
+        <a href="javascript:;" @click="goto(`/hospital/patients`)">
+          <div class="home-tab">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
               width="120"
@@ -32,10 +32,10 @@
                 {{ translation['Statu_1_202'] }}
               </strong>
             </h4>
-          </a>
-        </div>
-        <div class="home-tab with-arrow">
-          <a href="javascript:;" @click="goto(`/users`)">
+          </div>
+        </a>
+        <a href="javascript:;" @click="goto(`/users`)">
+          <div class="home-tab with-arrow">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
               width="120"
@@ -45,8 +45,8 @@
               {{ translation.Manag_1_455 }}
               <strong class="strong">{{ translation['Users_1_504'] }} </strong>
             </h4>
-          </a>
-        </div>
+          </div>
+        </a>
       </a-col>
       <!-- #end left side tabs -->
       <a-col :span="4"></a-col>

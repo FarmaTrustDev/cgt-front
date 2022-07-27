@@ -2,7 +2,10 @@
   <div class="support-detail">
     <a-card class="default-border-radius">
       <p class="mb-4 BagID float-right">BagID: {{ticket.reference_Id}}</p>
-      <p class="mb-4 PUID">PUID: Emma Wilbrouke</p>
+      <p class="mb-4 PUID">PUID: {{  ticket.reporter_name.substring(
+    ticket.reporter_name.lastIndexOf("(") + 1, 
+    ticket.reporter_name.lastIndexOf(")")
+) }}</p>
       <!-- ============ -->
       <a-card class="p-4 default-border-radius">
         <p class="SubjectMsg">{{ ticket.description }}</p>
@@ -91,7 +94,7 @@ export default {
   methods:{
     getDateFormat(date){
       console.log(date, 'date')
-     return moment(String(date)).format('hh:mm MM/DD/YYYY')
+     return moment(String(date)).format('hh:mm Do MMMM YYYY')
     }
   },
 }

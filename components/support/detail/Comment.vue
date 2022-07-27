@@ -23,7 +23,7 @@
                 </div></template
               >
               <a-tooltip slot="datetime" :title="item.read_at">
-                <span>{{ item.read_at }}</span>
+                <span>{{ getDateFormat(item.read_at) }}</span>
               </a-tooltip>
             </a-comment>
           </a-list-item>
@@ -136,7 +136,7 @@ export default {
     },
     translation() {
       return this.$store.getters.getTranslation
-    },    
+    },
   },
   mounted() {},
   methods: {
@@ -167,6 +167,9 @@ export default {
     },
     getType(isOwner) {
       return isOwner ? 'received' : 'sent'
+    },
+    getDateFormat(date) {
+      return moment(String(date)).format('hh:mm Do MMMM YYYY')
     },
   },
 }

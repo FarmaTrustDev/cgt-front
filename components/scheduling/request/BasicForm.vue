@@ -7,7 +7,6 @@
       @submit="onSubmit"
     >
       <LogisticLookup />
-
       <a-row :gutter="16">
         <a-col :span="12">
           <a-form-item :label="translation.SamplColle_3_518" class="pb-0">

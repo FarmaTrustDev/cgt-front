@@ -34,7 +34,10 @@
           @click="clickImage(record)"
         />
       </template>
-
+      <template slot="active" slot-scope="record">
+        <span v-if="record">Accepted</span>
+        <span v-else>New Changes Submitted</span>
+      </template>
       <template slot="icon" slot-scope="icon, record">
         <a-icon type="cloud-upload" @click="clickIcon(record)" />
       </template>
@@ -48,13 +51,18 @@
 
       <template slot="check" slot-scope="flag">
         <!-- <strong>{{ flag }}</strong> -->
-        <a-icon
-          v-if="flag"
-          type="check-circle"
+        <!-- <a-icon
+         
+          type="check"
           two-tone-color="#52c41a"
           theme="twoTone"
+        /> -->
+        <a-icon
+          v-if="flag"
+          type="check"
+          theme="outlined"
+          :style="{ color: '#52c41a' }"
         />
-
         <a-icon
           v-else
           type="close-circle"
@@ -100,7 +108,7 @@
                   <a-menu-item>
                     <a
                       href="javascript:;"
-                      @click="holdTreatment(record, treatment)"
+                      @click="handleCancelModal(true, record, treatment)"
                       ><a-icon type="minus-circle" />
                       {{
                         treatment.isHold
@@ -109,7 +117,7 @@
                       }}</a
                     >
                   </a-menu-item>
-                  <a-menu-item>
+                  <a-menu-item class="treatment-cancel-placeholder">
                     <a
                       href="javascript:;"
                       @click="cancelTreatment(record, treatment)"
@@ -251,7 +259,11 @@
         </a-button>
       </div>
 
-      <span slot="nameTags" slot-scope="tags">
+      <span v-if="isHospital" slot="nameTags" slot-scope="tags">
+        <a-tag>{{ tags.name }}</a-tag>
+      </span>
+
+      <span v-else slot="nameTags" slot-scope="tags">
         <a-tag v-for="tag in tags" :key="tag.id">{{ tag.name }}</a-tag>
       </span>
     </a-table>
@@ -262,20 +274,45 @@
       :visible="showCancelTreatmentModal"
       title="Cancel Treatment"
       :footer="null"
+      @cancel="handleCancelTreatmentModal(false)"
     >
-      <a-textarea
-        v-model="treatmentCancelReason"
-        placeholder="Controlled autosize"
-        :auto-size="{ minRows: 3, maxRows: 5 }"
-      />
-
-      <a-button
-        :loading="loading"
-        type="primary"
-        @click="submitCancelResponse"
-        @cancel="handleCancelTreatmentModal(false)"
-        >submit</a-button
-      >
+      <a-form :form="form" @submit="handleSubmit">
+        <a-form-item>
+          <!-- v-model="treatmentCancelReason" -->
+          <a-textarea
+            v-decorator="[
+              'note',
+              {
+                rules: [{ required: true, message: 'Please input your note!' }],
+              },
+            ]"
+            placeholder="Enter Note"
+          />
+        </a-form-item>
+        <a-form-item >
+            <a-button :loading="loading" type="primary" html-type="submit" class="float-right">
+              Submit
+            </a-button>
+        </a-form-item>
+      </a-form>
+    </a-modal>
+    <a-modal
+      title="Pause treatment"
+      :visible="showPauseModal"
+      @ok="handleOk"
+      @cancel="handleCancelModal(false , '' ,'')"
+    >
+      <p>Are you sure you want to pause the treatment ?</p>
+    </a-modal>
+    <a-modal
+      :visible="showFlagModal"
+      @ok="handleFlagModal(true, '', '', true)"
+      @cancel="handleFlagModal(false, patient, treatment, false)"
+    >
+      <p>
+        Treatment is already in pause state, do you want to switch the status to
+        cancel ?
+      </p>
     </a-modal>
   </div>
 </template>
@@ -309,12 +346,19 @@ export default {
     shouldFetch: { type: Boolean, default: true },
     showPagination: { type: Boolean, default: true },
     shouldUpdate: { type: Boolean, default: false },
+    isHospital: { type: Boolean, default: false },
+    isManufacturer: { type: Boolean, default: false },
   },
 
   data() {
     return {
       data: [],
+      recordData: [],
+      patientData: [],
+      form: this.$form.createForm(this, { name: 'coordinated' }),
       loading: false,
+      showPauseModal: false,
+      showFlagModal: false,
       phases: PATIENT_TREATMENT_PHASES,
       treatmentCancelReason: '',
       showCancelTreatmentModal: false,
@@ -337,6 +381,17 @@ export default {
   },
   methods: {
     preventDefault,
+    handleSubmit(e) {
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values)
+          // eslint-disable-next-line no-unused-expressions
+          this.submitCancelResponse()
+          this.handleCancelTreatmentModal(false)
+        }
+      })
+    },
     fetch(params = {}) {
       this.loading = true
       const fetchFrom = this.getDataApiService()
@@ -358,7 +413,11 @@ export default {
         })
     },
     getDataApiService() {
-      return isEmpty(this.fetchFrom) ? this.apiService.get : this.fetchFrom
+      return isEmpty(this.fetchFrom)
+        ? this.isHospital
+          ? this.apiService.getHospitalScreening
+          : this.apiService.get
+        : this.fetchFrom
     },
     getCurrentStep(treatment) {
       // Most expensive Operation in whole application
@@ -423,6 +482,27 @@ export default {
         this.fetch()
       })
     },
+    handleFlagModal(e, patient, treatment, isHold) {
+      // eslint-disable-next-line eqeqeq
+      if (e == true && isHold == false) {
+        this.patientData = patient
+        this.recordData = treatment
+        this.showFlagModal = e
+      }
+      // eslint-disable-next-line eqeqeq
+      else if (e == true && isHold == true) {
+        console.log(this.recordData, 'treatment')
+        this.showFlagModal = false
+        this.holdTreatment(this.patientData, this.recordData)
+        console.log(this.recordData, 'treatment data after cancellation')
+        this.recordData.isHold = false
+        this.cancelTreatment(this.patientData, this.recordData)
+      }
+      // eslint-disable-next-line eqeqeq
+      else if (e == false && isHold == false) {
+        this.showFlagModal = false
+      }
+    },
     deadPatient(patient) {
       const isDead = !patient.isDead
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
@@ -448,15 +528,20 @@ export default {
         .then((response) => {
           this.handleCancelTreatmentModal(false)
           this.success(response.message)
-          this.treatmentCancelReason = false
+          this.treatmentCancelReason = 'false'
           this.$emit('fetchParent', response)
         })
         .catch(this.error)
         .finally(() => (this.loading = true))
     },
     cancelTreatment(patient, treatment) {
-      this.treatmentForCancellation = treatment
-      this.handleCancelTreatmentModal(true)
+      // eslint-disable-next-line eqeqeq
+      if (treatment.isHold == true) {
+        this.handleFlagModal(true, patient, treatment, false)
+      } else {
+        this.treatmentForCancellation = treatment
+        this.handleCancelTreatmentModal(true)
+      }
     },
     holdTreatment(patient, treatment) {
       TreatmentServices.hold(treatment.globalId, !treatment.isHold)
@@ -485,6 +570,20 @@ export default {
       })
       // console.log(patient, treatment)
     },
+    handleCancelModal(e , record, treatment)
+    {
+      this.patientData = record
+      this.recordData = treatment
+      console.log(this.recordData , 'handle cancel modal')
+      this.showPauseModal = e
+    },
+    handleOk()
+    {
+      console.log(this.patientData, 'Patient Data')
+      console.log(this.recordData, 'Record Data')
+      this.holdTreatment(this.patientData, this.recordData)
+      this.showPauseModal = false
+    }
   },
 }
 </script>

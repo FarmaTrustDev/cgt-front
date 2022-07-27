@@ -5,9 +5,9 @@
       <a-row :gutter="15" class="grey-card m-auto">
         <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
           <nuxt-link :to="menu.to">
-            <div class="admin-tab administration-tab">
+            <div class="admin-tab">
               <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
-              <img width="90px" :src="menu.icon" />
+              <img width="75px" :src="menu.icon" />
               <h4 style="font-size: 1.125rem" class="heading-home">
                 {{ translation[menu.name] }}
               </h4>
@@ -50,6 +50,6 @@ export default {
 </script>
 <style scoped>
 .admin-tab {
-  max-width: 90%;
+  max-width: 75%;
 }
 </style>

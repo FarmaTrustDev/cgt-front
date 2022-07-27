@@ -12,7 +12,7 @@
       :data-source="screenings"
       :pagination="false"
       :loading="loading"
-      class="square-table"
+      class="square-table "
     >
       <template slot="name" slot-scope="name">
         {{ name }}
@@ -51,8 +51,8 @@
                 ],
               },
             ]"
-            :placeholder="translation.Enternote_3_546+':'"
-            @blur="(e) => handleInput(row.id,e)"
+            placeholder="Please input your notes"
+            @blur="(e) => handleInput(row.id, e)"
           />
           <a-input
             v-decorator="[
@@ -107,68 +107,70 @@ export default {
   data() {
     return {
       loading: false,
-      columns:[
-  {
-    title:`${this.$store.getters.getTranslation.Detai_1_346}`,
-    dataIndex: 'name',
-    scopedSlots: { customRender: 'name' },
-    width: '40%',
-  },
-  {
-    title:`${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'gender',
-    scopedSlots: { customRender: 'action' },
-  },
-  {
-    title:`${this.$store.getters.getTranslation.Notes_1_350}`,
-    dataIndex: 'notes',
-    scopedSlots: { customRender: 'notes' },
-  },
-],
+      columns: [
+        {
+          title: `${this.$store.getters.getTranslation.Detai_1_346}`,
+          dataIndex: 'name',
+          scopedSlots: { customRender: 'name' },
+          width: '40%',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'gender',
+          scopedSlots: { customRender: 'action' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Notes_1_350}`,
+          dataIndex: 'notes',
+          scopedSlots: { customRender: 'notes' },
+        },
+      ],
       notesRequired: {},
-      filledData:0,
-      noteItem:[],
+      filledData: 0,
+      noteItem: [],
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {this.filledData=0},
+  mounted() {
+    this.filledData = 0
+  },
   methods: {
     handleCheck(value, rowId) {
       const notesRequired = this.notesRequired
       notesRequired[rowId] = value
       this.notesRequired = notesRequired
-      if(value===true){
-        this.filledData=this.filledData+1
-      }else{
-        this.filledData=this.filledData-1
+      if (value === true) {
+        this.filledData = this.filledData + 1
+      } else {
+        this.filledData = this.filledData - 1
       }
-      if(this.filledData<0){
-        this.filledData=0
+      if (this.filledData < 0) {
+        this.filledData = 0
       }
       this.sendData(this.filledData)
     },
-    handleInput(rowId,e) {
-      if(this.noteItem.includes(rowId)){
-        this.noteItem.splice(this.noteItem.indexOf(rowId),1);
-        this.filledData=this.filledData - 1
+    handleInput(rowId, e) {
+      if (this.noteItem.includes(rowId)) {
+        this.noteItem.splice(this.noteItem.indexOf(rowId), 1)
+        this.filledData = this.filledData - 1
       }
-      if(this.filledData<0){
-        this.filledData=0
+      if (this.filledData < 0) {
+        this.filledData = 0
       }
-      if(!this.notesRequired[rowId] && e.target.value!==null){
+      if (!this.notesRequired[rowId] && e.target.value !== null) {
         console.log(this.noteItem)
         this.noteItem.push(rowId)
-        this.filledData=this.filledData + 1
+        this.filledData = this.filledData + 1
         this.sendData(this.filledData)
       }
     },
-    sendData(totVals){
-      this.$emit('getFilledDatas',totVals);
-    }
+    sendData(totVals) {
+      this.$emit('getFilledDatas', totVals)
+    },
   },
 }
 </script>

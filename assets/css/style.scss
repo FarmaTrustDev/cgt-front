@@ -31,6 +31,7 @@
 @import './components/inventory';
 @import './components/consumables';
 @import './components/support';
+@import './components/screening';
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap');
 
@@ -79,46 +80,63 @@ a {
 .w-125 {
   width: 123%;
 }
-
-.square-table .ant-table-content {
-  table {
-    border-collapse: separate;
-    text-align: center;
-    vertical-align: middle;
+.border-space {
+  .table {
+    border-spacing: 0 1em;
   }
-  table thead tr {
-    border-collapse: collapse;
-    border-style: hidden;
-  }
-  .ant-table-thead tr th {
-    border: unset;
-    padding: 15px;
-    font-weight: bold;
-    text-align: center;
-
-    // why repeating code ?? check the below line
-    &:first-child {
-      border-bottom-left-radius: 40px;
-      border-top-left-radius: 40px;
-    }
-    &:last-child {
-      border-bottom-right-radius: 40px;
-      border-top-right-radius: 40px;
-    }
+}
+.square-table {
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 13px 12px;
+    padding-bottom: 0%;
+    margin: 15px 18px 7px;
+    word-wrap: break-word;
   }
 
-  .ant-table-row td {
-    &:first-child {
-      border-bottom-left-radius: 40px;
-      border-top-left-radius: 40px;
+  .ant-table-content {
+    table {
+      border-collapse: separate;
+      text-align: center;
+      vertical-align: middle;
     }
-    &:last-child {
-      border-bottom-right-radius: 40px;
-      border-top-right-radius: 40px;
+
+    table thead tr {
+      border-collapse: collapse;
+      border-style: hidden;
+    }
+    .ant-table-thead tr th {
+      border: unset;
+      padding: 15px;
+      font-weight: bold;
+      text-align: center;
+      .ant-table table {
+        border-spacing: 0 3px;
+      }
+
+      // why repeating code ?? check the below line
+      &:first-child {
+        border-bottom-left-radius: 40px;
+        border-top-left-radius: 40px;
+      }
+      &:last-child {
+        border-bottom-right-radius: 40px;
+        border-top-right-radius: 40px;
+      }
+    }
+
+    .ant-table-row td {
+      &:first-child {
+        border-bottom-left-radius: 40px;
+        border-top-left-radius: 40px;
+      }
+      &:last-child {
+        border-bottom-right-radius: 40px;
+        border-top-right-radius: 40px;
+      }
     }
   }
 }
-
 .ant-form-vertical .ant-form-item {
   // padding-bottom: unset;
   // margin-bottom: unset;

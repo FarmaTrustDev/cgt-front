@@ -36,7 +36,10 @@
           >
             {{ translation['Sched_1_681'] }}
           </div>
-          <scheduling :treatment="treatment" />
+          <scheduling 
+            :treatment="treatment"
+            :rejection="rejectedData"
+             />
         </a-tab-pane>
       </a-tabs>
     </a-skeleton>
