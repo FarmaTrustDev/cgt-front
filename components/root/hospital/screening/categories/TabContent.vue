@@ -1,10 +1,11 @@
 <template>
   <div>
-    <a-list item-layout="horizontal" :data-source="data">
-      <a-list-item slot="renderItem" class="ml-80" slot-scope="item"
-        >{{ item.name }}
+    <a-list item-layout="horizontal" :data-source="data" class="admin-screenging-questions">
+      <a-list-item slot="renderItem" slot-scope="item"
+        >
+        {{ item.name }}
       </a-list-item>
-    </a-list>
+    </a-list>    
   </div>
 </template>
 <script>
@@ -27,6 +28,13 @@ export default {
   data() {
     return {
       data,
+      column:[
+        {
+          title:'Questions',
+          dataIndex: 'name',
+          key: 'name',
+        },
+      ],      
       showScreeningModal: false,
     }
   },
