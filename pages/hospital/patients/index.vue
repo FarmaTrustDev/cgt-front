@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="page-header clearfix">
-      <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3>
-      <h3 class="page-title pl-5 float-left">Patient List</h3>
+      <!-- <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3> -->
+      <div class="page-title pl-5 float-left">
+        Patient List
+      </div>
 
       <a-button
         type="primary"

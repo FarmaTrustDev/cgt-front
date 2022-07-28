@@ -4,7 +4,7 @@
     <h3 class="page-title ml-5 float-left">{{translation.UserNew_3_136}}</h3>
       <a-button
         type="primary"
-        class="mrm-5 float-right mt-5"
+        class="mr-15 float-right mt-5"
         @click="goto('users/create')"
         >{{translation.adduser_2_464}}</a-button
       >
