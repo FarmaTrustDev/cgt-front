@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-30 mr-30">
+    <div class="ml-30 mr-30" >
     <div class="clearfix mt-15">
     <h3 class="page-title ml-5 float-left">{{translation.UserNew_3_136}}</h3>
       <a-button
@@ -20,6 +20,7 @@
       <a-table
         :columns="columns"
         :data-source="datasource"
+        :loading="loading"
         class="rounded-table pt-10"
         :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
       >

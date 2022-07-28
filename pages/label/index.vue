@@ -17,7 +17,7 @@
 
     <a-row class="">
       <a-skeleton :loading="loading" class="specific-card">
-        <Table :data="data"></Table>
+        <Table :data="data" :loading="loading"></Table>
       </a-skeleton>
     </a-row>
   </div>

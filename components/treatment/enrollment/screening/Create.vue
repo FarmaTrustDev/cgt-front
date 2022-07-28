@@ -11,6 +11,7 @@
           <FormActionButton
             :text="translation.SaveScree_4_468"
             :disabled="isCreated"
+            :loading="loading"
             class="mt-15"
           />
         </span>
