@@ -132,7 +132,7 @@
                   <a-menu-item>
                     <a
                       href="javascript:;"
-                      @click="deleteTreatment(record, treatment)"
+                      @click="handleDeleteModal(true, record, treatment)"
                       ><a-icon type="delete" /> {{ translation.Delet_1_451 }}</a
                     >
                   </a-menu-item>
@@ -283,16 +283,21 @@
             v-decorator="[
               'note',
               {
-                rules: [{ required: true, message: 'Please input your note!' }],
+                rules: [{ required: true, message: 'Required' }],
               },
             ]"
             placeholder="Enter Note"
           />
         </a-form-item>
-        <a-form-item >
-            <a-button :loading="loading" type="primary" html-type="submit" class="float-right">
-              Submit
-            </a-button>
+        <a-form-item>
+          <a-button
+            :loading="loading"
+            type="primary"
+            html-type="submit"
+            class="float-right"
+          >
+            Submit
+          </a-button>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -300,7 +305,7 @@
       title="Pause treatment"
       :visible="showPauseModal"
       @ok="handleOk"
-      @cancel="handleCancelModal(false , '' ,'')"
+      @cancel="handleCancelModal(false, '', '')"
     >
       <p>Are you sure you want to pause the treatment ?</p>
     </a-modal>
@@ -313,6 +318,13 @@
         Treatment is already in pause state, do you want to switch the status to
         cancel ?
       </p>
+    </a-modal>
+    <a-modal
+      :visible="showDeleteModal"
+      @ok="handleDeleteModal(false, '', '')"
+      @cancel="deleteModal(false)"
+    >
+      <p>Are you sure you want to delete ?</p>
     </a-modal>
   </div>
 </template>
@@ -357,6 +369,7 @@ export default {
       patientData: [],
       form: this.$form.createForm(this, { name: 'coordinated' }),
       loading: false,
+      showDeleteModal: false,
       showPauseModal: false,
       showFlagModal: false,
       phases: PATIENT_TREATMENT_PHASES,
@@ -481,6 +494,7 @@ export default {
         this.fetch()
       })
     },
+
     handleFlagModal(e, patient, treatment, isHold) {
       // eslint-disable-next-line eqeqeq
       if (e == true && isHold == false) {
@@ -560,24 +574,39 @@ export default {
       }
       return this.pagination
     },
-    deleteTreatment(patient, treatment) {
+    deleteTreatment(e, patient, treatment) {
       TreatmentServices.destroy(treatment.id).then((response) => {
         this.success(response.message)
         this.fetch()
       })
       // console.log(patient, treatment)
     },
-    handleCancelModal(e , record, treatment)
+    handleDeleteModal(e, patient, treatment) {
+      // eslint-disable-next-line eqeqeq
+      if (e == true) {
+        this.patientData = patient
+        this.recordData = treatment
+        this.deleteModal(e)
+      }
+      // eslint-disable-next-line eqeqeq
+      else if (e == false) {
+        this.deleteTreatment(e, this.patientData, this.recordData)
+        this.deleteModal(e)
+      }
+    },
+    deleteModal(e)
     {
+      this.showDeleteModal = e
+    },
+    handleCancelModal(e, record, treatment) {
       this.patientData = record
       this.recordData = treatment
       this.showPauseModal = e
     },
-    handleOk()
-    {
+    handleOk() {
       this.holdTreatment(this.patientData, this.recordData)
       this.showPauseModal = false
-    }
+    },
   },
 }
 </script>

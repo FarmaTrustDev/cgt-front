@@ -54,7 +54,7 @@ export default {
   methods:{
     checkData(categories)
     {
-        return !isEmpty(categories)?categories[0].treatmentTypeName: 'N/A' ;
+        return !isEmpty(categories) ? categories[0].treatmentTypeName : 'N/A' ;
     }
   }
 }
