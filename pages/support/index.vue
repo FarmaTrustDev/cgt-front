@@ -42,7 +42,7 @@
             <a-dropdown>
               <a-button class="action-button" size="small">{{
                 translation.Admin_1_142
-              }}</a-button>
+              }} <a-icon type="down" /> </a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="showUpdate(record)"

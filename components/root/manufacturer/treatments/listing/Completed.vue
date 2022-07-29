@@ -9,7 +9,7 @@
             type="link"
             @click="
               goto(
-                `/manufacturer/treatments/process/${record.treatment.globalId}`
+                `/manufacturer/treatments/process/${record.treatment.globalId}?view=OUTBOUND_SHIPMENT`
               )
             "
             >{{ name }}</a-button
@@ -95,7 +95,7 @@ export default {
         on: {
           click: (event) => {
             this.goto(
-              `/manufacturer/treatments/process/${record.treatment.globalId}`
+              `/manufacturer/treatments/process/${record.treatment.globalId}?view=OUTBOUND_SHIPMENT`
             )
           },
         },

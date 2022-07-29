@@ -6,10 +6,10 @@
         {{record.direction==1? record.hospital.name: record.manufacturerName}}
       </span>
       <span slot="action" slot-scope="text, record">
-        <a-button type="primary" dashed @click="showConfirm(record, true)">
+        <a-button type="primary" :loading="loading" dashed @click="showConfirm(record, true)">
           {{translation.Accep_1_278}}
         </a-button>
-        <a-button type="danger" dashed @click="showConfirm(record, false)">
+        <a-button type="danger" :loading="loading" dashed @click="showConfirm(record, false)">
           {{translation.Rejec_1_280}}
         </a-button>
       </span>
