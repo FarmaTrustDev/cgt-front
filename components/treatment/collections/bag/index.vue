@@ -53,7 +53,7 @@ export default {
   methods: {
     completeBag(bag) {
       if (this.validateCollectionComplete(bag)) {
-        return this.error(`Mark all collection steps of ${bag.id}`)
+        return this.error(`Mark all collection steps `)
       }
       this.markComplete(bag)
     },

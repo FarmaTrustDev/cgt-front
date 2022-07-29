@@ -4,10 +4,10 @@
     <a-table :loading="loading" :columns="column" :data-source="data" :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}">
         <span slot="action" slot-scope="text, record">
             <div v-if="showButton(record)">
-                <a-button type="primary" dashed @click="showConfirm(record, true)">
+                <a-button type="primary" :loading="loading" dashed @click="showConfirm(record, true)">
                     {{translation.Accep_1_278}}
                 </a-button>
-                <a-button class="new-treatment-btn" dashed @click="showConfirm(record, false)">
+                <a-button class="new-treatment-btn" :loading="loading" dashed @click="showConfirm(record, false)">
                     {{translation.Rejec_1_280}}
                 </a-button>
             </div>
@@ -30,8 +30,8 @@
         <a-form :form="form" :layout="formLayout" @submit="onSubmit">
             <Form :is-accepted="isAccepted" :data="selectedRow" />
 
-            <FormActionButton :text="getButtonText()" :btn-type="getButtonType()" :is-created="false"><span slot="extra" class="mr-5">
-                    <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
+            <FormActionButton :text="getButtonText()" :btn-type="getButtonType()" :loading="loading" :is-created="false"><span slot="extra" class="mr-5">
+                    <a-button @click="handleModal(false)" Reject Scheduling Request>{{translation.cance_1_296}}</a-button>
                 </span></FormActionButton>
         </a-form>
     </a-modal> 

@@ -2,12 +2,13 @@
   <a-skeleton :loading="isEmpty(schedule)">
     <article class="article">
         <h4 class="heading pl-0">Treatment Delivery</h4>
-      </article>
+    </article>
     <a-row>
-      <a-col :span="12">
+      <a-col :span="11">
         <pickup-detail :scheduling="schedule" :shipment="pickupShipment"
       /></a-col>
-      <a-col :span="12">
+      <a-col :span="2"></a-col>
+      <a-col :span="11">
         <delivery-detail :scheduling="schedule" :shipment="deliveryShipment"
       /></a-col>
     </a-row>

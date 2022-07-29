@@ -142,8 +142,52 @@
                 </a-dropdown>
               </div>
             </div>
-
-            <div class="container-drop-down-div"></div>
+            <div class="container-drop-down-div">
+              <span class="vertical-line-standard-table"></span>
+              <a-dropdown>
+                <a-button type="primary" class="ant-btn-drop-down">
+                  {{ translation['Admin_1_142'] }}
+                </a-button>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a href="javascript:;" @click="gotoView(record, treatment)"
+                      ><a-icon type="search" /> {{ translation.view_1_750 }}</a
+                    >
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a
+                      href="javascript:;"
+                      @click="handleCancelModal(true, record, treatment)"
+                      ><a-icon type="minus-circle" />
+                      {{
+                        treatment.isHold
+                          ? translation.Resum_1_463
+                          : translation.Pause_1_452
+                      }}</a
+                    >
+                  </a-menu-item>
+                  <a-menu-item class="treatment-cancel-placeholder">
+                    <a
+                      href="javascript:;"
+                      @click="cancelTreatment(record, treatment)"
+                      ><a-icon type="minus-circle" />
+                      {{
+                        treatment.isCancel
+                          ? 'continue'
+                          : translation.cance_1_296
+                      }}</a
+                    >
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a
+                      href="javascript:;"
+                      @click="handleDeleteModal(true, record, treatment)"
+                      ><a-icon type="delete" /> {{ translation.Delet_1_451 }}</a
+                    >
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </div>
           </div>
         </span>
       </span>
@@ -288,7 +332,7 @@
             v-decorator="[
               'note',
               {
-                rules: [{ required: true, message: 'Please input your note!' }],
+                rules: [{ required: true, message: 'Required' }],
               },
             ]"
             placeholder="Enter Note"
@@ -323,6 +367,13 @@
         Treatment is already in pause state, do you want to switch the status to
         cancel ?
       </p>
+    </a-modal>
+    <a-modal
+      :visible="showDeleteModal"
+      @ok="handleDeleteModal(false, '', '')"
+      @cancel="deleteModal(false)"
+    >
+      <p>Are you sure you want to delete ?</p>
     </a-modal>
   </div>
 </template>
@@ -367,6 +418,7 @@ export default {
       patientData: [],
       form: this.$form.createForm(this, { name: 'coordinated' }),
       loading: false,
+      showDeleteModal: false,
       showPauseModal: false,
       showFlagModal: false,
       phases: PATIENT_TREATMENT_PHASES,
@@ -491,6 +543,7 @@ export default {
         this.fetch()
       })
     },
+
     handleFlagModal(e, patient, treatment, isHold) {
       // eslint-disable-next-line eqeqeq
       if (e == true && isHold == false) {
@@ -570,12 +623,29 @@ export default {
       }
       return this.pagination
     },
-    deleteTreatment(patient, treatment) {
+    deleteTreatment(e, patient, treatment) {
       TreatmentServices.destroy(treatment.id).then((response) => {
         this.success(response.message)
         this.fetch()
       })
       // console.log(patient, treatment)
+    },
+    handleDeleteModal(e, patient, treatment) {
+      // eslint-disable-next-line eqeqeq
+      if (e == true) {
+        this.patientData = patient
+        this.recordData = treatment
+        this.deleteModal(e)
+      }
+      // eslint-disable-next-line eqeqeq
+      else if (e == false) {
+        this.deleteTreatment(e, this.patientData, this.recordData)
+        this.deleteModal(e)
+      }
+    },
+    deleteModal(e)
+    {
+      this.showDeleteModal = e
     },
     handleCancelModal(e, record, treatment) {
       this.patientData = record

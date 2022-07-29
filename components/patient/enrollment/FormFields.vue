@@ -15,7 +15,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -37,7 +37,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -57,7 +57,7 @@
               'Email',
               {
                 initialValue: patient.email,
-                rules: [{ required: true, message: 'This field is required!' }],
+                rules: [{ required: true, message: 'Required' }],
               },
             ]"
             :placeholder="translation.EmailAddre_2_140"
@@ -78,7 +78,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -103,7 +103,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -131,7 +131,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -187,12 +187,7 @@
               'height',
               {
                 initialValue: patient.height,
-                rules: [
-                  {
-                    required: true,
-                    message: 'This field is required!',
-                  },
-                ],
+                rules: [],
               },
             ]"
             placeholder="Height(cm)"
@@ -212,7 +207,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -333,7 +328,7 @@
               'City',
               {
                 initialValue: patient.city,
-                rules: [{ required: true, message: 'This field is required!' }],
+                rules: [{ required: true, message: 'Required' }],
               },
             ]"
             :placeholder="translation.City_1_446"
@@ -370,7 +365,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -394,7 +389,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },
@@ -417,7 +412,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'This field is required!',
+                    message: 'Required',
                   },
                 ],
               },

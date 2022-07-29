@@ -9,7 +9,7 @@
             type="link"
             @click="
               goto(
-                `/manufacturer/treatments/process/${record.treatment.globalId}`
+                `/manufacturer/treatments/process/${record.treatment.globalId}?view=OUTBOUND_SHIPMENT`
               )
             "
             >{{ name }}</a-button
@@ -75,7 +75,8 @@ export default {
       isAccepted: false,
       params: {
         IsShipmentReceived: true,
-        Direction: 1,
+        Direction: 2,
+        active:true,
         ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
         LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
@@ -95,7 +96,7 @@ export default {
         on: {
           click: (event) => {
             this.goto(
-              `/manufacturer/treatments/process/${record.treatment.globalId}`
+              `/manufacturer/treatments/process/${record.treatment.globalId}?view=OUTBOUND_SHIPMENT`
             )
           },
         },
