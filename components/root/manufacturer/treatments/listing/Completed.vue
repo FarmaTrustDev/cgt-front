@@ -1,14 +1,15 @@
 <template>
   <div>
     <Filters @getParams="getParams" />
-    <a-table :loading="loading" :columns="column" :data-source="data">
+    <a-table :loading="loading" :columns="column" :data-source="data" :custom-row="customRowReDirect">
       <template slot="name" slot-scope="name, record">
         <strong>
           <a-button
+            class="btn-color"
             type="link"
             @click="
               goto(
-                `/manufacturer/treatments/process/${record.treatment.globalId}`
+                `/manufacturer/treatments/process/${record.treatment.globalId}?view=OUTBOUND_SHIPMENT`
               )
             "
             >{{ name }}</a-button
@@ -37,34 +38,35 @@ export default {
   mixins: [routeHelpers, withTableCrud],
   data() {
     return {
-      column:[
-  {
-    title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
-    dataIndex: 'patientEnrollmentNumber',
-    key: 'patientEnrollmentNumber',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
-    dataIndex: 'treatmentType.name',
-    key: 'TreatmentName',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Organ_1_166}`,
-    dataIndex: 'hospital.name',
-    key: 'OrganizationName',
-  },
-  {
-    title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
-    dataIndex: 'collectionDateDeliveryDate',
-    key: 'collectionDateDeliveryDate',
-  },
+      column: [
+        {
+          title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
+          dataIndex: 'patientEnrollmentNumber',
+          key: 'patientEnrollmentNumber',
+          scopedSlots: { customRender: 'name' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
+          dataIndex: 'treatmentType.name',
+          key: 'TreatmentName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Organ_1_166}`,
+          dataIndex: 'hospital.name',
+          key: 'OrganizationName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+          dataIndex: 'collectionDateDeliveryDate',
+          key: 'collectionDateDeliveryDate',
+        },
 
-  // {
-    // title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    // dataIndex: 'action',
-    // scopedSlots: { customRender: 'action' },
-  // },
-],
+        // {
+        // title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+        // dataIndex: 'action',
+        // scopedSlots: { customRender: 'action' },
+        // },
+      ],
       loading: false,
       data: [],
       apiService: SchedulingServices,
@@ -73,7 +75,8 @@ export default {
       isAccepted: false,
       params: {
         IsShipmentReceived: true,
-        Direction: 1,
+        Direction: 2,
+        active:true,
         ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
         LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
         start: _getPastMomentStandardFormatted(2, 'month'),
@@ -88,6 +91,17 @@ export default {
     // this.fetch()
   },
   methods: {
+    customRowReDirect(record) {
+      return {
+        on: {
+          click: (event) => {
+            this.goto(
+              `/manufacturer/treatments/process/${record.treatment.globalId}?view=OUTBOUND_SHIPMENT`
+            )
+          },
+        },
+      }
+    },
     stepClick(record, phase) {
       this.goto(
         `/manufacturer/treatments/process/${record.treatment.globalId}`,

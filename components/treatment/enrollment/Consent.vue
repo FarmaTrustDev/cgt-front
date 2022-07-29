@@ -44,7 +44,7 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton :text="translation.SaveConse_4_695" />
+      <FormActionButton :loading="loading" :text="translation.SaveConse_4_695" />
     </a-form>
   </div>
 </template>

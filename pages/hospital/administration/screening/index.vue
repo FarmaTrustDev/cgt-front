@@ -22,28 +22,29 @@ export default {
     return {
       loading: false,
       column:[
-  {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
-    title: `Manufacturer`,
-    dataIndex: 'manufacturer',
-    key: 'hospitals',
-       scopedSlots: { customRender: 'nameTags' },
-  },
-  {
-    title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
-    dataIndex: 'treatmentType.name',
-    key: 'treatmentType.Name',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'btn',
-    scopedSlots: { customRender: 'btn' },
-  },
-],
+        {
+          title: `Manufacturer`,
+          dataIndex: 'manufacturer',
+          key: 'hospitals',
+            scopedSlots: { customRender: 'nameTags' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
+          dataIndex: 'treatmentType.name',
+          key: 'treatmentType.Name',
+        },
+        {
+          title: `Status`,
+          dataIndex: 'active',
+          key: 'active',
+          scopedSlots: { customRender: 'active' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'btn',
+          scopedSlots: { customRender: 'btn' },
+        },
+      ],
       ScreeningTemplateServices,
       ActionLink,
     }

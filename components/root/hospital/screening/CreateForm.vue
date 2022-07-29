@@ -2,7 +2,7 @@
   <div>
     <span v-if="isCreated">
       <a-divider>Screening Questions</a-divider>
-      <CategoryTabs v-if="entity.id" :template-id="entity.id"
+      <CategoryTabs v-if="entity.id" :template-id="entity.id" :manufacturerId="entity.manufacturerId" :treatmentTypeId="entity.treatmentTypeId"
     /></span>
   </div>
 </template>
@@ -31,6 +31,7 @@ export default {
       formLayout: 'vertical',
       apiService: ScreeningTemplateServices,
       gotoLink: '/hospital/administration/screening',
+      isActive:false,
     }
   },
   computed:{
@@ -39,8 +40,12 @@ export default {
     },
   },   
   mounted() {
+    this.getHospitalStatus()
   },
   methods: {
+    getHospitalStatus(){
+      // console.log(this.entity)
+    }
   },
 }
 </script>

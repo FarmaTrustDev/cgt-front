@@ -1,0 +1,15 @@
+.admin-screenging-questions {
+    .ant-list-item {
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border: 1px solid;
+    border-radius: 15px;
+    color: black;
+    padding-left: 1%;
+  }.ant-list-split .ant-list-item:last-child {
+    border-bottom: 1px solid !important;
+}
+}

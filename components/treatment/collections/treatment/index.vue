@@ -20,6 +20,7 @@
       "
       class="w-100 mt-15"
       type="primary"
+      :loading="loading"
       @click="markTreatmentCollectionComplete(bags)"
       >Complete Collection Process {{ treatment.treatmentCollectionStatus }}
     </a-button>

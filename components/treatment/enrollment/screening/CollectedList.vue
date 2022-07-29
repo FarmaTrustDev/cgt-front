@@ -1,6 +1,6 @@
 <template>
   <span>
-      <!-- <h3>Treatment Type: {{categories.treatmentTypeName}}</h3> -->
+      <h1 class="page-title">Treatment Type: {{checkData(categories)}}</h1>
     <a-tabs class="screening-tabs">
       <a-tab-pane
         v-for="category in categories"
@@ -19,6 +19,7 @@
 </template>
 <script>
 import standardTable from '~/components/common/StandardTable'
+import { isEmpty } from '~/services/Helpers'
 export default {
   components: { standardTable },
   props: {
@@ -29,6 +30,7 @@ export default {
   },
   data() {
     return {
+      treatmentTypeName : '',
       column: [
         {
           title: `${this.$store.getters.getTranslation.Detai_1_346}`,
@@ -49,5 +51,11 @@ export default {
       ],
     }
   },
+  methods:{
+    checkData(categories)
+    {
+        return !isEmpty(categories) ? categories[0].treatmentTypeName : 'N/A' ;
+    }
+  }
 }
 </script>

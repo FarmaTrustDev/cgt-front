@@ -86,7 +86,7 @@ export default {
       ActionLink,
       borderCard: false,
       fetchPatientService: {},
-      showPagination:true,
+      showPagination: true,
     }
   },
   /* computed:{
@@ -103,10 +103,14 @@ export default {
     },
     fetchSearch(params) {
       this.fetchPatientService(params)
-    },    
+    },
     searchPatent(e) {
       const search = e.target.value
-      this.fetchSearch({ puid: search, name: search, TreatmentTypeName: search })
+      this.fetchSearch({
+        puid: search,
+        name: search,
+        TreatmentTypeName: search,
+      })
     },
   },
 }

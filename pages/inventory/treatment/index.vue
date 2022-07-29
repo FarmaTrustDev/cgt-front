@@ -14,11 +14,11 @@
       </div>
 
       <span slot="action" slot-scope="text, record">
-        <div v-if="showButton(record)">
+        <div v-if="showButton(record)" :loading="loading">
           <a-button type="primary">
             {{ translation.Accep_1_278 }}
           </a-button>
-          <a-button type="danger">
+          <a-button type="danger" :loading="loading">
             {{ translation.Rejec_1_280 }}
           </a-button>
         </div>

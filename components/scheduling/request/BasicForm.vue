@@ -1,5 +1,24 @@
 <template>
   <div>
+    <div v-for="(data, index) in rejectedData" :key="index" class="mb-5">
+      <a-alert :message="'The treatment was rejected by ' + data.organization +  '. Re-schedule the treatment from available slots below.'" type="success" />
+    </div>
+    <div v-if="showData">
+      
+      <a-skeleton :loading="isEmpty(schedule)">
+        <a-row>
+          <h4 class="heading pl-0">Outbound Shipping Details</h4>
+          <a-col :span="12">
+            <pickup-detail :scheduling="schedule" :shipment="pickupShipment"
+          /></a-col>
+          <a-col :span="1"></a-col>
+          <a-col :span="12">
+            <delivery-detail :scheduling="schedule" :shipment="deliveryShipment"
+          /></a-col>
+        </a-row>
+      </a-skeleton>
+    </div>
+    <div v-else>
     <a-form
       v-if="treatment.phaseId >= TREATMENT_PHASES.OUTBOUND_SCHEDULING.id"
       :form="form"
@@ -85,17 +104,14 @@
       </a-form-item>
     </a-form>
     <alert v-else message="Collection not completed" />
-    <a-modal v-model="visible" title="Rejection by user and organization">
-      <div v-for="(data, index) in rejectedData" :key="index">
-        <p>This treatment was rejected by {{ data.organization }} by {{data.username}} for this reason : {{data.rejectionReason}}</p>
-      </div>
-      <template slot="footer">
-        <a-button key="back" @click="handleCancel(false)"> Ok </a-button>
-      </template>
-    </a-modal>
+    </div>
   </div>
 </template>
 <script>
+import withFetch from '~/mixins/with-fetch'
+import shipmentHelpers from '~/mixins/shipment-helpers'
+import pickupDetail from '~/components/treatment/treatment/pickup/Detail'
+import deliveryDetail from '~/components/treatment/treatment/delivery/Detail'
 import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import SchedulingServices from '~/services/API/SchedulingServices'
@@ -109,8 +125,8 @@ import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
 import alert from '~/components/alert'
 export default {
-  components: { LogisticLookup, alert },
-  mixins: [notifications, routeHelpers],
+  components: { LogisticLookup, alert, pickupDetail, deliveryDetail},
+  mixins: [withFetch, notifications, routeHelpers, shipmentHelpers],
   props: {
     treatment: { type: Object, required: true },
   },
@@ -118,7 +134,12 @@ export default {
     return {
       loading: false,
       visible: false,
+      schedule: null,
+      pickupShipment: {},
+      deliveryShipment: {},
       rejectedData: [],
+      showData:false,
+      outStatus:null,
       formLayout: 'vertical',
       treatmentId: this.$route.params.id,
       form: this.$form.createForm(this, {
@@ -167,6 +188,20 @@ export default {
             .catch(this.error)
         }
       })
+    },
+    fetch(id) {
+      SchedulingServices.getDetailByTreatmentOut(this.treatment.id)
+        .then((response) => {
+          this.schedule = response.data
+          this.showData=true
+        })
+        .then(() => {
+          this.markShipmentFlags()
+        })
+        .finally(() => {
+          this.loading = false
+          // this.showData=false
+        })
     },
     handleCancel() {
       this.visible = false

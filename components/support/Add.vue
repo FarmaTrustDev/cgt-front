@@ -21,7 +21,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Patient Required',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -52,7 +52,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please input Subject !',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -70,7 +70,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please input Reporter Name !',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -86,7 +86,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Patient Required',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -154,7 +154,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please input Subject !',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -179,7 +179,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please input Description !',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -202,7 +202,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please select Status',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -229,7 +229,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please input Subject !',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -249,7 +249,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please select Priority',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -281,7 +281,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please select StackHolder',
+                        message: 'Required',
                       },
                     ],
                   },
@@ -371,7 +371,8 @@ export default {
       this.$emit('closeModal', show)
     },
     searchPatient(keyword) {
-      this.fetchPatient({ puid: keyword, name: keyword, email: keyword })
+      console.log(keyword)
+      this.fetchPatient({ puid: keyword, name: keyword, email: keyword, active: true })
     },
     fetchPatient(params = {}) {
       PatientServices.search(params).then((response) => {

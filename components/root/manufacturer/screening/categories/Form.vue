@@ -2,7 +2,7 @@
   <div>
     <a-skeleton :loading="loading">
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-        <a-form-item>
+        <a-form-item label="Category Name">
           <a-input
             v-decorator="[
               'name',

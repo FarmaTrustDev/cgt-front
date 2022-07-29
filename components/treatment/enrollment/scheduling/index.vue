@@ -3,9 +3,8 @@
     <a-spin :spinning="loading">
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
         <Detail v-if="isScheduled" :entity="entity" />
-
         <span v-else>
-          <Form :form="form" :treatment="treatment" />
+          <Form :form="form" :treatment="treatment" :rejection="rejection" />
         </span>
       </a-form>
     </a-spin>
@@ -26,6 +25,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    rejection: {
+      type:Array,
+      default: ()=>[]
+    }
   },
   data() {
     return {

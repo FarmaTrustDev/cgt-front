@@ -28,7 +28,7 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Scheduling" :disabled="!treatment.screeningStatus">
+        <a-tab-pane key="Scheduling" :disabled="!isScreeningDone">
           <div
             slot="tab"
             class="tab-title"
@@ -36,20 +36,10 @@
           >
             {{ translation['Sched_1_681'] }}
           </div>
-          <scheduling :treatment="treatment" />
+          <scheduling :treatment="treatment" :rejection="rejectedData" />
         </a-tab-pane>
       </a-tabs>
     </a-skeleton>
-    <a-modal v-model="visible" title="Rejection by user and organization"> 
-      <div v-for="(data,index) in rejectedData" :key="index">
-        <p>This treatment was rejected by {{ data.organization }} by {{data.username}} for this reason : {{data.rejectionReason}}</p>
-      </div>
-      <template slot="footer">
-        <a-button key="back" @click="handleCancel()">
-          Ok
-        </a-button>
-      </template>
-    </a-modal>
   </div>
 </template>
 
@@ -78,9 +68,10 @@ export default {
       treatment: {},
       isCreated: false,
       visible: false,
-      rejectedData : [],
+      rejectedData: [],
       haveTreatment: false,
       loading: true,
+      isScreeningDone : false
     }
   },
   computed: {
@@ -139,10 +130,9 @@ export default {
         })
       TreatmentServices.schedule(treatmentId, 1)
         .then((response) => {
-          this.rejectedData = response.data;
+          this.rejectedData = response.data
           // eslint-disable-next-line eqeqeq
-          if(this.rejectedData.length != 0)
-          {
+          if (this.rejectedData.length != 0) {
             this.visible = true
             console.log(this.rejectedData, 'rejected data')
           }
@@ -154,6 +144,7 @@ export default {
     },
     updateTreatment(treatment) {
       this.treatment = treatment
+      this.isScreeningDone = true
       this.haveTreatment = true
     },
     tabChange(key) {
@@ -165,8 +156,8 @@ export default {
     isCompleted(flag) {
       return flag ? 'ant-tabs-tab-completed' : ''
     },
-      handleCancel() {
-      this.visible = false;
+    handleCancel() {
+      this.visible = false
     },
   },
 }

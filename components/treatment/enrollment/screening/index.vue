@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>    
     <Create
       v-if="!isCreated"
       :treatment="treatment"
@@ -15,7 +15,6 @@ import CollectedList from '~/components/treatment/enrollment/screening/Collected
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 export default {
   components: { Create, CollectedList },
-
   props: {
     treatment: {
       type: Object,
@@ -23,7 +22,7 @@ export default {
     },
   },
   data() {
-    return { categories: null, isCreated: false }
+    return { categories: null, isCreated: null }
   },
   mounted() {
     this.isScreeningCompleted()

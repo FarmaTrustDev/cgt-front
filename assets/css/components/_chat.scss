@@ -15,6 +15,7 @@ $defaultHeight: calc(100vh - 100px);
   .ant-avatar {
     width: 70px;
     height: 70px;
+    background: none !important;
   }
   .ant-list-split .ant-list-item {
     border-bottom: none;
@@ -49,7 +50,7 @@ $defaultHeight: calc(100vh - 100px);
       font-size: 1.25rem;
       color: #6c757d;
       font-weight: bold;
-      font-family: sans-serif;
+      // font-family: sans-serif;
     }
     .ant-list-item-meta-content {
       padding-top: 2%;

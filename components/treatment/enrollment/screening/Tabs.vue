@@ -75,6 +75,7 @@ export default {
         this.setCurrentTab(index + 1)
         this.tabsSubmitButton = JSON.stringify(this.tabsSubmitButton)
         this.tabsSubmitButton = JSON.parse(this.tabsSubmitButton)
+        console.log(this.tabsSubmitButton[index], 'submit button which is being true');
         this.tabsSubmitButton[index] = true
       } else {
         this.confirm(
@@ -91,3 +92,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active{
+  border: none;
+}
+</style>

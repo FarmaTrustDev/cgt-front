@@ -31,16 +31,19 @@
           </a-dropdown>
         </div>
         <!-- Header Logo -->
-        <div class="login-logo">
-          <img
-            src="https://demoapi.qmaid.co/Logos/2020_10_22.14_48_51.jpg"
-            logo
-            hendling
-            for
-            temp
-            class="logo"
-          />
-          <span class="title">{{ user.organizationName }} </span>
+        <div class="org-title">
+          <div class="login-logo-x">
+            <img
+              src="https://demoapi.qmaid.co/Logos/2020_10_22.14_48_51.jpg"
+              width="20px"
+              logo
+              hendling
+              for
+              temp
+              class="logo"
+            />
+            <span class="title">{{ user.organizationName }} </span>
+          </div>
         </div>
         <!-- Header Lang Select -->
         <div>
