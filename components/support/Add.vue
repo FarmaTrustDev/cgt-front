@@ -371,7 +371,8 @@ export default {
       this.$emit('closeModal', show)
     },
     searchPatient(keyword) {
-      this.fetchPatient({ puid: keyword, name: keyword, email: keyword })
+      console.log(keyword)
+      this.fetchPatient({ puid: keyword, name: keyword, email: keyword, active: true })
     },
     fetchPatient(params = {}) {
       PatientServices.search(params).then((response) => {
