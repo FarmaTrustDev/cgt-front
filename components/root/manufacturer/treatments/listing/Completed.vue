@@ -75,7 +75,8 @@ export default {
       isAccepted: false,
       params: {
         IsShipmentReceived: true,
-        Direction: 1,
+        Direction: 2,
+        active:true,
         ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
         LogisticStatusNot: SCHEDULING_STATUSES.rejected.id,
         start: _getPastMomentStandardFormatted(2, 'month'),

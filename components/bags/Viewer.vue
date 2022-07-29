@@ -6,7 +6,7 @@
         :should-fetch="false"
         :dump-data="bags"
         :columns="columns"
-        :pagination="false"
+        :show-pagination="false"
         @clickImage="clickImage"
       />
     </a-skeleton>
