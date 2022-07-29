@@ -15,7 +15,7 @@
             ]"
             :disabled="true"
             size="large"
-            placeholder="Email/Username"
+            placeholder="Select manufacturer"
           />
           <a-input
             v-decorator="[
