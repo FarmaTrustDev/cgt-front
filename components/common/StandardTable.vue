@@ -142,7 +142,7 @@
                 </a-dropdown>
               </div>
             </div>
-            <div class="container-drop-down-div">
+            <!-- <div class="container-drop-down-div">
               <span class="vertical-line-standard-table"></span>
               <a-dropdown>
                 <a-button type="primary" class="ant-btn-drop-down">
@@ -187,7 +187,7 @@
                   </a-menu-item>
                 </a-menu>
               </a-dropdown>
-            </div>
+            </div> -->
           </div>
         </span>
       </span>
@@ -643,8 +643,7 @@ export default {
         this.deleteModal(e)
       }
     },
-    deleteModal(e)
-    {
+    deleteModal(e) {
       this.showDeleteModal = e
     },
     handleCancelModal(e, record, treatment) {

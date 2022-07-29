@@ -156,7 +156,11 @@ a {
 .page-title {
   font-size: 1.5625rem;
   font-weight: 600;
-}
+  }
+  .page-title.head  {
+    font-weight: 500 !important;
+    padding-left: 3rem;
+  }
 .heading {
   font-size: 1.5625rem;
 }
@@ -181,7 +185,7 @@ a {
 .container-div.main {
   display: block !important;
   position: relative;
-  text-align: right;
+  text-align: unset;
 }
 .container-steps-div {
   width: 98%;
@@ -221,7 +225,7 @@ a {
   position: absolute;
   width: 20px;
   height: 0;
-  border: 1px solid #999;
+  border: 0.3px solid #999;
   transform: rotate(90deg);
   margin-top: 27px;
   margin-left: -15px;
@@ -261,5 +265,22 @@ a {
     padding: 15px 10px;
     border-radius: 22px;
     background-color: #f9f9f9;
+  }
+}
+.page-header.clearfix {
+  position: relative;
+  padding: 0 61px 0 22px;
+
+  .page-title.pl-5 {
+    position: absolute;
+    bottom: 0;
+    color: black;
+  }
+  .ant-btn {
+    height: fit-content;
+    span {
+      font-size: 1rem;
+      padding: 15px;
+    }
   }
 }

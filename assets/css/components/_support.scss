@@ -24,3 +24,25 @@ $chatHeight: 255px;
     overflow-y: scroll;
   }
 }
+.specific-page {
+  .ant-tabs.ant-tabs-top {
+    padding: 1.5rem;
+  }
+  .page-header {
+    padding-right: 45px !important;
+  }
+  .ant-tabs-nav .ant-tabs-tab {
+    font-weight: 400 !important;
+  }
+  .ant-tabs-nav .ant-tabs-tab:hover {
+    color: inherit !important;
+  }
+  .ant-btn {
+    height: fit-content;
+    padding: 0;
+    span {
+      padding: 13px;
+      font-size: 1rem;
+    }
+  }
+}

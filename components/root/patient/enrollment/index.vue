@@ -3,13 +3,13 @@
     <a-skeleton :loading="loading">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
         <a-tab-pane key="enrollment">
-          <div slot="tab" class="tab-title" :class="isCompleted(isCreated)">
+          <div slot="tab" class="tab-title main" :class="isCompleted(isCreated)">
             {{ translation['PatieDetai_2_673'] }}
           </div>
           <enrollment :treatment="treatment" @getNextTab="getNextTab" />
         </a-tab-pane>
         <a-tab-pane key="Consent" :disabled="!isCreated">
-          <div slot="tab" class="tab-title" :class="isCompleted(isCreated)">
+          <div slot="tab" class="tab-title main" :class="isCompleted(isCreated)">
             {{ translation['Conse_1_677'] }}
           </div>
           <consent
@@ -19,7 +19,7 @@
           />
         </a-tab-pane>
         <a-tab-pane key="Screening" :disabled="!haveTreatment">
-          <div slot="tab" :class="isCompleted(haveTreatment)" class="tab-title">
+          <div slot="tab" :class="isCompleted(haveTreatment)" class="tab-title main">
             {{ translation['Scree_1_679'] }}
           </div>
           <screening
@@ -31,7 +31,7 @@
         <a-tab-pane key="Scheduling" :disabled="!isScreeningDone">
           <div
             slot="tab"
-            class="tab-title"
+            class="tab-title main"
             :class="isCompleted(treatment.screeningStatus)"
           >
             {{ translation['Sched_1_681'] }}

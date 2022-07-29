@@ -18,7 +18,7 @@
         >
           <div class="menu-container">
             <div>
-              <img :src="menu.icon" style="width: 20px" />
+              <img :src="menu.icon" style="width: 17px" />
             </div>
             <div>
               <span class="title">{{ translation[menu.name] }}</span>

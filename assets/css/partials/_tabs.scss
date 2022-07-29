@@ -99,8 +99,12 @@
   background-color: #fff;
 }
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
-  color: #3869d1;
+  color: #7c8db5;
+  border: solid 1px #9dc5ff;
+  font-size: 1rem;
   background-color: #f2f5fb !important;
+  background-color: #f3f8ff;
+  font-weight: 500;
   // border: 0.1px solid #a3c9ff;
 }
 
