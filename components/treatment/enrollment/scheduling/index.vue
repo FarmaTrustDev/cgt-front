@@ -26,9 +26,9 @@ export default {
       default: () => ({}),
     },
     rejection: {
-      type:Array,
-      default: ()=>[]
-    }
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
