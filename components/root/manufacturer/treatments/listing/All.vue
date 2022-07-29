@@ -17,7 +17,7 @@
 <script>
 import SchedulingServices from '~/services/API/SchedulingServices'
 import routeHelpers from '~/mixins/route-helpers'
-import { SCHEDULING_STATUSES } from '~/services/Constant'
+// import { SCHEDULING_STATUSES } from '~/services/Constant'
 import { MANUFACTURER_TREATMENT_PENDING_PHASES } from '~/services/Constant/Phases'
 import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import {
@@ -69,9 +69,9 @@ export default {
       showResponseModal: false,
       isAccepted: false,
       params: {
-        IsShipmentReceived: true,
-        Direction: 1,
-        ManufacturerStatus: SCHEDULING_STATUSES.accepted.id,
+        IsShipmentReceived: null,
+        Direction: null,
+        ManufacturerStatus: null,
         start: _getPastMomentStandardFormatted(2, 'month'),
         end: _getFutureMomentStandardFormatted(2, 'month'),
       },
