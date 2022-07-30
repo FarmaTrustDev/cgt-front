@@ -14,19 +14,27 @@ export default {
         },
         isManufacturer() {
             const user = this.getStoreUserDetails();
-            return user.organizationTypeAlias === "MANUFACTURER";
+            return user.roleName === "MANUFACTURER_ADMIN";
+        },
+        isScientist() {
+            const user = this.getStoreUserDetails();
+            return user.roleName === "SCIENTIST_TYPE";
+        },
+        isReceptionist() {
+            const user = this.getStoreUserDetails();
+            return user.roleName === "RECEPTIONIST_TYPE";
         },
         isHospital() {
             const user = this.getStoreUserDetails();
-            return user.organizationTypeAlias === "HOSPITAL";
+            return (user.roleName === "HOSPITAL_ADMIN" || user.roleName==="DOCTOR_TYPE" || user.roleName==="NURSE_TYPE");
         },
         isLogistic() {
             const user = this.getStoreUserDetails();
-            return user.organizationTypeAlias === "LOGISTIC";
+            return user.organizationTypeAlias === "LOGISTIC_ADMIN";
         },
         isSmartLab(){
             const user = this.getStoreUserDetails();
-            return user.organizationTypeAlias === "SMARTLAB";
+            return user.organizationTypeAlias === "SMARTLAB_ADMIN";
         },
         getStoreUserDetails() {
             return this.$store.getters.getUser

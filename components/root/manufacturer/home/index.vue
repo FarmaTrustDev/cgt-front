@@ -3,7 +3,7 @@
     <a-card class="grey-card" :bordered="false">
       <a-row>
         <!-- left side tabs -->
-        <a-col :span="12">
+        <a-col :span="12" v-if="isManufacturer()">
           <div class="home-tab">
             <a href="javascript:;" @click="goto(`/manufacturer/schedules`)">
               <img
@@ -35,6 +35,28 @@
             </a>
           </div>
         </a-col>
+        <a-col :span="12" v-if="isReceptionist() || isScientist()">
+          <div class="home-tab">
+            
+              <img
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
+              />
+              <h4 class="heading-home">
+                <strong class="strong"> Scan Bag </strong>
+              </h4>
+            
+          </div>
+          <div class="home-tab">
+            <a href="javascript:;" @click="goto(`/manufacturer/treatments`)">
+              <img
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
+              />
+              <h4 class="heading-home">
+                <strong class="strong"> Ongoing Treatment </strong>
+              </h4>
+            </a>
+          </div>
+        </a-col>       
         <!-- #end left side tabs -->
         <a-col :span="2"></a-col>
         <a-col :span="10">
