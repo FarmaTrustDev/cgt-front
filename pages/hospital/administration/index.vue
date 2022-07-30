@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-page">
+  <div class=" container">
     <h3 class="page-title ml-40">{{ translation._1_438 }}</h3>
     <div>
       <a-row :gutter="15" class="grey-card m-auto">

@@ -1,7 +1,7 @@
 <template>
   <div class="chat-page chat-card-padding">
     <!-- <a-button type="primary" @click="showUsersModal(true)">Add Users</a-button> -->
-    <a-row class="grey-card">
+    <a-row class="grey-card" style="margin: 0">
       <a-col :span="9" class="left-bar">
         <a-card :bordered="false" class="default-card chat-container-height"
           ><a-spin :spinning="conversationLoader">
