@@ -1,18 +1,23 @@
 <template>
-  <div>
+  <div style="margin-top: 2em">
     <div class="page-header clearfix">
-      <h3 class="page-title pl-5 float-left">{{ translation.PatieList_2_627 }}</h3>
-
-      <a-button
-        type="primary"
-        class="mrm-5 float-right"
-        @click="goto('patients/create')"
-        >{{ translation['AddNew_3_631'] }}</a-button
-      >
+      <!-- <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3> -->
+      <div class="page-title pl-5 float-left" style="width: 50%">
+        Patient List
+      </div>
+      <div style="width: 25%; display: inline">
+        <a-button
+          type="primary"
+          class="mrm-5 float-right"
+          @click="goto('patients/create')"
+          >{{ translation['AddNew_3_631'] }}</a-button
+        >
+      </div>
       <a-input
         ref="userNameInput"
         :placeholder="translation.searc_1_488"
         class="float-right page-search-input"
+        style="width: 25%"
         @change="searchPatent"
       >
         <a-icon slot="prefix" type="search" />

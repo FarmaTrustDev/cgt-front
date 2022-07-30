@@ -5,7 +5,11 @@
         <img :src="getImageUrl('Logos/logo.svg')" class="logo"
       /></nuxt-link>
     </div>
-    <a-skeleton :loading="isEmpty(user)" :paragraph="{ rows: 10 }">
+    <a-skeleton
+      :loading="isEmpty(user)"
+      :paragraph="{ rows: 10 }"
+      class="side-menu"
+    >
       <a-menu :selected-keys="selectedKey" mode="inline">
         <a-menu-item
           v-for="menu in user.menus"
@@ -13,12 +17,12 @@
           @click="goto(menu)"
         >
           <div class="menu-container">
-          <div>
-            <img :src="menu.icon" style="width: 20px" />
-          </div>
-          <div>
-            <span class="title">{{ translation[menu.name] }}</span>
-          </div>
+            <div>
+              <img :src="menu.icon" style="width: 17px" />
+            </div>
+            <div>
+              <span class="title">{{ translation[menu.name] }}</span>
+            </div>
           </div>
         </a-menu-item>
 
@@ -61,11 +65,11 @@ export default {
     },
   },
   mounted() {
-    if(isEmpty(this.user)){
+    if (isEmpty(this.user)) {
       this.logout()
-    }else{
+    } else {
       const bus = AuthServices.getBusEvent()
-        const logout = this.logout
+      const logout = this.logout
       bus.$on('UNAUTHORIZE', function (data) {
         logout()
       })
@@ -91,7 +95,7 @@ export default {
       setAccessToken('')
       this.$store.commit('setToken', {})
       this.$store.commit('setUser', {})
-      this.$store.commit('setSelectedMenu',["1"])
+      this.$store.commit('setSelectedMenu', ['1'])
       this.$router.push({
         path: '/login',
       })

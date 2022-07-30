@@ -26,7 +26,7 @@
         </strong>
       </template>
 
-      <template slot="image" slot-scope="src, record">
+      <template slot="image" slot-scope="src, record" class="maaz">
         <img
           width="50"
           class="img-responsive"
@@ -81,8 +81,8 @@
           :key="treatment.id"
           :class="getTreatmentStepClass(record, treatment)"
         >
-          <div class="container-div">
-            <div class="container-steps-div">
+          <div class="container-div main">
+            <div class="container-steps-div main">
               <div>
                 <steps
                   :treatment="treatment"
@@ -91,9 +91,58 @@
                   :patient="record"
                   :goto-view="stepClick"
                 ></steps>
+                <span class="vertical-line-standard-table"></span>
+
+                <a-dropdown>
+                  <a-button type="primary" class="ant-btn-drop-down">
+                    {{ translation['Admin_1_142'] }}
+                  </a-button>
+                  <a-menu slot="overlay">
+                    <a-menu-item>
+                      <a
+                        href="javascript:;"
+                        @click="gotoView(record, treatment)"
+                        ><a-icon type="search" />
+                        {{ translation.view_1_750 }}</a
+                      >
+                    </a-menu-item>
+                    <a-menu-item>
+                      <a
+                        href="javascript:;"
+                        @click="handleCancelModal(true, record, treatment)"
+                        ><a-icon type="minus-circle" />
+                        {{
+                          treatment.isHold
+                            ? translation.Resum_1_463
+                            : translation.Pause_1_452
+                        }}</a
+                      >
+                    </a-menu-item>
+                    <a-menu-item class="treatment-cancel-placeholder">
+                      <a
+                        href="javascript:;"
+                        @click="cancelTreatment(record, treatment)"
+                        ><a-icon type="minus-circle" />
+                        {{
+                          treatment.isCancel
+                            ? 'continue'
+                            : translation.cance_1_296
+                        }}</a
+                      >
+                    </a-menu-item>
+                    <a-menu-item>
+                      <a
+                        href="javascript:;"
+                        @click="deleteTreatment(record, treatment)"
+                        ><a-icon type="delete" />
+                        {{ translation.Delet_1_451 }}</a
+                      >
+                    </a-menu-item>
+                  </a-menu>
+                </a-dropdown>
               </div>
             </div>
-            <div class="container-drop-down-div">
+            <!-- <div class="container-drop-down-div">
               <span class="vertical-line-standard-table"></span>
               <a-dropdown>
                 <a-button type="primary" class="ant-btn-drop-down">
@@ -138,7 +187,7 @@
                   </a-menu-item>
                 </a-menu>
               </a-dropdown>
-            </div>
+            </div> -->
           </div>
         </span>
       </span>
@@ -594,8 +643,7 @@ export default {
         this.deleteModal(e)
       }
     },
-    deleteModal(e)
-    {
+    deleteModal(e) {
       this.showDeleteModal = e
     },
     handleCancelModal(e, record, treatment) {
