@@ -47,7 +47,7 @@
             
           </div>
           <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/manufacturer/treatments`)">
+            <a href="javascript:;" @click="goto(`/manufacturer/treatments/pendingTreatment`)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg" width="120" height="100"
               />

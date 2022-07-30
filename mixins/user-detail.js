@@ -26,7 +26,15 @@ export default {
         },
         isHospital() {
             const user = this.getStoreUserDetails();
-            return (user.roleName === "HOSPITAL_ADMIN" || user.roleName==="DOCTOR_TYPE" || user.roleName==="NURSE_TYPE");
+            return user.roleName === "HOSPITAL_ADMIN";
+        },
+        isDoctor() {
+            const user = this.getStoreUserDetails();
+            return user.roleName==="DOCTOR_TYPE";
+        },
+        isNurse() {
+            const user = this.getStoreUserDetails();
+            return user.roleName==="NURSE_TYPE";
         },
         isLogistic() {
             const user = this.getStoreUserDetails();

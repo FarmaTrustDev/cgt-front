@@ -2,7 +2,7 @@
 <div class="home-page container">
     <h1 class="title" ><strong>{{translation['Mydashb_2_7']}}</strong></h1>
     <manufacturerHome v-if="isManufacturer() || isScientist() || isReceptionist()" />
-    <hospitalHome v-if="isHospital()" />
+    <hospitalHome v-if="isHospital() || isDoctor() || isNurse()" />
     <logisticHome v-if="isLogistic()" />
     <smartLabHome v-if="isSmartLab()" />
 </div>
