@@ -473,7 +473,7 @@ export default {
     },
   },
   mounted() {
-    this.getCountries()
+    // this.getCountries()
   },
   updated() {
     if (this.isCreated && this.fetchCountry) {

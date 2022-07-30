@@ -26,9 +26,9 @@ export default {
       default: () => ({}),
     },
     rejection: {
-      type:Array,
-      default: ()=>[]
-    }
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -53,7 +53,16 @@ export default {
         this.treatment.isSchedule
       ) {
         this.fetchScheduling(this.treatment.id)
+      } else {
+        this.checkCreated()
       }
+    },
+    afterFetch() {
+      if (this.treatment.isSchedule) {
+        this.fetchScheduling(this.treatment.id)
+      }
+
+      // this.validateIsCreated()
     },
     fetchScheduling(id) {
       SchedulingServices.getByTreatment(id).then((response) => {

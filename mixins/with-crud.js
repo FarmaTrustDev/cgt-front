@@ -22,12 +22,12 @@ export default {
     }
   },
   methods: {
-    checkCreated() {
+    async checkCreated() {
       const entityId = this.$route.params.id
       if (this.isGuid(entityId)) {
         this.entityId = entityId
         this.isCreated = true
-        this.fetch(entityId)
+        await this.fetch(entityId)
       }
     },
     upsert(values) {
@@ -39,15 +39,18 @@ export default {
       }
       return this.create(values)
     },
-    fetch(id) {
+    async fetch(id) {
       this.loading = true
-      this.apiService
+      await this.apiService
         .getById(id)
         .then((response) => {
           this.entity = response.data
 
           if (this.isFunction(this.getEntity)) {
             this.getEntity(response)
+          }
+          if (this.isFunction(this.afterFetch)) {
+            this.afterFetch(response)
           }
         })
         .finally(() => (this.loading = false))

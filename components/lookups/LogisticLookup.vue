@@ -14,7 +14,7 @@
         },
       ]"
       :loading="typeLoading"
-      placeholder="Select LogisticProvider"
+      placeholder= "Select Logistic Provider"
       class="default-select w-100"
       size="large"
       :disabled="disabled"
@@ -48,14 +48,14 @@ export default {
       typeLoading: false,
     }
   },
+    computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
+    },
   mounted() {
     this.fetch()
   },
-  computed: {
-    translation() {
-      return this.$store.getters.getTranslation
-    },
-  },  
   methods: {
     fetch() {
       this.typeLoading = true

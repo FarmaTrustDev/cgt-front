@@ -23,7 +23,8 @@ export default {
   props: {
     showButton: {
       type: Boolean,
-      required: true,
+      required: false,
+      default: true,// adding this why this props is required ?
     },
     action: {
       type: String,
