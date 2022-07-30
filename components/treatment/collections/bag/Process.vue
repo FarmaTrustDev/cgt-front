@@ -39,7 +39,7 @@
                   initialValue: row.notes,
                 },
               ]"
-              :placeholder="translation.Enternote_3_546+':'"
+              :placeholder="translation.Enternote_3_546 + ':'"
             />
             <span v-else>{{ row.notes }}</span>
             <a-input
@@ -58,7 +58,6 @@
           <InstantUpload
             :saved-list="row.uploads"
             :action="bagService.uploads(row.id)"
-            :show-button="false"
           />
         </template>
         <template slot="action" slot-scope="name, row">
@@ -106,31 +105,31 @@ export default {
   },
   data() {
     return {
-      columns:[
-  {
-    title: `${this.$store.getters.getTranslation.Detai_1_346}`,
-    dataIndex: 'name',
-    width: '30%',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Check_1_454}`,
-    dataIndex: 'collected',
-    scopedSlots: { customRender: 'collected' },
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Notes_1_350}`,
-    dataIndex: 'notes',
-    scopedSlots: { customRender: 'notes' },
-  },
-  {
-    title: 'Upload',
-    scopedSlots: { customRender: 'uploader' },
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    scopedSlots: { customRender: 'action' },
-  },
-],
+      columns: [
+        {
+          title: `${this.$store.getters.getTranslation.Detai_1_346}`,
+          dataIndex: 'name',
+          width: '30%',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Check_1_454}`,
+          dataIndex: 'collected',
+          scopedSlots: { customRender: 'collected' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Notes_1_350}`,
+          dataIndex: 'notes',
+          scopedSlots: { customRender: 'notes' },
+        },
+        {
+          title: 'Upload',
+          scopedSlots: { customRender: 'uploader' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          scopedSlots: { customRender: 'action' },
+        },
+      ],
       loading: false,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
@@ -142,7 +141,7 @@ export default {
       bagService: BagCollectionServices,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
