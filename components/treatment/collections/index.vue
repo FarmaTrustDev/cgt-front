@@ -46,7 +46,7 @@
             height="50%"
           />
         </p>
-        <h4><p>Please select today/future date </p></h4>
+        <h4><p>Complete all steps before completing this sample. </p></h4>
         <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
       </center>
     </a-modal>

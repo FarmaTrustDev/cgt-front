@@ -336,3 +336,7 @@
   opacity: 1;
   transition: 0s
 }
+.has-error .ant-input {
+  background-color: #fff;
+  border: 1px solid red;
+}
