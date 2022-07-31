@@ -35,7 +35,7 @@
           </div>
         </a>
         <a href="javascript:;" @click="goto(`/users`)">
-          <div class="home-tab with-arrow">
+          <div v-if="isHospital()" class="home-tab with-arrow">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
               width="120"

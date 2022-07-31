@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-30 mr-30" >
+    <div class="ml-30 mr-30 container" >
     <div class="clearfix mt-15">
     <h3 class="page-title ml-5 float-left">{{translation.UserNew_3_136}}</h3>
       <a-button

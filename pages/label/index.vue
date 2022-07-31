@@ -1,8 +1,8 @@
 <template>
-  <div class="label-page ">
-    <a-row class="p-10 mb-10 specific-card">
+  <div class="label-page container p-0">
+    <a-row class="p-5 mb-1 specific-card">
       <div class="page-header">
-        <h3 class="page-title float-left">{{translation.Label_1_27}}</h3>
+        <h3 class="page-title float-left mb-1">{{translation.Label_1_27}}</h3>
 
         <a-input
           ref="userNameInput"
@@ -16,7 +16,7 @@
     </a-row>
 
     <a-row class="">
-      <a-skeleton :loading="loading" class="specific-card">
+      <a-skeleton :loading="loading" class="specific-card p-0">
         <Table :data="data" :loading="loading"></Table>
       </a-skeleton>
     </a-row>

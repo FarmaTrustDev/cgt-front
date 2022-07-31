@@ -156,11 +156,11 @@ a {
 .page-title {
   font-size: 1.5625rem;
   font-weight: 600;
-  }
-  .page-title.head  {
-    font-weight: 500 !important;
-    padding-left: 3rem;
-  }
+}
+.page-title.head {
+  font-weight: 500 !important;
+  padding-left: 3rem;
+}
 .heading {
   font-size: 1.5625rem;
 }
@@ -186,6 +186,8 @@ a {
   display: block !important;
   position: relative;
   text-align: unset;
+  width: fit-content;
+  margin-left: auto;
 }
 .container-steps-div {
   width: 98%;
@@ -193,6 +195,7 @@ a {
 }
 .container-steps-div.main {
   display: block !important;
+  width: 100%;
 }
 .container-drop-down-div {
   width: 5%;
@@ -256,6 +259,11 @@ a {
     width: 97% !important;
   }
 }
+.home-page.container {
+  .title {
+    margin-bottom: 10px;
+  }
+}
 .org-title {
   margin-left: 8px;
   margin-right: 8px;
@@ -278,9 +286,10 @@ a {
   }
   .ant-btn {
     height: fit-content;
+    padding: 0;
     span {
       font-size: 1rem;
-      padding: 15px;
+      padding: 13px;
     }
   }
 }

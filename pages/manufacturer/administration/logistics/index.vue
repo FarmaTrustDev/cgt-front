@@ -20,7 +20,7 @@
               </a-select-option>
             </a-select>
             <!-- Apply Checkbox -->
-            <a-checkbox @change="onChange">
+            <a-checkbox>
               <h2><b>{{translation.Applyto_3_459}}</b></h2>
             </a-checkbox>
 

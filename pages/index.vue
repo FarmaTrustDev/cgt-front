@@ -1,9 +1,8 @@
 <template>
 <div class="home-page container">
     <h1 class="title" ><strong>{{translation['Mydashb_2_7']}}</strong></h1>
-
-    <manufacturerHome v-if="isManufacturer()" />
-    <hospitalHome v-if="isHospital()" />
+    <manufacturerHome v-if="isManufacturer() || isScientist() || isReceptionist()" />
+    <hospitalHome v-if="isHospital() || isDoctor() || isNurse()" />
     <logisticHome v-if="isLogistic()" />
     <smartLabHome v-if="isSmartLab()" />
 </div>
@@ -22,7 +21,7 @@ export default {
         manufacturerHome,
         hospitalHome,
         logisticHome,
-        smartLabHome
+        smartLabHome,
     },
     mixins: [routeHelpers, userDetail],
     middleware: 'auth',
