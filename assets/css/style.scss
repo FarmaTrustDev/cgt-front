@@ -225,13 +225,16 @@ a {
   }
 }
 .vertical-line-standard-table {
-  position: absolute;
-  width: 20px;
-  height: 0;
+  width: 1px;
+  height: 20px;
   border: 0.3px solid #999;
-  transform: rotate(90deg);
-  margin-top: 27px;
-  margin-left: -15px;
+  margin: 0 5px;
+
+  // why do this why so many sci ? @naveed discuss with me
+  // position: absolute;
+  // transform: rotate(90deg);
+  // margin-top: 27px;
+  // margin-left: -15px;
 }
 .ant-pagination {
   .ant-pagination-item-link,
