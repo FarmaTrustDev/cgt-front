@@ -1,5 +1,5 @@
 <template>
-  <a-form-item :label="translation.LogisProvi_2_380">
+  <a-form-item :label="translation.LogisProvi_2_380" >
     <a-select
       v-decorator="[
         'logisticId',
@@ -13,8 +13,7 @@
           ],
         },
       ]"
-      :loading="typeLoading"
-      placeholder= "Select Logistic Provider"
+      placeholder = "Select Logistic Provider"
       class="default-select w-100"
       size="large"
       :disabled="disabled"

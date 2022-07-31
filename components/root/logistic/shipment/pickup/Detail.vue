@@ -21,7 +21,7 @@
         <dt>Collected by:</dt>
         <dd>{{ shipment.logisticUserName }}</dd>
         <dt>Pickup At</dt>
-        <dd>{{ getDateFormat(shipment.pickupAt) }}</dd>
+        <dd>{{ moment(String(shipment.pickupAt)).format('dddd DD MM YYYY hh:mm') }}</dd>
         <dt>Pickup Location:</dt>
         <dd>{{ shipment.origin }}</dd>
       </dl>
