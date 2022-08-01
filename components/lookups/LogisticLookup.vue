@@ -14,9 +14,8 @@
         },
       ]"
       :loading="typeLoading"
-      placeholder= "Select Logistic Provider"
-      class="default-select w-100"
-      size="large"
+      placeholder=""
+      :mode="isMultiple ? 'multiple': ''"
       :disabled="disabled"
       @change="onchange"
     >
@@ -39,6 +38,8 @@ export default {
     logisticId: { type: Number, default: null },
     disabled: { type: Boolean, default: false },
     params: { type: Object, default: () => ({}) },
+    isMultiple:{ type: Boolean, default: false },
+    isAdmin:{ type: Boolean, default: false },
   },
 
   data() {
