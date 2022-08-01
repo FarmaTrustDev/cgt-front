@@ -15,7 +15,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Please select your Logistics!',
+                        message: 'Select Logistics!',
                       },
                     ],
                   },
