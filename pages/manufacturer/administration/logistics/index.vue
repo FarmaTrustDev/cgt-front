@@ -6,35 +6,47 @@
         <a-card :bordered="false" class="default-card logistic-container">
             <h2>{{translation.SelecPartn_2_458}} </h2>
             <br>
-                  <a-form-item>
-        <a-select
-          v-decorator="[
-            'HospitalsId',
-            {
-              // initialValue: entity.hospitalsId,
-              rules: [
-                {
-                  required: false,
-                  message: 'Please select your Logistics!',
-                },
-              ],
-            },
-          ]"
-          mode="multiple"
-          placeholder="Select Logistics"
-          style="width: 100%"
-          class="default-select"
-        >
-          <a-select-option v-for="hospital in hospitals" :key="hospital.id">
-            {{ hospital.name }}
-          </a-select-option>
-        </a-select>
-      </a-form-item>
-            <!-- Apply Checkbox -->
-            <a-checkbox>
-              <h2><b>{{translation.Applyto_3_459}}</b></h2>
-            </a-checkbox>
-
+            <a-form-item>
+              <a-select
+                v-decorator="[
+                  'HospitalsId',
+                  {
+                    // initialValue: entity.hospitalsId,
+                    rules: [
+                      {
+                        required: false,
+                        message: 'Please select your Logistics!',
+                      },
+                    ],
+                  },
+                ]"
+                mode="multiple"
+                placeholder="Select Logistics"
+                style="width: 100%"
+                class="default-select"
+              >
+                <a-select-option v-for="hospital in hospitals" :key="hospital.id">
+                  {{ hospital.name }}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+            <a-form-item>
+              <a-checkbox
+        v-decorator="[
+          `accepted`,
+          {
+            rules: [
+              { required: true, message: 'Please input your Patient Id!' },
+            ],
+          },
+        ]"
+        class="d-none"
+      />
+              <!-- Apply Checkbox -->
+              <a-checkbox >
+                <h2><b>{{translation.Applyto_3_459}}</b></h2>
+              </a-checkbox>
+            </a-form-item>
             <a-col class="text-right mt-15">
               <FormActionButton :loading="btnLoading" :is-created="isCreated" />
             </a-col>
