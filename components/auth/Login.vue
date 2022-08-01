@@ -102,7 +102,7 @@ export default {
         })
         .catch((e) => {
           if (!isEmpty(e.response)) {
-            this.error = `Session has expired`
+            this.error = 'Invalid User'
             this.showError = true
           }
         })
