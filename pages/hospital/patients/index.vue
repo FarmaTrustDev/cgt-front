@@ -76,7 +76,6 @@ export default {
           key: 'treatment_status',
           slots: { title: 'customTitle' },
           scopedSlots: { customRender: 'treatment_status' },
-          width: 640,
           class: 'treatment-status-col',
         },
         {
