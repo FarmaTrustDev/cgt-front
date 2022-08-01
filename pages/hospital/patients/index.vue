@@ -68,7 +68,7 @@ export default {
           title: `${this.$store.getters.getTranslation._1_442}`,
           dataIndex: 'treatmentTypeId',
           key: 'treatmentTypeId',
-          width: 100,
+          width: 75,
           scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {

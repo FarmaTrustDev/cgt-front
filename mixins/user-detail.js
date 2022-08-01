@@ -38,11 +38,11 @@ export default {
         },
         isLogistic() {
             const user = this.getStoreUserDetails();
-            return user.organizationTypeAlias === "LOGISTIC_ADMIN";
+            return user.roleName === "LOGISTIC_ADMIN";
         },
         isSmartLab(){
             const user = this.getStoreUserDetails();
-            return user.organizationTypeAlias === "SMARTLAB_ADMIN";
+            return user.roleName === "SMARTLAB_ADMIN";
         },
         getStoreUserDetails() {
             return this.$store.getters.getUser

@@ -9,12 +9,12 @@
             <a-form-item>
               <a-select
                 v-decorator="[
-                  'HospitalsId',
+                  'LogisticsId',
                   {
-                    // initialValue: entity.hospitalsId,
+                    initialValue: entity.logisticsId,
                     rules: [
                       {
-                        required: false,
+                        required: true,
                         message: 'Please select your Logistics!',
                       },
                     ],
@@ -25,8 +25,8 @@
                 style="width: 100%"
                 class="default-select"
               >
-                <a-select-option v-for="hospital in hospitals" :key="hospital.id">
-                  {{ hospital.name }}
+                <a-select-option v-for="logistic in logistics" :key="logistic.id">
+                  {{ logistic.name }}
                 </a-select-option>
               </a-select>
             </a-form-item>
@@ -34,21 +34,17 @@
               <a-checkbox
         v-decorator="[
           `accepted`,
-          {
-            rules: [
-              { required: true, message: 'Please input your Patient Id!' },
-            ],
-          },
         ]"
-        class="d-none"
-      />
+        :checked="checked"
+        @change="checkChanged"
+        :disabled="false"
+      >
               <!-- Apply Checkbox -->
-              <a-checkbox >
                 <h2><b>{{translation.Applyto_3_459}}</b></h2>
               </a-checkbox>
             </a-form-item>
             <a-col class="text-right mt-15">
-              <FormActionButton :loading="btnLoading" :is-created="isCreated" />
+              <FormActionButton :loading="btnLoading" :custom-text="'Submit'" :is-created="isCreated" />
             </a-col>
 
           </a-card>
@@ -65,17 +61,20 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import { LOGISTIC_ALIAS } from '~/services/Constant'
 import OrganizationServices from '~/services/API/OrganizationServices'
+import HospitalLogisticServices from '~/services/API/HospitalLogisticServices'
   export default{
     mixins: [routeHelpers, nullHelper, notifications],
     data() {
       return {
         // value: ['fastlink'],
         entityId: null,
+        entity:{},
         formLayout: 'vertical',
-        hospitals: [],
+        logistics: [],
         hospitalLoading: true,
         btnLoading: false,
         isCreated: false,
+        checked:false,
         form: this.$form.createForm(this, {
           name: 'screening',
         }),
@@ -88,25 +87,38 @@ import OrganizationServices from '~/services/API/OrganizationServices'
     },
     mounted() {
       this.fetchOrganization()
+      this.fetchLogistics()
     },    
     methods:{
       fetchOrganization() {
         OrganizationServices.get({ organizationTypeAlias: LOGISTIC_ALIAS })
           .then((response) => {
-            this.hospitals = response.data
+            this.logistics = response.data
           })
           .finally(() => (this.hospitalLoading = false))
       },     
       save(){
         this.success("Contract Added!")
       },
+      fetchLogistics(){
+        HospitalLogisticServices.get().then((response)=>{
+          this.entity=response.data
+          if(this.entity.logisticsId.length>0){
+            this.checked=true
+          }
+        })
+      },
+      checkChanged(e){
+        this.checked=e.target.checked;
+      },
       onSubmit(e) {
         this.loading = true
         e.preventDefault()
         this.form.validateFields((err, values) => {
           if (!err) {
-            console.log(values)
-            // this.create(values)
+            if(this.checked){
+              this.create(values)
+            }
           } else {
             this.loading = false
           }
@@ -116,18 +128,11 @@ import OrganizationServices from '~/services/API/OrganizationServices'
       create(values) {
         this.btnLoading = true
         this.loading = true
-        this.apiService
-          .create(values)
-          .then((response) => {
+        HospitalLogisticServices.create(values).then((response) => {
             this.success(response.message)
-            if (!this.isEmpty(this.gotoLink)) {
-              this.goto('/manufacturer/administration/logistics')
-            }
-            if (this.isFunction(this.afterCreate)) {
-              this.afterCreate(response)
-              this.btnLoading = false
-              this.loading = false
-            }
+            this.btnLoading = false
+            this.loading = false
+            this.goto('/hospital/Administration')
           })
           .catch(this.error)
           .finally(() => {
