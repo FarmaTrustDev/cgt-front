@@ -42,12 +42,19 @@ function getById(id) {
   })
 }
 
+function getByIntId(param) {
+  return request({
+    url: `${baseApi}/getById/${param}`,
+  })
+}
+
 const TreatmentTypeServices = {
   get,
   getById,
   getRemaining,
   getActive,
   getWithScreening,
+  getByIntId,
   getActiveWithOutScreening,
 }
 

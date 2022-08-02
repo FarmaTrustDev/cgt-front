@@ -52,10 +52,12 @@
 import Form from '~/components/root/manufacturer/screening/formField/index.vue'
 import ScreeningServices from '~/services/API/ScreeningServices'
 import nullHelper from '~/mixins/null-helpers'
+import routeHelpers from '~/mixins/route-helpers'
+
 const data = []
 export default {
   components: { Form },
-  mixins: [nullHelper],
+  mixins: [nullHelper,routeHelpers],
   props: {
     // categoryId: {
     //   type: String,
@@ -100,7 +102,9 @@ export default {
       this.handleCategoryModal(false)
     },
     deleteScreening(id){
-      ScreeningServices.destroy(id)
+      ScreeningServices.destroy(id).then((response)=>{
+        this.goto('/manufacturer/administration/screening')
+      })
       // alert(name)
     },
   },

@@ -60,9 +60,10 @@
                     @click="
                       goto(`/manufacturer/treatments/process/${item.globalId}`)
                     "
-                    >{{ item.patientPUID }}</a
+                    >{{ item.patientPUID }}   {{getDateOnly(item.collectionDate)}} / {{getDateOnly(item.deliveryDate)}}</a
                   >
-                </a-list-item-meta></a-list-item
+                </a-list-item-meta>
+                </a-list-item
               >
             </a-list>
           </div>
@@ -152,6 +153,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { isEmpty } from '~/services/Helpers'
 import { _getFormatMoment, getMomentByStandardFormat, } from '~/services/Helpers/MomentHelpers'
@@ -167,6 +169,7 @@ export default {
     return {
       treatments: [],
       isTreatment : true,
+      moment,
     }
   },
   computed: {
@@ -191,7 +194,10 @@ export default {
         }
       })
     },
-
+    getDateOnly(date)
+    {
+      return moment(date).format('DD-MM-yyyy')
+    },
     _getFormatMoment,
     getMomentByStandardFormat,
   },
