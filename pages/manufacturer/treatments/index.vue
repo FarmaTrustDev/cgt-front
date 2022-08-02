@@ -21,7 +21,7 @@
         <a-tab-pane key="2" :tab="translation.PendiTreat_2_300">
           <in-progress />
         </a-tab-pane>
-        <a-tab-pane key="3" :tab="translation.ComplTreat_2_844"><completed /></a-tab-pane>
+        <a-tab-pane key="3" tab="Completed Treatment"><completed /></a-tab-pane>
         <a-tab-pane key="4" tab="All Treatments"> <all /></a-tab-pane>
       </a-tabs>
     </div>

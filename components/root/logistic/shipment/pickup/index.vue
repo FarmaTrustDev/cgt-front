@@ -13,7 +13,7 @@
                 'senderName',
                 {
                   rules: [
-                    { required: true, message: 'Please input Handled by' },
+                    { required: true, message: 'Required' },
                   ],
                 },
               ]"
@@ -97,7 +97,8 @@
 <script>
 import {
   _getTodayMoment,
-  _disabledPreviousDate,
+  // _disabledPreviousDate,
+  _disablePrevDateFromYesterday
 } from '~/services/Helpers/MomentHelpers'
 import { DEFAULT_DATE_TIME_FORMAT } from '~/services/Constant/DateTime'
 import ShipmentServices from '~/services/API/ShipmentServices'
@@ -127,7 +128,7 @@ export default {
     },
   },
   methods: {
-    disabledDate: _disabledPreviousDate,
+    disabledDate: _disablePrevDateFromYesterday,
     onSubmit(e) {
       // this.loading = true
       e.preventDefault()

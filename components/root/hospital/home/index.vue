@@ -11,7 +11,7 @@
               height="100"
             />
             <h4 class="heading-home">
-              {{ translation.Check_1_454 }}
+              {{ translation.enrol_1_496 }}
               <strong class="strong"
                 >{{ translation['new_1_276'] }} {{ translation['Patie_1_184'] }}
               </strong>
@@ -26,7 +26,7 @@
               height="100"
             />
             <h4 class="heading-home">
-              {{ translation.enrol_1_496 }}
+              {{ translation.Check_1_454 }}
               <strong class="strong"
                 >{{ translation['Patie_1_184'] }}
                 {{ translation['Statu_1_202'] }}
@@ -69,12 +69,12 @@ export default {
   data() {
     return {}
   },
-  mounted() {},
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
+  mounted() {},
   methods: {
     gotoView(uri) {
       this.goto(`/${uri}`)

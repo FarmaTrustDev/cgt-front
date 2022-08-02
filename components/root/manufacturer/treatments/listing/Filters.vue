@@ -67,7 +67,6 @@ export default {
     {
       const current = date;
       const previousDate = current.getFullYear()+'-'+(current.getMonth()-1)+'-'+current.getDate();
-      console.log(previousDate, 'past two months date')
       return previousDate
     }
   },
