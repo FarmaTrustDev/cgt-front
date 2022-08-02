@@ -238,7 +238,11 @@
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">
-              <a>{{ translation.OpenTicke_2_800 }}</a>
+              <a
+              @click="
+                  goto(`/support?showModel=true`)
+                "
+              >{{ translation.OpenTicke_2_800 }}</a>
             </a-menu-item>
             <a-menu-item key="Consent">
               <a
