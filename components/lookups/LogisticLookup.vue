@@ -47,6 +47,7 @@ export default {
       LOGISTIC_ALIAS,
       treatmentTypes: {},
       typeLoading: false,
+      logisticsData:{},
     }
   },
     computed: {
@@ -56,11 +57,12 @@ export default {
     },
   mounted() {
     this.fetch()
+    // this.fetchLogistics()
   },
   methods: {
     fetch() {
       this.typeLoading = true
-      OrganizationService.get({
+      OrganizationService.getAllocatedOrDefault({
         ...this.params,
         OrganizationTypeAlias: this.LOGISTIC_ALIAS,
       })
@@ -69,6 +71,15 @@ export default {
         })
         .finally(() => (this.typeLoading = false))
     },
+    /* fetchLogistics(){
+      HospitalLogisticServices.get().then((response)=>{
+        if(response.data.logisticsId.length>0){
+          // this.treatmentTypes={}
+        }else{
+          fetch()
+        }
+      })
+    }, */
     onchange(value, e) {
       this.$emit('onChange', value)
     },

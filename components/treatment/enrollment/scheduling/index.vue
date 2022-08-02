@@ -54,7 +54,7 @@ export default {
       ) {
         this.fetchScheduling(this.treatment.id)
       } else {
-        this.checkCreated()
+       // this.checkCreated()
       }
     },
     afterFetch() {
