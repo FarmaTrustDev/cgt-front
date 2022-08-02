@@ -1,52 +1,50 @@
 <template>
   <span>
     <Filters @getParams="getParams" />
-        <a-table
-          :class="getTreatmentStepClass(record)"
-          :loading="loading"
-          :columns="column"
-          :data-source="data"
-          :pagination="{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ['10', '20', '30', '50', '100'],
-          }"
-        >
-          <span slot="action" slot-scope="text, record">
-            <div v-if="showButton(record)">
-              <a-button
-                type="primary"
-                :loading="loading"
-                dashed
-                @click="showConfirm(record, true)"
-              >
-                {{ translation.Accep_1_278 }}
-              </a-button>
-              <a-button
-                class="new-treatment-btn"
-                :loading="loading"
-                dashed
-                @click="showConfirm(record, false)"
-              >
-                {{ translation.Rejec_1_280 }}
-              </a-button>
-            </div>
-            <div v-else>
-              <a-badge
-                >{{
-                  record.treatment.isDead
-                    ? 'Patient Dead'
-                    : 'Treatment is on hold'
-                }}{{ data[0] }}</a-badge
-              >
-            </div>
-          </span>
-          <span slot="status" slot-scope="text, record">
-            <div v-if="showButton(record)">
-              <a-button class="new-treatment-status-btn"> New </a-button>
-            </div>
-          </span>
-        </a-table>
+    <!-- :class="getTreatmentStepClass(record)" -->
+    <a-table
+      :loading="loading"
+      :columns="column"
+      :data-source="data"
+      :pagination="{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50', '100'],
+      }"
+    >
+      <span slot="action" slot-scope="text, record">
+        <div v-if="showButton(record)">
+          <a-button
+            type="primary"
+            :loading="loading"
+            dashed
+            @click="showConfirm(record, true)"
+          >
+            {{ translation.Accep_1_278 }}
+          </a-button>
+          <a-button
+            class="new-treatment-btn"
+            :loading="loading"
+            dashed
+            @click="showConfirm(record, false)"
+          >
+            {{ translation.Rejec_1_280 }}
+          </a-button>
+        </div>
+        <div v-else>
+          <a-badge
+            >{{
+              record.treatment.isDead ? 'Patient Dead' : 'Treatment is on hold'
+            }}{{ data[0] }}</a-badge
+          >
+        </div>
+      </span>
+      <span slot="status" slot-scope="text, record">
+        <div v-if="showButton(record)">
+          <a-button class="new-treatment-status-btn"> New </a-button>
+        </div>
+      </span>
+    </a-table>
 
     <a-modal
       :title="
@@ -89,6 +87,7 @@ import {
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
+import { isEmpty } from '~/services/Utilities'
 const ActionLink = '/manufacturer/schedules'
 export default {
   components: {
@@ -155,6 +154,11 @@ export default {
       formLayout: 'vertical',
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   methods: {
     showConfirm(record, isAccepted) {
       this.isAccepted = isAccepted
@@ -176,11 +180,12 @@ export default {
       this.showResponseModal = show
     },
     getTreatmentStepClass(record) {
-        alert(record[0].treatment)
-      if (record.treatment.isDead) {
-        return 'dead'
-      } else if (record.treatment.isHold ) {
-        return 'hold'
+      if (!isEmpty(record)) {
+        if (record.treatment.isDead) {
+          return 'dead'
+        } else if (record.treatment.isHold) {
+          return 'hold'
+        }
       }
     },
     submitTreatmentResult() {},
@@ -206,11 +211,6 @@ export default {
     },
     getParams(params) {
       this.fetch(params)
-    },
-  },
-  computed: {
-    translation() {
-      return this.$store.getters.getTranslation
     },
   },
 }
