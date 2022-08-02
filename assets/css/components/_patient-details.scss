@@ -56,10 +56,41 @@
     }
     dd {
       color: #000;
+      // display: inline !important;
     }
     dt {
       color: #909090;
       font-weight: 700;
+      // display: inline !important;
     }
   }
 }
+.btn-send-mail.ant-btn[disabled] {
+  display: none !important;
+}
+.ant-upload:hover {
+  .ant-btn:hover {
+    color: #000;
+    border: 1px solid #000;
+  }
+  .ant-btn:active {
+    color: #000;
+    border: 1px solid #000;
+  }
+  .ant-btn:focus {
+    color: #000;
+    border: 1px solid #000;
+  }
+}
+.aftercare-note {
+  padding: 15px 25px;
+}
+.aftercare-note:active {
+  background-color: #fff;
+  border: none;
+}
+.aftercare-note:focus {
+  background-color: #fff;
+  border: none;
+}
+

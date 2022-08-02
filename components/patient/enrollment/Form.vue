@@ -14,21 +14,30 @@
     </a-form>
     <a-modal
       :visible="visibleModal"
-      ok-text="Ok"
+      ok-text="OK"
       :footer="null"
       @cancel="handleOk()"
       @ok="handleOk()"
+      class="error-model"
     >
       <center>
-        <p>
+        <p style="margin: 0">
           <img
             :src="getImageUrl('Icons/cross-letter.jpg')"
-            width="50%"
-            height="50%"
+            width="40%"
+            height="40%"
           />
         </p>
-        <h2><p>There are some errors in your submission. Please correct them.</p></h2>
-        <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
+        <h3>Complete Consent first</h3>
+        <!-- <p>There are some errors in your submission. Please correct them.</p> -->
+        <footer>
+          <a-button
+            class="ant-btn ant-btn-primary"
+            @click="handleOk()"
+            style="padding: 5px 50px"
+            ><b>Ok</b></a-button
+          >
+        </footer>
       </center>
     </a-modal>
     <!-- </a-spin> -->
@@ -43,7 +52,7 @@ import nullHelper from '~/mixins/null-helpers'
 import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { FormFields },
-  mixins: [notifications, routeHelpers, nullHelper,imagesHelper],
+  mixins: [notifications, routeHelpers, nullHelper, imagesHelper],
   data() {
     return {
       loading: false,
@@ -58,7 +67,7 @@ export default {
       }),
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -99,7 +108,7 @@ export default {
         }
       })
     },
-        handleOk() {
+    handleOk() {
       this.visibleModal = false
     },
     upsert(values) {

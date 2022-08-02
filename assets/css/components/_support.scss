@@ -41,8 +41,24 @@ $chatHeight: 255px;
     height: fit-content;
     padding: 0;
     span {
-      padding: 13px;
+      padding: 13px 15px;
       font-size: 1rem;
+    }
+  }
+  .ant-table-row {
+    .action-button.ant-btn {
+      height: fit-content;
+      padding: 0 5px;
+      span {
+        font-size: 14px;
+      }
+      // padding: 13px 15px;
+    }
+    .action-button.ant-btn:hover,
+    .action-button.ant-btn:focus {
+      color: unset !important;
+      background-color: #ececec;
+      border: 1px solid #ececec !important;
     }
   }
 }

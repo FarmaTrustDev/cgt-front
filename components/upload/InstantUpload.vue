@@ -9,9 +9,7 @@
     :default-file-list="savedList"
     @change="handleChange"
   >
-    <a-button v-if="showButton">
-      <a-icon type="upload" /> Click to Upload
-    </a-button>
+    <a-button v-if="showButton"> <a-icon type="upload" /> </a-button>
     <slot name="button"></slot>
   </a-upload>
 </template>
@@ -24,7 +22,7 @@ export default {
     showButton: {
       type: Boolean,
       required: false,
-      default: true,// adding this why this props is required ?
+      default: true, // adding this why this props is required ?
     },
     action: {
       type: String,

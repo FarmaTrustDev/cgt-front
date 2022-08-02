@@ -7,13 +7,18 @@
 
       <div class="hospital-detail">
         <!-- Header notifications -->
-        <div class="notifications">
+        <div class="notifications" style="margin: 0">
           <a-dropdown :trigger="['click']">
             <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
               <!-- <a-icon type="bell" theme="filled" /> -->
-              <a-badge :count="notificationCount"
-                ><a-avatar shape="square" icon="bell"
-              /></a-badge>
+              <a-badge :count="notificationCount">
+                <!-- <a-avatar shape="square" icon="bell"/> -->
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/57/57167.png"
+                  alt=""
+                  width="25px"
+                />
+              </a-badge>
             </a>
             <a-menu slot="overlay" class="notifications-dropdown">
               <a-menu-item

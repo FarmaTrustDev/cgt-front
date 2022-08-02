@@ -5,13 +5,13 @@
         <h4 class="heading pl-0">{{ heading }}</h4>
       </article>
       <dl class="ant-row common-detail">
-        <dt>Logistics Provider:</dt>
+        <dt>Logistics Provider</dt>
         <dd>{{ scheduling.logisticName }}</dd>
         <dt>Sample Collection Date:</dt>
-        <dd>{{getDateFormat(scheduling.collectionDate)}}</dd>
+        <dd>{{ getDateFormat(scheduling.collectionDate) }}</dd>
         <dt>Expected Delivery Date</dt>
         <dd>{{ getDateFormat(scheduling.deliveryDate) }}</dd>
-        <dt>{{translation.EstimArriv_3_322}}</dt>
+        <dt>{{ translation.EstimArriv_3_322 }}</dt>
         <dd>{{ getDateFormat(scheduling.deliveryDate) }}</dd>
       </dl>
 
@@ -48,17 +48,17 @@ export default {
     },
   },
   data() {
-    return {moment,}
+    return { moment }
   },
   computed: {
     translation() {
-        return this.$store.getters.getTranslation
+      return this.$store.getters.getTranslation
     },
-  }, 
+  },
   methods: {
     getMomentByStandardFormat,
     isEmpty,
-      getDateFormat(date) {
+    getDateFormat(date) {
       return moment(String(date)).format('dddd DD MM YYYY')
     },
   },

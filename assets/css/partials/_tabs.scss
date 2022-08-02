@@ -17,16 +17,20 @@
   }
 }
 .screening-tabs {
+  .ant-tabs-tab {
+    background-color: #f2f5fb !important;
+    border-radius: 24px;
+    // &:hover {
+    //   color: unset !important;
+    // }
+  }
+
   .ant-tabs-tab-active.ant-tabs-tab {
     color: #3869d1;
     background-color: #f2f5fb !important;
     border: 0.1px solid #a3c9ff;
     border-radius: 24px;
-  }
-  .ant-tabs-tab {
-    background-color: #f2f5fb !important;
-    // border: 0.1px solid #a3c9ff;
-    border-radius: 24px;
+    font-weight: 500;
   }
   .ant-table-tbody td {
     border-color: #1bb558;
@@ -40,6 +44,9 @@
   }
   .ant-tabs-bar {
     border-bottom: 1px solid white;
+  }
+  .ant-tabs-nav-container {
+    padding: 3px 0;
   }
 }
 .pills-tabs {
@@ -82,7 +89,6 @@
     }
   }
 }
-
 .no-border-bottom {
   .ant-tabs-ink-bar {
     display: none !important;
@@ -98,6 +104,7 @@
   font-weight: 600;
   background-color: #fff;
 }
+
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
   color: #7c8db5;
   border: solid 1px #9dc5ff;
@@ -153,6 +160,7 @@
     }
   }
 }
+
 .large-tabs {
   .ant-layout {
     // text-align: center;

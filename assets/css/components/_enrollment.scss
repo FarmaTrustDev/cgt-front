@@ -169,6 +169,16 @@
         background-color: $primary-color;
       }
     }
+    .fc-prevYear-button:active,
+    .fc-nextYear-button:active {
+      background-color: $primary-color !important;
+      border: none;
+    }
+    .fc-prevYear-button:focus,
+    .fc-nextYear-button:focus {
+      border: 1px solid #ebedf2;
+      box-shadow: none;
+    }
     .fc-button-primary:not(.fc-prevYear-button, .fc-nextYear-button) {
       background-color: $primary-color;
       color: #fff;
@@ -199,6 +209,37 @@
     border: 1px solid transparent;
     border-radius: 0.25rem;
   }
+  .ant-descriptions-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .ant-descriptions-item-label.ant-descriptions-item-colon,
+  .ant-descriptions-item-content {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .ant-descriptions-item {
+    width: 50% !important;
+    margin-right: 10px;
+    font-weight: 600;
+  }
+  .line {
+    background-color: #e2e2e2;
+    border: 1px solid #ececec;
+  }
+  
+  .external-entity {
+    .ant-descriptions-item-content {
+      display: block;
+      padding: 15px 25px;
+      background-color: #e9ecef;
+      font-size: 1rem;
+      margin-top: 15px;
+      border-radius: 35px;
+      margin-right: 20px;
+      font-weight: 400;
+    }
+  }
 }
 .patient-page {
   .enrollment-page {
@@ -211,7 +252,6 @@
       input.ant-input:hover {
         border-color: transparent !important;
         box-shadow: none !important;
-
       }
       input.ant-input:focus {
         border-color: transparent !important;
@@ -221,6 +261,7 @@
     }
   }
 }
+
 .schedule-create-tabs {
   .enrollment-page {
     padding: 10%;
@@ -236,6 +277,11 @@
       margin-top: 15px;
       padding: 10%;
       border-radius: 24px;
+    }
+    .ant-alert-info {
+      padding: 20px 15px;
+      background-color: gainsboro;
+      border: 1px solid gainsboro;
     }
   }
 }

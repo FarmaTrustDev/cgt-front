@@ -16,6 +16,8 @@
                 ],
               },
             ]"
+            placeholder="Notes"
+            class="aftercare-note"
             style="width: 100%"
             size="large"
           ></a-textarea>
@@ -67,9 +69,9 @@ export default {
     onSubmit(e) {},
   },
   computed: {
-        translation() {
-            return this.$store.getters.getTranslation
-        },
+    translation() {
+      return this.$store.getters.getTranslation
     },
+  },
 }
 </script>

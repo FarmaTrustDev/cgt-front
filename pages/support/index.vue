@@ -50,7 +50,7 @@
               </a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
-                  <a href="javascript:;" @click="showUpdate(record)"
+                  <a @click="showUpdate(record)"
                     ><a-icon type="search" />
                     {{ translation.Updatticke_2_222 }}</a
                   >

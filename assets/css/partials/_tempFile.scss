@@ -1,0 +1,18 @@
+.screening-tabs {
+  .ant-tabs-nav-wrap {
+    .ant-table-tbody {
+      .ant-tabs-tab-active {
+        background-color: #f2f5fb !important;
+      }
+    }
+  }
+}
+// -------------
+.patient-page {
+  .ant-table-row {
+    td {
+      border-top: 0;
+      border-right: 0 !important;
+    }
+  }
+}

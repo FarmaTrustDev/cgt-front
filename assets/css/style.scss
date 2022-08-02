@@ -15,6 +15,7 @@
 @import './partials/tabs';
 @import './partials/buttons';
 @import './partials/tables';
+@import './partials/_tempFile';
 @import './partials/_steps';
 @import './partials/calendar';
 @import './partials/shadow';
@@ -48,6 +49,15 @@ body {
   background-color: #ececec;
   padding: 20px;
   border-radius: 35px;
+}
+.error-model {
+  button {
+    height: fit-content;
+    span {
+      padding: 5px px 60px;
+      font-size: 16px;
+    }
+  }
 }
 .ant-select-focused .ant-select-selection,
 .ant-select-selection:focus,
@@ -85,6 +95,7 @@ a {
     border-spacing: 0 1em;
   }
 }
+
 .square-table {
   .ant-table-thead > tr > th,
   .ant-table-tbody > tr > td {
@@ -137,11 +148,10 @@ a {
     }
   }
 }
-.ant-form-vertical .ant-form-item {
-  // padding-bottom: unset;
-  // margin-bottom: unset;
-}
-
+// .ant-form-vertical .ant-form-item {
+// padding-bottom: unset;
+// margin-bottom: unset;
+// }
 .square-table .ant-table-tbody {
   tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) {
     td {
@@ -185,7 +195,7 @@ a {
 .container-div.main {
   display: block !important;
   position: relative;
-  text-align: unset;
+  text-align: end;
   width: fit-content;
   margin-left: auto;
 }
@@ -194,6 +204,7 @@ a {
   display: flex;
 }
 .container-steps-div.main {
+  text-align: right !important;
   display: block !important;
   width: 100%;
 }
@@ -275,6 +286,22 @@ a {
     background-color: #f9f9f9;
   }
 }
+.clearfix.mt-15 {
+  .ant-input:focus {
+    border: 1px solid #ececec !important;
+  }
+}
+.users-list {
+  .ant-btn:active {
+    color: unset !important;
+    background: #ececec;
+  }
+  .ant-btn:hover {
+    color: unset !important;
+    background: #ececec;
+  }
+}
+
 .page-header.clearfix {
   position: relative;
   padding: 0 61px 0 22px;
@@ -291,5 +318,84 @@ a {
       font-size: 1rem;
       padding: 13px;
     }
+  }
+}
+// ==========================
+.patient-page {
+  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+    border: none !important;
+  }
+  .ant-tabs-tab:hover {
+    color: black !important;
+  }
+  .ant-table-row {
+    .action-button.ant-btn {
+      height: fit-content;
+      padding: 8px 15px;
+      span {
+        font-size: 14px;
+      }
+      // padding: 13px 15px;
+    }
+    .action-button.ant-btn:hover,
+    .action-button.ant-btn:focus {
+      color: unset !important;
+      background-color: #ececec;
+      border: 1px solid #ececec !important;
+    }
+  }
+}
+.screening-tabs {
+  .ant-tabs-nav-wrap {
+    .ant-table-tbody {
+      .ant-tabs-tab {
+        border: 1px solid #ececec;
+        background-color: white !important;
+      }
+      // .ant-tabs-tab-active {
+      //   background-color: #f2f5fb !important;
+      // }
+      .ant-tabs-tab:hover {
+        color: unset !important;
+      }
+
+      // td {
+      //   font-weight: 500;
+      // }
+    }
+  }
+}
+.ant-descriptions-item-colon::after {
+  // display: none !important;
+}
+.enrollment-page {
+  .ant-alert-info {
+    padding: 0.75rem 1.25rem;
+    background-color: #e2e3e5;
+    border: 1px solid gainsboro;
+  }
+  // kt-form__actions {
+  //   position: absolute;
+  //   bottom: 0;
+  //   right: 0;
+  // }
+  .ant-alert.ant-alert-no-icon {
+    border: none;
+    background-color: #ececec !important;
+  }
+  textarea.ant-input:focus {
+    border: none;
+  }
+}
+.pick-info {
+  .text-right {
+    color: black;
+    font-weight: bold;
+  }
+}
+.delivery-info {
+  .text-right {
+    color: black;
+    font-weight: bold;
   }
 }

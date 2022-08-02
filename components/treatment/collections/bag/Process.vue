@@ -66,6 +66,7 @@
             shape="round"
             icon="sync"
             @click="handleCollectionSubmit(row)"
+            class="btn-send-mail"
           />
           <a-button
             v-if="row.isCollected"

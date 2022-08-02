@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="default-card">
+    <a-card :bordered="false" class="default-card delivery-info">
       <article class="article">
         <h4 class="heading pl-0">{{ heading }}</h4>
       </article>
@@ -9,7 +9,7 @@
         <a-col :span="12" class="mt-15">
           <span class="text-muted">{{translation.IsRecei_2_328}}</span>
         </a-col>
-        <a-col :span="12"  class="mt-15">
+        <a-col :span="12"  class="mt-15 text-right">
           {{translation.Done_1_340}}
         </a-col>        
       </a-row>
@@ -17,7 +17,7 @@
         <a-col :span="12" class="mt-15">
           <span class="text-muted">{{translation['Receiby:_2_330']}}</span>
         </a-col>
-        <a-col :span="12" class="mt-15">
+        <a-col :span="12" class="mt-15 text-right">
           {{ shipment.receiverName }}
         </a-col>        
       </a-row>          
@@ -25,7 +25,7 @@
         <a-col :span="12" class="mt-15">
           <span class="text-muted">{{translation['ReceiDate:_2_332']}}</span>
         </a-col>
-        <a-col :span="12" class="mt-15">
+        <a-col :span="12" class="mt-15 text-right">
           {{ _getFormatMoment(getMomentByStandardFormat(shipment.deliveryAt)).format('DD/MM/YYYY') }}
         </a-col>        
       </a-row>

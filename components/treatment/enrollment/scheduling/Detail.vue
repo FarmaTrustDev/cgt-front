@@ -7,12 +7,16 @@
       <a-descriptions-item :label="translation.DelivDispa_3_728">
         {{ getDateFormat(entity.pickupDateTime) }}
       </a-descriptions-item>
+      <br />
       <a-descriptions-item :label="translation.SamplDeliv_3_730">
         {{ getDateFormat(entity.deliveryDate) }}
       </a-descriptions-item>
     </a-descriptions>
-
-    <a-descriptions :title="translation.ExterEntit_2_760">
+    <hr class="line" />
+    <a-descriptions
+      :title="translation.ExterEntit_2_760"
+      class="external-entity"
+    >
       <a-descriptions-item :label="translation.Manuf_1_89">
         {{ entity.manufacturerName }}
       </a-descriptions-item>
@@ -20,6 +24,7 @@
         {{ entity.logisticName }}
       </a-descriptions-item>
     </a-descriptions>
+    <hr class="line" />
 
     <a-descriptions :title="translation.TreatSched_3_764">
       <a-descriptions-item :label="translation.TreatStart_3_732">
@@ -28,6 +33,7 @@
       <a-descriptions-item :label="translation.ComplDate_3_734">
         {{ getDateFormat(entity.completionDate) }}
       </a-descriptions-item>
+      <br />
       <a-descriptions-item :label="translation.Durat_1_484">
         {{ getDateFormat(entity.duration) }} Days
       </a-descriptions-item>
@@ -64,10 +70,10 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  methods:{
-        getDateFormat(date) {
+  methods: {
+    getDateFormat(date) {
       return moment(String(date)).format(' DD/MM/YYYY')
     },
-  }
+  },
 }
 </script>

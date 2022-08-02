@@ -69,6 +69,7 @@
           :label="translation.Phone_1_63 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
+          min="0"
         >
           <a-input
             v-decorator="[
@@ -85,6 +86,7 @@
             ]"
             type="number"
             placeholder="12345678"
+            min="0"
           />
         </a-form-item>
       </a-col>

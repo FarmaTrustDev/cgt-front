@@ -73,6 +73,7 @@
           :label="Phone_1_63"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
+          min="0"
         >
           <a-input
             v-decorator="[

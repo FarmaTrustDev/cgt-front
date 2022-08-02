@@ -5,20 +5,20 @@
         <h4 class="heading pl-0">Treatment Receiving</h4>
       </article>
       <dl class="ant-row common-detail">
-        <dt>{{translation.IsRecei_2_328}}:</dt>
-        <dd class="text-success">
+        <dt>{{ translation.IsRecei_2_328 }}</dt>
+        <dd class="text-success" style="color: green">
           <a-icon
             v-if="!isEmpty(shipment)"
-            
             type="check-circle"
+            style="color: green"
           />
-          {{translation.Done_1_340}}
+          {{ translation.Done_1_340 }}
         </dd>
-        <dt>{{translation['Receiby:_2_330']}}:</dt>
+        <dt>{{ translation['Receiby:_2_330'] }}</dt>
         <dd>{{ shipment.receiverName }}</dd>
-        <dt>{{translation['ReceiDate:_2_332']}}:</dt>
+        <dt>{{ translation['ReceiDate:_2_332'] }}</dt>
         <dd>{{ getMomentByStandardFormat(shipment.deliveryAt) }}</dd>
-        <dt>{{translation['ReceiNote:_2_334']}}:</dt>
+        <dt>{{ translation['ReceiNote:_2_334'] }}</dt>
         <dd>{{ shipment.notes }}</dd>
       </dl>
     </a-card>
@@ -40,11 +40,27 @@ export default {
   data() {
     return {}
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  },
   methods: { isEmpty, getMomentByStandardFormat },
 }
 </script>
+<style scoped>
+.common-detail > dt {
+  width: 50%;
+  display: inline;
+  font-weight: bold;
+
+  /* color: black; */
+}
+.common-detail > dd {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+  color: black;
+  font-weight: bold;
+}
+</style>

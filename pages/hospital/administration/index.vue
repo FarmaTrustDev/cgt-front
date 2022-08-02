@@ -1,8 +1,8 @@
 <template>
-  <div class=" container">
+  <div class="container">
     <h3 class="page-title ml-40">{{ translation._1_438 }}</h3>
     <div>
-      <a-row :gutter="15" class="grey-card m-auto">
+      <a-row :gutter="15" class="grey-card m-auto admin-page">
         <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
           <nuxt-link :to="menu.to">
             <div class="admin-tab">
@@ -51,5 +51,15 @@ export default {
 <style scoped>
 .admin-tab {
   max-width: 75%;
+  text-align: left;
+  background: #fff;
+  padding: 25px;
+  border-radius: 52px;
+}
+.admin-tab > h4 {
+  font-size: 1.125rem;
+  width: fit-content;
+  margin-left: 18px;
+  display: inline;
 }
 </style>

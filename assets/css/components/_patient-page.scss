@@ -2,7 +2,7 @@
   .treatmentName {
     display: inline-block;
     padding: 10px 0;
-   // margin-top: 12px;
+    // margin-top: 12px;
   }
   .ant-table-content {
     .ant-table-tbody tr {
@@ -14,7 +14,7 @@
         background-repeat: no-repeat;
         background-position: left;
         margin-right: 0 !important;
-        color: #2255c2;
+        // color: #2255c2;
         border-radius: 44px;
       }
     }
@@ -24,7 +24,6 @@
     > td {
     background: none;
   }
-
   .btn {
     display: inline-block;
     font-weight: 400;
@@ -82,4 +81,76 @@
       width: 49%;
     }
   }
+
+  // .ant-table-row-cell-break-word {
+  //   .ant
+  //   .ant-btn:active, .ant-btn.active {
+  //     border: #babac0;
+  //     color: #babac0;
+  //   }
+  // }
+  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+    border: none !important;
+  }
+  .ant-tabs-tab:hover {
+    color: black !important;
+  }
+  .ant-alert-info {
+    background-color: #ececec;
+    border: #ececec;
+  }
+  // ------------------
+  .ant-descriptions-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .ant-descriptions-item-label.ant-descriptions-item-colon,
+  .ant-descriptions-item-content {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .ant-descriptions-item {
+    width: 50% !important;
+    margin-right: 10px;
+    font-weight: 600;
+  }
+  .line {
+    background-color: #e2e2e2;
+    border: 1px solid #ececec;
+  }
+
+  .external-entity {
+    .ant-descriptions-item-content {
+      display: block;
+      padding: 15px 25px;
+      background-color: #e9ecef;
+      font-size: 1rem;
+      margin-top: 15px;
+      border-radius: 35px;
+      margin-right: 20px;
+      font-weight: 400;
+    }
+  }
+  
+  .ant-table-row {
+    // td {
+    //   border-top: 0;
+    //   border-right: 0 !important;
+    // }
+    .square-table .ant-table-content .ant-table-row td:last-child {
+      border-bottom-left-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+      border-left: 0;
+      border-right: 0;
+    }
+    .ant-table-row-cell-break-word {
+      border-bottom-left-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+      border-left: 0;
+      border-right: 0;
+    }
+  }
 }
+// .patient-page {
+
+// }

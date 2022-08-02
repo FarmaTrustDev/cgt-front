@@ -91,14 +91,19 @@
 
 .ant-input {
   &:hover {
-    border-color: #1749b5;
+    border-color: #bebfcb;
   }
   &:focus {
-    border-color: #2255c2;
-    box-shadow: 0 0 0 2px rgb(34, 85, 194, 0.45);
+    border: 1px solid #bebfcb;
+    box-shadow: none;
   }
 }
-
+input#login_username:active {
+  border-color: #40a9ff !important;
+}
+input#login_username:focus {
+  border-color: #40a9ff !important;
+}
 .ant-form-item-label {
   label {
     color: #909090;
@@ -315,11 +320,11 @@
     padding-bottom: 2%;
   }
 }
-.border-none{
+.border-none {
   border: none;
 }
 .button::after {
-  content: "";
+  content: '';
   background: #f2f5fb;
   display: block;
   position: absolute;
@@ -328,13 +333,13 @@
   margin-left: -20px !important;
   margin-top: -120%;
   opacity: 0;
-  transition: all 0.8s
+  transition: all 0.8s;
 }
 .button:active::after {
   padding: 0;
   margin: 0;
   opacity: 1;
-  transition: 0s
+  transition: 0s;
 }
 .has-error .ant-input {
   background-color: #fff;

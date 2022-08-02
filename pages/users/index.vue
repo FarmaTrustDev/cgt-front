@@ -21,7 +21,7 @@
         :columns="columns"
         :data-source="datasource"
         :loading="loading"
-        class="rounded-table pt-10"
+        class="rounded-table pt-10 users-list"
         :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
       >
         <template slot="action" slot-scope="action">

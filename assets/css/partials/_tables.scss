@@ -14,7 +14,7 @@
   }
 
   .ant-table-thead tr th {
-    padding: 15px;
+    padding: 12px;
     padding-left: 7px;
     padding-right: 7px;
     border-top: 2px solid #ebebeb !important;
@@ -44,6 +44,7 @@
     &:first-child {
       border-bottom-left-radius: 44px;
       border-top-left-radius: 44px;
+      font-weight: bold;
     }
     &:last-child {
       border-bottom-right-radius: 44px;
@@ -59,8 +60,12 @@
     margin-top: 2rem;
     color: #909090;
     &:hover {
-      background-color: #fff;
+      box-shadow: 0 26px 120px 0 rgb(0 0 0 / 14%);
+      background-color: #fff !important;
       cursor: pointer;
+      td {
+        background-color: #fff !important;
+      }
     }
   }
 }
