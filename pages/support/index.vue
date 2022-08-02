@@ -160,8 +160,15 @@ export default {
   },
   mounted() {
     this.fetch()
+    this.showModelFromPatient()
   },
   methods: {
+    showModelFromPatient(){
+      // console.log(this.$route.query.showModel)
+      if(this.$route.query.showModel){
+        this.showAddModal=true
+      }
+    },
     customRowReDirect(record) {
       // alert(record)
       // console.log(record)
