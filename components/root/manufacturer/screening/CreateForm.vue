@@ -6,7 +6,7 @@
           v-decorator="[
             'treatmentTypeId',
             {
-              initialValue: entity.treatmentTypeName,
+              initialValue: entity.treatmentTypeId,
               rules: [
                 {
                   required: true,
@@ -87,6 +87,7 @@ export default {
       typeLoading: true,
       hospitalLoading: true,
       btnLoading: false,
+      fetchTreatmentTypess:true,
       form: this.$form.createForm(this, {
         name: 'screening',
       }),
@@ -102,17 +103,36 @@ export default {
     },
   },   
   mounted() {
-    this.fetchTreatmentTypes()
+    // this.fetchTreatmentTypes()
     this.fetchOrganization()
+    this.getActiveWithOutScreening()
+  },
+  updated() {
+    if (this.isCreated && this.fetchTreatmentTypess) {
+      this.fetchTreatmentTypess = false
+      this.getTreatmentTypes()
+    }
   },
   methods: {
-    fetchTreatmentTypes() {
+    getActiveWithOutScreening() {
       this.typeLoading = true
       TreatmentService.getActiveWithOutScreening()
         .then((response) => {
           this.treatmentType = response.data
         })
         .finally(() => (this.typeLoading = false))
+    },
+    getTreatmentTypes() {
+      if (this.isCreated) {
+        this.fetchTreatmentTypes({ Ids: [this.entity.treatmentTypeId] })
+      } else {
+        this.getActiveWithOutScreening()
+      }
+    },
+    fetchTreatmentTypes(params = {}) {
+      TreatmentService.get(params).then((response) => {
+        this.treatmentType = response.data
+      })
     },
     fetchOrganization() {
       this.hospitalLoading = true

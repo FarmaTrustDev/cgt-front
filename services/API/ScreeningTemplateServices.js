@@ -46,9 +46,10 @@ function create(data) {
 }
 
 function update(id, data) {
+  console.log(data)
   return request({
-    url: `${baseApi}/${id}`,
-    method: 'Put',
+    url: `${baseApi}/update/${id}`,
+    method: 'put',
     data,
   })
 }

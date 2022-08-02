@@ -106,7 +106,7 @@ export default {
           for (const dat in conversations.data) {
             if (
               conversations.data[dat].id === 925 ||
-              conversations.data[dat].id === 913
+              conversations.data[dat].id === 913 
             ) {
               console.log('hello remove tis if printed')
             } else {
@@ -114,7 +114,7 @@ export default {
               this.conversations.push(conversations.data[dat])
             }
           }
-
+          // console.log(this.conversations)
           // this.conversations = conversations.data
         })
         .catch((e) => {})
@@ -127,7 +127,15 @@ export default {
       this.endToEndConversationLoader = true
       ChatServices.get(params)
         .then((response) => {
-          this.endToEndConversation = response.data
+          this.endToEndConversation.splice(0)
+          for(const dt in response.data){
+            if(response.data[dt].id===973 || response.data[dt].id===903 || response.data[dt].id===905){
+              console.log(response.data[dt])
+            }
+            else{
+              this.endToEndConversation.push(response.data[dt])
+            }
+          }
         })
         .then(() => {
           this.scrollMethod()
