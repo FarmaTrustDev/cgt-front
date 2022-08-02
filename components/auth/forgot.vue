@@ -92,7 +92,8 @@ export default {
         })
         .catch((e) => {
           if (!isEmpty(e.response)) {
-            this.error = e.response.data.message
+            this.error = 'Please enter a valid Email.'
+            // this.error = e.response.data.message
             this.showError = true
           }
         })

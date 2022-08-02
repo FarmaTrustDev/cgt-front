@@ -357,10 +357,33 @@
     <a-modal
       title="Pause treatment"
       :visible="showPauseModal"
-      @ok="handleOk"
+      :footer="false"
       @cancel="handleCancelModal(false, '', '')"
     >
-      <p>Are you sure you want to pause the treatment ?</p>
+        <a-form :form="form" @submit="handleOk">
+        <a-form-item>
+          <a-textarea
+          v-model="treatmentPauseReason"
+            v-decorator="[
+              'note',
+              {
+                rules: [{ required: true, message: 'Required' }],
+              },
+            ]"
+            placeholder="Enter Note"
+          />
+        </a-form-item>
+        <a-form-item>
+          <a-button
+            :loading="loading"
+            type="primary"
+            html-type="submit"
+            class="float-right"
+          >
+            Submit
+          </a-button>
+        </a-form-item>
+      </a-form>
     </a-modal>
     <a-modal
       :visible="showFlagModal"
@@ -435,8 +458,10 @@ export default {
       showFlagModal: false,
       phases: PATIENT_TREATMENT_PHASES,
       treatmentCancelReason: '',
+      treatmentPauseReason : '',
       showCancelTreatmentModal: false,
       treatmentForCancellation: {},
+      treatmentForPause: {},
       showPauseDeleteModal: false
       // pagination: {},
     }
@@ -465,6 +490,28 @@ export default {
           this.handleCancelTreatmentModal(false)
         }
       })
+    },
+    handleOk(e)
+    {
+      e.preventDefault()
+      this.form.validateFields((err, values)=>{
+        if(!err){
+          this.submitPauseResponse()
+          this.showPauseModal = false
+        }
+      })
+    },
+    submitPauseResponse()
+    {
+      const treatment = this.treatmentForPause
+      TreatmentServices.hold(treatment.globalId, !treatment.isHold, {
+        notes: this.treatmentPauseReason
+      })
+        .then((response) => {
+          this.$emit('fetchParent', response)
+          this.treatmentPauseReason = ''
+        })
+        .catch(this.error)
     },
     fetch(params = {}) {
       this.loading = true
@@ -602,7 +649,7 @@ export default {
         .then((response) => {
           this.handleCancelTreatmentModal(false)
           this.success(response.message)
-          this.treatmentCancelReason = 'false'
+          this.treatmentCancelReason = ''
           this.$emit('fetchParent', response)
         })
         .catch(this.error)
@@ -618,11 +665,15 @@ export default {
       }
     },
     holdTreatment(patient, treatment) {
-      TreatmentServices.hold(treatment.globalId, !treatment.isHold)
+      TreatmentServices.hold(treatment.globalId, !treatment.isHold, {
+        notes: this.treatmentPauseReason
+      })
         .then((response) => {
           this.$emit('fetchParent', response)
+          this.treatmentPauseReason = ''
         })
         .catch(this.error)
+        
     },
     getTreatmentStepClass(patient, treatment) {
       if (patient.isDead) {
@@ -664,6 +715,7 @@ export default {
     handleCancelModal(e, record, treatment) {
       this.patientData = record
       this.recordData = treatment
+      this.treatmentForPause =  treatment
       console.log(this.recordData, 'record data')
       // eslint-disable-next-line eqeqeq
       if(this.recordData.isCancel==true)
@@ -674,10 +726,6 @@ export default {
       {
         this.showPauseModal = e
       }
-    },
-    handleOk() {
-      this.holdTreatment(this.patientData, this.recordData)
-      this.showPauseModal = false
     },
     handleModal(){
       this.cancelTreatment(this.patientData, this.recordData)

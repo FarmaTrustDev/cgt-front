@@ -102,7 +102,7 @@ export default {
         })
         .catch((e) => {
           if (!isEmpty(e.response)) {
-            this.error = 'Invalid User'
+            this.error = 'Invalid Username/Password'
             this.showError = true
           }
         })
