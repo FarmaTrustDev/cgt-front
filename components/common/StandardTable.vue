@@ -20,7 +20,7 @@
 
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
-          <span style="margin-top: 3px" class="treatmentName">{{
+          <span class="treatmentName mt-15">{{
             treatment.treatmentTypeName
           }}</span>
         </strong>
@@ -133,7 +133,7 @@
                     <a-menu-item>
                       <a
                         href="javascript:;"
-                        @click="deleteTreatment(record, treatment)"
+                        @click="handleDeleteModal(true,record, treatment)"
                         ><a-icon type="delete" />
                         {{ translation.Delet_1_451 }}</a
                       >
@@ -238,7 +238,11 @@
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">
-              <a>{{ translation.OpenTicke_2_800 }}</a>
+              <a
+              @click="
+                  goto(`/support?showModel=true`)
+                "
+              >{{ translation.OpenTicke_2_800 }}</a>
             </a-menu-item>
             <a-menu-item key="Consent">
               <a
@@ -327,8 +331,8 @@
     >
       <a-form :form="form" @submit="handleSubmit">
         <a-form-item>
-          <!-- v-model="treatmentCancelReason" -->
           <a-textarea
+          v-model="treatmentCancelReason"
             v-decorator="[
               'note',
               {
@@ -353,10 +357,33 @@
     <a-modal
       title="Pause treatment"
       :visible="showPauseModal"
-      @ok="handleOk"
+      :footer="false"
       @cancel="handleCancelModal(false, '', '')"
     >
-      <p>Are you sure you want to pause the treatment ?</p>
+        <a-form :form="form" @submit="handleOk">
+        <a-form-item>
+          <a-textarea
+          v-model="treatmentPauseReason"
+            v-decorator="[
+              'note',
+              {
+                rules: [{ required: true, message: 'Required' }],
+              },
+            ]"
+            placeholder="Enter Note"
+          />
+        </a-form-item>
+        <a-form-item>
+          <a-button
+            :loading="loading"
+            type="primary"
+            html-type="submit"
+            class="float-right"
+          >
+            Submit
+          </a-button>
+        </a-form-item>
+      </a-form>
     </a-modal>
     <a-modal
       :visible="showFlagModal"
@@ -374,6 +401,14 @@
       @cancel="deleteModal(false)"
     >
       <p>Are you sure you want to delete ?</p>
+    </a-modal>
+    <a-modal
+      :visible="showPauseDeleteModal"
+      @ok="handleModal()"
+      @cancel="cancelModal(false)"
+      >
+      The treatment is already in cancel state. Do you want to switch the
+       status to pause ?
     </a-modal>
   </div>
 </template>
@@ -423,8 +458,11 @@ export default {
       showFlagModal: false,
       phases: PATIENT_TREATMENT_PHASES,
       treatmentCancelReason: '',
+      treatmentPauseReason : '',
       showCancelTreatmentModal: false,
       treatmentForCancellation: {},
+      treatmentForPause: {},
+      showPauseDeleteModal: false
       // pagination: {},
     }
   },
@@ -452,6 +490,28 @@ export default {
           this.handleCancelTreatmentModal(false)
         }
       })
+    },
+    handleOk(e)
+    {
+      e.preventDefault()
+      this.form.validateFields((err, values)=>{
+        if(!err){
+          this.submitPauseResponse()
+          this.showPauseModal = false
+        }
+      })
+    },
+    submitPauseResponse()
+    {
+      const treatment = this.treatmentForPause
+      TreatmentServices.hold(treatment.globalId, !treatment.isHold, {
+        notes: this.treatmentPauseReason
+      })
+        .then((response) => {
+          this.$emit('fetchParent', response)
+          this.treatmentPauseReason = ''
+        })
+        .catch(this.error)
     },
     fetch(params = {}) {
       this.loading = true
@@ -580,6 +640,7 @@ export default {
     },
     submitCancelResponse() {
       /// ANy how need to optimize on high priority
+      console.log(this.treatmentForCancellation,'treatmentForCancellation')
       const treatment = this.treatmentForCancellation
       this.loading = true
       TreatmentServices.cancel(treatment.globalId, !treatment.isCancel, {
@@ -588,7 +649,7 @@ export default {
         .then((response) => {
           this.handleCancelTreatmentModal(false)
           this.success(response.message)
-          this.treatmentCancelReason = 'false'
+          this.treatmentCancelReason = ''
           this.$emit('fetchParent', response)
         })
         .catch(this.error)
@@ -604,11 +665,15 @@ export default {
       }
     },
     holdTreatment(patient, treatment) {
-      TreatmentServices.hold(treatment.globalId, !treatment.isHold)
+      TreatmentServices.hold(treatment.globalId, !treatment.isHold, {
+        notes: this.treatmentPauseReason
+      })
         .then((response) => {
           this.$emit('fetchParent', response)
+          this.treatmentPauseReason = ''
         })
         .catch(this.error)
+        
     },
     getTreatmentStepClass(patient, treatment) {
       if (patient.isDead) {
@@ -624,6 +689,7 @@ export default {
       return this.pagination
     },
     deleteTreatment(e, patient, treatment) {
+      console.log(treatment, 'treatment')
       TreatmentServices.destroy(treatment.id).then((response) => {
         this.success(response.message)
         this.fetch()
@@ -649,12 +715,26 @@ export default {
     handleCancelModal(e, record, treatment) {
       this.patientData = record
       this.recordData = treatment
-      this.showPauseModal = e
+      this.treatmentForPause =  treatment
+      console.log(this.recordData, 'record data')
+      // eslint-disable-next-line eqeqeq
+      if(this.recordData.isCancel==true)
+      {
+        this.cancelModal(true)
+      }
+      else
+      {
+        this.showPauseModal = e
+      }
     },
-    handleOk() {
-      this.holdTreatment(this.patientData, this.recordData)
-      this.showPauseModal = false
+    handleModal(){
+      this.cancelTreatment(this.patientData, this.recordData)
+      this.showPauseModal = true
+      this.cancelModal(false)
     },
+    cancelModal(e){
+      this.showPauseDeleteModal = e
+    }
   },
 }
 </script>

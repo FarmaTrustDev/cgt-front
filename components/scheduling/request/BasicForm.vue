@@ -78,7 +78,7 @@
             </a-date-picker> </a-form-item
         ></a-col>
         <a-col :span="12">
-          <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
+          <a-form-item label="Expected Delivery Date" class="pb-0">
             <a-date-picker
               v-decorator="[
                 'deliveryDate',
@@ -86,7 +86,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please select your Delivery Arrival Date!',
+                      message: 'Please select your expected delivery Date!',
                     },
                   ],
                 },
@@ -95,6 +95,7 @@
               :format="dateFormat"
               style="width: 100%"
               size="large"
+              disabled 
             >
             </a-date-picker> </a-form-item
         ></a-col>
@@ -108,6 +109,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 import withFetch from '~/mixins/with-fetch'
 import shipmentHelpers from '~/mixins/shipment-helpers'
 import pickupDetail from '~/components/treatment/treatment/pickup/Detail'
@@ -118,7 +120,7 @@ import SchedulingServices from '~/services/API/SchedulingServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import {
-  getMomentByStandardFormat,
+  // getMomentByStandardFormat,
   _disabledPreviousDate,
 } from '~/services/Helpers/MomentHelpers'
 import notifications from '~/mixins/notifications'
@@ -135,6 +137,7 @@ export default {
       loading: false,
       visible: false,
       schedule: null,
+      moment,
       pickupShipment: {},
       deliveryShipment: {},
       rejectedData: [],
@@ -160,11 +163,12 @@ export default {
   methods: {
     disabledDate: _disabledPreviousDate,
     collectionDateChange(value, date) {
+      const futureDate = moment(date, 'DD/MM/YYYY')
       this.form.setFieldsValue({
-        deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
+        deliveryDate: futureDate.add(2, 'day')
       })
     },
-
+  // (getMomentByStandardFormat(date).add(2, 'day'))
     GetRejectionDetail(treatmentId) {
       TreatmentServices.schedule(treatmentId, 2).then((response) => {
         this.rejectedData = response.data

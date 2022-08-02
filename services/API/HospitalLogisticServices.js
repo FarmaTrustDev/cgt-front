@@ -1,12 +1,12 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
 
-const baseApi = `${BASE_API}/Organization`
+const baseApi = `${BASE_API}/HospitalLogistic`
 
-function get(params = {}) {
+function get() {
   return request({
     url: `${baseApi}`,
-    params,
+    method: 'GET'
   })
 }
 function create(data) {
@@ -34,18 +34,12 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
-function getAllocatedOrDefault(){
-  return request({
-    url: `${baseApi}/getAllocatedOrDefaultLogistics`,
-  })  
-}
-const OrganizationServices = {
+const HospitalLogisticServices = {
   get,
   create,
   destroy,
   put,
-  getById,
-  getAllocatedOrDefault
+  getById
 }
 
-export default OrganizationServices
+export default HospitalLogisticServices

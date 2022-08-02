@@ -109,10 +109,11 @@ function getHospitalCount() {
   })
 }
 
-function hold(id, status) {
+function hold(id, status, data = {}) {
   return request({
     url: `${baseApi}/hold/${id}/${status}`,
     method: 'PATCH',
+    data,
   })
 }
 

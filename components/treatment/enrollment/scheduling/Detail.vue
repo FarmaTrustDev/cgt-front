@@ -35,7 +35,7 @@
       </a-descriptions-item>
       <br />
       <a-descriptions-item :label="translation.Durat_1_484">
-        {{ getDateFormat(entity.duration) }} Days
+        {{ entity.duration }} Days
       </a-descriptions-item>
       <a-descriptions-item :label="translation.DelivArriv_4_736">
         {{ getDateFormat(entity.deliveryArrivalDate) }}

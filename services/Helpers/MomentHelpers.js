@@ -31,6 +31,10 @@ export const _disabledPreviousDate = (current) => {
   return current < moment().endOf('day')
 }
 
+export const _disablePrevDateFromYesterday = (current) => {
+  return current <= moment().endOf('day')
+}
+
 export const _disabledFutureDate = (current) => {
   return current > moment().endOf('day')
 }

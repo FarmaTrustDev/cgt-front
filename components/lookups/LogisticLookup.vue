@@ -1,5 +1,5 @@
 <template>
-  <a-form-item :label="translation.LogisProvi_2_380">
+  <a-form-item :label="translation.LogisProvi_2_380" >
     <a-select
       v-decorator="[
         'logisticId',
@@ -13,8 +13,7 @@
           ],
         },
       ]"
-      :loading="typeLoading"
-      placeholder= "Select Logistic Provider"
+      placeholder = "Select Logistic Provider"
       class="default-select w-100"
       size="large"
       :disabled="disabled"
@@ -39,6 +38,8 @@ export default {
     logisticId: { type: Number, default: null },
     disabled: { type: Boolean, default: false },
     params: { type: Object, default: () => ({}) },
+    isMultiple:{ type: Boolean, default: false },
+    isAdmin:{ type: Boolean, default: false },
   },
 
   data() {
@@ -46,6 +47,7 @@ export default {
       LOGISTIC_ALIAS,
       treatmentTypes: {},
       typeLoading: false,
+      logisticsData:{},
     }
   },
     computed: {
@@ -55,11 +57,12 @@ export default {
     },
   mounted() {
     this.fetch()
+    // this.fetchLogistics()
   },
   methods: {
     fetch() {
       this.typeLoading = true
-      OrganizationService.get({
+      OrganizationService.getAllocatedOrDefault({
         ...this.params,
         OrganizationTypeAlias: this.LOGISTIC_ALIAS,
       })
@@ -68,6 +71,15 @@ export default {
         })
         .finally(() => (this.typeLoading = false))
     },
+    /* fetchLogistics(){
+      HospitalLogisticServices.get().then((response)=>{
+        if(response.data.logisticsId.length>0){
+          // this.treatmentTypes={}
+        }else{
+          fetch()
+        }
+      })
+    }, */
     onchange(value, e) {
       this.$emit('onChange', value)
     },
