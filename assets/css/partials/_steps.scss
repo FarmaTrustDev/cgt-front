@@ -38,6 +38,18 @@
     background-color: #e2e2e2;
   }
 
+  .ant-btn-drop-down {
+    margin-top: auto;
+  }
+
+  .container-steps-div {
+    min-width: 780px;
+    padding: 0;
+    margin-top: 0;
+    .rounded-table .ant-table-tbody td {
+      padding: 5px;
+    }
+  }
   .ant-steps-item {
     padding: 5px 2px;
     border: 0;
@@ -45,12 +57,12 @@
     color: #233151;
     border-radius: 22px;
     cursor: pointer;
-    padding-right: 5px;
-    margin: auto 8px;
+    padding-right: 2px;
+    margin: auto 0;
   }
 
   .ant-steps-item-wait {
-    margin-left: 15px;
+    // margin-left: 15px; why ?
     background-color: #f9f9f9;
   }
 
@@ -73,7 +85,7 @@
       content: '';
       position: absolute;
       width: 85%;
-      top: 20px;
+      top: 24px;
       // bottom: 0;
       margin: auto;
       height: 2px;
@@ -81,7 +93,7 @@
       background-color: #bebfcb;
     }
     .ant-steps-small.ant-steps-label-horizontal {
-      display: block !important;
+      // display: block !important;
     }
   }
 
@@ -201,8 +213,8 @@
     background: #d1f2dc;
     .ant-steps-item-content {
       &::before {
-        width: 14px;
-        height: 14px;
+        width: 20px;
+        height: 20px;
         margin-left: 10px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
@@ -370,11 +382,11 @@
     }
   }
 
-  .ant-table-thead > tr > th,
-  .ant-table-tbody > tr > td {
-    padding-top: 0;
-    border: 1px solid red;
-  }
+  // .ant-table-thead > tr > th,
+  // .ant-table-tbody > tr > td {
+  //   padding-top: 0;
+  //   border: 1px solid red;
+  // }
 }
 
 .view-screen {

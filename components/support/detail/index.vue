@@ -2,10 +2,7 @@
   <div class="support-detail">
     <a-card class="default-border-radius">
       <p class="mb-4 BagID float-right">BagID: {{ticket.reference_Id}}</p>
-      <p class="mb-4 PUID">PUID: {{  ticket.reporter_name.substring(
-    ticket.reporter_name.lastIndexOf("(") + 1, 
-    ticket.reporter_name.lastIndexOf(")")
-) }}</p>
+      <p class="mb-4 PUID">PUID: {{ getPuid(ticket.reporter_name) }}</p>
       <!-- ============ -->
       <a-card class="p-4 default-border-radius">
         <p class="SubjectMsg">{{ ticket.description }}</p>
@@ -86,6 +83,7 @@
 </template>
 <script>
 import moment from 'moment';
+import { isEmpty } from '~/services/Helpers'
 export default {
   props: {
     data: { type: Array, default: () => {} },
@@ -95,6 +93,17 @@ export default {
     getDateFormat(date){
       console.log(date, 'date')
      return moment(String(date)).format('hh:mm Do MMMM YYYY')
+    },
+    getPuid(puid)
+    {
+      if(!isEmpty(puid))
+      {
+        const result = puid.match(/\((.*)\)/);
+        return result[1]
+      }
+      else{
+        return puid
+      }
     }
   },
 }

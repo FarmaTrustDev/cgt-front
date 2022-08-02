@@ -1,7 +1,7 @@
 <template>
   <div class="clearfix">
     <a-range-picker class="float-right calendar-range-picker-field"
-    :default-value="[moment('2015-06-06',dateFormat), moment('2015-06-06',dateFormat)]"
+    :default-value="[moment(getCurrentDate(new Date()),dateFormat), moment(getPreviousDate(new Date()),dateFormat)]"
      @change="searchDataRange"
      :format="dateFormat" />
     <a-input
@@ -57,6 +57,18 @@ export default {
     emitParams(params) {
       this.$emit('getParams', params)
     },
+    getCurrentDate(date)
+    {
+      const current = date;
+      const futureDate = current.getFullYear()+'-'+(current.getMonth()+2)+'-'+current.getDate();
+      return futureDate
+    },
+    getPreviousDate(date)
+    {
+      const current = date;
+      const previousDate = current.getFullYear()+'-'+(current.getMonth()-1)+'-'+current.getDate();
+      return previousDate
+    }
   },
 }
 </script>

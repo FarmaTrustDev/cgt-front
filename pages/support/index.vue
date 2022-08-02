@@ -1,23 +1,18 @@
 <template>
-  <div class="specific-page container">
+  <div class="specific-page">
     <a-row class="mt-25 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left head" style="width: 50%">
-          Support Issues
-        </h3>
-        <div style="width: 25%; display: inline">
-          <a-button
-            type="primary"
-            class="mrm-5 mrt float-right"
-            @click="showModal(true)"
-            >{{ translation.AddNew_3_182 }}
-          </a-button>
-        </div>
+        <h3 class="page-title float-left">Support Issues</h3>
+        <a-button
+          type="primary"
+          class="mrm-5 mrt float-right"
+          @click="showModal(true)"
+          >{{ translation.AddNew_3_182 }}
+        </a-button>
         <a-input
           ref="userNameInput"
           :placeholder="translation.searc_1_488"
           class="float-right page-search-input"
-          style="width: 25%"
           @change="searchSupport"
         >
           <a-icon slot="prefix" type="search" />
@@ -45,9 +40,9 @@
                   <a-icon type="edit" />
                 </a-button> -->
             <a-dropdown>
-              <a-button class="action-button" size="small"
-                >{{ translation.Admin_1_142 }} <a-icon type="down" />
-              </a-button>
+              <a-button class="action-button" size="small">{{
+                translation.Admin_1_142
+              }} <a-icon type="down" /> </a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a href="javascript:;" @click="showUpdate(record)"
@@ -165,8 +160,15 @@ export default {
   },
   mounted() {
     this.fetch()
+    this.showModelFromPatient()
   },
   methods: {
+    showModelFromPatient(){
+      // console.log(this.$route.query.showModel)
+      if(this.$route.query.showModel){
+        this.showAddModal=true
+      }
+    },
     customRowReDirect(record) {
       // alert(record)
       // console.log(record)
@@ -211,7 +213,7 @@ export default {
           this.archivedData.splice(0)
           this.inprogressData.splice(0)
           this.resolvedData.splice(0)
-          for (const dat in this.data) {
+          for(const dat in this.data){
             // console.log(this.data[dat])
             const dates = this.data[dat].created_At.split('T')[0]
             this.data[dat].created_At = dates

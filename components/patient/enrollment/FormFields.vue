@@ -417,9 +417,10 @@
                 ],
               },
             ]"
+            notFoundContent="Not found"
             :show-search="true"
             :filter-option="filterOption"
-            :placeholder="translation.Count_1_49"
+            placeholder= "Search country"
             style="width: 100%"
             size="large"
             class="default-select pt-2"
