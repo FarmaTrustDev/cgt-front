@@ -340,8 +340,8 @@ export default {
         { id: 1, name: `${this.$store.getters.getTranslation.Archi_1_226}`},
         { id: 2, name: `${this.$store.getters.getTranslation.Inprogr_2_204}`},
         { id: 3, name: `${this.$store.getters.getTranslation.Resol_1_230}`},
-        { id: 4, name: `${this.$store.getters.getTranslation.cance_1_296}`},
-        { id: 5, name: `${this.$store.getters.getTranslation.Pause_1_452}`},
+        // { id: 4, name: `${this.$store.getters.getTranslation.cance_1_296}`},
+        // { id: 5, name: `${this.$store.getters.getTranslation.Pause_1_452}`},
       ],
       priorities: [
         { id: 1, name: `${this.$store.getters.getTranslation.high_1_200}`},

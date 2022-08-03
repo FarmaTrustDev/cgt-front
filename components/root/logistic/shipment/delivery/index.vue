@@ -39,7 +39,7 @@
                   ],
                 },
               ]"
-              :format="DEFAULT_DATE_TIME_FORMAT"
+              :format="STANDARD_UK_DATE_FORMAT"
               :disabled-date="disabledDate"
               style="width: 100%"
               size="large"
@@ -76,7 +76,7 @@ import {
   _getTodayMoment,
   _disabledPreviousDate,
 } from '~/services/Helpers/MomentHelpers'
-import { DEFAULT_DATE_TIME_FORMAT } from '~/services/Constant/DateTime'
+import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import ShipmentServices from '~/services/API/ShipmentServices'
 import notifications from '~/mixins/notifications'
 export default {
@@ -95,7 +95,7 @@ export default {
         name: 'deliveryShipment',
       }),
       formLayout: 'vertical',
-      DEFAULT_DATE_TIME_FORMAT,
+      STANDARD_UK_DATE_FORMAT,
     }
   },
   computed:{

@@ -17,7 +17,7 @@
         <dt>{{translation['Receiby:_2_330']}}:</dt>
         <dd>{{ shipment.receiverName }}</dd>
         <dt>{{translation['ReceiDate:_2_332']}}:</dt>
-        <dd>{{ getMomentByStandardFormat(shipment.deliveryAt) }}</dd>
+        <dd>{{  moment(String(shipment.deliveryAt)).format('dddd DD MM YYYY') }}</dd>
         <dt>{{translation['ReceiNote:_2_334']}}:</dt>
         <dd>{{ shipment.notes }}</dd>
       </dl>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { isEmpty } from '~/services/Utilities'
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 export default {
@@ -38,7 +39,9 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      moment,
+    }
   },
   computed:{
     translation() {

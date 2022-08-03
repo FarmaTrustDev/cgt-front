@@ -132,7 +132,7 @@
                 initialValue: patient.gender,
                 rules: [
                   {
-                    required: true,
+                    required: '',
                     message: 'Required',
                   },
                 ],
@@ -189,7 +189,12 @@
               'height',
               {
                 initialValue: patient.height,
-                rules: [],
+                rules: [
+                  {
+                    required: true,
+                    message: 'Required',
+                  },
+                ],
               },
             ]"
             placeholder="Height(cm)"
@@ -419,10 +424,10 @@
                 ],
               },
             ]"
-            notFoundContent="Not found"
+            notFoundContent="Enter Country Name"
             :show-search="true"
             :filter-option="filterOption"
-            placeholder= "Search country"
+            placeholder="Search country"
             style="width: 100%"
             size="large"
             class="default-select pt-2"
