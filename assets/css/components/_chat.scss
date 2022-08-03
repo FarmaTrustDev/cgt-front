@@ -20,11 +20,11 @@ $defaultHeight: calc(100vh - 100px);
   .ant-list-split .ant-list-item {
     border-bottom: none;
     padding-top: 3%;
-      :active {
-        background: #f2f5fb;
-        border-radius: 22px;
-        opacity: 1;
-        transition: 0.001s;
+    :active {
+      background: #f2f5fb;
+      border-radius: 22px;
+      opacity: 1;
+      transition: 0.001s;
     }
   }
   .ant-comment {
@@ -99,16 +99,18 @@ $defaultHeight: calc(100vh - 100px);
       border-radius: 22px;
     }
     .message-sent {
-      justify-content: right;
       .ant-comment {
+        position: unset !important;
         .content-body {
           background-color: rgba(120, 98, 255, 0.14);
         }
       }
     }
-    .message-received {
+    .message-recived {
       justify-content: left;
       .ant-comment {
+        position: unset !important;
+
         .content-body {
           background-color: #f1faff;
         }

@@ -36,6 +36,7 @@ $chatHeight: 255px;
         li {
           position: relative;
           padding-bottom: 30px;
+          border-bottom: 0;
           .ant-comment-content {
             position: unset !important;
           }
@@ -51,16 +52,18 @@ $chatHeight: 255px;
           background-color: rgba(120, 98, 255, 0.14);
           border-radius: 22px;
           padding: 0 5px;
+          position: unset;
         }
         .ant-comment-content-author {
           position: absolute;
           width: 50%;
           top: 69px;
-          left: 188px;
+          left: 223px;
+          overflow: hidden;
           display: inline-block;
         }
       }
-      .message-received {
+      .message-receive {
         justify-content: end;
         .ant-comment {
           background-color: #f1faff;

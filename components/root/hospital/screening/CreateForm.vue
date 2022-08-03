@@ -1,8 +1,13 @@
 <template>
   <div>
-    <span v-if="isCreated">
-      <a-divider>Screening Questions</a-divider>
-      <CategoryTabs v-if="entity.id" :template-id="entity.id" :manufacturerId="entity.manufacturerId" :treatmentTypeId="entity.treatmentTypeId"
+    <span v-if="isCreated" class="admin-screening-page">
+      <!-- <a-divider>Screening Questions</a-divider> -->
+      <CategoryTabs
+        v-if="entity.id"
+        :template-id="entity.id"
+        :manufacturerId="entity.manufacturerId"
+        :treatmentTypeId="entity.treatmentTypeId"
+        class="grey-card"
     /></span>
   </div>
 </template>
@@ -31,21 +36,21 @@ export default {
       formLayout: 'vertical',
       apiService: ScreeningTemplateServices,
       gotoLink: '/hospital/administration/screening',
-      isActive:false,
+      isActive: false,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },   
+  },
   mounted() {
     this.getHospitalStatus()
   },
   methods: {
-    getHospitalStatus(){
+    getHospitalStatus() {
       // console.log(this.entity)
-    }
+    },
   },
 }
 </script>
