@@ -121,7 +121,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         id: 2,
         name: 'Manufacturer',
         alias: 'MANUFACTURER',
-        phaseId: 10,
+        phaseId: 9,
         enablePageId: 10,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.patient,
