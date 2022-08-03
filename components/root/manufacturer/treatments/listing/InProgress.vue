@@ -1,26 +1,37 @@
 <template>
   <div>
     <Filters @getParams="getParams" />
-    <a-table :loading="loading" class="page-footer" :columns="column" :data-source="data" :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}">
+    <a-table
+      :loading="loading"
+      class="page-footer"
+      :columns="column"
+      :data-source="data"
+      :pagination="{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50', '100'],
+      }"
+    >
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
-        <div class="treatment-steps">
-          <span class="step-col">
-          <a-steps
-            :initial="1"
-            :current="getCurrentStep(record.treatment)"
-            size="small"
-          >
-            <a-step
-              v-for="phase in phases"
-              :key="phase.id"
-              :title="phase.name"
-              @click="stepClick(record, phase)"
-            />
-          </a-steps>
-          </span>
+        <div :class="getTreatmentStepClass(record)">
+          <div class="treatment-steps">
+            <span class="step-col">
+              <a-steps
+                :initial="1"
+                :current="getCurrentStep(record.treatment)"
+                size="small"
+              >
+                <a-step
+                  v-for="phase in phases"
+                  :key="phase.id"
+                  :title="phase.name"
+                  @click="stepClick(record, phase)"
+                />
+              </a-steps>
+            </span>
+          </div>
         </div>
-
         <!-- //Steps -->
       </span>
     </a-table>
@@ -44,40 +55,39 @@ export default {
   mixins: [routeHelpers, withTableCrud],
   data() {
     return {
-      column:[
-  {
-    title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
-    dataIndex: 'patientEnrollmentNumber',
-    key: 'patientEnrollmentNumber',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
-    dataIndex: 'treatmentType.name',
-    key: 'TreatmentName',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.ProduLine_2_449}`,
-    dataIndex: 'productionLine.name',
-    key: 'productionLine',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Organ_1_166}`,
-    dataIndex: 'hospital.name',
-    key: 'OrganizationName',
-  },
-  {
-    title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
-    dataIndex: 'collectionDateDeliveryDate',
-    key: 'collectionDateDeliveryDate',
-  },
+      column: [
+        {
+          title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
+          dataIndex: 'patientEnrollmentNumber',
+          key: 'patientEnrollmentNumber',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
+          dataIndex: 'treatmentType.name',
+          key: 'TreatmentName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.ProduLine_2_449}`,
+          dataIndex: 'productionLine.name',
+          key: 'productionLine',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Organ_1_166}`,
+          dataIndex: 'hospital.name',
+          key: 'OrganizationName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+          dataIndex: 'collectionDateDeliveryDate',
+          key: 'collectionDateDeliveryDate',
+        },
 
-  {
-    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
-]
-,
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'action',
+          scopedSlots: { customRender: 'action' },
+        },
+      ],
       loading: false,
       data: [],
       apiService: SchedulingServices,
@@ -109,6 +119,11 @@ export default {
         )
       }
       return false
+    },
+    getTreatmentStepClass(patient) {
+      if (patient.treatment.isHold || patient.treatment.isCancel) {
+        return 'isHold'
+      }
     },
     getCurrentStep(treatment) {
       if (treatment.phaseId != null) {
@@ -143,3 +158,22 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.isHold {
+  .ant-steps-item.ant-steps-item-finish {
+    background: #fffbc8;
+  }
+  .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
+    background: #fffbc8;
+  }
+  .ant-steps-item.ant-steps-item-wait {
+    background: #fffbc8;
+  }
+   .ant-steps-item-finish .ant-steps-item-content{
+    &::before{
+      background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+    }
+  }
+}
+</style>

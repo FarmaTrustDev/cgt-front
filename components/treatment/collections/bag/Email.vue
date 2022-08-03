@@ -49,7 +49,7 @@
           v-decorator="[
             `subject`,
             {
-              initialValue: user.organizationTypeAlias + ' Screening Results',
+              initialValue: camelCaseConversion(user.organizationTypeAlias) + ' Screening Results',
             },
           ]"
           type="hidden"
@@ -97,6 +97,10 @@ export default {
     this.fetchUser()
   },
   methods: {
+    camelCaseConversion(str) {
+    return str.charAt(0).toUpperCase() +
+               str.slice(1).toLowerCase();
+      },
     fetchUser() {
       UserServices.getByBagId(this.bagId).then((response) => {
         this.users = response.data

@@ -1,52 +1,53 @@
 <template>
   <span>
     <Filters @getParams="getParams" />
-        <a-table
-          :class="getTreatmentStepClass(record)"
-          :loading="loading"
-          :columns="column"
-          :data-source="data"
-          :pagination="{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ['10', '20', '30', '50', '100'],
-          }"
-        >
-          <span slot="action" slot-scope="text, record">
-            <div v-if="showButton(record)">
-              <a-button
-                type="primary"
-                :loading="loading"
-                dashed
-                @click="showConfirm(record, true)"
-              >
-                {{ translation.Accep_1_278 }}
-              </a-button>
-              <a-button
-                class="new-treatment-btn"
-                :loading="loading"
-                dashed
-                @click="showConfirm(record, false)"
-              >
-                {{ translation.Rejec_1_280 }}
-              </a-button>
-            </div>
-            <div v-else>
-              <a-badge
-                >{{
-                  record.treatment.isDead
-                    ? 'Patient Dead'
-                    : 'Treatment is on hold'
-                }}{{ data[0] }}</a-badge
-              >
-            </div>
-          </span>
-          <span slot="status" slot-scope="text, record">
-            <div v-if="showButton(record)">
-              <a-button class="new-treatment-status-btn"> New </a-button>
-            </div>
-          </span>
-        </a-table>
+    <a-table
+      :loading="loading"
+      :columns="column"
+      :data-source="data"
+      :pagination="{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50', '100'],
+      }"
+    >
+      <span slot="action" slot-scope="text, record">
+        <div v-if="showButton(record)">
+          <a-button
+            type="primary"
+            :loading="loading"
+            dashed
+            @click="showConfirm(record, true)"
+          >
+            {{ translation.Accep_1_278 }}
+          </a-button>
+          <a-button
+            class="new-treatment-btn"
+            :loading="loading"
+            dashed
+            @click="showConfirm(record, false)"
+          >
+            {{ translation.Rejec_1_280 }}
+          </a-button>
+        </div>
+        <div v-else-if="showTreamentStatus(record)">
+          <a-badge v-if = record.treatment.isDead>
+            Patient Dead
+          </a-badge>
+          <a-badge v-if = record.treatment.isHold>
+             Patient is on hold
+          </a-badge>
+          <a-badge v-if = record.treatment.isCancel>
+            Patient has been canceled
+          </a-badge>
+        </div>
+      </span>
+      <span slot="status" slot-scope="text, record">
+        <div v-if="showButton(record)">
+          <a-button class="new-treatment-status-btn"> New </a-button>
+        </div>
+      </span>
+    </a-table>
 
     <a-modal
       :title="
@@ -89,6 +90,7 @@ import {
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
+import { isEmpty } from '~/services/Utilities'
 const ActionLink = '/manufacturer/schedules'
 export default {
   components: {
@@ -138,6 +140,7 @@ export default {
       data: [],
       apiService: SchedulingServices,
       ActionLink,
+      treatmentStatusClass: 'normal',
       showResponseModal: false,
       isAccepted: false,
       params: {
@@ -153,7 +156,13 @@ export default {
         name: 'screeningCategory',
       }),
       formLayout: 'vertical',
+      
     }
+  },
+    computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     showConfirm(record, isAccepted) {
@@ -176,11 +185,12 @@ export default {
       this.showResponseModal = show
     },
     getTreatmentStepClass(record) {
-        alert(record[0].treatment)
-      if (record.treatment.isDead) {
-        return 'dead'
-      } else if (record.treatment.isHold ) {
-        return 'hold'
+      if (!isEmpty(record)) {
+        if (record.treatment.isDead) {
+          return 'dead'
+        } else if (record.treatment.isHold) {
+          return 'hold'
+        }
       }
     },
     submitTreatmentResult() {},
@@ -202,15 +212,21 @@ export default {
       this.loading = false
     },
     showButton(schedule) {
-      return !(schedule.treatment.isHold || schedule.treatment.isDead)
+      return !(schedule.treatment.isHold || schedule.treatment.isDead | schedule.treatment.isCancel)
+    },
+    showTreamentStatus(schedule)
+    {
+        // eslint-disable-next-line eqeqeq
+        if(schedule.treatment.isHold==true || schedule.treatment.isCancel==true | schedule.treatment.isDead==true)
+        {
+            this.treatmentStatusClass = 'isHold'
+        }
+        // eslint-disable-next-line eqeqeq
+        // alert(this.treatmentStatusClass)
+        return (schedule.treatment.isHold || schedule.treatment.isDead | schedule.treatment.isCancel)
     },
     getParams(params) {
       this.fetch(params)
-    },
-  },
-  computed: {
-    translation() {
-      return this.$store.getters.getTranslation
     },
   },
 }

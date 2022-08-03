@@ -4,7 +4,7 @@
     <a-table :loading="loading" :columns="column" :data-source="data">
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
-        <div>
+        <div :class="getTreatmentStepClass(record)">
           <a-steps :current="getCurrentStep(record)" size="small">
             <a-step title="Pickup Shipment" @click="stepClick(record)" />
 
@@ -29,38 +29,38 @@ import {
 } from '~/services/Helpers/MomentHelpers'
 const ActionLink = '/manufacturer/schedules'
 export default {
-  components: { Filters, },
+  components: { Filters },
   mixins: [withTableCrud, routeHelpers],
   data() {
     return {
-      column:[
-  {
-    title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
-    dataIndex: 'patientEnrollmentNumber',
-    key: 'patientEnrollmentNumber',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
-    dataIndex: 'treatmentType.name',
-    key: 'TreatmentName',
-  },
-  {
-    title: `${this.$store.getters.getTranslation.Organ_1_166}`,
-    dataIndex: 'hospital.name',
-    key: 'OrganizationName',
-  },
-  {
-    title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
-    dataIndex: 'collectionDateDeliveryDate',
-    key: 'collectionDateDeliveryDate',
-  },
+      column: [
+        {
+          title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
+          dataIndex: 'patientEnrollmentNumber',
+          key: 'patientEnrollmentNumber',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
+          dataIndex: 'treatmentType.name',
+          key: 'TreatmentName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Organ_1_166}`,
+          dataIndex: 'hospital.name',
+          key: 'OrganizationName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
+          dataIndex: 'collectionDateDeliveryDate',
+          key: 'collectionDateDeliveryDate',
+        },
 
-  {
-    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-    dataIndex: 'action',
-    scopedSlots: { customRender: 'action' },
-  },
-],
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'action',
+          scopedSlots: { customRender: 'action' },
+        },
+      ],
       loading: false,
       data: [],
       apiService: SchedulingServices,
@@ -80,6 +80,11 @@ export default {
   },
   mounted() {},
   methods: {
+    getTreatmentStepClass(patient) {
+      if (patient.treatment.isHold || patient.treatment.isCancel) {
+        return 'isHold'
+      }
+    },
     stepClick(record) {
       this.goto(`/logistic/shipment/${record.globalId}`)
     },
@@ -87,7 +92,24 @@ export default {
     getParams(params) {
       this.fetch(params)
     },
-
   },
 }
 </script>
+<style lang="scss" scoped>
+.isHold {
+  .ant-steps-item.ant-steps-item-finish {
+    background: #fffbc8;
+  }
+  .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
+    background: #fffbc8;
+  }
+  .ant-steps-item.ant-steps-item-wait {
+    background: #fffbc8;
+  }
+  .ant-steps-item-finish .ant-steps-item-content {
+    &::before {
+      background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+    }
+  }
+}
+</style>

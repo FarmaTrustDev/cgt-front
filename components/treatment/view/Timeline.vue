@@ -8,7 +8,10 @@
       >
         <a-icon v-if="step.isCompleted" slot="dot" type="check-circle-o" />
         <a-icon v-else slot="dot" type="clock-circle-o" />
-        <div class="step-bar">
+        <div
+          class="step-bar"
+          :class="step.isCompleted ? 'green-border' : 'grey-border'"
+        >
           <!-- {{ step }} -->
           <a-row>
             <a-col :span="12">

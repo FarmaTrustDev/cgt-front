@@ -8,6 +8,7 @@
     z-index: 2;
   }
 }
+
 .ant-table-row {
   // &::before {
   //   content: '';
@@ -24,6 +25,7 @@
     border-right: 1px solid #e2e2e2;
   }
 }
+
 .treatment-steps {
   position: relative;
   &::before {
@@ -209,6 +211,7 @@
     }
   }
 
+
   .ant-steps-item-finish {
     background: #d1f2dc;
     .ant-steps-item-content {
@@ -381,7 +384,6 @@
       }
     }
   }
-
   // .ant-table-thead > tr > th,
   // .ant-table-tbody > tr > td {
   //   padding-top: 0;
@@ -416,8 +418,13 @@
       color: #1bb559;
     }
   }
-  .step-bar {
+  .green-border {
     border: 1px solid #1bb559;
+  }
+  .grey-border {
+    border: 1px solid #e3e4e4;
+  }
+  .step-bar {
     padding: 10px;
     border-radius: $default-radius;
     margin-left: 10px;

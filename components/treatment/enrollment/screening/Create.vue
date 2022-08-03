@@ -17,7 +17,31 @@
         </span>
       </a-skeleton>
     </a-form>
+    <a-modal
+      :visible="showMessage"
+      ok-text="Ok"
+      :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
+    >
+      <center>
+        <p>
+          <img
+            :src="getImageUrl('Icons/cross-letter.jpg')"
+            width="50%"
+            height="50%"
+          />
+        </p>
+        <h3><p>Please accept the new screening questions from manufacturer</p></h3>
+        <footer>
+          <a-button class="ant-btn ant-btn-primary" @click="handleOk()"
+            >Ok</a-button
+          >
+        </footer>
+      </center>
+    </a-modal>
   </div>
+  
 </template>
 <script>
 // import TreatmentServices from '~/services/API/TreatmentServices'
@@ -27,9 +51,11 @@ import notifications from '~/mixins/notifications'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 import TreatmentScreeningServices from '~/services/API/TreatmentScreeningServices'
 import CategoryTabs from '~/components/treatment/enrollment/screening/Tabs'
+import imagesHelper from '~/mixins/images-helper'
+
 export default {
   components: { CategoryTabs },
-  mixins: [notifications, routeHelpers, nullHelper],
+  mixins: [notifications, routeHelpers, nullHelper,imagesHelper],
   props: {
     treatment: {
       type: Object,
@@ -47,6 +73,7 @@ export default {
       loading: false,
       categories: null,
       isCreated: false,
+      showMessage:false,
     }
   },
   computed: {
@@ -75,8 +102,15 @@ export default {
       this.loading = true
       ScreeningCategoryServices.getByTreatmentTypeId(treatmentTypeId)
         .then((response) => {
-          this.categories = response.data
-          this.message = false
+          for(const dt in response.data){
+            if(response.data[dt].screeningTemplateHospitalStatus===false){
+              this.showMessage=true
+            }
+          }
+          if(this.showMessage===false){
+            this.categories = response.data
+            this.message = false
+          }
         })
         .finally(() => (this.loading = false))
         .catch(this.error, (this.categories = null), (this.message = 'true'))
@@ -93,6 +127,9 @@ export default {
           this.isCreated = true
         })
         .catch(this.error)
+    },
+    handleOk() {
+      this.showMessage = false
     },
   },
 }
