@@ -41,16 +41,16 @@ export default {
       bags: null,
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     this.registerFetchTreatment()
   },
   beforeDestroy() {
     this.$nuxt.$off(EVENT_FETCH_TREATMENT_DETAIL)
-  },
-  computed:{
-    translation() {
-      return this.$store.getters.getTranslation
-    },
   },  
   methods: {
     afterFetch(data) {
