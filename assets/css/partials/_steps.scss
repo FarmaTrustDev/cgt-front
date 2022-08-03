@@ -9,6 +9,30 @@
   }
 }
 
+.manufacturer-step {
+  // border: 1px solid red;
+  .step-col::before {
+    left: 0 !important;
+    top: 28px !important;
+  }
+
+  .ant-steps-item {
+    flex: auto;
+    padding-top: 10px;
+    padding-bottom: 8px;
+  }
+  .ant-steps-item-title {
+    display: inline-block;
+  }
+  .ant-steps-item-wait,
+  .ant-steps-item-finish {
+    .ant-steps-item-title {
+      display: none;
+      border: 1px solid pink;
+    }
+  }
+}
+
 .ant-table-row {
   // &::before {
   //   content: '';
@@ -210,7 +234,6 @@
       }
     }
   }
-
 
   .ant-steps-item-finish {
     background: #d1f2dc;
