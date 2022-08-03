@@ -23,6 +23,7 @@
         <a-row>
           <a-col :span="6" class="chart-container">
             <PatientsChart
+              v-if="loaded"
               ref="patients_chart"
               :chart-data="chartData"
               :options="options"
@@ -81,6 +82,7 @@ export default {
   data() {
     return {
       dynamicData: [],
+      loaded:false,
       labsData: [
         { id: 1, name: 'Berlin-Cellfuse' },
         { id: 2, name: 'Vienna-Cellfuse R&D' },
@@ -176,6 +178,7 @@ export default {
       StatisticsServices.treatment(id).then((response) => {
         this.chartDetail = response.data
         this.intializeData(this.chartDetail)
+        this.loaded=true
       })
     },
     fetchTreatment() {

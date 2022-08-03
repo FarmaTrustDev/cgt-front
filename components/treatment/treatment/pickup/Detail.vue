@@ -1,10 +1,10 @@
 <template>
   <div>
-    <a-card v-if="!isEmpty(shipment)" :bordered="false" class="default-card">
+    <a-card :bordered="false" class="default-card">
       <article class="article">
         <h6 class="heading pl-0">Sample Shipping Details</h6>
       </article>
-      <dl class="ant-row common-detail">
+      <dl v-if="!isEmpty(shipment)" class="ant-row common-detail">
         <dt>{{ translation.DispaDate_2_316 }}:</dt>
         <dd>{{ scheduling.collectionDateDeliveryDate }}</dd>
         <dt>{{ translation.CarriStatu_2_320 }}</dt>
@@ -12,6 +12,7 @@
         <dt>{{ translation.EstimArriv_3_322 }}</dt>
         <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
       </dl>
+      <alert v-else message="Sample has not been picked by the logistic" />
     </a-card>
   </div>
 </template>

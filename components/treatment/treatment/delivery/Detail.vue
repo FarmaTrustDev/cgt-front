@@ -4,7 +4,7 @@
       <article class="article">
         <h4 class="heading pl-0">Treatment Receiving</h4>
       </article>
-      <dl class="ant-row common-detail">
+      <dl v-if="!isEmpty(shipment)" class="ant-row common-detail">
         <dt>{{ translation.IsRecei_2_328 }}</dt>
         <dd class="text-success" style="color: green">
           <a-icon
@@ -21,6 +21,7 @@
         <dt>{{ translation['ReceiNote:_2_334'] }}</dt>
         <dd>{{ shipment.notes }}</dd>
       </dl>
+      <alert v-else message="Sample has not been Delivered by the logistic" />
     </a-card>
   </div>
 </template>

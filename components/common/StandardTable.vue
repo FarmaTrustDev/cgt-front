@@ -20,10 +20,13 @@
 
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
-          <span class="treatmentName ">{{
+          <a-tooltip :title="'TreatmentID: '+treatment.treatmentPUID">
+          <span class="treatmentName mt-15">{{
             treatment.treatmentTypeName
           }}</span>
+        </a-tooltip>
         </strong>
+
       </template>
 
       <template slot="image" slot-scope="src, record" class="maaz">

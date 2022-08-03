@@ -13,7 +13,7 @@
             {{ scheduling.logisticName }}
           </a-col>
         </a-row>
-        <a-row>
+        <!-- <a-row>
           <a-col :span="12" class="mt-15">
             <span class="text-muted">Sample Collection Date:</span>
           </a-col>
@@ -24,8 +24,8 @@
               ).format('DD/MM/YYYY')
             }}
           </a-col>
-        </a-row>
-        <a-row>
+        </a-row> -->
+        <!-- <a-row>
           <a-col :span="12" class="mt-15">
             <span class="text-muted">Expected Delivery Date:</span>
           </a-col>
@@ -36,8 +36,8 @@
               ).format('DD/MM/YYYY')
             }}
           </a-col>
-        </a-row>
-        <a-row>
+        </a-row> -->
+        <!-- <a-row>
           <a-col :span="12" class="mt-15">
             <span class="text-muted">{{ translation.EstimArriv_3_322 }}</span>
           </a-col>
@@ -48,7 +48,7 @@
               ).format('DD/MM/YYYY')
             }}
           </a-col>
-        </a-row>
+        </a-row> -->
         <a-row>
           <a-col :span="12" class="mt-15">
             <span class="text-muted">Handled by:</span>
