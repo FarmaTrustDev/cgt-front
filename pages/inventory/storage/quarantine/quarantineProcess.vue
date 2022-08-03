@@ -95,7 +95,7 @@
             <!-- //Steps -->
             <div class="treatment-steps" style="width:100%; margin-left:-3%;">
               <span class="step-col-large" functional>
-              <a-steps :initial="1" :current="1" size="small">
+              <a-steps :initial="1" :current="1" size="small" class="test">
                 
                 <a-step
                   v-for="phase in phases"

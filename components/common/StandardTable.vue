@@ -20,7 +20,7 @@
 
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
-          <span class="treatmentName mt-15">{{
+          <span class="treatmentName ">{{
             treatment.treatmentTypeName
           }}</span>
         </strong>

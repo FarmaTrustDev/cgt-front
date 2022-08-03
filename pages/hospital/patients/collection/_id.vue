@@ -2,12 +2,16 @@
   <page-layout
     :loading="loading"
     title="Treatment Status"
-    class="patient-page"
+    class="patient-page container"
     :create="false"
   >
     <template slot="content">
       <detail :treatment="entity" @fetchTreatment="fetchMethod" />
-      <status v-if="!isEmpty(entity.patient)" :treatment="entity" />
+      <status
+        v-if="!isEmpty(entity.patient)"
+        :treatment="entity"
+        class="treatment-process"
+      />
     </template>
   </page-layout>
 </template>

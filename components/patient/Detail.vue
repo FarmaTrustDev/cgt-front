@@ -3,36 +3,55 @@
     <a-row :gutter="20" dir="ltr">
       <a-col :span="8" class="mt-15">
         <h6>
-          <span class="text-muted"> {{translation.PatieID_2_264}}:</span>
-          {{ patient.enrollmentNumber }}
+          <span class="text-muted"> {{ translation.PatieID_2_264 }}:</span>
+          <span>{{ patient.enrollmentNumber }}</span>
         </h6>
-      </a-col>
-      <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted">{{translation.Gende_1_637}}:</span> {{ patient.gender==1 ? 'Male': 'Female' }}</h6>
-      </a-col>
-      <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted"> {{translation.Age_1_746}}:</span> {{ patient.age }}</h6>
-      </a-col>
-    </a-row>
-    <a-row :gutter="20" dir="ltr">
-      <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted">Height (cm): </span> {{ patient.height }}</h6>
-      </a-col>
-      <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted"> Weight (kg): </span>{{ patient.weight }} kg</h6>
       </a-col>
       <a-col :span="8" class="mt-15">
         <h6>
-          <span class="text-muted">{{translation.BloodType_2_635}}:</span>{{ patient.bloodType }}
+          <span class="text-muted">{{ translation.Gende_1_637 }}:</span>
+          <span>{{ patient.gender == 1 ? 'Male' : 'Female' }}</span>
+        </h6>
+      </a-col>
+      <a-col :span="8" class="mt-15">
+        <h6>
+          <span class="text-muted"> {{ translation.Age_1_746 }}:</span>
+          <span>{{ patient.age }}</span>
         </h6>
       </a-col>
     </a-row>
     <a-row :gutter="20" dir="ltr">
       <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted">{{translation.Locat_1_448}}:</span> {{ patient.city }}</h6>
+        <h6>
+          <span class="text-muted">Height (cm): </span>
+          <span>{{ patient.height }}</span>
+        </h6>
       </a-col>
       <a-col :span="8" class="mt-15">
-        <h6><span class="text-muted">{{translation.EmailAddre_2_140}}:</span> {{ patient.email }}</h6>
+        <h6>
+          <span class="text-muted"> Weight (kg): </span
+          ><span>{{ patient.weight }} kg</span>
+        </h6>
+      </a-col>
+      <a-col :span="8" class="mt-15">
+        <h6>
+          <span class="text-muted">{{ translation.BloodType_2_635 }}:</span
+          ><span class="text-right">{{ patient.bloodType }}</span>
+        </h6>
+      </a-col>
+    </a-row>
+    <a-row :gutter="20" dir="ltr">
+      <a-col :span="8" class="mt-15">
+        <h6>
+          <span class="text-muted">{{ translation.Locat_1_448 }}:</span>
+          <span>{{ patient.city }}</span>
+        </h6>
+      </a-col>
+      <a-col :span="8" class="mt-15">
+        <h6>
+          <span class="text-muted">{{ translation.EmailAddre_2_140 }}:</span
+          ><span style="width: 47px;"> {{ patient.email }}</span>
+        </h6>
       </a-col>
     </a-row>
   </div>
@@ -42,10 +61,16 @@ export default {
   props: {
     patient: { type: Object, required: true },
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  }, 
+  },
 }
 </script>
+<style scoped>
+h6 {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

@@ -7,7 +7,7 @@
         :data-source="collections"
         :pagination="false"
         :loading="loading"
-        class="square-table"
+        class="square-table collect-sample-data"
       >
         <template slot="collected" slot-scope="name, row">
           <!-- {{ row }} -->
@@ -66,12 +66,13 @@
             shape="round"
             icon="sync"
             @click="handleCollectionSubmit(row)"
-            class="btn-send-mail"
+            class="btn-send"
           />
           <a-button
             v-if="row.isCollected"
             type="primary"
             @click="handleEmailModal(true, row)"
+            class="btn-send-mail"
             >Send Email</a-button
           >
         </template>

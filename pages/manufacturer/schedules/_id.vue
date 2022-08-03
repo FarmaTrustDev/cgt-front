@@ -1,7 +1,7 @@
 <template>
   <page-layout
     :create="false"
-    class="patient-page enrollment-title"
+    class="patient-page enrollment-title container"
     :loading="loading"
     title="Treatment Setup"
   >

@@ -65,13 +65,15 @@
 
   .ant-tabs-tab-active {
     &::before {
-      background-image: url($urlBase + '/web/icons/circle-active.svg') !important;
+      // background-image: url($urlBase + '/web/icons/circle-active.svg') !important;
+      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg') !important;
     }
   }
 
   .ant-tabs-tab {
     &::before {
-      background-image: url($urlBase + '/web/icons/circle.svg');
+      // background-image: url($urlBase + '/web/icons/circle.svg');
+      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
       max-width: 40px;
       height: 56px;
       background-repeat: no-repeat;

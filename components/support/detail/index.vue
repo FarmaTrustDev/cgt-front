@@ -13,7 +13,7 @@
         </p>
       </a-card>
       <!-- ============ -->
-      <div class="user-involved">
+      <div class="user-involved support_page">
         <p class="mt-15">Users Involved</p>
         <a-tabs
           class="h-tabs"

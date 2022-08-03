@@ -247,6 +247,22 @@ a {
   // margin-top: 27px;
   // margin-left: -15px;
 }
+.support_page {
+  .ant-tabs-nav-scroll {
+    .ant-tabs-tab {
+      margin: 0 4px !important;
+    }
+  }
+  .ant-tabs-nav {
+    .ant-tabs-tab {
+      font-size: 12px !important;
+    }
+    .ant-tabs-tab-active {
+      border: 1px solid #ececec !important;
+      color: black ;
+    }
+  }
+}
 .ant-pagination {
   .ant-pagination-item-link,
   .ant-pagination-disabled {
@@ -400,5 +416,24 @@ a {
   .text-right {
     color: black;
     font-weight: bold;
+  }
+}
+.cmnt-msg {
+  // .ant-form-item-control {
+
+  //   background-color: #fff !important;
+  // }
+  #chat_message {
+    background-color: #fff;
+    border: 1px solid #ececec;
+    height: 56px;
+    padding: 8px;
+    border-radius: 22px;
+  }
+}
+.user-involved.support_page {
+  .f {
+    font-weight: 600;
+    font-size: 12px !important;
   }
 }

@@ -1,11 +1,17 @@
 <template>
   <div class="support-chat">
     <div class="border-bottom">
-      Ticket CKD-{{ ticket.id }}
+      <b> Ticket CKD-{{ ticket.id }}</b>
       <br />
-      Subject: <span class="text-capitalize">{{ ticket.subject }}</span>
+      <br />
+
+      Subject:
+      <span class="text-capitalize mb-10" style="display: inline-block"
+        >{{ ticket.subject }} <br />
+      </span>
     </div>
-    <a-divider></a-divider>
+
+    <!-- <a-divider></a-divider> -->
     <a-row>
       <a-col class="chat-list">
         <!-- <pre> {{ data }}</pre> -->
@@ -32,7 +38,7 @@
     </a-row>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <a-row>
-        <a-col>
+        <a-col class="cmnt-msg">
           <a-form-item>
             <a-input
               v-decorator="[

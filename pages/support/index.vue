@@ -1,5 +1,5 @@
 <template>
-  <div class="specific-page">
+  <div class="specific-page container support_page">
     <a-row class="mt-25 mb-10">
       <div class="page-header">
         <h3 class="page-title float-left">Support Issues</h3>

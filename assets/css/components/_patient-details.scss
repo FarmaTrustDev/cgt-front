@@ -65,8 +65,15 @@
     }
   }
 }
-.btn-send-mail.ant-btn[disabled] {
+.btn-send.ant-btn[disabled] {
   display: none !important;
+}
+.btn-send-mail {
+  height: fit-content;
+  span {
+    padding: 5px 0;
+    font-size: 13px;
+  }
 }
 .ant-upload:hover {
   .ant-btn:hover {

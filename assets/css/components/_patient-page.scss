@@ -131,25 +131,6 @@
       font-weight: 400;
     }
   }
-  
-  .ant-table-row {
-    // td {
-    //   border-top: 0;
-    //   border-right: 0 !important;
-    // }
-    .square-table .ant-table-content .ant-table-row td:last-child {
-      border-bottom-left-radius: 0 !important;
-      border-top-left-radius: 0 !important;
-      border-left: 0;
-      border-right: 0;
-    }
-    .ant-table-row-cell-break-word {
-      border-bottom-left-radius: 0 !important;
-      border-top-left-radius: 0 !important;
-      border-left: 0;
-      border-right: 0;
-    }
-  }
 }
 // .patient-page {
 
