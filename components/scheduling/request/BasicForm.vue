@@ -3,7 +3,7 @@
     <div v-for="(data, index) in rejectedData" :key="index" class="mb-5">
       <a-alert :message="'The treatment was rejected by ' + data.organization +  '. For: ' + data.rejectionReason + ' Re-schedule the treatment from available slots below.'" type="success" />
     </div>
-    <div v-if="showData">
+    <div v-if="!isEmpty(pickupShipment)">
       
       <a-skeleton :loading="isEmpty(schedule)">
         <a-row>
@@ -19,13 +19,14 @@
       </a-skeleton>
     </div>
     <div v-else>
+      <a-alert v-if="showData" class="mb-15" :message="'Request sent to '+logisticName+' you can ship the sample once logistic provider approved the request'" type="info" />
     <a-form
       v-if="treatment.phaseId >= TREATMENT_PHASES.OUTBOUND_SCHEDULING.id"
       :form="form"
       :layout="formLayout"
       @submit="onSubmit"
     >
-      <LogisticLookup />
+      <LogisticLookup :logisticId="logisticId" :params="{Id: logisticId}" />
       <a-row :gutter="16">
         <a-col :span="12">
           <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
@@ -61,6 +62,7 @@
               v-decorator="[
                 'collectionDate',
                 {
+                  initialValue:collectionDate,
                   rules: [
                     {
                       required: true,
@@ -83,6 +85,7 @@
               v-decorator="[
                 'deliveryDate',
                 {
+                  initialValue:deliveryDate,
                   rules: [
                     {
                       required: true,
@@ -101,7 +104,7 @@
         ></a-col>
       </a-row>
       <a-form-item>
-        <FormActionButton :loading="loading" custom-text="Submit" />
+        <FormActionButton v-if="!showData" :loading="loading" custom-text="Submit" />
       </a-form-item>
     </a-form>
     <alert v-else message="Collection not completed" />
@@ -141,6 +144,10 @@ export default {
       pickupShipment: {},
       deliveryShipment: {},
       rejectedData: [],
+      logisticId:null,
+      logisticName:'',
+      collectionDate:null,
+      deliveryDate:null,
       showData:false,
       outStatus:null,
       formLayout: 'vertical',
@@ -198,6 +205,10 @@ export default {
         .then((response) => {
           this.schedule = response.data
           this.showData=true
+          this.logisticId=this.schedule.logisticId
+          this.collectionDate=this.schedule.collectionDate
+          this.deliveryDate=this.schedule.deliveryDate
+          this.logisticName=this.schedule.logisticName
         })
         .then(() => {
           this.markShipmentFlags()
