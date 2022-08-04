@@ -33,7 +33,7 @@
                         ? 'ant-steps-item-active-blue-large'
                         : 'ant-steps-horizontal-large'
                     "
-                    @click="stepClick(entity, phase, phase.alias)"
+                    @click="stepClick(entity, phase, phase.alias, phase.id)"
                   />
                 </a-steps>
               </span>
@@ -145,13 +145,14 @@ export default {
       this.getCurrentStep(this.entity)
       // console.log(data)
     },
-    stepClick(record, phase, alias) {
+    stepClick(record, phase, alias, phaseId) {
       // console.log(record.phaseId+'-'+phase.enablePageId+'-'+this.currentPhase)
       if (
         record.phaseId >= phase.enablePageId ||
         phase.id === this.currentPhase
       ) {
         this.setActiveTab(alias)
+        this.currentPhase = phaseId
         return this.goto(
           `/manufacturer/treatments/process/${record.globalId}`,
           { ...phase.params }
