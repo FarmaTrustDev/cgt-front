@@ -90,7 +90,6 @@ import {
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
-import { isEmpty } from '~/services/Utilities'
 const ActionLink = '/manufacturer/schedules'
 export default {
   components: {
@@ -183,15 +182,6 @@ export default {
         this.isAccepted = false
       }
       this.showResponseModal = show
-    },
-    getTreatmentStepClass(record) {
-      if (!isEmpty(record)) {
-        if (record.treatment.isDead) {
-          return 'dead'
-        } else if (record.treatment.isHold) {
-          return 'hold'
-        }
-      }
     },
     submitTreatmentResult() {},
     onSubmit(e) {

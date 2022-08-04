@@ -328,7 +328,7 @@
     the sprint cannot segregate the patient -->
     <a-modal
       :visible="showCancelTreatmentModal"
-      title="Cancel Treatment"
+      :title="cancelModalTitle"
       :footer="null"
       @cancel="handleCancelTreatmentModal(false)"
     >
@@ -358,7 +358,7 @@
       </a-form>
     </a-modal>
     <a-modal
-      title="Pause treatment"
+      :title="pauseModalTitle"
       :visible="showPauseModal"
       :footer="false"
       @cancel="handleCancelModal(false, '', '')"
@@ -465,7 +465,9 @@ export default {
       showCancelTreatmentModal: false,
       treatmentForCancellation: {},
       treatmentForPause: {},
-      showPauseDeleteModal: false
+      showPauseDeleteModal: false,
+      cancelModalTitle: 'Cancel Treatment',
+      pauseModalTitle : 'Pause Treatment'
       // pagination: {},
     }
   },
@@ -501,6 +503,7 @@ export default {
         if(!err){
           this.submitPauseResponse()
           this.showPauseModal = false
+          this.treatmentPauseReason = ''
         }
       })
     },
@@ -659,12 +662,14 @@ export default {
         .finally(() => (this.loading = true))
     },
     cancelTreatment(patient, treatment) {
+      this.cancelModalTitle = treatment.isCancel ? 'Continue Treatment' : 'Cancel Treatment'
       // eslint-disable-next-line eqeqeq
       if (treatment.isHold == true) {
         this.handleFlagModal(true, patient, treatment, false)
       } else {
         this.treatmentForCancellation = treatment
         this.handleCancelTreatmentModal(true)
+        this.treatmentCancelReason = ''
       }
     },
     holdTreatment(patient, treatment) {
@@ -681,8 +686,11 @@ export default {
     getTreatmentStepClass(patient, treatment) {
       if (patient.isDead) {
         return 'dead'
-      } else if (treatment.isHold || treatment.isCancel) {
+      } else if (treatment.isHold) {
         return 'hold'
+      }
+      else if(treatment.isCancel){
+        return 'cancel'
       }
     },
     getPagination() {
@@ -692,7 +700,6 @@ export default {
       return this.pagination
     },
     deleteTreatment(e, patient, treatment) {
-      console.log(treatment, 'treatment')
       TreatmentServices.destroy(treatment.id).then((response) => {
         this.success(response.message)
         this.fetch()
@@ -718,6 +725,7 @@ export default {
     handleCancelModal(e, record, treatment) {
       this.patientData = record
       this.recordData = treatment
+      this.pauseModalTitle = treatment.isHold ? 'Resume Treatment' : 'Pause Treatment' 
       this.treatmentForPause =  treatment
       console.log(this.recordData, 'record data')
       // eslint-disable-next-line eqeqeq

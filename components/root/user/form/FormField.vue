@@ -242,7 +242,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your First Name',
+                    message: 'Please input your Role',
                   },
                 ],
               },
@@ -416,7 +416,7 @@ import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 import RoleServices from '~/services/API/RoleServices'
 import Upload from '~/components/upload/userUpload'
-import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
+import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 export default {
   components: { Upload },
   mixins: [withCrud],
@@ -434,7 +434,7 @@ export default {
       fetchRole: true,
       formLayout: 'vertical',
       apiService: UserServices,
-      allowedExtensions: DOCUMENT_EXTENSIONS,
+      allowedExtensions: PICTURE_UPLOAD_EXTENSIONS,
       newSelected: false,
       defaultImage: true,
       fileList:[],

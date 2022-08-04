@@ -8,7 +8,7 @@
       @preview="handlePreview"
       @change="handleChange"
     >
-      <div>
+      <div v-if="isChanged ? fileList.length<1 : defaultFileList.length<1">
         <a-icon type="camera" />
         <div class="ant-upload-text">Upload</div>
       </div>
@@ -34,6 +34,7 @@ export default {
       previewImage: '',
       fileList:[],
       isChanged:false,
+      extensionAllowed:true
     }
   },
   mounted(){
@@ -41,6 +42,7 @@ export default {
   },
   methods: {
     beforeUpload(file) {
+      console.log('BeforeUpload')
       const strName = file.name
       const ext = strName.split('.').pop()
       const isAllowedExtension = this.extensions.includes('.' + ext)
@@ -48,8 +50,8 @@ export default {
       if (!isAllowedExtension) {
         this.$message.error('Extension not allow')
         this.fileList=[]
-        return true
       }
+      this.extensionAllowed=isAllowedExtension
     },
     handleCancel () {
       this.previewVisible = false
@@ -68,9 +70,11 @@ export default {
       this.$emit('handleChange', file)
     }, */ 
     handleChange ({ fileList }) {
-      this.isChanged=true
-      this.fileList = fileList
-      this.$emit('handleChange', this.fileList)
+      if(this.extensionAllowed===true){
+        this.isChanged=true
+        this.fileList = fileList
+        this.$emit('handleChange', this.fileList)
+      }
     },
   },
 }

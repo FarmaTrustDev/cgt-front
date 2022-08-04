@@ -1,7 +1,7 @@
 <template>
   <div class="clearfix">
     <a-range-picker class="float-right calendar-range-picker-field"
-    :default-value="[moment(getCurrentDate(new Date()),dateFormat), moment(getPreviousDate(new Date()),dateFormat)]"
+    :default-value="[moment(getPreviousDate(new Date()),dateFormat), moment(getCurrentDate(new Date()),dateFormat)]"
      @change="searchDataRange"
      :format="dateFormat" />
     <a-input
