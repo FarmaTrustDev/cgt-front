@@ -376,6 +376,7 @@
     & .ant-steps-item:last-child {
       padding-right: 5px;
       padding-left: 0;
+      flex: auto;
     }
   }
 
@@ -400,6 +401,7 @@
         padding-left: 25px;
         padding-top: 3px;
       }
+
       &::before {
         width: 35px;
         height: 35px;
