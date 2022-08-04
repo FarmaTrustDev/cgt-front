@@ -183,7 +183,6 @@ export default {
           if(this.rejectedData.length != 0)
           {
             this.visible = true
-            console.log(this.rejectedData, 'rejected data')
           }
       })
     },
