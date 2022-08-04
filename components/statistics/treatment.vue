@@ -175,6 +175,7 @@ export default {
       this.chartData.datasets[0].backgroundColor[3] = '#fa6363'
     },
     fetchTreatmentStats(id) {
+      this.loaded=false
       StatisticsServices.treatment(id).then((response) => {
         this.chartDetail = response.data
         this.intializeData(this.chartDetail)
