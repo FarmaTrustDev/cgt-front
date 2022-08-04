@@ -19,7 +19,7 @@
       </a-skeleton>
     </div>
     <div v-else>
-      <a-alert v-if="showData" class="mb-15" :message="'Request sent to '+logisticName+' you can ship the sample once logistic provider approved the request'" type="info" />
+      <a-alert v-if="showData" class="mb-15" :message="'Request sent to '+logisticName+', you can ship the sample once logistic provider approved the request'" type="info" />
     <a-form
       v-if="treatment.phaseId >= TREATMENT_PHASES.OUTBOUND_SCHEDULING.id"
       :form="form"
@@ -203,14 +203,19 @@ export default {
       SchedulingServices.getDetailByTreatmentOut(this.treatment.id)
         .then((response) => {
           this.schedule = response.data
-          this.showData=true
-          this.logisticId=this.schedule.logisticId
-          this.collectionDate=this.schedule.collectionDate
-          this.deliveryDate=this.schedule.deliveryDate
-          this.logisticName=this.schedule.logisticName
+          console.log(this.schedule.logisticId)
+          if(this.schedule.logisticName!=null){
+            this.showData=true
+            this.logisticId=this.schedule.logisticId
+            this.collectionDate=this.schedule.collectionDate
+            this.deliveryDate=this.schedule.deliveryDate
+            this.logisticName=this.schedule.logisticName
+          }
         })
         .then(() => {
-          this.markShipmentFlags()
+          if(this.showData){
+            this.markShipmentFlags()
+          }
         })
         .finally(() => {
           this.loading = false

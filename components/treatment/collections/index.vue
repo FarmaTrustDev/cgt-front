@@ -30,7 +30,7 @@
         />
       </a-modal>
     </div>
-    <a-alert v-else message="Collection is on request"></a-alert>
+    <a-alert v-else message="Manufacturer has not accepted the treatment request yet"></a-alert>
     <a-modal
       :visible="visibleModal"
       ok-text="Ok"
