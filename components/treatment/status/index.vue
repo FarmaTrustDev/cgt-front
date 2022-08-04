@@ -39,7 +39,7 @@
             <Viewer :treatment="treatment" />
             <shipment :treatment="treatment" />
           </div>
-          <alert v-else message="Shipping not process" type="info"></alert>
+          <alert v-else message="Logistic provider has not approved the request yet" type="info"></alert>
         </a-tab-pane>
         <a-tab-pane
           key="5"
