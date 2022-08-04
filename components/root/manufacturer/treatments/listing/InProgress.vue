@@ -15,7 +15,7 @@
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)">
-          <div class="treatment-steps">
+          <div class="treatment-steps manufacturer-step">
             <span class="step-col">
               <a-steps
                 :initial="1"
@@ -112,13 +112,12 @@ export default {
   },
   methods: {
     stepClick(record, phase) {
-      if (record.treatment.phaseId >= phase.enablePageId) {
+      if (record.treatment.phaseId >= phase.phaseId) {
         return this.goto(
           `/manufacturer/treatments/process/${record.treatment.globalId}`,
           { ...phase.params }
         )
       }
-      return false
     },
     getTreatmentStepClass(patient) {
       if (patient.treatment.isHold || patient.treatment.isCancel) {
@@ -170,8 +169,8 @@ export default {
   .ant-steps-item.ant-steps-item-wait {
     background: #fffbc8;
   }
-   .ant-steps-item-finish .ant-steps-item-content{
-    &::before{
+  .ant-steps-item-finish .ant-steps-item-content {
+    &::before {
       background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
     }
   }

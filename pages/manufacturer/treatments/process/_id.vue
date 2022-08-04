@@ -11,28 +11,52 @@
         <a-card :bordered="false" class="mt-15 default-card h-tabs">
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:105%; margin-left:-3%; padding-right:2%">
+            <div
+              class="treatment-steps"
+              style="width: 105%; margin-left: -3%; padding-right: 2%"
+            >
               <span class="step-col-large">
-              <a-steps size="small" :initial="1" :current="getCurrentStep(entity)">
-                <a-step
-                  v-for="phase in phases"
-                  :key="phase.id"
-                  :title="phase.name"
-                  :class="(currentPhase>phase.id) ? 'ant-steps-item-active-large': (currentPhase==phase.id) ? 'ant-steps-item-active-blue-large':'ant-steps-horizontal-large'"
-                  @click="stepClick(entity, phase, phase.alias)"
-                />
-              </a-steps>
+                <a-steps
+                  size="small"
+                  :initial="1"
+                  :current="currentPhase"
+                  @change="onChangeSteps"
+                >
+                  <a-step
+                    v-for="phase in phases"
+                    :key="phase.id"
+                    :title="phase.name"
+                    :class="
+                      currentPhase > phase.id
+                        ? 'ant-steps-item-active-large'
+                        : currentPhase == phase.id
+                        ? 'ant-steps-item-active-blue-large'
+                        : 'ant-steps-horizontal-large'
+                    "
+                    @click="stepClick(entity, phase, phase.alias, phase.id)"
+                  />
+                </a-steps>
               </span>
             </div>
             <!-- //Steps -->
-          </span> 
+          </span>
         </a-card>
         <a-card :bordered="false" class="mt-15 default-card h-tabs">
-          <shipment v-if="activeTab==='INBOUND_SHIPMENT'" :treatment="entity" />
-          <process v-if="activeTab==='MANUFACTURER'" :treatment="entity" @fetchTreatment="fetchTreatment" />
-          <QrViewer v-if="activeTab==='OUTBOUND_SHIPMENT'" :treatment="entity" />
+          <shipment
+            v-if="activeTab === 'INBOUND_SHIPMENT'"
+            :treatment="entity"
+          />
+          <process
+            v-if="activeTab === 'MANUFACTURER'"
+            :treatment="entity"
+            @fetchTreatment="fetchTreatment"
+          />
+          <QrViewer
+            v-if="activeTab === 'OUTBOUND_SHIPMENT'"
+            :treatment="entity"
+          />
           <scheduling-basic-request
-            v-if="activeTab==='OUTBOUND_SHIPMENT'"
+            v-if="activeTab === 'OUTBOUND_SHIPMENT'"
             :treatment="entity"
             @fetchTreatment="fetchTreatment"
           />
@@ -56,9 +80,7 @@ import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
-import {
-  MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS
-} from '~/services/Constant/Phases'
+import { MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS } from '~/services/Constant/Phases'
 export default {
   components: {
     process,
@@ -70,6 +92,7 @@ export default {
   },
   mixins: [withFetch],
   middleware: 'auth',
+
   data() {
     return {
       loading: true,
@@ -83,22 +106,22 @@ export default {
         active: true,
         direction: 1,
       },
-      phases:MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS,
-      currentPhase:1,
-      activeTab:'INBOUND_SHIPMENT',
+      phases: MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS,
+      currentPhase: 1,
+      activeTab: 'INBOUND_SHIPMENT',
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.handleActiveTab()
   },
-  computed: {
-    translation() {
-        return this.$store.getters.getTranslation
-    },
-  },
   methods: {
-    handleActiveTab(){
-      this.activeTab=this.$route.query.view
+    handleActiveTab() {
+      this.activeTab = this.$route.query.view
     },
     getCurrentStep(treatment) {
       if (treatment.phaseId != null) {
@@ -112,19 +135,24 @@ export default {
             break
           }
         }
-        this.currentPhase=currentPhase
+        this.currentPhase = currentPhase
         return currentPhase
       }
       return 1
     },
     afterFetch(data) {
       this.loading = false
+      this.getCurrentStep(this.entity)
       // console.log(data)
     },
-    stepClick(record, phase,alias) {
+    stepClick(record, phase, alias, phaseId) {
       // console.log(record.phaseId+'-'+phase.enablePageId+'-'+this.currentPhase)
-      if ((record.phaseId >= phase.enablePageId) || (phase.id===this.currentPhase)) {
+      if (
+        record.phaseId >= phase.enablePageId ||
+        phase.id === this.currentPhase
+      ) {
         this.setActiveTab(alias)
+        this.currentPhase = phaseId
         return this.goto(
           `/manufacturer/treatments/process/${record.globalId}`,
           { ...phase.params }
@@ -132,13 +160,18 @@ export default {
       }
       return false
     },
-    setActiveTab(tab){
-      this.activeTab=tab
+    setActiveTab(tab) {
+      this.activeTab = tab
     },
     fetchTreatment(treatmentId) {
       this.fetch(treatmentId)
-      this.goto(`/manufacturer/treatments/process/${treatmentId}?view=OUTBOUND_SHIPMENT`)
+      this.goto(
+        `/manufacturer/treatments/process/${treatmentId}?view=OUTBOUND_SHIPMENT`
+      )
       this.setActiveTab('OUTBOUND_SHIPMENT')
+    },
+    onChangeSteps(step) {
+      this.currentPhase = step
     },
   },
 }
