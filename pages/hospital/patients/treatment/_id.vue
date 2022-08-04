@@ -2,7 +2,7 @@
   <page-layout
     :loading="loading"
     :title="translation.TreatStatu_2_748"
-    class="patient-page"
+    class="patient-page container"
     :create="false"
   >
     <template slot="content">

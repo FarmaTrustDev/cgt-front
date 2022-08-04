@@ -1,6 +1,6 @@
 <template>
   <page-layout
-    class="support"
+    class="support container"
     :create="false"
     :loading="loading"
     title="Support Detail"

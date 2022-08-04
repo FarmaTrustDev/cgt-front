@@ -7,6 +7,14 @@
       }
     }
   }
+  .SubjectMsg,
+  .patientName,
+  .Date,
+  .StackHolder {
+    // font-weight: bold;
+    color: black;
+    font-size: 13px !important;
+  }
 }
 .support-page {
   .ant-tabs {
@@ -21,7 +29,49 @@ $chatHeight: 255px;
   .chat-list {
     min-height: $chatHeight;
     max-height: $chatHeight;
-    overflow-y: scroll;
+    .ant-spin-nested-loading {
+      overflow-y: auto;
+      ul {
+        max-height: 242px;
+        li {
+          position: relative;
+          padding-bottom: 30px;
+          border-bottom: 0;
+          .ant-comment-content {
+            position: unset !important;
+          }
+        }
+        .ant-comment-inner {
+          padding: 16px 5px;
+        }
+      }
+      .message-sent {
+        justify-content: end;
+        margin-right: 24px;
+        .ant-comment {
+          background-color: rgba(120, 98, 255, 0.14);
+          border-radius: 22px;
+          padding: 0 5px;
+          position: unset;
+        }
+        .ant-comment-content-author {
+          position: absolute;
+          width: 50%;
+          top: 69px;
+          left: 223px;
+          overflow: hidden;
+          display: inline-block;
+        }
+      }
+      .message-receive {
+        justify-content: end;
+        .ant-comment {
+          background-color: #f1faff;
+          border-radius: 22px;
+          padding: 0 5px;
+        }
+      }
+    }
   }
 }
 .specific-page {
