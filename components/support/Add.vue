@@ -2,7 +2,7 @@
   <div>
     <a-modal
       :footer="null"
-      :width="900"
+      :width="550"
       :title="translation.AddNew_3_182"
       :destroy-on-close="true"
       :visible="visible"

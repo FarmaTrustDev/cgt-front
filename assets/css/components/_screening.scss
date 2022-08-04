@@ -1,5 +1,5 @@
 .admin-screenging-questions {
-    .ant-list-item {
+  .ant-list-item {
     margin-top: 1%;
     display: flex;
     align-items: center;
@@ -9,7 +9,21 @@
     border-radius: 15px;
     color: black;
     padding-left: 1%;
-  }.ant-list-split .ant-list-item:last-child {
+  }
+  .ant-list-split .ant-list-item:last-child {
     border-bottom: 1px solid !important;
+  }
 }
+// --------------
+.users-list {
+  .ant-table-row {
+    td:first-child {
+      font-weight: 400 !important;
+    }
+  }
+  // td.user-role {
+  //   background: rgb(255, 255, 203);
+  //   border-radius: 22px;
+  //   margin: 5px 0;
+  // }
 }

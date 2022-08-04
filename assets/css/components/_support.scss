@@ -21,7 +21,13 @@
     overflow: inherit;
   }
 }
-
+.support_page {
+  .ant-table-row {
+    td:first-child {
+      font-weight: 400 !important;
+    }
+  }
+}
 $chatHeight: 255px;
 .support-chat {
   min-height: 400px;

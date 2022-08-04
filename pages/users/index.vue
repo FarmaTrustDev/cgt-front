@@ -1,38 +1,46 @@
 <template>
-    <div class="ml-30 mr-30 container" >
+  <div class="ml-30 mr-30 container">
     <div class="clearfix mt-15">
-    <h3 class="page-title ml-5 float-left">{{translation.UserNew_3_136}}</h3>
+      <h3 class="page-title ml-5 mb-1 float-left">
+        {{ translation.UserNew_3_136 }}
+      </h3>
       <a-button
         type="primary"
         class="mr-15 float-right mt-5"
         @click="goto('users/create')"
-        >{{translation.adduser_2_464}}</a-button
+        >{{ translation.adduser_2_464 }}</a-button
       >
-    <a-input
-      class="float-right page-search-input"
-      ref="userNameInput"
-      :placeholder="translation.Searcuser_2_404"
-      @change="searchUser"
+      <a-input
+        class="float-right page-search-input"
+        ref="userNameInput"
+        :placeholder="translation.Searcuser_2_404"
+        @change="searchUser"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
+    </div>
+    <a-table
+      :columns="columns"
+      :data-source="datasource"
+      :loading="loading"
+      class="rounded-table pt-10 users-list"
+      :pagination="{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50', '100'],
+      }"
     >
-      <a-icon slot="prefix" type="search" />
-    </a-input>
-    </div>      
-      <a-table
-        :columns="columns"
-        :data-source="datasource"
-        :loading="loading"
-        class="rounded-table pt-10 users-list"
-        :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
-      >
-        <template slot="action" slot-scope="action">
-          <a-dropdown>
+      <template slot="action" slot-scope="action">
+        <a-dropdown>
           <a-button class="action-button" @click="preventDefault">
-            {{translation['Admin_1_142']}} <a-icon type="down" />
+            {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
-          <a-menu-item key="userDetail">
-            <a @click="goto(`/users/${action.globalId}`)">{{translation.Edit_1_450}}</a>
-            <a-popconfirm
+            <a-menu-item key="userDetail">
+              <a @click="goto(`/users/${action.globalId}`)">{{
+                translation.Edit_1_450
+              }}</a>
+              <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
@@ -41,13 +49,12 @@
               >
                 {{ translation.Delet_1_451 }}
               </a-popconfirm>
-            
-          </a-menu-item>
+            </a-menu-item>
           </a-menu>
-          </a-dropdown>
-        </template>
-      </a-table>
-    </div>  
+        </a-dropdown>
+      </template>
+    </a-table>
+  </div>
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
@@ -61,11 +68,11 @@ export default {
   data() {
     return {
       datasource: [],
-      columns:[
+      columns: [
         {
           title: `${this.$store.getters.getTranslation.Name_1_138}`,
           dataIndex: 'name',
-          key: 'name'
+          key: 'name',
         },
         {
           title: `${this.$store.getters.getTranslation.Entittype_2_406}`,
@@ -81,20 +88,21 @@ export default {
           title: `${this.$store.getters.getTranslation.UserRole_2_410}`,
           dataIndex: 'roleName',
           key: 'roleName',
+          class: `user-role`,
         },
         {
           title: `${this.$store.getters.getTranslation.EmailAddre_2_140}`,
           key: 'email',
           dataIndex: 'email',
-        }, 
+        },
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           key: 'action',
           scopedSlots: { customRender: 'action' },
         },
-    ],
-    loading: true,
-    fullName:[],
+      ],
+      loading: true,
+      fullName: [],
     }
   },
   computed: {
@@ -104,7 +112,7 @@ export default {
     },
     translation() {
       return this.$store.getters.getTranslation
-    },    
+    },
   },
   mounted() {
     this.fetch()
@@ -113,7 +121,10 @@ export default {
     preventDefault,
     fetch() {
       // alert('hello')
-      UserServices.getUser(this.user.organizationId, this.user.organizationTypeId)
+      UserServices.getUser(
+        this.user.organizationId,
+        this.user.organizationTypeId
+      )
         .then((response) => {
           this.datasource = response.data
         })
@@ -130,20 +141,21 @@ export default {
     searchUser(e) {
       const search = e.target.value
       // alert(search)
-      if(search!==''){
-        this.fetchSearch({ userName: search, roleName: search,email:search})
-      }else{
+      if (search !== '') {
+        this.fetchSearch({ userName: search, roleName: search, email: search })
+      } else {
         this.fetch()
       }
     },
     deleteUser(record) {
-      UserServices.destroy(record).then((response) => {
-        // console.log(response)
-        this.success(response.message)
-        this.fetch()
-        this.$router.push({path:'/users'})
-      })
-      .finally(() => (this.loading = false))
+      UserServices.destroy(record)
+        .then((response) => {
+          // console.log(response)
+          this.success(response.message)
+          this.fetch()
+          this.$router.push({ path: '/users' })
+        })
+        .finally(() => (this.loading = false))
     },
   },
 }

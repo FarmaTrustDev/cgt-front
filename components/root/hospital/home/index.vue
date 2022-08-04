@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="home-page manf-board">
     <a-card class="grey-card" :bordered="false">
       <!-- left side tabs -->
       <a-col :md="10" class="mtminus-7">
