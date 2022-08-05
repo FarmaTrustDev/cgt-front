@@ -12,7 +12,7 @@
       <a-form :form="form" @submit="onSubmit">
         <a-row :gutter="20">
           <a-col :span="12">
-            <a-form-item v-if="!isCreated" :label="translation.Patie_1_184">
+            <a-form-item v-if="!isCreated" label="Patient">
               <a-select
                 v-decorator="[
                   'patient_Id',
@@ -28,7 +28,7 @@
                 ]"
                 :show-search="true"
                 :filter-option="filterOption"
-                :placeholder="translation.searc_1_488+' By Name, Id, Email'"
+                placeholder="Name (PUID)"
                 style="width: 100%"
                 size="large"
                 autocomplete="off"
@@ -61,7 +61,7 @@
                 placeholder="Subject"
               />
             </a-form-item>
-            <a-form-item v-else :label="translation.Patie_1_184">
+            <a-form-item v-else label="Patient">
               <a-input
                 v-decorator="[
                   'reporter_name',
@@ -97,7 +97,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Bags:">
+            <a-form-item label="Bags">
               <a-input
                 v-decorator="[
                   'id',
@@ -142,6 +142,7 @@
         <a-row :gutter="20">
           <a-col :span="24">
             <a-form-item
+             class="remove-required-colon"
               :label="translation.Subje_1_190"
               :label-col="{ span: 24 }"
               :wrapper-col="{ span: 24 }"
