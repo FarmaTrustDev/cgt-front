@@ -5,7 +5,7 @@
         <a-col :span="24">
           <a-card class="white-card" :bordered="false">
             <a-row>
-              <a-col :span="14"
+              <a-col :span="10"
                 ><span class="dated-time">
                   {{ _getFormatMoment().format('HH:mm') }}</span
                 >

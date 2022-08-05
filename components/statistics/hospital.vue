@@ -151,6 +151,7 @@ export default {
     display: inline-block;
     background-color: #e9f3ff;
     border-radius: 15px;
+    // padding-right: 5px;
   }
 }
 </style>
