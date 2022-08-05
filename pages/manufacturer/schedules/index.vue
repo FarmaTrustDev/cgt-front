@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" :title="translation.Treat_1_29" class="specific-card">
+  <page-layout :loading="loading" :title="translation.Treat_1_29" class="specific-card manf-schedule">
     <template slot="content">
       <standardTable
         :columns="column"

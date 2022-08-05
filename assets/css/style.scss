@@ -166,6 +166,7 @@ a {
 .page-title {
   font-size: 1.5625rem;
   font-weight: 600;
+  color: #000;
 }
 .page-title.head {
   font-weight: 500 !important;
@@ -248,7 +249,6 @@ a {
   // margin-left: -15px;
 }
 .support_page {
-
   .ant-tabs-nav-scroll {
     .ant-tabs-tab {
       margin: 0 4px !important;
@@ -388,6 +388,7 @@ a {
 .ant-descriptions-item-colon::after {
   // display: none !important;
 }
+
 .enrollment-page {
   .ant-alert-info {
     padding: 0.75rem 1.25rem;
@@ -436,5 +437,27 @@ a {
   .f {
     font-weight: 600;
     font-size: 12px !important;
+  }
+}
+.manf-home {
+  .home-tab {
+    margin: 0 5px 25px 5px;
+  }
+
+  .grey-card > .ant-card-body {
+    padding-top: 0;
+  }
+  .halfNHalf {
+    .white-card.ant-card {
+      padding: 21px 10px;
+      margin-top: 0;
+      margin-bottom: 6% !important;
+    }
+  }
+  .dateTimeBox {
+    font-size: 16px;
+    .daysName {
+      font-weight: 400;
+    }
   }
 }

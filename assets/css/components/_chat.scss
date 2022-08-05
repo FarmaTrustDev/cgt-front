@@ -99,17 +99,18 @@ $defaultHeight: calc(100vh - 100px);
       border-radius: 22px;
     }
     .message-sent {
+      justify-content: end;
       .ant-comment {
-        position: unset !important;
+        // position: unset !important;
         .content-body {
           background-color: rgba(120, 98, 255, 0.14);
         }
       }
     }
-    .message-recived {
-      justify-content: left;
+    .message-received {
+      // justify-content: left;
       .ant-comment {
-        position: unset !important;
+        // position: unset !important;
 
         .content-body {
           background-color: #f1faff;

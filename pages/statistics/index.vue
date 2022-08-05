@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <div class="page-header clearfix">
-    <div class="page-title ml-6">{{translation.Stati_1_19}}</div>
+    <div class="page-title">{{translation.Stati_1_19}}</div>
     </div>
     <a-card :bordered="false" class="grey-card">
         <a-col :span="11" class="mtminus-6">
