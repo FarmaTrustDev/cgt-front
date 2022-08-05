@@ -2,7 +2,7 @@
   <div class="specific-page container support_page">
     <a-row class="mt-25 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left">Support Issues</h3>
+        <h3 class="page-title float-left">{{translation['suppoissue_2_176']}}</h3>
         <a-button
           type="primary"
           class="mrm-5 mrt float-right"

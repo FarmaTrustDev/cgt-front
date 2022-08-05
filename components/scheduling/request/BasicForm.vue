@@ -7,7 +7,7 @@
       
       <a-skeleton :loading="isEmpty(schedule)">
         <a-row>
-          <h4 class="heading pl-0">Outbound Shipping Details</h4>
+          <h4 class="heading pl-0">{{translation.OutboShipp_4_378}}</h4>
           <a-col :span="12">
             <pickup-detail :scheduling="schedule" :shipment="pickupShipment"
           /></a-col>
@@ -104,10 +104,10 @@
         ></a-col>
       </a-row>
       <a-form-item>
-        <FormActionButton v-if="!showData" :loading="loading" custom-text="Submit" />
+        <FormActionButton v-if="!showData" :loading="loading" :custom-text="translation['Submi_1_248']" />
       </a-form-item>
     </a-form>
-    <alert v-else message="Collection not completed" />
+    <alert v-else :message="translation.Collenot_3_573" />
     </div>
   </div>
 </template>

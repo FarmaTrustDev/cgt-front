@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form" @submit="onSubmit">
-      <a-form-item label="Users">
+      <a-form-item :label="translation['Users_1_504']">
         <a-select
           v-decorator="[
             'emails',

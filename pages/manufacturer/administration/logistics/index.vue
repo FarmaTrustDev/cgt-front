@@ -44,7 +44,7 @@
               </a-checkbox>
             </a-form-item>
             <a-col class="text-right mt-15">
-              <FormActionButton :loading="btnLoading" :custom-text="'Submit'" :is-created="isCreated" />
+              <FormActionButton :loading="btnLoading" :custom-text="translation['Submi_1_248']" :is-created="isCreated" />
             </a-col>
 
           </a-card>

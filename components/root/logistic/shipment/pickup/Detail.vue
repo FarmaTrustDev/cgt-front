@@ -2,27 +2,27 @@
   <div>
     <a-card v-if="!isEmpty(shipment)" :bordered="false" class="default-card">
       <article class="article">
-        <h4 class="heading pl-0">{{ heading }}</h4>
+        <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
       </article>
       <dl class="ant-row common-detail">
-        <dt>Logistics Provider</dt>
+        <dt>{{translation.LogisProvi_2_380}}</dt>
         <dd>{{ scheduling.logisticName }}</dd>
-        <dt>Sample Collection Date:</dt>
+        <dt>{{translation['SamplColle_3_518']}}:</dt>
         <dd>{{ getDateFormat(scheduling.collectionDate) }}</dd>
-        <dt>Expected Delivery Date</dt>
+        <dt>{{translation['ExpecDeliv_3_388']}}</dt>
         <dd>{{ getDateFormat(scheduling.deliveryDate) }}</dd>
         <dt>{{ translation.EstimArriv_3_322 }}</dt>
         <dd>{{ getDateFormat(scheduling.deliveryDate) }}</dd>
       </dl>
 
       <dl class="ant-row common-detail">
-        <dt>Handled by:</dt>
+        <dt>{{translation['Handlby:_2_384']}}</dt>
         <dd>{{ shipment.senderName }}</dd>
-        <dt>Collected by:</dt>
+        <dt>{{translation['Colleby:_2_390']}}</dt>
         <dd>{{ shipment.logisticUserName }}</dd>
-        <dt>Pickup At</dt>
+        <dt>{{translation['PickuDate:_2_386']}}</dt>
         <dd>{{ moment(String(shipment.pickupAt)).format('dddd DD MM YYYY') }}</dd>
-        <dt>Pickup Location:</dt>
+        <dt>{{translation['PickuLocat_2_792']}}</dt>
         <dd>{{ shipment.origin }}</dd>
       </dl>
     </a-card>

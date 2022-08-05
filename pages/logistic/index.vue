@@ -3,11 +3,11 @@
     :create="false"
     :bordered="false"
     :loading="loading"
-    title="Treatments"
+    :title="translation.Treat_1_29"
   >
     <template slot="content">
       <a-tabs :animated="false">
-        <a-tab-pane key="1" tab="New Requests">
+        <a-tab-pane key="1" :tab="translation.NewReque_2_480">
           <newRequests />
         </a-tab-pane>
         <a-tab-pane key="3" :tab="translation.Inprogr_2_204"> <in-progress /> </a-tab-pane>

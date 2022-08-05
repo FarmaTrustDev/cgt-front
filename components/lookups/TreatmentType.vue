@@ -13,7 +13,7 @@
             v-decorator="[
               'treatmentTypeId',
               {
-                initialValue: treatmentTypeName || undefined,
+                initialValue: treatmentTypeId,
                 rules: [
                   {
                     required: true,
@@ -61,6 +61,7 @@ export default {
     treatmentTypeName: { type: String, default: null},
     disabled: { type: Boolean, default: false },
     active:{ type: Boolean, default: false},
+    fetchAll:{ type: Boolean, default: false},
   },
 
   data() {
@@ -70,7 +71,7 @@ export default {
     }
   },
   mounted() {
-    this.fetchTreatmentTypes()
+      this.fetchTreatmentTypes()
   },
   computed:{
     translation() {
@@ -79,20 +80,29 @@ export default {
   },
   methods: {
     fetchTreatmentTypes() {
-      this.typeLoading = true
-      if(this.active){
-        TreatmentService.getWithScreening()
-          .then((response) => {
-            this.treatmentTypes = response.data
-          })
-          .finally(() => (this.typeLoading = false))
+      if(this.fetchAll){
+        this.fetchSelectedTreatmentTypes(this.treatmentTypeId)
       }else{
-        TreatmentService.getRemaining()
-          .then((response) => {
-            this.treatmentTypes = response.data
-          })
-          .finally(() => (this.typeLoading = false))
+        this.typeLoading = true
+        if(this.active){
+          TreatmentService.getWithScreening()
+            .then((response) => {
+              this.treatmentTypes = response.data
+            })
+            .finally(() => (this.typeLoading = false))
+        }else{
+          TreatmentService.getRemaining()
+            .then((response) => {
+              this.treatmentTypes = response.data
+            })
+            .finally(() => (this.typeLoading = false))
+        }
       }
+    },
+    fetchSelectedTreatmentTypes(id){
+      TreatmentService.get(id).then((response)=>{
+        this.treatmentTypes =  response.data
+      })
     },
     onchange(value, e) {
       this.$emit('onChange', value)

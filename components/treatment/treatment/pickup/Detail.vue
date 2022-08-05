@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="default-card">
       <article class="article">
-        <h6 class="heading pl-0">Sample Shipping Details</h6>
+        <h6 class="heading pl-0">{{translation.SamplShipp_3_517}}</h6>
       </article>
       <dl v-if="!isEmpty(shipment)" class="ant-row common-detail">
         <dt>{{ translation.DispaDate_2_316 }}:</dt>
@@ -12,7 +12,7 @@
         <dt>{{ translation.EstimArriv_3_322 }}</dt>
         <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
       </dl>
-      <alert v-else message="Sample has not been picked by the logistic" />
+      <alert v-else :message="translation.Samplhas_8_571" />
     </a-card>
   </div>
 </template>

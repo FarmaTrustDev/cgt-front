@@ -272,12 +272,13 @@
               },
             ]"
             :placeholder="translation.Postc_1_444"
+            @blur="fetchCountryByPostCode"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="City*:"
+          :label="translation['City_1_446']+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -325,7 +326,7 @@
       </a-col>
       <a-col :span="24">
         <a-form-item
-          :label="translation.PostaAddre_2_450+':'"
+          :label="translation.PostaAddre_2_450"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
           class="pb-0"
@@ -349,7 +350,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="County*:"
+          :label="translation['Count_1_657']+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -371,9 +372,10 @@
           />
         </a-form-item>
       </a-col>
+      
       <a-col :span="12">
         <a-form-item
-          label="Country*:"
+          :label="translation['Count_1_49']+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -411,19 +413,28 @@
 <script>
 import UserServices from '~/services/API/UserServices'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
-import withCrud from '~/mixins/with-crud'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 import RoleServices from '~/services/API/RoleServices'
 import Upload from '~/components/upload/userUpload'
 import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
+import MapServices from '~/services/API/MapServices'
+import nullHelper from '~/mixins/null-helpers'
 export default {
   components: { Upload },
-  mixins: [withCrud],
-
+  mixins: [nullHelper],
+  props: {
+    isCreated: {
+      type: Boolean,
+      default: false,
+    },
+    entity: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-      entity: {},
       entityId: null,
       userRoleId: 0,
       loading: false,
@@ -441,14 +452,14 @@ export default {
       // defaultFIleList:{uid:null, name:'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', status:null, response: null, url: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg'},
     }
   },
-  mounted() {
-    this.getCountries()
-    this.getRoles()
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.getCountries()
+    this.getRoles()
   },
   updated() {
     if (this.isCreated && this.fetchCountry) {
@@ -462,13 +473,13 @@ export default {
   },
   methods: {    
     handleChange(info) {
-      // console.log(info)
       this.fileList = info
       this.$emit('handleChange', this.fileList)
     },
     filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries(params = {}) {
+      console.log(params)
       CountryServices.get(params).then((response) => {
         this.countries = response.data.data
       })
@@ -480,15 +491,13 @@ export default {
     },
     getCountries() {
       if (this.isCreated) {
-        this.fetchCountries({ Ids: [this.entity.coutryId] })
+        this.fetchCountries({ Ids: [this.entity.countryId] })
       } else {
         this.fetchCountries()
       }
     },
     getRoles() {
       if (this.isCreated) {
-        // alert(this.entity.userRoleId)
-        // this.userRoleId=this.entity.userRoleId
         this.fetchRoles({ Ids: [this.entity.roleId] })
       } else {
         this.fetchRoles()
@@ -500,6 +509,11 @@ export default {
     searchRoles(name, b) {
       this.fetchRoles({ name })
     },
+    fetchCountryByPostCode(e){
+      MapServices.fetchCountryByPostCode(e.target.value).then((response)=>{
+        console.log(response.result.address_components)
+      })
+    }
   },
 }
 </script>

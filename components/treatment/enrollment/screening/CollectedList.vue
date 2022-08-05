@@ -1,6 +1,6 @@
 <template>
   <span>
-      <h1 class="page-title">Treatment Type: {{checkData(categories)}}</h1>
+      <h1 class="page-title">{{translation['TreatType_2_67']}}: {{checkData(categories)}}</h1>
     <a-tabs class="screening-tabs">
       <a-tab-pane
         v-for="category in categories"
@@ -51,6 +51,11 @@ export default {
       ],
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods:{
     checkData(categories)
     {

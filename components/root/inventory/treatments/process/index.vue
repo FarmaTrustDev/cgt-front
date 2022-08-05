@@ -8,7 +8,7 @@
       show-complete-btn="manufacturerCollectionStatus"
       @completeAllBag="completeAllBag"
     />
-    <alert v-else message="Collection not set yet" />
+    <alert v-else :message="translation.Collenot_4_572" />
   </div>
 </template>
 <script>

@@ -96,7 +96,7 @@
     <a-form-item class="mt-15">
       <FormActionButton
         :disabled="buttonEnable"
-        text="Submit"
+        :text="translation['Submi_1_248']"
         @click="submit"
         :loading="loading"
       />

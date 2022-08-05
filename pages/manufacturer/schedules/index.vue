@@ -5,7 +5,7 @@
         :columns="column"
         :api-service="ManufacturerTreatmentServices"
         :action-link="ActionLink"
-        :button-name = "`Manage Availabililty`"
+        :button-name = "translation['ManagAvail_2_77']"
         
       />
     </template>

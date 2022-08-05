@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <formfield @handleChange="handleChange" />
+      <FormFields :entity="userData" :is-created="isCreated" @handleChange="handleChange" />
       <a-form-item
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
@@ -20,10 +20,10 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import UserServices from '~/services/API/UserServices'
-import formfield from '~/components/root/user/form/FormField'
+import FormFields from '~/components/root/user/form/FormField'
 
 export default {
-  components: { formfield },
+  components: { FormFields },
   mixins: [notifications, routeHelpers, nullHelper],
 
   data() {
@@ -31,7 +31,7 @@ export default {
       loading: false,
       successResponse: '',
       showError: false,
-      user: {},
+      userData: {},
       entityId: null,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
@@ -42,7 +42,8 @@ export default {
       fileList: [],
       isCreated: false,
       file:[],
-      
+      activate:true,
+      deactivate:true,
     }
   },
   mounted() {
@@ -79,6 +80,8 @@ export default {
         .getById(id)
         .then((response) => {
           this.entity = response.data
+          this.userData=response.data
+          // console.log(this.userData)
           if (this.isFunction(this.getEntity)) {
             this.getEntity(response)
           }

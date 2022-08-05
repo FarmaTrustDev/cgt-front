@@ -115,7 +115,7 @@ export default {
       this.handleModal(true)
     },
     getButtonText() {
-      return this.isAccepted ? 'Accept' : 'Reject'
+      return this.isAccepted ? "translation.Accep_1_278" : "translation.Rejec_1_280"
     },
     getButtonType() {
       return this.isAccepted ? 'primary' : 'danger'

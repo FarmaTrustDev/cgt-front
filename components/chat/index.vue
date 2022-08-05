@@ -47,7 +47,7 @@
     </a-modal>
     <a-modal
       :visible="usersModal"
-      title="Users List"
+      :title="translation.UsersList_2_575"
       :footer="null"
       width="40%"
       @cancel="showUsersModal(false)"

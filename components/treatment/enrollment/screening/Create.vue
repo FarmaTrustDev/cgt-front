@@ -32,7 +32,7 @@
             height="50%"
           />
         </p>
-        <h3><p>Please accept the new screening questions from manufacturer</p></h3>
+        <h3><p>{{translation.Pleasaccep_8_567}}</p></h3>
         <footer>
           <a-button class="ant-btn ant-btn-primary" @click="handleOk()"
             >Ok</a-button
