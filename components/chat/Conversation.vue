@@ -126,6 +126,11 @@ export default {
       formLayout: 'vertical',
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     this.$emit('loadScrollMethod', this.scrollToElement)
   },
@@ -133,8 +138,6 @@ export default {
     onSubmit(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
-        // console.log(values)
-
         if (!err) {
           this.postMessage(values)
           this.form.resetFields()
@@ -146,11 +149,9 @@ export default {
     },
     postMessage(params) {
       ChatServices.create(params).then((response) => {
-        // console.log(response)
         this.$emit('fetch', response)
       })
     },
-
     handleChange(e) {
       this.value = e.target.value
     },
@@ -161,11 +162,6 @@ export default {
       const content = this.$refs.container
 
       content.scrollTop = content.scrollHeight
-    },
-  },
-  computed: {
-    translation() {
-      return this.$store.getters.getTranslation
     },
   },
 }
