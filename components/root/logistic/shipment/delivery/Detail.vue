@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="default-card">
       <article class="article">
-        <h4 class="heading pl-0">{{ heading }}</h4>
+        <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
       </article>
       <dl class="ant-row common-detail">
         <dt>{{translation.IsRecei_2_328}}:</dt>

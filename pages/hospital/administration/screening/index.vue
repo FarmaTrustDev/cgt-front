@@ -6,7 +6,7 @@
         :api-service="ScreeningTemplateServices"
         :action-link="ActionLink"
         :isHospital="true"
-        :button-name="`Process Admin`"
+        :button-name="translation.ProceAdmin_2_569"
       />
     </template>
   </page-layout>
@@ -23,7 +23,7 @@ export default {
       loading: false,
       column:[
         {
-          title: `Manufacturer`,
+          title: `${this.$store.getters.getTranslation.Manuf_1_89}`,
           dataIndex: 'manufacturer',
           key: 'hospitals',
             scopedSlots: { customRender: 'nameTags' },
@@ -34,7 +34,7 @@ export default {
           key: 'treatmentType.Name',
         },
         {
-          title: `Status`,
+          title: `${this.$store.getters.getTranslation.Statu_1_202}`,
           dataIndex: 'active',
           key: 'active',
           scopedSlots: { customRender: 'active' },

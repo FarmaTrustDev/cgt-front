@@ -67,8 +67,9 @@
         <FormActionButton
           :text="getButtonText()"
           :btn-type="getButtonType()"
-          :loading="loading"
           :is-created="false"
+          :loading="loading"
+          :disabled="clicked"
           ><span slot="extra" class="mr-5">
             <a-button @click="handleModal(false)" Reject Scheduling Request>{{
               translation.cance_1_296
@@ -99,6 +100,7 @@ export default {
   mixins: [withTableCrud],
   data() {
     return {
+      clicked:false,
       column: [
         {
           title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
@@ -186,6 +188,7 @@ export default {
     submitTreatmentResult() {},
     onSubmit(e) {
       this.loading = true
+      this.clicked = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
@@ -200,6 +203,7 @@ export default {
         }
       })
       this.loading = false
+      this.clicked = false
     },
     showButton(schedule) {
       return !(schedule.treatment.isHold || schedule.treatment.isDead | schedule.treatment.isCancel)

@@ -14,7 +14,7 @@
       </a-card>
       <!-- ============ -->
       <div class="user-involved support_page">
-        <p class="mt-15">Users Involved</p>
+        <p class="mt-15">{{translation['UsersInvol_2_108']}}</p>
         <a-tabs
           class="h-tabs"
           type="card"

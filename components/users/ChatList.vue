@@ -5,7 +5,7 @@
         <p> {{record.firstName}} {{record.lastName}}</p>
       </template>
       <template slot="message" slot-scope="text, record">
-        <a-button type="primary" @click="getUser(text, record)"> Message</a-button>
+        <a-button type="primary" @click="getUser(text, record)"> {{translation.messa_1_498}}</a-button>
       </template>
     </a-table>
   </div>
@@ -24,7 +24,7 @@ export default {
     scopedSlots: { customRender: 'userName' },
   },
   {
-    title: `Email Address`,
+    title: `${this.$store.getters.getTranslation.EmailAddre_2_140}`,
     dataIndex: 'email',
     key: 'email',
     width: '40%',
@@ -40,6 +40,11 @@ data: [] }
   mounted() {
     this.fetch()
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     getUser(user) {
       this.$emit('getUser', user)

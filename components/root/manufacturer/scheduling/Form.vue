@@ -3,9 +3,11 @@
     <!-- <a-skeleton :loading="loading"> -->
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <LookupsTreatmentType
+          v-if="isCreated ? isCreated : !isCreated"
           :disabled="isCreated"
           :treatment-type-id="entity.treatmentTypeId"
           :treatment-type-name="entity.treatmentTypeName"
+          :fetchAll="true"
         />
         <a-form-item :label="translation.Descr_1_69">
           <a-textarea
@@ -76,7 +78,7 @@
         </a-form-item>
         </a-col>
         </a-row>
-        <FormActionButton text="Next" :loading="btnLoading" :is-created="isCreated">
+        <FormActionButton :text="translation['Next_1_478']" :loading="btnLoading" :is-created="isCreated">
         </FormActionButton>
       </a-form>
     <!-- </a-skeleton> -->
@@ -107,6 +109,7 @@ export default {
       isCreated: false,
       gotoLink: '/manufacturer/schedules',
       manufacturerTreatment: {},
+      activate:true,
     }
   },
   computed: {

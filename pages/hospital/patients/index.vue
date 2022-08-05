@@ -3,7 +3,7 @@
     <div class="page-header clearfix">
       <!-- <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3> -->
       <div class="page-title pl-5 float-left" style="width: 50%">
-        Patient List
+        {{translation.PatieList_2_627}}
       </div>
       <div style="width: 25%; display: inline">
         <a-button

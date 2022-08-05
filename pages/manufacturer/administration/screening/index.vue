@@ -5,7 +5,7 @@
         :columns="column"
         :api-service="ScreeningTemplateServices"
         :action-link="ActionLink"
-        :button-name="`Process Admin`"
+        :button-name="translation.ProceAdmin_2_569"
       />
     </template>
   </page-layout>

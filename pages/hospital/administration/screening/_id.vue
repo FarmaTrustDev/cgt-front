@@ -1,5 +1,5 @@
 <template>
-  <page-layout :create="false" class="container" :loading="loading" title="Screening Questions">
+  <page-layout :create="false" class="container" :loading="loading" :title="translation.ScreeQuest_2_566">
     <template slot="content"> <create /> </template>
   </page-layout>
 </template>

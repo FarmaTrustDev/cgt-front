@@ -4,7 +4,7 @@
     :api-service="ManufacturerTreatmentServices"
     :fetch-from="ManufacturerTreatmentServices.getTreatmentTypes"
     :action-link="actionLink"
-    :button-name="`Process Admin`"
+    :button-name="translation.ProceAdmin_2_569"
   />
 </template>
 <script>
@@ -25,7 +25,7 @@ export default {
     return {
       column:[
   {
-    title: `Process Steps`,
+    title: `${this.$store.getters.getTranslation.ProceStep_2_486}`,
     dataIndex: 'name',
     key: 'name',
   },
@@ -41,6 +41,11 @@ export default {
       borderCard: false,
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {},
 }
 </script>

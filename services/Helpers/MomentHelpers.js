@@ -28,7 +28,8 @@ export const _getDefaultDateFormate = (date = _getTodayMoment()) =>
   moment(date, DATE_FORMAT)
 
 export const _disabledPreviousDate = (current) => {
-  return current < moment().endOf('day')
+  return current < moment().add( -1 ,'day')
+  // return current < moment().endOf('day')
 }
 
 export const _disablePrevDateFromYesterday = (current) => {

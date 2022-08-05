@@ -97,8 +97,8 @@
 <script>
 import {
   _getTodayMoment,
-  // _disabledPreviousDate,
-  _disablePrevDateFromYesterday
+  _disabledPreviousDate,
+  // _disablePrevDateFromYesterday
 } from '~/services/Helpers/MomentHelpers'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import ShipmentServices from '~/services/API/ShipmentServices'
@@ -128,7 +128,7 @@ export default {
     },
   },
   methods: {
-    disabledDate: _disablePrevDateFromYesterday,
+    disabledDate: _disabledPreviousDate,
     onSubmit(e) {
       // this.loading = true
       e.preventDefault()

@@ -1,8 +1,16 @@
 <template>
   <div>
     <div v-for="(data, index) in rejection" :key="index">
-      <a-alert :message="'The treatment was rejected by ' + data.organization + '. For: ' + data.rejectionReason +  '. Re-schedule the treatment from available slots below.'" type="success" />
-      </div>
+      <a-alert
+        :message="
+          'The treatment was rejected by ' +
+          data.organization +
+          '. Re-schedule the treatment from available slots below. For:' +
+          getRejectionDetail(data.rejectionReason)  
+        "
+        type="success"
+      />
+    </div>
     <h3 class="page-title">{{ translation.Availslots_2_724 }}</h3>
     <div class="grey-card">
       <calendar
@@ -49,6 +57,7 @@ import {
   getMomentByStandardFormat,
   _disabledPreviousDate,
 } from '~/services/Helpers/MomentHelpers'
+import { isEmpty } from '~/services/Utilities'
 export default {
   components: { FormFields, calendar },
   mixins: [imagesHelper],
@@ -95,6 +104,15 @@ export default {
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
+    },
+    getRejectionDetail(data){
+      if(!isEmpty(data))
+      {
+        return 'data'
+      }
+      else{
+        return 'N/A'
+      }
     },
     getMomentByStandardFormat,
     getEventClick(detail) {
