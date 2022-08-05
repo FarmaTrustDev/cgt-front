@@ -345,3 +345,9 @@ input#login_username:focus {
   background-color: #fff;
   border: 1px solid red;
 }
+  .ant-form-item-label > label::after {
+    content: '';
+    position: relative;
+    top: -0.5px;
+    margin: 0 8px 0 2px;
+  }

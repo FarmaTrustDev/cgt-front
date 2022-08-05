@@ -168,7 +168,7 @@ export default {
         getNotification(notification.data)
       })
     },
-    /// this method works when auto message generate
+    // this method works when auto message generate
     // ! hot fix need to optimize the code
     getNotification(notification) {
       const opponentId = notification.sender_Id

@@ -64,6 +64,7 @@
           <a-button
             :disabled="row.isCollected || btnLoading"
             shape="round"
+            :loading="loading"
             icon="sync"
             @click="handleCollectionSubmit(row)"
             class="btn-send"
