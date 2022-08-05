@@ -461,3 +461,30 @@ a {
     }
   }
 }
+// ==================================
+.manf-stats {
+  .imageHeading {
+    figure.mtminus-60 {
+      display: flex;
+      align-items: center;
+      figcaption.flex-display {
+        position: unset;
+      }
+    }
+  }
+}
+// ================================
+.manf-treatment {
+  .ant-tabs-top-bar {
+    margin-top: 45px;
+    .ant-tabs-nav-container {
+      .ant-tabs-nav-wrap {
+        text-align: center;
+        .ant-tabs-nav {
+          padding: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
