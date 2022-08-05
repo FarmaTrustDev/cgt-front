@@ -7,7 +7,7 @@
   >
     <template slot="content">
       <div class="grey-card">
-        <profile-picture-and-detail :treatment="entity" />
+        <treatment-profile-picture-and-detail :treatment="entity" />
         <a-card :bordered="false" class="mt-15 default-card h-tabs">
           <span>
             <!-- //Steps -->
@@ -70,7 +70,7 @@
 import PageLayout from '~/components/layout/PageLayout'
 import withFetch from '~/mixins/with-fetch'
 import TreatmentServices from '~/services/API/TreatmentServices'
-import ProfilePictureCard from '~/components/patient/profile/ProfileAndDetail'
+import TreatmentProfilePictureCard from '~/components/patient/profile/TreatmentProfileCard'
 import process from '~/components/root/manufacturer/treatments/process'
 import QrViewer from '~/components/bags/Viewer'
 import shipment from '~/components/treatment/shipment'
@@ -85,7 +85,7 @@ export default {
   components: {
     process,
     'page-layout': PageLayout,
-    'profile-picture-and-detail': ProfilePictureCard,
+    'treatment-profile-picture-and-detail': TreatmentProfilePictureCard,
     shipment,
     'scheduling-basic-request': schedulingBasicRequest,
     QrViewer,

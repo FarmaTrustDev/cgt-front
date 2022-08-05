@@ -2,12 +2,12 @@
   <div>
     <a-card :bordered="false" class="default-card pick-info">
       <article class="article">
-        <h4 class="heading pl-0">{{ heading }}</h4>
+        <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
       </article>
       <div v-if="!isEmpty(shipment)">
         <a-row>
           <a-col :span="12" class="mt-15">
-            <span class="text-muted">Logistics Provider</span>
+            <span class="text-muted">{{translation.LogisProvi_2_380}}</span>
           </a-col>
           <a-col :span="12" class="mt-15 text-right">
             {{ scheduling.logisticName }}
@@ -51,7 +51,7 @@
         </a-row> -->
         <a-row>
           <a-col :span="12" class="mt-15">
-            <span class="text-muted">Handled by:</span>
+            <span class="text-muted">{{translation['Handlby:_2_384']}}</span>
           </a-col>
           <a-col :span="12" class="mt-15 text-right">
             {{ shipment.senderName }}
@@ -59,7 +59,7 @@
         </a-row>
         <a-row>
           <a-col :span="12" class="mt-15">
-            <span class="text-muted">Collected by:</span>
+            <span class="text-muted">{{translation['Colleby:_2_390']}}</span>
           </a-col>
           <a-col :span="12" class="mt-15 text-right">
             {{ shipment.logisticUserName }}
@@ -67,7 +67,7 @@
         </a-row>
         <a-row>
           <a-col :span="12" class="mt-15">
-            <span class="text-muted">Pickup At:</span>
+            <span class="text-muted">{{translation['PickuDate:_2_386']}}</span>
           </a-col>
           <a-col :span="12" class="mt-15 text-right">
             {{
@@ -79,14 +79,14 @@
         </a-row>
         <a-row>
           <a-col :span="12" class="mt-15">
-            <span class="text-muted">Pickup Location:</span>
+            <span class="text-muted">{{translation['PickuLocat_2_792']}}</span>
           </a-col>
           <a-col :span="12" class="mt-15 text-right">
             {{ shipment.origin }}
           </a-col>
         </a-row>
       </div>
-      <alert v-else message="Sample has not been picked by the logistic" />
+      <alert v-else :message="translation.Samplhas_8_571" />
     </a-card>
   </div>
 </template>

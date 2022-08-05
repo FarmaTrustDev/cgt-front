@@ -2,7 +2,7 @@
   <page-layout
     :create="false"
     :loading="loading"
-    :title="treatmentName + ' Manufacturer Collection Process'"
+    :title="treatmentName + translation.ManufColle_3_574"
   >
     <template slot="content">
       <create :collection-type="COLLECTION_TYPE.treatment.id" />
@@ -23,6 +23,11 @@ export default {
       COLLECTION_TYPE,
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {},
 }
 </script>

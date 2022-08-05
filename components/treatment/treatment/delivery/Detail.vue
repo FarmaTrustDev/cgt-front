@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="default-card">
       <article class="article">
-        <h4 class="heading pl-0">Treatment Receiving</h4>
+        <h4 class="heading pl-0">{{translation.TreatRecei_2_326}}</h4>
       </article>
       <dl v-if="!isEmpty(shipment)" class="ant-row common-detail">
         <dt>{{ translation.IsRecei_2_328 }}</dt>

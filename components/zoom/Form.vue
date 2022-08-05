@@ -2,7 +2,7 @@
   <div>
     <a-form :form="form" @submit="onSubmit">
       <form-fields />
-      <FormActionButton :loading="loading" text="Create" />
+      <FormActionButton :loading="loading" :text="translation['Creat_1_123']" />
     </a-form>
   </div>
 </template>
@@ -18,6 +18,11 @@ export default {
       }),
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     onSubmit(e) {
       e.preventDefault()

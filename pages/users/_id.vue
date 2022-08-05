@@ -4,7 +4,7 @@
       <div class="grey-card mtminus-2">
         <a-card :bordered="false" class="default-border-radius mtminus-2">
           <h2>{{translation.AddUser_3_418}}</h2>
-          <formField />
+          <FormField />
       </a-card>
     </div>
     </template>
@@ -12,9 +12,9 @@
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import formField from '~/components/root/user/form'
+import FormField from '~/components/root/user/form'
 export default {
-  components: { 'page-layout': PageLayout, formField },
+  components: { 'page-layout': PageLayout, FormField },
   data() {
     return {
       loading: false,

@@ -20,7 +20,7 @@
         </a-tab-pane>
         <!-- // adding button -->
         <a-button slot="tabBarExtraContent" type="primary" @click="add">
-          Pre Screening Questions
+          {{translation.PreScree_3_568}}
         </a-button>
       </a-tabs>
 

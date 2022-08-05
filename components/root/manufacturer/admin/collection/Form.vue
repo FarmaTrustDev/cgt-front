@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-spin :spinning="loading">
-      <FormActionButton text="Add Process Steps" @click="addCollection" />
+      <FormActionButton :text="translation.AddProce_3_483" @click="addCollection" />
       <standardTable
         v-if="showTable"
         :columns="column"
@@ -26,7 +26,7 @@
             :collection-type="collectionType"
             @handlesShowModal="handlesShowModal"
           />
-          <FormActionButton :loading="loading" :is-created="isCreated" />
+          <FormActionButton :loading="loading" :custom-text="translation.Creat_1_123" :is-created="isCreated" />
         </a-form>
       </a-modal>
     </a-spin>
@@ -53,7 +53,7 @@ export default {
       showTable: false,
       column:[
   {
-    title: `Process Steps`,
+    title: `${this.$store.getters.getTranslation.ProceStep_2_486}`,
     dataIndex: 'name',
     key: 'name',
     width: '90%',

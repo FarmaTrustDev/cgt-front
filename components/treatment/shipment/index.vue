@@ -4,13 +4,13 @@
       <a-col :span="12">
         <pickup-detail
           :scheduling="schedule"
-          heading="Pickup Detail"
+          :heading="translation['PickuDetai_2_786']"
           :shipment="pickupShipment"
         />
       </a-col>
       <a-col :span="12">
         <delivery-detail
-          heading="Delivery Detail"
+          :heading="translation.DelivDetai_2_570"
           :scheduling="schedule"
           :shipment="deliveryShipment"
       /></a-col>
@@ -39,6 +39,11 @@ export default {
       schedule: null,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   methods: {
     fetch(id) {
       SchedulingServices.getDetailByTreatment(this.treatment.id)

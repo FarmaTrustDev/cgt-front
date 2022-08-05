@@ -60,7 +60,7 @@
       <FormActionButton
         class="mt-15"
         :loading="loading"
-        custom-text="Submit" 
+        :custom-text="translation['Submi_1_248']" 
         @click="clickImage"
       />
       <!-- @click="goto('/inventory/storage/tasks')"-->

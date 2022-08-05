@@ -27,6 +27,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
 import { getFormattedMoment,_disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
+import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 // import AppointmentServices from '~/services/API/AppointmentServices'
 import nullHelper from '~/mixins/null-helpers'
@@ -54,7 +55,7 @@ export default {
         nowIndicator: true,
         editable: false,
         displayEventTime : false,
-        selectable: true,
+        selectable: false,
         events: this.handleDateClick,
         slotMinTime: '08:00:00',
         height: 550,
@@ -114,6 +115,7 @@ export default {
       this.calendarEventsData = updatedData
     },
     handleDateClick(arg, callback) {
+      this.loading = true
       const manufacturerTreatment = this.manufacturerTreatment
       if (!this.isEmpty(manufacturerTreatment)) {
         TreatmentAvailabilityServices.get({
@@ -125,9 +127,15 @@ export default {
             this.savedEvents = schedules.data
             callback(schedules.data)
           })
-          .catch(this.error)
+          .catch((e) => {
+          if (!isEmpty(e.response)) {
+            // this.error = e.response.data.message
+            
+          }
+        })
           .finally(() => (this.loading = false))
-      }
+          // console.log(this.error)
+        }
     },
     showCalendarOpener(show) {
       this.openDatePicker = show

@@ -29,8 +29,8 @@
         <a-tab-pane key="2" :tab="translation.PendiTreat_2_300">
           <in-progress />
         </a-tab-pane>
-        <a-tab-pane key="3" tab="Completed Treatment"><completed /></a-tab-pane>
-        <a-tab-pane key="4" tab="All Treatments"> <all /></a-tab-pane>
+        <a-tab-pane key="3" :tab="translation['Compltreat_2_394']"><completed /></a-tab-pane>
+        <a-tab-pane key="4" :tab="translation['AllTreat_2_826']"> <all /></a-tab-pane>
       </a-tabs>
     </div>
   </div>

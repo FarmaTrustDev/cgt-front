@@ -31,5 +31,10 @@ export default {
       this.$emit('getConversation', conversation)
     },
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
 }
 </script>

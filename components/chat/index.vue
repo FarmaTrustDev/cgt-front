@@ -47,7 +47,7 @@
     </a-modal>
     <a-modal
       :visible="usersModal"
-      title="Users List"
+      :title="translation.UsersList_2_575"
       :footer="null"
       width="40%"
       @cancel="showUsersModal(false)"
@@ -168,7 +168,7 @@ export default {
         getNotification(notification.data)
       })
     },
-    /// this method works when auto message generate
+    // this method works when auto message generate
     // ! hot fix need to optimize the code
     getNotification(notification) {
       const opponentId = notification.sender_Id

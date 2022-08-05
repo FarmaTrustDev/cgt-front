@@ -180,7 +180,7 @@
       >
       <a-col :span="12">
         <a-form-item
-          label="Height(cm)*"
+          :label="translation['Heigh(cm)*_2_641']"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -202,7 +202,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Weight(Kg)*"
+          :label="translation['Weigh(kg)*_2_639']"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >

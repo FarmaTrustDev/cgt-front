@@ -3,7 +3,7 @@
     :create="false"
     class="patient-page enrollment-title container"
     :loading="loading"
-    title="Treatment Setup"
+    :title="translation['TreatSetup_2_466']"
   >
     <template slot="content"> 
           <create />
@@ -20,5 +20,10 @@ export default {
       loading: false,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
 }
 </script>

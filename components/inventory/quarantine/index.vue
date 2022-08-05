@@ -39,7 +39,7 @@
       ></a-col>
     </a-row>
     <a-form-item class="mt-15">
-      <FormActionButton @click="clickImage" :loading="loading" custom-text="Submit" />
+      <FormActionButton @click="clickImage" :loading="loading" :custom-text="translation['Submi_1_248']" />
     </a-form-item>
       <a-modal
       :visible="showModal"

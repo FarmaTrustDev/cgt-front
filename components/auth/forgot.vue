@@ -5,7 +5,7 @@
       <h3>Enter you email to reset you password</h3>
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
-          <a-form-item label="Email Address">
+          <a-form-item :label="translation['EmailAddre_2_140']">
             <a-input
               v-decorator="[
                 'username',

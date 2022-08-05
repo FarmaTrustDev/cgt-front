@@ -266,7 +266,7 @@
                   <FormActionButton
                     :loading="loading"
                     @click="clickSubmit"
-                    custom-text="Submit"
+                    :custom-text="translation['Submi_1_248']"
                   />
                   <a-modal
                     :visible="showLogisticsModal"

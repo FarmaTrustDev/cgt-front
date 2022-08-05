@@ -25,7 +25,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Email Address*:"
+          :label="translation['EmailAddre_2_140']+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -43,7 +43,7 @@
               },
             ]"
             :disabled="isCreated"
-            placeholder="Email Address"
+            :placeholder="translation['EmailAddre_2_140']"
           /> </a-form-item
       ></a-col>
       
