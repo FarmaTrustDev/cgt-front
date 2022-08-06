@@ -148,6 +148,7 @@ export default {
       })
     },
     postMessage(params) {
+      console.log(params)
       ChatServices.create(params).then((response) => {
         this.$emit('fetch', response)
       })
