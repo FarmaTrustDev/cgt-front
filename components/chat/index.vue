@@ -148,20 +148,23 @@ export default {
     getConversation(conversation) {
       let params = {}
       const recipientData = {}
+      
       if (conversation.isGroup) {
         recipientData.type = 'group_Id'
+        recipientData.name = conversation.group_Name
+        recipientData.id = conversation.group_Id
         params = {
-          group_Id: conversation.opponentId,
+          group_Id: conversation.group_Id,
         }
       } else {
         recipientData.type = 'recipient_Id'
+        recipientData.name = conversation.recipient_Name
+        recipientData.id = conversation.opponentId
         params = {
           recipient_Id: conversation.opponentId,
         }
       }
 
-      recipientData.id = conversation.opponentId
-      recipientData.name = conversation.recipient_Name
       this.recipient = recipientData
       this.fetch(params)
     },
