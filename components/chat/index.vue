@@ -148,10 +148,12 @@ export default {
     getConversation(conversation) {
       let params = {}
       const recipientData = {}
-      
+
       if (conversation.isGroup) {
         recipientData.type = 'group_Id'
-        recipientData.name = conversation.group_Name
+        recipientData.name = !isEmpty(conversation.group_Name)
+          ? conversation.group_Name
+          : conversation.group_name
         recipientData.id = conversation.group_Id
         params = {
           group_Id: conversation.group_Id,

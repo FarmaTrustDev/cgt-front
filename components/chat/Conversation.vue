@@ -3,7 +3,7 @@
     <a-card :bordered="false" class="chat-margin fix-chat-size">
       <strong slot="title">
         {{ recipient.name }} <a-divider></a-divider>
-      </strong>
+           </strong>
 
       <div class="chat-conversation-container">
         <a-row>
