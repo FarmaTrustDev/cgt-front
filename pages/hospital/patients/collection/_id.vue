@@ -10,7 +10,7 @@
       <status
         v-if="!isEmpty(entity.patient)"
         :treatment="entity"
-        class="treatment-process"
+        class="treatment-process green-on-update"
       />
     </template>
   </page-layout>
