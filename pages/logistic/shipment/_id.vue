@@ -13,7 +13,11 @@
             @change="changeTabs"
           >
             <a-tab-pane :key="1">
-              <div slot="tab" class="tab-title main">
+              <div
+                slot="tab"
+                class="tab-title main"
+                :class="isCompleted(!isEmpty(pickupShipment))"
+              >
                 {{ translation.PickuShipm_2_861 }}
               </div>
               <pickup
@@ -29,7 +33,11 @@
               />
             </a-tab-pane>
             <a-tab-pane :key="2">
-              <div slot="tab" class="tab-title main">
+              <div
+                slot="tab"
+                class="tab-title main"
+                :class="isCompleted(!isEmpty(deliveryShipment))"
+              >
                 {{ translation.DelivShipm_2_863 }}
               </div>
               <delivery
