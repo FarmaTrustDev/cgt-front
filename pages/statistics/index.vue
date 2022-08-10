@@ -1,14 +1,14 @@
 <template>
-  <div class="container">
+  <div class="container manf-stats">
     <div class="page-header clearfix">
     <div class="page-title">{{translation.Stati_1_19}}</div>
     </div>
     <a-card :bordered="false" class="grey-card">
-        <a-col :span="11" class="mtminus-6">
+        <a-col :md="11" class="mtminus-6">
           <treatmentStats />
         </a-col>
-        <a-col :span="2"></a-col>
-        <a-col :span="11" class="mtminus-5">
+        <a-col :span="1"></a-col>
+        <a-col :md="12" class="mtminus-5">
           <hospitalStats />
         </a-col>
     </a-card>
