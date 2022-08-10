@@ -81,6 +81,7 @@
     font-size: 0.875rem;
     border-radius: 22px;
     max-width: 150px;
+    margin-bottom: 5px;
   }
 }
 
@@ -92,6 +93,7 @@
 }
 .sidebar {
   overflow: hidden;
+  overflow-y: auto !important;
   .side-menu {
     margin-top: 5%;
   }

@@ -19,7 +19,7 @@
         @getEventClick="getEventClick"
       ></calendar>
     </div>
-    <FormFields :treatment="treatment" :entity="entity"></FormFields>
+    <FormFields :treatment="treatment" :entity="entity" class="slots-main"></FormFields>
     <FormActionButton :is-created="isCreated" />
     <a-modal
       :visible="visibleModal"

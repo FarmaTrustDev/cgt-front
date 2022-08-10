@@ -1,5 +1,5 @@
 <template>
-  <a-form-item :label="translation.LogisProvi_2_380" >
+  <a-form-item :label="translation.LogisProvi_2_380">
     <a-select
       v-decorator="[
         'logisticId',
@@ -13,12 +13,16 @@
           ],
         },
       ]"
-      placeholder = "Select Logistic Provider"
+      placeholder="Select Logistic Provider"
       class="default-select w-100"
       size="large"
       :disabled="disabled"
       @change="onchange"
     >
+      <a-select-option value="" disabled selected
+        >Select Logistic Provider</a-select-option
+      >
+
       <a-select-option
         v-for="type in treatmentTypes"
         :key="type.id"
@@ -38,8 +42,8 @@ export default {
     logisticId: { type: Number, default: null },
     disabled: { type: Boolean, default: false },
     params: { type: Object, default: () => ({}) },
-    isMultiple:{ type: Boolean, default: false },
-    isAdmin:{ type: Boolean, default: false },
+    isMultiple: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
   },
 
   data() {
@@ -47,14 +51,14 @@ export default {
       LOGISTIC_ALIAS,
       treatmentTypes: {},
       typeLoading: false,
-      logisticsData:{},
+      logisticsData: {},
     }
   },
-    computed: {
-      translation() {
-        return this.$store.getters.getTranslation
-      },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
     },
+  },
   mounted() {
     this.fetch()
     // this.fetchLogistics()

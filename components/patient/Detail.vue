@@ -13,7 +13,7 @@
           <span>{{ patient.gender == 1 ? 'Male' : 'Female' }}</span>
         </h6>
       </a-col>
-      <a-col :span="8" class="mt-15">
+      <a-col :span="6" class="mt-15">
         <h6>
           <span class="text-muted"> {{ translation.Age_1_746 }}:</span>
           <span>{{ patient.age }}</span>
@@ -33,7 +33,7 @@
           ><span>{{ patient.weight }} kg</span>
         </h6>
       </a-col>
-      <a-col :span="8" class="mt-15">
+      <a-col :span="6" class="mt-15">
         <h6>
           <span class="text-muted">{{ translation.BloodType_2_635 }}:</span
           ><span class="text-right">{{ patient.bloodType }}</span>
@@ -47,10 +47,13 @@
           <span>{{ patient.city }}</span>
         </h6>
       </a-col>
-      <a-col :span="8" class="mt-15">
+      <a-col :span="10" class="mt-15">
         <h6>
-          <span class="text-muted">{{ translation.EmailAddre_2_140 }}:</span
-          ><span style="width: 47px;"> {{ patient.email }}</span>
+          <span class="text-muted" style="width: 25%"
+            >{{ translation.EmailAddre_2_140 }}:</span
+          ><span style="width: 155px; overflow: hidden; height: 40px">
+            {{ patient.email }}</span
+          >
         </h6>
       </a-col>
     </a-row>
@@ -71,6 +74,5 @@ export default {
 <style scoped>
 h6 {
   display: flex;
-  justify-content: space-between;
 }
 </style>
