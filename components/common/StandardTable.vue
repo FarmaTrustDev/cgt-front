@@ -91,6 +91,12 @@
                   :patient="record"
                   :goto-view="stepClick"
                 ></steps>
+                <steps v-if="checkTreatment(treatment)"
+                :phases="phases"
+                :patient="record"
+                >
+
+                </steps>
                 <span class="vertical-line-standard-table"></span>
 
                 <a-dropdown>
@@ -540,10 +546,10 @@ export default {
         : this.fetchFrom
     },
     getCurrentStep(treatment) {
+      let currentPhase = 0
       // Most expensive Operation in whole application
       if (!isEmpty(treatment.phaseId)) {
         const phases = this.phases
-        let currentPhase = 0
         for (let phase = 0; phase < phases.length; phase++) {
           if (phases[phase].phaseId <= treatment.phaseId) {
             currentPhase = phases[phase].id
@@ -602,7 +608,16 @@ export default {
         this.fetch()
       })
     },
-
+    checkTreatment(treatment)
+    {
+      console.log(treatment, 'treatment')
+      if(treatment == null)
+      {
+        return true
+      }
+      else
+      return false
+    },
     handleFlagModal(e, patient, treatment, isHold) {
       // eslint-disable-next-line eqeqeq
       if (e == true && isHold == false) {
