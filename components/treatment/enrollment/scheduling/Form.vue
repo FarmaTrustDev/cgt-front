@@ -5,9 +5,10 @@
         :message="
           'The treatment was rejected by ' +
           data.organization +
-          '. Re-schedule the treatment from available slots below. For:' +
-          getRejectionDetail(data.rejectionReason)  
+          '. Re-schedule the treatment from available slots below.'
+           
         "
+        :description="getRejectionDetail(data.rejectionReason) "
         type="success"
       />
     </div>
@@ -20,7 +21,7 @@
       ></calendar>
     </div>
     <FormFields :treatment="treatment" :entity="entity"></FormFields>
-    <FormActionButton :is-created="isCreated" />
+    <FormActionButton text="Finish Scheduling" :is-created="isCreated" />
     <a-modal
       :visible="visibleModal"
       ok-text="Ok"
@@ -108,10 +109,10 @@ export default {
     getRejectionDetail(data){
       if(!isEmpty(data))
       {
-        return 'data'
+        return "Reason: " + 'data'
       }
       else{
-        return 'N/A'
+        return "Reason: " + 'N/A'
       }
     },
     getMomentByStandardFormat,

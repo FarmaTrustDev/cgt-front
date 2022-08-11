@@ -13,10 +13,11 @@
           ],
         },
       ]"
-      placeholder = "Select Logistic Provider"
+      placeholder="Select Logistics Provider"
+      :loading="typeLoading"
       class="default-select w-100"
       size="large"
-      :disabled="disabled"
+      :disabled="false"
       @change="onchange"
     >
       <a-select-option

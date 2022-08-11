@@ -172,7 +172,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please enter duration!',
                   },
                 ],
               },
@@ -219,6 +219,7 @@
                 ],
               },
             ]"
+            placeholder="Enter Notes"
             style="width: 100%"
             size="large"
           ></a-textarea> </a-form-item

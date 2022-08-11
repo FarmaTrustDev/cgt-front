@@ -109,7 +109,7 @@ export default {
           width: 100,
         },
         {
-          title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
+          title: `${this.$store.getters.getTranslation.Statu_1_202}`,
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' },
           width: 100,
@@ -120,7 +120,8 @@ export default {
           scopedSlots: { customRender: 'action' },
           width: 100,
         },
-      ],
+      ], 
+      data:[],
       loading: false,
       loadingTicket: false,
       isCreated: false,
@@ -190,7 +191,7 @@ export default {
       this.loading = true
       SupportServices.get(params)
         .then((response) => {
-          this.data = response.ticket
+          this.data= response.ticket
           this.archivedData.splice(0)
           this.inprogressData.splice(0)
           this.resolvedData.splice(0)

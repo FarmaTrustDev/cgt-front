@@ -14,6 +14,7 @@
         />
         <FormActionButton
           v-if="!tabsSubmitButton[`${index}`]"
+          :loading="loading"
           html-type="button"
           :text="getButtonText(category.name) + '-' + index"
           class="mt-15 screening-btn"
