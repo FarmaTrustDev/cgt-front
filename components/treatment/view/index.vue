@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false" class="default-card no-shadow">
-    <a-alert v-if ="treatment.isHold" :message="'The treatment is on pause state. Reason: '+ actionResult.notes + '. At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm')" type="success"></a-alert>
-    <a-alert v-if ="treatment.isCancel" :message="'The treatment is on cancel state. Reason: '+ actionResult.notes + '. At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm')" type="success"></a-alert>
+    <a-alert v-if ="treatment.isHold" :message="'The treatment is on pause state.  At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm') " :description="'Reason: '+ actionResult.notes + '.'" type="success"></a-alert>
+    <a-alert v-if ="treatment.isCancel" :message="'The treatment is on cancel state.  At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm') " :description="'Reason: '+ actionResult.notes + '.'" type="success"></a-alert>
     <div v-if="!isEmpty(bags)"> 
       <a-tabs :active-key="activeTab" type="card" @change="onTabChange">
         <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">

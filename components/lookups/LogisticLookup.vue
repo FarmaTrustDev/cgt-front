@@ -16,7 +16,7 @@
       placeholder="Select Logistic Provider"
       class="default-select w-100"
       size="large"
-      :disabled="disabled"
+      :disabled="false"
       @change="onchange"
     >
       <a-select-option value="" disabled selected

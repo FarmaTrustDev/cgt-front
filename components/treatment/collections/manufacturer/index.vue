@@ -10,6 +10,25 @@
       @click="completeAllBags(bags)"
       >Complete Collection Process
     </a-button>
+      <a-modal
+      :visible="visibleModal"
+      ok-text="Ok"
+      :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
+    >
+      <center>
+        <p>
+          <img
+            :src="getImageUrl('Icons/cross-letter.jpg')"
+            width="50%"
+            height="50%"
+          />
+        </p>
+        <h4><p>Complete all steps before completing this sample. </p></h4>
+        <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
+      </center>
+    </a-modal>
   </a-skeleton>
 </template>
 <script>
@@ -18,10 +37,10 @@ import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import { COLLECTION_TYPE } from '~/services/Constant'
 import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
-
+import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { Bag },
-  mixins: [notifications],
+  mixins: [notifications, imagesHelper],
   props: {
     treatment: { required: true, type: Object },
     showCompleteBtn: { required: true, type: String },
@@ -30,6 +49,7 @@ export default {
     return {
       showModal: false,
       fetchIdFromParams: false,
+      visibleModal: false,
       bags: [],
       COLLECTION_TYPE,
       loading: true,
@@ -67,8 +87,12 @@ export default {
       if (this.validateAllBagsCompleted(bags)) {
         this.$emit('completeAllBag', bags)
       } else {
-        this.error('Complete all the bags')
+        this.visibleModal = true
+        // this.error('Complete all the bags')
       }
+    },
+        handleOk() {
+      this.visibleModal = false
     },
     validateAllBagsCompleted(bags) {
       if (!isEmpty(bags)) {

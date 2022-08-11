@@ -8,5 +8,8 @@ export default {
                 this.activeTab = view.query.view
             }
         },
+        isCompleted(flag) {
+            return flag ? 'ant-tabs-tab-completed' : ''
+        },
     },
 }

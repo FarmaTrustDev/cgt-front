@@ -19,48 +19,6 @@
       // width: fit-content;
       // padding-right: 25px;
     }
-    .tab-title {
-      text-decoration: none;
-      font-weight: 500;
-      border-radius: 22px;
-      font-size: 1rem;
-      padding: 25px;
-      color: #233151;
-      background-color: #f9f9f9;
-      &::before {
-        position: inherit;
-        content: '';
-        height: 40px;
-        width: 40px;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 10px;
-        background-size: 100%;
-        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
-        border-top: none;
-      }
-    }
-    .ant-tabs-tab-completed {
-      background-color: #d1f2dc;
-      &::before {
-        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg');
-      }
-    }
-    .ant-tabs-tab-active {
-      .tab-title {
-        background-color: #f2f5fb;
-        &::before {
-          background-size: cover;
-          background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg');
-        }
-      }
-    }
-
-    .ant-tabs-tab {
-      text-align: left;
-      margin-top: 15px;
-      padding: 0;
-    }
   }
 
   .ant-tabs-ink-bar {
@@ -262,6 +220,52 @@
   }
 }
 
+.green-on-update {
+  .ant-tabs-tab {
+    text-align: left;
+    margin-top: 15px;
+    padding: 0;
+  }
+  .tab-title {
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 22px;
+    font-size: 1rem;
+    padding: 25px;
+    color: #233151;
+    background-color: #f9f9f9;
+    &::before {
+      position: inherit;
+      content: '';
+      height: 40px;
+      width: 40px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      background-size: 100%;
+      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
+      border-top: none;
+    }
+  }
+  .ant-tabs-bar {
+    .ant-tabs-tab-completed {
+      background-color: #d1f2dc;
+      &::before {
+        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg');
+      }
+    }
+    .ant-tabs-tab-active {
+      .tab-title {
+        background-color: #f2f5fb;
+        &::before {
+          background-size: cover;
+          background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg');
+        }
+      }
+    }
+  }
+}
+
 .schedule-create-tabs {
   .enrollment-page {
     padding: 10%;
@@ -309,6 +313,7 @@
     text-overflow: ellipsis;
   }
 }
+
 .schedule-logistic-selection {
   .ant-select-selection {
     margin-bottom: 20px;

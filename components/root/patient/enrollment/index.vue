@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-skeleton :loading="loading">
+    <a-skeleton :loading="loading" class="green-on-update">
       <a-tabs tab-position="left" :active-key="activeTab" @change="tabChange">
         <a-tab-pane key="enrollment">
           <div
@@ -169,9 +169,9 @@ export default {
     getNextTab(key) {
       this.tabChange(key)
     },
-    isCompleted(flag) {
-      return flag ? 'ant-tabs-tab-completed' : ''
-    },
+    // isCompleted(flag) {
+    //   return flag ? 'ant-tabs-tab-completed' : ''
+    // },
     handleCancel() {
       this.visible = false
     },

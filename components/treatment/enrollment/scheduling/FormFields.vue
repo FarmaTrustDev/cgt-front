@@ -171,7 +171,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please enter duration!',
                   },
                 ],
               },

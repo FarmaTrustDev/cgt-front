@@ -159,7 +159,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.blockState {
+  position: relative;
+  &::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+  }
+}
 .isHold {
+      .ant-steps {
+      @extend .blockState;
+    }
   .ant-steps-item.ant-steps-item-finish {
     background: #fffbc8;
   }

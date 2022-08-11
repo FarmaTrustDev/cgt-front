@@ -43,7 +43,7 @@
       :destroy-on-close="true"
       @cancel="handleGroupModal(false)"
     >
-      <Group />
+      <Group @getGroup="getGroup" />
     </a-modal>
     <a-modal
       :visible="usersModal"
@@ -106,7 +106,7 @@ export default {
           for (const dat in conversations.data) {
             if (
               conversations.data[dat].id === 925 ||
-              conversations.data[dat].id === 913 
+              conversations.data[dat].id === 913
             ) {
               console.log('hello remove tis if printed')
             } else {
@@ -128,11 +128,14 @@ export default {
       ChatServices.get(params)
         .then((response) => {
           this.endToEndConversation.splice(0)
-          for(const dt in response.data){
-            if(response.data[dt].id===973 || response.data[dt].id===903 || response.data[dt].id===905){
+          for (const dt in response.data) {
+            if (
+              response.data[dt].id === 973 ||
+              response.data[dt].id === 903 ||
+              response.data[dt].id === 905
+            ) {
               console.log(response.data[dt])
-            }
-            else{
+            } else {
               this.endToEndConversation.push(response.data[dt])
             }
           }
@@ -145,20 +148,25 @@ export default {
     getConversation(conversation) {
       let params = {}
       const recipientData = {}
+
       if (conversation.isGroup) {
         recipientData.type = 'group_Id'
+        recipientData.name = !isEmpty(conversation.group_Name)
+          ? conversation.group_Name
+          : conversation.group_name
+        recipientData.id = conversation.group_Id
         params = {
-          group_Id: conversation.opponentId,
+          group_Id: conversation.group_Id,
         }
       } else {
         recipientData.type = 'recipient_Id'
+        recipientData.name = conversation.recipient_Name
+        recipientData.id = conversation.opponentId
         params = {
           recipient_Id: conversation.opponentId,
         }
       }
 
-      recipientData.id = conversation.opponentId
-      recipientData.name = conversation.recipient_Name
       this.recipient = recipientData
       this.fetch(params)
     },
@@ -208,6 +216,19 @@ export default {
 
       this.fetch({ recipient_Id: users.id })
       this.showUsersModal(false)
+    },
+    getGroup(group) {
+      this.recipient = {
+        type: 'group_Id',
+        name: group.name,
+        id: group.id,
+      }
+
+      this.fetch({
+        Group_Id: group.id,
+        sender_id: this.$store.getters.getUser.id,
+      })
+      this.handleGroupModal(false)
     },
     loadFromChat(notification) {
       this.getConversation(notification.data)

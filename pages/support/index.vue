@@ -134,7 +134,7 @@ export default {
           width: 100,
         },
         {
-          title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
+          title: `${this.$store.getters.getTranslation.Statu_1_202}`,
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' },
           width: 100,

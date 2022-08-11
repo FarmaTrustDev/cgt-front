@@ -127,28 +127,27 @@
     .ant-tabs-right-bar {
       .ant-tabs-tab {
         text-align: left;
-        padding: 15px 25px;
+        padding: 0;
         height: auto;
         background-color: #f9f9f9;
         border-radius: 22px !important;
-        padding-left: 40px !important;
         // margin: auto;
-        &::after {
-          content: '';
-          position: absolute;
-          height: 28px;
-          width: 28px;
-          left: 7px;
-          top: 50%;
-          bottom: 50%;
-          margin: auto;
-          background-size: 100%;
-          background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
-        }
+        // &::after {
+        //   content: '';
+        //   position: absolute;
+        //   height: 28px;
+        //   width: 28px;
+        //   left: 7px;
+        //   top: 50%;
+        //   bottom: 50%;
+        //   margin: auto;
+        //   background-size: 100%;
+        //   background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
+        // }
       }
       .ant-tabs-tab-active {
-        padding: 15px 25px;
-        padding-bottom: 15px !important;
+        // padding: 15px 25px;
+        // padding-bottom: 15px !important;
         &::after {
           background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
         }
