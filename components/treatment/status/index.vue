@@ -34,7 +34,7 @@
         >
           <div v-if="tabs.shippingDetails">
             <article class="article">
-              <h4 class="heading pl-0">Sample Shipping Detail</h4>
+              <h4 class="heading pl-0">{{translation.SamplShipp_3_517}}</h4>
             </article>
             <Viewer :treatment="treatment" />
             <shipment :treatment="treatment" />
