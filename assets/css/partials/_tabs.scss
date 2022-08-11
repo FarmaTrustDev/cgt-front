@@ -102,15 +102,14 @@
   border-radius: 22px;
   margin-right: 30px;
   margin-bottom: 10px;
-  font-size: 1rem;
+  font-size: 1rem !important;
   font-weight: 600;
   background-color: #fff;
 }
 
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
   color: #7c8db5;
-  border: solid 1px #9dc5ff;
-  font-size: 1rem;
+  border: solid 1px #9dc5ff !important;
   background-color: #f2f5fb !important;
   background-color: #f3f8ff;
   font-weight: 500;
@@ -206,5 +205,14 @@
   textarea.ant-input {
     height: auto;
     border-radius: 12px;
+  }
+}
+//
+.qr_bag {
+  .ant-table-row.ant-table-row-level-0 {
+    td {
+      border-top: 1px solid #ececec;
+      padding: 8px;
+    }
   }
 }

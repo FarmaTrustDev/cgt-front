@@ -288,6 +288,20 @@
       border: 1px solid gainsboro;
     }
   }
+  .fc-daygrid-event.fc-daygrid-dot-event.fc-event {
+    padding: 10px;
+    font-size: 12px;
+    background: #3869d1;
+    margin-bottom: 10px;
+    text-align: center;
+    box-shadow: 1px 1px 4px 0 #323232bf;
+    &:hover {
+      cursor: default;
+    }
+    .fc-daygrid-event-dot {
+      display: none;
+    }
+  }
 }
 .enrollment-title {
   .ant-card-head-title {

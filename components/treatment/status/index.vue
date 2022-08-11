@@ -45,7 +45,7 @@
             <article class="article">
               <h4 class="heading pl-0">Sample Shipping Detail</h4>
             </article>
-            <Viewer :treatment="treatment" />
+            <Viewer :treatment="treatment"/>
             <shipment :treatment="treatment" />
           </div>
           <alert
