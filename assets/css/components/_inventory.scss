@@ -14,7 +14,7 @@
   }
   .location {
     color: #7a7575;
-    font-size:	0.875rem;
+    font-size: 0.875rem;
     padding: 5px 15px 0;
 
     .anticon {
@@ -54,13 +54,21 @@
   }
 
   .h-tabs .ant-tabs-tab {
-    padding: 8px 25px;
+    padding: 8px 8px;
     margin-top: 10px;
+  }
+  .ant-tabs-top-bar {
+    div.ant-tabs-nav-wrap {
+      text-align: center;
+    }
+  }
+  .ant-tabs-nav .ant-tabs-tab {
+    margin: 0 16px 0 0;
   }
   .flag-title {
     img {
       margin-right: 12px;
-      font-size:1rem;
+      font-size: 1rem;
       height: 25px;
     }
     .title {
@@ -140,7 +148,7 @@
     background-color: $primary-color;
   }
 }
-.manf-treatment-body{
-    padding-left:3%;
-    padding-right:3%;
+.manf-treatment-body {
+  padding-left: 3%;
+  padding-right: 3%;
 }

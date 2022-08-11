@@ -7,7 +7,7 @@
           <span>{{ patient.patient.enrollmentNumber }}</span>
         </h6>
       </a-col> -->
-            <a-col :span="8" class="mt-15">
+      <a-col :span="8" class="mt-15">
         <h6>
           <span class="text-muted"> Hospital:</span>
           <span>{{ patient.hospitalName }}</span>
@@ -16,10 +16,9 @@
       <a-col :span="8" class="mt-15">
         <h6>
           <span class="text-muted">Treatment Type:</span>
-          <span>{{ patient.treatmentTypeName}}</span>
+          <span>{{ patient.treatmentTypeName }}</span>
         </h6>
       </a-col>
-
     </a-row>
     <!-- <a-row :gutter="20" dir="ltr">
       <a-col :span="8" class="mt-15">
@@ -53,7 +52,9 @@
       <a-col :span="8" class="mt-15">
         <h6>
           <span class="text-muted">{{ translation.EmailAddre_2_140 }}:</span
-          ><span style="width: 47px;"> {{ patient.patient.email }}</span>
+          ><span style="width: 155px; overflow: hidden; height: 40px">
+            {{ patient.patient.email }}</span
+          >
         </h6>
       </a-col>
     </a-row>

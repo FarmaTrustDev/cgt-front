@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-date-picker
-    class="availability-calender"
+      class="availability-calender"
       :open="openDatePicker"
       :disabled-date="disabledDate"
       format="YYYY-MM-DD"
@@ -11,6 +11,7 @@
       @ok="showCalendarOpener(false)"
     />
     <FullCalendar
+      class="grey-card"
       :options="calendarOptions"
       :header="{
         left: 'prev,next',
@@ -26,7 +27,10 @@ import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import TreatmentAvailabilityServices from '~/services/API/TreatmentAvailabilityServices'
-import { getFormattedMoment,_disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
+import {
+  getFormattedMoment,
+  _disabledPreviousDate,
+} from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 // import AppointmentServices from '~/services/API/AppointmentServices'
@@ -54,7 +58,7 @@ export default {
         initialView: 'dayGridMonth',
         nowIndicator: true,
         editable: false,
-        displayEventTime : false,
+        displayEventTime: false,
         selectable: false,
         events: this.handleDateClick,
         slotMinTime: '08:00:00',
@@ -128,14 +132,13 @@ export default {
             callback(schedules.data)
           })
           .catch((e) => {
-          if (!isEmpty(e.response)) {
-            // this.error = e.response.data.message
-            
-          }
-        })
+            if (!isEmpty(e.response)) {
+              // this.error = e.response.data.message
+            }
+          })
           .finally(() => (this.loading = false))
-          // console.log(this.error)
-        }
+        // console.log(this.error)
+      }
     },
     showCalendarOpener(show) {
       this.openDatePicker = show

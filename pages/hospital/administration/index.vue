@@ -60,6 +60,7 @@ export default {
   background: #fff;
   padding: 25px;
   border-radius: 52px;
+  margin:auto;
 }
 .admin-tab > h4 {
   font-size: 1.125rem;

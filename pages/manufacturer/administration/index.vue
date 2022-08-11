@@ -3,8 +3,9 @@
     <h3 class="page-title ml-40">{{ translation._1_438 }}</h3>
     <div>
       <a-row :gutter="15" class="grey-card m-auto">
-        <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
+        <a-col v-for="menu in userAdminMenu" :key="menu.key" :md="12">
           <nuxt-link :to="menu.to">
+            <!-- <div :md="1" class="ant-col-md-1"></div> -->
             <div class="admin-tab administration-tab">
               <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
               <img width="90px" :src="menu.icon" />

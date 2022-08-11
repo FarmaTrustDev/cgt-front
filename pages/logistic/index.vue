@@ -4,6 +4,7 @@
     :bordered="false"
     :loading="loading"
     :title="translation.Treat_1_29"
+    class="container"
   >
     <template slot="content">
       <a-tabs :animated="false">

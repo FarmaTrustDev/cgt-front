@@ -134,7 +134,6 @@
             ]"
             :format="dateFormat"
             :disabled-date="disabledDate"
-           
             size="large"
           >
           </a-date-picker> </a-form-item
@@ -157,12 +156,12 @@
             ]"
             :format="dateFormat"
             :disabled-date="disabledDate"
-            
             size="large"
           >
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
+        <div class="mt-3 mb-10" style="color: #909090">Duration</div>
         <a-form-item :label="translation.Durat_1_484" class="pb-0">
           <a-input-number
             v-decorator="[
@@ -172,19 +171,20 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Date of Birth!',
+                    message: 'Please enter duration!',
                   },
                 ],
               },
             ]"
             style="width: 100%"
             size="large"
+            class="duration_field"
           ></a-input-number> </a-form-item
       ></a-col>
     </a-row>
     <a-row>
       <a-col :span="12" class="plr-10">
-        <a-form-item :label="translation.DelivArriv_4_736 " class="pb-0">
+        <a-form-item :label="translation.DelivArriv_4_736" class="pb-0">
           <a-date-picker
             v-decorator="[
               'deliveryArrivalDate',
@@ -205,7 +205,7 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
-      <a-col :span="12" class="plr-10">
+      <a-col :md="12" class="plr-10">
         <a-form-item :label="translation.Notes_1_350" class="pb-0">
           <a-textarea
             v-decorator="[
@@ -219,7 +219,8 @@
                 ],
               },
             ]"
-            style="width: 100%"
+            style="width: 100%; padding-top: 15px"
+            class="note-area"
             size="large"
           ></a-textarea> </a-form-item
       ></a-col>
@@ -228,7 +229,7 @@
 </template>
 <script>
 import LogisticLookup from '~/components/lookups/LogisticLookup'
-import {_disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
+import { _disabledPreviousDate } from '~/services/Helpers/MomentHelpers'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 export default {
   components: { LogisticLookup },
@@ -261,9 +262,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  methods: { 
+  methods: {
     disabledDate: _disabledPreviousDate,
-    onSubmit(e) {} 
-    },
+    onSubmit(e) {},
+  },
 }
 </script>
+<style scoped>
+.duration_field {
+  border: 0 !important;
+}
+.duration_field:focus {
+  border-color: none !important;
+  box-shadow: none !important;
+}
+</style>

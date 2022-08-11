@@ -3,12 +3,17 @@
     <a-table :data-source="data" :loading="loading" :columns="columns">
       <template slot="title">
         <a-button type="primary" @click="handleGroupModal(true)">
-          {{translation.CreatGroup_2_479}}</a-button
+          {{ translation.CreatGroup_2_479 }}</a-button
         >
       </template>
-      <template slot="message" slot-scope="text, record">
-        <a-button type="" @click="getUser(text, record)"> {{translation.view_1_750}}</a-button>
+      <template slot="action" slot-scope="text, record">
+        <a-button type="" @click="getGroup(text, record)"> add group</a-button>
       </template>
+      <!-- <template slot="message" slot-scope="text, record">
+        <a-button type="" @click="getGroup(text, record)">
+          {{ translation.view_1_750 }}</a-button
+        >
+      </template> -->
     </a-table>
     <a-modal
       :destroy-on-close="true"
@@ -20,8 +25,11 @@
     >
       <a-form :form="form" @submit="onSubmit">
         <FormFields @getImage="getImage" />
-        <FormActionButton :loading="loading" :custom-text="translation.CreatGroup_2_479"
-      @cancel="handleGroupModal(false)" />
+        <FormActionButton
+          :loading="loading"
+          :custom-text="translation.CreatGroup_2_479"
+          @cancel="handleGroupModal(false)"
+        />
       </a-form>
     </a-modal>
   </div>
@@ -41,6 +49,11 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
+    // scopedSlots: { customRender: 'title' },
+  },
+  {
+    title: 'Action',
+    scopedSlots: { customRender: 'action' },
   },
 ]
 export default {
@@ -57,11 +70,11 @@ export default {
       }),
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  },
   mounted() {
     this.fetch()
   },
@@ -81,6 +94,9 @@ export default {
       if (!isEmpty(files)) {
         this.files = files
       }
+    },
+    getGroup(g, r) {
+      this.$emit('getGroup', g)
     },
     onSubmit(e) {
       // this.loading = true

@@ -69,9 +69,7 @@ export default {
   },
   mixins: [routeHelpers],
   props: {
-    dumpData: { type: Array,
-      default: ()=>[],
-    },
+    dumpData: { type: Array, default: () => [] },
     type: {
       type: String,
       default: '',
@@ -112,7 +110,7 @@ export default {
           width: 100,
         },
         {
-          title: `${this.$store.getters.getTranslation.CarriStatu_2_320}`,
+          title: `${this.$store.getters.getTranslation.Statu_1_202}`,
           dataIndex: 'status',
           scopedSlots: { customRender: 'status' },
           width: 100,
@@ -135,6 +133,9 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.fetch()
   },
   methods: {
     handleTableChange(pagination, filters, sorter) {
@@ -176,7 +177,7 @@ export default {
     showUpdate(record) {
       this.fetchTicket(record.id)
     },
-        fetch(params = {}) {
+    fetch(params = {}) {
       // console.log(params.reference_Id)
       this.loading = true
       SupportServices.get(params)
@@ -185,7 +186,7 @@ export default {
           this.archivedData.splice(0)
           this.inprogressData.splice(0)
           this.resolvedData.splice(0)
-          for(const dat in this.data){
+          for (const dat in this.data) {
             // console.log(this.data[dat])
             const dates = this.data[dat].created_At.split('T')[0]
             this.data[dat].created_At = dates

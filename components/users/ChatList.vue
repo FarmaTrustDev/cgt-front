@@ -37,13 +37,13 @@ export default {
 UserServices, 
 data: [] }
   },
-  mounted() {
-    this.fetch()
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.fetch()
   },  
   methods: {
     getUser(user) {

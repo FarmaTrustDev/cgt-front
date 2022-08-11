@@ -1,14 +1,25 @@
 <template>
-  <page-layout :create="false" :loading="loading" :title="translation.Shipm_1_756+' '+translation.Statu_1_202">
+  <page-layout
+    :create="false"
+    :loading="loading"
+    :title="translation.Shipm_1_756 + ' ' + translation.Statu_1_202"
+  >
     <template slot="content">
-      <div class="grey-card enrollment-page">
+      <div class="grey-card enrollment-page green-on-update">
         <a-card class="default-border-radius ant-card">
           <a-tabs
             :active-key="activeKey"
-            @change="changeTabs"
             :tab-position="mode"
+            @change="changeTabs"
           >
-            <a-tab-pane :key="1" :tab="translation.PickuShipm_2_861">
+            <a-tab-pane :key="1">
+              <div
+                slot="tab"
+                class="tab-title main"
+                :class="isCompleted(!isEmpty(pickupShipment))"
+              >
+                {{ translation.PickuShipm_2_861 }}
+              </div>
               <pickup
                 v-if="isEmpty(pickupShipment)"
                 :scheduling="entity"
@@ -21,7 +32,14 @@
                 :shipment="pickupShipment"
               />
             </a-tab-pane>
-            <a-tab-pane :key="2" :tab="translation.DelivShipm_2_863">
+            <a-tab-pane :key="2">
+              <div
+                slot="tab"
+                class="tab-title main"
+                :class="isCompleted(!isEmpty(deliveryShipment))"
+              >
+                {{ translation.DelivShipm_2_863 }}
+              </div>
               <delivery
                 v-if="isEmpty(deliveryShipment)"
                 :shipment="deliveryShipment"
@@ -50,6 +68,7 @@ import deliveryDetail from '~/components/root/logistic/shipment/delivery/Detail'
 import withFetch from '~/mixins/with-fetch'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import { isEmpty } from '~/services/Utilities'
+import tabsHelpers from '~/mixins/tabs-helpers'
 export default {
   components: {
     'page-layout': PageLayout,
@@ -58,7 +77,7 @@ export default {
     delivery,
     pickup,
   },
-  mixins: [withFetch],
+  mixins: [withFetch, tabsHelpers],
   data() {
     return {
       loading: false,
@@ -70,7 +89,7 @@ export default {
       activeKey: 1,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },

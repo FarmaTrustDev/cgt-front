@@ -162,6 +162,9 @@ a {
 .page-header {
   margin-top: -1rem;
   // margin-bottom: 20px;
+  .selection-tab .ant-select-selection {
+    padding-top: 11px !important;
+  }
 }
 .page-title {
   font-size: 1.5625rem;
@@ -262,6 +265,9 @@ a {
       border: 1px solid #ececec !important;
       color: black;
     }
+  }
+  .page-title {
+    font-weight: 400;
   }
 }
 .ant-pagination {
@@ -407,6 +413,11 @@ a {
   textarea.ant-input:focus {
     border: none;
   }
+  .ant-calendar-picker.ant-calendar-picker-large {
+    .ant-calendar-picker-input.ant-input {
+      padding-bottom: 5px !important;
+    }
+  }
 }
 .pick-info {
   .text-right {
@@ -460,4 +471,36 @@ a {
       font-weight: 400;
     }
   }
+}
+// ==================================
+.manf-stats {
+  .imageHeading {
+    figure.mtminus-60 {
+      display: flex;
+      align-items: center;
+      figcaption.flex-display {
+        position: unset;
+      }
+    }
+  }
+}
+// ================================
+.manf-treatment {
+  .ant-tabs-top-bar {
+    margin-top: 45px;
+    .ant-tabs-nav-container {
+      .ant-tabs-nav-wrap {
+        text-align: center;
+        .ant-tabs-nav {
+          padding: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+//
+.ant-calendar-picker-clear,
+.ant-calendar-picker-icon {
+  top: 46%;
 }

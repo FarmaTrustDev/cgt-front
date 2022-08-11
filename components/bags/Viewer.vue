@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="qr_bag">
     <a-skeleton :loading="loading">
       <StandardTable
         v-if="bags.length > 0"

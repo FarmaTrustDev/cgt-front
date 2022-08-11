@@ -1,8 +1,8 @@
 <template>
   <page-layout class="patient-page enrollment-title" :create="false">
     <template slot="content">
-      <div class="grey-card enrollment-page container">
-        <a-card :bordered="false" class="default-border-radius  pt-0">
+      <div class="grey-card enrollment-page container green-on-update">
+        <a-card :bordered="false" class="default-border-radius pt-0">
           <Enrollment />
         </a-card></div
     ></template>
@@ -16,6 +16,5 @@ export default {
   components: { Enrollment, 'page-layout': PageLayout },
   middleware: 'auth',
   mounted() {},
-  
 }
 </script>

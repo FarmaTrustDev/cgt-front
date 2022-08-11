@@ -7,19 +7,25 @@
         tab-position="left"
         @change="callback"
       >
-        <a-tab-pane
-          key="scheduling"
-          :disabled="!tabs.scheduling"
-          tab="Scheduling"
-        >
+        <a-tab-pane key="scheduling" :disabled="!tabs.scheduling">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(treatment.screeningStatus)"
+          >
+            Scheduling
+          </div>
           <scheduling :treatment="treatment" />
         </a-tab-pane>
 
-        <a-tab-pane
-          key="collection"
-          :disabled="!tabs.collectSamples"
-          tab=" Collect Samples"
-        >
+        <a-tab-pane key="collection" :disabled="!tabs.collectSamples">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(tabs.collectSamples)"
+          >
+            Collect Samples
+          </div>
           <collections
             v-if="tabs.collectSamples != null"
             :enabled="tabs.collectSamples"
@@ -27,39 +33,55 @@
           />
         </a-tab-pane>
 
-        <a-tab-pane
-          key="shipment"
-          :disabled="!tabs.shippingDetails"
-          tab=" Sample Shipping Detail"
-        >
+        <a-tab-pane key="shipment" :disabled="!tabs.shippingDetails">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(tabs.shippingDetails)"
+          >
+            Sample Shipping Detail
+          </div>
           <div v-if="tabs.shippingDetails">
             <article class="article">
               <h4 class="heading pl-0">{{translation.SamplShipp_3_517}}</h4>
             </article>
-            <Viewer :treatment="treatment" />
+            <Viewer :treatment="treatment"/>
             <shipment :treatment="treatment" />
           </div>
-          <alert v-else message="Logistic provider has not approved the request yet" type="info"></alert>
+          <alert
+            v-else
+            message="Logistic provider has not approved the request yet"
+            type="info"
+          ></alert>
         </a-tab-pane>
-        <a-tab-pane
-          key="5"
-          :disabled="!tabs.treatmentDelivery"
-          tab="Treatment Delivery"
-        >
+        <a-tab-pane key="5" :disabled="!tabs.treatmentDelivery">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(tabs.treatmentDelivery)"
+          >
+            Treatment Deliveryn
+          </div>
           <treatmentDelivery :treatment="treatment"
         /></a-tab-pane>
-        <a-tab-pane
-          key="treatment"
-          :disabled="!tabs.treatmentCollection"
-          tab=" Treatment Collection"
-        >
+        <a-tab-pane key="treatment" :disabled="!tabs.treatmentCollection">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(tabs.treatmentCollection)"
+          >
+            Treatment Collection
+          </div>
           <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
-        <a-tab-pane
-          key="after-care"
-          :disabled="!tabs.afterCare"
-          tab="Aftercare"
-        >
+        <a-tab-pane key="after-care" :disabled="!tabs.afterCare">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(tabs.afterCare)"
+          >
+            Aftercare
+          </div>
           <afterCare :treatment="treatment" />
         </a-tab-pane> </a-tabs
     ></a-card>
@@ -107,7 +129,6 @@ export default {
   },
   methods: {
     callback(key) {
-      console.log(key)
       this.activeTab = key
     },
     fetchTreatment() {

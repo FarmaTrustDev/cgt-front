@@ -368,7 +368,7 @@
             v-decorator="[
               'street',
               {
-                initialValue: patient.problem,
+                initialValue: patient.street,
                 rules: [
                   {
                     required: true,

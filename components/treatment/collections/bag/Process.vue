@@ -61,14 +61,16 @@
           />
         </template>
         <template slot="action" slot-scope="name, row">
-          <a-button
+          <!-- shape="round" icon="sync" -->
+          <button
             :disabled="row.isCollected || btnLoading"
-            shape="round"
             :loading="loading"
-            icon="sync"
             @click="handleCollectionSubmit(row)"
-            class="btn-send"
-          />
+            type="primary"
+            class="btn-send ant-btn ant-btn-primary"
+          >
+            Confirm
+          </button>
           <a-button
             v-if="row.isCollected"
             type="primary"
