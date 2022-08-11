@@ -95,6 +95,7 @@ export default {
         { id: 'de', name: 'German' },
         { id: 'za', name: 'Chinese' },
         { id: 'ar', name: 'Arabic' },
+        { id: 'fr', name: 'French' },
       ],
       lang: null,
       notificationCount: 0,
@@ -119,7 +120,7 @@ export default {
     this.notificationHandler()
     this.genericNotificationHandler()
     this.fetchUnreadMessages()
-    // this.uploadTranslations()
+    this.uploadTranslations()
     // this.downloadTranslations()
   },
   methods: {

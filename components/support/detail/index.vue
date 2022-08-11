@@ -89,6 +89,11 @@ export default {
     data: { type: Array, default: () => {} },
     ticket: { type: Object, default: () => {}, required: true },
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },   
   methods:{
     getDateFormat(date){
       console.log(date, 'date')

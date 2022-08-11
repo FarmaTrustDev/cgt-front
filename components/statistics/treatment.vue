@@ -183,7 +183,7 @@ export default {
       })
     },
     fetchTreatment() {
-      TreatmentTypeServices.get()
+      TreatmentTypeServices.getWithScreening()
         .then((response) => {
           this.treatmentTypes = response.data
         })

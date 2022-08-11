@@ -123,6 +123,11 @@ export default {
       tabs: {},
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }, 
   mounted() {
     this.handleActiveTab()
     this.fetchScheduling()
