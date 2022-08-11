@@ -8,7 +8,7 @@
     <template slot="content">
       <div class="grey-card">
         <treatment-profile-picture-and-detail :treatment="entity" />
-        <a-card :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card :bordered="false" class="mt-15 default-card-x h-tabs">
           <span>
             <!-- //Steps -->
             <div

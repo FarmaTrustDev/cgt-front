@@ -3,11 +3,11 @@
     <article class="article">
         <h4 class="heading pl-0">Treatment Delivery</h4>
     </article>
-    <a-row>
-      <a-col :span="11">
+    <a-row class="grey-card">
+      <a-col :span="12">
         <pickup-detail :scheduling="schedule" :shipment="pickupShipment"
       /></a-col>
-      <a-col :span="2"></a-col>
+      <a-col :span="1"></a-col>
       <a-col :span="11">
         <delivery-detail :scheduling="schedule" :shipment="deliveryShipment"
       /></a-col>
