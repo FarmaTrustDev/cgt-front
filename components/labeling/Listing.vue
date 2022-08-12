@@ -10,7 +10,11 @@
       <template slot="name" slot-scope="name">
         <strong>{{ name }}</strong>
       </template>
-
+      <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
+          <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
+            <span class="treatmentName">{{ name }}</span>
+          </a-tooltip>
+      </template>
       <template slot="print" slot-scope="text, schedule">
         <a-button
           v-for="bag in schedule.treatment.bags"
@@ -54,6 +58,7 @@ export default {
         {
           title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
           dataIndex: 'treatmentType.name',
+          scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {
           title: `${this.$store.getters.getTranslation.Print_1_111}`,

@@ -197,7 +197,7 @@
                 ],
               },
             ]"
-            placeholder="Height(cm)"
+            :placeholder="translation['Heigh(cm)*_2_641']"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -219,7 +219,7 @@
                 ],
               },
             ]"
-            placeholder="Weight(kg)"
+            :placeholder="translation['Weigh(kg)*_2_639']"
           />
         </a-form-item>
       </a-col>
@@ -427,7 +427,7 @@
             notFoundContent="Enter Country Name"
             :show-search="true"
             :filter-option="filterOption"
-            placeholder="Search country"
+            :placeholder="translation.Searccount_2_576"
             style="width: 100%"
             size="large"
             class="default-select pt-2"
