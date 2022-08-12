@@ -118,6 +118,8 @@ import HospitalLogisticServices from '~/services/API/HospitalLogisticServices'
           if (!err) {
             if(this.checked){
               this.create(values)
+            }else{
+              this.destroy()
             }
           } else {
             this.loading = false
@@ -132,7 +134,23 @@ import HospitalLogisticServices from '~/services/API/HospitalLogisticServices'
             this.success(response.message)
             this.btnLoading = false
             this.loading = false
-            this.goto('/hospital/Administration')
+            this.goto('/manufacturer/Administration/logistics')
+          })
+          .catch(this.error)
+          .finally(() => {
+            // this.btnLoading = false
+            // this.loading = false
+            this.loading = false
+          })
+      },
+      destroy() {
+        this.btnLoading = true
+        this.loading = true
+        HospitalLogisticServices.destroyAll().then((response) => {
+            this.success(response.message)
+            this.btnLoading = false
+            this.loading = false
+            this.goto('/manufacturer/Administration/logistics')
           })
           .catch(this.error)
           .finally(() => {

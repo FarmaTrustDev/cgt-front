@@ -3,7 +3,7 @@
     <a-table
       :columns="columns"
       :row-key="(record) => record.uuid"
-      :data-source="dumpData"
+      :data-source="resolveData"
       :loading="loading"
       class="rounded-table"
       :customRow="customRowReDirect"
@@ -128,6 +128,7 @@ export default {
       showAddModal: false,
       loadingTicket: false,
       ticket: {},
+      resolveData: this.dumpData
     }
   },
   computed: {
@@ -177,9 +178,9 @@ export default {
       SupportServices.get(params)
         .then((response) => {
           this.data = response.ticket
-          this.archivedData.splice(0)
-          this.inprogressData.splice(0)
-          this.resolvedData.splice(0)
+          // this.archivedData.splice(0)
+          // this.inprogressData.splice(0)
+          this.resolveData.splice(0)
           for(const dat in this.data){
             // console.log(this.data[dat])
             const dates = this.data[dat].created_At.split('T')[0]
@@ -189,13 +190,13 @@ export default {
               this.data[dat].reporter_name = 'Chris Murphy (DAC3138P)'
             }
             if (this.data[dat].status_Name === 'In progress') {
-              this.inprogressData.push(this.data[dat])
+              // this.inprogressData.push(this.data[dat])
             }
             if (this.data[dat].status_Name === 'Resolved') {
-              this.resolvedData.push(this.data[dat])
+              this.resolveData.push(this.data[dat])
             }
             if (this.data[dat].status_Name === 'Archived') {
-              this.archivedData.push(this.data[dat])
+              // this.archivedData.push(this.data[dat])
             }
           }
           // console.log(this.resolvedData)

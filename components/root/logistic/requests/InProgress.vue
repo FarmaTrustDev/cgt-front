@@ -2,6 +2,11 @@
   <div>
     <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
+      <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
+          <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
+            <span class="treatmentName">{{ name }}</span>
+          </a-tooltip>
+      </template> 
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)">
@@ -43,6 +48,7 @@ export default {
           title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
           dataIndex: 'treatmentType.name',
           key: 'TreatmentName',
+          scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {
           title: `${this.$store.getters.getTranslation.Organ_1_166}`,

@@ -12,6 +12,11 @@
         pageSizeOptions: ['10', '20', '30', '50', '100'],
       }"
     >
+      <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
+          <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
+            <span class="treatmentName">{{ name }}</span>
+          </a-tooltip>
+      </template>       
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)">
@@ -65,6 +70,7 @@ export default {
           title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
           dataIndex: 'treatmentType.name',
           key: 'TreatmentName',
+          scopedSlots: { customRender: 'treatmentTypeNameRender' },
         },
         {
           title: `${this.$store.getters.getTranslation.ProduLine_2_449}`,

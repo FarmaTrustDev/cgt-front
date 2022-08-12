@@ -3,7 +3,7 @@
     <a-table
       :columns="columns"
       :row-key="(record) => record.uuid"
-      :data-source="dumpData"
+      :data-source="inProgressData != null ? inProgressData : dumpData"
       :loading="loading"
       class="rounded-table"
       :customRow="customRowReDirect"
@@ -47,7 +47,7 @@
         </a-dropdown>
       </template>
     </a-table>
-        <!-- Add New Ticket Modal -->
+    <!-- Add New Ticket Modal -->
     <a-skeleton :loading="loadingTicket">
       <add-new-ticket
         v-if="showAddModal"
@@ -63,7 +63,7 @@ import SupportServices from '~/services/API/SupportServices'
 import AddNewTicketModal from '~/components/support/Add'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
-    components: {
+  components: {
     'add-new-ticket': AddNewTicketModal,
   },
   props: {
@@ -120,13 +120,14 @@ export default {
           scopedSlots: { customRender: 'action' },
           width: 100,
         },
-      ], 
-      data:[],
+      ],
+      data: [],
       loading: false,
       loadingTicket: false,
       isCreated: false,
       showAddModal: false,
       ticket: {},
+      inProgressData:this.dumpData,
     }
   },
   computed: {
@@ -186,16 +187,16 @@ export default {
           this.loadingTicket = false
         })
     },
-            fetch(params = {}) {
+    fetch(params = {}) {
       // console.log(params.reference_Id)
       this.loading = true
       SupportServices.get(params)
         .then((response) => {
-          this.data= response.ticket
-          this.archivedData.splice(0)
-          this.inprogressData.splice(0)
-          this.resolvedData.splice(0)
-          for(const dat in this.data){
+          this.data = response.ticket
+          // this.archivedData.splice(0)
+          this.inProgressData.splice(0)
+          // this.resolvedData.splice(0)
+          for (const dat in this.data) {
             // console.log(this.data[dat])
             const dates = this.data[dat].created_At.split('T')[0]
             this.data[dat].created_At = dates
@@ -204,13 +205,13 @@ export default {
               this.data[dat].reporter_name = 'Chris Murphy (DAC3138P)'
             }
             if (this.data[dat].status_Name === 'In progress') {
-              this.inprogressData.push(this.data[dat])
+              this.inProgressData.push(this.data[dat])
             }
             if (this.data[dat].status_Name === 'Resolved') {
-              this.resolvedData.push(this.data[dat])
+              // this.resolvedData.push(this.data[dat])
             }
             if (this.data[dat].status_Name === 'Archived') {
-              this.archivedData.push(this.data[dat])
+              // this.archivedData.push(this.data[dat])
             }
           }
           // console.log(this.resolvedData)
