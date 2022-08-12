@@ -76,6 +76,19 @@
         slot-scope="text, record"
         class="treatment-steps"
       >
+<!-- steps without treatments -->
+          <div class="container-div">
+            <div class="container-steps-div main">
+              <div @click="gotoConsent(record)">
+                <steps v-if="checkTreatment(record)"
+                  :phases="phases"
+                  :patient="record"
+                  :current-step="getCurrentStep"
+                ></steps>
+              </div>
+            </div>
+          </div>
+<!-- Steps with treatments -->
         <span
           v-for="treatment in record.treatments"
           :key="treatment.id"
@@ -91,12 +104,7 @@
                   :patient="record"
                   :goto-view="stepClick"
                 ></steps>
-                <steps v-if="checkTreatment(treatment)"
-                :phases="phases"
-                :patient="record"
-                >
 
-                </steps>
                 <span class="vertical-line-standard-table"></span>
 
                 <a-dropdown>
@@ -562,6 +570,10 @@ export default {
       }
       return 1
     },
+    gotoConsent(patient){
+      if(!isEmpty(patient))
+      this.goto(`/hospital/patients/${patient.globalId}?view=Consent`)
+    },
     stepClick(patient, treatment, phase) {
       // insane logic
       //  2 for patient
@@ -608,15 +620,12 @@ export default {
         this.fetch()
       })
     },
-    checkTreatment(treatment)
-    {
-      console.log(treatment, 'treatment')
-      if(treatment == null)
-      {
+    checkTreatment(record) {
+      if (isEmpty(record.treatments)) {
         return true
+      } else {
+        return false
       }
-      else
-      return false
     },
     handleFlagModal(e, patient, treatment, isHold) {
       // eslint-disable-next-line eqeqeq
@@ -631,6 +640,7 @@ export default {
         this.holdTreatment(this.patientData, this.recordData)
         this.recordData.isHold = false
         this.cancelTreatment(this.patientData, this.recordData)
+        this.showCancelTreatmentModal = false
       }
       // eslint-disable-next-line eqeqeq
       else if (e == false && isHold == false) {
@@ -654,7 +664,6 @@ export default {
     },
     submitCancelResponse() {
       /// ANy how need to optimize on high priority
-      console.log(this.treatmentForCancellation, 'treatmentForCancellation')
       const treatment = this.treatmentForCancellation
       this.loading = true
       TreatmentServices.cancel(treatment.globalId, !treatment.isCancel, {

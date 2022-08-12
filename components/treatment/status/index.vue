@@ -60,7 +60,7 @@
             class="tab-title"
             :class="isCompleted(tabs.treatmentDelivery)"
           >
-            Treatment Deliveryn
+            Treatment Delivery
           </div>
           <treatmentDelivery :treatment="treatment"
         /></a-tab-pane>
