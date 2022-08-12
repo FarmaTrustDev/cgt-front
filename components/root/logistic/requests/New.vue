@@ -27,7 +27,7 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <Form :is-accepted="isAccepted" :data="selectedRow" />
         <FormActionButton
-          :text="getButtonText()"
+          :text="getButtonText() === 'Accept' ? translation.Accep_1_278 : translation.Rejec_1_280"
           :btn-type="getButtonType()"
           :is-created="false"
           ><span slot="extra" class="mr-5">
@@ -115,7 +115,7 @@ export default {
       this.handleModal(true)
     },
     getButtonText() {
-      return this.isAccepted ? "translation.Accep_1_278" : "translation.Rejec_1_280"
+      return this.isAccepted ? "Accept" : "Reject"
     },
     getButtonType() {
       return this.isAccepted ? 'primary' : 'danger'

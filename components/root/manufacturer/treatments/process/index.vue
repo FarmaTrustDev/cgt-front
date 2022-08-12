@@ -24,6 +24,11 @@ export default {
   data() {
     return { TREATMENT_PHASES }
   },
+  computed: {
+    translation() {
+        return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     completeAllBag(bags) {
       TreatmentServices.markManufacturerCollection(this.treatment.id).then(

@@ -7,7 +7,7 @@
     class="container"
   >
     <template slot="content">
-      <a-tabs :animated="false">
+      <a-tabs :animated="false" class="logistic_tabs">
         <a-tab-pane key="1" :tab="translation.NewReque_2_480">
           <newRequests />
         </a-tab-pane>
