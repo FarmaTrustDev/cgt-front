@@ -12,9 +12,9 @@
           :screenings="category.screenings"
           @getFilledDatas="getFilledData"
         />
+        
         <FormActionButton
-          v-if="!tabsSubmitButton[`${index}`]"
-          :loading="loading"
+          v-if="!tabsSubmitButton[`${index}`] && !isEmpty(category.screenings)"
           html-type="button"
           :text="getButtonText(category.name) + '-' + index"
           class="mt-15 screening-btn"
