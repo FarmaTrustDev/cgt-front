@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="default-card no-shadow">
+  <a-card :bordered="false" class="default-card-x no-shadow">
     <a-alert v-if ="treatment.isHold" :message="'The treatment is on pause state.  At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm') " :description="'Reason: '+ actionResult.notes + '.'" type="success"></a-alert>
     <a-alert v-if ="treatment.isCancel" :message="'The treatment is on cancel state.  At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm') " :description="'Reason: '+ actionResult.notes + '.'" type="success"></a-alert>
     <div v-if="!isEmpty(bags)"> 

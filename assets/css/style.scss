@@ -147,6 +147,23 @@ a {
       }
     }
   }
+  .ant-upload-list.ant-upload-list-text {
+    width: 130px;
+    margin: auto;
+  }
+  // .ant-switch.ant-switch-checked {
+  //   height:33px;
+  //   background-color: #3869d1 !important;
+  //   .ant-switch-inner {
+  //     padding: 7px;
+  //     font-size: 15px;
+  //   }
+  //   .ant-switch-checked::after {
+  //     top: 3px;
+  //     height: 23px;
+  //     width: 23px;
+  //   }
+  // }
 }
 // .ant-form-vertical .ant-form-item {
 // padding-bottom: unset;
@@ -357,7 +374,7 @@ a {
   .ant-table-row {
     .action-button.ant-btn {
       height: fit-content;
-      padding: 8px 15px;
+      padding: 8px 10px;
       span {
         font-size: 14px;
       }
