@@ -54,7 +54,7 @@
         <h6>
           <!-- {{ translation.EmailAddre_2_140 }} -->
           <span class="text-muted">Email:&nbsp;</span
-          ><span style="width: 155px; overflow: hidden; height: 40px">
+          ><span style="overflow: hidden; height: 40px">
             {{ patient.email }}</span
           >
         </h6>

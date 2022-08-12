@@ -52,7 +52,7 @@
       <a-col :span="8" class="mt-15">
         <h6>
           <span class="text-muted">{{ translation.EmailAddre_2_140 }}:</span
-          ><span style="width: 155px; overflow: hidden; height: 40px">
+          ><span style="overflow: hidden; height: 40px">
             {{ patient.patient.email }}</span
           >
         </h6>

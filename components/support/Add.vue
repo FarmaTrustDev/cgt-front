@@ -8,6 +8,7 @@
       :visible="visible"
       @cancel="showModal(false)"
       @ok="showModal(false)"
+      style="margin-top: 3px"
     >
       <a-form :form="form" @submit="onSubmit">
         <a-row :gutter="20">
@@ -142,7 +143,7 @@
         <a-row :gutter="20">
           <a-col :span="24">
             <a-form-item
-             class="remove-required-colon"
+              class="remove-required-colon"
               :label="translation.Subje_1_190"
               :label-col="{ span: 24 }"
               :wrapper-col="{ span: 24 }"
@@ -168,7 +169,7 @@
         <a-row :gutter="20">
           <a-col :span="24">
             <a-form-item
-              :label="translation.Descr_1_69+':'"
+              :label="translation.Descr_1_69 + ':'"
               :label-col="{ span: 24 }"
               :wrapper-col="{ span: 24 }"
             >
@@ -305,7 +306,7 @@
           </a-col>
         </a-row>
 
-        <a-row class="mt-15">
+        <a-row class="">
           <a-col class="text-right">
             <FormActionButton :is-created="isCreated" :loading="loading" />
           </a-col>
@@ -338,32 +339,32 @@ export default {
       }),
       typeLoading: false,
       statuses: [
-        { id: 1, name: `${this.$store.getters.getTranslation.Archi_1_226}`},
-        { id: 2, name: `${this.$store.getters.getTranslation.Inprogr_2_204}`},
-        { id: 3, name: `${this.$store.getters.getTranslation.Resol_1_230}`},
+        { id: 1, name: `${this.$store.getters.getTranslation.Archi_1_226}` },
+        { id: 2, name: `${this.$store.getters.getTranslation.Inprogr_2_204}` },
+        { id: 3, name: `${this.$store.getters.getTranslation.Resol_1_230}` },
         // { id: 4, name: `${this.$store.getters.getTranslation.cance_1_296}`},
         // { id: 5, name: `${this.$store.getters.getTranslation.Pause_1_452}`},
       ],
       priorities: [
-        { id: 1, name: `${this.$store.getters.getTranslation.high_1_200}`},
-        { id: 2, name: `${this.$store.getters.getTranslation.mediu_1_198}`},
-        { id: 3, name: `${this.$store.getters.getTranslation.low_1_196}`},
+        { id: 1, name: `${this.$store.getters.getTranslation.high_1_200}` },
+        { id: 2, name: `${this.$store.getters.getTranslation.mediu_1_198}` },
+        { id: 3, name: `${this.$store.getters.getTranslation.low_1_196}` },
       ],
       stakeHoldersList: [
-        { id: 1, name: `${this.$store.getters.getTranslation.Hospi_1_47}`},
-        { id: 2, name: `${this.$store.getters.getTranslation.Manuf_1_89}`},
-        { id: 3, name: `${this.$store.getters.getTranslation.Logis_1_146}`},
+        { id: 1, name: `${this.$store.getters.getTranslation.Hospi_1_47}` },
+        { id: 2, name: `${this.$store.getters.getTranslation.Manuf_1_89}` },
+        { id: 3, name: `${this.$store.getters.getTranslation.Logis_1_146}` },
       ],
       loading: false,
       bags: [],
     }
   },
   mounted() {},
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  }, 
+  },
   methods: {
     filterOption,
     showModal(show) {
@@ -373,7 +374,12 @@ export default {
     },
     searchPatient(keyword) {
       console.log(keyword)
-      this.fetchPatient({ puid: keyword, name: keyword, email: keyword, active: true })
+      this.fetchPatient({
+        puid: keyword,
+        name: keyword,
+        email: keyword,
+        active: true,
+      })
     },
     fetchPatient(params = {}) {
       PatientServices.search(params).then((response) => {
@@ -448,5 +454,5 @@ export default {
         })
     },
   },
-  }
+}
 </script>

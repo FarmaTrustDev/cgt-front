@@ -7,11 +7,13 @@
     class="container"
   >
     <template slot="content">
-      <a-tabs :animated="false" class="logistic_tabs">
+      <a-tabs :animated="false" class="logistic_tabs rounded-table">
         <a-tab-pane key="1" :tab="translation.NewReque_2_480">
           <newRequests />
         </a-tab-pane>
-        <a-tab-pane key="3" :tab="translation.Inprogr_2_204"> <in-progress /> </a-tab-pane>
+        <a-tab-pane key="3" :tab="translation.Inprogr_2_204">
+          <in-progress />
+        </a-tab-pane>
       </a-tabs>
     </template>
   </page-layout>
@@ -36,7 +38,7 @@ export default {
       isAccepted: false,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
