@@ -1,8 +1,24 @@
 <template>
   <a-card :bordered="false" class="default-card-x no-shadow">
-    <a-alert v-if ="treatment.isHold" :message="'The treatment is on pause state.  At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm') " :description="'Reason: '+ actionResult.notes + '.'" type="success"></a-alert>
-    <a-alert v-if ="treatment.isCancel" :message="'The treatment is on cancel state.  At '+ moment(actionResult.createdAt).format('do MMMM YYYY hh:mm') " :description="'Reason: '+ actionResult.notes + '.'" type="success"></a-alert>
-    <div v-if="!isEmpty(bags)"> 
+    <a-alert
+      v-if="treatment.isHold"
+      :message="
+        'The treatment is on pause state.  At ' +
+        moment(actionResult.createdAt).format('do MMMM YYYY hh:mm')
+      "
+      :description="'Reason: ' + actionResult.notes + '.'"
+      type="success"
+    ></a-alert>
+    <a-alert
+      v-if="treatment.isCancel"
+      :message="
+        'The treatment is on cancel state.  At ' +
+        moment(actionResult.createdAt).format('do MMMM YYYY hh:mm')
+      "
+      :description="'Reason: ' + actionResult.notes + '.'"
+      type="success"
+    ></a-alert>
+    <div v-if="!isEmpty(bags)">
       <a-tabs :active-key="activeTab" type="card" @change="onTabChange">
         <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
           <Steps class="view-screen" :bag="bag" :treatment="treatment" />
@@ -27,19 +43,19 @@ export default {
     // bags: { required: true, type: Object },
   },
   data() {
-    return { 
-     moment,
-     activeTab: null,
-     showCompleteBag: true,
-     bags: null,
-     actionResult: {}
-     }
+    return {
+      moment,
+      activeTab: null,
+      showCompleteBag: true,
+      bags: null,
+      actionResult: {},
+    }
   },
-    computed:{
-      translation() {
-        return this.$store.getters.getTranslation
-      },
-    },  
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     this.fetchBags()
     this.getTreatmentAction()
@@ -49,20 +65,20 @@ export default {
       TreatmentBagServices.get({ treatmentId: this.treatment.id }).then(
         (bags) => {
           this.bags = bags.data
-          
+
           if (!isEmpty(this.bags)) {
             this.onTabChange(this.bags[0].id)
           }
         }
       )
     },
-    getTreatmentAction(){
+    getTreatmentAction() {
       TreatmentLogServices.GetLastActionByTreatmentId(this.treatment.id).then(
-        (response)=>{
+        (response) => {
           this.actionResult = response.data
-          console.log(this.actionResult)
         }
-      )},
+      )
+    },
     isEmpty,
     onTabChange(bagId) {
       this.activeTab = bagId
