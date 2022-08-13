@@ -534,3 +534,17 @@ a {
   margin: 25px;
   margin-bottom: 17px;
 }
+//
+.toggle_record {
+  width: 65px;
+  height: 30px;
+  background-color: #f56363;
+  &::after {
+    top: 2px !important;
+    width: 22px;
+    height: 22px;
+  }
+}
+.toggle_record.ant-switch-checked {
+  background-color: #3869d1;
+}

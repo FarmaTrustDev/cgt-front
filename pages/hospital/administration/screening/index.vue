@@ -1,5 +1,10 @@
 <template>
-  <page-layout :loading="loading" :create="false" title="Screening Question">
+  <page-layout
+    :loading="loading"
+    :create="false"
+    title="Screening Question"
+    class="container"
+  >
     <template slot="content">
       <standardTable
         :columns="column"
@@ -21,12 +26,12 @@ export default {
   data() {
     return {
       loading: false,
-      column:[
+      column: [
         {
           title: `${this.$store.getters.getTranslation.Manuf_1_89}`,
           dataIndex: 'manufacturer',
           key: 'hospitals',
-            scopedSlots: { customRender: 'nameTags' },
+          scopedSlots: { customRender: 'nameTags' },
         },
         {
           title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
@@ -50,7 +55,7 @@ export default {
     }
   },
   methods: {},
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },

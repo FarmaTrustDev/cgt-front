@@ -22,6 +22,7 @@
                 },
               ]"
               size="large"
+              class="toggle_record"
               :checked-children="translation.yes_1_654"
               :un-checked-children="translation.no_1_656"
             />

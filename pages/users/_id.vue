@@ -1,7 +1,7 @@
 <template>
   <page-layout :create="false" :loading="loading" :bordered="false" :back="false">
     <template slot="content">
-      <div class="grey-card mtminus-2">
+      <div class="grey-card mtminus-2 container" >
         <a-card :bordered="false" class="default-border-radius mtminus-2">
           <h2>{{translation.AddUser_3_418}}</h2>
           <FormField />
