@@ -387,6 +387,14 @@ a {
       border: 1px solid #ececec !important;
     }
   }
+  .default-card-x {
+    .ant-alert {
+      width: 75%;
+      margin: auto;
+      background-color: #ececec;
+      border: gray;
+    }
+  }
 }
 .screening-tabs {
   .ant-tabs-nav-wrap {
@@ -520,4 +528,23 @@ a {
 .ant-calendar-picker-clear,
 .ant-calendar-picker-icon {
   top: 46%;
+}
+//
+.bags_section > .ant-tabs-bar.ant-tabs-top-bar.ant-tabs-card-bar {
+  margin: 25px;
+  margin-bottom: 17px;
+}
+//
+.toggle_record {
+  width: 65px;
+  height: 30px;
+  background-color: #f56363;
+  &::after {
+    top: 2px !important;
+    width: 22px;
+    height: 22px;
+  }
+}
+.toggle_record.ant-switch-checked {
+  background-color: #3869d1;
 }

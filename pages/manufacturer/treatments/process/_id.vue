@@ -13,7 +13,7 @@
             <!-- //Steps -->
             <div
               class="treatment-steps"
-              style="width: 105%; margin-left: -3%; padding-right: 2%"
+              style="width: 100%; margin-left: 0%; padding-right: 2%"
             >
               <span class="step-col-large">
                 <a-steps

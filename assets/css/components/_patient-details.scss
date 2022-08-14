@@ -66,6 +66,16 @@
     }
   }
 }
+.btn-send {
+  height: 32px;
+  background: #ececec;
+  border: gray;
+  color: gray;
+  &:hover {
+    color: #000;
+    background-color: #c1c1c1;
+  }
+}
 .btn-send.ant-btn[disabled] {
   display: none !important;
 }

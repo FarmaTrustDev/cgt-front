@@ -34,12 +34,19 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
+function destroyAll() {
+  return request({
+    url: `${baseApi}`,
+    method: 'DELETE',
+  })
+}
 const HospitalLogisticServices = {
   get,
   create,
   destroy,
   put,
-  getById
+  getById,
+  destroyAll
 }
 
 export default HospitalLogisticServices

@@ -7,6 +7,7 @@
     ></a-alert>
 
     <a-table
+      v-else
       :columns="columns"
       :row-key="(record) => record.globalId"
       :data-source="screenings"

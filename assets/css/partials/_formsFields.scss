@@ -74,7 +74,10 @@
     color: #495057;
     // border: 1px solid red;
   }
-
+  .ant-select-search__field {
+    position: absolute;
+    height: 25px;
+  }
   .ant-select-selection__placeholder,
   .ant-select-search__field__placeholder {
     margin-top: -15px;
@@ -137,6 +140,7 @@ input#login_username:focus {
     // height: 50px;
     height: 105%;
     border: 1px solid #bebfcb;
+    padding-left: 35px !important;
   }
   ::-webkit-input-placeholder {
     padding-left: 7%;

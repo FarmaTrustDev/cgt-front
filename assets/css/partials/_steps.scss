@@ -239,7 +239,7 @@
   }
   .cancel {
     .ant-steps-item {
-      background: #ff8361;
+      background: #ffd8d8;
     }
     .ant-steps {
       @extend .blockState;
@@ -256,8 +256,8 @@
     background: #d1f2dc;
     .ant-steps-item-content {
       &::before {
-        width: 20px;
-        height: 20px;
+        width: 17px;
+        height: 17px;
         margin-left: 10px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
       }
