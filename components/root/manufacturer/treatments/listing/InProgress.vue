@@ -13,10 +13,10 @@
       }"
     >
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
-          <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
-            <span class="treatmentName">{{ name }}</span>
-          </a-tooltip>
-      </template>       
+        <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
+          <span class="treatmentName">{{ name }}</span>
+        </a-tooltip>
+      </template>
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)">
@@ -176,9 +176,9 @@ export default {
   }
 }
 .isHold {
-      .ant-steps {
-      @extend .blockState;
-    }
+  .ant-steps {
+    @extend .blockState;
+  }
   .ant-steps-item.ant-steps-item-finish {
     background: #fffbc8;
   }
