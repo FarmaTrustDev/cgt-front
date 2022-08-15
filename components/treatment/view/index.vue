@@ -80,7 +80,6 @@ export default {
       TreatmentLogServices.GetLastActionByTreatmentId(this.treatment.id).then(
         (response) => {
           this.actionResult = response.data
-          console.log(this.actionResult)
         }
       )
     },

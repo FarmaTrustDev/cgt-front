@@ -11,7 +11,7 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(treatment.screeningStatus)"
+            :class="isCompleted(treatment.phaseId > 3)"
           >
             Scheduling
           </div>
@@ -22,9 +22,9 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(tabs.collectSamples)"
+            :class="isCompleted(treatment.phaseId > 4)"
           >
-            Collect Samples
+            Collect Samples {{ treatment.phaseId }}
           </div>
           <collections
             v-if="tabs.collectSamples != null"
@@ -43,9 +43,9 @@
           </div>
           <div v-if="tabs.shippingDetails">
             <article class="article">
-              <h4 class="heading pl-0">{{translation.SamplShipp_3_517}}</h4>
+              <h4 class="heading pl-0">{{ translation.SamplShipp_3_517 }}</h4>
             </article>
-            <Viewer :treatment="treatment"/>
+            <Viewer :treatment="treatment" />
             <shipment :treatment="treatment" />
           </div>
           <alert
@@ -127,7 +127,7 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-  }, 
+  },
   mounted() {
     this.handleActiveTab()
     this.fetchScheduling()
