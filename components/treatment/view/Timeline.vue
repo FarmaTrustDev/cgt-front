@@ -26,15 +26,26 @@
               <div v-if="step.isCompleted" class="right d-block">
                 <strong class="step-title d-block"> by:{{ step.by }}</strong>
                 <span class="organization">{{ step.organizationName }}</span>
-                <a-upload
+                <!-- <a-upload
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   :default-file-list="uploadedFiles(step.uploads)"
                 >
-                </a-upload>
+                </a-upload> -->
+                <ul v-if="!isEmpty(step.uploads)">
+                  <li v-for="upload in step.uploads" :key="upload.uid">
+                    <a
+                      :href="getImageUrl(upload.url)"
+                      download
+                      target="_blank"
+                      >{{ upload.name }}</a
+                    >
+                  </li>
+                </ul>
               </div>
             </a-col>
-          </a-row></div
-      ></a-timeline-item>
+          </a-row>
+        </div></a-timeline-item
+      >
     </a-timeline>
   </div>
 </template>
@@ -43,6 +54,7 @@
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { isEmpty } from '~/services/Utilities'
 import imagesHelper from '~/mixins/images-helper'
+
 export default {
   mixins: [imagesHelper],
   props: {

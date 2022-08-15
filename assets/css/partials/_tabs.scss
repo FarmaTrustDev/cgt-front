@@ -60,7 +60,12 @@
       top: 0;
       bottom: 0;
       margin-top: 30px;
+      left: 22px;
     }
+  }
+
+  .ant-tabs-bar .tab-title {
+    padding: 15px 25px;
   }
 
   .ant-tabs-tab-active {
@@ -70,21 +75,21 @@
     }
   }
 
-  .ant-tabs-tab {
-    &::before {
-      // background-image: url($urlBase + '/web/icons/circle.svg');
-      background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
-      max-width: 40px;
-      height: 56px;
-      background-repeat: no-repeat;
-      background-position: 0, 0;
-      margin-left: 15px;
-    }
-  }
+  // .ant-tabs-tab {
+  //   &::before {
+  //     // background-image: url($urlBase + '/web/icons/circle.svg');
+  //     background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
+  //     max-width: 40px;
+  //     height: 56px;
+  //     background-repeat: no-repeat;
+  //     background-position: 0, 0;
+  //     margin-left: 15px;
+  //   }
+  // }
 
   .ant-tabs.ant-tabs-card {
     .ant-tabs-tab {
-      padding: 16px 56px;
+      padding: 0; // as we need to show active tab or green complete tab
       line-height: initial;
       height: auto;
       background-color: #f9f9f9 !important;
