@@ -15,7 +15,6 @@
               class="tab-title"
               :class="isCompleted(treatment.phaseId >= step.completedStep)"
             >
-              {{ treatment.phaseId }}
               {{ step.name }}
             </div>
             <Timeline
