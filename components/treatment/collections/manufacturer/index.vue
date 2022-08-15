@@ -10,7 +10,7 @@
       @click="completeAllBags(bags)"
       >Complete Collection Process
     </a-button>
-      <a-modal
+    <a-modal
       :visible="visibleModal"
       ok-text="Ok"
       :footer="null"
@@ -25,8 +25,15 @@
             height="50%"
           />
         </p>
-        <h4><p>Complete all steps before completing this sample. </p></h4>
-        <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
+        <h3>Complete all steps before completing this sample.</h3>
+        <footer>
+          <a-button
+            class="ant-btn ant-btn-primary"
+            @click="handleOk()"
+            style="padding: 5px 50px"
+            ><b>Ok</b></a-button
+          >
+        </footer>
       </center>
     </a-modal>
   </a-skeleton>
@@ -91,7 +98,7 @@ export default {
         // this.error('Complete all the bags')
       }
     },
-        handleOk() {
+    handleOk() {
       this.visibleModal = false
     },
     validateAllBagsCompleted(bags) {

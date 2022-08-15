@@ -7,7 +7,7 @@
         @click="addBags"
       />
       <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
-      
+
       <a-button
         v-if="!treatment.hospitalCollectionStatus && bags.length > 0"
         class="w-100 mt-15"
@@ -30,7 +30,10 @@
         />
       </a-modal>
     </div>
-    <a-alert v-else message="Manufacturer has not accepted the treatment request yet"></a-alert>
+    <a-alert
+      v-else
+      message="Manufacturer has not accepted the treatment request yet"
+    ></a-alert>
     <a-modal
       :visible="visibleModal"
       ok-text="Ok"
@@ -46,8 +49,15 @@
             height="50%"
           />
         </p>
-        <h4><p>Complete all steps before completing this sample. </p></h4>
-        <footer><a-button class="ant-btn ant-btn-primary" @click="handleOk()">Ok</a-button></footer>
+        <h3>Complete all steps before completing this sample.</h3>
+        <footer>
+          <a-button
+            class="ant-btn ant-btn-primary"
+            @click="handleOk()"
+            style="padding: 5px 50px"
+            ><b>Ok</b></a-button
+          >
+        </footer>
       </center>
     </a-modal>
   </a-skeleton>
@@ -77,7 +87,7 @@ export default {
       bags: [],
       COLLECTION_TYPE,
       loading: true,
-      schedule:[],
+      schedule: [],
     }
   },
   mounted() {

@@ -32,16 +32,18 @@
             height="50%"
           />
         </p>
-        <h3><p>{{translation.Pleasaccep_8_567}}</p></h3>
+        <h3>{{ translation.Pleasaccep_8_567 }}</h3>
         <footer>
-          <a-button class="ant-btn ant-btn-primary" @click="handleOk()"
+          <a-button
+            class="ant-btn ant-btn-primary"
+            @click="handleOk()"
+            style="padding: 5px 50px"
             >Ok</a-button
           >
         </footer>
       </center>
     </a-modal>
   </div>
-  
 </template>
 <script>
 // import TreatmentServices from '~/services/API/TreatmentServices'
@@ -55,7 +57,7 @@ import imagesHelper from '~/mixins/images-helper'
 
 export default {
   components: { CategoryTabs },
-  mixins: [notifications, routeHelpers, nullHelper,imagesHelper],
+  mixins: [notifications, routeHelpers, nullHelper, imagesHelper],
   props: {
     treatment: {
       type: Object,
@@ -73,7 +75,7 @@ export default {
       loading: false,
       categories: null,
       isCreated: false,
-      showMessage:false,
+      showMessage: false,
     }
   },
   computed: {
@@ -90,9 +92,7 @@ export default {
         if (!err) {
           this.create(values)
         } else {
-          this.confirm(
-            'Complete the patient screenings first!'
-          )
+          this.confirm('Complete the patient screenings first!')
           this.loading = false
         }
         this.loading = false
@@ -102,12 +102,12 @@ export default {
       this.loading = true
       ScreeningCategoryServices.getByTreatmentTypeId(treatmentTypeId)
         .then((response) => {
-          for(const dt in response.data){
-            if(response.data[dt].screeningTemplateHospitalStatus===false){
-              this.showMessage=true
+          for (const dt in response.data) {
+            if (response.data[dt].screeningTemplateHospitalStatus === false) {
+              this.showMessage = true
             }
           }
-          if(this.showMessage===false){
+          if (this.showMessage === false) {
             this.categories = response.data
             this.message = false
           }
