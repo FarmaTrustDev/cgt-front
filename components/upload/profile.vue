@@ -13,21 +13,11 @@
         <div class="ant-upload-text">Upload</div>
       </div>
     </a-upload>
-    <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-      <img alt="example" style="width: 100%" :src="previewImage" />
-    </a-modal>
   </div>
 </template>
 <script>
 import { isEmpty } from '~/services/Helpers'
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = (error) => reject(error)
-  })
-}
+
 export default {
   props: {
     extensions: { type: Array, default: () => [] },
@@ -39,7 +29,6 @@ export default {
   },
   data() {
     return {
-      previewVisible: false,
       previewImage: '',
       fileList: [],
     }
@@ -61,14 +50,6 @@ export default {
     isEmpty,
     handleCancel() {
       this.previewVisible = false
-    },
-    async handlePreview(file) {
-      if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj)
-      }
-      this.previewImage = file.url || file.preview
-
-      this.previewVisible = true
     },
     beforeUpload(file) {
       if (this.isExtensionAllow(file)) {
