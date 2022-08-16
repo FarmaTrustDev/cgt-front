@@ -6,7 +6,6 @@
       :before-upload="beforeUpload"
       :action="handleChange"
       :remove="handleRemove"
-      @preview="handlePreview"
       @change="handleChange"
     >
       <div v-if="fileList.length < 1">
