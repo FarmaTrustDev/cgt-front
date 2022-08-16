@@ -71,8 +71,10 @@ export default {
       this.previewVisible = true
     },
     beforeUpload(file) {
-      this.$emit('handleChange', [file])
-      this.fileList = [file]
+      if (this.isExtensionAllow(file)) {
+        this.$emit('handleChange', [file])
+        this.fileList = [file]
+      }
     },
     handleChange(file, fileList) {
       // this.$emit('handleChange', [file])
@@ -84,6 +86,18 @@ export default {
       newFileList.splice(index, 1)
       this.fileList = newFileList
       this.$emit('handleChange', this.fileList)
+    },
+    isExtensionAllow(file) {
+      const strName = file.name
+      const ext = strName.split('.').pop()
+      const isAllowedExtension = this.extensions.includes('.' + ext)
+      // extension upload the file @todo work in progess
+      if (!isAllowedExtension) {
+        this.$message.error('Extension not allow')
+        this.fileList = []
+      }
+      this.extensionAllowed = isAllowedExtension
+      return isAllowedExtension
     },
   },
 }
