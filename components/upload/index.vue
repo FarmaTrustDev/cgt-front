@@ -4,7 +4,7 @@
     :default-file-list="defaultFileList"
      list-type="picture-card"
     name="file"
-    :action="handleChange"
+    @action="handleChange"
     :disabled="disabled"
   >
     <p class="ant-upload-drag-icon">

@@ -69,6 +69,21 @@ export default {
       loading: false,
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.PatieID_2_264
+        this.columns[1].title=newValues['Colle-_4_268']
+        this.columns[2].title=newValues.TreatType_2_67
+        this.columns[3].title=newValues.Print_1_111
+      }
+    }
+  },  
   methods: {
     openViewModal(id) {
       this.showViewModal = true

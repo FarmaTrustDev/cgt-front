@@ -68,6 +68,14 @@ export default {
   mounted() {
     this.fetch()
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.Name_1_138
+        this.columns[1].title=newValues.Actio_1_220
+      }
+    }
+  },  
   methods: {
     fetch() {
       OrganizationServicesServices.get()

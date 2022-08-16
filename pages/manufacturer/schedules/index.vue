@@ -52,7 +52,17 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.Treat_1_29
+        this.column[1].title=newValues.Price_1_73
+        this.column[2].title=newValues.Descr_1_69
+        this.column[3].title=newValues.Actio_1_220
+      }
+    }
+  },    
   methods: {},
 }
 </script>

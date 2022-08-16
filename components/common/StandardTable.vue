@@ -485,6 +485,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.phases[0].name=newValues.Scree_1_679
+        this.phases[1].name=newValues.Sched_1_681
+        this.phases[2].name=newValues.Colle_1_444
+        this.phases[3].name=newValues.Shipm_1_756
+        this.phases[4].name=newValues.Treat_1_29
+        this.phases[5].name=newValues.Aftercare_2_638
+      }
+    }
+  },   
   mounted() {
     if (this.shouldFetch) {
       this.fetch()
