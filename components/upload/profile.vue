@@ -3,8 +3,11 @@
     <a-upload
       list-type="picture-card"
       :file-list="fileList"
+      :before-upload="beforeUpload"
       :action="handleChange"
+      :remove="handleRemove"
       @preview="handlePreview"
+      @change="handleChange"
     >
       <div v-if="fileList.length < 1">
         <a-icon type="plus" />
@@ -27,12 +30,33 @@ function getBase64(file) {
   })
 }
 export default {
+  props: {
+    extensions: { type: Array, default: () => [] },
+    defaultFileList: { type: Array, default: () => [] },
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
+  },
   data() {
     return {
       previewVisible: false,
       previewImage: '',
       fileList: [],
     }
+  },
+  watch: {
+    defaultFileList: {
+      immediate: true,
+      handler(val, oldVal) {
+        if (val !== oldVal) {
+          this.fileList = val
+        }
+      },
+    },
+  },
+  mounted() {
+    this.fileList = this.defaultFileList
   },
   methods: {
     isEmpty,
@@ -44,11 +68,23 @@ export default {
         file.preview = await getBase64(file.originFileObj)
       }
       this.previewImage = file.url || file.preview
+
       this.previewVisible = true
     },
-    handleChange(file, fileList) {
+    beforeUpload(file) {
       this.$emit('handleChange', [file])
       this.fileList = [file]
+    },
+    handleChange(file, fileList) {
+      // this.$emit('handleChange', [file])
+      // this.fileList = [fileList]
+    },
+    handleRemove(file) {
+      const index = this.fileList.indexOf(file)
+      const newFileList = this.fileList.slice()
+      newFileList.splice(index, 1)
+      this.fileList = newFileList
+      this.$emit('handleChange', this.fileList)
     },
   },
 }

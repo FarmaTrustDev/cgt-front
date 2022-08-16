@@ -1,11 +1,12 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormFields :entity="userData" :is-created="isCreated" @handleChange="handleChange" />
-      <a-form-item
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
-      >
+      <FormFields
+        :entity="userData"
+        :is-created="isCreated"
+        @handleChange="handleChange"
+      />
+      <a-form-item :label-col="{ span: 24 }" :wrapper-col="{ span: 22 }">
         <FormActionButton
           :is-created="isCreated"
           :loading="loading"
@@ -41,30 +42,30 @@ export default {
       apiService: UserServices,
       fileList: [],
       isCreated: false,
-      file:[],
-      activate:true,
-      deactivate:true,
+      file: [],
+      activate: true,
+      deactivate: true,
     }
   },
-  mounted() {
-    this.checkCreated()
-  },
-  computed:{
+  computed: {
     users() {
       return this.$store.getters.getUser
     },
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  },
+  mounted() {
+    this.checkCreated()
+  },
   methods: {
-      handleChange(info) {
-        // console.log(info)
-        this.fileList = info
-        console.log(this.fileList)
-        // this.file=this.fileList[0].originFileObj
-        // console.log(this.fileList[0].originFileObj)
-        // this.$emit('handleChange', this.fileList)
+    handleChange(info) {
+      // console.log(info)
+      this.fileList = info
+      console.log(this.fileList)
+      // this.file=this.fileList[0].originFileObj
+      // console.log(this.fileList[0].originFileObj)
+      // this.$emit('handleChange', this.fileList)
     },
     checkCreated() {
       const entityId = this.$route.params.id
@@ -80,7 +81,7 @@ export default {
         .getById(id)
         .then((response) => {
           this.entity = response.data
-          this.userData=response.data
+          this.userData = response.data
           // console.log(this.userData)
           if (this.isFunction(this.getEntity)) {
             this.getEntity(response)
@@ -125,15 +126,15 @@ export default {
       this.apiService
         .create(values)
         .then((response) => {
-            this.success(response.message)
-            if (!this.isEmpty(this.gotoLink)) {
-              this.goto(`${this.gotoLink}`)
-            }
-            if (this.isFunction(this.afterCreate)) {
-              this.afterCreate(response)
-              this.btnLoading = false
-              this.loading = false
-            }
+          this.success(response.message)
+          if (!this.isEmpty(this.gotoLink)) {
+            this.goto(`${this.gotoLink}`)
+          }
+          if (this.isFunction(this.afterCreate)) {
+            this.afterCreate(response)
+            this.btnLoading = false
+            this.loading = false
+          }
         })
         .catch(this.error)
         .finally(() => {
@@ -141,7 +142,7 @@ export default {
           this.loading = false
           this.loading = false
         })
-    },  
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
@@ -153,10 +154,10 @@ export default {
             formData.append(key, values[key])
           }
           this.fileList.forEach((files) => {
-            console.log(files)
+            console.log(typeof files)
             formData.append('profileImageUrl', files)
           })
-          // console.log(formData)        
+          // console.log(formData)
           this.upsert(formData)
         } else {
           this.loading = false
@@ -174,7 +175,7 @@ export default {
           this.$router.push({ path: '/users' })
           this.loading = false
         })
-    },  
+    },
   },
 }
 </script>
