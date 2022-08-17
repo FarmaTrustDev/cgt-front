@@ -28,7 +28,7 @@
             height="40%"
           />
         </p>
-        <h3>There are some errors in your submission. Correct Them.</h3>
+        <h3>{{translation.Thereare_10_522}}</h3>
         <!-- <p>There are some errors in your submission. Please correct them.</p> -->
         <footer>
           <a-button

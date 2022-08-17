@@ -174,7 +174,7 @@ export default {
         {
           id: 5,
           isCollected: false,
-          name: `Is there any new packing or repackaging required?`,
+          name: `${this.$store.getters.getTranslation.Isthere_8_524}`,
         },
       ],
     }

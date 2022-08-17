@@ -15,13 +15,13 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Select Logistics!',
+                        message: translation.seleclogis_3_516,
                       },
                     ],
                   },
                 ]"
                 mode="multiple"
-                placeholder="Select Logistics"
+                :placeholder="translation.seleclogis_3_516"
                 style="width: 100%"
                 class="default-select"
               >

@@ -57,6 +57,11 @@ export default {
   mounted() {
     this.setCurrentTab(this.newTabIndex)
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     setCurrentTab(key) {
       const categories = this.categories
@@ -79,9 +84,7 @@ export default {
         console.log(this.tabsSubmitButton[index], 'submit button which is being true');
         this.tabsSubmitButton[index] = true
       } else {
-        this.confirm(
-          'The screening checklist will not proceed with the No answer(s).Correct them.'
-        )
+        this.confirm(this.translation.Thescree_13_720)
       }
     },
     getFilledData(vals) {

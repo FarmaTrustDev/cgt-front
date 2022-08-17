@@ -291,7 +291,10 @@ export default {
           isCollected: false,
           name: `Confirm there is no visual package damage?`,
         },
-        { id: 4, isCollected: false, name: `Confirm packaging has been removed without any issues?` },
+        { 
+          id: 4, isCollected: false, 
+          name: `Confirm packaging has been removed without any issues?` 
+        },
         {
           id: 5,
           isCollected: false,
@@ -338,12 +341,12 @@ export default {
         {
           id: 5,
           isCollected: false,
-          name: `Has sample been packaged for courier ?`,
+          name: `Has sample been packaged for courier?`,
         },
         {
           id: 6,
           isCollected: false,
-          name: `Is documentation completed and ready for courier pick up ?`,
+          name: `Is documentation completed and ready for courier pick up?`,
         },
       ],
     }
@@ -353,6 +356,14 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.phases[0].name=newValues.InbouAccep_3_834
+        this.phases[1].name=newValues.ProceSampl_2_499
+      }
+    }
+  },  
   mounted() {
     this.handleActiveTab()
   },

@@ -412,7 +412,7 @@
       @ok="handleDeleteModal(false, '', '')"
       @cancel="deleteModal(false)"
     >
-      <p>Are you sure you want to delete ?</p>
+      <p>{{translation.Areyou_4_484}}</p>
     </a-modal>
     <a-modal
       :visible="showPauseDeleteModal"
