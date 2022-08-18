@@ -16,9 +16,9 @@
       :visible="visibleModal"
       ok-text="OK"
       :footer="null"
+      class="error-model"
       @cancel="handleOk()"
       @ok="handleOk()"
-      class="error-model"
     >
       <center>
         <p style="margin: 0">
@@ -47,6 +47,7 @@
 import FormFields from '~/components/patient/enrollment/FormFields'
 import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
+import TreatmentServices from '~/services/API/TreatmentServices'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import imagesHelper from '~/mixins/images-helper'
@@ -62,6 +63,7 @@ export default {
       patient: {},
       entityId: null,
       isCreated: false,
+      treatmentData: {},
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }),
@@ -131,12 +133,30 @@ export default {
     create(values) {
       PatientServices.create(values)
         .then((response) => {
+          if (response.data.globalId != null) {
+            const formData = new FormData()
+            formData.append('patientId', response.data.globalId)
+            TreatmentServices.create(formData)
+              .then((res) => {
+                this.success(res.message)
+                this.sendData(res.data.globalId)
+                this.goto(
+                  `/hospital/patients/${response.data.globalId}?view=Consent`,
+                  { treatment_id: res.data.globalId }
+                )
+              })
+              .catch(this.error)
+              .finally(() => (this.loading = false))
+          }
           this.success(response.message)
-          this.goto(`/hospital/patients/${response.data.globalId}?view=Consent`)
+
           // this.$emit('getNextTab', 'Consent')
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
+    },
+    sendData(data) {
+      this.$emit('getTreatment', data)
     },
   },
 }
