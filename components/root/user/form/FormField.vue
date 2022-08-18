@@ -25,7 +25,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.LastName_2_422+'*:'"
+          :label="translation.LastName_2_422 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -48,7 +48,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.EmailAddre_2_140+'*:'"
+          :label="translation.EmailAddre_2_140 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -71,7 +71,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Usern_1_400+'*:'"
+          :label="translation.Usern_1_400 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -141,7 +141,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.What3_1_432+':'"
+          :label="translation.What3_1_432 + ':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -187,7 +187,7 @@
           />
         </a-form-item>
       </a-col>
-      
+
       <a-col :span="12">
         <a-form-item
           label="Image:"
@@ -195,16 +195,16 @@
           :wrapper-col="{ span: 22 }"
           class="pb-0"
         >
-      <Upload
-        :default-file-list="entity.profileImageUrl"
-        :extensions="allowedExtensions"
-        @handleChange="handleChange"
+          <Upload
+            :default-file-list="entity.profileImageUrl"
+            :extensions="allowedExtensions"
+            @handleChange="handleChange"
           />
         </a-form-item>
-           </a-col>
+      </a-col>
       <a-col :span="24">
         <a-form-item
-          :label="translation.Roles_1_442+'*:'"
+          :label="translation.Roles_1_442 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -250,10 +250,10 @@
             type="hidden"
           />
         </a-form-item>
-      </a-col>      
+      </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Postc_1_444+':'"
+          :label="translation.Postc_1_444 + ':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -278,7 +278,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation['City_1_446']+'*:'"
+          :label="translation['City_1_446'] + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -302,7 +302,7 @@
       </a-col>
       <a-col :span="24">
         <a-form-item
-          :label="translation.Locat_1_448+':'"
+          :label="translation.Locat_1_448 + ':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
           class="pb-0"
@@ -350,7 +350,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation['Count_1_657']+'*:'"
+          :label="translation['Count_1_657'] + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -372,10 +372,10 @@
           />
         </a-form-item>
       </a-col>
-      
+
       <a-col :span="12">
         <a-form-item
-          :label="translation['Count_1_49']+'*:'"
+          :label="translation['Count_1_49'] + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -416,7 +416,7 @@ import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 import RoleServices from '~/services/API/RoleServices'
-import Upload from '~/components/upload/userUpload'
+import Upload from '~/components/upload/profile'
 import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 import MapServices from '~/services/API/MapServices'
 import nullHelper from '~/mixins/null-helpers'
@@ -448,11 +448,11 @@ export default {
       allowedExtensions: PICTURE_UPLOAD_EXTENSIONS,
       newSelected: false,
       defaultImage: true,
-      fileList:[],
+      fileList: [],
       // defaultFIleList:{uid:null, name:'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', status:null, response: null, url: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg'},
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -471,7 +471,7 @@ export default {
       this.getRoles()
     }
   },
-  methods: {    
+  methods: {
     handleChange(info) {
       this.fileList = info
       this.$emit('handleChange', this.fileList)
@@ -479,7 +479,6 @@ export default {
     filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries(params = {}) {
-      console.log(params)
       CountryServices.get(params).then((response) => {
         this.countries = response.data.data
       })
@@ -509,11 +508,9 @@ export default {
     searchRoles(name, b) {
       this.fetchRoles({ name })
     },
-    fetchCountryByPostCode(e){
-      MapServices.fetchCountryByPostCode(e.target.value).then((response)=>{
-        console.log(response.result.address_components)
-      })
-    }
+    fetchCountryByPostCode(e) {
+      MapServices.fetchCountryByPostCode(e.target.value).then((response) => {})
+    },
   },
 }
 </script>

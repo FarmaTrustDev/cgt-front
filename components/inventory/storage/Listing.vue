@@ -11,7 +11,7 @@
               v-decorator="['quantity']"
               :allow-clear="true"
               size="large"
-              placeholder="Quantity of Vials"
+              :placeholder="translation.Quantof_3_604"
               @change="(e) => search(e.target.value, 'quantity')"
             />
           </a-form-item>
@@ -19,7 +19,7 @@
             <a-select
               v-decorator="[`temperature`]"
               class="w-min-200"
-              placeholder="Temperature"
+              :placeholder="translation.Tempe_1_605"
               :allow-clear="true"
               @change="(e) => search(e, 'temperatureId')"
             >
@@ -33,7 +33,7 @@
           <a-form-item>
             <a-select
               v-decorator="[`zone`]"
-              placeholder=" Storage Zone"
+              :placeholder="translation.StoraZone_2_606"
               class="w-min-200"
               :allow-clear="true"
               @change="(e) => search(e, 'zoneId')"

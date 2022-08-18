@@ -33,7 +33,7 @@ export default {
         countryName: 'Germany - Cellfuse',
         address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
         flag: 'web/flags/de.svg',
-        global: ' Head of Lab- Stephen Jones',
+        // global: `${this.$store.getters.getTranslation.Headof_3_549}` + '- Stephen Jones',
         phone: '49 6781 9855-0',
         email: 'info-imfs@cellfuse.de',
       }),

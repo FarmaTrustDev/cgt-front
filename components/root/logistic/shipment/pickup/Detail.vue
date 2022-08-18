@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+     <a-card v-if="!isEmpty(shipment)" :bordered="false"  >
+      
+      <th>QrUrl</th>
+      <th>Puid</th>
+      <tr v-for="(bag, index) in scheduling.treatmentBag" :key="index">
+        <td><img :src="getImageUrl(bag.qrUrl)" width="65px" /></td>
+        <td>{{bag.puid}}</td>
+      </tr>
+    </a-card>
     <a-card v-if="!isEmpty(shipment)" :bordered="false" class="default-card">
       <article class="article">
         <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
@@ -53,8 +62,10 @@
 <script>
 import moment from 'moment'
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import imagesHelper from '~/mixins/images-helper'
 import { isEmpty } from '~/services/Utilities'
 export default {
+  mixins:[imagesHelper],
   props: {
     heading: { default: 'Shipping Details', require: true, type: String },
     shipment: {
@@ -69,7 +80,9 @@ export default {
     },
   },
   data() {
-    return { moment }
+    return { moment, 
+    url: null
+    }
   },
   computed: {
     translation() {
@@ -82,6 +95,11 @@ export default {
     getDateFormat(date) {
       return moment(String(date)).format('dddd DD MM YYYY')
     },
+    getUrl(url)
+    {
+      this.url = url
+      return this.url
+    }
   },
 }
 </script>

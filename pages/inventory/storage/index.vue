@@ -18,7 +18,7 @@
             v-decorator="['quantity']"
             :allow-clear="true"
             size="large"
-            placeholder="Search Product"
+            :placeholder="translation.searc_1_488"
             class="float-right inventory-search"
             @change="(e) => search(e.target.value, 'title')"
           >
@@ -31,7 +31,7 @@
             v-decorator="['quantity']"
             :allow-clear="true"
             size="large"
-            placeholder="Search Product"
+            :placeholder="translation.searc_1_488"
             class="float-right inventory-search placeholder-alignment"
             @change="
               (e) =>

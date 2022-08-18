@@ -30,5 +30,10 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
 }
 </script>

@@ -4,7 +4,7 @@
     :loading="loading"
     :bordered="false"
     :back="false"
-    title="Client Hubs"
+    :title="translation.ClienHub_2_566"
   >
     <template slot="content">
       <div class="grey-card">
@@ -31,7 +31,7 @@
                 <span><a href="/inventory/clients/clients"> <img :src="getImageUrl('web/icons/stock.svg')" /></a></span>
                 <span @click="goto(`status`)" style="cursor:pointer"> <img :src="getImageUrl('web/icons/bill1.svg')" /></span>
               </div>
-              <div style="width:210px">Upcoming Tasks: </div>
+              <div style="width:210px">{{translation.UpcomTasks_2_644}}: </div>
               <div class="list">
                 <ul>
                   <li
@@ -74,6 +74,15 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.tasks[0].name=newValues.StoreSampl_2_579
+        this.tasks[1].name=newValues.OutboProce_2_514
+        this.tasks[2].name=newValues.inboushipm_2_302
+      }
+    }
+  },   
   methods: {
     clickToGo(url){
       this.goto(url)

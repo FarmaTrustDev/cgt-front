@@ -42,6 +42,15 @@ data: [] }
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.Name_1_138
+        this.column[1].title=newValues.EmailAddre_2_140
+        this.column[2].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetch()
   },  

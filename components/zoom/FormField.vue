@@ -13,12 +13,12 @@
               rules: [
                 {
                   required: true,
-                  message: 'Please input your Description',
+                  message: translation.Pleasinput_4_630,
                 },
               ],
             },
           ]"
-          placeholder="Please input your Description"
+          :placeholder="translation.Pleasinput_4_630"
         />
       </a-form-item>
     </a-col>

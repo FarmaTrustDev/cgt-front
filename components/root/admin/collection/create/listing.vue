@@ -45,7 +45,15 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  }, 
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.ProceStep_2_486
+        this.column[1].title=newValues.Actio_1_220
+      }
+    }
+  },   
   methods: {},
 }
 </script>

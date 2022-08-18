@@ -65,6 +65,23 @@ export default {
   data() {
     return { steps: null }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.steps[0].by=newValues.InbouDate_2_635
+        this.steps[1].by=newValues.InbouProce_2_513
+        this.steps[2].by=newValues.Stora_1_366
+        this.steps[3].by=newValues.VisuaCheck_2_636
+        this.steps[4].by=newValues.PackaDepot_2_637
+        this.steps[5].by=newValues.CouriPick_3_648
+      }
+    }
+  },  
   mounted() {
     this.fetchSteps()
   },

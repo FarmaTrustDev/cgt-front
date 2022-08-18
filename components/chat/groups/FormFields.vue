@@ -37,7 +37,9 @@
     </a-row>
     <a-row class="mb-15">
       <a-col :span="24">
-        <a-button type="primary" @click="addRow">+ {{translation.AddOrgan_2_3}}</a-button>
+        <a-button type="primary" @click="addRow"
+          >+ {{ translation.AddOrgan_2_3 }}</a-button
+        >
       </a-col>
     </a-row>
     <a-row v-for="(org, index) in organizationKeys" :key="org.id" :gutter="16">
@@ -121,13 +123,13 @@ export default {
       organizations: {},
     }
   },
-  mounted() {
-    this.fetchOrganization()
-  },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.fetchOrganization()
   },
   methods: {
     getImage(files) {

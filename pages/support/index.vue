@@ -158,6 +158,19 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.date_1_510
+        this.columns[1].title=newValues.TickeID_2_212
+        this.columns[3].title=newValues.BagID_2_540
+        this.columns[4].title=newValues.IssueDetai_2_214
+        this.columns[5].title=newValues.LastUpdat_2_216
+        this.columns[6].title=newValues.Statu_1_202
+        this.columns[7].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetch()
     this.showModelFromPatient()

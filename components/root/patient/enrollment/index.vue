@@ -10,7 +10,11 @@
           >
             {{ translation['PatieDetai_2_673'] }}
           </div>
-          <enrollment :treatment="treatment" @getNextTab="getNextTab" />
+          <enrollment
+            :treatment="treatment"
+            @getNextTab="getNextTab"
+            @getTreatment="getTreatmentGlobalId"
+          />
         </a-tab-pane>
         <a-tab-pane key="Consent" :disabled="!isCreated">
           <div
@@ -111,7 +115,6 @@ export default {
 
       if (this.isGuid(globalId)) {
         this.entityId = globalId
-
         this.fetchPatient(globalId)
       }
     },
@@ -150,7 +153,6 @@ export default {
           // eslint-disable-next-line eqeqeq
           if (this.rejectedData.length != 0) {
             this.visible = true
-            console.log(this.rejectedData, 'rejected data')
           }
         })
         .catch(this.error)
@@ -162,6 +164,9 @@ export default {
       this.treatment = treatment
       this.isScreeningDone = true
       this.haveTreatment = true
+    },
+    getTreatmentGlobalId(treatment) {
+      this.treatment = treatment
     },
     tabChange(key) {
       this.activeTab = key
