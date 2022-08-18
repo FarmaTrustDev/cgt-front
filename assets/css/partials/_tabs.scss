@@ -89,10 +89,14 @@
 
   .ant-tabs.ant-tabs-card {
     .ant-tabs-tab {
-      padding: 0; // as we need to show active tab or green complete tab
+      padding: 13px 56px;
       line-height: initial;
       height: auto;
       background-color: #f9f9f9 !important;
+    }
+    .ant-tabs-tab-active {
+      // background-color: #d1f2dc !important;
+      box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
     }
   }
 }
@@ -115,7 +119,7 @@
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
   color: #7c8db5;
   border: solid 1px #9dc5ff !important;
-  background-color: #f2f5fb !important;
+  background-color: #f2f5fb;
   background-color: #f3f8ff;
   font-weight: 500;
   // border: 0.1px solid #a3c9ff;

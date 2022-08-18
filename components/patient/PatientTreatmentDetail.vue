@@ -9,13 +9,13 @@
       </a-col> -->
       <a-col :span="8" class="mt-15">
         <h6>
-          <span class="text-muted"> Hospital:</span>
+          <span class="text-muted"> Hospital:&nbsp;</span>
           <span>{{ patient.hospitalName }}</span>
         </h6>
       </a-col>
-      <a-col :span="8" class="mt-15">
-        <h6>
-          <span class="text-muted">Treatment Type:</span>
+      <a-col :span="10" class="mt-15">
+        <h6 style="justify-content: end;">
+          <span class="text-muted">Treatment Type:&nbsp;</span>
           <span>{{ patient.treatmentTypeName }}</span>
         </h6>
       </a-col>
@@ -43,7 +43,7 @@
     <a-row :gutter="20" dir="ltr">
       <a-col :span="8" class="mt-15">
         <h6>
-          <span class="text-muted">Phone No:</span>
+          <span class="text-muted">Phone No:&nbsp;</span>
           <span>{{ patient.patient.phone }}</span>
         </h6>
       </a-col>
@@ -52,7 +52,7 @@
       <a-col :span="8" class="mt-15">
         <h6>
           <span class="text-muted">{{ translation.EmailAddre_2_140 }}:</span
-          ><span style="overflow: hidden; height: 40px">
+          ><span style=" height: 40px">
             {{ patient.patient.email }}</span
           >
         </h6>
@@ -75,6 +75,5 @@ export default {
 <style scoped>
 h6 {
   display: flex;
-  justify-content: space-between;
 }
 </style>
