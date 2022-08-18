@@ -3,8 +3,8 @@
     <a-row style="height:35px; margin-left:10px">
       <a-col :span="6">Task/Store Sample</a-col>
       <a-col :span="6">ID: DAC53827</a-col>
-      <a-col :span="8">Name: Platelet Lycate</a-col>
-      <a-col :span="4">Client: Novartis</a-col>
+      <a-col :span="8">{{translation.Name_1_138}}: Platelet Lycate</a-col>
+      <a-col :span="4">{{translation.Clien_1_505}}: Novartis</a-col>
     </a-row>
     <a-row style="height:35px; margin-left:10px">
       <a-col :span="6">Fridge: Kings 123</a-col>

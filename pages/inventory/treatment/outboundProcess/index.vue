@@ -377,7 +377,10 @@ export default {
           isCollected: false,
           name: `${this.$store.getters.getTranslation.Isthere_6_520}`,
         },
-        { id: 4, isCollected: false, name: `Are there any status issues ?` },
+        { 
+          id: 4, isCollected: false, 
+          name: `Are there any status issues ?` 
+        },
         {
           id: 5,
           isCollected: false,

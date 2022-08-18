@@ -91,7 +91,7 @@ export default {
           this.create(values)
         } else {
           this.confirm(
-            'Complete the patient screenings first!'
+            this.translation.Pleascompl_6_722
           )
           this.loading = false
         }

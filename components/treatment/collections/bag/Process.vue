@@ -108,6 +108,7 @@ export default {
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
+    bagKeyId:{ required: true, type: Number},
   },
   data() {
     return {
@@ -161,7 +162,7 @@ export default {
         BagCollectionServices.update(collection.id, values)
           .then((response) => {
             this.success(response.message)
-            this.$emit('fetchBags')
+            this.$emit('fetchBags', this.bagKeyId)
             this.btnLoading = false
           })
           .catch(() => {

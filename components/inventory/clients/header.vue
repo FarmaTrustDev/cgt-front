@@ -14,19 +14,19 @@
 
           <a-col :span="16">    
             <a-row>
-              <a-col :span="5" style="font-weight: bold; line-height:20px">Client:</a-col>
+              <a-col :span="5" style="font-weight: bold; line-height:20px">{{translation.Clien_1_505}}:</a-col>
               <a-col :span="11">Novartis</a-col>
             </a-row>
             <a-row>
-              <a-col :span="5" style="font-weight: bold">Contact Name:</a-col>
+              <a-col :span="5" style="font-weight: bold">{{translation.ClienName_2_540}}:</a-col>
               <a-col :span="11">Lucas Sinclair</a-col>
             </a-row>
             <a-row>
-              <a-col :span="5" style="font-weight: bold">Contact Number:</a-col>
+              <a-col :span="5" style="font-weight: bold">{{translation.ContaNumbe_2_404}}:</a-col>
               <a-col :span="11">+44 1286 132475</a-col>
             </a-row>
             <a-row>
-              <a-col :span="5" style="font-weight: bold">Address:</a-col>
+              <a-col :span="5" style="font-weight: bold">{{translation.Addre_1_559}}:</a-col>
               <a-col :span="11"
                 >The WestWorks, 195 Wood Ln, London W12 7FQ</a-col
               >

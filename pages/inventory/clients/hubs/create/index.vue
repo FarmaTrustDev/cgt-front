@@ -4,7 +4,7 @@
     :loading="loading"
     :bordered="false"
     :back="false"
-    title="Client Hubs"
+    :title="translation.ClienHub_2_566"
   >
     <template slot="content">
       <div class="grey-card">

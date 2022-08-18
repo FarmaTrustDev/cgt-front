@@ -55,7 +55,16 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.Detai_1_346
+        this.column[1].title=newValues.Notes_1_350
+        this.column[2].title=newValues.Actio_1_220
+      }
+    }
+  },    
   methods:{
     checkData(categories)
     {

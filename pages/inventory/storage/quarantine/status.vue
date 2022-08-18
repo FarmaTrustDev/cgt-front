@@ -1,7 +1,7 @@
 <template>
   <div>
       <h3 class="page-title">Sample Status In Quarantine</h3>
-      <div><h3 style="font-weight:bold">Sample Details</h3></div>
+      <div><h3 style="font-weight:bold">{{translation.SamplDetai_2_510}}</h3></div>
       <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="true" />
     <a-table
       class="rounded-table"
@@ -44,12 +44,12 @@ export default {
           scopedSlots: { customRender: 'stage' },
         },
         {
-          title: `Organization`,
+          title: `${this.$store.getters.getTranslation.Organ_1_166}`,
           dataIndex: 'organization',
           key: 'organization',
         },
         {
-          title: `Notes`,
+          title: `${this.$store.getters.getTranslation.Notes_1_350}`,
           dataIndex: 'notes',
           key: 'notes',
         },
@@ -59,7 +59,7 @@ export default {
           key: 'signedBy',
         },
         {
-          title: `Date`,
+          title: `${this.$store.getters.getTranslation.date_1_510}`,
           dataIndex: 'date',
           key: 'date',
         },
@@ -72,7 +72,7 @@ export default {
       newTasksData: [
         {
           url:'web/icons/greenTick.png',
-          stage: 'Manufacture',
+          stage: `${this.$store.getters.getTranslation.Manuf_1_89}`,
           organization: 'Adaptimmune',
           notes:'',
           signedBy: 'Mike Wheeler',
@@ -90,7 +90,7 @@ export default {
         },
         {
           url:'web/icons/greenTick.png',
-          stage: 'Courier',
+          stage: `${this.$store.getters.getTranslation.Couri_1_234}`,
           organization: 'Cryoport',
           notes:'Visible damage to packaging',
           signedBy: 'Dustin Henderson',
@@ -99,7 +99,7 @@ export default {
         },
         {
           url:'web/icons/alarm.png',
-          stage: 'Inbound',
+          stage: `${this.$store.getters.getTranslation.Inbou_1_498}`,
           organization: 'Cellfuse',
           notes:'Visible damage to packaging',
           signedBy: 'Mike Wheeler',

@@ -59,7 +59,7 @@
           <a-tab-pane key="3" tab="Courier">
             <a-row>
               <a-col :span="12">
-                <span>Head of Lab Logistics </span>
+                <span>{{translation.Headof_3_549}} Logistics </span>
                 <h6 class="f">Steve Emerson</h6>
                 <h6 class="f">steve@fastlink.com</h6>
                 <h6 class="f">+442036562473</h6>

@@ -114,6 +114,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.Name_1_138
+        this.columns[1].title=newValues.Entittype_2_406
+        this.columns[2].title=newValues.EntitName_2_408
+        this.columns[3].title=newValues.UserRole_2_410
+        this.columns[4].title=newValues.EmailAddre_2_140
+        this.columns[5].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetch()
   },

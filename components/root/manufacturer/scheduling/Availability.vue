@@ -5,7 +5,6 @@
       :open="openDatePicker"
       :disabled-date="disabledDate"
       format="YYYY-MM-DD"
-      show-time
       @openChange="handleStartOpenChange"
       @change="onDateChange"
       @ok="showCalendarOpener(false)"
