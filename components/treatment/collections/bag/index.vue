@@ -62,7 +62,7 @@ export default {
     },
     completeBag(bag) {
       if (this.validateCollectionComplete(bag)) {
-        return this.error(`Mark all collection steps `)
+        return this.error(`Confirm all collection steps `)
       }
       this.markComplete(bag)
     },
