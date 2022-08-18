@@ -4,7 +4,7 @@
     :loading="false"
     :bordered="false"
     :title="translation.TasksList_2_558"
-    class="specific"
+    class="specific container smartlab_task"
   >
     <div slot="content">
       <div class="mt-15 clearfix">
