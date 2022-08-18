@@ -16,7 +16,7 @@
         <a-col class="mb-15" :span="21">
         </a-col>
         <a-col class="mb-15" :span="3">
-          <a-button type="primary" @click="getAutoSelect">Auto Select</a-button>
+          <a-button type="primary" @click="getAutoSelect">{{translation.AutoSelec_2_600}}</a-button>
         </a-col>
       </a-row>
       
@@ -52,7 +52,7 @@
           >
             <div slot="center" class="text-center">
               <Trays v-if="!isEmpty(trayData)" :numVials="numVials" :autoSelect="autoSelect" :trays="trayData" />
-              <a-empty v-else description=" select the rack" />
+              <a-empty v-else :description="translation.selecthe_3_628" />
             </div> </TileCenter
         ></a-col>
       </a-row>
@@ -66,16 +66,16 @@
       <!-- @click="goto('/inventory/storage/tasks')"-->
       <a-modal
       :visible="showModal"
-      title="Confirm sample storage"
+      :title="translation.Confisampl_3_621"
       ok-text="Confirm"
-      cancel-text="Cancel"
+      :cancel-text="translation.cance_1_296"
       @ok="confirm(false)"
       @cancel="handleModal(false)"
       >
       <div>
-        <a-row><a-col>Freezer : Atara 001</a-col></a-row>
-        <a-row><a-col>Shelf : Shelf 01</a-col></a-row>
-        <a-row><a-col>Box location : 1A</a-col></a-row>
+        <a-row><a-col>{{translation.Freez_1_624}} : Atara 001</a-col></a-row>
+        <a-row><a-col>{{translation.Shelf_1_623}} : Shelf 01</a-col></a-row>
+        <a-row><a-col>{{translation.BoxLocat_2_622}} : 1A</a-col></a-row>
       </div>
       <!--<img class="img-responsive" :src="qrUrl" />-->
       <!-- <template slot="footer">

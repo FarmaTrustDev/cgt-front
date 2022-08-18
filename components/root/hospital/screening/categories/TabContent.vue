@@ -30,7 +30,7 @@ export default {
       data,
       column:[
         {
-          title:'Questions',
+          title: `${this.$store.getters.getTranslation.Quest_1_580}`,
           dataIndex: 'name',
           key: 'name',
         },
@@ -48,6 +48,13 @@ export default {
       return this.$store.getters.getTranslation
     },
   },  
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.Quest_1_580
+      }
+    }
+  },   
   methods: {
     fetch() {
       this.loading = true

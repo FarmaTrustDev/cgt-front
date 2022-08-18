@@ -118,7 +118,7 @@
         <div class="h-tabs large-tabs" style="width:100%;">
           
           <div>        
-          <strong style="font-size:1.25rem;">Quality Assurance Checklist</strong>
+          <strong style="font-size:1.25rem;">{{translation.QualiAssur_3_565}}</strong>
           </div>
           <Process
             :collections="dummyCollection"
@@ -159,17 +159,17 @@ export default {
         {
           id: 1,
           isCollected: false,
-          name: `Has the sample been cleared to enter general storage?`,
+          name: `${this.$store.getters.getTranslation.Hasthe_9_589}`,
         },
         {
           id: 2,
           isCollected: false,
-          name: `Have all issues been cleared with the provider?`,
+          name: `${this.$store.getters.getTranslation.Haveall_8_590}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `Has a record been made and communicated of \n any error in shipping or the inbound process?`,
+          name: `${this.$store.getters.getTranslation.Hasa_16_591}`,
         },
         {
           id: 5,
@@ -184,6 +184,20 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.dummyCollection[0].name=newValues.Hasthe_9_589
+        this.dummyCollection[1].name=newValues.Haveall_8_590
+        this.dummyCollection[2].name=newValues.Hasa_16_591
+        this.dummyCollection[3].name=newValues.Isthere_8_524
+
+        this.phases[0].name=newValues.InbouAccep_3_834
+        this.phases[1].name=newValues.ProceSampl_2_499
+        this.phases[2].name=newValues.StoreSampl_2_579
+      }
+    }
+  },   
   mounted() {
     this.handleActiveTab()
   },

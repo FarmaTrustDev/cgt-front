@@ -3,7 +3,7 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    title="Filter Storage Facilities"
+    :title="translation.FilteStora_3_601"
     class="specific-storage"
   >
     <div slot="content" class="h-tabs large-tabs">
@@ -34,7 +34,7 @@
                 v-decorator="['quantity']"
                 :allow-clear="true"
                 size="large"
-                placeholder="Quantity of Vials"
+                :placeholder="translation.Quantof_3_604"
                 @change="(e) => search(e.target.value, 'quantity')"
               />
             </a-form-item>
@@ -45,7 +45,7 @@
               <a-select
                 v-decorator="[`temperature`]"
                 class="w-min-200"
-                placeholder="Temperature"
+                :placeholder="translation.Tempe_1_605"
                 :allow-clear="true"
                 @change="(e) => search(e, 'temperatureId')"
               >
@@ -62,7 +62,7 @@
             <a-form-item>
               <a-select
                 v-decorator="[`zone`]"
-                placeholder=" Storage Zone"
+                :placeholder="translation.StoraZone_2_606"
                 class="w-min-200"
                 :allow-clear="true"
                 @change="(e) => search(e, 'zoneId')"
@@ -75,7 +75,7 @@
         </a-col>
       </a-row>
       </a-form>
-      <h3 class="page-title ml-40">Select Storage Facility</h3>  
+      <h3 class="page-title ml-40">{{translation.SelecStora_3_602}}</h3>  
           <Listing :storages="storage" :selectedVials="vials" :typeId="isInbound" />
         <!--</a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">

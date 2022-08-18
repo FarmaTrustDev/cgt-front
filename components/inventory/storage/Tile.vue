@@ -13,7 +13,7 @@
           <img
             class="mr-5"
             :src="getImageUrl('web/inventory/storage/full-screen.svg')"
-          />{{ storage.quantity }} % full
+          />{{ storage.quantity }} % {{translation.Full_1_603}}
         </span>
         <span>
           <img
@@ -44,6 +44,11 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {},
 }
 </script>

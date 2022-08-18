@@ -167,16 +167,16 @@
                         size="small"
                         icon="printer"
                         @click="clickImage(record)"
-                        >Print</a-button
+                        >{{translation.Print_1_111}}</a-button
                       >
                     </template>
                   </a-table>
                 </a-skeleton>
-                <a-modal :visible="showModal" title="Print" @cancel="handleModal(false)" >
+                <a-modal :visible="showModal" :title="translation.Print_1_111" @cancel="handleModal(false)" >
                   <img class="img-responsive" :src="qrUrl" />
                   <template slot="footer">
-                    <a-button @click="handleModal(false)">Cancel</a-button>
-                    <a-button @click="printWindow()">Print</a-button>
+                    <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
+                    <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
                   </template>
                 </a-modal>
               </div>
@@ -231,6 +231,7 @@
                         ]"
                         :format="dateFormat"
                         :disabled-date="disabledDate"
+                        :placeholder="translation.SelecDate_2_633"
                         style="width: 100%"
                         size="large"
                       >
@@ -255,6 +256,7 @@
                           },
                         ]"
                         :disabled-date="disabledDate"
+                        :placeholder="translation.SelecDate_2_633"
                         :format="dateFormat"
                         style="width: 100%"
                         size="large"
@@ -270,21 +272,21 @@
                   />
                   <a-modal
                     :visible="showLogisticsModal"
-                    title="Confirm Courier"
+                    :title="translation.Confi_1_646"
                     @cancel="handleLogisticsModal(false)"
                   >
                     <div>
                       <a-row>
-                        <a-col :span="24">Are you sure you want to request courier?</a-col>
+                        <a-col :span="24">{{translation.Areyou_8_631}}</a-col>
                         </a-row>
                     </div>
                     <!--<img class="img-responsive" :src="qrUrl" />-->
                     <template slot="footer">
                       <a-button @click="handleLogisticsModal(false)"
-                        >Cancel</a-button
+                        >{{translation.cance_1_296}}</a-button
                       >
                       <a-button @click="confirm(false)" type="primary"
-                        >Confirm</a-button
+                        >{{translation.Confi_1_646}}</a-button
                       >
                     </template>
                   </a-modal>
@@ -343,18 +345,18 @@ export default {
       ],
       columns: [
         {
-          title: 'Sample',
+          title: `${this.$store.getters.getTranslation.Sampl_1_310}`,
           dataIndex: 'qrUrl',
           key: 'qrUrl',
           scopedSlots: { customRender: 'image' },
         },
         {
-          title: 'Sample ID',
+          title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
           dataIndex: 'puid',
           key: 'puid',
         },
         {
-          title: 'Print QR',
+          title: `${this.$store.getters.getTranslation.Print_1_111}` + ' QR',
           dataIndex: 'print',
           key: 'print',
           scopedSlots: { customRender: 'print' },
@@ -379,7 +381,7 @@ export default {
         },
         { 
           id: 4, isCollected: false, 
-          name: `Are there any status issues ?` 
+          name: `${this.$store.getters.getTranslation.Arethere_5_587}` 
         },
         {
           id: 5,
@@ -412,12 +414,12 @@ export default {
         {
           id: 2,
           isCollected: false,
-          name: `Has sample been removed from freezer ?`,
+          name: `${this.$store.getters.getTranslation.Hassampl_6_583}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `Does sample packaging pass visual check ?`,
+          name: `${this.$store.getters.getTranslation.Doessampl_6_584}`,
         },
         {
           id: 4,
@@ -427,12 +429,12 @@ export default {
         {
           id: 5,
           isCollected: false,
-          name: `Has sample been packaged for courier ?`,
+          name: `${this.$store.getters.getTranslation.Hassampl_6_585}`,
         },
         {
           id: 6,
           isCollected: false,
-          name: `Is documentation completed and ready for courier pick up ?`,
+          name: `${this.$store.getters.getTranslation.Isdocum_9_586}`,
         },
       ],
     }
@@ -442,6 +444,34 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.dummyOutBoundCollection[0].name=newValues.Hassampl_6_583
+        this.dummyOutBoundCollection[1].name=newValues.Doessampl_6_584
+        this.dummyOutBoundCollection[2].name=newValues.IsSampl_6_529
+        this.dummyOutBoundCollection[3].name=newValues.Hassampl_6_585
+        this.dummyOutBoundCollection[4].name=newValues.Isdocum_9_586
+
+        this.dummyCollection[0].name=newValues.Packarecei_2_518
+        this.dummyCollection[1].name=newValues.Doespacka_6_519
+        this.dummyCollection[2].name=newValues.Isthere_6_520
+        this.dummyCollection[3].name=newValues.Arethere_5_587
+        this.dummyCollection[4].name=newValues.Doesthe_9_522
+        this.dummyCollection[5].name=newValues.Isitem_7_523
+        this.dummyCollection[6].name=newValues.Isthere_8_524
+        this.dummyCollection[7].name=newValues.Specifreez_9_525
+
+        this.columns[0].title=newValues.Sampl_1_310
+        this.columns[1].title=newValues.SamplID_2_502
+        this.columns[2].title=newValues.Print_1_111
+
+        this.phases[0].name=newValues.StoreSampl_2_579
+        this.phases[1].name=newValues.OutboProce_2_514
+        this.phases[2].name=newValues.Couri_1_234
+      }
+    }
+  },     
   mounted() {
     this.handleActiveTab()
   },
