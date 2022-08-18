@@ -8,16 +8,15 @@
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
+            <!-- :placeholder="translation['Handlby:_2_384']" -->
             <a-input
               v-decorator="[
                 'senderName',
                 {
-                  rules: [
-                    { required: true, message: 'Required' },
-                  ],
+                  rules: [{ required: true, message: 'Required' }],
                 },
               ]"
-              :placeholder="translation['Handlby:_2_384']"
+              placeholder="Handled by"
             /> </a-form-item
         ></a-col>
         <a-col :span="12">
@@ -26,6 +25,7 @@
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
+            <!-- :placeholder="translation['Colleby:_2_390']" -->
             <a-input
               v-decorator="[
                 'LogisticUserName',
@@ -35,7 +35,7 @@
                   ],
                 },
               ]"
-              :placeholder="translation['Colleby:_2_390']"
+              placeholder="Collected by"
             /> </a-form-item
         ></a-col>
 
@@ -88,7 +88,9 @@
             /> </a-form-item
         ></a-col>
         <a-col :span="24"
-          ><FormActionButton :loading="loading" :custom-text="translation['Save&_3_453']"
+          ><FormActionButton
+            :loading="loading"
+            :custom-text="translation['Save&_3_453']"
         /></a-col>
       </a-row>
     </a-form>
@@ -122,7 +124,7 @@ export default {
       STANDARD_UK_DATE_FORMAT,
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },

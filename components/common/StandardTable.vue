@@ -76,18 +76,6 @@
         slot-scope="text, record"
         class="treatment-steps"
       >
-<!-- steps without treatments -->
-          <div class="container-div">
-            <div class="container-steps-div main">
-              <div @click="gotoConsent(record)">
-                <steps v-if="checkTreatment(record)"
-                  :phases="phases"
-                  :patient="record"
-                  :current-step="getCurrentStep"
-                ></steps>
-              </div>
-            </div>
-          </div>
 <!-- Steps with treatments -->
         <span
           v-for="treatment in record.treatments"
@@ -343,11 +331,12 @@
     >
       <a-form :form="form" @submit="handleSubmit">
         <a-form-item>
+            <!-- v-model="treatmentCancelReason" -->
           <a-textarea
-            v-model="treatmentCancelReason"
             v-decorator="[
               'note',
               {
+                initialValue:note,
                 rules: [{ required: true, message: 'Required' }],
               },
             ]"
@@ -372,18 +361,20 @@
       :footer="false"
       @cancel="handleCancelModal(false, '', '')"
     >
-      <a-form :form="form" @submit="handleOk">
+      <a-form ref="pauseForm" :form="form" @submit="handleOk">
+            <!-- v-model="treatmentPauseReason" -->
         <a-form-item>
           <a-textarea
-            v-model="treatmentPauseReason"
             v-decorator="[
-              'note',
+              'notes',
               {
+                initialValue:notes,
                 rules: [{ required: true, message: 'Required' }],
               },
             ]"
             placeholder="Enter Note"
           />
+          
         </a-form-item>
         <a-form-item>
           <a-button
@@ -469,8 +460,10 @@ export default {
       showPauseModal: false,
       showFlagModal: false,
       phases: PATIENT_TREATMENT_PHASES,
-      treatmentCancelReason: '',
-      treatmentPauseReason: '',
+      treatmentCancelReason: "",
+      treatmentPauseReason: "",
+      note:'',
+      notes:'',
       showCancelTreatmentModal: false,
       treatmentForCancellation: {},
       treatmentForPause: {},
@@ -510,6 +503,7 @@ export default {
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
+        this.treatmentCancelReason = values.note
         if (!err) {
           // eslint-disable-next-line no-unused-expressions
           this.submitCancelResponse()
@@ -520,11 +514,12 @@ export default {
     handleOk(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
+        this.treatmentPauseReason = values.notes
         if (!err) {
           this.submitPauseResponse()
           this.showPauseModal = false
-          this.treatmentPauseReason = ''
         }
+        
       })
     },
     submitPauseResponse() {
@@ -534,7 +529,6 @@ export default {
       })
         .then((response) => {
           this.$emit('fetchParent', response)
-          this.treatmentPauseReason = ''
         })
         .catch(this.error)
     },
@@ -582,14 +576,13 @@ export default {
       }
       return 1
     },
-    gotoConsent(patient){
+    gotoConsent(patient, treatment){
       if(!isEmpty(patient))
-      this.goto(`/hospital/patients/${patient.globalId}?view=Consent`)
+      this.goto(`/hospital/patients/${patient.globalId}?view=Consent`, {treatment_id : treatment.globalId})
     },
     stepClick(patient, treatment, phase) {
       // insane logic
       //  2 for patient
-      // console.log(patient, treatment.phaseId, phase.phaseId)
       // return false
       if (
         phase.id !== 1 &&
@@ -600,7 +593,7 @@ export default {
       }
       const routeModel =
         phase.url_type === 1 ? patient.globalId : treatment.globalId
-      return this.goto(`${phase.url_slug}${routeModel}`, {
+      return treatment.phaseId === 1 ? this.gotoConsent(patient, treatment) : this.goto(`${phase.url_slug}${routeModel}`, {
         treatment_id: treatment.globalId,
         ...phase.params,
       })
@@ -652,7 +645,6 @@ export default {
         this.holdTreatment(this.patientData, this.recordData)
         this.recordData.isHold = false
         this.cancelTreatment(this.patientData, this.recordData)
-        this.showCancelTreatmentModal = false
       }
       // eslint-disable-next-line eqeqeq
       else if (e == false && isHold == false) {
@@ -684,23 +676,21 @@ export default {
         .then((response) => {
           this.handleCancelTreatmentModal(false)
           this.success(response.message)
-          this.treatmentCancelReason = ''
-          this.$emit('fetchParent', response)
+          this.$emit('fetchParent', response) 
         })
         .catch(this.error)
         .finally(() => (this.loading = true))
+          
     },
     cancelTreatment(patient, treatment) {
       this.cancelModalTitle = treatment.isCancel
         ? 'Continue Treatment'
         : 'Cancel Treatment'
-      // eslint-disable-next-line eqeqeq
-      if (treatment.isHold == true) {
+      if (treatment.isHold === true) {
         this.handleFlagModal(true, patient, treatment, false)
-      } else {
+      } else if(treatment.isHold === false) {
         this.treatmentForCancellation = treatment
         this.handleCancelTreatmentModal(true)
-        this.treatmentCancelReason = ''
       }
     },
     holdTreatment(patient, treatment) {
@@ -709,7 +699,6 @@ export default {
       })
         .then((response) => {
           this.$emit('fetchParent', response)
-          this.treatmentPauseReason = ''
         })
         .catch(this.error)
     },
@@ -733,7 +722,6 @@ export default {
         this.success(response.message)
         this.fetch()
       })
-      // console.log(patient, treatment)
     },
     handleDeleteModal(e, patient, treatment) {
       // eslint-disable-next-line eqeqeq
@@ -758,7 +746,6 @@ export default {
         ? 'Resume Treatment'
         : 'Pause Treatment'
       this.treatmentForPause = treatment
-      console.log(this.recordData, 'record data')
       // eslint-disable-next-line eqeqeq
       if (this.recordData.isCancel == true) {
         this.cancelModal(true)
@@ -768,6 +755,9 @@ export default {
     },
     handleModal() {
       this.cancelTreatment(this.patientData, this.recordData)
+      this.handleCancelTreatmentModal(false)
+      this.treatmentForCancellation = this.recordData
+      this.submitCancelResponse()
       this.showPauseModal = true
       this.cancelModal(false)
     },

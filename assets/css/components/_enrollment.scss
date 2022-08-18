@@ -202,7 +202,7 @@
 .patient-page {
   .enrollment-page {
     .ant-card-body {
-      padding: 28px !important;
+      // padding: 28px !important;
       margin: 6px;
       padding-right: 0 !important;
     }
@@ -224,7 +224,7 @@
   .ant-tabs-tab {
     text-align: left;
     margin-top: 15px;
-    padding: 0;
+    // padding: 0;
   }
   .tab-title {
     text-decoration: none;
@@ -262,6 +262,11 @@
           background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg');
         }
       }
+    }
+  }
+  .square-table {
+    .ant-row.ant-form-item {
+      margin-bottom: 2px;
     }
   }
 }

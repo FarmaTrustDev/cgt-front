@@ -99,7 +99,7 @@ a {
 .square-table {
   .ant-table-thead > tr > th,
   .ant-table-tbody > tr > td {
-    padding: 13px 12px;
+    padding: 9px 12px;
     padding-bottom: 0%;
     margin: 15px 18px 7px;
     word-wrap: break-word;
@@ -416,9 +416,6 @@ a {
     }
   }
 }
-.ant-descriptions-item-colon::after {
-  // display: none !important;
-}
 
 .enrollment-page {
   .ant-alert-info {
@@ -547,4 +544,16 @@ a {
 }
 .toggle_record.ant-switch-checked {
   background-color: #3869d1;
+}
+// 
+.ant-tabs-vertical.ant-tabs-card.ant-tabs-left .ant-tabs-card-bar.ant-tabs-left-bar .ant-tabs-tab-active {
+  padding-right: 0;
+}
+// 
+.square-table.collect-sample-data.ant-table-wrapper {
+  .ant-table-row {
+    div.ant-row.ant-form-item {
+      margin-bottom: 2px;
+    }
+  }
 }

@@ -6,9 +6,8 @@
           'The treatment was rejected by ' +
           data.organization +
           '. Re-schedule the treatment from available slots below.'
-           
         "
-        :description="getRejectionDetail(data.rejectionReason) "
+        :description="getRejectionDetail(data.rejectionReason)"
         type="success"
       />
     </div>
@@ -20,7 +19,11 @@
         @getEventClick="getEventClick"
       ></calendar>
     </div>
-    <FormFields :treatment="treatment" :entity="entity" class="slots-main"></FormFields>
+    <FormFields
+      :treatment="treatment"
+      :entity="entity"
+      class="slots-main"
+    ></FormFields>
     <FormActionButton text="Finish Scheduling" :is-created="isCreated" />
     <a-modal
       :visible="visibleModal"
@@ -37,9 +40,12 @@
             height="50%"
           />
         </p>
-        <h3><p>Please Select Today/Future Date</p></h3>
+        <h3>Please Select Today/Future Date</h3>
         <footer>
-          <a-button class="ant-btn ant-btn-primary" @click="handleOk()"
+          <a-button
+            class="ant-btn ant-btn-primary"
+            @click="handleOk()"
+            style="padding: 5px 50px"
             >Ok</a-button
           >
         </footer>
@@ -106,13 +112,11 @@ export default {
         .catch(this.error)
         .finally(() => (this.loading = false))
     },
-    getRejectionDetail(data){
-      if(!isEmpty(data))
-      {
-        return "Reason: " + 'data'
-      }
-      else{
-        return "Reason: " + 'N/A'
+    getRejectionDetail(data) {
+      if (!isEmpty(data)) {
+        return 'Reason: ' + 'data'
+      } else {
+        return 'Reason: ' + 'N/A'
       }
     },
     getMomentByStandardFormat,
