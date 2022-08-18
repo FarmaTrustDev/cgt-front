@@ -54,6 +54,16 @@ export default {
       ActionLink,
     }
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.Manuf_1_89
+        this.column[1].title=newValues.TreatType_2_67
+        this.column[2].title=newValues.Statu_1_202
+        this.column[3].title=newValues.Actio_1_220
+      }
+    }
+  },  
   methods: {},
   computed: {
     translation() {

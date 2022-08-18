@@ -13,14 +13,14 @@
           ],
         },
       ]"
-      placeholder="Select Logistic Provider"
+      :placeholder="translation.seleclogis_3_516"
       class="default-select w-100"
       size="large"
       :disabled="false"
       @change="onchange"
     >
       <a-select-option value="" disabled selected
-        >Select Logistic Provider</a-select-option
+        >{{translation.seleclogis_3_516}}</a-select-option
       >
 
       <a-select-option

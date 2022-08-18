@@ -5,15 +5,15 @@
         <Process
           :collections="bag.collection"
           :bag-id="bag.puid"
+          :bag-key-id="bag.id"
           @fetchBags="fetchBags"
         />
         <div class="text-right mt-15">
           <!-- <a-button type="primary" @click="completeBag(bag)"
             >Complete Sample( #{{ bag.puid }})</a-button
           > -->
-
           <a-button
-            v-if="!bag.isCollectionCompleted && showCompleteBag"
+            v-if="!bag.isCollectionCompleted"
             type="primary"
             @click="completeBag(bag)"
             >Complete this Sample</a-button
@@ -42,25 +42,34 @@ export default {
   watch: {
     bags(newBags, oldVal) {
       // watch it
+      console.log(this.activeTab)
       if (newBags !== oldVal) {
-        if (!isEmpty(newBags)) {
+        if (!isEmpty(newBags) && this.activeTab===null) {
+          // console.log(newBags)
           this.activeTab = newBags[0].id
+          // console.log(this.activeTab)
         }
       }
     },
   },
-  mounted() {},
+  mounted() {
+    // this.setActiveTab()
+  },
   methods: {
+    setActiveTab(){
+      console.log(this.bags)
+      // this.activeTab=this.bags[0].id
+    },
     completeBag(bag) {
       if (this.validateCollectionComplete(bag)) {
-        return this.error(`Mark all collection steps `)
+        return this.error(`Confirm all collection steps `)
       }
       this.markComplete(bag)
     },
     markComplete(bag) {
       TreatmentBagServices.markCollectionComplete(bag.id).then((response) => {
         this.showCompleteBag = false
-        this.fetchBags()
+        this.fetchBags(bag.id)
       })
     },
     validateCollectionComplete(bags) {
@@ -82,7 +91,8 @@ export default {
     callback(key) {
       this.activeTab = key
     },
-    fetchBags() {
+    fetchBags(bagKeyId) {
+      this.activeTab=bagKeyId
       this.$emit('fetchBags')
     },
   },

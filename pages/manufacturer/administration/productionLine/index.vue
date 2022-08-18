@@ -43,6 +43,19 @@ export default {
       ActionLink,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[1].title=newValues.Name_1_138
+        this.column[2].title=newValues.Actio_1_220
+      }
+    }
+  },  
   methods: {},
 }
 </script>

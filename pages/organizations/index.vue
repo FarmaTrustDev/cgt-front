@@ -66,6 +66,17 @@ export default {
       loading: true,
     }
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.Name_1_138
+        this.columns[1].title=newValues.EmailAddre_2_140
+        this.columns[2].title=newValues.Phone_1_63
+        this.columns[3].title=newValues.PostaAddre_2_450
+        this.columns[4].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetch()
   },

@@ -7,7 +7,7 @@
         >
       </template>
       <template slot="action" slot-scope="text, record">
-        <a-button type="" @click="getGroup(text, record)"> add group</a-button>
+        <a-button type="" @click="getGroup(text, record)"> {{translation.AddGroup_2_456}}</a-button>
       </template>
       <!-- <template slot="message" slot-scope="text, record">
         <a-button type="" @click="getGroup(text, record)">
@@ -38,24 +38,6 @@
 import ChatServices from '~/services/API/ChatServices'
 import FormFields from '~/components/chat/groups/FormFields'
 import { isEmpty } from '~/services/Utilities'
-
-const columns = [
-  {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    // scopedSlots: { customRender: 'title' },
-  },
-  {
-    title: 'Action',
-    scopedSlots: { customRender: 'action' },
-  },
-]
 export default {
   components: { FormFields },
   data() {
@@ -63,7 +45,23 @@ export default {
       loading: false,
       groupModal: false,
       data: [],
-      columns,
+      columns : [
+  {
+    title: 'Id',
+    dataIndex: 'id',
+    key: 'id',
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Name_1_138}`,
+    dataIndex: 'name',
+    key: 'name',
+    // scopedSlots: { customRender: 'title' },
+  },
+  {
+    title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+    scopedSlots: { customRender: 'action' },
+  },
+],
       files: [],
       form: this.$form.createForm(this, {
         name: 'createForm',
@@ -75,6 +73,14 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[1].title=newValues.Name_1_138
+        this.columns[2].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetch()
   },

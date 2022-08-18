@@ -97,7 +97,7 @@
               </span>
             </a-table>
           </a-tab-pane>
-          <a-tab-pane key="2" tab="Outbound Samples">
+          <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
@@ -158,8 +158,8 @@
         <a-modal :visible="showModal" :title="translation.Docum_1_507" @cancel="handleModal(false)">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
-            <a-button @click="handleModal(false)">Cancel</a-button>
-            <a-button @click="printWindow()">Print</a-button>
+            <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
+            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
           </template>
         </a-modal>
       </div>
@@ -332,7 +332,7 @@ export default {
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `Sample Name`,
+          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -399,12 +399,12 @@ export default {
 
       newSampleColumns: [
         {
-          title: `Sample ID`,
+          title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
           dataIndex: 'patientEnrollmentNumber',
           key: 'patientEnrollmentNumber',
         },
         {
-          title: `Sample Name`,
+          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -472,7 +472,7 @@ export default {
           scopedSlots: { customRender: 'name' },
         },
         {
-          title: `Sample Name`,
+          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
           dataIndex: 'treatmentType',
           key: 'treatmentType',
         },
@@ -507,6 +507,38 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.allSampleColumns[0].title=newValues.SamplID_2_502
+        this.allSampleColumns[1].title=newValues.SamplName_2_503
+        this.allSampleColumns[2].title=newValues.StoraArea_2_504
+        this.allSampleColumns[3].title=newValues.Clien_1_505
+        this.allSampleColumns[4].title=newValues.ArrivDate_5_535
+        this.allSampleColumns[5].title=newValues.Dispaby_2_396
+ 
+        this.pendingColumns[0].title=newValues.SamplID_2_502
+        this.pendingColumns[1].title=newValues.SamplName_2_503
+        this.pendingColumns[2].title=newValues.StoraArea_2_504
+        this.pendingColumns[3].title=newValues.Clien_1_505
+        this.pendingColumns[4].title=newValues.ArrivDate_5_535
+        this.pendingColumns[5].title=newValues.Actio_1_220
+
+        this.newSampleColumns[0].title=newValues.SamplID_2_502
+        this.newSampleColumns[1].title=newValues.SamplName_2_503
+        this.newSampleColumns[2].title=newValues.Clien_1_505
+        this.newSampleColumns[3].title=newValues.ArrivDate_5_535
+        this.newSampleColumns[4].title=newValues.Docum_1_507
+        this.newSampleColumns[5].title=newValues.Actio_1_220
+        this.phases[0].name=newValues.inboushipm_2_302
+        this.phases[1].name=newValues.ProceSampl_2_499
+        this.phases[2].name=newValues.StoreSampl_2_579
+        this.outboundSteps[0].name=newValues.StoreSampl_2_579
+        this.outboundSteps[1].name=newValues.OutboProce_2_514
+        this.outboundSteps[2].name=newValues.Couri_1_234
+      }
+    }
+  },   
   methods: {
     searchTreatment() {},
     stepClick(record, phase) {

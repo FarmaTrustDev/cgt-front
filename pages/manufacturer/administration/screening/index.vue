@@ -47,6 +47,15 @@ export default {
       ActionLink,
     }
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[1].title=newValues.Hospi_1_47
+        this.column[2].title=newValues.TreatType_2_67
+        this.column[3].title=newValues.Actio_1_220
+      }
+    }
+  },  
   methods: {},
   computed:{
     translation() {

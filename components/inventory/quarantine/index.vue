@@ -34,7 +34,7 @@
               :trays="trayData"
               @getTube="getTube"
             />
-            <a-empty v-else description=" select the rack" />
+            <a-empty v-else :description="translation.selecthe_3_628" />
           </div> </TileCenter
       ></a-col>
     </a-row>
@@ -43,16 +43,16 @@
     </a-form-item>
       <a-modal
       :visible="showModal"
-      title="Confirm sample storage"
-      ok-text="Confirm"
-      cancel-text="Cancel"
+      :title="translation.Confisampl_3_621"
+      :ok-text="translation.Confi_1_646"
+      :cancel-text="translation.cance_1_296"
       @ok="confirm(false)"
       @cancel="handleModal(false)"
       >
       <div>
-        <a-row><a-col>Freezer : Atara 001</a-col></a-row>
-        <a-row><a-col>Shelf : Shelf 01</a-col></a-row>
-        <a-row><a-col>Box location : 1A</a-col></a-row>
+        <a-row><a-col>{{translation.Freez_1_624}} : Atara 001</a-col></a-row>
+        <a-row><a-col>{{translation.Shelf_1_623}} : Shelf 01</a-col></a-row>
+        <a-row><a-col>{{translation.BoxLocat_2_622}} : 1A</a-col></a-row>
       </div>
       <!--<img class="img-responsive" :src="qrUrl" />-->
       <!-- <template slot="footer">

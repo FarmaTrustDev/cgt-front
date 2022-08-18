@@ -59,7 +59,7 @@ export default {
           width: 100,
         },
         {
-          title: `${this.$store.getters.getTranslation.PatieName_2_93}`,
+          title:`${this.$store.getters.getTranslation.PatieName_2_93}`,
           dataIndex: 'name',
           key: 'name',
           width: 150,
@@ -93,11 +93,20 @@ export default {
       showPagination: true,
     }
   },
-  /* computed:{
+  computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
-  }, */
+  },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[1].title=newValues.PatieName_2_93
+        this.column[2].title=newValues._1_442
+        this.column[4].title=newValues.Actio_1_220
+      }
+    }
+  },
   methods: {
     getFetch(fetch) {
       this.fetchPatientService = fetch

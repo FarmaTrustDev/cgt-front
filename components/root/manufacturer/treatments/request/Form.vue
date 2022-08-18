@@ -63,7 +63,7 @@
             rules: [],
           },
         ]"
-        placeholder="Production Line"
+        :placeholder="translation.ProduLine_2_449"
       >
         <a-select-option
           v-for="productionLine in productionLines"

@@ -147,15 +147,15 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           if (values.consent === true) {
-            if(this.treatment.id==null)
-            {
-              this.create(values)
-            }else{
-              values.globalId=this.treatment.globalId
+            // if(this.treatment.id==null)
+            // {
+            //   this.create(values)
+            // }else{
+              const treatGlobalId = this.$route.query.treatment_id
+              values.globalId=treatGlobalId
               this.updateConcent(values)
-              // console.log(this.treatment.globalId)
               // this.goto(this.$route.path, { treatment_id: response.data.globalId })
-            }
+            // }
           } else {
             this.checkBoxError = true
             this.loading = false
