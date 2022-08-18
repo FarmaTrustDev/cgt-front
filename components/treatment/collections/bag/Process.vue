@@ -40,7 +40,7 @@
                   initialValue: row.notes,
                 },
               ]"
-              :placeholder="translation.Enternote_3_546 + ':'"
+              :placeholder="translation.Enternote_3_588 + ':'"
             />
             <span v-else>{{ row.notes }}</span>
             <a-input

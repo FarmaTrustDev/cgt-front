@@ -48,7 +48,7 @@
                 :autoSelect="autoSelect"
                 @getTube="getTube"
               />
-              <a-empty v-else description=" select the rack" />
+              <a-empty v-else :description="translation.selecthe_3_628" />
             </div> </TileCenter
         ></a-col>
       </a-row>
@@ -59,11 +59,11 @@
         <div class="view-screen">
           <span v-if="!isEmpty(steps)">
             <h2 slot="title" class="pad-bottom">
-              Provenance Data - Asset DEC123
+              {{translation.ProveData_2_634}} - Asset DEC123
             </h2>
             <TimeLine :steps="steps" />
           </span>
-          <a-empty v-else description="No tube selected" />
+          <a-empty v-else :description="translation.Notube_3_647" />
         </div>
       </a-card>
     </div>
@@ -106,6 +106,19 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.steps[0].by=newValues.InbouDate_2_635
+        this.steps[1].by=newValues.InbouProce_2_513
+        this.steps[2].by=newValues.Stora_1_366
+        this.steps[3].by=newValues.VisuaCheck_2_636
+        this.steps[4].by=newValues.PackaDepot_2_637
+        this.steps[5].by=newValues.CouriPick_3_648
+      }
+    }
+  },   
+
   mounted() {
     console.log(this.$route.query.open)
   },

@@ -31,13 +31,18 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     getText() {
       if (this.isCreated) {
         if (this.text !== defaultText) {
           return this.text
         }
-        return 'Update'
+        return this.translation.Updat_1_208
       }
       return this.customText !== null ? this.customText : this.text
     },

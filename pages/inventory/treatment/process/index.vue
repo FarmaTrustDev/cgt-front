@@ -279,41 +279,41 @@ export default {
         {
           id: 1,
           isCollected: false,
-          name: `Has the package been received at Inbound depot?`,
+          name: `${this.$store.getters.getTranslation.Hasthe_8_592}`,
         },
         {
           id: 2,
           isCollected: false,
-          name: `Does the package match the Advance Shipment Notice?`,
+          name: `${this.$store.getters.getTranslation.Doesthe_8_593}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `Confirm there is no visual package damage?`,
+          name: `${this.$store.getters.getTranslation.Confithere_7_594}`,
         },
         { 
           id: 4, isCollected: false, 
-          name: `Confirm packaging has been removed without any issues?` 
+          name: `${this.$store.getters.getTranslation.Confipacka_8_595}`,
         },
         {
           id: 5,
           isCollected: false,
-          name: `Confirm the item is safe to be placed in the relevant Freezer temperature?`,
+          name: `${this.$store.getters.getTranslation.Confithe_13_596}`,
         },
         {
           id: 6,
           isCollected: false,
-          name: `Confirm no repacking is required?`,
+          name: `${this.$store.getters.getTranslation.Confino_5_597}`,
         },
         {
           id: 7,
           isCollected: false,
-          name: `Confirm there are no status issues?`,
+          name: `${this.$store.getters.getTranslation.Confithere_6_598}`,
         },
         {
           id: 8,
           isCollected: false,
-          name: `Confirm that the package does not need to be placed in Quarantine`,
+          name: `${this.$store.getters.getTranslation.Confithat_12_599}`,
           alias: QUARANTINE_STORAGE,
         },
       ],
@@ -326,12 +326,12 @@ export default {
         {
           id: 2,
           isCollected: false,
-          name: `Has sample been removed from freezer ?`,
+          name: `${this.$store.getters.getTranslation.Hassampl_6_583}`,
         },
         {
           id: 3,
           isCollected: false,
-          name: `Does sample packaging pass visual check ?`,
+          name: `${this.$store.getters.getTranslation.Doessampl_6_584}`,
         },
         {
           id: 4,
@@ -341,12 +341,12 @@ export default {
         {
           id: 5,
           isCollected: false,
-          name: `Has sample been packaged for courier?`,
+          name: `${this.$store.getters.getTranslation.Hassampl_6_585}`,
         },
         {
           id: 6,
           isCollected: false,
-          name: `Is documentation completed and ready for courier pick up?`,
+          name: `${this.$store.getters.getTranslation.Isdocum_9_586}`,
         },
       ],
     }
@@ -361,6 +361,23 @@ export default {
       if(newValues!==oldValue){
         this.phases[0].name=newValues.InbouAccep_3_834
         this.phases[1].name=newValues.ProceSampl_2_499
+        this.phases[2].name=newValues.StoreSampl_2_579
+        
+        this.dummyCollection[0].name=newValues.Hasthe_8_592
+        this.dummyCollection[1].name=newValues.Doesthe_8_593
+        this.dummyCollection[2].name=newValues.Confithere_7_594
+        this.dummyCollection[3].name=newValues.Confipacka_8_595
+        this.dummyCollection[4].name=newValues.Confithe_13_596
+        this.dummyCollection[5].name=newValues.Confino_5_597
+        this.dummyCollection[6].name=newValues.Confithere_6_598
+        this.dummyCollection[7].name=newValues.Confithat_12_599
+
+
+        this.dummyOutBoundCollection[0].name=newValues.Hassampl_6_583
+        this.dummyOutBoundCollection[1].name=newValues.Doessampl_6_584
+        this.dummyOutBoundCollection[2].name=newValues.IsSampl_6_529
+        this.dummyOutBoundCollection[3].name=newValues.Hassampl_6_585
+        this.dummyOutBoundCollection[4].name=newValues.Isdocum_9_586
       }
     }
   },  

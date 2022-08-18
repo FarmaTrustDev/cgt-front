@@ -22,7 +22,7 @@
                   rules: [
                     {
                       required: !notesRequired[row.id],
-                      message: '',
+                      message: promptMessage,
                     },
                   ],
                 },
@@ -51,12 +51,12 @@
                   rules: [
                     {
                       required: !notesRequired[row.id],
-                      message: '',
+                      message: promptMessage,
                     },
                   ],
                 },
               ]"
-              :placeholder="translation.Enternote_3_546"
+              :placeholder="translation.Enternote_3_588"
               @blur="(e) => handleInput(row.id,e)"
             />
             <span v-else>{{ row.notes }}</span>
@@ -118,14 +118,14 @@
 
 
     <a-modal
-      title="You have left option(s) 'No'."
+      :title="translation.Youhave_5_625"
       :visible="showQuaranitineModal"
       @cancel="handleErrorShowModal(false)"
     >
-      <p v-if="inboundCheck">Do you want to quarantine the sample?</p>
+      <p v-if="inboundCheck">{{translation.Doyou_7_626}}</p>
       <template #footer>
-        <a-button key="back" @click="handleErrorShowModal(false)">No</a-button>
-        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">Yes</a-button>
+        <a-button key="back" @click="handleErrorShowModal(false)">{{translation.no_1_656}}</a-button>
+        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">{{translation.yes_1_654}}</a-button>
       </template>      
     </a-modal>
     <a-modal
@@ -163,7 +163,7 @@ export default {
     return {
       columns: [
         {
-          title: `Questions`,
+          title: `${this.$store.getters.getTranslation.Quest_1_580}`,
           dataIndex: 'name',
           width: '30%',
         },
@@ -178,7 +178,7 @@ export default {
           scopedSlots: { customRender: 'notes' },
         },
         {
-          title: 'Supporting Documents',
+          title: `${this.$store.getters.getTranslation.SuppoDocum_2_581}`,
           scopedSlots: { customRender: 'email' },
         },
         /* {
@@ -201,7 +201,9 @@ export default {
       filledData:0,
       noteItem:[],
       showQuaranitineModal:false,
-      inboundCheck:false,      
+      inboundCheck:false,
+      errorMessage:`${this.$store.getters.getTranslation.Thecheck_10_582}`,
+      promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,      
     }
   },
   computed: {
@@ -209,6 +211,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.Quest_1_580
+        this.columns[1].title=newValues.Check_1_454
+        this.columns[2].title=newValues.Notes_1_350
+        this.columns[3].title=newValues.SuppoDocum_2_581
+        this.errorMessage=newValues.Thecheck_10_582
+        this.promptMessage=newValues.Pleasinput_4_578
+      }
+    }
+  },     
   methods: {
     submit() {
       this.form.validateFields((err,values)=>{
@@ -312,7 +326,7 @@ export default {
     },
     error() {
     this.$error({
-      title: 'The checklist will not proceed with the No answer(s).Correct them.',
+      title: this.errorMessage,
       // content: 'some messages...some messages...',
     });
     },

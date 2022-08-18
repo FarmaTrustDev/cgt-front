@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h3 class="page-title">Sample Status In Quarantine</h3>
+      <h3 class="page-title">{{translation.SamplStatu_4_614}}</h3>
       <div><h3 style="font-weight:bold">{{translation.SamplDetai_2_510}}</h3></div>
       <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="true" />
     <a-table
@@ -38,7 +38,7 @@ export default {
       qrUrl: 'Uploads/DocumentURL/label1.jpg',
       newTasksColumns: [
         {
-          title: `Stage`,
+          title: `${this.$store.getters.getTranslation.Stage_1_615}`,
           dataIndex: 'stage',
           key: 'stage',
           scopedSlots: { customRender: 'stage' },
@@ -54,7 +54,7 @@ export default {
           key: 'notes',
         },
         {
-          title: `Signed By`,
+          title: `${this.$store.getters.getTranslation.SigneBy_2_616}`,
           dataIndex: 'signedBy',
           key: 'signedBy',
         },
@@ -64,7 +64,7 @@ export default {
           key: 'date',
         },
         {
-          title: `Time`,
+          title: `${this.$store.getters.getTranslation.Time_1_617}`,
           dataIndex: 'time',
           key: 'time',
         },
@@ -81,7 +81,7 @@ export default {
         },
         {
           url:'web/icons/greenTick.png',
-          stage: 'Shipped',
+          stage: `${this.$store.getters.getTranslation.Shipp_1_618}`,
           organization: 'Adaptimmune',
           notes:'',
           signedBy: 'Mike Wheeler',
@@ -108,7 +108,7 @@ export default {
         },
         {
           url:'web/icons/alarm.png',
-          stage: 'Quarantine',
+          stage: `${this.$store.getters.getTranslation.Quara_1_619}`,
           organization: 'Cellfuse',
           notes:'Package place in Quarantine Fridge 003, \n Shelf 1, Rack 9D-G',
           signedBy: 'Mike Wheeler',
@@ -123,6 +123,25 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.newTasksData[0].stage=newValues.Manuf_1_89
+        this.newTasksData[1].stage=newValues.Shipp_1_618
+        this.newTasksData[2].stage=newValues.Couri_1_234
+        this.newTasksData[3].stage=newValues.Inbou_1_498
+        this.newTasksData[4].stage=newValues.Quara_1_619
+
+        this.newTasksColumns[0].title=newValues.Stage_1_615
+        this.newTasksColumns[1].title=newValues.Organ_1_166
+        this.newTasksColumns[2].title=newValues.Notes_1_350
+        this.newTasksColumns[3].title=newValues.SigneBy_2_616
+        this.newTasksColumns[4].title=newValues.date_1_510
+        this.newTasksColumns[5].title=newValues.Time_1_617
+      }
+    }
+  },   
   methods: {
     handleModal(show) {
       this.showModal = show
