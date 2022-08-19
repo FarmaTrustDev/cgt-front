@@ -538,16 +538,11 @@ export default {
         this.outboundSteps[0].name=newValues.StoreSampl_2_579
         this.outboundSteps[1].name=newValues.OutboProce_2_514
         this.outboundSteps[2].name=newValues.Couri_1_234
-      }else{
-        this.phases[0].name=newValues.inboushipm_2_302
-        this.phases[1].name=newValues.ProceSampl_2_499
-        this.phases[2].name=newValues.StoreSampl_2_579
-
-        this.outboundSteps[0].name=newValues.StoreSampl_2_579
-        this.outboundSteps[1].name=newValues.OutboProce_2_514
-        this.outboundSteps[2].name=newValues.Couri_1_234
       }
     }
+  },  
+  mounted() {
+    this.getTranslationData()
   },   
   methods: {
     searchTreatment() {},
@@ -570,7 +565,15 @@ export default {
       this.qrUrl = id
       // LabelServices.scheduling(id);
     },
+    getTranslationData(){
+        this.phases[0].name=translation.inboushipm_2_302
+        this.phases[1].name=translation.ProceSampl_2_499
+        this.phases[2].name=translation.StoreSampl_2_579
 
+        this.outboundSteps[0].name=translation.StoreSampl_2_579
+        this.outboundSteps[1].name=translation.OutboProce_2_514
+        this.outboundSteps[2].name=translation.Couri_1_234
+    },
     inboundSearch(value, key) {
       // console.log(key)
       let filters = this.filters

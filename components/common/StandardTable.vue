@@ -480,6 +480,7 @@ export default {
   },
   watch:{
     translation(newValues, oldValue){
+      console.log(oldValue)
       if(newValues!==oldValue){
         this.phases[0].name=newValues.Scree_1_679
         this.phases[1].name=newValues.Sched_1_681
@@ -491,6 +492,7 @@ export default {
     }
   },   
   mounted() {
+    this.getTranslationData()
     if (this.shouldFetch) {
       this.fetch()
       this.getFetchMethod()
@@ -510,6 +512,14 @@ export default {
           this.handleCancelTreatmentModal(false)
         }
       })
+    },
+    getTranslationData(){
+      this.phases[0].name=this.translation.Scree_1_679
+      this.phases[1].name=this.translation.Sched_1_681
+      this.phases[2].name=this.translation.Colle_1_444
+      this.phases[3].name=this.translation.Shipm_1_756
+      this.phases[4].name=this.translation.Treat_1_29
+      this.phases[5].name=this.translation.Aftercare_2_638
     },
     handleOk(e) {
       e.preventDefault()

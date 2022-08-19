@@ -469,14 +469,11 @@ export default {
         this.phases[0].name=newValues.StoreSampl_2_579
         this.phases[1].name=newValues.OutboProce_2_514
         this.phases[2].name=newValues.Couri_1_234
-      }else{
-        this.phases[0].name=newValues.StoreSampl_2_579
-        this.phases[1].name=newValues.OutboProce_2_514
-        this.phases[2].name=newValues.Couri_1_234
       }
     }
   },     
   mounted() {
+    this.getTranslationData()
     this.handleActiveTab()
   },
   methods: {
@@ -491,6 +488,11 @@ export default {
         this.activeTab=this.$route.query.view
       }
     },
+    getTranslationData(){
+        this.phases[0].name=translation.StoreSampl_2_579
+        this.phases[1].name=translation.OutboProce_2_514
+        this.phases[2].name=translation.Couri_1_234       
+    },    
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
         deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
