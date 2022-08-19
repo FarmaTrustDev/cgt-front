@@ -72,6 +72,7 @@
     &::before {
       // background-image: url($urlBase + '/web/icons/circle-active.svg') !important;
       background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg') !important;
+      background-repeat: no-repeat;
     }
   }
 

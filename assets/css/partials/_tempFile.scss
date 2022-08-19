@@ -90,6 +90,8 @@
 .support.container:last-child {
   padding-top: 0;
 }
+// 
+
 .view-screen {
   .pills-tabs.no-shadow {
     .ant-tabs-tab {
@@ -99,5 +101,24 @@
       // background-color: transparent !important;
       box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
     }
+  }
+}
+
+//
+.treatment-steps.manufacturer-step {
+  .ant-steps-item {
+    border: 1px solid #b8b8b8;
+    padding: 9px 5px !important;
+  }
+  .ant-steps-item-finish {
+    padding-bottom: 4px !important;
+
+  }
+  .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
+    border: 0;
+  }
+  .ant-steps-small.ant-steps-horizontal:not(.ant-steps-label-vertical)
+    .ant-steps-item {
+    margin-left: 0 !important;
   }
 }

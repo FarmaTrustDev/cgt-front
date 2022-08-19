@@ -2,7 +2,7 @@
   <page-layout
     :loading="false"
     :title="translation.SamplStatu_2_509"
-    class="specific"
+    class="specific container smartlab_task_inner"
     :create="false"
   >
     <template slot="content">
@@ -94,7 +94,7 @@
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:100%; margin-left:-3%; padding-right:2%">
+            <div class="treatment-steps" style="width:100%">
               <span class="step-col-large">
               <a-steps size="small">
                 <a-step

@@ -72,7 +72,15 @@
   padding-right: 0;
   padding-top: 0;
 }
-
+.bags_section {
+  .view-screen {
+    .ant-card-body {
+      .ant-tabs-tab {
+        padding: 0 !important;
+      }
+    }
+  }
+}
 .mt-15.view-screen {
   .ant-card-body {
     .ant-tabs {
