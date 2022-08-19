@@ -566,13 +566,13 @@ export default {
       // LabelServices.scheduling(id);
     },
     getTranslationData(){
-        this.phases[0].name=translation.inboushipm_2_302
-        this.phases[1].name=translation.ProceSampl_2_499
-        this.phases[2].name=translation.StoreSampl_2_579
+        this.phases[0].name=this.translation.inboushipm_2_302
+        this.phases[1].name=this.translation.ProceSampl_2_499
+        this.phases[2].name=this.translation.StoreSampl_2_579
 
-        this.outboundSteps[0].name=translation.StoreSampl_2_579
-        this.outboundSteps[1].name=translation.OutboProce_2_514
-        this.outboundSteps[2].name=translation.Couri_1_234
+        this.outboundSteps[0].name=this.translation.StoreSampl_2_579
+        this.outboundSteps[1].name=this.translation.OutboProce_2_514
+        this.outboundSteps[2].name=this.translation.Couri_1_234
     },
     inboundSearch(value, key) {
       // console.log(key)
