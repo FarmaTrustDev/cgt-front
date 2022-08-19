@@ -125,10 +125,33 @@ export default {
       return this.$store.getters.getTranslation
     },    
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.Lab_1_566
+        this.columns[1].title=newValues.Addre_1_559
+        this.columns[2].title=newValues.Headof_3_549
+        this.columns[3].title=newValues.City_1_446
+        this.columns[4].title=newValues.Count_1_49
+        this.columns[5].title=newValues.EmailAddre_2_140
+        this.columns[6].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetch()
+    this.getTranslationData()
   },
   methods: {
+    getTranslationData(){
+        this.columns[0].title=this.translation.Lab_1_566
+        this.columns[1].title=this.translation.Addre_1_559
+        this.columns[2].title=this.translation.Headof_3_549
+        this.columns[3].title=this.translation.City_1_446
+        this.columns[4].title=this.translation.Count_1_49
+        this.columns[5].title=this.translation.EmailAddre_2_140
+        this.columns[6].title=this.translation.Actio_1_220
+    },    
     preventDefault,
     fetch() {
       UserServices.getUser(this.user.organizationId, this.user.organizationTypeId)

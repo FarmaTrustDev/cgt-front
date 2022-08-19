@@ -26,22 +26,53 @@
 import imagesHelper from '~/mixins/images-helper'
 export default {
   mixins: [imagesHelper],
-  props: {
+  /*  props: {        // This has been changed for localization purpose because the data was not being passed by the calling component
     data: {
       type: Object,
       default: () => ({
         countryName: 'Germany - Cellfuse',
         address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
         flag: 'web/flags/de.svg',
-        // global: `${this.$store.getters.getTranslation.Headof_3_549}` + '- Stephen Jones',
+        global: 'Head of Lab - Stephen Jones',
         phone: '49 6781 9855-0',
         email: 'info-imfs@cellfuse.de',
       }),
     },
+  }, */
+  data() {
+    return {
+      data: {
+        countryName: 'Germany - Cellfuse',
+        address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
+        flag: 'web/flags/de.svg',
+        global: '',
+        phone: '49 6781 9855-0',
+        email: 'info-imfs@cellfuse.de',
+      }
+    }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },    
+  },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.data.global=newValues.Headof_3_549 + '- Stephen Jones'
+      }
+    }
+  },   
+  mounted() {
+    this.getTranslationData()
+  },
+  methods: {
+    getTranslationData(){
+      this.data.global=this.translation.Headof_3_549 + '- Stephen Jones'
+    }
+  },    
 }
 </script>
-
 <style lang="scss" scoped>
 .icon-col {
   .anticon {
