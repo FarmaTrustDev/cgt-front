@@ -6,8 +6,8 @@
     :create="false"
   >
     <template slot="content">
-      <div class="grey-card" style="width: 90%; margin-left: 5%">
-        <div class="patient-details-page" style="width:95%; margin-left:2%">
+      <div class="grey-card">
+        <div class="patient-details-page" style="margin:2%;margin-top: 0;">
           <a-row :gutter="18">
             <a-col :span="6">
               <a-card :bordered="false" class="qr-section default-card">
@@ -89,7 +89,7 @@
         </div>
         <a-card
           :bordered="false"
-          class="mt-15 default-card inbound-accept-tabs"
+          class="mt-15 default-card inbound-accept-tabs tabs_body"
           style="width:95%; margin-left:2%"
         >
           <span>
@@ -118,7 +118,7 @@
           style="width:95%; margin-left:2%"
         >
 
-        <div class="h-tabs large-tabs" style="width:100%; margin-left:-3%">
+        <div class="h-tabs large-tabs" style="width:100%">
               <a-row>
                 <a-col :span="11">
                   <a-card :bordered="false" class="default-card">
@@ -229,7 +229,7 @@
         <a-card
           v-if="activeTab=='PROCESS_SAMPLE'"
           :bordered="false"
-          class="mt-15 default-card inbound-accept-tabs"
+          class="mt-15 default-card inbound-accept-tabs test"
           style="width:95%; margin-left:2%"
         >
 

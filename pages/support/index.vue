@@ -2,7 +2,12 @@
   <div class="specific-page container support_page">
     <a-row class="mt-25 mb-10">
       <div class="page-header">
-        <h3 class="page-title float-left">{{translation['suppoissue_2_176']}}</h3>
+        <h3
+          class="page-title float-left ant-card-head"
+          style="border-bottom: 0"
+        >
+          <b>{{ translation['suppoissue_2_176'] }}</b>
+        </h3>
         <a-button
           type="primary"
           class="mrm-5 mrt float-right"
@@ -40,9 +45,9 @@
                   <a-icon type="edit" />
                 </a-button> -->
             <a-dropdown>
-              <a-button class="action-button" size="small">{{
-                translation.Admin_1_142
-              }} <a-icon type="down" /> </a-button>
+              <a-button class="action-button" size="small"
+                >{{ translation.Admin_1_142 }} <a-icon type="down" />
+              </a-button>
               <a-menu slot="overlay">
                 <a-menu-item>
                   <a @click="showUpdate(record)"
@@ -158,28 +163,28 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.columns[0].title=newValues.date_1_510
-        this.columns[1].title=newValues.TickeID_2_212
-        this.columns[3].title=newValues.BagID_2_540
-        this.columns[4].title=newValues.IssueDetai_2_214
-        this.columns[5].title=newValues.LastUpdat_2_216
-        this.columns[6].title=newValues.Statu_1_202
-        this.columns[7].title=newValues.Actio_1_220
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.columns[0].title = newValues.date_1_510
+        this.columns[1].title = newValues.TickeID_2_212
+        this.columns[3].title = newValues.BagID_2_540
+        this.columns[4].title = newValues.IssueDetai_2_214
+        this.columns[5].title = newValues.LastUpdat_2_216
+        this.columns[6].title = newValues.Statu_1_202
+        this.columns[7].title = newValues.Actio_1_220
       }
-    }
-  },  
+    },
+  },
   mounted() {
     this.fetch()
     this.showModelFromPatient()
   },
   methods: {
-    showModelFromPatient(){
+    showModelFromPatient() {
       // console.log(this.$route.query.showModel)
-      if(this.$route.query.showModel){
-        this.showAddModal=true
+      if (this.$route.query.showModel) {
+        this.showAddModal = true
       }
     },
     customRowReDirect(record) {
@@ -226,7 +231,7 @@ export default {
           this.archivedData.splice(0)
           this.inprogressData.splice(0)
           this.resolvedData.splice(0)
-          for(const dat in this.data){
+          for (const dat in this.data) {
             // console.log(this.data[dat])
             const dates = this.data[dat].created_At.split('T')[0]
             this.data[dat].created_At = dates

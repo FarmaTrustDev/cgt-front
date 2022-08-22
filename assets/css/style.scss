@@ -241,7 +241,7 @@ a {
   .page-title {
     font-size: 1.5625rem;
     font-weight: 600;
-    margin-left: 5%;
+    // margin-left: 5%;
   }
 }
 .specific-storage {
@@ -249,7 +249,7 @@ a {
   .page-title {
     font-size: 1.5625rem;
     font-weight: 600;
-    margin-left: 10px;
+    // margin-left: 10px;
   }
 }
 .inventory-storage-title {
@@ -567,7 +567,7 @@ a {
   .treatment-steps {
     .ant-steps-item {
       margin-right: 0 !important;
-      margin-left: 5px !important;
+      margin-left: 7px !important;
     }
   }
   .ant-steps-item-finish {
@@ -580,5 +580,29 @@ a {
       color: #000;
       font-weight: 600;
     }
+  }
+}
+//
+.inbound-accept-tabs.tabs_body {
+  .ant-card-body {
+    padding: 0 !important;
+  }
+  .ant-steps-small.ant-steps-label-horizontal {
+    margin-top: 0;
+  }
+  .ant-steps-item.ant-steps-item-wait.ant-steps-horizontal-large {
+    margin-right: 0 !important;
+  }
+  .ant-steps-item {
+    margin: 5px !important;
+    .ant-steps-item-title {
+      font-size: 15px !important;
+    }
+  }
+}
+// 
+.steps-green {
+   .step-bar {
+    border: 2px solid #1bb558;
   }
 }

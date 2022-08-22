@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3 class="page-title ml-40">{{ translation._1_438 }}</h3>
+    <h3 class="page-title">{{ translation._1_438 }}</h3>
     <div>
       <a-row :gutter="15" class="grey-card m-auto admin-page">
         <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">

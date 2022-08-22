@@ -1,42 +1,50 @@
 <template>
-    <div>
+  <div class="container" style="margin-top: 25px !important">
     <div class="page-header clearfix">
-    <h3 class="page-title pl-5 float-left">{{translation.LabList_2_551}}</h3>
+      <h3 class="page-title float-left">
+        {{ translation.LabList_2_551 }}
+      </h3>
       <a-button
         type="primary"
         class="mrm-5 float-right"
         @click="goto('lab/create')"
-        >{{translation.AddLab_2_562}}</a-button
+        >{{ translation.AddLab_2_562 }}</a-button
       >
-    <a-input
-      class="float-right page-search-input"
-      ref="userNameInput"
-      :placeholder="translation.SearcLab_2_561"
-      @change="searchUser"
+      <a-input
+        class="float-right page-search-input"
+        ref="userNameInput"
+        :placeholder="translation.SearcLab_2_561"
+        @change="searchUser"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
+    </div>
+    <a-table
+      :columns="columns"
+      :data-source="datasource"
+      class="rounded-table"
+      :pagination="{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50', '100'],
+      }"
     >
-      <a-icon slot="prefix" type="search" />
-    </a-input>
-    </div>      
-      <a-table
-        :columns="columns"
-        :data-source="datasource"
-        class="rounded-table"
-        :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
-      >
-        <template slot="action" slot-scope="action">
-          <a-dropdown>
+      <template slot="action" slot-scope="action">
+        <a-dropdown>
           <a-button class="action-button" @click="preventDefault">
-            {{translation['Admin_1_142']}} <a-icon type="down" />
+            {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
-          <a-menu-item key="userDetail">
-            <a @click="goto(`/inventory/lab/${action.globalId}`)">{{translation.Edit_1_450}}</a>
-          </a-menu-item>
+            <a-menu-item key="userDetail">
+              <a @click="goto(`/inventory/lab/${action.globalId}`)">{{
+                translation.Edit_1_450
+              }}</a>
+            </a-menu-item>
           </a-menu>
-          </a-dropdown>
-        </template>
-      </a-table>
-    </div>  
+        </a-dropdown>
+      </template>
+    </a-table>
+  </div>
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
@@ -51,35 +59,36 @@ export default {
     return {
       datasource: [
         {
-          name: 'Cellfuse', 
-          organizationTypeAlias: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
+          name: 'Cellfuse',
+          organizationTypeAlias:
+            'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
           organizationName: 'Stephen Jones',
           city: 'Berlin',
-          country:'Germany',
+          country: 'Germany',
           email: 'info-imfs@cellfuse.de',
         },
         {
-          name: 'Cellfuse US', 
+          name: 'Cellfuse US',
           organizationTypeAlias: 'Cambridge. 66 D-55743 USA',
           organizationName: 'George Washington Carver',
           city: 'Cambridge',
-          country:'USA',
+          country: 'USA',
           email: 'info-imfs@cellfuse.usa',
         },
         {
-          name: 'Cellfuse US', 
+          name: 'Cellfuse US',
           organizationTypeAlias: 'Gaithersburg. 66 D-55743 USA',
           organizationName: 'Richard Feynman',
           city: 'Gaithersburg',
-          country:'USA',
+          country: 'USA',
           email: 'info-imfs@cellfuse.usa',
-        },                
+        },
       ],
-      columns:[
+      columns: [
         {
           title: `${this.$store.getters.getTranslation.Lab_1_566}`,
           dataIndex: 'name',
-          key: 'name'
+          key: 'name',
         },
         {
           title: `${this.$store.getters.getTranslation.Addre_1_559}`,
@@ -105,15 +114,15 @@ export default {
           title: `${this.$store.getters.getTranslation.EmailAddre_2_140}`,
           key: 'email',
           dataIndex: 'email',
-        }, 
+        },
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           key: 'action',
           scopedSlots: { customRender: 'action' },
         },
-    ],
+      ],
       loading: true,
-      fullName:[],
+      fullName: [],
     }
   },
   computed: {
@@ -123,7 +132,7 @@ export default {
     },
     translation() {
       return this.$store.getters.getTranslation
-    },    
+    },
   },
   mounted() {
     this.fetch()
@@ -131,7 +140,10 @@ export default {
   methods: {
     preventDefault,
     fetch() {
-      UserServices.getUser(this.user.organizationId, this.user.organizationTypeId)
+      UserServices.getUser(
+        this.user.organizationId,
+        this.user.organizationTypeId
+      )
         .then((response) => {
           // this.datasource = response.data
         })
@@ -148,9 +160,9 @@ export default {
     searchUser(e) {
       const search = e.target.value
       // alert(search)
-      if(search!==''){
-        this.fetchSearch({ userName: search, roleName: search,email:search})
-      }else{
+      if (search !== '') {
+        this.fetchSearch({ userName: search, roleName: search, email: search })
+      } else {
         this.fetch()
       }
     },
