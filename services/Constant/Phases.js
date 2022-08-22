@@ -61,7 +61,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 2,
         name: 'Scheduling',
         alias: 'SCHEDULING',
-        phaseId: 5,// requesting manufacturer reject
+        phaseId: 3,// requesting manufacturer reject
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'Scheduling' }
