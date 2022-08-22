@@ -8,7 +8,8 @@
       show-complete-btn="manufacturerCollectionStatus"
       @completeAllBag="completeAllBag"
     />
-    <alert v-else :message="translation.Collenot_4_572" />
+    <alert v-else message="Shipment is not being shedule yet by the Clinic for this treatment.
+     This treatment will be available once the hospital has done the shipment" />
   </div>
 </template>
 <script>
