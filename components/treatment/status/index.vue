@@ -22,9 +22,9 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(treatment.phaseId > 4)"
+            :class="isCompleted(treatment.phaseId > 6)"
           >
-            Collect Samples 
+            Collect Samples
           </div>
           <collections
             v-if="tabs.collectSamples != null"
