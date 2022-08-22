@@ -294,6 +294,25 @@
               </a-form>
         </div>
         </a-card>
+
+    <a-modal :visible="showCourierModal" class="modal-design-smart-lab" :cancel-text="'Print'" :ok-text="'Submit'" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleCourierModal(false)" @ok="handleCourierModalOk(false)">
+          <a-card class="grey-card-smart-lab">
+            <status-detail :heading-title="'Shipment'" :statusDetails="statusDetails" :status="'Complete'" />
+            <hr class="mt-15">
+            <h2>1. Shipping Information</h2>
+            <CustomDisplay :headingTitle="''" :colVal="12" :customDisplayData="customDisplayDataShipInfo" />
+            <h2>  2. Exceptional Release 3. Transfer Preparation </h2>
+            <CustomDisplay :headingTitle="'Select all that apply'" :colVal="12" :customDisplayData="customDisplayDataExceptionalRel" />
+            <h2>   4. Shipper and Accessories </h2>
+            <CustomDisplay :headingTitle="''" :colVal="24" :customDisplayData="customDisplayDataShipperAccess" />
+            <treatment-table :columns="shippingTableDataColumn" :dataSource="shippingTableData" :heading-title="''" />
+            <h2> 5. Inventory</h2>
+            <h2> 6. Selection and Packaging 7. Review and Closure</h2>
+            <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataSelectionPackage" />
+      </a-card>    
+    </a-modal>
+
+
       </div>
     </template>
   </page-layout>
@@ -315,13 +334,211 @@ import { isEmpty } from '~/services/Helpers'
 import {
   INVENTORY_OUTBOUND_STATUS_STEPS
 } from '~/services/Constant/Phases'
-// import shipment from '~/components/inventory/treatment/shipment'
+import StatusDetail from '~/components/inventory/treatment/statusDetail'
+import CustomDisplay from '~/components/inventory/treatment/customDisplay'
+import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 
+// import shipment from '~/components/inventory/treatment/shipment'
+export const customDisplayDataShipInfo = [
+  {
+    title: 'Receiving Institution:',
+    value: 'Clinical Site 1',
+    key:0,
+    url:'',
+  },
+  {
+    title: 'Consignee:',
+    value: 'Mrs Dr',
+    key:1,
+    url:'',
+  },
+  {
+    title: 'Additional Information:',
+    value: 'Text here...',
+    key:2,
+    url:'',
+  },
+  {
+    title: 'Planned Date of Shipment:',
+    value: '27/06/2022',
+    key:3,
+    url:'',
+  },  
+  {
+    title: 'Courier Name:',
+    value: 'CRYOPDP',
+    key:4,
+    url:'',
+  },
+  {
+    title: 'Shipping Temperature:',
+    value: 'Cryogenic',
+    key:5,
+    url:'',
+  },
+  {
+    title: ' Courier Phone:',
+    value: '07700000000',
+    key:6,
+    url:'',
+  },
+  {
+    title: 'Initiated by:',
+    value: 'Andrea Marosan',
+    key:7,
+    url:'',
+  },
+  {
+    title: ' Date:',
+    value: '27/06/2022 at 14:00',
+    key:8,
+    url:'',
+  },              
+]
+export const customDisplayDataSelectionPackage = [
+  {
+    title: 'Selected by:',
+    value: 'Andrea Marosan',
+    key:0,
+    url:'',
+  },
+  {
+    title: 'Verified by:',
+    value: 'QA User NJ',
+    key:1,
+    url:'',
+  },
+  {
+    title: 'QA Release:',
+    value: 'QA User NJ',
+    key:2,
+    url:'',
+  },
+  {
+    title: 'Completed by:',
+    value: 'Najib Rehman',
+    key:3,
+    url:'',
+  },
+  {
+    title: 'Date:',
+    value: '27/06/2022 at 14:06',
+    key:4,
+    url:'',
+  },
+  {
+    title: 'Date:',
+    value: '27/06/2022 at 14:09',
+    key:5,
+    url:'',
+  },
+  {
+    title: 'Date:',
+    value: '27/06/2022 at 14:10',
+    key:6,
+    url:'',
+  },
+  {
+    title: 'Date:',
+    value: '27/06/2022 at 14:11',
+    key:7,
+    url:'',
+  },
+]
+export const customDisplayDataExceptionalRel = [
+  {
+    title: 'Workstation:',
+    value: 'S-01',
+    key:1,
+    url:'',
+  },
+  {
+    title: 'Expired/Expiring Products',
+    value: 'No',
+    key:0,
+    url:'web/icons/greenTick.png',
+  },  
+  {
+    title: 'Date:',
+    value: '27/06/2022',
+    key:2,
+    url:'',
+  },
+  {
+    title: 'Quarantined Product',
+    value: 'No',
+    key:3,
+    url:'web/icons/greenTick.png',
+  },  
+  {
+    title: 'Transport Vessel ID:',
+    value: 'C-02',
+    key:4,
+    url:'',
+  },
+  {
+    title: 'Not Clinical Use Product',
+    value: 'No',
+    key:5,
+    url:'web/icons/greenTick.png',
+  },
+  {
+    title: 'Shipment Tracking #:',
+    value: '1564765136',
+    key:6,
+    url:'',
+  },
+  {
+    title: 'QA Exceptional Release:',
+    value: 'e-Signature',
+    key:7,
+    url:'',
+  },
+]
+export const customDisplayDataShipperAccess = [
+  {
+    title: 'Client Provided - Ensure the product temperatures are appropriate:',
+    value: 'No',
+    key:0,
+    url:'web/icons/greenTick.png',
+  },
+  {
+    title: 'Other - Ensure the product temperatures are appropriate:',
+    value: 'No',
+    key:1,
+    url:'web/icons/greenTick.png',
+  },
+  {
+    title: 'CXVC1SP -High Volume General Purpose Cryogenic Shipper:',
+    value: 'No',
+    key:2,
+    url:'web/icons/greenTick.png',
+  },
+  {
+    title: 'EXP-6SP - Standard General Purpose Cryogenic Shipper:',
+    value: 'No',
+    key:3,
+    url:'web/icons/greenTick.png',
+  },
+]
+  export const shippingTableData= [
+    {
+      shipperType: 'CXVC1SP',
+      temperature: 'Cryogenic',
+      shipperID: '15641164456',
+      monitorID: '165469516',
+      sealType: 'Tamper Seal',
+      trackingID:'1654650654165',
+    },
+  ]
 export default {
   components: {
     'page-layout': PageLayout,
     Process,
     LogisticLookup,
+    StatusDetail,
+    CustomDisplay,
+    treatmentTable
     // shipment,
   },
   middleware: 'auth',
@@ -336,6 +553,58 @@ export default {
       showLogisticsModal:false,
       dateFormat: STANDARD_UK_DATE_FORMAT,
       phases:INVENTORY_OUTBOUND_STATUS_STEPS,
+      customDisplayDataShipInfo,
+      showCourierModal:false,
+      shippingTableData,
+      customDisplayDataShipperAccess,
+      customDisplayDataExceptionalRel,
+      customDisplayDataSelectionPackage,
+      shippingTableDataColumn:[
+        {
+          title: 'Shipper Type',
+          dataIndex: 'shipperType',
+          key: 'shipperType',
+        },
+        {
+          title: 'Temperature',
+          dataIndex: 'temperature',
+          key: 'temperature',
+        },
+        {
+          title: 'Shipper ID',
+          dataIndex: 'shipperID',
+          key: 'shipperID',
+        }, 
+        {
+          title: 'Monitor ID',
+          dataIndex: 'monitorID',
+          key: 'monitorID',
+        },
+        {
+          title: 'Seal Type',
+          dataIndex: 'sealType',
+          key: 'sealType',
+        },
+        {
+          title: 'Tracking ID',
+          dataIndex: 'trackingID',
+          key: 'trackingID',
+        },
+      ], 
+      statusDetails :[
+      {
+        clientID: 'DAC-654',
+        projectID: '123456a',
+        protocolD: 'T1',
+        arn: 'ARN-0633-003',
+        createdBy: 'David Handerson',
+        client: 'Novartis',
+        project: 'Texas Test Project',
+        protocol: 'Kiet Test',
+        description: 'Novartis Receipt',
+        createdOn: '27/06/2022',
+        location: 'Cryoport - London',
+      }],
       bagData: [
         {
           puid: 'DAC7993',
@@ -530,16 +799,24 @@ export default {
       window.print()
     },
     clickSubmit() {
-      this.handleLogisticsModal(true)
+      this.showCourierModal=true
+      // this.handleLogisticsModal(true)
     },
     handleLogisticsModal(show){
       this.showLogisticsModal = show
       console.log(this.showLogisticsModal)
     },
+    handleCourierModal(){
+      this.showCourierModal=false
+    },
+    handleCourierModalOk(){
+      this.showCourierModal=false
+      this.goto('/inventory/storage/tasks')
+    },    
     confirm(show) {
       this.showLogisticsModal = show
       this.success('Request sent to logistics')
-      this.goto('/inventory/storage/tasks')
+      
     },
     reDirect(url,alias){
       if(!isEmpty(url)){
