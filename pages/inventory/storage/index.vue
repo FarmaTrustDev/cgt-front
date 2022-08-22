@@ -4,7 +4,7 @@
     :loading="loading"
     :bordered="false"
     :title="translation.StoraServi_2_532"
-    class="specific-storage"
+    class="specific-storage container"
   >
     <div slot="content" class="h-tabs large-tabs">
       <a-row>

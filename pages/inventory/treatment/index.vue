@@ -23,14 +23,14 @@
           </a-button>
         </div>
       </span>
-      <div class="h-tabs large-tabs" style="margin-left: 3%">
+      <div class="h-tabs large-tabs">
         <a-tabs type="card" :animated="false">
           <!-- <a-tab-pane key="1" :tab="translation.Inbou_1_498">
           <a-table
             class="rounded-table"
             :columns="newSampleColumns"
             :data-source="newSampleData"
-            :should-fetch="false"
+          :should-fetch="false"
           >
             <template slot="print" slot-scope="record">
               <a-button

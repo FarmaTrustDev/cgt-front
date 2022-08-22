@@ -4,9 +4,9 @@
     :loading="loading"
     :bordered="false"
     :title="translation.StoraServi_2_532"
-    class="specific-storage"
+    class="specific-storage container"
   >
-    <div slot="content" class="w-1200 margin-auto">
+    <div slot="content" class="">
       <a-row>
         <a-col class="mb-15" :span="24">
           <detail />
@@ -61,7 +61,7 @@
             <h2 slot="title" class="pad-bottom">
               {{translation.ProveData_2_634}} - Asset DEC123
             </h2>
-            <TimeLine :steps="steps" />
+            <TimeLine :steps="steps"  class="steps-green"  />
           </span>
           <a-empty v-else :description="translation.Notube_3_647" />
         </div>
