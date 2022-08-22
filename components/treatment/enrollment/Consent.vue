@@ -148,14 +148,15 @@ export default {
         if (!err) {
           if (values.consent === true) {
             // if(this.treatment.id==null)
-            // {
-            //   this.create(values)
-            // }else{
-              const treatGlobalId = this.$route.query.treatment_id
+            if(this.$route.query.treatmentId == null)
+            {
+              this.create(values)
+            }else{
+              const treatGlobalId = this.$route.query.treatmentId
               values.globalId=treatGlobalId
               this.updateConcent(values)
               // this.goto(this.$route.path, { treatment_id: response.data.globalId })
-            // }
+            }
           } else {
             this.checkBoxError = true
             this.loading = false
