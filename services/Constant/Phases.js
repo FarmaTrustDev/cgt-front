@@ -111,8 +111,8 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         id: 1,
         name: 'Inbound Shipment',
         alias: 'INBOUND_SHIPMENT',
-        phaseId: 5,
-        enablePageId: 5,
+        phaseId: 4,
+        enablePageId: 4,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'INBOUND_SHIPMENT' }
@@ -144,8 +144,8 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
         id: 1,
         name: 'Inbound Accepance Details',
         alias: 'INBOUND_SHIPMENT',
-        phaseId: 8,
-        enablePageId: 5,
+        phaseId: 3,
+        enablePageId: 3,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'INBOUND_SHIPMENT' }
@@ -155,7 +155,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
         name: 'Manufacturing',
         alias: 'MANUFACTURER',
         phaseId: 10,
-        enablePageId: 10,
+        enablePageId: 9,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.patient,
         params: { view: 'MANUFACTURER' }
@@ -165,7 +165,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
         name: 'Outbound Shipment',
         alias: 'OUTBOUND_SHIPMENT',
         phaseId: 14,
-        enablePageId: 14,
+        enablePageId: 10,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.treatment,
         params: { view: 'OUTBOUND_SHIPMENT' }
