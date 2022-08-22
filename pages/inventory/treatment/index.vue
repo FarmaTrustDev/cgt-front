@@ -530,14 +530,19 @@ export default {
         this.newSampleColumns[3].title=newValues.ArrivDate_5_535
         this.newSampleColumns[4].title=newValues.Docum_1_507
         this.newSampleColumns[5].title=newValues.Actio_1_220
+        
         this.phases[0].name=newValues.inboushipm_2_302
         this.phases[1].name=newValues.ProceSampl_2_499
         this.phases[2].name=newValues.StoreSampl_2_579
+
         this.outboundSteps[0].name=newValues.StoreSampl_2_579
         this.outboundSteps[1].name=newValues.OutboProce_2_514
         this.outboundSteps[2].name=newValues.Couri_1_234
       }
     }
+  },  
+  mounted() {
+    this.getTranslationData()
   },   
   methods: {
     searchTreatment() {},
@@ -560,7 +565,15 @@ export default {
       this.qrUrl = id
       // LabelServices.scheduling(id);
     },
+    getTranslationData(){
+        this.phases[0].name=this.translation.inboushipm_2_302
+        this.phases[1].name=this.translation.ProceSampl_2_499
+        this.phases[2].name=this.translation.StoreSampl_2_579
 
+        this.outboundSteps[0].name=this.translation.StoreSampl_2_579
+        this.outboundSteps[1].name=this.translation.OutboProce_2_514
+        this.outboundSteps[2].name=this.translation.Couri_1_234
+    },
     inboundSearch(value, key) {
       // console.log(key)
       let filters = this.filters

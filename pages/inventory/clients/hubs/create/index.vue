@@ -82,8 +82,16 @@ export default {
         this.tasks[2].name=newValues.inboushipm_2_302
       }
     }
-  },   
+  },
+  mounted() {
+    this.getTranslationData()
+  },     
   methods: {
+    getTranslationData(){
+      this.tasks[0].name=this.translation.StoreSampl_2_579
+      this.tasks[1].name=this.translation.OutboProce_2_514
+      this.tasks[2].name=this.translation.inboushipm_2_302
+    },    
     clickToGo(url){
       this.goto(url)
     },

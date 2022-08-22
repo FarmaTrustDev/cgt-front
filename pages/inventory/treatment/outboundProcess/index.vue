@@ -473,6 +473,7 @@ export default {
     }
   },     
   mounted() {
+    this.getTranslationData()
     this.handleActiveTab()
   },
   methods: {
@@ -487,6 +488,11 @@ export default {
         this.activeTab=this.$route.query.view
       }
     },
+    getTranslationData(){
+        this.phases[0].name=this.translation.StoreSampl_2_579
+        this.phases[1].name=this.translation.OutboProce_2_514
+        this.phases[2].name=this.translation.Couri_1_234       
+    },    
     collectionDateChange(value, date) {
       this.form.setFieldsValue({
         deliveryDate: getMomentByStandardFormat(date).add(2, 'day'),
