@@ -146,8 +146,12 @@ export default {
       }
     },
     getTreatmentStepClass(patient) {
-      if (patient.treatment.isHold || patient.treatment.isCancel) {
+      if (patient.treatment.isHold) {
         return 'isHold'
+      }
+      else if(patient.treatment.isCancel)
+      {
+        return 'isCancel'
       }
     },
     getCurrentStep(treatment) {
@@ -207,6 +211,25 @@ export default {
   }
   .ant-steps-item.ant-steps-item-wait {
     background: #fffbc8;
+  }
+  .ant-steps-item-finish .ant-steps-item-content {
+    &::before {
+      background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+    }
+  }
+}
+.isCancel{
+  .ant-steps {
+    @extend .blockState;
+  }
+  .ant-steps-item.ant-steps-item-finish {
+    background: #ffd8d8;
+  }
+  .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
+    background: #ffd8d8;
+  }
+  .ant-steps-item.ant-steps-item-wait {
+    background: #ffd8d8;
   }
   .ant-steps-item-finish .ant-steps-item-content {
     &::before {

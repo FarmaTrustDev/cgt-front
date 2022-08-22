@@ -120,7 +120,7 @@ export default {
     this.notificationHandler()
     this.genericNotificationHandler()
     this.fetchUnreadMessages()
-    // this.uploadTranslations()
+     this.uploadTranslations()
     // this.downloadTranslations()
   },
   methods: {

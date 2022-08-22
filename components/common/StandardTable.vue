@@ -25,7 +25,7 @@
           </a-tooltip>
         </strong>
       </template>
-
+      
       <template slot="image" slot-scope="src, record">
         <img
           width="50"
@@ -538,6 +538,7 @@ export default {
         notes: this.treatmentPauseReason,
       })
         .then((response) => {
+          this.success('Status updated successfully')
           this.$emit('fetchParent', response)
         })
         .catch(this.error)
@@ -685,20 +686,23 @@ export default {
       })
         .then((response) => {
           this.handleCancelTreatmentModal(false)
-          this.success(response.message)
+          // this.success(response.message)
+          this.success('Status updated successfully')
           this.$emit('fetchParent', response) 
         })
         .catch(this.error)
         .finally(() => (this.loading = true))
           
     },
+    
     cancelTreatment(patient, treatment) {
+      debugger
       this.cancelModalTitle = treatment.isCancel
         ? 'Continue Treatment'
         : 'Cancel Treatment'
       if (treatment.isHold === true) {
         this.handleFlagModal(true, patient, treatment, false)
-      } else if(treatment.isHold === false) {
+      } else  {
         this.treatmentForCancellation = treatment
         this.handleCancelTreatmentModal(true)
       }
@@ -708,6 +712,7 @@ export default {
         notes: this.treatmentPauseReason,
       })
         .then((response) => {
+          this.success('Status updated successfully')
           this.$emit('fetchParent', response)
         })
         .catch(this.error)

@@ -7,7 +7,7 @@
   >
     <template slot="content">
       <div class="grey-card" style="width: 90%; margin-left: 5%">
-        <div class="patient-details-page" style="width: 90%; margin-left: 5%">
+        <div class="patient-details-page">
           <a-row :gutter="18">
             <a-col :span="6">
               <a-card :bordered="false" class="qr-section default-card">
@@ -89,13 +89,13 @@
         </div>
         <a-card
           :bordered="false"
-          class="mt-15 default-card inbound-accept-tabs"
-          style="width:90%; margin-left:5%"
+          class="mt-15 default-card inbound-accept-tabs tabs_body"
+          style="margin:5%"
         >
           <span>
             <!-- //Steps -->
             
-            <div class="treatment-steps" style="width:100%; margin-left:-3%;">
+            <div class="treatment-steps" style="width:100%; margin:auto">
               <span class="step-col-large">
               <a-steps size="small">
                   <a-step

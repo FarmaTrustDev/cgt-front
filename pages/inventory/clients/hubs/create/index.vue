@@ -5,6 +5,7 @@
     :bordered="false"
     :back="false"
     :title="translation.ClienHub_2_566"
+    class="container"
   >
     <template slot="content">
       <div class="grey-card">

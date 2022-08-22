@@ -4,7 +4,7 @@
     :loading="loading"
     :bordered="false"
     :title="translation.FilteStora_3_601"
-    class="specific-storage"
+    class="specific-storage container"
   >
     <div slot="content" class="h-tabs large-tabs">
       <a-row>

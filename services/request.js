@@ -13,9 +13,8 @@ const request = function (options) {
   }
 
   const onError = function (err) {
-
     if (err.response && err.response.status === 401) {
-      bus.$emit('UNAUTHORIZE', err.response)
+      bus.$emit('UNAUTHORIZE', 'Session has expired')
     }
 
     if (err.response) {

@@ -3,7 +3,7 @@
     :create="false"
     :loading="false"
     :bordered="false"
-    class="specific-storage"
+    class="specific-storage container"
   >
     <div slot="content">
       <div class="h-tabs large-tabs" style="margin-left: 2%">

@@ -6,7 +6,9 @@
     :title="translation.SmartStore_2_548"
     class="specific-storage container"
   >
+    <!--  -->
     <template slot="content">
+
       <inventory />
       <a-card :bordered="false" class="default-border-radius">
         <h2 slot="title">Components</h2>

@@ -10,7 +10,7 @@
       <span slot="organizationName" slot-scope="record">
         {{record.direction==1? record.hospital.name: record.manufacturerName}}
       </span>
-      <span slot="action" slot-scope="text, record">
+      <span v-if="showButton(record)" slot="action" slot-scope="text, record">
         <a-button type="primary" :loading="loading" dashed @click="showConfirm(record, true)">
           {{translation.Accep_1_278}}
         </a-button>
@@ -18,6 +18,17 @@
           {{translation.Rejec_1_280}}
         </a-button>
       </span>
+              <div v-else-if="showTreamentStatus(record)">
+          <a-badge v-if = record.treatment.isDead>
+            Patient Dead
+          </a-badge>
+          <a-badge v-if = record.treatment.isHold>
+             Patient is on hold
+          </a-badge>
+          <a-badge v-if = record.treatment.isCancel>
+            Patient has been canceled
+          </a-badge>
+        </div>
     </a-table>
     <a-modal
       title="Scheduling Request"
@@ -139,6 +150,20 @@ export default {
     },
     handleModal(show) {
       this.showResponseModal = show
+    },
+        showTreamentStatus(schedule)
+    {
+        // eslint-disable-next-line eqeqeq
+        if(schedule.treatment.isHold==true || schedule.treatment.isCancel==true | schedule.treatment.isDead==true)
+        {
+            this.treatmentStatusClass = 'isHold'
+        }
+        // eslint-disable-next-line eqeqeq
+        // alert(this.treatmentStatusClass)
+        return (schedule.treatment.isHold || schedule.treatment.isDead | schedule.treatment.isCancel)
+    },
+        showButton(schedule) {
+      return !(schedule.treatment.isHold || schedule.treatment.isDead | schedule.treatment.isCancel)
     },
     submitTreatmentResult() {},
     onSubmit(e) {

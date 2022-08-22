@@ -103,8 +103,12 @@ export default {
   mounted() {},
   methods: {
     getTreatmentStepClass(patient) {
-      if (patient.treatment.isHold || patient.treatment.isCancel) {
+      if (patient.treatment.isHold ) {
         return 'isHold'
+      }
+      else if(patient.treatment.isCancel)
+      {
+        return 'isCancel'
       }
     },
     stepClick(record) {
@@ -118,7 +122,20 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.blockState {
+  position: relative;
+  &::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+  }
+}
 .isHold {
+    .ant-steps {
+    @extend .blockState !optional;
+  }
   .ant-steps-item.ant-steps-item-finish {
     background: #fffbc8;
   }
@@ -127,6 +144,25 @@ export default {
   }
   .ant-steps-item.ant-steps-item-wait {
     background: #fffbc8;
+  }
+  .ant-steps-item-finish .ant-steps-item-content {
+    &::before {
+      background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+    }
+  }
+}
+.isCancel {
+    .ant-steps {
+    @extend .blockState;
+  }
+  .ant-steps-item.ant-steps-item-finish {
+    background: #ffd8d8;
+  }
+  .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
+    background: #ffd8d8;
+  }
+  .ant-steps-item.ant-steps-item-wait {
+    background: #ffd8d8;
   }
   .ant-steps-item-finish .ant-steps-item-content {
     &::before {

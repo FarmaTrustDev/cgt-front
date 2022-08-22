@@ -7,7 +7,7 @@
             <!-- left side tabs -->
             <a-col :md="11" :lg="11">
               <a href="javascript:;" @click="goto(`/inventory/treatment`)">
-                <div class="home-tab">
+                <div class="home-tab mt-0">
                   <img
                     src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
                     width="120"

@@ -138,11 +138,10 @@ export default {
             formData.append('patientId', response.data.globalId)
             TreatmentServices.create(formData)
               .then((res) => {
-                this.success(res.message)
                 this.sendData(res.data.globalId)
                 this.goto(
                   `/hospital/patients/${response.data.globalId}?view=Consent`,
-                  { treatment_id: res.data.globalId }
+                  { treatmentId: res.data.globalId }
                 )
               })
               .catch(this.error)
@@ -150,7 +149,7 @@ export default {
           }
           this.success(response.message)
 
-          // this.$emit('getNextTab', 'Consent')
+          this.$emit('getNextTab', 'Consent')
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
