@@ -131,7 +131,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
         id: 3,
         name: 'Outbound Shipment',
         alias: 'OUTBOUND_SHIPMENT',
-        phaseId: 14,
+        phaseId: 10,
         enablePageId: 14,
         url_slug: '/manufacturer/treatments/process/',
         url_type: URL_TYPE.treatment,
