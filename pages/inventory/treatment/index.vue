@@ -158,15 +158,29 @@
             </a-table>
           </a-tab-pane>
         </a-tabs>
-        <a-modal :visible="showModal" class="modal-design-smart-lab" :cancel-text="'Print'" :dialog-style="{ right: '20%', top:'5%' }" @cancel="openPopViewModal(false)" @ok="handleOk(false)">
+        <a-modal :visible="showModal" class="modal-design-smart-lab" :dialog-style="{ right: '20%', top:'5%' }"  @cancel="openPopViewModal(false)" @ok="handleOk(false)">
           <a-card class="grey-card-smart-lab">
             <status-detail :heading-title="'Advanced Receipt Notice'" :status="'Completed'" />
             <hr class="mt-15">
             <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="false" />
             <CustomDisplay :headingTitle="'Information'" :colVal="8" :singleLineKey="'Cryoportal Number:'" :singleLineValue="'684792563-9570-68746596'" :customDisplayData="customDisplayData" />
             <h2>Incoming Materials</h2>
-            <CustomDisplay :headingTitle="''" :colVal="24" :customDisplayData="customDisplayDataMat" />    
-          </a-card>    
+
+            <a-card class="white-card-smart-lab">
+                <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">
+                    <a-row style="line-height:30px">
+                        <a-col :span="4" class="text-muted" >{{custDD.title}}</a-col>
+                        
+                        <a-col v-if="custDD.url===''" :span="20">{{custDD.value}}</a-col>
+                        <a-col v-else :span="20" class="text-muted" ><img :src="getImageUrl(custDD.url)" width="20" height="20" class="img-responsive" style="border-radius:5px" /></a-col>
+                    </a-row>
+                </a-col>
+            </a-card>
+          </a-card>  
+          <template slot="footer">
+            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
+            <a-button type="primary" @click="handleOk(false)">Ok</a-button>
+          </template>            
         </a-modal>
         <a-modal :visible="showModalImage" :title="translation.Docum_1_507" @cancel="handleModal(false)">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />

@@ -123,14 +123,24 @@
             <hr class="mt-15">
             <h2>1. Material Receipt and Identification</h2>
             <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataMRI" />
-            <h2>2. Material Receipt and Identification</h2>
+            <h2>2. Material Unpacking</h2>
             <treatment-table :columns="contentTrackingColumns" :dataSource="contentTracking" :heading-title="'Content Tracking'" />
             <treatment-table :columns="contentTrackingColumns2" :dataSource="contentTracking2" :heading-title="''" />
             <h2>3. QA Disposition</h2>
             <treatment-table :columns="contentTrackingColumns2" :dataSource="contentTracking2" :heading-title="''" />
             <h2>4. Material Release</h2>
-            <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataReleaseBy" />
+            <a-row><a-col :span="6"><h2 style="line-height:50px">Release Location </h2></a-col><a-col :span="14"><h2><a-input style="border-radius:10px; height:50px" /></h2></a-col></a-row>
+            <a-card class="white-card-smart-lab">
+                <a-row v-for="custDD in customDisplayDataReleaseBy" :key="custDD.key">
+                  <a-col :span="2" class="text-muted" >Release By: </a-col><a-col :span="5">{{custDD.releaseBy}}</a-col>
+                  <a-col :span="1" class="text-muted" >Date: </a-col><a-col :span="8">{{custDD.date}}</a-col>
+                </a-row>
+            </a-card>
       </a-card>    
+          <template slot="footer">
+            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
+            <a-button type="primary" @click="handleInventoryOk(false)">Submit</a-button>
+          </template>
     </a-modal>
     <a-modal :visible="showSchedulingModal" :cancel-text="'Print'" :ok-text="'Submit'" class="modal-design-smart-lab" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleSchedulingModal(false)" @ok="handleScheOk(false)">
           <a-card class="grey-card-smart-lab">
@@ -138,25 +148,35 @@
             <hr class="mt-15">
             <h2>Order</h2>
             <CustomDisplay :headingTitle="''" :colVal="12" :customDisplayData="customDisplayDataShipInfo" />
-            <treatment-table :columns="contentTrackingColumns" :dataSource="contentTracking" :heading-title="'Content Tracking'" />
-            <treatment-table :columns="contentTrackingColumns2" :dataSource="contentTracking2" :heading-title="''" />
-            <h2>3. QA Disposition</h2>
-            <treatment-table :columns="contentTrackingColumns2" :dataSource="contentTracking2" :heading-title="''" />
-            <h2>4. Material Release</h2>
-            <CustomDisplay :headingTitle="''" :colVal="12" :customDisplayData="customDisplayDataReleaseBy" />
             <treatment-table :columns="orderTableDataColumns" :dataSource="orderTableData" :heading-title="''" />
             <treatment-table :columns="orderProductTableDataColumns" :dataSource="orderProductTableData" :heading-title="'Ordered Produts'" />
             <h2>Order Initiation</h2>
-            <CustomDisplay :headingTitle="''" :colVal="8" :customDisplayData="customDisplayDataOrderInit" />
+
+            <a-card class="white-card-smart-lab">
+                <a-row v-for="custDD in customDisplayDataOrderInit" :key="custDD.key">
+                  <a-col :span="2" class="text-muted" >Initiated by: </a-col><a-col :span="5">{{custDD.initiatedBy}}</a-col>
+                  <a-col :span="1" class="text-muted" >Date: </a-col><a-col :span="5">{{custDD.date}}</a-col>
+                  <a-col :span="4" class="text-muted" >Order Acceptable? </a-col><a-col :span="6">
+                  <img :src="getImageUrl(custDD.orderAcceptable)" width="20" height="20" class="img-responsive" style="border-radius:5px" />
+                  </a-col>
+                </a-row>
+            </a-card>
             <h2>Order Review</h2>
-            <CustomDisplay :headingTitle="''" :colVal="12" :customDisplayData="customDisplayDataOrderReview" />
-      </a-card>    
+
+            <a-card class="white-card-smart-lab">
+                <a-row v-for="custDD in customDisplayDataOrderReview" :key="custDD.key">
+                  <a-col :span="2" class="text-muted" >Review By: </a-col><a-col :span="5">{{custDD.reviewBy}}</a-col>
+                  <a-col :span="1" class="text-muted" >Date: </a-col><a-col :span="8">{{custDD.date}}</a-col>
+                </a-row>
+            </a-card>
+      </a-card> 
+
+          <template slot="footer">
+            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
+            <a-button type="primary" @click="handleScheOk(false)">Submit</a-button>
+          </template>
+
     </a-modal>
-
-    
-
-
-
     <a-modal
       :title="translation.Youhave_5_625"
       :visible="showQuaranitineModal"
@@ -193,6 +213,8 @@ import routeHelpers from '~/mixins/route-helpers'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
+import imagesHelper from '~/mixins/images-helper'
+
 
 export const customDisplayDataMRI = [
   {
@@ -473,17 +495,10 @@ export const contentTrackingQA= [
     },
 ]
 export const customDisplayDataReleaseBy = [
-  {
-    title: 'Released by:',
-    value: 'David Handerson',
+  {    
+    releaseBy: 'David Handerson',
+    date: '27/06/2022',
     key:0,
-    url:'',
-  },
-  {
-    title: 'Date:',
-    value: '27/06/2022',
-    key:1,
-    url:'',
   },        
 ]
 export const orderProductTableData= [
@@ -497,42 +512,23 @@ export const orderProductTableData= [
 ]
 export const customDisplayDataOrderInit = [
   {
-    title: 'Initiated by:',
-    value: 'Andrea Marosan',
+    initiatedBy: 'Andrea Marosan',
+    date: '27/06/2022 at 14:00',
+    orderAcceptable:'web/icons/greenTick.png',
     key:0,
-    url:'',
   },
-  {
-    title: 'Date:',
-    value: '27/06/2022 at 14:00',
-    key:1,
-    url:'',
-  },
-  {
-    title: 'Order Acceptable? ',
-    value: 'Yes',
-    key:2,
-    url:'web/icons/greenTick.png',
-  },          
 ]
 
 export const customDisplayDataOrderReview = [
   {
-    title: 'Reviewed by:',
-    value: 'Najib Rehman',
+    reviewBy: 'Najib Rehman',
+    date: '27/06/2022 at 14:00',
     key:0,
-    url:'',
-  },
-  {
-    title: 'Date:',
-    value: '27/06/2022 at 14:00',
-    key:1,
-    url:'',
   },          
 ]
 export default {
   components: { Email, InstantUpload, Quarantine,StatusDetail,CustomDisplay,treatmentTable },
-  mixins: [notifications, routeHelpers],
+  mixins: [notifications, routeHelpers,imagesHelper],
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
@@ -881,6 +877,7 @@ export default {
       this.showSchedulingModal=false
     },
     handleScheOk(){
+      this.success('Submitted successfully')
       this.showSchedulingModal=false
       this.$emit('handleActiveTab', 'COURIER')
       this.goto('/inventory/treatment/outboundProcess?view=COURIER')
@@ -889,6 +886,7 @@ export default {
       this.showInventoryModal=false
     },
     handleInventoryOk(){
+      this.success('Submitted successfully')
       this.showInventoryModal=false
       this.goto('/inventory/storage/ColorFridge?inbound=true')
     },
@@ -898,6 +896,9 @@ export default {
     handleQuarantineSubmit() {
       this.handleQuarantineModal(false)
       this.buttonEnable = true
+    },
+    printWindow(){
+      window.print()
     },
     error() {
     this.$error({
