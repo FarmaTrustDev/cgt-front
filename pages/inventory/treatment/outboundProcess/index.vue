@@ -97,12 +97,12 @@
             
             <div class="treatment-steps" style="width:100%; margin:auto">
               <span class="step-col-large">
-              <a-steps size="small">
+              <a-steps size="small" :current="1">
                   <a-step
                     v-for="phase in phases"
                     :key="phase.id"
                     :title="phase.name"
-                    :class="(phase.id==1) ? 'ant-steps-item-active-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
+                    :class="(phase.id==1) ? 'ant-steps-item-finish-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
                     @click="reDirect(phase.url_slug,phase.alias)"
                   />
                 </a-steps>

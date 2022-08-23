@@ -83,13 +83,13 @@
                 <!-- //Steps -->
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                  <a-steps :initial="1" :current="1" size="small">
+                  <a-steps :initial="1" size="small">
                     <a-step
                       v-for="phase in phases"
                       :key="phase.id"
                       :title="phase.name"
-                      :status="(phase.id===2 && record.processSample=='red') ? 'wait' : (phase.id===2 && record.processSample=='green') ? 'finish' : 'wait'"
-                      :class="(phase.id===2 && record.processSample=='red') ? 'ant-steps-item-error': (phase.id===2 && record.processSample!='red') ? 'ant-steps-item-active-blue' : ''"
+                      :status="(phase.id===2 && record.processSample=='red') ? 'wait' : ((phase.id===2 && record.processSample=='green') || phase.id===1) ? 'finish' : 'wait'"
+                      :class="(phase.id===2 && record.processSample=='red') ? 'ant-steps-item-error': ((phase.id===2 && record.processSample!=='red')) ? 'ant-steps-item-active-blue' : ((phase.id!==3)) ? 'ant-steps-item-finish' :''"
                       @click="(phase.id===2 && record.processSample=='red') ? stepClick('error', '/inventory/storage/quarantine/status') : stepClick(record, phase)"
                     />
                   </a-steps>
@@ -120,7 +120,7 @@
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                  <a-steps :initial="1" :current="1" size="small">
+                  <a-steps :initial="1" :current="2" size="small">
                     <a-step
                       v-for="phase in outboundSteps"
                       :key="phase.id"

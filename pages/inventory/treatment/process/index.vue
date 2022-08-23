@@ -96,12 +96,13 @@
             <!-- //Steps -->
             <div class="treatment-steps" style="width:100%">
               <span class="step-col-large">
-              <a-steps size="small">
+              <a-steps size="small" :current="2">
                 <a-step
                   v-for="phase in phases"
                   :key="phase.id"
                   :title="phase.name"
-                  :class="(phase.id==1) ? 'ant-steps-item-active-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
+                  :class="(phase.id==1) ? 'ant-steps-item-finish-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
+                  :status="(phase.id==1) ? 'finish' : (phase.id==2) ? 'wait' : ''"
                   @click="reDirect(phase.url_slug,phase.alias)"
                 />
               </a-steps>
@@ -255,7 +256,7 @@
 import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
 import {
-  QUARANTINE_RESOLUTION_PHASES
+  QUARANTINE_PROCESS_PHASES
 } from '~/services/Constant/Phases'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
 // import shipment from '~/components/inventory/treatment/shipment'
@@ -274,7 +275,7 @@ export default {
     return {
       activeTab: 'inbound',
       type: 'inbound',
-      phases:QUARANTINE_RESOLUTION_PHASES,
+      phases:QUARANTINE_PROCESS_PHASES,
       dummyCollection: [
         {
           id: 1,
