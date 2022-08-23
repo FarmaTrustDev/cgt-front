@@ -205,6 +205,7 @@ export default {
       })
     },
     onSubmit(e) {
+      this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {

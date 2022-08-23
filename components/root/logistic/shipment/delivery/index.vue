@@ -106,7 +106,7 @@ export default {
   methods: {
     disabledDate: _disabledPreviousDate,
     onSubmit(e) {
-      // this.loading = true
+      this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
