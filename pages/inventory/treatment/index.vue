@@ -56,12 +56,12 @@
           <a-tab-pane key="1" :tab="translation.InbouSampl_2_306">
             <a-input
               :placeholder="translation.searc_1_488"
-              class="float-right inventory-search mb-15"
+              class="float-right inventory-search mt-15"
               @change="
                 (e) => inboundSearch(e.target.value, 'patientEnrollmentNumber')
               "
             >
-              <a-icon slot="prefix" type="search" class="mb-5" />
+              <a-icon slot="prefix" type="search" class="mt-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -69,27 +69,44 @@
               :data-source="inbound"
               :should-fetch="false"
             >
-            <template slot="print" slot-scope="print">
-        <a-button
-          @click="openViewModal(print)"
-          >
-        <img :src="getImageUrl('Icons/Union.svg')" ></a-button
-        >
-      </template>
+              <template slot="print" slot-scope="print">
+                <a-button @click="openViewModal(print)">
+                  <img :src="getImageUrl('Icons/Union.svg')"
+                /></a-button>
+              </template>
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                  <a-steps :initial="1" :current="1" size="small">
-                    <a-step
-                      v-for="phase in phases"
-                      :key="phase.id"
-                      :title="phase.name"
-                      :status="(phase.id===2 && record.processSample=='red') ? 'wait' : (phase.id===2 && record.processSample=='green') ? 'finish' : 'wait'"
-                      :class="(phase.id===2 && record.processSample=='red') ? 'ant-steps-item-error': (phase.id===2 && record.processSample!='red') ? 'ant-steps-item-active-blue' : ''"
-                      @click="(phase.id===2 && record.processSample=='red') ? stepClick('error', '/inventory/storage/quarantine/status') : stepClick(record, phase)"
-                    />
-                  </a-steps>
+                    <a-steps :initial="1" :current="1" size="small">
+                      <a-step
+                        v-for="phase in phases"
+                        :key="phase.id"
+                        :title="phase.name"
+                        :status="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? 'wait'
+                            : phase.id === 2 && record.processSample == 'green'
+                            ? 'finish'
+                            : 'wait'
+                        "
+                        :class="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? 'ant-steps-item-error'
+                            : phase.id === 2 && record.processSample != 'red'
+                            ? 'ant-steps-item-active-blue'
+                            : ''
+                        "
+                        @click="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? stepClick(
+                                'error',
+                                '/inventory/storage/quarantine/status'
+                              )
+                            : stepClick(record, phase)
+                        "
+                      />
+                    </a-steps>
                   </span>
                 </div>
 
@@ -106,7 +123,7 @@
                 (e) => outboundSearch(e.target.value, 'patientEnrollmentNumber')
               "
             >
-              <a-icon slot="prefix" type="search" class="mb-5" />
+              <a-icon slot="prefix" type="search" class="mt-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -117,15 +134,17 @@
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                  <a-steps :initial="1" :current="1" size="small">
-                    <a-step
-                      v-for="phase in outboundSteps"
-                      :key="phase.id"
-                      :title="phase.name"
-                      :class="(phase.id===2) ? 'ant-steps-item-active-blue' : ''"
-                      @click="stepClick(record, phase)"
-                    />
-                  </a-steps>
+                    <a-steps :initial="1" :current="1" size="small">
+                      <a-step
+                        v-for="phase in outboundSteps"
+                        :key="phase.id"
+                        :title="phase.name"
+                        :class="
+                          phase.id === 2 ? 'ant-steps-item-active-blue' : ''
+                        "
+                        @click="stepClick(record, phase)"
+                      />
+                    </a-steps>
                   </span>
                 </div>
               </span>
@@ -133,7 +152,11 @@
               <!-- ==== steps === -->
             </a-table>
           </a-tab-pane>
-          <a-tab-pane v-if="false" key="allSample" :tab="translation.AllSampl_2_501">
+          <a-tab-pane
+            v-if="false"
+            key="allSample"
+            :tab="translation.AllSampl_2_501"
+          >
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
@@ -143,7 +166,7 @@
                   allSampleSearch(e.target.value, 'patientEnrollmentNumber')
               "
             >
-              <a-icon slot="prefix" type="search" class="mb-5" />
+              <a-icon slot="prefix" type="search" class="mt-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -155,11 +178,19 @@
             </a-table>
           </a-tab-pane>
         </a-tabs>
-        <a-modal :visible="showModal" :title="translation.Docum_1_507" @cancel="handleModal(false)">
+        <a-modal
+          :visible="showModal"
+          :title="translation.Docum_1_507"
+          @cancel="handleModal(false)"
+        >
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
-            <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
-            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
+            <a-button @click="handleModal(false)">{{
+              translation.cance_1_296
+            }}</a-button>
+            <a-button @click="printWindow()">{{
+              translation.Print_1_111
+            }}</a-button>
           </template>
         </a-modal>
       </div>
@@ -185,7 +216,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '10/06/2022 - 14/07/2022',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'green',
+    processSample: 'green',
   },
   {
     patientEnrollmentNumber: 'DAC7986',
@@ -193,7 +224,7 @@ export const newSampleData = [
     hospital: 'Novartis',
     collectionDateDeliveryDate: '15/06/2022 - 20/07/2023',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'green',
+    processSample: 'green',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -201,7 +232,7 @@ export const newSampleData = [
     hospital: 'Autolus',
     collectionDateDeliveryDate: '21/06/2022 - 26/08/2024',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'red',
+    processSample: 'red',
   },
   {
     patientEnrollmentNumber: 'DAC7996',
@@ -209,7 +240,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '25/06/2022 - 29/08/2025',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'default',
+    processSample: 'default',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -217,7 +248,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '28/06/2022 - 03/08/2026',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'default',
+    processSample: 'default',
   },
 ]
 export const completedSampleData = [
@@ -507,44 +538,44 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.allSampleColumns[0].title=newValues.SamplID_2_502
-        this.allSampleColumns[1].title=newValues.SamplName_2_503
-        this.allSampleColumns[2].title=newValues.StoraArea_2_504
-        this.allSampleColumns[3].title=newValues.Clien_1_505
-        this.allSampleColumns[4].title=newValues.ArrivDate_5_535
-        this.allSampleColumns[5].title=newValues.Dispaby_2_396
- 
-        this.pendingColumns[0].title=newValues.SamplID_2_502
-        this.pendingColumns[1].title=newValues.SamplName_2_503
-        this.pendingColumns[2].title=newValues.StoraArea_2_504
-        this.pendingColumns[3].title=newValues.Clien_1_505
-        this.pendingColumns[4].title=newValues.ArrivDate_5_535
-        this.pendingColumns[5].title=newValues.Actio_1_220
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.allSampleColumns[0].title = newValues.SamplID_2_502
+        this.allSampleColumns[1].title = newValues.SamplName_2_503
+        this.allSampleColumns[2].title = newValues.StoraArea_2_504
+        this.allSampleColumns[3].title = newValues.Clien_1_505
+        this.allSampleColumns[4].title = newValues.ArrivDate_5_535
+        this.allSampleColumns[5].title = newValues.Dispaby_2_396
 
-        this.newSampleColumns[0].title=newValues.SamplID_2_502
-        this.newSampleColumns[1].title=newValues.SamplName_2_503
-        this.newSampleColumns[2].title=newValues.Clien_1_505
-        this.newSampleColumns[3].title=newValues.ArrivDate_5_535
-        this.newSampleColumns[4].title=newValues.Docum_1_507
-        this.newSampleColumns[5].title=newValues.Actio_1_220
-        this.phases[0].name=newValues.inboushipm_2_302
-        this.phases[1].name=newValues.ProceSampl_2_499
-        this.phases[2].name=newValues.StoreSampl_2_579
-        this.outboundSteps[0].name=newValues.StoreSampl_2_579
-        this.outboundSteps[1].name=newValues.OutboProce_2_514
-        this.outboundSteps[2].name=newValues.Couri_1_234
+        this.pendingColumns[0].title = newValues.SamplID_2_502
+        this.pendingColumns[1].title = newValues.SamplName_2_503
+        this.pendingColumns[2].title = newValues.StoraArea_2_504
+        this.pendingColumns[3].title = newValues.Clien_1_505
+        this.pendingColumns[4].title = newValues.ArrivDate_5_535
+        this.pendingColumns[5].title = newValues.Actio_1_220
+
+        this.newSampleColumns[0].title = newValues.SamplID_2_502
+        this.newSampleColumns[1].title = newValues.SamplName_2_503
+        this.newSampleColumns[2].title = newValues.Clien_1_505
+        this.newSampleColumns[3].title = newValues.ArrivDate_5_535
+        this.newSampleColumns[4].title = newValues.Docum_1_507
+        this.newSampleColumns[5].title = newValues.Actio_1_220
+        this.phases[0].name = newValues.inboushipm_2_302
+        this.phases[1].name = newValues.ProceSampl_2_499
+        this.phases[2].name = newValues.StoreSampl_2_579
+        this.outboundSteps[0].name = newValues.StoreSampl_2_579
+        this.outboundSteps[1].name = newValues.OutboProce_2_514
+        this.outboundSteps[2].name = newValues.Couri_1_234
       }
-    }
-  },   
+    },
+  },
   methods: {
     searchTreatment() {},
     stepClick(record, phase) {
-      if(record==='error'){
+      if (record === 'error') {
         this.goto(phase)
-      }else{
+      } else {
         this.goto(phase.url_slug)
       }
     },
@@ -650,7 +681,7 @@ export default {
     redirect() {
       this.goto('/inventory/storage/location')
     },
-     printWindow(){
+    printWindow() {
       window.print()
     },
     customRow(record) {
