@@ -309,7 +309,11 @@
             <h2> 5. Inventory</h2>
             <h2> 6. Selection and Packaging 7. Review and Closure</h2>
             <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataSelectionPackage" />
-      </a-card>    
+      </a-card> 
+          <template slot="footer">
+            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
+            <a-button type="primary" @click="handleCourierModalOk(false)">Submit</a-button>
+          </template>         
     </a-modal>
 
 
@@ -810,6 +814,7 @@ export default {
       this.showCourierModal=false
     },
     handleCourierModalOk(){
+      this.success('Submitted successfully')
       this.showCourierModal=false
       this.goto('/inventory/storage/tasks')
     },    
