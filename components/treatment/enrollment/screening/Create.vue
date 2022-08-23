@@ -95,7 +95,6 @@ export default {
           this.confirm('Complete the patient screenings first!')
           this.loading = false
         }
-        this.loading = false
       })
     },
     onTreatmentSelect(treatmentTypeId) {
