@@ -1,42 +1,51 @@
 <template>
-    <div>
+  <div class="container add_storage" style="margin-top: 25px !important">
     <div class="page-header clearfix">
-    <h3 class="page-title pl-5 float-left">{{translation.AddStora_3_557}}</h3>
+      <h3 class="page-title float-left">
+        {{ translation.AddStora_3_557 }}
+      </h3>
       <a-button
         type="primary"
         class="mrm-5 float-right"
         @click="goto('facility/create')"
-        >{{translation.AddStora_3_557}}</a-button
+        >{{ translation.AddStora_3_557 }}</a-button
       >
-    <a-input
-      class="float-right page-search-input"
-      ref="userNameInput"
-      :placeholder="translation.SearcStora_3_560"
-      @change="searchUser"
+      <a-input
+        class="float-right page-search-input"
+        ref="userNameInput"
+        :placeholder="translation.SearcStora_3_560"
+        @change="searchUser"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
+    </div>
+    <a-table
+      :columns="columns"
+      :data-source="datasource"
+      class="rounded-table"
+      :pagination="{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50', '100'],
+      }"
     >
-      <a-icon slot="prefix" type="search" />
-    </a-input>
-    </div>      
-      <a-table
-        :columns="columns"
-        :data-source="datasource"
-        class="rounded-table"
-        :pagination="{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30', '50', '100']}"
-      >
-        <template slot="action" slot-scope="action">
-          <a-dropdown>
+      <template slot="action" slot-scope="action">
+        <a-dropdown>
           <a-button class="action-button" @click="preventDefault">
-            {{translation['Admin_1_142']}} <a-icon type="down" />
+            {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
-          <a-menu-item key="userDetail">
-            <a @click="goto(`/inventory/storage/facility/${action.globalId}`)">{{translation.Edit_1_450}}</a>
-          </a-menu-item>
+            <a-menu-item key="userDetail">
+              <a
+                @click="goto(`/inventory/storage/facility/${action.globalId}`)"
+                >{{ translation.Edit_1_450 }}</a
+              >
+            </a-menu-item>
           </a-menu>
-          </a-dropdown>
-        </template>
-      </a-table>
-    </div>  
+        </a-dropdown>
+      </template>
+    </a-table>
+  </div>
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
@@ -51,35 +60,35 @@ export default {
     return {
       datasource: [
         {
-          name: 'Cellfuse', 
+          name: 'Cellfuse',
           organizationTypeAlias: '5ml EDTA blood collection tube',
           organizationName: 'Germany - Cellfuse',
           city: 'Zone A, Storage Suite 3',
-          country:'2',
+          country: '2',
           email: '8',
         },
         {
-          name: 'Cellfuse US', 
+          name: 'Cellfuse US',
           organizationTypeAlias: '10ml SST blood collection tubes',
           organizationName: 'Vienna - Cellfuse R&D',
           city: 'Zone C, Storage Suite 2',
-          country:'4',
+          country: '4',
           email: '12',
         },
         {
-          name: 'Cellfuse US', 
+          name: 'Cellfuse US',
           organizationTypeAlias: 'Vacutainer holder',
           organizationName: 'Gaithersburg USA - Cellfuse US',
           city: 'Zone B, Storage Suite 2',
-          country:'3',
+          country: '3',
           email: '19',
-        },                
+        },
       ],
-      columns:[
+      columns: [
         {
           title: `${this.$store.getters.getTranslation.EquipType_2_552}`,
           dataIndex: 'name',
-          key: 'name'
+          key: 'name',
         },
         {
           title: `${this.$store.getters.getTranslation.EquipName_2_553}`,
@@ -105,15 +114,15 @@ export default {
           title: `${this.$store.getters.getTranslation.Numbeof_3_556}`,
           key: 'email',
           dataIndex: 'email',
-        }, 
+        },
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           key: 'action',
           scopedSlots: { customRender: 'action' },
         },
-    ],
+      ],
       loading: true,
-      fullName:[],
+      fullName: [],
     }
   },
   computed: {
@@ -123,21 +132,21 @@ export default {
     },
     translation() {
       return this.$store.getters.getTranslation
-    },    
+    },
   },
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.columns[0].title=newValues.EquipType_2_552
-        this.columns[1].title=newValues.EquipName_2_553
-        this.columns[2].title=newValues.Lab_1_566
-        this.columns[3].title=newValues.LabZone_2_554
-        this.columns[4].title=newValues.Numbeof_3_555
-        this.columns[5].title=newValues.Numbeof_3_556
-        this.columns[6].title=newValues.Actio_1_220
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.columns[0].title = newValues.EquipType_2_552
+        this.columns[1].title = newValues.EquipName_2_553
+        this.columns[2].title = newValues.Lab_1_566
+        this.columns[3].title = newValues.LabZone_2_554
+        this.columns[4].title = newValues.Numbeof_3_555
+        this.columns[5].title = newValues.Numbeof_3_556
+        this.columns[6].title = newValues.Actio_1_220
       }
-    }
-  },  
+    },
+  },
   mounted() {
     this.fetch()
     this.getTranslationData()
@@ -145,21 +154,24 @@ export default {
   methods: {
     preventDefault,
     fetch() {
-      UserServices.getUser(this.user.organizationId, this.user.organizationTypeId)
+      UserServices.getUser(
+        this.user.organizationId,
+        this.user.organizationTypeId
+      )
         .then((response) => {
           // this.datasource = response.data
         })
         .finally(() => (this.loading = false))
     },
-    getTranslationData(){
-        this.columns[0].title=this.translation.EquipType_2_552
-        this.columns[1].title=this.translation.EquipName_2_553
-        this.columns[2].title=this.translation.Lab_1_566
-        this.columns[3].title=this.translation.LabZone_2_554
-        this.columns[4].title=this.translation.Numbeof_3_555
-        this.columns[5].title=this.translation.Numbeof_3_556
-        this.columns[6].title=this.translation.Actio_1_220
-    },    
+    getTranslationData() {
+      this.columns[0].title = this.translation.EquipType_2_552
+      this.columns[1].title = this.translation.EquipName_2_553
+      this.columns[2].title = this.translation.Lab_1_566
+      this.columns[3].title = this.translation.LabZone_2_554
+      this.columns[4].title = this.translation.Numbeof_3_555
+      this.columns[5].title = this.translation.Numbeof_3_556
+      this.columns[6].title = this.translation.Actio_1_220
+    },
     fetchSearch(params) {
       // alert(params.name)
       UserServices.getSearchUser(params)
@@ -171,9 +183,9 @@ export default {
     searchUser(e) {
       const search = e.target.value
       // alert(search)
-      if(search!==''){
-        this.fetchSearch({ userName: search, roleName: search,email:search})
-      }else{
+      if (search !== '') {
+        this.fetchSearch({ userName: search, roleName: search, email: search })
+      } else {
         this.fetch()
       }
     },

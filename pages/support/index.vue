@@ -1,84 +1,98 @@
 <template>
-  <div class="specific-page container support_page">
-    <a-row class="mt-25 mb-10">
-      <div class="page-header">
-        <h3
-          class="page-title float-left ant-card-head"
-          style="border-bottom: 0"
-        >
-          <b>{{ translation['suppoissue_2_176'] }}</b>
-        </h3>
-        <a-button
-          type="primary"
-          class="mrm-5 mrt float-right"
-          @click="showModal(true)"
-          >{{ translation.AddNew_3_182 }}
-        </a-button>
-        <a-input
-          ref="userNameInput"
-          :placeholder="translation.searc_1_488"
-          class="float-right page-search-input"
-          @change="searchSupport"
-        >
-          <a-icon slot="prefix" type="search" />
-        </a-input>
-      </div>
-    </a-row>
-    <a-tabs type="card" @change="callback">
-      <a-tab-pane key="1" :tab="translation.All_1_210">
-        <a-table
-          class="rounded-table"
-          :loading="loading"
-          :data-source="data"
-          :columns="columns"
-          :custom-row="customRowReDirect"
-        >
-          <template slot="tickets" slot-scope="id"> CKD-{{ id }} </template>
-          <template slot="status" slot-scope="status, record">
-            <span :class="'status status-' + getStatusName(status, record)">{{
-              record.status_Name
-            }}</span>
-          </template>
+  <page-layout :create="false" :loading="loading" :title="translation['suppoissue_2_176']">
+    <div class="specific-page container support_page" slot="content">
+      <a-row class="mt-25 mb-10">
+        <div class="page-header">
+          <!-- <h3
+            class="page-title float-left ant-card-head"
+            style="border-bottom: 0"
+          >
+            <b>{{ translation['suppoissue_2_176'] }}</b>
+          </h3> -->
+          <a-button
+            type="primary"
+            class="mrm-5 mrt float-right"
+            @click="showModal(true)"
+            >{{ translation.AddNew_3_182 }}
+          </a-button>
+          <a-input
+            ref="userNameInput"
+            :placeholder="translation.searc_1_488"
+            class="float-right page-search-input"
+            @change="searchSupport"
+          >
+            <a-icon slot="prefix" type="search" />
+          </a-input>
+        </div>
+      </a-row>
+      <a-tabs type="card" @change="callback">
+        <a-tab-pane key="1" :tab="translation.All_1_210">
+          <a-table
+            class="rounded-table"
+            :loading="loading"
+            :data-source="data"
+            :columns="columns"
+            :custom-row="customRowReDirect"
+          >
+            <template slot="tickets" slot-scope="id"> CKD-{{ id }} </template>
+            <template slot="status" slot-scope="status, record">
+              <span :class="'status status-' + getStatusName(status, record)">{{
+                record.status_Name
+              }}</span>
+            </template>
 
-          <span slot="action" slot-scope="text, record">
-            <!-- <a-button type="link">
+            <span slot="action" slot-scope="text, record">
+              <!-- <a-button type="link">
                   <a-icon type="edit" />
                 </a-button> -->
-            <a-dropdown>
-              <a-button class="action-button" size="small"
-                >{{ translation.Admin_1_142 }} <a-icon type="down" />
-              </a-button>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a @click="showUpdate(record)"
-                    ><a-icon type="search" />
-                    {{ translation.Updatticke_2_222 }}</a
-                  >
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </span>
-        </a-table>
-      </a-tab-pane>
-      <a-tab-pane key="2" :tab="translation.Archi_1_226">
-        <Table type="archive" :dump-data="archivedData" @fetchData="fetchData" />
-      </a-tab-pane>
-      <a-tab-pane key="3" :tab="translation.InPro_1_533">
-        <InProgress type="inProgress" :dump-data="inprogressData" @fetchData="fetchData" />
-      </a-tab-pane>
-      <a-tab-pane key="4" :tab="translation.Resol_1_230">
-        <Resolved type="resolved" :dump-data="resolvedData" @fetchData="fetchData" />
-      </a-tab-pane>
-    </a-tabs>
-    <!-- Add New Ticket Modal -->
-    <a-skeleton :loading="loadingTicket">
-      <add-new-ticket
-        v-if="showAddModal"
-        :ticket="ticket"
-        :is-created="isCreated"
-        @closeModal="closeModal"
-    /></a-skeleton>
-  </div>
+              <a-dropdown>
+                <a-button class="action-button" size="small"
+                  >{{ translation.Admin_1_142 }} <a-icon type="down" />
+                </a-button>
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a @click="showUpdate(record)"
+                      ><a-icon type="search" />
+                      {{ translation.Updatticke_2_222 }}</a
+                    >
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </span>
+          </a-table>
+        </a-tab-pane>
+        <a-tab-pane key="2" :tab="translation.Archi_1_226">
+          <Table
+            type="archive"
+            :dump-data="archivedData"
+            @fetchData="fetchData"
+          />
+        </a-tab-pane>
+        <a-tab-pane key="3" :tab="translation.InPro_1_533">
+          <InProgress
+            type="inProgress"
+            :dump-data="inprogressData"
+            @fetchData="fetchData"
+          />
+        </a-tab-pane>
+        <a-tab-pane key="4" :tab="translation.Resol_1_230">
+          <Resolved
+            type="resolved"
+            :dump-data="resolvedData"
+            @fetchData="fetchData"
+          />
+        </a-tab-pane>
+      </a-tabs>
+      <!-- Add New Ticket Modal -->
+      <a-skeleton :loading="loadingTicket">
+        <add-new-ticket
+          v-if="showAddModal"
+          :ticket="ticket"
+          :is-created="isCreated"
+          @closeModal="closeModal"
+      /></a-skeleton>
+    </div>
+  </page-layout>
 </template>
 
 <script>
@@ -87,6 +101,8 @@ import AddNewTicketModal from '~/components/support/Add'
 import SupportServices from '~/services/API/SupportServices'
 import InProgress from '~/components/support/InProgress.vue'
 import Resolved from '~/components/support/Resolved.vue'
+import PageLayout from '~/components/layout/PageLayout'
+
 // import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
 
@@ -94,6 +110,7 @@ export default {
   components: {
     Table,
     InProgress,
+    PageLayout,
     Resolved,
     'add-new-ticket': AddNewTicketModal,
     // PageLayout
@@ -199,8 +216,7 @@ export default {
         },
       }
     },
-    fetchData()
-    {
+    fetchData() {
       this.fetch()
     },
     showUpdate(record) {
