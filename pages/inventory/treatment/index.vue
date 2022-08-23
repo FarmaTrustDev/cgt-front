@@ -164,7 +164,7 @@
             <hr class="mt-15">
             <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="false" />
             <CustomDisplay :headingTitle="'Information'" :colVal="8" :singleLineKey="'Cryoportal Number:'" :singleLineValue="'684792563-9570-68746596'" :customDisplayData="customDisplayData" />
-            <h2>Incoming Materials</h2>
+            <h2 class="mt-15">Incoming Materials</h2>
 
             <a-card class="white-card-smart-lab">
                 <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">
@@ -214,7 +214,7 @@ export const customDisplayData = [
     title: 'Return Materials:',
     value: 'Yes',
     key:0,
-    url:'',
+    url:'web/icons/greenTick.png',
   },
   {
     title: 'Initiated by:',

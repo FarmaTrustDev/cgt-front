@@ -5,21 +5,21 @@
         <div class="status-div">Status: <span class="status-smart-lab-pop">{{status}}</span> </div>
         <span v-for="stDetail in statusDetails" :key="stDetail.clientID">
         <a-row>
-        <a-col :span="3" class="text-muted">Client ID:</a-col><a-col :span="3">{{stDetail.clientID}}</a-col>
-        <a-col :span="3" class="text-muted">ARN #:</a-col><a-col :span="3">{{stDetail.arn}}</a-col>
-        <a-col :span="3" class="text-muted">Project:</a-col><a-col :span="3">{{stDetail.project}}</a-col>
-        <a-col :span="3" class="text-muted">Created on:</a-col><a-col :span="3">{{stDetail.createdOn}}</a-col>
+        <a-col :span="2" class="text-muted">Client ID:</a-col><a-col :span="4" class="text-color-black">{{stDetail.clientID}}</a-col>
+        <a-col :span="2" class="text-muted">ARN #:</a-col><a-col :span="4" class="text-color-black">{{stDetail.arn}}</a-col>
+        <a-col :span="2" class="text-muted">Project:</a-col><a-col :span="4" class="text-color-black">{{stDetail.project}}</a-col>
+        <a-col :span="2" class="text-muted">Created on:</a-col><a-col :span="4" class="text-color-black">{{stDetail.createdOn}}</a-col>
         </a-row>
         <a-row>
-        <a-col :span="3" class="text-muted">Project ID:</a-col><a-col :span="3">{{stDetail.projectID}}</a-col>
-        <a-col :span="3" class="text-muted">Created by:</a-col><a-col :span="3">{{stDetail.createdBy}}</a-col>
-        <a-col :span="3" class="text-muted">Protocol:</a-col><a-col :span="3">{{stDetail.protocol}}</a-col>
-        <a-col :span="3" class="text-muted">Location:</a-col><a-col :span="3">{{stDetail.location}}</a-col>
+        <a-col :span="2" class="text-muted">Project ID:</a-col><a-col :span="4" class="text-color-black">{{stDetail.projectID}}</a-col>
+        <a-col :span="2" class="text-muted">Created by:</a-col><a-col :span="4" class="text-color-black">{{stDetail.createdBy}}</a-col>
+        <a-col :span="2" class="text-muted">Protocol:</a-col><a-col :span="4" class="text-color-black">{{stDetail.protocol}}</a-col>
+        <a-col :span="2" class="text-muted">Location:</a-col><a-col :span="4" class="text-color-black">{{stDetail.location}}</a-col>
         </a-row>
         <a-row>
-        <a-col :span="3" class="text-muted">Protocol ID:</a-col><a-col :span="3">{{stDetail.protocolD}}</a-col>
-        <a-col :span="3" class="text-muted">Client:</a-col><a-col :span="3">{{stDetail.client}}</a-col>
-        <a-col :span="3" class="text-muted">Description:</a-col><a-col :span="3">{{stDetail.description}}</a-col>
+        <a-col :span="2" class="text-muted">Protocol ID:</a-col><a-col :span="4" class="text-color-black">{{stDetail.protocolD}}</a-col>
+        <a-col :span="2" class="text-muted">Client:</a-col><a-col :span="4" class="text-color-black">{{stDetail.client}}</a-col>
+        <a-col :span="2" class="text-muted">Description:</a-col><a-col :span="4" class="text-color-black">{{stDetail.description}}</a-col>
         </a-row>                
         </span>
 
