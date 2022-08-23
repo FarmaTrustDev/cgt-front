@@ -4,6 +4,21 @@
       <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
     </article>
     <a-card :bordered="false" class="default-card grey-card">
+        <dl class="ant-row common-detail">
+          <div class="ant-col-24 d-flex">
+            <dt>Dispatch Date:</dt>
+            <dd>{{getDateFormat(scheduling.pickupDateTime)}}</dd>
+          </div>
+          <div class="ant-col-24 d-flex">
+            <dt>Carrier Status:</dt>
+
+            <dd v-if="!isEmpty(shipment)">Completed</dd>
+          </div>
+          <div class="ant-col-24 d-flex">
+            <dt>{{ translation.EstimArriv_3_322 }}</dt>
+            <dd>{{getDateFormat(scheduling.deliveryDate)}}</dd>
+          </div>
+        </dl>
       <dl class="ant-row common-detail">
         <div class="ant-col-24 d-flex">
           <dt>{{ translation.IsRecei_2_328 }}</dt>
@@ -19,7 +34,7 @@
         <div class="ant-col-24 d-flex">
           <dt>{{ translation['ReceiDate:_2_332'] }}</dt>
           <dd>
-            {{ moment(String(shipment.deliveryAt)).format('dddd DD MM YYYY') }}
+            {{ moment(String(shipment.deliveryAt)).format('DD/MM/YYYY') }}
           </dd>
         </div>
         <div class="ant-col-24 d-flex">
@@ -43,6 +58,11 @@ export default {
       require: true,
       type: Object,
     },
+        scheduling: {
+      default: () => {},
+      require: true,
+      type: Object,
+    },
   },
   data() {
     return {
@@ -54,7 +74,11 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  methods: { isEmpty, getMomentByStandardFormat },
+  methods: { isEmpty, getMomentByStandardFormat,
+      getDateFormat(date) {
+      return moment(String(date)).format('DD/MM/YYYY')
+    },
+  },
 }
 </script>
 <style scoped>

@@ -172,7 +172,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
     },
 ]
 
-export const QUARANTINE_RESOLUTION_PHASES = [
+export const QUARANTINE_PROCESS_PHASES = [
     {
         id: 1,
         name: 'Inbound Acceptance',
@@ -204,6 +204,40 @@ export const QUARANTINE_RESOLUTION_PHASES = [
         params: { view: 'STORE_SAMPLE' }
     },
 ]
+
+export const QUARANTINE_RESOLUTION_PHASES = [
+    {
+        id: 1,
+        name: 'Inbound Acceptance',
+        alias: 'INBOUND_ACCEPTANCE_DETAILS',
+        phaseId: 8,
+        enablePageId: 5,
+        url_slug: '/inventory/storage/quarantine/quarantineProcess?view=INBOUND_ACCEPTANCE_DETAILS',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'INBOUND_ACCEPTANCE_DETAILS' }
+    },
+    {
+        id: 2,
+        name: 'Process Sample',
+        alias: 'PROCESS_SAMPLE',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '/inventory/storage/quarantine/quarantineProcess?view=PROCESS_SAMPLE',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'PROCESS_SAMPLE' }
+    },
+    {
+        id: 3,
+        name: 'Store sample',
+        alias: 'STORE_SAMPLE',
+        phaseId: 14,
+        enablePageId: 14,
+        url_slug: '',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'STORE_SAMPLE' }
+    },
+]
+
 // These Phases has to bee changed for Smart_Lab_Demo_Purpose
 export const SMART_LAB_TREATMENT_PENDING_PHASES = [
     {

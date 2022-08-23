@@ -61,7 +61,7 @@ export default {
       this.apiService
         .create(values)
         .then((response) => {
-          this.success(response.message)
+          this.success('Scheduling request has been sent.')
           if (!this.isEmpty(this.gotoLink)) {
             this.goto(`${this.gotoLink}/${response.data.globalId}`)
           }

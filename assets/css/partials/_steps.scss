@@ -136,7 +136,7 @@
     &::before {
       content: '';
       position: absolute;
-      width: 100%;
+      width: 90%;
       top: 1px;
       bottom: 0;
       margin: auto;
@@ -325,6 +325,30 @@
       }
     }
   }
+
+  .ant-steps-item-finish-large {
+    background: #d1f2dc;
+    margin-left: 2%;
+    border-radius: 20px;
+    height: 60px;
+    min-width: 30%;
+    .ant-steps-item-content {
+      font-weight: 600;
+      font-size: 1.8rem;
+      .ant-steps-item-title {
+        font-size: large;
+        font-weight: 400;
+        margin-left: 4%;
+      }
+      &::before {
+        margin-top: 3px;
+        width: 35px;
+        height: 35px;
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+      }
+    }
+  }
+
 
   .ant-steps-item-active {
     background-color: #f2f5fb;

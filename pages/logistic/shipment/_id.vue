@@ -32,7 +32,7 @@
                 :shipment="pickupShipment"
               />
             </a-tab-pane>
-            <a-tab-pane :key="2">
+            <a-tab-pane :key="2" :disabled="checkTabStatus(deliveryShipment)">
               <div
                 slot="tab"
                 class="tab-title main"
@@ -41,6 +41,7 @@
                 {{ translation.DelivShipm_2_863 }}
               </div>
               <delivery
+                
                 v-if="isEmpty(deliveryShipment)"
                 :shipment="deliveryShipment"
                 :scheduling="entity"
@@ -81,6 +82,7 @@ export default {
   data() {
     return {
       loading: false,
+      pickedUp: true,
       mode: 'left',
       fetchMethod: SchedulingServices.getDetailById,
       schedule: null,
@@ -105,7 +107,21 @@ export default {
       this.schedule = this.entity
       this.markShipmentFlags()
     },
+    checkTabStatus(deliveryShipment){
+      if(!isEmpty(deliveryShipment) === true && this.pickedUp === true)
+      {
+        return false
+      }
+      else if(this.pickedUp === false)
+      {
+        return false
+      }
+      else{
+        return true
+      }
+    },
     fetchList() {
+      this.pickedUp = false
       this.fetch(this.entity.globalId)
     },
     markShipmentFlags() {
