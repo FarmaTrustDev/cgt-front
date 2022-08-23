@@ -34,7 +34,7 @@
           </a-col>
           <a-col v-if="showButton" :span="5" style="text-align:right">
               <a-button size="large" class="mb-10 mtm-20" type="primary" html-type="submit" @click="openViewModal()" :loading="false"> {{translation.TempoRelea_2_612}}</a-button>
-              <a-button size="large" class="mt-10" type="primary" html-type="submit" :loading="false" @click="goto('/inventory/storage/quarantine/quarantineProcess')">{{translation.ResolQuara_2_613}}</a-button>
+              <a-button size="large" class="mt-10" type="primary" html-type="submit" :loading="false" @click="goto('/inventory/storage/quarantine/quarantineProcess?view=PROCESS_SAMPLE')">{{translation.ResolQuara_2_613}}</a-button>
           </a-col>
         </a-row>
         <a-modal :visible="showModal"

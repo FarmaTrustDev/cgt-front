@@ -16,7 +16,7 @@
         <FormActionButton
           v-if="!tabsSubmitButton[`${index}`] && !isEmpty(category.screenings)"
           html-type="button"
-          :text="getButtonText(category.name) + '-' + index"
+          :text="getButtonText(category.name) "
           class="mt-15 screening-btn"
           @click="getNextTab(index, category.screenings, category.name)"
         />
@@ -73,7 +73,7 @@ export default {
       }
     },
     getButtonText(val) {
-      return this.$store.getters.getTranslation.ComplScree_3_469 + val
+      return this.$store.getters.getTranslation.ComplScree_3_469 + ' ' + val
     },
     getNextTab(index, screening) {
       if (this.filledData === screening.length) {
