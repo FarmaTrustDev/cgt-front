@@ -220,6 +220,7 @@ export default {
         .finally(() => {
           this.loading = false
         })
+        this.$emit('fetchData','')
     },
     showModal(value) {
       this.showAddModal = value

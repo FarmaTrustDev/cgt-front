@@ -25,7 +25,7 @@
           </a-tooltip>
         </strong>
       </template>
-
+      
       <template slot="image" slot-scope="src, record">
         <img
           width="50"
@@ -480,6 +480,7 @@ export default {
   },
   watch:{
     translation(newValues, oldValue){
+      console.log(oldValue)
       if(newValues!==oldValue){
         this.phases[0].name=newValues.Scree_1_679
         this.phases[1].name=newValues.Sched_1_681
@@ -491,6 +492,7 @@ export default {
     }
   },   
   mounted() {
+    this.getTranslationData()
     if (this.shouldFetch) {
       this.fetch()
       this.getFetchMethod()
@@ -511,6 +513,14 @@ export default {
         }
       })
     },
+    getTranslationData(){
+      this.phases[0].name=this.translation.Scree_1_679
+      this.phases[1].name=this.translation.Sched_1_681
+      this.phases[2].name=this.translation.Colle_1_444
+      this.phases[3].name=this.translation.Shipm_1_756
+      this.phases[4].name=this.translation.Treat_1_29
+      this.phases[5].name=this.translation.Aftercare_2_638
+    },
     handleOk(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
@@ -528,6 +538,7 @@ export default {
         notes: this.treatmentPauseReason,
       })
         .then((response) => {
+          this.success('Status updated successfully')
           this.$emit('fetchParent', response)
         })
         .catch(this.error)
@@ -675,20 +686,23 @@ export default {
       })
         .then((response) => {
           this.handleCancelTreatmentModal(false)
-          this.success(response.message)
+          // this.success(response.message)
+          this.success('Status updated successfully')
           this.$emit('fetchParent', response) 
         })
         .catch(this.error)
         .finally(() => (this.loading = true))
           
     },
+    
     cancelTreatment(patient, treatment) {
+      debugger
       this.cancelModalTitle = treatment.isCancel
         ? 'Continue Treatment'
         : 'Cancel Treatment'
       if (treatment.isHold === true) {
         this.handleFlagModal(true, patient, treatment, false)
-      } else if(treatment.isHold === false) {
+      } else  {
         this.treatmentForCancellation = treatment
         this.handleCancelTreatmentModal(true)
       }
@@ -698,6 +712,7 @@ export default {
         notes: this.treatmentPauseReason,
       })
         .then((response) => {
+          this.success('Status updated successfully')
           this.$emit('fetchParent', response)
         })
         .catch(this.error)

@@ -125,8 +125,22 @@ export default {
       return this.$store.getters.getTranslation
     },    
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.EquipType_2_552
+        this.columns[1].title=newValues.EquipName_2_553
+        this.columns[2].title=newValues.Lab_1_566
+        this.columns[3].title=newValues.LabZone_2_554
+        this.columns[4].title=newValues.Numbeof_3_555
+        this.columns[5].title=newValues.Numbeof_3_556
+        this.columns[6].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetch()
+    this.getTranslationData()
   },
   methods: {
     preventDefault,
@@ -137,6 +151,15 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    getTranslationData(){
+        this.columns[0].title=this.translation.EquipType_2_552
+        this.columns[1].title=this.translation.EquipName_2_553
+        this.columns[2].title=this.translation.Lab_1_566
+        this.columns[3].title=this.translation.LabZone_2_554
+        this.columns[4].title=this.translation.Numbeof_3_555
+        this.columns[5].title=this.translation.Numbeof_3_556
+        this.columns[6].title=this.translation.Actio_1_220
+    },    
     fetchSearch(params) {
       // alert(params.name)
       UserServices.getSearchUser(params)

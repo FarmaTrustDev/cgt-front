@@ -162,8 +162,11 @@ export default {
     },
     updateTreatment(treatment) {
       this.treatment = treatment
-      this.isScreeningDone = true
-      this.haveTreatment = true
+      if(treatment.phaseId !== 1)
+      {
+        this.isScreeningDone = true
+        this.haveTreatment = true
+      }
     },
     getTreatmentGlobalId(treatment) {
       this.treatment = treatment

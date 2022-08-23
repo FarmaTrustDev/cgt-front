@@ -86,6 +86,22 @@ export default {
       ],
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
+
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.data[0].description.global=this.translation.Headof_3_549 + ' - Stephen Jones'
+        this.data[1].description.global=this.translation.Headof_3_549 + ' - Stephen Jones'
+        this.data[2].description.global=this.translation.Headof_3_549 + ' - Stephen Jones'
+        this.data[3].description.global=this.translation.Headof_3_549 + ' - Stephen Jones'
+      }
+    }
+  },     
   methods: {
     callback(key) {
       console.log(key)

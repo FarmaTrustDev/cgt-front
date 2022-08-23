@@ -182,7 +182,11 @@
     color: $color;
   }
 }
-
+@media print {
+  body, html, #wrapper {
+      height: 100%;
+  }
+}
 @mixin bi_gre($primary, $secondary) {
   background: $primary;
   background: -moz-linear-gradient(left, $primary 0%, $secondary 100%);

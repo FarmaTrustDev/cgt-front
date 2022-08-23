@@ -8,6 +8,7 @@
     <template slot="content">
       <div class="grey-card">
         <treatment-profile-picture-and-detail :treatment="entity" />
+
         <a-card :bordered="false" class="mt-15 default-card-x h-tabs">
           <span>
             <!-- //Steps -->
@@ -41,7 +42,24 @@
             <!-- //Steps -->
           </span>
         </a-card>
-        <a-card :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card
+          v-if="(entity.isHold == true) | (entity.isCancel == true)"
+          :bordered="false"
+          class="mt-15 default-card"
+        >
+          <a-alert
+            v-if="entity.isHold == true"
+            type="error"
+            message="Treatment has been paused"
+          />
+          <a-alert
+            v-if="entity.isCancel == true"
+            type="error"
+            message="Treatment has been cancelled"
+          />
+        </a-card>
+
+        <a-card v-else :bordered="false" class="mt-15 default-card h-tabs">
           <shipment
             v-if="activeTab === 'INBOUND_SHIPMENT'"
             :treatment="entity"
@@ -109,11 +127,21 @@ export default {
       phases: MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS,
       currentPhase: 1,
       activeTab: 'INBOUND_SHIPMENT',
+      disableNextTab: false,
     }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+  },
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.phases[0].name = newValues.InbouAccep_3_834
+        this.phases[1].name = newValues.Manuf_1_342
+        this.phases[2].name = newValues.OutboShipm_2_376
+      }
     },
   },
   mounted() {
@@ -143,13 +171,12 @@ export default {
     afterFetch(data) {
       this.loading = false
       this.getCurrentStep(this.entity)
-      // console.log(data)
     },
     stepClick(record, phase, alias, phaseId) {
-      // console.log(record.phaseId+'-'+phase.enablePageId+'-'+this.currentPhase)
+      this.disableNextTab = false
       if (
-        record.phaseId >= phase.enablePageId ||
-        phase.id === this.currentPhase
+        record.phaseId >= phase.enablePageId
+        // ||         phase.id === this.currentPhase
       ) {
         this.setActiveTab(alias)
         this.currentPhase = phaseId
@@ -157,7 +184,10 @@ export default {
           `/manufacturer/treatments/process/${record.globalId}`,
           { ...phase.params }
         )
+      } else {
+        this.disableNextTab = true
       }
+
       return false
     },
     setActiveTab(tab) {
@@ -171,7 +201,9 @@ export default {
       this.setActiveTab('OUTBOUND_SHIPMENT')
     },
     onChangeSteps(step) {
-      this.currentPhase = step
+      if (!this.disableNextTab) {
+        this.currentPhase = step
+      }
     },
   },
 }

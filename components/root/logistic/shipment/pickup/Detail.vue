@@ -44,9 +44,9 @@
             <dd>{{ shipment.logisticUserName }}</dd>
           </div>
           <div class="ant-col-24 d-flex">
-            <dt>{{ translation['PickuDate:_2_386'] }}</dt>
+            <dt>Pickup At:</dt>
             <dd>
-              {{ moment(String(shipment.pickupAt)).format('dddd DD MM YYYY') }}
+              {{ moment(String(shipment.pickupAt)).format('dddd DD MM YYYY hh:mm') }}
             </dd>
           </div>
           <div class="ant-col-24 d-flex">

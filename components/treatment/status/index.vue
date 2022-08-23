@@ -22,9 +22,9 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(treatment.phaseId > 4)"
+            :class="isCompleted(treatment.phaseId > 6)"
           >
-            Collect Samples 
+            Collect Samples
           </div>
           <collections
             v-if="tabs.collectSamples != null"
@@ -37,7 +37,7 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(tabs.shippingDetails)"
+            :class="isCompleted(treatment.phaseId > 8)"
           >
             Sample Shipping Detail
           </div>
@@ -58,7 +58,7 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(tabs.treatmentDelivery)"
+            :class="isCompleted(treatment.phaseId > 13)"
           >
             Treatment Delivery
           </div>
@@ -68,7 +68,7 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(tabs.treatmentCollection)"
+            :class="isCompleted(treatment.phaseId > 14)"
           >
             Treatment Collection
           </div>
