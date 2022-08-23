@@ -584,7 +584,7 @@ a {
       margin-right: 0 !important;
       margin-left: 7px !important;
       .ant-steps-item-title {
-        margin: 0 7px 0 0 !important;
+        margin: 0 8px 0 0 !important;
       }
     }
   }
@@ -631,3 +631,7 @@ a {
     }
   }
 }
+.Component_body {
+.default-border-radius > .ant-card-head{
+  padding: 0 !important;
+}}
