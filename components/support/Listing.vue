@@ -159,7 +159,7 @@ export default {
         on: {
           click: (event) => {
             // console.log(record)
-            this.goto(`support/${record.global_Id}`)
+            this.goto(`/support/${record.global_Id}`)
           },
         },
       }
@@ -211,6 +211,7 @@ export default {
         .finally(() => {
           this.loading = false
         })
+        this.$emit('fetchData','')
     },
     fetchTicket(globalId) {
       this.loadingTicket = true

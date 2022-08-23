@@ -15,6 +15,7 @@
         ]"
         style="width: 100%"
         size="large"
+        format="DD/MM/YYYY"
       >
       </a-date-picker>
     </a-form-item>

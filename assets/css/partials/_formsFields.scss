@@ -214,6 +214,25 @@ input#login_username:focus {
     width: 1000px;
   }
 }
+
+.modal-design-smart-lab {
+  background-color: #f9f9f9;
+  border: none;
+  .ant-input {
+    border-radius: 1px;
+  }
+  .ant-btn {
+    border-radius: 8px;
+    width: 12%;
+    height: 35px;
+    margin-right: 20px;
+  }
+  .ant-modal-content {
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    width: 1200px;
+  }
+}
 .upload-button {
   height: 20px;
   width: 30px;

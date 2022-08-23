@@ -231,6 +231,20 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.productsColumn[0].title=newValues.Produ_1_538
+        this.productsColumn[1].title=newValues.ProduDescr_2_539
+        this.productsColumn[2].title=newValues.ClienName_2_540
+        this.productsColumn[3].title=newValues.ProduLocat_2_541
+        this.productsColumn[4].title=newValues.ExpirDate_2_543
+        this.productsColumn[5].title=newValues.ProduQuali_2_544
+        this.productsColumn[6].title=newValues.ProjeManag_2_545
+        this.productsColumn[7].title=newValues.ProjeCode_2_546
+      }
+    }
+  },  
   mounted() {
     this.data = this.productsData
     if (this.$route.query.inbound) {

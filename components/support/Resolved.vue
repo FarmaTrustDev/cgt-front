@@ -205,6 +205,7 @@ export default {
         .finally(() => {
           this.loading = false
         })
+        this.$emit('fetchData','')
     },
     fetchTicket(globalId) {
       this.loadingTicket = true

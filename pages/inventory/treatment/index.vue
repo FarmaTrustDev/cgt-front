@@ -69,11 +69,16 @@
               :data-source="inbound"
               :should-fetch="false"
             >
-              <template slot="print" slot-scope="print">
-                <a-button @click="openViewModal(print)">
-                  <img :src="getImageUrl('Icons/Union.svg')"
-                /></a-button>
-              </template>
+            <template slot="print" slot-scope="record, print">
+        <a-button v-if="print.processSample==='default'"
+          @click="openViewModal(record)"
+          ><img :src="getImageUrl('Icons/Union.svg')" ></a-button>
+        <a-button v-else
+          @click="openPopViewModal(true)"
+          >  
+        <img :src="getImageUrl('Icons/Union.svg')" ></a-button
+        >
+      </template>
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
@@ -178,11 +183,31 @@
             </a-table>
           </a-tab-pane>
         </a-tabs>
-        <a-modal
-          :visible="showModal"
-          :title="translation.Docum_1_507"
-          @cancel="handleModal(false)"
-        >
+        <a-modal :visible="showModal" class="modal-design-smart-lab" :dialog-style="{ right: '20%', top:'5%' }"  @cancel="openPopViewModal(false)" @ok="handleOk(false)">
+          <a-card class="grey-card-smart-lab">
+            <status-detail :heading-title="'Advanced Receipt Notice'" :status="'Completed'" />
+            <hr class="mt-15">
+            <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="false" />
+            <CustomDisplay :headingTitle="'Information'" :colVal="8" :singleLineKey="'Cryoportal Number:'" :singleLineValue="'684792563-9570-68746596'" :customDisplayData="customDisplayData" />
+            <h2>Incoming Materials</h2>
+
+            <a-card class="white-card-smart-lab">
+                <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">
+                    <a-row style="line-height:30px">
+                        <a-col :span="4" class="text-muted" >{{custDD.title}}</a-col>
+                        
+                        <a-col v-if="custDD.url===''" :span="20">{{custDD.value}}</a-col>
+                        <a-col v-else :span="20" class="text-muted" ><img :src="getImageUrl(custDD.url)" width="20" height="20" class="img-responsive" style="border-radius:5px" /></a-col>
+                    </a-row>
+                </a-col>
+            </a-card>
+          </a-card>  
+          <template slot="footer">
+            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
+            <a-button type="primary" @click="handleOk(false)">Ok</a-button>
+          </template>            
+        </a-modal>
+        <a-modal :visible="showModalImage" :title="translation.Docum_1_507" @cancel="handleModal(false)">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
             <a-button @click="handleModal(false)">{{
@@ -200,6 +225,10 @@
 
 <script>
 import PageLayout from '~/components/layout/PageLayout'
+import Header from '~/components/inventory/treatment/treatmentheader'
+import StatusDetail from '~/components/inventory/treatment/statusDetail'
+import CustomDisplay from '~/components/inventory/treatment/customDisplay'
+// import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import {
   SMART_LAB_TREATMENT_PENDING_PHASES,
   INVENTORY_OUTBOUND_STATUS_STEPS,
@@ -208,6 +237,134 @@ import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
 import { isEmpty } from '~/services/Utilities'
 import { isNumber } from '~/services/Helpers'
+
+export const customDisplayData = [
+  {
+    title: 'Return Materials:',
+    value: 'Yes',
+    key:0,
+    url:'',
+  },
+  {
+    title: 'Initiated by:',
+    value: 'Andrea Marosan',
+    key:1,
+    url:'',
+  },
+  {
+    title: 'Date:',
+    value: '27/06/2022',
+    key:2,
+    url:'',
+  },
+  {
+    title: 'Origin:',
+    value: 'Lonza',
+    key:3,
+    url:'',
+  },  
+  {
+    title: 'Completed by:',
+    value: 'Najib Rehman',
+    key:4,
+    url:'',
+  },
+  {
+    title: 'Date:',
+    value: '27/06/2022',
+    key:5,
+    url:'',
+  },
+  {
+    title: 'Courier:',
+    value: 'fedEx',
+    key:6,
+    url:'',
+  },
+  {
+    title: 'Client ID:',
+    value: 'DAC-654',
+    key:7,
+    url:'',
+  },
+  {
+    title: 'Client:',
+    value: 'Novartis',
+    key:8,
+    url:'',
+  },  
+  {
+    title: 'Tracking ID:',
+    value: '1984916419',
+    key:9,
+    url:'',
+  },  
+  {
+    title: 'Project ID:',
+    value: '123456a',
+    key:10,
+    url:'',
+  }, 
+  {
+    title: 'Project:',
+    value: 'Texas Test Project',
+    key:11,
+    url:'',
+  },
+  {
+    title: 'Protocol ID:',
+    value: 'T1',
+    key:12,
+    url:'',
+  },
+  {
+    title: 'ARN #:',
+    value: 'ARN-0633-003',
+    key:13,
+    url:'',
+  },
+  {
+    title: 'Location:',
+    value: 'Cryoport - London',
+    key:14,
+    url:'',
+  },
+  {
+    title: 'Protocol:',
+    value: 'Kiet Test',
+    key:15,
+    url:'',
+  },
+  {
+    title: 'Description:',
+    value: 'Novartis Receipt',
+    key:16,
+    url:'',
+  },
+  {
+    title: 'Number of Containers:',
+    value: '1',
+    key:17,
+    url:'',
+  },                 
+]
+
+
+export const customDisplayDataMat = [
+  {
+    title: 'Client Products:',
+    value: 'Yes',
+    key:0,
+    url:'web/icons/greenTick.png',
+  },
+  {
+    title: 'Supplies:',
+    value: 'Yes',
+    key:1,
+    url:'web/icons/greenTick.png',
+  },        
+]
+
 
 export const newSampleData = [
   {
@@ -335,6 +492,7 @@ export const allSampleData = [
     dispatchedBy: 'In Progress',
   },
 ]
+   
 export default {
   components: {
     // 'new-request': newRequests,
@@ -343,6 +501,10 @@ export default {
     // completed: Completed,
     // StandardTable,
     PageLayout,
+    Header,
+    StatusDetail,
+    // treatmentTable,
+    CustomDisplay,
   },
 
   mixins: [routeHelpers, imagesHelper],
@@ -353,9 +515,12 @@ export default {
       treatmentTypes: [],
       filters: {},
       qrUrl: '/Uploads/DocumentURL/shipping notice.png',
-      showModal: false,
+      showModalImage: false,
+      showModal:false,
       phases: SMART_LAB_TREATMENT_PENDING_PHASES,
       outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
+      customDisplayData,
+      customDisplayDataMat,
       completedColumns: [
         {
           title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
@@ -528,9 +693,29 @@ export default {
           key: 'dispatchedBy',
         },
       ],
+      
+      
+      
+      
+      
+                 
       inbound: newSampleData,
       outbound: completedSampleData,
       allSample: allSampleData,
+      statusDetails :[
+      {
+        clientID: 'DAC-654',
+        projectID: '123456a',
+        protocolD: 'T1',
+        arn: 'ARN-0633-003',
+        createdBy: 'David Handerson',
+        client: 'Novartis',
+        project: 'Texas Test Project',
+        protocol: 'Kiet Test',
+        description: 'Novartis Receipt',
+        createdOn: '27/06/2022',
+        location: 'Cryoport - London',
+      }],
     }
   },
   computed: {
@@ -538,38 +723,43 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  watch: {
-    translation(newValues, oldValue) {
-      if (newValues !== oldValue) {
-        this.allSampleColumns[0].title = newValues.SamplID_2_502
-        this.allSampleColumns[1].title = newValues.SamplName_2_503
-        this.allSampleColumns[2].title = newValues.StoraArea_2_504
-        this.allSampleColumns[3].title = newValues.Clien_1_505
-        this.allSampleColumns[4].title = newValues.ArrivDate_5_535
-        this.allSampleColumns[5].title = newValues.Dispaby_2_396
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.allSampleColumns[0].title=newValues.SamplID_2_502
+        this.allSampleColumns[1].title=newValues.SamplName_2_503
+        this.allSampleColumns[2].title=newValues.StoraArea_2_504
+        this.allSampleColumns[3].title=newValues.Clien_1_505
+        this.allSampleColumns[4].title=newValues.ArrivDate_5_535
+        this.allSampleColumns[5].title=newValues.Dispaby_2_396
+ 
+        this.pendingColumns[0].title=newValues.SamplID_2_502
+        this.pendingColumns[1].title=newValues.SamplName_2_503
+        this.pendingColumns[2].title=newValues.StoraArea_2_504
+        this.pendingColumns[3].title=newValues.Clien_1_505
+        this.pendingColumns[4].title=newValues.ArrivDate_5_535
+        this.pendingColumns[5].title=newValues.Actio_1_220
 
-        this.pendingColumns[0].title = newValues.SamplID_2_502
-        this.pendingColumns[1].title = newValues.SamplName_2_503
-        this.pendingColumns[2].title = newValues.StoraArea_2_504
-        this.pendingColumns[3].title = newValues.Clien_1_505
-        this.pendingColumns[4].title = newValues.ArrivDate_5_535
-        this.pendingColumns[5].title = newValues.Actio_1_220
+        this.newSampleColumns[0].title=newValues.SamplID_2_502
+        this.newSampleColumns[1].title=newValues.SamplName_2_503
+        this.newSampleColumns[2].title=newValues.Clien_1_505
+        this.newSampleColumns[3].title=newValues.ArrivDate_5_535
+        this.newSampleColumns[4].title=newValues.Docum_1_507
+        this.newSampleColumns[5].title=newValues.Actio_1_220
 
-        this.newSampleColumns[0].title = newValues.SamplID_2_502
-        this.newSampleColumns[1].title = newValues.SamplName_2_503
-        this.newSampleColumns[2].title = newValues.Clien_1_505
-        this.newSampleColumns[3].title = newValues.ArrivDate_5_535
-        this.newSampleColumns[4].title = newValues.Docum_1_507
-        this.newSampleColumns[5].title = newValues.Actio_1_220
-        this.phases[0].name = newValues.inboushipm_2_302
-        this.phases[1].name = newValues.ProceSampl_2_499
-        this.phases[2].name = newValues.StoreSampl_2_579
-        this.outboundSteps[0].name = newValues.StoreSampl_2_579
-        this.outboundSteps[1].name = newValues.OutboProce_2_514
-        this.outboundSteps[2].name = newValues.Couri_1_234
+        this.phases[0].name=newValues.inboushipm_2_302
+        this.phases[1].name=newValues.ProceSampl_2_499
+        this.phases[2].name=newValues.StoreSampl_2_579
+
+        this.outboundSteps[0].name=newValues.StoreSampl_2_579
+        this.outboundSteps[1].name=newValues.OutboProce_2_514
+        this.outboundSteps[2].name=newValues.Couri_1_234
       }
-    },
-  },
+    }
+  },  
+  mounted() {
+    this.getTranslationData()
+  },   
   methods: {
     searchTreatment() {},
     stepClick(record, phase) {
@@ -584,14 +774,28 @@ export default {
       this.handleModal(true)
     },
     handleModal(show) {
-      this.showModal = show
+      this.showModalImage = show
+    },
+    handleOk(){
+      this.showModal=false
     },
     openViewModal(id) {
-      this.showModal = true
+      this.showModalImage = true
       this.qrUrl = id
       // LabelServices.scheduling(id);
     },
+    openPopViewModal(val){
+      this.showModal=val
+    },
+    getTranslationData(){
+        this.phases[0].name=this.translation.inboushipm_2_302
+        this.phases[1].name=this.translation.ProceSampl_2_499
+        this.phases[2].name=this.translation.StoreSampl_2_579
 
+        this.outboundSteps[0].name=this.translation.StoreSampl_2_579
+        this.outboundSteps[1].name=this.translation.OutboProce_2_514
+        this.outboundSteps[2].name=this.translation.Couri_1_234
+    },
     inboundSearch(value, key) {
       // console.log(key)
       let filters = this.filters

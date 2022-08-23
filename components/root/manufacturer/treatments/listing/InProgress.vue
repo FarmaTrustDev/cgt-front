@@ -113,10 +113,29 @@ export default {
       phases: MANUFACTURER_TREATMENT_PENDING_PHASES,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.phases[0].name = newValues.InbouAccep_3_834
+        this.phases[1].name = newValues.Manuf_1_342
+        this.phases[2].name = newValues.OutboShipm_2_376
+      }
+    },
+  },
   mounted() {
     // this.fetch()
   },
   methods: {
+    getTranslationData() {
+      this.phases[0].name = this.translation.InbouAccep_3_834
+      this.phases[1].name = this.translation.Manuf_1_342
+      this.phases[2].name = this.translation.OutboShipm_2_376
+    },
     stepClick(record, phase) {
       if (record.treatment.phaseId >= phase.phaseId) {
         return this.goto(
@@ -126,8 +145,10 @@ export default {
       }
     },
     getTreatmentStepClass(patient) {
-      if (patient.treatment.isHold || patient.treatment.isCancel) {
+      if (patient.treatment.isHold) {
         return 'isHold'
+      } else if (patient.treatment.isCancel) {
+        return 'isCancel'
       }
     },
     getCurrentStep(treatment) {
@@ -187,6 +208,25 @@ export default {
   }
   .ant-steps-item.ant-steps-item-wait {
     background: #fffbc8;
+  }
+  .ant-steps-item-finish .ant-steps-item-content {
+    &::before {
+      background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+    }
+  }
+}
+.isCancel {
+  .ant-steps {
+    @extend .blockState;
+  }
+  .ant-steps-item.ant-steps-item-finish {
+    background: #ffd8d8;
+  }
+  .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
+    background: #ffd8d8;
+  }
+  .ant-steps-item.ant-steps-item-wait {
+    background: #ffd8d8;
   }
   .ant-steps-item-finish .ant-steps-item-content {
     &::before {

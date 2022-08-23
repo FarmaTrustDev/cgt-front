@@ -87,6 +87,21 @@ export default {
       currentTreatmentStep : ''
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
+  watch:{
+    translation(newValues, oldValue){
+      console.log(oldValue)
+      if(newValues!==oldValue){
+        this.phases[0].name=newValues.InbouAccep_3_834
+        this.phases[1].name=newValues.Manuf_1_342
+        this.phases[2].name=newValues.OutboShipm_2_376
+      }
+    }
+  },  
   mounted() {
     // this.fetch()
   },

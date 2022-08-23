@@ -61,13 +61,13 @@
         </a-table>
       </a-tab-pane>
       <a-tab-pane key="2" :tab="translation.Archi_1_226">
-        <Table type="archive" :dump-data="archivedData" />
+        <Table type="archive" :dump-data="archivedData" @fetchData="fetchData" />
       </a-tab-pane>
       <a-tab-pane key="3" :tab="translation.InPro_1_533">
-        <InProgress type="inProgress" :dump-data="inprogressData" />
+        <InProgress type="inProgress" :dump-data="inprogressData" @fetchData="fetchData" />
       </a-tab-pane>
       <a-tab-pane key="4" :tab="translation.Resol_1_230">
-        <Resolved type="resolved" :dump-data="resolvedData" />
+        <Resolved type="resolved" :dump-data="resolvedData" @fetchData="fetchData" />
       </a-tab-pane>
     </a-tabs>
     <!-- Add New Ticket Modal -->
@@ -194,10 +194,14 @@ export default {
         on: {
           click: (event) => {
             // console.log(record)
-            this.goto(`support/${record.global_Id}`)
+            this.goto(`/support/${record.global_Id}`)
           },
         },
       }
+    },
+    fetchData()
+    {
+      this.fetch()
     },
     showUpdate(record) {
       this.fetchTicket(record.id)

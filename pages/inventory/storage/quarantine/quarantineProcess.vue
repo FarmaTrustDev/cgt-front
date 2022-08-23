@@ -200,8 +200,14 @@ export default {
   },   
   mounted() {
     this.handleActiveTab()
+    this.getTranslationData()
   },
   methods: {
+    getTranslationData(){
+      this.phases[0].name=this.translation.InbouAccep_3_834
+      this.phases[1].name=this.translation.ProceSampl_2_499
+      this.phases[2].name=this.translation.StoreSampl_2_579
+    },
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {
         if (collection.id === collectionId) {
