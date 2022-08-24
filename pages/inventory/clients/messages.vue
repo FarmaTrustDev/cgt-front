@@ -13,9 +13,11 @@
         />
         <a-input-search
           placeholder="Search"
-          class="search-field-msg ml-90 pt-15"
+          class="search-field-msg-x inventory-search pt-15 float-right"
         />
-        <a-tabs type="card" :animated="false">
+        <!-- <a-icon slot="prefix" type="search" /> -->
+
+        <a-tabs type="card" :animated="false" class="client_msgs mt-15">
           <a-tab-pane key="1" tab="All">
             <a-card class="mt-15 mr-30">
               <span class="message-heading"> Sample requested by NTU</span>
@@ -184,8 +186,10 @@
 <script>
 import Header from '~/components/inventory/clients/header.vue'
 import routeHelpers from '~/mixins/route-helpers'
+import PageLayout from '~/components/layout/PageLayout'
+
 export default {
-  components: { Header },
+  components: { Header, PageLayout },
   mixins: [routeHelpers],
 }
 </script>

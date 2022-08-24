@@ -2,12 +2,12 @@
   <div>
     <a-row>
       <a-col :span="24">
-        <detail class="mb-15" :data="data.description" />
+        <detail class="" :data="data.description" />
         <br />
       </a-col>
     </a-row>
-    <div class="mt-15 mb-15 pr-15 clearfix">
-      <h2 class="mt-15">
+    <div class="mb-15 pr-15 clearfix">
+      <h2 class="">
         <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">{{
           translation.Equip_1_568
         }}</strong>

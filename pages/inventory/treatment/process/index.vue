@@ -45,14 +45,14 @@
                         <span> Baystate Clinic</span>
                       </h6>
                     </a-col>
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="5" class="mt-15">
                       <h6>
                         <span class="text-muted"
                           >{{ translation.SamplName_2_503 }}:</span
                         >
                       </h6>
                     </a-col>
-                    <a-col :span="8" class="mt-15">
+                    <a-col :span="7" class="mt-15">
                       <h6><span>Human Cells</span></h6>
                     </a-col>
                   </a-row>
@@ -124,115 +124,116 @@
           v-if="activeTab == 'INBOUND_ACCEPTANCE_DETAILS'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
-          style="width: 96%; margin-left: 2%"
+          style="width:96%; margin-left:2%"
         >
-          <div class="h-tabs large-tabs" style="width: 100%">
-            <a-row>
-              <a-col :span="11">
-                <a-card :bordered="false" class="default-card">
-                  <article class="article">
-                    <h4 class="heading pl-0">
-                      {{ translation.ShippDetai_2_314 }}
-                    </h4>
-                  </article>
-                  <div>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">
-                          {{ translation.DispaDate_2_316 }}:</span
-                        >
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 20/06/2022</span>
-                      </a-col>
-                    </a-row>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">
-                          {{ translation.DispaBy_2_516 }}:</span
-                        >
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 20/06/2022</span>
-                      </a-col>
-                    </a-row>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">
-                          {{ translation.CarriStatu_2_320 }}</span
-                        >
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> In-Process</span>
-                      </a-col>
-                    </a-row>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">{{
-                          translation.EstimArriv_3_322
-                        }}</span>
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 21/06/2022</span>
-                      </a-col>
-                    </a-row>
-                  </div>
-                </a-card>
-              </a-col>
-              <a-col :span="1"></a-col>
-              <a-col :span="12">
-                <a-card :bordered="false" class="default-card">
-                  <article class="article">
-                    <h4 class="heading pl-0">
-                      {{ translation.SamplRecei_2_515 }}
-                    </h4>
-                  </article>
-                  <div>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">{{
-                          translation.IsRecei_2_328
-                        }}</span>
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> Done</span>
-                      </a-col>
-                    </a-row>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">
-                          {{ translation['Receiby:_2_330'] }}</span
-                        >
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted">Sadaan Shahid</span>
-                      </a-col>
-                    </a-row>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">
-                          {{ translation['ReceiDate:_2_332'] }}</span
-                        >
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 21/06/2022</span>
-                      </a-col>
-                    </a-row>
-                    <a-row :gutter="20" dir="ltr">
-                      <a-col :span="10" class="mt-15">
-                        <span class="text-muted">{{
-                          translation['ReceiNote:_2_334']
-                        }}</span>
-                      </a-col>
-                      <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> Received</span>
-                      </a-col>
-                    </a-row>
-                  </div>
-                </a-card>
-              </a-col>
-            </a-row>
-          </div>
+
+        <div class="h-tabs large-tabs" style="width:100%">
+              <a-row>
+                <a-col :span="11">
+                  <a-card :bordered="false" class="default-card">
+                    <article class="article">
+                      <h4 class="heading pl-0">
+                        {{ translation.ShippDetai_2_314 }}
+                      </h4>
+                    </article>
+                    <div>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">
+                            {{ translation.DispaDate_2_316 }}:</span
+                          >
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted"> 20/06/2022</span>
+                        </a-col>
+                      </a-row>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">
+                            {{ translation.DispaBy_2_516 }}:</span
+                          >
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted"> 20/06/2022</span>
+                        </a-col>
+                      </a-row>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">
+                            {{ translation.CarriStatu_2_320 }}</span
+                          >
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted"> In-Process</span>
+                        </a-col>
+                      </a-row>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">{{
+                            translation.EstimArriv_3_322
+                          }}</span>
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted"> 21/06/2022</span>
+                        </a-col>
+                      </a-row>
+                    </div>
+                  </a-card>
+                </a-col>
+                <a-col :span="1"></a-col>
+                <a-col :span="12">
+                  <a-card :bordered="false" class="default-card">
+                    <article class="article">
+                      <h4 class="heading pl-0">
+                        {{ translation.SamplRecei_2_515 }}
+                      </h4>
+                    </article>
+                    <div>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">{{
+                            translation.IsRecei_2_328
+                          }}</span>
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted"> Done</span>
+                        </a-col>
+                      </a-row>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">
+                            {{ translation['Receiby:_2_330'] }}</span
+                          >
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted">Sadaan Shahid</span>
+                        </a-col>
+                      </a-row>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">
+                            {{ translation['ReceiDate:_2_332'] }}</span
+                          >
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted"> 21/06/2022</span>
+                        </a-col>
+                      </a-row>
+                      <a-row :gutter="20" dir="ltr">
+                        <a-col :span="10" class="mt-15">
+                          <span class="text-muted">{{
+                            translation['ReceiNote:_2_334']
+                          }}</span>
+                        </a-col>
+                        <a-col :span="6" class="mt-15 float-right">
+                          <span class="text-muted"> Received</span>
+                        </a-col>
+                      </a-row>
+                    </div>
+                  </a-card>
+                </a-col>
+              </a-row>
+        </div>
         </a-card>
         <a-card
           v-if="activeTab == 'PROCESS_SAMPLE'"

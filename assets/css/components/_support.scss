@@ -49,6 +49,7 @@ $chatHeight: 255px;
         }
         .ant-comment-inner {
           padding: 16px 5px;
+          position: relative;
         }
       }
       .message-sent {
@@ -63,7 +64,7 @@ $chatHeight: 255px;
         .ant-comment-content-author {
           position: absolute;
           width: 50%;
-          top: 69px;
+          top: 100%;
           left: 223px;
           overflow: hidden;
           display: inline-block;
@@ -118,7 +119,11 @@ $chatHeight: 255px;
     }
   }
 }
-
+.process_sample-section {
+  .ant-card-body {
+    padding-top: 12px;
+  }
+}
 .page-search-input-container {
   .page-search-input {
     right: 0;

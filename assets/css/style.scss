@@ -270,6 +270,9 @@ a {
   // margin-left: -15px;
 }
 .support_page {
+   .ant-tabs.ant-tabs-top {
+    padding: 0 !important;
+  }
   .ant-tabs-nav-scroll {
     .ant-tabs-tab {
       margin: 0 4px !important;
@@ -584,7 +587,7 @@ a {
       margin-right: 0 !important;
       margin-left: 7px !important;
       .ant-steps-item-title {
-        margin: 0 12px 0 0 !important;
+        margin: 0 14px 0 0 !important;
       }
     }
   }

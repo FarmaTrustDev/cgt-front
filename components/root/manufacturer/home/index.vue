@@ -1,7 +1,7 @@
 <template>
   <div class="home-page manf-home">
     <a-card class="grey-card" :bordered="false">
-      <a-row class="test">
+      <a-row class="">
         <!-- left side tabs -->
         <a-col :md="10" v-if="isManufacturer()">
           <div class="home-tab">
