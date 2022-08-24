@@ -4,28 +4,20 @@
     :loading="loading"
     :bordered="false"
     :title="translation.AddStora_3_557"
-    class="container"
+    class="container page-search-input-container"
   >
     <template slot="headerMenus">
-      <div class="">
-        <!-- <h3 class="page-title float-left">
-          {{ translation.AddStora_3_557 }}
-        </h3> -->
-        <a-button
-          type="primary"
-          class="mrm-5 float-right"
-          @click="goto('facility/create')"
-          >{{ translation.AddStora_3_557 }}</a-button
-        >
-        <a-input
-          class="float-right page-search-input"
-          ref="userNameInput"
-          :placeholder="translation.SearcStora_3_560"
-          @change="searchUser"
-        >
-          <a-icon slot="prefix" type="search" />
-        </a-input>
-      </div>
+      <a-button type="primary" class="mrm-5" @click="goto('facility/create')">{{
+        translation.AddStora_3_557
+      }}</a-button>
+      <a-input
+        ref="userNameInput"
+        class="page-search-input"
+        :placeholder="translation.SearcStora_3_560"
+        @change="searchUser"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
     </template>
     <div class="add_storage" style="margin-top: 25px !important" slot="content">
       <a-table
