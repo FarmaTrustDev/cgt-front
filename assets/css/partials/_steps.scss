@@ -127,7 +127,29 @@
       padding-right: 3px;
     }
   }
-
+  .step-col-logistic {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 80%;
+      top: 24px;
+      // bottom: 0;
+      margin: auto;
+      height: 2px;
+      left: 70px;
+      background-color: #bebfcb;
+    }
+    // .ant-steps-small.ant-steps-label-horizontal {
+    // display: block !important;
+    // }
+    .ant-steps-item {
+      // margin-right: 8px !important;
+      padding-right: 3px;
+    }
+  }
   .step-col-large {
     display: inline-flex;
     overflow: hidden;

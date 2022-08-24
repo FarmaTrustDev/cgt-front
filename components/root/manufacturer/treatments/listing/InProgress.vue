@@ -20,7 +20,7 @@
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)">
-          <div class="treatment-steps manufacturer-step">
+          <div class="treatment-steps">
             <span class="step-col">
               <a-steps
                 :initial="1"
