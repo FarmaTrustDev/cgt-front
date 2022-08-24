@@ -7,7 +7,7 @@
         >
       </template>
       <template slot="action" slot-scope="text, record">
-        <a-button type="" @click="getGroup(text, record)"> {{translation.AddGroup_2_456}}</a-button>
+        <a-button type="" @click="getGroup(text, record)"> Message</a-button>
       </template>
       <!-- <template slot="message" slot-scope="text, record">
         <a-button type="" @click="getGroup(text, record)">
