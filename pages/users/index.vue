@@ -5,7 +5,7 @@
     class="specific container"
     :create="false"
   >
-    <div class="mr-30" slot="content">
+    <div class="" slot="content">
       <div class="mt-15">
         <!-- <h3 class="page-title ml-5 mb-1 float-left">
         {{ translation.UserNew_3_136 }}

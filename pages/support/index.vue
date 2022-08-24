@@ -1,6 +1,6 @@
 <template>
-  <page-layout :create="false" :loading="loading" :title="translation['suppoissue_2_176']">
-    <div class="specific-page container support_page" slot="content">
+  <page-layout :create="false" :loading="loading" :title="translation['suppoissue_2_176']" class="container">
+    <div class="specific-page  support_page" slot="content">
       <a-row class="mt-25 mb-10">
         <div class="page-header">
           <!-- <h3
@@ -11,7 +11,7 @@
           </h3> -->
           <a-button
             type="primary"
-            class="mrm-5 mrt float-right"
+            class="mrt float-right"
             @click="showModal(true)"
             >{{ translation.AddNew_3_182 }}
           </a-button>
