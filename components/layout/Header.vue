@@ -27,8 +27,8 @@
               </a-menu-item>
 
               <a-menu-item
-                v-else
                 v-for="notification in notifications"
+                v-else
                 :key="notification.id"
                 @click="markRead(notification)"
               >
