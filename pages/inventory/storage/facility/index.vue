@@ -1,60 +1,76 @@
 <template>
-  <div class="container add_storage" style="margin-top: 25px !important">
-    <div class="page-header clearfix">
-      <h3 class="page-title float-left">
-        {{ translation.AddStora_3_557 }}
-      </h3>
-      <a-button
-        type="primary"
-        class="mrm-5 float-right"
-        @click="goto('facility/create')"
-        >{{ translation.AddStora_3_557 }}</a-button
+  <page-layout
+    :create="false"
+    :loading="loading"
+    :bordered="false"
+    :title="translation.AddStora_3_557"
+    class="container"
+  >
+    <template slot="headerMenus">
+      <div class="">
+        <!-- <h3 class="page-title float-left">
+          {{ translation.AddStora_3_557 }}
+        </h3> -->
+        <a-button
+          type="primary"
+          class="mrm-5 float-right"
+          @click="goto('facility/create')"
+          >{{ translation.AddStora_3_557 }}</a-button
+        >
+        <a-input
+          class="float-right page-search-input"
+          ref="userNameInput"
+          :placeholder="translation.SearcStora_3_560"
+          @change="searchUser"
+        >
+          <a-icon slot="prefix" type="search" />
+        </a-input>
+      </div>
+    </template>
+    <div class="add_storage" style="margin-top: 25px !important" slot="content">
+      <a-table
+        :columns="columns"
+        :data-source="datasource"
+        class="rounded-table"
+        :pagination="{
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: ['10', '20', '30', '50', '100'],
+        }"
       >
-      <a-input
-        class="float-right page-search-input"
-        ref="userNameInput"
-        :placeholder="translation.SearcStora_3_560"
-        @change="searchUser"
-      >
-        <a-icon slot="prefix" type="search" />
-      </a-input>
+        <template slot="action" slot-scope="action">
+          <a-dropdown>
+            <a-button class="action-button" @click="preventDefault">
+              {{ translation['Admin_1_142'] }} <a-icon type="down" />
+            </a-button>
+            <a-menu slot="overlay">
+              <a-menu-item key="userDetail">
+                <a
+                  @click="
+                    goto(`/inventory/storage/facility/${action.globalId}`)
+                  "
+                  >{{ translation.Edit_1_450 }}</a
+                >
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
+        </template>
+      </a-table>
     </div>
-    <a-table
-      :columns="columns"
-      :data-source="datasource"
-      class="rounded-table"
-      :pagination="{
-        defaultPageSize: 10,
-        showSizeChanger: true,
-        pageSizeOptions: ['10', '20', '30', '50', '100'],
-      }"
-    >
-      <template slot="action" slot-scope="action">
-        <a-dropdown>
-          <a-button class="action-button" @click="preventDefault">
-            {{ translation['Admin_1_142'] }} <a-icon type="down" />
-          </a-button>
-          <a-menu slot="overlay">
-            <a-menu-item key="userDetail">
-              <a
-                @click="goto(`/inventory/storage/facility/${action.globalId}`)"
-                >{{ translation.Edit_1_450 }}</a
-              >
-            </a-menu-item>
-          </a-menu>
-        </a-dropdown>
-      </template>
-    </a-table>
-  </div>
+  </page-layout>
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
 // import { success } from '~/services/Helpers/notifications'
 import { preventDefault } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
+import PageLayout from '~/components/layout/PageLayout'
 
 // import PageLayout from '~/components/layout/PageLayout'
 export default {
+  components: {
+    PageLayout,
+  },
   mixins: [routeHelpers],
   data() {
     return {
