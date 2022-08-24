@@ -1,5 +1,18 @@
 <template>
   <div>
+    <span v-if="treatment.isHold === true | treatment.isCancel === true">
+                <a-alert
+            v-if="treatment.isHold == true"
+            type="error"
+            message="Treatment has been paused"
+          />
+          <a-alert
+            v-if="treatment.isCancel == true"
+            type="error"
+            message="Treatment has been cancelled"
+          />
+    </span>
+    <span v-else>
     <manufactureCollection
       v-if="
         treatment.phaseId >= TREATMENT_PHASES.MANUFACTURER_SAMPLE_COLLECTION.id
@@ -10,6 +23,7 @@
     />
     <alert v-else message="Shipment is not being shedule yet by the Clinic for this treatment.
      This treatment will be available once the hospital has done the shipment" />
+  </span>
   </div>
 </template>
 <script>

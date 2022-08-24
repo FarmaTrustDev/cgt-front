@@ -42,7 +42,7 @@
             <!-- //Steps -->
           </span>
         </a-card>
-        <a-card
+        <!-- <a-card
           v-if="(entity.isHold == true) | (entity.isCancel == true)"
           :bordered="false"
           class="mt-15 default-card"
@@ -57,9 +57,9 @@
             type="error"
             message="Treatment has been cancelled"
           />
-        </a-card>
+        </a-card> -->
 
-        <a-card v-else :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card :bordered="false" class="mt-15 default-card h-tabs">
           <shipment
             v-if="activeTab === 'INBOUND_SHIPMENT'"
             :treatment="entity"
@@ -69,10 +69,12 @@
             :treatment="entity"
             @fetchTreatment="fetchTreatment"
           />
+          <div v-if="chechAction()">
           <QrViewer
             v-if="activeTab === 'OUTBOUND_SHIPMENT'"
             :treatment="entity"
           />
+          </div>
           <scheduling-basic-request
             v-if="activeTab === 'OUTBOUND_SHIPMENT'"
             :treatment="entity"
@@ -148,6 +150,16 @@ export default {
     this.handleActiveTab()
   },
   methods: {
+    chechAction(){
+      if(this.entity.isHold === true | this.entity.isCancel === true)
+      {
+        return false
+      }
+      else
+      {
+       return true
+      }
+    },
     handleActiveTab() {
       this.activeTab = this.$route.query.view
     },

@@ -1,7 +1,7 @@
 <template>
   <a-skeleton :loading="loading">
     <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
-
+    <div v-if="treatment.isHold !== true | treatment.isCancel !== true">
     <a-button
       v-if="!treatment[`${showCompleteBtn}`] && bags.length > 0"
       class="w-100 mt-15"
@@ -10,6 +10,7 @@
       @click="completeAllBags(bags)"
       >Complete Collection Process
     </a-button>
+    </div>
     <a-modal
       :visible="visibleModal"
       ok-text="Ok"
