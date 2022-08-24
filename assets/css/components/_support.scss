@@ -118,3 +118,15 @@ $chatHeight: 255px;
     }
   }
 }
+
+.support-listing-page {
+  .page-search-input {
+    right: 0;
+    min-width: 200px;
+    margin-right: 15px;
+    text-align: left;
+  }
+  .ant-card-extra {
+    // text-align: right;
+  }
+}
