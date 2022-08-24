@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <page-layout :create="false" :loading="loading" :bordered="false">
+  <div slot="content" class="container">
       <Header :url="'web/inventory/storage/hub/clients/'+clientId+'.png'" :clientNames="clientName" :client="client" :show-button="false" />
     <a-table
       class="rounded-table"
