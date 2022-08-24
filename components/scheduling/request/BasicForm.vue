@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div v-if="treatment.isHold === true | treatment.isCancel === true">
+          <a-alert
+            v-if="treatment.isHold == true"
+            type="error"
+            message="Treatment has been paused"
+          />
+          <a-alert
+            v-if="treatment.isCancel == true"
+            type="error"
+            message="Treatment has been cancelled"
+          />
+    </div>
+    <div v-else>
     <div v-for="(data, index) in rejectedData" :key="index" class="mb-5">
       <a-alert
         :message="
@@ -44,6 +57,16 @@
         :layout="formLayout"
         @submit="onSubmit"
       >
+          <a-alert
+            v-if="treatment.isHold == true"
+            type="error"
+            message="Treatment has been paused"
+          />
+          <a-alert
+            v-if="treatment.isCancel == true"
+            type="error"
+            message="Treatment has been cancelled"
+          />
         <LogisticLookup :logisticId="logisticId" :params="{ Id: logisticId }" />
         <a-row :gutter="16">
           <a-col :span="12">
@@ -126,6 +149,8 @@
       </a-form-item>
     </a-form>
     <alert v-else :message="translation.Collenot_3_573" />
+    
+    </div>
     </div>
   </div>
 </template>
@@ -187,6 +212,15 @@ export default {
     this.GetRejectionDetail(this.treatmentId)
   },
   methods: {
+    checkAction(){
+      if(this.treatment.isHold === true | this.treatment.isCancel === true)
+      {
+        return false
+      } 
+      else{
+        return true
+      }
+    },
     disabledDate: _disabledPreviousDate,
     collectionDateChange(value, date) {
       const futureDate = moment(date, 'DD/MM/YYYY')
