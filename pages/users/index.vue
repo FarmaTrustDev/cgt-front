@@ -36,10 +36,13 @@
             {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
-            <a-menu-item key="userDetail">
+            <a-menu-item key="1">
               <a @click="goto(`/users/${action.globalId}`)">{{
                 translation.Edit_1_450
               }}</a>
+
+            </a-menu-item>
+            <a-menu-item key="2">
               <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
@@ -47,7 +50,7 @@
                 placement="topLeft"
                 @confirm="deleteUser(`${action.globalId}`)"
               >
-                {{ translation.Delet_1_451 }}
+              {{ translation.Delet_1_451 }}
               </a-popconfirm>
             </a-menu-item>
           </a-menu>

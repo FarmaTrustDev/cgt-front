@@ -20,7 +20,7 @@
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)">
-          <div class="treatment-steps">
+          <div class="treatment-steps manufacturer-step">
             <span class="step-col">
               <a-steps
                 :initial="1"
@@ -186,20 +186,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.blockState {
-  position: relative;
-  &::before {
-    content: '';
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 2;
-  }
-}
+// .blockState {
+//   position: relative;
+//   &::before {
+//     content: '';
+//     height: 100%;
+//     width: 100%;
+//     position: absolute;
+//     z-index: 2;
+//   }
+// }
 .isHold {
-  .ant-steps {
-    @extend .blockState;
-  }
+  // .ant-steps {
+  //   @extend .blockState;
+  // }
   .ant-steps-item.ant-steps-item-finish {
     background: #fffbc8;
   }
@@ -216,9 +216,9 @@ export default {
   }
 }
 .isCancel {
-  .ant-steps {
-    @extend .blockState;
-  }
+  // .ant-steps {
+  //   @extend .blockState;
+  // }
   .ant-steps-item.ant-steps-item-finish {
     background: #ffd8d8;
   }
