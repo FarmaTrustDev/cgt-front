@@ -90,7 +90,7 @@
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs tabs_body"
-          style="width:95%; margin-left:2%"
+          style="width:96%; margin-left:2%"
         >
           <span>
             <!-- //Steps -->
@@ -116,7 +116,7 @@
           v-if="activeTab=='INBOUND_ACCEPTANCE_DETAILS'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
-          style="width:95%; margin-left:2%"
+          style="width:96%; margin-left:2%"
         >
 
         <div class="h-tabs large-tabs" style="width:100%">
@@ -231,7 +231,7 @@
           v-if="activeTab=='PROCESS_SAMPLE'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs test"
-          style="width:95%; margin-left:2%"
+          style="width:96%; margin-left:2%"
         >
 
         <div class="h-tabs large-tabs" style="width:100%;">              

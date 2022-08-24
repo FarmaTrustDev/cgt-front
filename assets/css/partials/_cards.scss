@@ -14,7 +14,7 @@
   }
   .ant-card-body {
     padding: 12px;
-    padding-top: 4%;
+    padding-top: 3%;
   }
 }
 
@@ -105,6 +105,14 @@
           margin-right: 3px !important;
         }
       }
+    }
+  }
+}
+// 
+.add_storage {
+  .ant-table-tbody {
+    td:first-child {
+      text-align: initial;
     }
   }
 }

@@ -36,3 +36,8 @@
 .btn-color {
   color: black;
 }
+.ant-pagination-options-size-changer.ant-select {
+  .ant-select-selection.ant-select-selection--single {
+    margin-bottom: 0;
+  }
+}

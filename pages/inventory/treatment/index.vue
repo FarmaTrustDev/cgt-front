@@ -56,12 +56,12 @@
           <a-tab-pane key="1" :tab="translation.InbouSampl_2_306">
             <a-input
               :placeholder="translation.searc_1_488"
-              class="float-right inventory-search mb-15"
+              class="float-right inventory-search mt-15"
               @change="
                 (e) => inboundSearch(e.target.value, 'patientEnrollmentNumber')
               "
             >
-              <a-icon slot="prefix" type="search" class="mb-5" />
+              <a-icon slot="prefix" type="search" class="mt-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -109,7 +109,7 @@
                 (e) => outboundSearch(e.target.value, 'patientEnrollmentNumber')
               "
             >
-              <a-icon slot="prefix" type="search" class="mb-5" />
+              <a-icon slot="prefix" type="search" class="mt-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -136,7 +136,11 @@
               <!-- ==== steps === -->
             </a-table>
           </a-tab-pane>
-          <a-tab-pane v-if="false" key="allSample" :tab="translation.AllSampl_2_501">
+          <a-tab-pane
+            v-if="false"
+            key="allSample"
+            :tab="translation.AllSampl_2_501"
+          >
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
@@ -146,7 +150,7 @@
                   allSampleSearch(e.target.value, 'patientEnrollmentNumber')
               "
             >
-              <a-icon slot="prefix" type="search" class="mb-5" />
+              <a-icon slot="prefix" type="search" class="mt-5" />
             </a-input>
             <a-table
               class="rounded-table"
@@ -185,8 +189,12 @@
         <a-modal :visible="showModalImage" :title="translation.Docum_1_507" @cancel="handleModal(false)">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
-            <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
-            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
+            <a-button @click="handleModal(false)">{{
+              translation.cance_1_296
+            }}</a-button>
+            <a-button @click="printWindow()">{{
+              translation.Print_1_111
+            }}</a-button>
           </template>
         </a-modal>
       </div>
@@ -344,7 +352,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '10/06/2022 - 14/07/2022',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'green',
+    processSample: 'green',
   },
   {
     patientEnrollmentNumber: 'DAC7986',
@@ -352,7 +360,7 @@ export const newSampleData = [
     hospital: 'Novartis',
     collectionDateDeliveryDate: '15/06/2022 - 20/07/2023',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'green',
+    processSample: 'green',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -360,7 +368,7 @@ export const newSampleData = [
     hospital: 'Autolus',
     collectionDateDeliveryDate: '21/06/2022 - 26/08/2024',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'red',
+    processSample: 'red',
   },
   {
     patientEnrollmentNumber: 'DAC7996',
@@ -368,7 +376,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '25/06/2022 - 29/08/2025',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'default',
+    processSample: 'default',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -376,7 +384,7 @@ export const newSampleData = [
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '28/06/2022 - 03/08/2026',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
-    processSample:'default',
+    processSample: 'default',
   },
 ]
 export const completedSampleData = [
@@ -734,9 +742,9 @@ export default {
   methods: {
     searchTreatment() {},
     stepClick(record, phase) {
-      if(record==='error'){
+      if (record === 'error') {
         this.goto(phase)
-      }else{
+      } else {
         this.goto(phase.url_slug)
       }
     },
@@ -856,7 +864,7 @@ export default {
     redirect() {
       this.goto('/inventory/storage/location')
     },
-     printWindow(){
+    printWindow() {
       window.print()
     },
     customRow(record) {

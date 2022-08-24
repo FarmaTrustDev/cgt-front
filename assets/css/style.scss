@@ -43,7 +43,7 @@ body {
   font-weight: 400;
 }
 .container {
-  max-width: 1140px;
+  max-width: 1175px;
   margin: auto;
 }
 .profile-grey-bg {
@@ -496,19 +496,19 @@ a {
   }
 }
 
-.status-smart-lab-pop{
-  background-color:#D1F2DD; 
-  border-radius:20px; 
-  padding-left:20px;
-  padding-right:20px; 
-  padding-top:5px; 
-  padding-bottom:5px;
-  margin-left: 20px; 
-  font-size:15px  
+.status-smart-lab-pop {
+  background-color: #d1f2dd;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 20px;
+  font-size: 15px;
 }
-.status-div{
-  height:50px; 
-  font-size:20px
+.status-div {
+  height: 50px;
+  font-size: 20px;
 }
 // ==================================
 .manf-stats {
@@ -583,6 +583,9 @@ a {
     .ant-steps-item {
       margin-right: 0 !important;
       margin-left: 7px !important;
+      .ant-steps-item-title {
+        margin: 0 12px 0 0 !important;
+      }
     }
   }
   .ant-steps-item-finish {
@@ -615,9 +618,21 @@ a {
     }
   }
 }
-// 
+//
 .steps-green {
-   .step-bar {
+  .step-bar {
     border: 2px solid #1bb558;
+  }
+}
+.smartlab_home {
+  .halfNHalf {
+    .white-card.ant-card {
+      margin-top: 0;
+    }
+  }
+}
+.Component_body {
+  .default-border-radius > .ant-card-head {
+    padding: 0 !important;
   }
 }

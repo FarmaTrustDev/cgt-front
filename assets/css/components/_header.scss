@@ -22,7 +22,7 @@ header.ant-layout-header {
     .ant-select-selection--single {
       background-color: #f9f9f9;
       font-weight: bold;
-      height: 40px;
+      height: 55px;
     }
   }
   .login-logo {
@@ -57,7 +57,7 @@ header.ant-layout-header {
 }
 .notifications-dropdown {
   max-height: 500px;
-  overflow-y: scroll;
+  overflow-y: auto;
   .ant-dropdown-menu-item {
     padding: 0.25rem 1.5rem;
     width: 300px;

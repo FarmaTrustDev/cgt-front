@@ -21,12 +21,21 @@
               </a-badge>
             </a>
             <a-menu slot="overlay" class="notifications-dropdown">
+              <!-- {{notifications.length == 0 ? "upper" : "test" }} -->
+              <a-menu-item v-if="notifications.length == 0">
+                <span>No notification yet</span>
+              </a-menu-item>
+
               <a-menu-item
+                v-else
                 v-for="notification in notifications"
                 :key="notification.id"
                 @click="markRead(notification)"
-                ><strong
-                  ><p class="m-0">{{ notification.recipient_Name }}</p></strong
+              >
+                <strong
+                  ><p class="m-0">
+                    {{ notification.recipient_Name }}
+                  </p></strong
                 >
                 <span class="ellipsis border-bottom">{{
                   notification.message

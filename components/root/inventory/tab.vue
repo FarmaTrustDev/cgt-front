@@ -11,11 +11,11 @@
         <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">{{
           translation.Equip_1_568
         }}</strong>
-        <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="ml-20">{{
+        <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">{{
           translation.Kits_1_547
         }}</strong>
       </h2>
-      <a-row class="p-15 w-125 display-inline-block" :gutter="16">
+      <a-row class="w-125 display-inline-block" :gutter="16">
         <a-col class="suit" :span="20">
           <suite />
         </a-col>

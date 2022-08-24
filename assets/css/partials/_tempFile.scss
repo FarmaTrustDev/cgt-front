@@ -90,8 +90,17 @@
 .support.container:last-child {
   padding-top: 0;
 }
-// 
 
+// SMARTLAB
+.smartlab_task {
+  .ant-tabs-nav-scroll {
+    .ant-tabs-tab {
+      margin-right: 25px !important;
+      padding: 2px 22px !important;
+    }
+  }
+}
+// 
 .view-screen {
   .pills-tabs.no-shadow {
     .ant-tabs-tab {
