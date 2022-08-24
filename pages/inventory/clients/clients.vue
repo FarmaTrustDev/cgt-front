@@ -1,24 +1,18 @@
 <template>
   <page-layout :create="false" :loading="loading" :bordered="false">
-    <div class="container" slot="content">
-      <Header
-        :url="'web/inventory/storage/hub/clients/6.png'"
-        :show-button="false"
-      />
-      <a-table
-        class="rounded-table"
-        :columns="newTasksColumns"
-        :data-source="newTasksData"
-        :should-fetch="false"
-        style="white-space: pre"
-      >
-        <template slot="storageDocument" slot-scope="">
-          <img
-            :src="getImageUrl('web/inventory/storage/upload.jpeg')"
-            @click="openViewModal"
-          />
-        </template>
-        <a-modal :visible="showModal" :title="translation.Docum_1_507">
+  <div slot="content" class="container">
+      <Header :url="'web/inventory/storage/hub/clients/'+clientId+'.png'" :clientNames="clientName" :client="client" :show-button="false" />
+    <a-table
+      class="rounded-table"
+      :columns="newTasksColumns"
+      :data-source="newTasksData"
+      :should-fetch="false"
+      style="white-space:pre"
+    >
+      <template slot="storageDocument" slot-scope="">
+        <img :src="getImageUrl('/Icons/Union.svg')" @click="openViewModal" />
+      </template>
+      <a-modal :visible="showModal" :title="translation.Docum_1_507">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
             <a-button @click="handleModal(false)">Cancel</a-button>
@@ -54,6 +48,39 @@ import PageLayout from '~/components/layout/PageLayout'
 // import { isNumber } from '~/services/Helpers'
 
 // import { newSampleData } from '../treatment/index.vue'
+export const clientData = [
+  {
+    title: 'Adaptimmune',
+    value: 'Adam Holioc',
+    key:1,
+  },
+  {
+    title: 'TCR',
+    value: 'Andrew Symond',
+    key:2,
+  },
+  {
+    title: 'gsk',
+    value: 'Mc GIll',
+    key:3,
+  },
+  {
+    title: 'ANTHONY',
+    value: 'Richardson',
+    key:4,
+  },  
+  {
+    title: 'Kite',
+    value: 'Viv Richard',
+    key:5,
+  },
+  {
+    title: 'Novartis',
+    value: 'Shaun Pollak',
+    key:6,
+  },  
+]
+
 export default {
   components: { Header, PageLayout },
   mixins: [routeHelpers, imagesHelper],
@@ -64,6 +91,10 @@ export default {
       clicked: false,
       greenDisk: 'g',
       blueDisk: 'b',
+      clientId:null,
+      clientData,
+      clientName:'',
+      client:'',
       qrUrl: 'Uploads/DocumentURL/label1.jpg',
       newTasksColumns: [
         {
@@ -177,7 +208,20 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  mounted() {
+    this.getClientId()
+  },   
   methods: {
+    getClientId(){
+      this.clientId=this.$route.query.clientId
+      for(const i in this.clientData ){
+        if(this.clientData[i].key===parseInt(this.clientId)){
+          console.log(this.clientData[i].title)
+          this.clientName=this.clientData[i].value
+          this.client=this.clientData[i].title
+        }
+      }
+    },
     handleModal(show) {
       this.showModal = show
     },

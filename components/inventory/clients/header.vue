@@ -9,14 +9,14 @@
         </figure>
       </a-col>
 
-          <a-col :span="16">    
+          <a-col :span="16" style="padding-left:15px">    
             <a-row>
               <a-col :span="5" style="font-weight: bold; line-height:20px">{{translation.Clien_1_505}}:</a-col>
-              <a-col :span="11">Novartis</a-col>
+              <a-col :span="11">{{client}}</a-col>
             </a-row>
             <a-row>
               <a-col :span="5" style="font-weight: bold">{{translation.ClienName_2_540}}:</a-col>
-              <a-col :span="11">Lucas Sinclair</a-col>
+              <a-col :span="11">{{clientNames}}</a-col>
             </a-row>
             <a-row>
               <a-col :span="5" style="font-weight: bold">{{translation.ContaNumbe_2_404}}:</a-col>
@@ -63,6 +63,8 @@ export default {
   props: {
     url: { type: String },
     showButton: { type: Boolean },
+    clientNames:{ type: String},
+    client:{type: String},
   },
   data() {
     return {

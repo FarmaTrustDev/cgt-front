@@ -7,12 +7,12 @@
             <span class="treatmentName">{{ name }}</span>
           </a-tooltip>
       </template> 
-      <span slot="action" slot-scope="text, record">
+      <span slot="action" slot-scope="text, record" class="treatment-steps ">
         <!-- //Steps -->
-        <div :class="getTreatmentStepClass(record)">
+        <div :class="getTreatmentStepClass(record)" class="step-col-logistic" >
           <a-steps :current="getCurrentStep(record)" size="small">
             <a-step title="Pickup Shipment" @click="stepClick(record)" />
-
+            
             <a-step title="Delivery Shipment" />
           </a-steps>
         </div>
