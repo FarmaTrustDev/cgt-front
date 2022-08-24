@@ -297,28 +297,28 @@
 
     <a-modal :visible="showCourierModal" class="modal-design-smart-lab" :cancel-text="'Print'" :ok-text="'Submit'" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleCourierModal(false)" @ok="handleCourierModalOk(false)">
           <a-card class="grey-card-smart-lab">
-            <status-detail :heading-title="'Shipment'" :statusDetails="statusDetails" :status="'Complete'" />
+            <status-detail :heading-title="translation.Shipm_1_756" :statusDetails="statusDetails" :status="translation.Compl_1_250" />
             <hr class="mt-15">
-            <h2 class="mt-15">1. Shipping Information</h2>
+            <h2 class="mt-15">{{translation['1.Shipp_3_779']}}</h2>
             <CustomDisplay :headingTitle="''" :colVal="12" :customDisplayData="customDisplayDataShipInfo" />
             <a-row>
-              <a-col :span="10"><h2 class="mt-15">  2. Exceptional Release </h2></a-col> 
-              <a-col :span="10"><h2 class="mt-15">3. Transfer Preparation </h2></a-col>
+              <a-col :span="10"><h2 class="mt-15">  {{translation['2.Excep_3_752']}} </h2></a-col> 
+              <a-col :span="10"><h2 class="mt-15">{{translation['3.Trans_3_778']}} </h2></a-col>
             </a-row>  
-            <CustomDisplay :headingTitle="'Select all that apply'" :colVal="12" :customDisplayData="customDisplayDataExceptionalRel" />
-            <h2 class="mt-15">   4. Shipper and Accessories </h2>
+            <CustomDisplay :headingTitle="translation.Selecall_4_753" :colVal="12" :customDisplayData="customDisplayDataExceptionalRel" />
+            <h2 class="mt-15">   {{translation['4.Shipp_4_761']}} </h2>
             <CustomDisplay :headingTitle="''" :colVal="24" :customDisplayData="customDisplayDataShipperAccess" />
             <treatment-table :columns="shippingTableDataColumn" :dataSource="shippingTableData" :heading-title="''" />
-            <h2 class="mt-15"> 5. Inventory</h2>
+            <h2 class="mt-15"> {{translation['5.Inven_2_769']}}</h2>
             <a-row>
-              <a-col :span="10"><h2 class="mt-15">6. Selection and Packaging </h2></a-col> 
-              <a-col :span="10"><h2 class="mt-15">7. Review and Closure </h2></a-col>
+              <a-col :span="10"><h2 class="mt-15">{{translation['6.Selec_4_770']}} </h2></a-col> 
+              <a-col :span="10"><h2 class="mt-15">{{translation['7.Revie_4_771']}}</h2></a-col>
             </a-row>            
             <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataSelectionPackage" />
       </a-card> 
           <template slot="footer">
             <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
-            <a-button type="primary" @click="handleCourierModalOk(false)">Submit</a-button>
+            <a-button type="primary" @click="handleCourierModalOk(false)">{{translation.Submi_1_248}}</a-button>
           </template>         
     </a-modal>
 
@@ -351,55 +351,55 @@ import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 // import shipment from '~/components/inventory/treatment/shipment'
 export const customDisplayDataShipInfo = [
   {
-    title: 'Receiving Institution:',
+    title: '',
     value: 'Clinical Site 1',
     key:0,
     url:'',
   },
   {
-    title: 'Consignee:',
+    title: '',
     value: 'Mrs Dr',
     key:1,
     url:'',
   },
   {
-    title: 'Additional Information:',
+    title: '',
     value: 'Text here...',
     key:2,
     url:'',
   },
   {
-    title: 'Planned Date of Shipment:',
+    title: '',
     value: '27/06/2022',
     key:3,
     url:'',
   },  
   {
-    title: 'Courier Name:',
+    title: '',
     value: 'CRYOPDP',
     key:4,
     url:'',
   },
   {
-    title: 'Shipping Temperature:',
+    title: '',
     value: 'Cryogenic',
     key:5,
     url:'',
   },
   {
-    title: ' Courier Phone:',
+    title: '',
     value: '07700000000',
     key:6,
     url:'',
   },
   {
-    title: 'Initiated by:',
+    title: '',
     value: 'Andrea Marosan',
     key:7,
     url:'',
   },
   {
-    title: ' Date:',
+    title: '',
     value: '27/06/2022 at 14:00',
     key:8,
     url:'',
@@ -407,49 +407,49 @@ export const customDisplayDataShipInfo = [
 ]
 export const customDisplayDataSelectionPackage = [
   {
-    title: 'Selected by:',
+    title: '',
     value: 'Andrea Marosan',
     key:0,
     url:'',
   },
   {
-    title: 'Verified by:',
+    title: '',
     value: 'QA User NJ',
     key:1,
     url:'',
   },
   {
-    title: 'QA Release:',
+    title: '',
     value: 'QA User NJ',
     key:2,
     url:'',
   },
   {
-    title: 'Completed by:',
+    title: '',
     value: 'Najib Rehman',
     key:3,
     url:'',
   },
   {
-    title: 'Date:',
+    title: '',
     value: '27/06/2022 at 14:06',
     key:4,
     url:'',
   },
   {
-    title: 'Date:',
+    title: '',
     value: '27/06/2022 at 14:09',
     key:5,
     url:'',
   },
   {
-    title: 'Date:',
+    title: '',
     value: '27/06/2022 at 14:10',
     key:6,
     url:'',
   },
   {
-    title: 'Date:',
+    title: '',
     value: '27/06/2022 at 14:11',
     key:7,
     url:'',
@@ -457,49 +457,49 @@ export const customDisplayDataSelectionPackage = [
 ]
 export const customDisplayDataExceptionalRel = [
   {
-    title: 'Workstation:',
+    title: '',
     value: 'S-01',
     key:1,
     url:'',
   },
   {
-    title: 'Expired/Expiring Products',
+    title: '',
     value: 'No',
     key:0,
     url:'web/icons/greenTick.png',
   },  
   {
-    title: 'Date:',
+    title: '',
     value: '27/06/2022',
     key:2,
     url:'',
   },
   {
-    title: 'Quarantined Product',
+    title: '',
     value: 'No',
     key:3,
     url:'web/icons/greenTick.png',
   },  
   {
-    title: 'Transport Vessel ID:',
+    title: '',
     value: 'C-02',
     key:4,
     url:'',
   },
   {
-    title: 'Not Clinical Use Product',
+    title: '',
     value: 'No',
     key:5,
     url:'web/icons/greenTick.png',
   },
   {
-    title: 'Shipment Tracking #:',
+    title: '',
     value: '1564765136',
     key:6,
     url:'',
   },
   {
-    title: 'QA Exceptional Release:',
+    title: '',
     value: 'e-Signature',
     key:7,
     url:'',
@@ -507,25 +507,25 @@ export const customDisplayDataExceptionalRel = [
 ]
 export const customDisplayDataShipperAccess = [
   {
-    title: 'Client Provided - Ensure the product temperatures are appropriate:',
+    title: '',
     value: 'No',
     key:0,
     url:'web/icons/greenTick.png',
   },
   {
-    title: 'Other - Ensure the product temperatures are appropriate:',
+    title: '',
     value: 'No',
     key:1,
     url:'web/icons/greenTick.png',
   },
   {
-    title: 'CXVC1SP -High Volume General Purpose Cryogenic Shipper:',
+    title: '',
     value: 'No',
     key:2,
     url:'web/icons/greenTick.png',
   },
   {
-    title: 'EXP-6SP - Standard General Purpose Cryogenic Shipper:',
+    title: '',
     value: 'No',
     key:3,
     url:'web/icons/greenTick.png',
@@ -571,32 +571,32 @@ export default {
       customDisplayDataSelectionPackage,
       shippingTableDataColumn:[
         {
-          title: 'Shipper Type',
+          title: `${this.$store.getters.getTranslation.ShippType_2_766}`,
           dataIndex: 'shipperType',
           key: 'shipperType',
         },
         {
-          title: 'Temperature',
+          title: `${this.$store.getters.getTranslation.Tempe_1_605}`,
           dataIndex: 'temperature',
           key: 'temperature',
         },
         {
-          title: 'Shipper ID',
+          title: `${this.$store.getters.getTranslation.ShippID_2_767}`,
           dataIndex: 'shipperID',
           key: 'shipperID',
         }, 
         {
-          title: 'Monitor ID',
+          title: `${this.$store.getters.getTranslation.MonitID_2_714}`,
           dataIndex: 'monitorID',
           key: 'monitorID',
         },
         {
-          title: 'Seal Type',
+          title: `${this.$store.getters.getTranslation.SealType_2_768}`,
           dataIndex: 'sealType',
           key: 'sealType',
         },
         {
-          title: 'Tracking ID',
+          title: `${this.$store.getters.getTranslation['TrackID:_2_667']}`,
           dataIndex: 'trackingID',
           key: 'trackingID',
         },
@@ -748,6 +748,51 @@ export default {
         this.phases[0].name=newValues.StoreSampl_2_579
         this.phases[1].name=newValues.OutboProce_2_514
         this.phases[2].name=newValues.Couri_1_234
+
+        this.customDisplayDataExceptionalRel[0].title=newValues.Works_1_754
+        this.customDisplayDataExceptionalRel[1].title=newValues.ExpirProdu_2_755
+        this.customDisplayDataExceptionalRel[2].title=newValues['Date:_1_664']
+        this.customDisplayDataExceptionalRel[3].title=newValues.QuaraProdu_2_756
+        this.customDisplayDataExceptionalRel[4].title=newValues.TransVesse_3_706
+        this.customDisplayDataExceptionalRel[5].title=newValues.NotClini_4_757
+        this.customDisplayDataExceptionalRel[6].title=newValues.ShipmTrack_3_758
+        this.customDisplayDataExceptionalRel[7].title=newValues.QAExcep_3_759
+
+
+        this.customDisplayDataShipperAccess[0].title=newValues.ClienProvi_9_762
+        this.customDisplayDataShipperAccess[1].title=newValues['Other-_8_763']
+        this.customDisplayDataShipperAccess[2].title=newValues['CXVC1-High_7_764']
+        this.customDisplayDataShipperAccess[3].title=newValues['EXP-6-_7_765']
+
+
+        this.customDisplayDataShipInfo[0].title=newValues.ReceiInsti_2_728
+        this.customDisplayDataShipInfo[1].title=newValues.Consi_1_729
+        this.customDisplayDataShipInfo[2].title=newValues.AdditInfor_2_751
+        this.customDisplayDataShipInfo[3].title=newValues.PlannDate_4_731
+        this.customDisplayDataShipInfo[4].title=newValues['CouriName:_2_732']
+        this.customDisplayDataShipInfo[5].title=newValues.ShippTempe_2_733
+        this.customDisplayDataShipInfo[6].title=newValues.CouriPhone_2_734
+        this.customDisplayDataShipInfo[7].title=newValues['Initiby:_2_661']
+        this.customDisplayDataShipInfo[8].title=newValues['Date:_1_664']
+
+
+
+        this.customDisplayDataSelectionPackage[0].title=newValues['Selecby:_2_772']
+        this.customDisplayDataSelectionPackage[1].title=newValues['Verifby:_2_774']
+        this.customDisplayDataSelectionPackage[2].title=newValues.QARelea_2_776
+        this.customDisplayDataSelectionPackage[3].title=newValues['Complby:_2_663']
+        this.customDisplayDataSelectionPackage[4].title=newValues['Date:_1_664']
+        this.customDisplayDataSelectionPackage[5].title=newValues['Date:_1_664']
+        this.customDisplayDataSelectionPackage[6].title=newValues['Date:_1_664']
+        this.customDisplayDataSelectionPackage[7].title=newValues['Date:_1_664']
+
+
+        this.shippingTableDataColumn[0].title=newValues.ShippType_2_766
+        this.shippingTableDataColumn[1].title=newValues.Tempe_1_605
+        this.shippingTableDataColumn[2].title=newValues.ShippID_2_767
+        this.shippingTableDataColumn[3].title=newValues.MonitID_2_714
+        this.shippingTableDataColumn[4].title=newValues.SealType_2_768
+        this.shippingTableDataColumn[5].title=newValues['TrackID:_2_667']
       }
     }
   },     
@@ -770,7 +815,49 @@ export default {
     getTranslationData(){
         this.phases[0].name=this.translation.StoreSampl_2_579
         this.phases[1].name=this.translation.OutboProce_2_514
-        this.phases[2].name=this.translation.Couri_1_234       
+        this.phases[2].name=this.translation.Couri_1_234
+        
+        this.customDisplayDataExceptionalRel[0].title=this.translation.Works_1_754
+        this.customDisplayDataExceptionalRel[1].title=this.translation.ExpirProdu_2_755
+        this.customDisplayDataExceptionalRel[2].title=this.translation['Date:_1_664']
+        this.customDisplayDataExceptionalRel[3].title=this.translation.QuaraProdu_2_756
+        this.customDisplayDataExceptionalRel[4].title=this.translation.TransVesse_3_706
+        this.customDisplayDataExceptionalRel[5].title=this.translation.NotClini_4_757
+        this.customDisplayDataExceptionalRel[6].title=this.translation.ShipmTrack_3_758
+        this.customDisplayDataExceptionalRel[7].title=this.translation.QAExcep_3_759  
+        
+        this.customDisplayDataShipperAccess[0].title=this.translation.ClienProvi_9_762
+        this.customDisplayDataShipperAccess[1].title=this.translation['Other-_8_763']
+        this.customDisplayDataShipperAccess[2].title=this.translation['CXVC1-High_7_764']
+        this.customDisplayDataShipperAccess[3].title=this.translation['EXP-6-_7_765']
+        
+        this.customDisplayDataShipInfo[0].title=this.translation.ReceiInsti_2_728
+        this.customDisplayDataShipInfo[1].title=this.translation.Consi_1_729
+        this.customDisplayDataShipInfo[2].title=this.translation.AdditInfor_2_751
+        this.customDisplayDataShipInfo[3].title=this.translation.PlannDate_4_731
+        this.customDisplayDataShipInfo[4].title=this.translation['CouriName:_2_732']
+        this.customDisplayDataShipInfo[5].title=this.translation.ShippTempe_2_733
+        this.customDisplayDataShipInfo[6].title=this.translation.CouriPhone_2_734
+        this.customDisplayDataShipInfo[7].title=this.translation['Initiby:_2_661']
+        this.customDisplayDataShipInfo[8].title=this.translation['Date:_1_664']
+
+        this.customDisplayDataSelectionPackage[0].title=this.translation['Selecby:_2_772']
+        this.customDisplayDataSelectionPackage[1].title=this.translation['Verifby:_2_774']
+        this.customDisplayDataSelectionPackage[2].title=this.translation.QARelea_2_776
+        this.customDisplayDataSelectionPackage[3].title=this.translation['Complby:_2_663']
+        this.customDisplayDataSelectionPackage[4].title=this.translation['Date:_1_664']
+        this.customDisplayDataSelectionPackage[5].title=this.translation['Date:_1_664']
+        this.customDisplayDataSelectionPackage[6].title=this.translation['Date:_1_664']
+        this.customDisplayDataSelectionPackage[7].title=this.translation['Date:_1_664']
+        
+        this.shippingTableDataColumn[0].title=this.translation.ShippType_2_766
+        this.shippingTableDataColumn[1].title=this.translation.Tempe_1_605
+        this.shippingTableDataColumn[2].title=this.translation.ShippID_2_767
+        this.shippingTableDataColumn[3].title=this.translation.MonitID_2_714
+        this.shippingTableDataColumn[4].title=this.translation.SealType_2_768
+        this.shippingTableDataColumn[5].title=this.translation['TrackID:_2_667']        
+
+
     },    
     collectionDateChange(value, date) {
       this.form.setFieldsValue({

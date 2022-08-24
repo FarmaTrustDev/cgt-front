@@ -164,11 +164,11 @@
         </a-tabs>
         <a-modal :visible="showModal" class="modal-design-smart-lab" :dialog-style="{ right: '20%', top:'5%' }"  @cancel="openPopViewModal(false)" @ok="handleOk(false)">
           <a-card class="grey-card-smart-lab">
-            <status-detail :heading-title="'Advanced Receipt Notice'" :status="'Completed'" />
+            <status-detail :heading-title="translation.AdvanRecei_3_648" :status="translation.Compl_1_250" />
             <hr class="mt-15">
             <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="false" />
-            <CustomDisplay :headingTitle="'Information'" :colVal="8" :singleLineKey="'Cryoportal Number:'" :singleLineValue="'684792563-9570-68746596'" :customDisplayData="customDisplayData" />
-            <h2 class="mt-15">Incoming Materials</h2>
+            <CustomDisplay :headingTitle="translation.Infor_1_658" :colVal="8" :singleLineKey="translation.CryopNumbe_2_659" :singleLineValue="'684792563-9570-68746596'" :customDisplayData="customDisplayData" />
+            <h2 class="mt-15">{{translation.IncomMater_2_674}}</h2>
 
             <a-card class="white-card-smart-lab">
                 <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">
@@ -183,7 +183,7 @@
           </a-card>  
           <template slot="footer">
             <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
-            <a-button type="primary" @click="handleOk(false)">Ok</a-button>
+            <a-button type="primary" @click="handleOk(false)">{{translation.Ok_1_663}}</a-button>
           </template>            
         </a-modal>
         <a-modal :visible="showModalImage" :title="translation.Docum_1_507" @cancel="handleModal(false)">
@@ -219,79 +219,79 @@ import { isNumber } from '~/services/Helpers'
 
 export const customDisplayData = [
   {
-    title: 'Return Materials:',
+    title: '',
     value: 'Yes',
     key:0,
     url:'web/icons/greenTick.png',
   },
   {
-    title: 'Initiated by:',
+    title: '',
     value: 'Andrea Marosan',
     key:1,
     url:'',
   },
   {
-    title: 'Date:',
+    title: '',
     value: '27/06/2022',
     key:2,
     url:'',
   },
   {
-    title: 'Origin:',
+    title: '',
     value: 'Lonza',
     key:3,
     url:'',
   },  
   {
-    title: 'Completed by:',
+    title: '',
     value: 'Najib Rehman',
     key:4,
     url:'',
   },
   {
-    title: 'Date:',
+    title: '',
     value: '27/06/2022',
     key:5,
     url:'',
   },
   {
-    title: 'Courier:',
+    title: '',
     value: 'fedEx',
     key:6,
     url:'',
   },
   {
-    title: 'Client ID:',
+    title: '',
     value: 'DAC-654',
     key:7,
     url:'',
   },
   {
-    title: 'Client:',
+    title: '',
     value: 'Novartis',
     key:8,
     url:'',
   },  
   {
-    title: 'Tracking ID:',
+    title: '',
     value: '1984916419',
     key:9,
     url:'',
   },  
   {
-    title: 'Project ID:',
+    title: '',
     value: '123456a',
     key:10,
     url:'',
   }, 
   {
-    title: 'Project:',
+    title: '',
     value: 'Texas Test Project',
     key:11,
     url:'',
   },
   {
-    title: 'Protocol ID:',
+    title: '',
     value: 'T1',
     key:12,
     url:'',
@@ -303,25 +303,25 @@ export const customDisplayData = [
     url:'',
   },
   {
-    title: 'Location:',
+    title: '',
     value: 'Cryoport - London',
     key:14,
     url:'',
   },
   {
-    title: 'Protocol:',
+    title: '',
     value: 'Kiet Test',
     key:15,
     url:'',
   },
   {
-    title: 'Description:',
+    title: '',
     value: 'Novartis Receipt',
     key:16,
     url:'',
   },
   {
-    title: 'Number of Containers:',
+    title: '',
     value: '1',
     key:17,
     url:'',
@@ -733,6 +733,30 @@ export default {
         this.outboundSteps[0].name=newValues.StoreSampl_2_579
         this.outboundSteps[1].name=newValues.OutboProce_2_514
         this.outboundSteps[2].name=newValues.Couri_1_234
+
+
+        this.customDisplayData[0].title=newValues.ReturMater_2_660
+        this.customDisplayData[1].title=newValues['Initiby:_2_661']
+        this.customDisplayData[2].title=newValues['Date:_1_664']
+        this.customDisplayData[3].title=newValues.Origi_1_662
+        this.customDisplayData[4].title=newValues['Complby:_2_663']
+        this.customDisplayData[5].title=newValues['Date:_1_664']
+        this.customDisplayData[6].title=newValues.Couri_1_665
+        this.customDisplayData[7].title=newValues['ClienID:_2_678']
+        this.customDisplayData[8].title=newValues.Clien_1_666
+        this.customDisplayData[9].title=newValues['TrackID:_2_667']
+        this.customDisplayData[10].title=newValues['ProjeID:_2_668']
+        this.customDisplayData[11].title=newValues.Proje_1_669
+        this.customDisplayData[12].title=newValues['ProtoID:_2_682']
+        // this.customDisplayData[13].title=newValues.ReturMater_2_660
+        this.customDisplayData[14].title=newValues.Locat_1_671
+        this.customDisplayData[15].title=newValues.Proto_1_686
+        this.customDisplayData[16].title=newValues.Descr_1_655
+        this.customDisplayData[17].title=newValues.Numbeof_3_673       
+
+
+        this.customDisplayDataMat[0].title=newValues.ClienProdu_2_675
+        this.customDisplayDataMat[1].title=newValues.Suppl_1_676
       }
     }
   },  
@@ -774,6 +798,28 @@ export default {
         this.outboundSteps[0].name=this.translation.StoreSampl_2_579
         this.outboundSteps[1].name=this.translation.OutboProce_2_514
         this.outboundSteps[2].name=this.translation.Couri_1_234
+
+        this.customDisplayData[0].title=this.translation.ReturMater_2_660
+        this.customDisplayData[1].title=this.translation['Initiby:_2_661']
+        this.customDisplayData[2].title=this.translation['Date:_1_664']
+        this.customDisplayData[3].title=this.translation.Origi_1_662
+        this.customDisplayData[4].title=this.translation['Complby:_2_663']
+        this.customDisplayData[5].title=this.translation['Date:_1_664']
+        this.customDisplayData[6].title=this.translation.Couri_1_665
+        this.customDisplayData[7].title=this.translation['ClienID:_2_678']
+        this.customDisplayData[8].title=this.translation.Clien_1_666
+        this.customDisplayData[9].title=this.translation['TrackID:_2_667']
+        this.customDisplayData[10].title=this.translation['ProjeID:_2_668']
+        this.customDisplayData[11].title=this.translation.Proje_1_669
+        this.customDisplayData[12].title=this.translation['ProtoID:_2_682']
+        // this.customDisplayData[13].title=newValues.ReturMater_2_660
+        this.customDisplayData[14].title=this.translation.Locat_1_671
+        this.customDisplayData[15].title=this.translation.Proto_1_686
+        this.customDisplayData[16].title=this.translation.Descr_1_655
+        this.customDisplayData[17].title=this.translation.Numbeof_3_673
+        
+        this.customDisplayDataMat[0].title=this.translation.ClienProdu_2_675
+        this.customDisplayDataMat[1].title=this.translation.Suppl_1_676
     },
     inboundSearch(value, key) {
       // console.log(key)
