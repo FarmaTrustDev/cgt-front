@@ -1,12 +1,22 @@
 <template>
-  <page-layout :create="false" :loading="loading" :bordered="false" :back="false">
+  <page-layout
+    :create="false"
+    :loading="loading"
+    :bordered="false"
+    class="container"
+    :title="translation.AddStora_3_557"
+  >
     <template slot="content">
+      <!-- <h2 class="page-title">
+        <strong>{{ translation.AddStora_3_557 }}</strong>
+      </h2>
+       -->
+
       <div class="grey-card">
         <a-card :bordered="false" class="default-border-radius">
-          <h2>{{translation.AddStora_3_557}}</h2>
           <formField class="mt-15" />
-      </a-card>
-    </div>
+        </a-card>
+      </div>
     </template>
   </page-layout>
 </template>
@@ -27,7 +37,7 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
-    },    
+    },
   },
   methods: {
     // onSubmit(e) {

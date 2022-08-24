@@ -3,7 +3,6 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    :back="false"
     :title="translation.ClienHub_2_566"
     class="container"
   >

@@ -121,14 +121,14 @@
           <a-card class="grey-card-smart-lab">
             <status-detail :heading-title="'Material Receipt'" :statusDetails="statusDetails" :status="'Inventory'" />
             <hr class="mt-15">
-            <h2>1. Material Receipt and Identification</h2>
+            <h2 class="mt-15">1. Material Receipt and Identification</h2>
             <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataMRI" />
-            <h2>2. Material Unpacking</h2>
+            <h2 class="mt-15">2. Material Unpacking</h2>
             <treatment-table :columns="contentTrackingColumns" :dataSource="contentTracking" :heading-title="'Content Tracking'" />
             <treatment-table :columns="contentTrackingColumns2" :dataSource="contentTracking2" :heading-title="''" />
-            <h2>3. QA Disposition</h2>
+            <h2 class="mt-15">3. QA Disposition</h2>
             <treatment-table :columns="contentTrackingColumns2" :dataSource="contentTracking2" :heading-title="''" />
-            <h2>4. Material Release</h2>
+            <h2 class="mt-15">4. Material Release</h2>
             <a-row><a-col :span="6"><h2 style="line-height:50px">Release Location </h2></a-col><a-col :span="14"><h2><a-input style="border-radius:10px; height:50px" /></h2></a-col></a-row>
             <a-card class="white-card-smart-lab">
                 <a-row v-for="custDD in customDisplayDataReleaseBy" :key="custDD.key">
@@ -146,11 +146,11 @@
           <a-card class="grey-card-smart-lab">
             <status-detail :heading-title="'Order'" :statusDetails="statusDetails" :status="'Scheduling'" />
             <hr class="mt-15">
-            <h2>Order</h2>
+            <h2 class="mt-15">Order</h2>
             <CustomDisplay :headingTitle="''" :colVal="12" :customDisplayData="customDisplayDataShipInfo" />
             <treatment-table :columns="orderTableDataColumns" :dataSource="orderTableData" :heading-title="''" />
             <treatment-table :columns="orderProductTableDataColumns" :dataSource="orderProductTableData" :heading-title="'Ordered Produts'" />
-            <h2>Order Initiation</h2>
+            <h2 class="mt-15">Order Initiation</h2>
 
             <a-card class="white-card-smart-lab">
                 <a-row v-for="custDD in customDisplayDataOrderInit" :key="custDD.key">
@@ -161,7 +161,7 @@
                   </a-col>
                 </a-row>
             </a-card>
-            <h2>Order Review</h2>
+            <h2 class="mt-15">Order Review</h2>
 
             <a-card class="white-card-smart-lab">
                 <a-row v-for="custDD in customDisplayDataOrderReview" :key="custDD.key">

@@ -1,16 +1,13 @@
 <template>
-    <div>
-        <!-- // make its component -->
-        <a-row>
-          <a-col :span="3">
-            <figure>
-              <img
-                class="responsive_img"
-                :src="getImageUrl(url)"
-              />
-              <figcaption></figcaption>
-            </figure>
-          </a-col>
+  <div>
+    <!-- // make its component -->
+    <a-row>
+      <a-col :span="3">
+        <figure>
+          <img class="responsive_img" :src="getImageUrl(url)" />
+          <figcaption></figcaption>
+        </figure>
+      </a-col>
 
           <a-col :span="16">    
             <a-row>
@@ -34,7 +31,7 @@
           </a-col>
           <a-col v-if="showButton" :span="5" style="text-align:right">
               <a-button size="large" class="mb-10 mtm-20" type="primary" html-type="submit" @click="openViewModal()" :loading="false"> {{translation.TempoRelea_2_612}}</a-button>
-              <a-button size="large" class="mt-10" type="primary" html-type="submit" :loading="false" @click="goto('/inventory/storage/quarantine/quarantineProcess')">{{translation.ResolQuara_2_613}}</a-button>
+              <a-button size="large" class="mt-10" type="primary" html-type="submit" :loading="false" @click="goto('/inventory/storage/quarantine/quarantineProcess?view=PROCESS_SAMPLE')">{{translation.ResolQuara_2_613}}</a-button>
           </a-col>
         </a-row>
         <a-modal :visible="showModal"
@@ -65,27 +62,45 @@ export default {
   mixins: [routeHelpers, imagesHelper],
   props: {
     url: { type: String },
-    showButton:{type: Boolean},
+    showButton: { type: Boolean },
   },
-  data(){
-    return{
-    showModal: false,
+  data() {
+    return {
+      showModal: false,
+      clientInfo: [
+        {
+          clientBrand: 'Novida',
+          clientName: 'James',
+          clientContact: '009-xxxxx',
+          clientAdress: 'new Orlene, 78589',
+          key: 0,
+          url: '',
+        },
+        {
+          clientBrand: 'test',
+          clientName: 'James',
+          clientContact: '009-xxxxx',
+          clientAdress: 'new Orlene, 78589',
+          key: 0,
+          url: '',
+        },
+      ],
     }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },   
-  methods:{
+  },
+  methods: {
     openViewModal() {
       this.showModal = true
       // this.qrUrl = id
       // LabelServices.scheduling(id);
-    },   
+    },
     handleModal(show) {
       this.showModal = show
     },
-  }
+  },
 }
 </script>

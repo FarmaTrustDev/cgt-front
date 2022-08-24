@@ -4,14 +4,14 @@
     :loading="loading"
     :bordered="false"
     :title="translation.SmartStore_2_548"
-    class="specific-storage container"
+    class="specific-storage container Component_body"
   >
     <!--  -->
     <template slot="content">
 
       <inventory />
       <a-card :bordered="false" class="default-border-radius">
-        <h2 slot="title">Components</h2>
+        <h2 slot="title"><strong>Components</strong></h2>
         <a-row :gutter="16">
           <consumables />
           <!-- <a-col :span="2"> </a-col>

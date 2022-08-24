@@ -22,7 +22,7 @@
             class="float-right inventory-search"
             @change="(e) => search(e.target.value, 'title')"
           >
-            <a-icon slot="prefix" type="search" class="mb-5" />
+            <a-icon slot="prefix" type="search" class="mt-5" />
           </a-input>
           <Listing :storages="storage" :typeId="isInbound" />
         </a-tab-pane>
@@ -41,7 +41,7 @@
                 )
             "
           >
-            <a-icon slot="prefix" type="search" class="mb-5 " />
+            <a-icon slot="prefix" type="search" class="mt-5 " />
           </a-input>
           <a-table
             class="rounded-table"

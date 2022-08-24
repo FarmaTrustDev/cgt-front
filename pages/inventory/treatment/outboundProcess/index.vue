@@ -7,7 +7,7 @@
   >
     <template slot="content">
       <div class="grey-card" style="width: 90%; margin-left: 5%">
-        <div class="patient-details-page">
+        <div class="patient-details-page" style="margin:0 5%">
           <a-row :gutter="18">
             <a-col :span="6">
               <a-card :bordered="false" class="qr-section default-card">
@@ -90,19 +90,19 @@
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs tabs_body"
-          style="margin:5%"
+          style="margin:3% 5%"
         >
           <span>
             <!-- //Steps -->
             
             <div class="treatment-steps" style="width:100%; margin:auto">
               <span class="step-col-large">
-              <a-steps size="small">
+              <a-steps size="small" :current="1">
                   <a-step
                     v-for="phase in phases"
                     :key="phase.id"
                     :title="phase.name"
-                    :class="(phase.id==1) ? 'ant-steps-item-active-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
+                    :class="(phase.id==1) ? 'ant-steps-item-finish-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
                     @click="reDirect(phase.url_slug,phase.alias)"
                   />
                 </a-steps>
@@ -299,15 +299,21 @@
           <a-card class="grey-card-smart-lab">
             <status-detail :heading-title="'Shipment'" :statusDetails="statusDetails" :status="'Complete'" />
             <hr class="mt-15">
-            <h2>1. Shipping Information</h2>
+            <h2 class="mt-15">1. Shipping Information</h2>
             <CustomDisplay :headingTitle="''" :colVal="12" :customDisplayData="customDisplayDataShipInfo" />
-            <h2>  2. Exceptional Release 3. Transfer Preparation </h2>
+            <a-row>
+              <a-col :span="10"><h2 class="mt-15">  2. Exceptional Release </h2></a-col> 
+              <a-col :span="10"><h2 class="mt-15">3. Transfer Preparation </h2></a-col>
+            </a-row>  
             <CustomDisplay :headingTitle="'Select all that apply'" :colVal="12" :customDisplayData="customDisplayDataExceptionalRel" />
-            <h2>   4. Shipper and Accessories </h2>
+            <h2 class="mt-15">   4. Shipper and Accessories </h2>
             <CustomDisplay :headingTitle="''" :colVal="24" :customDisplayData="customDisplayDataShipperAccess" />
             <treatment-table :columns="shippingTableDataColumn" :dataSource="shippingTableData" :heading-title="''" />
-            <h2> 5. Inventory</h2>
-            <h2> 6. Selection and Packaging 7. Review and Closure</h2>
+            <h2 class="mt-15"> 5. Inventory</h2>
+            <a-row>
+              <a-col :span="10"><h2 class="mt-15">6. Selection and Packaging </h2></a-col> 
+              <a-col :span="10"><h2 class="mt-15">7. Review and Closure </h2></a-col>
+            </a-row>            
             <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataSelectionPackage" />
       </a-card> 
           <template slot="footer">
