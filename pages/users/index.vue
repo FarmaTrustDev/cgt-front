@@ -1,72 +1,80 @@
 <template>
-  <div class="ml-30 mr-30 container">
-    <div class="clearfix mt-15">
-      <h3 class="page-title ml-5 mb-1 float-left">
+  <page-layout
+    :loading="false"
+    :title="translation.UserNew_3_136"
+    class="specific container"
+    :create="false"
+  >
+    <div class="mr-30" slot="content">
+      <div class="mt-15">
+        <!-- <h3 class="page-title ml-5 mb-1 float-left">
         {{ translation.UserNew_3_136 }}
-      </h3>
-      <a-button
-        type="primary"
-        class="mr-15 float-right mt-5"
-        @click="goto('users/create')"
-        >{{ translation.adduser_2_464 }}</a-button
+      </h3> -->
+        <a-button
+          type="primary"
+          class="mr-15 float-right mt-5"
+          @click="goto('users/create')"
+          >{{ translation.adduser_2_464 }}</a-button
+        >
+        <a-input
+          class="float-right page-search-input"
+          ref="userNameInput"
+          :placeholder="translation.Searcuser_2_404"
+          @change="searchUser"
+        >
+          <a-icon slot="prefix" type="search" />
+        </a-input>
+      </div>
+      <a-table
+        :columns="columns"
+        :data-source="datasource"
+        :loading="loading"
+        class="rounded-table pt-10 users-list"
+        :pagination="{
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: ['10', '20', '30', '50', '100'],
+        }"
       >
-      <a-input
-        class="float-right page-search-input"
-        ref="userNameInput"
-        :placeholder="translation.Searcuser_2_404"
-        @change="searchUser"
-      >
-        <a-icon slot="prefix" type="search" />
-      </a-input>
+        <template slot="action" slot-scope="action">
+          <a-dropdown>
+            <a-button class="action-button" @click="preventDefault">
+              {{ translation['Admin_1_142'] }} <a-icon type="down" />
+            </a-button>
+            <a-menu slot="overlay">
+              <a-menu-item key="1">
+                <a @click="goto(`/users/${action.globalId}`)">{{
+                  translation.Edit_1_450
+                }}</a>
+              </a-menu-item>
+              <a-menu-item key="2">
+                <a-popconfirm
+                  :title="translation.Areyou_4_484"
+                  :ok-text="translation.yes_1_654"
+                  :cancel-text="translation.no_1_656"
+                  placement="topLeft"
+                  @confirm="deleteUser(`${action.globalId}`)"
+                >
+                  {{ translation.Delet_1_451 }}
+                </a-popconfirm>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
+        </template>
+      </a-table>
     </div>
-    <a-table
-      :columns="columns"
-      :data-source="datasource"
-      :loading="loading"
-      class="rounded-table pt-10 users-list"
-      :pagination="{
-        defaultPageSize: 10,
-        showSizeChanger: true,
-        pageSizeOptions: ['10', '20', '30', '50', '100'],
-      }"
-    >
-      <template slot="action" slot-scope="action">
-        <a-dropdown>
-          <a-button class="action-button" @click="preventDefault">
-            {{ translation['Admin_1_142'] }} <a-icon type="down" />
-          </a-button>
-          <a-menu slot="overlay">
-            <a-menu-item key="1">
-              <a @click="goto(`/users/${action.globalId}`)">{{
-                translation.Edit_1_450
-              }}</a>
-
-            </a-menu-item>
-            <a-menu-item key="2">
-              <a-popconfirm
-                :title="translation.Areyou_4_484"
-                :ok-text="translation.yes_1_654"
-                :cancel-text="translation.no_1_656"
-                placement="topLeft"
-                @confirm="deleteUser(`${action.globalId}`)"
-              >
-              {{ translation.Delet_1_451 }}
-              </a-popconfirm>
-            </a-menu-item>
-          </a-menu>
-        </a-dropdown>
-      </template>
-    </a-table>
-  </div>
+  </page-layout>
 </template>
 <script>
 import UserServices from '~/services/API/UserServices'
 import notifications from '~/mixins/notifications'
 import { preventDefault } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
+import PageLayout from '~/components/layout/PageLayout'
 
 // import PageLayout from '~/components/layout/PageLayout'
 export default {
+  components: { PageLayout },
   mixins: [routeHelpers, notifications],
   data() {
     return {
@@ -117,18 +125,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.columns[0].title=newValues.Name_1_138
-        this.columns[1].title=newValues.Entittype_2_406
-        this.columns[2].title=newValues.EntitName_2_408
-        this.columns[3].title=newValues.UserRole_2_410
-        this.columns[4].title=newValues.EmailAddre_2_140
-        this.columns[5].title=newValues.Actio_1_220
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.columns[0].title = newValues.Name_1_138
+        this.columns[1].title = newValues.Entittype_2_406
+        this.columns[2].title = newValues.EntitName_2_408
+        this.columns[3].title = newValues.UserRole_2_410
+        this.columns[4].title = newValues.EmailAddre_2_140
+        this.columns[5].title = newValues.Actio_1_220
       }
-    }
-  },  
+    },
+  },
   mounted() {
     this.fetch()
   },

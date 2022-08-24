@@ -1,11 +1,11 @@
 <template>
   <page-layout
     :loading="false"
-    class="specific"
+    class="specific container"
     :create="false"
   >
     <template slot="content">
-      <div class="grey-card" style="width: 90%; margin-left: 5%">
+      <div class="grey-card" style="width: 100%">
       <div class="patient-details-page" style="width:95%; margin-left:2%">
           <a-row :gutter="18">
             <a-col :span="6">
@@ -44,14 +44,14 @@
                         <span> Baystate Clinic</span>
                       </h6>
                     </a-col>
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="5" class="mt-15">
                       <h6>
                         <span class="text-muted"
                           >{{ translation.SamplName_2_503 }}:</span
                         >
                       </h6>
                     </a-col>
-                    <a-col :span="8" class="mt-15">
+                    <a-col :span="7" class="mt-15">
                       <h6><span>Human Cells</span></h6>
                     </a-col>
                   </a-row>
