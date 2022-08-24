@@ -88,14 +88,14 @@
         </div>
         <a-card
           :bordered="false"
-          class="mt-15 default-card inbound-accept-tabs"
+          class="mt-15 default-card inbound-accept-tabs process_sample-section"
           style="width:96%; margin-left:2%;"
         >
           <span>
             <!-- //Steps -->
             <div class="treatment-steps" style="width:100%">
               <span class="step-col-large" functional>
-              <a-steps :initial="1" size="small" class="test">
+              <a-steps :initial="1" size="small" class="margin-top:0px">
                 
                 <a-step
                   v-for="phase in phases"

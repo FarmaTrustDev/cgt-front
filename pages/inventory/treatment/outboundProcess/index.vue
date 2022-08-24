@@ -136,7 +136,7 @@
         <a-card
           v-if="activeTab=='COURIER'"
           :bordered="false"
-          class="mt-15 default-card inbound-accept-tabs"
+          class="mt-15 default-card inbound-accept-tabs bount_status"
           style="width:90%; margin-left:5%"
         >
 

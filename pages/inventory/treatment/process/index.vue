@@ -45,14 +45,14 @@
                         <span> Baystate Clinic</span>
                       </h6>
                     </a-col>
-                    <a-col :span="4" class="mt-15">
+                    <a-col :span="5" class="mt-15">
                       <h6>
                         <span class="text-muted"
                           >{{ translation.SamplName_2_503 }}:</span
                         >
                       </h6>
                     </a-col>
-                    <a-col :span="8" class="mt-15">
+                    <a-col :span="7" class="mt-15">
                       <h6><span>Human Cells</span></h6>
                     </a-col>
                   </a-row>
@@ -198,7 +198,7 @@
                           >
                         </a-col>
                         <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted">Sadaan Shahid</span>
+                          <span class="text-muted">Gary Jose</span>
                         </a-col>
                       </a-row>
                       <a-row :gutter="20" dir="ltr">

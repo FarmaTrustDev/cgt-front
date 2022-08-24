@@ -56,7 +56,7 @@
       <!-- 
         title="Provenance Data - Asset DEC123" -->
       <a-card :bordered="false" class="data_screen">
-        <div class="view-screen">
+        <div class="view-screen steps-green">
           <span v-if="!isEmpty(steps)">
             <h2 slot="title" class="pad-bottom">
               {{translation.ProveData_2_634}} - Asset DEC123
