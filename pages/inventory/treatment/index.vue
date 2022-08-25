@@ -201,7 +201,7 @@
               :show-button="false"
             />
             <CustomDisplay
-              :headingTitle="translation.Infor_1_658"
+              :heading-title="translation.Infor_1_658"
               :colVal="8"
               :singleLineKey="translation.CryopNumbe_2_659"
               :singleLineValue="'684792563-9570-68746596'"
