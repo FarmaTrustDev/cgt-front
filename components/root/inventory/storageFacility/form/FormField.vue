@@ -8,7 +8,7 @@
           :wrapper-col="{ span: 21 }"
         >
           <a-select
-          placeholder="Select Equipment Type"
+          :placeholder="translation.EquipType_2_552"
           style="width: 100%"
           size="large"
           class="default-select"
@@ -21,12 +21,12 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Lab"
+          :label="translation.Lab_1_566"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
           <a-select
-          placeholder="Select Lab"
+          :placeholder="translation.SelecLab_2_564"
           style="width: 100%"
           size="large"
           class="default-select"
@@ -39,7 +39,7 @@
       </a-col>      
       <a-col :span="12">
         <a-form-item
-          label="Equipment Name*:"
+          :label="translation.EquipName_2_553+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -51,18 +51,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Equipment Name',
+                    message: translation.EquipName_2_553,
                   },
                 ],
               },
             ]"
             :disabled="isCreated"
-            placeholder="Equipment Name"
+            :placeholder="translation.EquipName_2_553"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Lab Zone"
+          :label="translation.LabZone_2_554"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -74,18 +74,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Lab Zone',
+                    message: translation.LabZone_2_554,
                   },
                 ],
               },
             ]"
-            placeholder="Lab Zone"
+            :placeholder="translation.LabZone_2_554"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="No of Shelves"
+          :label="translation.Numbeof_3_555"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -97,18 +97,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your No of Shelves',
+                    message: translation.Numbeof_3_555,
                   },
                 ],
               },
             ]"
-            placeholder="No of Shelves"
+            :placeholder="translation.Numbeof_3_555"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="No of Racks"
+          :label="translation.Numbeof_3_556"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -120,12 +120,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input No of Racks',
+                    message: translation.Numbeof_3_556,
                   },
                 ],
               },
             ]"
-            placeholder="No of Racks"
+            :placeholder="translation.Numbeof_3_556"
           />
         </a-form-item>
       </a-col>   
@@ -135,9 +135,7 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
-          <a-input
-            placeholder="Suite"
-          /> </a-form-item
+          <a-input /> </a-form-item
       ></a-col>
       <a-col :span="12">      
       <a-form-item

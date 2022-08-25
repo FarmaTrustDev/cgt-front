@@ -1,7 +1,6 @@
 <template>
   <page-layout
     :create="false"
-    :loading="loading"
     :bordered="false"
     :title="translation._1_438"
     class="specific-storage container"

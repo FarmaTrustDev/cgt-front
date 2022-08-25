@@ -102,7 +102,7 @@ export default {
       ],
       columns: [
         {
-          title: `${this.$store.getters.getTranslation.EquipType_2_552}`,
+          title: `${this.$store.getters.getTranslation.Organ_1_166}`,
           dataIndex: 'name',
           key: 'name',
         },
@@ -153,7 +153,7 @@ export default {
   watch: {
     translation(newValues, oldValue) {
       if (newValues !== oldValue) {
-        this.columns[0].title = newValues.EquipType_2_552
+        this.columns[0].title = newValues.Organ_1_166
         this.columns[1].title = newValues.EquipName_2_553
         this.columns[2].title = newValues.Lab_1_566
         this.columns[3].title = newValues.LabZone_2_554
@@ -180,7 +180,7 @@ export default {
         .finally(() => (this.loading = false))
     },
     getTranslationData() {
-      this.columns[0].title = this.translation.EquipType_2_552
+      this.columns[0].title = this.translation.Organ_1_166
       this.columns[1].title = this.translation.EquipName_2_553
       this.columns[2].title = this.translation.Lab_1_566
       this.columns[3].title = this.translation.LabZone_2_554
