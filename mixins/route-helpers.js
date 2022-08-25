@@ -6,5 +6,9 @@ export default {
     goBack() {
       this.$router.go(-1)
     },
+    handleSidebarKey(uri, key) {
+      this.$store.commit('setSelectedMenu', [`${key}`])
+      this.goto(uri)
+    },
   },
 }

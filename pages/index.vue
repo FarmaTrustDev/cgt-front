@@ -28,12 +28,12 @@ export default {
     data() {
         return {}
     },
-    mounted() {},
     computed: {
         translation() {
             return this.$store.getters.getTranslation
         },
     },
+    mounted() {},
     methods: {
         gotoView(uri) {
             this.goto(`/${uri}`)
