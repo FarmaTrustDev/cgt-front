@@ -26,7 +26,7 @@
         <a-col :span="16">
           <a-row>
             <a-col :span="5" style="font-weight: bold">Client:</a-col>
-            <a-col :span="11">Novartis</a-col>
+            <a-col :span="11">Adaptimmune</a-col>
           </a-row>
           <a-row>
             <a-col :span="5" style="font-weight: bold">Contact Name:</a-col>
