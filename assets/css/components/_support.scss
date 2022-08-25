@@ -37,11 +37,12 @@ $chatHeight: 255px;
     max-height: $chatHeight;
     .ant-spin-nested-loading {
       overflow-y: auto;
+      overflow-x: hidden;
       ul {
         max-height: 242px;
         li {
           position: relative;
-          padding-bottom: 30px;
+          padding-bottom: 23px;
           border-bottom: 0;
           .ant-comment-content {
             position: unset !important;
@@ -63,9 +64,10 @@ $chatHeight: 255px;
         }
         .ant-comment-content-author {
           position: absolute;
-          width: 50%;
+          width: 95%;
+          min-width: 210px;
           top: 100%;
-          left: 223px;
+          left: 15px;
           overflow: hidden;
           display: inline-block;
         }

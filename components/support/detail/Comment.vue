@@ -1,5 +1,5 @@
 <template>
-  <div class="support-chat">
+  <div class="chat-page">
     <div class="border-bottom">
       <b> Ticket CKD-{{ ticket.id }}</b>
       <br />
@@ -13,7 +13,7 @@
 
     <!-- <a-divider></a-divider> -->
     <a-row>
-      <a-col class="chat-list">
+      <a-col class="chat-list right-bar">
         <!-- <pre> {{ data }}</pre> -->
 
         <a-list :data-source="data" item-layout="horizontal" :bordered="false">
@@ -22,9 +22,9 @@
             slot-scope="item"
             :class="'message-' + getType(item.isOwner)"
           >
-            <a-comment :author="item.sender_Name" :content="item.content">
+            <a-comment :author="item.sender_Name" :content="item.content" class="">
               <template slot="content"
-                ><div class="message-time">
+                ><div class="message-time content-body">
                   {{ item.message }}
                 </div></template
               >
