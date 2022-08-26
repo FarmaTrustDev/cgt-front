@@ -696,7 +696,6 @@ export default {
     },
     
     cancelTreatment(patient, treatment) {
-      debugger
       this.cancelModalTitle = treatment.isCancel
         ? 'Continue Treatment'
         : 'Cancel Treatment'
