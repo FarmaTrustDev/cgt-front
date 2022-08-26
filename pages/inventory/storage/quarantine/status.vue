@@ -1,18 +1,32 @@
 <template>
-  <div>
-      <h3 class="page-title">{{translation.SamplStatu_4_614}}</h3>
-      <div><h3 style="font-weight:bold">{{translation.SamplDetai_2_510}}</h3></div>
-      <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="true" />
+  <div class="container">
+    <h3 class="page-title">{{ translation.SamplStatu_4_614 }}</h3>
+    <div>
+      <h3 style="font-weight: bold">{{ translation.SamplDetai_2_510 }}</h3>
+    </div>
+    <Header
+      :url="'Uploads/patient/10/qr/637880405174699096.png'"
+      :show-button="true"
+    />
     <a-table
       class="rounded-table"
       :columns="newTasksColumns"
       :data-source="newTasksData"
       :should-fetch="false"
-      style="white-space:pre"
+      style="white-space: pre"
     >
-    <template slot="stage" slot-scope="record, text">
-        <div style="float:left" class="ml-20"><img :src="getImageUrl(text.url)" width="26" height="26" class="img-responsive" style="border-radius:5px" /></div> <div class="ml-40" style="float:left;">{{record}}</div>
-    </template>
+      <template slot="stage" slot-scope="record, text">
+        <div style="float: left" class="ml-20">
+          <img
+            :src="getImageUrl(text.url)"
+            width="26"
+            height="26"
+            class="img-responsive"
+            style="border-radius: 5px"
+          />
+        </div>
+        <div class="ml-40" style="float: left">{{ record }}</div>
+      </template>
     </a-table>
   </div>
 </template>
@@ -26,7 +40,7 @@ import Header from '~/components/inventory/clients/header.vue'
 
 // import { newSampleData } from '../treatment/index.vue'
 export default {
-  components: {Header},
+  components: { Header },
   mixins: [routeHelpers, imagesHelper],
   setup() {},
   data() {
@@ -71,50 +85,51 @@ export default {
       ],
       newTasksData: [
         {
-          url:'web/icons/greenTick.png',
+          url: 'web/icons/greenTick.png',
           stage: `${this.$store.getters.getTranslation.Manuf_1_89}`,
           organization: 'Adaptimmune',
-          notes:'',
+          notes: '',
           signedBy: 'Mike Wheeler',
           date: '05/05/2022',
-          time:'14:00',
+          time: '14:00',
         },
         {
-          url:'web/icons/greenTick.png',
+          url: 'web/icons/greenTick.png',
           stage: `${this.$store.getters.getTranslation.Shipp_1_618}`,
           organization: 'Adaptimmune',
-          notes:'',
+          notes: '',
           signedBy: 'Mike Wheeler',
           date: '11/07/2022',
-          time:'14:00',
+          time: '14:00',
         },
         {
-          url:'web/icons/greenTick.png',
+          url: 'web/icons/greenTick.png',
           stage: `${this.$store.getters.getTranslation.Couri_1_234}`,
           organization: 'Cryoport',
-          notes:'Visible damage to packaging',
+          notes: 'Visible damage to packaging',
           signedBy: 'Dustin Henderson',
           date: '12/07/2022',
-          time:'14:00',
+          time: '14:00',
         },
         {
-          url:'web/icons/alarm.png',
+          url: 'web/icons/alarm.png',
           stage: `${this.$store.getters.getTranslation.Inbou_1_498}`,
           organization: 'Cellfuse',
-          notes:'Visible damage to packaging',
+          notes: 'Visible damage to packaging',
           signedBy: 'Mike Wheeler',
           date: '05/07/2022',
-          time:'14:00',
+          time: '14:00',
         },
         {
-          url:'web/icons/alarm.png',
+          url: 'web/icons/alarm.png',
           stage: `${this.$store.getters.getTranslation.Quara_1_619}`,
           organization: 'Cellfuse',
-          notes:'Package place in Quarantine Fridge 003, \n Shelf 1, Rack 9D-G',
+          notes:
+            'Package place in Quarantine Fridge 003, \n Shelf 1, Rack 9D-G',
           signedBy: 'Mike Wheeler',
           date: '05/07/2022',
-          time:'14:00',
-        },        
+          time: '14:00',
+        },
       ],
     }
   },
@@ -124,24 +139,24 @@ export default {
     },
   },
 
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.newTasksData[0].stage=newValues.Manuf_1_89
-        this.newTasksData[1].stage=newValues.Shipp_1_618
-        this.newTasksData[2].stage=newValues.Couri_1_234
-        this.newTasksData[3].stage=newValues.Inbou_1_498
-        this.newTasksData[4].stage=newValues.Quara_1_619
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.newTasksData[0].stage = newValues.Manuf_1_89
+        this.newTasksData[1].stage = newValues.Shipp_1_618
+        this.newTasksData[2].stage = newValues.Couri_1_234
+        this.newTasksData[3].stage = newValues.Inbou_1_498
+        this.newTasksData[4].stage = newValues.Quara_1_619
 
-        this.newTasksColumns[0].title=newValues.Stage_1_615
-        this.newTasksColumns[1].title=newValues.Organ_1_166
-        this.newTasksColumns[2].title=newValues.Notes_1_350
-        this.newTasksColumns[3].title=newValues.SigneBy_2_616
-        this.newTasksColumns[4].title=newValues.date_1_510
-        this.newTasksColumns[5].title=newValues.Time_1_617
+        this.newTasksColumns[0].title = newValues.Stage_1_615
+        this.newTasksColumns[1].title = newValues.Organ_1_166
+        this.newTasksColumns[2].title = newValues.Notes_1_350
+        this.newTasksColumns[3].title = newValues.SigneBy_2_616
+        this.newTasksColumns[4].title = newValues.date_1_510
+        this.newTasksColumns[5].title = newValues.Time_1_617
       }
-    }
-  },   
+    },
+  },
   methods: {
     handleModal(show) {
       this.showModal = show

@@ -4,25 +4,21 @@
     :loading="loading"
     :bordered="false"
     :title="translation.LabList_2_551"
-        class="container"
-
+    class="specific container page-search-input-container"
   >
-    <div slot="headerMenus">
-      <a-button
-        type="primary"
-        class="mrm-5 float-right"
-        @click="goto('lab/create')"
-        >{{ translation.AddLab_2_562 }}</a-button
-      >
+    <template slot="headerMenus">
       <a-input
-        class="float-right page-search-input"
         ref="userNameInput"
+        class="page-search-input"
         :placeholder="translation.SearcLab_2_561"
         @change="searchUser"
       >
         <a-icon slot="prefix" type="search" />
       </a-input>
-    </div>
+      <a-button type="primary" class="" @click="goto('lab/create')">{{
+        translation.AddLab_2_562
+      }}</a-button>
+    </template>
     <div slot="content">
       <!-- <template slot="content"> -->
       <!-- <h3 class="page-title float-left">

@@ -3,7 +3,10 @@
     <a-card class="grey-card" :bordered="false">
       <!-- left side tabs -->
       <a-col :md="10" class="mtminus-7">
-        <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
+        <a
+          href="javascript:;"
+          @click="handleSidebarKey(`/hospital/patients/create`, 3)"
+        >
           <div class="home-tab">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
@@ -18,7 +21,7 @@
             </h4>
           </div>
         </a>
-        <a href="javascript:;" @click="goto(`/hospital/patients`)">
+        <a href="javascript:;" @click="handleSidebarKey(`/hospital/patients`, 2)">
           <div class="home-tab">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
@@ -34,7 +37,7 @@
             </h4>
           </div>
         </a>
-        <a href="javascript:;" @click="goto(`/users`)">
+        <a href="javascript:;" @click="handleSidebarKey(`/users`, 8)">
           <div v-if="isHospital()" class="home-tab with-arrow">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
@@ -76,7 +79,8 @@ export default {
   },
   mounted() {},
   methods: {
-    gotoView(uri) {
+    gotoView(uri, key) {
+      this.$store.commit('setSelectedMenu', [`${key}`])
       this.goto(`/${uri}`)
     },
   },

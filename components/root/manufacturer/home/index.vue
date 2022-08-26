@@ -1,11 +1,14 @@
 <template>
   <div class="home-page manf-home">
     <a-card class="grey-card" :bordered="false">
-      <a-row class="test">
+      <a-row class="">
         <!-- left side tabs -->
         <a-col :md="10" v-if="isManufacturer()">
           <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/manufacturer/schedules`)">
+            <a
+              href="javascript:;"
+              @click="handleSidebarKey(`/manufacturer/schedules`, 3)"
+            >
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
                 width="120"
@@ -18,7 +21,10 @@
             </a>
           </div>
           <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/manufacturer/treatments`)">
+            <a
+              href="javascript:;"
+              @click="handleSidebarKey(`/manufacturer/treatments`, 4)"
+            >
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
                 width="120"
@@ -31,7 +37,7 @@
             </a>
           </div>
           <div class="home-tab with-arrow">
-            <a href="javascript:;" @click="goto(`/users`)">
+            <a href="javascript:;" @click="handleSidebarKey(`/users`, 11)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
                 width="120"
@@ -60,7 +66,12 @@
           <div class="home-tab">
             <a
               href="javascript:;"
-              @click="goto(`/manufacturer/treatments/pendingTreatment`)"
+              @click="
+                handleSidebarKey(
+                  `/manufacturer/treatments/pendingTreatment`,
+                  12
+                )
+              "
             >
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"

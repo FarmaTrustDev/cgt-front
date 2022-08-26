@@ -1,12 +1,18 @@
 <template>
-  <page-layout :create="false" :loading="loading" :bordered="false" :back="false">
+  <page-layout
+    :create="false"
+    :loading="loading"
+    :bordered="false"
+    :title="translation.AddUser_3_418"
+    class="container"
+  >
     <template slot="content">
-      <div class="grey-card mtminus-2 container" >
+      <div class="grey-card mtminus-2 container">
         <a-card :bordered="false" class="default-border-radius mtminus-2">
-          <h2>{{translation.AddUser_3_418}}</h2>
+          <!-- <h2>{{translation.AddUser_3_418}}</h2> -->
           <FormField />
-      </a-card>
-    </div>
+        </a-card>
+      </div>
     </template>
   </page-layout>
 </template>
@@ -27,7 +33,7 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
-    },    
+    },
   },
   methods: {
     // onSubmit(e) {
