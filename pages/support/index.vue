@@ -11,7 +11,7 @@
           </h3> -->
           <a-button
             type="primary"
-            class="mrt float-right"
+            class="float-right"
             @click="showModal(true)"
             >{{ translation.AddNew_3_182 }}
           </a-button>

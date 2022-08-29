@@ -67,10 +67,11 @@
 ///////////////Sidebar updated
 
 .logout-menu {
-  position: absolute ;
+  position: absolute !important;
+  bottom: 10px;
+
   // z-index: 999999999;
   // top: 50px;
-  // bottom: 20px;
   // left: 30px;
   .menu-container {
     background-color: #3869d1;

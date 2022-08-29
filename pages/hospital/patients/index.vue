@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top: 1.5em">
-    <div class="page-header clearfix">
+    <div class="page-header clearfix mt-15">
       <!-- <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3> -->
       <div class="page-title pl-5 float-left" style="width: 50%">
         {{translation.PatieList_2_627}}
