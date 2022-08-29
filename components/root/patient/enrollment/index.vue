@@ -20,7 +20,7 @@
           <div
             slot="tab"
             class="tab-title main"
-            :class="isCompleted(isCreated)"
+            :class="isCompleted(treatment.consent)"
           >
             {{ translation['Conse_1_677'] }}
           </div>
@@ -33,7 +33,7 @@
         <a-tab-pane key="Screening" :disabled="!haveTreatment">
           <div
             slot="tab"
-            :class="isCompleted(haveTreatment)"
+            :class="isCompleted(isScreeningDone | treatment.screeningStatus)"
             class="tab-title main"
           >
             {{ translation['Scree_1_679'] }}
@@ -44,11 +44,11 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Scheduling" :disabled="!isScreeningDone">
+        <a-tab-pane key="Scheduling" :disabled="!isScreeningCompleted | treatment.screeningStatus===true">
           <div
             slot="tab"
             class="tab-title main"
-            :class="isCompleted(treatment.screeningStatus)"
+            :class="isCompleted(treatment.isSchedule)"
           >
             {{ translation['Sched_1_681'] }}
           </div>
@@ -92,6 +92,7 @@ export default {
       haveTreatment: false,
       loading: true,
       isScreeningDone: false,
+      isScreeningCompleted : false
     }
   },
   computed: {
@@ -137,6 +138,10 @@ export default {
         this.loading = false
       }
     },
+    consentCompleted()
+    {
+      this.isConsentDone = true
+    },
     fetch(treatmentId) {
       this.loading = true
       TreatmentServices.detail(treatmentId)
@@ -164,7 +169,7 @@ export default {
       this.treatment = treatment
       if(treatment.phaseId !== 1)
       {
-        this.isScreeningDone = true
+        this.isScreeningCompleted = true
         this.haveTreatment = true
       }
     },
@@ -175,6 +180,12 @@ export default {
       this.activeTab = key
     },
     getNextTab(key) {
+      debugger
+      if(key === 'Scheduling')
+      {
+        this.isScreeningDone = true
+        this.tabChange(key)
+      }
       this.tabChange(key)
     },
     // isCompleted(flag) {

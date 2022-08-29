@@ -384,7 +384,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Count_1_657 + '*:'"
+          :label="translation.Count_1_657 + ':*'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -407,7 +407,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          :label="translation.Count_1_49"
+          :label="translation.Count_1_49+ ':*'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >

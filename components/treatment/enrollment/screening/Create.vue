@@ -90,6 +90,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
+          values.screeningStatus = true
           this.create(values)
         } else {
           this.confirm('Complete the patient screenings first!')
