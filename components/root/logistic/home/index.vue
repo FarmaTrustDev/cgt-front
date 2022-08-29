@@ -5,22 +5,33 @@
         <!-- left side tabs -->
         <a-col :span="9">
           <div class="home-tab">
-            <a href="javascript:;" @click="goto(`/Logistic`)">
+            <a href="javascript:;" @click="handleSidebarKey(`/logistic`, 2)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg" width="120" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
+                width="120"
+                height="100"
               />
               <h4 class="heading-home">
-                {{translation.Check_1_454}} <strong class="strong">{{translation['new_1_276']}} {{translation['Patie_1_184']}} </strong>
+                {{ translation.Check_1_454 }}
+                <strong class="strong"
+                  >{{ translation['new_1_276'] }}
+                  {{ translation['Patie_1_184'] }}
+                </strong>
               </h4>
             </a>
           </div>
           <div class="home-tab with-arrow">
-            <a href="javascript:;" @click="goto(`/users`)">
+            <a href="javascript:;" @click="handleSidebarKey(`/users`, 4)">
               <img
-                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg" width="120" height="100"
+                src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
+                width="120"
+                height="100"
               />
               <h4 class="heading-home">
-                {{translation.Manag_1_455}} <strong class="strong">{{translation.ManagUsers_2_17}} </strong>
+                {{ translation.Manag_1_455 }}
+                <strong class="strong"
+                  >{{ translation.ManagUsers_2_17 }}
+                </strong>
               </h4>
             </a>
           </div>
@@ -48,7 +59,7 @@ export default {
   data() {
     return {}
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },

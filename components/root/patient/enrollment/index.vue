@@ -30,13 +30,25 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Screening" :disabled="!haveTreatment">
+        <a-tab-pane
+          key="Screening"
+          :disabled="
+            !isEmpty(treatment) &&
+            treatment.phaseId > TREATMENT_PHASES.CONSENT.id
+          "
+        >
           <div
             slot="tab"
-            :class="isCompleted(haveTreatment)"
+            :class="
+              isCompleted(
+                !isEmpty(treatment) &&
+                  treatment.phaseId >= TREATMENT_PHASES.SCREENING.id
+              )
+            "
             class="tab-title main"
           >
             {{ translation['Scree_1_679'] }}
+            <pre></pre>
           </div>
           <screening
             :treatment="treatment"
@@ -74,6 +86,7 @@ import PatientServices from '~/services/API/PatientServices'
 import notifications from '~/mixins/notifications'
 import tabsHelpers from '~/mixins/tabs-helpers'
 import nullHelper from '~/mixins/null-helpers'
+import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 export default {
   components: {
     enrollment,
@@ -92,6 +105,7 @@ export default {
       haveTreatment: false,
       loading: true,
       isScreeningDone: false,
+      TREATMENT_PHASES,
     }
   },
   computed: {
@@ -162,10 +176,8 @@ export default {
     },
     updateTreatment(treatment) {
       this.treatment = treatment
-      if(treatment.phaseId !== 1)
-      {
+      if (treatment.phaseId !== 1) {
         this.isScreeningDone = true
-        this.haveTreatment = true
       }
     },
     getTreatmentGlobalId(treatment) {

@@ -141,13 +141,13 @@ export default {
                 this.sendData(res.data.globalId)
                 this.goto(
                   `/hospital/patients/${response.data.globalId}?view=Consent`,
-                  { treatmentId: res.data.globalId }
+                  { treatment_id: res.data.globalId }
                 )
               })
               .catch(this.error)
               .finally(() => (this.loading = false))
           }
-          this.success(response.message)
+          this.success('Patient enrolled successfully')
 
           this.$emit('getNextTab', 'Consent')
         })
