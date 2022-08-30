@@ -64,7 +64,7 @@
   textarea,
   .ant-select-selection--single {
     border-radius: 18px;
-    background-color: #f9f9f9;
+    background-color: #f3f6f9;
     // padding-top: 15px;
     // padding-left: 25px;
     border: 0;
@@ -110,10 +110,13 @@
   }
 }
 input#login_username:active {
-  border-color: #40a9ff !important;
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 }
 input#login_username:focus {
-  border-color: #40a9ff !important;
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+input#login_password:focus {
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%) ;
 }
 .ant-form-item-label {
   label {
