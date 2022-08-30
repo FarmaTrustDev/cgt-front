@@ -20,7 +20,7 @@
           <div
             slot="tab"
             class="tab-title main"
-            :class="isCompleted(treatment.consent)"
+            :class="isCompleted(isCreated)"
           >
             {{ translation['Conse_1_677'] }}
           </div>
@@ -30,13 +30,25 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Screening" :disabled="!haveTreatment">
+        <a-tab-pane
+          key="Screening"
+          :disabled="
+            !isEmpty(treatment) &&
+            treatment.phaseId > TREATMENT_PHASES.CONSENT.id
+          "
+        >
           <div
             slot="tab"
-            :class="isCompleted(isScreeningDone || treatment.screeningStatus)"
+            :class="
+              isCompleted(
+                !isEmpty(treatment) &&
+                  treatment.phaseId >= TREATMENT_PHASES.SCREENING.id
+              )
+            "
             class="tab-title main"
           >
             {{ translation['Scree_1_679'] }}
+            <pre></pre>
           </div>
           <screening
             :treatment="treatment"
@@ -44,11 +56,11 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Scheduling" :disabled="isScreeningCompleted || treatment.screeningStatus">
+        <a-tab-pane key="Scheduling" :disabled="!isScreeningDone">
           <div
             slot="tab"
             class="tab-title main"
-            :class="isCompleted(treatment.isSchedule)"
+            :class="isCompleted(treatment.screeningStatus)"
           >
             {{ translation['Sched_1_681'] }}
           </div>
@@ -74,6 +86,7 @@ import PatientServices from '~/services/API/PatientServices'
 import notifications from '~/mixins/notifications'
 import tabsHelpers from '~/mixins/tabs-helpers'
 import nullHelper from '~/mixins/null-helpers'
+import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 export default {
   components: {
     enrollment,
@@ -92,7 +105,7 @@ export default {
       haveTreatment: false,
       loading: true,
       isScreeningDone: false,
-      isScreeningCompleted : false
+      TREATMENT_PHASES,
     }
   },
   computed: {
@@ -138,10 +151,6 @@ export default {
         this.loading = false
       }
     },
-    consentCompleted()
-    {
-      this.isConsentDone = true
-    },
     fetch(treatmentId) {
       this.loading = true
       TreatmentServices.detail(treatmentId)
@@ -167,10 +176,8 @@ export default {
     },
     updateTreatment(treatment) {
       this.treatment = treatment
-      if(treatment.phaseId !== 1)
-      {
-        this.isScreeningCompleted = true
-        this.haveTreatment = true
+      if (treatment.phaseId !== 1) {
+        this.isScreeningDone = true
       }
     },
     getTreatmentGlobalId(treatment) {
@@ -180,10 +187,6 @@ export default {
       this.activeTab = key
     },
     getNextTab(key) {
-      if(key === 'Scheduling')
-      {
-        this.isScreeningDone = true
-      }
       this.tabChange(key)
     },
     // isCompleted(flag) {
