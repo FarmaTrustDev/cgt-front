@@ -31,8 +31,7 @@ export default {
     return {
       calendarOptions: {
         headerToolbar: {
-          left: 'prevYear,title,nextYear',
-          right: 'dayGridMonth'
+         center: 'dayGridMonth',
         },
         plugins: [interactionPlugin, timeGridPlugin, dayGridPlugin],
         initialView: 'dayGridMonth',
