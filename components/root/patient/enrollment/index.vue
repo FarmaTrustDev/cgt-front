@@ -33,7 +33,7 @@
         <a-tab-pane key="Screening" :disabled="!haveTreatment">
           <div
             slot="tab"
-            :class="isCompleted(isScreeningDone | treatment.screeningStatus)"
+            :class="isCompleted(isScreeningDone || treatment.screeningStatus)"
             class="tab-title main"
           >
             {{ translation['Scree_1_679'] }}
@@ -44,7 +44,7 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Scheduling" :disabled="!isScreeningCompleted | treatment.screeningStatus===true">
+        <a-tab-pane key="Scheduling" :disabled="isScreeningCompleted || treatment.screeningStatus">
           <div
             slot="tab"
             class="tab-title main"
@@ -180,11 +180,9 @@ export default {
       this.activeTab = key
     },
     getNextTab(key) {
-      debugger
       if(key === 'Scheduling')
       {
         this.isScreeningDone = true
-        this.tabChange(key)
       }
       this.tabChange(key)
     },

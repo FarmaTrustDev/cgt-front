@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     isScreeningCompleted() {
-      debugger
       this.treatmentParamId = this.$route.query.treatment_id
       if (this.treatment.screeningStatus) {
         this.isCreated = true
@@ -53,11 +52,9 @@ export default {
       }
     },
     fetch(treatmentParamId) {
-      debugger
       TreatmentServices.detail(treatmentParamId)
         .then((response) => {
           this.getTreatmentByParamId = response.data
-          console.log(this.getTreatmentByParamId)
         })
         .catch(this.error)
         .finally(() => {
@@ -76,7 +73,6 @@ export default {
       this.$emit('getNextTab', data)
     },
     getTreatment(data) {
-      debugger
       this.$emit('getTreatment', data)
     },
   },
