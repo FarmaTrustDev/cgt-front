@@ -1,5 +1,5 @@
 <template>
-  <div>    
+  <div>
     <Create
       v-if="!isCreated"
       :treatment="treatment"
@@ -13,6 +13,7 @@
 import Create from '~/components/treatment/enrollment/screening/Create'
 import CollectedList from '~/components/treatment/enrollment/screening/CollectedList'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
+// import TreatmentServices from '~/services/API/TreatmentServices'
 export default {
   components: { Create, CollectedList },
   props: {
@@ -22,13 +23,21 @@ export default {
     },
   },
   data() {
-    return { categories: null, isCreated: null }
+    return {
+      categories: null,
+      isCreated: null,
+      getTreatmentByParamId: {},
+      treatmentParamId: {},
+      loading: false,
+    }
   },
   mounted() {
     this.isScreeningCompleted()
   },
   methods: {
     isScreeningCompleted() {
+      this.treatmentParamId = this.$route.query.treatment_id
+
       if (this.treatment.screeningStatus) {
         this.isCreated = true
         this.fetchTreatmentScreening(this.treatment)
@@ -36,10 +45,10 @@ export default {
     },
     fetchTreatmentScreening(treatment) {
       ScreeningCategoryServices.getByTreatmentId(treatment.id)
-      .then((response) => {
+        .then((response) => {
           this.categories = response.data
         })
-      .catch(this.error)
+        .catch(this.error)
         .finally(() => (this.loading = false))
     },
     getNextTab(data) {

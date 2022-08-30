@@ -9,13 +9,15 @@ getUser(users) {},
     :create="false"
   >
     <template slot="headerMenus">
-      <a-button type="primary" @click="showZoomModal(true)"
-        >{{translation.Newzoom_3_119}}</a-button
-      >
-      <a-button type="primary" @click="showModal(true)">{{translation['Users_1_504']}}</a-button>
-      <a-button type="primary" @click="showGroupModal(true)"
-        >{{translation.AddGroup_2_456}}</a-button
-      >
+      <a-button type="primary" @click="showZoomModal(true)">{{
+        translation.Newzoom_3_119
+      }}</a-button>
+      <a-button type="primary" @click="showModal(true)">{{
+        translation['Users_1_504']
+      }}</a-button>
+      <a-button type="primary" @click="showGroupModal(true)">{{
+        translation.AddGroup_2_456
+      }}</a-button>
     </template>
     <template slot="content">
       <chat
@@ -43,7 +45,7 @@ export default {
       showGroupModal: () => {},
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },

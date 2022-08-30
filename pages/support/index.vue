@@ -1,30 +1,24 @@
 <template>
-  <page-layout :create="false" :loading="loading" :title="translation['suppoissue_2_176']" class="container">
-    <div class="specific-page  support_page" slot="content">
-      <a-row class="mt-25 mb-10">
-        <div class="page-header">
-          <!-- <h3
-            class="page-title float-left ant-card-head"
-            style="border-bottom: 0"
-          >
-            <b>{{ translation['suppoissue_2_176'] }}</b>
-          </h3> -->
-          <a-button
-            type="primary"
-            class="float-right"
-            @click="showModal(true)"
-            >{{ translation.AddNew_3_182 }}
-          </a-button>
-          <a-input
-            ref="userNameInput"
-            :placeholder="translation.searc_1_488"
-            class="float-right page-search-input"
-            @change="searchSupport"
-          >
-            <a-icon slot="prefix" type="search" />
-          </a-input>
-        </div>
-      </a-row>
+  <page-layout
+    :create="false"
+    :loading="loading"
+    :title="translation['suppoissue_2_176']"
+    class="specific container page-search-input-container"
+  >
+    <template slot="headerMenus">
+      <a-input
+        ref="userNameInput"
+        :placeholder="translation.searc_1_488"
+        class="page-search-input"
+        @change="searchSupport"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
+      <a-button type="primary" @click="showModal(true)"
+        >{{ translation.AddNew_3_182 }}
+      </a-button>
+    </template>
+    <div slot="content" class="specific-page container support_page">
       <a-tabs type="card" @change="callback">
         <a-tab-pane key="1" :tab="translation.All_1_210">
           <a-table

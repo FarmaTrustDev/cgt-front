@@ -403,7 +403,7 @@
       @ok="handleDeleteModal(false, '', '')"
       @cancel="deleteModal(false)"
     >
-      <p>{{translation.Areyou_4_484}}</p>
+      <p>Are you sure you want to delete this treatment?</p>
     </a-modal>
     <a-modal
       :visible="showPauseDeleteModal"
@@ -696,7 +696,6 @@ export default {
     },
     
     cancelTreatment(patient, treatment) {
-      debugger
       this.cancelModalTitle = treatment.isCancel
         ? 'Continue Treatment'
         : 'Cancel Treatment'
@@ -734,7 +733,7 @@ export default {
     },
     deleteTreatment(e, patient, treatment) {
       TreatmentServices.destroy(treatment.id).then((response) => {
-        this.success(response.message)
+        this.success('Treatment has been deleted.')
         this.fetch()
       })
     },

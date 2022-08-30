@@ -192,7 +192,7 @@
       :width="1200"
       :footer="null"
       :visible="showQuarantine"
-      title="Select quarantine storage:"
+      :title="translation.Selecquara_3_627+':'"
       @cancel="handleQuarantineModal(false)"
     >
       <!-- <showQuarantine /> -->

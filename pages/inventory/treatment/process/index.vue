@@ -7,7 +7,7 @@
   >
     <template slot="content">
       <div class="grey-card">
-        <div class="patient-details-page" style="margin:2%;margin-top: 0;">
+        <div class="patient-details-page" style="margin: 2%; margin-top: 0">
           <a-row :gutter="18">
             <a-col :span="6">
               <a-card :bordered="false" class="qr-section default-card">
@@ -90,153 +90,161 @@
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs tabs_body"
-          style="width:96%; margin-left:2%"
+          style="width: 96%; margin-left: 2%"
         >
           <span>
             <!-- //Steps -->
-            <div class="treatment-steps" style="width:100%">
+            <div class="treatment-steps" style="width: 100%">
               <span class="step-col-large">
-              <a-steps size="small" :current="2">
-                <a-step
-                  v-for="phase in phases"
-                  :key="phase.id"
-                  :title="phase.name"
-                  :class="(phase.id==1) ? 'ant-steps-item-finish-large' : (phase.id==2) ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'"
-                  :status="(phase.id==1) ? 'finish' : (phase.id==2) ? 'wait' : ''"
-                  @click="reDirect(phase.url_slug,phase.alias)"
-                />
-              </a-steps>
+                <a-steps size="small" :current="2">
+                  <a-step
+                    v-for="phase in phases"
+                    :key="phase.id"
+                    :title="phase.name"
+                    :class="
+                      phase.id == 1
+                        ? 'ant-steps-item-finish-large'
+                        : phase.id == 2
+                        ? 'ant-steps-item-active-blue-large'
+                        : 'ant-steps-horizontal-large'
+                    "
+                    :status="
+                      phase.id == 1 ? 'finish' : phase.id == 2 ? 'wait' : ''
+                    "
+                    @click="reDirect(phase.url_slug, phase.alias)"
+                  />
+                </a-steps>
               </span>
             </div>
             <!-- //Steps -->
-          </span> 
+          </span>
         </a-card>
 
         <a-card
-          v-if="activeTab=='INBOUND_ACCEPTANCE_DETAILS'"
+          v-if="activeTab == 'INBOUND_ACCEPTANCE_DETAILS'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
-          style="width:96%; margin-left:2%"
+          style="width: 96%; margin-left: 2%"
         >
-
-        <div class="h-tabs large-tabs" style="width:100%">
-              <a-row>
-                <a-col :span="11">
-                  <a-card :bordered="false" class="default-card">
-                    <article class="article">
-                      <h4 class="heading pl-0">
-                        {{ translation.ShippDetai_2_314 }}
-                      </h4>
-                    </article>
-                    <div>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.DispaDate_2_316 }}:</span
-                          >
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted"> 20/06/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.DispaBy_2_516 }}:</span
-                          >
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted"> 20/06/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation.CarriStatu_2_320 }}</span
-                          >
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted"> In-Process</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation.EstimArriv_3_322
-                          }}</span>
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted"> 21/06/2022</span>
-                        </a-col>
-                      </a-row>
-                    </div>
-                  </a-card>
-                </a-col>
-                <a-col :span="1"></a-col>
-                <a-col :span="12">
-                  <a-card :bordered="false" class="default-card">
-                    <article class="article">
-                      <h4 class="heading pl-0">
-                        {{ translation.SamplRecei_2_515 }}
-                      </h4>
-                    </article>
-                    <div>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation.IsRecei_2_328
-                          }}</span>
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted"> Done</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation['Receiby:_2_330'] }}</span
-                          >
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted">Gary Jose</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">
-                            {{ translation['ReceiDate:_2_332'] }}</span
-                          >
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted"> 21/06/2022</span>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="20" dir="ltr">
-                        <a-col :span="10" class="mt-15">
-                          <span class="text-muted">{{
-                            translation['ReceiNote:_2_334']
-                          }}</span>
-                        </a-col>
-                        <a-col :span="6" class="mt-15 float-right">
-                          <span class="text-muted"> Received</span>
-                        </a-col>
-                      </a-row>
-                    </div>
-                  </a-card>
-                </a-col>
-              </a-row>
-        </div>
+          <div class="h-tabs large-tabs" style="width: 100%">
+            <a-row>
+              <a-col :span="11">
+                <a-card :bordered="false" class="default-card">
+                  <article class="article">
+                    <h4 class="heading pl-0">
+                      {{ translation.ShippDetai_2_314 }}
+                    </h4>
+                  </article>
+                  <div>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">
+                          {{ translation.DispaDate_2_316 }}:</span
+                        >
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted"> 20/06/2022</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">
+                          {{ translation.DispaBy_2_516 }}:</span
+                        >
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted"> Gary Jose</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">
+                          {{ translation.CarriStatu_2_320 }}</span
+                        >
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted"> In-Process</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">{{
+                          translation.EstimArriv_3_322
+                        }}</span>
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted"> 21/06/2022</span>
+                      </a-col>
+                    </a-row>
+                  </div>
+                </a-card>
+              </a-col>
+              <a-col :span="1"></a-col>
+              <a-col :span="12">
+                <a-card :bordered="false" class="default-card">
+                  <article class="article">
+                    <h4 class="heading pl-0">
+                      {{ translation.SamplRecei_2_515 }}
+                    </h4>
+                  </article>
+                  <div>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">{{
+                          translation.IsRecei_2_328
+                        }}</span>
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted"> Done</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">
+                          {{ translation['Receiby:_2_330'] }}</span
+                        >
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted">Fred Smith</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">
+                          {{ translation['ReceiDate:_2_332'] }}</span
+                        >
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted"> 21/06/2022</span>
+                      </a-col>
+                    </a-row>
+                    <a-row :gutter="20" dir="ltr">
+                      <a-col :span="10" class="mt-15">
+                        <span class="text-muted">{{
+                          translation['ReceiNote:_2_334']
+                        }}</span>
+                      </a-col>
+                      <a-col :span="6" class="mt-15 float-right">
+                        <span class="text-muted"> Received</span>
+                      </a-col>
+                    </a-row>
+                  </div>
+                </a-card>
+              </a-col>
+            </a-row>
+          </div>
         </a-card>
         <a-card
-          v-if="activeTab=='PROCESS_SAMPLE'"
+          v-if="activeTab == 'PROCESS_SAMPLE'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs test"
-          style="width:96%; margin-left:2%"
+          style="width: 96%; margin-left: 2%"
         >
-
-        <div class="h-tabs large-tabs" style="width:100%;">              
-              <div>
-              <strong style="font-size:1.25rem">{{ translation.QualiAssur_3_565 }}</strong>
+          <div class="h-tabs large-tabs" style="width: 100%">
+            <div>
+              <strong style="font-size: 1.25rem">{{
+                translation.QualiAssur_3_565
+              }}</strong>
               <Process
                 :collections="dummyCollection"
                 :bag-id="'BUID-123'"
@@ -244,7 +252,7 @@
                 @fetchBags="() => {}"
                 @updateId="updateId"
               />
-              </div>
+            </div>
           </div>
         </a-card>
       </div>
@@ -255,9 +263,7 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
-import {
-  QUARANTINE_PROCESS_PHASES
-} from '~/services/Constant/Phases'
+import { QUARANTINE_PROCESS_PHASES } from '~/services/Constant/Phases'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
 // import shipment from '~/components/inventory/treatment/shipment'
 import tabsHelpers from '~/mixins/tabs-helpers'
@@ -269,13 +275,13 @@ export default {
     Process,
     // shipment,
   },
-  mixins: [tabsHelpers,routeHelpers],
+  mixins: [tabsHelpers, routeHelpers],
   middleware: 'auth',
   data() {
     return {
       activeTab: 'inbound',
       type: 'inbound',
-      phases:QUARANTINE_PROCESS_PHASES,
+      phases: QUARANTINE_PROCESS_PHASES,
       dummyCollection: [
         {
           id: 1,
@@ -292,8 +298,9 @@ export default {
           isCollected: false,
           name: `${this.$store.getters.getTranslation.Confithere_7_594}`,
         },
-        { 
-          id: 4, isCollected: false, 
+        {
+          id: 4,
+          isCollected: false,
           name: `${this.$store.getters.getTranslation.Confipacka_8_595}`,
         },
         {
@@ -357,43 +364,43 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.phases[0].name=newValues.InbouAccep_3_834
-        this.phases[1].name=newValues.ProceSampl_2_499
-        this.phases[2].name=newValues.StoreSampl_2_579
-        
-        this.dummyCollection[0].name=newValues.Hasthe_8_592
-        this.dummyCollection[1].name=newValues.Doesthe_8_593
-        this.dummyCollection[2].name=newValues.Confithere_7_594
-        this.dummyCollection[3].name=newValues.Confipacka_8_595
-        this.dummyCollection[4].name=newValues.Confithe_13_596
-        this.dummyCollection[5].name=newValues.Confino_5_597
-        this.dummyCollection[6].name=newValues.Confithere_6_598
-        this.dummyCollection[7].name=newValues.Confithat_12_599
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.phases[0].name = newValues.InbouAccep_3_834
+        this.phases[1].name = newValues.ProceSampl_2_499
+        this.phases[2].name = newValues.StoreSampl_2_579
 
+        this.dummyCollection[0].name = newValues.Hasthe_8_592
+        this.dummyCollection[1].name = newValues.Doesthe_8_593
+        this.dummyCollection[2].name = newValues.Confithere_7_594
+        this.dummyCollection[3].name = newValues.Confipacka_8_595
+        this.dummyCollection[4].name = newValues.Confithe_13_596
+        this.dummyCollection[5].name = newValues.Confino_5_597
+        this.dummyCollection[6].name = newValues.Confithere_6_598
+        this.dummyCollection[7].name = newValues.Confithat_12_599
 
-        this.dummyOutBoundCollection[0].name=newValues.Hassampl_6_583
-        this.dummyOutBoundCollection[1].name=newValues.Doessampl_6_584
-        this.dummyOutBoundCollection[2].name=newValues.IsSampl_6_529
-        this.dummyOutBoundCollection[3].name=newValues.Hassampl_6_585
-        this.dummyOutBoundCollection[4].name=newValues.Isdocum_9_586
+        this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583
+        this.dummyOutBoundCollection[1].name = newValues.Doessampl_6_584
+        this.dummyOutBoundCollection[2].name = newValues.IsSampl_6_529
+        this.dummyOutBoundCollection[3].name = newValues.Hassampl_6_585
+        this.dummyOutBoundCollection[4].name = newValues.Isdocum_9_586
       }
-    }
-  },  
+    },
+  },
   mounted() {
     this.handleActiveTab()
     this.getTranslationData()
+    this.$store.commit('setSelectedMenu', [`2`])
   },
   methods: {
-    getTranslationData(){
-      this.phases[0].name=this.translation.InbouAccep_3_834
-      this.phases[1].name=this.translation.ProceSampl_2_499
-      this.phases[2].name=this.translation.StoreSampl_2_579
-    },    
-    handleActiveTab(){
-      this.activeTab=this.$route.query.view
+    getTranslationData() {
+      this.phases[0].name = this.translation.InbouAccep_3_834
+      this.phases[1].name = this.translation.ProceSampl_2_499
+      this.phases[2].name = this.translation.StoreSampl_2_579
+    },
+    handleActiveTab() {
+      this.activeTab = this.$route.query.view
     },
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {
@@ -405,12 +412,12 @@ export default {
 
       this.dummyCollection = dumCollection
     },
-    setActiveTav(tab){
-      this.activeTab=tab
+    setActiveTav(tab) {
+      this.activeTab = tab
     },
-    reDirect(url,alias){
-      if(!isEmpty(url)){
-        this.activeTab=alias
+    reDirect(url, alias) {
+      if (!isEmpty(url)) {
+        this.activeTab = alias
         this.goto(url)
       }
     },
