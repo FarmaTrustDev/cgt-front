@@ -2,7 +2,7 @@
   <div class="home-page manf-board">
     <a-card class="grey-card" :bordered="false">
       <!-- left side tabs -->
-      <a-col :md="10" class="mtminus-7">
+      <a-col :md="10" class="mtminus-6">
         <a
           href="javascript:;"
           @click="handleSidebarKey(`/hospital/patients/create`, 3)"
@@ -54,7 +54,7 @@
       <!-- #end left side tabs -->
       <a-col :span="4"></a-col>
 
-      <a-col :md="10" class="mtminus-6">
+      <a-col :md="10" class="mtminus-5">
         <treatment-stats />
       </a-col>
     </a-card>

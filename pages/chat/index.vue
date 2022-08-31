@@ -4,6 +4,7 @@ getUser(users) {},
     :loading="loading"
     :title="translation.Chat_1_31"
     :bordered="borderCard"
+    :back="false"
     class="specific container"
     :create="false"
   >

@@ -13,7 +13,8 @@
 import Create from '~/components/treatment/enrollment/screening/Create'
 import CollectedList from '~/components/treatment/enrollment/screening/CollectedList'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
-// import TreatmentServices from '~/services/API/TreatmentServices'
+import TreatmentServices from '~/services/API/TreatmentServices'
+import { isEmpty } from '~/services/Utilities'
 export default {
   components: { Create, CollectedList },
   props: {
@@ -26,7 +27,7 @@ export default {
     return {
       categories: null,
       isCreated: null,
-      getTreatmentByParamId: {},
+      getTreatmentByParamId: [],
       treatmentParamId: {},
       loading: false,
     }
@@ -37,11 +38,15 @@ export default {
   methods: {
     isScreeningCompleted() {
       this.treatmentParamId = this.$route.query.treatment_id
-
-      if (this.treatment.screeningStatus) {
+      if(isEmpty(this.treatment))
+      {
+        this.fetch(this.treatmentParamId)
+      }
+      else if (this.treatment.screeningStatus) {
         this.isCreated = true
         this.fetchTreatmentScreening(this.treatment)
       }
+
     },
     fetchTreatmentScreening(treatment) {
       ScreeningCategoryServices.getByTreatmentId(treatment.id)
@@ -57,6 +62,20 @@ export default {
     getTreatment(data) {
       this.$emit('getTreatment', data)
     },
-  },
+      fetch(treatmentId) {
+      TreatmentServices.detail(treatmentId)
+        .then((response) => {
+          this.getTreatmentByParamId = response.data
+          if(this.getTreatmentByParamId.screeningStatus === true)
+          {
+            this.isCreated = true
+            this.fetchTreatmentScreening(this.getTreatmentByParamId)
+          }
+        })
+        .catch(this.error)
+        .finally(() => {
+        })
+    }
+  },  
 }
 </script>

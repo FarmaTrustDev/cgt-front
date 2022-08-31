@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <a-spin :spinning="loading"> -->
+
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <FormFields :is-created="isCreated" :patient="patient" />
       <a-form-item class="pr-2 mt-15">
@@ -28,7 +29,7 @@
             height="40%"
           />
         </p>
-        <h3>{{translation.Thereare_10_522}}</h3>
+        <h3>{{ translation.Thereare_10_522 }}</h3>
         <!-- <p>There are some errors in your submission. Please correct them.</p> -->
         <footer>
           <a-button

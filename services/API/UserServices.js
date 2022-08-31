@@ -109,10 +109,11 @@ function resetPassword(id, data) {
   })
 }
 
-function resetPasswordEmail(id){
+function resetPasswordEmail(data){
   return request({
-    url: `${baseApi}/reset-password-email/${id}`,
-    method: 'GET',
+    url: `${baseApi}/reset-password-email`,
+    data,
+    method: 'POST',
   })
 }
 

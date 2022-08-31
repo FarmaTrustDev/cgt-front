@@ -12,7 +12,7 @@
       </h3> -->
         <a-button
           type="primary"
-          class="mr-15 float-right mt-5"
+          class="mr-15 float-right"
           @click="goto('users/create')"
           >{{ translation.adduser_2_464 }}</a-button
         >

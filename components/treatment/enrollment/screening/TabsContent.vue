@@ -52,7 +52,7 @@
                 ],
               },
             ]"
-            placeholder="Please input your notes"
+            placeholder="Note"
             @blur="(e) => handleInput(row.id, e)"
           />
           <a-input
