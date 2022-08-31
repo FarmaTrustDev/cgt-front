@@ -1,6 +1,6 @@
 <template>
   <div class="label-page container p-0">
-    <a-row class="p-5 mb-1 specific-card">
+    <a-row class="p-5 mb-1 mt-25">
       <div class="page-header">
         <h3 class="page-title float-left mb-1">{{translation.Label_1_27}}</h3>
 

@@ -1,7 +1,6 @@
 <template>
   <page-layout
     :create="false"
-    :loading="loading"
     :bordered="false"
     class="container"
   >
@@ -80,7 +79,7 @@
         </template>
         <template slot="confirm" slot-scope="confirm, index">
           <a-button
-            :class="confirm | checkAll ? 'blue' : 'gray'"
+            :class="confirm || checkAll ? 'blue' : 'gray'"
             size="small"
             @click="handleClick(confirm, index)"
             ><span>{{ translation.ConfiPlace_2_643 }}</span></a-button

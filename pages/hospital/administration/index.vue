@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3 class="page-title">{{ translation._1_438 }}</h3>
+    <h3 class="page-title mt-15">{{ translation._1_438 }}</h3>
     <div>
       <a-row :gutter="15" class="grey-card m-auto admin-page">
         <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
@@ -54,13 +54,16 @@ export default {
 }
 </script>
 <style scoped>
+.grey-card {
+  padding-top: 2% !important;
+}
 .admin-tab {
-  max-width: 75%;
+  max-width: 85%;
   text-align: left;
   background: #fff;
   padding: 25px;
   border-radius: 52px;
-  margin:auto;
+  margin: auto;
 }
 .admin-tab > h4 {
   font-size: 1.125rem;
