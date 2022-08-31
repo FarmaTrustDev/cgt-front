@@ -13,16 +13,12 @@
           ],
         },
       ]"
-      :placeholder="translation.seleclogis_3_516"
       class="default-select w-100"
-      size="large"
+      :placeholder="placeholder"
       :disabled="false"
+      size="large"
       @change="onchange"
     >
-      <a-select-option value="" disabled selected
-        >{{translation.seleclogis_3_516}}</a-select-option
-      >
-
       <a-select-option
         v-for="type in treatmentTypes"
         :key="type.id"
@@ -52,6 +48,7 @@ export default {
       treatmentTypes: {},
       typeLoading: false,
       logisticsData: {},
+      placeholder:"Select logistic provider"
     }
   },
   computed: {
@@ -85,6 +82,7 @@ export default {
       })
     }, */
     onchange(value, e) {
+      this.placeholder=""
       this.$emit('onChange', value)
     },
   },
