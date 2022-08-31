@@ -7,7 +7,7 @@
       v-if="isManufacturer() || isScientist() || isReceptionist()"
     />
     <hospitalHome v-if="isHospital() || isDoctor() || isNurse()" />
-    <logisticHome v-if="isLogistic()" />
+    <logisticHome v-if="isLogistic()" class="logistic_board"/>
     <smartLabHome v-if="isSmartLab()" />
   </div>
 </template>
