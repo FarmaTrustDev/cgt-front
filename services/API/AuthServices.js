@@ -60,10 +60,11 @@ function getActivationAuth(id) {
   })
 }
 
-function getKeyWithEmail(id) {
+function getKeyWithEmail(data) {
   return request({
-    url: `${baseApi}/get-key-with-email/${id}`,
-    method: 'GET',
+    url: `${baseApi}/get-key-with-email`,
+    data,
+    method: 'POST',
   })
 }
 const AuthService = {
