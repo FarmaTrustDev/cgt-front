@@ -97,8 +97,9 @@ export default {
     },
     validateAllList(data, screening) {
       //  check if data is not empty
-      if (!isEmpty(data)) {
+      if (!isEmpty(data) && data) {
         //  remove the empty undefinde from data
+
         const filterData = data.filter((n) => n)
 
         //  check if the screen lenth all validation equals
