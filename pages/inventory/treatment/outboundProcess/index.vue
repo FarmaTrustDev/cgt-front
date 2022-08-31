@@ -90,7 +90,7 @@
         <a-card
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs tabs_body"
-          style="margin: 3% 5%"
+          style="margin: 3% 2%"
         >
           <span>
             <!-- //Steps -->
@@ -122,7 +122,7 @@
           v-if="activeTab == 'OUTBOUND_PROCESS'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
-          style="width: 90%; margin-left: 5%"
+          style="width: 96%; margin-left: 2%"
         >
           <div class="h-tabs large-tabs" style="width: 100%; margin-left: -1%">
             <Process
@@ -140,7 +140,7 @@
           v-if="activeTab == 'COURIER'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs bount_status"
-          style="width: 90%; margin-left: 5%"
+          style="width: 96%; margin-left: 2%"
         >
           <div class="h-tabs large-tabs" style="width: 100%">
             <div>

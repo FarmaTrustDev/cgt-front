@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3 manf-treatment container">
+  <div class="mt-3 manf-treatment container" style="margin-top: 20px">
     <div class="page-header clearfix">
       <h3 class="page-title pl-5 float-left">
         {{ translation['TreatList_2_258'] }}
@@ -29,8 +29,12 @@
         <a-tab-pane key="2" :tab="translation.PendiTreat_2_300">
           <in-progress />
         </a-tab-pane>
-        <a-tab-pane key="3" :tab="translation['Compltreat_2_394']"><completed /></a-tab-pane>
-        <a-tab-pane key="4" :tab="translation['AllTreat_2_826']"> <all /></a-tab-pane>
+        <a-tab-pane key="3" :tab="translation['Compltreat_2_394']"
+          ><completed
+        /></a-tab-pane>
+        <a-tab-pane key="4" :tab="translation['AllTreat_2_826']">
+          <all
+        /></a-tab-pane>
       </a-tabs>
     </div>
   </div>
@@ -77,4 +81,3 @@ export default {
   },
 }
 </script>
- 

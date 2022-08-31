@@ -254,7 +254,7 @@ a {
 }
 .inventory-storage-title {
   .page-title {
-    margin-left: 12.5%;
+    // margin-left: 12.5%;
   }
 }
 .vertical-line-standard-table {
@@ -467,7 +467,7 @@ a {
     border: 1px solid #ececec;
     height: 56px;
     padding: 8px;
-    border-radius: 22px;
+    border-radius: 42px;
   }
 }
 .user-involved.support_page {
@@ -638,4 +638,11 @@ a {
   .default-border-radius > .ant-card-head {
     padding: 0 !important;
   }
+}
+// 
+.home-page.manf-board {
+  .ant-select-search--inline {.ant-select-search__field{
+    position: absolute;
+    margin-top: -10px !important;
+  }}
 }
