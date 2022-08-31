@@ -8,7 +8,7 @@
           <a-form-item :label="translation['EmailAddre_2_140']">
             <a-input
               v-decorator="[
-                'username',
+                'email',
                 {
                   rules: [
                     { required: true, message: 'Please input your Email!' },
@@ -77,7 +77,7 @@ export default {
       })
     },
     resetPasswordEmails(params) {
-      AuthServices.getKeyWithEmail(params.username)
+      AuthServices.getKeyWithEmail(params)
         .then((response) => {
           setRefreshToken(response.refreshToken)
           setAccessToken(response.accessToken)
@@ -86,7 +86,7 @@ export default {
             status: true,
           })
           // success(this, { message: response.message })
-          UserServices.resetPasswordEmail(params.username).then((responses)=>{
+          UserServices.resetPasswordEmail(params).then((responses)=>{
             success(this, { message: responses.data })
           })
         })

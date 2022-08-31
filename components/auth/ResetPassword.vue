@@ -1,7 +1,7 @@
 <template>
   <div class="half-secondary">
     <div class="login">
-      <a-card :bordered="false" :title="translation.ResetPassw_2_472">
+      <a-card :bordered="false" :title="title==='Activate' ? 'Activate Account' : 'Reset Password'">
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
           <a-form-item label="Password">
@@ -39,7 +39,7 @@
               v-decorator="[
                 'privateKey',
                 {
-                  initialValue: privateKey,
+                  initialValue: authKey,
                   rules: [
                     { required: true, message: '' },
                   ],
@@ -68,12 +68,17 @@
 </template>
 
 <script>
-import AuthServices from '~/services/API/AuthServices'
 import UserServices from '~/services/API/UserServices'
-import { setAccessToken, setRefreshToken } from '~/services/Auth'
 import { success } from '~/services/Helpers/notifications'
 import { isEmpty } from '~/services/Helpers'
+import routeHelpers from '~/mixins/route-helpers'
+
 export default {
+  props: {
+    authKey: { type: String, required: true },
+    title:{ type: String},
+  },
+  mixins: [routeHelpers],   
   data() {
     return {
       formLayout: 'horizontal',
@@ -84,12 +89,7 @@ export default {
       form: this.$form.createForm(this, {
         name: 'login',
       }),
-      privateKey:'',
     }
-  },
-  mounted(){
-      this.privateKey=this.$route.query.id
-      this.checkUserKey(this.privateKey)
   },
   computed:{
     translation() {
@@ -97,25 +97,6 @@ export default {
     },
   },   
   methods: {
-    checkUserKey(key) {
-      AuthServices.getActivationAuth(key)
-        .then((response) => {
-          setRefreshToken(response.refreshToken)
-          setAccessToken(response.accessToken)
-          this.$store.commit('setToken', {
-            token: response.accessToken,
-            status: true,
-          })
-          success(this, { message: response.message })
-        })
-        .catch((e) => {
-          if (!isEmpty(e.response)) {
-            this.error = e.response.data.message
-            this.showError = true
-          }
-        })
-        .finally(() => (this.loading = false))
-    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
