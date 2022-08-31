@@ -18,7 +18,13 @@
       :description="'Reason: ' + actionResult.notes + ' '"
       type="success"
     ></a-alert>
-    <div v-if="!isEmpty(bags)">
+    <div v-if="!treatment.isSchedule">
+      <alert message="Treatment has not been scheduled yet." />
+    </div>
+    <div v-else-if="treatment.isSchedule && treatment.phaseId <6">
+        <alert message="Manufacturer has not approved the treatment request yet." />
+    </div>
+    <div v-else-if="!isEmpty(bags)">
       <a-tabs :active-key="activeTab" type="card" @change="onTabChange" class="bags_section">
         <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
           <Steps

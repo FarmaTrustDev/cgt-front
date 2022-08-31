@@ -20,7 +20,7 @@
           <div
             slot="tab"
             class="tab-title main"
-            :class="isCompleted(isCreated)"
+            :class="isCompleted(treatment.consent)"
           >
             {{ translation['Conse_1_677'] }}
           </div>
@@ -32,10 +32,7 @@
         </a-tab-pane>
         <a-tab-pane
           key="Screening"
-          :disabled="
-            !isEmpty(treatment) &&
-            treatment.phaseId > TREATMENT_PHASES.CONSENT.id
-          "
+          :disabled="!treatment.consent"
         >
           <div
             slot="tab"
