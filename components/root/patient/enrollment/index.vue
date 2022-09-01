@@ -30,19 +30,13 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane
-          key="Screening"
-          :disabled="!treatment.consent"
-        >
+        <a-tab-pane key="Screening" :disabled="!treatment.consent">
           <div
             slot="tab"
-            :class="
-              isCompleted(isScreeningDone || treatment.screeningStatus)
-            "
+            :class="isCompleted(isScreeningDone || treatment.screeningStatus)"
             class="tab-title main"
           >
             {{ translation['Scree_1_679'] }}
-            <pre></pre>
           </div>
           <screening
             :treatment="treatment"
@@ -50,7 +44,15 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Scheduling" :disabled="checkTreatmentScreeningStatus(isScreeningDone, treatment.screeningStatus)">
+        <a-tab-pane
+          key="Scheduling"
+          :disabled="
+            checkTreatmentScreeningStatus(
+              isScreeningDone,
+              treatment.screeningStatus
+            )
+          "
+        >
           <div
             slot="tab"
             class="tab-title main"
@@ -113,14 +115,10 @@ export default {
     this.isPatientCreated()
   },
   methods: {
-    checkTreatmentScreeningStatus(screeningdone, screeningStatus)
-    {
-      if(screeningdone === true || screeningStatus === true)
-      {
+    checkTreatmentScreeningStatus(screeningdone, screeningStatus) {
+      if (screeningdone === true || screeningStatus === true) {
         return false
-      }
-      else
-      {
+      } else {
         return true
       }
     },
@@ -189,8 +187,7 @@ export default {
       this.activeTab = key
     },
     getNextTab(key) {
-      if(key === 'Scheduling')
-      {
+      if (key === 'Scheduling') {
         this.isScreeningDone = true
       }
       this.tabChange(key)

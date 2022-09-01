@@ -158,6 +158,10 @@ export default {
         id: rowId,
       }
 
+      const notesRequired = this.notesRequired
+      notesRequired[rowId] = value
+      this.notesRequired = notesRequired
+
       this.checkValidationList = checkListValidation
       this.sendData(this.checkValidationList)
     },
