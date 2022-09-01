@@ -45,6 +45,7 @@
         />
       </a-form-item>
       <FormActionButton
+        v-if="isInConsentPhase(treatment)"
         :loading="loading"
         :text="translation.SaveConse_4_695"
       />
@@ -60,6 +61,7 @@ import notifications from '~/mixins/notifications'
 import Upload from '~/components/upload'
 import { isEmpty } from '~/services/Utilities'
 import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
+import { TREATMENT_PHASES } from '~/services/Constant/Phases'
 export default {
   components: { Upload },
   mixins: [notifications, routeHelpers, nullHelper],
@@ -80,7 +82,8 @@ export default {
       fileList: [],
       allowedExtensions: DOCUMENT_EXTENSIONS,
       checkBoxError: false,
-      treatId : ''
+      treatId: '',
+      TREATMENT_PHASES,
     }
   },
   computed: {
@@ -94,8 +97,13 @@ export default {
   },
 
   methods: {
+    isInConsentPhase() {
+      return (
+        isEmpty(this.treatment) ||
+        this.treatment.phaseId < TREATMENT_PHASES.CONSENT.id
+      )
+    },
     handleChange(info) {
-      console.log(info)
       this.fileList = info
     },
     checkChecked(e) {
@@ -144,8 +152,7 @@ export default {
         .catch(this.error)
         .finally(() => (this.loading = false))
     },
-    getTreatmentId(treatmentid)
-    {
+    getTreatmentId(treatmentid) {
       this.treatId = treatmentid
     },
     onSubmit(e) {
@@ -156,14 +163,12 @@ export default {
           if (values.consent === true) {
             // if(this.treatment.id==null)
             const param = this.$route.query
-            if(!isEmpty(param.treatment_id))
-            {
+            if (!isEmpty(param.treatment_id)) {
               this.getTreatmentId(param.treatment_id)
             }
-            if (this.$route.query.treatment_id == null ) {
+            if (this.$route.query.treatment_id == null) {
               this.create(values)
-            }
-            else {
+            } else {
               const treatGlobalId = this.$route.query.treatment_id
               values.globalId = treatGlobalId
               this.updateConcent(values)
