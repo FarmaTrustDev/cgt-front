@@ -22,7 +22,7 @@
       type="primary"
       :loading="loading"
       @click="markTreatmentCollectionComplete(bags)"
-      >Complete Collection Process {{ treatment.treatmentCollectionStatus }}
+      >Complete Collection Process
     </a-button>
     <a-modal
       :footer="false"

@@ -37,10 +37,7 @@
           <div
             slot="tab"
             :class="
-              isCompleted(
-                !isEmpty(treatment) &&
-                  treatment.phaseId >= TREATMENT_PHASES.SCREENING.id
-              )
+              isCompleted(isScreeningDone || treatment.screeningStatus)
             "
             class="tab-title main"
           >
@@ -53,11 +50,11 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane key="Scheduling" :disabled="!isScreeningDone">
+        <a-tab-pane key="Scheduling" :disabled="checkTreatmentScreeningStatus(isScreeningDone, treatment.screeningStatus)">
           <div
             slot="tab"
             class="tab-title main"
-            :class="isCompleted(treatment.screeningStatus)"
+            :class="isCompleted(treatment.isSchedule)"
           >
             {{ translation['Sched_1_681'] }}
           </div>
@@ -116,6 +113,17 @@ export default {
     this.isPatientCreated()
   },
   methods: {
+    checkTreatmentScreeningStatus(screeningdone, screeningStatus)
+    {
+      if(screeningdone === true || screeningStatus === true)
+      {
+        return false
+      }
+      else
+      {
+        return true
+      }
+    },
     handleActiveTab() {
       if (this.$route.query.view) {
         this.activeTab = this.$route.query.view
@@ -173,9 +181,6 @@ export default {
     },
     updateTreatment(treatment) {
       this.treatment = treatment
-      if (treatment.phaseId !== 1) {
-        this.isScreeningDone = true
-      }
     },
     getTreatmentGlobalId(treatment) {
       this.treatment = treatment
@@ -184,6 +189,10 @@ export default {
       this.activeTab = key
     },
     getNextTab(key) {
+      if(key === 'Scheduling')
+      {
+        this.isScreeningDone = true
+      }
       this.tabChange(key)
     },
     // isCompleted(flag) {

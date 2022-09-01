@@ -52,6 +52,7 @@
             ],
           },
         ]"
+        placeholder="Description"
         style="width: 100%"
         size="large"
       ></a-textarea>
