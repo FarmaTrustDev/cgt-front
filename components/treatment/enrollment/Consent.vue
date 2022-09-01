@@ -100,7 +100,7 @@ export default {
     isInConsentPhase() {
       return (
         isEmpty(this.treatment) ||
-        this.treatment.phaseId < TREATMENT_PHASES.CONSENT.id
+        this.treatment.phaseId <= TREATMENT_PHASES.CONSENT.id
       )
     },
     handleChange(info) {
