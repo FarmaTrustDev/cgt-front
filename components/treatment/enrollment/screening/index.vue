@@ -14,7 +14,6 @@ import Create from '~/components/treatment/enrollment/screening/Create'
 import CollectedList from '~/components/treatment/enrollment/screening/CollectedList'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
-import { isEmpty } from '~/services/Utilities'
 export default {
   components: { Create, CollectedList },
   props: {
@@ -38,15 +37,7 @@ export default {
   methods: {
     isScreeningCompleted() {
       this.treatmentParamId = this.$route.query.treatment_id
-      if(isEmpty(this.treatment))
-      {
         this.fetch(this.treatmentParamId)
-      }
-      else if (this.treatment.screeningStatus) {
-        this.isCreated = true
-        this.fetchTreatmentScreening(this.treatment)
-      }
-
     },
     fetchTreatmentScreening(treatment) {
       ScreeningCategoryServices.getByTreatmentId(treatment.id)

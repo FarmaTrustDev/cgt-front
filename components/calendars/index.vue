@@ -3,7 +3,7 @@
     <FullCalendar
       :options="calendarOptions"
       :header="{
-        left: 'prev,next',
+        left: 'prev,next ',
       }"
       @select="handleEventClick"
       @changeDate="handleDateClick"
@@ -31,7 +31,9 @@ export default {
     return {
       calendarOptions: {
         headerToolbar: {
-         center: 'dayGridMonth',
+          left: false,
+          center: 'title',
+          right: 'prev,next'
         },
         plugins: [interactionPlugin, timeGridPlugin, dayGridPlugin],
         initialView: 'dayGridMonth',

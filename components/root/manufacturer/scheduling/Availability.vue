@@ -51,7 +51,9 @@ export default {
       loading: false,
       calendarOptions: {
         headerToolbar: {
-          center: 'dayGridMonth', // buttons for switching between views
+           left: false,
+          center: 'title',
+          right: 'prev,next'
         },
         plugins: [interactionPlugin, timeGridPlugin, dayGridPlugin],
         initialView: 'dayGridMonth',
