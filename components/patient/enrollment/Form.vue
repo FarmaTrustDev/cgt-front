@@ -34,8 +34,8 @@
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"
-            @click="handleOk()"
             style="padding: 5px 50px"
+            @click="handleOk()"
             ><b>Ok</b></a-button
           >
         </footer>

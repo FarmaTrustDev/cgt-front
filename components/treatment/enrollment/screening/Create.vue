@@ -6,7 +6,7 @@
       </a-alert>
       <a-skeleton :loading="loading">
         <span v-if="categories">
-          <CategoryTabs :categories="categories" />
+          <CategoryTabs :form="form" :categories="categories" />
           <!-- <a-button type="primary" class="w-100 btn-complete-category">Complete screening results for {CATEGORYNAME} group</a-button> -->
           <FormActionButton
             :text="translation.SaveScree_4_468"
@@ -36,8 +36,8 @@
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"
-            @click="handleOk()"
             style="padding: 5px 50px"
+            @click="handleOk()"
             >Ok</a-button
           >
         </footer>
