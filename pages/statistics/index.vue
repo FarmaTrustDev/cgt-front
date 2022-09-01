@@ -1,7 +1,7 @@
 <template>
   <div class="container manf-stats">
     <div class="page-header clearfix">
-    <div class="page-title">{{translation.Stati_1_19}}</div>
+    <div class="page-title mt-25">{{translation.Stati_1_19}}</div>
     </div>
     <a-card :bordered="false" class="grey-card">
         <a-col :md="11" class="mtminus-6">

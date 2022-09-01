@@ -59,6 +59,7 @@
           <InstantUpload
             :saved-list="row.uploads"
             :action="bagService.uploads(row.id)"
+            class="upload-file"
           />
         </template>
         <template slot="action" slot-scope="name, row">
@@ -108,7 +109,7 @@ export default {
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
-    bagKeyId:{ required: true, type: Number},
+    bagKeyId: { required: true, type: Number },
   },
   data() {
     return {
@@ -180,3 +181,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.upload-file {
+  margin-bottom: 8px;
+  display: block;
+}
+</style>
