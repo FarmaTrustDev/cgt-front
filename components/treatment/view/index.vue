@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="default-card-x no-shadow">
+  <a-card :bordered="false" class="default-card no-shadow">
     <a-alert
       v-if="treatment.isHold"
       :message="
@@ -18,10 +18,10 @@
       :description="'Reason: ' + actionResult.notes + ' '"
       type="success"
     ></a-alert>
-    <div v-if="!treatment.isSchedule">
+    <div v-if="!treatment.isSchedule && treatment.phaseId <3">
       <alert message="Treatment has not been scheduled yet." />
     </div>
-    <div v-else-if="treatment.isSchedule && treatment.phaseId <6">
+    <div v-else-if="treatment.isSchedule && treatment.phaseId <4">
         <alert message="Manufacturer has not approved the treatment request yet." />
     </div>
     <div v-else-if="!isEmpty(bags)">

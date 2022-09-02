@@ -64,13 +64,13 @@ export default {
       loading: true,
     }
   },
-  mounted() {
-    this.fetchList()
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    this.fetchList()
   },   
   methods: {
     tabClick() {},
