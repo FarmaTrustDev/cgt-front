@@ -444,6 +444,18 @@ a {
       padding-bottom: 5px !important;
     }
   }
+  .ant-tabs-content.ant-tabs-content-animated.ant-tabs-left-content {
+    .ant-tabs-nav-container.ant-tabs-nav-container-scrolling {
+      padding: 0;
+    }
+    .ant-tabs-nav {
+     
+      .ant-tabs-tab {
+        margin-right: 7px !important;
+        width: 32.5%;
+      }
+    }
+  }
 }
 .pick-info {
   .text-right {
