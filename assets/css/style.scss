@@ -270,7 +270,7 @@ a {
   // margin-left: -15px;
 }
 .support_page {
-   .ant-tabs.ant-tabs-top {
+  .ant-tabs.ant-tabs-top {
     padding: 0 !important;
   }
   .ant-tabs-nav-scroll {
@@ -639,10 +639,12 @@ a {
     padding: 0 !important;
   }
 }
-// 
+//
 .home-page.manf-board {
-  .ant-select-search--inline {.ant-select-search__field{
-    position: absolute;
-    margin-top: -10px !important;
-  }}
+  .ant-select-search--inline {
+    .ant-select-search__field {
+      position: absolute;
+      margin-top: -10px !important;
+    }
+  }
 }

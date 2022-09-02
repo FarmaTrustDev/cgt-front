@@ -114,3 +114,13 @@
   background-color: #fff;
   border: none;
 }
+.manf-treatment-body {
+  .ant-tabs-nav-container {
+    padding: 0;
+  }
+  .ant-tabs.ant-tabs-card {
+    .ant-tabs-tab {
+      width: 22.3%;
+    }
+  } 
+}

@@ -151,6 +151,11 @@
 .manf-treatment-body {
   padding-left: 3%;
   padding-right: 3%;
+  .ant-table-tbody {
+    td:first-child {
+      font-weight: 400 !important;
+    }
+  }
 }
 .client_msgs {
   .ant-tabs-nav {
