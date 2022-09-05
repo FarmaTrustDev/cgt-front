@@ -27,11 +27,11 @@
               :un-checked-children="translation.no_1_656"
             />
 
-            <a-icon v-else type="check"></a-icon>
+            <a-icon v-else type="check" class="icon-check"></a-icon>
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
-          <a-form-item>
+          <a-form-item class="notes-body">
             <a-input
               v-if="!row.isCollected"
               v-decorator="[
@@ -150,6 +150,9 @@ export default {
     }
   },
   computed: {
+    // title() {
+    //   return this.$store.getters.getTranslation.Notes_1_350.dataIndex
+    // },
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -185,5 +188,17 @@ export default {
 .upload-file {
   margin: 8px 0;
   display: block;
+}
+.notes-body {
+  width: 68%;
+  margin: auto;
+  height: 55px;
+  overflow: hidden;
+  background: #ececec;
+  border-radius: 28px;
+  padding: 6px;
+}
+.icon-check {
+  color: green;
 }
 </style>
