@@ -183,7 +183,7 @@ export default {
 </script>
 <style scoped>
 .upload-file {
-  margin-bottom: 8px;
+  margin: 8px 0;
   display: block;
 }
 </style>

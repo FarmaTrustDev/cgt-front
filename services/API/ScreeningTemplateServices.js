@@ -24,6 +24,13 @@ function getHospitalTempStatus(templateId, treatmentTypeId, manufacturerId) {
   })
 }
 
+function getScreeningTempStatus(templateId) {
+  return request({
+    url: `${baseApi}/getScreeningTemplateStatus/${templateId}`,
+    method:'GET',
+  })
+}
+
 function markAcceptance(templateId, treatmentTypeId, manufacturerId) {
   return request({
     url: `${baseApi}/markAcceptance/${templateId}/${treatmentTypeId}/${manufacturerId}`,
@@ -62,7 +69,8 @@ const ScreeningTemplateServices = {
   markAcceptance,
   create,
   getById,
-  update
+  update,
+  getScreeningTempStatus
 }
 
 export default ScreeningTemplateServices

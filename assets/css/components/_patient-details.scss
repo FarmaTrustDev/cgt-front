@@ -2,6 +2,9 @@
   // margin-left:35px;
   // margin-right:35px;
   // margin-top:30px;
+  .grey-card.m-0 {
+    // padding-top: 0 !important;
+  }
   .qr-section {
     height: 240px;
     figure {
@@ -110,4 +113,14 @@
 .aftercare-note:focus {
   background-color: #fff;
   border: none;
+}
+.manf-treatment-body {
+  .ant-tabs-nav-container {
+    padding: 0;
+  }
+  .ant-tabs.ant-tabs-card {
+    .ant-tabs-tab {
+      width: 22.3%;
+    }
+  } 
 }

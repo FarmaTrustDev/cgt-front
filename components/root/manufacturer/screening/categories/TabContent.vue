@@ -75,15 +75,15 @@ export default {
       showScreeningModal: false,
     }
   },
-  mounted() {
-    if (!this.isEmpty(this.category)) {
-      this.fetch()
-    }
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    if (!this.isEmpty(this.category)) {
+      this.fetch()
+    }
   },  
   methods: {
     fetch() {

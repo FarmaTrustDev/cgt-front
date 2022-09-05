@@ -8,7 +8,7 @@
         class="
           float-right
           page-search-input
-          mr-6
+          mr-5
           ant-selection-placeholder
           selection-tab
         "

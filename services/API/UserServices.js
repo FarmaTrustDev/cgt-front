@@ -117,6 +117,14 @@ function resetPasswordEmail(data){
   })
 }
 
+function sendEmailToHospitals(data){
+  return request({
+    url: `${baseApi}/send-email-to-hospitals`,
+    data,
+    method: 'POST',
+  })
+}
+
 const UserServices = {
   detail,
   adminMenu,
@@ -136,6 +144,7 @@ const UserServices = {
   resetPassword,
   resetPasswordEmail,
   getSearchUser,
+  sendEmailToHospitals,
 }
 
 export default UserServices
