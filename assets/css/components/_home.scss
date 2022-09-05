@@ -86,7 +86,6 @@
     background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
     background-size: cover;
     background-repeat: no-repeat;
-
   }
   .stats {
     color: #233151;
@@ -197,7 +196,6 @@
     background-image: url('https://cgt-dev-ft.microsysx.com/assets/media/bg/bg-hover-blue.svg');
     background-size: cover;
     background-repeat: no-repeat;
-
   }
   .stats {
     color: #233151;
@@ -277,6 +275,15 @@
     .admin-page,
     .admin-tab {
       margin: 3% !important;
+    }
+  }
+}
+
+.enrollment-page {
+  .ant-tabs-left-bar {
+    .ant-tabs-tab {
+      padding: 8px 15px !important;
+      margin-bottom: 0 !important;
     }
   }
 }

@@ -1,5 +1,5 @@
 .enrollment-page {
-  margin: 0 2%;
+  margin: 0;
   padding: 26px !important;
   .ant-tabs .ant-tabs-left-content {
     border-left: unset;
@@ -60,7 +60,7 @@
     background-color: #fa6363;
     color: #fff;
     &::after {
-      top: 11px;
+      top: 9px;
       left: 8px;
     }
   }
@@ -204,7 +204,7 @@
     .ant-card-body {
       // padding: 28px !important;
       margin: 6px;
-      padding-right: 0 !important;
+      padding-right: 6px !important;
     }
     .ant-form-item-control {
       input.ant-input:hover {
@@ -224,7 +224,7 @@
   .ant-tabs-tab {
     text-align: left;
     margin-top: 15px;
-    // padding: 0;
+    // padding: 8px 25px !important;
   }
   .tab-title {
     text-decoration: none;
@@ -252,6 +252,8 @@
     .ant-tabs-tab-completed {
       background-color: #d1f2dc;
       &::before {
+        margin-right: 10px;
+        background-size: cover;
         background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg');
         background-repeat: no-repeat;
       }
@@ -261,9 +263,9 @@
         background-color: #f2f5fb;
         &::before {
           background-size: cover;
+          margin-right: 10px;
           background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg');
           background-repeat: no-repeat;
-
         }
       }
     }
@@ -316,7 +318,7 @@
   .ant-card-head-title {
     display: inline-block;
     flex: 1;
-    padding: 20px 45px;
+    padding: 20px 20px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
