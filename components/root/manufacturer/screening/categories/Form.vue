@@ -2,7 +2,7 @@
   <div>
     <a-skeleton :loading="loading">
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-        <a-form-item label="Category Name">
+        <a-form-item label="Group Name">
           <a-input
             v-decorator="[
               'name',
@@ -10,14 +10,14 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Category Name!',
+                    message: 'Please input your Group Name!',
                   },
                 ],
                 initialValue: entity.name,
               },
             ]"
             size="large"
-            placeholder="Insert Category Name"
+            placeholder="Insert Group Name"
           />
           <a-input
             v-decorator="[

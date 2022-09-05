@@ -143,7 +143,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
 export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
     {
         id: 1,
-        name: 'Inbound Accepance Details',
+        name: 'Inbound Acceptance Details',
         alias: 'INBOUND_SHIPMENT',
         phaseId: 3,
         enablePageId: 3,

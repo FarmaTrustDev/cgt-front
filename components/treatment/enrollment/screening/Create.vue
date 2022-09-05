@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <LookupsTreatmentType :active="true" @onChange="onTreatmentSelect" />
+      <LookupsTreatmentType class="slots-main" :active="true" @onChange="onTreatmentSelect" />
       <a-alert v-if="message" type="info" :message="translation.Selecthe_8_476">
       </a-alert>
       <a-skeleton :loading="loading">

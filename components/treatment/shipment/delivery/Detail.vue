@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div v-if="isEmpty(shipment)">
     <a-card :bordered="false" class="default-card delivery-info">
       <article class="article">
-        <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
+        <h4 class="heading pl-0">Treatment Receiving</h4>
       </article>
       <div v-if="!isEmpty(shipment)">
       <a-row>
@@ -50,7 +50,7 @@ import alert from '~/components/alert'
 export default {
   components: { alert },
   props: {
-    heading: { default: 'Shipping Details', require: true, type: String },
+    heading: { default: 'Treatment Receiving', require: true, type: String },
     shipment: {
       default: () => {},
       require: true,

@@ -1,12 +1,10 @@
 <template>
   <div>
-
     <a-row class="pt-10">
-
       <a-col :span="12">
-        <h3 class="page-title">{{translation.Selectreat_3_262}}</h3>
+        <h3 class="page-title">Select Treatment Type</h3>
       </a-col>
- 
+
       <a-col :span="12">
         <a-form-item>
           <a-select
@@ -23,7 +21,7 @@
               },
             ]"
             :loading="typeLoading"
-            :placeholder="translation.Selectreat_3_262"
+            :placeholder="placeholder"
             class="default-select w-100"
             size="large"
             :disabled="disabled"
@@ -38,18 +36,14 @@
             </a-select-option>
           </a-select>
         </a-form-item>
-
       </a-col>
-
     </a-row>
 
     <a-row v-if="!treatmentTypes">
       <a-col class="empty-message">
-        {{translation.Selecthe_8_476}}
+        {{ translation.Selecthe_8_476 }}
       </a-col>
     </a-row>
-
-
   </div>
 </template>
 
@@ -58,39 +52,40 @@ import TreatmentService from '~/services/API/TreatmentTypeServices'
 export default {
   props: {
     treatmentTypeId: { type: Number, default: null },
-    treatmentTypeName: { type: String, default: null},
+    treatmentTypeName: { type: String, default: null },
     disabled: { type: Boolean, default: false },
-    active:{ type: Boolean, default: false},
-    fetchAll:{ type: Boolean, default: false},
+    active: { type: Boolean, default: false },
+    fetchAll: { type: Boolean, default: false },
   },
 
   data() {
     return {
       treatmentTypes: {},
       typeLoading: false,
+      placeholder: 'Select Treatment Type'
     }
   },
   mounted() {
-      this.fetchTreatmentTypes()
+    this.fetchTreatmentTypes()
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
   methods: {
     fetchTreatmentTypes() {
-      if(this.fetchAll){
+      if (this.fetchAll) {
         this.fetchSelectedTreatmentTypes(this.treatmentTypeId)
-      }else{
+      } else {
         this.typeLoading = true
-        if(this.active){
+        if (this.active) {
           TreatmentService.getWithScreening()
             .then((response) => {
               this.treatmentTypes = response.data
             })
             .finally(() => (this.typeLoading = false))
-        }else{
+        } else {
           TreatmentService.getRemaining()
             .then((response) => {
               this.treatmentTypes = response.data
@@ -99,12 +94,13 @@ export default {
         }
       }
     },
-    fetchSelectedTreatmentTypes(id){
-      TreatmentService.get(id).then((response)=>{
-        this.treatmentTypes =  response.data
+    fetchSelectedTreatmentTypes(id) {
+      TreatmentService.get(id).then((response) => {
+        this.treatmentTypes = response.data
       })
     },
     onchange(value, e) {
+      this.placeholder = ''
       this.$emit('onChange', value)
     },
   },

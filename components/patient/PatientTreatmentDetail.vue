@@ -14,7 +14,8 @@
         </h6>
       </a-col>
       <a-col :span="8" class="mt-15">
-        <h6 style="justify-content: end;">
+        <h6>
+          <!--  style="justify-content: space-evenly;" -->
           <span class="text-muted">Treatment Type:&nbsp;</span>
           <span>{{ patient.treatmentTypeName }}</span>
         </h6>
@@ -49,17 +50,17 @@
       </a-col>
       <a-col :span="8" class="mt-15">
         <h6>
-          <span class="text-muted">Treatmtent ID:</span
-          ><span style="justify-content: end;">
-            {{ patient.treatmentPUID }}</span
-          >
+           <!-- style="justify-content: space-evenly;" -->
+          <span class="text-muted">Treatmtent ID:&nbsp;</span
+          ><span>
+            {{ patient.treatmentPUID }}</span>
         </h6>
       </a-col>
     </a-row>
     <a-row>
       <a-col :span="12" class="mt-15">
         <h6>
-          <span class="text-muted">{{ translation.EmailAddre_2_140 }}:</span
+          <span class="text-muted">{{ translation.EmailAddre_2_140 }}:&nbsp;</span
           ><span style=" height: 40px">
             {{ patient.patient.email }}</span
           >

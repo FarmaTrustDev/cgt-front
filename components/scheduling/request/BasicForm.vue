@@ -49,7 +49,7 @@
         :message="
           'Request sent to ' +
           logisticName +
-          ', you can ship the sample once logistic provider approved the request'
+          ', you can ship the sample once logistic provider has approved the request'
         "
         type="info"
       />

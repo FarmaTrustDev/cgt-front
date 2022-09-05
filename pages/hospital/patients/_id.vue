@@ -1,5 +1,5 @@
 <template>
-  <page-layout class="patient-page enrollment-title container" :title="'Enroll'" :create="false">
+  <page-layout class="patient-page enrollment-title container"  :create="false">
     <template slot="content">
 
       <div class="grey-card enrollment-page green-on-update">
