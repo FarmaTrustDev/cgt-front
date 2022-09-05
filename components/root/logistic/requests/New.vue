@@ -172,9 +172,10 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           const data = this.selectedRow
+          const performedAction = values.accepted === true ? 'accepted' : 'rejected' 
           SchedulingServices.markScheduleRequest(data.id, values).then(
             (response) => {
-              this.success(response.message)
+              this.success('Request ' + performedAction)
               this.handleModal(false)
               this.fetch()
             }
