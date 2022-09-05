@@ -149,7 +149,7 @@ export default {
       this.steps[5].by=this.translation.CouriPick_3_648 
     },
     getTranslation(){
-      console.log(this.steps.length)
+      // console.log(this.steps.length)
       if(this.steps.length>0){
         this.steps[0].by=this.translation.InbouDate_2_635
         this.steps[1].by=this.translation.InbouProce_2_513

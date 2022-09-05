@@ -100,7 +100,7 @@ export default {
   },
   watch:{
     translation(newValues, oldValue){
-      console.log(oldValue)
+      // console.log(oldValue)
       if(newValues!==oldValue){
         this.phases[0].name=newValues.InbouAccep_3_834
         this.phases[1].name=newValues.Manuf_1_342

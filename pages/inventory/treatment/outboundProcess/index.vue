@@ -977,7 +977,7 @@ export default {
       this.dummyOutBoundCollection = dumCollection
     },
     clickImage(record) {
-      console.log(record)
+      // console.log(record)
       this.qrUrl = record.qrUrl
       this.handleModal(true)
     },
@@ -993,7 +993,7 @@ export default {
     },
     handleLogisticsModal(show) {
       this.showLogisticsModal = show
-      console.log(this.showLogisticsModal)
+      // console.log(this.showLogisticsModal)
     },
     handleCourierModal() {
       this.showCourierModal = false

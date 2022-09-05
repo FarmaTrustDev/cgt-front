@@ -70,7 +70,7 @@ export default {
         })
     },
     clickImage(record) {
-      console.log(record)
+      // console.log(record)
       this.qrUrl = record.qrUrl
       this.handleModal(true)
     },

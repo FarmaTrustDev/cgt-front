@@ -58,7 +58,7 @@ export default {
   methods: {
     fetch() {
       this.loading = true
-      ScreeningServices.get({ screeningCategoryId: this.category.id })
+      ScreeningServices.get({ screeningCategoryId: this.category.id, Active: true, })
         .then((response) => {
           this.data = response.data
         })

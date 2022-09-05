@@ -42,7 +42,7 @@ export default {
   watch: {
     bags(newBags, oldVal) {
       // watch it
-      console.log(this.activeTab)
+      // console.log(this.activeTab)
       if (newBags !== oldVal) {
         if (!isEmpty(newBags) && this.activeTab===null) {
           // console.log(newBags)

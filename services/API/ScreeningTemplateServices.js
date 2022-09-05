@@ -38,6 +38,13 @@ function markAcceptance(templateId, treatmentTypeId, manufacturerId) {
   })
 }
 
+function submitScreeningRequest(templateId, treatmentTypeId, manufacturerId) {
+  return request({
+    url: `${baseApi}/submit-screening-request/${templateId}`,
+    method:'GET',
+  })
+}
+
 function getById(id) {
   return request({
     url: `${baseApi}/${id}`,
@@ -53,7 +60,7 @@ function create(data) {
 }
 
 function update(id, data) {
-  console.log(data)
+  // console.log(data)
   return request({
     url: `${baseApi}/update/${id}`,
     method: 'put',
@@ -70,7 +77,8 @@ const ScreeningTemplateServices = {
   create,
   getById,
   update,
-  getScreeningTempStatus
+  getScreeningTempStatus,
+  submitScreeningRequest
 }
 
 export default ScreeningTemplateServices
