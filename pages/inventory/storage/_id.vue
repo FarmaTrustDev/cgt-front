@@ -123,7 +123,7 @@ export default {
 
   mounted() {
     this.getTranslation()
-    console.log(this.$route.query.open)
+    // console.log(this.$route.query.open)
   },
   methods: {
     isEmpty,

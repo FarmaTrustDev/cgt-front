@@ -82,6 +82,7 @@ export default {
   },
   methods: {
     afterCreate(response) {
+      this.$emit('getScreenTempStatusIndex')  
       this.$emit('upsert', response)
     },
     afterUpdate(response) {

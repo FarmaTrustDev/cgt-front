@@ -16,7 +16,7 @@
           :closable="pane.closable"
           :editable="pane.closable"
         >
-          <TabContent :category="pane" />
+          <TabContent :category="pane" @getScreenTempStatusTabCon="getScreenTempStatus" />
         </a-tab-pane>
         <!-- // adding button -->
         <a-button slot="tabBarExtraContent" type="primary" @click="add">
@@ -97,6 +97,9 @@ export default {
     add() {
       this.setCurrentId(null)
       this.handleCategoryModal(true)
+    },
+    getScreenTempStatus(){
+      this.$emit('getScreenTempStatusTab')
     },
     fetchList() {
       this.loading = true
