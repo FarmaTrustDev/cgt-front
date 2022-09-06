@@ -94,6 +94,12 @@
       margin-top: 15px;
       margin-bottom: 1.5rem;
       vertical-align: middle;
+      .fc-button {
+        border: 0;
+      }
+      .fc-prev-button  {
+        border-right: 2px solid gray !important;
+      }
     }
     .fc-view-harness {
       background: #fff;
