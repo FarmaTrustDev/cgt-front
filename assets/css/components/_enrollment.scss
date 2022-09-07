@@ -16,6 +16,7 @@
       display: flex;
       align-items: center;
       width: 100%;
+      margin: 0;
       // width: fit-content;
       // padding-right: 25px;
     }
@@ -81,6 +82,9 @@
 
   .fc {
     color: #000;
+    .fc-daygrid-event {
+      box-shadow: 1px 1px 4px 2px #8080807e;
+    }
     a {
       color: #000;
       &:hover {
@@ -97,8 +101,8 @@
       .fc-button {
         border: 0;
       }
-      .fc-prev-button  {
-        border-right: 2px solid gray !important;
+      .fc-prev-button {
+        border-right: 2px solid #fff !important;
       }
     }
     .fc-view-harness {
@@ -237,7 +241,7 @@
     font-weight: 500;
     border-radius: 22px;
     font-size: 1rem;
-    padding: 25px;
+    padding: 21px;
     color: #233151;
     background-color: #f9f9f9;
     &::before {

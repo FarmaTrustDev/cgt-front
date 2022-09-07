@@ -453,6 +453,9 @@ a {
       .ant-tabs-tab {
         margin-right: 7px !important;
         width: 32.5%;
+        .ant-tabs-tab-unclosable {
+          font-size: 14px;
+        }
       }
     }
   }
