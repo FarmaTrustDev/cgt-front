@@ -44,7 +44,7 @@
         class="d-none"
       />
     </a-form-item>
-    <a-form-item v-if="!isAccepted" :label="translation.Notefor_3_292+':'">
+    <a-form-item v-if="!isAccepted" :label="translation.Notefor_3_292">
       <a-textarea
         v-decorator="[
           `reason`,
