@@ -123,5 +123,28 @@
       width: 22.3%;
       color: #000;
     }
-  } 
+  }
+}
+.treatment_tabs {
+  .no-shadow {
+    padding-right: 0;
+    padding-left: 0;
+    .view-screen {
+      .ant-card-body {
+        padding-right: 0;
+        padding-left: 0;
+        .ant-tabs-nav-container.ant-tabs-nav-container-scrolling {
+          padding: 0;
+          .ant-tabs-tab-arrow-show {
+            display: none;
+          }
+          .ant-tabs-tab {
+            .tab-title {
+              padding-left: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

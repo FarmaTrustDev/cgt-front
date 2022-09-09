@@ -159,3 +159,11 @@ $defaultHeight: calc(100vh - 100px);
     padding-bottom: 1.5rem;
   }
 }
+// 
+.treatment-process {
+  .ant-tabs-left-bar {
+    .ant-tabs-tab {
+      border: 0 !important;
+    }
+  }
+}

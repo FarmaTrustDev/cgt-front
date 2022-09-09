@@ -3,9 +3,10 @@
     <!-- Tabs -->
     <a-spin :spinning="loading">
       <a-tabs
+        v-if="!isEmpty(panes)"
         v-model="activeKey"
         hide-add
-        
+
         @tabClick="tabClick"
       >
         <a-tab-pane
@@ -18,7 +19,11 @@
         </a-tab-pane>
         <!-- // adding button -->
       </a-tabs>
-
+      <a-alert
+      v-else
+      type="info"
+      message="No screening question added by manufacturer">
+    </a-alert>
       <!-- Tabs -->
     </a-spin>
   </div>
@@ -29,8 +34,9 @@ import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
+import nullHelper from '~/mixins/null-helpers'
 export default {
-  mixins:[routeHelpers,notifications],
+  mixins:[routeHelpers,notifications,nullHelper],
   components: { TabContent },
   props: {
     templateId: {

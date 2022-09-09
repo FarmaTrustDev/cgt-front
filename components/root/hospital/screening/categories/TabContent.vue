@@ -1,11 +1,17 @@
 <template>
   <div>
-    <a-list item-layout="horizontal" :data-source="data" class="admin-screenging-questions">
+    <a-list v-if="!isEmpty(data)" item-layout="horizontal" :data-source="data" class="admin-screenging-questions">
       <a-list-item slot="renderItem" slot-scope="item"
         >
         {{ item.name }}
       </a-list-item>
-    </a-list>    
+    </a-list>
+    <a-alert
+      v-else
+      type="info"
+      message="No screening question added by manufacturer"
+    >
+    </a-alert>
   </div>
 </template>
 <script>
