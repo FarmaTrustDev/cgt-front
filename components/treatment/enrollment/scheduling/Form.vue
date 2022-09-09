@@ -114,7 +114,7 @@ export default {
     },
     getRejectionDetail(data) {
       if (!isEmpty(data)) {
-        return 'Reason: ' + 'data'
+        return 'Reason: ' + data
       } else {
         return 'Reason: ' + 'N/A'
       }
