@@ -1,10 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container logistic-pick-detail">
      <a-card v-if="!isEmpty(shipment)" :bordered="false"  >
-      
+      <div class="card-head">
       <th>QrUrl</th>
       <th>Puid</th>
-      <tr v-for="(bag, index) in scheduling.treatmentBag" :key="index">
+    </div>
+      <tr v-for="(bag, index) in scheduling.treatmentBag" :key="index" class="header-body">
         <td><img :src="getImageUrl(bag.qrUrl)" width="65px" /></td>
         <td>{{bag.puid}}</td>
       </tr>
@@ -112,8 +113,9 @@ export default {
 }
 .grey-card > .common-detail {
   background-color: #fff;
-  width: 49.7%;
+  width: 47.7%;
   padding: 10px;
+  margin: auto;
   border-radius: 20px;
 }
 </style>

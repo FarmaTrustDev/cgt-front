@@ -1,9 +1,9 @@
 <template>
-  <div class="container" style="width: 50%; margin: 0">
+  <div class="container logistic-shipping-detail">
     <article class="article">
       <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
     </article>
-    <a-card :bordered="false" class="default-card grey-card">
+    <a-card :bordered="false" class="default-card grey-card ship-cards-body">
         <dl class="ant-row common-detail">
           <div class="ant-col-24 d-flex">
             <dt>Dispatch Date:</dt>
@@ -92,5 +92,7 @@ export default {
   background-color: #fff;
   border-radius: 20px;
   padding: 10px;
+  width: 47.7%;
+  margin: auto;
 }
 </style>
