@@ -580,7 +580,16 @@ export default {
             break
           }
         }
-        return currentPhase
+        if(treatment.isSchedule === false)
+        {
+          currentPhase = 2
+          return currentPhase
+        }
+        else
+        {
+          return currentPhase
+        }
+        
       }
       return 1
     },

@@ -3,8 +3,8 @@
     <a-card class="grey-card" :bordered="false">
       <a-row>
         <!-- left side tabs -->
-        <a-col :span="9">
-          <div class="home-tab">
+        <a-col :span="11">
+          <div class="home-tab" style="margin-top:10px !important">
             <a href="javascript:;" @click="handleSidebarKey(`/logistic`, 2)">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
@@ -37,10 +37,9 @@
           </div>
         </a-col>
         <!-- #end left side tabs -->
-        <a-col :span="2"></a-col>
         <a-col :span="3"></a-col>
 
-        <a-col :span="9">
+        <a-col :span="10">
           <TimeCard />
         </a-col>
       </a-row>

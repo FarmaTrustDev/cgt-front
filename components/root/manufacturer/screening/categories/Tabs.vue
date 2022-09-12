@@ -1,20 +1,18 @@
 <template>
   <div>
     <!-- Tabs -->
-    <a-spin :spinning="loading">
+    <!-- <a-spin :spinning="loading"> -->
       <a-tabs
-        v-model="activeKey"
-        hide-add
-        type="editable-card"
-        @tabClick="tabClick"
-        @edit="onEdit"
+      v-model="activeKey"
+      hide-add
+      type="editable-card"
+      @tabClick="tabClick"
+      @edit="onEdit"
       >
         <a-tab-pane
           v-for="pane in panes"
           :key="pane.globalId"
           :tab="pane.name"
-          :closable="pane.closable"
-          :editable="pane.closable"
         >
           <TabContent :category="pane" @getScreenTempStatusTabCon="getScreenTempStatus" />
         </a-tab-pane>
@@ -62,6 +60,7 @@ export default {
       newTabIndex: 0,
       showCategoryModal: false,
       loading: true,
+      icon: '<a-icon type="more">'
     }
   },
   computed:{
@@ -71,9 +70,9 @@ export default {
   },
   mounted() {
     this.fetchList()
-  },   
+  },
   methods: {
-    tabClick() {},
+    tabClick(){},
     handleCategoryModal(show) {
       this.showCategoryModal = show
     },
@@ -93,6 +92,11 @@ export default {
     },
     setCurrentId(key) {
       this.currentCategoryId = key
+    },
+    getTabName(name)
+    {
+      const str = '<a-icon type="more" />'
+      return name + str
     },
     add() {
       this.setCurrentId(null)
