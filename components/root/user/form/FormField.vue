@@ -420,6 +420,7 @@ import Upload from '~/components/upload/profile'
 import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 import MapServices from '~/services/API/MapServices'
 import nullHelper from '~/mixins/null-helpers'
+import { isEmpty } from '~/services/Helpers'
 export default {
   components: { Upload },
   mixins: [nullHelper],
@@ -432,6 +433,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    form: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
@@ -440,7 +445,6 @@ export default {
       loading: false,
       countries: [],
       roles: [],
-      // isCreated:true,
       fetchCountry: true,
       fetchRole: true,
       formLayout: 'vertical',
@@ -449,7 +453,11 @@ export default {
       newSelected: false,
       defaultImage: true,
       fileList: [],
-      // defaultFIleList:{uid:null, name:'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg', status:null, response: null, url: 'https://cgt-dev-ft.microsysx.com/uploads/Chat-Group/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg'},
+      city:'',
+      location:'',
+      county:'',
+      userData:[],
+      countId:this.entity.countryId,
     }
   },
   computed: {
@@ -458,13 +466,14 @@ export default {
     },
   },
   mounted() {
-    this.getCountries()
     this.getRoles()
   },
   updated() {
     if (this.isCreated && this.fetchCountry) {
-      this.fetchCountry = false
-      this.getCountries()
+      if (this.isGuid(this.$route.params.id)) {
+        this.fetch(this.$route.params.id)
+        this.fetchCountry = false
+      }
     }
     if (this.isCreated && this.fetchRole) {
       this.fetchRole = false
@@ -476,11 +485,24 @@ export default {
       this.fileList = info
       this.$emit('handleChange', this.fileList)
     },
+    fetch(id) {
+      this.loading = true
+      this.apiService
+        .getById(id)
+        .then((response) => {
+          this.userData = response.data
+          this.fetchCountries({ Ids: [this.userData.countryId] })
+        })
+        .finally(() => (this.loading = false))
+    },    
     filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries(params = {}) {
       CountryServices.get(params).then((response) => {
         this.countries = response.data.data
+        if(!isEmpty(params)){
+          this.form.setFieldsValue({countryId:this.countries[0].id})
+        }
       })
     },
     fetchRoles(params = {}) {
@@ -489,7 +511,7 @@ export default {
       })
     },
     getCountries() {
-      if (this.isCreated) {
+      if (this.entity.countryId!==undefined && this.isCreated) {
         this.fetchCountries({ Ids: [this.entity.countryId] })
       } else {
         this.fetchCountries()
@@ -509,7 +531,19 @@ export default {
       this.fetchRoles({ name })
     },
     fetchCountryByPostCode(e) {
-      MapServices.fetchCountryByPostCode(e.target.value).then((response) => {})
+      MapServices.fetchCountryByPostCode(e.target.value).then((response) => {
+        this.form.setFieldsValue({city: response.result.address_components[1].long_name})
+        this.form.setFieldsValue({location: response.result.location})
+        this.form.setFieldsValue({County: response.result.address_components[1].long_name})
+        let name=''
+        if(response.result.address_components[3].short_name==='GB'){
+          name=response.result.address_components[3].long_name  
+        }else{
+          name=response.result.address_components[4].long_name
+        }
+        // const name=response.result.address_components[4].long_name
+        this.searchCountries(name,'b')
+      })
     },
   },
 }
