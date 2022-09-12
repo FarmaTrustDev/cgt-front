@@ -4,7 +4,7 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <FormFields :treatment="treatment" />
         <a-form-item>
-          <FormActionButton :loading="stateLoading" />
+          <FormActionButton text="Save" :loading="stateLoading" />
           <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
         </a-form-item>
       </a-form>

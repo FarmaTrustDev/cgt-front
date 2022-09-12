@@ -53,6 +53,7 @@ export const PATIENT_TREATMENT_PHASES = [
         name: 'Screening',
         alias: 'SCREENING',
         phaseId: 3,
+        // phaseId: 2, // 2 is using in the patient list , if you need to change please concern @naveed
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'Screening' }
@@ -142,7 +143,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
 export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
     {
         id: 1,
-        name: 'Inbound Accepance Details',
+        name: 'Inbound Acceptance Details',
         alias: 'INBOUND_SHIPMENT',
         phaseId: 3,
         enablePageId: 3,

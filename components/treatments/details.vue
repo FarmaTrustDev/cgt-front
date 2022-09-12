@@ -1,7 +1,7 @@
 <template>
   <div class="patient-details-page">
-    <div class="grey-card m-0">
-      <a-row :gutter="18">
+    <div class="grey-card mt-5">
+      <a-row :gutter="18" class="mtminus-2">
         <a-col :span="6">
           <a-card :bordered="false" class="qr-section default-card">
             <ProfilePictureCard

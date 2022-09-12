@@ -112,7 +112,7 @@ export default {
         if (!err) {
           ShipmentServices.deliveryCreate(this.scheduling.id, values)
             .then((response) => {
-              this.success(response.message)
+              this.success('Submitted successfully')
               this.$emit('onCreate', response)
             })
             .catch(this.error)

@@ -69,30 +69,49 @@
               :data-source="inbound"
               :should-fetch="false"
             >
-            <template slot="print" slot-scope="record, print">
-        <a-button v-if="print.processSample==='default'"
-          @click="openViewModal(record)"
-          ><img :src="getImageUrl('Icons/Union.svg')" ></a-button>
-        <a-button v-else
-          @click="openPopViewModal(true)"
-          >  
-        <img :src="getImageUrl('Icons/Union.svg')" ></a-button
-        >
-      </template>
+              <template slot="print" slot-scope="record, print">
+                <a-button
+                  v-if="print.processSample === 'default'"
+                  @click="openViewModal(record)"
+                  ><img :src="getImageUrl('Icons/Union.svg')"
+                /></a-button>
+                <a-button v-else @click="openPopViewModal(true)">
+                  <img :src="getImageUrl('Icons/Union.svg')"
+                /></a-button>
+              </template>
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                  <a-steps :initial="1" size="small">
-                    <a-step
-                      v-for="phase in phases"
-                      :key="phase.id"
-                      :title="phase.name"
-                      :status="(phase.id===2 && record.processSample=='red') ? 'wait' : ''"
-                      :class="(phase.id===2 && record.processSample=='red') ? 'ant-steps-item-error': ((phase.id===2 && record.processSample!=='red')) ? 'ant-steps-item-active-blue' : ((phase.id!==3)) ? 'ant-steps-item-finish' :''"
-                      @click="(phase.id===2 && record.processSample=='red') ? stepClick('error', '/inventory/storage/quarantine/status') : stepClick(record, phase)"
-                    />
-                  </a-steps>
+                    <a-steps :initial="1" size="small">
+                      <a-step
+                        v-for="phase in phases"
+                        :key="phase.id"
+                        :title="phase.name"
+                        :status="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? 'wait'
+                            : ''
+                        "
+                        :class="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? 'ant-steps-item-error'
+                            : phase.id === 2 && record.processSample !== 'red'
+                            ? 'ant-steps-item-active-blue'
+                            : phase.id !== 3
+                            ? 'ant-steps-item-finish'
+                            : ''
+                        "
+                        @click="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? stepClick(
+                                'error',
+                                '/inventory/storage/quarantine/status'
+                              )
+                            : stepClick(record, phase)
+                        "
+                      />
+                    </a-steps>
                   </span>
                 </div>
 
@@ -120,15 +139,17 @@
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                  <a-steps :initial="1" :current="2" size="small">
-                    <a-step
-                      v-for="phase in outboundSteps"
-                      :key="phase.id"
-                      :title="phase.name"
-                      :class="(phase.id===2) ? 'ant-steps-item-active-blue' : ''"
-                      @click="stepClick(record, phase)"
-                    />
-                  </a-steps>
+                    <a-steps :initial="1" :current="2" size="small">
+                      <a-step
+                        v-for="phase in outboundSteps"
+                        :key="phase.id"
+                        :title="phase.name"
+                        :class="
+                          phase.id === 2 ? 'ant-steps-item-active-blue' : ''
+                        "
+                        @click="stepClick(record, phase)"
+                      />
+                    </a-steps>
                   </span>
                 </div>
               </span>
@@ -162,31 +183,66 @@
             </a-table>
           </a-tab-pane>
         </a-tabs>
-        <a-modal :visible="showModal" class="modal-design-smart-lab" :dialog-style="{ right: '20%', top:'5%' }"  @cancel="openPopViewModal(false)" @ok="handleOk(false)">
+        <a-modal
+          :visible="showModal"
+          class="modal-design-smart-lab"
+          :dialog-style="{ right: '20%', top: '5%' }"
+          @cancel="openPopViewModal(false)"
+          @ok="handleOk(false)"
+        >
           <a-card class="grey-card-smart-lab">
-            <status-detail :heading-title="translation.AdvanRecei_3_648" :status="translation.Compl_1_250" />
-            <hr class="mt-15">
-            <Header :url="'Uploads/patient/10/qr/637880405174699096.png'" :show-button="false" />
-            <CustomDisplay :headingTitle="translation.Infor_1_658" :colVal="8" :singleLineKey="translation.CryopNumbe_2_659" :singleLineValue="'684792563-9570-68746596'" :customDisplayData="customDisplayData" />
-            <h2 class="mt-15">{{translation.IncomMater_2_674}}</h2>
+            <status-detail
+              :heading-title="translation.AdvanRecei_3_648"
+              :status="translation.Compl_1_250"
+            />
+            <hr class="mt-15" />
+            <Header
+              :url="'Uploads/patient/10/qr/637880405174699096.png'"
+              :show-button="false"
+            />
+            <CustomDisplay
+              :heading-title="translation.Infor_1_658"
+              :colVal="8"
+              :singleLineKey="translation.CryopNumbe_2_659"
+              :singleLineValue="'684792563-9570-68746596'"
+              :customDisplayData="customDisplayData"
+            />
+            <h2 class="mt-15">{{ translation.IncomMater_2_674 }}</h2>
 
             <a-card class="white-card-smart-lab">
-                <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">
-                    <a-row style="line-height:30px">
-                        <a-col :span="4" class="text-muted" >{{custDD.title}}</a-col>
-                        
-                        <a-col v-if="custDD.url===''" :span="20">{{custDD.value}}</a-col>
-                        <a-col v-else :span="20" class="text-muted" ><img :src="getImageUrl(custDD.url)" width="20" height="20" class="img-responsive" style="border-radius:5px" /></a-col>
-                    </a-row>
-                </a-col>
+              <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">
+                <a-row style="line-height: 30px">
+                  <a-col :span="4" class="text-muted">{{ custDD.title }}</a-col>
+
+                  <a-col v-if="custDD.url === ''" :span="20">{{
+                    custDD.value
+                  }}</a-col>
+                  <a-col v-else :span="20" class="text-muted"
+                    ><img
+                      :src="getImageUrl(custDD.url)"
+                      width="20"
+                      height="20"
+                      class="img-responsive"
+                      style="border-radius: 5px"
+                  /></a-col>
+                </a-row>
+              </a-col>
             </a-card>
-          </a-card>  
+          </a-card>
           <template slot="footer">
-            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
-            <a-button type="primary" @click="handleOk(false)">{{translation.Ok_1_663}}</a-button>
-          </template>            
+            <a-button @click="printWindow()">{{
+              translation.Print_1_111
+            }}</a-button>
+            <a-button type="primary" @click="handleOk(false)">{{
+              translation.Ok_1_663
+            }}</a-button>
+          </template>
         </a-modal>
-        <a-modal :visible="showModalImage" :title="translation.Docum_1_507" @cancel="handleModal(false)">
+        <a-modal
+          :visible="showModalImage"
+          :title="translation.Docum_1_507"
+          @cancel="handleModal(false)"
+        >
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
             <a-button @click="handleModal(false)">{{
@@ -221,129 +277,127 @@ export const customDisplayData = [
   {
     title: '',
     value: 'Yes',
-    key:0,
-    url:'web/icons/greenTick.png',
+    key: 0,
+    url: 'web/icons/greenTick.png',
   },
   {
     title: '',
     value: 'Andrea Marosan',
-    key:1,
-    url:'',
+    key: 1,
+    url: '',
   },
   {
     title: '',
     value: '27/06/2022',
-    key:2,
-    url:'',
+    key: 2,
+    url: '',
   },
   {
     title: '',
     value: 'Lonza',
-    key:3,
-    url:'',
-  },  
+    key: 3,
+    url: '',
+  },
   {
     title: '',
     value: 'Najib Rehman',
-    key:4,
-    url:'',
+    key: 4,
+    url: '',
   },
   {
     title: '',
     value: '27/06/2022',
-    key:5,
-    url:'',
+    key: 5,
+    url: '',
   },
   {
     title: '',
     value: 'fedEx',
-    key:6,
-    url:'',
+    key: 6,
+    url: '',
   },
   {
     title: '',
     value: 'DAC-654',
-    key:7,
-    url:'',
+    key: 7,
+    url: '',
   },
   {
     title: '',
     value: 'Novartis',
-    key:8,
-    url:'',
-  },  
+    key: 8,
+    url: '',
+  },
   {
     title: '',
     value: '1984916419',
-    key:9,
-    url:'',
-  },  
+    key: 9,
+    url: '',
+  },
   {
     title: '',
     value: '123456a',
-    key:10,
-    url:'',
-  }, 
+    key: 10,
+    url: '',
+  },
   {
     title: '',
     value: 'Texas Test Project',
-    key:11,
-    url:'',
+    key: 11,
+    url: '',
   },
   {
     title: '',
     value: 'T1',
-    key:12,
-    url:'',
+    key: 12,
+    url: '',
   },
   {
     title: 'ARN #:',
     value: 'ARN-0633-003',
-    key:13,
-    url:'',
+    key: 13,
+    url: '',
   },
   {
     title: '',
     value: 'Cryoport - London',
-    key:14,
-    url:'',
+    key: 14,
+    url: '',
   },
   {
     title: '',
     value: 'Kiet Test',
-    key:15,
-    url:'',
+    key: 15,
+    url: '',
   },
   {
     title: '',
     value: 'Novartis Receipt',
-    key:16,
-    url:'',
+    key: 16,
+    url: '',
   },
   {
     title: '',
     value: '1',
-    key:17,
-    url:'',
-  },                 
+    key: 17,
+    url: '',
+  },
 ]
-
 
 export const customDisplayDataMat = [
   {
     title: 'Client Products:',
     value: 'Yes',
-    key:0,
-    url:'web/icons/greenTick.png',
+    key: 0,
+    url: 'web/icons/greenTick.png',
   },
   {
     title: 'Supplies:',
     value: 'Yes',
-    key:1,
-    url:'web/icons/greenTick.png',
-  },        
+    key: 1,
+    url: 'web/icons/greenTick.png',
+  },
 ]
-
 
 export const newSampleData = [
   {
@@ -471,7 +525,7 @@ export const allSampleData = [
     dispatchedBy: 'In Progress',
   },
 ]
-   
+
 export default {
   components: {
     // 'new-request': newRequests,
@@ -495,7 +549,7 @@ export default {
       filters: {},
       qrUrl: '/Uploads/DocumentURL/shipping notice.png',
       showModalImage: false,
-      showModal:false,
+      showModal: false,
       phases: SMART_LAB_TREATMENT_PENDING_PHASES,
       outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
       customDisplayData,
@@ -672,29 +726,25 @@ export default {
           key: 'dispatchedBy',
         },
       ],
-      
-      
-      
-      
-      
-                 
+
       inbound: newSampleData,
       outbound: completedSampleData,
       allSample: allSampleData,
-      statusDetails :[
-      {
-        clientID: 'DAC-654',
-        projectID: '123456a',
-        protocolD: 'T1',
-        arn: 'ARN-0633-003',
-        createdBy: 'David Handerson',
-        client: 'Novartis',
-        project: 'Texas Test Project',
-        protocol: 'Kiet Test',
-        description: 'Novartis Receipt',
-        createdOn: '27/06/2022',
-        location: 'Cryoport - London',
-      }],
+      statusDetails: [
+        {
+          clientID: 'DAC-654',
+          projectID: '123456a',
+          protocolD: 'T1',
+          arn: 'ARN-0633-003',
+          createdBy: 'David Handerson',
+          client: 'Novartis',
+          project: 'Texas Test Project',
+          protocol: 'Kiet Test',
+          description: 'Novartis Receipt',
+          createdOn: '27/06/2022',
+          location: 'Cryoport - London',
+        },
+      ],
     }
   },
   computed: {
@@ -702,67 +752,66 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.allSampleColumns[0].title=newValues.SamplID_2_502
-        this.allSampleColumns[1].title=newValues.SamplName_2_503
-        this.allSampleColumns[2].title=newValues.StoraArea_2_504
-        this.allSampleColumns[3].title=newValues.Clien_1_505
-        this.allSampleColumns[4].title=newValues.ArrivDate_5_535
-        this.allSampleColumns[5].title=newValues.Dispaby_2_396
- 
-        this.pendingColumns[0].title=newValues.SamplID_2_502
-        this.pendingColumns[1].title=newValues.SamplName_2_503
-        this.pendingColumns[2].title=newValues.StoraArea_2_504
-        this.pendingColumns[3].title=newValues.Clien_1_505
-        this.pendingColumns[4].title=newValues.ArrivDate_5_535
-        this.pendingColumns[5].title=newValues.Actio_1_220
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.allSampleColumns[0].title = newValues.SamplID_2_502
+        this.allSampleColumns[1].title = newValues.SamplName_2_503
+        this.allSampleColumns[2].title = newValues.StoraArea_2_504
+        this.allSampleColumns[3].title = newValues.Clien_1_505
+        this.allSampleColumns[4].title = newValues.ArrivDate_5_535
+        this.allSampleColumns[5].title = newValues.Dispaby_2_396
 
-        this.newSampleColumns[0].title=newValues.SamplID_2_502
-        this.newSampleColumns[1].title=newValues.SamplName_2_503
-        this.newSampleColumns[2].title=newValues.Clien_1_505
-        this.newSampleColumns[3].title=newValues.ArrivDate_5_535
-        this.newSampleColumns[4].title=newValues.Docum_1_507
-        this.newSampleColumns[5].title=newValues.Actio_1_220
+        this.pendingColumns[0].title = newValues.SamplID_2_502
+        this.pendingColumns[1].title = newValues.SamplName_2_503
+        this.pendingColumns[2].title = newValues.StoraArea_2_504
+        this.pendingColumns[3].title = newValues.Clien_1_505
+        this.pendingColumns[4].title = newValues.ArrivDate_5_535
+        this.pendingColumns[5].title = newValues.Actio_1_220
 
-        this.phases[0].name=newValues.inboushipm_2_302
-        this.phases[1].name=newValues.ProceSampl_2_499
-        this.phases[2].name=newValues.StoreSampl_2_579
+        this.newSampleColumns[0].title = newValues.SamplID_2_502
+        this.newSampleColumns[1].title = newValues.SamplName_2_503
+        this.newSampleColumns[2].title = newValues.Clien_1_505
+        this.newSampleColumns[3].title = newValues.ArrivDate_5_535
+        this.newSampleColumns[4].title = newValues.Docum_1_507
+        this.newSampleColumns[5].title = newValues.Actio_1_220
 
-        this.outboundSteps[0].name=newValues.StoreSampl_2_579
-        this.outboundSteps[1].name=newValues.OutboProce_2_514
-        this.outboundSteps[2].name=newValues.Couri_1_234
+        this.phases[0].name = newValues.inboushipm_2_302
+        this.phases[1].name = newValues.ProceSampl_2_499
+        this.phases[2].name = newValues.StoreSampl_2_579
 
+        this.outboundSteps[0].name = newValues.StoreSampl_2_579
+        this.outboundSteps[1].name = newValues.OutboProce_2_514
+        this.outboundSteps[2].name = newValues.Couri_1_234
 
-        this.customDisplayData[0].title=newValues.ReturMater_2_660
-        this.customDisplayData[1].title=newValues['Initiby:_2_661']
-        this.customDisplayData[2].title=newValues['Date:_1_664']
-        this.customDisplayData[3].title=newValues.Origi_1_662
-        this.customDisplayData[4].title=newValues['Complby:_2_663']
-        this.customDisplayData[5].title=newValues['Date:_1_664']
-        this.customDisplayData[6].title=newValues.Couri_1_665
-        this.customDisplayData[7].title=newValues['ClienID:_2_678']
-        this.customDisplayData[8].title=newValues.Clien_1_666
-        this.customDisplayData[9].title=newValues['TrackID:_2_667']
-        this.customDisplayData[10].title=newValues['ProjeID:_2_668']
-        this.customDisplayData[11].title=newValues.Proje_1_669
-        this.customDisplayData[12].title=newValues['ProtoID:_2_682']
+        this.customDisplayData[0].title = newValues.ReturMater_2_660
+        this.customDisplayData[1].title = newValues['Initiby:_2_661']
+        this.customDisplayData[2].title = newValues['Date:_1_664']
+        this.customDisplayData[3].title = newValues.Origi_1_662
+        this.customDisplayData[4].title = newValues['Complby:_2_663']
+        this.customDisplayData[5].title = newValues['Date:_1_664']
+        this.customDisplayData[6].title = newValues.Couri_1_665
+        this.customDisplayData[7].title = newValues['ClienID:_2_678']
+        this.customDisplayData[8].title = newValues.Clien_1_666
+        this.customDisplayData[9].title = newValues['TrackID:_2_667']
+        this.customDisplayData[10].title = newValues['ProjeID:_2_668']
+        this.customDisplayData[11].title = newValues.Proje_1_669
+        this.customDisplayData[12].title = newValues['ProtoID:_2_682']
         // this.customDisplayData[13].title=newValues.ReturMater_2_660
-        this.customDisplayData[14].title=newValues.Locat_1_671
-        this.customDisplayData[15].title=newValues.Proto_1_686
-        this.customDisplayData[16].title=newValues.Descr_1_655
-        this.customDisplayData[17].title=newValues.Numbeof_3_673       
+        this.customDisplayData[14].title = newValues.Locat_1_671
+        this.customDisplayData[15].title = newValues.Proto_1_686
+        this.customDisplayData[16].title = newValues.Descr_1_655
+        this.customDisplayData[17].title = newValues.Numbeof_3_673
 
-
-        this.customDisplayDataMat[0].title=newValues.ClienProdu_2_675
-        this.customDisplayDataMat[1].title=newValues.Suppl_1_676
+        this.customDisplayDataMat[0].title = newValues.ClienProdu_2_675
+        this.customDisplayDataMat[1].title = newValues.Suppl_1_676
       }
-    }
-  },  
+    },
+  },
   mounted() {
     this.getTranslationData()
-  },   
+    this.$store.commit('setSelectedMenu', [`2`])
+  },
   methods: {
     searchTreatment() {},
     stepClick(record, phase) {
@@ -779,52 +828,52 @@ export default {
     handleModal(show) {
       this.showModalImage = show
     },
-    handleOk(){
-      this.showModal=false
+    handleOk() {
+      this.showModal = false
     },
     openViewModal(id) {
       this.showModalImage = true
       this.qrUrl = id
       // LabelServices.scheduling(id);
     },
-    openPopViewModal(val){
-      this.showModal=val
+    openPopViewModal(val) {
+      this.showModal = val
     },
-    getTranslationData(){
-        this.phases[0].name=this.translation.inboushipm_2_302
-        this.phases[1].name=this.translation.ProceSampl_2_499
-        this.phases[2].name=this.translation.StoreSampl_2_579
+    getTranslationData() {
+      this.phases[0].name = this.translation.inboushipm_2_302
+      this.phases[1].name = this.translation.ProceSampl_2_499
+      this.phases[2].name = this.translation.StoreSampl_2_579
 
-        this.outboundSteps[0].name=this.translation.StoreSampl_2_579
-        this.outboundSteps[1].name=this.translation.OutboProce_2_514
-        this.outboundSteps[2].name=this.translation.Couri_1_234
+      this.outboundSteps[0].name = this.translation.StoreSampl_2_579
+      this.outboundSteps[1].name = this.translation.OutboProce_2_514
+      this.outboundSteps[2].name = this.translation.Couri_1_234
 
-        this.customDisplayData[0].title=this.translation.ReturMater_2_660
-        this.customDisplayData[1].title=this.translation['Initiby:_2_661']
-        this.customDisplayData[2].title=this.translation['Date:_1_664']
-        this.customDisplayData[3].title=this.translation.Origi_1_662
-        this.customDisplayData[4].title=this.translation['Complby:_2_663']
-        this.customDisplayData[5].title=this.translation['Date:_1_664']
-        this.customDisplayData[6].title=this.translation.Couri_1_665
-        this.customDisplayData[7].title=this.translation['ClienID:_2_678']
-        this.customDisplayData[8].title=this.translation.Clien_1_666
-        this.customDisplayData[9].title=this.translation['TrackID:_2_667']
-        this.customDisplayData[10].title=this.translation['ProjeID:_2_668']
-        this.customDisplayData[11].title=this.translation.Proje_1_669
-        this.customDisplayData[12].title=this.translation['ProtoID:_2_682']
-        // this.customDisplayData[13].title=newValues.ReturMater_2_660
-        this.customDisplayData[14].title=this.translation.Locat_1_671
-        this.customDisplayData[15].title=this.translation.Proto_1_686
-        this.customDisplayData[16].title=this.translation.Descr_1_655
-        this.customDisplayData[17].title=this.translation.Numbeof_3_673
-        
-        this.customDisplayDataMat[0].title=this.translation.ClienProdu_2_675
-        this.customDisplayDataMat[1].title=this.translation.Suppl_1_676
+      this.customDisplayData[0].title = this.translation.ReturMater_2_660
+      this.customDisplayData[1].title = this.translation['Initiby:_2_661']
+      this.customDisplayData[2].title = this.translation['Date:_1_664']
+      this.customDisplayData[3].title = this.translation.Origi_1_662
+      this.customDisplayData[4].title = this.translation['Complby:_2_663']
+      this.customDisplayData[5].title = this.translation['Date:_1_664']
+      this.customDisplayData[6].title = this.translation.Couri_1_665
+      this.customDisplayData[7].title = this.translation['ClienID:_2_678']
+      this.customDisplayData[8].title = this.translation.Clien_1_666
+      this.customDisplayData[9].title = this.translation['TrackID:_2_667']
+      this.customDisplayData[10].title = this.translation['ProjeID:_2_668']
+      this.customDisplayData[11].title = this.translation.Proje_1_669
+      this.customDisplayData[12].title = this.translation['ProtoID:_2_682']
+      // this.customDisplayData[13].title=newValues.ReturMater_2_660
+      this.customDisplayData[14].title = this.translation.Locat_1_671
+      this.customDisplayData[15].title = this.translation.Proto_1_686
+      this.customDisplayData[16].title = this.translation.Descr_1_655
+      this.customDisplayData[17].title = this.translation.Numbeof_3_673
+
+      this.customDisplayDataMat[0].title = this.translation.ClienProdu_2_675
+      this.customDisplayDataMat[1].title = this.translation.Suppl_1_676
     },
     inboundSearch(value, key) {
-      // console.log(key)
+      // console.log(value.toUpperCase())
       let filters = this.filters
-      filters[key] = value
+      filters[key] = value.toUpperCase()
       filters = JSON.stringify(filters)
       filters = JSON.parse(filters)
       this.filters = filters
@@ -836,11 +885,10 @@ export default {
 
           storages = newSampleData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              return storage[filter].match(value)
+              return storage[filter].match(value.toUpperCase())
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) == filterValue
+            return storage[filter].match(value.toUpperCase()) == filterValue.toUpperCase()
           })
         }
         storages = JSON.stringify(storages)
@@ -850,9 +898,8 @@ export default {
       }
     },
     outboundSearch(value, key) {
-      // console.log(key)
       let filters = this.filters
-      filters[key] = value
+      filters[key] = value.toUpperCase()
       filters = JSON.stringify(filters)
       filters = JSON.parse(filters)
       this.filters = filters
@@ -860,15 +907,15 @@ export default {
       if (!isEmpty(filters)) {
         let storages = []
         for (const filter in filters) {
+          // console.log(filters)
           const filterValue = filters[filter]
-
           storages = completedSampleData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              return storage[filter].match(value)
+              // console.log(storage[filter])
+              return storage[filter].match(value.toUpperCase())
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) == filterValue
+            return storage[filter].match(value.toUpperCase()) == filterValue.toUpperCase()
           })
         }
 
@@ -879,7 +926,6 @@ export default {
       }
     },
     allSampleSearch(value, key) {
-      // console.log(key)
       let filters = this.filters
       filters[key] = value
       filters = JSON.stringify(filters)
@@ -893,14 +939,12 @@ export default {
 
           storages = allSampleData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
               return storage[filter].match(value)
             }
             // eslint-disable-next-line eqeqeq
             return storage[filter].match(value) == filterValue
           })
         }
-
         storages = JSON.stringify(storages)
         this.allSample = JSON.parse(storages)
       } else {

@@ -6,9 +6,6 @@
       status="process"
       size="small"
     >
-      <!-- <div >
-        {{ treatment.treatmentTypeName }}
-      </div> -->
       <a-step
         v-for="phase in phases"
         :key="phase.phaseId"

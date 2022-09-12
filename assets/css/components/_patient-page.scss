@@ -51,8 +51,14 @@
   }
 
   .patient-table {
-    .ant-table {
-      overflow-x: auto;
+    td.ant-table-row-cell-break-word:nth-child(2) {
+      font-weight: bold !important;
+    }
+    td.ant-table-row-cell-break-word:nth-child(1) {
+      font-weight: 300 !important;
+    }
+    td.ant-table-row-cell-break-word:nth-child(3) {
+      font-weight: 300 !important;
     }
   }
 
@@ -78,7 +84,7 @@
     }
     .treatment-title {
       display: inline-block;
-      width: 49%;
+      // width: 49%;
     }
   }
 

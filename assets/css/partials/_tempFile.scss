@@ -5,13 +5,23 @@
   .ant-tabs-nav.ant-tabs-nav-animated {
     width: 100%;
   }
+  .ant-tabs-tab:nth-child(1)::after{
+    content: ' ';
+    width: 3px;
+    height: 34px;
+    display: inline-block;
+    position: absolute;
+    background: #bab9b97d;
+    right: -11px;
+    top: 5px;
+  }
   .ant-tabs-tab {
     width: 48%;
     border-radius: 44px;
     border: 1px solid #ececec;
     text-align: center;
     margin: 0;
-    margin-right: 8px !important;
+    margin-right: 18px !important;
   }
   .ant-tabs-tab-active {
     border: 1px solid #a3c9ff !important;
@@ -22,7 +32,11 @@
   .ant-tabs-ink-bar.ant-tabs-ink-bar-no-animated {
     display: none !important;
   }
+  .ant-calendar-picker-input.ant-input {
+    margin-top: 0;
+  }
 }
+
 // -------------
 .screening-tabs {
   .ant-tabs-nav-wrap {
@@ -116,11 +130,14 @@
 //
 .treatment-steps.manufacturer-step {
   .ant-steps-item {
-    border: 1px solid #b8b8b8;
+    border: 1px solid #ececec;
     padding: 9px 5px !important;
   }
+  .ant-steps-item.ant-steps-item-process {
+    width: 170px !important;
+  }
   .ant-steps-item-finish {
-    padding-bottom: 4px !important;
+    padding-bottom: 6px !important;
 
   }
   .ant-steps-item.ant-steps-item-process.ant-steps-item-active {

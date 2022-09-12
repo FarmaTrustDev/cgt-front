@@ -7,11 +7,11 @@
               <a-col :span="4" class="text-muted">{{singleLineKey}}</a-col>
               <a-col :span="16" class="text-color-black">{{singleLineValue}}</a-col>
             </a-row>
-            <a-col v-for="custDD in customDisplayData" :key="custDD.key" :span="colVal" class="mt-10">
+            <a-col v-for="custDD in customDisplayData" :key="custDD.key" :span="colVal" class="mt-10"  style="min-height:30px;">
                 <a-row>
-                    <a-col :span="12" class="text-muted" style="line-height:15px">{{custDD.title}}</a-col>
+                    <a-col :span="12" class="text-muted" style="line-height:15px" >{{custDD.title}}</a-col>
                     
-                    <a-col v-if="custDD.url===''" :span="12" class="text-color-black" style="line-height:15px">{{custDD.value}}</a-col>
+                    <a-col v-if="custDD.url===''" :span="12" class="text-color-black;" style="line-height:15px">{{custDD.value}}</a-col>
                     <a-col v-else :span="12" class="text-muted" style="line-height:15px"><img :src="getImageUrl(custDD.url)" width="15" height="15" class="img-responsive" style="border-radius:5px" /></a-col>
                 </a-row>
             </a-col>

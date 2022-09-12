@@ -110,15 +110,17 @@ export default {
   watch:{
     translation(newValues, oldValue){
       if(newValues!==oldValue){
-        this.steps[0].by=newValues.InbouDate_2_635
-        this.steps[1].by=newValues.InbouProce_2_513
-        this.steps[2].by=newValues.Stora_1_366
-        this.steps[3].by=newValues.VisuaCheck_2_636
-        this.steps[4].by=newValues.PackaDepot_2_637
-        this.steps[5].by=newValues.CouriPick_3_648
+        if(this.steps.length>0){
+          this.steps[0].by=newValues.InbouDate_2_635
+          this.steps[1].by=newValues.InbouProce_2_513
+          this.steps[2].by=newValues.Stora_1_366
+          this.steps[3].by=newValues.VisuaCheck_2_636
+          this.steps[4].by=newValues.PackaDepot_2_637
+          this.steps[5].by=newValues.CouriPick_3_648
+        }
       }
     }
-  },  
+  },
   mounted() {
     const m = this.getRackPortion
     const g = this.getTube
@@ -126,6 +128,7 @@ export default {
       m()
       g()
     }, 100)
+    this.getTranslation()
   },
   methods: {
     isEmpty,
@@ -138,7 +141,24 @@ export default {
     },
     getTube(tube) {
       this.steps = this.fridgeData.racks[0].portions[0].trays[0].tubes[0].steps
+      this.steps[0].by=this.translation.InbouDate_2_635
+      this.steps[1].by=this.translation.InbouProce_2_513
+      this.steps[2].by=this.translation.Stora_1_366
+      this.steps[3].by=this.translation.VisuaCheck_2_636
+      this.steps[4].by=this.translation.PackaDepot_2_637
+      this.steps[5].by=this.translation.CouriPick_3_648 
     },
+    getTranslation(){
+      // console.log(this.steps.length)
+      if(this.steps.length>0){
+        this.steps[0].by=this.translation.InbouDate_2_635
+        this.steps[1].by=this.translation.InbouProce_2_513
+        this.steps[2].by=this.translation.Stora_1_366
+        this.steps[3].by=this.translation.VisuaCheck_2_636
+        this.steps[4].by=this.translation.PackaDepot_2_637
+        this.steps[5].by=this.translation.CouriPick_3_648
+      }
+    },    
   },
 }
 </script>

@@ -17,7 +17,7 @@
       }"
       @changeDate="handleDateClick"
     />
-    <FormActionButton :loading="loading" @click="onSubmit"> </FormActionButton>
+    <FormActionButton :loading="loading" text="Save Schedule" @click="onSubmit"> </FormActionButton>
   </div>
 </template>
 <script>
@@ -51,7 +51,9 @@ export default {
       loading: false,
       calendarOptions: {
         headerToolbar: {
-          center: 'dayGridMonth', // buttons for switching between views
+           left: false,
+          center: 'title',
+          right: 'prev,next'
         },
         plugins: [interactionPlugin, timeGridPlugin, dayGridPlugin],
         initialView: 'dayGridMonth',

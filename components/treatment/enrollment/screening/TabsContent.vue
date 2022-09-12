@@ -13,7 +13,7 @@
       :data-source="screenings"
       :pagination="false"
       :loading="loading"
-      class="square-table "
+      class="square-table"
     >
       <template slot="name" slot-scope="name">
         {{ name }}
@@ -52,7 +52,7 @@
                 ],
               },
             ]"
-            placeholder="Please input your notes"
+            placeholder="Note"
             @blur="(e) => handleInput(row.id, e)"
           />
           <a-input
@@ -104,6 +104,11 @@ export default {
       required: true,
       default: () => [],
     },
+    form: {
+      required: true,
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -129,6 +134,7 @@ export default {
       notesRequired: {},
       filledData: 0,
       noteItem: [],
+      checkValidationList: [],
     }
   },
   computed: {
@@ -140,34 +146,31 @@ export default {
     this.filledData = 0
   },
   methods: {
-    handleCheck(value, rowId) {
+    pushListArray(value, rowId) {
+      const notesValue = this.form.getFieldValue(
+        `screenings[id-${rowId}][notes]`
+      )
+
+      const checkListValidation = this.checkValidationList
+      checkListValidation[rowId] = {
+        value,
+        notes: notesValue,
+        id: rowId,
+      }
+
       const notesRequired = this.notesRequired
       notesRequired[rowId] = value
       this.notesRequired = notesRequired
-      if (value === true) {
-        this.filledData = this.filledData + 1
-      } else {
-        this.filledData = this.filledData - 1
-      }
-      if (this.filledData < 0) {
-        this.filledData = 0
-      }
-      this.sendData(this.filledData)
+
+      this.checkValidationList = checkListValidation
+      this.sendData(this.checkValidationList)
+    },
+
+    handleCheck(value, rowId) {
+      this.pushListArray(value, rowId)
     },
     handleInput(rowId, e) {
-      if (this.noteItem.includes(rowId)) {
-        this.noteItem.splice(this.noteItem.indexOf(rowId), 1)
-        this.filledData = this.filledData - 1
-      }
-      if (this.filledData < 0) {
-        this.filledData = 0
-      }
-      if (!this.notesRequired[rowId] && e.target.value !== null) {
-        console.log(this.noteItem)
-        this.noteItem.push(rowId)
-        this.filledData = this.filledData + 1
-        this.sendData(this.filledData)
-      }
+      this.pushListArray(e.target.value, rowId)
     },
     sendData(totVals) {
       this.$emit('getFilledDatas', totVals)

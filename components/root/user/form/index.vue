@@ -2,8 +2,10 @@
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <FormFields
+        :form="form"
         :entity="userData"
         :is-created="isCreated"
+        @cheCreated="checkCreated"
         @handleChange="handleChange"
       />
       <a-form-item :label-col="{ span: 24 }" :wrapper-col="{ span: 22 }">

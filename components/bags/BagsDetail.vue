@@ -1,5 +1,6 @@
 <template>
   <div class="qr_bag">
+    <h4 class="heading pl-0">Inbound Samples</h4>
     <a-skeleton :loading="loading">
       <StandardTable
         v-if="bags.length > 0"
@@ -25,16 +26,26 @@ import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import StandardTable from '~/components/common/StandardTable'
 const columns = [
   {
+    title: 'QR Code',
+    dataIndex: 'qrUrl',
+    key: 'qrUrl',
+    scopedSlots: { customRender: 'image' },
+  },
+  {
     title: 'Bag Id',
     dataIndex: 'puid',
     key: 'puid',
   },
   {
-    title: 'Image',
-    dataIndex: 'qrUrl',
-    key: 'qrUrl',
-    scopedSlots: { customRender: 'image' },
+    title: 'Collection Date/Time',
+    dataIndex: 'collectionDateTime',
+    key: 'collDateTime'
   },
+  {
+    title: 'Description',
+    dataIndex: 'notes',
+    key: 'description'
+  }
 ]
 export default {
   components: { StandardTable },
@@ -61,6 +72,7 @@ export default {
       TreatmentBagServices.get({ treatmentId: this.treatment.id })
         .then((bags) => {
           this.bags = bags.data
+          console.log(bags)
         })
         .then(() => {
           this.loading = false

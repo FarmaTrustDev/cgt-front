@@ -1,7 +1,7 @@
 <template>
   <a-card class="white-card" :bordered="false">
     <a-row>
-      <a-col :span="12"
+      <a-col :span="10"
         ><span class="danger-time">
           {{ _getFormatMoment().format('HH:mm') }}</span
         ></a-col

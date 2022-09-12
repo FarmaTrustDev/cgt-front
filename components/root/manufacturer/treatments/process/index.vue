@@ -5,11 +5,13 @@
             v-if="treatment.isHold == true"
             type="error"
             message="Treatment has been paused"
+            :description=" 'Reason : ' + treatment.treatmentPauseReason"
           />
           <a-alert
             v-if="treatment.isCancel == true"
             type="error"
             message="Treatment has been cancelled"
+            :description=" 'Reason : ' + treatment.treatmentCancelReason"
           />
     </span>
     <span v-else>

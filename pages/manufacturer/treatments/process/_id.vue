@@ -60,6 +60,10 @@
         </a-card> -->
 
         <a-card :bordered="false" class="mt-15 default-card h-tabs">
+          <BagDetail
+            v-if="activeTab === 'INBOUND_SHIPMENT'"
+            :treatment="entity"
+          />
           <shipment
             v-if="activeTab === 'INBOUND_SHIPMENT'"
             :treatment="entity"
@@ -93,6 +97,7 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import TreatmentProfilePictureCard from '~/components/patient/profile/TreatmentProfileCard'
 import process from '~/components/root/manufacturer/treatments/process'
 import QrViewer from '~/components/bags/Viewer'
+import BagDetail from '~/components/bags/BagsDetail.vue'
 import shipment from '~/components/treatment/shipment'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
 import schedulingBasicRequest from '~/components/scheduling/request/BasicForm'
@@ -109,6 +114,7 @@ export default {
     shipment,
     'scheduling-basic-request': schedulingBasicRequest,
     QrViewer,
+    BagDetail,
   },
   mixins: [withFetch],
   middleware: 'auth',

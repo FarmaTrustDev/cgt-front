@@ -24,9 +24,23 @@ function getHospitalTempStatus(templateId, treatmentTypeId, manufacturerId) {
   })
 }
 
+function getScreeningTempStatus(templateId) {
+  return request({
+    url: `${baseApi}/getScreeningTemplateStatus/${templateId}`,
+    method:'GET',
+  })
+}
+
 function markAcceptance(templateId, treatmentTypeId, manufacturerId) {
   return request({
     url: `${baseApi}/markAcceptance/${templateId}/${treatmentTypeId}/${manufacturerId}`,
+    method:'GET',
+  })
+}
+
+function submitScreeningRequest(templateId, treatmentTypeId, manufacturerId) {
+  return request({
+    url: `${baseApi}/submit-screening-request/${templateId}`,
     method:'GET',
   })
 }
@@ -46,7 +60,7 @@ function create(data) {
 }
 
 function update(id, data) {
-  console.log(data)
+  // console.log(data)
   return request({
     url: `${baseApi}/update/${id}`,
     method: 'put',
@@ -62,7 +76,9 @@ const ScreeningTemplateServices = {
   markAcceptance,
   create,
   getById,
-  update
+  update,
+  getScreeningTempStatus,
+  submitScreeningRequest
 }
 
 export default ScreeningTemplateServices

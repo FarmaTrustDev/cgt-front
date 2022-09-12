@@ -2,8 +2,11 @@
   <div class="home-page manf-board">
     <a-card class="grey-card" :bordered="false">
       <!-- left side tabs -->
-      <a-col :md="10" class="mtminus-7">
-        <a href="javascript:;" @click="goto(`/hospital/patients/create`)">
+      <a-col :md="11" class="mtminus-6">
+        <a
+          href="javascript:;"
+          @click="handleSidebarKey(`/hospital/patients/create`, 3)"
+        >
           <div class="home-tab">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/note-board-scheduling.svg"
@@ -18,7 +21,7 @@
             </h4>
           </div>
         </a>
-        <a href="javascript:;" @click="goto(`/hospital/patients`)">
+        <a href="javascript:;" @click="handleSidebarKey(`/hospital/patients`, 2)">
           <div class="home-tab">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
@@ -34,7 +37,7 @@
             </h4>
           </div>
         </a>
-        <a href="javascript:;" @click="goto(`/users`)">
+        <a href="javascript:;" @click="handleSidebarKey(`/users`, 8)">
           <div v-if="isHospital()" class="home-tab with-arrow">
             <img
               src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"
@@ -49,9 +52,9 @@
         </a>
       </a-col>
       <!-- #end left side tabs -->
-      <a-col :span="4"></a-col>
+      <a-col :span="3"></a-col>
 
-      <a-col :md="10" class="mtminus-6">
+      <a-col :md="10" class="mtminus-5">
         <treatment-stats />
       </a-col>
     </a-card>
@@ -76,7 +79,8 @@ export default {
   },
   mounted() {},
   methods: {
-    gotoView(uri) {
+    gotoView(uri, key) {
+      this.$store.commit('setSelectedMenu', [`${key}`])
       this.goto(`/${uri}`)
     },
   },

@@ -18,17 +18,17 @@
           <scheduling :treatment="treatment" />
         </a-tab-pane>
 
-        <a-tab-pane key="collection" :disabled="!tabs.collectSamples">
+        <a-tab-pane key="collection" :disabled="treatment.phaseId < 4">
           <div
             slot="tab"
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 6)"
           >
-            Collect Samples
+            Collect Samples {{ treatment.phaseId }}
           </div>
           <collections
             v-if="tabs.collectSamples != null"
-            :enabled="tabs.collectSamples"
+            :enabled="treatment.phaseId <= 4"
             :treatment="treatment"
           />
         </a-tab-pane>

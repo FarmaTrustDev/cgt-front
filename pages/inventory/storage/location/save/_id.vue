@@ -67,7 +67,7 @@
       <a-modal
       :visible="showModal"
       :title="translation.Confisampl_3_621"
-      ok-text="Confirm"
+      :ok-text="translation.Confi_1_646"
       :cancel-text="translation.cance_1_296"
       @ok="confirm(false)"
       @cancel="handleModal(false)"

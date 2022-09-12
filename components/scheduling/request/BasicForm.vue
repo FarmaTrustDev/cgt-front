@@ -5,11 +5,13 @@
             v-if="treatment.isHold == true"
             type="error"
             message="Treatment has been paused"
+            :description=" 'Reason : ' + treatment.treatmentPauseReason"
           />
           <a-alert
             v-if="treatment.isCancel == true"
             type="error"
             message="Treatment has been cancelled"
+            :description=" 'Reason : ' + treatment.treatmentCancelReason"
           />
     </div>
     <div v-else>
@@ -47,7 +49,7 @@
         :message="
           'Request sent to ' +
           logisticName +
-          ', you can ship the sample once logistic provider approved the request'
+          ', you can ship the sample once logistic provider has approved the request'
         "
         type="info"
       />
@@ -61,13 +63,15 @@
             v-if="treatment.isHold == true"
             type="error"
             message="Treatment has been paused"
+            :description=" 'Reason : ' + treatment.treatmentPauseReason"
           />
           <a-alert
             v-if="treatment.isCancel == true"
             type="error"
             message="Treatment has been cancelled"
+            :description=" 'Reason : ' + treatment.treatmentCancelReason"
           />
-        <LogisticLookup :logisticId="logisticId" :params="{ Id: logisticId }" />
+        <LogisticLookup :logistic-id="logisticId" :params="{ Id: logisticId }" />
         <a-row :gutter="16">
           <a-col :span="12">
             <a-form-item :label="translation.SamplColle_3_518" class="pb-0">

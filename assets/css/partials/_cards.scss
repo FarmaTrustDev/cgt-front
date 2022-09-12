@@ -5,7 +5,7 @@
   border-radius: 44px;
   padding-left: 2%;
   padding-right: 2%;
-  padding-top: 4%;
+  padding-top: 3%;
   padding-bottom: 2%;
 
   .ant-card {
@@ -114,5 +114,10 @@
     td:first-child {
       text-align: initial;
     }
+  }
+}
+.logistic_board {
+  .grey-card {
+    padding-top: 0 !important;
   }
 }

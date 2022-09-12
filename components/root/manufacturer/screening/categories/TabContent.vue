@@ -18,12 +18,11 @@
               <a-menu-item key="1"> <a-icon type="edit" />{{translation.Edit_1_450}} </a-menu-item>
               <a-menu-item key="2" >
                 <a-popconfirm
-              :title="translation.Areyou_4_484"
-              :ok-text="translation.yes_1_654"
-              :cancel-text="translation.no_1_656"
-              placement="topLeft"
-              @confirm="deleteScreening(item.id)"
-            >
+                  :title="translation.Areyou_4_484"
+                  :ok-text="translation.yes_1_654"
+                  :cancel-text="translation.no_1_656"
+                  placement="topLeft"
+                  @confirm="deleteScreening(item.id)">
                 <a-icon type="delete" />{{translation.Delet_1_451}}</a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -44,6 +43,7 @@
         :category="category"
         @close="handleCategoryModal"
         @upsert="handleUpsert"
+        @getScreenTempStatusIndex="getScreenTempStatus"
       />
     </a-modal>
   </div>
@@ -75,15 +75,15 @@ export default {
       showScreeningModal: false,
     }
   },
-  mounted() {
-    if (!this.isEmpty(this.category)) {
-      this.fetch()
-    }
-  },
   computed:{
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  mounted() {
+    if (!this.isEmpty(this.category)) {
+      this.fetch()
+    }
   },  
   methods: {
     fetch() {
@@ -100,6 +100,9 @@ export default {
     handleUpsert(response) {
       this.fetch()
       this.handleCategoryModal(false)
+    },
+    getScreenTempStatus(){
+      this.$emit('getScreenTempStatusTabCon')
     },
     deleteScreening(id){
       ScreeningServices.destroy(id).then((response)=>{

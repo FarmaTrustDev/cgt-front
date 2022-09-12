@@ -109,10 +109,19 @@ function resetPassword(id, data) {
   })
 }
 
-function resetPasswordEmail(id){
+function resetPasswordEmail(data){
   return request({
-    url: `${baseApi}/reset-password-email/${id}`,
-    method: 'GET',
+    url: `${baseApi}/reset-password-email`,
+    data,
+    method: 'POST',
+  })
+}
+
+function sendEmailToHospitals(data){
+  return request({
+    url: `${baseApi}/send-email-to-hospitals`,
+    data,
+    method: 'POST',
   })
 }
 
@@ -135,6 +144,7 @@ const UserServices = {
   resetPassword,
   resetPasswordEmail,
   getSearchUser,
+  sendEmailToHospitals,
 }
 
 export default UserServices

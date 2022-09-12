@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="12">
         <a-form-item
-          label="Lab Name*:"
+          :label="translation.Lab_1_566+'*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -15,12 +15,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input Lab Name',
+                    message: translation.Lab_1_566,
                   },
                 ],
               },
             ]"
-            placeholder="Lab Name"
+            :placeholder="translation.Lab_1_566"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -37,7 +37,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Email',
+                    message: translation['EmailAddre_2_140'],
                   },
                 ],
               },
@@ -49,7 +49,7 @@
       
       <a-col :span="12">
         <a-form-item
-          label="Postcode"
+          :label="translation.Postc_1_444"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -62,18 +62,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Postcode',
+                    message: translation.Postc_1_444,
                   },
                 ],
               },
             ]"
-            placeholder="Postcode"
+            :placeholder="translation.Postc_1_444"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Contact Number"
+          :label="translation.ContaNumbe_2_404"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -86,18 +86,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Contact Number',
+                    message: translation.ContaNumbe_2_404,
                   },
                 ],
               },
             ]"
-            placeholder="Contact"
+            :placeholder="translation.ContaNumbe_2_404"
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Postal address"
+          :label="translation.PostaAddre_2_450"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -110,18 +110,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Postal Address',
+                    message: '',
                   },
                 ],
               },
             ]"
-            placeholder="Postal Address"
+            placeholder=""
           />
         </a-form-item>
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="City"
+          :label="translation.City_1_446"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -134,18 +134,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your City',
+                    message: translation.City_1_446,
                   },
                 ],
               },
             ]"
-            placeholder="Postal City"
+            :placeholder="translation.City_1_446"
           />
         </a-form-item>
       </a-col>   
       <a-col :span="12">
         <a-form-item
-          label="Location:"
+          :label="translation.Locat_1_448+':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -157,18 +157,18 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Location',
+                    message: translation.Locat_1_448,
                   },
                 ],
               },
             ]"
 
-            placeholder="Location"
+            :placeholder="translation.Locat_1_448"
           /> </a-form-item
       ></a-col>         
       <a-col :span="12">
         <a-form-item
-          label="County"
+          :label="translation.Count_1_657"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
@@ -180,14 +180,14 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your country!',
+                    message: translation.Count_1_657,
                   },
                 ],
               },
             ]"
             :show-search="true"
             :filter-option="filterOption"
-            placeholder="County"
+            :placeholder="translation.Count_1_657"
             style="width: 100%"
             size="large"
             class="default-select"

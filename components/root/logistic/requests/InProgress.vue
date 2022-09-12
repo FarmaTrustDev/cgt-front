@@ -7,13 +7,15 @@
             <span class="treatmentName">{{ name }}</span>
           </a-tooltip>
       </template> 
-      <span slot="action" slot-scope="text, record" class="treatment-steps ">
+      <span slot="duration" slot-scope="text, index" :key="index">
+        {{text}} Day(s)
+      </span>
+      <span slot="action" slot-scope="text, record" class="treatment-steps">
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)" class="step-col-logistic" >
-          <a-steps :current="getCurrentStep(record)" size="small">
-            <a-step title="Pickup Shipment" @click="stepClick(record)" />
-            
-            <a-step title="Delivery Shipment" />
+          <a-steps  size="small" :initial="1">
+            <a-step :key="1" title="Pickup Shipment" :class="record.treatment.phaseId > 8 ? 'ant-steps-item-finish' : 'ant-steps-item-active'" @click="stepClick(record)" />
+            <a-step :key="2" title="Delivery Shipment" :class="record.treatment.phaseId > 8 ? 'ant-steps-item-active' : ''" />
           </a-steps>
         </div>
 
@@ -28,6 +30,7 @@ import SchedulingServices from '~/services/API/SchedulingServices'
 import withTableCrud from '~/mixins/with-table-crud'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
 import routeHelpers from '~/mixins/route-helpers'
+import tabsHelpers from '~/mixins/tabs-helpers'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
@@ -35,7 +38,7 @@ import {
 const ActionLink = '/manufacturer/schedules'
 export default {
   components: { Filters },
-  mixins: [withTableCrud, routeHelpers],
+  mixins: [withTableCrud, routeHelpers, tabsHelpers],
   data() {
     return {
       column: [
@@ -54,6 +57,11 @@ export default {
           title: `${this.$store.getters.getTranslation.Organ_1_166}`,
           dataIndex: 'hospital.name',
           key: 'OrganizationName',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Durat_1_71}`,
+          dataIndex: 'duration',
+          scopedSlots: {customRender: 'duration'}
         },
         {
           title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,

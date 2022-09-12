@@ -27,11 +27,11 @@
               :un-checked-children="translation.no_1_656"
             />
 
-            <a-icon v-else type="check"></a-icon>
+            <a-icon v-else type="check" class="icon-check"></a-icon>
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
-          <a-form-item>
+          <a-form-item class="notes-body">
             <a-input
               v-if="!row.isCollected"
               v-decorator="[
@@ -59,6 +59,7 @@
           <InstantUpload
             :saved-list="row.uploads"
             :action="bagService.uploads(row.id)"
+            class="upload-file"
           />
         </template>
         <template slot="action" slot-scope="name, row">
@@ -108,7 +109,7 @@ export default {
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
-    bagKeyId:{ required: true, type: Number},
+    bagKeyId: { required: true, type: Number },
   },
   data() {
     return {
@@ -149,6 +150,9 @@ export default {
     }
   },
   computed: {
+    // title() {
+    //   return this.$store.getters.getTranslation.Notes_1_350.dataIndex
+    // },
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -180,3 +184,21 @@ export default {
   },
 }
 </script>
+<style scoped>
+.upload-file {
+  margin: 8px 0;
+  display: block;
+}
+.notes-body {
+  width: 68%;
+  margin: auto;
+  height: 55px;
+  overflow: hidden;
+  background: #ececec;
+  border-radius: 28px;
+  padding: 6px;
+}
+.icon-check {
+  color: green;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="consent-page">
-    <h3 class="page-title">{{translation.PatieConse_2_685}}</h3>
+    <h3 class="page-title">{{ translation.PatieConse_2_685 }}</h3>
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <Upload
@@ -26,11 +26,11 @@
           @change="checkChecked($event)"
           :disabled="treatment.consent"
         >
-          {{translation.PatieConse_4_465}}
+          {{ translation.PatieConse_4_465 }}
         </a-checkbox>
-      <h1 v-if="checkBoxError" style="color:#f00; font-weight:bold">
-        {{translation.Consecheck_4_840}}
-      </h1>
+        <h1 v-if="checkBoxError" style="color: #f00; font-weight: bold">
+          {{ translation.Consecheck_4_840 }}
+        </h1>
         <a-input
           v-decorator="[
             `patientId`,
@@ -44,7 +44,11 @@
           type="hidden"
         />
       </a-form-item>
-      <FormActionButton :loading="loading" :text="translation.SaveConse_4_695" />
+      <FormActionButton
+        v-if="isInConsentPhase(treatment)"
+        :loading="loading"
+        :text="translation.SaveConse_4_695"
+      />
     </a-form>
   </div>
 </template>
@@ -55,7 +59,9 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import Upload from '~/components/upload'
+import { isEmpty } from '~/services/Utilities'
 import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
+import { TREATMENT_PHASES } from '~/services/Constant/Phases'
 export default {
   components: { Upload },
   mixins: [notifications, routeHelpers, nullHelper],
@@ -76,6 +82,8 @@ export default {
       fileList: [],
       allowedExtensions: DOCUMENT_EXTENSIONS,
       checkBoxError: false,
+      treatId: '',
+      TREATMENT_PHASES,
     }
   },
   computed: {
@@ -89,8 +97,13 @@ export default {
   },
 
   methods: {
+    isInConsentPhase() {
+      return (
+        isEmpty(this.treatment) ||
+        this.treatment.phaseId <= TREATMENT_PHASES.CONSENT.id
+      )
+    },
     handleChange(info) {
-      console.log(info)
       this.fileList = info
     },
     checkChecked(e) {
@@ -119,7 +132,6 @@ export default {
         .finally(() => (this.loading = false))
     },
 
-
     updateConcent(values) {
       const formData = new FormData()
       for (const key in values) {
@@ -140,7 +152,9 @@ export default {
         .catch(this.error)
         .finally(() => (this.loading = false))
     },
-
+    getTreatmentId(treatmentid) {
+      this.treatId = treatmentid
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
@@ -148,12 +162,15 @@ export default {
         if (!err) {
           if (values.consent === true) {
             // if(this.treatment.id==null)
-            if(this.$route.query.treatmentId == null)
-            {
+            const param = this.$route.query
+            if (!isEmpty(param.treatment_id)) {
+              this.getTreatmentId(param.treatment_id)
+            }
+            if (this.$route.query.treatment_id == null) {
               this.create(values)
-            }else{
-              const treatGlobalId = this.$route.query.treatmentId
-              values.globalId=treatGlobalId
+            } else {
+              const treatGlobalId = this.$route.query.treatment_id
+              values.globalId = treatGlobalId
               this.updateConcent(values)
               // this.goto(this.$route.path, { treatment_id: response.data.globalId })
             }

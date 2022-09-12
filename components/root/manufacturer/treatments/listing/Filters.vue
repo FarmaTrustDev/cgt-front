@@ -3,6 +3,7 @@
     <a-range-picker class="float-right calendar-range-picker-field"
     :default-value="[moment(getPreviousDate(new Date())), moment(getCurrentDate(new Date()))]"
      @change="searchDataRange"
+     separator="-"
      :format="dateFormat" />
     <a-input
       ref="userNameInput"

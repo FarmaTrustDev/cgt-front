@@ -1,12 +1,12 @@
 <template>
   <div>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <LookupsTreatmentType :active="true" @onChange="onTreatmentSelect" />
+      <LookupsTreatmentType class="slots-main" :active="true" @onChange="onTreatmentSelect" />
       <a-alert v-if="message" type="info" :message="translation.Selecthe_8_476">
       </a-alert>
       <a-skeleton :loading="loading">
         <span v-if="categories">
-          <CategoryTabs :categories="categories" />
+          <CategoryTabs :form="form" :categories="categories" />
           <!-- <a-button type="primary" class="w-100 btn-complete-category">Complete screening results for {CATEGORYNAME} group</a-button> -->
           <FormActionButton
             :text="translation.SaveScree_4_468"
@@ -36,8 +36,8 @@
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"
-            @click="handleOk()"
             style="padding: 5px 50px"
+            @click="handleOk()"
             >Ok</a-button
           >
         </footer>
@@ -90,6 +90,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
+          values.screeningStatus = true
           this.create(values)
         } else {
           this.confirm('Complete the patient screenings first!')

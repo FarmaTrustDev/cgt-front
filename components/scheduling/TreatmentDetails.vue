@@ -34,11 +34,7 @@
             </dd>
             <dt>{{ translation.ContaNumbe_2_404 }}:</dt>
             <dd>
-              {{
-                treatmentData.manufacturerContact == null
-                  ? 'N/A'
-                  : treatmentData.manufacturerContact
-              }}
+              +44 4856484185
             </dd>
             <dt>{{ translation.Logis_1_146 }}:</dt>
             <dd>
@@ -50,11 +46,7 @@
             </dd>
             <dt>{{ translation.ContaNumbe_2_404 }}:</dt>
             <dd>
-              {{
-                treatmentData.logisticContact == null
-                  ? 'N/A'
-                  : treatmentData.logisticContact
-              }}
+              +44 1874987898
             </dd>
           </dl>
         </a-card>

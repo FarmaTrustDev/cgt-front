@@ -161,7 +161,6 @@
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
-        <div class="mt-3 mb-10" style="color: #909090">Duration</div>
         <a-form-item :label="translation.Durat_1_484" class="pb-0">
           <a-input-number
             v-decorator="[

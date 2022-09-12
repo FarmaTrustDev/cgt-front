@@ -1,8 +1,9 @@
 <template>
   <div>
     <!-- <a-spin :spinning="loading"> -->
+
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormFields :is-created="isCreated" :patient="patient" />
+      <FormFields :form="form" :is-created="isCreated" :patient="patient" />
       <a-form-item class="pr-2 mt-15">
         <FormActionButton
           :is-created="isCreated"
@@ -28,13 +29,13 @@
             height="40%"
           />
         </p>
-        <h3>{{translation.Thereare_10_522}}</h3>
+        <h3>{{ translation.Thereare_10_522 }}</h3>
         <!-- <p>There are some errors in your submission. Please correct them.</p> -->
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"
-            @click="handleOk()"
             style="padding: 5px 50px"
+            @click="handleOk()"
             ><b>Ok</b></a-button
           >
         </footer>
@@ -141,13 +142,13 @@ export default {
                 this.sendData(res.data.globalId)
                 this.goto(
                   `/hospital/patients/${response.data.globalId}?view=Consent`,
-                  { treatmentId: res.data.globalId }
+                  { treatment_id: res.data.globalId }
                 )
               })
               .catch(this.error)
               .finally(() => (this.loading = false))
           }
-          this.success(response.message)
+          this.success('Patient enrolled successfully')
 
           this.$emit('getNextTab', 'Consent')
         })

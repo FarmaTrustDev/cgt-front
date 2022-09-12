@@ -228,6 +228,7 @@
       display: inline-block;
       vertical-align: middle;
       background-size: 100%;
+      background-repeat: no-repeat;
       background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg);
     }
   }
@@ -240,6 +241,8 @@
       &::before {
         content: '';
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+        background-repeat: no-repeat;
+
       }
     }
     .ant-steps {
@@ -258,6 +261,8 @@
       &::before {
         content: '';
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+        background-repeat: no-repeat;
+
       }
     }
   }
@@ -272,6 +277,8 @@
       &::before {
         content: '';
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+        background-repeat: no-repeat;
+
       }
     }
   }
@@ -284,6 +291,8 @@
         height: 17px;
         margin-left: 10px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+        background-repeat: no-repeat;
+
       }
     }
   }
@@ -297,6 +306,8 @@
       &::before {
         content: '';
         background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
+        background-repeat: no-repeat;
+
       }
     }
   }
@@ -321,6 +332,7 @@
         width: 30px;
         height: 30px;
         background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
+        background-repeat: no-repeat;
       }
     }
   }
@@ -380,6 +392,8 @@
         // margin: 0;
         // margin-left: 15px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
+        background-repeat: no-repeat;
+
       }
     }
   }
