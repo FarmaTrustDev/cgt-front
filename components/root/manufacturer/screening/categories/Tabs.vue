@@ -6,10 +6,9 @@
       v-model="activeKey"
       hide-add
       type="editable-card"
-        @tabClick="tabClick"
-        @edit="onEdit"
+      @tabClick="tabClick"
+      @edit="onEdit"
       >
-          <!-- :tab="pane.name" -->
         <a-tab-pane
           v-for="pane in panes"
           :key="pane.globalId"
@@ -71,7 +70,7 @@ export default {
   },
   mounted() {
     this.fetchList()
-  },   
+  },
   methods: {
     tabClick(){},
     handleCategoryModal(show) {
