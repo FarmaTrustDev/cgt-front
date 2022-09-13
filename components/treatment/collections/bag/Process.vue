@@ -190,13 +190,13 @@ export default {
   display: block;
 }
 .notes-body {
-  width: 68%;
+  /* width: 68%; */
   margin: auto;
   height: 55px;
   overflow: hidden;
   background: #ececec;
   border-radius: 28px;
-  padding: 6px;
+  padding: 0 !important;
 }
 .icon-check {
   color: green;
