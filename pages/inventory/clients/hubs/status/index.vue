@@ -1,7 +1,6 @@
 <template>
   <page-layout
     :create="false"
-    :loading="loading"
     :bordered="false"
     class="container"
   >
@@ -13,7 +12,8 @@
           pages and change this url name and then remove this alert "
     >
     </alert> -->
-      <a-row>
+    <Header :url="'web/inventory/storage/hub/clients/'+clientId+'.png'" :clientNames="clientName" :client="client" :show-button="false" />
+      <!-- <a-row>
         <a-col :span="4">
           <figure>
             <img
@@ -41,10 +41,10 @@
             <a-col :span="11">The WestWorks, 195 Wood Ln, London W12 7FQ</a-col>
           </a-row>
         </a-col>
-      </a-row>
+      </a-row> -->
 
       <a-row :gutter="16">
-        <a-col :span="21">
+        <a-col :span="24">
           <a-card class="white-card">
             <table class="w-100">
               <thead>
@@ -81,14 +81,46 @@
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
 import PageLayout from '~/components/layout/PageLayout'
-
+import Header from '~/components/inventory/clients/header.vue'
 // import { newSampleData } from '../treatment/index.vue'
 // import { isEmpty } from '~/services/Utilities'
 // import { isNumber } from '~/services/Helpers'
 
 // import { newSampleData } from '../treatment/index.vue'
+export const clientData = [
+  {
+    title: 'Adaptimmune',
+    value: 'Adam Holioc',
+    key:1,
+  },
+  {
+    title: 'TCR',
+    value: 'Andrew Symond',
+    key:2,
+  },
+  {
+    title: 'gsk',
+    value: 'Mc GIll',
+    key:3,
+  },
+  {
+    title: 'ANTHONY',
+    value: 'Richardson',
+    key:4,
+  },  
+  {
+    title: 'Kite',
+    value: 'Viv Richard',
+    key:5,
+  },
+  {
+    title: 'Novartis',
+    value: 'Shaun Pollak',
+    key:6,
+  },  
+]
 export default {
-  components: { PageLayout },
+  components: { PageLayout, Header },
   filters: {
     hashBold(value) {
       if (!value) return ''
@@ -106,6 +138,10 @@ export default {
       clicked: false,
       greenDisk: 'g',
       blueDisk: 'b',
+      clientId:null,
+      clientData,
+      clientName:'',
+      client:'',
       qrUrl: 'Uploads/DocumentURL/shipping notice.jpg',
       details: [
         {
@@ -183,7 +219,19 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  mounted(){
+    this.getClientId()
+  },
   methods: {
+    getClientId(){
+      this.clientId=this.$route.query.clientId
+      for(const i in this.clientData ){
+        if(this.clientData[i].key===parseInt(this.clientId)){
+          this.clientName=this.clientData[i].value
+          this.client=this.clientData[i].title
+        }
+      }
+    },
     handleModal(show) {
       this.showModal = show
     },
