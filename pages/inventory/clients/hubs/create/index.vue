@@ -27,9 +27,9 @@
               </figure>
               
               <div class="icons">
-                <span><a href="javascript:;" @click="goto(`/inventory/clients/messages?clientId=${c}`)"><img :src="getImageUrl('web/icons/inbox.svg')" /></a></span>
-                <span><a href="javascript:;" @click="goto(`/inventory/clients/clients?clientId=${c}`)"> <img :src="getImageUrl('web/icons/stock.svg')" /></a></span>
-                <span @click="goto(`status`)" style="cursor:pointer"> <img :src="getImageUrl('web/icons/bill1.svg')" /></span>
+                <span><a href="javascript:;" @click="goto(`/inventory/clients/messages?clientId=${c}`)"><img :src="getImageUrl('web/icons/inbox.svg')" width="35" height="35" /></a></span>
+                <span><a href="javascript:;" @click="goto(`/inventory/clients/clients?clientId=${c}`)"> <img :src="getImageUrl('web/icons/stock.svg')" width="35" height="35" /></a></span>
+                <span><a href="javascript:;" @click="goto(`/inventory/clients/hubs/status?clientId=${c}`)"><img :src="getImageUrl('web/icons/bill1.svg')" width="35" height="35" /></a></span>
               </div>
               <div style="width:210px">{{translation.UpcomTasks_2_644}}: </div>
               <div class="list">

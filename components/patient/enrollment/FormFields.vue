@@ -322,6 +322,7 @@
             ]"
             name="postCode"
             :placeholder="translation['PostaCode:_2_649']"
+            @blur="fetchCountryByPostCode"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
@@ -448,8 +449,9 @@ import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import { filterOption } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
+import MapServices from '~/services/API/MapServices'
 // import PatientServices from '~/services/API/PatientServices'
-// import { isEmpty } from '~/services/Utilities'
+import { isEmpty } from '~/services/Utilities'
 export default {
   props: {
     isCreated: {
@@ -460,6 +462,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    form: {
+      type: Object,
+      default: () => ({}),
+    },       
   },
   data() {
     return {
@@ -470,9 +476,9 @@ export default {
       postCode: '',
       cityName: '',
       countryName: '',
-      form: this.$form.createForm(this, {
+      /* form: this.$form.createForm(this, {
         name: 'patientEnrollment',
-      }),
+      }), */
     }
   },
   computed: {
@@ -495,6 +501,9 @@ export default {
     fetchCountries(params = {}) {
       CountryServices.get(params).then((response) => {
         this.countries = response.data.data
+        if(!isEmpty(params)){
+          this.form.setFieldsValue({countryId:this.countries[0].id})
+        }
       })
     },
     getCountries() {
@@ -507,6 +516,21 @@ export default {
     searchCountries(name, b) {
       this.fetchCountries({ name })
     },
+    fetchCountryByPostCode(e) {
+      MapServices.fetchCountryByPostCode(e.target.value).then((response) => {
+        this.form.setFieldsValue({City: response.result.address_components[1].long_name})
+        this.form.setFieldsValue({address: response.result.location})
+        this.form.setFieldsValue({County: response.result.address_components[1].long_name})
+        let name=''
+        if(response.result.address_components[3].short_name==='GB'){
+          name=response.result.address_components[3].long_name  
+        }else{
+          name=response.result.address_components[4].long_name
+        }
+        // const name=response.result.address_components[4].long_name
+        this.searchCountries(name,'b')
+      })
+    },    
     /* postCodeChange(data) {
       PatientServices.getMapInfo(data.target.value).then((response) => {
         // alert(response.result.address_components[1].long_name)

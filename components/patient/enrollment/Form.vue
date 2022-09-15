@@ -3,7 +3,7 @@
     <!-- <a-spin :spinning="loading"> -->
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormFields :is-created="isCreated" :patient="patient" />
+      <FormFields :form="form" :is-created="isCreated" :patient="patient" />
       <a-form-item class="pr-2 mt-15">
         <FormActionButton
           :is-created="isCreated"

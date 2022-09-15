@@ -37,7 +37,7 @@
               (e) =>
                 productSearch(
                   e.target.value,
-                  'product,productLocation,clientName,description'
+                  'product'
                 )
             "
           >
@@ -275,51 +275,38 @@ export default {
     },
     productSearch(value, key) {
       let filters = this.productFilters
-      const keys = key.split(',')
-      for (let i = 0; i < keys.length; i++) {
-        filters[keys[i]] = value
-      }
+      filters[key] = value.toUpperCase()
       filters = JSON.stringify(filters)
       filters = JSON.parse(filters)
       this.filters = filters
       if (!isEmpty(value)) {
         let products = []
         for (const filter in filters) {
-          // console.log(filters)
           const filterValue = filters[filter]
-          // console.log(filterValue)
           products = this.productsData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              // return storage[filter].match(value)
-              return filterValue
+              // console.log(storage[filter])
+              return storage[filter].match(value.toUpperCase())
             }
-            // return storage[filter].match(value) === filterValue
-            return storage[filter] === filterValue
+            // eslint-disable-next-line eqeqeq
+            return storage[filter].match(value.toUpperCase()) == filterValue.toUpperCase()
           })
-          if (products.length > 0) break
-          // console.log(products.length)
         }
-
         products = JSON.stringify(products)
-        // this.updateData(products)
         this.data = JSON.parse(products)
         this.shouldUpdate = true
       } else {
         this.data = this.productsData
         this.shouldUpdate = true
-        // this.data = this.productsData
       }
-      // console.log(this.data)
     },
     updateData(str) {
       // alert('hello')
       console.log(str)
     },
     search(value, key) {
-      // console.log(key)
       let filters = this.filters
-      filters[key] = value
+      filters[key] = value.toUpperCase()
       filters = JSON.stringify(filters)
       filters = JSON.parse(filters)
       this.filters = filters
@@ -328,17 +315,15 @@ export default {
         let storages = []
         for (const filter in filters) {
           const filterValue = filters[filter]
-
           storages = baseStorage.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              return storage[filter].match(value)
+              // console.log(storage[filter])
+              return storage[filter].toUpperCase().match(value.toUpperCase())
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) == filterValue
+            return storage[filter].toUpperCase().match(value.toUpperCase()) == filterValue.toUpperCase()
           })
         }
-
         storages = JSON.stringify(storages)
         this.storage = JSON.parse(storages)
       } else {

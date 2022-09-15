@@ -871,9 +871,9 @@ export default {
       this.customDisplayDataMat[1].title = this.translation.Suppl_1_676
     },
     inboundSearch(value, key) {
-      // console.log(key)
+      // console.log(value.toUpperCase())
       let filters = this.filters
-      filters[key] = value
+      filters[key] = value.toUpperCase()
       filters = JSON.stringify(filters)
       filters = JSON.parse(filters)
       this.filters = filters
@@ -885,11 +885,10 @@ export default {
 
           storages = newSampleData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              return storage[filter].match(value)
+              return storage[filter].match(value.toUpperCase())
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) == filterValue
+            return storage[filter].match(value.toUpperCase()) == filterValue.toUpperCase()
           })
         }
         storages = JSON.stringify(storages)
@@ -899,9 +898,8 @@ export default {
       }
     },
     outboundSearch(value, key) {
-      // console.log(key)
       let filters = this.filters
-      filters[key] = value
+      filters[key] = value.toUpperCase()
       filters = JSON.stringify(filters)
       filters = JSON.parse(filters)
       this.filters = filters
@@ -909,15 +907,15 @@ export default {
       if (!isEmpty(filters)) {
         let storages = []
         for (const filter in filters) {
+          // console.log(filters)
           const filterValue = filters[filter]
-
           storages = completedSampleData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              return storage[filter].match(value)
+              // console.log(storage[filter])
+              return storage[filter].match(value.toUpperCase())
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) == filterValue
+            return storage[filter].match(value.toUpperCase()) == filterValue.toUpperCase()
           })
         }
 
@@ -928,7 +926,6 @@ export default {
       }
     },
     allSampleSearch(value, key) {
-      // console.log(key)
       let filters = this.filters
       filters[key] = value
       filters = JSON.stringify(filters)
@@ -942,14 +939,12 @@ export default {
 
           storages = allSampleData.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
               return storage[filter].match(value)
             }
             // eslint-disable-next-line eqeqeq
             return storage[filter].match(value) == filterValue
           })
         }
-
         storages = JSON.stringify(storages)
         this.allSample = JSON.parse(storages)
       } else {

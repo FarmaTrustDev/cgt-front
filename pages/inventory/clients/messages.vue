@@ -7,10 +7,7 @@
   >
     <div slot="content">
       <div class="h-tabs large-tabs" style="margin-left: 2%">
-        <Header
-          :url="'Uploads/patient/10/qr/637880405174699096.png'"
-          :show-button="false"
-        />
+        <Header :url="'web/inventory/storage/hub/clients/'+clientId+'.png'" :clientNames="clientName" :client="client" :show-button="false" />
         <a-input-search
           placeholder="Search"
           class="search-field-msg-x inventory-search pt-15 float-right"
@@ -187,9 +184,62 @@
 import Header from '~/components/inventory/clients/header.vue'
 import routeHelpers from '~/mixins/route-helpers'
 import PageLayout from '~/components/layout/PageLayout'
-
+export const clientData = [
+  {
+    title: 'Adaptimmune',
+    value: 'Adam Holioc',
+    key:1,
+  },
+  {
+    title: 'TCR',
+    value: 'Andrew Symond',
+    key:2,
+  },
+  {
+    title: 'gsk',
+    value: 'Mc GIll',
+    key:3,
+  },
+  {
+    title: 'ANTHONY',
+    value: 'Richardson',
+    key:4,
+  },  
+  {
+    title: 'Kite',
+    value: 'Viv Richard',
+    key:5,
+  },
+  {
+    title: 'Novartis',
+    value: 'Shaun Pollak',
+    key:6,
+  },  
+]
 export default {
   components: { Header, PageLayout },
   mixins: [routeHelpers],
+   data() {
+    return {
+      clientId:null,
+      clientData,
+      clientName:'',
+      client:'',
+    }
+  },
+  mounted() {
+    this.getClientId()
+  },
+  methods:{
+    getClientId(){
+      this.clientId=this.$route.query.clientId
+      for(const i in this.clientData ){
+        if(this.clientData[i].key===parseInt(this.clientId)){
+          this.clientName=this.clientData[i].value
+          this.client=this.clientData[i].title
+        }
+      }
+    },
+  }, 
 }
 </script>
