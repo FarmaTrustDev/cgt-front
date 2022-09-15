@@ -24,7 +24,7 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 6)"
           >
-            Collect Samples {{ treatment.phaseId }}
+            Collect Samples
           </div>
           <collections
             v-if="tabs.collectSamples != null"
