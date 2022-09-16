@@ -29,8 +29,9 @@
       </span>
     </a-row>
   </div>
+    </template>
+</page-layout>
 </template>
-
 <script>
 // import layout from 'ant-design-vue/lib/layout'
 
