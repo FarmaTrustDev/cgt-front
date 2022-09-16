@@ -8,7 +8,7 @@
               'manufacturerName',
               {
                 rules: [
-                  { required: true, message: 'Please input manufacturerName!' },
+                  { required: true, message: 'Please input manufacturerName' },
                 ],
                 initialValue: entity.manufacturerName,
               },
@@ -22,7 +22,7 @@
               'treatmentAvailabilityId',
               {
                 rules: [
-                  { required: true, message: 'Please input your Email!' },
+                  { required: true, message: 'Please input your Email' },
                 ],
                 initialValue: entity.treatmentAvailabilityId,
               },
@@ -35,7 +35,7 @@
               'treatmentId',
               {
                 rules: [
-                  { required: true, message: 'Please input your treatmentId!' },
+                  { required: true, message: 'Please input your treatmentId' },
                 ],
                 initialValue: treatment.id,
               },
@@ -59,7 +59,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Collection Date!',
+                    message: 'Please select your Collection Date',
                   },
                 ],
               },
@@ -81,7 +81,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Dispatch Date!',
+                    message: 'Please select your Dispatch Date',
                   },
                 ],
               },
@@ -103,7 +103,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Delivery Date!',
+                    message: 'Please select your Delivery Date',
                   },
                 ],
               },
@@ -127,7 +127,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Start Date!',
+                    message: 'Please select your Start Date',
                   },
                 ],
               },
@@ -149,7 +149,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Completion Date!',
+                    message: 'Please select your Completion Date',
                   },
                 ],
               },
@@ -170,13 +170,14 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please enter duration!',
+                    message: 'Please enter duration',
                   },
                 ],
               },
             ]"
             style="width: 100%"
             size="large"
+            placeholder="Duration"
             class="duration_field"
           ></a-input-number> </a-form-item
       ></a-col>
@@ -192,7 +193,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Delivery Arrival Date Birth!',
+                    message: 'Please select your Delivery Arrival Date Birth',
                   },
                 ],
               },
@@ -215,12 +216,13 @@
                   {
                     message: 'Please enter notes',
                   },
-                ],
+                ], 
               },
             ]"
             style="width: 100%; padding-top: 15px"
             class="note-area"
             size="large"
+            placeholder="Enter Notes"
           ></a-textarea> </a-form-item
       ></a-col>
     </a-row>

@@ -20,7 +20,7 @@
                   <a-icon type="edit" />
                 </a-button> -->
         <a-dropdown>
-          <a-button class="action-button" size="small">{{
+          <a-button class="action-button admin-btn" size="small">{{
             translation.Admin_1_142
           }}</a-button>
           <a-menu slot="overlay">

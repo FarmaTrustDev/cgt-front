@@ -6,7 +6,7 @@
       <a-button v-if="create" type="primary" @click="gotoState('create')"
         >{{translation.Creat_1_123}}</a-button
       >
-      <a-button v-if="back" type="primary" class="mr-10" @click="goBack()">{{translation.Back_1_538}}</a-button>
+      <a-button v-if="back" type="primary" class="mr-10 btn-back" @click="goBack()">{{translation.Back_1_538}}</a-button>
     </span>
 
     <slot name="content" />
@@ -48,3 +48,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+.btn-back {
+  background: #ececec;
+  border: transparent;
+  color: #000;
+}
+</style>

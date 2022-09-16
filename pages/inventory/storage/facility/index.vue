@@ -32,7 +32,7 @@
       >
         <template slot="action" slot-scope="action">
           <a-dropdown>
-            <a-button class="action-button" @click="preventDefault">
+            <a-button class="action-button admin-btn" @click="preventDefault">
               {{ translation['Admin_1_142'] }} <a-icon type="down" />
             </a-button>
             <a-menu slot="overlay">

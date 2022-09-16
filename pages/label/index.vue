@@ -1,8 +1,16 @@
 <template>
-  <div class="label-page container p-0">
-    <a-row class="p-5 mb-1 mt-25">
-      <div class="page-header">
-        <h3 class="page-title float-left mb-1">{{translation.Label_1_27}}</h3>
+  <page-layout
+    :create="false"
+    :bordered="false"
+    :loading="loading"
+    :title="translation.Label_1_27"
+    class="container"
+  >
+    <template slot="content">
+      <div class="label-page container">
+        <a-row class="p-5 mb-1 mt-25">
+          <div class="page-header">
+            <h3 class="page-title float-left mb-1"></h3>
 
         <a-input
           ref="userNameInput"
@@ -24,10 +32,14 @@
 </template>
 
 <script>
+// import layout from 'ant-design-vue/lib/layout'
+
 import Table from '~/components/labeling/Listing'
 import LabelServices from '~/services/API/LabelServices'
+import PageLayout from '~/components/layout/PageLayout'
+
 export default {
-  components: { Table },
+  components: { Table, PageLayout },
   data() {
     return {
       data: [],
@@ -37,11 +49,11 @@ export default {
   mounted() {
     this.fetch()
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },   
+  },
   methods: {
     fetch() {
       this.loading = true
@@ -58,12 +70,15 @@ export default {
           this.data = response.data
         })
         .finally(() => (this.loading = false))
-    },    
+    },
     searchLabel(e) {
       const search = e.target.value
-      if(search!==''){
-        this.fetchSearch({patientEnrollmentNumber: search, TreatmentTypeName:search})
-      }else{
+      if (search !== '') {
+        this.fetchSearch({
+          patientEnrollmentNumber: search,
+          TreatmentTypeName: search,
+        })
+      } else {
         this.fetch()
       }
     },
