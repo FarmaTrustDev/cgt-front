@@ -21,23 +21,91 @@
       </a-row>
 
       <a-row class="">
-        <a-skeleton :loading="loading" class="specific-card p-0">
+        <a-table
+          :columns="columns"
+          :data-source="datasource"
+          :pagination="{
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: ['10', '20', '30', '50', '100'],
+        }"
+          class="rounded-table"
+        ></a-table>
+        <!-- <a-skeleton :loading="loading" class="specific-card p-0">
           <Table :data="data" :loading="loading"></Table>
-        </a-skeleton> </a-row></template
+        </a-skeleton>  -->
+      </a-row></template
   ></page-layout>
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import Table from '~/components/labeling/Listing'
+// import Table from '~/components/labeling/Listing'
 import LabelServices from '~/services/API/LabelServices'
 export default {
   components: {
-    'page-layout': PageLayout,Table
+    'page-layout': PageLayout,
   },
   data() {
     return {
       data: [],
       loading: true,
+      datasource: [
+        {
+          id: 'DAC49784',
+          name: 'Stephen Jones',
+          date: '12/07/2022',
+          status: 'New',
+          doc: 'Form',
+        },
+        {
+          id: 'DAC517847',
+          name: 'Stephen Jones',
+          date: '15/08/2022',
+          status: 'New',
+          doc: 'Form',
+        },
+        {
+          id: 'DAC69254',
+          name: 'Stephen Jones',
+          date: '19/08/2022',
+          status: 'New',
+          doc: 'Form',
+        },
+        {
+          id: 'DAC79798',
+          name: 'Stephen Jones',
+          date: '20/08/2022',
+          status: 'New',
+          doc: 'Form',
+        },
+      ],
+      columns: [
+        {
+          title: 'Sample ID',
+          dataIndex: 'id',
+          key: 'id',
+        },
+        {
+          title: 'Qualified Person',
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: 'Arrival Date',
+          dataIndex: 'date',
+          key: 'date',
+        },
+        {
+          title: 'Status',
+          dataIndex: 'status',
+          key: 'status',
+        },
+        {
+          title: 'Document',
+          dataIndex: 'doc',
+          key: 'doc',
+        },
+      ],
     }
   },
   mounted() {

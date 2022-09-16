@@ -111,9 +111,10 @@
   cursor: pointer;
   @extend .light-shadow;
 
+  padding-right: 20%;
   position: absolute;
   margin: -7px;
-  margin-left: 7px;
+  margin-left: 3px;
 }
 
 .w-1200 {
