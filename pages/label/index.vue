@@ -16,9 +16,9 @@
     </a-row>
 
     <a-row class="">
-      <a-skeleton :loading="loading" class="specific-card p-0">
-        <Table :data="data" :loading="loading"></Table>
-      </a-skeleton>
+      <span  class="specific-card p-0">
+        <Table :data="data" ></Table>
+      </span>
     </a-row>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       data: [],
-      loading: true,
+      loading: false,
     }
   },
   mounted() {

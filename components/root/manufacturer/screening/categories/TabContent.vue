@@ -18,7 +18,7 @@
               <a-menu-item key="1"> <a-icon type="edit" />{{translation.Edit_1_450}} </a-menu-item>
               <a-menu-item key="2" >
                 <a-popconfirm
-                  :title="translation.Areyou_4_484"
+                  title="Are you sure you want to delete this question?"
                   :ok-text="translation.yes_1_654"
                   :cancel-text="translation.no_1_656"
                   placement="topLeft"

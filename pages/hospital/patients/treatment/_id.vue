@@ -1,6 +1,5 @@
 <template>
   <page-layout
-    :loading="loading"
     :title="translation.TreatStatu_2_748"
     class="patient-page container"
     :create="false"
@@ -11,6 +10,7 @@
         <div class="grey-card treatment_tabs m-0 pt-0">
           <TreatmentView
             v-if="!isEmpty(entity.patient) && entity.screeningStatus"
+            :loading="loading"
             :treatment="entity"
           />
           <a-card v-else class="text-center default-card p-0">
@@ -31,11 +31,14 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 import TreatmentView from '~/components/treatment/view'
 export default {
-  components: { detail, 'page-layout': PageLayout, TreatmentView },
+  components: { detail, 'page-layout': PageLayout, 
+  TreatmentView
+   },
   mixins: [withFetch],
   middleware: 'auth',
   data() {
     return {
+      loading: false,
       apiService: TreatmentServices,
       fetchMethod: TreatmentServices.detail,
       bags: null,
@@ -57,9 +60,11 @@ export default {
       // TreatmentServices.getCustody(this.entity.id, 1).then((treatment) => {})
     },
     fetchTreatment(id) {
+      this.loading = true
       TreatmentServices.detail(id).then((treatment) => {
         this.entity = treatment.data
       })
+      this.loading = false
     },
     registerFetchTreatment() {
       const fetchTreatment = this.fetchTreatment

@@ -31,6 +31,15 @@ export default {
       loading: false,
     }
   },
+    watch:{
+    treatment(newData, oldData)
+    {
+      if(newData !== oldData)
+      {
+        this.isScreeningCompleted()
+      }
+    }
+  },
   mounted() {
     this.isScreeningCompleted()
   },

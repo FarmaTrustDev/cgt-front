@@ -1,7 +1,7 @@
+    // :loading="loading"
 <template>
   <page-layout
     :create="false"
-    :loading="loading"
     :title="translation['suppoissue_2_176']"
     class="specific container page-search-input-container"
   >
