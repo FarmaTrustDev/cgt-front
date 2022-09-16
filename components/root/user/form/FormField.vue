@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.FirstName_2_420 + '*:'"
@@ -54,6 +55,7 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.EmailAddre_2_140 + '*:'"

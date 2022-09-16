@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.FirstName_2_420 + '*:'"
@@ -54,6 +55,7 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
       <a-col :span="8">
         <a-form-item
           :label="translation.EmailAddre_2_140 + '*:'"
@@ -77,7 +79,6 @@
             :placeholder="translation.EmailAddre_2_140"
           /> </a-form-item
       ></a-col>
-
       <a-col :span="8">
         <a-form-item
           :label="translation.Phone_1_63 + '*:'"
@@ -265,7 +266,7 @@
           />
         </a-form-item>
       </a-col> -->
-      <a-col :span="12"></a-col>
+      <!-- <a-col :span="12"></a-col> -->
       <a-col :span="24">
         <a-form-item
           :label="translation.Aller_1_643"
@@ -323,7 +324,6 @@
           />
         </a-form-item>
       </a-col>
-
       <a-col :span="12">
         <a-form-item
           :label="translation['PostaCode:_2_649']"
