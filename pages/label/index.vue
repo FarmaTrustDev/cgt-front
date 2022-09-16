@@ -4,31 +4,24 @@
     :bordered="false"
     :loading="loading"
     :title="translation.Label_1_27"
-    class="container"
+    class="container page-search-input-container"
   >
-    <template slot="content">
-      <div class="label-page container">
-        <a-row class="p-5 mb-1 mt-25">
-          <div class="page-header">
-            <h3 class="page-title float-left mb-1"></h3>
-
+    <template slot="headerMenus">
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
-              class="float-right page-search-input"
+              class="page-search-input"
               @change="searchLabel"
             >
               <a-icon slot="prefix" type="search" />
             </a-input>
-          </div>
-        </a-row>
-
-        <a-row class="">
-          <a-skeleton :loading="loading" class="specific-card p-0">
-            <Table :data="data" :loading="loading"></Table>
-          </a-skeleton>
-        </a-row>
-      </div>
+    </template>
+    <template slot="content">
+      <a-row class="">
+        <a-skeleton :loading="loading" class="specific-card p-0">
+          <Table :data="data" :loading="loading"></Table>
+        </a-skeleton>
+      </a-row>
     </template>
   </page-layout>
 </template>
