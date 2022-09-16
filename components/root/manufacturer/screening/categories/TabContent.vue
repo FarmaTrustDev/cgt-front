@@ -80,6 +80,15 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+    watch:{
+    category(newData, oldData)
+    {
+      if(newData.globalId !== oldData.globalId)
+      {
+        this.fetch()
+      }
+    }
+  },
   mounted() {
     if (!this.isEmpty(this.category)) {
       this.fetch()
