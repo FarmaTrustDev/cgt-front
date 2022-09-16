@@ -220,7 +220,7 @@
 
             <a-menu-item key="3"
               ><a-popconfirm
-                :title="translation.Areyou_4_484"
+                title="Are you sure you want to delete this step ?"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"

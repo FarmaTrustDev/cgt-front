@@ -4,11 +4,11 @@
       <a-card
         style="margin-top: -30px !important"
         :bordered="false"
-        class="p-0 mt-0 pt-0 default-card pills-tabs no-shadow green-on-update"
+        class="p-0 mt-0 pt-0 default-card pills-tabs green-on-update"
       >
         <a-tabs class="pt-0" type="card">
           <a-tab-pane v-for="step in tabs" :key="step.id" class="border1">
-            <!-- todo getting event name from backend -->
+             <!-- todo getting event name from backend  -->
 
             <div
               slot="tab"
@@ -40,7 +40,9 @@ const steps = [
   { id: 5, name: 'Treatment', alias: 'Treatment', completedStep: 14 },
 ]
 export default {
-  components: { Timeline },
+  components: { 
+    Timeline
+     },
   mixins: [tabsHelpers],
   props: {
     treatment: { required: true, type: Object },

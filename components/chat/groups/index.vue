@@ -1,13 +1,16 @@
 <template>
   <div>
-    <a-table :data-source="data" :loading="loading" :columns="columns">
+    <a-table :data-source="data" :loading="loading" :columns="columns" class="rounded-table">
       <template slot="title">
         <a-button type="primary" @click="handleGroupModal(true)">
           {{ translation.CreatGroup_2_479 }}</a-button
         >
       </template>
+      <template slot="id" slot-scope="text, record, index">
+        {{index +1}}
+      </template>
       <template slot="action" slot-scope="text, record">
-        <a-button type="" @click="getGroup(text, record)"> Message</a-button>
+        <a-button type="primary" @click="getGroup(text, record)"> Message</a-button>
       </template>
       <!-- <template slot="message" slot-scope="text, record">
         <a-button type="" @click="getGroup(text, record)">
@@ -47,12 +50,13 @@ export default {
       data: [],
       columns : [
   {
-    title: 'Id',
-    dataIndex: 'id',
-    key: 'id',
+    title: `S.no`,
+    scopedSlots:{customRender:'id'},
+    // key: 'id',
+    // dataIndex: 'id',
   },
   {
-    title: `${this.$store.getters.getTranslation.Name_1_138}`,
+    title: `${this.$store.getters.getTranslation.GroupName_2_150}`,
     dataIndex: 'name',
     key: 'name',
     // scopedSlots: { customRender: 'title' },

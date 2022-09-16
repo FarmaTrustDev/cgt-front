@@ -17,6 +17,10 @@
                     required: true,
                     message: 'Please input your First Name',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid name'
+                  }
                 ],
               },
             ]"
@@ -39,6 +43,10 @@
                     required: true,
                     message: 'Please input your last Name',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid name'
+                  }
                 ],
               },
             ]"
@@ -61,6 +69,10 @@
                   {
                     required: true,
                     message: 'Please input your Email',
+                  },
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!',
                   },
                 ],
               },
@@ -135,6 +147,7 @@
                 ],
               },
             ]"
+            type="number"
             :placeholder="translation.ContaNumbe_2_430"
           />
         </a-form-item>
@@ -180,6 +193,10 @@
                     required: true,
                     message: 'Please input your Department',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid name'
+                  }
                 ],
               },
             ]"
@@ -293,6 +310,10 @@
                     required: true,
                     message: 'Please input your City',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid city name'
+                  }
                 ],
               },
             ]"
@@ -365,10 +386,14 @@
                     required: true,
                     message: 'Please input your County',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid county name'
+                  }
                 ],
               },
             ]"
-            :placeholder="translation.Count_1_452"
+            placeholder="County"
           />
         </a-form-item>
       </a-col>

@@ -26,6 +26,15 @@
   </page-layout>
 </template>
 
+    <a-row class="">
+      <span  class="specific-card p-0">
+        <Table :data="data" ></Table>
+      </span>
+    </a-row>
+  </div>
+    </template>
+</page-layout>
+</template>
 <script>
 // import layout from 'ant-design-vue/lib/layout'
 
@@ -38,7 +47,7 @@ export default {
   data() {
     return {
       data: [],
-      loading: true,
+      loading: false,
     }
   },
   mounted() {

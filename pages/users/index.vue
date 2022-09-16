@@ -2,29 +2,29 @@
   <page-layout
     :loading="false"
     :title="translation.UserNew_3_136"
-    class="specific container"
+    class="specific container page-search-input-container"
     :create="false"
   >
-    <div class="" slot="content">
-      <div class="mt-15">
+  <template slot="headerMenus">
         <!-- <h3 class="page-title ml-5 mb-1 float-left">
         {{ translation.UserNew_3_136 }}
       </h3> -->
-        <a-button
-          type="primary"
-          class="mr-15 float-right"
-          @click="goto('users/create')"
-          >{{ translation.adduser_2_464 }}</a-button
-        >
-        <a-input
-          class="float-right page-search-input"
+       <a-input
+          class=" page-search-input"
           ref="userNameInput"
           :placeholder="translation.Searcuser_2_404"
           @change="searchUser"
         >
           <a-icon slot="prefix" type="search" />
         </a-input>
-      </div>
+        <a-button
+          type="primary"
+          @click="goto('users/create')"
+          >{{ translation.adduser_2_464 }}</a-button
+        >
+       
+      </template>
+  <div slot="content">    
       <a-table
         :columns="columns"
         :data-source="datasource"
