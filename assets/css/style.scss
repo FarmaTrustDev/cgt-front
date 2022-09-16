@@ -666,3 +666,19 @@ a {
     }
   }
 }
+// =======================
+td.status-sample.status-sample {
+  position: relative;
+  color: black;
+}
+td.status-sample.status-sample::after {
+  content: "";
+  background: #f2f2a26b;
+  display: block;
+  width: 88px;
+  height: 38px;
+  position: absolute;
+  top: 7px;
+  left: 12px;
+  border-radius: 20px;
+}
