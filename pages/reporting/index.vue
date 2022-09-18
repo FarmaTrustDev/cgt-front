@@ -27,10 +27,25 @@
             pageSizeOptions: ['10', '20', '30', '50', '100'],
           }"
           class="rounded-table"
-        ></a-table>
-        <!-- <a-skeleton :loading="loading" class="specific-card p-0">
-          <Table :data="data" :loading="loading"></Table>
-        </a-skeleton>  -->
+        >
+          <div slot="status" slot-scope="value, row">
+            <div v-if="row.statusId === 'tag1'">
+              <span :id="row.statusId">{{ value }}</span>
+            </div>
+            <div v-else>
+              <span :id="row.statusId">{{ value }}</span>
+            </div>
+          </div>
+          <div slot="doc" slot-scope="value">
+            <a-button
+              icon="printer"
+              class="print-btn"
+              type="primary"
+              size="small"
+              >{{ value }}</a-button
+            >
+          </div>
+        </a-table>
       </a-row></template
     ></page-layout
   >
@@ -54,7 +69,8 @@ export default {
           name: 'Stephen Jones',
           date: '12/07/2022',
           status: 'New',
-          doc: 'Form',
+          statusId: 'tag1',
+          doc: 'View Form',
         },
         {
           id: 'DAC517847',
@@ -62,7 +78,8 @@ export default {
           name: 'Chris Smith',
           date: '15/08/2022',
           status: 'Saved',
-          doc: 'Form',
+          statusId: 'tag2',
+          doc: 'View Form',
         },
         {
           id: 'DAC69254',
@@ -70,7 +87,8 @@ export default {
           name: 'Stephen Jones',
           date: '19/08/2022',
           status: 'New',
-          doc: 'Form',
+          statusId: 'tag1',
+          doc: 'View Form',
         },
         {
           id: 'DAC79798',
@@ -78,7 +96,8 @@ export default {
           name: 'Oliver Jack',
           date: '20/08/2022',
           status: 'Saved',
-          doc: 'Form',
+          statusId: 'tag2',
+          doc: 'View Form',
         },
         {
           id: 'DAC37790',
@@ -86,7 +105,8 @@ export default {
           name: 'Jack Connor',
           date: '20/08/2022',
           status: 'Saved',
-          doc: 'Form',
+          statusId: 'tag2',
+          doc: 'View Form',
         },
       ],
       columns: [
@@ -96,7 +116,7 @@ export default {
           key: 'id',
         },
         {
-          title: 'Sample Name',
+          title: 'Client',
           dataIndex: 'sample',
           key: 'sample',
         },
@@ -115,11 +135,13 @@ export default {
           dataIndex: 'status',
           key: 'status',
           class: 'status-sample',
+          scopedSlots: { customRender: 'status' },
         },
         {
           title: 'Document',
           dataIndex: 'doc',
           key: 'doc',
+          scopedSlots: { customRender: 'doc' },
         },
       ],
     }

@@ -2,7 +2,7 @@
   <page-layout
     :create="false"
     :bordered="false"
-    :title="Inventory"
+    title="Inventory"
     class="container"
   >
     <div class="grey-card p-25" style="margin-top: 10px" slot="content">
