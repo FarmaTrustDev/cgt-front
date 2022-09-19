@@ -21,7 +21,7 @@
               <img :src="menu.icon" style="width: 17px" />
             </div>
             <div>
-              <span class="title">{{ translation[menu.name] }}</span>
+              <span class="title">{{ isEmpty(translation[menu.name]) ? menu.name : translation[menu.name] }}</span>
             </div>
           </div>
         </a-menu-item>

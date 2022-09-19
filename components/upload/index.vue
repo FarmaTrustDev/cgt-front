@@ -4,7 +4,7 @@
     :default-file-list="defaultFileList"
      list-type="picture-card"
     name="file"
-    @action="handleChange"
+    @change="handleChange"
     :disabled="disabled"
   >
     <p class="ant-upload-drag-icon">
@@ -44,31 +44,33 @@ export default {
     },
   },  
   methods: {
-    beforeUpload(file) {
+    beforeUpload(file) {  /// will comlete it after cryport assignment
       const strName = file.name
       const ext = strName.split('.').pop()
       const isAllowedExtension = this.extensions.includes('.' + ext)
       // extension upload the file @todo work in progess
       if (!isAllowedExtension) {
         this.$message.error('Extension not allow')
+        this.stateFileList=[]
         return true
+      }else{
+        this.$emit('handleChange', [file])
+        this.stateFileList=[file]
       }
       // const isLt2M = file.size / 1024 / 1024 < 2
       // if (!isLt2M) {
       //   this.$message.error('Extension')
       // }
     },
-    async handleChange(file, fileList) {
-      // @todo removing work in under construction
-      if (file.status === 'remove') {
-        await this.removeFromFileList(file)
-      } else {
-        await this.addToFileList(file)
-      }
-      this.$emit('handleChange', this.stateFileList)
+    handleChange ({ fileList }) {  ///// will complete it after cryoport assignment
+      // console.log(fileList)
+      // this.isChanged=true
+      // this.fileList = fileList
+      // this.$emit('handleChange', fileList)
     },
 
     async addToFileList(file) {
+      // alert('add')
       const files = this.stateFileList
       //    files = JSON.stringify(files);
       //    files = JSON.parse(files);
