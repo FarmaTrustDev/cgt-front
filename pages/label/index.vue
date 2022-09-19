@@ -26,7 +26,7 @@
   </page-layout>
 </template>
 
-    <a-row class="">
+/*     <a-row class="">
       <span  class="specific-card p-0">
         <Table :data="data" ></Table>
       </span>
@@ -34,7 +34,7 @@
   </div>
     </template>
 </page-layout>
-</template>
+</template> */
 <script>
 // import layout from 'ant-design-vue/lib/layout'
 
