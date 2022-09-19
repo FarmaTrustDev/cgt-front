@@ -1,47 +1,63 @@
 <template>
-  <div class="label-page container p-0">
-    <a-row class="p-5 mb-1 mt-25">
-      <div class="page-header">
-        <h3 class="page-title float-left mb-1">{{translation.Label_1_27}}</h3>
-
-        <a-input
-          ref="userNameInput"
-          :placeholder="translation.searc_1_488"
-          class="float-right page-search-input"
-          @change="searchLabel"
-        >
-          <a-icon slot="prefix" type="search" />
-        </a-input>
-      </div>
-    </a-row>
-
-    <a-row class="">
-      <a-skeleton :loading="loading" class="specific-card p-0">
-        <Table :data="data" :loading="loading"></Table>
-      </a-skeleton>
-    </a-row>
-  </div>
+  <page-layout
+    :create="false"
+    :bordered="false"
+    :loading="loading"
+    :title="translation.Label_1_27"
+    class="container page-search-input-container"
+  >
+    <template slot="headerMenus">
+            <a-input
+              ref="userNameInput"
+              :placeholder="translation.searc_1_488"
+              class="page-search-input"
+              @change="searchLabel"
+            >
+              <a-icon slot="prefix" type="search" />
+            </a-input>
+    </template>
+    <template slot="content">
+      <a-row class="">
+        <a-skeleton :loading="loading" class="specific-card p-0">
+          <Table :data="data" :loading="loading"></Table>
+        </a-skeleton>
+      </a-row>
+    </template>
+  </page-layout>
 </template>
 
+    <a-row class="">
+      <span  class="specific-card p-0">
+        <Table :data="data" ></Table>
+      </span>
+    </a-row>
+  </div>
+    </template>
+</page-layout>
+</template>
 <script>
+// import layout from 'ant-design-vue/lib/layout'
+
 import Table from '~/components/labeling/Listing'
 import LabelServices from '~/services/API/LabelServices'
+import PageLayout from '~/components/layout/PageLayout'
+
 export default {
-  components: { Table },
+  components: { Table, PageLayout },
   data() {
     return {
       data: [],
-      loading: true,
+      loading: false,
     }
   },
   mounted() {
     this.fetch()
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },   
+  },
   methods: {
     fetch() {
       this.loading = true
@@ -58,12 +74,15 @@ export default {
           this.data = response.data
         })
         .finally(() => (this.loading = false))
-    },    
+    },
     searchLabel(e) {
       const search = e.target.value
-      if(search!==''){
-        this.fetchSearch({patientEnrollmentNumber: search, TreatmentTypeName:search})
-      }else{
+      if (search !== '') {
+        this.fetchSearch({
+          patientEnrollmentNumber: search,
+          TreatmentTypeName: search,
+        })
+      } else {
         this.fetch()
       }
     },

@@ -226,3 +226,19 @@
     }
   }
 }
+.ant-list-grid-item{
+  .ant-list-item{
+    padding-left: 4%;
+  }
+.ant-list-grid .ant-col > .ant-list-item {
+  display: flex;
+  max-width: 100%;
+  border-bottom: none;
+  justify-content: initial;
+  border: 1px solid #e8e8e8;
+  border-radius: 25px;
+  margin-right: 10% ;
+  padding-top: 3%;
+  padding-bottom: 3%;
+} 
+}

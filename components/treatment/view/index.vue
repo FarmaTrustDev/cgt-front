@@ -24,17 +24,17 @@
     <div v-else-if="treatment.isSchedule && treatment.phaseId <4">
         <alert message="Manufacturer has not approved the treatment request yet." />
     </div>
-    <div v-else-if="!isEmpty(bags)">
+     <div v-else-if="!isEmpty(bags)">
       <a-tabs :active-key="activeTab" type="card" @change="onTabChange" class="bags_section">
         <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
-          <Steps
+         <Steps
             class="view-screen"
             :bag="bag"
             :treatment="treatment"
           />
         </a-tab-pane>
       </a-tabs>
-    </div>
+    </div> 
     <alert v-else :message="translation.Creatsampl_7_489" />
   </a-card>
 </template>
@@ -47,7 +47,9 @@ import { isEmpty } from '~/services/Utilities'
 import alert from '~/components/alert'
 
 export default {
-  components: { Steps, alert },
+  components: { 
+    Steps, 
+    alert },
   props: {
     treatment: { required: true, type: Object },
     // bags: { required: true, type: Object },

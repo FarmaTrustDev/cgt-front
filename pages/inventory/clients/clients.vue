@@ -1,6 +1,7 @@
 <template>
-  <page-layout :create="false" :loading="loading" :bordered="false">
+  <page-layout :create="false" :bordered="false" :title="Inventory">
   <div slot="content" class="container">
+    <h1 class="heading page-title"> Inventory</h1>
       <Header :url="'web/inventory/storage/hub/clients/'+clientId+'.png'" :clientNames="clientName" :client="client" :show-button="false" />
     <a-table
       class="rounded-table"
@@ -216,7 +217,6 @@ export default {
       this.clientId=this.$route.query.clientId
       for(const i in this.clientData ){
         if(this.clientData[i].key===parseInt(this.clientId)){
-          console.log(this.clientData[i].title)
           this.clientName=this.clientData[i].value
           this.client=this.clientData[i].title
         }

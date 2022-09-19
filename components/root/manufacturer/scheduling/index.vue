@@ -1,20 +1,20 @@
 <template>
   <div class="grey-card enrollment-page schedule-create-tabs">
     <a-card :bordered="false" class="default-border-radius pt-0">
-      <a-skeleton :loading="loading">
+      <a-skeleton :loading="loading" class="green-on-update">
         <a-tabs
           tab-position="left"
           :default-active-key="activeTab"
           @change="tabChange"
         >
-          <a-tab-pane :key="1" class="m-3">
-            <div slot="tab" class="tab-title">
+          <a-tab-pane :key="1" class="m-3" >
+            <div slot="tab" class="tab-title main ant-tabs-tab-completed">
               {{ translation['Detai_1_346'] }}
             </div>
             <Form :treatment="treatment" @getEntity="getEntity" />
           </a-tab-pane>
           <a-tab-pane :key="2" :disabled="!isCreated" class="m-3">
-            <div slot="tab" class="tab-title">
+            <div slot="tab" class="tab-title main ant-tabs-tab-completed">
               {{ translation['Avail_1_450'] }}
             </div>
             <Availability v-if="isCreated" :manufacturer-treatment="entity" />

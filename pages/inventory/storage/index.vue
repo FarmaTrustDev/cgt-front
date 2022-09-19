@@ -305,9 +305,8 @@ export default {
       console.log(str)
     },
     search(value, key) {
-      // console.log(key)
       let filters = this.filters
-      filters[key] = value
+      filters[key] = value.toUpperCase()
       filters = JSON.stringify(filters)
       filters = JSON.parse(filters)
       this.filters = filters
@@ -316,17 +315,15 @@ export default {
         let storages = []
         for (const filter in filters) {
           const filterValue = filters[filter]
-
           storages = baseStorage.filter((storage) => {
             if (isEmpty(filterValue) && !isNumber(filterValue)) {
-              // console.log(storage)
-              return storage[filter].match(value)
+              // console.log(storage[filter])
+              return storage[filter].toUpperCase().match(value.toUpperCase())
             }
             // eslint-disable-next-line eqeqeq
-            return storage[filter].match(value) == filterValue
+            return storage[filter].toUpperCase().match(value.toUpperCase()) == filterValue.toUpperCase()
           })
         }
-
         storages = JSON.stringify(storages)
         this.storage = JSON.parse(storages)
       } else {

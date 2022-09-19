@@ -1,10 +1,10 @@
 <template>
   <div class="logistics-page">
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-    <a-row :gutter="16" class="grey-card">
+    <a-row :gutter="16" class="grey-card-x">
       <a-col>
-        <a-card :bordered="false" class="default-card logistic-container">
-            <h2>{{translation.SelecPartn_2_458}} </h2>
+        <a-card :bordered="false" class="default-card-x logistic-container">
+            <h1 class="page-title heading">{{translation.SelecPartn_2_458}} </h1>
             <br>
             <a-form-item>
               <a-select
@@ -40,7 +40,7 @@
         :disabled="false"
       >
               <!-- Apply Checkbox -->
-                <h2><b>{{translation.Applyto_3_459}}</b></h2>
+                <h3><b>{{translation.Applyto_3_459}}</b></h3>
               </a-checkbox>
             </a-form-item>
             <a-col class="text-right mt-15">

@@ -4,8 +4,8 @@
       :columns="columns"
       :row-key="(record) => record.uuid"
       :data-source="data"
-      :loading="loading"
       class="rounded-table"
+      :loading="loading"
     >
       <template slot="name" slot-scope="name">
         <strong>{{ name }}</strong>
@@ -66,7 +66,7 @@ export default {
           scopedSlots: { customRender: 'print' },
         },
       ],
-      loading: false,
+      loading: true,
     }
   },
   computed:{
@@ -84,6 +84,9 @@ export default {
       }
     }
   },  
+  mounted(){
+    this.loading = false
+  },
   methods: {
     openViewModal(id) {
       this.showViewModal = true

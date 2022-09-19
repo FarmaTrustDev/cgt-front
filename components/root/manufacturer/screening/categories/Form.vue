@@ -30,9 +30,8 @@
             type="hidden"
           />
         </a-form-item>
-        <FormActionButton :loading="btnLoading" text="Submit" :is-created="isCreated">
-          <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" />
-        </FormActionButton>
+        <FormActionButton :loading="btnLoading" :text="isCreated===true ? 'Update' : 'Submit'" :is-created="isCreated" />
+          <!-- <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" /> -->
       </a-form>
     </a-skeleton>
   </div>
