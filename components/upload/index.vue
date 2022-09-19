@@ -44,7 +44,7 @@ export default {
     },
   },  
   methods: {
-    beforeUpload(file) {  /// will comlete it after cryport assignment
+    beforeUpload(file) {  // will comlete it after cryport assignment
       const strName = file.name
       const ext = strName.split('.').pop()
       const isAllowedExtension = this.extensions.includes('.' + ext)
@@ -62,7 +62,7 @@ export default {
       //   this.$message.error('Extension')
       // }
     },
-    handleChange ({ fileList }) {  ///// will complete it after cryoport assignment
+    handleChange ({ fileList }) {  // will complete it after cryoport assignment
       // console.log(fileList)
       // this.isChanged=true
       // this.fileList = fileList
