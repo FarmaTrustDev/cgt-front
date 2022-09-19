@@ -2,9 +2,10 @@
   <page-layout
     :create="false"
     :bordered="false"
+    title="Inventory"
     class="container"
   >
-    <div class="bg-grey p-25" style="margin-top: 10px" slot="content">
+    <div class="grey-card p-25" style="margin-top: 10px" slot="content">
       <!-- // make its component -->
       <!-- <alert
       type="warning"

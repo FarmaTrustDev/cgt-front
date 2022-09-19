@@ -22,12 +22,16 @@
       @ok="handleOk()"
     >
       <center>
-        <p style="margin: 0">
-          <img
+        <p class="cross-img">
+          <span class="inner-mark">
+          <span class="line-left line"></span>
+          <span class="line-right line"></span>
+        </span>
+          <!-- <img
             :src="getImageUrl('Icons/cross-letter.jpg')"
             width="40%"
             height="40%"
-          />
+          /> -->
         </p>
         <h3>{{ translation.Thereare_10_522 }}</h3>
         <!-- <p>There are some errors in your submission. Please correct them.</p> -->

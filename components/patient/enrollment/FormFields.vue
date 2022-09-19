@@ -17,6 +17,10 @@
                     required: true,
                     message: 'Required',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid name'
+                  }
                 ],
               },
             ]"
@@ -39,6 +43,10 @@
                     required: true,
                     message: 'Required',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid name'
+                  }
                 ],
               },
             ]"
@@ -53,11 +61,17 @@
           :wrapper-col="{ span: 22 }"
         >
           <a-input
+          
             v-decorator="[
               'Email',
               {
                 initialValue: patient.email,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [
+                {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+                },
+                { required: true, message: 'Required' }],
               },
             ]"
             :placeholder="translation.EmailAddre_2_140"
@@ -197,6 +211,8 @@
                 ],
               },
             ]"
+            type="number"
+            min="0"
             :placeholder="translation['Heigh(cm)*_2_641']"
           /> </a-form-item
       ></a-col>
@@ -219,6 +235,8 @@
                 ],
               },
             ]"
+            type="number"
+            min="0"
             :placeholder="translation['Weigh(kg)*_2_639']"
           />
         </a-form-item>
@@ -336,8 +354,15 @@
               'City',
               {
                 initialValue: patient.city,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [
+                { required: true, message: 'Required' },
+                {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid city name'
+                }
+                ],
               },
+              
             ]"
             :placeholder="translation.City_1_446"
           /> </a-form-item
@@ -399,6 +424,10 @@
                     required: true,
                     message: 'Required',
                   },
+                  {
+                    pattern: /^[a-z]+$/,
+                    message: 'Please enter a valid county name'
+                  }
                 ],
               },
             ]"

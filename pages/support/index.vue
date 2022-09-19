@@ -1,7 +1,7 @@
+    // :loading="loading"
 <template>
   <page-layout
     :create="false"
-    :loading="loading"
     :title="translation['suppoissue_2_176']"
     class="specific container page-search-input-container"
   >
@@ -40,7 +40,7 @@
                   <a-icon type="edit" />
                 </a-button> -->
               <a-dropdown>
-                <a-button class="action-button" size="small"
+                <a-button class="action-button admin-btn" size="small"
                   >{{ translation.Admin_1_142 }} <a-icon type="down" />
                 </a-button>
                 <a-menu slot="overlay">

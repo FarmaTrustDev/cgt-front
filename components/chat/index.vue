@@ -38,7 +38,8 @@
     <a-modal
       :width="1200"
       :visible="groupModal"
-      :title="translation.adduser_2_464"
+      title="Groups"
+      :dialog-style="{ top: '10px' }"
       :footer="null"
       :destroy-on-close="true"
       @cancel="handleGroupModal(false)"

@@ -14,7 +14,7 @@
         <a-button type="primary" :loading="loading" dashed @click="showConfirm(record, true)">
           {{translation.Accep_1_278}}
         </a-button>
-        <a-button type="danger" :loading="loading" dashed @click="showConfirm(record, false)">
+        <a-button class="new-treatment-btn" :loading="loading" dashed @click="showConfirm(record, false)">
           {{translation.Rejec_1_280}}
         </a-button>
       </span>

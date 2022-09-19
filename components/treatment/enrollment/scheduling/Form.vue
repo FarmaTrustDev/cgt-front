@@ -33,12 +33,16 @@
       @ok="handleOk()"
     >
       <center>
-        <p>
-          <img
+        <p class="cross-img">
+          <span class="inner-mark">
+          <span class="line-left line"></span>
+          <span class="line-right line"></span>
+        </span>
+          <!-- <img
             :src="getImageUrl('Icons/cross-letter.jpg')"
-            width="50%"
-            height="50%"
-          />
+            width="40%"
+            height="40%"
+          /> -->
         </p>
         <h3>Please Select Today/Future Date</h3>
         <footer>
