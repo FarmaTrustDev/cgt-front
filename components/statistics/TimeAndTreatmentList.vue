@@ -101,8 +101,8 @@
                   </a-col>
                   <a-col :span="12">
                     <div class="h-tabs large-tabs float-right">
-                      <a href="./inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS">Inbound </a><span> / </span>
-                      <a href="./inventory/treatment/outboundProcess?view=OUTBOUND_PROCESS"> Outbound</a>
+                      <a href="./inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS" class="bound-btns">Inbound </a>
+                      <a href="./inventory/treatment/outboundProcess?view=OUTBOUND_PROCESS" class="bound-btns"> Outbound</a>
                       <!-- <a-tabs type="card" :animated="false">
                         <a-tab-pane key="1" :tab="translation.InbouSampl_2_306">
                         </a-tab-pane>
@@ -245,3 +245,17 @@ export default {
   },
 }
 </script>
+<style scoped>
+.bound-btns {
+  padding: 5px 8px;
+  background: #f2f5fb !important;
+  border: solid 1px #9dc5ff !important;
+  border-radius: 22px;
+  font-weight: 400;
+  margin-right: 5px;
+  color: #7c8db5;
+}
+.bound-btns:hover {
+  color: #a7a7a7;
+}
+</style>

@@ -4,38 +4,51 @@
     :bordered="false"
     :loading="loading"
     title="Reporting"
-    class="container"
+    class="container page-search-input-container"
   >
+    <template slot="headerMenus">
+      <a-input
+        ref="userNameInput"
+        :placeholder="translation.searc_1_488"
+        class="page-search-input"
+        @change="searchLabel"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
+    </template>
     <template slot="content">
-      <a-row class="p-5 mb-1 mt-25">
-        <div class="page-header">
-          <a-input
-            ref="userNameInput"
-            :placeholder="translation.searc_1_488"
-            class="float-right page-search-input"
-            @change="searchLabel"
-          >
-            <a-icon slot="prefix" type="search" />
-          </a-input>
-        </div>
-      </a-row>
-
       <a-row class="">
         <a-table
           :columns="columns"
           :data-source="datasource"
           :pagination="{
-          defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: ['10', '20', '30', '50', '100'],
-        }"
+            defaultPageSize: 10,
+            showSizeChanger: true,
+            pageSizeOptions: ['10', '20', '30', '50', '100'],
+          }"
           class="rounded-table"
-        ></a-table>
-        <!-- <a-skeleton :loading="loading" class="specific-card p-0">
-          <Table :data="data" :loading="loading"></Table>
-        </a-skeleton>  -->
+        >
+          <div slot="status" slot-scope="value, row">
+            <div v-if="row.statusId === 'tag1'">
+              <span :id="row.statusId">{{ value }}</span>
+            </div>
+            <div v-else>
+              <span :id="row.statusId">{{ value }}</span>
+            </div>
+          </div>
+          <div slot="doc" slot-scope="value">
+            <a-button
+              icon="printer"
+              class="print-btn"
+              type="primary"
+              size="small"
+              >{{ value }}</a-button
+            >
+          </div>
+        </a-table>
       </a-row></template
-  ></page-layout>
+    ></page-layout
+  >
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
@@ -52,31 +65,48 @@ export default {
       datasource: [
         {
           id: 'DAC49784',
+          sample: 'Novartis',
           name: 'Stephen Jones',
           date: '12/07/2022',
           status: 'New',
-          doc: 'Form',
+          statusId: 'tag1',
+          doc: 'View Form',
         },
         {
           id: 'DAC517847',
-          name: 'Stephen Jones',
+          sample: 'Adaptimmune',
+          name: 'Chris Smith',
           date: '15/08/2022',
-          status: 'New',
-          doc: 'Form',
+          status: 'Saved',
+          statusId: 'tag2',
+          doc: 'View Form',
         },
         {
           id: 'DAC69254',
+          sample: 'TCR',
           name: 'Stephen Jones',
           date: '19/08/2022',
           status: 'New',
-          doc: 'Form',
+          statusId: 'tag1',
+          doc: 'View Form',
         },
         {
           id: 'DAC79798',
-          name: 'Stephen Jones',
+          sample: 'Novartis',
+          name: 'Oliver Jack',
           date: '20/08/2022',
-          status: 'New',
-          doc: 'Form',
+          status: 'Saved',
+          statusId: 'tag2',
+          doc: 'View Form',
+        },
+        {
+          id: 'DAC37790',
+          sample: 'Adaptimmune',
+          name: 'Jack Connor',
+          date: '20/08/2022',
+          status: 'Saved',
+          statusId: 'tag2',
+          doc: 'View Form',
         },
       ],
       columns: [
@@ -84,6 +114,11 @@ export default {
           title: 'Sample ID',
           dataIndex: 'id',
           key: 'id',
+        },
+        {
+          title: 'Client',
+          dataIndex: 'sample',
+          key: 'sample',
         },
         {
           title: 'Qualified Person',
@@ -99,11 +134,14 @@ export default {
           title: 'Status',
           dataIndex: 'status',
           key: 'status',
+          class: 'status-sample',
+          scopedSlots: { customRender: 'status' },
         },
         {
           title: 'Document',
           dataIndex: 'doc',
           key: 'doc',
+          scopedSlots: { customRender: 'doc' },
         },
       ],
     }
