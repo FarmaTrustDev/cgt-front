@@ -2,60 +2,61 @@
   <div>
     <a-row>
       <a-row>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.FirstName_2_420 + '*:'"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
-        >
-          <a-input
-            v-decorator="[
-              'firstName',
-              {
-                initialValue: patient.firstName,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Required',
-                  },
-                  {
-                    pattern: /^[a-z]+$/,
-                    message: 'Please enter a valid name'
-                  }
-                ],
-              },
-            ]"
-            :placeholder="translation.FirstName_2_420"
-          /> </a-form-item
-      ></a-col>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.LastName_2_422 + '*:'"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
-        >
-          <a-input
-            v-decorator="[
-              'lastName',
-              {
-                initialValue: patient.lastName,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Required',
-                  },
-                  {
-                    pattern: /^[a-z]+$/,
-                    message: 'Please enter a valid name'
-                  }
-                ],
-              },
-            ]"
-            :placeholder="translation.LastName_2_422"
-          />
-        </a-form-item>
-      </a-col>
+        <a-col :span="12">
+          <a-form-item
+            :label="translation.FirstName_2_420 + '*:'"
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 22 }"
+          >
+            <a-input
+              v-decorator="[
+                'firstName',
+                {
+                  initialValue: patient.firstName,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Required',
+                    },
+                    {
+                      pattern: /^[a-z&A-Z]+$/,
+                      message: 'Please enter a valid name',
+                    },
+                  ],
+                },
+              ]"
+              :placeholder="translation.FirstName_2_420"
+            /> </a-form-item
+        ></a-col>
+        <a-col :span="12">
+          <a-form-item
+            :label="translation.LastName_2_422 + '*:'"
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 22 }"
+          >
+            <a-input
+              v-decorator="[
+                'lastName',
+                {
+                  initialValue: patient.lastName,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Required',
+                    },
+                    {
+                      pattern: /^[a-z&A-Z]+$/,
+                      message: 'Please enter a valid name',
+                    },
+                  ],
+                },
+              ]"
+              :placeholder="translation.LastName_2_422"
+            />
+          </a-form-item>
+        </a-col>
       </a-row>
+      <a-row>
       <a-col :span="8">
         <a-form-item
           :label="translation.EmailAddre_2_140 + '*:'"
@@ -63,22 +64,20 @@
           :wrapper-col="{ span: 22 }"
         >
           <a-input
-          
+            v-model="email"
             v-decorator="[
               'Email',
               {
                 initialValue: patient.email,
-                rules: [
-                {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-                },
-                { required: true, message: 'Required' }],
+                rules: [{ required: true, message: 'Required' }],
               },
             ]"
+            type="email"
             :placeholder="translation.EmailAddre_2_140"
-          /> </a-form-item
+            @focusout="validateEmail"
+          />{{ msg }} </a-form-item
       ></a-col>
+            
       <a-col :span="8">
         <a-form-item
           :label="translation.Phone_1_63 + '*:'"
@@ -134,6 +133,8 @@
           </a-date-picker>
         </a-form-item>
       </a-col>
+      </a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.Gende_1_637"
@@ -193,6 +194,7 @@
           </a-select>
         </a-form-item></a-col
       >
+      </a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation['Heigh(cm)*_2_641'] + '*'"
@@ -339,7 +341,7 @@
               },
             ]"
             name="postCode"
-            :placeholder="translation['PostaCode:_2_649']"
+            placeholder="Postal Code "
             @blur="fetchCountryByPostCode"
           /> </a-form-item
       ></a-col>
@@ -355,14 +357,13 @@
               {
                 initialValue: patient.city,
                 rules: [
-                { required: true, message: 'Required' },
-                {
-                    pattern: /^[a-z]+$/,
-                    message: 'Please enter a valid city name'
-                }
+                  { required: true, message: 'Required' },
+                  {
+                    pattern: /^[a-z&A-Z]+$/,
+                    message: 'Please enter a valid city name',
+                  },
                 ],
               },
-              
             ]"
             :placeholder="translation.City_1_446"
           /> </a-form-item
@@ -381,7 +382,7 @@
                 rules: [{ message: '' }],
               },
             ]"
-            :placeholder="translation.PostaCode_3_651"
+            placeholder="Postal Code Address"
           /> </a-form-item
       ></a-col>
       <a-col :span="24">
@@ -404,7 +405,7 @@
               },
             ]"
             :auto-size="{ minRows: 3, maxRows: 5 }"
-            :placeholder="translation.StreeNumbe_2_653"
+            placeholder="Steet Number"
           />
         </a-form-item>
       </a-col>
@@ -425,9 +426,9 @@
                     message: 'Required',
                   },
                   {
-                    pattern: /^[a-z]+$/,
-                    message: 'Please enter a valid county name'
-                  }
+                    pattern: /^[a-z&A-Z]+$/,
+                    message: 'Please enter a valid county name',
+                  },
                 ],
               },
             ]"
@@ -494,7 +495,7 @@ export default {
     form: {
       type: Object,
       default: () => ({}),
-    },       
+    },
   },
   data() {
     return {
@@ -505,6 +506,8 @@ export default {
       postCode: '',
       cityName: '',
       countryName: '',
+      email:'',
+      msg: '',
       /* form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }), */
@@ -515,9 +518,19 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {
-    // this.getCountries()
+  watch:{
+    msg(newMsg, oldMsg)
+    {
+      if(newMsg !== oldMsg)
+      {
+          this.msg = newMsg
+      }
+    }
   },
+  mounted() {
+    this.fetchCountries()
+  },
+
   updated() {
     if (this.isCreated && this.fetchCountry) {
       this.fetchCountry = false
@@ -525,13 +538,20 @@ export default {
     }
   },
   methods: {
+    validateEmail() {
+      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        this.msg = ''
+      } else {
+        this.msg = 'Please enter a valid email'
+      }
+    },
     filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries(params = {}) {
       CountryServices.get(params).then((response) => {
         this.countries = response.data.data
-        if(!isEmpty(params)){
-          this.form.setFieldsValue({countryId:this.countries[0].id})
+        if (!isEmpty(params)) {
+          this.form.setFieldsValue({ countryId: this.countries[0].id })
         }
       })
     },
@@ -547,19 +567,23 @@ export default {
     },
     fetchCountryByPostCode(e) {
       MapServices.fetchCountryByPostCode(e.target.value).then((response) => {
-        this.form.setFieldsValue({City: response.result.address_components[1].long_name})
-        this.form.setFieldsValue({address: response.result.location})
-        this.form.setFieldsValue({County: response.result.address_components[1].long_name})
-        let name=''
-        if(response.result.address_components[3].short_name==='GB'){
-          name=response.result.address_components[3].long_name  
-        }else{
-          name=response.result.address_components[4].long_name
+        this.form.setFieldsValue({
+          City: response.result.address_components[1].long_name,
+        })
+        this.form.setFieldsValue({ address: response.result.location })
+        this.form.setFieldsValue({
+          County: response.result.address_components[1].long_name,
+        })
+        let name = ''
+        if (response.result.address_components[3].short_name === 'GB') {
+          name = response.result.address_components[3].long_name
+        } else {
+          name = response.result.address_components[4].long_name
         }
         // const name=response.result.address_components[4].long_name
-        this.searchCountries(name,'b')
+        this.searchCountries(name, 'b')
       })
-    },    
+    },
     /* postCodeChange(data) {
       PatientServices.getMapInfo(data.target.value).then((response) => {
         // alert(response.result.address_components[1].long_name)

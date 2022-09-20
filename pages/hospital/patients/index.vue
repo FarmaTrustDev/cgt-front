@@ -123,6 +123,8 @@ export default {
         puid: search,
         name: search,
         TreatmentTypeName: search,
+        PUID: search,
+        PatientEnrollmentNumber: search
       })
     },
   },
