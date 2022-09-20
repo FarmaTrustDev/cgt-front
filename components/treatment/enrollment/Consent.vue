@@ -105,6 +105,7 @@ export default {
     },
     handleChange(info) {
       this.fileList = info
+      // console.log(this.fileList)
     },
     checkChecked(e) {
       if (e.target.checked) {
@@ -116,11 +117,11 @@ export default {
       for (const key in values) {
         formData.append(key, values[key])
       }
-
       this.fileList.forEach((files) => {
+        // console.log(files)
         formData.append('files', files)
       })
-
+      // console.log(formData)
       TreatmentServices.create(formData)
         .then((response) => {
           this.success(response.message)
