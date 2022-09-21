@@ -42,6 +42,7 @@
               class="print-btn"
               type="primary"
               size="small"
+              @click="goto(`/report`)"
               >{{ value }}</a-button
             >
           </div>
@@ -53,11 +54,13 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 // import Table from '~/components/labeling/Listing'
+import routeHelpers from '~/mixins/route-helpers'
 import LabelServices from '~/services/API/LabelServices'
 export default {
   components: {
     'page-layout': PageLayout,
   },
+  mixins:[routeHelpers],
   data() {
     return {
       data: [],
