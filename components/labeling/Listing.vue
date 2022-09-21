@@ -28,7 +28,6 @@
         >
       </template>
     </a-table>
-
     <!-- View the Modal -->
     <ViewLabelModal v-if="showViewModal" :key="schedulingId" />
   </div>
@@ -46,6 +45,7 @@ export default {
     return {
       showViewModal: false,
       schedulingId: null,
+      loading: true,
       columns: [
         {
           title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
@@ -66,7 +66,6 @@ export default {
           scopedSlots: { customRender: 'print' },
         },
       ],
-      loading: true,
     }
   },
   computed:{
@@ -85,9 +84,15 @@ export default {
     }
   },  
   mounted(){
-    this.loading = false
+    setInterval(() => {
+      this.revertLoading()
+    }, 100);
   },
   methods: {
+  revertLoading()
+    {
+      this.loading = false
+    },
     openViewModal(id) {
       this.showViewModal = true
       this.schedulingId = id
