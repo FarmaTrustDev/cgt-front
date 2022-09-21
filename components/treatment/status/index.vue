@@ -28,7 +28,7 @@
           </div>
           <collections
             v-if="tabs.collectSamples != null"
-            :enabled="treatment.phaseId <= 4"
+            :enabled="treatment.phaseId < 4"
             :treatment="treatment"
           />
         </a-tab-pane>
