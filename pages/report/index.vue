@@ -120,28 +120,37 @@
             <a-col :span="2" class="text-right mt-15 mr-10"><span>DATE</span></a-col><a-col :span="10"><a-form-item><a-input /></a-form-item></a-col>
           </a-row>
           <a-row>
-          <a-col><a-form-item>All applicable Events/Deviations have been satisfied to allow lot disposition: <a-checkbox>Yes</a-checkbox><a-checkbox>N/A</a-checkbox></a-form-item></a-col>
+            <a-col :span="10" class="mt-10">
+                All applicable Events/Deviations have been satisfied to allow lot disposition:
+            </a-col>
+            <a-col :span="10"> 
+              <a-form-item><a-checkbox>Yes</a-checkbox><a-checkbox>N/A</a-checkbox></a-form-item>
+            </a-col>
           </a-row>       
           <h2>PRODUCT DISPOSITION: (Conforms to the requirement defined for the material manufactured)</h2>
           <a-row>
-          <a-col :span="11" style="text-align:right">
-            <a-form-item>Conforms to Requirements: <a-checkbox /></a-form-item>
+          <a-col :span="10" class="mt-10 mr-5" style="text-align:right">Conforms to Requirements:</a-col>  
+          <a-col :span="1">
+            <a-form-item><a-checkbox /></a-form-item>
           </a-col>
           <a-col :span="1" />
           <a-col :span="4"> Quantity Accepted: </a-col>
           <a-col :span="5"><a-form-item><a-input /></a-form-item> </a-col>
           </a-row>
           <a-row>
-          <a-col :span="11" style="text-align:right">
-            <a-form-item>Does Not Conform to Requirements: <a-checkbox /></a-form-item>
+          <a-col :span="10" class="mt-10 mr-5" style="text-align:right">
+            Does Not Conform to Requirements:
+          </a-col>
+          <a-col :span="1">
+            <a-form-item><a-checkbox /></a-form-item>
           </a-col>
           <a-col :span="1" />
           <a-col :span="4"> Quantity Rejected: </a-col>
           <a-col :span="5"><a-form-item><a-input /></a-form-item> </a-col>
           </a-row>
           <a-row>
-          <a-col :span="11" class="mt-15" style="text-align:right">Reason material Does Not Conform:</a-col>
-          <a-col :span="1" />
+          <a-col :span="10" class="mt-15" style="text-align:right">Reason material Does Not Conform:</a-col>
+          <a-col :span="2" />
           <a-col :span="11" style="margin-left:20px"><a-form-item><a-input /></a-form-item> </a-col>
           </a-row>
           <a-row>
@@ -162,15 +171,24 @@
         <a-card class="white-card-smart-lab">
           <h2>FINAL PRODUCT DISPOSITION: (CLIENT APPROVAL)</h2>
         <a-row>
-          <a-col :span="5">
-            <a-form-item><a-checkbox style="padding-right:10px" />APPROVED</a-form-item>
+          <a-col :span="2" class="mt-10 mr-10" style="text-align:right">
+            APPROVED
           </a-col>
-          <a-col :span="10">
-            <a-form-item><a-checkbox style="padding-right:10px" />QUARANTINE (FURTHER INSTRUCTIONS TO FOLLOW)</a-form-item>
+          <a-col :span="1">
+            <a-form-item><a-checkbox style="padding-right:10px" /></a-form-item>
           </a-col>
-          <a-col :span="5">
-            <a-form-item><a-checkbox style="padding-right:10px" />REJECT</a-form-item>
+          <a-col :span="7" class="mt-10 mr-10" style="text-align:right">
+            QUARANTINE (FURTHER INSTRUCTIONS TO FOLLOW)
           </a-col>
+          <a-col :span="1">
+            <a-form-item><a-checkbox style="padding-right:10px" /></a-form-item>
+          </a-col>
+          <a-col :span="2" class="mt-10 mr-10" style="text-align:right">
+            REJECT
+          </a-col>
+          <a-col :span="1">
+            <a-form-item><a-checkbox style="padding-right:10px" /></a-form-item>
+          </a-col>                    
         </a-row>
         <a-row>
             <a-col :span="2" class="text-right mt-15 mr-10"><span>NAME</span></a-col><a-col :span="9"><a-form-item><a-input /></a-form-item></a-col>
