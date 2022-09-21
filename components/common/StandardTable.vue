@@ -219,14 +219,15 @@
             </a-menu-item>
 
             <a-menu-item key="3"
-              ><a-popconfirm
+              >
+              <!-- <a-popconfirm
                 title="Are you sure you want to delete this step ?"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="clickDelete(record)"
-              >
-                <a-icon type="delete" />{{ translation.Delet_1_451 }}
+              > -->
+                <a-icon type="delete" @click="stepDeleteModal(true, record)"/>{{ translation.Delet_1_451 }}
               </a-popconfirm></a-menu-item
             >
           </a-menu>
@@ -264,16 +265,16 @@
               </a-popconfirm>
             </a-menu-item>
             <a-menu-item key="4">
-              <a-popconfirm
+              <!-- <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deadPatient(record)"
-              >
-                <span v-if="record.isDead"> {{ translation.Resum_1_463 }}</span>
-                <span v-else>{{ translation.cance_1_296 }}</span>
-              </a-popconfirm>
+              > -->
+                <span v-if="record.isDead" @click="patientDelete(true ,record)"> {{ translation.Resum_1_463 }}</span>
+                <span v-else @click="patientDelete(true, record)">{{ translation.cance_1_296 }}</span>
+              <!-- </a-popconfirm> -->
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -412,9 +413,75 @@
       The treatment is already in cancel state. Do you want to switch the status
       to pause ?
     </a-modal>
+    <a-modal
+    :visible="patientDeleteModal"
+    :footer="null"
+    class="error-model"
+    @cancel="patientDelete(false, '')"
+    >
+    <center>
+      <p class="cross-img">
+        <span class="inner-mark">
+          <span class="line-left line"></span>
+          <span class="line-right line"></span>
+        </span>
+      </p>
+      <h3>Are you sure you want to delete this patient ( {{patientRecord.name}} ) ?</h3>
+      <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="patientDeleteMethod()"
+            >Confirm</a-button
+          >
+          <a-button
+          class="ant-btn"
+          style="padding: 5px 50px"
+          type="danger"
+          @click="patientDelete(false,'')"
+          >
+          Cancel
+          </a-button>
+        </footer>
+    </center>
+      </a-modal>    
+        <a-modal
+      :visible="visibleDeleteModal"
+      ok-text="OK"
+      :footer="null"
+      class="error-model"
+      @cancel="stepDeleteModal(false, '')"
+    >
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+          <span class="line-left line"></span>
+          <span class="line-right line"></span>
+        </span>
+        </p>
+        <h3>Are you sure you want to delete this step ?</h3>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="stepDelete()"
+            >Confirm</a-button
+          >
+          <a-button
+          class="ant-btn"
+          style="padding: 5px 50px"
+          type="danger"
+          @click="stepDeleteModal(false,'')"
+          >
+          Cancel
+          </a-button>
+        </footer>
+      </center>
+    </a-modal>
   </div>
 </template>
 <script>
+// import {getImageUrl} from '~/mixins/images-helper'
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
 import { isEmpty, preventDefault } from '~/services/Helpers'
@@ -424,6 +491,7 @@ import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import paginationHelper from '~/mixins/pagination'
 import filterOption from '~/mixins/filter-options'
+// import { Modal } from 'ant-design-vue';
 export default {
   components: { steps },
   mixins: [routeHelpers, notifications, paginationHelper, filterOption],
@@ -453,6 +521,7 @@ export default {
       data: [],
       recordData: [],
       patientData: [],
+      visibleDeleteModal: false,
       form: this.$form.createForm(this, { name: 'coordinated' }),
       loading: false,
       showDeleteModal: false,
@@ -464,9 +533,12 @@ export default {
       note: '',
       notes: '',
       showCancelTreatmentModal: false,
+      deleteStep:{},
       treatmentForCancellation: {},
       treatmentForPause: {},
       showPauseDeleteModal: false,
+      patientDeleteModal: false,
+      patientRecord:'',
       cancelModalTitle: 'Cancel Treatment',
       pauseModalTitle: 'Pause Treatment',
       // pagination: {},
@@ -499,6 +571,26 @@ export default {
     }
   },
   methods: {
+    patientDeleteMethod()
+    {
+      this.deadPatient(this.patientRecord)
+      this.patientDeleteModal = false
+    },
+    patientDelete(e,record)
+    { 
+      this.patientRecord = record
+      this.patientDeleteModal = e
+    },
+    stepDelete()
+    {
+      this.clickDelete(this.deleteStep)
+      this.stepDeleteModal(false, '')
+    },
+    stepDeleteModal(e,step)
+    {
+      this.deleteStep = step
+      this.visibleDeleteModal = e
+    },
     preventDefault,
     handleSubmit(e) {
       e.preventDefault()
@@ -673,6 +765,7 @@ export default {
       }
     },
     deadPatient(patient) {
+      debugger
       const isDead = !patient.isDead
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
         this.$emit('fetchParent', response)

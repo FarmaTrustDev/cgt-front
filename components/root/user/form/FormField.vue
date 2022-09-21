@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.FirstName_2_420 + '*:'"
@@ -18,7 +19,7 @@
                     message: 'Please input your First Name',
                   },
                   {
-                    pattern: /^[a-z]+$/,
+                    pattern: /^[a-z&A-Z]+$/,
                     message: 'Please enter a valid name'
                   }
                 ],
@@ -44,7 +45,7 @@
                     message: 'Please input your last Name',
                   },
                   {
-                    pattern: /^[a-z]+$/,
+                    pattern: /^[a-z&A-Z]+$/,
                     message: 'Please enter a valid name'
                   }
                 ],
@@ -54,6 +55,8 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.EmailAddre_2_140 + '*:'"
@@ -61,6 +64,7 @@
           :wrapper-col="{ span: 22 }"
         >
           <a-input
+            v-model="email"
             v-decorator="[
               'email',
               {
@@ -70,16 +74,15 @@
                     required: true,
                     message: 'Please input your Email',
                   },
-                  {
-                    type: 'email',
-                    message: 'The input is not valid E-mail!',
-                  },
                 ],
+                
               },
             ]"
-            :disabled="isCreated"
+            type="email"
             :placeholder="translation.EmailAddre_2_140"
-          /> </a-form-item
+            :disabled="isCreated"
+            @focusout="validateEmail"
+          />{{ msg }} </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
@@ -105,6 +108,7 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.OfficAddre_2_428"
@@ -194,7 +198,7 @@
                     message: 'Please input your Department',
                   },
                   {
-                    pattern: /^[a-z]+$/,
+                    pattern: /^[a-z&A-Z]+$/,
                     message: 'Please enter a valid name'
                   }
                 ],
@@ -233,7 +237,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your role!',
+                    message: 'Please select your role',
                   },
                 ],
               },
@@ -311,7 +315,7 @@
                     message: 'Please input your City',
                   },
                   {
-                    pattern: /^[a-z]+$/,
+                    pattern: /^[a-z&A-Z]+$/,
                     message: 'Please enter a valid city name'
                   }
                 ],
@@ -387,7 +391,7 @@
                     message: 'Please input your County',
                   },
                   {
-                    pattern: /^[a-z]+$/,
+                    pattern: /^[a-z&A-Z]+$/,
                     message: 'Please enter a valid county name'
                   }
                 ],
@@ -412,7 +416,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your country!',
+                    message: 'Please select your country',
                   },
                 ],
               },
@@ -483,6 +487,8 @@ export default {
       county:'',
       userData:[],
       countId:this.entity.countryId,
+      email:'',
+      msg: '',
     }
   },
   computed: {
@@ -490,8 +496,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+      watch:{
+    msg(newMsg, oldMsg)
+    {
+      if(newMsg !== oldMsg)
+      {
+          this.msg = newMsg
+      }
+    }
+  },
   mounted() {
     this.getRoles()
+    this.fetchCountries()
   },
   updated() {
     if (this.isCreated && this.fetchCountry) {
@@ -506,6 +522,13 @@ export default {
     }
   },
   methods: {
+    validateEmail() {
+      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        this.msg = ''
+      } else {
+        this.msg = 'Please enter a valid email'
+      }
+    },
     handleChange(info) {
       this.fileList = info
       this.$emit('handleChange', this.fileList)

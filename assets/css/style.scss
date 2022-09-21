@@ -294,6 +294,9 @@ a {
   }
 }
 .ant-pagination {
+  .ant-pagination-item {
+    line-height: 32px;
+  }
   .ant-pagination-item-link,
   .ant-pagination-disabled {
     background: #f0f3ff;
