@@ -6,7 +6,7 @@
             <p style="text-align:justify">{{text}}</p>
             <a-form-item v-if="showButton" class="text-right"><a-button @click="$emit('handelPositiv')">+</a-button><a-button @click="$emit('handelNegative')">-</a-button></a-form-item>
             <a-row>
-                <a-col v-for="custDD in customCol" :key="name+custDD.key" :span="custDD.width" style="text-align:center">{{custDD.name}}</a-col>
+                <a-col v-for="custDD in customCol" :key="name+custDD.key" :span="custDD.width" style="text-align:center;">{{custDD.name}}</a-col>
             </a-row>
             <a-row v-for="x in loopVal" :key="'Row'+x">
                 <a-col v-for="custDD in customCol" :key="name+'Col'+x+custDD.key" :span="custDD.width" style="text-align:center; padding-left:5px">
