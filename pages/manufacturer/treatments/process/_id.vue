@@ -73,11 +73,11 @@
             :treatment="entity"
             @fetchTreatment="fetchTreatment"
           />
-          <div v-if="chechAction()">
-          <QrViewer
-            v-if="activeTab === 'OUTBOUND_SHIPMENT'"
-            :treatment="entity"
-          />
+          <div v-if="checkAction()">
+            <QrViewer
+              v-if="activeTab === 'OUTBOUND_SHIPMENT'"
+              :treatment="entity"
+            />
           </div>
           <scheduling-basic-request
             v-if="activeTab === 'OUTBOUND_SHIPMENT'"
@@ -156,15 +156,8 @@ export default {
     this.handleActiveTab()
   },
   methods: {
-    chechAction(){
-      if(this.entity.isHold === true | this.entity.isCancel === true)
-      {
-        return false
-      }
-      else
-      {
-       return true
-      }
+    checkAction() {
+      return !((this.entity.isHold) | (this.entity.isCancel ))
     },
     handleActiveTab() {
       this.activeTab = this.$route.query.view
