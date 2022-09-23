@@ -44,9 +44,9 @@
       <center>
         <p class="cross-img">
           <span class="inner-mark">
-          <span class="line-left line"></span>
-          <span class="line-right line"></span>
-        </span>
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
           <!-- <img
             :src="getImageUrl('Icons/cross-letter.jpg')"
             width="40%"

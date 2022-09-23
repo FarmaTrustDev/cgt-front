@@ -5,7 +5,7 @@
   .ant-tabs-nav.ant-tabs-nav-animated {
     width: 100%;
   }
-  .ant-tabs-tab:nth-child(1)::after{
+  .ant-tabs-tab:nth-child(1)::after {
     content: ' ';
     width: 3px;
     height: 34px;
@@ -114,7 +114,7 @@
     }
   }
 }
-// 
+//
 .view-screen {
   .pills-tabs.no-shadow {
     .ant-tabs-tab {
@@ -138,7 +138,6 @@
   }
   .ant-steps-item-finish {
     padding-bottom: 6px !important;
-
   }
   .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
     border: 0;
