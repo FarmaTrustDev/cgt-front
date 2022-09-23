@@ -290,11 +290,24 @@
 //
 .sample-tabs-small {
   width: 100%;
+  .ant-table-thead {
+    display: none;
+  }
+  .ant-pagination.ant-table-pagination{
+    display: none;
+  }
   .ant-tabs.ant-tabs-top {
+    .ant-tabs-top-bar  {
+      margin-bottom: 0;
+    }
     // height: 47px;
     .ant-tabs-nav-container {
       padding: 0;
+      .ant-tabs-nav-scroll{
+        text-align: end;
+      }
       .ant-tabs-tab {
+        margin-bottom: 0;
         margin-right: 5px !important;
         height: 35px !important;
         width: 125px !important;

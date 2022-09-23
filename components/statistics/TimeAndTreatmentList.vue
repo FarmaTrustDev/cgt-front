@@ -108,8 +108,6 @@
                     <div
                       class="h-tabs large-tabs float-right sample-tabs-small"
                     >
-                      <!-- <a href="./inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS" class="bound-btns">Inbound </a>
-                      <a href="./inventory/treatment/outboundProcess?view=OUTBOUND_PROCESS" class="bound-btns"> Outbound</a> -->
                       <a-tabs type="card" :animated="false">
                         <a-tab-pane key="1" :tab="translation.InbouSampl_2_306">
                           <a-table
@@ -208,74 +206,9 @@
                         </a-tab-pane>
                       </a-tabs>
                     </div>
-                    <!-- <span class="float-right"
-                    >{{ translation.Inbou_1_498 }} / {{
-                      translation.OutboProce_2_514
-                    }}</span
-                  > -->
                   </a-col>
             </a-row>
-            <!-- <a-row>
-              <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <div class="default-border-radius border mt-15 timebox">
-                  <a-list>
-                    <a-list-item
-                      style="cursor: pointer"
-                      class="mt-3"
-                      @click="goto(`/inventory/treatment/process`)"
-                    >
-                      <a-col :span="12">
-                        <p class="ml-6">DAC48694</p>
-                      </a-col>
-                      <a-col :span="12">
-                        <p class="float-right mr-6">
-                          {{ _getFormatMoment().format('DD/MM/YYYY') }} -
-                          {{
-                            _getFormatMoment(
-                              getMomentByStandardFormat(new Date()).add(
-                                3,
-                                'day'
-                              )
-                            ).format('DD/MM/YYYY')
-                          }}
-                        </p>
-                      </a-col>
-                    </a-list-item>
-                  </a-list>
-                </div>
-              </a-col>
-            </a-row>
-            <a-row>
-              <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <div class="default-border-radius border mt-15 timebox">
-                  <a-list>
-                    <a-list-item
-                      style="cursor: pointer"
-                      class="mt-3"
-                      @click="goto(`/inventory/treatment/process`)"
-                    >
-                      <a-col :span="12">
-                        <p class="ml-6">DAC43057</p>
-                      </a-col>
-                      <a-col :span="12">
-                        <p class="float-right mr-6">
-                          {{ _getFormatMoment().format('DD/MM/YYYY') }} -
-                          {{
-                            _getFormatMoment(
-                              getMomentByStandardFormat(new Date()).add(
-                                3,
-                                'day'
-                              )
-                            ).format('DD/MM/YYYY')
-                          }}
-                        </p>
-                      </a-col>
-                    </a-list-item>
-                  </a-list>
-                </div>
-              </a-col>
-            </a-row> -->
-            <div
+           <div
               class="text-center p-15 red-div-size"
               style="cursor: pointer"
               @click="goto(`/inventory/treatment`)"
@@ -306,132 +239,6 @@ import { isNumber } from '~/services/Helpers'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import imagesHelper from '~/mixins/images-helper'
 
-// export const customDisplayData = [
-//   {
-//     title: '',
-//     value: 'Yes',
-//     key: 0,
-//     url: 'web/icons/greenTick.png',
-//   },
-//   {
-//     title: '',
-//     value: 'Andrea Marosan',
-//     key: 1,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: '27/06/2022',
-//     key: 2,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'Lonza',
-//     key: 3,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'Najib Rehman',
-//     key: 4,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: '27/06/2022',
-//     key: 5,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'fedEx',
-//     key: 6,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'DAC-654',
-//     key: 7,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'Novartis',
-//     key: 8,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: '1984916419',
-//     key: 9,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: '123456a',
-//     key: 10,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'Texas Test Project',
-//     key: 11,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'T1',
-//     key: 12,
-//     url: '',
-//   },
-//   {
-//     title: 'ARN #:',
-//     value: 'ARN-0633-003',
-//     key: 13,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'Cryoport - London',
-//     key: 14,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'Kiet Test',
-//     key: 15,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: 'Novartis Receipt',
-//     key: 16,
-//     url: '',
-//   },
-//   {
-//     title: '',
-//     value: '1',
-//     key: 17,
-//     url: '',
-//   },
-// ]
-
-// export const customDisplayDataMat = [
-//   {
-//     title: 'Client Products:',
-//     value: 'Yes',
-//     key: 0,
-//     url: 'web/icons/greenTick.png',
-//   },
-//   {
-//     title: 'Supplies:',
-//     value: 'Yes',
-//     key: 1,
-//     url: 'web/icons/greenTick.png',
-//   },
-// ]
-
 export const newSampleData = [
   {
     patientEnrollmentNumber: 'DAC7993',
@@ -449,7 +256,6 @@ export const newSampleData = [
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
   },
-  
 ]
 export const completedSampleData = [
   {
@@ -542,12 +348,6 @@ export default {
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
-        // {
-        //   title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
-        //   dataIndex: 'dispatchedBy',
-        //   key: 'dispatchedBy',
-        //   scopedSlots: { customRender: 'status-steps' },
-        // },
       ],
 
       pendingSampleData: [
@@ -588,19 +388,6 @@ export default {
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
-        // {
-        //   title: `${this.$store.getters.getTranslation.Docum_1_507}`,
-        //   dataIndex: 'print',
-        //   key: 'print',
-        //   scopedSlots: { customRender: 'print' },
-        // },
-        // {
-        //   title: `${this.$store.getters.getTranslation.Actio_1_220}`,
-        //   dataIndex: 'action',
-        //   scopedSlots: {
-        //     customRender: 'action',
-        //   },
-        // },
       ],
       pendingColumns: [
         {
@@ -634,39 +421,39 @@ export default {
           scopedSlots: { customRender: 'action' },
         },
       ],
-      allSampleColumns: [
-        {
-          title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
-          scopedSlots: { customRender: 'name' },
-        },
-        {
-          title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
-          dataIndex: 'productionLine',
-          key: 'productionLine',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
-          dataIndex: 'dispatchedBy',
-          key: 'dispatchedBy',
-        },
-      ],
+      // allSampleColumns: [
+      //   {
+      //     title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
+      //     dataIndex: 'patientEnrollmentNumber',
+      //     key: 'patientEnrollmentNumber',
+      //     scopedSlots: { customRender: 'name' },
+      //   },
+      //   {
+      //     title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
+      //     dataIndex: 'treatmentType',
+      //     key: 'treatmentType',
+      //   },
+      //   {
+      //     title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
+      //     dataIndex: 'productionLine',
+      //     key: 'productionLine',
+      //   },
+      //   {
+      //     title: `${this.$store.getters.getTranslation.Clien_1_505}`,
+      //     dataIndex: 'hospital',
+      //     key: 'hospital',
+      //   },
+      //   {
+      //     title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
+      //     dataIndex: 'collectionDateDeliveryDate',
+      //     key: 'collectionDateDeliveryDate',
+      //   },
+      //   {
+      //     title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
+      //     dataIndex: 'dispatchedBy',
+      //     key: 'dispatchedBy',
+      //   },
+      // ],
 
       inbound: newSampleData,
       outbound: completedSampleData,
