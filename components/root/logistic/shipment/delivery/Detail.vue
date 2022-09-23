@@ -39,7 +39,7 @@
         </div>
         <div class="ant-col-24 d-flex">
           <dt>{{ translation['ReceiNote:_2_334'] }}</dt>
-          <dd>{{ shipment.notes }}</dd>
+          <dd>{{ shipment.receivingNote }}</dd>
         </div>
       </dl>
     </a-card>

@@ -85,11 +85,15 @@
   </div>
 </template>
 <script>
-import withCrud from '~/mixins/with-crud'
+// import withCrud from '~/mixins/with-crud'
 import ManufacturerTreatmentServices from '~/services/API/ManufacturerTreatmentServices'
 import nullHelper from '~/mixins/null-helpers'
+import notifications from '~/mixins/notifications'
 export default {
-  mixins: [withCrud, nullHelper],
+  mixins: [
+    // withCrud,
+    notifications,
+    nullHelper],
   props: {
     // templateId: {
     //   required: true,
@@ -110,6 +114,7 @@ export default {
       gotoLink: '/manufacturer/schedules',
       manufacturerTreatment: {},
       activate:true,
+      btnLoading: false
     }
   },
   computed: {
@@ -117,12 +122,105 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {},
+  mounted() {
+    this.checkCreated()
+  },
   methods: {
+    async checkCreated() {
+      const entityId = this.$route.params.id
+      if (this.isGuid(entityId)) {
+        this.entityId = entityId
+        this.isCreated = true
+        await this.fetch(entityId)
+      }
+    },
+    async fetch(id) {
+      this.loading = true
+      await this.apiService
+        .getById(id)
+        .then((response) => {
+          this.entity = response.data
+          if (this.isFunction(this.getEntity)) {
+            this.getEntity(response)
+          }
+          if (this.isFunction(this.afterFetch)) {
+            this.afterFetch(response)
+          }
+        })
+        .finally(() => (this.loading = false))
+    },
+    onSubmit(e)
+    {
+      e.preventDefault()
+      this.form.validateFields((err, values)=>
+      {
+        if (!err) {
+          this.upsert(values)
+        } else {
+          this.visibleModal = true
+          this.loading = false
+        }
+      }
+      )
+    },
+    upsert(values) {
+      if (this.isFunction(this.beforeUpsert)) {
+        this.beforeUpsert(values)
+      }
+      if (this.isCreated) {
+        return this.update(values)
+      }
+      return this.create(values)
+    },
+    update(values) {
+      this.btnLoading = true
+      this.apiService
+        .update(this.entityId, values)
+        .then((response) => {
+          this.success(response.message)
+          // if (!this.isEmpty(this.gotoLink)) {
+          //   this.goto(`${this.gotoLink}`)
+          // }
+          if (this.isFunction(this.afterUpdate)) {
+            this.afterUpdate(response)
+            this.btnLoading = false
+            this.loading = false
+          }
+        })
+        .catch(this.error)
+        .finally(() => {
+          this.loading = false
+        })
+    },
+        create(values) {
+      this.btnLoading = true
+      this.loading = true
+      this.apiService
+        .create(values)
+        .then((response) => {
+          this.success(response.message)
+          // if (!this.isEmpty(this.gotoLink)) {
+          //   this.goto(`${this.gotoLink}/${response.data.globalId}`)
+          // }
+          if (this.isFunction(this.afterCreate)) {
+            this.afterCreate(response)
+            this.btnLoading = false
+            this.loading = false
+          }
+        })
+        .catch(this.error)
+        .finally(() => {
+          this.btnLoading = false
+          this.loading = false
+        })
+    },
     afterCreate(response) {
+      this.$emit('getNextTab', 2)
       //   this.$emit('upsert', response)
     },
-    afterUpdate(response) {},
+    afterUpdate(response) {
+      this.$emit('getNextTab', 2)
+    },
     getEntity(entity) {
       this.$emit('getEntity', entity.data)
       // this.manufacturerTreatment = entity.data
