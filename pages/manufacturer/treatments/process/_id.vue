@@ -97,7 +97,7 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import TreatmentProfilePictureCard from '~/components/patient/profile/TreatmentProfileCard'
 import process from '~/components/root/manufacturer/treatments/process'
 import QrViewer from '~/components/bags/Viewer'
-import BagDetail from '~/components/bags/BagsDetail.vue'
+import BagDetail from '~/components/bags/BagsDetail'
 import shipment from '~/components/treatment/shipment'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
 import schedulingBasicRequest from '~/components/scheduling/request/BasicForm'
@@ -157,7 +157,7 @@ export default {
   },
   methods: {
     checkAction() {
-      return !((this.entity.isHold) | (this.entity.isCancel ))
+      return !(this.entity.isHold | this.entity.isCancel)
     },
     handleActiveTab() {
       this.activeTab = this.$route.query.view

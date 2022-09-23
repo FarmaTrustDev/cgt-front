@@ -1,47 +1,51 @@
 <template>
-  <a-skeleton :loading="loading">
-    <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
-    <div v-if="treatment.isHold !== true | treatment.isCancel !== true">
-    <a-button
-      v-if="!treatment[`${showCompleteBtn}`] && bags.length > 0"
-      class="w-100 mt-15"
-      type="primary"
-      :loading="loading"
-      @click="completeAllBags(bags)"
-      >Complete Collection Process
-    </a-button>
-    </div>
-    <a-modal
-      :visible="visibleModal"
-      ok-text="Ok"
-      :footer="null"
-      @cancel="handleOk()"
-      @ok="handleOk()"
-    >
-      <center>
-        <p class="cross-img">
-          <span class="inner-mark">
-          <span class="line-left line"></span>
-          <span class="line-right line"></span>
-        </span>
-          <!-- <img
+  <div>
+    <a-skeleton :rows="10" :loading="loading">
+      <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
+      <div v-if="(treatment.isHold !== true) | (treatment.isCancel !== true)">
+        <a-button
+          v-if="!treatment[`${showCompleteBtn}`] && bags.length > 0"
+          class="w-100 mt-15"
+          type="primary"
+          :loading="loading"
+          @click="completeAllBags(bags)"
+          >Complete Collection Process
+        </a-button>
+      </div>
+      <a-modal
+        :visible="visibleModal"
+        ok-text="Ok"
+        :footer="null"
+        @cancel="handleOk()"
+        @ok="handleOk()"
+      >
+        <center>
+          <p class="cross-img">
+            <span class="inner-mark">
+              <span class="line-left line"></span>
+              <span class="line-right line"></span>
+            </span>
+            <!-- <img
             :src="getImageUrl('Icons/cross-letter.jpg')"
             width="40%"
             height="40%"
           /> -->
-        </p>
-        <h3>Complete all steps before completing this sample.</h3>
-        <footer>
-          <a-button
-            class="ant-btn ant-btn-primary"
-            @click="handleOk()"
-            style="padding: 5px 50px"
-            ><b>Ok</b></a-button
-          >
-        </footer>
-      </center>
-    </a-modal>
-  </a-skeleton>
+          </p>
+          <h3>Complete all steps before completing this sample.</h3>
+          <footer>
+            <!-- @Mehdi please optimize the code  -->
+            <a-button
+              class="ant-btn ant-btn-primary"
+              style="padding: 5px 50px"
+              @click="handleOk()"
+              ><b>Ok</b></a-button
+            >
+            <!-- @Mehdi please optimize the code  -->
+          </footer>
+        </center>
+      </a-modal>
+    </a-skeleton>
+  </div>
 </template>
 <script>
 import Bag from '~/components/treatment/collections/bag'
@@ -87,7 +91,9 @@ export default {
           .then((response) => {
             this.bags = response.data
           })
-          .finally((this.loading = false))
+          .finally(() => {
+            this.loading = false
+          })
       }
     },
     onCreate(data) {
