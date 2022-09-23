@@ -4,20 +4,20 @@
       <a-skeleton :loading="loading" class="green-on-update">
         <a-tabs
           tab-position="left"
-          :default-active-key="activeTab"
+          :active-key="activeTab"
           @change="tabChange"
         >
           <a-tab-pane :key="1" class="m-3" >
             <div slot="tab" class="tab-title main ant-tabs-tab-completed">
               {{ translation['Detai_1_346'] }}
             </div>
-            <Form :treatment="treatment" @getEntity="getEntity" />
+            <Form :treatment="treatment" @getEntity="getEntity" @getNextTab = getNextTab />
           </a-tab-pane>
           <a-tab-pane :key="2" :disabled="!isCreated" class="m-3">
             <div slot="tab" class="tab-title main ant-tabs-tab-completed">
               {{ translation['Avail_1_450'] }}
             </div>
-            <Availability v-if="isCreated" :manufacturer-treatment="entity" />
+            <Availability  :manufacturer-treatment="entity" />
           </a-tab-pane>
         </a-tabs>
       </a-skeleton>
@@ -57,8 +57,12 @@ export default {
       this.entity = entity
       this.isCreated = true
     },
-    tabChange(a, b, c) {
-      console.log(a, b, c)
+    getNextTab(key)
+    {
+      this.tabChange(key)
+    },
+    tabChange(key) {
+      this.activeTab = key
     },
   },
 }

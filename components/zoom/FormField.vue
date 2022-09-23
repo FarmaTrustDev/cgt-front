@@ -18,7 +18,7 @@
               ],
             },
           ]"
-          :placeholder="translation.Pleasinput_4_630"
+          placeholder="Description"
         />
       </a-form-item>
     </a-col>

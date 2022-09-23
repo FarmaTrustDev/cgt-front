@@ -41,6 +41,7 @@ export default {
         ...this.params,
         puid: search,
         treatmentTypeName: search,
+        PatientEnrollmentNumber: search
       }
       console.log(this.params)
       this.emitParams(this.params)
