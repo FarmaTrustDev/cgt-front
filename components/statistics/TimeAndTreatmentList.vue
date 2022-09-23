@@ -109,7 +109,7 @@
                       class="h-tabs large-tabs float-right sample-tabs-small"
                     >
                       <a-tabs type="card" :animated="false">
-                        <a-tab-pane key="1" :tab="translation.InbouSampl_2_306">
+                        <a-tab-pane key="1" tab="Inbound">
                           <a-table
                             class="rounded-table"
                             :columns="newSampleColumns"
@@ -170,7 +170,7 @@
                             </span>
                           </a-table>
                         </a-tab-pane>
-                        <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
+                        <a-tab-pane key="2" tab="Outbound">
                           <a-table
                             class="rounded-table"
                             :columns="completedColumns"
