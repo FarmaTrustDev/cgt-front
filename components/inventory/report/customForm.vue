@@ -10,11 +10,11 @@
             </a-row>
             <a-row v-for="x in loopVal" :key="'Row'+x">
                 <a-col v-for="custDD in customCol" :key="name+'Col'+x+custDD.key" :span="custDD.width" style="text-align:center; padding-left:5px">
-                    <a-form-item v-if="custDD.control==='textArea'"><a-textarea :auto-size="{ minRows: 5, maxRows: 10 }" style="border-radius:1px" /></a-form-item>
-                    <a-form-item v-if="custDD.control===''"><a-input style="border-radius:15px;" /></a-form-item>
+                    <a-form-item v-if="custDD.control==='textArea'"><a-textarea :auto-size="{ minRows: 5, maxRows: 10 }" style="border-radius:1px"></a-textarea></a-form-item>
+                    <a-form-item v-if="custDD.control===''"><a-input v-if="tag==='tag2' && 'data' in custDD" :value="custDD.data" style="border-radius:15px;" /><a-input v-else style="border-radius:15px;" /></a-form-item>
                     <a-form-item v-if="custDD.control==='Yes/No'"><a-checkbox>Yes</a-checkbox><a-checkbox>No</a-checkbox></a-form-item>
                     <a-form-item v-if="custDD.control==='N/A'"><a-checkbox>N/A</a-checkbox></a-form-item>
-                    <p class="mt-15" v-if="custDD.control==='serial'">{{x+'.'}}</p>
+                    <p v-if="custDD.control==='serial'" class="mt-15">{{x+'.'}}</p>
                 </a-col>
             </a-row>
             <a-row v-if="performedBy">
@@ -38,7 +38,7 @@
             </a-row>
             <a-row v-for="x,index in data" :key="index">
                 <a-col v-for="custDD in x" :key="name+'Col'+index+custDD.key" :span="custDD.width" style="text-align:center; padding-left:10px">
-                    <a-form-item v-if="custDD.control===''"><a-input style="border-radius:15px;" /></a-form-item>
+                    <a-form-item v-if="custDD.control===''"><a-input v-if="tag==='tag2' && 'data' in custDD" :value="custDD.data" style="border-radius:15px;" /><a-input v-else style="border-radius:15px;" /></a-form-item>
                     <a-form-item v-if="custDD.control==='Yes/No/NA'"><a-checkbox>Yes</a-checkbox><a-checkbox>No</a-checkbox><a-checkbox>N/A</a-checkbox></a-form-item>
                     <a-form-item v-if="custDD.control==='Yes/No'"><a-checkbox>Yes</a-checkbox><a-checkbox>No</a-checkbox></a-form-item>
                     <a-form-item v-if="custDD.control==='N/A'"><a-checkbox>N/A</a-checkbox></a-form-item>
@@ -78,6 +78,7 @@ export default {
     performedBy:{type: Boolean, default:false},
     verifiedBy:{type: Boolean, default:false},
     showButton:{type: Boolean, default:true},
+    tag:{type: String, default: 'tag1'},
 },
   methods: {
     isEmpty,

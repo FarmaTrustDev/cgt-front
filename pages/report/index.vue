@@ -1,14 +1,14 @@
 <template>
     <div>
-      <div @click="generatePDF()">Generate PDF</div>
-        <custom-form :name="'titlePage'" :data="coustomDataTitlePage" />
+      <a-button @click="generatePDF()" type="promary">Generate PDF</a-button><div v-if="progressVal>0">Download in progress: {{progressVal}}/100 </div>
+        <custom-form :name="'titlePage'" :data="coustomDataTitlePage" :tag="tag" />
           <a-card class="white-card-smart-lab">
             <p><b>APPROVALS:</b> This record has been reviewed by the undersigned personnel and has been found to be complete and appropriate for the activities documented herein.</p>
             <a-row>
               <a-col :span="3" class="mt-15"><span>Client:</span></a-col>
-              <a-col :span="7" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
-              <a-col :span="7" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
-              <a-col :span="6" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
+              <a-col :span="7" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="James Cooper" /><a-input v-else /></a-form-item></a-col>
+              <a-col :span="7" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="Lorem ipsum" /><a-input v-else /></a-form-item></a-col>
+              <a-col :span="6" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="23/09/22" /><a-input v-else /></a-form-item></a-col>
             </a-row>
             <a-row>
               <a-col :span="3" class="mt-15"><span></span></a-col>
@@ -18,9 +18,9 @@
             </a-row>
             <a-row>
               <a-col :span="3" class="mt-15"><span>Client:</span></a-col>
-              <a-col :span="7" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
-              <a-col :span="7" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
-              <a-col :span="6" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
+              <a-col :span="7" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="James Cooper" /><a-input v-else /></a-form-item></a-col>
+              <a-col :span="7" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="Lorem ipsum" /><a-input v-else /></a-form-item></a-col>
+              <a-col :span="6" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="23/09/22" /><a-input v-else /></a-form-item></a-col>
             </a-row>
             <a-row>
               <a-col :span="3" class="mt-15"><span></span></a-col>
@@ -37,14 +37,14 @@
                 (Verify Work Order information to confirm BPR/Lot information was not previously assigned for preprinting of labels)
               </a-col>
               <a-col :span="16" style="margin-left:5px">
-                <a-form-item><a-input /></a-form-item>
+                <a-form-item><a-input v-if="tag==='tag2'" value="124578" /><a-input v-else /></a-form-item>
               </a-col>
             </a-row>
             <a-row>
               <a-col :span="7"><span>Experic Quality Approval of Batch Production Record Issued By:</span></a-col>
-              <a-col :span="5" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
-              <a-col :span="6" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
-              <a-col :span="5" class="ml-5"><a-form-item><a-input /></a-form-item></a-col>
+              <a-col :span="5" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="James Cooper" /><a-input v-else /></a-form-item></a-col>
+              <a-col :span="6" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="Lorem ipsum" /><a-input v-else /></a-form-item></a-col>
+              <a-col :span="5" class="ml-5"><a-form-item><a-input v-if="tag==='tag2'" value="23/09/22" /><a-input v-else /></a-form-item></a-col>
             </a-row>
             <a-row>
               <a-col :span="7"><span></span></a-col>
@@ -53,7 +53,7 @@
               <a-col :span="5" style="margin-top:-20px; text-align:center" class="ml-5">Date</a-col>
             </a-row>
           </a-card>
-          <custom-form :headingTitle="titlePerson" :name="'person'" :text="textPerson" :customCol="customColsPerson" @handelPositiv="increasePersonVal" @handelNegative="decreasePersonVal" :loopVal="personLoopVal" :reviewedBy="true" />
+          <custom-form :headingTitle="titlePerson" :name="'person'" :text="textPerson" :tag="tag" :customCol="customColsPerson" @handelPositiv="increasePersonVal" @handelNegative="decreasePersonVal" :loopVal="personLoopVal" :reviewedBy="true" />
           <custom-form :headingTitle="titleBatch" :name="'batch'" :customCol="customColsBatchRec" @handelPositiv="increaseBatchVal" @handelNegative="decreaseBatchVal" :loopVal="batchLoopVal" :reviewedBy="true" />
           <custom-form :headingTitle="titleBills" :name="'bills'" :customCol="customColsBills" @handelPositiv="increaseBillsVal" @handelNegative="decreaseBillsVal" :loopVal="billsLoopVal" />
           <custom-form :headingTitle="titleEquipment" :name="'equipment'" :text="textEquipment" :customCol="customColsEquipment" @handelPositiv="increaseEquipmentVal" @handelNegative="decreaseEquipmentVal" :loopVal="equipmentLoopVal" :reviewedBy="true" />
@@ -216,14 +216,14 @@
         ref="html2Pdf"
       >
         <section slot="pdf-content">
-          <print-form :name="'titlePage'" :data="coustomDataTitlePage" />
+          <print-form :name="'titlePage'" :data="coustomDataTitlePage" :tag="tag" />
           <a-card class="white-card-smart-lab">
             <p><b>APPROVALS:</b> This record has been reviewed by the undersigned personnel and has been found to be complete and appropriate for the activities documented herein.</p>
             <a-row>
               <a-col :span="3" class="mt-5" style="height:30px"><span>Client:</span></a-col>
-              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px">&nbsp;</a-col>
-              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px">&nbsp;</a-col>
-              <a-col :span="6" class="ml-5" style="border: 2px solid black;height:30px">&nbsp;</a-col>
+              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px"><p v-if="tag==='tag2'">James Cooper</p><p v-else>&nbsp;</p></a-col>
+              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px"><p v-if="tag==='tag2'">Lorem ipsum</p><p v-else>&nbsp;</p></a-col>
+              <a-col :span="6" class="ml-5" style="border: 2px solid black;height:30px"><p v-if="tag==='tag2'">23/09/22</p><p v-else>&nbsp;</p></a-col>
             </a-row>
             <a-row>
               <a-col :span="3" class="mt-15"><span></span></a-col>
@@ -233,9 +233,9 @@
             </a-row>
             <a-row>
               <a-col :span="3" class="mt-5" style="height:30px"><span>Client:</span></a-col>
-              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px">&nbsp;</a-col>
-              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px">&nbsp;</a-col>
-              <a-col :span="6" class="ml-5" style="border: 2px solid black;height:30px">&nbsp;</a-col>
+              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px"><p v-if="tag==='tag2'">James Cooper</p><p v-else>&nbsp;</p></a-col>
+              <a-col :span="7" class="ml-5" style="border: 2px solid black;height:30px"><p v-if="tag==='tag2'">Lorem ipsum</p><p v-else>&nbsp;</p></a-col>
+              <a-col :span="6" class="ml-5" style="border: 2px solid black;height:30px"><p v-if="tag==='tag2'">23/09/22</p><p v-else>&nbsp;</p></a-col>
             </a-row>
             <a-row>
               <a-col :span="3" class="mt-15" ><span></span></a-col>
@@ -249,14 +249,14 @@
                 Batch Production Record (BPR) Number: (Verify Work Order information to confirm BPR/Lot information was not previously assigned for preprinting of labels)
               </a-col>
               <a-col :span="16" class="ml-5" style="border: 1px solid black;height:90px">
-                &nbsp;
+                <p v-if="tag==='tag2'">124578</p><p v-else>&nbsp;</p>
               </a-col>
             </a-row>
             <a-row>
               <a-col :span="7" style="border: 1px solid black;height:50px"><span>Experic Quality Approval of Batch Production Record Issued By:</span></a-col>
-              <a-col :span="5" class="ml-5" style="border: 1px solid black;height:50px">&nbsp;</a-col>
-              <a-col :span="6" class="ml-5" style="border: 1px solid black;height:50px">&nbsp;</a-col>
-              <a-col :span="5" class="ml-5" style="border: 1px solid black;height:50px">&nbsp;</a-col>
+              <a-col :span="5" class="ml-5" style="border: 1px solid black;height:50px"><p v-if="tag==='tag2'">James Cooper</p><p v-else>&nbsp;</p></a-col>
+              <a-col :span="6" class="ml-5" style="border: 1px solid black;height:50px"><p v-if="tag==='tag2'">Lorem ipsum</p><p v-else>&nbsp;</p></a-col>
+              <a-col :span="5" class="ml-5" style="border: 1px solid black;height:50px"><p v-if="tag==='tag2'">23/09/22</p><p v-else>&nbsp;</p></a-col>
             </a-row>
             <a-row>
               <a-col :span="7"><span></span></a-col>
@@ -266,7 +266,7 @@
             </a-row>
           </a-card>
           <div style="page-break-after: always;"></div>
-          <print-form :headingTitle="titlePerson" :name="'person'" :text="textPerson" :customCol="customColsPerson" @handelPositiv="increasePersonVal" @handelNegative="decreasePersonVal" :loopVal="personLoopVal" :reviewedBy="true" />
+          <print-form :headingTitle="titlePerson" :name="'person'" :text="textPerson" :tag="tag" :customCol="customColsPerson" @handelPositiv="increasePersonVal" @handelNegative="decreasePersonVal" :loopVal="personLoopVal" :reviewedBy="true" />
           <div style="page-break-after: always;"></div>
           <print-form :headingTitle="titleBatch" :name="'batch'" :customCol="customColsBatchRec" @handelPositiv="increaseBatchVal" @handelNegative="decreaseBatchVal" :loopVal="batchLoopVal" :reviewedBy="true" />
           <div style="page-break-after: always;"></div>
@@ -440,36 +440,42 @@ export const customColsPerson = [
     key: 0,
     width:5,
     control:'',
+    data:'James Cooper',
   },
   {
     name: 'SIGNATURE',
     key: 1,
     width:5,
     control:'',
+    data:'Lorem ipsum',
   },
   {
     name: 'TITLE',
     key: 2,
     width:5,
     control:'',
+    data:'Lorem ipsum Lorem ipsum',
   },
   {
     name: 'ROLE PERFORMED',
     key: 3,
     width:5,
     control:'',
+    data:'Lorem ipsum'
   },
   {
     name: 'INITIALS',
     key: 4,
     width:2,
     control:'',
+    data:'',
   },
   {
     name: 'DATE',
     key: 5,
     width:2,
     control:'',
+    data:'23/09/22',
   },
 ]
 export const customColsBRA = [
@@ -1226,6 +1232,7 @@ export const coustomDataTitlePage=[[
     width:8,
     control:'text',
     height:'40px',
+    data:'',
   },
   {
     text: '',
@@ -1233,6 +1240,7 @@ export const coustomDataTitlePage=[[
     width:16,
     control:'',
     height:'40px',
+    data:'34578',
   },
 ],[
   {
@@ -1241,6 +1249,7 @@ export const coustomDataTitlePage=[[
     width:8,
     control:'text',
     height:'40px',
+    data:'',
   },
   {
     text: '',
@@ -1248,6 +1257,7 @@ export const coustomDataTitlePage=[[
     width:16,
     control:'',
     height:'40px',
+    data:'Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit',
   },
 ],[
   {
@@ -1256,6 +1266,7 @@ export const coustomDataTitlePage=[[
     width:8,
     control:'text',
     height:'40px',
+    data:'',
   },
   {
     text: '',
@@ -1263,6 +1274,7 @@ export const coustomDataTitlePage=[[
     width:16,
     control:'',
     height:'40px',
+    data:'32 °C',
   },
 ],[
   {
@@ -1271,6 +1283,7 @@ export const coustomDataTitlePage=[[
     width:8,
     control:'text',
     height:'40px',
+    data:'',
   },
   {
     text: '',
@@ -1278,6 +1291,7 @@ export const coustomDataTitlePage=[[
     width:16,
     control:'',
     height:'40px',
+    data:'47%',
   },
 ],[
   {
@@ -1286,6 +1300,7 @@ export const coustomDataTitlePage=[[
     width:8,
     control:'text',
     height:'60px',
+    data:'',
   },
   {
     text: 'Refer to Pharmaceutical Based Exposure Control Limit Product Review Form DOC-000183[1]',
@@ -1293,6 +1308,7 @@ export const coustomDataTitlePage=[[
     width:16,
     control:'text',
     height:'60px',
+    data:'',
   },
 ]]
 export const coustomDataIPI=[[
@@ -1567,6 +1583,8 @@ export default {
     pLocLoopVal:5,
     rLocLoopVal:5,
     bRALoopVal:5,
+    progressVal:0,
+    tag:'',
     titleLine:'LINE CLEARANCE / START UP',
     titleEquipment:'EQUIPMENT',
     titlePerson:'PERSONNEL LOG',
@@ -1592,15 +1610,22 @@ export default {
     textEquipment:'Complete required information below for equipment used or N/A if not used.' ,
     }
   },
+  mounted(){
+    this.getParam()
+  },
   methods:{
+    getParam(){
+      this.tag=this.$route.query.report
+    },
     onProgress(event) {
-      console.log(`Processed: ${event} / 100`);
+      this.progressVal=event
+      console.log(`Processed: ${event} / 100`)
     },
     hasGenerated() {
-      alert("PDF generated successfully!");
+      alert("PDF generated successfully!")
     },
     generatePDF() {
-      this.$refs.html2Pdf.generatePdf();
+      this.$refs.html2Pdf.generatePdf()
     },
     increasePersonVal(){
         this.personLoopVal=this.personLoopVal+1

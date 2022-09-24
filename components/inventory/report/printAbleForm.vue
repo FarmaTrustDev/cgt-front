@@ -12,8 +12,8 @@
                 <a-col v-for="custDD in customCol" :key="name+'Col'+x+custDD.key" :span="custDD.width" style="border: 1px solid black; text-align:center; height:35px; padding-left:5px">
                     <a-form-item v-if="custDD.control==='Yes/No'" style="height:35px"><a-checkbox>Yes</a-checkbox><a-checkbox>No</a-checkbox></a-form-item>
                     <a-form-item v-if="custDD.control==='N/A'"  style="height:35px"><a-checkbox>N/A</a-checkbox></a-form-item>
-                    <p class="mt-15" v-if="custDD.control==='serial'">{{x+'.'}}</p>
-                    <p class="mt-15" v-else>&nbsp;</p>
+                    <p v-if="custDD.control==='serial'" class="mt-15" >{{x+'.'}}</p>
+                    <p v-else class="mt-15 text-left" ><span v-if="tag==='tag2' && 'data' in custDD">{{custDD.data}}</span><span v-else>&nbsp;</span></p>
                 </a-col>
             </a-row>
             <a-row v-if="performedBy">
@@ -41,7 +41,7 @@
                     <a-form-item v-if="custDD.control==='Yes/No'"><a-checkbox>Yes</a-checkbox><a-checkbox>No</a-checkbox></a-form-item>
                     <a-form-item v-if="custDD.control==='N/A'"><a-checkbox>N/A</a-checkbox></a-form-item>
                     <span v-if="custDD.control==='text'"><p style="text-align:justify" class="mt-10">{{custDD.text}}</p></span>
-                    <p class="mt-15" v-else>&nbsp;</p>
+                    <p v-else class="mt-15 text-left"><span v-if="tag==='tag2' && 'data' in custDD">{{custDD.data}}</span><span v-else>&nbsp;</span></p>
                 </a-col>
             </a-row>
             <a-row v-if="performedBy">
@@ -77,6 +77,7 @@ export default {
     performedBy:{type: Boolean, default:false},
     verifiedBy:{type: Boolean, default:false},
     showButton:{type: Boolean, default:true},
+    tag:{type: String, default: 'tag1'},
 },
   methods: {
     isEmpty,

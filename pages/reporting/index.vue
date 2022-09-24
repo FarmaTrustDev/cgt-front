@@ -36,13 +36,13 @@
               <span :id="row.statusId">{{ value }}</span>
             </div>
           </div>
-          <div slot="doc" slot-scope="value">
+          <div slot="doc" slot-scope="value, row">
             <a-button
               icon="printer"
               class="print-btn"
               type="primary"
               size="small"
-              @click="goto(`/report`)"
+              @click="goto(`/report?report=${row.statusId}`)"
               >{{ value }}</a-button
             >
           </div>
