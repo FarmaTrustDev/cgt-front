@@ -242,7 +242,7 @@ import imagesHelper from '~/mixins/images-helper'
 export const newSampleData = [
   {
     patientEnrollmentNumber: 'DAC7993',
-    treatmentType: 'Human Cells ',
+    // treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '10/06/2022 - 14/07/2022',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
@@ -250,7 +250,7 @@ export const newSampleData = [
   },
   {
     patientEnrollmentNumber: 'DAC7986',
-    treatmentType: 'Human Cells ',
+    // treatmentType: 'Human Cells ',
     hospital: 'Novartis',
     collectionDateDeliveryDate: '15/06/2022 - 20/07/2023',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
@@ -260,16 +260,16 @@ export const newSampleData = [
 export const completedSampleData = [
   {
     patientEnrollmentNumber: 'DAC65198',
-    treatmentType: 'Human Cells',
-    productionLine: 'Zone A',
+    // treatmentType: 'Human Cells',
+    // productionLine: 'Zone A',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '25/04/2022 - 28/08/2022',
     // dispatchedBy: 'Ben Hawkins',
   },
   {
     patientEnrollmentNumber: 'DAC2237',
-    treatmentType: 'Human Cells',
-    productionLine: 'Zone C',
+    // treatmentType: 'Human Cells',
+    // productionLine: 'Zone C',
     hospital: 'Novartis',
     collectionDateDeliveryDate: '08/04/2022 - 11/08/2022',
     // dispatchedBy: 'Shawn David',
@@ -278,16 +278,16 @@ export const completedSampleData = [
 export const allSampleData = [
   {
     patientEnrollmentNumber: 'DAC7993',
-    treatmentType: 'Human Cells ',
-    productionLine: 'Zone C',
+    // treatmentType: 'Human Cells ',
+    // productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '05/06/2022 - 08/07/2022',
     // dispatchedBy: 'In Progress',
   },
   {
     patientEnrollmentNumber: 'DAC21362',
-    treatmentType: 'Human Cells ',
-    productionLine: 'Zone C',
+    // treatmentType: 'Human Cells ',
+    // productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '30/05/2022 - 02/07/2022',
     // dispatchedBy: 'In Progress',
@@ -421,40 +421,7 @@ export default {
           scopedSlots: { customRender: 'action' },
         },
       ],
-      // allSampleColumns: [
-      //   {
-      //     title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-      //     dataIndex: 'patientEnrollmentNumber',
-      //     key: 'patientEnrollmentNumber',
-      //     scopedSlots: { customRender: 'name' },
-      //   },
-      //   {
-      //     title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-      //     dataIndex: 'treatmentType',
-      //     key: 'treatmentType',
-      //   },
-      //   {
-      //     title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
-      //     dataIndex: 'productionLine',
-      //     key: 'productionLine',
-      //   },
-      //   {
-      //     title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-      //     dataIndex: 'hospital',
-      //     key: 'hospital',
-      //   },
-      //   {
-      //     title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-      //     dataIndex: 'collectionDateDeliveryDate',
-      //     key: 'collectionDateDeliveryDate',
-      //   },
-      //   {
-      //     title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
-      //     dataIndex: 'dispatchedBy',
-      //     key: 'dispatchedBy',
-      //   },
-      // ],
-
+     
       inbound: newSampleData,
       outbound: completedSampleData,
       allSample: allSampleData,
