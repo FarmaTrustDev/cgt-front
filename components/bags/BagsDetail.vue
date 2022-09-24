@@ -39,13 +39,13 @@ const columns = [
   {
     title: 'Collection Date/Time',
     dataIndex: 'collectionDateTime',
-    key: 'collDateTime'
+    key: 'collDateTime',
   },
   {
     title: 'Description',
     dataIndex: 'notes',
-    key: 'description'
-  }
+    key: 'description',
+  },
 ]
 export default {
   components: { StandardTable },
@@ -69,17 +69,12 @@ export default {
   },
   methods: {
     fetchBags() {
+      this.loading = true
       TreatmentBagServices.get({ treatmentId: this.treatment.id })
         .then((bags) => {
           this.bags = bags.data
-          console.log(bags)
         })
-        .then(() => {
-          this.loading = false
-        })
-        .finally(() => {
-          this.loading = false
-        })
+        .finally((this.loading = false))
     },
     clickImage(record) {
       this.qrUrl = record.qrUrl

@@ -1,31 +1,35 @@
 <template>
   <div>
-    <span v-if="treatment.isHold === true | treatment.isCancel === true">
-                <a-alert
-            v-if="treatment.isHold == true"
-            type="error"
-            message="Treatment has been paused"
-            :description=" 'Reason : ' + treatment.treatmentPauseReason"
-          />
-          <a-alert
-            v-if="treatment.isCancel == true"
-            type="error"
-            message="Treatment has been cancelled"
-            :description=" 'Reason : ' + treatment.treatmentCancelReason"
-          />
+    <span v-if="treatment.isHold | treatment.isCancel">
+      <a-alert
+        v-if="treatment.isHold == true"
+        type="error"
+        message="Treatment has been paused"
+        :description="'Reason : ' + treatment.treatmentPauseReason"
+      />
+      <a-alert
+        v-if="treatment.isCancel == true"
+        type="error"
+        message="Treatment has been cancelled"
+        :description="'Reason : ' + treatment.treatmentCancelReason"
+      />
     </span>
     <span v-else>
-    <manufactureCollection
-      v-if="
-        treatment.phaseId >= TREATMENT_PHASES.MANUFACTURER_SAMPLE_COLLECTION.id
-      "
-      :treatment="treatment"
-      show-complete-btn="manufacturerCollectionStatus"
-      @completeAllBag="completeAllBag"
-    />
-    <alert v-else message="Shipment is not being shedule yet by the Clinic for this treatment.
-     This treatment will be available once the hospital has done the shipment" />
-  </span>
+      <manufactureCollection
+        v-if="
+          treatment.phaseId >=
+          TREATMENT_PHASES.MANUFACTURER_SAMPLE_COLLECTION.id
+        "
+        :treatment="treatment"
+        show-complete-btn="manufacturerCollectionStatus"
+        @completeAllBag="completeAllBag"
+      />
+      <alert
+        v-else
+        message="Shipment is not being shedule yet by the Clinic for this treatment.
+     This treatment will be available once the hospital has done the shipment"
+      />
+    </span>
   </div>
 </template>
 <script>
@@ -43,9 +47,9 @@ export default {
   },
   computed: {
     translation() {
-        return this.$store.getters.getTranslation
+      return this.$store.getters.getTranslation
     },
-  },  
+  },
   methods: {
     completeAllBag(bags) {
       TreatmentServices.markManufacturerCollection(this.treatment.id).then(

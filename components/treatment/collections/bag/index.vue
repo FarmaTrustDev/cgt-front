@@ -44,7 +44,7 @@ export default {
       // watch it
       // console.log(this.activeTab)
       if (newBags !== oldVal) {
-        if (!isEmpty(newBags) && this.activeTab===null) {
+        if (!isEmpty(newBags) && this.activeTab === null) {
           // console.log(newBags)
           this.activeTab = newBags[0].id
           // console.log(this.activeTab)
@@ -53,12 +53,13 @@ export default {
     },
   },
   mounted() {
-    // this.setActiveTab()
+    this.setActiveTab()
   },
   methods: {
-    setActiveTab(){
-      console.log(this.bags)
-      // this.activeTab=this.bags[0].id
+    setActiveTab() {
+      if (!isEmpty(this.bags)) {
+        this.activeTab = this.bags[0].id
+      }
     },
     completeBag(bag) {
       if (this.validateCollectionComplete(bag)) {
@@ -92,7 +93,7 @@ export default {
       this.activeTab = key
     },
     fetchBags(bagKeyId) {
-      this.activeTab=bagKeyId
+      this.activeTab = bagKeyId
       this.$emit('fetchBags')
     },
   },

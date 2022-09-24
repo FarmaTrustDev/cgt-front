@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <a-skeleton :loading="loading">
     <a-timeline>
       <a-timeline-item
         v-for="step in steps"
@@ -47,7 +47,7 @@
         </div></a-timeline-item
       >
     </a-timeline>
-  </div>
+  </a-skeleton>
 </template>
 
 <script>
@@ -63,27 +63,27 @@ export default {
     stepTypeId: { required: true, type: Number },
   },
   data() {
-    return { steps: null }
+    return { steps: null, loading: false }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        if(this.steps!=null){
-          this.steps[0].by=newValues.InbouDate_2_635
-          this.steps[1].by=newValues.InbouProce_2_513
-          this.steps[2].by=newValues.Stora_1_366
-          this.steps[3].by=newValues.VisuaCheck_2_636
-          this.steps[4].by=newValues.PackaDepot_2_637
-          this.steps[5].by=newValues.CouriPick_3_648
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        if (this.steps != null) {
+          this.steps[0].by = newValues.InbouDate_2_635
+          this.steps[1].by = newValues.InbouProce_2_513
+          this.steps[2].by = newValues.Stora_1_366
+          this.steps[3].by = newValues.VisuaCheck_2_636
+          this.steps[4].by = newValues.PackaDepot_2_637
+          this.steps[5].by = newValues.CouriPick_3_648
         }
       }
-    }
-  },  
+    },
+  },
   mounted() {
     this.fetchSteps()
     this.getTranslationData()
@@ -91,24 +91,27 @@ export default {
   methods: {
     isEmpty,
     fetchSteps() {
+      this.loading = true
       TreatmentServices.getCustody(
         this.treatment.id,
         this.bag.id,
         this.stepTypeId
-      ).then((response) => {
-        if (!isEmpty(response.data)) {
-          this.steps = response.data.steps
-        }
-      })
+      )
+        .then((response) => {
+          if (!isEmpty(response.data)) {
+            this.steps = response.data.steps
+          }
+        })
+        .finally(() => (this.loading = false))
     },
-    getTranslationData(){
-      if(this.steps!=null){
-        this.steps[0].by=this.translation.InbouDate_2_635
-        this.steps[1].by=this.translation.InbouProce_2_513
-        this.steps[2].by=this.translation.Stora_1_366
-        this.steps[3].by=this.translation.VisuaCheck_2_636
-        this.steps[4].by=this.translation.PackaDepot_2_637
-        this.steps[5].by=this.translation.CouriPick_3_648
+    getTranslationData() {
+      if (this.steps != null) {
+        this.steps[0].by = this.translation.InbouDate_2_635
+        this.steps[1].by = this.translation.InbouProce_2_513
+        this.steps[2].by = this.translation.Stora_1_366
+        this.steps[3].by = this.translation.VisuaCheck_2_636
+        this.steps[4].by = this.translation.PackaDepot_2_637
+        this.steps[5].by = this.translation.CouriPick_3_648
       }
     },
   },
