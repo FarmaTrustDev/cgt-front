@@ -99,115 +99,111 @@
                       {{ translation.Sampl_1_310 }}
                     </span>
                   </a-col>
-                 
                 </div>
               </a-col>
             </a-row>
             <a-row>
               <a-col :span="24">
-                    <div
-                      class="h-tabs large-tabs float-right sample-tabs-small"
-                    >
-                      <a-tabs type="card" :animated="false">
-                        <a-tab-pane key="1" tab="Inbound">
-                          <a-table
-                            class="rounded-table"
-                            :columns="newSampleColumns"
-                            :data-source="inbound"
-                            :should-fetch="false"
+                <div class="h-tabs large-tabs float-right sample-tabs-small">
+                  <a-tabs type="card" :animated="false">
+                    <a-tab-pane key="1" tab="Inbound">
+                      <nuxt-link
+                        to="/inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS"
+                      >
+                        <a-table
+                          class="rounded-table"
+                          :columns="newSampleColumns"
+                          :data-source="inbound"
+                          :should-fetch="false"
+                        >
+                          <span
+                            slot="action"
+                            slot-scope="text, record"
+                            @click="goto('/test')"
                           >
-                            <!-- <template slot="print" slot-scope="record, print">
-                              <a-button
-                                v-if="print.processSample === 'default'"
-                                @click="openViewModal(record)"
-                                ><img :src="getImageUrl('Icons/Union.svg')"
-                              /></a-button>
-                              <a-button v-else @click="openPopViewModal(true)">
-                                <img :src="getImageUrl('Icons/Union.svg')"
-                              /></a-button>
-                            </template> -->
-                            <span slot="action" slot-scope="text, record">
-                              <!-- //Steps -->
-                              <div class="treatment-steps">
-                                <span class="step-col" functional>
-                                  <a-steps :initial="1" size="small">
-                                    <nuxt-link to="/inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS">
-      </nuxt-link>
-                                    <a-step
-                                      v-for="phase in phases"
-                                      :key="phase.id"
-                                      :title="phase.name"
-                                      :status="
-                                        phase.id === 2 &&
-                                        record.processSample == 'red' ? 'wait' : ''"
-                                      :class="
-                                        phase.id === 2 &&
-                                        record.processSample == 'red'
-                                          ? 'ant-steps-item-error'
-                                          : phase.id === 2 &&
-                                            record.processSample !== 'red'
-                                          ? 'ant-steps-item-active-blue'
-                                          : phase.id !== 3
-                                          ? 'ant-steps-item-finish'
-                                          : ''
-                                      "
-                                      @click="
-                                        phase.id === 2 &&
-                                        record.processSample == 'red'
-                                          ? stepClick(
-                                              'error',
-                                              '/inventory/storage/quarantine/status'
-                                            )
-                                          : stepClick(record, phase)
-                                      "
-                                    />
-                                  </a-steps>
-                                </span>
-                              </div>
+                            <!-- //Steps -->
+                            <div class="treatment-steps">
+                              <span class="step-col" functional>
+                                <a-steps :initial="1" size="small">
+                                  <a-step
+                                    v-for="phase in phases"
+                                    :key="phase.id"
+                                    :title="phase.name"
+                                    :status="
+                                      phase.id === 2 &&
+                                      record.processSample == 'red'
+                                        ? 'wait'
+                                        : ''
+                                    "
+                                    :class="
+                                      phase.id === 2 &&
+                                      record.processSample == 'red'
+                                        ? 'ant-steps-item-error'
+                                        : phase.id === 2 &&
+                                          record.processSample !== 'red'
+                                        ? 'ant-steps-item-active-blue'
+                                        : phase.id !== 3
+                                        ? 'ant-steps-item-finish'
+                                        : ''
+                                    "
+                                    @click="
+                                      phase.id === 2 &&
+                                      record.processSample == 'red'
+                                        ? stepClick(
+                                            'error',
+                                            '/inventory/storage/quarantine/status'
+                                          )
+                                        : stepClick(record, phase)
+                                    "
+                                  />
+                                </a-steps>
+                              </span>
+                            </div>
 
-                              <!-- //Steps -->
-                            </span>
-                          </a-table>
-                        </a-tab-pane>
-                        <a-tab-pane key="2" tab="Outbound">
-                          <a-table
-                            class="rounded-table"
-                            :columns="completedColumns"
-                            :data-source="outbound"
-                          >
-                            <!-- ==== steps === -->
-                            <span slot="status-steps" slot-scope="text, record">
-                              <div class="treatment-steps">
-                                <span class="step-col" functional>
-                                  <a-steps
-                                    :initial="1"
-                                    :current="2"
-                                    size="small"
-                                  >
-                                    <a-step
-                                      v-for="phase in outboundSteps"
-                                      :key="phase.id"
-                                      :title="phase.name"
-                                      :class="
-                                        phase.id === 2
-                                          ? 'ant-steps-item-active-blue'
-                                          : ''
-                                      "
-                                      @click="stepClick(record, phase)"
-                                    />
-                                  </a-steps>
-                                </span>
-                              </div>
-                            </span>
+                            <!-- //Steps -->
+                          </span>
+                        </a-table>
+                      </nuxt-link>
+                    </a-tab-pane>
+                    <a-tab-pane key="2" tab="Outbound">
+                      <nuxt-link
+                        to="/inventory/treatment/outboundProcess?view=OUTBOUND_PROCESS"
+                      >
+                        <a-table
+                          class="rounded-table"
+                          :columns="completedColumns"
+                          :data-source="outbound"
+                        >
+                          <!-- ==== steps === -->
+                          <span slot="status-steps" slot-scope="text, record">
+                            <div class="treatment-steps">
+                              <span class="step-col" functional>
+                                <a-steps :initial="1" :current="2" size="small">
+                                  <a-step
+                                    v-for="phase in outboundSteps"
+                                    :key="phase.id"
+                                    :title="phase.name"
+                                    :class="
+                                      phase.id === 2
+                                        ? 'ant-steps-item-active-blue'
+                                        : ''
+                                    "
+                                    @click="stepClick(record, phase)"
+                                  />
+                                </a-steps>
+                              </span>
+                            </div>
+                          </span>
 
-                            <!-- ==== steps === -->
-                          </a-table>
-                        </a-tab-pane>
-                      </a-tabs>
-                    </div>
-                  </a-col>
+                          <!-- ==== steps === -->
+                        </a-table></nuxt-link
+                      >
+                    </a-tab-pane>
+                  </a-tabs>
+                </div>
+              </a-col>
             </a-row>
-           <div
+            <div
               class="text-center p-15 red-div-size"
               style="cursor: pointer"
               @click="goto(`/inventory/treatment`)"
@@ -291,7 +287,6 @@ export const allSampleData = [
     collectionDateDeliveryDate: '30/05/2022 - 02/07/2022',
     // dispatchedBy: 'In Progress',
   },
- 
 ]
 
 export default {
@@ -299,9 +294,8 @@ export default {
     StatusDetail,
     // treatmentTable,
     CustomDisplay,
-
   ],
-  mixins: [routeHelpers,imagesHelper],
+  mixins: [routeHelpers, imagesHelper],
   props: {
     removeList: { type: Boolean, default: true },
     type: { type: String, required: false, default: 'info' },
@@ -420,7 +414,7 @@ export default {
           scopedSlots: { customRender: 'action' },
         },
       ],
-     
+
       inbound: newSampleData,
       outbound: completedSampleData,
       allSample: allSampleData,
@@ -487,7 +481,8 @@ export default {
             }
             // eslint-disable-next-line eqeqeq
             return (
-              storage[filter].match(value.toUpperCase()) ===  filterValue.toUpperCase()
+              storage[filter].match(value.toUpperCase()) ===
+              filterValue.toUpperCase()
             )
           })
         }
@@ -516,7 +511,8 @@ export default {
             }
             // eslint-disable-next-line eqeqeq
             return (
-              storage[filter].match(value.toUpperCase()) === filterValue.toUpperCase()
+              storage[filter].match(value.toUpperCase()) ===
+              filterValue.toUpperCase()
             )
           })
         }
