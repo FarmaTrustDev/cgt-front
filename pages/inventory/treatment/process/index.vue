@@ -143,7 +143,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 25/06/2022</span>
+                        <span class="text-muted"> 25/09/2022 </span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
