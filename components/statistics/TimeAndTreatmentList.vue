@@ -116,7 +116,7 @@
                             :data-source="inbound"
                             :should-fetch="false"
                           >
-                            <template slot="print" slot-scope="record, print">
+                            <!-- <template slot="print" slot-scope="record, print">
                               <a-button
                                 v-if="print.processSample === 'default'"
                                 @click="openViewModal(record)"
@@ -125,22 +125,21 @@
                               <a-button v-else @click="openPopViewModal(true)">
                                 <img :src="getImageUrl('Icons/Union.svg')"
                               /></a-button>
-                            </template>
+                            </template> -->
                             <span slot="action" slot-scope="text, record">
                               <!-- //Steps -->
                               <div class="treatment-steps">
                                 <span class="step-col" functional>
                                   <a-steps :initial="1" size="small">
+                                    <nuxt-link to="/inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS">
+      </nuxt-link>
                                     <a-step
                                       v-for="phase in phases"
                                       :key="phase.id"
                                       :title="phase.name"
                                       :status="
                                         phase.id === 2 &&
-                                        record.processSample == 'red'
-                                          ? 'wait'
-                                          : ''
-                                      "
+                                        record.processSample == 'red' ? 'wait' : ''"
                                       :class="
                                         phase.id === 2 &&
                                         record.processSample == 'red'

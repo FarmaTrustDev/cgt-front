@@ -67,12 +67,7 @@
 ///////////////Sidebar updated
 
 .logout-menu {
-  position: absolute !important;
-  bottom: 10px;
-
-  // z-index: 999999999;
-  // top: 50px;
-  // left: 30px;
+ margin: 15px 0 !important;
   .menu-container {
     background-color: #3869d1;
     color: white;
@@ -206,17 +201,17 @@
 	background-color: #F5F5F5;
 }
 
-.sidebar::-webkit-scrollbar
-{
-	width: 3.5px;
-	background-color: #F5F5F5;
-}
+
 
 .sidebar::-webkit-scrollbar-thumb
 {
 	background-color: #969696;
 }
-
+.sidebar::-webkit-scrollbar
+{
+	width: 3.5px;
+	background-color: #F5F5F5;
+}
 // =================================================================
 .main-section {
   border-left: 1px solid #e8e8e8 !important;
