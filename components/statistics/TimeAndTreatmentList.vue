@@ -246,7 +246,7 @@ export const newSampleData = [
   {
     patientEnrollmentNumber: 'DAC7986',
     // treatmentType: 'Human Cells ',
-    hospital: 'Novartis',
+    hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '25/09/2022 - 28/09/2022',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
@@ -254,19 +254,19 @@ export const newSampleData = [
 ]
 export const completedSampleData = [
   {
-    patientEnrollmentNumber: 'DAC65198',
+    patientEnrollmentNumber: 'DAC6519',
     // treatmentType: 'Human Cells',
     // productionLine: 'Zone A',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '26/09/2022 - 29/09/2022',
+    hospital: 'Adaptimmune',
+    collectionDateDeliveryDate: '24/09/2022 - 27/09/2022',
     // dispatchedBy: 'Ben Hawkins',
   },
   {
     patientEnrollmentNumber: 'DAC2237',
     // treatmentType: 'Human Cells',
     // productionLine: 'Zone C',
-    hospital: 'Novartis',
-    collectionDateDeliveryDate: '25/09/2022 - 28/09/2022',
+    hospital: 'Kite',
+    collectionDateDeliveryDate: '23/09/2022 - 26/09/2022',
     // dispatchedBy: 'Shawn David',
   },
 ]

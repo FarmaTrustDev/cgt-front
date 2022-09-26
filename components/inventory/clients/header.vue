@@ -12,11 +12,11 @@
           <a-col :span="16" style="padding-left:15px">    
             <a-row>
               <a-col :span="5" style="font-weight: bold; line-height:20px">{{translation.Clien_1_505}}:</a-col>
-              <a-col :span="11">{{client}}</a-col>
+              <a-col :span="11">{{isEmpty(client)? 'Autolus' : client}}</a-col>
             </a-row>
             <a-row>
               <a-col :span="5" style="font-weight: bold">{{translation.ClienName_2_540}}:</a-col>
-              <a-col :span="11">{{clientNames}}</a-col>
+              <a-col :span="11">{{isEmpty(clientNames) ? 'James Anderson' : clientNames}}</a-col>
             </a-row>
             <a-row>
               <a-col :span="5" style="font-weight: bold">{{translation.ContaNumbe_2_404}}:</a-col>
@@ -26,6 +26,12 @@
               <a-col :span="5" style="font-weight: bold">{{translation.Addre_1_559}}:</a-col>
               <a-col :span="11"
                 >The WestWorks, 195 Wood Ln, London W12 7FQ</a-col
+              >
+            </a-row>
+            <a-row>
+              <a-col :span="5" style="font-weight: bold">{{translation.date_1_510}}:</a-col>
+              <a-col :span="11"
+                >24 August 2022</a-col
               >
             </a-row>
           </a-col>
@@ -58,6 +64,7 @@
 <script>
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
+import { isEmpty } from '~/services/Helpers'
 export default {
   mixins: [routeHelpers, imagesHelper],
   props: {
@@ -69,6 +76,7 @@ export default {
   data() {
     return {
       showModal: false,
+      isEmpty,
       clientInfo: [
         {
           clientBrand: 'Novida',
