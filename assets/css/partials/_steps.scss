@@ -94,7 +94,7 @@
   }
 
   .ant-steps {
-    margin-top: 8px;
+    // margin-top: 8px;
   }
 
   .treatment-name-col {
@@ -112,7 +112,7 @@
       content: '';
       position: absolute;
       width: 85%;
-      top: 24px;
+      top: 15px;  // Task list steps line was disturbed for that it has been adjusted from 24 to 15
       // bottom: 0;
       margin: auto;
       height: 2px;

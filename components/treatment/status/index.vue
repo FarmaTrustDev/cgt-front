@@ -28,7 +28,7 @@
           </div>
           <collections
             v-if="tabs.collectSamples != null"
-            :enabled="treatment.phaseId <= 4"
+            :enabled="treatment.phaseId > 4"
             :treatment="treatment"
           />
         </a-tab-pane>
@@ -133,6 +133,10 @@ export default {
     this.fetchScheduling()
   },
   methods: {
+    getCollectionPhase() {
+      console.log(this.treatment.phaseId)
+      console.log(this.treatment.phaseId < 4)
+    },
     callback(key) {
       this.activeTab = key
     },

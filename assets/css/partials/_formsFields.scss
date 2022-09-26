@@ -94,7 +94,10 @@
     font-weight: 400;
   }
 }
-
+.ant-form-item-children {
+  position: relative;
+  color: red;
+}
 .ant-select-selection__rendered,
 .ant-select-selection-selected-value {
   line-height: 35px;

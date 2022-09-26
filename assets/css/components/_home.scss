@@ -287,3 +287,42 @@
     }
   }
 }
+//
+.sample-tabs-small {
+  width: 100%;
+  .ant-table-thead {
+    display: none;
+  }
+  .ant-tabs-nav-scroll {
+    text-align: right !important;
+    .ant-tabs-nav {
+      width: 100%;
+    }
+  }
+  .ant-pagination.ant-table-pagination{
+    display: none;
+  }
+  .ant-tabs.ant-tabs-top {
+    .ant-tabs-top-bar  {
+      margin-bottom: 0;
+    }
+    // height: 47px;
+    .ant-tabs-nav-container {
+      padding: 0;
+     
+      .ant-tabs-tab {
+        width: 48% !important;
+        margin-bottom: 0;
+        margin-right: 5px !important;
+        height: 37px !important;
+        // width: 125px !important;
+        text-align: center;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        align-items: center;
+        padding: 0;
+        margin-top: 7px;
+      }
+    }
+  }
+}

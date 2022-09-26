@@ -8,12 +8,12 @@
           :shipment="pickupShipment"
         />
       </a-col>
-      <a-col v-if="!isEmpty(pickupShipment)" :span="12" >
+      <a-col v-if="!isEmpty(pickupShipment)" :span="12">
         <delivery-detail
           :heading="translation.DelivDetai_2_570"
           :scheduling="schedule"
           :shipment="deliveryShipment"
-      />
+        />
       </a-col>
     </a-row>
   </a-skeleton>
@@ -27,9 +27,7 @@ import SchedulingServices from '~/services/API/SchedulingServices'
 import { isEmpty } from '~/services/Helpers'
 
 export default {
-  components: { pickupDetail,
-   deliveryDetail 
-   },
+  components: { pickupDetail, deliveryDetail },
   mixins: [withFetch, shipmentHelpers],
   props: {
     treatment: { type: Object, required: true },
@@ -40,15 +38,17 @@ export default {
       pickupShipment: {},
       deliveryShipment: {},
       schedule: null,
+      loading: false,
     }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },   
+  },
   methods: {
     fetch(id) {
+      this.loading = true
       SchedulingServices.getDetailByTreatment(this.treatment.id)
         .then((response) => {
           this.schedule = response.data
@@ -56,6 +56,7 @@ export default {
         .then(() => {
           this.markShipmentFlags()
         })
+        .finally((this.loading = false))
     },
     isEmpty,
   },

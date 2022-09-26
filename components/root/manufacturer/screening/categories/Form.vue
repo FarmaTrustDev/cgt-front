@@ -10,14 +10,14 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Group Name!',
+                    message: 'Required',
                   },
                 ],
                 initialValue: entity.name,
               },
             ]"
             size="large"
-            placeholder="Insert Group Name"
+            placeholder="Group Name"
           />
           <a-input
             v-decorator="[

@@ -11,14 +11,14 @@
             <a-menu slot="overlay">
               <a-menu-item key="1" @click="edit(item.globalId)"> <a-icon type="edit" />{{translation.Edit_1_450}} </a-menu-item>
               <a-menu-item key="2" >
-                <a-popconfirm
+                <!-- <a-popconfirm
                   title="Are you sure you want to delete this group?"
                   :ok-text="translation.yes_1_654"
                   :cancel-text="translation.no_1_656"
                   placement="topLeft"
                   @confirm="checkReference(item.globalId)"
-                  >
-                <a-icon type="delete" />{{translation.Delet_1_451}}</a-popconfirm>
+                  > -->
+                <a-icon type="delete" @click="stepDeleteModal(true, item.globalId)" />{{translation.Delet_1_451}}
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -44,6 +44,45 @@
         @close="handleCategoryModal"
         @upsert="handleCategory"
       />
+    </a-modal>
+    <a-modal
+      :visible="visibleDeleteModal"
+      ok-text="OK"
+      :footer="null"
+      class="error-model"
+      @cancel="stepDeleteModal(false, '')"
+    >
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+          <span class="line-left line"></span>
+          <span class="line-right line"></span>
+        </span>
+          <!-- <img
+            :src="getImageUrl('Icons/cross-letter.jpg')"
+            width="40%"
+            height="40%"
+          /> -->
+        </p>
+        <h3>Are you sure you want to delete this group?</h3>
+        <!-- <p>There are some errors in your submission. Please correct them.</p> -->
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="stepDelete()"
+            >Confirm</a-button
+          >
+          <a-button
+          class="ant-btn"
+          style="padding: 5px 50px"
+          type="danger"
+          @click="stepDeleteModal(false,'')"
+          >
+          Cancel
+          </a-button>
+        </footer>
+      </center>
     </a-modal>
   </div>
 </template>
@@ -74,7 +113,9 @@ export default {
       showCategoryModal: false,
       loading: true,
       isCreated: false,
-      catagoryModalTitle: 'Add Group Name'
+      catagoryModalTitle: 'Add Group',
+      visibleDeleteModal: false,
+      deleteStep:''
     }
   },
   computed:{
@@ -86,6 +127,16 @@ export default {
     this.fetchList()
   },
   methods: {
+    stepDelete()
+    {
+      this.checkReference(this.deleteStep)
+      this.stepDeleteModal(false, '')
+    },
+    stepDeleteModal(e,step)
+    {
+      this.deleteStep = step
+      this.visibleDeleteModal = e
+    },
     tabClick(){},
     onChange(current) {
       this.current = current;
@@ -136,7 +187,7 @@ export default {
     },
     add() {
       this.setCurrentId(null)
-      this.catagoryModalTitle = 'Add Group Name'
+      this.catagoryModalTitle = 'Add Group'
       this.handleCategoryModal(true)
     },
     getScreenTempStatus(){

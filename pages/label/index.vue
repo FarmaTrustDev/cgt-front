@@ -2,7 +2,6 @@
   <page-layout
     :create="false"
     :bordered="false"
-    :loading="loading"
     :title="translation.Label_1_27"
     class="container page-search-input-container"
   >
@@ -18,9 +17,9 @@
     </template>
     <template slot="content">
       <a-row class="">
-        <a-skeleton :loading="loading" class="specific-card p-0">
+        <span  class="specific-card p-0">
           <Table :data="data" :loading="loading"></Table>
-        </a-skeleton>
+        </span>
       </a-row>
     </template>
   </page-layout>
@@ -37,7 +36,7 @@ export default {
   data() {
     return {
       data: [],
-      loading: false,
+      loading:false,
     }
   },
   mounted() {
@@ -71,6 +70,7 @@ export default {
         this.fetchSearch({
           patientEnrollmentNumber: search,
           TreatmentTypeName: search,
+          PUID:search
         })
       } else {
         this.fetch()

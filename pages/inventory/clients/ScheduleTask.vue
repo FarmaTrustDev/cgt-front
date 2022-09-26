@@ -16,7 +16,7 @@
           Type of Task:
           <a-dropdown-button>
             Dropdown
-            <a-menu slot="overlay" @click="handleMenuClick">
+            <a-menu slot="overlay">
               <a-menu-item key="1">
                 <a-icon type="user" />Sample Recipt
               </a-menu-item>
@@ -30,11 +30,11 @@
             <a-icon slot="icon" type="caret-down" />
           </a-dropdown-button>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="6">
           <img :src="getImageUrl('icons/equalizer.svg')" />
           <a-dropdown-button>
             Execute On
-            <a-menu slot="overlay" @click="handleMenuClick">
+            <a-menu slot="overlay">
               <a-menu-item key="1">
                 <a-icon type="user" />Execute On
               </a-menu-item>
@@ -48,27 +48,25 @@
             <a-icon slot="icon" type="caret-down" />
           </a-dropdown-button>
         </a-col>
-        <a-col :span="8">
+        <a-col :span="2" class="mt-10" style="margin-right:-25px">Date: </a-col>
+        <a-col :span="5">
           <a-date-picker />
         </a-col>
         </a-col>
         <a-col :span="24" class="ml-20 mt-20">
-          <a-col :span="12">
-            <a-col :span="5" class="mt-5">Assign task to:</a-col>
-           <a-col :span="10"><a-input placeholder="Name" /></a-col>
-          </a-col>
-          <a-col :span="12">
-          <a-col :span="2" class="mt-5">Email:</a-col>  
-           <a-col :span="10"> <a-input placeholder="contact@org.com" /></a-col>
-          </a-col>
+            <a-col :span="3" class="mt-5">Assign task to:</a-col>
+            <a-col :span="7" class="mml-15"><a-input placeholder="Name" /></a-col>
+            <a-col :span="4" />
+            <a-col :span="1" class="mt-5">Email:</a-col>  
+            <a-col :span="5" class="ml-35"> <a-input placeholder="contact@org.com" /></a-col>
         </a-col>
         <a-col class="ml-20 mt-20">
           Show notification:
           <a-col :span="24">
             <a-col :span="4">
-                <span class="float-right mr-10">
+ 
               Now:
-              </span>
+
             </a-col>
             <a-col :span="20">
               <a-checkbox> </a-checkbox>
@@ -77,9 +75,7 @@
           </a-col>
           <a-col class="ml-20 mt-20">
             <a-col :span="4">
-                <span class="float-right mr-10">
               Date of task:
-              </span>
               </a-col>
               <a-col :span="20">
               <a-checkbox> </a-checkbox>
@@ -87,17 +83,27 @@
           </a-col>
           <a-col  class="ml-20 mt-20">
             <a-col :span="4">
-                <span class="float-right mr-10">
+
               One week before task:
-              </span>
+
               </a-col>
               <a-col :span="6">
               <a-checkbox> </a-checkbox>
             </a-col>
           </a-col>
         <a-col :span="24" class="ml-20 mt-20">
-        <a-col :span="2" class="mt-40">Comments:</a-col>
-         <a-col :span="20"><a-textarea placeholder="Basic usage" :rows="4" /></a-col>    
+        <a-col :span="2">Comments:</a-col>
+         <a-col :span="20" class="ml-10">
+         <a-textarea
+            v-decorator="[
+              'notes'
+            ]"
+            style="width: 100%; padding-top: 15px"
+            class="note-area"
+            size="large"
+            placeholder="Basic Usage"
+          ></a-textarea>
+         </a-col>    
         </a-col>
         <a-col :span="24" class="ml-20 mt-20">
          Upload Documents:

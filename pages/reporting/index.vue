@@ -3,7 +3,7 @@
     :create="false"
     :bordered="false"
     :loading="loading"
-    title="Reporting"
+    :title="translation.Repor_1_786"
     class="container page-search-input-container"
   >
     <template slot="headerMenus">
@@ -36,13 +36,14 @@
               <span :id="row.statusId">{{ value }}</span>
             </div>
           </div>
-          <div slot="doc" slot-scope="value">
+          <div slot="doc" slot-scope="value, row">
             <a-button
               icon="printer"
               class="print-btn"
               type="primary"
               size="small"
-              >{{ value }}</a-button
+              @click="goto(`/report?report=${row.statusId}`)"
+              >{{ translation.ViewForm_2_789 }}</a-button
             >
           </div>
         </a-table>
@@ -53,11 +54,13 @@
 <script>
 import PageLayout from '~/components/layout/PageLayout'
 // import Table from '~/components/labeling/Listing'
+import routeHelpers from '~/mixins/route-helpers'
 import LabelServices from '~/services/API/LabelServices'
 export default {
   components: {
     'page-layout': PageLayout,
   },
+  mixins:[routeHelpers],
   data() {
     return {
       data: [],
@@ -77,8 +80,8 @@ export default {
           sample: 'Adaptimmune',
           name: 'Chris Smith',
           date: '15/08/2022',
-          status: 'Saved',
-          statusId: 'tag2',
+          status: 'New',
+          statusId: 'tag1',
           doc: 'View Form',
         },
         {
@@ -95,50 +98,59 @@ export default {
           sample: 'Novartis',
           name: 'Oliver Jack',
           date: '20/08/2022',
-          status: 'Saved',
-          statusId: 'tag2',
+          status: 'New',
+          statusId: 'tag1',
           doc: 'View Form',
         },
         {
-          id: 'DAC37790',
-          sample: 'Adaptimmune',
-          name: 'Jack Connor',
-          date: '20/08/2022',
-          status: 'Saved',
-          statusId: 'tag2',
+          id: 'DAC795412',
+          sample: 'Novartis',
+          name: 'John Smith',
+          date: '29/07/2022',
+          status: 'New',
+          statusId: 'tag1',
           doc: 'View Form',
         },
+        // {
+        //   id: 'DAC37790',
+        //   sample: 'Adaptimmune',
+        //   name: 'Jack Connor',
+        //   date: '20/08/2022',
+        //   status: 'Saved',
+        //   statusId: 'tag2',
+        //   doc: 'View Form',
+        // },
       ],
       columns: [
         {
-          title: 'Sample ID',
+          title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
           dataIndex: 'id',
           key: 'id',
         },
         {
-          title: 'Client',
+          title: `${this.$store.getters.getTranslation.Clien_1_505}`,
           dataIndex: 'sample',
           key: 'sample',
         },
         {
-          title: 'Qualified Person',
+          title: `${this.$store.getters.getTranslation.QualiPerso_2_787}`,
           dataIndex: 'name',
           key: 'name',
         },
         {
-          title: 'Arrival Date',
+          title: `${this.$store.getters.getTranslation.ArrivDate_2_788}`,
           dataIndex: 'date',
           key: 'date',
         },
         {
-          title: 'Status',
+          title: `${this.$store.getters.getTranslation.Statu_1_202}`,
           dataIndex: 'status',
           key: 'status',
           class: 'status-sample',
           scopedSlots: { customRender: 'status' },
         },
         {
-          title: 'Document',
+          title: `${this.$store.getters.getTranslation.Docum_1_507}`,
           dataIndex: 'doc',
           key: 'doc',
           scopedSlots: { customRender: 'doc' },
@@ -153,6 +165,18 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.columns[0].title=newValues.SamplID_2_502
+        this.columns[1].title=newValues.Clien_1_505
+        this.columns[2].title=newValues.QualiPerso_2_787
+        this.columns[3].title=newValues.ArrivDate_2_788
+        this.columns[4].title=newValues.Statu_1_202
+        this.columns[5].title=newValues.Docum_1_507
+      }
+    }
   },
   methods: {
     fetch() {

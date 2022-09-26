@@ -17,7 +17,7 @@
                   ],
                 },
               ]"
-              :placeholder="translation['Receiby:_2_330']"
+              placeholder="Received by"
             /> </a-form-item
         ></a-col>
 
@@ -56,12 +56,12 @@
           >
             <a-textarea
               v-decorator="[
-                'ReceivingNotes',
+                'ReceivingNote',
                 {
                   rules: [],
                 },
               ]"
-              :placeholder="translation['ReceiNote:_2_334']"
+              placeholder="Receive note"
             /> </a-form-item
         ></a-col>
         <a-col :span="24"

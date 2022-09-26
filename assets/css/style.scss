@@ -294,6 +294,9 @@ a {
   }
 }
 .ant-pagination {
+  .ant-pagination-item {
+    line-height: 32px;
+  }
   .ant-pagination-item-link,
   .ant-pagination-disabled {
     background: #f0f3ff;
@@ -684,7 +687,7 @@ a {
 // }
 .status-sample {
   #tag1 {
-    background-color: #ffffbc;
+    background-color: #ffdbdb;
     padding: 10px 26px;
     border-radius: 22px;
   }
