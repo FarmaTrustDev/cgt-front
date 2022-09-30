@@ -20,7 +20,7 @@
       <a-row>
         <a-col :span="12">
           <a-form-item
-            label="Hospital Name*"
+            :label='organizationName + " Name*"'
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -37,7 +37,7 @@
                   ],
                 },
               ]"
-              placeholder="Hospital Name"
+              :placeholder='organizationName  +" Name"'
             /> </a-form-item
         ></a-col>
         <a-col :span="12">
@@ -65,8 +65,6 @@
             />
           </a-form-item>
         </a-col>
-
-        <!-- @focusout="validateEmail" -->
       </a-row>
       <a-col :span="12">
         <a-form-item
@@ -78,7 +76,7 @@
             v-decorator="[
               'email',
               {
-                initialValue: entity.email,
+                initialValue : entity.email,
                 rules: [
                   {
                     required: true,
@@ -89,12 +87,12 @@
             ]"
             type="email"
             :placeholder="translation.EmailAddre_2_140"
-            :disable="isCreated"
+            :disabled="isCreated"
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          label="Hospital Address*"
+          :label='organizationName + " Address*"'
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -102,16 +100,16 @@
             v-decorator="[
               'address',
               {
-                initialValue:entity.address,
+                initialValue: entity.address,
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Required',
                   },
                 ],
               },
             ]"
-            placeholder="Hospital Address"
+            :placeholder='organizationName + " Address"'
           /> </a-form-item
       ></a-col>
     </a-row>
@@ -137,6 +135,11 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    organizationName:{
+      type: String,
+      default: '',
+      require: true
+    }
   },
   data() {
     return {
@@ -144,12 +147,15 @@ export default {
       allowedExtensions: PICTURE_UPLOAD_EXTENSIONS,
     }
   },
+  
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
-  methods: {
+  mounted(){
+  },
+    methods: {
     handleChange(info) {
       this.fileList = info
       this.$emit('handleChange', this.fileList)

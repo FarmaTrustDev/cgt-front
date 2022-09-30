@@ -1,7 +1,7 @@
 <template>
     <div>
-        <a-button type="primary" @click="goto('/superAdmin/entities/addHospital/form')">+ Add hospital</a-button>
-        <a-table :columns="columns" :data-source="hospitals">
+        <a-button type="primary" @click="goto('/superAdmin/entities/addOrganization/form?name='+buttonName)">+ Add {{buttonName}}</a-button>
+        <a-table :columns="columns" :data-source="organization">
          <template slot="action" slot-scope="action">
           <a-dropdown>
             <!-- <a-button class="action-button" @click="preventDefault"> -->
@@ -9,7 +9,8 @@
             <!-- </a-button> -->
             <a-menu slot="overlay">
               <a-menu-item key="1">
-                <a @click="goto(`/superAdmin/entities/addHospital/${action}`)">{{
+                <!-- @click="goto(`/superAdmin/entities/addHospital/${action}`)" -->
+                <a >{{
                   translation.Edit_1_450
                 }}</a>
               </a-menu-item>
@@ -36,13 +37,26 @@ import { preventDefault } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
     mixins:[routeHelpers],
+    props:{
+        alias:{
+            type: String,
+            require: true,
+            default:''
+        },
+        fieldName:{
+            type: String,
+            default:'',
+            require: true
+        },
+    },
     data()
     {
         return{
-         hospitals :[],
-         columns:[
+         organization :[],
+         buttonName : this.fieldName,
+        columns:[
         {            
-            title:`Hospital`,
+            title: this.fieldName,
             dataIndex:'name',
             key:'name'
         },
@@ -66,7 +80,7 @@ export default {
          ]
         }
     },
-      computed: {
+    computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
@@ -78,9 +92,9 @@ export default {
         preventDefault,
         fetch()
         {
-            OrganizationServices.get({ organizationTypeId: 2 })
+            OrganizationServices.get({ organizationTypeAlias: this.alias })
                 .then((response) => {
-                    this.hospitals = response.data
+                    this.organization = response.data
                     })
         }
     }

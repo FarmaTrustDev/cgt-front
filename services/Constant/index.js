@@ -54,6 +54,7 @@ export const GENDER = [
 
 export const HOSPITAL_ALIAS = 'HOSPITAL'
 export const LOGISTIC_ALIAS = 'LOGISTIC'
+export const MANUFACTURER_ALIAS = 'MANUFACTURER'
 
 export const SCHEDULING_STATUSES = {
   new: { id: 1, name: 'New' },

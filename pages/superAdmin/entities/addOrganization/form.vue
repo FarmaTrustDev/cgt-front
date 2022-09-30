@@ -3,19 +3,20 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    title="Manufacturer Details"
+    :title="organizationName + ' Details'"
     class="container"
   >
     <template slot="content">
       <div class="grey-card mtminus-2 container">
         <a-card :bordered="false" class="default-border-radius mtminus-2">
           <a-form :form="form" @submit="onSubmit">
-          <FormField
+          <FormField 
           :entity="organizationData"
           :form="form"
+          :organization-name="organizationName"
           :is-created="isCreated"
           @handleChange="handleChange"
-           />
+          />
           <a-form-item :label-col="{ span: 24 }" :wrapper-col="{ span: 23 }">
           <FormActionButton
           :loading="loading"
@@ -23,7 +24,7 @@
           custom-text="Save"
         />
       </a-form-item>
-          </a-form>
+        </a-form>
         </a-card>
       </div>
     </template>
@@ -31,24 +32,26 @@
 </template>
 <script>
 import PageLayout from '~/components/layout/PageLayout'
-import FormField from '~/components/root/superAdmin/entities/addManufacturer/formFields'
+import FormField from '~/components/root/superAdmin/entities/formFields'
 import OrganizationServices from '~/services/API/OrganizationServices'
 import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
+import nullHelper from '~/mixins/null-helpers'
 export default {
     components:{'page-layout': PageLayout,FormField},
-    mixins:[notifications,routeHelpers],
+    mixins:[notifications,routeHelpers,nullHelper],
     data(){
       return{
         apiService: OrganizationServices,
         form: this.$form.createForm(this, {
-        name: 'manufacturerCreate',
+        name: 'hospitalCreate',
       }),
-        loading:false,
-        fileList: [],
-        gotoLink: 'superAdmin/entities',
-        isCreated: false,
         organizationData:{},
+        loading:false,
+        fileList: {},
+        isCreated: false,
+        gotoLink: '/superAdmin/entities',
+        organizationName : '',
       }
     },
     computed: {
@@ -56,7 +59,10 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-      methods:{
+  mounted() {
+    this.checkCreated()
+  },
+  methods:{
     handleChange(info) {
       this.fileList = info
     },
@@ -70,7 +76,7 @@ export default {
           for (const key in values) {
             formData.append(key, values[key])
           }
-            formData.append('organizationTypeId',3)
+            formData.append('organizationTypeId',4)
           this.fileList.forEach((files) => {
             formData.append('profileImageUrl', files)
           })
@@ -79,32 +85,6 @@ export default {
           this.loading = false
         }
       })
-    },
-    
-    create(values)
-    {
-      this.apiService.create(values)
-      .then((response) =>{
-        this.success(response.message)
-        // this.goto(`${this.gotoLink}`)
-      })
-    },
-    update(values)
-    {
-      const entityId = this.$route.params.id
-      this.apiService.update(entityId,values)
-      .then((response)=>{
-        this.success(response.message)
-      })
-    },
-    checkCreated()
-    {
-      const entityId = this.$route.params.id
-      if (this.isGuid(entityId)) {
-        this.entityId = entityId
-        this.isCreated = true
-        this.fetch(entityId)
-      }
     },
     upsert(values)
     {
@@ -117,6 +97,41 @@ export default {
       }
       return this.create(values)
     },
+    create(values)
+    {
+      this.loading = true
+      this.apiService.create(values)
+      .then((response) =>{
+        this.success(response.message)
+        this.goto(`${this.gotoLink}`)
+      })
+    },
+    update(values)
+    {
+      const entityId = this.$route.params.id
+      this.apiService.update(entityId,values)
+      .then((response)=>{
+        this.success(response.message)
+      })
+    },
+    checkCreated()
+    {
+      this.organizationName = this.$route.query.name;
+      const entityId = this.$route.params.id
+      if (this.isGuid(entityId)) {
+        this.entityId = entityId
+        this.isCreated = true
+        this.fetch(entityId)
+      }
+    },
+    fetch(id)
+    {
+      this.loading = true
+      this.apiService.getByGuid(id)
+      .then((response)=>{
+          this.organizationData = response.data
+      }).finally(this.loading = false)
+    }
   }
 }
 </script>

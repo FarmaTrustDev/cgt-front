@@ -1,13 +1,13 @@
 <template>
       <div class=" mtminus-2 container">
-          <FormField />
+          <!-- <FormField /> -->
       </div>
 </template>
 <script>
 
-import FormField from '~/pages/superAdmin/entities/addManufacturer/form'
+// import FormField from '~/pages/superAdmin/entities/addHospital/form'
 export default {
-    components:{FormField},
+    // components:{FormField},
     data(){
       return{
         loading: false
