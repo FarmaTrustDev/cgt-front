@@ -99,7 +99,6 @@ export default {
         })
     },
     onSubmit(e) {
-      debugger
       this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {

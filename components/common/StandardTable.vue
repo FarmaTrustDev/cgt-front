@@ -765,7 +765,6 @@ export default {
       }
     },
     deadPatient(patient) {
-      debugger
       const isDead = !patient.isDead
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
         this.$emit('fetchParent', response)
