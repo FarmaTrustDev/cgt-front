@@ -42,7 +42,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> Baystate Clinic</span>
+                        <span> Adaptimmune</span>
                       </h6>
                     </a-col>
                     <a-col :span="5" class="mt-15">
@@ -66,7 +66,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> baystateclinic@gmail.com</span>
+                        <span> adaptimmune@gmail.com</span>
                       </h6>
                     </a-col>
                   </a-row>

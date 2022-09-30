@@ -49,17 +49,19 @@
           <a-card class="white-card">
             <table class="w-100">
               <thead>
-                <th>Services</th>
-                <th class="pr-5">units</th>
-                <th>price per unit</th>
-                <th>total</th>
+                <th style="font-size:17px; font-weight:bold">Services</th>
+                <th class="pr-5" style="font-size:17px; font-weight:bold">Units</th>
+                <th style="font-size:17px; font-weight:bold">Price Per Unit</th>
+                <th style="font-size:17px; font-weight:bold">Total</th>
               </thead>
               <tr v-for="detail in details" :key="detail.id">
                 <td class="pt-10">{{ detail.service }}</td>
                 <td class="pt-10">{{ detail.unit }}</td>
                 <td
                   class="pt-10"
+                  style="font-weight:bold; font-size:15px"
                   v-html="$options.filters.hashBold(detail.prices)"
+                  
                 >
                   {{ detail.prices }}
                 </td>
@@ -148,50 +150,50 @@ export default {
         {
           service: '-20°C storage',
           unit: 8,
-          prices: '$152',
-          total: '$1,216',
+          prices: '$1,520',
+          total: '$12,160',
         },
         {
           service: '-80°C storage',
           unit: 12,
-          prices: '$200',
-          total: '$2,400',
+          prices: '$2,000',
+          total: '$24,000',
         },
         {
           service: 'LN2 storage',
           unit: 4,
-          prices: '$234',
-          total: '$936',
+          prices: '$2,340',
+          total: '$9,360',
         },
         {
           service: 'Service Fees',
           unit: '',
           prices: '',
-          total: '$143',
+          total: '$1,430',
         },
         {
           service: 'Utility Fees',
           unit: '',
           prices: '',
-          total: '$134',
+          total: '$1,340',
         },
         {
           service: 'Additional Fees',
           unit: '',
           prices: '',
-          total: '$124',
+          total: '$1,240',
         },
         {
           service: 'Professional Service Fees',
           unit: '',
           prices: '',
-          total: '$426',
+          total: '$4,260',
         },
         {
           service: '',
           unit: '',
           prices: '<b>Subtotal<b>',
-          total: '<b>$5235</b>',
+          total: '<b>$53,790</b>',
         },
         {
           service: '',
@@ -203,13 +205,13 @@ export default {
           service: '',
           unit: '',
           prices: '<b>Total Tax</b>',
-          total: '$524',
+          total: '$5,379',
         },
         {
           service: '',
           unit: '',
           prices: '<b>Balance Due</b>',
-          total: '<b>$5759</b>',
+          total: '<b>$59,169</b>',
         },
       ],
     }
