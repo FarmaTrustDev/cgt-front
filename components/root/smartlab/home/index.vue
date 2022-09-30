@@ -44,7 +44,7 @@
                 </div>
               </a>
 
-              <a href="javascript:;" @click="handleSidebarKey(`/users`, 11)">
+              <a href="javascript:;" @click="gotoView(`/superAdmin/user`)">
                 <div class="home-tab with-arrow">
                   <img
                     src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"

@@ -16,7 +16,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your First Name',
+                    message: 'Please input your first name',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -42,7 +42,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your last Name',
+                    message: 'Please input your last name',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -72,7 +72,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Email',
+                    message: 'Please input your email',
                   },
                 ],
                 
@@ -98,7 +98,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your UserName',
+                    message: 'Please input your usrename',
                   },
                 ],
               },
@@ -123,7 +123,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Office Address',
+                    message: 'Please input your office address',
                   },
                 ],
               },
@@ -146,7 +146,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Contact Number',
+                    message: 'Please input your contact number',
                   },
                 ],
               },
@@ -171,7 +171,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your What3Words',
+                    message: 'Please input your what3words',
                   },
                 ],
               },
@@ -195,7 +195,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Department',
+                    message: 'Please input your department',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -208,7 +208,6 @@
           />
         </a-form-item>
       </a-col>
-
       <a-col :span="12">
         <a-form-item
           label="Image:"
@@ -263,7 +262,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Role',
+                    message: 'Please input your role',
                   },
                 ],
               },
@@ -287,7 +286,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Postcode',
+                    message: 'Please input your postcode',
                   },
                 ],
               },
@@ -312,7 +311,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your City',
+                    message: 'Please input your city',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -340,7 +339,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Location',
+                    message: 'Please input your location',
                   },
                 ],
               },
@@ -364,7 +363,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Postal Address',
+                    message: 'Please input your postal address',
                   },
                 ],
               },
@@ -388,7 +387,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your County',
+                    message: 'Please input your county',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,

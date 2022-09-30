@@ -54,6 +54,11 @@ function getSearchUser(params = {}) {
     params,
   })
 }
+function getAllUsers(){
+  return request({
+    url: `${baseApi}/getAllUsers`
+  })
+}
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -125,6 +130,12 @@ function sendEmailToHospitals(data){
   })
 }
 
+function basicDetail(){
+  return request({
+    url: `${baseApi}/basic-detail`,
+  })
+}
+
 const UserServices = {
   detail,
   adminMenu,
@@ -139,12 +150,14 @@ const UserServices = {
   get,
   getUser,
   getByBagId,
+  getAllUsers,
   test,
   activateAccount,
   resetPassword,
   resetPasswordEmail,
   getSearchUser,
   sendEmailToHospitals,
+  basicDetail,
 }
 
 export default UserServices

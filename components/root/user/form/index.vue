@@ -135,7 +135,6 @@ export default {
         .finally(() => {
           this.btnLoading = false
           this.loading = false
-          this.loading = false
         })
     },
     onSubmit(e) {
