@@ -52,9 +52,9 @@
             </a-row>
             <div class="default-border-radius border mt-15 timebox">
               <a-list v-if="isTreatment == false">
-                <a-list-item>
-                  <div class="pl-5">
-                    <p class="pt-1 mt-15">{{ translation.Thereare_6_565 }}</p>
+                <a-list-item class="p-0">
+                  <div class="">
+                    <p class="pt-1 mt-15 ml-15">{{ translation.Thereare_6_565 }}</p>
                   </div>
                 </a-list-item>
               </a-list>
