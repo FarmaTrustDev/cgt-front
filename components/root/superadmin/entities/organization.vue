@@ -9,8 +9,9 @@
             <!-- </a-button> -->
             <a-menu slot="overlay">
               <a-menu-item key="1">
-                <!-- @click="goto(`/superAdmin/entities/addHospital/${action}`)" -->
-                <a >{{
+                <a 
+                @click="goto(`/superAdmin/entities/addOrganization/${action}?name=`+buttonName)"
+                >{{
                   translation.Edit_1_450
                 }}</a>
               </a-menu-item>
@@ -20,7 +21,7 @@
                   :ok-text="translation.yes_1_654"
                   :cancel-text="translation.no_1_656"
                   placement="topLeft"
-                  @confirm="deleteUser(`${action.globalId}`)"
+                  @confirm="deleteUser(`${action}`)"
                 >
                   {{ translation.Delet_1_451 }}
                 </a-popconfirm>
@@ -96,6 +97,13 @@ export default {
                 .then((response) => {
                     this.organization = response.data
                     })
+        },
+        deleteUser(id)
+        {
+          OrganizationServices.destroy(id)
+          .then((response)=>{
+            this.fetch();
+          })
         }
     }
 }

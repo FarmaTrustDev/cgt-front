@@ -2,7 +2,7 @@
   <div>
     <a-row>
       <a-row>
-        <a-col :span="12">
+        <a-col :span="24">
           <a-form-item
             label="Image:"
             :label-col="{ span: 24 }"
@@ -10,10 +10,22 @@
             class="pb-0"
           >
             <Upload
+              v-decorator="[
+                'imageUrl',
+                {
+                  initialValue: entity.profileImageUrl,
+                  rules: [
+                    {
+                      required: imgRequired,
+                    },
+                  ],
+                },
+              ]"
               :default-file-list="entity.profileImageUrl"
               :extensions="allowedExtensions"
               @handleChange="handleChange"
             />
+            {{reqMessage}}
           </a-form-item>
         </a-col>
       </a-row>
@@ -87,9 +99,9 @@
             ]"
             type="email"
             :placeholder="translation.EmailAddre_2_140"
-            :disabled="isCreated"
           /> </a-form-item
       ></a-col>
+            <!-- :disabled="isCreated" -->
       <a-col :span="12">
         <a-form-item
           :label='organizationName + " Address*"'
@@ -119,6 +131,8 @@
 import Upload from '~/components/upload/profile'
 import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 import nullHelper from '~/mixins/null-helpers'
+import OrganizationServices from '~/services/API/OrganizationServices'
+// import { isEmpty } from '~/services/Utilities'
 export default {
   components: { Upload },
   mixins:[nullHelper],
@@ -145,6 +159,10 @@ export default {
     return {
       loading: false,
       allowedExtensions: PICTURE_UPLOAD_EXTENSIONS,
+      imgRequired:true,
+      reqMessage : 'Required',
+      data:'',
+      apiService: OrganizationServices,
     }
   },
   
@@ -154,10 +172,27 @@ export default {
     },
   },
   mounted(){
-  },
+    this.isEdit()
+    },
     methods: {
+      isEdit()
+      { 
+        const entityId = this.$route.params.id
+      this.fetch(entityId)
+      },
+      fetch(id)
+    {
+      this.loading = true
+      this.apiService.getByGuid(id)
+      .then((response)=>{
+          this.data = response.data
+          this.handleChange(response.data.profileImageUrl)
+      }).finally(this.loading = false)
+    },
     handleChange(info) {
       this.fileList = info
+      this.imgRequired = false
+      this.reqMessage = ''
       this.$emit('handleChange', this.fileList)
     },
   },

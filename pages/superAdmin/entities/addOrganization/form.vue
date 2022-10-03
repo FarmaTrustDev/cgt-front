@@ -15,13 +15,14 @@
           :form="form"
           :organization-name="organizationName"
           :is-created="isCreated"
+          @cheCreated="checkCreated"
           @handleChange="handleChange"
           />
           <a-form-item :label-col="{ span: 24 }" :wrapper-col="{ span: 23 }">
           <FormActionButton
           :loading="loading"
-          :is-created="isCreated"
           custom-text="Save"
+          :is-created="isCreated"
         />
       </a-form-item>
         </a-form>
@@ -37,6 +38,12 @@ import OrganizationServices from '~/services/API/OrganizationServices'
 import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
+import {
+  LOGISTIC_ALIAS,
+  HOSPITAL_ALIAS,
+  MANUFACTURER_ALIAS,
+} from '~/services/Constant'
+// import { isEmpty } from '~/services/Utilities'
 export default {
     components:{'page-layout': PageLayout,FormField},
     mixins:[notifications,routeHelpers,nullHelper],
@@ -52,6 +59,8 @@ export default {
         isCreated: false,
         gotoLink: '/superAdmin/entities',
         organizationName : '',
+        organizationType: '',
+        organizationTypeAlias :''
       }
     },
     computed: {
@@ -68,6 +77,8 @@ export default {
     },
     onSubmit(e)
     {
+    this.organizationType = this.$route.query.name;
+    this.GetOrganizationTypeAlias(this.organizationType)
     this.loading = true
       e.preventDefault()
         this.form.validateFields((err, values) => {
@@ -76,7 +87,7 @@ export default {
           for (const key in values) {
             formData.append(key, values[key])
           }
-            formData.append('organizationTypeId',4)
+            formData.append('organizationTypeAlias',this.organizationTypeAlias)
           this.fileList.forEach((files) => {
             formData.append('profileImageUrl', files)
           })
@@ -85,6 +96,21 @@ export default {
           this.loading = false
         }
       })
+    },
+    GetOrganizationTypeAlias(name)
+    {
+      if(name === 'Hospital')
+      {
+         this.organizationTypeAlias =  HOSPITAL_ALIAS
+      }
+      else if(name === 'Logistic')
+      {
+        this.organizationTypeAlias = LOGISTIC_ALIAS
+      }
+      else if(name === 'Manufacturer')
+      {
+        this.organizationTypeAlias = MANUFACTURER_ALIAS
+      }
     },
     upsert(values)
     {
@@ -103,8 +129,9 @@ export default {
       this.apiService.create(values)
       .then((response) =>{
         this.success(response.message)
-        this.goto(`${this.gotoLink}`)
       })
+      this.getOrganization();
+        this.goto(`${this.gotoLink}`)
     },
     update(values)
     {
@@ -113,6 +140,8 @@ export default {
       .then((response)=>{
         this.success(response.message)
       })
+      this.getOrganization()
+      this.goto(`${this.gotoLink}`)
     },
     checkCreated()
     {
@@ -131,7 +160,14 @@ export default {
       .then((response)=>{
           this.organizationData = response.data
       }).finally(this.loading = false)
-    }
+    },
+    getOrganization()
+        {
+            OrganizationServices.get({ organizationTypeAlias: this.organizationTypeAlias })
+                .then((response) => {
+                    this.organization = response.data
+                    })
+        }
   }
 }
 </script>
