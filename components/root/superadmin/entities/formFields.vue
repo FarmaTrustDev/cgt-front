@@ -132,7 +132,7 @@ import Upload from '~/components/upload/profile'
 import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 import nullHelper from '~/mixins/null-helpers'
 import OrganizationServices from '~/services/API/OrganizationServices'
-// import { isEmpty } from '~/services/Utilities'
+import { isEmpty } from '~/services/Utilities'
 export default {
   components: { Upload },
   mixins:[nullHelper],
@@ -186,7 +186,10 @@ export default {
       this.apiService.getByGuid(id)
       .then((response)=>{
           this.data = response.data
-          this.handleChange(response.data.profileImageUrl)
+          if(!isEmpty(response.data.profileImageUrl))
+          {
+            this.handleChange(response.data.profileImageUrl)
+          }
       }).finally(this.loading = false)
     },
     handleChange(info) {
