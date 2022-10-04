@@ -2,6 +2,11 @@
   <div>
     <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
+      <template slot="pUIDRender" slot-scope="name, patient">
+        <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.patientEnrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Hospital PUID: ' + patient.hospitalPUID">
+          <span class="treatmentName">{{ patient.logisticPUID }}</span>
+        </a-tooltip>        
+      </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
           <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
             <span class="treatmentName">{{ name }}</span>
@@ -75,6 +80,7 @@ export default {
     title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
     dataIndex: 'patientEnrollmentNumber',
     key: 'patientEnrollmentNumber',
+    scopedSlots: { customRender: 'pUIDRender' },
   },
   {
     title: `${this.$store.getters.getTranslation.TreatType_2_67}`,

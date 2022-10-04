@@ -12,6 +12,11 @@
         pageSizeOptions: ['10', '20', '30', '50', '100'],
       }"
     >
+      <template slot="pUIDRender" slot-scope="name, patient">
+        <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.enrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Logistics PUID: ' + patient.logisticsPUID">
+          <span class="treatmentName">{{ patient.hospitalPUID }}</span>
+        </a-tooltip>        
+      </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
         <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
           <span class="treatmentName">{{ name }}</span>
@@ -65,6 +70,7 @@ export default {
           title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
           dataIndex: 'patientEnrollmentNumber',
           key: 'patientEnrollmentNumber',
+          scopedSlots: { customRender: 'pUIDRender' },
         },
         {
           title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
