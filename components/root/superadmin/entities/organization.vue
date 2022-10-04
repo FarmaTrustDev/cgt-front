@@ -81,11 +81,21 @@ export default {
          ]
         }
     },
+    
     computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
   },
+    watch:{
+      organization(newValue, oldValue)
+      {
+        if(newValue !== oldValue)
+        {
+          this.organization = newValue
+        }
+      }
+    },
     mounted(){
         this.fetch();
     },
@@ -103,7 +113,7 @@ export default {
           OrganizationServices.destroy(id)
           .then((response)=>{
             this.fetch();
-          })
+            })
         }
     }
 }

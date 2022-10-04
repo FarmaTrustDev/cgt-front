@@ -19,7 +19,7 @@
         </a-input>
         <a-button
           type="primary"
-          @click="goto('users/create')"
+          @click="goto(`/users/create`)"
           >{{ translation.adduser_2_464 }}</a-button
         >
        

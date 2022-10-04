@@ -10,8 +10,8 @@
         {{ translation.UserNew_3_136 }}
       </h3> -->
        <a-input
-          class=" page-search-input"
           ref="userNameInput"
+          class=" page-search-input"
           :placeholder="translation.Searcuser_2_404"
           @change="searchUser"
         >
@@ -19,7 +19,7 @@
         </a-input>
         <a-button
           type="primary"
-          @click="goto('users/create')"
+          @click="goto('/users/create')"
           >{{ translation.adduser_2_464 }}</a-button
         >
        

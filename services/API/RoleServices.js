@@ -39,13 +39,19 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
+
+function getRolesById(id){
+  return request({
+    url: `${baseApi}/getRolesById/${id}`,
+  })
+}
 const RoleServices = {
   get,
   create,
   destroy,
   update,
   getById,
+  getRolesById,
 }
 
 export default RoleServices
-

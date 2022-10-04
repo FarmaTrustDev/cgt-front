@@ -41,13 +41,21 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
+
+function GetAllTypes(){
+  return request({
+    url: `${baseApi}/get-all-types`,
+    method: 'GET'
+  })
+}
 const OrganizationTypeServices = {
   get,
   post,
   create,
   destroy,
   put,
-  getById
+  getById,
+  GetAllTypes,
 }
 
 export default OrganizationTypeServices

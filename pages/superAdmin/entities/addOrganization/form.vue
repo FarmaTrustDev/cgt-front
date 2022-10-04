@@ -135,8 +135,8 @@ export default {
     },
     update(values)
     {
-      const entityId = this.$route.params.id
-      this.apiService.update(entityId,values)
+      // const entityId = this.$route.params.id
+      this.apiService.update(this.entityId,values)
       .then((response)=>{
         this.success(response.message)
       })
@@ -147,11 +147,11 @@ export default {
     {
       this.organizationName = this.$route.query.name;
       const entityId = this.$route.params.id
-      if (this.isGuid(entityId)) {
-        this.entityId = entityId
-        this.isCreated = true
-        this.fetch(entityId)
-      }
+        if (this.isGuid(entityId)) {
+          this.entityId = entityId
+          this.isCreated = true
+          this.fetch(entityId)
+        }
     },
     fetch(id)
     {

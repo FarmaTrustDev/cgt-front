@@ -165,7 +165,6 @@ export default {
       apiService: OrganizationServices,
     }
   },
-  
   computed: {
     translation() {
       return this.$store.getters.getTranslation
@@ -178,7 +177,10 @@ export default {
       isEdit()
       { 
         const entityId = this.$route.params.id
-      this.fetch(entityId)
+        if (this.isGuid(entityId))
+        {
+          this.fetch(entityId)
+        }
       },
       fetch(id)
     {
@@ -189,6 +191,7 @@ export default {
           if(!isEmpty(response.data.profileImageUrl))
           {
             this.handleChange(response.data.profileImageUrl)
+            this.reqMessage = ''
           }
       }).finally(this.loading = false)
     },
