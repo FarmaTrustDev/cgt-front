@@ -38,3 +38,16 @@
     padding-bottom: 5px;
   }
 }
+.ant-tooltip-inner {
+  min-width: 30px;
+  min-height: 32px;
+  padding: 6px 8px;
+  color: #fff;
+  text-align: left;
+  text-decoration: none;
+  word-wrap: break-word;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 4px;
+  white-space: pre-line;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}

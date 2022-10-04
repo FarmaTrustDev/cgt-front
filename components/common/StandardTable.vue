@@ -13,7 +13,11 @@
           {{ translation['TreatStatu_2_748'] }}
         </div>
       </template>
-
+      <template slot="pUIDRender" slot-scope="name, patient">
+          <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.enrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Logistics PUID: ' + patient.logisticsPUID">
+            <span class="treatmentName">{{ patient.hospitalPUID }}</span>
+          </a-tooltip>        
+      </template>
       <template slot="name" slot-scope="name">
         <strong>{{ name }}</strong>
       </template>
@@ -228,7 +232,7 @@
                 @confirm="clickDelete(record)"
               > -->
                 <a-icon type="delete" @click="stepDeleteModal(true, record)"/>{{ translation.Delet_1_451 }}
-              </a-popconfirm></a-menu-item
+              </a-menu-item
             >
           </a-menu>
         </a-dropdown>
@@ -765,7 +769,6 @@ export default {
       }
     },
     deadPatient(patient) {
-      debugger
       const isDead = !patient.isDead
       TreatmentServices.markDead(patient.globalId, isDead).then((response) => {
         this.$emit('fetchParent', response)

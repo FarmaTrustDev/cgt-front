@@ -44,6 +44,11 @@ export default {
             const user = this.getStoreUserDetails();
             return user.roleName === "SMARTLAB_ADMIN";
         },
+        isAdmin()
+        {
+            const user = this.getStoreUserDetails();
+            return user.roleName === "ADMIN_TYPE";
+        },
         getStoreUserDetails() {
             return this.$store.getters.getUser
         }

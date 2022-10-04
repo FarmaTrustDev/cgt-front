@@ -48,6 +48,20 @@ function getByIntId(param) {
   })
 }
 
+function create(name){
+  return request({
+    url: `${baseApi}/create/${name}`,
+    method: 'POST'
+  })
+}
+
+function deleteById(id){
+  return request({
+    url: `${baseApi}/${id}`,
+    method: 'DELETE'
+  })
+}
+
 const TreatmentTypeServices = {
   get,
   getById,
@@ -56,6 +70,8 @@ const TreatmentTypeServices = {
   getWithScreening,
   getByIntId,
   getActiveWithOutScreening,
+  create,
+  deleteById,
 }
 
 export default TreatmentTypeServices

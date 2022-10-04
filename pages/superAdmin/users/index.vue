@@ -10,8 +10,8 @@
         {{ translation.UserNew_3_136 }}
       </h3> -->
        <a-input
-          ref="userNameInput"
           class=" page-search-input"
+          ref="userNameInput"
           :placeholder="translation.Searcuser_2_404"
           @change="searchUser"
         >
@@ -19,7 +19,7 @@
         </a-input>
         <a-button
           type="primary"
-          @click="goto('/users/create')"
+          @click="goto(`/users/create`)"
           >{{ translation.adduser_2_464 }}</a-button
         >
        
@@ -36,11 +36,14 @@
           pageSizeOptions: ['10', '20', '30', '50', '100'],
         }"
       >
+        <template slot="role" slot-scope="role">
+           <span class="new-treatment-status-btn" style="border-radius:25px"> {{role}} </span>
+        </template>
         <template slot="action" slot-scope="action">
           <a-dropdown>
-            <a-button class="action-button" @click="preventDefault">
-              {{ translation['Admin_1_142'] }} <a-icon type="down" />
-            </a-button>
+            <!-- <a-button class="action-button" @click="preventDefault"> -->
+               <a-icon type="more" @click="preventDefault" />
+            <!-- </a-button> -->
             <a-menu slot="overlay">
               <a-menu-item key="1">
                 <a @click="goto(`/users/${action.globalId}`)">{{
@@ -100,6 +103,7 @@ export default {
           dataIndex: 'roleName',
           key: 'roleName',
           class: `user-role`,
+          scopedSlots:{customRender : 'role'}
         },
         {
           title: `${this.$store.getters.getTranslation.EmailAddre_2_140}`,
@@ -144,10 +148,7 @@ export default {
     preventDefault,
     fetch() {
       // alert('hello')
-      UserServices.getUser(
-        this.user.organizationId,
-        this.user.organizationTypeId
-      )
+      UserServices.getAllUsers()
         .then((response) => {
           this.datasource = response.data
         })

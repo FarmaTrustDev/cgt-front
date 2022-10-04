@@ -39,13 +39,29 @@ function getAllocatedOrDefault(){
     url: `${baseApi}/getAllocatedOrDefaultLogistics`,
   })  
 }
+
+function getByGuid(id){
+  return request({
+    url: `${baseApi}/getByGuid/${id}`
+  })
+}
+
+function update(id,data){
+  return request({
+    url:`${baseApi}/${id}`,
+    data,
+    method:'PATCH'
+  })
+}
 const OrganizationServices = {
   get,
   create,
   destroy,
+  getByGuid,
   put,
   getById,
-  getAllocatedOrDefault
+  getAllocatedOrDefault,
+  update,
 }
 
 export default OrganizationServices

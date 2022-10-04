@@ -16,7 +16,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your First Name',
+                    message: 'Please input your first name',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -42,7 +42,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your last Name',
+                    message: 'Please input your last name',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -72,7 +72,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Email',
+                    message: 'Please input your email',
                   },
                 ],
                 
@@ -98,7 +98,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your UserName',
+                    message: 'Please input your usrename',
                   },
                 ],
               },
@@ -123,7 +123,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Office Address',
+                    message: 'Please input your office address',
                   },
                 ],
               },
@@ -146,7 +146,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Contact Number',
+                    message: 'Please input your contact number',
                   },
                 ],
               },
@@ -171,7 +171,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your What3Words',
+                    message: 'Please input your what3words',
                   },
                 ],
               },
@@ -195,7 +195,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Department',
+                    message: 'Please input your department',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -208,7 +208,6 @@
           />
         </a-form-item>
       </a-col>
-
       <a-col :span="12">
         <a-form-item
           label="Image:"
@@ -223,15 +222,67 @@
           />
         </a-form-item>
       </a-col>
-      <a-col :span="24">
+      <div v-if="users.name === 'Super Admin'">
+      <a-col :span="4">
+        <!-- :default-value=""  -->
+        <label>User Group*:</label>
+      </a-col>
+      <a-col :span="20">
+        <a-form-item>
+        <a-radio-group 
+            v-decorator="[
+              'organizationType',
+              {
+                initialValue: entity.organizationTypeId,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select organization type',
+                  },
+                ],
+              },
+            ]"
+            @change="handleChange" >
+            <a-radio v-for=" orgType in organizationTypes" :key="orgType.id" :value="orgType.id" @change="onChange(orgType)">
+              {{orgType.name}}
+            </a-radio>
+        </a-radio-group>
+        </a-form-item>
+      </a-col>
+      
+      <a-col :span="10">
+        <a-form-item label="Entities">
+          <a-select
+          v-decorator="[
+              'organization',
+              {
+                initialValue: entity.organizationId,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select organization type',
+                  },
+                ],
+              },
+            ]"
+            placeholder="Entities"
+          >
+            <a-select-option v-for="org in organization" :key="org.id">
+              {{ org.name }}
+            </a-select-option>
+          </a-select>
+  </a-form-item>
+        </a-col>
+        <a-col :span="2"></a-col>
+      <a-col :span="10">
         <a-form-item
-          :label="translation.Roles_1_442 + '*:'"
+          label="Roles"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
           <a-select
             v-decorator="[
-              'roleId',
+              'role',
               {
                 initialValue: entity.roleId,
                 rules: [
@@ -263,7 +314,57 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Role',
+                    message: 'Please input your role',
+                  },
+                ],
+              },
+            ]"
+            type="hidden"
+          />
+        </a-form-item>
+      </a-col>
+      </div>
+      <a-col v-else :span="24">
+        <a-form-item
+          :label="translation.Roles_1_442 + '*:'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-select
+            v-decorator="[
+              'role',
+              {
+                initialValue: entity.roleId,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your role',
+                  },
+                ],
+              },
+            ]"
+            :show-search="true"
+            :filter-option="filterOption"
+            :placeholder="translation.Roles_1_442"
+            style="width: 100%"
+            size="large"
+            class="default-select"
+            @search="searchCountries"
+          >
+            <a-select-option v-for="role in roles" :key="role.id">
+              {{ role.name }}
+            </a-select-option>
+          </a-select>
+          <a-input
+            v-decorator="[
+              'userRoleId',
+              {
+                initialValue:
+                  entity.userRoleId == undefined ? 0 : entity.userRoleId,
+                rules: [
+                  {
+                    required: false,
+                    message: 'Please input your role',
                   },
                 ],
               },
@@ -287,7 +388,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Postcode',
+                    message: 'Please input your postcode',
                   },
                 ],
               },
@@ -312,7 +413,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your City',
+                    message: 'Please input your city',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -340,7 +441,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Location',
+                    message: 'Please input your location',
                   },
                 ],
               },
@@ -364,7 +465,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your Postal Address',
+                    message: 'Please input your postal address',
                   },
                 ],
               },
@@ -388,7 +489,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your County',
+                    message: 'Please input your county',
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -450,6 +551,8 @@ import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 import MapServices from '~/services/API/MapServices'
 import nullHelper from '~/mixins/null-helpers'
 import { isEmpty } from '~/services/Helpers'
+import OrganizationTypeServices from '~/services/API/OrganizationTypeServices'
+import OrganizationServices from '~/services/API/OrganizationServices'
 export default {
   components: { Upload },
   mixins: [nullHelper],
@@ -489,25 +592,32 @@ export default {
       countId:this.entity.countryId,
       email:'',
       msg: '',
+      organizationTypes:[],
+      organization:[]
     }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
+    users() {
+      return this.$store.getters.getUser
+    },
   },
-      watch:{
+  watch:{
     msg(newMsg, oldMsg)
     {
       if(newMsg !== oldMsg)
       {
           this.msg = newMsg
       }
-    }
+    },
   },
   mounted() {
     this.getRoles()
     this.fetchCountries()
+    this.getOrganizationsType()
+    
   },
   updated() {
     if (this.isCreated && this.fetchCountry) {
@@ -532,6 +642,13 @@ export default {
     handleChange(info) {
       this.fileList = info
       this.$emit('handleChange', this.fileList)
+    },
+    getOrganizationsType()
+    {
+      OrganizationTypeServices.GetAllTypes()
+      .then((response)=>{
+        this.organizationTypes = response.data
+      })
     },
     fetch(id) {
       this.loading = true
@@ -593,6 +710,18 @@ export default {
         this.searchCountries(name,'b')
       })
     },
+    onChange(e)
+    {
+      const id = e.id
+      RoleServices.getRolesById(id).then((response)=>{
+        this.roles = response.data
+      })
+       OrganizationServices.get({ organizationTypeAlias: e.alias })
+        .then((response) => {
+          this.organization = response.data
+          })
+
+    }
   },
 }
 </script>

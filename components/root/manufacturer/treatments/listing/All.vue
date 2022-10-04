@@ -7,14 +7,16 @@
             <span class="treatmentName">{{ name }}</span>
           </a-tooltip>
       </template>   
-      <template slot="name" slot-scope="name">
+      <template slot="name" slot-scope="name, treatment">
+        <a-tooltip :title="'PUID: ' + treatment.patientEnrollmentNumber + '\n Hospital PUID: ' + treatment.hospitalPUID+ '\n Logistics PUID: ' + treatment.logisticPUID">
         <strong>
           <a-button
             type="link"
             class="btn-color"
-            >{{ name }}</a-button
+            >{{ treatment.manufacturerPUID }}</a-button
           >
         </strong>
+        </a-tooltip>
       </template>
     </a-table>
   </div>
