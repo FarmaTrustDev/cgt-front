@@ -38,6 +38,7 @@ import OrganizationServices from '~/services/API/OrganizationServices'
 import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
+import { isEmpty } from '~/services/Utilities'
 import {
   LOGISTIC_ALIAS,
   HOSPITAL_ALIAS,
@@ -83,18 +84,40 @@ export default {
       e.preventDefault()
         this.form.validateFields((err, values) => {
         if (!err) {
+          let pat=''
+          if(values.custom){
+            // console.log(values)
+            // debugger
+            for(let i=1;i<= (values.length) - (values.prefix.length);i++){
+              if(!isEmpty(values['input'+i])){
+                // alert('input')
+                pat=pat+values['input'+i]
+              }else if(values['pattern'+i]===true){
+                pat=pat+'N'
+                // console.log(values['pattern'+i])
+              }else{
+                pat=pat+'C'
+              }
+            }
+          }
+          // console.log(pat)
           const formData = new FormData()
           for (const key in values) {
-            formData.append(key, values[key])
+            if(pat.length>0 && key==='pattern'){
+              formData.append('pattern', pat)
+            }else{
+              formData.append(key, values[key])
+            }
           }
-            formData.append('organizationTypeAlias',this.organizationTypeAlias)
+          
+          formData.append('organizationTypeAlias',this.organizationTypeAlias)
           this.fileList.forEach((files) => {
             formData.append('profileImageUrl', files)
           })
           this.upsert(formData)
         } else {
           this.loading = false
-        }
+        } 
       })
     },
     GetOrganizationTypeAlias(name)
@@ -162,12 +185,11 @@ export default {
       }).finally(this.loading = false)
     },
     getOrganization()
-        {
-            OrganizationServices.get({ organizationTypeAlias: this.organizationTypeAlias })
-                .then((response) => {
-                    this.organization = response.data
-                    })
-        }
+    {
+      OrganizationServices.get({ organizationTypeAlias: this.organizationTypeAlias }).then((response) => {
+        this.organization = response.data
+      })
+    }
   }
 }
 </script>

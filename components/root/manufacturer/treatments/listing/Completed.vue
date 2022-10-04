@@ -8,6 +8,7 @@
           </a-tooltip>
       </template>      
       <template slot="name" slot-scope="name, record">
+        <a-tooltip :title="'PUID: ' + record.patientEnrollmentNumber + '\n Hospital PUID: ' + record.hospitalPUID+ '\n Logistics PUID: ' + record.logisticPUID">
         <strong>
           <a-button
             class="btn-color"
@@ -17,9 +18,10 @@
                 `/manufacturer/treatments/process/${record.treatment.globalId}?view=OUTBOUND_SHIPMENT`
               )
             "
-            >{{ name }}</a-button
+            >{{ record.manufacturerPUID }}</a-button
           >
         </strong>
+        </a-tooltip>
       </template>
     </a-table>
   </div>

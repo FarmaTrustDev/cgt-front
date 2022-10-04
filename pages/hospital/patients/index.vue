@@ -54,9 +54,10 @@ export default {
       column: [
         {
           title: `PUID`,
-          dataIndex: 'enrollmentNumber',
+          dataIndex: 'hospitalPUID',
           key: 'PUID',
           width: 100,
+          scopedSlots:{customRender: 'pUIDRender'}
         },
         {
           title:`${this.$store.getters.getTranslation.PatieName_2_93}`,
