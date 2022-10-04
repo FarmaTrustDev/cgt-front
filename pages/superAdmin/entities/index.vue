@@ -22,7 +22,7 @@
 // import hospitals from '~/components/root/superAdmin/Entities/hospital'
 // import manufacturer from '~/components/root/superAdmin/Entities/manufacturer'
 // import logistic from '~/components/root/superAdmin/Entities/logistics'
-import organization from '~/components/root/superAdmin/Entities/organization'
+import organization from '~/components/root/superAdmin/entities/organization'
 import {
   LOGISTIC_ALIAS,
   HOSPITAL_ALIAS,
