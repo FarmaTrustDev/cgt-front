@@ -464,6 +464,11 @@ a {
       }
     }
   }
+  .ant-form.ant-form-vertical {
+    .ant-row.ant-form-item {
+      margin-bottom: 15px !important;
+    }
+  }
 }
 .pick-info {
   .text-right {

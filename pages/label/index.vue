@@ -3,7 +3,7 @@
     :create="false"
     :bordered="false"
     :title="translation.Label_1_27"
-    class="container page-search-input-container"
+    class="container page-search-input-container header-page"
   >
     <template slot="headerMenus">
             <a-input

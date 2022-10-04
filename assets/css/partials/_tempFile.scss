@@ -152,3 +152,19 @@
     padding: 12px 15px !important;
   }
 }
+// 
+.header-page {
+  .ant-card-head-wrapper {
+    div {
+      padding: 0;
+    }
+  }
+}
+
+.plain-header-border.specific.container {
+  .ant-card-head-wrapper {
+    div {
+      padding: 0;
+    }
+  }
+}
