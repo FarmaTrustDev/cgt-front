@@ -158,7 +158,7 @@
                 initialValue: entity.address,
                 rules: [
                   {
-                    required: false,
+                    required: true,
                     message: 'Required',
                   },
                 ],
@@ -180,7 +180,7 @@
                 initialValue: entity.prefix,
                 rules: [
                   {
-                    required: false,
+                    required: true,
                     message: 'Required',
                   },
                 ],
@@ -203,7 +203,7 @@
                 initialValue: entity.length,
                 rules: [
                   {
-                    required: false,
+                    required: true,
                     message: 'Required',
                   },
                 ],
