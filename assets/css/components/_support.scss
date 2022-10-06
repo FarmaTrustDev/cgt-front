@@ -28,61 +28,70 @@
     }
   }
 }
-$chatHeight: 255px;
-.support-chat {
-  min-height: 400px;
-
+.chat-page {
   .chat-list {
-    min-height: $chatHeight;
-    max-height: $chatHeight;
-    .ant-spin-nested-loading {
-      overflow-y: auto;
-      overflow-x: hidden;
-      ul {
-        max-height: 242px;
-        li {
-          position: relative;
-          padding-bottom: 23px;
-          border-bottom: 0;
-          .ant-comment-content {
-            position: unset !important;
-          }
-        }
-        .ant-comment-inner {
-          padding: 16px 5px;
-          position: relative;
-        }
-      }
-      .message-sent {
-        justify-content: end;
-        margin-right: 24px;
-        .ant-comment {
-          background-color: rgba(120, 98, 255, 0.14);
-          border-radius: 22px;
-          padding: 0 5px;
-          position: unset;
-        }
-        .ant-comment-content-author {
-          position: absolute;
-          width: 95%;
-          min-width: 210px;
-          top: 100%;
-          left: 15px;
-          overflow: hidden;
-          display: inline-block;
-        }
-      }
-      .message-received {
-        // justify-content: end;
-        .ant-comment {
-          background-color: #f1faff;
-          border-radius: 22px;
-          padding: 0 5px;
-        }
-      }
+    ul {
+      overflow: auto;
+      max-height: 235px;
     }
   }
 }
+$chatHeight: 255px;
+// .support-chat {
+//   min-height: 400px;
+
+//   .chat-list {
+//     min-height: $chatHeight;
+//     max-height: $chatHeight;
+//     .ant-spin-nested-loading {
+//       overflow-y: auto;
+//       overflow-x: hidden;
+//       ul {
+//         max-height: 242px;
+//         li {
+//           position: relative;
+//           padding-bottom: 23px;
+//           border-bottom: 0;
+//           .ant-comment-content {
+//             position: unset !important;
+//           }
+//         }
+//         .ant-comment-inner {
+//           padding: 16px 5px;
+//           position: relative;
+//         }
+//       }
+//       .message-sent {
+//         justify-content: end;
+//         margin-right: 24px;
+//         .ant-comment {
+//           background-color: rgba(120, 98, 255, 0.14);
+//           border-radius: 22px;
+//           padding: 0 5px;
+//           position: unset;
+//         }
+//         .ant-comment-content-author {
+//           position: absolute;
+//           width: 95%;
+//           min-width: 210px;
+//           top: 100%;
+//           left: 15px;
+//           overflow: hidden;
+//           display: inline-block;
+//         }
+//       }
+//       .message-received {
+//         // justify-content: end;
+//         .ant-comment {
+//           background-color: #f1faff;
+//           border-radius: 22px;
+//           padding: 0 5px;
+//         }
+//       }
+//     }
+  
+//   }
+// }
 .specific-page {
   .ant-tabs.ant-tabs-top {
     padding: 1.5rem;

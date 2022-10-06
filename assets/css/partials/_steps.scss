@@ -70,7 +70,7 @@
   }
 
   .container-steps-div {
-    min-width: 752px;
+    min-width: 748px;
     padding: 0;
     margin-top: 0;
     .rounded-table .ant-table-tbody td {
@@ -225,7 +225,7 @@
       width: 20px;
       margin-left: 5px;
       margin-right: 3px;
-      margin-top: -3px;
+      // margin-top: -3px;
       display: inline-block;
       vertical-align: middle;
       background-size: 100%;
@@ -289,10 +289,10 @@
     background: #d1f2dc;
     .ant-steps-item-content {
       &::before {
-        width: 19px;
+        width: 21px;
         border: 3px solid white;
         border-radius: 15px;
-        height: 19px;
+        height: 21px;
         // margin-left: 10px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
         background-repeat: no-repeat;

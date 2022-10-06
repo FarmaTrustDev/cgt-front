@@ -19,6 +19,12 @@ a {
   border-color: #ffdbdb;
 }
 .new-treatment-status-btn {
-  padding: 13px 15px;
+  padding: 3px 18px;
   background-color: #fff8e5;
+  height: 35px !important;
+  border: 0;
+  width: 87px;
+  &:hover {
+    background-color:#fff8e5 !important;
+  }
 }

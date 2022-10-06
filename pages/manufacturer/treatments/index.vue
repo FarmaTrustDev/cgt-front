@@ -21,7 +21,7 @@
         >
       </a-select>
     </div>
-    <div class="h-tabs large-tabs rounded-table manf-treatment-body">
+    <div class="h-tabs large-tabs rounded-table manf-treatment-body treatment-list-body">
       <a-tabs type="card" :animated="false">
         <a-tab-pane key="1" :tab="translation.NewTreat_2_260">
           <new-request />
