@@ -191,6 +191,7 @@ export default {
 }
 .notes-body {
   /* width: 68%; */
+  width: 200px;
   margin: auto;
   height: 55px;
   overflow: hidden;

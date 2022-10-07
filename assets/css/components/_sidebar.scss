@@ -68,6 +68,13 @@
 
 .logout-menu {
  margin: 15px 0 !important;
+//  padding-left: 24px;
+    // width: fit-content;
+    // display: flex;
+    // height: fit-content;
+    // position: absolute !important;
+    // bottom: 30px;
+    // width: 100%;
   .menu-container {
     background-color: #3869d1;
     color: white;
@@ -94,6 +101,9 @@
 .sidebar {
   overflow: hidden;
   overflow-y: auto !important;
+  ul {
+    height: 83%;
+  }
   .side-menu {
     margin-top: 5%;
   }
@@ -267,4 +277,12 @@
 }
 .data_screen > .ant-card-body {
   padding-right: 0 !important;
+}
+.step-col-large {
+  .ant-steps-item-title {
+    font-size: 15px !important;
+    &::after {
+      display: none;
+    }
+  }
 }

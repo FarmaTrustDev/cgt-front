@@ -34,7 +34,7 @@
             :bordered="false"
           >
             <a-row>
-              <a-col :span="24">
+              <a-col :span="24" class="px-10">
                 <div>
                   <a-col :span="10">
                     <span class="float-left">

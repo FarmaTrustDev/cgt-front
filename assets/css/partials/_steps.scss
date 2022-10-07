@@ -112,7 +112,7 @@
       content: '';
       position: absolute;
       width: 85%;
-      top: 23px !important;  // Task list steps line was disturbed for that it has been adjusted from 24 to 15
+      top: 23px !important; // Task list steps line was disturbed for that it has been adjusted from 24 to 15
       // bottom: 0;
       margin: auto;
       height: 2px;
@@ -155,7 +155,9 @@
     display: inline-flex;
     overflow: hidden;
     position: relative;
+    margin-top: 14px;
     width: 100%;
+    
     &::before {
       content: '';
       position: absolute;
@@ -168,16 +170,6 @@
       background-color: #bebfcb;
     }
   }
-
-  .ant-steps-small .ant-steps-item-title {
-    font-size: 12px !important;
-    margin-top: 5px;
-    // min-width: 150px;
-    &::after {
-      display: none;
-    }
-  }
-
   .ant-steps-item-icon {
     display: none;
   }
@@ -243,7 +235,6 @@
         content: '';
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
         background-repeat: no-repeat;
-
       }
     }
     .ant-steps {
@@ -263,7 +254,6 @@
         content: '';
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
         background-repeat: no-repeat;
-
       }
     }
   }
@@ -279,7 +269,6 @@
         content: '';
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
         background-repeat: no-repeat;
-
       }
     }
   }
@@ -296,7 +285,6 @@
         // margin-left: 10px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
         background-repeat: no-repeat;
-
       }
     }
   }
@@ -311,7 +299,6 @@
         content: '';
         background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
         background-repeat: no-repeat;
-
       }
     }
   }
@@ -387,7 +374,6 @@
     }
   }
 
-
   .ant-steps-item-active {
     background-color: #f2f5fb;
     .ant-steps-item-content {
@@ -397,7 +383,6 @@
         // margin-left: 15px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
         background-repeat: no-repeat;
-
       }
     }
   }
