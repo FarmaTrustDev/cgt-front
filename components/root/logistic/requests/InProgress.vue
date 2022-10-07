@@ -3,24 +3,50 @@
     <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
       <template slot="pUIDRender" slot-scope="name, patient">
-        <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.patientEnrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Hospital PUID: ' + patient.hospitalPUID">
+        <a-tooltip
+          style="white-space: pre-line"
+          :title="
+            'PUID: ' +
+            patient.patientEnrollmentNumber +
+            '\n Manufacturer PUID: ' +
+            patient.manufacturerPUID +
+            '\n Hospital PUID: ' +
+            patient.hospitalPUID
+          "
+        >
           <span class="treatmentName">{{ patient.logisticPUID }}</span>
-        </a-tooltip>        
+        </a-tooltip>
       </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
-          <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
-            <span class="treatmentName">{{ name }}</span>
-          </a-tooltip>
-      </template> 
+        <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
+          <span class="treatmentName">{{ name }}</span>
+        </a-tooltip>
+      </template>
       <span slot="duration" slot-scope="text, index" :key="index.id">
-        {{text}} Day(s)
+        {{ text }} Day(s)
       </span>
       <span slot="action" slot-scope="text, record" class="treatment-steps">
         <!-- //Steps -->
-        <div :class="getTreatmentStepClass(record)" class="step-col-logistic" >
-          <a-steps  size="small" :initial="1">
-            <a-step :key="1" title="Pickup Shipment" :class="record.treatment.phaseId > 8 ? 'ant-steps-item-finish' : 'ant-steps-item-active'" @click="stepClick(record)" />
-            <a-step :key="2" title="Delivery Shipment" :class="record.treatment.phaseId > 8 ? 'ant-steps-item-active' : ''" />
+        <div :class="getTreatmentStepClass(record)" class="step-col-logistic">
+          <a-steps size="small" :initial="1">
+            <a-step
+              :key="1"
+              title="Pickup Shipment"
+              :class="
+                record.treatment.phaseId >= 8
+                  ? 'ant-steps-item-finish'
+                  : 'ant-steps-item-active'
+              "
+              @click="stepClick(record, 1)"
+            />
+            <a-step
+              :key="2"
+              title="Delivery Shipment"
+              :class="
+                record.treatment.phaseId > 8 ? 'ant-steps-item-active' : ''
+              "
+              @click="stepClick(record, 2)"
+            />
           </a-steps>
         </div>
 
@@ -67,7 +93,7 @@ export default {
         {
           title: `${this.$store.getters.getTranslation.Durat_1_71}`,
           dataIndex: 'duration',
-          scopedSlots: {customRender: 'duration'}
+          scopedSlots: { customRender: 'duration' },
         },
         {
           title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
@@ -102,31 +128,33 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
-  watch:{
-    translation(newValues, oldValue){
-      if(newValues!==oldValue){
-        this.column[0].title=newValues.PatieID_2_264
-        this.column[1].title=newValues.TreatType_2_67
-        this.column[2].title=newValues.Organ_1_166
-        this.column[3].title=newValues['Colle-_4_268']
-        this.column[4].title=newValues.Actio_1_220
+  },
+  watch: {
+    translation(newValues, oldValue) {
+      if (newValues !== oldValue) {
+        this.column[0].title = newValues.PatieID_2_264
+        this.column[1].title = newValues.TreatType_2_67
+        this.column[2].title = newValues.Organ_1_166
+        this.column[3].title = newValues['Colle-_4_268']
+        this.column[4].title = newValues.Actio_1_220
       }
-    }
-  },   
+    },
+  },
   mounted() {},
   methods: {
     getTreatmentStepClass(patient) {
-      if (patient.treatment.isHold ) {
+      if (patient.treatment.isHold) {
         return 'isHold'
-      }
-      else if(patient.treatment.isCancel)
-      {
+      } else if (patient.treatment.isCancel) {
         return 'isCancel'
       }
     },
-    stepClick(record) {
-      this.goto(`/logistic/shipment/${record.globalId}`)
+    stepClick(record, view = 1) {
+      let viewRedirect = 'PICK_UP'
+      if (view === 2) {
+        viewRedirect = 'DELIVERY'
+      }
+      this.goto(`/logistic/shipment/${record.globalId}?view=${viewRedirect}`)
     },
     getCurrentStep(record) {},
     getParams(params) {
@@ -147,7 +175,7 @@ export default {
   }
 }
 .isHold {
-    .ant-steps {
+  .ant-steps {
     @extend .blockState !optional;
   }
   .ant-steps-item.ant-steps-item-finish {
@@ -166,7 +194,7 @@ export default {
   }
 }
 .isCancel {
-    .ant-steps {
+  .ant-steps {
     @extend .blockState;
   }
   .ant-steps-item.ant-steps-item-finish {

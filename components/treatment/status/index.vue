@@ -22,7 +22,7 @@
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(treatment.phaseId > 6)"
+            :class="isCompleted(treatment.phaseId >= 6)"
           >
             Collect Samples
           </div>
@@ -134,8 +134,8 @@ export default {
   },
   methods: {
     getCollectionPhase() {
-      console.log(this.treatment.phaseId)
-      console.log(this.treatment.phaseId < 4)
+      // console.log(this.treatment.phaseId)
+      // console.log(this.treatment.phaseId < 4)
     },
     callback(key) {
       this.activeTab = key

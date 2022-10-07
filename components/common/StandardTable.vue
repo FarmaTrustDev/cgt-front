@@ -14,9 +14,19 @@
         </div>
       </template>
       <template slot="pUIDRender" slot-scope="name, patient">
-          <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.enrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Logistics PUID: ' + patient.logisticsPUID">
-            <span class="treatmentName">{{ patient.hospitalPUID }}</span>
-          </a-tooltip>        
+        <a-tooltip
+          style="white-space: pre-line"
+          :title="
+            'PUID: ' +
+            patient.enrollmentNumber +
+            '\n Manufacturer PUID: ' +
+            patient.manufacturerPUID +
+            '\n Logistics PUID: ' +
+            patient.logisticsPUID
+          "
+        >
+          <span class="treatmentName">{{ patient.hospitalPUID }}</span>
+        </a-tooltip>
       </template>
       <template slot="name" slot-scope="name">
         <strong>{{ name }}</strong>
@@ -222,8 +232,7 @@
               <a-icon type="edit" />{{ translation.Updat_1_208 }}
             </a-menu-item>
 
-            <a-menu-item key="3"
-              >
+            <a-menu-item key="3">
               <!-- <a-popconfirm
                 title="Are you sure you want to delete this step ?"
                 :ok-text="translation.yes_1_654"
@@ -231,9 +240,10 @@
                 placement="topLeft"
                 @confirm="clickDelete(record)"
               > -->
-                <a-icon type="delete" @click="stepDeleteModal(true, record)"/>{{ translation.Delet_1_451 }}
-              </a-menu-item
-            >
+              <a-icon type="delete" @click="stepDeleteModal(true, record)" />{{
+                translation.Delet_1_451
+              }}
+            </a-menu-item>
           </a-menu>
         </a-dropdown>
       </span>
@@ -258,14 +268,14 @@
               >
             </a-menu-item>
             <a-menu-item key="3">
-              <a-popconfirm 
+              <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deletePatient(`${record.id}`)"
               >
-              <!-- <button type="delete" @confirm="deletePatient(`${record.id}`)">{{ translation.HidePatie_2_804 }} </button> -->
+                <!-- <button type="delete" @confirm="deletePatient(`${record.id}`)">{{ translation.HidePatie_2_804 }} </button> -->
                 {{ translation.HidePatie_2_804 }}
               </a-popconfirm>
             </a-menu-item>
@@ -277,8 +287,12 @@
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               > -->
-                <span v-if="record.isDead" @click="patientDelete(true ,record)"> {{ translation.Resum_1_463 }}</span>
-                <span v-else @click="patientDelete(true, record)">{{ translation.cance_1_296 }}</span>
+              <span v-if="record.isDead" @click="patientDelete(true, record)">
+                {{ translation.Resum_1_463 }}</span
+              >
+              <span v-else @click="patientDelete(true, record)">{{
+                translation.cance_1_296
+              }}</span>
               <!-- </a-popconfirm> -->
             </a-menu-item>
           </a-menu>
@@ -419,20 +433,23 @@
       to pause ?
     </a-modal>
     <a-modal
-    :visible="patientDeleteModal"
-    :footer="null"
-    class="error-model"
-    @cancel="patientDelete(false, '')"
+      :visible="patientDeleteModal"
+      :footer="null"
+      class="error-model"
+      @cancel="patientDelete(false, '')"
     >
-    <center>
-      <p class="cross-img">
-        <span class="inner-mark">
-          <span class="line-left line"></span>
-          <span class="line-right line"></span>
-        </span>
-      </p>
-      <h3>Are you sure you want to delete this patient ( {{patientRecord.name}} ) ?</h3>
-      <footer class="mt-6">
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
+        </p>
+        <h3>
+          Are you sure you want to delete this patient (
+          {{ patientRecord.name }} ) ?
+        </h3>
+        <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
@@ -440,17 +457,17 @@
             >Confirm</a-button
           >
           <a-button
-          class="ant-btn"
-          style="padding: 5px 50px"
-          type="danger"
-          @click="patientDelete(false,'')"
+            class="ant-btn"
+            style="padding: 5px 50px"
+            type="danger"
+            @click="patientDelete(false, '')"
           >
-          Cancel
+            Cancel
           </a-button>
         </footer>
-    </center>
-      </a-modal>    
-        <a-modal
+      </center>
+    </a-modal>
+    <a-modal
       :visible="visibleDeleteModal"
       ok-text="OK"
       :footer="null"
@@ -460,9 +477,9 @@
       <center>
         <p class="cross-img">
           <span class="inner-mark">
-          <span class="line-left line"></span>
-          <span class="line-right line"></span>
-        </span>
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
         </p>
         <h3>Are you sure you want to delete this step ?</h3>
         <footer class="mt-6">
@@ -473,12 +490,12 @@
             >Confirm</a-button
           >
           <a-button
-          class="ant-btn"
-          style="padding: 5px 50px"
-          type="danger"
-          @click="stepDeleteModal(false,'')"
+            class="ant-btn"
+            style="padding: 5px 50px"
+            type="danger"
+            @click="stepDeleteModal(false, '')"
           >
-          Cancel
+            Cancel
           </a-button>
         </footer>
       </center>
@@ -538,12 +555,12 @@ export default {
       note: '',
       notes: '',
       showCancelTreatmentModal: false,
-      deleteStep:{},
+      deleteStep: {},
       treatmentForCancellation: {},
       treatmentForPause: {},
       showPauseDeleteModal: false,
       patientDeleteModal: false,
-      patientRecord:'',
+      patientRecord: '',
       cancelModalTitle: 'Cancel Treatment',
       pauseModalTitle: 'Pause Treatment',
       // pagination: {},
@@ -576,23 +593,19 @@ export default {
     }
   },
   methods: {
-    patientDeleteMethod()
-    {
+    patientDeleteMethod() {
       this.deadPatient(this.patientRecord)
       this.patientDeleteModal = false
     },
-    patientDelete(e,record)
-    { 
+    patientDelete(e, record) {
       this.patientRecord = record
       this.patientDeleteModal = e
     },
-    stepDelete()
-    {
+    stepDelete() {
       this.clickDelete(this.deleteStep)
       this.stepDeleteModal(false, '')
     },
-    stepDeleteModal(e,step)
-    {
+    stepDeleteModal(e, step) {
       this.deleteStep = step
       this.visibleDeleteModal = e
     },
@@ -669,6 +682,13 @@ export default {
       // Most expensive Operation in whole application
       if (!isEmpty(treatment.phaseId)) {
         const phases = this.phases
+
+        // check iif schedule is not set then return screening phase
+        // if (treatment.isSchedule === false) {
+        //   currentPhase = 2 // screening on Phases 2
+        //   return currentPhase
+        // }
+
         for (let phase = 0; phase < phases.length; phase++) {
           if (phases[phase].phaseId <= treatment.phaseId) {
             currentPhase = phases[phase].id
@@ -677,16 +697,7 @@ export default {
             break
           }
         }
-        if(treatment.isSchedule === false)
-        {
-          currentPhase = 2
-          return currentPhase
-        }
-        else
-        {
-          return currentPhase
-        }
-        
+        return currentPhase
       }
       return 1
     },
