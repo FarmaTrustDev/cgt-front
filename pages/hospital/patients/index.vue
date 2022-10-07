@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 1.5em">
+  <div style="margin-top: 1.5em" class="patient-list-page">
     <div class="page-header clearfix mt-15">
       <!-- <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3> -->
       <div class="page-title float-left" style="width: 50%">
@@ -8,7 +8,7 @@
       <div style="width: 25%; display: inline">
         <a-button
           type="primary"
-          class="mrm-5 float-right"
+          class="float-right"
           @click="goto('patients/create')"
           >{{ translation['AddNew_3_631'] }}</a-button
         >

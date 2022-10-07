@@ -229,7 +229,7 @@ a {
 }
 .container-steps-div.main {
   text-align: right !important;
-  display: block !important;
+  // display: block !important;
   width: 100%;
 }
 .container-drop-down-div {
@@ -374,6 +374,8 @@ a {
 }
 // ==========================
 .patient-page {
+  overflow-x: auto;
+
   .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
     border: none !important;
   }
@@ -384,6 +386,7 @@ a {
     .action-button.ant-btn {
       height: fit-content;
       padding: 8px 10px;
+      color: #000;
       span {
         font-size: 14px;
       }

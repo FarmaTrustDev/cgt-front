@@ -36,7 +36,14 @@
     margin-top: 0;
   }
 }
-
+// 
+.manf-treatment {
+  .ant-table-tbody {
+    .ant-btn {
+      height: 40px !important;
+    }
+  }
+}
 // -------------
 .screening-tabs {
   .ant-tabs-nav-wrap {
@@ -114,6 +121,14 @@
     }
   }
 }
+// 
+.treatment-list-body {
+  .ant-tabs-nav-container {
+    .ant-tabs-tab {
+      font-size: 1rem !important;
+    }
+  }
+}
 //
 .view-screen {
   .pills-tabs.no-shadow {
@@ -136,9 +151,9 @@
   .ant-steps-item.ant-steps-item-process {
     width: 170px !important;
   }
-  .ant-steps-item-finish {
-    padding-bottom: 6px !important;
-  }
+  // .ant-steps-item-finish {
+  //   padding-bottom: 6px !important;
+  // }
   .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
     border: 0;
   }
