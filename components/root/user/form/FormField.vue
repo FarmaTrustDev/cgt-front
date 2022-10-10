@@ -81,8 +81,7 @@
             type="email"
             :placeholder="translation.EmailAddre_2_140"
             :disabled="isCreated"
-            @focusout="validateEmail"
-          />{{ msg }} </a-form-item
+          /></a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
@@ -639,7 +638,6 @@ export default {
       userData:[],
       countId:this.entity.countryId,
       email:'',
-      msg: '',
       organizationTypes:[],
       organization:[]
     }
@@ -653,13 +651,6 @@ export default {
     },
   },
   watch:{
-    msg(newMsg, oldMsg)
-    {
-      if(newMsg !== oldMsg)
-      {
-          this.msg = newMsg
-      }
-    },
     roles(newRoles, oldRoles)
     {
       if(newRoles !== oldRoles)
@@ -694,13 +685,6 @@ export default {
     }
   },
   methods: {
-    validateEmail() {
-      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-        this.msg = ''
-      } else {
-        this.msg = 'Please enter a valid email'
-      }
-    },
     handleChange(info) {
       this.fileList = info
       this.$emit('handleChange', this.fileList)
