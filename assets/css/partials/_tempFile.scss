@@ -36,7 +36,7 @@
     margin-top: 0;
   }
 }
-// 
+//
 .manf-treatment {
   .ant-table-tbody {
     .ant-btn {
@@ -121,7 +121,7 @@
     }
   }
 }
-// 
+//
 .treatment-list-body {
   .ant-tabs-nav-container {
     .ant-tabs-tab {
@@ -167,7 +167,7 @@
     padding: 12px 15px !important;
   }
 }
-// 
+//
 .header-page {
   .ant-card-head-wrapper {
     div {
@@ -183,7 +183,7 @@
     }
   }
 }
-// 
+//
 .step-col {
   .ant-steps-small .ant-steps-item-title {
     font-size: 12px !important;
@@ -191,6 +191,19 @@
     // min-width: 150px;
     &::after {
       display: none;
+    }
+  }
+}
+//
+.notes-body {
+  .ant-form-item-control {
+    margin: 6px;
+    input {
+      background-color: transparent;
+      padding-bottom: 12px;
+      &:focus {
+        border: none;
+      }
     }
   }
 }
