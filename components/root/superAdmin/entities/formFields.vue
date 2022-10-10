@@ -215,6 +215,36 @@
             @change="(e)=>getLength(e.target.value)"
           /> </a-form-item
       ></a-col>
+      <a-col  :span="24">
+         <a-form-item
+         label="Treatment Type"
+         >
+        <a-select
+        v-decorator="[
+            'treatmentTypesId',
+            {
+              initialValue: entity.treatmentTypesId,
+              rules: [
+                {
+                  required: false,
+                  message: 'Please select your Hospital!',
+                },
+              ],
+            },
+          ]"
+          mode="multiple"
+          placeholder="Insert treatment type"
+          style="width: 100%"
+        >
+          <!-- :v-model="value" -->
+
+          <!-- @change="handleChange" -->
+        <a-select-option v-for="item in treatmentTypes" :key="item.id">
+          {{ item.name }}
+        </a-select-option>
+      </a-select>
+      </a-form-item>
+      </a-col>
       <a-col v-if="isCreated" :span="24">
         <a-form-item
           :label='organizationName + " Exisitng Pattern"'
@@ -286,6 +316,7 @@ import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 import nullHelper from '~/mixins/null-helpers'
 import OrganizationServices from '~/services/API/OrganizationServices'
 import { isEmpty } from '~/services/Utilities'
+import TreatmentTypeService from '~/services/API/TreatmentTypeServices'
 export default {
   components: { Upload },
   mixins:[nullHelper],
@@ -315,11 +346,13 @@ export default {
       imgRequired:true,
       reqMessage : 'Required',
       data:'',
+      selectedItems: [],
       apiService: OrganizationServices,
       lent:0,
       prefix:'',
       showCustom:false,
       pattern:'',
+      treatmentTypes: []
     }
   },
   computed: {
@@ -328,6 +361,7 @@ export default {
     },
   },
   mounted(){
+    this.fetchTreamentTypes()
     this.isEdit()
     },
     methods: {
@@ -373,6 +407,11 @@ export default {
       this.imgRequired = false
       this.reqMessage = ''
       this.$emit('handleChange', this.fileList)
+    },
+    fetchTreamentTypes() {
+      TreatmentTypeService.getActive().then((response) => {
+        this.treatmentTypes = response.data
+      }).finally()
     },
   },
 }
