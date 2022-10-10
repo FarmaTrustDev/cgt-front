@@ -18,11 +18,8 @@
           style="white-space: pre-line"
           :title="
             'PUID: ' +
-            patient.enrollmentNumber +
-            '\n Manufacturer PUID: ' +
-            patient.manufacturerPUID +
-            '\n Logistics PUID: ' +
-            patient.logisticsPUID
+            patient.enrollmentNumber + '\n'+
+            patient.organizationData
           "
         >
           <span class="treatmentName">{{ patient.hospitalPUID }}</span>

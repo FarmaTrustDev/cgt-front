@@ -13,8 +13,14 @@
       }"
     >
       <template slot="pUIDRender" slot-scope="name, patient">
-        <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.enrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Logistics PUID: ' + patient.logisticsPUID">
-          <span class="treatmentName">{{ patient.hospitalPUID }}</span>
+        <a-tooltip style="white-space: pre-line" 
+          :title="
+            'PUID: ' + patient.patientEnrollmentNumber + 
+            '\n'+patient.hospital.name+': ' + patient.hospitalPUID+
+            '\n'+patient.logisticName+': ' + patient.logisticPUID
+          "
+        >
+        <span class="treatmentName">{{ patient.manufacturerPUID }}</span>
         </a-tooltip>        
       </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
