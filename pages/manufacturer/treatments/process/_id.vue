@@ -42,24 +42,24 @@
             <!-- //Steps -->
           </span>
         </a-card>
-        <!-- <a-card
-          v-if="(entity.isHold == true) | (entity.isCancel == true)"
+        <a-card
+          v-if="entity.isHold | entity.isCancel "
           :bordered="false"
           class="mt-15 default-card"
         >
           <a-alert
-            v-if="entity.isHold == true"
+            v-if="entity.isHold"
             type="error"
             message="Treatment has been paused"
           />
           <a-alert
-            v-if="entity.isCancel == true"
+            v-if="entity.isCancel"
             type="error"
             message="Treatment has been cancelled"
           />
-        </a-card> -->
+        </a-card>
 
-        <a-card :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card v-else :bordered="false" class="mt-15 default-card h-tabs">
           <BagDetail
             v-if="activeTab === 'INBOUND_SHIPMENT'"
             :treatment="entity"

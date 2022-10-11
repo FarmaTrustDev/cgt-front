@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div v-if="treatment.isHold === true | treatment.isCancel === true">
+    <div v-if="treatment.isHold | treatment.isCancel">
           <a-alert
-            v-if="treatment.isHold == true"
+            v-if="treatment.isHold"
             type="error"
             message="Treatment has been paused"
             :description=" 'Reason : ' + treatment.treatmentPauseReason"
           />
           <a-alert
-            v-if="treatment.isCancel == true"
+            v-if="treatment.isCancel"
             type="error"
             message="Treatment has been cancelled"
             :description=" 'Reason : ' + treatment.treatmentCancelReason"
@@ -60,13 +60,13 @@
         @submit="onSubmit"
       >
           <a-alert
-            v-if="treatment.isHold == true"
+            v-if="treatment.isHold"
             type="error"
             message="Treatment has been paused"
             :description=" 'Reason : ' + treatment.treatmentPauseReason"
           />
           <a-alert
-            v-if="treatment.isCancel == true"
+            v-if="treatment.isCancel"
             type="error"
             message="Treatment has been cancelled"
             :description=" 'Reason : ' + treatment.treatmentCancelReason"
