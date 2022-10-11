@@ -8,7 +8,13 @@
           </a-tooltip>
       </template>      
       <template slot="name" slot-scope="name, record">
-        <a-tooltip :title="'PUID: ' + record.patientEnrollmentNumber + '\n Hospital PUID: ' + record.hospitalPUID+ '\n Logistics PUID: ' + record.logisticPUID">
+        <a-tooltip 
+          :title="
+            'PUID: ' + record.patientEnrollmentNumber + 
+            '\n'+record.hospital.name+': ' + record.hospitalPUID+
+            '\n'+record.logisticName+': ' + record.logisticPUID
+          "
+        >
         <strong>
           <a-button
             class="btn-color"

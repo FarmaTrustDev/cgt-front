@@ -8,9 +8,9 @@
           :title="
             'PUID: ' +
             patient.patientEnrollmentNumber +
-            '\n Manufacturer PUID: ' +
+            '\n' + patient.manufacturerName+': '+
             patient.manufacturerPUID +
-            '\n Hospital PUID: ' +
+            '\n' + patient.hospital.name +': '+
             patient.hospitalPUID
           "
         >

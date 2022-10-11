@@ -3,7 +3,13 @@
     <Filters @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data">
       <template slot="pUIDRender" slot-scope="name, patient">
-        <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.patientEnrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Hospital PUID: ' + patient.hospitalPUID">
+        <a-tooltip style="white-space: pre-line" 
+        :title="
+          'PUID: ' + patient.patientEnrollmentNumber + 
+          '\n' + patient.manufacturerName+': '+patient.manufacturerPUID +
+          '\n' + patient.hospital.name +': '+patient.hospitalPUID
+          "
+        >
           <span class="treatmentName">{{ patient.logisticPUID }}</span>
         </a-tooltip>        
       </template>
@@ -157,7 +163,7 @@ export default {
     handleModal(show) {
       this.showResponseModal = show
     },
-        showTreamentStatus(schedule)
+    showTreamentStatus(schedule)
     {
         // eslint-disable-next-line eqeqeq
         if(schedule.treatment.isHold==true || schedule.treatment.isCancel==true | schedule.treatment.isDead==true)

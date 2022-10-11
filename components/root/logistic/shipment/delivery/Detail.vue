@@ -1,10 +1,11 @@
 <template>
   <div class="container logistic-shipping-detail">
     <article class="article">
-      <h4 class="heading pl-0">{{ translation.ShippDetai_2_314 }}</h4>
+      <h4 class="heading pl-0">Delivery {{ translation.ShippDetai_2_314 }}</h4>
     </article>
     <a-card :bordered="false" class="default-card grey-card ship-cards-body">
         <dl class="ant-row common-detail">
+          <h2>Shipping Details</h2>
           <div class="ant-col-24 d-flex">
             <dt>Dispatch Date:</dt>
             <dd>{{getDateFormat(scheduling.pickupDateTime)}}</dd>
@@ -20,6 +21,7 @@
           </div>
         </dl>
       <dl class="ant-row common-detail">
+        <h2>Treatment Receive</h2>
         <div class="ant-col-24 d-flex">
           <dt>{{ translation.IsRecei_2_328 }}</dt>
           <dd class="text-success">
@@ -94,5 +96,6 @@ export default {
   padding: 10px;
   width: 47.7%;
   margin: auto;
+  margin-top: 0 !important;
 }
 </style>

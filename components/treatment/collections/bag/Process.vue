@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="heading">Sample Shipping Details</h1>
     <a-form :form="form" layout="horizontal">
       <a-table
         :columns="columns"
@@ -40,7 +41,7 @@
                   initialValue: row.notes,
                 },
               ]"
-              :placeholder="translation.Enternote_3_588 + ':'"
+              placeholder="Notes"
             />
             <span v-else>{{ row.notes }}</span>
             <a-input
@@ -191,7 +192,7 @@ export default {
 }
 .notes-body {
   /* width: 68%; */
-  width: 200px;
+  width: 180px;
   margin: auto;
   height: 55px;
   overflow: hidden;

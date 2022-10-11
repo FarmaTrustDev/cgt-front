@@ -1,11 +1,11 @@
 <template>
   <div class="container logistic-pick-detail">
      <a-card v-if="!isEmpty(shipment)" :bordered="false"  >
-      <div class="card-head">
+      <div class="card-head grey-card border">
       <th>QrUrl</th>
       <th>Puid</th>
     </div>
-      <tr v-for="(bag, index) in scheduling.treatmentBag" :key="index" class="header-body">
+      <tr v-for="(bag, index) in scheduling.treatmentBag" :key="index" class="header-body grey-card border mt-5">
         <td><img :src="getImageUrl(bag.qrUrl)" width="65px" /></td>
         <td>{{bag.puid}}</td>
       </tr>
@@ -16,6 +16,7 @@
       </article>
       <div class="grey-card d-flex">
         <dl class="ant-row common-detail">
+          <h2>External Entities</h2>
           <div class="ant-col-24 d-flex">
             <dt>{{ translation.LogisProvi_2_380 }}</dt>
             <dd>{{ scheduling.logisticName }}</dd>
@@ -36,6 +37,8 @@
         </dl>
 
         <dl class="ant-row common-detail">
+          <h2>Pickup Details</h2>
+
           <div class="ant-col-24 d-flex">
             <dt>{{ translation['Handlby:_2_384'] }}</dt>
             <dd>{{ shipment.senderName }}</dd>
@@ -117,5 +120,6 @@ export default {
   padding: 10px;
   margin: auto;
   border-radius: 20px;
+  margin-top: 0 !important;
 }
 </style>
