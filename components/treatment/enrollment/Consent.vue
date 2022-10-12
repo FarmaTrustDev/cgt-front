@@ -134,6 +134,7 @@ export default {
     },
 
     updateConcent(values) {
+      this.loading = true
       const formData = new FormData()
       for (const key in values) {
         formData.append(key, values[key])

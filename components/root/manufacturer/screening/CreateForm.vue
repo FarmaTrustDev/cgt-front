@@ -70,7 +70,7 @@
        </a-form-item>
       </a-col>
       <a-col :span="12" v-if="!active" class="mt-25 text-right">
-        <a-button  type="primary" @click="sendEmail(entity.hospitalsId, entity.globalId)">Submit</a-button>
+        <a-button :loading="submitBtnLoading" type="primary" @click="sendEmail(entity.hospitalsId, entity.globalId)">Submit</a-button>
       </a-col>
       </span>
   </div>
@@ -94,6 +94,7 @@ export default {
       entityId: null,
       isCreated: false,
       loading: false,
+      submitBtnLoading : false,
       treatmentType: {},
       entity: {},
       typeLoading: true,
@@ -181,6 +182,8 @@ export default {
       this.checked=e.target.checked;
     },
     sendEmail(data, tempId){
+      this.submitBtnLoading = true
+      this.active = true
       if(this.checked){
         UserServices.sendEmailToHospitals({hospitalsId: data, globalId: tempId}).then((response)=>{
           success(this, { message: 'Email sent successfully' })
@@ -188,11 +191,14 @@ export default {
         ScreeningTemplateServices.submitScreeningRequest(this.entity.id).then((response)=>{
           success(this, { message: response.message })
         })
+        this.submitBtnLoading = false
       }else{
         ScreeningTemplateServices.submitScreeningRequest(this.entity.id).then((response)=>{
           success(this, { message: response.message })
         })
+        this.submitBtnLoading = false
       }
+      
     }
   },
 }

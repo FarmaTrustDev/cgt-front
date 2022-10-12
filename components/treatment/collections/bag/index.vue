@@ -37,7 +37,7 @@ export default {
     bags: { required: true, type: Array },
   },
   data() {
-    return { activeTab: null, showCompleteBag: true }
+    return { activeTab: null, showCompleteBag: true,  }
   },
   watch: {
     bags(newBags, oldVal) {
@@ -45,7 +45,6 @@ export default {
       // console.log(this.activeTab)
       if (newBags !== oldVal) {
         if (!isEmpty(newBags) && this.activeTab === null) {
-          // console.log(newBags)
           this.activeTab = newBags[0].id
           // console.log(this.activeTab)
         }
@@ -93,8 +92,8 @@ export default {
       this.activeTab = key
     },
     fetchBags(bagKeyId) {
+      this.$emit('fetchBags',bagKeyId)
       this.activeTab = bagKeyId
-      this.$emit('fetchBags')
     },
   },
 }
