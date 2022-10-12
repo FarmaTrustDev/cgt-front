@@ -8,9 +8,13 @@
           :title="
             'PUID: ' +
             patient.patientEnrollmentNumber +
-            '\n' + patient.manufacturerName+': '+
+            '\n' +
+            patient.manufacturerName +
+            ': ' +
             patient.manufacturerPUID +
-            '\n' + patient.hospital.name +': '+
+            '\n' +
+            patient.hospital.name +
+            ': ' +
             patient.hospitalPUID
           "
         >
@@ -29,22 +33,19 @@
         <!-- //Steps -->
         <div :class="getTreatmentStepClass(record)" class="step-col-logistic">
           <a-steps size="small" :initial="1">
+            // @todo use the logic in patient list to complete the After care
+            step in green color als need improvement in the code which return
+            class
             <a-step
               :key="1"
               title="Pickup Shipment"
-              :class="
-                record.treatment.phaseId >= 8
-                  ? 'ant-steps-item-finish'
-                  : 'ant-steps-item-active'
-              "
+              :class="getTabClass(record.treatment.phaseId >= 8)"
               @click="stepClick(record, 1)"
             />
             <a-step
               :key="2"
               title="Delivery Shipment"
-              :class="
-                record.treatment.phaseId > 8 ? 'ant-steps-item-active' : ''
-              "
+              :class="getTabClass(record.treatment.phaseId > 8)"
               @click="stepClick(record, 2)"
             />
           </a-steps>
@@ -142,6 +143,9 @@ export default {
   },
   mounted() {},
   methods: {
+    getTabClass(condition) {
+      return condition ? 'ant-steps-item-finish' : 'ant-steps-item-active'
+    },
     getTreatmentStepClass(patient) {
       if (patient.treatment.isHold) {
         return 'isHold'
