@@ -36,7 +36,7 @@
               initialValue: entity.hospitalsId,
               rules: [
                 {
-                  required: false,
+                  required: true,
                   message: 'Please select your Hospital!',
                 },
               ],

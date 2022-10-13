@@ -1,5 +1,5 @@
 <template>
-    <page-layout :create="false" class="container" :loading="loading" :title="translation._1_438">
+    <page-layout :create="false" class="container" :title="translation._1_438">
 
   <!-- <div class="container"> -->
     <!-- <h3 class="page-title mt-15">{{ translation._1_438 }}</h3> -->
