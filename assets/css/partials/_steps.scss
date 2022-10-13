@@ -127,6 +127,9 @@
       padding-right: 3px;
       margin-top: 8px;
     }
+    .Treatments {
+      padding-right: 5px;
+    }
   }
   .step-col-logistic {
     display: inline-flex;
@@ -157,7 +160,7 @@
     position: relative;
     margin-top: 14px;
     width: 100%;
-    
+
     &::before {
       content: '';
       position: absolute;
@@ -377,7 +380,7 @@
   .ant-steps-item-active {
     background-color: #f2f5fb;
     .ant-steps-item-content {
-      margin-left: 5px;
+      // margin-left: 5px;
       &::before {
         // margin: 0;
         // margin-left: 15px;

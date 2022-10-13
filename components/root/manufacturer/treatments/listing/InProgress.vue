@@ -209,9 +209,9 @@ export default {
   }
 }
 .isHold {
-  // .ant-steps {
-  //   @extend .blockState;
-  // }
+  .ant-steps {
+    @extend .blockState;
+  }
   .ant-steps-item.ant-steps-item-finish {
     background: #fffbc8;
   }

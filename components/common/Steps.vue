@@ -10,6 +10,7 @@
         v-for="phase in phases"
         :key="phase.phaseId"
         :title="phase.name"
+        :class="phase.name"
         @click="(a) => emitGotoView(patient, treatment, phase)"
       >
       </a-step>

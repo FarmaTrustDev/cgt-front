@@ -87,11 +87,14 @@
               :placeholder="translation.PickuLocat_2_792"
             /> </a-form-item
         ></a-col>
-        <a-col :span="24"
-          ><FormActionButton
+        <a-col :span="24">
+          <a-form-item>
+          <FormActionButton
             :loading="loading"
             :custom-text="translation['Save&_3_453']"
-        /></a-col>
+        />
+        </a-form-item>
+        </a-col>
       </a-row>
     </a-form>
   </div>
@@ -132,8 +135,8 @@ export default {
   methods: {
     disabledDate: _disabledPreviousDate,
     onSubmit(e) {
-      this.loading = true
       e.preventDefault()
+      this.loading = true
       this.form.validateFields((err, values) => {
         if (!err) {
           ShipmentServices.pickupCreate(this.scheduling.id, values)
@@ -142,6 +145,9 @@ export default {
               this.$emit('onCreate', response)
             })
             .catch(this.error)
+        }
+        else{
+          this.loading = false
         }
       })
     },

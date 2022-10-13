@@ -68,17 +68,17 @@
           <button
             :disabled="row.isCollected || btnLoading"
             :loading="loading"
-            @click="handleCollectionSubmit(row)"
-            type="primary"
             class="btn-send ant-btn ant-btn-primary"
+            type="primary"
+            @click="handleCollectionSubmit(row)"
           >
             Confirm
           </button>
           <a-button
             v-if="row.isCollected"
             type="primary"
-            @click="handleEmailModal(true, row)"
             class="btn-send-mail"
+            @click="handleEmailModal(true, row)"
             >Send Email</a-button
           >
         </template>
@@ -167,13 +167,17 @@ export default {
         BagCollectionServices.update(collection.id, values)
           .then((response) => {
             this.success(response.message)
-            this.$emit('fetchBags', this.bagKeyId)
             this.btnLoading = false
+            this.fetchBags(this.bagKeyId)
           })
           .catch(() => {
             this.btnLoading = false
           })
       }
+    },
+    fetchBags(bagKeyId) {
+      this.$emit('fetchBags',bagKeyId)
+      this.activeTab = bagKeyId
     },
     handleEmailModal(show, data) {
       if (show) {

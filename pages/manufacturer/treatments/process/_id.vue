@@ -27,13 +27,7 @@
                     v-for="phase in phases"
                     :key="phase.id"
                     :title="phase.name"
-                    :class="
-                      currentPhase > phase.id
-                        ? 'ant-steps-item-active-large'
-                        : currentPhase == phase.id
-                        ? 'ant-steps-item-active-blue-large'
-                        : 'ant-steps-horizontal-large'
-                    "
+                    :class="getTabClass(currentPhase, phase)"
                     @click="stepClick(entity, phase, phase.alias, phase.id)"
                   />
                 </a-steps>
@@ -42,24 +36,24 @@
             <!-- //Steps -->
           </span>
         </a-card>
-        <!-- <a-card
-          v-if="(entity.isHold == true) | (entity.isCancel == true)"
+        <a-card
+          v-if="entity.isHold | entity.isCancel"
           :bordered="false"
           class="mt-15 default-card"
         >
           <a-alert
-            v-if="entity.isHold == true"
+            v-if="entity.isHold"
             type="error"
             message="Treatment has been paused"
           />
           <a-alert
-            v-if="entity.isCancel == true"
+            v-if="entity.isCancel"
             type="error"
             message="Treatment has been cancelled"
           />
-        </a-card> -->
+        </a-card>
 
-        <a-card :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card v-else :bordered="false" class="mt-15 default-card h-tabs">
           <BagDetail
             v-if="activeTab === 'INBOUND_SHIPMENT'"
             :treatment="entity"
@@ -136,6 +130,8 @@ export default {
       currentPhase: 1,
       activeTab: 'INBOUND_SHIPMENT',
       disableNextTab: false,
+      viewAlreadyLoaded: false,
+      treatmentCurrentPhase: 1,
     }
   },
   computed: {
@@ -161,6 +157,26 @@ export default {
     },
     handleActiveTab() {
       this.activeTab = this.$route.query.view
+
+      this.viewAlreadyLoaded = true
+    },
+    getTabClass(currentPhase, phase) {
+      return (
+        this.getActiveClass(currentPhase, phase) +
+        ' ' +
+        this.getCompleteClass(currentPhase, phase)
+      )
+    },
+    getCompleteClass(currentPhase, phase) {
+      if (currentPhase > phase.id || this.treatmentCurrentPhase > phase.id) {
+        return 'ant-steps-item-active-large'
+      }
+    },
+    getActiveClass(currentPhase, phase) {
+      if (currentPhase === phase.id) {
+        return 'ant-steps-item-active-blue-large' // active class
+      }
+      return 'ant-steps-horizontal-large'
     },
     getCurrentStep(treatment) {
       if (treatment.phaseId != null) {
@@ -175,6 +191,7 @@ export default {
           }
         }
         this.currentPhase = currentPhase
+        this.treatmentCurrentPhase = currentPhase
         return currentPhase
       }
       return 1
@@ -182,6 +199,13 @@ export default {
     afterFetch(data) {
       this.loading = false
       this.getCurrentStep(this.entity)
+      // if (this.viewAlreadyLoaded) {
+      //   this.currentPhase = this.loadCurrentPhaseFromURL()
+      // }
+    },
+    loadCurrentPhaseFromURL() {
+      this.viewAlreadyLoaded = false
+      return 1
     },
     stepClick(record, phase, alias, phaseId) {
       this.disableNextTab = false
@@ -212,9 +236,9 @@ export default {
       this.setActiveTab('OUTBOUND_SHIPMENT')
     },
     onChangeSteps(step) {
-      if (!this.disableNextTab) {
-        this.currentPhase = step
-      }
+      // if (!this.disableNextTab) {
+      //   this.currentPhase = step
+      // }
     },
   },
 }

@@ -218,7 +218,9 @@
           {{ buttonName }}
         </a-button>
       </span>
-
+      <span slot="screeningId" slot-scope="text, record, index">
+        {{index + 1}}
+      </span>
       <span slot="upsertDropdown" slot-scope="text, record">
         <a-dropdown>
           <a-button class="action-button" @click="preventDefault">

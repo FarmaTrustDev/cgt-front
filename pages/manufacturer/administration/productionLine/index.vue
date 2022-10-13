@@ -23,9 +23,9 @@ export default {
       loading: false,
       column:[
   {
-    title: 'Id',
+    title: 'S.no',
     dataIndex: 'id',
-    key: 'id',
+    scopedSlots: {customRender : 'screeningId'},
   },
   {
     title: `${this.$store.getters.getTranslation.Name_1_138}`,

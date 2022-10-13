@@ -9,7 +9,7 @@
       v-if="treatment.manufacturerCollectionStatus"
       :bags="bags"
       :treatment="treatment"
-      @fetchBags="fetchBags"
+      @fetchBags="fetchBag"
     />
 
     <a-button
@@ -83,6 +83,11 @@ export default {
           })
           .finally((this.loading = false))
       }
+    },
+    fetchBag(key)
+    {
+      this.fetchBags()
+      this.activeTab = key
     },
     onCreate(data) {
       this.handleModal(false)
