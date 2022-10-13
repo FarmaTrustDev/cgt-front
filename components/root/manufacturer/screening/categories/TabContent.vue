@@ -34,9 +34,9 @@
                   placement="topLeft"
                   @confirm="deleteScreening(item.id)"
                 > -->
-                  <a-icon type="delete" @click="stepDeleteModal(true,item.id)"/>{{
+                  <span @click="stepDeleteModal(true,item.id)"><a-icon type="delete" />{{
                     translation.Delet_1_451
-                  }}
+                  }}</span>
                   <!-- </a-popconfirm> -->
               </a-menu-item>
             </a-menu>

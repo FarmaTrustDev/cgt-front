@@ -239,9 +239,10 @@
                 placement="topLeft"
                 @confirm="clickDelete(record)"
               > -->
-              <a-icon type="delete" @click="stepDeleteModal(true, record)" />{{
+              <span @click="stepDeleteModal(true, record)"><a-icon type="delete"  />{{
                 translation.Delet_1_451
               }}
+              </span>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -266,19 +267,18 @@
                 >{{ translation.Addnew_3_75 }}</a
               >
             </a-menu-item>
-            <a-menu-item key="3">
-              <a-popconfirm
+            <a-menu-item key="3" @click="hidePatientModal(true, record.id)">
+              <!-- <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deletePatient(`${record.id}`)"
               >
-                <!-- <button type="delete" @confirm="deletePatient(`${record.id}`)">{{ translation.HidePatie_2_804 }} </button> -->
+              </a-popconfirm> -->
                 {{ translation.HidePatie_2_804 }}
-              </a-popconfirm>
             </a-menu-item>
-            <a-menu-item key="4">
+            <a-menu-item key="4" @click="patientDelete(true, record)">
               <!-- <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
@@ -286,10 +286,10 @@
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               > -->
-              <span v-if="record.isDead" @click="patientDelete(true, record)">
+              <span v-if="record.isDead">
                 {{ translation.Resum_1_463 }}</span
               >
-              <span v-else @click="patientDelete(true, record)">{{
+              <span v-else >{{
                 translation.cance_1_296
               }}</span>
               <!-- </a-popconfirm> -->
@@ -418,10 +418,56 @@
     </a-modal>
     <a-modal
       :visible="showDeleteModal"
-      @ok="handleDeleteModal(false, '', '')"
+      :footer="null"
       @cancel="deleteModal(false)"
     >
-      <p>Are you sure you want to delete this treatment?</p>
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
+        </p>
+         <p>Are you sure you want to delete this treatment?</p>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="handleDeleteModal(false, '', '')"
+            >Confirm</a-button
+          >
+          <a-button
+            class="ant-btn text-cancel"
+            style="padding: 5px 50px"
+            @click="deleteModal(false)"
+          >
+            Cancel
+          </a-button>
+        </footer></center>
+    </a-modal>
+     <a-modal
+      :visible="patientHideModal"
+      :footer="null"
+      @cancel="hidePatientModal(false,'')"
+    >
+      <center>
+         <h2>Are you sure you want to hide this patient permanently?</h2>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="hidePatient()"
+            >Confirm</a-button
+          >
+          <a-button
+            class="ant-btn text-cancel"
+            style="padding: 5px 50px"
+            
+            @click="hidePatientModal(false,'')"
+          >
+            Cancel
+          </a-button>
+        </footer></center>
     </a-modal>
     <a-modal
       :visible="showPauseDeleteModal"
@@ -430,6 +476,7 @@
     >
       The treatment is already in cancel state. Do you want to switch the status
       to pause ?
+      
     </a-modal>
     <a-modal
       :visible="patientDeleteModal"
@@ -456,9 +503,8 @@
             >Confirm</a-button
           >
           <a-button
-            class="ant-btn"
+            class="ant-btn text-cancel"
             style="padding: 5px 50px"
-            type="danger"
             @click="patientDelete(false, '')"
           >
             Cancel
@@ -489,9 +535,9 @@
             >Confirm</a-button
           >
           <a-button
-            class="ant-btn"
+            class="ant-btn text-cancel"
             style="padding: 5px 50px"
-            type="danger"
+            
             @click="stepDeleteModal(false, '')"
           >
             Cancel
@@ -562,6 +608,8 @@ export default {
       patientRecord: '',
       cancelModalTitle: 'Cancel Treatment',
       pauseModalTitle: 'Pause Treatment',
+      patientHideModal: false,
+      patientId : ''
       // pagination: {},
     }
   },
@@ -592,6 +640,16 @@ export default {
     }
   },
   methods: {
+    hidePatientModal(e,record)
+    {
+      this.patientId = record
+      this.patientHideModal = e
+    },
+    hidePatient()
+    {
+      this.patientHideModal = false
+      this.deletePatient(this.patientId)
+    },
     patientDeleteMethod() {
       this.deadPatient(this.patientRecord)
       this.patientDeleteModal = false
