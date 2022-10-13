@@ -255,7 +255,7 @@
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">
-              <a @click="goto(`/support?showModel=true`)">{{
+              <a @click="handleSidebarKey(`/support?showModel=true`,4)">{{
                 translation.OpenTicke_2_800
               }}</a>
             </a-menu-item>

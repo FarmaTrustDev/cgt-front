@@ -47,7 +47,7 @@
                   translation.Edit_1_450
                 }}</a>
               </a-menu-item>
-              <a-menu-item key="2">
+              <a-menu-item key="2" @click="userDelete(true, action.globalId)">
                 <!-- <a-popconfirm
                   :title="translation.Areyou_4_484"
                   :ok-text="translation.yes_1_654"
@@ -56,7 +56,7 @@
                   @confirm="deleteUser(`${action.globalId}`)"
                 >
                 </a-popconfirm> -->
-                  <span @click="userDelete(true, action.globalId)">{{ translation.Delet_1_451 }}</span>
+                  <span >{{ translation.Delet_1_451 }}</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
