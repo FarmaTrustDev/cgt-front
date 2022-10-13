@@ -711,3 +711,25 @@ a {
   margin: auto;
   
 }
+
+.side-menu::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+
+
+.side-menu::-webkit-scrollbar-thumb
+{
+	background-color: #969696;
+}
+.side-menu::-webkit-scrollbar
+{
+	width: 3.5px;
+	background-color: #F5F5F5;
+}
+
+.sidebar:hover { ul.side-menu::-webkit-scrollbar {
+ width: 5px;
+}}
