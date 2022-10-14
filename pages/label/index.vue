@@ -69,8 +69,11 @@ export default {
       if (search !== '') {
         this.fetchSearch({
           patientEnrollmentNumber: search,
-          TreatmentTypeName: search,
-          PUID:search
+          treatmentTypeName: search,
+          puid:search,
+          manufaturerPUID:search,
+          logisticPUID:search,
+          hospitalPUID:search
         })
       } else {
         this.fetch()
