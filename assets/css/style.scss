@@ -152,6 +152,13 @@ a {
   .ant-upload-list.ant-upload-list-text {
     width: 130px;
     margin: auto;
+    margin-left: -20px;
+
+    .ant-upload-list-item-info {
+      .ant-upload-list-item-name {
+        padding-left: 15px;
+      }
+    }
   }
   // .ant-switch.ant-switch-checked {
   //   height:33px;

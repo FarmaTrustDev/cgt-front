@@ -192,6 +192,7 @@ export default {
 <style scoped>
 .upload-file {
   margin: 8px 0;
+  width: 55px;
   display: block;
 }
 .notes-body {
