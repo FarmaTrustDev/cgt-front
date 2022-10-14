@@ -37,7 +37,7 @@ export default {
       apiService: SchedulingServices,
       fetchIdFromParams: false,
       entity: {},
-      isScheduled: true,
+      isScheduled: false,
       loading: false
     }
   },

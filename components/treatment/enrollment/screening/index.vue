@@ -55,6 +55,7 @@ export default {
     fetchTreatmentScreening(treatment) {
       ScreeningCategoryServices.getByTreatmentId(treatment.id)
         .then((response) => {
+          debugger
           this.categories = response.data
           this.treatmentTypeName = this.categories[0].treatmentTypeName
         })
