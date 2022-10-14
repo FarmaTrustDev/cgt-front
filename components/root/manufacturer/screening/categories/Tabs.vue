@@ -11,7 +11,7 @@
             <a-menu slot="overlay">
               <a-menu-item key="1" @click="edit(item.globalId)"> <a-icon type="edit" />{{translation.Edit_1_450}} </a-menu-item>
               <a-menu-item key="2" >
-                <a-icon type="delete" @click="stepDeleteModal(true, item.globalId)" />{{translation.Delet_1_451}}
+               <span @click="stepDeleteModal(true, item.globalId)"> <a-icon type="delete"  />{{translation.Delet_1_451}}</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>

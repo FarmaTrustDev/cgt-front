@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false" class="default-card">
       <article class="article">
-        <h4 class="heading pl-0">{{translation.TreatRecei_2_326}}</h4>
+        <h4 class="heading ">{{translation.TreatRecei_2_326}}</h4>
       </article>
       <dl v-if="!isEmpty(shipment)" class="ant-row common-detail">
         <dt>{{ translation.IsRecei_2_328 }}</dt>
@@ -17,7 +17,8 @@
         <dt>{{ translation['Receiby:_2_330'] }}</dt>
         <dd>{{ shipment.receiverName }}</dd>
         <dt>{{ translation['ReceiDate:_2_332'] }}</dt>
-        <dd>{{ getMomentByStandardFormat(shipment.deliveryAt) }}</dd>
+        <dd>{{ getDateFormat(shipment.deliveryAt) }}</dd>
+         <!-- moment(String(shipment.deliveryAt)).format('DD/MM/YYYY') -->
         <dt>{{ translation['ReceiNote:_2_334'] }}</dt>
         <dd>{{ shipment.notes }}</dd>
       </dl>
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { isEmpty } from '~/services/Utilities'
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 export default {
@@ -46,7 +48,10 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  methods: { isEmpty, getMomentByStandardFormat },
+  methods: { isEmpty, getMomentByStandardFormat,
+  getDateFormat(date) {
+      return moment(String(date)).format('DD/MM/YYYY')
+    }, },
 }
 </script>
 <style scoped>

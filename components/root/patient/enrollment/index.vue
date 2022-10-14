@@ -40,6 +40,7 @@
           </div>
           <screening
             :treatment="treatment"
+            :loading="loading"
             @getNextTab="getNextTab"
             @getTreatment="updateTreatment"
           />

@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <a-skeleton :loading="loading">
     <Create
-      v-if="!isCreated"
+      v-if="isCreated"
       :treatment="treatment"
+      :loading="loading"
       @getNextTab="getNextTab"
       @getTreatment="getTreatment"
     />
-    <CollectedList v-else :categories="categories" />
-  </div>
+    <CollectedList  v-else :loading="loading" :treatment-type-name ="treatmentTypeName" :categories="categories" />
+  </a-skeleton>
 </template>
 <script>
 import Create from '~/components/treatment/enrollment/screening/Create'
@@ -25,10 +26,11 @@ export default {
   data() {
     return {
       categories: null,
-      isCreated: null,
+      isCreated: false,
       getTreatmentByParamId: [],
       treatmentParamId: {},
       loading: false,
+      treatmentTypeName: ''
     }
   },
     watch:{
@@ -45,16 +47,19 @@ export default {
   },
   methods: {
     isScreeningCompleted() {
+      this.loading = true
       this.treatmentParamId = this.$route.query.treatment_id
         this.fetch(this.treatmentParamId)
+        this.loading = false
     },
     fetchTreatmentScreening(treatment) {
       ScreeningCategoryServices.getByTreatmentId(treatment.id)
         .then((response) => {
           this.categories = response.data
+          this.treatmentTypeName = this.categories[0].treatmentTypeName
         })
         .catch(this.error)
-        .finally(() => (this.loading = false))
+        
     },
     getNextTab(data) {
       this.$emit('getNextTab', data)
@@ -68,8 +73,11 @@ export default {
           this.getTreatmentByParamId = response.data
           if(this.getTreatmentByParamId.screeningStatus === true)
           {
-            this.isCreated = true
+            this.isCreated = false
             this.fetchTreatmentScreening(this.getTreatmentByParamId)
+          }
+          else{
+            this.isCreated = true
           }
         })
         .catch(this.error)

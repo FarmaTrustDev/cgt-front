@@ -30,7 +30,7 @@
         class="rounded-table pt-10 users-list"
       >
         <div slot="action" slot-scope="action, slot">
-          <a-button type="danger" @click="deleteType(slot.id)">Delete</a-button>
+          <a-button type="danger" @click="treatTypeDelete(true ,slot.id)">Delete</a-button>
         </div>
       </a-table>
     </div>
@@ -91,6 +91,39 @@
       </footer>
       </center>
     </a-modal>
+     <a-modal
+      :visible="treatTypeDeleteModal"
+      :footer="null"
+      class="error-model"
+      @cancel="treatTypeDelete(false, '')"
+    >
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
+        </p>
+        <h3>
+          Are you sure you want to delete this treatment type ?
+        </h3>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="treatTypeDeleteMethod()"
+            >Confirm</a-button
+          >
+          <a-button
+            class="ant-btn text-cancel"
+            style="padding: 5px 50px"
+            @click="treatTypeDelete(false, '')"
+          >
+            Cancel
+          </a-button>
+        </footer>
+      </center>
+            </a-modal>
   </div>
 </template>
 <script>
@@ -125,7 +158,10 @@ export default {
       form: this.$form.createForm(this, {
         name: 'TreatmentTypeCreate',
       }),
-      treatmentType: ''
+      treatmentType: '',
+      treatTypeDeleteModal: false,
+      treatTypeId : ''
+
     }
   },
   computed: {
@@ -137,6 +173,14 @@ export default {
     this.fetchTreamentTypes()
   },
   methods: {
+    treatTypeDeleteMethod() {
+      this.deleteType(this.treatTypeId)
+      this.treatTypeDeleteModal = false
+    },
+    treatTypeDelete(e, record) {
+      this.treatTypeId = record
+      this.treatTypeDeleteModal = e
+    },
     handleSubmit(e)
     {
         this.loading = true
@@ -156,8 +200,8 @@ export default {
                 }).finally(this.loading=false)
                 this.treatmentType = ''
                 this.handleCancel();
-                this.fetchTreamentTypes();
             }
+                this.fetchTreamentTypes();
         })
     },
     deleteType(id)

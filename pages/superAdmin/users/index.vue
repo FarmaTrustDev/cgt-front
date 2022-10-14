@@ -51,7 +51,7 @@
                 }}</a>
               </a-menu-item>
               <a-menu-item key="2">
-                <a-popconfirm
+                <!-- <a-popconfirm
                   :title="translation.Areyou_4_484"
                   :ok-text="translation.yes_1_654"
                   :cancel-text="translation.no_1_656"
@@ -59,13 +59,48 @@
                   @confirm="deleteUser(`${action.globalId}`)"
                 >
                   {{ translation.Delet_1_451 }}
-                </a-popconfirm>
+                </a-popconfirm> -->
+                <span @click="userDelete(true,action.globalId)">{{ translation.Delet_1_451 }}</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </template>
       </a-table>
     </div>
+     <a-modal
+      :visible="userDeleteModal"
+      :footer="null"
+      class="error-model"
+      @cancel="userDelete(false, '')"
+    >
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
+        </p>
+        <h3>
+          Are you sure you want to delete this user ?
+        </h3>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="userDeleteMethod()"
+            >Confirm</a-button
+          >
+          <a-button
+            class="ant-btn"
+            style="padding: 5px 50px"
+            type="danger"
+            @click="userDelete(false, '')"
+          >
+            Cancel
+          </a-button>
+        </footer>
+      </center>
+            </a-modal>
   </page-layout>
 </template>
 <script>
@@ -118,6 +153,8 @@ export default {
       ],
       loading: true,
       fullName: [],
+      userDeleteModal: false,
+      userId: ''
     }
   },
   computed: {
@@ -146,6 +183,14 @@ export default {
   },
   methods: {
     preventDefault,
+    userDeleteMethod() {
+      this.deleteUser(this.userId)
+      this.userDeleteModal = false
+    },
+    userDelete(e, record) {
+      this.userId = record
+      this.userDeleteModal = e
+    },
     fetch() {
       // alert('hello')
       UserServices.getAllUsers()
