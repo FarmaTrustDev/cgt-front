@@ -116,6 +116,7 @@ export default {
       this.fetchPatientService()
     },
     fetchSearch(params) {
+      console.log(params)
       this.fetchPatientService(params)
     },
     searchPatent(e) {
@@ -123,9 +124,11 @@ export default {
       this.fetchSearch({
         puid: search,
         name: search,
-        TreatmentTypeName: search,
-        PUID: search,
-        PatientEnrollmentNumber: search
+        treatmentTypeName: search,
+        patientEnrollmentNumber: search,
+        manufacturerPUID:search,
+        logisticPUID:search,
+        hospitalPUID:search,
       })
     },
   },
