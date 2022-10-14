@@ -1,7 +1,7 @@
 <template>
   <a-skeleton :loading="loading">
     <Create
-      v-if="isCreated"
+      v-if="!isCreated"
       :treatment="treatment"
       :loading="loading"
       @getNextTab="getNextTab"
@@ -55,7 +55,6 @@ export default {
     fetchTreatmentScreening(treatment) {
       ScreeningCategoryServices.getByTreatmentId(treatment.id)
         .then((response) => {
-          debugger
           this.categories = response.data
           this.treatmentTypeName = this.categories[0].treatmentTypeName
         })
@@ -74,11 +73,8 @@ export default {
           this.getTreatmentByParamId = response.data
           if(this.getTreatmentByParamId.screeningStatus === true)
           {
-            this.isCreated = false
-            this.fetchTreatmentScreening(this.getTreatmentByParamId)
-          }
-          else{
             this.isCreated = true
+            this.fetchTreatmentScreening(this.getTreatmentByParamId)
           }
         })
         .catch(this.error)
