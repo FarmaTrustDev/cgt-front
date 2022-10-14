@@ -134,6 +134,7 @@ export default {
     if(this.entity.id!==undefined && this.fetchStatus){
       this.fetchStatus=false
       this.getScreeningTempStatus(this.entity.id)
+      this.getScreeningCategoryStatus(this.entity.id)
     }
   },    
   methods: {
@@ -160,6 +161,16 @@ export default {
     getScreeningTempStatus(id) {
       this.loading = true
       ScreeningTemplateServices.getScreeningTempStatus(id)
+        .then((response) => {
+          this.active = response.data
+        })
+        .finally(() => {
+          this.loading = false
+        }) 
+    },
+    getScreeningCategoryStatus(id) {
+      this.loading = true
+      ScreeningTemplateServices.getScreeningCategoryStatus(id)
         .then((response) => {
           this.active = response.data
         })
