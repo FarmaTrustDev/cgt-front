@@ -108,6 +108,7 @@ export default {
       isCreated: false,
       catagoryModalTitle: 'Add Group',
       visibleDeleteModal: false,
+      gotoLink: '/manufacturer/administration/screening',
       deleteStep:''
     }
   },
@@ -136,17 +137,18 @@ export default {
     },
     checkReference(id)
     {
-    if (!this.isEmpty(id)) {
-      this.isCreated = true
-      this.loading = true
-      ScreeningCategoryServices.getById(id)
-        .then((response) => {
-          this.entity = response.data
-          this.entityId = this.entity.globalId
-          this.onDelete()
-        })
-        .finally(() => (this.loading = false))
-    }
+      if (!this.isEmpty(id)) {
+        this.isCreated = true
+        this.loading = true
+        ScreeningCategoryServices.getById(id)
+          .then((response) => {
+            this.entity = response.data
+            this.entityId = this.entity.globalId
+            this.onDelete()
+            this.goto(`${this.gotoLink}`)
+          })
+          .finally(() => (this.loading = false))
+      }
     },
     handleCategoryModal(show) {
       this.showCategoryModal = show
