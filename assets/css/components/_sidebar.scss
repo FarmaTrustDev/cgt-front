@@ -67,7 +67,16 @@
 ///////////////Sidebar updated
 
 .logout-menu {
- margin: 15px 0 !important;
+//  margin: 15px 0 !important;
+margin-top: auto !important;
+
+//  padding-left: 24px;
+    // width: fit-content;
+    // display: flex;
+    // height: fit-content;
+    // position: absolute !important;
+    // bottom: 30px;
+    // width: 100%;
   .menu-container {
     background-color: #3869d1;
     color: white;
@@ -93,9 +102,17 @@
 }
 .sidebar {
   overflow: hidden;
-  overflow-y: auto !important;
+  // overflow-y: auto !important;
+  ul {
+    // height: 83%;
+    height: calc(100% - 110px);
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+  }
   .side-menu {
-    margin-top: 5%;
+    margin-top: 10px;
   }
   .logo-container {
     @extend .text-center;
@@ -178,6 +195,7 @@
   .ant-menu-inline .ant-menu-item {
     line-height: 35px;
     // position: initial;
+    display: inline-table;
     &::after {
       content: '';
       width: 5px;
@@ -195,23 +213,7 @@
     }
   }
 }
-.sidebar::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
 
-
-
-.sidebar::-webkit-scrollbar-thumb
-{
-	background-color: #969696;
-}
-.sidebar::-webkit-scrollbar
-{
-	width: 3.5px;
-	background-color: #F5F5F5;
-}
 // =================================================================
 .main-section {
   border-left: 1px solid #e8e8e8 !important;
@@ -226,8 +228,9 @@
         td {
           padding-top: 0 !important;
           font-weight: bold;
+          border-radius: 0;
           .ant-row.ant-form-item {
-            margin: 5px 0;
+            margin: 17px 0;
             padding: 8px;
           }
           .ant-form-item-children {
@@ -267,4 +270,12 @@
 }
 .data_screen > .ant-card-body {
   padding-right: 0 !important;
+}
+.step-col-large {
+  .ant-steps-item-title {
+    font-size: 15px !important;
+    &::after {
+      display: none;
+    }
+  }
 }

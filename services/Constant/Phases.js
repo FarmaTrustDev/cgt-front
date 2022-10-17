@@ -62,7 +62,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 2,
         name: 'Scheduling',
         alias: 'SCHEDULING',
-        phaseId: 3,// requesting manufacturer reject
+        phaseId: 4,// requesting manufacturer reject fix on 3 | before its state is 3(Scheduling ) we change this because active work  treatmentPhase > static phase;
         url_slug: '/hospital/patients/',
         url_type: URL_TYPE.patient,
         params: { view: 'Scheduling' }
@@ -71,7 +71,7 @@ export const PATIENT_TREATMENT_PHASES = [
         id: 3,
         name: 'Collection',
         alias: 'COLLECTION',
-        phaseId: 7,
+        phaseId: 6,//   before its state is 7(logistic pick ) we change this because collection phase complete and now handover to logistic;
         url_slug: '/hospital/patients/collection/',
         url_type: URL_TYPE.treatment,
         params: { view: 'collection' }

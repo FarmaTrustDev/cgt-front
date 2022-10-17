@@ -3,7 +3,7 @@
     <a-alert
       v-if="screenings <= 0"
       type="info"
-      :message="translation.NoScree_3_475"
+      message="There are no screening questions from the manufacturer"
     ></a-alert>
 
     <a-table

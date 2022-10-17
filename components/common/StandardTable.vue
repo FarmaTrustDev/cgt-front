@@ -14,9 +14,16 @@
         </div>
       </template>
       <template slot="pUIDRender" slot-scope="name, patient">
-          <a-tooltip style="white-space: pre-line" :title="'PUID: ' + patient.enrollmentNumber + '\n Manufacturer PUID: ' + patient.manufacturerPUID+ '\n Logistics PUID: ' + patient.logisticsPUID">
-            <span class="treatmentName">{{ patient.hospitalPUID }}</span>
-          </a-tooltip>        
+        <a-tooltip
+          style="white-space: pre-line"
+          :title="
+            'PUID: ' +
+            patient.enrollmentNumber + '\n'+
+            patient.organizationData
+          "
+        >
+          <span class="treatmentName">{{ patient.hospitalPUID }}</span>
+        </a-tooltip>
       </template>
       <template slot="name" slot-scope="name">
         <strong>{{ name }}</strong>
@@ -211,7 +218,9 @@
           {{ buttonName }}
         </a-button>
       </span>
-
+      <span slot="screeningId" slot-scope="text, record, index">
+        {{index + 1}}
+      </span>
       <span slot="upsertDropdown" slot-scope="text, record">
         <a-dropdown>
           <a-button class="action-button" @click="preventDefault">
@@ -222,8 +231,7 @@
               <a-icon type="edit" />{{ translation.Updat_1_208 }}
             </a-menu-item>
 
-            <a-menu-item key="3"
-              >
+            <a-menu-item key="3">
               <!-- <a-popconfirm
                 title="Are you sure you want to delete this step ?"
                 :ok-text="translation.yes_1_654"
@@ -231,9 +239,11 @@
                 placement="topLeft"
                 @confirm="clickDelete(record)"
               > -->
-                <a-icon type="delete" @click="stepDeleteModal(true, record)"/>{{ translation.Delet_1_451 }}
-              </a-menu-item
-            >
+              <span @click="stepDeleteModal(true, record)"><a-icon type="delete"  />{{
+                translation.Delet_1_451
+              }}
+              </span>
+            </a-menu-item>
           </a-menu>
         </a-dropdown>
       </span>
@@ -245,7 +255,7 @@
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">
-              <a @click="goto(`/support?showModel=true`)">{{
+              <a @click="handleSidebarKey(`/support?showModel=true`,4)">{{
                 translation.OpenTicke_2_800
               }}</a>
             </a-menu-item>
@@ -257,18 +267,18 @@
                 >{{ translation.Addnew_3_75 }}</a
               >
             </a-menu-item>
-            <a-menu-item key="3">
-              <a-popconfirm
+            <a-menu-item key="3" @click="hidePatientModal(true, record.id)">
+              <!-- <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
                 :cancel-text="translation.no_1_656"
                 placement="topLeft"
                 @confirm="deletePatient(`${record.id}`)"
               >
+              </a-popconfirm> -->
                 {{ translation.HidePatie_2_804 }}
-              </a-popconfirm>
             </a-menu-item>
-            <a-menu-item key="4">
+            <a-menu-item key="4" @click="patientDelete(true, record)">
               <!-- <a-popconfirm
                 :title="translation.Areyou_4_484"
                 :ok-text="translation.yes_1_654"
@@ -276,8 +286,12 @@
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               > -->
-                <span v-if="record.isDead" @click="patientDelete(true ,record)"> {{ translation.Resum_1_463 }}</span>
-                <span v-else @click="patientDelete(true, record)">{{ translation.cance_1_296 }}</span>
+              <span v-if="record.isDead">
+                {{ translation.Resum_1_463 }}</span
+              >
+              <span v-else >{{
+                translation.cance_1_296
+              }}</span>
               <!-- </a-popconfirm> -->
             </a-menu-item>
           </a-menu>
@@ -404,10 +418,56 @@
     </a-modal>
     <a-modal
       :visible="showDeleteModal"
-      @ok="handleDeleteModal(false, '', '')"
+      :footer="null"
       @cancel="deleteModal(false)"
     >
-      <p>Are you sure you want to delete this treatment?</p>
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
+        </p>
+         <p>Are you sure you want to delete this treatment?</p>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="handleDeleteModal(false, '', '')"
+            >Confirm</a-button
+          >
+          <a-button
+            class="ant-btn text-cancel"
+            style="padding: 5px 50px"
+            @click="deleteModal(false)"
+          >
+            Cancel
+          </a-button>
+        </footer></center>
+    </a-modal>
+     <a-modal
+      :visible="patientHideModal"
+      :footer="null"
+      @cancel="hidePatientModal(false,'')"
+    >
+      <center>
+         <h2>Are you sure you want to hide this patient permanently?</h2>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="hidePatient()"
+            >Confirm</a-button
+          >
+          <a-button
+            class="ant-btn text-cancel"
+            style="padding: 5px 50px"
+            
+            @click="hidePatientModal(false,'')"
+          >
+            Cancel
+          </a-button>
+        </footer></center>
     </a-modal>
     <a-modal
       :visible="showPauseDeleteModal"
@@ -416,22 +476,26 @@
     >
       The treatment is already in cancel state. Do you want to switch the status
       to pause ?
+      
     </a-modal>
     <a-modal
-    :visible="patientDeleteModal"
-    :footer="null"
-    class="error-model"
-    @cancel="patientDelete(false, '')"
+      :visible="patientDeleteModal"
+      :footer="null"
+      class="error-model"
+      @cancel="patientDelete(false, '')"
     >
-    <center>
-      <p class="cross-img">
-        <span class="inner-mark">
-          <span class="line-left line"></span>
-          <span class="line-right line"></span>
-        </span>
-      </p>
-      <h3>Are you sure you want to delete this patient ( {{patientRecord.name}} ) ?</h3>
-      <footer class="mt-6">
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
+        </p>
+        <h3>
+          Are you sure you want to delete this patient (
+          {{ patientRecord.name }} ) ?
+        </h3>
+        <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
@@ -439,17 +503,16 @@
             >Confirm</a-button
           >
           <a-button
-          class="ant-btn"
-          style="padding: 5px 50px"
-          type="danger"
-          @click="patientDelete(false,'')"
+            class="ant-btn text-cancel"
+            style="padding: 5px 50px"
+            @click="patientDelete(false, '')"
           >
-          Cancel
+            Cancel
           </a-button>
         </footer>
-    </center>
-      </a-modal>    
-        <a-modal
+      </center>
+    </a-modal>
+    <a-modal
       :visible="visibleDeleteModal"
       ok-text="OK"
       :footer="null"
@@ -459,9 +522,9 @@
       <center>
         <p class="cross-img">
           <span class="inner-mark">
-          <span class="line-left line"></span>
-          <span class="line-right line"></span>
-        </span>
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
         </p>
         <h3>Are you sure you want to delete this step ?</h3>
         <footer class="mt-6">
@@ -472,12 +535,12 @@
             >Confirm</a-button
           >
           <a-button
-          class="ant-btn"
-          style="padding: 5px 50px"
-          type="danger"
-          @click="stepDeleteModal(false,'')"
+            class="ant-btn text-cancel"
+            style="padding: 5px 50px"
+            
+            @click="stepDeleteModal(false, '')"
           >
-          Cancel
+            Cancel
           </a-button>
         </footer>
       </center>
@@ -537,14 +600,16 @@ export default {
       note: '',
       notes: '',
       showCancelTreatmentModal: false,
-      deleteStep:{},
+      deleteStep: {},
       treatmentForCancellation: {},
       treatmentForPause: {},
       showPauseDeleteModal: false,
       patientDeleteModal: false,
-      patientRecord:'',
+      patientRecord: '',
       cancelModalTitle: 'Cancel Treatment',
       pauseModalTitle: 'Pause Treatment',
+      patientHideModal: false,
+      patientId : ''
       // pagination: {},
     }
   },
@@ -575,23 +640,29 @@ export default {
     }
   },
   methods: {
-    patientDeleteMethod()
+    hidePatientModal(e,record)
     {
+      this.patientId = record
+      this.patientHideModal = e
+    },
+    hidePatient()
+    {
+      this.patientHideModal = false
+      this.deletePatient(this.patientId)
+    },
+    patientDeleteMethod() {
       this.deadPatient(this.patientRecord)
       this.patientDeleteModal = false
     },
-    patientDelete(e,record)
-    { 
+    patientDelete(e, record) {
       this.patientRecord = record
       this.patientDeleteModal = e
     },
-    stepDelete()
-    {
+    stepDelete() {
       this.clickDelete(this.deleteStep)
       this.stepDeleteModal(false, '')
     },
-    stepDeleteModal(e,step)
-    {
+    stepDeleteModal(e, step) {
       this.deleteStep = step
       this.visibleDeleteModal = e
     },
@@ -668,6 +739,13 @@ export default {
       // Most expensive Operation in whole application
       if (!isEmpty(treatment.phaseId)) {
         const phases = this.phases
+
+        // check iif schedule is not set then return screening phase
+        // if (treatment.isSchedule === false) {
+        //   currentPhase = 2 // screening on Phases 2
+        //   return currentPhase
+        // }
+
         for (let phase = 0; phase < phases.length; phase++) {
           if (phases[phase].phaseId <= treatment.phaseId) {
             currentPhase = phases[phase].id
@@ -676,16 +754,7 @@ export default {
             break
           }
         }
-        if(treatment.isSchedule === false)
-        {
-          currentPhase = 2
-          return currentPhase
-        }
-        else
-        {
-          return currentPhase
-        }
-        
+        return currentPhase
       }
       return 1
     },

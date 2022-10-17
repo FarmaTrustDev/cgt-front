@@ -1,6 +1,11 @@
 <template>
   <div>
-    <a-tabs v-model="activeKey" hide-add type="editable-card">
+    <a-alert
+      v-if="isEmpty(categories)"
+      type="info"
+      message="There are no screening questions from the manufacturer"
+    ></a-alert>
+    <a-tabs  v-else v-model="activeKey" :loading="loading" hide-add type="editable-card">
       <a-tab-pane
         v-for="(category, index) in categories"
         :key="category.globalId"

@@ -3,7 +3,7 @@
     :create="false"
     :bordered="false"
     :title="translation.Label_1_27"
-    class="container page-search-input-container"
+    class="container page-search-input-container header-page"
   >
     <template slot="headerMenus">
             <a-input
@@ -69,8 +69,11 @@ export default {
       if (search !== '') {
         this.fetchSearch({
           patientEnrollmentNumber: search,
-          TreatmentTypeName: search,
-          PUID:search
+          treatmentTypeName: search,
+          puid:search,
+          manufaturerPUID:search,
+          logisticPUID:search,
+          hospitalPUID:search
         })
       } else {
         this.fetch()

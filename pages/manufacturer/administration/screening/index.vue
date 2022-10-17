@@ -7,6 +7,7 @@
         :action-link="ActionLink"
         :button-name="translation.ProceAdmin_2_569"
       />
+
     </template>
   </page-layout>
 </template>
@@ -22,9 +23,9 @@ export default {
       loading: false,
       column:[
   {
-    title: 'Id',
+    title: 'S.no',
     dataIndex: 'id',
-    key: 'id',
+    scopedSlots: {customRender : 'screeningId'},
   },
   {
     title: `${this.$store.getters.getTranslation.Hospi_1_47}`,

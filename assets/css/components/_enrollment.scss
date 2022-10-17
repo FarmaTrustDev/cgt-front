@@ -7,6 +7,7 @@
   .ant-tabs-content.ant-tabs-content-animated.ant-tabs-left-content {
     padding-left: 32px !important;
     margin-top: 15px !important;
+    border-left: 1px solid gainsboro;
   }
   .ant-tabs-left-bar {
     border-right: unset;
@@ -208,6 +209,7 @@
       font-weight: 400;
     }
   }
+ 
 }
 .patient-page {
   .enrollment-page {

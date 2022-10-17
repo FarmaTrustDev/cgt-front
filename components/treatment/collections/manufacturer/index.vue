@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-skeleton :rows="10" :loading="loading">
-      <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
+      <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBag" />
       <div v-if="(treatment.isHold !== true) | (treatment.isCancel !== true)">
         <a-button
           v-if="!treatment[`${showCompleteBtn}`] && bags.length > 0"
@@ -25,18 +25,12 @@
               <span class="line-left line"></span>
               <span class="line-right line"></span>
             </span>
-            <!-- <img
-            :src="getImageUrl('Icons/cross-letter.jpg')"
-            width="40%"
-            height="40%"
-          /> -->
           </p>
           <h3>Complete all steps before completing this sample.</h3>
           <footer>
             <!-- @Mehdi please optimize the code  -->
             <a-button
-              class="ant-btn ant-btn-primary"
-              style="padding: 5px 50px"
+              class="ant-btn ant-btn-primary error-ok-btn"
               @click="handleOk()"
               ><b>Ok</b></a-button
             >
@@ -95,6 +89,11 @@ export default {
             this.loading = false
           })
       }
+    },
+    fetchBag(key)
+    {
+      this.fetchBags()
+      this.activeTab = key
     },
     onCreate(data) {
       this.handleModal(false)

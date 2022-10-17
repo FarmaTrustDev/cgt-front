@@ -34,7 +34,7 @@
             :bordered="false"
           >
             <a-row>
-              <a-col :span="24">
+              <a-col :span="24" class="px-10">
                 <div>
                   <a-col :span="10">
                     <span class="float-left">
@@ -64,13 +64,19 @@
                     <a
                       slot="title"
                       @click="
-                        goto(
-                          `/manufacturer/treatments/process/${item.globalId}`
+                        handleSidebarKey(
+                          `/manufacturer/treatments/process/${item.globalId}`,4
                         )
                       "
-                      >{{ item.patientPUID }}
+                      >
+                      <p class="float-left">
+                      {{ item.patientPUID }}
+                      </p>
+                      <p class="float-right">
                       {{ getDateOnly(item.collectionDate) }} /
-                      {{ getDateOnly(item.deliveryDate) }}</a
+                      {{ getDateOnly(item.deliveryDate) }}
+                      </p>
+                      </a
                     >
                   </a-list-item-meta>
                 </a-list-item>
@@ -79,8 +85,9 @@
             <div
               class="text-center red-div-size mt-5"
               style="cursor: pointer"
-              @click="goto(`/inventory/treatment`)"
+              @click="handleSidebarKey(`manufacturer/treatments`, 4)"
             >
+              <!-- @click="handleSidebarKey(`/inventory/treatment`)" -->
               {{ translation.Showmore_2_534 }}
             </div>
           </a-card>

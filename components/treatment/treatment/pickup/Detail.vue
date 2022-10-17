@@ -1,16 +1,22 @@
 <template>
-  <div>
+  <div >
     <a-card :bordered="false" class="default-card">
       <article class="article">
         <h6 class="heading pl-0">{{translation.SamplShipp_3_517}}</h6>
       </article>
       <dl v-if="!isEmpty(shipment)" class="ant-row common-detail">
-        <dt>{{ translation.DispaDate_2_316 }}:</dt>
-        <dd>{{ scheduling.collectionDateDeliveryDate }}</dd>
-        <dt>{{ translation.CarriStatu_2_320 }}</dt>
-        <dd>-</dd>
-        <dt>{{ translation.EstimArriv_3_322 }}</dt>
-        <dd>{{ getMomentByStandardFormat(scheduling.deliveryDate) }}</dd>
+        <div class="ant-col-24 d-flex">
+        <dt class="float-left">{{ translation.DispaDate_2_316 }}:</dt>
+        <dd class="float-right">{{ scheduling.collectionDateDeliveryDate }}</dd>
+        </div>
+        <div class="ant-col-24 d-flex">
+        <dt class="float-left">{{ translation.CarriStatu_2_320 }}</dt>
+        <dd class="float-right">-</dd>
+        </div>
+        <div class="ant-col-24 d-flex">
+        <dt class="float-left">Estimated Arrival Date:</dt>
+        <dd class="float-right">{{getDateFormat(scheduling.deliveryDate)}}</dd>
+        </div>
       </dl>
       <alert v-else :message="translation.Samplhas_8_571" />
     </a-card>
@@ -18,6 +24,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 export default {
@@ -45,6 +52,9 @@ export default {
   methods: {
     getMomentByStandardFormat,
     isEmpty,
+    getDateFormat(date) {
+      return moment(String(date)).format('DD/MM/YYYY')
+    },
   },
 }
 </script>

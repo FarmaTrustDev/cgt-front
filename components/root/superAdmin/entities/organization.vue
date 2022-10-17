@@ -16,7 +16,7 @@
                 }}</a>
               </a-menu-item>
               <a-menu-item key="2">
-                <a-popconfirm
+                <!-- <a-popconfirm
                   :title="translation.Areyou_4_484"
                   :ok-text="translation.yes_1_654"
                   :cancel-text="translation.no_1_656"
@@ -24,12 +24,47 @@
                   @confirm="deleteUser(`${action}`)"
                 >
                   {{ translation.Delet_1_451 }}
-                </a-popconfirm>
+                </a-popconfirm> -->
+                <span @click="orgDelete(true, action.globalId)">{{ translation.Delet_1_451 }}</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </template>
         </a-table>
+        <a-modal
+      :visible="orgDeleteModal"
+      :footer="null"
+      class="error-model"
+      @cancel="orgDelete(false, '')"
+    >
+      <center>
+        <p class="cross-img">
+          <span class="inner-mark">
+            <span class="line-left line"></span>
+            <span class="line-right line"></span>
+          </span>
+        </p>
+        <h3>
+          Are you sure you want to delete this user ?
+        </h3>
+        <footer class="mt-6">
+          <a-button
+            class="ant-btn ant-btn-primary"
+            style="padding: 5px 50px"
+            @click="orgDeleteMethod()"
+            >Confirm</a-button
+          >
+          <a-button
+            class="ant-btn"
+            style="padding: 5px 50px"
+            type="danger"
+            @click="orgDelete(false, '')"
+          >
+            Cancel
+          </a-button>
+        </footer>
+      </center>
+            </a-modal>
     </div>
 </template>
 <script>
@@ -78,7 +113,10 @@ export default {
             customRender: 'action',
           },
         },
-         ]
+         ],
+         orgDeleteModal: false,
+         orgId : ''
+
         }
     },
     
@@ -101,6 +139,14 @@ export default {
     },
     methods:{
         preventDefault,
+            orgDeleteMethod() {
+      this.deleteUser(this.orgId)
+      this.userDeleteModal = false
+    },
+    orgDelete(e, record) {
+      this.orgId = record
+      this.orgDeleteModal = e
+    },
         fetch()
         {
             OrganizationServices.get({ organizationTypeAlias: this.alias })

@@ -31,6 +31,13 @@ function getScreeningTempStatus(templateId) {
   })
 }
 
+function getScreeningCategoryStatus(templateId) {
+  return request({
+    url: `${baseApi}/getScreeningCategoryStatus/${templateId}`,
+    method:'GET',
+  })
+}
+
 function markAcceptance(templateId, treatmentTypeId, manufacturerId) {
   return request({
     url: `${baseApi}/markAcceptance/${templateId}/${treatmentTypeId}/${manufacturerId}`,
@@ -78,7 +85,8 @@ const ScreeningTemplateServices = {
   getById,
   update,
   getScreeningTempStatus,
-  submitScreeningRequest
+  submitScreeningRequest,
+  getScreeningCategoryStatus
 }
 
 export default ScreeningTemplateServices

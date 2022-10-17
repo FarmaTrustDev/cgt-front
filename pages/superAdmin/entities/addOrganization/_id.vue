@@ -1,6 +1,6 @@
 <template>
       <div class=" mtminus-2 container">
-          <FormField :fieldName="fieldName" />
+          <FormField :field-name="fieldName" />
       </div>
 </template>
 <script>
@@ -10,6 +10,7 @@ import {
   LOGISTIC_ALIAS,
   HOSPITAL_ALIAS,
   MANUFACTURER_ALIAS,
+  SMARTLAB_ALIAS
 } from '~/services/Constant'
 export default {
   components:{FormField},
@@ -37,6 +38,10 @@ export default {
       else if(this.fieldName === 'Manufacturer')
       {
         this.organizationTypeAlias = MANUFACTURER_ALIAS
+      }
+      else if (this.fieldName === 'SmartLab')
+      {
+        this.organizationTypeAlias = SMARTLAB_ALIAS
       }
     },
   },

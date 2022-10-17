@@ -1,6 +1,6 @@
 <template>
-  <span>
-      <h1 class="page-title">{{translation['TreatType_2_67']}}: {{checkData(categories)}}</h1>
+  <span :loading="loading">
+      <h1 v-if="!isEmpty(treatmentTypeName)" class="page-title">{{translation['TreatType_2_67']}}: {{treatmentTypeName}}</h1>
     <a-tabs class="screening-tabs">
       <a-tab-pane
         v-for="category in categories"
@@ -27,10 +27,12 @@ export default {
       type: Array,
       default: () => [],
     },
+    treatmentTypeName:{
+      type: String,
+    },
   },
   data() {
     return {
-      treatmentTypeName : '',
       column: [
         {
           title: `${this.$store.getters.getTranslation.Detai_1_346}`,
@@ -49,6 +51,7 @@ export default {
           scopedSlots: { customRender: 'check' },
         },
       ],
+      loading: true
     }
   },
   computed: {
@@ -66,10 +69,7 @@ export default {
     }
   },    
   methods:{
-    checkData(categories)
-    {
-        return !isEmpty(categories) ? categories[0].treatmentTypeName : 'N/A' ;
-    }
+    isEmpty,
   }
 }
 </script>

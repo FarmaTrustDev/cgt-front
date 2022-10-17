@@ -461,7 +461,7 @@
             :placeholder="translation.Searccount_2_576"
             style="width: 100%"
             size="large"
-            class="default-select pt-2"
+            class="default-select"
             @search="searchCountries"
           >
             <a-select-option v-for="country in countries" :key="country.id">

@@ -2,23 +2,16 @@
   <div  class="ant-list-grid-item">
       <a-row>
       <a-col :span="23">
-      <a-list :grid="{ gutter: 16, column: 6}" :data-source="panes">
-        <a-list-item slot="renderItem" slot-scope="item" >
-        <div class="cursor-pointer" @click="paneData(item)"> {{item.name}}</div>
+      <a-list :grid="{ gutter: 16, column: 6}" :data-source="panes" >
+        <a-list-item slot="renderItem"  slot-scope="item" class="cursor-pointer" @click="paneData(item)" >
+        <div> {{item.name}}</div>
         <a slot="actions">
           <a-dropdown>
             <a-icon type="more" />
             <a-menu slot="overlay">
               <a-menu-item key="1" @click="edit(item.globalId)"> <a-icon type="edit" />{{translation.Edit_1_450}} </a-menu-item>
               <a-menu-item key="2" >
-                <!-- <a-popconfirm
-                  title="Are you sure you want to delete this group?"
-                  :ok-text="translation.yes_1_654"
-                  :cancel-text="translation.no_1_656"
-                  placement="topLeft"
-                  @confirm="checkReference(item.globalId)"
-                  > -->
-                <a-icon type="delete" @click="stepDeleteModal(true, item.globalId)" />{{translation.Delet_1_451}}
+               <span @click="stepDeleteModal(true, item.globalId)"> <a-icon type="delete"  />{{translation.Delet_1_451}}</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -115,6 +108,7 @@ export default {
       isCreated: false,
       catagoryModalTitle: 'Add Group',
       visibleDeleteModal: false,
+      gotoLink: '/manufacturer/administration/screening',
       deleteStep:''
     }
   },
@@ -143,17 +137,18 @@ export default {
     },
     checkReference(id)
     {
-    if (!this.isEmpty(id)) {
-      this.isCreated = true
-      this.loading = true
-      ScreeningCategoryServices.getById(id)
-        .then((response) => {
-          this.entity = response.data
-          this.entityId = this.entity.globalId
-          this.onDelete()
-        })
-        .finally(() => (this.loading = false))
-    }
+      if (!this.isEmpty(id)) {
+        this.isCreated = true
+        this.loading = true
+        ScreeningCategoryServices.getById(id)
+          .then((response) => {
+            this.entity = response.data
+            this.entityId = this.entity.globalId
+            this.onDelete()
+            this.goto(`${this.gotoLink}`)
+          })
+          .finally(() => (this.loading = false))
+      }
     },
     handleCategoryModal(show) {
       this.showCategoryModal = show

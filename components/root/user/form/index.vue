@@ -123,7 +123,7 @@ export default {
         .then((response) => {
           this.success(response.message)
           if (!this.isEmpty(this.gotoLink)) {
-            this.goto(`${this.gotoLink}`)
+            this.users.name === 'Super Admin' ? this.goto(`superAdmin/users`) : this.goto(`${this.gotoLink}`)
           }
           if (this.isFunction(this.afterCreate)) {
             this.afterCreate(response)
@@ -146,9 +146,9 @@ export default {
           for (const key in values) {
             formData.append(key, values[key])
           }
-          this.fileList.forEach((files) => {
-            formData.append('profileImageUrl', files)
-          })
+            this.fileList.forEach((files) => {
+              formData.append('profileImageUrl', files)
+            })
           this.upsert(formData)
         } else {
           this.loading = false

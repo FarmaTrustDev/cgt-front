@@ -9,7 +9,7 @@
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb> -->
-        <div class="main">
+        <div class="main center-container">
           <Nuxt />
         </div>
       </a-layout-content>

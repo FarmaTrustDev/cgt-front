@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
-    <h3 class="page-title mt-15">{{ translation._1_438 }}</h3>
-    <div>
+    <page-layout :create="false" class="container" :title="translation._1_438">
+
+  <!-- <div class="container"> -->
+    <!-- <h3 class="page-title mt-15">{{ translation._1_438 }}</h3> -->
+    <div slot="content">
       <a-row :gutter="15" class="grey-card m-auto admin-page">
         <a-col v-for="menu in userAdminMenu" :key="menu.key" :span="12">
           <nuxt-link :to="menu.to">
@@ -20,13 +22,17 @@
           </nuxt-link>
         </a-col>
       </a-row>
-    </div>
+    <!-- </div> -->
   </div>
+  </page-layout>
 </template>
 
 <script>
 import UserServices from '~/services/API/UserServices'
+import PageLayout from '~/components/layout/PageLayout'
+
 export default {
+  components: {PageLayout},
   data() {
     return {
       userAdminMenu: [],

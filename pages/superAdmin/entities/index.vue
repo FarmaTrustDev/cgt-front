@@ -14,6 +14,9 @@
         <a-tab-pane key="3" tab="Logistic">
           <organization :alias="logAlias" :field-name="'Logistic'" />
         </a-tab-pane>
+        <a-tab-pane key="4" tab="SmartLab"> 
+          <organization :alias="smartLabAlias" :field-name="'SmartLab'" />
+        </a-tab-pane>
       </a-tabs>
     </div>
   </div>
@@ -22,11 +25,12 @@
 // import hospitals from '~/components/root/superAdmin/Entities/hospital'
 // import manufacturer from '~/components/root/superAdmin/Entities/manufacturer'
 // import logistic from '~/components/root/superAdmin/Entities/logistics'
-import organization from '~/components/root/superAdmin/Entities/organization'
+import organization from '~/components/root/superAdmin/entities/organization'
 import {
   LOGISTIC_ALIAS,
   HOSPITAL_ALIAS,
   MANUFACTURER_ALIAS,
+  SMARTLAB_ALIAS,
 } from '~/services/Constant'
 export default {
   components: { organization },
@@ -35,6 +39,7 @@ export default {
       hospAlias: HOSPITAL_ALIAS,
       manfAlias: MANUFACTURER_ALIAS,
       logAlias: LOGISTIC_ALIAS,
+      smartLabAlias: SMARTLAB_ALIAS
     }
   },
   computed: {

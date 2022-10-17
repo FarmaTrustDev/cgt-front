@@ -39,10 +39,12 @@ import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import { isEmpty } from '~/services/Utilities'
+import ManufacturerTreatmentServices from '~/services/API/ManufacturerTreatmentServices'
 import {
   LOGISTIC_ALIAS,
   HOSPITAL_ALIAS,
   MANUFACTURER_ALIAS,
+  SMARTLAB_ALIAS
 } from '~/services/Constant'
 // import { isEmpty } from '~/services/Utilities'
 export default {
@@ -61,7 +63,8 @@ export default {
         gotoLink: '/superAdmin/entities',
         organizationName : '',
         organizationType: '',
-        organizationTypeAlias :''
+        organizationTypeAlias :'',
+        treatTypesId: [],
       }
     },
     computed: {
@@ -84,10 +87,12 @@ export default {
       e.preventDefault()
         this.form.validateFields((err, values) => {
         if (!err) {
+          if(values.treatmentTypesId)
+            {
+              this.treatTypesId = values.treatmentTypesId.slice();
+            }
           let pat=''
           if(values.custom){
-            // console.log(values)
-            // debugger
             for(let i=1;i<= (values.length) - (values.prefix.length);i++){
               if(!isEmpty(values['input'+i])){
                 // alert('input')
@@ -134,6 +139,10 @@ export default {
       {
         this.organizationTypeAlias = MANUFACTURER_ALIAS
       }
+      else if(name === 'SmartLab')
+      {
+        this.organizationTypeAlias = SMARTLAB_ALIAS
+      }
     },
     upsert(values)
     {
@@ -151,6 +160,7 @@ export default {
       this.loading = true
       this.apiService.create(values)
       .then((response) =>{
+          ManufacturerTreatmentServices.create({organizationId: response.data.id, treatmentTypesId: this.treatTypesId})
         this.success(response.message)
       })
       this.getOrganization();

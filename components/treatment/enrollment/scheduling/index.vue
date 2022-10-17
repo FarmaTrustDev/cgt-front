@@ -2,10 +2,8 @@
   <div>
     <a-spin :spinning="loading">
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
-        <Detail v-if="isScheduled" :entity="entity" />
-        <span v-else>
-          <Form :form="form" :treatment="treatment" :rejection="rejection" />
-        </span>
+          <Form v-if="!isScheduled" :form="form" :treatment="treatment" :rejection="rejection" />
+        <Detail v-else  :entity="entity" />
       </a-form>
     </a-spin>
   </div>
@@ -40,6 +38,7 @@ export default {
       fetchIdFromParams: false,
       entity: {},
       isScheduled: false,
+      loading: false
     }
   },
   mounted() {
@@ -47,6 +46,7 @@ export default {
   },
   methods: {
     validateIsCreated() {
+      this.loading = true
       if (
         !isEmpty(this.treatment) &&
         this.treatment.id &&
@@ -56,6 +56,7 @@ export default {
       } else {
        // this.checkCreated()
       }
+      this.loading = false
     },
     afterFetch() {
       if (this.treatment.isSchedule) {

@@ -81,8 +81,7 @@
             type="email"
             :placeholder="translation.EmailAddre_2_140"
             :disabled="isCreated"
-            @focusout="validateEmail"
-          />{{ msg }} </a-form-item
+          /></a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
@@ -231,18 +230,18 @@
         <a-form-item>
         <a-radio-group 
             v-decorator="[
-              'organizationType',
+              'organizationTypeId',
               {
                 initialValue: entity.organizationTypeId,
                 rules: [
                   {
-                    required: true,
+                    required: false,
                     message: 'Please select organization type',
                   },
                 ],
               },
             ]"
-            @change="handleChange" >
+             >
             <a-radio v-for=" orgType in organizationTypes" :key="orgType.id" :value="orgType.id" @change="onChange(orgType)">
               {{orgType.name}}
             </a-radio>
@@ -254,13 +253,13 @@
         <a-form-item label="Entities">
           <a-select
           v-decorator="[
-              'organization',
+              'organizationId',
               {
                 initialValue: entity.organizationId,
                 rules: [
                   {
-                    required: true,
-                    message: 'Please select organization type',
+                    required: false,
+                    message: 'Please select organization',
                   },
                 ],
               },
@@ -271,10 +270,10 @@
               {{ org.name }}
             </a-select-option>
           </a-select>
-  </a-form-item>
+          </a-form-item>
         </a-col>
         <a-col :span="2"></a-col>
-      <a-col :span="10">
+      <!-- <a-col :span="10">
         <a-form-item
           label="Roles"
           :label-col="{ span: 24 }"
@@ -283,6 +282,55 @@
           <a-select
             v-decorator="[
               'role',
+              {
+                initialValue: entity.roleId,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your role',
+                  },
+                ],
+              },
+            ]"
+            :show-search="true"
+            :filter-option="filterOption"
+            :placeholder="translation.Roles_1_442"
+            style="width: 100%"
+            size="large"
+            class="default-select"
+            @search="searchCountries"
+          >
+            <a-select-option v-for="role in roles" :key="role.id">
+              {{ role.name }}
+            </a-select-option>
+          </a-select>
+          <a-input
+            v-decorator="[
+              'userRoleId',
+              {
+                initialValue:
+                  entity.userRoleId == undefined ? 0 : entity.userRoleId,
+                rules: [
+                  {
+                    required: false,
+                    message: 'Please input your role',
+                  },
+                ],
+              },
+            ]"
+            type="hidden"
+          />
+        </a-form-item>
+      </a-col> -->
+      <a-col :span="10">
+        <a-form-item
+          :label="translation.Roles_1_442 + '*:'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-select
+            v-decorator="[
+              'roleId',
               {
                 initialValue: entity.roleId,
                 rules: [
@@ -332,7 +380,7 @@
         >
           <a-select
             v-decorator="[
-              'role',
+              'roleId',
               {
                 initialValue: entity.roleId,
                 rules: [
@@ -543,14 +591,13 @@
 <script>
 import UserServices from '~/services/API/UserServices'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
-import { filterOption } from '~/services/Helpers'
+import { filterOption,isEmpty } from '~/services/Helpers'
 import CountryServices from '~/services/API/CountryServices'
 import RoleServices from '~/services/API/RoleServices'
 import Upload from '~/components/upload/profile'
 import { PICTURE_UPLOAD_EXTENSIONS } from '~/services/Constant'
 import MapServices from '~/services/API/MapServices'
 import nullHelper from '~/mixins/null-helpers'
-import { isEmpty } from '~/services/Helpers'
 import OrganizationTypeServices from '~/services/API/OrganizationTypeServices'
 import OrganizationServices from '~/services/API/OrganizationServices'
 export default {
@@ -591,7 +638,6 @@ export default {
       userData:[],
       countId:this.entity.countryId,
       email:'',
-      msg: '',
       organizationTypes:[],
       organization:[]
     }
@@ -605,19 +651,26 @@ export default {
     },
   },
   watch:{
-    msg(newMsg, oldMsg)
+    roles(newRoles, oldRoles)
     {
-      if(newMsg !== oldMsg)
+      if(newRoles !== oldRoles)
       {
-          this.msg = newMsg
+        this.roles = newRoles
       }
     },
+    entity(newValue, oldValue)
+    {
+      if(newValue !== oldValue)
+      {
+        this.getRolebyId(newValue.organizationTypeId)
+        this.getOrganizationByAlias(newValue.organizationTypeAlias)
+      }
+    }
   },
   mounted() {
     this.getRoles()
     this.fetchCountries()
     this.getOrganizationsType()
-    
   },
   updated() {
     if (this.isCreated && this.fetchCountry) {
@@ -632,13 +685,6 @@ export default {
     }
   },
   methods: {
-    validateEmail() {
-      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-        this.msg = ''
-      } else {
-        this.msg = 'Please enter a valid email'
-      }
-    },
     handleChange(info) {
       this.fileList = info
       this.$emit('handleChange', this.fileList)
@@ -683,8 +729,8 @@ export default {
       }
     },
     getRoles() {
-      if (this.isCreated) {
-        this.fetchRoles({ Ids: [this.entity.roleId] })
+      if (this.isCreated && this.users.name !== 'Super Admin') {
+          this.fetchRoles({ Ids: [this.entity.roleId] })
       } else {
         this.fetchRoles()
       }
@@ -710,17 +756,25 @@ export default {
         this.searchCountries(name,'b')
       })
     },
-    onChange(e)
+    getRolebyId(Id)
     {
-      const id = e.id
-      RoleServices.getRolesById(id).then((response)=>{
+      RoleServices.getRolesById(Id).then((response)=>{
         this.roles = response.data
       })
-       OrganizationServices.get({ organizationTypeAlias: e.alias })
+    },
+    getOrganizationByAlias(e)
+    {
+          OrganizationServices.get({ organizationTypeAlias: e })
         .then((response) => {
-          this.organization = response.data
-          })
-
+        this.organization = response.data
+        })
+    },
+    onChange(e)
+    {
+      
+      const id = e.id
+      this.getRolebyId(id);
+      this.getOrganizationByAlias(e.alias)
     }
   },
 }
