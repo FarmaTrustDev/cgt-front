@@ -34,7 +34,7 @@
             </dd>
             <dt>{{ translation.ContaNumbe_2_404 }}:</dt>
             <dd>
-              +44 4856484185
+              {{treatmentData.manufacturerContact}}
             </dd>
             <dt>{{ translation.Logis_1_146 }}:</dt>
             <dd>
@@ -46,7 +46,7 @@
             </dd>
             <dt>{{ translation.ContaNumbe_2_404 }}:</dt>
             <dd>
-              +44 1874987898
+              {{treatmentData.logisticContact}}
             </dd>
           </dl>
         </a-card>

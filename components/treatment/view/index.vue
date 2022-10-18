@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="default-card no-shadow">
+  <a-card :bordered="false" class="default-card">
     <a-alert
       v-if="treatment.isHold"
       :message="

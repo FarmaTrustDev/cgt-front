@@ -1,9 +1,8 @@
 <template>
   <a-skeleton :loading="loading">
     <Create
-      v-if="!isCreated"
+      v-if="!isCreated && !loading"
       :treatment="treatment"
-      :loading="loading"
       @getNextTab="getNextTab"
       @getTreatment="getTreatment"
     />
