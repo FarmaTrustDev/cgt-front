@@ -13,7 +13,7 @@
         <a-col :span="18">
           <a-card :bordered="false" class="default-card details-section">
             <article class="article">
-              <h4 class="heading pl-0">{{translation.PatieDetai_2_673}}</h4>
+              <h4 class="heading pl-0">{{ translation.PatieDetai_2_673 }}</h4>
             </article>
             <PatientDetails
               v-if="!isEmpty(treatment.patient)"
@@ -58,11 +58,11 @@ export default {
         'https://demoapi.qmaid.co/patient/8/treatment/qr/637765674125093892.png',
     }
   },
-  computed:{
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
-  },   
+  },
   methods: {
     isEmpty,
   },

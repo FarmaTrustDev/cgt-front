@@ -5,9 +5,9 @@
     :create="false"
   >
     <template slot="content">
-      <div class="grey-card">
+      <div class="grey-card treat-body">
         <detail :treatment="entity" @fetchTreatment="fetchMethod" />
-        <div class="grey-card treatment_tabs m-0 pt-0">
+        <div class="grey-card treatment_tabs m-0 pt-0" style="padding: 0">
           <TreatmentView
             v-if="!isEmpty(entity.patient) && entity.screeningStatus"
             :loading="loading"
