@@ -194,6 +194,13 @@
     }
   }
 }
+.ant-steps-small {
+.ant-steps-item-finish {
+  .ant-steps-item-content::before {
+    border: 3px solid #fff;
+  }
+}
+}
 //
 .notes-body {
   .ant-form-item-control {
