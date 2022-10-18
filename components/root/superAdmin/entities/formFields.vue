@@ -217,6 +217,7 @@
       ></a-col>
       <a-col  :span="24">
          <a-form-item
+         v-if="organizationName === 'Manufacturer'"
          label="Treatment Type"
          >
         <a-select

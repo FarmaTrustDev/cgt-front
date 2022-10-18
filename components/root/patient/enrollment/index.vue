@@ -39,6 +39,7 @@
             {{ translation['Scree_1_679'] }}
           </div>
           <screening
+            v-if="!loadingScreening"
             :treatment="treatment"
             :loading="loading"
             @getNextTab="getNextTab"
@@ -103,6 +104,7 @@ export default {
       loading: true,
       isScreeningDone: false,
       TREATMENT_PHASES,
+      loadingScreening: false,
     }
   },
   computed: {
@@ -179,7 +181,9 @@ export default {
         })
     },
     updateTreatment(treatment) {
+      this.loadingScreening = true
       this.treatment = treatment
+      this.loadingScreening = false
     },
     getTreatmentGlobalId(treatment) {
       this.treatment = treatment

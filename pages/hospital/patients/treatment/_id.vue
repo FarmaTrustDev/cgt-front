@@ -14,7 +14,7 @@
             :treatment="entity"
           />
           <a-card v-else class="text-center default-card p-0">
-            <h2 class="m-0">{{translation.Treattype_7_477}}</h2>
+            <h2 class="pb-5">{{translation.Treattype_7_477}}</h2>
           </a-card>
         </div>
       </div>

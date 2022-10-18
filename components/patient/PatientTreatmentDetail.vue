@@ -45,7 +45,7 @@
       <a-col :span="11" class="mt-15">
         <h6>
           <span class="text-muted">Phone No:&nbsp;</span>
-          <span>{{ patient.patient.phone }}</span>
+          <span>{{ patient.hospitalPhone }}</span>
         </h6>
       </a-col>
       <a-col :span="8" class="mt-15">
@@ -62,7 +62,7 @@
         <h6>
           <span class="text-muted">{{ translation.EmailAddre_2_140 }}:&nbsp;</span
           ><span style=" height: 40px">
-            {{ patient.patient.email }}</span
+            {{ patient.hospitalEmail }}</span
           >
         </h6>
       </a-col>
