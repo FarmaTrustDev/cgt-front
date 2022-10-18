@@ -6,7 +6,12 @@
       @getNextTab="getNextTab"
       @getTreatment="getTreatment"
     />
-    <CollectedList  v-else :loading="loading" :treatment-type-name ="treatmentTypeName" :categories="categories" />
+    <CollectedList
+      v-else
+      :loading="loading"
+      :treatment-type-name="treatmentTypeName"
+      :categories="categories"
+    />
   </a-skeleton>
 </template>
 <script>
@@ -14,6 +19,7 @@ import Create from '~/components/treatment/enrollment/screening/Create'
 import CollectedList from '~/components/treatment/enrollment/screening/CollectedList'
 import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
+import { isEmpty } from '~/services/Utilities'
 export default {
   components: { Create, CollectedList },
   props: {
@@ -29,17 +35,15 @@ export default {
       getTreatmentByParamId: [],
       treatmentParamId: {},
       loading: false,
-      treatmentTypeName: ''
+      treatmentTypeName: '',
     }
   },
-    watch:{
-    treatment(newData, oldData)
-    {
-      if(newData !== oldData)
-      {
+  watch: {
+    treatment(newData, oldData) {
+      if (newData !== oldData) {
         this.isScreeningCompleted()
       }
-    }
+    },
   },
   mounted() {
     this.isScreeningCompleted()
@@ -47,9 +51,13 @@ export default {
   methods: {
     isScreeningCompleted() {
       this.loading = true
+
       this.treatmentParamId = this.$route.query.treatment_id
-        this.fetch(this.treatmentParamId)
-        this.loading = false
+      if (isEmpty(this.treatmentParamId)) {
+        this.treatmentParamId = this.treatment.globalId
+      }
+      this.fetch(this.treatmentParamId)
+      this.loading = false
     },
     fetchTreatmentScreening(treatment) {
       ScreeningCategoryServices.getByTreatmentId(treatment.id)
@@ -58,7 +66,6 @@ export default {
           this.treatmentTypeName = this.categories[0].treatmentTypeName
         })
         .catch(this.error)
-        
     },
     getNextTab(data) {
       this.$emit('getNextTab', data)
@@ -66,20 +73,18 @@ export default {
     getTreatment(data) {
       this.$emit('getTreatment', data)
     },
-      fetch(treatmentId) {
+    fetch(treatmentId) {
       TreatmentServices.detail(treatmentId)
         .then((response) => {
           this.getTreatmentByParamId = response.data
-          if(this.getTreatmentByParamId.screeningStatus === true)
-          {
+          if (this.getTreatmentByParamId.screeningStatus === true) {
             this.isCreated = true
             this.fetchTreatmentScreening(this.getTreatmentByParamId)
           }
         })
         .catch(this.error)
-        .finally(() => {
-        })
-    }
-  },  
+        .finally(() => {})
+    },
+  },
 }
 </script>
