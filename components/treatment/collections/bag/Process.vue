@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="heading">Sample Shipping Details</h1>
     <a-form :form="form" layout="horizontal">
       <a-table
         :columns="columns"
