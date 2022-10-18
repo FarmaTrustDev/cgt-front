@@ -1,6 +1,17 @@
 <template>
   <a-card :bordered="false" class="default-card">
-    <a-alert
+    <div v-if="treatment.isHold" class="text-center">
+      <h2 class="pb-5">
+        The treatment is on pause state. At
+        {{
+          actionResult.createdAt !== null
+            ? getDateTime(actionResult.createdAt)
+            : 'N/A'
+        }}
+      </h2>
+      <h3>Reason : {{ actionResult.notes }}</h3>
+    </div>
+    <!-- <a-alert
       v-if="treatment.isHold"
       :message="
         'The treatment is on pause state.  At ' +
@@ -8,8 +19,19 @@
       "
       :description="'Reason: ' + actionResult.notes + ' '"
       type="success"
-    ></a-alert>
-    <a-alert
+    ></a-alert> -->
+    <div v-if="treatment.isCancel" class="text-center">
+      <h2 class="pb-5">
+        The treatment is cancel pause state. At
+        {{
+          actionResult.createdAt !== null
+            ? getDateTime(actionResult.createdAt)
+            : 'N/A'
+        }}
+      </h2>
+      <h3>Reason : {{ actionResult.notes }}</h3>
+    </div>
+    <!-- <a-alert
       v-if="treatment.isCancel"
       :message="
         'The treatment is on cancel state.  At ' +
@@ -17,25 +39,30 @@
       "
       :description="'Reason: ' + actionResult.notes + ' '"
       type="success"
-    ></a-alert>
-    <div v-if="!treatment.isSchedule && treatment.phaseId <3">
+    ></a-alert> -->
+    <div v-if="!treatment.isSchedule && treatment.phaseId < 3">
       <alert message="Treatment has not been scheduled yet." />
     </div>
-    <div v-else-if="treatment.isSchedule && treatment.phaseId <4">
-        <alert message="Manufacturer has not approved the treatment request yet." />
+    <div v-else-if="treatment.isSchedule && treatment.phaseId < 4">
+      <alert
+        message="Manufacturer has not approved the treatment request yet."
+      />
     </div>
-     <div v-else-if="!isEmpty(bags)">
-      <a-tabs :active-key="activeTab" type="card" @change="onTabChange" class="bags_section">
+    <div v-else-if="!isEmpty(bags)">
+      <a-tabs
+        :active-key="activeTab"
+        type="card"
+        class="bags_section"
+        @change="onTabChange"
+      >
         <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
-         <Steps
-            class="view-screen"
-            :bag="bag"
-            :treatment="treatment"
-          />
+          <Steps class="view-screen" :bag="bag" :treatment="treatment" />
         </a-tab-pane>
       </a-tabs>
-    </div> 
-    <alert v-else :message="translation.Creatsampl_7_489" />
+    </div>
+    <div v-else class="text-center">
+      <h2 class="pb-5">{{ translation.Creatsampl_7_489 }}</h2>
+    </div>
   </a-card>
 </template>
 <script>
@@ -47,9 +74,10 @@ import { isEmpty } from '~/services/Utilities'
 import alert from '~/components/alert'
 
 export default {
-  components: { 
-    Steps, 
-    alert },
+  components: {
+    Steps,
+    alert,
+  },
   props: {
     treatment: { required: true, type: Object },
     // bags: { required: true, type: Object },
@@ -90,6 +118,9 @@ export default {
           this.actionResult = response.data
         }
       )
+    },
+    getDateTime(date) {
+      return moment(date).format('do MMMM YYYY hh:mm')
     },
     isEmpty,
     onTabChange(bagId) {
