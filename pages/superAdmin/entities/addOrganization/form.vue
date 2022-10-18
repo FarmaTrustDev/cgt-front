@@ -171,6 +171,7 @@ export default {
       // const entityId = this.$route.params.id
       this.apiService.update(this.entityId,values)
       .then((response)=>{
+        ManufacturerTreatmentServices.create({organizationId: response.data.id, treatmentTypesId: this.treatTypesId})
         this.success(response.message)
       })
       this.getOrganization()

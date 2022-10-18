@@ -94,6 +94,7 @@
                 },
               ]"
               :placeholder='organizationName  +" User Name"'
+              :disabled="isCreated"
             /> </a-form-item
         ></a-col>
         <a-col :span="12">
@@ -142,9 +143,9 @@
             ]"
             type="email"
             :placeholder="translation.EmailAddre_2_140"
+            :disabled="isCreated"
           /> </a-form-item
       ></a-col>
-            <!-- :disabled="isCreated" -->
       <a-col :span="12">
         <a-form-item
           :label='organizationName + " Address*"'
