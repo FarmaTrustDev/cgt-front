@@ -74,7 +74,6 @@
             ]"
             type="email"
             :placeholder="translation.EmailAddre_2_140"
-            @focusout="validateEmail"
           />{{ msg }} </a-form-item
       ></a-col>
             
