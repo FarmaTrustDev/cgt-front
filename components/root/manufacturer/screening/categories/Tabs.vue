@@ -4,7 +4,8 @@
       <a-col :span="23">
       <a-list :grid="{ gutter: 16, column: 6}" :data-source="panes" >
         <a-list-item slot="renderItem"  slot-scope="item" class="cursor-pointer" @click="paneData(item)" >
-        <div> {{item.name}}</div>
+        <div v-if="!item.active" class="amended-category"> {{item.name}}</div>
+        <div v-else> {{item.name}}</div>
         <a slot="actions">
           <a-dropdown>
             <a-icon type="more" />
