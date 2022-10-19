@@ -139,10 +139,19 @@
 }
 .timebox {
   margin-bottom: 10px;
+  border: none !important;
   .ant-list-item {
     padding: 12px 0;
     padding-right: 15px;
     padding-left: 15px;
+    border: 1px solid gainsboro !important;
+    border-radius: 22px;
+    margin-bottom: 10px;
+    p {
+      margin: 0 !important;
+      padding: 6px;
+      color: rgb(112, 112, 112);
+    }
   }
   h4 {
     margin: 0;
