@@ -5,16 +5,16 @@
     :create="false"
   >
     <template slot="content">
-      <div class="grey-card">
+      <div class="grey-card treat-body">
         <detail :treatment="entity" @fetchTreatment="fetchMethod" />
-        <div class="grey-card treatment_tabs m-0 pt-0">
+        <div class="grey-card treatment_tabs m-0 pt-0" style="padding: 0">
           <TreatmentView
             v-if="!isEmpty(entity.patient) && entity.screeningStatus"
             :loading="loading"
             :treatment="entity"
           />
           <a-card v-else class="text-center default-card p-0">
-            <h2 class="m-0">{{translation.Treattype_7_477}}</h2>
+            <h2 class="pb-5">{{translation.Treattype_7_477}}</h2>
           </a-card>
         </div>
       </div>

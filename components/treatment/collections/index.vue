@@ -1,11 +1,16 @@
 <template>
   <a-skeleton :loading="loading">
     <div v-if="enabled">
+      <h1 class="heading" style="display: inline-block">
+       <b> Sample Shipping Details</b>
+      </h1>
       <FormActionButton
         v-if="!treatment.hospitalCollectionStatus"
         text="Add Sample"
         @click="addBags"
+        style="float: right;"
       />
+
       <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBags" />
 
       <a-button

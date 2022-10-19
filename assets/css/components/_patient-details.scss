@@ -85,7 +85,7 @@
 .btn-send-mail {
   height: fit-content;
   span {
-    padding: 5px 0;
+    padding: 8px 2px;
     font-size: 13px;
   }
 }
@@ -126,6 +126,11 @@
   }
 }
 .treatment_tabs {
+  .default-card.no-shadow >
+    .ant-card-body {
+      padding-top: 0;
+    
+  }
   .no-shadow {
     padding-right: 0;
     padding-left: 0;
