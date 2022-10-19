@@ -94,6 +94,7 @@
                 },
               ]"
               :placeholder='organizationName  +" User Name"'
+              :disabled="isCreated"
             /> </a-form-item
         ></a-col>
         <a-col :span="12">
@@ -142,9 +143,9 @@
             ]"
             type="email"
             :placeholder="translation.EmailAddre_2_140"
+            :disabled="isCreated"
           /> </a-form-item
       ></a-col>
-            <!-- :disabled="isCreated" -->
       <a-col :span="12">
         <a-form-item
           :label='organizationName + " Address*"'
@@ -217,6 +218,7 @@
       ></a-col>
       <a-col  :span="24">
          <a-form-item
+         v-if="organizationName === 'Manufacturer'"
          label="Treatment Type"
          >
         <a-select
@@ -282,7 +284,7 @@
       </a-col>
       <a-col :span="1">
         <a-form-item>
-          <a-checkbox v-decorator="[`custom`]" @change="getCustom($event)" />
+          <a-checkbox v-decorator="[`custom`, {initialValue:false}]" @change="getCustom($event)" />
         </a-form-item>
       </a-col>
       <a-col :span="22">

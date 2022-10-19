@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="heading">Sample Shipping Details</h1>
     <a-form :form="form" layout="horizontal">
       <a-table
         :columns="columns"
@@ -104,6 +103,7 @@ import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
 import InstantUpload from '~/components/upload/InstantUpload'
+
 export default {
   components: { Email, InstantUpload },
   mixins: [notifications],
@@ -114,6 +114,7 @@ export default {
   },
   data() {
     return {
+      
       columns: [
         {
           title: `${this.$store.getters.getTranslation.Detai_1_346}`,

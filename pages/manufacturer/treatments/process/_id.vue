@@ -18,7 +18,7 @@
             >
               <span class="step-col-large">
                 <a-steps
-                  size="small"
+                  
                   :initial="1"
                   :current="currentPhase"
                   @change="onChangeSteps"

@@ -88,7 +88,7 @@ export default {
       }
     },
     fetchAfterCare(id) {
-      AfterCareServices.getByTreatment(id).then((response) => {
+      AfterCareServices.getById(id).then((response) => {
         const entity = response.data
         if (!isEmpty(entity)) {
           this.entity = entity
