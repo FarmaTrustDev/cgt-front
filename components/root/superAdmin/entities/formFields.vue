@@ -282,7 +282,7 @@
       </a-col>
       <a-col :span="1">
         <a-form-item>
-          <a-checkbox v-decorator="[`custom`]" @change="getCustom($event)" />
+          <a-checkbox v-decorator="[`custom`, {initialValue:false}]" @change="getCustom($event)" />
         </a-form-item>
       </a-col>
       <a-col :span="22">

@@ -77,6 +77,7 @@
 import PatientsChart from '~/components/root/home/PatientsChart'
 import TreatmentTypeServices from '~/services/API/TreatmentTypeServices'
 import StatisticsServices from '~/services/API/StatisticsServices'
+import { isEmpty } from '~/services/Helpers'
 export default {
   components: { PatientsChart },
   data() {
@@ -188,7 +189,9 @@ export default {
           this.treatmentTypes = response.data
         })
         .then(() => {
-          this.fetchTreatmentStats(this.treatmentTypes[0].id)
+          if(!isEmpty(this.treatmentTypes[0])){
+            this.fetchTreatmentStats(this.treatmentTypes[0].id)
+          }
         })
     },
   },
