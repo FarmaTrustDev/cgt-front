@@ -50,10 +50,8 @@
                   initialValue: row.id,
                 },
               ]"
-              disabled
+              type="hidden"
             />
-            <!-- type="hidden" -->
-
           </a-form-item>
         </template>
 
