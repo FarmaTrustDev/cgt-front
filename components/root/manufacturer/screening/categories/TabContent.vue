@@ -24,7 +24,7 @@
             <a-icon type="more" />
             <a-menu slot="overlay">
               <a-menu-item key="1">
-                <a-icon type="edit" />{{ translation.Edit_1_450 }}
+                <a-icon type="edit" @click ="edit(item.id)" />{{ translation.Edit_1_450 }}
               </a-menu-item>
               <a-menu-item key="2">
                 <!-- <a-popconfirm
@@ -86,6 +86,7 @@
       @cancel="handleCategoryModal(false)"
     >
       <Form
+        :category-id="categoryId"
         :category="category"
         @close="handleCategoryModal"
         @upsert="handleUpsert"
@@ -120,7 +121,8 @@ export default {
       data,
       visibleDeleteModal: false,
       showScreeningModal: false,
-      deleteStep:''
+      deleteStep:'',
+      categoryId : null
     }
   },
   computed: {
@@ -172,6 +174,11 @@ export default {
         this.goto('/manufacturer/administration/screening')
       })
       // alert(name)
+    },
+    edit(key)
+    {
+      this.categoryId = key
+      this.handleCategoryModal(true)
     },
   },
 }

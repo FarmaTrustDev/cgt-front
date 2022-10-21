@@ -12,7 +12,7 @@ function get(params = {}) {
 
 function getById(id) {
   return request({
-    url: `${baseApi}/${id}`,
+    url: `${baseApi}/getById/${id}`,
   })
 }
 

@@ -75,7 +75,30 @@
         <a-row :gutter="16">
           <a-col :span="12">
             <a-form-item :label="translation.SamplColle_3_518" class="pb-0">
-              <a-input
+            <a-date-picker
+              v-decorator="[
+                'collectionDate',
+                {
+                  initialValue:collectionDate,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please select your delivery arrival date',
+                    },
+                  ],
+                },
+              ]"
+              :format="dateFormat"
+              :disabled-date="disabledDate"
+              style="width: 100%"
+              size="large"
+              @change="collectionDateChange"
+            >
+            </a-date-picker> </a-form-item
+        ></a-col>
+        <a-col :span="12">
+          <a-form-item label="Expected Delivery Date" class="pb-0">
+                        <a-input
                 v-decorator="[
                   `treatmentId`,
                   {
@@ -84,7 +107,6 @@
                 ]"
                 type="hidden"
               />
-
             <a-input
               v-decorator="[
                 `hospitalId`,
@@ -105,41 +127,17 @@
             />
             <a-date-picker
               v-decorator="[
-                'collectionDate',
-                {
-                  initialValue:collectionDate,
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please select your Delivery Arrival Date!',
-                    },
-                  ],
-                },
-              ]"
-              :format="dateFormat"
-              :disabled-date="disabledDate"
-              style="width: 100%"
-              size="large"
-              @change="collectionDateChange"
-            >
-            </a-date-picker> </a-form-item
-        ></a-col>
-        <a-col :span="12">
-          <a-form-item label="Expected Delivery Date" class="pb-0">
-            <a-date-picker
-              v-decorator="[
                 'deliveryDate',
                 {
                   initialValue:deliveryDate,
                   rules: [
                     {
                       required: true,
-                      message: 'Please select your expected delivery Date!',
+                      message: 'Please select your expected delivery date',
                     },
                   ],
                 },
               ]"
-              :disabled-date="disabledDate"
               :format="dateFormat"
               style="width: 100%"
               size="large"
@@ -255,6 +253,7 @@ export default {
             .catch(this.error)
         }
       })
+      this.loading = false
     },
     getRejectionDetail(data){
       if(!isEmpty(data))
@@ -269,7 +268,6 @@ export default {
       SchedulingServices.getDetailByTreatmentOut(this.treatment.id)
         .then((response) => {
           this.schedule = response.data
-          console.log(this.schedule.logisticId)
           if (this.schedule.logisticName != null) {
             this.showData = true
             this.logisticId = this.schedule.logisticId

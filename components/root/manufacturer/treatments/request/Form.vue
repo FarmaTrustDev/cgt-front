@@ -89,16 +89,17 @@ export default {
       productionLines: [],
     }
   },
+    computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
+    },
   mounted() {
     this.fetchProductionLine()
   },
-  computed: {
-    translation() {
-      return this.$store.getters.getTranslation
-    },
-  },
   methods: {
     fetchProductionLine() {
+      console.log(this.data)
       ProductionLineServices.get().then((productionLine) => {
         this.productionLines = productionLine.data
       })
