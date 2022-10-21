@@ -60,7 +60,12 @@
 
     <span v-if="isCreated">
       <a-divider>{{translation.AssocScree_2_489}}</a-divider>
-
+      <a-alert
+        v-if="!active || !activeCategry"
+        type="warning"
+        class="mb-5"
+        message="The screening question has been amended and ready to be submitted"
+      />
       <CategoryTabs v-if="entity.id" @getScreenTempStatusTab="getScreenTempStatus" :template-id="entity.id"/>
       <a-col :span="12" v-if="!active" class="mt-15">
        <a-form-item> 
@@ -109,6 +114,7 @@ export default {
       apiService: ScreeningTemplateServices,
       gotoLink: '/manufacturer/administration/screening',
       active:false,
+      activeCategry:false,
       fetchStatus:true,
       checked:false,
     }
@@ -172,7 +178,7 @@ export default {
       this.loading = true
       ScreeningTemplateServices.getScreeningCategoryStatus(id)
         .then((response) => {
-          this.active = response.data
+          this.activeCategry = response.data
         })
         .finally(() => {
           this.loading = false

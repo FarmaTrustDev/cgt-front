@@ -17,8 +17,8 @@
       :data-source="data"
       class="admin-screenging-questions"
     >
-      <a-list-item slot="renderItem" slot-scope="item">
-        {{ item.name }}
+      <a-list-item slot="renderItem" slot-scope="item" :class="!item.active ? 'amended-category' : ''">
+        <div>{{ item.name }}</div>
         <a slot="actions">
           <a-dropdown>
             <a-icon type="more" />

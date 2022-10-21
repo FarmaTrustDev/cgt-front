@@ -160,7 +160,13 @@ $defaultHeight: calc(100vh - 100px);
   }
 }
 // 
+.treatment-process.mt-15 {
+  .ant-tabs-nav.ant-tabs-nav-animated {
+    width: 95%;
+  }
+}
 .treatment-process {
+ 
   .ant-tabs-left-bar {
     .ant-tabs-tab {
       border: 0 !important;
