@@ -113,12 +113,18 @@ export default {
         this.phases[0].name=newValues.InbouAccep_3_834
         this.phases[1].name=newValues.Manuf_1_342
         this.phases[2].name=newValues.OutboShipm_2_376
+        
+        this.column[0].title=newValues.PatieID_2_264
+        this.column[1].title=newValues.TreatType_2_67
+        this.column[2].title=newValues.Organ_1_166
+        this.column[3].title=newValues['Colle-_4_268']
       }
     }
   },    
   mounted() {
     // this.fetch()
   },
+
   methods: {
     customRowReDirect(record) {
       return {

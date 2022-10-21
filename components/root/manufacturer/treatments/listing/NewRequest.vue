@@ -142,7 +142,7 @@ export default {
           key: 'collectionDateDeliveryDate',
         },
         {
-          title: `Status`,
+          title: `${this.$store.getters.getTranslation.Statu_1_202}`,
           dataIndex: 'status',
           scopedSlots: {
             customRender: 'status',
@@ -184,6 +184,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.PatieID_2_264
+        this.column[1].title=newValues.TreatType_2_67
+        this.column[2].title=newValues.Organ_1_166
+        this.column[3].title=newValues['Colle-_4_268']
+        this.column[4].title=newValues.Statu_1_202
+        this.column[5].title=newValues.Actio_1_220
+      }
+    }
+  }, 
   methods: {
     showConfirm(record, isAccepted) {
       this.isAccepted = isAccepted
