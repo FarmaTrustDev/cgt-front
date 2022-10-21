@@ -1,5 +1,15 @@
 <template>
   <div>
+    <a-card v-if="!isEmpty(scheduling)" :bordered="false" class="logistic-pick-detail mb-25 no-shadow" >
+      <div class="card-head grey-card border">
+      <th>QrUrl</th>
+      <th>Puid</th>
+    </div>
+      <tr v-for="(bag, index) in scheduling.treatmentBag" :key="index" class="header-body grey-card border mt-5">
+        <td><img :src="getImageUrl(bag.qrUrl)" width="65px" /></td>
+        <td>{{bag.puid}}</td>
+      </tr>
+    </a-card>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <a-row>
         <a-col :span="12">
@@ -108,8 +118,10 @@ import {
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import ShipmentServices from '~/services/API/ShipmentServices'
 import notifications from '~/mixins/notifications'
+import imagesHelper from '~/mixins/images-helper'
+import { isEmpty } from '~/services/Utilities'
 export default {
-  mixins: [notifications],
+  mixins: [notifications, imagesHelper],
   props: {
     scheduling: {
       default: () => {},
@@ -132,7 +144,14 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  mounted(){
+    if(!isEmpty(this.scheduling))
+    {
+      console.log('scheduling data of form',this.scheduling)
+    }
+  },
   methods: {
+    isEmpty,
     disabledDate: _disabledPreviousDate,
     onSubmit(e) {
       e.preventDefault()
