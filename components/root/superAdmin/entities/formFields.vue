@@ -11,7 +11,7 @@
           >
             <Upload
               v-decorator="[
-                'imageUrl',
+                'profileImageUrl',
                 {
                   initialValue: entity.profileImageUrl,
                   rules: [

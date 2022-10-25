@@ -111,11 +111,24 @@ export default {
       smartLabCountData:[{id: '1',img:'Icons/flags/1x1/us.svg', name:'United States', count:5},{id: '2',img:'Icons/flags/1x1/de.svg', name:'Germany', count:3},{id: '4',img:'Icons/flags/1x1/gb.svg', name:'United Kingdom', count:2}],
       countriesData: [
         {
+          count: 26,
+          id: 3,
+          name: 'United kingdom',
+          img: 'web/flags/uk.png'
+        },
+        {
+          count: 25,
+          id: 2,
+          name: 'USA',
+          img: 'web/flags/us.png'
+        },
+        {
           count: 24,
           id: 1,
           name: 'Germany',
-          img: 'web/flags/de.svg',
+          img: 'web/flags/de.png',
         },
+        
       ],
     }
   },

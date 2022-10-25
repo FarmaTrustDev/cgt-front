@@ -222,7 +222,7 @@ export default {
           // console.log(response)
           this.success(response.message)
           this.fetch()
-          this.$router.push({ path: '/users' })
+          this.$router.push({ path: '/superAdmin/users' })
         })
         .finally(() => (this.loading = false))
     },
