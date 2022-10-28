@@ -47,7 +47,18 @@
         <!-- Header Logo -->
         <div class="org-title">
           <div class="login-logo-x">
+            <img 
+              v-if="user.organizationProfileImage"
+              :src="getImageUrl(logo)" 
+              width="20px"
+              logo
+              hendling
+              for
+              temp
+              class="logo"
+            >
             <img
+              v-else
               src="https://demoapi.qmaid.co/Logos/2020_10_22.14_48_51.jpg"
               width="20px"
               logo
@@ -86,7 +97,7 @@ import TranslationServices from '~/services/API/TranslationServices'
 import translationHelpers from '~/mixins/translation-helpers'
 import ChatServices from '~/services/API/ChatServices'
 import { BASE_URL } from '~/services/Constant/index'
-
+import imagesHelper from '~/mixins/images-helper'
 import routeHelpers from '~/mixins/route-helpers'
 const connection = new HubConnectionBuilder()
   .withUrl(`${BASE_URL}NotificationUserHub`)
@@ -96,7 +107,7 @@ connection.start()
 
 export default {
   name: 'Header',
-  mixins: [translationHelpers, routeHelpers],
+  mixins: [translationHelpers, routeHelpers, imagesHelper],
   data() {
     return {
       languages: [
@@ -109,6 +120,7 @@ export default {
       lang: null,
       notificationCount: 0,
       notifications: [],
+      logo: ''
     }
   },
   async fetch() {
@@ -129,6 +141,7 @@ export default {
     this.notificationHandler()
     this.genericNotificationHandler()
     this.fetchUnreadMessages()
+    this.checkImage()
     // this.uploadTranslations()
     // this.downloadTranslations()
   },
@@ -197,6 +210,14 @@ export default {
           this.goto(`/chat`)
         })
     },
+    checkImage()
+      {
+        if(!isEmpty(this.user.organizationProfileImage))
+        {
+          this.logo = this.user.organizationProfileImage.replace(/['"]+/g, '')
+          
+        }
+      }
   },
 }
 </script>

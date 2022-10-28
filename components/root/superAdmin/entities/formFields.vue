@@ -52,7 +52,7 @@
               :placeholder='organizationName  +" Name"'
             /> </a-form-item
         ></a-col>
-        <a-col :span="12">
+        <!-- <a-col :span="12">
           <a-form-item
             :label='organizationName + " Alias*"'
             :label-col="{ span: 24 }"
@@ -96,7 +96,7 @@
               :placeholder='organizationName  +" User Name"'
               :disabled="isCreated"
             /> </a-form-item
-        ></a-col>
+        ></a-col> -->
         <a-col :span="12">
           <a-form-item
             :label="translation.ContaNumbe_2_430"

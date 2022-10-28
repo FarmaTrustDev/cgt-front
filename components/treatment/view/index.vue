@@ -11,15 +11,6 @@
       </h2>
       <h3>Reason : {{ actionResult.notes }}</h3>
     </div>
-    <!-- <a-alert
-      v-if="treatment.isHold"
-      :message="
-        'The treatment is on pause state.  At ' +
-        moment(actionResult.createdAt).format('do MMMM YYYY hh:mm')
-      "
-      :description="'Reason: ' + actionResult.notes + ' '"
-      type="success"
-    ></a-alert> -->
     <div v-if="treatment.isCancel" class="text-center">
       <h2 class="pb-5">
         The treatment is cancel pause state. At
@@ -31,15 +22,6 @@
       </h2>
       <h3>Reason : {{ actionResult.notes }}</h3>
     </div>
-    <!-- <a-alert
-      v-if="treatment.isCancel"
-      :message="
-        'The treatment is on cancel state.  At ' +
-        moment(actionResult.createdAt).format('do MMMM YYYY hh:mm')
-      "
-      :description="'Reason: ' + actionResult.notes + ' '"
-      type="success"
-    ></a-alert> -->
     <div v-if="!treatment.isSchedule && treatment.phaseId < 3">
       <alert message="Treatment has not been scheduled yet." />
     </div>
@@ -56,7 +38,7 @@
         @change="onTabChange"
       >
         <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
-          <Steps class="view-screen" :bag="bag" :treatment="treatment" />
+          <Steps class="view-screen" :bag="bag" :treatment="treatment" :loading="loading" />
         </a-tab-pane>
       </a-tabs>
     </div>
@@ -89,6 +71,7 @@ export default {
       showCompleteBag: true,
       bags: null,
       actionResult: {},
+      loading:false
     }
   },
   computed: {
@@ -102,6 +85,7 @@ export default {
   },
   methods: {
     fetchBags() {
+      this.loading = true
       TreatmentBagServices.get({ treatmentId: this.treatment.id }).then(
         (bags) => {
           this.bags = bags.data
@@ -111,6 +95,7 @@ export default {
           }
         }
       )
+      this.loading = false
     },
     getTreatmentAction() {
       TreatmentLogServices.GetLastActionByTreatmentId(this.treatment.id).then(

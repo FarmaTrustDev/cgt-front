@@ -23,7 +23,7 @@
               v-decorator="[
                 'senderName',
                 {
-                  rules: [{ required: true, message: 'Required' }],
+                  rules: [{ required: true, message: 'Please input handled by' }],
                 },
               ]"
               placeholder="Handled by"
@@ -41,7 +41,7 @@
                 'LogisticUserName',
                 {
                   rules: [
-                    { required: true, message: 'Please input Collected by!' },
+                    { required: true, message: 'Please input collected by' },
                   ],
                 },
               ]"
@@ -62,7 +62,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please select your Pickup Date!',
+                      message: 'Please select your pickup date',
                     },
                   ],
                 },
@@ -89,7 +89,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input Pickup location!',
+                      message: 'Please input pickup location',
                     },
                   ],
                 },
