@@ -45,11 +45,15 @@
         </footer>
       </center>
     </a-modal>
+    <a-modal :visible="visiblePatientDetailModal" ok-text="Confirm" width="800px" @cancel="submitModalResponse(false)" @ok="submitModalResponse(true)" >
+      <PatientDetail :patient-detail="patientDetail" />
+    </a-modal>
     <!-- </a-spin> -->
   </div>
 </template>
 <script>
 import FormFields from '~/components/patient/enrollment/FormFields'
+import PatientDetail from '~/components/patient/enrollment/PatientDetail'
 import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
@@ -57,7 +61,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import imagesHelper from '~/mixins/images-helper'
 export default {
-  components: { FormFields },
+  components: { FormFields, PatientDetail },
   mixins: [notifications, routeHelpers, nullHelper, imagesHelper],
   data() {
     return {
@@ -72,6 +76,8 @@ export default {
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }),
+      patientDetail: {},
+      visiblePatientDetailModal: false
     }
   },
   computed: {
@@ -108,12 +114,26 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.upsert(values)
+          this.patientDetail = values
+          this.visibleDetialModal(true)
+          // this.upsert(values)
         } else {
           this.visibleModal = true
           this.loading = false
         }
       })
+    },
+    submitModalResponse(e)
+    {
+      if(e === true)
+      {
+        this.upsert(this.patientDetail)
+        this.visiblePatientDetailModal = false
+      }
+      else{
+        this.loading = false
+        this.visibleDetialModal(e)
+      }
     },
     handleOk() {
       this.visibleModal = false
@@ -161,6 +181,10 @@ export default {
     },
     sendData(data) {
       this.$emit('getTreatment', data)
+    },
+    visibleDetialModal(e)
+    {
+      this.visiblePatientDetailModal = e
     },
   },
 }

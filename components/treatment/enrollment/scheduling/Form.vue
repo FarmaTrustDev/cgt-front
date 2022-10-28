@@ -7,7 +7,7 @@
           data.organization +
           '. Re-schedule the treatment from available slots below.'
         "
-        :description="getRejectionDetail(data.rejectionReason)"
+        :description="getRejectionDetail(data.rejectionReason) + '. At ' + moment(data.rejectionDate).format('DD/MM/YYYY')"
         type="success"
       />
     </div>
@@ -44,7 +44,7 @@
             height="40%"
           /> -->
         </p>
-        <h3>Please Select Today/Future Date</h3>
+        <h3>Treatment slot with past dates cannot be scheduled</h3>
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"
@@ -95,6 +95,7 @@ export default {
       entity: {},
       events: [],
       manufacturerTreatment: {},
+      moment,
     }
   },
   computed: {
