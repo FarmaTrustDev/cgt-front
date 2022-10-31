@@ -10,7 +10,7 @@
         v-for="phase in phases"
         :key="phase.phaseId"
         :title="phase.name"
-        :class="phase.name"
+        :class="getClass(phase, treatment)"
         @click="(a) => emitGotoView(patient, treatment, phase)"
       >
       </a-step>
@@ -30,6 +30,19 @@ export default {
     return { current: 0 }
   },
   methods: {
+    getClass(phase, treatment) {
+      let className = phase.name
+
+      if (
+        phase.phaseId === 4 &&
+        treatment.phaseId === 3 &&
+        treatment.manufacturerRequestStatus
+      ) {
+        className = className + ' ' + 'rejected'
+      }
+
+      return className
+    },
     getCurrentStep(treatment) {
       this.current = this.currentStep(treatment)
       return this.current

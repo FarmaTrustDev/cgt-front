@@ -262,6 +262,17 @@
       }
     }
   }
+
+  .rejected {
+    background: #ffd8d8 !important;
+    .ant-steps-item-content {
+      &::before {
+        content: '';
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+        background-repeat: no-repeat;
+      }
+    }
+  }
   .cancel {
     .ant-steps-item {
       background: #ffd8d8;
