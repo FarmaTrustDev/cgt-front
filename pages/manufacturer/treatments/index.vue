@@ -13,27 +13,28 @@
           selection-tab
         "
         :placeholder="translation.TreatType_2_67"
+        @change="onChange"
       >
         <a-select-option
           v-for="treatmentType in treatmentTypes"
-          :key="treatmentType.id"
+          :key="treatmentType.id" :value="treatmentType.name"
           >{{ treatmentType.name }}</a-select-option
         >
       </a-select>
     </div>
     <div class="h-tabs large-tabs rounded-table manf-treatment-body treatment-list-body">
       <a-tabs type="card" :animated="false">
-        <a-tab-pane key="1" :tab="translation.NewTreat_2_260">
-          <new-request />
+        <a-tab-pane key="1"  :tab="translation.NewTreat_2_260">
+          <new-request :search-by-type="searchByType" />
         </a-tab-pane>
-        <a-tab-pane key="2" :tab="translation.PendiTreat_2_300">
-          <in-progress />
+        <a-tab-pane key="2"  :tab="translation.PendiTreat_2_300">
+          <in-progress :search-by-type="searchByType" />
         </a-tab-pane>
         <a-tab-pane key="3" :tab="translation['Compltreat_2_394']"
-          ><completed
+          ><completed :search-by-type="searchByType"
         /></a-tab-pane>
         <a-tab-pane key="4" :tab="translation['AllTreat_2_826']">
-          <all
+          <all :search-by-type="searchByType"
         /></a-tab-pane>
       </a-tabs>
     </div>
@@ -58,11 +59,21 @@ export default {
       loading: false,
       treatmentTypes: [],
       typeLoading: false,
+      searchByType: ''
     }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+  },
+  watch:{
+    searchByType(newValue, oldValue)
+    {
+      if(newValue !== oldValue)
+      {
+        this.searchByType = newValue
+      }
     },
   },
   mounted() {
@@ -78,6 +89,10 @@ export default {
         })
         .finally(() => (this.typeLoading = false))
     },
+    onChange(e)
+    {
+      this.searchByType = e
+    }
   },
 }
 </script>

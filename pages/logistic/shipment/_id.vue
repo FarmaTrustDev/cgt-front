@@ -41,7 +41,6 @@
                 {{ translation.DelivShipm_2_863 }}
               </div>
               <delivery
-                
                 v-if="isEmpty(deliveryShipment)"
                 :shipment="deliveryShipment"
                 :scheduling="entity"

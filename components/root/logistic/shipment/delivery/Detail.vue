@@ -5,7 +5,7 @@
     </article>
     <a-card :bordered="false" class="default-card grey-card ship-cards-body">
         <dl class="ant-row common-detail">
-          <h2>Shipping Details</h2>
+          <h2 class="heading">Shipping Details</h2>
           <div class="ant-col-24 d-flex">
             <dt>Dispatch Date:</dt>
             <dd>{{getDateFormat(scheduling.pickupDateTime)}}</dd>
@@ -21,7 +21,7 @@
           </div>
         </dl>
       <dl class="ant-row common-detail">
-        <h2>Treatment Receive</h2>
+        <h2 class="heading">Treatment Receive</h2>
         <div class="ant-col-24 d-flex">
           <dt>{{ translation.IsRecei_2_328 }}</dt>
           <dd class="text-success">
@@ -90,10 +90,20 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
+div.d-flex {
+  line-height: 1.7rem;
+}
+.d-flex > dt {
+  font-weight: 700 !important;
+}
+.d-flex > dd{
+  color: #000 ;
+}
 .grey-card > .ant-card-body > .common-detail {
   background-color: #fff;
   border-radius: 20px;
-  padding: 10px;
+  padding: 13px;
+  padding-bottom: 25px !important;
   width: 47.7%;
   margin: auto;
   margin-top: 0 !important;

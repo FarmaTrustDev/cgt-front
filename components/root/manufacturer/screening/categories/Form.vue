@@ -72,6 +72,7 @@ export default {
       this.loading = true
       ScreeningCategoryServices.getById(this.categoryId)
         .then((response) => {
+          debugger
           this.entity = response.data
           this.entityId = this.entity.globalId
         })

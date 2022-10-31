@@ -270,7 +270,7 @@ a {
   width: 1px;
   height: 20px;
   border: 0.3px solid #e9e9e9;
-  margin: 0 5px;
+  margin: 6px 5px 0 0;
 
   // why do this why so many sci ? @naveed discuss with me
   // position: absolute;
@@ -464,7 +464,6 @@ a {
       padding: 0;
     }
     .ant-tabs-nav {
-     
       .ant-tabs-tab {
         margin-right: 7px !important;
         width: 32.5%;
@@ -584,6 +583,7 @@ a {
 .bags_section > .ant-tabs-bar.ant-tabs-top-bar.ant-tabs-card-bar {
   margin: 25px;
   margin-bottom: 16px;
+  margin-top: 0;
 }
 
 //
@@ -716,27 +716,26 @@ a {
 .center-container {
   max-width: 1200px;
   margin: auto;
-  
 }
 
-.side-menu::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+.side-menu::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-
-
-.side-menu::-webkit-scrollbar-thumb
-{
-	background-color: #969696;
+.side-menu::-webkit-scrollbar-thumb {
+  background-color: #969696;
 }
-.side-menu::-webkit-scrollbar
-{
-	width: 3.5px;
-	background-color: #F5F5F5;
+.side-menu::-webkit-scrollbar {
+  width: 3.5px;
+  background-color: #f5f5f5;
 }
 
-.sidebar:hover { ul.side-menu::-webkit-scrollbar {
- width: 5px;
-}}
+.sidebar:hover {
+  ul.side-menu::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+.sample-shipping-detail > div > div.ant-tabs {
+  width: 100%;
+}

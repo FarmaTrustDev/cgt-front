@@ -70,13 +70,13 @@
   }
 }
 .btn-send {
-  height: 32px;
+  height: 35px;
   background: #ececec;
   border: gray;
   color: gray;
   &:hover {
     color: #000;
-    background-color: #c1c1c1;
+    background-color: #d5d5d5;
   }
 }
 .btn-send.ant-btn[disabled] {

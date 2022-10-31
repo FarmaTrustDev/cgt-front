@@ -16,7 +16,7 @@
       </article>
       <div class="grey-card d-flex">
         <dl class="ant-row common-detail">
-          <h2>External Entities</h2>
+          <h2 class="heading">External Entities</h2>
           <div class="ant-col-24 d-flex">
             <dt>{{ translation.LogisProvi_2_380 }}</dt>
             <dd>{{ scheduling.logisticName }}</dd>
@@ -37,7 +37,7 @@
         </dl>
 
         <dl class="ant-row common-detail">
-          <h2>Pickup Details</h2>
+          <h2 class="heading">Pickup Details</h2>
 
           <div class="ant-col-24 d-flex">
             <dt>{{ translation['Handlby:_2_384'] }}</dt>
@@ -50,7 +50,7 @@
           <div class="ant-col-24 d-flex">
             <dt>Pickup At:</dt>
             <dd>
-              {{ moment(String(shipment.pickupAt)).format('dddd DD MM YYYY hh:mm') }}
+              {{ moment(String(shipment.pickupAt)).format('DD/MM/YYYY hh:mm') }}
             </dd>
           </div>
           <div class="ant-col-24 d-flex">
@@ -97,7 +97,7 @@ export default {
     getMomentByStandardFormat,
     isEmpty,
     getDateFormat(date) {
-      return moment(String(date)).format('dddd DD MM YYYY')
+      return moment(String(date)).format('DD/MM/YYYY')
     },
     getUrl(url)
     {
@@ -114,10 +114,20 @@ export default {
   align-items: baseline;
   justify-content: space-between;
 }
+div.d-flex {
+  line-height: 1.7rem;
+}
+.d-flex > dt {
+  font-weight: 700 !important;
+}
+.d-flex > dd{
+  color: #000 ;
+}
 .grey-card > .common-detail {
   background-color: #fff;
   width: 47.7%;
-  padding: 10px;
+  padding: 13px;
+  padding-bottom: 25px;
   margin: auto;
   border-radius: 20px;
   margin-top: 0 !important;

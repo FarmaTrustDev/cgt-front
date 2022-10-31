@@ -6,9 +6,9 @@
       :title="translation.AddNew_3_182"
       :destroy-on-close="true"
       :visible="visible"
+      :dialog-style="{ top: '20px' }"
       @cancel="showModal(false)"
       @ok="showModal(false)"
-      style="margin-top: 3px"
     >
       <a-form :form="form" @submit="onSubmit">
         <a-row :gutter="20">
@@ -195,7 +195,7 @@
 
         <a-row :gutter="20">
           <a-col :span="12">
-            <a-form-item>
+            <a-form-item label="Status">
               <a-select
                 v-decorator="[
                   'status_Id',
@@ -242,7 +242,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item>
+            <a-form-item label="Priority">
               <a-select
                 v-decorator="[
                   'priority',
@@ -272,9 +272,9 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <a-row :gutter="20" class="mt-15">
+        <a-row :gutter="20" >
           <a-col>
-            <a-form-item>
+            <a-form-item label="Stackholders">
               <a-select
                 v-decorator="[
                   'stackHolder',

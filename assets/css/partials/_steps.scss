@@ -21,6 +21,7 @@
   .ant-steps-item {
     flex: auto;
     padding-top: 10px;
+    margin-top: auto !important;
     padding-bottom: 8px;
   }
   .ant-steps-item-title {
@@ -69,6 +70,7 @@
 
   .ant-btn-drop-down {
     margin-top: auto;
+    bottom: -5px;
   }
 
   .container-steps-div {
@@ -127,7 +129,8 @@
     .ant-steps-item {
       margin-right: 8px !important;
       padding-right: 3px;
-      margin-top: 8px;
+      margin-bottom: 4px;
+      margin-top: 4px;
     }
     .Treatments {
       padding-right: 5px;
@@ -207,7 +210,7 @@
   .ant-steps-item-content {
     // margin-right: 5px;
     .ant-steps-item-title {
-      height: 25px;
+      height: 23px;
       margin: 0;
       padding-right: 4px;
       // margin-left: 5px;
@@ -254,6 +257,17 @@
     .ant-steps {
       @extend .blockState;
     }
+    .ant-steps-item-content {
+      &::before {
+        content: '';
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg) !important;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .rejected {
+    background: #ffd8d8 !important;
     .ant-steps-item-content {
       &::before {
         content: '';
@@ -665,3 +679,12 @@
     }
   }
 }
+// 
+// @media(max-width: 101%){
+//   .default-card.pills-tabs.green-on-update {
+//     .ant-tabs-nav-scroll {
+//       .ant-tabs-tab
+//         margin: 0;
+//       }
+//     } 
+// }

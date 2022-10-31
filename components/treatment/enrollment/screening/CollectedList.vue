@@ -40,16 +40,16 @@ export default {
           key: 'name',
         },
         {
-          title: `${this.$store.getters.getTranslation.Notes_1_350}`,
-          dataIndex: 'notes',
-          key: 'notes',
-        },
-        {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'isCheck',
           key: 'isCheck',
           scopedSlots: { customRender: 'check' },
         },
+          {
+            title: `${this.$store.getters.getTranslation.Notes_1_350}`,
+            dataIndex: 'notes',
+            key: 'notes',
+          },
       ],
       loading: true
     }

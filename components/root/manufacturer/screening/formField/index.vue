@@ -31,7 +31,7 @@
           />
         </a-form-item>
         <FormActionButton :loading="btnLoading" :is-created="isCreated">
-          <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" />
+          <!-- <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" /> -->
         </FormActionButton>
       </a-form>
     </a-skeleton>
@@ -44,10 +44,10 @@ import nullHelper from '~/mixins/null-helpers'
 export default {
   mixins: [withCrud, nullHelper],
   props: {
-    // categoryId: {
-    //   type: String,
-    //   required: true,
-    // },
+    categoryId: {
+      required: false,
+      type: Number,
+    },
     category: {
       type: Object,
       required: true,
@@ -69,15 +69,15 @@ export default {
     }
   },
   mounted() {
-    if (!this.isEmpty(this.category)) {
-      // this.isCreated = true
-      // this.loading = true
-      // ScreeningServices.get({ category: this.category.id })
-      //   .then((response) => {
-      //     this.entity = response.data
-      //     this.entityId = this.entity.globalId
-      //   })
-      //   .finally(() => (this.loading = false))
+    if (!this.isEmpty(this.categoryId)) {
+      this.isCreated = true
+      this.loading = true
+      ScreeningServices.getById(this.categoryId )
+        .then((response) => {
+          this.entity = response.data
+          this.entityId = this.entity.id
+        })
+        .finally(() => (this.loading = false))
     }
   },
   methods: {
