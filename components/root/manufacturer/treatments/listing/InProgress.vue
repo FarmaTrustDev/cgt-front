@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Filters @getParams="getParams" />
+    <Filters :search-by-type="searchByType" @getParams="getParams" />
     <a-table
       :loading="loading"
       class="page-footer"
@@ -69,6 +69,9 @@ const ActionLink = '/manufacturer/schedules'
 export default {
   components: { Filters },
   mixins: [routeHelpers, withTableCrud],
+  props:{
+    searchByType: {type : String, default: ''}
+  },
   data() {
     return {
       column: [
@@ -146,8 +149,8 @@ export default {
       }
     },
   },
+
   mounted() {
-    // this.fetch()
   },
   methods: {
     getTranslationData() {

@@ -26,8 +26,8 @@
               :checked-children="translation.yes_1_654"
               :un-checked-children="translation.no_1_656"
             />
-
-            <a-icon v-else type="check" class="icon-check"></a-icon>
+            <a-icon v-else-if="row.collect" type="check" class="icon-check"></a-icon>
+            <a-icon v-else type="close" class="icon-close icon-size"></a-icon>
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
@@ -64,8 +64,9 @@
         </template>
         <template slot="action" slot-scope="name, row">
           <!-- shape="round" icon="sync" -->
+            <!-- || btnLoading @Naveed bhai is ki waja sy confirm krty wqt jerk create ho rha tha isi lye hata dia -->
           <button
-            :disabled="row.isCollected || btnLoading"
+            :disabled="row.isCollected" 
             :loading="loading"
             class="btn-send ant-btn ant-btn-primary"
             type="primary"
@@ -208,5 +209,11 @@ export default {
 }
 .icon-check {
   color: green;
+}
+.icon-close{
+  color: red;
+}
+.icon-size{
+  font-size: 20px;
 }
 </style>

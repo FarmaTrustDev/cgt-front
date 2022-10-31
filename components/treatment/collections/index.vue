@@ -1,6 +1,6 @@
 <template>
   <a-skeleton :loading="loading">
-    <div v-if="enabled">
+    <div v-if="enabled" class="sample-shipping-detail">
       <h1 class="heading" style="display: inline-block">
        <b> Sample Shipping Details</b>
       </h1>

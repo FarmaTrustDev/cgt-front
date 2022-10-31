@@ -1,6 +1,6 @@
 <template>
   <span>
-    <Filters @getParams="getParams" />
+    <Filters :search-by-type="searchByType" @getParams="getParams" />
     <a-table
       :loading="loading"
       :columns="column"
@@ -114,7 +114,10 @@ export default {
     Form,
     Filters,
   },
-  mixins: [withTableCrud],
+    mixins: [withTableCrud],
+  props:{
+    searchByType: {type : String, default: ''}
+  },
   data() {
     return {
       clicked:false,

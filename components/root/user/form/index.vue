@@ -102,7 +102,7 @@ export default {
           this.success(response.message)
           if (!this.isEmpty(this.gotoLink)) {
             this.userDetail()
-            this.goto(`${this.gotoLink}`)
+             this.users.name === 'Super Admin' ? this.goto(`/superAdmin/users`) : this.goto(`${this.gotoLink}`)
           }
           if (this.isFunction(this.afterUpdate)) {
             this.afterUpdate(response)
@@ -123,7 +123,7 @@ export default {
         .then((response) => {
           this.success(response.message)
           if (!this.isEmpty(this.gotoLink)) {
-            this.users.name === 'Super Admin' ? this.goto(`superAdmin/users`) : this.goto(`${this.gotoLink}`)
+            this.users.name === 'Super Admin' ? this.goto(`/superAdmin/users`) : this.goto(`${this.gotoLink}`)
           }
           if (this.isFunction(this.afterCreate)) {
             this.afterCreate(response)
@@ -162,7 +162,7 @@ export default {
           this.$store.commit('setUser', response.data)
         })
         .then(() => {
-          this.$router.push({ path: '/users' })
+           this.users.name === 'Super Admin' ? this.goto(`/superAdmin/users`) :  this.$router.push({ path: '/users' })
           this.loading = false
         })
     },

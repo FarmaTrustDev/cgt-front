@@ -21,6 +21,9 @@ import { getFormattedMoment } from '~/services/Helpers/MomentHelpers'
 import {STANDARD_UK_DATE_FORMAT} from '~//services/Constant/DateTime'
 import { isEmpty } from '~/services/Utilities'
 export default {
+  props:{
+    searchByType:{type : String , default: ''}
+  },
   data() {
     return { 
       params: {},
@@ -31,6 +34,40 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+  },
+  watch:{
+    searchByType(newValue, oldValue)
+    {
+      if(!isEmpty(newValue))
+      {
+        this.params={
+          ...this.params,
+          puid: newValue,
+          treatmentTypeName: newValue,
+          patientEnrollmentNumber: newValue,
+          manufacturerPUID:newValue,
+          hospitalPUID:newValue,
+          logisticPUID:newValue,
+        }
+        this.emitParams(this.params)
+      }
+    }
+  },
+  mounted(){
+    if(!isEmpty(this.searchByType))
+    {
+      this.params={
+        ...this.params,
+        puid: this.searchByType,
+        treatmentTypeName: this.searchByType,
+        patientEnrollmentNumber: this.searchByType,
+        manufacturerPUID:this.searchByType,
+        hospitalPUID:this.searchByType,
+        logisticPUID:this.searchByType,
+      }
+      this.emitParams(this.params)
+      // this.searchTreatment(this.searchByType)
+    }
   },
   methods: {
     moment,

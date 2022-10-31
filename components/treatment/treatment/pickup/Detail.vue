@@ -68,7 +68,7 @@ export default {
 }
 .common-detail > dd {
   display: inline-block;
-  width: 50%;
+  width: 25%;
   text-align: right;
   color: black;
   font-weight: bold;

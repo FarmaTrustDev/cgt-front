@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Filters @getParams="getParams" />
+    <Filters :search-by-type="searchByType" @getParams="getParams" />
     <a-table :loading="loading" :columns="column" :data-source="data" :custom-row="customRowReDirect">
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
           <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
@@ -49,6 +49,9 @@ const ActionLink = '/manufacturer/schedules'
 export default {
   components: { Filters },
   mixins: [routeHelpers, withTableCrud],
+  props:{
+    searchByType: {type : String, default: ''}
+  },
   data() {
     return {
       column: [

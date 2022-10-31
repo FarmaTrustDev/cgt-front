@@ -86,7 +86,7 @@ export default {
   mounted(){
     setInterval(() => {
       this.revertLoading()
-    }, 100);
+    }, 300);
   },
   methods: {
   revertLoading()

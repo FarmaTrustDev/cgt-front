@@ -449,6 +449,7 @@
       :visible="patientHideModal"
       :footer="null"
       @cancel="hidePatientModal(false,'')"
+      centered
     >
       <center>
          <h2>Are you sure you want to hide this patient permanently?</h2>
