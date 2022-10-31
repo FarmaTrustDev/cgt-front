@@ -13,6 +13,9 @@
           <span class="treatmentName">{{ patient.logisticPUID }}</span>
         </a-tooltip>        
       </template>
+      <template slot="duration" slot-scope="duration">
+        <span>{{duration.duration}} day(s)</span>
+      </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
           <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
             <span class="treatmentName">{{ name }}</span>
@@ -98,6 +101,11 @@ export default {
     title: `${this.$store.getters.getTranslation.Organ_1_166}`,
     key: 'organizationName',
     scopedSlots: { customRender: 'organizationName' },
+  },
+  {
+    title: 'Duration',
+    key : 'duration',
+    scopedSlots : { customRender : 'duration'}, 
   },
   {
     title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,

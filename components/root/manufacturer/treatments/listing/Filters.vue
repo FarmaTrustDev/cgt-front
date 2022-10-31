@@ -1,10 +1,11 @@
 <template>
   <div class="clearfix">
     <a-range-picker class="float-right calendar-range-picker-field"
-    :default-value="[moment(getPreviousDate(new Date())), moment(getCurrentDate(new Date()))]"
-     @change="searchDataRange"
+     :default-value="[moment(getPreviousDate(new Date())), moment(getCurrentDate(new Date()))]"
      separator="-"
-     :format="dateFormat" />
+     :format="dateFormat" 
+     @change="searchDataRange"
+     />
     <a-input
       ref="userNameInput"
       :placeholder="translation.searc_1_488"
@@ -103,7 +104,7 @@ export default {
     getCurrentDate(date)
     {
       const current = date;
-      const futureDate = current.getFullYear()+'-'+(current.getMonth()+2)+'-'+current.getDate();
+      const futureDate = current.getFullYear()+'-'+(current.getMonth()+3)+'-'+current.getDate();
       return futureDate
     },
     getPreviousDate(date)
