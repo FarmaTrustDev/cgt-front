@@ -82,31 +82,21 @@
           :wrapper-col="{ span: 22 }"
           min="0"
         >
-        <vue-tel-input
+        <a-input
             v-decorator="[
               'Phone',
               {
                 initialValue: patient.phone,
                 rules: [
                   {
-                    
-
+                    required:true,
+                    message:'Requried'
                   },
                 ],
               },
             ]"
-            :disabled-formatting="true"
-            :show-dial-code="true"
-            :enabled-flags="true"
-            :enabled-country-code="true"
-            placeholder="Enter phone number"
-            :show-search-box="true"
-            :disabled-fetching-country="true"
-            v-bind="bindProps"
-            :auto-default-country="false"
-            @input="onChange"
-          >
-        </vue-tel-input>
+            @change="onChange"
+          />
         </a-form-item>
       </a-col>
       <a-col :span="8">
@@ -495,8 +485,6 @@
 </template>
 
 <script>
-import {VueTelInput} from 'vue-tel-input';
-import 'vue-tel-input/dist/vue-tel-input.css';
 import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import { filterOption } from '~/services/Helpers'
@@ -505,7 +493,6 @@ import MapServices from '~/services/API/MapServices'
 // import PatientServices from '~/services/API/PatientServices'
 import { isEmpty } from '~/services/Utilities'
 export default {
-  components:{VueTelInput},
   props: {
     isCreated: {
       type: Boolean,
@@ -522,11 +509,7 @@ export default {
   },
   data() {
     return {
-      bindProps:{
-        inputOptions: {
-          showDialCode: true,
-        },
-      },
+      
       Gender: GENDER,
       bloodType: BLOOD_TYPES,
       countries: [],
@@ -634,10 +617,6 @@ export default {
 }
 </script>
 <style scoped>
-.vue-tel-input {
-    border-radius: 3px;
-    border: 1px solid white;
-}
 .ant-form-item{
   margin-bottom: 1px;
 }
