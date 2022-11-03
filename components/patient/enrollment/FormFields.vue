@@ -617,10 +617,6 @@ export default {
 }
 </script>
 <style scoped>
-.vue-tel-input {
-    border-radius: 3px;
-    border: 1px solid white;
-}
 .ant-form-item{
   margin-bottom: 1px;
 }
