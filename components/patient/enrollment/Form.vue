@@ -3,7 +3,7 @@
     <!-- <a-spin :spinning="loading"> -->
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormFields :form="form" :is-created="isCreated" :patient="patient" />
+      <FormFields :form="form" :is-created="isCreated" :patient="patient" @getPhoneNumber ="getPhoneNumber" />
       <a-form-item class="pr-2 mt-15">
         <FormActionButton
           :is-created="isCreated"
@@ -53,7 +53,7 @@
 </template>
 <script>
 import FormFields from '~/components/patient/enrollment/FormFields'
-import PatientDetail from '~/components/patient/enrollment/PatientDetail'
+import PatientDetail from '~/components/patient/enrollment/PatientDetails'
 import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
@@ -77,7 +77,8 @@ export default {
         name: 'patientEnrollment',
       }),
       patientDetail: {},
-      visiblePatientDetailModal: false
+      visiblePatientDetailModal: false,
+      patientPhone: ''
     }
   },
   computed: {
@@ -99,6 +100,10 @@ export default {
         this.fetch(patientId)
       }
     },
+    getPhoneNumber(e)
+    {
+      this.patientPhone = e
+    },
     fetch(id) {
       this.loading = true
       PatientServices.getById(id)
@@ -115,6 +120,7 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           this.patientDetail = values
+          this.patientDetail.Phone = this.patientPhone
           this.visibleDetialModal(true)
           // this.upsert(values)
         } else {

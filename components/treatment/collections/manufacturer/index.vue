@@ -62,7 +62,7 @@ export default {
       visibleModal: false,
       bags: [],
       COLLECTION_TYPE,
-      loading: true,
+      loading: false,
     }
   },
   mounted() {
@@ -78,7 +78,7 @@ export default {
     isEmpty,
     fetchBags() {
       if (!isEmpty(this.treatment)) {
-        this.loading = true
+        // this.loading = true
         TreatmentBagServices.getByTreatmentId(this.treatment.id, {
           type: COLLECTION_TYPE.manufacturer.id,
         })
@@ -86,7 +86,7 @@ export default {
             this.bags = response.data
           })
           .finally(() => {
-            this.loading = false
+            // this.loading = false
           })
       }
     },

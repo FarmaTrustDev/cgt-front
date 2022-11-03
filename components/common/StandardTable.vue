@@ -108,7 +108,7 @@
 
                 <a-dropdown>
                   <a-button type="primary" class="ant-btn-drop-down">
-                    {{ translation['Admin_1_142'] }}
+                    {{ translation['Admin_1_142'] }}<a-icon type="down" />
                   </a-button>
                   <a-menu slot="overlay">
                     <a-menu-item>
@@ -251,7 +251,7 @@
       <span slot="patientAction" slot-scope="text, record">
         <a-dropdown :trigger="['click']">
           <a-button class="action-button" @click="preventDefault">
-            {{ translation['Admin_1_142'] }} <a-icon type="down" />
+            {{ translation['Suppo_1_33'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">

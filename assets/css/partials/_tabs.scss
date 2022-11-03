@@ -172,7 +172,11 @@
     }
   }
 }
-
+.view-screen-tabs{
+  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active{
+    margin-left: 40px;
+  }
+}
 .large-tabs {
   .ant-layout {
     // text-align: center;

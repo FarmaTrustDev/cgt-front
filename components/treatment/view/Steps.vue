@@ -12,7 +12,7 @@
 
             <div
               slot="tab"
-              class="tab-title"
+              class="tab-title pl-10"
               :class="isCompleted(treatment.phaseId >= step.completedStep)"
             >
               {{ step.name }}
