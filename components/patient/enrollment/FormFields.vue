@@ -485,7 +485,6 @@
 </template>
 
 <script>
-import 'vue-tel-input/dist/vue-tel-input.css';
 import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import { filterOption } from '~/services/Helpers'
