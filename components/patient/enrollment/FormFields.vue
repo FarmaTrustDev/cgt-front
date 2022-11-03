@@ -1,6 +1,5 @@
 <template>
   <div>
-    <a-row>
       <a-row>
         <a-col :span="12">
           <a-form-item
@@ -75,8 +74,7 @@
             type="email"
             :placeholder="translation.EmailAddre_2_140"
           />{{ msg }} </a-form-item
-      ></a-col>
-            
+      ></a-col>        
       <a-col :span="8">
         <a-form-item
           :label="translation.Phone_1_63 + '*:'"
@@ -84,23 +82,31 @@
           :wrapper-col="{ span: 22 }"
           min="0"
         >
-          <a-input
+        <vue-tel-input
             v-decorator="[
               'Phone',
               {
                 initialValue: patient.phone,
                 rules: [
                   {
-                    required: true,
-                    message: 'Required',
+                    
+
                   },
                 ],
               },
             ]"
-            type="number"
-            placeholder="12345678"
-            min="0"
-          />
+            :disabled-formatting="true"
+            :show-dial-code="true"
+            :enabled-flags="true"
+            :enabled-country-code="true"
+            placeholder="Enter phone number"
+            :show-search-box="true"
+            :disabled-fetching-country="true"
+            v-bind="bindProps"
+            :auto-default-country="false"
+            @input="onChange"
+          >
+        </vue-tel-input>
         </a-form-item>
       </a-col>
       <a-col :span="8">
@@ -194,6 +200,7 @@
         </a-form-item></a-col
       >
       </a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation['Heigh(cm)*_2_641'] + '*'"
@@ -243,6 +250,7 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
       <!-- <a-col :span="12">
         <a-form-item
           :label="translation.What3_1_432 + '*'"
@@ -268,6 +276,7 @@
         </a-form-item>
       </a-col> -->
       <!-- <a-col :span="12"></a-col> -->
+      <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.Aller_1_643"
@@ -287,6 +296,8 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
+      <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.ActivProbl_2_645"
@@ -306,6 +317,8 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
+      <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.Medic_1_647"
@@ -325,6 +338,8 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation['PostaCode:_2_649']"
@@ -367,6 +382,8 @@
             :placeholder="translation.City_1_446"
           /> </a-form-item
       ></a-col>
+      </a-row>
+      <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.PostaCode_3_651"
@@ -384,6 +401,8 @@
             placeholder="Postal Code Address"
           /> </a-form-item
       ></a-col>
+      </a-row>
+      <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.StreeNumbe_2_653"
@@ -408,6 +427,8 @@
           />
         </a-form-item>
       </a-col>
+      </a-row>
+      <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.Count_1_657 + ':*'"
@@ -469,11 +490,13 @@
           </a-select>
         </a-form-item>
       </a-col>
-    </a-row>
+      </a-row>
   </div>
 </template>
 
 <script>
+import {VueTelInput} from 'vue-tel-input';
+import 'vue-tel-input/dist/vue-tel-input.css';
 import { BLOOD_TYPES, GENDER } from '~/services/Constant'
 import { _disabledFutureDate } from '~/services/Helpers/MomentHelpers'
 import { filterOption } from '~/services/Helpers'
@@ -482,6 +505,7 @@ import MapServices from '~/services/API/MapServices'
 // import PatientServices from '~/services/API/PatientServices'
 import { isEmpty } from '~/services/Utilities'
 export default {
+  components:{VueTelInput},
   props: {
     isCreated: {
       type: Boolean,
@@ -498,6 +522,11 @@ export default {
   },
   data() {
     return {
+      bindProps:{
+        inputOptions: {
+          showDialCode: true,
+        },
+      },
       Gender: GENDER,
       bloodType: BLOOD_TYPES,
       countries: [],
@@ -583,6 +612,10 @@ export default {
         this.searchCountries(name, 'b')
       })
     },
+    onChange(e) {
+      this.$emit('getPhoneNumber', e)
+      // console.log(e);
+    },
     /* postCodeChange(data) {
       PatientServices.getMapInfo(data.target.value).then((response) => {
         // alert(response.result.address_components[1].long_name)
@@ -599,3 +632,15 @@ export default {
   },
 }
 </script>
+<style scoped>
+.vue-tel-input {
+    border-radius: 3px;
+    border: 1px solid white;
+}
+.ant-form-item{
+  margin-bottom: 1px;
+}
+.ant-form-vertical .ant-form-item {
+    padding-bottom: 1px;
+}
+</style>

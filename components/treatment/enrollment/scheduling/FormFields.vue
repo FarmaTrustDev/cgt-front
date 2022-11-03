@@ -44,7 +44,7 @@
           />
         </a-form-item>
       </a-col>
-      <a-col :span="12" class="plr-10 mt-5">
+      <a-col :span="12" class="plr-10">
         <logistic-lookup></logistic-lookup>
       </a-col>
     </a-row>
@@ -276,5 +276,8 @@ export default {
 .duration_field:focus {
   border-color: none !important;
   box-shadow: none !important;
+}
+.ant-form-item{
+  margin-bottom: 1px;
 }
 </style>
