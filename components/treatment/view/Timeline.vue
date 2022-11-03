@@ -24,7 +24,7 @@
             </a-col>
             <a-col :span="12">
               <div v-if="step.isCompleted" class="right d-block">
-                <strong class="step-title d-block"> by:{{ step.by }}</strong>
+                <strong class="step-title d-block"> by: {{ step.by }}</strong>
                 <span class="organization">{{ step.organizationName }}</span>
                 <!-- <a-upload
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -117,3 +117,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.grey-card .ant-card-body {
+    padding: 9px;
+    padding-top: 2%;
+}
+</style>

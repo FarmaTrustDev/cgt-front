@@ -186,6 +186,9 @@
   body, html, #wrapper {
       height: 100%;
   }
+  .no-print{
+    display: none !important;
+  }
 }
 @mixin bi_gre($primary, $secondary) {
   background: $primary;

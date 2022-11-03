@@ -64,8 +64,8 @@
 
 
       <template #footer>
-        <a-button key="submit" class="footer-btn-label" type="primary" >{{translation.Print_1_111}}</a-button>
-        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled" @click="handleCancel" >{{translation.cance_1_296}}</a-button>
+        <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow()">{{translation.Print_1_111}}</a-button>
+        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handleCancel" >{{translation.cance_1_296}}</a-button>
       </template>
 
     </a-modal>
@@ -94,14 +94,14 @@
         // schedulingId:null,
       }
     },
-    mounted() {
-      // alert(this.$parent.schedulingId)
-      this.fetch(this.$parent.schedulingId)
-    },
     computed:{
       translation() {
         return this.$store.getters.getTranslation
       },
+    },    
+    mounted() {
+      // alert(this.$parent.schedulingId)
+      this.fetch(this.$parent.schedulingId)
     },
     methods: {
       getMomentByStandardFormat,
@@ -127,6 +127,10 @@
           this.patient=response.data.patient
         })
         .finally(() => (this.loading = false))
+      },
+      printWindow() {
+        this.visible=false
+        window.print()
       },
     }
   }

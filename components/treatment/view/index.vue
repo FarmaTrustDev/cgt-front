@@ -30,14 +30,14 @@
         message="Manufacturer has not approved the treatment request yet."
       />
     </div>
-    <div v-else-if="!isEmpty(bags)">
+    <div v-else-if="!isEmpty(bags)" class="view-screen-tabs">
       <a-tabs
         :active-key="activeTab"
         type="card"
-        class="bags_section"
+        class="bags_section "
         @change="onTabChange"
       >
-        <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
+        <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid" >
           <Steps class="view-screen" :bag="bag" :treatment="treatment" :loading="loading" />
         </a-tab-pane>
       </a-tabs>

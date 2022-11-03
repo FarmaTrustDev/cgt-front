@@ -743,15 +743,21 @@ export default {
     },
     fetchCountryByPostCode(e) {
       MapServices.fetchCountryByPostCode(e.target.value).then((response) => {
-        this.form.setFieldsValue({city: response.result.address_components[1].long_name})
-        this.form.setFieldsValue({location: response.result.location})
-        this.form.setFieldsValue({County: response.result.address_components[1].long_name})
-        let name=''
-        if(response.result.address_components[3].short_name==='GB'){
-          name=response.result.address_components[3].long_name  
-        }else{
-          name=response.result.address_components[4].long_name
+        let name = ''
+        if(response.result.address_components.length>0){
+          for(let i=0;i<response.result.address_components.length; i++){
+            if(response.result.address_components[i].types[0]==='postal_town'){
+              this.form.setFieldsValue({
+                city: response.result.address_components[i].long_name,
+                County: response.result.address_components[i].long_name,
+              })
+            }
+            if(response.result.address_components[i].types[0]==='country'){
+              name = response.result.address_components[i].long_name
+            }
+          }
         }
+        this.form.setFieldsValue({ location: response.result.location })
         // const name=response.result.address_components[4].long_name
         this.searchCountries(name,'b')
       })
