@@ -958,7 +958,7 @@ export default {
 </script>
 <style scoped>
 .patient-btn-admin {
-  height: 32px;
+  height: 30px;
     width: 75px;
     border-radius: 15px;
     font-size: 12px;
