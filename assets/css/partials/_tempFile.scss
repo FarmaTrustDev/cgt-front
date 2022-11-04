@@ -107,11 +107,17 @@
   .ant-card-head-title {
     padding: 0;
   }
+  .chat-page {
+    .chat-list {
+      .ant-spin-container {
+        min-height: 240px;
+      }
+    }
+  }
 }
 .support.container:last-child {
   padding-top: 0;
 }
-
 // SMARTLAB
 .smartlab_task {
   .ant-tabs-nav-scroll {

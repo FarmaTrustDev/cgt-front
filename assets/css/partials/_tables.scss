@@ -73,4 +73,14 @@
     }
   }
 }
-
+.ant-form-item-children {
+#patientEnrollment_Reference_Id,#patientEnrollment_patient_Id, #patientEnrollment_status_Id,#patientEnrollment_priority {
+  .ant-select-selection.ant-select-selection--single{
+    margin-bottom: 0 !important;
+  }
+}}
+.grey-card.enrollment-page.green-on-update {
+  .ant-select-selection {
+    margin-bottom: 0;
+  }
+}

@@ -130,7 +130,7 @@
       </a-col>
       </a-row>
       <a-row>
-      <a-col :span="12">
+      <a-col :span="8">
         <a-form-item
           :label="translation.Gende_1_637"
           :label-col="{ span: 24 }"
@@ -160,7 +160,7 @@
           </a-select>
         </a-form-item></a-col
       >
-      <a-col :span="12">
+      <a-col :span="8">
         <a-form-item
           :label="translation.BloodType_2_635"
           :label-col="{ span: 24 }"
@@ -189,9 +189,8 @@
           </a-select>
         </a-form-item></a-col
       >
-      </a-row>
-      <a-row>
-      <a-col :span="12">
+    
+      <a-col :span="8">
         <a-form-item
           :label="translation['Heigh(cm)*_2_641'] + '*'"
           :label-col="{ span: 24 }"
@@ -215,7 +214,9 @@
             :placeholder="translation['Heigh(cm)*_2_641']"
           /> </a-form-item
       ></a-col>
-      <a-col :span="12">
+      </a-row>
+      <a-row>
+      <a-col :span="8">
         <a-form-item
           :label="translation['Weigh(kg)*_2_639'] + '*'"
           :label-col="{ span: 24 }"
@@ -240,34 +241,9 @@
           />
         </a-form-item>
       </a-col>
-      </a-row>
-      <!-- <a-col :span="12">
-        <a-form-item
-          :label="translation.What3_1_432 + '*'"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-          class="pb-0"
-        >
-          <a-input
-            v-decorator="[
-              'what3Words',
-              {
-                initialValue: patient.what3Words,
-                rules: [
-                  {
-                    required: true,
-                    message: 'This field is required!',
-                  },
-                ],
-              },
-            ]"
-            :placeholder="translation.What3_1_432"
-          />
-        </a-form-item>
-      </a-col> -->
-      <!-- <a-col :span="12"></a-col> -->
-      <a-row>
-      <a-col :span="24">
+     
+    
+      <a-col :span="16">
         <a-form-item
           :label="translation.Aller_1_643"
           :label-col="{ span: 24 }"
