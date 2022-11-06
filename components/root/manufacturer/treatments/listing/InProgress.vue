@@ -13,15 +13,23 @@
       }"
     >
       <template slot="pUIDRender" slot-scope="name, patient">
-        <a-tooltip style="white-space: pre-line" 
+        <a-tooltip
+          style="white-space: pre-line"
           :title="
-            'PUID: ' + patient.patientEnrollmentNumber + 
-            '\n'+patient.hospital.name+': ' + patient.hospitalPUID+
-            '\n'+patient.logisticName+': ' + patient.logisticPUID
+            'PUID: ' +
+            patient.patientEnrollmentNumber +
+            '\n' +
+            patient.hospital.name +
+            ': ' +
+            patient.hospitalPUID +
+            '\n' +
+            patient.logisticName +
+            ': ' +
+            patient.logisticPUID
           "
         >
-        <span class="treatmentName">{{ patient.manufacturerPUID }}</span>
-        </a-tooltip>        
+          <span class="treatmentName">{{ patient.manufacturerPUID }}</span>
+        </a-tooltip>
       </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
         <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
@@ -69,8 +77,8 @@ const ActionLink = '/manufacturer/schedules'
 export default {
   components: { Filters },
   mixins: [routeHelpers, withTableCrud],
-  props:{
-    searchByType: {type : String, default: ''}
+  props: {
+    searchByType: { type: String, default: '' },
   },
   data() {
     return {
@@ -139,19 +147,18 @@ export default {
         this.phases[0].name = newValues.InbouAccep_3_834
         this.phases[1].name = newValues.Manuf_1_342
         this.phases[2].name = newValues.OutboShipm_2_376
-        
-        this.column[0].title=newValues.PatieID_2_264
-        this.column[1].title=newValues.TreatType_2_67
-        this.column[2].title=newValues.ProduLine_2_449
-        this.column[3].title=newValues.Organ_1_166
-        this.column[4].title=newValues['Colle-_4_268']
-        this.column[5].title=newValues.Actio_1_220
+
+        this.column[0].title = newValues.PatieID_2_264
+        this.column[1].title = newValues.TreatType_2_67
+        this.column[2].title = newValues.ProduLine_2_449
+        this.column[3].title = newValues.Organ_1_166
+        this.column[4].title = newValues['Colle-_4_268']
+        this.column[5].title = newValues.Actio_1_220
       }
     },
   },
 
-  mounted() {
-  },
+  mounted() {},
   methods: {
     getTranslationData() {
       this.phases[0].name = this.translation.InbouAccep_3_834
