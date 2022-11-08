@@ -1,4 +1,4 @@
-    // :loading="loading"
+// :loading="loading"
 <template>
   <page-layout
     :create="false"

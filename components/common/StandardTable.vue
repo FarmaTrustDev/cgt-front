@@ -107,8 +107,8 @@
                 <span class="vertical-line-standard-table"></span>
 
                 <a-dropdown>
-                  <a-button type="primary" class="ant-btn-drop-down">
-                    {{ translation['Admin_1_142'] }}<a-icon type="down" />
+                  <a-button type="primary" class="ant-btn-drop-down patient-btn-admin">
+                    {{ translation['Admin_1_142'] }}<a-icon type="down" class="ml-5"/>
                   </a-button>
                   <a-menu slot="overlay">
                     <a-menu-item>
@@ -956,3 +956,11 @@ export default {
   },
 }
 </script>
+<style scoped>
+.patient-btn-admin {
+  height: 30px;
+    width: 75px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+</style>
