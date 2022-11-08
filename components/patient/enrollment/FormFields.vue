@@ -127,7 +127,7 @@
             </a-select>
             <a-input
               v-decorator="[
-                'PhoneCode',
+                'phone',
                 {
                   initialValue: patient.phone !== null ? getPhoneNumber(patient.phone) : '',
                   rules: [

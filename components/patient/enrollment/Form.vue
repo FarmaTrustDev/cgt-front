@@ -114,6 +114,7 @@ export default {
           const result = myString.match(/\((.*)\)/)
           this.countryIso = result !== null ? result[1] : null
           this.patient = response.data
+          // this.patientPhone = '(' + this.countryIso + ')'
           this.isCreated = true
         })
         .catch(this.error)
@@ -124,8 +125,9 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
+          debugger
+          values.phone = this.countryIso + ' '+  values.phone
           this.patientDetail = values
-          this.patientDetail.Phone = this.patientPhone + this.patientDetail.Phone
           this.visibleDetialModal(true)
           // this.upsert(values)
         } else {
