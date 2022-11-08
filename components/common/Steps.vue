@@ -41,6 +41,10 @@ export default {
         className = className + ' ' + 'rejected'
       }
 
+      if (phase.phaseId === 16 && treatment.phaseId >= 15) {
+        className = className + ' ' + 'ant-steps-item-finish afterCare'
+      }
+
       return className
     },
     getCurrentStep(treatment) {
