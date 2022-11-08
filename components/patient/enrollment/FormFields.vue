@@ -1,61 +1,61 @@
 <template>
   <div>
-      <a-row>
-        <a-col :span="12">
-          <a-form-item
-            :label="translation.FirstName_2_420 + '*:'"
-            :label-col="{ span: 24 }"
-            :wrapper-col="{ span: 22 }"
-          >
-            <a-input
-              v-decorator="[
-                'firstName',
-                {
-                  initialValue: patient.firstName,
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Required',
-                    },
-                    {
-                      pattern: /^[a-z&A-Z]+$/,
-                      message: 'Please enter a valid name',
-                    },
-                  ],
-                },
-              ]"
-              :placeholder="translation.FirstName_2_420"
-            /> </a-form-item
-        ></a-col>
-        <a-col :span="12">
-          <a-form-item
-            :label="translation.LastName_2_422 + '*:'"
-            :label-col="{ span: 24 }"
-            :wrapper-col="{ span: 22 }"
-          >
-            <a-input
-              v-decorator="[
-                'lastName',
-                {
-                  initialValue: patient.lastName,
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Required',
-                    },
-                    {
-                      pattern: /^[a-z&A-Z]+$/,
-                      message: 'Please enter a valid name',
-                    },
-                  ],
-                },
-              ]"
-              :placeholder="translation.LastName_2_422"
-            />
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row>
+    <a-row>
+      <a-col :span="12">
+        <a-form-item
+          :label="translation.FirstName_2_420 + '*:'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+        >
+          <a-input
+            v-decorator="[
+              'firstName',
+              {
+                initialValue: patient.firstName,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Required',
+                  },
+                  {
+                    pattern: /^[a-z&A-Z]+$/,
+                    message: 'Please enter a valid name',
+                  },
+                ],
+              },
+            ]"
+            :placeholder="translation.FirstName_2_420"
+          /> </a-form-item
+      ></a-col>
+      <a-col :span="12">
+        <a-form-item
+          :label="translation.LastName_2_422 + '*:'"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 22 }"
+        >
+          <a-input
+            v-decorator="[
+              'lastName',
+              {
+                initialValue: patient.lastName,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Required',
+                  },
+                  {
+                    pattern: /^[a-z&A-Z]+$/,
+                    message: 'Please enter a valid name',
+                  },
+                ],
+              },
+            ]"
+            :placeholder="translation.LastName_2_422"
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+    <a-row>
       <a-col :span="8">
         <a-form-item
           :label="translation.EmailAddre_2_140 + '*:'"
@@ -73,8 +73,9 @@
             ]"
             type="email"
             :placeholder="translation.EmailAddre_2_140"
-          />{{ msg }} </a-form-item
-      ></a-col>        
+          />{{ msg }}
+        </a-form-item></a-col
+      >
       <a-col :span="8">
         <a-form-item
           :label="translation.Phone_1_63 + '*:'"
@@ -82,7 +83,7 @@
           :wrapper-col="{ span: 22 }"
           min="0"
         >
-        <a-input
+          <!-- <a-input
             v-decorator="[
               'Phone',
               {
@@ -96,7 +97,50 @@
               },
             ]"
             @change="onChange"
-          />
+          /> -->
+          <a-input-group compact>
+            <a-select
+              v-decorator="[
+                'countryCode',
+                {
+                  initialValue: countryIso,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Required',
+                    },
+                  ],
+                },
+              ]"
+              style="width: 50%"
+              :show-search="true"
+              @search="searchCountryCode"
+              @change="handleChange"
+            >
+              <a-select-option
+                v-for="country in countryCodeList"
+                :key="country.iso" :value="country.iso + country.countryCode"
+              >
+                {{ country.iso }}{{ country.countryCode }}
+              </a-select-option>
+            </a-select>
+            <a-input
+              v-decorator="[
+                'PhoneCode',
+                {
+                  initialValue: patient.phone !== null ? getPhoneNumber(patient.phone) : '',
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Requried',
+                    },
+                  ],
+                },
+              ]"
+              style="width: 50%"
+              placeholder="123456789"
+            />
+          </a-input-group>
         </a-form-item>
       </a-col>
       <a-col :span="8">
@@ -262,8 +306,8 @@
           />
         </a-form-item>
       </a-col>
-      </a-row>
-      <a-row>
+    </a-row>
+    <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.ActivProbl_2_645"
@@ -283,8 +327,8 @@
           />
         </a-form-item>
       </a-col>
-      </a-row>
-      <a-row>
+    </a-row>
+    <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.Medic_1_647"
@@ -304,8 +348,8 @@
           />
         </a-form-item>
       </a-col>
-      </a-row>
-      <a-row>
+    </a-row>
+    <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation['PostaCode:_2_649']"
@@ -348,8 +392,8 @@
             :placeholder="translation.City_1_446"
           /> </a-form-item
       ></a-col>
-      </a-row>
-      <a-row>
+    </a-row>
+    <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.PostaCode_3_651"
@@ -367,8 +411,8 @@
             placeholder="Postal Code Address"
           /> </a-form-item
       ></a-col>
-      </a-row>
-      <a-row>
+    </a-row>
+    <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.StreeNumbe_2_653"
@@ -393,8 +437,8 @@
           />
         </a-form-item>
       </a-col>
-      </a-row>
-      <a-row>
+    </a-row>
+    <a-row>
       <a-col :span="12">
         <a-form-item
           :label="translation.Count_1_657 + ':*'"
@@ -456,7 +500,7 @@
           </a-select>
         </a-form-item>
       </a-col>
-      </a-row>
+    </a-row>
   </div>
 </template>
 
@@ -482,10 +526,13 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    countryIso: {
+      type: String,
+      default: null
+    }
   },
   data() {
     return {
-      
       Gender: GENDER,
       bloodType: BLOOD_TYPES,
       countries: [],
@@ -493,8 +540,11 @@ export default {
       postCode: '',
       cityName: '',
       countryName: '',
-      email:'',
+      email: '',
       msg: '',
+      countryCode: [],
+      countryCodeList: {},
+      patientPhone: '',
       /* form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }), */
@@ -505,17 +555,16 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  watch:{
-    msg(newMsg, oldMsg)
-    {
-      if(newMsg !== oldMsg)
-      {
-          this.msg = newMsg
+  watch: {
+    msg(newMsg, oldMsg) {
+      if (newMsg !== oldMsg) {
+        this.msg = newMsg
       }
-    }
+    },
   },
   mounted() {
     this.fetchCountries()
+    this.fetchCountriesCode()
   },
 
   updated() {
@@ -535,12 +584,25 @@ export default {
     filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries(params = {}) {
+      CountryServices.get(params).then((response)=>{
+        this.countries = response.data.data
+      if (!isEmpty(params)) {
+        this.form.setFieldsValue({ countryId: this.countries[0].id })
+      }
+      })
+    },
+    selectCountries(params) {
       CountryServices.get(params).then((response) => {
         this.countries = response.data.data
-        if (!isEmpty(params)) {
-          this.form.setFieldsValue({ countryId: this.countries[0].id })
-        }
       })
+    },
+    getPhoneNumber(e)
+    {
+      if(!isEmpty(e))
+      {
+        const index = e.indexOf(")");  
+        return e.substr(index + 1);
+      }
     },
     getCountries() {
       if (this.isCreated) {
@@ -551,6 +613,18 @@ export default {
     },
     searchCountries(name, b) {
       this.fetchCountries({ name })
+    },
+    fetchCountriesCode() {
+      CountryServices.getCountryCodeList().then((response) => {
+        this.countryCodeList = response.data
+      })
+    },
+    searchCountryCode(countrycode) {
+      const params = { countryCode: countrycode }
+      this.selectCountries(params)
+      if (!isEmpty(params)) {
+        this.form.setFieldsValue({ countryCode: this.countries[0].iso })
+      }
     },
     fetchCountryByPostCode(e) {
       MapServices.fetchCountryByPostCode(e.target.value).then((response) => {
@@ -564,8 +638,9 @@ export default {
         this.searchCountries(name,'b')
       })
     },
-    onChange(e) {
-      this.$emit('getPhoneNumber', e)
+    handleChange(e) {
+      // console.log(e)
+      this.$emit('getPhoneNumber', '(' + e + ')')
       // console.log(e);
     },
     /* postCodeChange(data) {
@@ -585,10 +660,58 @@ export default {
 }
 </script>
 <style scoped>
-.ant-form-item{
+.ant-form-item {
   margin-bottom: 1px;
 }
 .ant-form-vertical .ant-form-item {
-    padding-bottom: 1px;
+  padding-bottom: 1px;
+}
+.ant-input-group.ant-input-group-compact > *:first-child,
+.ant-input-group.ant-input-group-compact
+  > .ant-select:first-child
+  > .ant-select-selection,
+.ant-input-group.ant-input-group-compact
+  > .ant-calendar-picker:first-child
+  .ant-input,
+.ant-input-group.ant-input-group-compact
+  > .ant-select-auto-complete:first-child
+  .ant-input,
+.ant-input-group.ant-input-group-compact
+  > .ant-cascader-picker:first-child
+  .ant-input,
+.ant-input-group.ant-input-group-compact
+  > .ant-mention-wrapper:first-child
+  .ant-mention-editor,
+.ant-input-group.ant-input-group-compact
+  > .ant-time-picker:first-child
+  .ant-time-picker-input {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.ant-input-group.ant-input-group-compact > *:last-child,
+.ant-input-group.ant-input-group-compact
+  > .ant-select:last-child
+  > .ant-select-selection,
+.ant-input-group.ant-input-group-compact
+  > .ant-calendar-picker:last-child
+  .ant-input,
+.ant-input-group.ant-input-group-compact
+  > .ant-select-auto-complete:last-child
+  .ant-input,
+.ant-input-group.ant-input-group-compact
+  > .ant-cascader-picker:last-child
+  .ant-input,
+.ant-input-group.ant-input-group-compact
+  > .ant-cascader-picker-focused:last-child
+  .ant-input,
+.ant-input-group.ant-input-group-compact
+  > .ant-mention-wrapper:last-child
+  .ant-mention-editor,
+.ant-input-group.ant-input-group-compact
+  > .ant-time-picker:last-child
+  .ant-time-picker-input {
+  border-right-width: 1px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 </style>

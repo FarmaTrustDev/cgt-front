@@ -280,4 +280,14 @@ export default {
 .ant-form-item{
   margin-bottom: 1px;
 }
+.ant-input[disabled] {
+    /* color: rgba(0, 0, 0, 0.25); */
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 1;
+    color:black
+}
+.ant-input[disabled] ::placeholder{
+  color: black
+}
 </style>

@@ -39,12 +39,20 @@ function destroy(id) {
     method: 'DELETE',
   })
 }
+function getCountryCodeList()
+{
+  return request({
+    url: `${baseApi}/GetCountryCodeList`,
+    method: 'GET'
+  })
+}
 const CountryServices = {
   get,
   create,
   destroy,
   update,
   getById,
+  getCountryCodeList,
 }
 
 export default CountryServices
