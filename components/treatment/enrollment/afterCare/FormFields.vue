@@ -38,6 +38,7 @@
           /> </a-form-item
       ></a-col>
     </a-row>
+  
   </div>
 </template>
 <script>
@@ -60,18 +61,20 @@ export default {
       successResponse: '',
       error: null,
       showError: false,
+       
       form: this.$form.createForm(this, {
         name: 'AfterCareNotes',
       }),
     }
   },
+    computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
+    },
   methods: {
     onSubmit(e) {},
-  },
-  computed: {
-    translation() {
-      return this.$store.getters.getTranslation
-    },
+
   },
 }
 </script>

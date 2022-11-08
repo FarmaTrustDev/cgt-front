@@ -91,7 +91,7 @@ export default {
   methods: {
     isEmpty,
     fetchSteps() {
-      this.loading = true
+      // this.loading = true
       TreatmentServices.getCustody(
         this.treatment.id,
         this.bag.id,
@@ -102,7 +102,7 @@ export default {
             this.steps = response.data.steps
           }
         })
-        .finally(() => (this.loading = false))
+        // .finally(() => (this.loading = false))
     },
     getTranslationData() {
       if (this.steps != null) {

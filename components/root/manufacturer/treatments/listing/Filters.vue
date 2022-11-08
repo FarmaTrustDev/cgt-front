@@ -104,7 +104,7 @@ export default {
     getCurrentDate(date)
     {
       const current = date;
-      const futureDate = current.getFullYear()+'-'+(current.getMonth()+3)+'-'+current.getDate();
+      const futureDate = current.getFullYear()+'-'+(current.getMonth()+2)+'-'+current.getDate();
       return futureDate
     },
     getPreviousDate(date)

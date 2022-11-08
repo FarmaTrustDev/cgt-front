@@ -52,6 +52,16 @@
 
     </a-row>
     </a-form>
+      <!-- title="Title" -->
+      <a-modal
+      title="Confirm partner(s)"
+      :visible="visible"
+      okText="Confirm"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <h2>  Are you sure you want to associate the contract with selected logistics ?</h2>
+    </a-modal>
   </div>
 </template>
 
@@ -75,9 +85,11 @@ import HospitalLogisticServices from '~/services/API/HospitalLogisticServices'
         btnLoading: false,
         isCreated: false,
         checked:false,
+        visible: false,
         form: this.$form.createForm(this, {
           name: 'screening',
         }),
+        logisticsData:{}
       };
     },
     computed:{
@@ -116,11 +128,8 @@ import HospitalLogisticServices from '~/services/API/HospitalLogisticServices'
         e.preventDefault()
         this.form.validateFields((err, values) => {
           if (!err) {
-            if(this.checked){
-              this.create(values)
-            }else{
-              this.destroy()
-            }
+            this.showModal(values)
+            
           } else {
             this.loading = false
           }
@@ -158,7 +167,22 @@ import HospitalLogisticServices from '~/services/API/HospitalLogisticServices'
             // this.loading = false
             this.loading = false
           })
-      },      
+      },   
+      handleOk() {
+        this.visible = false;
+        if(this.checked){
+              this.create(this.logisticsData)
+            }else{
+              this.destroy()
+            }
+    },
+    handleCancel(e) {
+      this.visible = false;
+    },
+    showModal(e) {
+      this.logisticsData = e
+      this.visible = true;
+    },   
     },
   }
 </script>

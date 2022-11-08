@@ -21,6 +21,7 @@
 .slots-main {
   .ant-select-selection__placeholder {
     display: block !important;
+    color: black;
   }
   // .note-area {
 
@@ -50,7 +51,7 @@
 }
 .ant-calendar-picker-input {
   margin-top: 3px;
-  margin-bottom: 9px;
+  // margin-bottom: 9px;
 }
 .ant-table-body {
   border-radius: 22px;

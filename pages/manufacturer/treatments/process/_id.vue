@@ -18,7 +18,6 @@
             >
               <span class="step-col-large">
                 <a-steps
-                  
                   :initial="1"
                   :current="currentPhase"
                   @change="onChangeSteps"
@@ -168,7 +167,11 @@ export default {
       )
     },
     getCompleteClass(currentPhase, phase) {
-      if (currentPhase > phase.id || this.treatmentCurrentPhase > phase.id) {
+      if (
+        currentPhase > phase.id ||
+        this.treatmentCurrentPhase > phase.id ||
+        this.treatmentCurrentPhase === 3 // worst workaround
+      ) {
         return 'ant-steps-item-active-large'
       }
     },

@@ -1,7 +1,7 @@
 <template>
 <div>
     <h1 class="title">Patient Details</h1>
-    <h3> Confirm patient details </h3>
+    <h3> Confirm Patient Details </h3>
     <a-card>
       <a-row class="white-card-smart-lab">
         <a-col :span="6" class="text-muted" >First Name: </a-col><a-col :span="6">{{patientDetail.firstName}}</a-col>
@@ -9,7 +9,7 @@
       </a-row>
       <a-row class="white-card-smart-lab">
         <a-col :span="6" class="text-muted" >Email: </a-col><a-col :span="6">{{patientDetail.Email}}</a-col>
-        <a-col :span="6" class="text-muted" >Phone No: </a-col><a-col :span="6">{{patientDetail.Phone}}</a-col>
+        <a-col :span="6" class="text-muted" >Phone No: </a-col><a-col :span="6">{{patientDetail.phone}}</a-col>
       </a-row>
       <a-row class="white-card-smart-lab">
         <a-col :span="6" class="text-muted" >DOB: </a-col><a-col :span="6">{{getDateFormat(patientDetail.dOB)}}</a-col>
@@ -62,3 +62,8 @@
   },
   }
   </script>
+  <style scoped>
+    .ant-col-6{
+  color: black;
+    }
+  </style>
