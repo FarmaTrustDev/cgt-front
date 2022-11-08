@@ -4,7 +4,7 @@
       <a-form :form="form" layout="horizontal" @submit="onSubmit">
         <Form :form="form" :treatment="treatment" />
       </a-form>
-      <a-list :data-source="datasource" item-layout="horizontal" :bordered="false">
+      <a-list :data-source="datasource" item-layout="horizontal" :bordered="false" :locale="locale">
         <template #renderItem="{ notes, createdAt }">
           <a-list-item class="ml-15 mr-15">
             <div><h3 class="font-wt-600">{{ notes }}</h3></div>
@@ -64,6 +64,7 @@ export default {
       fetchIdFromParams: false,
       entity: {},
       isScheduled: false,
+      locale:{emptyText: ' '}
     }
   },
   mounted() {

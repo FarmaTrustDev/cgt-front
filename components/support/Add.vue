@@ -7,6 +7,7 @@
       :destroy-on-close="true"
       :visible="visible"
       :dialog-style="{ top: '20px' }"
+      :loading="loading"
       @cancel="showModal(false)"
       @ok="showModal(false)"
     >
@@ -34,6 +35,7 @@
                 size="large"
                 autocomplete="off"
                 class="default-select"
+                :loading="loading"
                 @change="onPatientSelect"
                 @search="searchPatient"
               >
@@ -359,12 +361,13 @@ export default {
       bags: [],
     }
   },
-  mounted() {},
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
+      
   },
+  mounted() {this.fetchPatient()},
   methods: {
     filterOption,
     showModal(show) {
@@ -373,7 +376,6 @@ export default {
       this.$emit('closeModal', show)
     },
     searchPatient(keyword) {
-      console.log(keyword)
       this.fetchPatient({
         puid: keyword,
         name: keyword,
@@ -382,9 +384,11 @@ export default {
       })
     },
     fetchPatient(params = {}) {
+      this.loading = true
       PatientServices.search(params).then((response) => {
         this.patients = response.data
       })
+      this.loading = false
     },
     onPatientSelect(patientId, option, s) {
       this.fetchBags(option.data.attrs['data-globalId'])

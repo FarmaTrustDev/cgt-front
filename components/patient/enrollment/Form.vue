@@ -3,7 +3,8 @@
     <!-- <a-spin :spinning="loading"> -->
 
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-      <FormFields :form="form" :is-created="isCreated" :patient="patient" @getPhoneNumber ="getPhoneNumber" />
+      
+      <FormFields :form="form" :is-created="isCreated" :patient="patient" :country-iso="countryIso"  @getPhoneNumber ="getPhoneNumber" />
       <a-form-item class="pr-2 mt-15">
         <FormActionButton
           :is-created="isCreated"
@@ -78,7 +79,8 @@ export default {
       }),
       patientDetail: {},
       visiblePatientDetailModal: false,
-      patientPhone: ''
+      patientPhone: '',
+      countryIso : ''
     }
   },
   computed: {
@@ -108,6 +110,9 @@ export default {
       this.loading = true
       PatientServices.getById(id)
         .then((response) => {
+          const myString = response.data.phone
+          const result = myString.match(/\((.*)\)/)
+          this.countryIso = result !== null ? result[1] : null
           this.patient = response.data
           this.isCreated = true
         })
@@ -120,7 +125,7 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           this.patientDetail = values
-          this.patientDetail.Phone = this.patientPhone
+          this.patientDetail.Phone = this.patientPhone + this.patientDetail.Phone
           this.visibleDetialModal(true)
           // this.upsert(values)
         } else {

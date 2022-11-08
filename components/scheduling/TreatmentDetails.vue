@@ -67,24 +67,24 @@ export default {
   data() {
     return { treatmentData: {}, loading: false }
   },
+    computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
+    },
   mounted() {
     this.fetchByTreatmentId(this.treatment.id)
-  },
-  computed: {
-    translation() {
-      return this.$store.getters.getTranslation
-    },
   },
   methods: {
     fetchByTreatmentId(id) {
       if (!isEmpty(id)) {
         if (this.treatment.isSchedule) {
-          this.loading = true
+          // this.loading = true
           SchedulingServices.getByTreatment(id)
             .then((response) => {
               this.treatmentData = response.data
             })
-            .finally(() => (this.loading = false))
+            // .finally(() => (this.loading = false))
         }
       }
     },

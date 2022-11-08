@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     fetchBags() {
-      this.loading = true
+      // this.loading = true
       TreatmentBagServices.get({ treatmentId: this.treatment.id }).then(
         (bags) => {
           this.bags = bags.data
@@ -95,7 +95,7 @@ export default {
           }
         }
       )
-      this.loading = false
+      // this.loading = false
     },
     getTreatmentAction() {
       TreatmentLogServices.GetLastActionByTreatmentId(this.treatment.id).then(

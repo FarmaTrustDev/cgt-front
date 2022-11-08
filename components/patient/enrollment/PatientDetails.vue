@@ -1,7 +1,7 @@
 <template>
 <div>
     <h1 class="title">Patient Details</h1>
-    <h3> Confirm patient details </h3>
+    <h3> Confirm Patient Details </h3>
     <a-card>
       <a-row class="white-card-smart-lab">
         <a-col :span="6" class="text-muted" >First Name: </a-col><a-col :span="6">{{patientDetail.firstName}}</a-col>
