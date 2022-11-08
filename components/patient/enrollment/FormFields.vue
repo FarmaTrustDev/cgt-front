@@ -119,7 +119,7 @@
               @change="handleChange"
             >
               <a-select-option
-                v-for="country in countryCodeList"
+                v-for="country in countries"
                 :key="country.iso" :value="country.iso + country.countryCode"
               >
                 {{ country.iso }}{{ country.countryCode }}
@@ -613,9 +613,9 @@ export default {
         this.countryCodeList = response.data
       })
     },
-    searchCountryCode(countrycode) {
-      const params = { countryCode: countrycode }
-      this.selectCountries(params)
+    searchCountryCode(params) {
+      const param = { countryCode: params, iso : params }
+      this.selectCountries(param)
       if (!isEmpty(params)) {
         this.form.setFieldsValue({ countryCode: this.countries[0].iso })
       }
