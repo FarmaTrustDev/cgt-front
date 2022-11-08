@@ -82,6 +82,7 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           min="0"
+          class="patient-phone-field"
         >
           <!-- <a-input
             v-decorator="[
@@ -574,13 +575,6 @@ export default {
     }
   },
   methods: {
-    validateEmail() {
-      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-        this.msg = ''
-      } else {
-        this.msg = 'Please enter a valid email'
-      }
-    },
     filterOption,
     disabledDate: _disabledFutureDate,
     fetchCountries(params = {}) {
@@ -676,52 +670,5 @@ export default {
 .ant-form-vertical .ant-form-item {
   padding-bottom: 1px;
 }
-.ant-input-group.ant-input-group-compact > *:first-child,
-.ant-input-group.ant-input-group-compact
-  > .ant-select:first-child
-  > .ant-select-selection,
-.ant-input-group.ant-input-group-compact
-  > .ant-calendar-picker:first-child
-  .ant-input,
-.ant-input-group.ant-input-group-compact
-  > .ant-select-auto-complete:first-child
-  .ant-input,
-.ant-input-group.ant-input-group-compact
-  > .ant-cascader-picker:first-child
-  .ant-input,
-.ant-input-group.ant-input-group-compact
-  > .ant-mention-wrapper:first-child
-  .ant-mention-editor,
-.ant-input-group.ant-input-group-compact
-  > .ant-time-picker:first-child
-  .ant-time-picker-input {
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-}
-.ant-input-group.ant-input-group-compact > *:last-child,
-.ant-input-group.ant-input-group-compact
-  > .ant-select:last-child
-  > .ant-select-selection,
-.ant-input-group.ant-input-group-compact
-  > .ant-calendar-picker:last-child
-  .ant-input,
-.ant-input-group.ant-input-group-compact
-  > .ant-select-auto-complete:last-child
-  .ant-input,
-.ant-input-group.ant-input-group-compact
-  > .ant-cascader-picker:last-child
-  .ant-input,
-.ant-input-group.ant-input-group-compact
-  > .ant-cascader-picker-focused:last-child
-  .ant-input,
-.ant-input-group.ant-input-group-compact
-  > .ant-mention-wrapper:last-child
-  .ant-mention-editor,
-.ant-input-group.ant-input-group-compact
-  > .ant-time-picker:last-child
-  .ant-time-picker-input {
-  border-right-width: 1px;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
+
 </style>
