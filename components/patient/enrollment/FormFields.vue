@@ -175,7 +175,7 @@
       </a-col>
       </a-row>
       <a-row>
-      <a-col :span="8">
+      <a-col :span="12">
         <a-form-item
           :label="translation.Gende_1_637"
           :label-col="{ span: 24 }"
@@ -205,7 +205,7 @@
           </a-select>
         </a-form-item></a-col
       >
-      <a-col :span="8">
+      <a-col :span="12">
         <a-form-item
           :label="translation.BloodType_2_635"
           :label-col="{ span: 24 }"
@@ -234,8 +234,9 @@
           </a-select>
         </a-form-item></a-col
       >
-    
-      <a-col :span="8">
+    </a-row>
+    <a-row>
+      <a-col :span="12">
         <a-form-item
           :label="translation['Heigh(cm)*_2_641'] + '*'"
           :label-col="{ span: 24 }"
@@ -259,9 +260,9 @@
             :placeholder="translation['Heigh(cm)*_2_641']"
           /> </a-form-item
       ></a-col>
-      </a-row>
-      <a-row>
-      <a-col :span="8">
+      
+      
+      <a-col :span="12">
         <a-form-item
           :label="translation['Weigh(kg)*_2_639'] + '*'"
           :label-col="{ span: 24 }"
@@ -286,9 +287,9 @@
           />
         </a-form-item>
       </a-col>
-     
-    
-      <a-col :span="16">
+    </a-row> 
+    <a-row>
+      <a-col :span="24">
         <a-form-item
           :label="translation.Aller_1_643"
           :label-col="{ span: 24 }"
@@ -565,7 +566,6 @@ export default {
   },
   mounted() {
     this.fetchCountries()
-    this.fetchCountriesCode()
   },
 
   updated() {
@@ -607,11 +607,6 @@ export default {
     },
     searchCountries(name, b) {
       this.fetchCountries({ name })
-    },
-    fetchCountriesCode() {
-      CountryServices.getCountryCodeList().then((response) => {
-        this.countryCodeList = response.data
-      })
     },
     searchCountryCode(params) {
       const param = { countryCode: params, iso : params }
@@ -660,5 +655,4 @@ export default {
 .ant-form-vertical .ant-form-item {
   padding-bottom: 1px;
 }
-
 </style>

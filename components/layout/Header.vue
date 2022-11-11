@@ -75,11 +75,12 @@
           {{ translation.first }}
           <a-select
             :default-value="isEmpty(selectedLanguage) ? 'en' : selectedLanguage"
-            style="width: 120px"
+            style="width: 130px"
             @change="selectLanguage"
           >
             <a-select-option v-for="language in languages" :key="language.id">
               {{ language.name }}
+              <img :src="getImageUrl('web/flags/'+ language.flag)" style="vertical-align:middle"  />
             </a-select-option>
           </a-select>
         </div>
@@ -111,11 +112,11 @@ export default {
   data() {
     return {
       languages: [
-        { id: 'en', name: 'English' },
-        { id: 'de', name: 'German' },
-        { id: 'za', name: 'Chinese' },
-        { id: 'ar', name: 'Arabic' },
-        { id: 'fr', name: 'French' },
+        { id: 'en', name: 'English' , flag: 'uk.png'},
+        { id: 'de', name: 'German' , flag: 'de.png'},
+        { id: 'za', name: 'Chinese' , flag: 'cn.png'},
+        { id: 'ar', name: 'Arabic' , flag: 'sa.png'},
+        { id: 'fr', name: 'French' , flag: 'fr.png'},
       ],
       lang: null,
       notificationCount: 0,
