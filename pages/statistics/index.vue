@@ -1,16 +1,19 @@
 <template>
   <div class="container manf-stats">
-    <div class="page-header clearfix">
-    <div class="page-title mt-25 mb-15">{{translation.Stati_1_19}}</div>
+    <div
+      class="page-header clearfix"
+      
+    >
+      <div class="page-title mt-25 mb-15">{{ translation.Stati_1_19 }}</div>
     </div>
-    <a-card :bordered="false" class="grey-card">
-        <a-col :md="11" class="mtminus-6">
-          <treatmentStats />
-        </a-col>
-        <a-col :span="1"></a-col>
-        <a-col :md="12" class="mtminus-5">
-          <hospitalStats />
-        </a-col>
+    <a-card :bordered="false" class="grey-card" style="padding-top: 50px; padding-bottom: 50px">
+      <a-col :md="11" class="mtminus-6">
+        <treatmentStats />
+      </a-col>
+      <a-col :span="1"></a-col>
+      <a-col :md="12" class="mtminus-5">
+        <hospitalStats />
+      </a-col>
     </a-card>
   </div>
 </template>
@@ -22,17 +25,17 @@ export default {
   data() {
     return {
       loading: false,
-      organizationType:`${this.$store.getters.getUser}`,
+      organizationType: `${this.$store.getters.getUser}`,
     }
   },
   methods: {},
-  computed:{
+  computed: {
     user() {
       return this.$store.getters.getUser
     },
     translation() {
       return this.$store.getters.getTranslation
     },
-  },  
+  },
 }
 </script>
