@@ -52,7 +52,8 @@
           />
         </a-card>
 
-        <a-card v-else :bordered="false" class="mt-15 default-card h-tabs">
+        <a-card v-else :bordered="false" class="mt-15 default-card h-tabs manf-detail-list">
+          <h1 class="heading"><b class="ml-5">Manufacture Detail</b></h1>
           <BagDetail
             v-if="activeTab === 'INBOUND_SHIPMENT'"
             :treatment="entity"

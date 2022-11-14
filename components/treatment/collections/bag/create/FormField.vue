@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="add-bag-modal">
     <a-form-item :label="translation.ColleDate_3_290" class="pb-0">
       <a-date-picker
         v-decorator="[
