@@ -43,3 +43,15 @@ a {
 // .add-new-ticket-form {
 
 // }
+.manf-detail-list {
+  table {
+    tr {
+      td {
+        border-right: 0 !important;
+        border-left: 0 !important;
+        border-top: 0 !important;
+        border-bottom: 1px solid #ececec !important;
+      }
+    }
+  }
+}
