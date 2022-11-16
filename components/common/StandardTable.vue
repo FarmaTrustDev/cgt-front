@@ -2,11 +2,12 @@
   <div>
     <a-table
       :loading="loading"
-      :pagination="showPagination"
+      :pagination="pagination"
       :columns="columns"
       :data-source="shouldUpdate ? [...dumpData] : [...data]"
       class="rounded-table"
       :class="{ 'patient-table': patient }"
+
     >
       <template slot="customTitle">
         <div class="text-left treatment-title">
@@ -221,10 +222,11 @@
       <span slot="screeningId" slot-scope="text, record, index">
         {{index + 1}}
       </span>
-      <span slot="upsertDropdown" slot-scope="text, record">
-        <a-dropdown>
-          <a-button class="action-button" @click="preventDefault">
-            <b><a-icon type="more" /></b>
+      <span slot="upsertDropdown" slot-scope="text, record" class="manf-coll-admin-btn">
+        <a-dropdown >
+          <a-button class="action-button " @click="preventDefault">
+            <!-- <b><a-icon type="more" /></b> -->
+            {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="1" @click="clickUpdate(record)">
@@ -610,7 +612,16 @@ export default {
       cancelModalTitle: 'Cancel Treatment',
       pauseModalTitle: 'Pause Treatment',
       patientHideModal: false,
-      patientId : ''
+      patientId : '',
+      current: 1,
+      pagination: {
+        onChange: page => {
+        this.setCurrentPage(page , 10)
+        this.current = page
+        localStorage.setItem('patient_list_current_page', this.current)
+        },
+        pageSize: 10,
+      },
       // pagination: {},
     }
   },
@@ -639,8 +650,13 @@ export default {
     } else {
       this.data = this.dumpData
     }
+    if(localStorage.patient_list_current_page)
+    {
+      this.current = localStorage.patient_list_current_page
+    }
   },
   methods: {
+    
     hidePatientModal(e,record)
     {
       this.patientId = record
@@ -717,8 +733,10 @@ export default {
           if (response.data && response.data.data) {
             this.data = response.data.data
             this.setPagination(response.data)
+            this.setCurrentPage(this.current, 10)
           } else {
             this.setPagination(response.data)
+            this.setCurrentPage(this.current, 10)
             this.data = response.data
           }
         })
@@ -727,6 +745,14 @@ export default {
           this.$emit('finally')
           this.loading = false
         })
+    },
+    setCurrentPage(current, pageSize)
+    {
+      const pagination = { ...this.pagination };
+            pagination.current = current;
+            pagination.page = current;
+            pagination.pageSize = pageSize;
+            this.pagination = pagination;
     },
     getDataApiService() {
       return isEmpty(this.fetchFrom)

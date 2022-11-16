@@ -5,12 +5,12 @@
         v-decorator="[
           'name',
           {
-            rules: [{ required: true, message: 'Please input Process!' }],
+            rules: [{ required: true, message: 'Please input Process' }],
             initialValue: collection.name,
           },
         ]"
         size="large"
-        placeholder="input Process!"
+        placeholder="Enter Process Step"
       />
 
       <a-input
