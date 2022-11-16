@@ -2,12 +2,12 @@
   <div>
     <a-table
       :loading="loading"
-      :pagination="pagination"
+      :pagination="showPagination"
       :columns="columns"
       :data-source="shouldUpdate ? [...dumpData] : [...data]"
       class="rounded-table"
       :class="{ 'patient-table': patient }"
-
+      @change="onChange"
     >
       <template slot="customTitle">
         <div class="text-left treatment-title">
@@ -614,14 +614,6 @@ export default {
       patientHideModal: false,
       patientId : '',
       current: 1,
-      pagination: {
-        onChange: page => {
-        this.setCurrentPage(page , 10)
-        this.current = page
-        localStorage.setItem('patient_list_current_page', this.current)
-        },
-        pageSize: 10,
-      },
       // pagination: {},
     }
   },
@@ -656,7 +648,10 @@ export default {
     }
   },
   methods: {
-    
+    onChange(current)
+        {
+            localStorage.setItem('patient_list_current_page',current.current)
+        }, 
     hidePatientModal(e,record)
     {
       this.patientId = record
@@ -733,10 +728,9 @@ export default {
           if (response.data && response.data.data) {
             this.data = response.data.data
             this.setPagination(response.data)
-            this.setCurrentPage(this.current, 10)
+            this.pagination.current = this.current
           } else {
             this.setPagination(response.data)
-            this.setCurrentPage(this.current, 10)
             this.data = response.data
           }
         })
@@ -745,14 +739,6 @@ export default {
           this.$emit('finally')
           this.loading = false
         })
-    },
-    setCurrentPage(current, pageSize)
-    {
-      const pagination = { ...this.pagination };
-            pagination.current = current;
-            pagination.page = current;
-            pagination.pageSize = pageSize;
-            this.pagination = pagination;
     },
     getDataApiService() {
       return isEmpty(this.fetchFrom)
