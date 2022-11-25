@@ -11,7 +11,7 @@
       @cancel="showModal(false)"
       @ok="showModal(false)"
     >
-      <a-form :form="form" @submit="onSubmit">
+      <a-form :form="form" class="support-add-modal" @submit="onSubmit">
         <a-row :gutter="20">
           <a-col :span="12">
             <a-form-item v-if="!isCreated" label="Patient">
@@ -274,7 +274,7 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <a-row :gutter="20" >
+        <a-row :gutter="20">
           <a-col>
             <a-form-item label="Stackholders">
               <a-select
@@ -365,9 +365,10 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-      
   },
-  mounted() {this.fetchPatient()},
+  mounted() {
+    this.fetchPatient()
+  },
   methods: {
     filterOption,
     showModal(show) {
