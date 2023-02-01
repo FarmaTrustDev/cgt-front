@@ -37,7 +37,7 @@
         }"
       >
         <template slot="role" slot-scope="role">
-           <span class="new-treatment-status-btn" style="border-radius:25px"> {{role}} </span>
+           <span :class="getRoleColorCode(role)" style="border-radius:25px"> {{role}} </span>
         </template>
         <template slot="action" slot-scope="action">
           <a-dropdown>
@@ -216,6 +216,16 @@ export default {
         this.fetch()
       }
     },
+    getRoleColorCode(role)
+    {
+      if(role==='Hospital Admin' || role=== 'Manufacturer Admin' || role==='Smart_Lab_Admin' || role==='Logistic Admin')
+      {
+        return 'bg-color-manfAdmin'
+      }
+      else{
+        return 'new-treatment-status-btn'
+      }
+    },
     deleteUser(record) {
       UserServices.destroy(record)
         .then((response) => {
@@ -229,3 +239,23 @@ export default {
   },
 }
 </script>
+<style scoped>
+.new-treatment-status-btn {
+  padding: 13px 15px;
+  background-color: #fff8e5;
+  height: 35px !important;
+  border: 0;
+  width: 87px;
+}
+.bg-color-manfAdmin{
+  padding: 13px 15px;
+  background-color: #ffdbdb;
+  height: 35px !important;
+  border: 0;
+  width: 87px;
+}
+span.bg-color-manfAdmin {
+    background-color: #ffdbdb;
+    padding: 12px 15px;
+}
+</style>

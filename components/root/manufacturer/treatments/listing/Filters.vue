@@ -18,7 +18,7 @@
 </template>
 <script>
 import moment from 'moment';
-import { getFormattedMoment } from '~/services/Helpers/MomentHelpers'
+import { getFormattedMoment, _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 import {STANDARD_UK_DATE_FORMAT} from '~//services/Constant/DateTime'
 import { isEmpty } from '~/services/Utilities'
 export default {
@@ -103,14 +103,13 @@ export default {
     },
     getCurrentDate(date)
     {
-      const current = date;
-      const futureDate = current.getFullYear()+'-'+(current.getMonth()+2)+'-'+current.getDate();
+      const futureDate = _getFutureMomentStandardFormatted(2, 'month');
       return futureDate
     },
     getPreviousDate(date)
     {
       const current = date;
-      const previousDate = current.getFullYear()+'-'+(current.getMonth()-1)+'-'+current.getDate();
+      const previousDate = current.getFullYear()+'-'+(current.getMonth())+'-'+current.getDate();
       return previousDate
     }
   },

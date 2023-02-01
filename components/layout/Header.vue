@@ -142,7 +142,7 @@ export default {
     this.genericNotificationHandler()
     this.fetchUnreadMessages()
     this.checkImage()
-    // this.uploadTranslations()
+    this.uploadTranslations()
     // this.downloadTranslations()
   },
   methods: {

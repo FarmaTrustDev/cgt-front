@@ -99,7 +99,7 @@
             ]"
             @change="onChange"
           /> -->
-          <a-input-group compact>
+          <a-input-group compact class="no-arrow-on-number-field">
             <a-select
               v-decorator="[
                 'countryCode',
@@ -175,7 +175,7 @@
       </a-col>
       </a-row>
       <a-row>
-      <a-col :span="8">
+      <a-col :span="12">
         <a-form-item
           :label="translation.Gende_1_637"
           :label-col="{ span: 24 }"
@@ -205,7 +205,7 @@
           </a-select>
         </a-form-item></a-col
       >
-      <a-col :span="8">
+      <a-col :span="12">
         <a-form-item
           :label="translation.BloodType_2_635"
           :label-col="{ span: 24 }"
@@ -234,8 +234,9 @@
           </a-select>
         </a-form-item></a-col
       >
-    
-      <a-col :span="8">
+    </a-row>
+    <a-row>
+      <a-col :span="12">
         <a-form-item
           :label="translation['Heigh(cm)*_2_641'] + '*'"
           :label-col="{ span: 24 }"
@@ -259,9 +260,9 @@
             :placeholder="translation['Heigh(cm)*_2_641']"
           /> </a-form-item
       ></a-col>
-      </a-row>
-      <a-row>
-      <a-col :span="8">
+      
+      
+      <a-col :span="12">
         <a-form-item
           :label="translation['Weigh(kg)*_2_639'] + '*'"
           :label-col="{ span: 24 }"
@@ -286,9 +287,9 @@
           />
         </a-form-item>
       </a-col>
-     
-    
-      <a-col :span="16">
+    </a-row>
+      <a-row>
+      <a-col :span="24">
         <a-form-item
           :label="translation.Aller_1_643"
           :label-col="{ span: 24 }"
@@ -594,7 +595,8 @@ export default {
     {
       if(!isEmpty(e))
       {
-        const index = e.indexOf(")");  
+        const index = e.indexOf(")"); 
+        this.phoneNo = e.substr(index + 1) 
         return e.substr(index + 1);
       }
     },
@@ -660,5 +662,4 @@ export default {
 .ant-form-vertical .ant-form-item {
   padding-bottom: 1px;
 }
-
 </style>

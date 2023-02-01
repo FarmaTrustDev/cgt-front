@@ -136,6 +136,13 @@ function basicDetail(){
   })
 }
 
+function userWithOrganizationTypeId(params = {}) {
+  return request({
+    url: `${baseApi}/user-with-organization-type-id`,
+    params,
+  })
+}
+
 const UserServices = {
   detail,
   adminMenu,
@@ -158,6 +165,7 @@ const UserServices = {
   getSearchUser,
   sendEmailToHospitals,
   basicDetail,
+  userWithOrganizationTypeId
 }
 
 export default UserServices

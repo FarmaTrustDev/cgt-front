@@ -96,7 +96,6 @@ export default {
   },   
   methods:{
     getDateFormat(date){
-      console.log(date, 'date')
      return moment(String(date)).format('hh:mm Do MMMM YYYY')
     },
     getPuid(puid)

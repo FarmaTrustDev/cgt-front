@@ -21,7 +21,7 @@
 .slots-main {
   .ant-select-selection__placeholder {
     display: block !important;
-    color: black;
+    // color: black;
   }
   // .note-area {
 
@@ -102,7 +102,7 @@
 .ant-select-selection__rendered,
 .ant-select-selection-selected-value {
   line-height: 35px;
-  color: #909090;
+  color: #050505;
 }
 
 .ant-input {
@@ -435,4 +435,14 @@ input#login_password:focus {
     right: 1em;
     transform: rotate(-45deg);
   }
+}
+.no-arrow-on-number-field{
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 }
