@@ -99,7 +99,7 @@
             ]"
             @change="onChange"
           /> -->
-          <a-input-group compact>
+          <a-input-group compact class="no-arrow-on-number-field">
             <a-select
               v-decorator="[
                 'countryCode',
@@ -113,7 +113,7 @@
                   ],
                 },
               ]"
-              style="width: 50%"
+              style="width: 40%"
               :show-search="true"
               @search="searchCountryCode"
               @change="handleChange"
@@ -138,8 +138,10 @@
                   ],
                 },
               ]"
-              style="width: 50%"
+              
+              style="width: 60%"
               placeholder="123456789"
+              type="number"
             />
           </a-input-group>
         </a-form-item>
@@ -655,4 +657,5 @@ export default {
 .ant-form-vertical .ant-form-item {
   padding-bottom: 1px;
 }
+
 </style>

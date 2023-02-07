@@ -203,7 +203,7 @@ export default {
   margin: auto;
   height: 55px;
   overflow: hidden;
-  background: #ececec;
+  background: #f9f9f9;
   border-radius: 28px;
   padding: 0 !important;
 }
