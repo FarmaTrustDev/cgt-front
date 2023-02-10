@@ -35,64 +35,8 @@ export default {
   components: {PageLayout},
   data() {
     return {
-      userAdminMenu: [
-        {
-            "id":0,
-            "initial":null,
-            "name":"Summary By Asset",
-            "to":"/blyott/report/assetSummary",
-            "key":"1",
-            "icon":"http://localhost:22462/icons/administration.svg"
-        },
-        {
-            "id":1,
-            "initial":null,
-            "name":"Summary By Site",
-            "to":"/blyott/report/siteSummary",
-            "key":"2",
-            "icon":"http://localhost:22462/icons/administration.svg"
-        },
-        {
-            "id":2,
-            "initial":null,
-            "name":"Lab A",
-            "to":"/blyott/report/labA",
-            "key":"3",
-            "icon":"http://localhost:22462/icons/administration.svg"
-        },
-        {
-            "id":3,
-            "initial":null,
-            "name":"Lab B",
-            "to":"/blyott/report/labB",
-            "key":"4",
-            "icon":"http://localhost:22462/icons/administration.svg"
-        },
-        {
-            "id":4,
-            "initial":null,
-            "name":"Office",
-            "to":"/blyott/report/office",
-            "key":"5",
-            "icon":"http://localhost:22462/icons/administration.svg"
-        },
-        {
-            "id":5,
-            "initial":null,
-            "name":"Recently Used Lab A",
-            "to":"/blyott/report/recentLabA",
-            "key":"6",
-            "icon":"http://localhost:22462/icons/administration.svg"
-        },
-        {
-            "id":6,
-            "initial":null,
-            "name":"Recently Used Lab B",
-            "to":"/blyott/report/recentLabB",
-            "key":"7",
-            "icon":"http://localhost:22462/icons/administration.svg"
-        }
-      ],
+      locations:[],
+      userAdminMenu:[],
     }
   },
   computed: {
@@ -105,12 +49,12 @@ export default {
     },
   },
   mounted() {
-    // this.userDetail()
+    this.userDetail()
   },
   methods: {
     userDetail() {
-      UserServices.adminMenu().then((response) => {
-        this.userAdminMenu = response.data
+      UserServices.otherMenu().then((response) => {
+        this.userAdminMenu = response.data.result
       })
     },
   },

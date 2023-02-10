@@ -1,39 +1,31 @@
 <template>
-    <page-layout
-      :create="false"
-      :bordered="false"
-      title="Report Office"
-      class="container"
-    >
-      <template slot="content">
-        <a-row v-for="asset in assetD" :key="asset.name">
-            <h2>{{ asset[0].name }}</h2>
-            <a-table
-            :columns="columns"
-            :data-source="asset"
-            class="rounded-table"
-            :pagination="false"
-            >
-            </a-table>
-        </a-row>
-      </template>
-    </page-layout>
-  </template>
+  <div>
+    <h2 class="heading pl-0">{{ locationName }}</h2>
+      <a-row v-for="asset in assetD" :key="asset.name">
+          <h4>{{ asset[0].name }}</h4>
+          <a-table
+          :columns="columns"
+          :data-source="asset"
+          class="rounded-table"
+          :pagination="false"
+          >
+          </a-table>
+      </a-row>
+  </div>
+</template>
 <script>
-import PageLayout from '~/components/layout/PageLayout'
 import AssetServices from '~/services/API/AssetServices'
+import LocationServices from '~/services/API/LocationServices'
 import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
 
 export default {
-  components: {
-    'page-layout': PageLayout,
-  },
   mixins:[routeHelpers],
   data() {
     return {
       data: [],
       assetD:[],
+      locationName:'',
       assetData:[
         [{
             name:'Isopropanol (67-63-0)',
@@ -120,12 +112,20 @@ export default {
     },
   },
   mounted() {
-    this.fetchAsset()
+    const entityId = this.$route.params.id
+    this.fetchAsset(entityId)
+    this.fecthLocation(entityId)
   },
   methods: {
-    fetchAsset(){
-        const a=86069
-        AssetServices.GetSingleAsset(a)
+    fecthLocation(entityId){
+      LocationServices.fetchBlyottLocationByCode(entityId)
+      .then((response)=>{
+        this.locationName=response.LocationName
+      })
+    },
+    fetchAsset(entityId){
+        // const a=86069
+        AssetServices.GetSingleAsset(entityId)
         .then((response) => {
           // this.assetD=response.data.data
             for(let i=0;i<=response.data.data.length;i++){

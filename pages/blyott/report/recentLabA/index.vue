@@ -1,13 +1,8 @@
 <template>
-  <page-layout
-    :create="false"
-    :bordered="false"
-    title="Recent Report Lab A"
-    class="container"
-  >
-    <template slot="content">
+  <div>
+    <h2 class="heading pl-0">{{ locationName }}</h2>
       <a-row v-for="asset in assetD" :key="asset.name">
-          <h2>{{ asset[0].name }}</h2>
+          <h4>{{ asset[0].name }}</h4>
           <a-table
           :columns="columns"
           :data-source="asset"
@@ -16,24 +11,21 @@
           >
           </a-table>
       </a-row>
-    </template>
-  </page-layout>
+  </div>
 </template>
 <script>
-import PageLayout from '~/components/layout/PageLayout'
 import AssetServices from '~/services/API/AssetServices'
+import LocationServices from '~/services/API/LocationServices'
 import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
 
 export default {
-components: {
-  'page-layout': PageLayout,
-},
 mixins:[routeHelpers],
 data() {
   return {
     data: [],
     assetD:[],
+    locationName:'',
     assetData:[
       [{
           name:'Isopropanol (67-63-0)',
@@ -120,12 +112,20 @@ computed: {
   },
 },
 mounted() {
-  this.fetchAsset()
+  const entityId = this.$route.params.id
+    this.fetchAsset(entityId)
+    this.fecthLocation(entityId)
 },
 methods: {
-  fetchAsset(){
-      const a=86069
-      AssetServices.GetDetailAsset(a)
+  fecthLocation(entityId){
+      LocationServices.fetchBlyottLocationByCode(entityId)
+      .then((response)=>{
+        this.locationName=response.LocationName
+      })
+    },
+  fetchAsset(entityId){
+      // const a=86069
+      AssetServices.GetDetailAsset(entityId)
       .then((response) => {
         // this.assetD=response.data.data
           for(let i=0;i<=response.data.data.length;i++){

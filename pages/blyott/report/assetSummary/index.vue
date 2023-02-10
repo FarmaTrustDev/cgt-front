@@ -36,11 +36,6 @@ export default {
       loading: true,
       columns: [
         {
-          title: 'Chemical Code',
-          dataIndex: 'code',
-          key: 'code',
-        },
-        {
           title: 'Volume',
           dataIndex: 'volume',
           key: 'volume',
