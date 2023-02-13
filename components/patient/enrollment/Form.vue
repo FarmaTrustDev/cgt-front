@@ -113,6 +113,9 @@ export default {
           const myString = response.data.phone
           const result = myString.match(/\((.*)\)/)
           this.countryIso = result !== null ? result[1] : null
+          const index = myString.indexOf(")");  
+          const ph = myString.substr(index + 1);
+          response.data.phone = ph.split(" ").join("");
           this.patient = response.data
           // this.patientPhone = '(' + this.countryIso + ')'
           this.isCreated = true

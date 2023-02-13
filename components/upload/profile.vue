@@ -2,12 +2,13 @@
   <div class="clearfix">
     <a-upload
       list-type="picture-card"
-      :file-list="fileList"
-      :before-upload="beforeUpload"
-      :action="handleChange"
+      :default-file-list="fileList"
       :remove="handleRemove"
+      :before-upload="beforeUpload"
+      :showPreviewIcon="true"
+      :action="handleChange"
       @change="handleChange"
-    >
+      >
       <div v-if="fileList.length < 1">
         <a-icon type="plus" />
         <div class="ant-upload-text">Upload</div>
@@ -17,7 +18,6 @@
 </template>
 <script>
 import { isEmpty } from '~/services/Helpers'
-
 export default {
   props: {
     extensions: { type: Array, default: () => [] },
@@ -48,9 +48,9 @@ export default {
   },
   methods: {
     isEmpty,
-    handleCancel() {
-      this.previewVisible = false
-    },
+    // handleCancel() {
+    //   this.previewVisible = false
+    // },
     beforeUpload(file) {
       if (this.isExtensionAllow(file)) {
         this.$emit('handleChange', [file])
@@ -76,6 +76,7 @@ export default {
       if (!isAllowedExtension) {
         this.$message.error('Extension not allow')
         this.fileList = []
+        return true
       }
       this.extensionAllowed = isAllowedExtension
       return isAllowedExtension

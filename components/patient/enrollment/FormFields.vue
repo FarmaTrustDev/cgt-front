@@ -289,8 +289,8 @@
           />
         </a-form-item>
       </a-col>
-    </a-row> 
-    <a-row>
+    </a-row>
+      <a-row>
       <a-col :span="24">
         <a-form-item
           :label="translation.Aller_1_643"
@@ -596,7 +596,8 @@ export default {
     {
       if(!isEmpty(e))
       {
-        const index = e.indexOf(")");  
+        const index = e.indexOf(")"); 
+        this.phoneNo = e.substr(index + 1) 
         return e.substr(index + 1);
       }
     },
@@ -657,5 +658,4 @@ export default {
 .ant-form-vertical .ant-form-item {
   padding-bottom: 1px;
 }
-
 </style>

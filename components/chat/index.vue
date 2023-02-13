@@ -53,6 +53,7 @@
       width="40%"
       @cancel="showUsersModal(false)"
     >
+    
       <UserList @getUser="getUser" />
     </a-modal>
   </div>
@@ -80,6 +81,7 @@ export default {
       scrollMethod: () => {},
       groupModal: false,
       newConversations: [],
+      
     }
   },
   computed: {
@@ -234,6 +236,7 @@ export default {
     loadFromChat(notification) {
       this.getConversation(notification.data)
     },
+
   },
 }
 </script>

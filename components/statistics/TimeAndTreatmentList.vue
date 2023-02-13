@@ -65,7 +65,7 @@
                       slot="title"
                       @click="
                         handleSidebarKey(
-                          `/manufacturer/treatments/process/${item.globalId}`,4
+                          `/manufacturer/treatments/process/${item.globalId}?view=INBOUND_SHIPMENT`,4
                         )
                       "
                       >

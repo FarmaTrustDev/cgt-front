@@ -179,6 +179,7 @@
             size="large"
             placeholder="Duration"
             class="duration_field"
+            :disabled="true"
           ></a-input-number> </a-form-item
       ></a-col>
     </a-row>
