@@ -113,7 +113,7 @@
                   ],
                 },
               ]"
-              style="width: 50%"
+              style="width: 40%"
               :show-search="true"
               @search="searchCountryCode"
               @change="handleChange"
@@ -138,8 +138,10 @@
                   ],
                 },
               ]"
-              style="width: 50%"
+              
+              style="width: 60%"
               placeholder="123456789"
+              type="number"
             />
           </a-input-group>
         </a-form-item>
@@ -566,7 +568,6 @@ export default {
   },
   mounted() {
     this.fetchCountries()
-    this.fetchCountriesCode()
   },
 
   updated() {
@@ -609,11 +610,6 @@ export default {
     },
     searchCountries(name, b) {
       this.fetchCountries({ name })
-    },
-    fetchCountriesCode() {
-      CountryServices.getCountryCodeList().then((response) => {
-        this.countryCodeList = response.data
-      })
     },
     searchCountryCode(params) {
       const param = { countryCode: params, iso : params }

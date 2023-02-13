@@ -81,9 +81,10 @@ import notifications from '~/mixins/notifications'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 import imagesHelper from '~/mixins/images-helper'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: { BagForm, Bag },
-  mixins: [notifications, imagesHelper],
+  mixins: [notifications, imagesHelper, routeHelpers],
   props: {
     treatment: { required: true, type: Object },
     enabled: { required: true, type: Boolean, default: false },
@@ -139,6 +140,8 @@ export default {
               EVENT_FETCH_TREATMENT_DETAIL,
               this.treatment.globalId
             )
+            this.goto('/hospital/patients')
+            this.success('Collection step has been completed')
           }
         )
       } else {

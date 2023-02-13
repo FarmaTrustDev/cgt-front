@@ -43,3 +43,20 @@ a {
 // .add-new-ticket-form {
 
 // }
+.manf-detail-list {
+  table {
+    tr {
+      td {
+        color: #000;
+        border-right: 0 !important;
+        border-left: 0 !important;
+        border-top: 0 !important;
+        border-bottom: 1px solid #ececec !important;
+        border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+      }
+    }
+  }
+}

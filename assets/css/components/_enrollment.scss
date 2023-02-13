@@ -253,7 +253,7 @@
       width: 40px;
       display: inline-block;
       vertical-align: middle;
-      margin-right: 1px;
+      margin-right: 10px;
       background-size: 100%;
       background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg');
       border-top: none;
@@ -379,6 +379,7 @@
 .ant-time-picker-input {
 border-top-left-radius: 20px;
 border-bottom-left-radius: 20px;
+padding-bottom: 1px;
 }
 .ant-input-group.ant-input-group-compact > *:last-child,
 .ant-input-group.ant-input-group-compact

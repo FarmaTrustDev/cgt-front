@@ -70,7 +70,7 @@
 
   .ant-btn-drop-down {
     margin-top: auto;
-    bottom: -5px;
+    bottom: -3px;
   }
 
   .container-steps-div {
@@ -369,7 +369,27 @@
       }
     }
   }
+  .ant-steps-item-active {
+    background-color: #f2f5fb;
+    .ant-steps-item-content {
+      // margin-left: 5px;
+      &::before {
+        // margin: 0;
+        // margin-left: 15px;
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
+        background-repeat: no-repeat;
+      }
+    }
+  }
 
+  .afterCare {
+    background-color: #d1f2dc !important;
+    .ant-steps-item-content {
+      &::before {
+        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
+      }
+    }
+  }
   .ant-steps-item-finish-large {
     background: #d1f2dc;
     margin-left: 2%;
@@ -389,19 +409,6 @@
         width: 35px;
         height: 35px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/status-done-circle.svg);
-      }
-    }
-  }
-
-  .ant-steps-item-active {
-    background-color: #f2f5fb;
-    .ant-steps-item-content {
-      // margin-left: 5px;
-      &::before {
-        // margin: 0;
-        // margin-left: 15px;
-        background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
-        background-repeat: no-repeat;
       }
     }
   }
@@ -548,7 +555,7 @@
         font-weight: 400;
       }
       .date-time {
-        font: 16px poppins,sans-serif;
+        font: 16px poppins, sans-serif;
         color: black;
       }
     }
@@ -679,12 +686,12 @@
     }
   }
 }
-// 
+//
 // @media(max-width: 101%){
 //   .default-card.pills-tabs.green-on-update {
 //     .ant-tabs-nav-scroll {
 //       .ant-tabs-tab
 //         margin: 0;
 //       }
-//     } 
+//     }
 // }
