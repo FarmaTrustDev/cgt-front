@@ -114,7 +114,7 @@ export default {
             const data=response.Items[0]
             console.log(data)
             this.apiService.update(data).then((response)=>{
-                console.log(response)
+              this.goto(this.gotoLink)
             })
         })
         if (this.isFunction(this.afterCreate)) {
@@ -153,7 +153,7 @@ export default {
             const data=response.Items[0]
             console.log(data)
             this.apiService.create(data).then((response)=>{
-                console.log(response)
+              this.goto(this.gotoLink)
             })
         })
           if (this.isFunction(this.afterCreate)) {

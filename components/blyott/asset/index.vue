@@ -114,7 +114,7 @@ export default {
             console.log(data)
             data.locationId=locId
             this.apiService.update(data).then((response)=>{
-                console.log(response)
+              this.goto(this.gotoLink)
             })
         })
           if (this.isFunction(this.afterUpdate)) {

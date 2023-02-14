@@ -100,7 +100,7 @@
               data.id=cgtTagId
               console.log(data)
               this.apiService.update(data).then((response)=>{
-                  console.log(response)
+                this.goto(this.gotoLink)
             })
           })
             if (this.isFunction(this.afterUpdate)) {
@@ -125,7 +125,7 @@
               const data=JSON.parse(JSON.stringify(response))
               console.log(data)
               this.apiService.create(data).then((response)=>{
-                  console.log(response)
+                this.goto(this.gotoLink)
             })
           })
             if (this.isFunction(this.afterCreate)) {

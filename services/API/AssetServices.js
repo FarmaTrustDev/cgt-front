@@ -74,6 +74,14 @@ function startUsingAsset(data) {
   })
 }
 
+function tagAllocation(data) {
+  return request({
+    url: `${baseApi}/tagAllocation`,
+    data,
+    method: 'PUT',
+  })
+}
+
 function decommission(data) {
   return request({
     url: `${baseApi}/decommission`,
@@ -166,7 +174,8 @@ const AssetServices = {
     GetSingleAsset,
     GetDetailAsset,
     decommission,
-    startUsingAsset
+    startUsingAsset,
+    tagAllocation
   /* update,
   getById,
   get,

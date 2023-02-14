@@ -34,7 +34,7 @@
               </span>
             </div>
             <div slot="blyottTagId" slot-scope="value, row">
-              <span v-if="row.tagResponseDTO==null && row.endDate==null" :id="row.id" @click="goto(`/blyott/asset/${row.globalId}`)">
+              <span v-if="row.tagResponseDTO==null && row.endDate==null" :id="row.id" @click="goto(`/blyott/asset/report/allocation/allocateTag?id=${row.globalId}`)">
                 <div style="color:blue; font-weight:bold">Commission Asset</div>
               </span>
               <span v-else-if="row.tagResponseDTO!=null" :id="row.id">
