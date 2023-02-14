@@ -44,6 +44,10 @@ export default {
             const user = this.getStoreUserDetails();
             return user.roleName === "SMARTLAB_ADMIN";
         },
+        isIDMT(){
+            const user = this.getStoreUserDetails();
+            return user.roleName === "IDMT";
+        },
         isAdmin()
         {
             const user = this.getStoreUserDetails();
