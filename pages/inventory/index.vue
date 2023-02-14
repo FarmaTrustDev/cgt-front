@@ -11,7 +11,7 @@
 
       <inventory />
       <a-card :bordered="false" class="default-border-radius">
-        <h2 slot="title"><strong>{{translation.Compo_1_550}}</strong></h2>
+        <h2 slot="title"><strong>Consumables</strong></h2>
         <a-row :gutter="16">
           <consumables />
           <!-- <a-col :span="2"> </a-col>

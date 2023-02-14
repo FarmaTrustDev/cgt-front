@@ -3,10 +3,10 @@
     <h1 class="title">Patient Details</h1>
     <h3> Confirm Patient Details </h3>
     <a-card>
-      <a-row class="white-card-smart-lab">
-        <a-col :span="5" class="text-muted" >First Name: </a-col><a-col :span="7"><h3>{{patientDetail.firstName}}</h3></a-col>
-        <a-col :span="5" class="text-muted" >Last Name: </a-col><a-col :span="7"><h3>{{patientDetail.lastName}}</h3></a-col>
-      </a-row>
+        <a-row class="white-card-smart-lab">
+          <a-col :span="5" class="text-muted" >First Name: </a-col><a-col :span="7"><h3>{{patientDetail.firstName}}</h3></a-col>
+          <a-col :span="5" class="text-muted" >Last Name: </a-col><a-col :span="7"><h3>{{patientDetail.lastName}}</h3></a-col>
+        </a-row>
       <a-row class="white-card-smart-lab">
         <a-col :span="5" class="text-muted" >Email: </a-col><a-col :span="7"><h3>{{patientDetail.Email}}</h3></a-col>
         <a-col :span="5" class="text-muted" >Phone No: </a-col><a-col :span="7"><h3>{{patientDetail.phone}}</h3></a-col>
@@ -20,12 +20,12 @@
         <a-col :span="5" class="text-muted" >Height: </a-col><a-col :span="7"><h3>{{patientDetail.height}}</h3></a-col>
       </a-row>
         <a-row class="white-card-smart-lab">
-        <a-col :span="5" class="text-muted" >Weight: </a-col><a-col :span="7"><h3>{{patientDetail.weight}}</h3></a-col>
-        <a-col :span="5" class="text-muted" >Allergies: </a-col><a-col :span="7"><h3>{{patientDetail.allergies}}</h3></a-col>
+        <a-col :span="5" class="text-muted" >Weight: </a-col><a-col :span="7"><h3>{{patientDetail.weight !== null ? patientDetail.weight: 'N/A'}}</h3></a-col>
+        <a-col :span="5" class="text-muted" >Allergies: </a-col><a-col :span="7"><h3>{{patientDetail.allergies !== '' ? patientDetail.allergies: 'N/A'}}</h3></a-col>
       </a-row>
             <a-row class="white-card-smart-lab">
-        <a-col :span="5" class="text-muted" >Problem: </a-col><a-col :span="7"><h3>{{patientDetail.problem}}</h3></a-col>
-        <a-col :span="5" class="text-muted" >Medication: </a-col><a-col :span="7"><h3>{{patientDetail.medication}}</h3></a-col>
+        <a-col :span="5" class="text-muted" >Problem: </a-col><a-col :span="7"><h3>{{patientDetail.problem !== '' ? patientDetail.problem: 'N/A'}}</h3></a-col>
+        <a-col :span="5" class="text-muted" >Medication: </a-col><a-col :span="7"><h3>{{patientDetail.medication !== '' ? patientDetail.medication: 'N/A'}}</h3></a-col>
       </a-row>
             <a-row class="white-card-smart-lab">
         <a-col :span="5" class="text-muted" >Post Code: </a-col><a-col :span="7"><h3>{{patientDetail.postCode}}</h3></a-col>
