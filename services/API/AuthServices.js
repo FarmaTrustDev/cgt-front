@@ -1,7 +1,9 @@
 import { BASE_URL, BASE_API } from '../Constant'
 import request, { getAuthEvent } from '~/services/request'
+import requestBlyott, { getBlyottAuthEvent } from '~/services/requestBlyott'
 const baseUrl = `${BASE_URL}`
 const baseApi = `${BASE_API}/auth`
+const blyottApi = 'https://api.blyott.com'
 
 function login(data) {
   return request({
@@ -11,8 +13,28 @@ function login(data) {
   })
 }
 
+function blyottAuthentication(data) {
+  return requestBlyott({
+    url: `${blyottApi}/login`,
+    data,
+    method: 'POST',
+  })
+}
+
+function blyottAccessToken(data) {
+  return requestBlyott({
+    url: `${blyottApi}/getCredentialsWithRefreshToken`,
+    data,
+    method: 'POST',
+  })
+}
+
 function getBusEvent() {
   return getAuthEvent()
+}
+
+function getBlyottBusEvent() {
+  return getBlyottAuthEvent()
 }
 
 function logout(data = {}) {
@@ -74,9 +96,12 @@ const AuthService = {
   forgetpassword,
   resetPassword,
   getBusEvent,
+  getBlyottBusEvent,
   getActivationAuth,
   resetPasswordEmail,
-  getKeyWithEmail
+  getKeyWithEmail,
+  blyottAuthentication,
+  blyottAccessToken,
 }
 
 export default AuthService

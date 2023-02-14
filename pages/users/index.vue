@@ -5,26 +5,23 @@
     class="specific container page-search-input-container"
     :create="false"
   >
-  <template slot="headerMenus">
-        <!-- <h3 class="page-title ml-5 mb-1 float-left">
+    <template slot="headerMenus">
+      <!-- <h3 class="page-title ml-5 mb-1 float-left">
         {{ translation.UserNew_3_136 }}
       </h3> -->
-       <a-input
-          ref="userNameInput"
-          class=" page-search-input"
-          :placeholder="translation.Searcuser_2_404"
-          @change="searchUser"
-        >
-          <a-icon slot="prefix" type="search" />
-        </a-input>
-        <a-button
-          type="primary"
-          @click="goto('/users/create')"
-          >{{ translation.adduser_2_464 }}</a-button
-        >
-       
-      </template>
-  <div slot="content">    
+      <a-input
+        ref="userNameInput"
+        class="page-search-input"
+        :placeholder="translation.Searcuser_2_404"
+        @change="searchUser"
+      >
+        <a-icon slot="prefix" type="search" />
+      </a-input>
+      <a-button type="primary" @click="goto('/users/create')">{{
+        translation.adduser_2_464
+      }}</a-button>
+    </template>
+    <div slot="content">
       <a-table
         :columns="columns"
         :data-source="datasource"
@@ -36,6 +33,9 @@
           pageSizeOptions: ['10', '20', '30', '50', '100'],
         }"
       >
+      <template slot="role" slot-scope="role">
+           <span class="new-treatment-status-btn" style="border-radius:25px"> {{role}} </span>
+        </template>
         <template slot="action" slot-scope="action">
           <a-dropdown>
             <a-button class="action-button" @click="preventDefault">
@@ -56,46 +56,44 @@
                   @confirm="deleteUser(`${action.globalId}`)"
                 >
                 </a-popconfirm> -->
-                  <span >{{ translation.Delet_1_451 }}</span>
+                <span>{{ translation.Delet_1_451 }}</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </template>
       </a-table>
       <a-modal
-      :visible="userDeleteModal"
-      :footer="null"
-      class="error-model"
-      @cancel="userDelete(false, '')"
-    >
-      <center>
-        <p class="cross-img">
-          <span class="inner-mark">
-            <span class="line-left line"></span>
-            <span class="line-right line"></span>
-          </span>
-        </p>
-        <h3>
-          Are you sure you want to delete this user ?
-        </h3>
-        <footer class="mt-6">
-          <a-button
-            class="ant-btn ant-btn-primary"
-            style="padding: 5px 50px"
-            @click="userDeleteMethod()"
-            >Confirm</a-button
-          >
-          <a-button
-            class="ant-btn"
-            style="padding: 5px 50px"
-            type="danger"
-            @click="userDelete(false, '')"
-          >
-            Cancel
-          </a-button>
-        </footer>
-      </center>
-            </a-modal>
+        :visible="userDeleteModal"
+        :footer="null"
+        class="error-model"
+        @cancel="userDelete(false, '')"
+      >
+        <center>
+          <p class="cross-img">
+            <span class="inner-mark">
+              <span class="line-left line"></span>
+              <span class="line-right line"></span>
+            </span>
+          </p>
+          <h3>Are you sure you want to delete this user ?</h3>
+          <footer class="mt-6">
+            <a-button
+              class="ant-btn ant-btn-primary"
+              style="padding: 5px 50px"
+              @click="userDeleteMethod()"
+              >Confirm</a-button
+            >
+            <a-button
+              class="ant-btn"
+              style="padding: 5px 50px"
+              type="danger"
+              @click="userDelete(false, '')"
+            >
+              Cancel
+            </a-button>
+          </footer>
+        </center>
+      </a-modal>
     </div>
   </page-layout>
 </template>
@@ -134,6 +132,7 @@ export default {
           dataIndex: 'roleName',
           key: 'roleName',
           class: `user-role`,
+          scopedSlots: { customRender: 'role' },
         },
         {
           title: `${this.$store.getters.getTranslation.EmailAddre_2_140}`,
@@ -149,7 +148,7 @@ export default {
       userDeleteModal: false,
       loading: true,
       fullName: [],
-      userId: ''
+      userId: '',
     }
   },
   computed: {

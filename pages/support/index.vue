@@ -30,9 +30,9 @@
           >
             <template slot="tickets" slot-scope="id"> CKD-{{ id }} </template>
             <template slot="status" slot-scope="status, record">
-              <span :class="'status status-' + getStatusName(status, record)">{{
+              <b><span :class="'status status-' + getStatusName(status, record)">{{
                 record.status_Name
-              }}</span>
+              }}</span></b>
             </template>
 
             <span slot="action" slot-scope="text, record">
@@ -90,13 +90,13 @@
 </template>
 
 <script>
+import moment from 'moment';
 import Table from '~/components/support/Listing'
 import AddNewTicketModal from '~/components/support/Add'
 import SupportServices from '~/services/API/SupportServices'
 import InProgress from '~/components/support/InProgress.vue'
 import Resolved from '~/components/support/Resolved.vue'
 import PageLayout from '~/components/layout/PageLayout'
-
 // import PageLayout from '~/components/layout/PageLayout'
 import routeHelpers from '~/mixins/route-helpers'
 
@@ -247,7 +247,9 @@ export default {
           this.resolvedData.splice(0)
           for (const dat in this.data) {
             // console.log(this.data[dat])
-            const dates = this.data[dat].created_At.split('T')[0]
+            
+            // const dates = this.data[dat].created_At.split('T')[0]
+            const dates = moment(String(this.data[dat].created_At)).format('Do MMMM YYYY')
             this.data[dat].created_At = dates
             // console.log(dates)
             if (this.data[dat].reporter_name === 'Test User (DAC3138N)') {

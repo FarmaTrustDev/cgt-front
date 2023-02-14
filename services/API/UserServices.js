@@ -15,6 +15,14 @@ function adminMenu(data) {
     data,
   })
 }
+
+function otherMenu(data) {
+  return request({
+    url: `${baseApi}/otherMenu`,
+    data,
+  })
+}
+
 function users() {
   return request({
     url: `${baseApi}/users`,
@@ -136,9 +144,17 @@ function basicDetail(){
   })
 }
 
+function userWithOrganizationTypeId(params = {}) {
+  return request({
+    url: `${baseApi}/user-with-organization-type-id`,
+    params,
+  })
+}
+
 const UserServices = {
   detail,
   adminMenu,
+  otherMenu,
   adminSubMenus,
   users,
   hospitals,
@@ -158,6 +174,7 @@ const UserServices = {
   getSearchUser,
   sendEmailToHospitals,
   basicDetail,
+  userWithOrganizationTypeId
 }
 
 export default UserServices

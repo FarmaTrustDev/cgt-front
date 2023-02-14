@@ -188,3 +188,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+.ant-tooltip {
+    display: none;
+    position: relative;
+}
+</style>

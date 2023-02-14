@@ -21,7 +21,7 @@
 .slots-main {
   .ant-select-selection__placeholder {
     display: block !important;
-    color: black;
+    // color: black;
   }
   // .note-area {
 
@@ -102,7 +102,7 @@
 .ant-select-selection__rendered,
 .ant-select-selection-selected-value {
   line-height: 35px;
-  color: #495057;
+  color: #050505;
 }
 
 .ant-input {
@@ -436,23 +436,12 @@ input#login_password:focus {
     transform: rotate(-45deg);
   }
 }
-.manf-coll-admin-btn{
-  .ant-btn:hover, .ant-btn:focus, .ant-btn:active, .ant-btn.active {
-    text-decoration: none;
-    background: #f3f3f3;
-    border-color: white;
-    color: gray;
-    box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 5%);
-}
-}
 .no-arrow-on-number-field{
   input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-/* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
 }

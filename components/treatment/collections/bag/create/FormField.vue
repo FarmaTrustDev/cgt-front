@@ -14,6 +14,7 @@
           },
         ]"
         style="width: 100%"
+        :disabled-date="disabledDate"
         size="large"
         format="DD/MM/YYYY"
       >
@@ -75,7 +76,11 @@
   </div>
 </template>
 <script>
+  import {
+  _disabledPreviousDate,
+} from '~/services/Helpers/MomentHelpers'
 export default {
+
   props: { treatment: { required: true, type: Object } },
   data() {
     return {}
@@ -85,5 +90,8 @@ export default {
       return this.$store.getters.getTranslation
     },
   },  
+  methods:{
+    disabledDate: _disabledPreviousDate,
+  }
 }
 </script>
