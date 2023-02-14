@@ -8,9 +8,7 @@
     </a-row>
     <div class="mb-15 pr-15 clearfix">
       <h2 class="">
-        <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">{{
-          translation.Equip_1_568
-        }}</strong>
+        <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">Collection Kit</strong>
         <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">{{
           translation.Kits_1_547
         }}</strong>
