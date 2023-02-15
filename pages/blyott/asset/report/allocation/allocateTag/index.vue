@@ -77,8 +77,6 @@ export default {
     },
   },
   mounted() {
-    alert(this.$route.query.id)
-    // this.assetId = this.$route.params.id
     this.setAssetId(this.$route.query.id)
     this.fetchAsset()
   },
