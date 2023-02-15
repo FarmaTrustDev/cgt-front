@@ -193,4 +193,8 @@ export default {
     display: none;
     position: relative;
 }
+.ant-tooltip-placement-top, .ant-tooltip-placement-topLeft, .ant-tooltip-placement-topRight {
+    padding-bottom: 8px;
+    display: none !important;
+}
 </style>
