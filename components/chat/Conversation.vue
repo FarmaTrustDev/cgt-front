@@ -22,7 +22,7 @@
                   slot-scope="item"
                   :class="'message-' + getType(item.isOwner)"
                 >
-                  <a-comment :author="item.ownerName" :content="item.content">
+                  <a-comment :author="item.ownerName" :content="item.content" >
                     <template slot="content"
                       ><div class="content-body">
                         {{ item.message }}
