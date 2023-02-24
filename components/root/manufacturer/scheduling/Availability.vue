@@ -92,6 +92,11 @@ export default {
       savedEvents: [],
     }
   },
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    },
+  },
   mounted() {
     this.checkCreated()
   },
@@ -106,7 +111,7 @@ export default {
         this.addEvent([
           {
             end: dateM,
-            title: 'Cellfuse',
+            title: `${this.user.organizationName}`,
             start: dateM,
           },
         ])
