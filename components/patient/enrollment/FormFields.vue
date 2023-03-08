@@ -65,7 +65,7 @@
           <a-input
             v-model="email"
             v-decorator="[
-              'Email',
+              'email',
               {
                 initialValue: patient.email,
                 rules: [{ required: true, message: 'Required' }],
@@ -381,7 +381,7 @@
         >
           <a-input
             v-decorator="[
-              'City',
+              'city',
               {
                 initialValue: patient.city,
                 rules: [
@@ -451,7 +451,7 @@
         >
           <a-input
             v-decorator="[
-              'County',
+              'county',
               {
                 initialValue: patient.county,
                 rules: [

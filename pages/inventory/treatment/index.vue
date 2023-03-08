@@ -401,7 +401,7 @@ export const customDisplayDataMat = [
 
 export const newSampleData = [
   {
-    patientEnrollmentNumber: 'DAC7993',
+    patientEnrollmentNumber: 'DAC7994',
     treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
     collectionDateDeliveryDate: '26/09/2022 - 29/09/2022',

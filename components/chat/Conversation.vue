@@ -20,7 +20,7 @@
                 <a-list-item
                   slot="renderItem"
                   slot-scope="item"
-                  :class="'message-' + getType(item.isOwner)"
+                  :class="[item.isGroup ? users.name === item.ownerName ? 'message-sent' : 'message-received' : 'message-' + getType(item.isOwner)]"
                 >
                   <a-comment :author="item.sender_Name" :content="item.content">
                     <template slot="content"
@@ -130,6 +130,9 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    users() {
+        return this.$store.getters.getUser
+      },
   },
   mounted() {
     this.$emit('loadScrollMethod', this.scrollToElement)

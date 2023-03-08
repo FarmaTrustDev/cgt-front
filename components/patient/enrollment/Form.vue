@@ -1,10 +1,15 @@
 <template>
   <div>
-    <!-- <a-spin :spinning="loading"> -->
-
-    <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+    <div> <FormActionButton
+        v-if="isPatientExist"    
+      @click="enableForm()"
+          text="Edit"
+        /></div>
+    <a-spin :spinning="loading">
+      <PatientDetail v-if="isPatientExist" :patient-detail="patient"/>
+    <a-form v-else :form="form" :layout="formLayout" @submit="onSubmit">
       
-      <FormFields :form="form" :is-created="isCreated" :patient="patient" :country-iso="countryIso"  @getPhoneNumber ="getPhoneNumber" />
+      <FormFields   :form="form" :is-created="isCreated" :patient="patient" :country-iso="countryIso"  @getPhoneNumber ="getPhoneNumber" />
       <a-form-item class="pr-2 mt-15">
         <FormActionButton
           :is-created="isCreated"
@@ -49,7 +54,7 @@
     <a-modal :visible="visiblePatientDetailModal" ok-text="Confirm" width="800px" @cancel="submitModalResponse(false)" @ok="submitModalResponse(true)" >
       <PatientDetail :patient-detail="patientDetail" />
     </a-modal>
-    <!-- </a-spin> -->
+    </a-spin>
   </div>
 </template>
 <script>
@@ -73,6 +78,7 @@ export default {
       patient: {},
       entityId: null,
       isCreated: false,
+      isPatientExist: false,
       treatmentData: {},
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
@@ -90,9 +96,23 @@ export default {
   },
   mounted() {
     this.checkCreated()
+    this.patientExist()
   },
   updated() {},
   methods: {
+    enableForm(){
+      this.loading = true
+      this.isPatientExist = false
+      this.loading = false
+    },
+    patientExist(){
+      const patientId = this.$route.params.id
+      if(patientId !== null)
+      {
+        this.isPatientExist = true
+        this.fetch(patientId);
+      }
+    },
     checkCreated() {
       const patientId = this.$route.params.id
 
