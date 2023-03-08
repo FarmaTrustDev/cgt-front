@@ -107,7 +107,7 @@ export default {
     },
     patientExist(){
       const patientId = this.$route.params.id
-      if(patientId !== null)
+      if(patientId !== 'create' && patientId !== 'enrollment')
       {
         this.isPatientExist = true
         this.fetch(patientId);
