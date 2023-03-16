@@ -13,23 +13,23 @@
           translation.Kits_1_547
         }}</strong>
       </h2>
-      <a-row class="w-125 display-inline-block" :gutter="16">
-        <a-col class="suit" :span="20">
+      <a-row class="display-inline-block" :gutter="10">
+        <a-col class="suit" :span="10">
           <suite />
         </a-col>
-
-        <a-col v-if="false" :span="11">
-          <div class="">
+        <a-col :span="2"></a-col>
+        <a-col :span="11">
+          <div>
             <a-card
-              class="r-shadow mb-15 "
+              class="r-shadow mb-15"
               :bordered="false"
               title=""
             >
-              <h4>
+              <h1>
                 <a-button type="link">{{
                   translation.ColdStora_2_588
                 }}</a-button>
-              </h4>
+              </h1>
               <ImageHeading
                 :detail="{
                   img: 'web/inventory/Group-1000002120.svg',
@@ -37,7 +37,11 @@
                     '1x Class II cabinets, Grade A in Grade B background',
                 }"
                 :img-properties="{ width: '50px', height: '50px' }"
-              />
+              >
+              <span slot="extra">
+              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')"/></span>
+            </span>
+            </ImageHeading>
             </a-card>
           </div>
           <div class="">
@@ -55,7 +59,11 @@
                   :img-properties="{ width: '50px', height: '50px' }"
                   class="mt-15"
                   :detail="cl"
-                />
+                >
+                <span slot="extra">
+              <span><img :src="getImageUrl(cl.img)"></span>
+            </span>
+                </ImageHeading>
               </span>
             </a-card>
           </div>
@@ -68,18 +76,20 @@
 import detail from '~/components/root/inventory/detail'
 import suite from '~/components/root/inventory/equipment/Suite'
 import ImageHeading from '~/components/cards/ImageHeading'
+import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { detail, suite, ImageHeading },
+  mixins:[imagesHelper],
   props: { data: { type: Object, default: () => ({}) } },
   data() {
     return {
       outsideEquipment: [
         {
-          img: 'web/inventory/Group-1000002120.svg',
+          img: 'web/inventory/Group-1000002123.svg',
           heading: '1x Class II cabinets, Grade A in Grade B background',
         },
         {
-          img: 'web/inventory/Group-1000002120.svg',
+          img: 'web/inventory/Group-1000002124.svg',
           heading: '1x Class II cabinets, Grade A in Grade B background',
         },
       ],

@@ -26,7 +26,7 @@
     </div>
     <figure>
       <span class="digit top-digit">{{ threshold }}</span>
-      <div class="slider-beast" @drag="sliderDrag">
+      <div class="slider-beast" >
         <svg
           class="slider-svg"
           width="158"
@@ -48,9 +48,10 @@
             stroke-linecap="round"
           ></path>
         </svg>
-        <!-- <span class="digit">46</span> -->
+        <span class="digit">46</span>
         <span
           :data-value="data.threshold"
+          @drag="sliderDrag"
           class="drag-image ui-draggable ui-draggable-handle"
           style="left: 46px"
         >
