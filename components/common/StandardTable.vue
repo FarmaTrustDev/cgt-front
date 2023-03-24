@@ -19,7 +19,8 @@
           style="white-space: pre-line"
           :title="
             'PUID: ' +
-            patient.enrollmentNumber + '\n'+
+            patient.enrollmentNumber +
+            '\n' +
             patient.organizationData
           "
         >
@@ -104,12 +105,18 @@
                   :patient="record"
                   :goto-view="stepClick"
                 ></steps>
-
+               
                 <span class="vertical-line-standard-table"></span>
 
                 <a-dropdown>
-                  <a-button type="primary" class="ant-btn-drop-down patient-btn-admin">
-                    {{ translation['Admin_1_142'] }}<a-icon type="down" class="ml-5"/>
+                  <a-button
+                    type="primary"
+                    :class="`ant-btn-drop-down patient-btn-admin ${getExcursionClass(
+                      treatment.excursionId
+                    )}`"
+                  >
+                    {{ translation['Admin_1_142']
+                    }}<a-icon type="down" class="ml-5" />
                   </a-button>
                   <a-menu slot="overlay">
                     <a-menu-item>
@@ -220,12 +227,15 @@
         </a-button>
       </span>
       <span slot="screeningId" slot-scope="text, record, index">
-        {{index + 1}}
+        {{ index + 1 }}
       </span>
-      <span slot="upsertDropdown" slot-scope="text, record" class="manf-coll-admin-btn">
-        <a-dropdown >
-          <a-button class="action-button " @click="preventDefault">
-            <!-- <b><a-icon type="more" /></b> -->
+      <span
+        slot="upsertDropdown"
+        slot-scope="text, record"
+        class="manf-coll-admin-btn"
+      >
+        <a-dropdown>
+          <a-button class="action-button" @click="preventDefault">
             {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
           <a-menu slot="overlay">
@@ -241,9 +251,8 @@
                 placement="topLeft"
                 @confirm="clickDelete(record)"
               > -->
-              <span @click="stepDeleteModal(true, record)"><a-icon type="delete"  />{{
-                translation.Delet_1_451
-              }}
+              <span @click="stepDeleteModal(true, record)"
+                ><a-icon type="delete" />{{ translation.Delet_1_451 }}
               </span>
             </a-menu-item>
           </a-menu>
@@ -257,7 +266,7 @@
           </a-button>
           <a-menu slot="overlay">
             <a-menu-item key="0">
-              <a @click="handleSidebarKey(`/support?showModel=true`,4)">{{
+              <a @click="handleSidebarKey(`/support?showModel=true`, 4)">{{
                 translation.OpenTicke_2_800
               }}</a>
             </a-menu-item>
@@ -278,7 +287,7 @@
                 @confirm="deletePatient(`${record.id}`)"
               >
               </a-popconfirm> -->
-                {{ translation.HidePatie_2_804 }}
+              {{ translation.HidePatie_2_804 }}
             </a-menu-item>
             <a-menu-item key="4" @click="patientDelete(true, record)">
               <!-- <a-popconfirm
@@ -288,12 +297,8 @@
                 placement="topLeft"
                 @confirm="deadPatient(record)"
               > -->
-              <span v-if="record.isDead">
-                {{ translation.Resum_1_463 }}</span
-              >
-              <span v-else >{{
-                translation.cance_1_296
-              }}</span>
+              <span v-if="record.isDead"> {{ translation.Resum_1_463 }}</span>
+              <span v-else>{{ translation.cance_1_296 }}</span>
               <!-- </a-popconfirm> -->
             </a-menu-item>
           </a-menu>
@@ -430,7 +435,7 @@
             <span class="line-right line"></span>
           </span>
         </p>
-         <p>Are you sure you want to delete this treatment?</p>
+        <p>Are you sure you want to delete this treatment?</p>
         <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
@@ -445,16 +450,17 @@
           >
             Cancel
           </a-button>
-        </footer></center>
+        </footer>
+      </center>
     </a-modal>
-     <a-modal
+    <a-modal
       :visible="patientHideModal"
       :footer="null"
-      @cancel="hidePatientModal(false,'')"
+      @cancel="hidePatientModal(false, '')"
       centered
     >
       <center>
-         <h2>Are you sure you want to hide this patient permanently?</h2>
+        <h2>Are you sure you want to hide this patient permanently?</h2>
         <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
@@ -465,12 +471,12 @@
           <a-button
             class="ant-btn text-cancel"
             style="padding: 5px 50px"
-            
-            @click="hidePatientModal(false,'')"
+            @click="hidePatientModal(false, '')"
           >
             Cancel
           </a-button>
-        </footer></center>
+        </footer>
+      </center>
     </a-modal>
     <a-modal
       :visible="showPauseDeleteModal"
@@ -479,7 +485,6 @@
     >
       The treatment is already in cancel state. Do you want to switch the status
       to pause ?
-      
     </a-modal>
     <a-modal
       :visible="patientDeleteModal"
@@ -540,7 +545,6 @@
           <a-button
             class="ant-btn text-cancel"
             style="padding: 5px 50px"
-            
             @click="stepDeleteModal(false, '')"
           >
             Cancel
@@ -612,7 +616,7 @@ export default {
       cancelModalTitle: 'Cancel Treatment',
       pauseModalTitle: 'Pause Treatment',
       patientHideModal: false,
-      patientId : '',
+      patientId: '',
       current: 1,
       // pagination: {},
     }
@@ -642,23 +646,19 @@ export default {
     } else {
       this.data = this.dumpData
     }
-    if(localStorage.patient_list_current_page)
-    {
+    if (localStorage.patient_list_current_page) {
       this.current = localStorage.patient_list_current_page
     }
   },
   methods: {
-    onChange(current)
-        {
-            localStorage.setItem('patient_list_current_page',current.current)
-        }, 
-    hidePatientModal(e,record)
-    {
+    onChange(current) {
+      localStorage.setItem('patient_list_current_page', current.current)
+    },
+    hidePatientModal(e, record) {
       this.patientId = record
       this.patientHideModal = e
     },
-    hidePatient()
-    {
+    hidePatient() {
       this.patientHideModal = false
       this.deletePatient(this.patientId)
     },
@@ -965,14 +965,19 @@ export default {
     cancelModal(e) {
       this.showPauseDeleteModal = e
     },
+    getExcursionClass(excursionId) {
+      if (!isEmpty(excursionId)) {
+        return 'haveExcursion'
+      }
+    },
   },
 }
 </script>
 <style scoped>
 .patient-btn-admin {
   height: 36px;
-    width: 77px;
-    border-radius: 15px;
-    font-size: 12px;
+  width: 77px;
+  border-radius: 15px;
+  font-size: 12px;
 }
 </style>

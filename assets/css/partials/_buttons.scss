@@ -41,6 +41,37 @@
     margin-bottom: 0;
   }
 }
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
+}
+
+.haveExcursion {
+  background-color: $danger;
+  border-color: $danger;
+}
+
+.dangerFadeInOut {
+  background: $danger;
+  -webkit-animation: fadeinout 1s linear infinite;
+  animation: fadeinout 1s linear infinite;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
 }

@@ -1,5 +1,6 @@
 <template>
   <a-card :bordered="false" class="default-card">
+    <Excursion :treatment="treatment" />
     <div v-if="treatment.isHold" class="text-center">
       <h2 class="pb-5">
         The treatment is on pause state. At
@@ -34,11 +35,16 @@
       <a-tabs
         :active-key="activeTab"
         type="card"
-        class="bags_section "
+        class="bags_section"
         @change="onTabChange"
       >
-        <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid" >
-          <Steps class="view-screen" :bag="bag" :treatment="treatment" :loading="loading" />
+        <a-tab-pane v-for="bag in bags" :key="bag.id" :tab="bag.puid">
+          <Steps
+            class="view-screen"
+            :bag="bag"
+            :treatment="treatment"
+            :loading="loading"
+          />
         </a-tab-pane>
       </a-tabs>
     </div>
@@ -52,6 +58,7 @@ import moment from 'moment'
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import TreatmentLogServices from '~/services/API/TreatmentLogServices'
 import Steps from '~/components/treatment/view/Steps'
+import Excursion from '~/components/treatment/view/Excursion'
 import { isEmpty } from '~/services/Utilities'
 import alert from '~/components/alert'
 
@@ -59,6 +66,7 @@ export default {
   components: {
     Steps,
     alert,
+    Excursion,
   },
   props: {
     treatment: { required: true, type: Object },
@@ -71,7 +79,7 @@ export default {
       showCompleteBag: true,
       bags: null,
       actionResult: {},
-      loading:false
+      loading: false,
     }
   },
   computed: {
