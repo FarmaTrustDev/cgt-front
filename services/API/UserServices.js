@@ -15,14 +15,6 @@ function adminMenu(data) {
     data,
   })
 }
-
-function otherMenu(data) {
-  return request({
-    url: `${baseApi}/otherMenu`,
-    data,
-  })
-}
-
 function users() {
   return request({
     url: `${baseApi}/users`,
@@ -154,7 +146,6 @@ function userWithOrganizationTypeId(params = {}) {
 const UserServices = {
   detail,
   adminMenu,
-  otherMenu,
   adminSubMenus,
   users,
   hospitals,
