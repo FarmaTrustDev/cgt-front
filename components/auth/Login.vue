@@ -58,10 +58,7 @@
 <script>
 import AuthServices from '~/services/API/AuthServices'
 import UserServices from '~/services/API/UserServices'
-// import AssetServices from '~/services/API/AssetServices'
-// import LocatorServices from '~/services/API/LocationServices'
-import { setAccessToken, setRefreshToken, setBlyottAccessToken, setBlyottRefreshToken } from '~/services/Auth'
-// import { setAccessToken, setRefreshToken } from '~/services/Auth'
+import { setAccessToken, setRefreshToken } from '~/services/Auth'
 import { success } from '~/services/Helpers/notifications'
 import { isEmpty } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
@@ -100,27 +97,6 @@ export default {
             token: response.accessToken,
             status: true,
           })
-          AuthServices.blyottAuthentication({username:'ZulqrnainA', password:'17January2020'})
-            .then((blyott)=>{
-              setBlyottAccessToken(blyott.Token)
-              setBlyottRefreshToken(blyott.RefreshToken)
-              // console.log(blyott.RefreshToken)
-            })
-          /* AuthServices.blyottAuthentication({username:'ZulqrnainA', password:'17January2020'})
-            .then((blyott)=>{
-              setBlyottAccessToken(blyott.Token)
-              setBlyottRefreshToken(blyott.REFRESH_TOKEN)
-              AssetServices.getAllLocations({Page: 1, PageSize: 25, GlobalSearch: "", SortBy: "TagId", SortOrder: "Asc", Filters: []})
-                .then((location)=>{
-                  location.Items.forEach((element)=>{
-                    const data=JSON.parse(JSON.stringify(element))
-                    AssetServices.create(data)
-                      .then((createResponse)=>{
-                        console.log(createResponse)
-                      })
-                  })
-                })
-            }) */
           this.userDetail()
           success(this, { message: response.message })
         })

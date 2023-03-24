@@ -9,7 +9,6 @@
     <hospitalHome v-if="isHospital() || isDoctor() || isNurse()" />
     <logisticHome v-if="isLogistic()" class="logistic_board"/>
     <smartLabHome v-if="isSmartLab()" />
-    <blyottHome v-if="isIDMT()"/>
     <superAdminHome v-if="isAdmin()"/>
   </div>
 </template>
@@ -22,7 +21,6 @@ import manufacturerHome from '~/components/root/manufacturer/home'
 import hospitalHome from '~/components/root/hospital/home'
 import logisticHome from '~/components/root/logistic/home'
 import smartLabHome from '~/components/root/smartlab/home'
-import blyottHome from '~/components/root/blyott'
 import superAdminHome from '~/components/root/superAdmin/home'
 export default {
   components: {
@@ -30,8 +28,7 @@ export default {
     hospitalHome,
     logisticHome,
     smartLabHome,
-    superAdminHome,
-    blyottHome
+    superAdminHome
   },
   mixins: [routeHelpers, userDetail],
   middleware: 'auth',
