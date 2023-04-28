@@ -752,3 +752,14 @@ a {
 .anticon-down {
   margin-left: 4px !important;
 }
+.flash {
+  color: red;
+  -webkit-animation: flash linear 1.5s infinite;
+  -webkit-animation-name: flash;
+  animation: flash linear 1.5s infinite;
+  animation-name: flash;
+  border-color: #dc4e41;
+}
+.temp-container .alert-success {
+  color: white;
+}

@@ -1,26 +1,37 @@
 <template>
   <div>
-    <div class="mb-25" v-if="treatment.excursionId !== null">
-      <alert
-        class="dangerFadeInOut"
-        type="error"
-        show-icon
-        :message="`${getMessage(treatment.excursionId)} EXCURSION`"
-      />
+    <div class="mb-25 dangerFadeInOut p-1 text-white" v-if="treatment.excursionId !== null">
+      <div>
+        <img :src="getImageUrl('Icons/thermometer-temperature-icon.svg')" height="30px" />
+       <h3 class="text-white"> {{ getMessage(treatment.excursionId) }} EXCURSION </h3>
+      </div>
+      <div>Contact: 0441 839380</div>
     </div>
+   
   </div>
 </template>
 <script>
-import alert from '~/components/alert'
+import imagesHelper from '~/mixins/images-helper'
 export default {
-  components: { alert },
+  mixins: [imagesHelper],
   props: {
     treatment: { required: true, type: Object },
     // bags: { required: true, type: Object },
   },
   methods: {
     getMessage(excursionId) {
-      return excursionId === 1 ? 'TEMPERATURE' : 'SHOCK'
+      if(excursionId === 1)
+      {
+        return 'TEMPERATURE'
+      }
+      if (excursionId ===2)
+      {
+        return 'SHOCK';
+      }
+      if(excursionId === 3)
+      {
+        return 'TRANSPORT DELAY'
+      }
     },
   },
 }

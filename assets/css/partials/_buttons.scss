@@ -52,8 +52,8 @@
 
 .dangerFadeInOut {
   background: $danger;
-  -webkit-animation: fadeinout 1s linear infinite;
-  animation: fadeinout 1s linear infinite;
+  -webkit-animation: fadeinout 1.5s linear infinite;
+  animation: fadeinout 1.5s linear infinite;
 }
 
 @-webkit-keyframes fadeinout {

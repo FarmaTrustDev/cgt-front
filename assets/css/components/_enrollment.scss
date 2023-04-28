@@ -270,6 +270,16 @@
         background-repeat: no-repeat;
       }
     }
+    .ant-tabs-tab-excursion {
+      background-color: #fa6363 !important;
+      color: #eee;
+      &::before {
+        margin-right: 0;
+        background-size: cover;
+        background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/danger-cross.svg');
+        background-repeat: no-repeat;
+      }
+    }
     .ant-tabs-tab-active {
       .tab-title {
         background-color: #f2f5fb;
@@ -288,7 +298,6 @@
     }
   }
 }
-
 .schedule-create-tabs {
   .enrollment-page {
     padding: 10%;
