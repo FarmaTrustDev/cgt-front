@@ -7,13 +7,17 @@
         class="p-0 mt-0 pt-0 default-card pills-tabs green-on-update"
       >
         <a-tabs class="pt-0" type="card">
-          <a-tab-pane v-for="step in tabs" :key="step.id" class="border1">
+          <a-tab-pane
+            v-for="(step, index) in tabs"
+            :key="step.id"
+            :class="getLastTabsClass(index)"
+          >
              <!-- todo getting event name from backend  -->
 
             <div
               slot="tab"
               class="tab-title pl-10"
-              :class="isCompleted(treatment.phaseId >= step.completedStep)"
+              :class="`${getLastTabsClass(index)}-tab`"
             >
               {{ step.name }}
             </div>
@@ -31,6 +35,7 @@
 </template>
 <script>
 import Timeline from '~/components/treatment/view/Timeline'
+import { isEmpty } from '~/services/Utilities'
 import tabsHelpers from '~/mixins/tabs-helpers'
 const steps = [
   { id: 1, name: 'Hospital', alias: 'Hospital', completedStep: 4 },
@@ -47,13 +52,26 @@ export default {
   props: {
     treatment: { required: true, type: Object },
     bag: { required: true, type: Object },
+    tabNumber: { type: Number, default: 0 },
+    bags: { required: true, type: Array },
   },
   data() {
     return { tabs: steps }
   },
   mounted() {},
   methods: {
+    getLenthofBags() {
+      return !isEmpty(this.bags) ? this.bags.length - 1 : 0
+    },
+    isLastTab(index) {
+      return index === this.getLenthofBags()
+    },
     fetchSteps() {},
+    getLastTabsClass(index) {
+      return this.treatment.excursionId != null && this.isLastTab(index)
+        ? 'showExcursion'
+        : 'ashowExcursion'
+    },
   },
 }
 </script>

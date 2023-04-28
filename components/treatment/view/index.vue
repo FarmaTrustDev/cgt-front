@@ -44,6 +44,7 @@
             :bag="bag"
             :treatment="treatment"
             :loading="loading"
+            :bags="bags"
           />
         </a-tab-pane>
       </a-tabs>
