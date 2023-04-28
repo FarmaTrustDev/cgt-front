@@ -537,12 +537,14 @@
       color: #1bb559;
     }
   }
+
   .green-border {
     border: 1px solid #1bb559;
   }
   .grey-border {
     border: 1px solid #e3e4e4;
   }
+
   .step-bar {
     padding: 10px;
     border-radius: $default-radius;
@@ -588,6 +590,34 @@
   .ant-tabs-content {
     // margin-left: 3px;
     padding-left: 15px;
+  }
+}
+.showExcursion {
+  .ant-timeline-item-last {
+    .ant-timeline-item-head-green {
+      background-color: $danger;
+      svg {
+        path {
+          color: $danger;
+        }
+      }
+    }
+    .ant-timeline-item-content {
+      .green-border {
+        border: 1px solid $danger;
+      }
+    }
+  }
+
+  .ant-tabs-bar .ant-tabs-tab-active .tab-title {
+    border: 1px solid $danger;
+  }
+}
+.showExcursion-tab {
+  background-color: $danger !important;
+  color: white !important;
+  &::before {
+    background-image: url('https://cgt-dev-ft.microsysx.com/images/v2/icons/circle.svg') !important;
   }
 }
 
