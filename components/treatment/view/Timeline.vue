@@ -4,19 +4,20 @@
       <a-timeline-item
         v-for="step in steps"
         :key="step.id"
-        :color="step.isCompleted ? 'green' : 'grey'"
+        :color="isExcursionTab === true ? step.id === maxCompletedStep ? 'red' : step.isCompleted ? 'green' : 'grey' : step.isCompleted ? 'green' : 'grey'"
       >
         <a-icon v-if="step.isCompleted" slot="dot" type="check-circle-o" />
         <a-icon v-else slot="dot" type="clock-circle-o" />
+        
         <div
           class="step-bar"
-          :class="step.isCompleted ? 'green-border' : 'grey-border'"
+          :class="isExcursionTab === true ? step.id === maxCompletedStep ? 'red-border' : step.isCompleted ? 'green-border' : 'grey-border' : step.isCompleted ? 'green-border' : 'grey-border'"
         >
           <!-- {{ step }} -->
           <a-row>
             <a-col :span="12">
               <span class="left">
-                <span class="step-title"> {{ step.name }}</span>
+                <span class="step-title">{{ step.name }}</span>
                 <span class="date-time">{{
                   isEmpty(step.dateTime) ? 'Pending' : step.dateTime
                 }}</span>
@@ -61,9 +62,10 @@ export default {
     treatment: { required: true, type: Object },
     bag: { required: true, type: Object },
     stepTypeId: { required: true, type: Number },
+    isExcursionTab: {type:Boolean},
   },
   data() {
-    return { steps: null, loading: false }
+    return { steps: null, loading: false, maxCompletedStep: 0 }
   },
   computed: {
     translation() {
@@ -100,6 +102,8 @@ export default {
         .then((response) => {
           if (!isEmpty(response.data)) {
             this.steps = response.data.steps
+            this.maxCompletedStep = response.data.maxCompletedStepId;
+            console.log(response)
           }
         })
         // .finally(() => (this.loading = false))

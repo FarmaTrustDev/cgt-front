@@ -98,7 +98,6 @@ export default {
       TreatmentBagServices.get({ treatmentId: this.treatment.id }).then(
         (bags) => {
           this.bags = bags.data
-
           if (!isEmpty(this.bags)) {
             this.onTabChange(this.bags[0].id)
           }
