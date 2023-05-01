@@ -8,16 +8,15 @@
       >
         <a-tabs class="pt-0" type="card">
           <a-tab-pane
-            v-for="(step, index) in tabs"
+            v-for="(step) in tabs"
             :key="step.id"
-            :class="getLastTabsClass(index)"
-          >
+            class="border1"
+            >
              <!-- todo getting event name from backend  -->
-
             <div
               slot="tab"
               class="tab-title pl-10"
-              :class="`${getLastTabsClass(index)}-tab`"
+              :class="treatment.excursionId !== null ? step.id === totalCompletedStep ? 'ant-tabs-tab-excursion' : isCompleted(treatment.phaseId >= step.completedStep) : isCompleted(treatment.phaseId >= step.completedStep)"
             >
               {{ step.name }}
             </div>
@@ -26,6 +25,7 @@
               :treatment="treatment"
               :step-type-id="step.id"
               step="Timeline"
+              :isExcursionTab = "treatment.excursionId !== null ? step.id === totalCompletedStep ? true : false : false"
             />
           </a-tab-pane>
         </a-tabs>
@@ -52,21 +52,31 @@ export default {
   props: {
     treatment: { required: true, type: Object },
     bag: { required: true, type: Object },
-    tabNumber: { type: Number, default: 0 },
     bags: { required: true, type: Array },
   },
   data() {
-    return { tabs: steps }
+    return { tabs: steps, totalCompletedStep: 0 }
   },
-  mounted() {},
+  mounted() {this.getTotalCompletedSteps()},
   methods: {
-    getLenthofBags() {
-      return !isEmpty(this.bags) ? this.bags.length - 1 : 0
+    getTotalCompletedSteps()
+    {
+      for(let i=0; i<5; i++)
+      {
+        if(this.treatment.phaseId >= this.tabs[i].completedStep)
+        {
+          this.totalCompletedStep++;
+        }
+      }
+    },
+    getLenthofSteps() {
+      return !isEmpty(this.steps) ? this.steps.length - 1 : 0
     },
     isLastTab(index) {
       return index === this.getLenthofBags()
     },
     fetchSteps() {},
+    
     getLastTabsClass(index) {
       return this.treatment.excursionId != null && this.isLastTab(index)
         ? 'showExcursion'
