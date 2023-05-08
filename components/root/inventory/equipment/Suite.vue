@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="null" class="default-border-radius shadow">
       <a-tabs>
-        <a-tab-pane key="1" class="display-inline-block border-bottom-none font-size-18" tab="Blood Collection Kit A">
+        <a-tab-pane key="1" class="display-inline-block border-bottom-none font-size-18" tab="Class B Suite">
           <!-- <a-tab-pane key="1" :tab="translation.ClassB_3_572"> -->
           <ImageHeading v-for="(c, index) in classB" :key="index" :detail="c">
             <span slot="extra">
@@ -12,7 +12,7 @@
           </ImageHeading>
         </a-tab-pane>
             
-        <a-tab-pane key="2" class="font-size-18" tab="Blood Collection Kit B">
+        <a-tab-pane key="2" class="font-size-18" tab="Class C Suite">
           <ImageHeading
             v-for="(c, index) in classC"
             :key="index"

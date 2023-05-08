@@ -8,10 +8,9 @@
     </a-row>
     <div class="mb-15 pr-15 clearfix">
       <h2 class="">
-        <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">Collection Kit</strong>
-        <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">{{
-          translation.Kits_1_547
-        }}</strong>
+        <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">
+        Equipment</strong>
+        <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">Equipment</strong>
       </h2>
       <a-row class="display-inline-block" :gutter="10">
         <a-col class="suit" :span="10">
