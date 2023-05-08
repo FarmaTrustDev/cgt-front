@@ -57,7 +57,7 @@ export default {
   data() {
     return { tabs: steps}
   },
-  mounted() {},
+  mounted() {this.getTotalCompletedSteps()},
   methods: {
     isExcursionTab(minStep,completedStep){
       return (this.treatment.excursionId != null && this.treatment.phaseId >=minStep && this.treatment.phaseId <= completedStep)
