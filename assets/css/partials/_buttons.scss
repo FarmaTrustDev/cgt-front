@@ -41,6 +41,39 @@
     margin-bottom: 0;
   }
 }
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
+}
+
+.haveExcursion {
+  background-color: $danger;
+  border-color: $danger;
+}
+
+.dangerFadeInOut {
+  padding: 30px 15px !important;
+  background: $danger;
+  -webkit-animation: fadeinout 3s linear infinite;
+  animation: fadeinout 3s linear infinite;
+  color: white;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeinout {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }

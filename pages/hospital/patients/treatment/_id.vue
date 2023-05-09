@@ -8,6 +8,7 @@
       <div class="grey-card treat-body">
         <detail :treatment="entity" :loading="loading" @fetchTreatment="fetchMethod"  />
         <div class="grey-card treatment_tabs m-0 pt-0" style="padding: 0">
+          
           <TreatmentView
             v-if="!isEmpty(entity.patient) && entity.screeningStatus"
             :loading="loading"

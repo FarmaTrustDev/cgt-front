@@ -47,3 +47,12 @@ export const errorNotification = ($this, err) => {
     duration: 900000,
   })
 }
+
+
+export function isBool() {
+
+}
+
+export function getBool(value) {
+  return value === true || value === "true";
+}
