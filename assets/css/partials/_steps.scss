@@ -537,6 +537,18 @@
       color: #1bb559;
     }
   }
+  .ant-timeline-item-head-red {
+    background-color: lightcoral;
+    border-radius: 22px;
+    padding: 5px;
+    margin-top: 20px;
+    .anticon {
+      background-color: white;
+      border-radius: 22px;
+      padding: 5px;
+      color: red;
+    }
+  }
   .green-border {
     border: 1px solid #1bb559;
   }

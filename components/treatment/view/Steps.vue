@@ -26,6 +26,7 @@
               :step-type-id="step.id"
               step="Timeline"
               :isExcursionTab = "isExcursionTab(step.minStep,step.completedStep)"
+              @getName = "getName"
             />
           </a-tab-pane>
         </a-tabs>
@@ -57,7 +58,7 @@ export default {
   data() {
     return { tabs: steps}
   },
-  mounted() {this.getTotalCompletedSteps()},
+  mounted() {},
   methods: {
     isExcursionTab(minStep,completedStep){
       return (this.treatment.excursionId != null && this.treatment.phaseId >=minStep && this.treatment.phaseId <= completedStep)
@@ -75,6 +76,10 @@ export default {
         ? 'showExcursion-tab'
         : this.isCompleted(this.treatment.phaseId >= completedStep)
     },
+    getName(name)
+    {
+      this.$emit('getName',name)
+    }
   },
 }
 </script>

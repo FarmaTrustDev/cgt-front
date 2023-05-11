@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="default-card">
-    <Excursion :treatment="treatment" />
+    <Excursion :treatment="treatment" :redTileName="currentTimelineName" />
     <div v-if="treatment.isHold" class="text-center">
       <h2 class="pb-5">
         The treatment is on pause state. At
@@ -45,6 +45,7 @@
             :treatment="treatment"
             :loading="loading"
             :bags="bags"
+            @getName="getName"
           />
         </a-tab-pane>
       </a-tabs>
@@ -81,6 +82,7 @@ export default {
       bags: null,
       actionResult: {},
       loading: false,
+      currentTimelineName:''
     }
   },
   computed: {
@@ -119,6 +121,13 @@ export default {
     onTabChange(bagId) {
       this.activeTab = bagId
     },
+    getName(name)
+    {
+      if(!isEmpty(name))
+      {
+        this.currentTimelineName = name      
+      }
+    }
   },
 }
 </script>
