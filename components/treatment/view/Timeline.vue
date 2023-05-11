@@ -6,7 +6,8 @@
         :key="step.id"
         :color="isExcursionTab === true ? step.id === maxCompletedStep ? 'red' : step.isCompleted ? 'green' : 'grey' : step.isCompleted ? 'green' : 'grey'"
       >
-        <a-icon v-if="step.isCompleted" slot="dot" type="check-circle-o" />
+       <a-icon v-if="isExcursionTab === true && step.id === maxCompletedStep" slot="dot" type="close-circle-o"  />
+        <a-icon v-else-if="step.isCompleted" slot="dot" type="check-circle-o" />
         <a-icon v-else slot="dot" type="clock-circle-o" />
         
         <div
@@ -17,7 +18,7 @@
           <a-row>
             <a-col :span="12">
               <span class="left">
-                <span class="step-title">{{ step.name }}</span>
+                <span class="step-title" :class="getTimelineClass(step.id,step.name)">{{ step.name }}</span>
                 <span class="date-time">{{
                   isEmpty(step.dateTime) ? 'Pending' : step.dateTime
                 }}</span>
@@ -25,8 +26,8 @@
             </a-col>
             <a-col :span="12">
               <div v-if="step.isCompleted" class="right d-block">
-                <strong class="step-title d-block"> by: {{ step.by }}</strong>
-                <span class="organization">{{ step.organizationName }}</span>
+                <strong class="step-title d-block" :class="getTimelineClass(step.id,'')"> by: {{ step.by }}</strong>
+                <span class="organization" :class="getTimelineClass(step.id,'')">{{ step.organizationName }}</span>
                 <!-- <a-upload
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   :default-file-list="uploadedFiles(step.uploads)"
@@ -118,6 +119,23 @@ export default {
         this.steps[5].by = this.translation.CouriPick_3_648
       }
     },
+    sendName(id,name)
+    {
+      if(this.isExcursionTiemline(id)){
+        this.$emit('getName',name)
+      }
+    },
+    getTimelineClass(id,name)
+    {
+      this.sendName(id,name)
+      return  this.isExcursionTiemline(id) ?
+      'color-red' : '' 
+    },
+    isExcursionTiemline(id)
+    {
+      return this.isExcursionTab === true && 
+      id === this.maxCompletedStep
+    }
   },
 }
 </script>
