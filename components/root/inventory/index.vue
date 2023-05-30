@@ -14,6 +14,7 @@
                 <img width="40" :src="getImageUrl(d.flag)" />{{ d.title }}</span
               >
             </template>
+            <kit :data="d" />
             <tab :data="d" />
           </a-tab-pane>
         </a-tabs>
@@ -23,9 +24,10 @@
 </template>
 <script>
 import tab from '~/components/root/inventory/tab'
+import kit from '~/components/root/inventory/kit'
 import imagesHelper from '~/mixins/images-helper'
 export default {
-  components: { tab },
+  components: { tab, kit },
   mixins: [imagesHelper],
   data() {
     return {
