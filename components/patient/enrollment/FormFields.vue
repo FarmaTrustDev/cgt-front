@@ -220,7 +220,8 @@
                 initialValue: patient.bloodType,
                 rules: [
                   {
-                    message: '',
+                    required: true,
+                    message: 'Required',
                   },
                 ],
               },
@@ -230,7 +231,7 @@
             size="large"
             class="default-select"
           >
-            <a-select-option v-for="type in bloodType" :key="type">
+            <a-select-option v-for="(type, index) in bloodType" :key="index">
               {{ type }}
             </a-select-option>
           </a-select>
@@ -305,7 +306,7 @@
                 rules: [],
               },
             ]"
-            :auto-size="{ minRows: 3, maxRows: 5 }"
+            :auto-size="{ minRows: 2, maxRows: 5 }"
             :placeholder="translation.Aller_1_643"
           />
         </a-form-item>
@@ -326,7 +327,7 @@
                 rules: [],
               },
             ]"
-            :auto-size="{ minRows: 3, maxRows: 5 }"
+            :auto-size="{ minRows: 2, maxRows: 5 }"
             :placeholder="translation.ActivProbl_2_645"
           />
         </a-form-item>
@@ -347,8 +348,34 @@
                 rules: [],
               },
             ]"
-            :auto-size="{ minRows: 3, maxRows: 5 }"
+            :auto-size="{ minRows: 2, maxRows: 5 }"
             :placeholder="translation.Medic_1_647"
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+    <a-row>
+      <a-col :span="24">
+        <a-form-item
+          :label="translation.StreeNumbe_2_653"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-textarea
+            v-decorator="[
+              'street',
+              {
+                initialValue: patient.street,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Required',
+                  },
+                ],
+              },
+            ]"
+            :auto-size="{ minRows: 2, maxRows: 5 }"
+            placeholder="Steet Number"
           />
         </a-form-item>
       </a-col>
@@ -416,32 +443,7 @@
           /> </a-form-item
       ></a-col>
     </a-row>
-    <a-row>
-      <a-col :span="24">
-        <a-form-item
-          :label="translation.StreeNumbe_2_653"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 23 }"
-        >
-          <a-textarea
-            v-decorator="[
-              'street',
-              {
-                initialValue: patient.street,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Required',
-                  },
-                ],
-              },
-            ]"
-            :auto-size="{ minRows: 3, maxRows: 5 }"
-            placeholder="Steet Number"
-          />
-        </a-form-item>
-      </a-col>
-    </a-row>
+    
     <a-row>
       <a-col :span="12">
         <a-form-item
@@ -622,8 +624,8 @@ export default {
       MapServices.fetchCountryByPostCode(e.target.value).then((response) => {
         let name = ''
         this.form.setFieldsValue({
-          City: response.result.cityName,
-          County: response.result.countyName,
+          city: response.result.cityName,
+          county: response.result.countyName,
           address: response.result.location
         })
         name= response.result.countryName
