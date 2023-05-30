@@ -1,15 +1,8 @@
 <template>
   <div>
-    <a-row>
-      <a-col :span="24">
-        <detail class="" :data="data.description" />
-        <br />
-      </a-col>
-    </a-row>
     <div class="mb-15 pr-15 clearfix">
       <h2 class="">
-        <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">
-        Equipment</strong>
+        <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">Equipment</strong>
         <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">Equipment</strong>
       </h2>
       <a-row class="display-inline-block" :gutter="10">
@@ -72,12 +65,11 @@
   </div>
 </template>
 <script>
-import detail from '~/components/root/inventory/detail'
 import suite from '~/components/root/inventory/equipment/Suite'
 import ImageHeading from '~/components/cards/ImageHeading'
 import imagesHelper from '~/mixins/images-helper'
 export default {
-  components: { detail, suite, ImageHeading },
+  components: { suite, ImageHeading },
   mixins:[imagesHelper],
   props: { data: { type: Object, default: () => ({}) } },
   data() {
