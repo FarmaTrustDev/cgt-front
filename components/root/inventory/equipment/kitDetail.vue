@@ -110,27 +110,27 @@
             // img: 'Icons/kits.svg',
             img: 'web/inventory/Group-masks.svg',
             heading: 'Masks',
-            qty: 7
+            qty: 10
           },
           {
             img: 'web/inventory/Group-plasters.svg',
             heading: 'Plasters',
-            qty: 15
+            qty: 8
           },
           {
             img: 'web/inventory//Group-needles.svg',
             heading: 'Needles',
-            qty: 10
+            qty: 6
           },
           {
             img: 'web/inventory//Group-antiseptic.svg',
             heading: 'Antiseptic wipes',
-            qty: 50
+            qty: 40
           },
           {
             img: 'web/inventory//Group-cotton.svg',
             heading: 'Cotton swabs',
-            qty: 30
+            qty: 35
           },
         ],
         classC: [
@@ -138,27 +138,27 @@
             // img: 'Icons/kits.svg',
             img: 'web/inventory/Group-masks.svg',
             heading: 'Masks',
-            qty: 7
+            qty: 5
           },
           {
             img: 'web/inventory/Group-plasters.svg',
             heading: 'Plasters',
-            qty: 15
+            qty: 17
           },
           {
             img: 'web/inventory//Group-needles.svg',
             heading: 'Needles',
-            qty: 10
+            qty: 12
           },
           {
             img: 'web/inventory//Group-antiseptic.svg',
             heading: 'Antiseptic wipes',
-            qty: 50
+            qty: 35
           },
           {
             img: 'web/inventory//Group-cotton.svg',
             heading: 'Cotton swabs',
-            qty: 30
+            qty: 20
           },
         ],
       }

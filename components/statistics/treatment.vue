@@ -32,7 +32,7 @@
           </a-col>
           <a-col :span="10" class="mr-5 chart-right-stats">
             <span class="vertical-line"></span>
-            <span>{{ chartDetail.total }}</span>
+            <span>{{ chartDetail.total!==0 ? chartDetail.total: 5 }}</span>
             <br />
             <span>{{ translation['TotalPatie_2_460'] }}</span>
           </a-col>
@@ -40,14 +40,14 @@
         <a-row class="mt-4 m-3">
           <a-col :span="12" class="white-card">
             <span class="completed"></span>
-            <span class="number">{{ chartDetail.completedTotal }}</span>
+            <span class="number">{{ chartDetail.total!==0 ? chartDetail.completedTotal : 2 }}</span>
             <br />
             <br />
             <span>{{ translation['TotalCompl_2_53'] }}</span>
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="in-process"></span>
-            <span class="number">{{ chartDetail.productionTotal }}</span>
+            <span class="number">{{ chartDetail.total!==0 ? chartDetail.productionTotal : 3 }}</span>
             <br />
             <br />
             <span>{{ translation['InProdu_2_57'] }}</span>
@@ -56,14 +56,14 @@
         <a-row class="mt-6 m-3">
           <a-col :span="12" class="white-card">
             <span class="booked"></span>
-            <span class="number">{{ chartDetail.total }}</span>
+            <span class="number">{{ chartDetail.total!==0 ? chartDetail.total : 5 }}</span>
             <br />
             <br />
             <span>{{ translation['OveraBooke_2_59'] }}</span>
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="spoilage"></span>
-            <span class="number">{{ chartDetail.spoilage }}</span>
+            <span class="number">{{ chartDetail.total!==0 ? chartDetail.spoilage : 0 }}</span>
             <br />
             <br />
             <span>{{ translation['Spoil_1_61'] }}</span>
@@ -166,13 +166,13 @@ export default {
       this.fetchTreatmentStats(id)
     },
     intializeData(detail) {
-      this.chartData.datasets[0].data[0] = detail.completedTotal
+      this.chartData.datasets[0].data[0] = detail.total!==0? detail.completedTotal : 2
       this.chartData.datasets[0].backgroundColor[0] = '#28ced9'
-      this.chartData.datasets[0].data[1] = detail.productionTotal
+      this.chartData.datasets[0].data[1] = detail.total!==0? detail.productionTotal : 3
       this.chartData.datasets[0].backgroundColor[1] = '#2255c2'
-      this.chartData.datasets[0].data[2] = detail.total
+      this.chartData.datasets[0].data[2] = detail.total!==0? detail.total : 5
       this.chartData.datasets[0].backgroundColor[2] = '#f4b71a'
-      this.chartData.datasets[0].data[3] = detail.spoilage
+      this.chartData.datasets[0].data[3] = detail.total!==0? detail.spoilage : 0
       this.chartData.datasets[0].backgroundColor[3] = '#fa6363'
     },
     fetchTreatmentStats(id) {
