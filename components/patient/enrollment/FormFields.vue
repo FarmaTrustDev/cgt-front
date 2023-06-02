@@ -231,7 +231,7 @@
             size="large"
             class="default-select"
           >
-            <a-select-option v-for="(type, index) in bloodType" :key="index">
+            <a-select-option v-for="type in bloodType" :key="type">
               {{ type }}
             </a-select-option>
           </a-select>
