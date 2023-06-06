@@ -20,6 +20,29 @@
     </template>
     <div slot="content" class="specific-page container support_page">
       <a-tabs type="card" @change="callback">
+        
+        <a-tab-pane key="3" :tab="translation.InPro_1_533">
+          <InProgress
+            type="inProgress"
+            :dump-data="inprogressData"
+            @fetchData="fetchData"
+          />
+        </a-tab-pane>
+        <a-tab-pane key="2" :tab="translation.Archi_1_226">
+          <Table
+            type="archive"
+            :dump-data="archivedData"
+            @fetchData="fetchData"
+          />
+        </a-tab-pane>
+        
+        <a-tab-pane key="4" :tab="translation.Resol_1_230">
+          <Resolved
+            type="resolved"
+            :dump-data="resolvedData"
+            @fetchData="fetchData"
+          />
+        </a-tab-pane>
         <a-tab-pane key="1" :tab="translation.All_1_210">
           <a-table
             class="rounded-table"
@@ -54,27 +77,6 @@
               </a-dropdown>
             </span>
           </a-table>
-        </a-tab-pane>
-        <a-tab-pane key="2" :tab="translation.Archi_1_226">
-          <Table
-            type="archive"
-            :dump-data="archivedData"
-            @fetchData="fetchData"
-          />
-        </a-tab-pane>
-        <a-tab-pane key="3" :tab="translation.InPro_1_533">
-          <InProgress
-            type="inProgress"
-            :dump-data="inprogressData"
-            @fetchData="fetchData"
-          />
-        </a-tab-pane>
-        <a-tab-pane key="4" :tab="translation.Resol_1_230">
-          <Resolved
-            type="resolved"
-            :dump-data="resolvedData"
-            @fetchData="fetchData"
-          />
         </a-tab-pane>
       </a-tabs>
       <!-- Add New Ticket Modal -->

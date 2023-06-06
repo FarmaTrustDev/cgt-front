@@ -4,7 +4,6 @@
       <strong slot="title">
         {{ recipient.name }} <a-divider></a-divider>
       </strong>
-
       <div class="chat-conversation-container">
         <a-row>
           <div ref="container" class="peer-to-peer-chat-list">
@@ -24,7 +23,7 @@
                 >
                   <a-comment :author="item.sender_Name" :content="item.content">
                     <template slot="content"
-                      ><div class="content-body">
+                      ><div class="content-body" :style="'background-color:'+colorMap[item.sender_Id] ">
                         {{ item.message }}
                       </div></template
                     >
@@ -111,6 +110,7 @@ import ChatServices from '~/services/API/ChatServices'
 export default {
   props: {
     data: { type: Array, default: () => {} },
+    colorMap: { type: Object, default: () => {} },
     // messageToId: { type: String, default: null, required: true },
     // messageTo: { type: String, default: `recipient_Id`, required: true },
     recipient: { type: Object, default: () => {}, required: true },
@@ -136,6 +136,7 @@ export default {
   },
   mounted() {
     this.$emit('loadScrollMethod', this.scrollToElement)
+    // this.extractUniqueIds();
   },
   methods: {
     onSubmit(e) {
@@ -150,6 +151,7 @@ export default {
         }
       })
     },
+    
     postMessage(params) {
       ChatServices.create(params).then((response) => {
         this.$emit('fetch', response)
