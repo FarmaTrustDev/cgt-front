@@ -19,6 +19,7 @@
                 v-if="!isEmpty(recipient)"
                 :recipient="recipient"
                 :data="endToEndConversation"
+                :colorMap="colorMap"
                 @fetch="loadFromChat"
                 @loadScrollMethod="loadScrollMethod"
               />
@@ -81,7 +82,8 @@ export default {
       scrollMethod: () => {},
       groupModal: false,
       newConversations: [],
-      
+      uniqueIds: [],
+      colorMap: {},
     }
   },
   computed: {
@@ -103,7 +105,6 @@ export default {
     isEmpty,
     fetchConversation() {
       this.conversationLoader = true
-
       ChatServices.getConversations()
         .then((conversations) => {
           for (const dat in conversations.data) {
@@ -142,11 +143,39 @@ export default {
               this.endToEndConversation.push(response.data[dt])
             }
           }
+          this.extractUniqueIds(this.endToEndConversation)
         })
         .then(() => {
           this.scrollMethod()
         })
         .finally(() => (this.endToEndConversationLoader = false))
+    },
+    extractUniqueIds(data) {
+      const uniqueIdsSet = new Set();
+      data.forEach((item) => {
+        uniqueIdsSet.add(item.sender_Id);
+      });
+      this.uniqueIds = Array.from(uniqueIdsSet);
+      // console.log(this.uniqueIds)
+      this.assignColors();
+    },
+    assignColors() {
+      this.uniqueIds.forEach((id) => {
+        const color = this.generateRandomColor();
+        this.colorMap[id] = color;
+      });
+      console.log(this.colorMap)
+    },
+    generateRandomColor() {
+      const letters = 'BDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 4)];
+      }
+      return color;
+    },
+    getColor(id) {
+      return this.colorMap[id] || ''; // Return color from colorMap or empty string if not found
     },
     getConversation(conversation) {
       let params = {}
