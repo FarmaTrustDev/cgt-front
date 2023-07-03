@@ -83,7 +83,7 @@ export default {
     searchTreatment() {},
     fetchTreatmentTypes() {
       this.typeLoading = true
-      TreatmentService.getActive()
+      TreatmentService.getWithOrganizationId()
         .then((response) => {
           this.treatmentTypes = response.data
         })

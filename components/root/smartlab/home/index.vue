@@ -44,7 +44,7 @@
                 </div>
               </a>
 
-              <a href="javascript:;" @click="gotoView(`/superAdmin/user`)">
+              <a href="javascript:;" @click="gotoView(`users`)">
                 <div class="home-tab with-arrow">
                   <img
                     src="https://cgt-dev-ft.microsysx.com/images/v2/icons/Group%20644.svg"

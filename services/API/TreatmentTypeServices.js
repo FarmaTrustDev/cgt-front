@@ -62,6 +62,13 @@ function deleteById(id){
   })
 }
 
+function getWithOrganizationId(){
+  return request({
+    url: `${baseApi}/getWithOrganizationId`,
+    method : 'GET'
+  })
+}
+
 const TreatmentTypeServices = {
   get,
   getById,
@@ -72,6 +79,7 @@ const TreatmentTypeServices = {
   getActiveWithOutScreening,
   create,
   deleteById,
+  getWithOrganizationId
 }
 
 export default TreatmentTypeServices

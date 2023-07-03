@@ -75,6 +75,13 @@ function update(id, data) {
   })
 }
 
+function GetHospitalStat(id){
+  return request({
+    url: `${baseApi}/getScreeningTemplateHospital/${id}`,
+    method: 'GET'
+  })
+}
+
 
 const ScreeningTemplateServices = {
   get,
@@ -86,7 +93,8 @@ const ScreeningTemplateServices = {
   update,
   getScreeningTempStatus,
   submitScreeningRequest,
-  getScreeningCategoryStatus
+  getScreeningCategoryStatus,
+  GetHospitalStat
 }
 
 export default ScreeningTemplateServices

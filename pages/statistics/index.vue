@@ -8,11 +8,11 @@
     </div>
     <a-card :bordered="false" class="grey-card" style="padding-top: 50px; padding-bottom: 50px">
       <a-col :md="11" class="mtminus-6">
-        <treatmentStats />
+        <treatmentStats @getHospitalStatWithTreatmentType="getHospitalStatWithTreatmentType" />
       </a-col>
       <a-col :span="1"></a-col>
       <a-col :md="12" class="mtminus-5">
-        <hospitalStats />
+        <hospitalStats :hospitalData="hospitalStatData" />
       </a-col>
     </a-card>
   </div>
@@ -20,15 +20,24 @@
 <script>
 import treatmentStats from '~/components/statistics/treatment'
 import hospitalStats from '~/components/statistics/hospital'
+import ScreeningTemplateServices from '~/services/API/ScreeningTemplateServices'
 export default {
   components: { treatmentStats, hospitalStats },
   data() {
     return {
       loading: false,
       organizationType: `${this.$store.getters.getUser}`,
+      hospitalStatData:[]
     }
   },
-  methods: {},
+  methods: {
+    getHospitalStatWithTreatmentType(id){
+      ScreeningTemplateServices.GetHospitalStat(id).then((response)=>{
+        console.log(response.data)
+        this.hospitalStatData = response.data
+      })
+    }
+  },
   computed: {
     user() {
       return this.$store.getters.getUser
