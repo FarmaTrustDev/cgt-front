@@ -438,7 +438,7 @@ export const customDisplayDataShipInfo = [
   },
   {
     title: '',
-    value: '27/06/2022 at 14:00',
+    value: '27/06/2023 at 14:00',
     key:8,
     url:'',
   },              
@@ -513,7 +513,7 @@ export const orderProductTableData= [
 export const customDisplayDataOrderInit = [
   {
     initiatedBy: 'Andrea Marosan',
-    date: '27/06/2022 at 14:00',
+    date: '27/06/2023 at 14:00',
     orderAcceptable:'web/icons/greenTick.png',
     key:0,
   },

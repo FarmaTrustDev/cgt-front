@@ -8,15 +8,15 @@
             placeholder="Select Treatment Type"
             option-filter-prop="children"
             class="search-dropdown mt-15"
-            @change="fetchStats"
             v-model="defaultValue"
-          >
+            @change="fetchStats"
+            >
+            <!-- v-model="treatmentTypes[0].name" -->
             <!-- //@todo Zulkarznain bhai task fetch from   api -->
             <a-select-option
-              v-for="treatmentType in treatmentTypes"
-              :key="treatmentType.id"
+              v-for="treatmentType in treatmentTypes" :key="treatmentType.id"
             >
-              <p>{{ treatmentType.name }}</p>
+              {{ treatmentType.name }}
             </a-select-option>
           </a-select>
         </a-row>
@@ -107,7 +107,7 @@ export default {
         },
         cutoutPercentage: 65,
       },
-      defaultValue: 1,
+      defaultValue: '',
       completedTotal: 0,
       productionTotal: 0,
       total: 0,
@@ -164,6 +164,7 @@ export default {
   methods: {
     fetchStats(id) {
       this.fetchTreatmentStats(id)
+      this.$emit('getHospitalStatWithTreatmentType', id)
     },
     intializeData(detail) {
       this.chartData.datasets[0].data[0] = detail.total!==0? detail.completedTotal : 2
@@ -184,13 +185,15 @@ export default {
       })
     },
     fetchTreatment() {
-      TreatmentTypeServices.getWithScreening()
+      TreatmentTypeServices.getWithOrganizationId()
         .then((response) => {
           this.treatmentTypes = response.data
         })
         .then(() => {
           if(!isEmpty(this.treatmentTypes[0])){
             this.fetchTreatmentStats(this.treatmentTypes[0].id)
+            this.defaultValue = this.treatmentTypes !== null ? this.treatmentTypes[0].name : ''
+            this.$emit('getHospitalStatWithTreatmentType', this.treatmentTypes[0].id)
           }
         })
     },

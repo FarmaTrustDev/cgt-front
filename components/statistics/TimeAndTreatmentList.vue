@@ -246,7 +246,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7993',
     // treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '26/03/2023 - 29/04/2023',
+    collectionDateDeliveryDate: '26/06/2023 - 29/06/2024',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
   },
@@ -254,7 +254,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7986',
     // treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '25/03/2023 - 28/04/2023',
+    collectionDateDeliveryDate: '25/06/2023 - 28/12/2024',
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
   },
@@ -265,7 +265,7 @@ export const completedSampleData = [
     // treatmentType: 'Human Cells',
     // productionLine: 'Zone A',
     hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: '24/03/2023 - 27/04/2023',
+    collectionDateDeliveryDate: '24/06/2023 - 27/12/2024',
     // dispatchedBy: 'Ben Hawkins',
   },
   {
@@ -273,7 +273,7 @@ export const completedSampleData = [
     // treatmentType: 'Human Cells',
     // productionLine: 'Zone C',
     hospital: 'Kite',
-    collectionDateDeliveryDate: '23/03/2023 - 26/04/2023',
+    collectionDateDeliveryDate: '23/04/2023 - 26/12/2024',
     // dispatchedBy: 'Shawn David',
   },
 ]
@@ -283,7 +283,7 @@ export const allSampleData = [
     // treatmentType: 'Human Cells ',
     // productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '05/03/2023 - 08/07/2023',
+    collectionDateDeliveryDate: '05/03/2023 - 08/07/2024',
     // dispatchedBy: 'In Progress',
   },
   {
@@ -291,7 +291,7 @@ export const allSampleData = [
     // treatmentType: 'Human Cells ',
     // productionLine: 'Zone C',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '30/05/2023 - 02/07/2023',
+    collectionDateDeliveryDate: '30/05/2023 - 02/11/2024',
     // dispatchedBy: 'In Progress',
   },
 ]

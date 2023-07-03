@@ -104,9 +104,12 @@ export default {
   components: {
     ImageHeading,
   },
+  props:{
+    hospitalData :{type: Array,default: () => []}
+  },
   data() {
     return {
-      hospitalData: [],
+      // hospitalData: [],
       smartLabHospData:[{id: '1',profileImageUrl:'icons/hospital.png', name:'The Royal Hospital', count: 20},{id: '2',profileImageUrl:'icons/hospital.png', name:'Baystate Clinic', count:10},{id: '3',profileImageUrl:'icons/hospital.png', name:'University Hospital Birmingham', count:15}],
       smartLabCountData:[{id: '1',img:'Icons/flags/1x1/us.svg', name:'United States', count:5},{id: '2',img:'Icons/flags/1x1/de.svg', name:'Germany', count:3},{id: '4',img:'Icons/flags/1x1/gb.svg', name:'United Kingdom', count:2}],
       countriesData: [
@@ -141,12 +144,12 @@ export default {
     },
   },   
   mounted() {
-    this.fetchHospital()
+    // this.fetchHospital()
   },
   methods: {
     fetchHospital() {
       TreatmentServices.getHospitalCount().then((response) => {
-        this.hospitalData = response.data
+        // this.hospitalData = response.data
       })
     },
   },

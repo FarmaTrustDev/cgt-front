@@ -143,7 +143,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 25/09/2022 </span>
+                        <span class="text-muted"> 25/08/2023 </span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -173,7 +173,7 @@
                         }}</span>
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 26/09/2022</span>
+                        <span class="text-muted"> 26/07/2023</span>
                       </a-col>
                     </a-row>
                   </div>
@@ -215,7 +215,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted">  26/09/2022</span>
+                        <span class="text-muted">  26/08/2023</span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
