@@ -231,6 +231,7 @@ import {
   _getFormatMoment,
   getMomentByStandardFormat,
 } from '~/services/Helpers/MomentHelpers'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 import routeHelpers from '~/mixins/route-helpers'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import {
@@ -246,7 +247,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7993',
     // treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '26/06/2023 - 29/06/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
   },
@@ -254,7 +255,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7986',
     // treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '25/06/2023 - 28/12/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(8,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
   },
@@ -265,7 +266,7 @@ export const completedSampleData = [
     // treatmentType: 'Human Cells',
     // productionLine: 'Zone A',
     hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: '24/06/2023 - 27/12/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
     // dispatchedBy: 'Ben Hawkins',
   },
   {
@@ -273,7 +274,7 @@ export const completedSampleData = [
     // treatmentType: 'Human Cells',
     // productionLine: 'Zone C',
     hospital: 'Kite',
-    collectionDateDeliveryDate: '23/04/2023 - 26/12/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
     // dispatchedBy: 'Shawn David',
   },
 ]
