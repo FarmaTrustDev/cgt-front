@@ -1,3 +1,5 @@
+import moment from 'moment'
+import { _getFutureMomentStandardFormatted, _getPastMomentStandardFormatted } from '../Helpers/MomentHelpers'
 export const baseStorage = [
     {
         id: 1,
@@ -208,37 +210,37 @@ const tube = {
     steps: [
         {
             title: 'Jack Black',
-            date: '21 June, 2023 9:00',
+            date: moment(_getPastMomentStandardFormatted(2,'day')).format("D MMMM, YYYY") + ' 9:00',
             by: 'Inbound Date',
             detail: 'Cellfuse',
         },
         {
             title: ' Simon Smith',
-            date: '21 May, 2023 9:30',
+            date: moment(_getPastMomentStandardFormatted(34,'day')).format("D MMMM, YYYY") + ' 9:30',
             by: 'Inbound Process',
             detail: 'Cellfuse',
         },
         {
             title: 'Ahmed Salaam',
-            date: '21 June, 2023  10:00',
+            date: moment(_getPastMomentStandardFormatted(56,'day')).format("D MMMM, YYYY") + ' 10:00',
             by: 'Storage',
             detail: 'Cellfuse',
         },
         {
             title: 'Claire Jones',
-            date: '28 Feb, 2023  14:00',
+            date: moment(_getPastMomentStandardFormatted(23,'day')).format("D MMMM, YYYY") + ' 14:00',
             by: 'Visual Check',
             detail: 'Cellfuse',
         },
         {
             title: 'Dwayne Morgan',
-            date: '19 Apr, 2023  15:00',
+            date: moment(_getPastMomentStandardFormatted(27,'day')).format("D MMMM, YYYY") + ' 15:00',
             by: 'Packaging Depot',
             detail: 'Cellfuse',
         },
         {
             title: 'RT456',
-            date: '29 Apr, 2023 16:00',
+            date: moment(_getPastMomentStandardFormatted(2,'month')).format("D MMMM, YYYY") + ' 16:00',
             by: 'Courier Pick Up',
             detail: 'Cellfuse',
         },
@@ -251,37 +253,37 @@ const tube2 = {
     steps: [
         {
             title: 'Jack Black',
-            date: '03 July, 2023 9:00',
+            date: moment(_getFutureMomentStandardFormatted(12,'day')).format("D MMMM, YYYY") + ' 10:05',
             by: 'Inbound Date',
             detail: 'Cellfuse',
         },
         {
             title: ' Simon Smith',
-            date: '29 June, 2023 9:30',
+            date: moment(_getPastMomentStandardFormatted(2,'day')).format("D MMMM, YYYY") + ' 9:30',
             by: 'Inbound Process',
             detail: 'Cellfuse',
         },
         {
             title: 'Ahmed Salaam',
-            date: '21 Feb, 2023 10:00',
+            date: moment(_getPastMomentStandardFormatted(35,'day')).format("D MMMM, YYYY") + ' 10:00',
             by: 'Storage',
             detail: 'Cellfuse',
         },
         {
             title: 'Claire Jones',
-            date: '28 Feb, 2023 14:00',
+            date: moment(_getPastMomentStandardFormatted(40,'day')).format("D MMMM, YYYY") + ' 14:00',
             by: 'Visual Check',
             detail: 'Cellfuse',
         },
         {
             title: 'Dwayne Morgan',
-            date: '19 Apr, 2023 15:00',
+            date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 15:00',
             by: 'Packaging Depot',
             detail: 'Cellfuse',
         },
         {
             title: 'RT456',
-            date: '19 Apr, 2023 16:00',
+            date: moment(_getPastMomentStandardFormatted(1,'day')).format("D MMMM, YYYY") + ' 16:00',
             by: 'Courier Pick Up',
             detail: 'Cellfuse',
         },
@@ -294,37 +296,37 @@ const tube3 = {
     steps: [
         {
             title: 'Jack Black',
-            date: '01 July, 2023 9:00',
+            date: moment(_getPastMomentStandardFormatted(4,'day')).format("D MMMM, YYYY") + ' 9:00',
             by: 'Inbound Date',
             detail: 'Cellfuse',
         },
         {
             title: ' Simon Smith',
-            date: '28 June, 2023 9:30',
+            date: moment(_getPastMomentStandardFormatted(28,'day')).format("D MMMM, YYYY") + ' 9:30',
             by: 'Inbound Process',
             detail: 'Cellfuse',
         },
         {
             title: 'Ahmed Salaam',
-            date: '21 Apr, 2023 10:00',
+            date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 10:00',
             by: 'Storage',
             detail: 'Cellfuse',
         },
         {
             title: 'Claire Jones',
-            date: '28 Feb, 2023 14:00',
+            date: moment(_getPastMomentStandardFormatted(112,'day')).format("D MMMM, YYYY") + ' 14:00',
             by: 'Visual Check',
             detail: 'Cellfuse',
         },
         {
             title: 'Dwayne Morgan',
-            date: '19 Apr, 2023 15:00',
+            date: moment(_getPastMomentStandardFormatted(29,'day')).format("D MMMM, YYYY") + ' 15:00',
             by: 'Packaging Depot',
             detail: 'Cellfuse',
         },
         {
             title: 'RT456',
-            date: '19 Apr, 2023 16:00',
+            date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 16:00',
             by: 'Courier Pick Up',
             detail: 'Cellfuse',
         },
@@ -338,37 +340,37 @@ const tubeActive = {
     steps: [
         {
             title: 'Jack Black',
-            date: '21 June, 2023 9:00',
+            date: moment(_getPastMomentStandardFormatted(9,'day')).format("D MMMM, YYYY") + ' 9:00',
             by: 'Inbound Date',
             detail: 'Cellfuse',
         },
         {
             title: ' Simon Smith',
-            date: '21 May, 2023 9:30',
+            date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 9:30',
             by: 'Inbound Process',
             detail: 'Cellfuse',
         },
         {
             title: 'Ahmed Salaam',
-            date: '21 Feb, 2023 10:00',
+            date: moment(_getPastMomentStandardFormatted(2,'month')).format("D MMMM, YYYY") + ' 10:00',
             by: 'Storage',
             detail: 'Cellfuse',
         },
         {
             title: 'Claire Jones',
-            date: '28 Feb, 2023 14:00',
+            date: moment(_getPastMomentStandardFormatted(37,'day')).format("D MMMM, YYYY") + ' 14:00',
             by: 'Visual Check',
             detail: 'Cellfuse',
         },
         {
             title: 'Dwayne Morgan',
-            date: '19 Apr, 2023 15:00',
+            date: moment(_getPastMomentStandardFormatted(12,'day')).format("D MMMM, YYYY") + ' 15:00',
             by: 'Packaging Depot',
             detail: 'Cellfuse',
         },
         {
             title: 'RT456',
-            date: '19 Apr, 2023 16:00',
+            date: moment(_getPastMomentStandardFormatted(47,'day')).format("D MMMM, YYYY") + ' 16:00',
             by: 'Courier Pick Up',
             detail: 'Cellfuse',
         },

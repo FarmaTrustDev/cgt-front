@@ -259,6 +259,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import PageLayout from '~/components/layout/PageLayout'
 import Header from '~/components/inventory/treatment/treatmentheader'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
@@ -272,6 +273,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
 import { isEmpty } from '~/services/Utilities'
 import { isNumber } from '~/services/Helpers'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 
 export const customDisplayData = [
   {
@@ -288,7 +290,7 @@ export const customDisplayData = [
   },
   {
     title: '',
-    value: '27/06/2023',
+    value: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY"),
     key: 2,
     url: '',
   },
@@ -306,7 +308,7 @@ export const customDisplayData = [
   },
   {
     title: '',
-    value: '27/06/2023',
+    value: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY"),
     key: 5,
     url: '',
   },
@@ -404,7 +406,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7994',
     treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '16/06/2023 - 29/12/2023',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
   },
@@ -412,7 +414,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7986',
     treatmentType: 'Human Cells ',
     hospital: 'Novartis',
-    collectionDateDeliveryDate: '25/06/2023 - 28/07/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(8,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'green',
   },
@@ -420,7 +422,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC9874',
     treatmentType: 'Human Cells',
     hospital: 'Autolus',
-    collectionDateDeliveryDate: '21/05/2023 - 26/11/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'red',
   },
@@ -428,7 +430,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7996',
     treatmentType: 'Human Cells',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '25/06/2023 - 29/08/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'default',
   },
@@ -436,7 +438,7 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC9874',
     treatmentType: 'Human Cells',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '28/06/2023 - 03/08/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
     processSample: 'default',
   },
@@ -447,7 +449,7 @@ export const completedSampleData = [
     treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: '26/06/2023 - 29/01/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
     dispatchedBy: 'Ben Hawkins',
   },
   {
@@ -455,7 +457,7 @@ export const completedSampleData = [
     treatmentType: 'Human Cells',
     productionLine: 'Zone C',
     hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: '25/06/2023 - 28/09/2024',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
     dispatchedBy: 'Shawn David',
   },
   {
@@ -463,7 +465,7 @@ export const completedSampleData = [
     treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Kite',
-    collectionDateDeliveryDate: '09/06/2023 - 12/12/2023',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
     dispatchedBy: 'Chris Murphy',
   },
   {
@@ -471,7 +473,7 @@ export const completedSampleData = [
     treatmentType: 'Human Cells ',
     productionLine: 'Zone C',
     hospital: 'Kite',
-    collectionDateDeliveryDate: '08/05/2023 - 11/11/2023',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
     dispatchedBy: 'Allen Braun',
   },
 ]
@@ -966,6 +968,7 @@ export default {
         },
       }
     },
+    
   },
 }
 </script>

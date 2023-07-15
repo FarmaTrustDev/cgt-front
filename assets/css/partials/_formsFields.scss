@@ -241,6 +241,25 @@ input#login_password:focus {
     width: 1200px;
   }
 }
+.modal-design-smart-lab-label {
+  background-color: #fff;
+  border: none;
+  .ant-input {
+    border-radius: 1px;
+  }
+  .ant-btn {
+    border-radius: 8px;
+    width: 30%;
+    height: 35px;
+    margin-right: 20px;
+  }
+  .ant-modal-content {
+    border-radius: 15px;
+    background-color: #fff;
+    width: 800px;
+  }
+}
+
 .upload-button {
   height: 20px;
   width: 30px;
@@ -449,6 +468,13 @@ input[type="number"] {
 .font-size-16{
   font-size:16px;
 }
+.font-size-14{
+  font-size:14px;
+}
 .font-size-18{
   font-size: 18px;
+}
+.width-100{
+  width: 100px;
+  text-align: center;
 }

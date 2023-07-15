@@ -19,7 +19,7 @@
             </a-row>
             <a-row style="line-height:25px">
               <a-col :span="7" class="text-muted">{{translation.ExpecRecei_3_651}}</a-col>
-              <a-col :span="8" class="text-color-black">27/06/2023 at 13:00</a-col>
+              <a-col :span="8" class="text-color-black">{{moment(new Date()).format("DD/MM/YYYY")}} at 13:00</a-col>
               <a-col :span="5" class="text-muted">{{translation.Lotnumbe_2_652}}</a-col>
               <a-col :span="4" class="text-color-black">ABC1</a-col>
             </a-row>
@@ -41,8 +41,10 @@
     </div>
 </template>
 <script>
+import moment from 'moment'
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
+// import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 export default {
   mixins: [routeHelpers, imagesHelper],
   props: {
@@ -53,6 +55,8 @@ export default {
   data(){
     return{
     showModal: false,
+    moment,
+    
     }
   },
   computed: {

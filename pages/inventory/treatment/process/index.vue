@@ -143,7 +143,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 25/08/2023 </span>
+                        <span class="text-muted"> {{ moment(new Date()).format("DD/MM/YYYY") }} </span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -173,7 +173,7 @@
                         }}</span>
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> 26/07/2023</span>
+                        <span class="text-muted"> {{ moment(new Date().setDate(7,'day')).format("DD/MM/YYYY") }}</span>
                       </a-col>
                     </a-row>
                   </div>
@@ -215,7 +215,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted">  26/08/2023</span>
+                        <span class="text-muted">  {{ moment(new Date()).format("DD/MM/YYYY") }}</span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -261,6 +261,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
 import { QUARANTINE_PROCESS_PHASES } from '~/services/Constant/Phases'
@@ -279,6 +280,7 @@ export default {
   middleware: 'auth',
   data() {
     return {
+    moment,
       activeTab: 'inbound',
       type: 'inbound',
       phases: QUARANTINE_PROCESS_PHASES,

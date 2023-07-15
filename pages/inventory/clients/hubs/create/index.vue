@@ -52,6 +52,8 @@
   </page-layout>
 </template>
 <script>
+import moment from 'moment'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 import PageLayout from '~/components/layout/PageLayout'
 import imagesHelper from '~/mixins/images-helper'
 import routeHelpers from '~/mixins/route-helpers'
@@ -63,9 +65,9 @@ export default {
       loading: false,
       formLayout: 'vertical',
       tasks: [
-        { id: 1, name: 'Store Sample', date: '12/06/2023', url:'/inventory/storage/ColorFridge?inbound=true' },
-        { id: 2, name: 'Outbound Process', date: '02/07/2023', url:'/inventory/treatment/outboundProcess/' },
-        { id: 3, name: 'Inbound Shipment', date: '19/06/2023', url:'/inventory/treatment/process/' },
+        { id: 1, name: 'Store Sample', date: moment(_getFutureMomentStandardFormatted(7,'day')).format("DD/MM/YYYY"), url:'/inventory/storage/ColorFridge?inbound=true' },
+        { id: 2, name: 'Outbound Process', date: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY"), url:'/inventory/treatment/outboundProcess/' },
+        { id: 3, name: 'Inbound Shipment', date: moment(_getFutureMomentStandardFormatted(14,'day')).format("DD/MM/YYYY"), url:'/inventory/treatment/process/' },
       ],
     }
   },

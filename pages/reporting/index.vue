@@ -52,6 +52,8 @@
   >
 </template>
 <script>
+import moment from 'moment'
+import { _getFutureMomentStandardFormatted, _getPastMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 import PageLayout from '~/components/layout/PageLayout'
 // import Table from '~/components/labeling/Listing'
 import routeHelpers from '~/mixins/route-helpers'
@@ -70,7 +72,7 @@ export default {
           id: 'DAC49784',
           sample: 'Novartis',
           name: 'Stephen Jones',
-          date: '02/07/2023',
+          date: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY"),
           status: 'New',
           statusId: 'tag1',
           doc: 'View Form',
@@ -79,7 +81,7 @@ export default {
           id: 'DAC517847',
           sample: 'Adaptimmune',
           name: 'Chris Smith',
-          date: '15/06/2023',
+          date: moment(_getPastMomentStandardFormatted(1,'day')).format("DD/MM/YYYY"),
           status: 'New',
           statusId: 'tag1',
           doc: 'View Form',
@@ -88,7 +90,7 @@ export default {
           id: 'DAC69254',
           sample: 'TCR',
           name: 'Stephen Jones',
-          date: '19/06/2023',
+          date: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY"),
           status: 'New',
           statusId: 'tag1',
           doc: 'View Form',
@@ -97,7 +99,7 @@ export default {
           id: 'DAC79798',
           sample: 'Novartis',
           name: 'Oliver Jack',
-          date: '20/06/2023',
+          date: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY"),
           status: 'New',
           statusId: 'tag1',
           doc: 'View Form',
@@ -106,7 +108,7 @@ export default {
           id: 'DAC795412',
           sample: 'Novartis',
           name: 'John Smith',
-          date: '29/06/2023',
+          date: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY"),
           status: 'New',
           statusId: 'tag1',
           doc: 'View Form',
