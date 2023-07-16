@@ -8,9 +8,6 @@
   >
     <div slot="content">
       <div class="mt-15 clearfix">
-        <!-- <a-select class="float-right page-search-input" placeholder="Search">
-            <a-select-option v-for="treatmentType in treatmentTypes" :key="treatmentType.id">{{ treatmentType.name }}</a-select-option>
-        </a-select> -->
       </div>
 
       <span slot="action" slot-scope="text, record">
@@ -25,35 +22,8 @@
       </span>
       <div class="h-tabs large-tabs">
         <a-tabs type="card" :animated="false">
-          <!-- <a-tab-pane key="1" :tab="translation.Inbou_1_498">
-          <a-table
-            class="rounded-table"
-            :columns="newSampleColumns"
-            :data-source="newSampleData"
-          :should-fetch="false"
-          >
-            <template slot="print" slot-scope="record">
-              <a-button
-                class="print-btn"
-                type="primary"
-                size="small"
-                icon="printer"
-                @click="openViewModal(record)"
-                >{{ translation.ViewDocum_2_508 }}</a-button
-              >
-            </template>
-          </a-table>
-          <a-modal
-            :visible="showModal"
-            :title="translation.Docum_1_507"
-            @cancel="handleModal(false)"
-            @ok="handleModal(false)"
-          >
-            <img class="img-responsive" :src="getImageUrl(qrUrl)" />
-          </a-modal>
-        </a-tab-pane> -->
 
-          <a-tab-pane key="1" :tab="translation.InbouSampl_2_306">
+          <a-tab-pane key="1" tab="Inbound">
             <a-input
               :placeholder="translation.searc_1_488"
               class="float-right inventory-search mt-15"
@@ -75,7 +45,7 @@
                   @click="openViewModal(record)"
                   ><img :src="getImageUrl('Icons/Union.svg')"
                 /></a-button>
-                <a-button v-else @click="openPopViewModal(true)">
+                <a-button v-else @click="openPopViewModal(true, print)">
                   <img :src="getImageUrl('Icons/Union.svg')"
                 /></a-button>
               </template>
@@ -98,7 +68,7 @@
                             ? 'ant-steps-item-error'
                             : phase.id === 2 && record.processSample !== 'red'
                             ? 'ant-steps-item-active-blue'
-                            : phase.id !== 3
+                            : phase.id !== 3 && record.inbound===true
                             ? 'ant-steps-item-finish'
                             : ''
                         "
@@ -119,7 +89,7 @@
               </span>
             </a-table>
           </a-tab-pane>
-          <a-tab-pane key="2" :tab="translation.OutboSampl_2_500">
+          <a-tab-pane key="2" tab="Outbound">
             <a-input
               ref="userNameInput"
               :placeholder="translation.searc_1_488"
@@ -147,7 +117,7 @@
                         :class="
                           phase.id === 2 ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="stepClick(record, phase)"
+                        @click="stepClickOut(record, phase)"
                       />
                     </a-steps>
                   </span>
@@ -187,7 +157,7 @@
           :visible="showModal"
           class="modal-design-smart-lab"
           :dialog-style="{ right: '20%', top: '5%' }"
-          @cancel="openPopViewModal(false)"
+          @cancel="openPopViewModal(false, null)"
           @ok="handleOk(false)"
         >
           <a-card class="grey-card-smart-lab">
@@ -245,9 +215,7 @@
         >
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
-            <a-button @click="handleModal(false)">{{
-              translation.cance_1_296
-            }}</a-button>
+            <a-button @click="handleModal(false)">{{ translation.cance_1_296 }}</a-button>
             <a-button @click="printWindow()">{{
               translation.Print_1_111
             }}</a-button>
@@ -406,41 +374,61 @@ export const newSampleData = [
     patientEnrollmentNumber: 'DAC7994',
     treatmentType: 'Human Cells ',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:true,
+    projectName:'BayState USA IN89873',
+    projectId:'506',
     processSample: 'green',
+    email:'baystate@gmail.com',
   },
   {
     patientEnrollmentNumber: 'DAC7986',
     treatmentType: 'Human Cells ',
     hospital: 'Novartis',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(8,'month')).format("DD/MM/YYYY"),
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(8,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:true,
+    projectName:'Novartis - NTU Sample Project',
+    projectId:'7157',
     processSample: 'green',
+    email:'novartis@gmail.com',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
     treatmentType: 'Human Cells',
-    hospital: 'Autolus',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
+    hospital: 'Novartis',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:false,
+    projectName:'Novartis - NTU Sample Project',
+    projectId:'7157',
     processSample: 'red',
+    email:'novartis@gmail.com',
   },
   {
     patientEnrollmentNumber: 'DAC7996',
     treatmentType: 'Human Cells',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:false,
+    projectName:'BayState USA IN89873',
+    projectId:'506',
     processSample: 'default',
+    email:'baystate@gmail.com',
   },
   {
     patientEnrollmentNumber: 'DAC9874',
     treatmentType: 'Human Cells',
     hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
     print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:false,
+    projectName:'BayState USA IN89873',
+    projectId:'506',
     processSample: 'default',
+    email:'baystate@gmail.com',
   },
 ]
 export const completedSampleData = [
@@ -449,24 +437,33 @@ export const completedSampleData = [
     treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+    projectName:'Autolus Project Out89343',
+    projectId:'2440',
     dispatchedBy: 'Ben Hawkins',
+    email:'adaptimmune@gmail.com',
   },
   {
     patientEnrollmentNumber: 'DAC2237',
     treatmentType: 'Human Cells',
     productionLine: 'Zone C',
     hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    projectName:'Autolus Project Out89343',
+    projectId:'2440',
     dispatchedBy: 'Shawn David',
+    email:'adaptimmune@gmail.com',
   },
   {
     patientEnrollmentNumber: 'DAC85597',
     treatmentType: 'Human Cells',
     productionLine: 'Zone A',
     hospital: 'Kite',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
+    projectName:'Kite Out Washington Clinical Trial Ref:2343',
+    projectId:'594',
     dispatchedBy: 'Chris Murphy',
+    email:'kite@gmail.com',
   },
   {
     patientEnrollmentNumber: 'DAC39647',
@@ -474,7 +471,10 @@ export const completedSampleData = [
     productionLine: 'Zone C',
     hospital: 'Kite',
     collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    projectName:'Kite Out Washington Clinical Trial Ref:2343',
+    projectId:'594',
     dispatchedBy: 'Allen Braun',
+    email:'kite@gmail.com',
   },
 ]
 export const allSampleData = [
@@ -578,7 +578,17 @@ export default {
           key: 'hospital',
         },
         {
-          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
+          title: 'Project ID',
+          dataIndex: 'projectId',
+          key: 'projectId',
+        },
+        {
+          title: 'Project Name',
+          dataIndex: 'projectName',
+          key: 'projectName',
+        },
+        {
+          title: 'Execution Date - Expiry Date',
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
         },
@@ -645,6 +655,17 @@ export default {
           key: 'hospital',
         },
         {
+          title: 'Project ID',
+          dataIndex: 'projectId',
+          key: 'projectId',
+        },
+        {
+          title: 'Project Name',
+          dataIndex: 'projectName',
+          key: 'projectName',
+        },
+
+        {
           title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
           dataIndex: 'collectionDateDeliveryDate',
           key: 'collectionDateDeliveryDate',
@@ -683,6 +704,16 @@ export default {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
           dataIndex: 'hospital',
           key: 'hospital',
+        },
+        {
+          title: 'Project ID',
+          dataIndex: 'projectId',
+          key: 'projectId',
+        },
+        {
+          title: 'Project Name',
+          dataIndex: 'projectName',
+          key: 'projectName',
         },
         {
           title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
@@ -819,10 +850,20 @@ export default {
     stepClick(record, phase) {
       if (record === 'error') {
         this.goto(phase)
-      } else {
-        this.goto(phase.url_slug)
+      } else if(record.inbound===true && phase.id!==3){
+        this.goto(phase.url_slug+'&record='+JSON.stringify(record))
       }
     },
+    stepClickOut(record, phase) {
+      if (record === 'error') {
+        this.goto(phase)
+      } else if(phase.phaseId===1) {
+        this.goto(phase.url_slug+'?record='+JSON.stringify(record))
+      } else if (phase.phaseId===2){
+        this.goto(phase.url_slug+'&record='+JSON.stringify(record))
+      }
+    },
+    
     clickImage(record) {
       this.qrUrl = record.qrUrl
       this.handleModal(true)
@@ -838,7 +879,14 @@ export default {
       this.qrUrl = id
       // LabelServices.scheduling(id);
     },
-    openPopViewModal(val) {
+    openPopViewModal(val,record) {
+      if(record){
+        this.customDisplayData[8].value=record.hospital
+        this.customDisplayData[16].value=record.hospital
+        this.customDisplayData[7].value=record.projectId
+        this.customDisplayData[11].value=record.projectName
+        this.customDisplayData[10].value=record.hospital
+      }
       this.showModal = val
     },
     getTranslationData() {

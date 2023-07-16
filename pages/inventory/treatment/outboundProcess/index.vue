@@ -19,7 +19,7 @@
                   />
 
                   <figcaption>
-                    {{ translation.SamplID_2_502 }}: DAC48694
+                    {{ translation.SamplID_2_502 }}: {{record.patientEnrollmentNumber}}
                   </figcaption>
                 </figure>
               </a-card>
@@ -42,7 +42,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> Adaptimmune</span>
+                        <span> {{record.hospital}}</span>
                       </h6>
                     </a-col>
                     <a-col :span="5" class="mt-15">
@@ -66,7 +66,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> adaptimmune@gmail.com</span>
+                        <span> {{record.email}}</span>
                       </h6>
                     </a-col>
                   </a-row>
@@ -79,7 +79,7 @@
                       </h6>
                     </a-col>
                     <a-col :span="9" class="mt-15">
-                      <h6><span> +44 12345 1234</span></h6>
+                      <h6><span> +44 289 6655 </span></h6>
                     </a-col>
                   </a-row>
                 </div>
@@ -109,7 +109,7 @@
                         ? 'ant-steps-item-active-blue-large'
                         : 'ant-steps-horizontal-large'
                     "
-                    @click="reDirect(phase.url_slug, phase.alias)"
+                    @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)"
                   />
                 </a-steps>
               </span>
@@ -130,6 +130,7 @@
               :bag-id="'BUID-123'"
               :type-id="type"
               :active-tab="activeTab"
+              :record="record"
               @fetchBags="() => {}"
               @updateId="updateDummyOutBoundCollectionId"
               @handleActiveTab="handleActiveTab"
@@ -191,6 +192,7 @@
             </div>
             <a-form>
               <LogisticLookup />
+              
               <a-row :gutter="16">
                 <a-col :span="12">
                   <a-form-item
@@ -404,6 +406,7 @@ import { INVENTORY_OUTBOUND_STATUS_STEPS } from '~/services/Constant/Phases'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
+import StepServices from '~/services/API/StepServices'
 
 // import shipment from '~/components/inventory/treatment/shipment'
 export const customDisplayDataShipInfo = [
@@ -626,6 +629,7 @@ export default {
       customDisplayDataShipperAccess,
       customDisplayDataExceptionalRel,
       customDisplayDataSelectionPackage,
+      record:{},
       shippingTableDataColumn: [
         {
           title: `${this.$store.getters.getTranslation.ShippType_2_766}`,
@@ -879,6 +883,17 @@ export default {
       } else {
         this.activeTab = this.$route.query.view
       }
+      const obj=this.$route.query.record
+      this.record=JSON.parse(obj)
+      if (this.record && this.record.projectId) {
+        this.getSteps(this.record.projectId);
+      }      
+    },
+    getSteps(projectId){
+        StepServices.getByProjectId(projectId).then((response) => {
+            console.log(response)
+            this.dummyOutBoundCollection=response.data
+          })
     },
     getTranslationData() {
       this.phases[0].name = this.translation.StoreSampl_2_579

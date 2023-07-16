@@ -44,6 +44,11 @@
                   }}</a>
           </span>
         </template>
+        <template slot="projectDate" slot-scope="projectDate">
+          <span>
+            {{ moment(projectDate.projectDate).format('DD/MM/YYYY') }}
+          </span>
+        </template>
         <template slot="investigator" slot-scope="investigator">
           <span v-for="ivestigator,index in investigator.investigators" :key="index+'inv'">
             {{ivestigator.investigatorName + " "}}
@@ -106,6 +111,7 @@
     </page-layout>
   </template>
   <script>
+  import moment from 'moment'
   import ProjectServices from '~/services/API/ProjectServices'
   import notifications from '~/mixins/notifications'
   import { preventDefault } from '~/services/Helpers'
@@ -146,8 +152,8 @@
           },
           {
             title:'Date',
-            dataIndex: 'projectDate',
             key: 'projectDate',
+            scopedSlots: { customRender: 'projectDate' },
           },
           {
             title: 'Principle Investigator',
@@ -173,6 +179,7 @@
     },
     methods: {
       preventDefault,
+      moment,
       fetch() {
         ProjectServices.get()
           .then((response) => {

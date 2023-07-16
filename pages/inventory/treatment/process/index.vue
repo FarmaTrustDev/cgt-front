@@ -19,7 +19,7 @@
                   />
 
                   <figcaption>
-                    {{ translation.SamplID_2_502 }}: DAC48694
+                    {{ translation.SamplID_2_502 }}: {{record.patientEnrollmentNumber}}
                   </figcaption>
                 </figure>
               </a-card>
@@ -42,7 +42,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> Baystate Clinic</span>
+                        <span> {{record.hospital}}</span>
                       </h6>
                     </a-col>
                     <a-col :span="5" class="mt-15">
@@ -66,7 +66,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> baystateclinic@gmail.com</span>
+                        <span> {{record.email}}</span>
                       </h6>
                     </a-col>
                   </a-row>
@@ -79,7 +79,7 @@
                       </h6>
                     </a-col>
                     <a-col :span="9" class="mt-15">
-                      <h6><span> +44 12345 1234</span></h6>
+                      <h6><span> +44 289 6655</span></h6>
                     </a-col>
                   </a-row>
                 </div>
@@ -111,7 +111,7 @@
                     :status="
                       phase.id == 1 ? 'finish' : phase.id == 2 ? 'wait' : ''
                     "
-                    @click="reDirect(phase.url_slug, phase.alias)"
+                    @click="reDirect(phase.id<=2? phase.url_slug+'&record='+JSON.stringify(record) : '', phase.alias)"
                   />
                 </a-steps>
               </span>
@@ -143,7 +143,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ moment(new Date()).format("DD/MM/YYYY") }} </span>
+                        <span class="text-muted"> {{ record.collectionDateDeliveryDate.split("-")[0] }} </span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -173,7 +173,7 @@
                         }}</span>
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ moment(new Date().setDate(7,'day')).format("DD/MM/YYYY") }}</span>
+                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(7, 'days').format('DD/MM/YYYY') }}</span>
                       </a-col>
                     </a-row>
                   </div>
@@ -215,7 +215,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted">  {{ moment(new Date()).format("DD/MM/YYYY") }}</span>
+                        <span class="text-muted">  {{ record.collectionDateDeliveryDate.split("-")[0] }}</span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -270,6 +270,7 @@ import { QUARANTINE_STORAGE } from '~/services/Constant'
 import tabsHelpers from '~/mixins/tabs-helpers'
 import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
+import StepServices from '~/services/API/StepServices'
 export default {
   components: {
     'page-layout': PageLayout,
@@ -284,6 +285,7 @@ export default {
       activeTab: 'inbound',
       type: 'inbound',
       phases: QUARANTINE_PROCESS_PHASES,
+      record:{},
       dummyCollection: [
         {
           id: 1,
@@ -394,6 +396,7 @@ export default {
     this.handleActiveTab()
     this.getTranslationData()
     this.$store.commit('setSelectedMenu', [`2`])
+    // this.getSteps()
   },
   methods: {
     getTranslationData() {
@@ -403,6 +406,20 @@ export default {
     },
     handleActiveTab() {
       this.activeTab = this.$route.query.view
+      // this.record= this.$route.query.record
+      const obj=this.$route.query.record
+      this.record=JSON.parse(obj)
+      console.log(this.record)
+      if (this.record && this.record.projectId) {
+        this.getSteps(this.record.projectId);
+      }
+    },
+    getSteps(projectId){
+        console.log(this.dummyCollection)
+        StepServices.getByProjectId(projectId).then((response) => {
+            console.log(response)
+            this.dummyCollection=response.data
+          })
     },
     updateId(collectionId) {
       const dumCollection = this.dummyCollection.map((collection) => {
