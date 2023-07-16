@@ -25,10 +25,18 @@ function getByProcessId(id){
     })
 }
 
+function getByProjectId(id){
+    return request({
+        url : `${baseApi}/get-by-project-id/${id}`,
+        method : 'GET'
+    })
+}
+
 const StepServices = {
     create,
     get,
-    getByProcessId
+    getByProcessId,
+    getByProjectId
 }
 
 export default StepServices

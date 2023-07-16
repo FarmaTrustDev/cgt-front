@@ -534,6 +534,7 @@ export default {
     bagId: { required: true, type: String },
     activeTab: { type: String },
     typeId: { type: String },
+    record:{type: Object},
   },
   data() {
     return {
@@ -1052,7 +1053,8 @@ export default {
       this.success('Submitted successfully')
       this.showSchedulingModal=false
       this.$emit('handleActiveTab', 'COURIER')
-      this.goto('/inventory/treatment/outboundProcess?view=COURIER')
+      const obj=JSON.stringify(this.record)
+      this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
     },    
     handleInventorygModal(){
       this.showInventoryModal=false

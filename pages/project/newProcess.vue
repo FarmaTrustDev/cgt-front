@@ -99,7 +99,13 @@
             </div>
             </a-col>
         </a-row>
-        
+        <a-row >
+            <a-col :span="24">
+                <a-form-item class="text-right mt-20">
+                    <a-button type="primary" @click="goto('/project')">Submit</a-button>
+                </a-form-item>
+            </a-col>
+        </a-row>
         
       </div>
     </PageLayout>

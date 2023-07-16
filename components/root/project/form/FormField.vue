@@ -1,6 +1,6 @@
 <template>
     <div class="ml-35">
-      <a-row>
+      
         <a-row>
         <a-col :span="12">
           <a-form-item
@@ -59,7 +59,7 @@
           </a-form-item>
         </a-col>
         </a-row>
-        
+        <a-row>
         <a-col :span="12">
           
           <a-form-item
@@ -130,7 +130,13 @@
           </a-form-item>
         </a-col>
       </a-row>
+      <a-row >
+        <a-col :span="12"><a-button type="primary" style="margin-top:-70px" @click="showModal(true)">Add Investigator</a-button></a-col>
+        <a-col :span="12"><a-button type="primary" style="margin-top:-70px" @click="showModal1(true)">Add Partner</a-button></a-col>
 
+      </a-row>
+      
+      
       <div>
     <a-modal
       :footer="null"
