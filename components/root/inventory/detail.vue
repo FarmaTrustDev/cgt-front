@@ -26,6 +26,7 @@
 import imagesHelper from '~/mixins/images-helper'
 export default {
   mixins: [imagesHelper],
+  props: { data: { type: Object, default: () => ({}) } },
   /* props: {
     data: {
       type: Object,
@@ -41,14 +42,14 @@ export default {
   }, */
   data() {
     return {
-      data: {
+      /* data: {
         countryName: 'Germany - Cellfuse',
         address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
         flag: 'web/flags/de.svg',
         global: '',
         phone: '49 6781 9855-0',
         email: 'info-imfs@cellfuse.de',
-      }
+      } */
     }
   },  
   computed: {
@@ -59,7 +60,7 @@ export default {
   watch:{
     translation(newValues, oldValue){
       if(newValues!==oldValue){
-        this.data.global=newValues.Headof_3_549 + '- Stephen Jones'
+        // this.data.global=newValues.Headof_3_549 + '- Stephen Jones'
       }
     }
   },   
@@ -68,7 +69,7 @@ export default {
   },
   methods: {
     getTranslationData(){
-      this.data.global=this.translation.Headof_3_549 + '- Stephen Jones'
+      // this.data.global=this.translation.Headof_3_549 + '- Stephen Jones'
     }
   },   
 }

@@ -17,7 +17,7 @@
               <!-- :img-properties="{ width: '50px', height: '50px' }" -->
             </ImageHeading>
           </a-tab-pane>
-          <a-tab-pane key="2" class="display-inline-block border-bottom-none font-size-18" tab="Kit A">
+          <a-tab-pane v-if="tabId===1 || tabId===3" key="2" class="display-inline-block border-bottom-none font-size-18" tab="Kit A">
             <!-- <a-tab-pane key="1" :tab="translation.ClassB_3_572"> -->
             <ImageHeading 
                 v-for="(c, index) in classA" 
@@ -33,7 +33,7 @@
             </ImageHeading>
           </a-tab-pane>
               
-          <a-tab-pane key="3" class="display-inline-block border-bottom-none font-size-18" tab="Kit B">
+          <a-tab-pane v-if="tabId===1" key="3" class="display-inline-block border-bottom-none font-size-18" tab="Kit B">
             <ImageHeading
               v-for="(c, index) in classB"
               :key="index+'B'"
@@ -45,7 +45,7 @@
             </ImageHeading>
             <!-- :img-properties="{ width: '50px', height: '50px' }" -->
           </a-tab-pane>
-          <a-tab-pane key="4" class="display-inline-block border-bottom-none font-size-18" tab="Kit C">
+          <a-tab-pane v-if="tabId===1 || tabId===4" key="4" class="display-inline-block border-bottom-none font-size-18" tab="Kit C">
             <ImageHeading
               v-for="(c, index) in classC"
               :key="index+'C'"
@@ -90,6 +90,7 @@
   export default {
     components: { ImageHeading },
     mixins: [imagesHelper],
+    props: { tabId: { type: Number } },
     data() {
       return {
         classAll: [
@@ -161,12 +162,7 @@
           },
         ],
         classA: [
-        {
-            // img: 'Icons/kits.svg',
-            img: 'web/inventory/tubes.svg',
-            heading: 'Tubes',
-            qty: 200
-          },
+        
           {
             img: 'web/inventory/gloves.svg',
             heading: 'Gloves',
@@ -187,21 +183,13 @@
             heading: 'Liquid Bags',
             qty: 120
           },
-          {
-            img: 'web/inventory//label.svg',
-            heading: 'Labels',
-            qty: 200
-          },
+          
           {
             img: 'web/inventory//needles.svg',
             heading: 'Needles',
             qty: 200
           },
-          {
-            img: 'web/inventory//trocars.svg',
-            heading: 'Trocars',
-            qty: 50
-          },
+          
           {
             img: 'web/inventory//needle_holder.svg',
             heading: 'Needle holders',
@@ -214,12 +202,7 @@
           },
         ],
         classB: [
-        {
-            // img: 'Icons/kits.svg',
-            img: 'web/inventory/tubes.svg',
-            heading: 'Tubes',
-            qty: 450
-          },
+        
           {
             img: 'web/inventory/gloves.svg',
             heading: 'Gloves',
@@ -230,11 +213,7 @@
             heading: 'Containers',
             qty: 300
           },
-          {
-            img: 'web/inventory//vials.svg',
-            heading: 'Vials',
-            qty: 200
-          },
+          
           {
             img: 'web/inventory//liquid.svg',
             heading: 'Liquid Bags',
@@ -245,21 +224,13 @@
             heading: 'Labels',
             qty: 750
           },
-          {
-            img: 'web/inventory//needles.svg',
-            heading: 'Needles',
-            qty: 50
-          },
+          
           {
             img: 'web/inventory//trocars.svg',
             heading: 'Trocars',
             qty: 450
           },
-          {
-            img: 'web/inventory//needle_holder.svg',
-            heading: 'Needle holders',
-            qty: 500
-          },
+          
           {
             img: 'web/inventory//masks.svg',
             heading: 'Masks',
@@ -267,32 +238,19 @@
           },
         ],
         classC: [
-        {
-            // img: 'Icons/kits.svg',
-            img: 'web/inventory/tubes.svg',
-            heading: 'Tubes',
-            qty: 333
-          },
+        
           {
             img: 'web/inventory/gloves.svg',
             heading: 'Gloves',
             qty: 500
           },
-          {
-            img: 'web/inventory//container.svg',
-            heading: 'Containers',
-            qty: 450
-          },
+          
           {
             img: 'web/inventory//vials.svg',
             heading: 'Vials',
             qty: 600
           },
-          {
-            img: 'web/inventory//liquid.svg',
-            heading: 'Liquid Bags',
-            qty: 350
-          },
+          
           {
             img: 'web/inventory//label.svg',
             heading: 'Labels',
@@ -303,21 +261,13 @@
             heading: 'Needles',
             qty: 500
           },
-          {
-            img: 'web/inventory//trocars.svg',
-            heading: 'Trocars',
-            qty: 800
-          },
+          
           {
             img: 'web/inventory//needle_holder.svg',
             heading: 'Needle holders',
             qty: 50
           },
-          {
-            img: 'web/inventory//masks.svg',
-            heading: 'Masks',
-            qty: 200
-          },
+          
           {
             img: 'web/inventory//antiseptic.svg',
             heading: 'Antiseptic wipes',

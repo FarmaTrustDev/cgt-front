@@ -9,7 +9,7 @@
     <div slot="content" class="">
       <a-row>
         <a-col class="mb-15" :span="24">
-          <detail />
+          <detail :data="data" />
         </a-col>
       </a-row>
       <a-row :gutter="24">
@@ -100,6 +100,14 @@ export default {
       tubes: [],
       trayData: [],
       autoSelect:null,
+      data: {
+        countryName: 'Germany - Cellfuse',
+        address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
+        flag: 'web/flags/de.svg',
+        global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Stephen Jones',
+        phone: '49 6781 9855-0',
+        email: 'info-imfs@cellfuse.de',
+      }
     }
   },
   computed: {

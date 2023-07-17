@@ -13,7 +13,7 @@
         </h2>
         <a-row class="display-inline-block" :gutter="10">
           <a-col class="suit" :span="23">
-            <kitDetail />
+            <kitDetail :tabId="data.id" />
           </a-col>
           
         </a-row>
@@ -28,7 +28,9 @@
   export default {
     components: { detail, kitDetail },
     mixins:[imagesHelper],
-    props: { data: { type: Object, default: () => ({}) } },
+    props: { 
+      data: { type: Object, default: () => ({}) },
+    },
     data() {
       return {
         outsideEquipment: [

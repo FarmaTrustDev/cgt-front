@@ -252,37 +252,37 @@ const tube2 = {
     name: '5A',
     steps: [
         {
-            title: 'Jack Black',
+            title: 'James Smith',
             date: moment(_getFutureMomentStandardFormatted(12,'day')).format("D MMMM, YYYY") + ' 10:05',
             by: 'Inbound Date',
             detail: 'Cellfuse',
         },
         {
-            title: ' Simon Smith',
+            title: 'Emma Johnson',
             date: moment(_getPastMomentStandardFormatted(2,'day')).format("D MMMM, YYYY") + ' 9:30',
             by: 'Inbound Process',
             detail: 'Cellfuse',
         },
         {
-            title: 'Ahmed Salaam',
+            title: 'Louis Dupont',
             date: moment(_getPastMomentStandardFormatted(35,'day')).format("D MMMM, YYYY") + ' 10:00',
             by: 'Storage',
             detail: 'Cellfuse',
         },
         {
-            title: 'Claire Jones',
+            title: 'Sophia Schmidt',
             date: moment(_getPastMomentStandardFormatted(40,'day')).format("D MMMM, YYYY") + ' 14:00',
             by: 'Visual Check',
             detail: 'Cellfuse',
         },
         {
-            title: 'Dwayne Morgan',
+            title: 'Ben Fischer',
             date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 15:00',
             by: 'Packaging Depot',
             detail: 'Cellfuse',
         },
         {
-            title: 'RT456',
+            title: 'Mia Weber',
             date: moment(_getPastMomentStandardFormatted(1,'day')).format("D MMMM, YYYY") + ' 16:00',
             by: 'Courier Pick Up',
             detail: 'Cellfuse',
@@ -295,19 +295,19 @@ const tube3 = {
     name: '5A',
     steps: [
         {
-            title: 'Jack Black',
+            title: 'Sophia Wilson',
             date: moment(_getPastMomentStandardFormatted(4,'day')).format("D MMMM, YYYY") + ' 9:00',
             by: 'Inbound Date',
             detail: 'Cellfuse',
         },
         {
-            title: ' Simon Smith',
+            title: 'Maximilian Müller',
             date: moment(_getPastMomentStandardFormatted(28,'day')).format("D MMMM, YYYY") + ' 9:30',
             by: 'Inbound Process',
             detail: 'Cellfuse',
         },
         {
-            title: 'Ahmed Salaam',
+            title: 'William Davis',
             date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 10:00',
             by: 'Storage',
             detail: 'Cellfuse',
@@ -319,13 +319,185 @@ const tube3 = {
             detail: 'Cellfuse',
         },
         {
-            title: 'Dwayne Morgan',
+            title: 'Olivia Thompson',
             date: moment(_getPastMomentStandardFormatted(29,'day')).format("D MMMM, YYYY") + ' 15:00',
             by: 'Packaging Depot',
             detail: 'Cellfuse',
         },
         {
             title: 'RT456',
+            date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 16:00',
+            by: 'Courier Pick Up',
+            detail: 'Cellfuse',
+        },
+    ],
+}
+const tube4 = {
+    id: 3,
+    active: false,
+    name: '5A',
+    steps: [
+        {
+            title: 'Hannah Becker',
+            date: moment(_getPastMomentStandardFormatted(4,'day')).format("D MMMM, YYYY") + ' 9:00',
+            by: 'Inbound Date',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Paul Hoffmann',
+            date: moment(_getPastMomentStandardFormatted(28,'day')).format("D MMMM, YYYY") + ' 9:30',
+            by: 'Inbound Process',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Emma Schäfer',
+            date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 10:00',
+            by: 'Storage',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Claire Jones',
+            date: moment(_getPastMomentStandardFormatted(112,'day')).format("D MMMM, YYYY") + ' 14:00',
+            by: 'Visual Check',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Liam Anderson',
+            date: moment(_getPastMomentStandardFormatted(29,'day')).format("D MMMM, YYYY") + ' 15:00',
+            by: 'Packaging Depot',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Ava Garcia',
+            date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 16:00',
+            by: 'Courier Pick Up',
+            detail: 'Cellfuse',
+        },
+    ],
+}
+const tube5 = {
+    id: 3,
+    active: false,
+    name: '5A',
+    steps: [
+        {
+            title: 'Paul Hoffmann',
+            date: moment(_getPastMomentStandardFormatted(4,'day')).format("D MMMM, YYYY") + ' 9:00',
+            by: 'Inbound Date',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Emma Schäfer',
+            date: moment(_getPastMomentStandardFormatted(28,'day')).format("D MMMM, YYYY") + ' 9:30',
+            by: 'Inbound Process',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Lukas Bauer',
+            date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 10:00',
+            by: 'Storage',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Claire Jones',
+            date: moment(_getPastMomentStandardFormatted(112,'day')).format("D MMMM, YYYY") + ' 14:00',
+            by: 'Visual Check',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Laura Schneider',
+            date: moment(_getPastMomentStandardFormatted(29,'day')).format("D MMMM, YYYY") + ' 15:00',
+            by: 'Packaging Depot',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Ava Garcia',
+            date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 16:00',
+            by: 'Courier Pick Up',
+            detail: 'Cellfuse',
+        },
+    ],
+}
+const tube6 = {
+    id: 3,
+    active: false,
+    name: '5A',
+    steps: [
+        {
+            title: 'Lena Meyer',
+            date: moment(_getPastMomentStandardFormatted(4,'day')).format("D MMMM, YYYY") + ' 9:00',
+            by: 'Inbound Date',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Ethan Lewis',
+            date: moment(_getPastMomentStandardFormatted(28,'day')).format("D MMMM, YYYY") + ' 9:30',
+            by: 'Inbound Process',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Charlotte Walker',
+            date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 10:00',
+            by: 'Storage',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Felix Klein',
+            date: moment(_getPastMomentStandardFormatted(112,'day')).format("D MMMM, YYYY") + ' 14:00',
+            by: 'Visual Check',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Laura Schneider',
+            date: moment(_getPastMomentStandardFormatted(29,'day')).format("D MMMM, YYYY") + ' 15:00',
+            by: 'Packaging Depot',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Lena Meyer',
+            date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 16:00',
+            by: 'Courier Pick Up',
+            detail: 'Cellfuse',
+        },
+    ],
+}
+const tube7 = {
+    id: 3,
+    active: false,
+    name: '5A',
+    steps: [
+        {
+            title: 'Alexander Hall',
+            date: moment(_getPastMomentStandardFormatted(4,'day')).format("D MMMM, YYYY") + ' 9:00',
+            by: 'Inbound Date',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Amelia White',
+            date: moment(_getPastMomentStandardFormatted(28,'day')).format("D MMMM, YYYY") + ' 9:30',
+            by: 'Inbound Process',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Luis Schröder',
+            date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 10:00',
+            by: 'Storage',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Felix Klein',
+            date: moment(_getPastMomentStandardFormatted(112,'day')).format("D MMMM, YYYY") + ' 14:00',
+            by: 'Visual Check',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Marie Zimmermann',
+            date: moment(_getPastMomentStandardFormatted(29,'day')).format("D MMMM, YYYY") + ' 15:00',
+            by: 'Packaging Depot',
+            detail: 'Cellfuse',
+        },
+        {
+            title: 'Hannah Becker',
             date: moment(_getPastMomentStandardFormatted()).format("D MMMM, YYYY") + ' 16:00',
             by: 'Courier Pick Up',
             detail: 'Cellfuse',
@@ -339,37 +511,37 @@ const tubeActive = {
     isHover: true,
     steps: [
         {
-            title: 'Jack Black',
+            title: 'Gabriel Lambert',
             date: moment(_getPastMomentStandardFormatted(9,'day')).format("D MMMM, YYYY") + ' 9:00',
             by: 'Inbound Date',
             detail: 'Cellfuse',
         },
         {
-            title: ' Simon Smith',
+            title: 'Léa Rousseau',
             date: moment(_getPastMomentStandardFormatted(20,'day')).format("D MMMM, YYYY") + ' 9:30',
             by: 'Inbound Process',
             detail: 'Cellfuse',
         },
         {
-            title: 'Ahmed Salaam',
+            title: 'Ben Fischer',
             date: moment(_getPastMomentStandardFormatted(2,'month')).format("D MMMM, YYYY") + ' 10:00',
             by: 'Storage',
             detail: 'Cellfuse',
         },
         {
-            title: 'Claire Jones',
+            title: 'Noah Martinez',
             date: moment(_getPastMomentStandardFormatted(37,'day')).format("D MMMM, YYYY") + ' 14:00',
             by: 'Visual Check',
             detail: 'Cellfuse',
         },
         {
-            title: 'Dwayne Morgan',
+            title: 'Sophia Becker',
             date: moment(_getPastMomentStandardFormatted(12,'day')).format("D MMMM, YYYY") + ' 15:00',
             by: 'Packaging Depot',
             detail: 'Cellfuse',
         },
         {
-            title: 'RT456',
+            title: 'Elias Wagner',
             date: moment(_getPastMomentStandardFormatted(47,'day')).format("D MMMM, YYYY") + ' 16:00',
             by: 'Courier Pick Up',
             detail: 'Cellfuse',
@@ -382,22 +554,22 @@ const portion = {
     active: true,
     trays: [
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube2, tube3, tubeActive, tube4, tube2, tube3],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tubeActive, tube4, tube3, tube2, tubeActive, tube3],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube3, tube2, tubeActive, tube4, tube2, tube6],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube2, tube4, tube3, tube2, tube5, tube7],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube7, tube6, tube5, tube4, tubeActive, tube2],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube2, tube3, tube4, tube5, tube6, tube7],
         },
     ],
 }
@@ -408,22 +580,22 @@ const activePortion = {
     active: true,
     trays: [
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tubeActive],
+            tubes: [tube2, tube3, tube4, tube5, tube6, tubeActive],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube6, tube5, tube7, tube3, tube4, tube2],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube2, tube3, tube4, tube5, tube6, tube7],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube7, tube6, tube5, tube2, tube3, tube],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube, tube2, tube3, tube4, tube5, tube6],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube7, tube5, tube6, tube2, tube3, tube],
         },
     ],
 }
@@ -433,19 +605,19 @@ const portion2 = {
     active: false,
     trays: [
         {
-            tubes: [tube2, tube3, tube, tube2, tube, tube],
+            tubes: [tube2, tube3, tube4, tube5, tube6, tube7],
         },
         {
-            tubes: [tube, tube2, tube, tube, tube, tube],
+            tubes: [tube6, tube5, tube4, tube3, tube2, tube],
         },
         {
-            tubes: [tube, tube, tube, tube, tube, tube],
+            tubes: [tube7, tube, tube6, tube5, tube4, tube3],
         },
         {
-            tubes: [tube, tube, tube, tube, tube, tube],
+            tubes: [tube3, tube2, tube7, tube4, tube6, tube5],
         },
         {
-            tubes: [tube, tube, tube, tube, tube, tube],
+            tubes: [tube6, tube7, tube5, tube3, tube2, tube],
         },
     ],
 }
@@ -455,19 +627,19 @@ const portion3 = {
     active: false,
     trays: [
         {
-            tubes: [tube2, tube3, tube2, tube2, tube2, tube],
+            tubes: [tube2, tube3, tube4, tube5, tube6, tube7],
         },
         {
-            tubes: [tube2, tube, tube2, tube2, tube2, tube2],
+            tubes: [tube5, tube6, tube7, tube3, tube2, tube],
         },
         {
-            tubes: [tube2, tube2, tube2, tube, tube2, tube2],
+            tubes: [tube, tube2, tube5, tube4, tube3, tube6],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube2, tube2],
+            tubes: [tube4, tube3, tube2, tube, tube7, tube6],
         },
         {
-            tubes: [tube2, tube2, tube2, tube2, tube, tube],
+            tubes: [tube, tube7, tube6, tube5, tube4, tube3],
         },
     ],
 }
