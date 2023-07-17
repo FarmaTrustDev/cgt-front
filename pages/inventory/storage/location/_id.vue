@@ -148,7 +148,7 @@ export default {
       }
     },
     getTube(tube) {
-      this.steps = this.fridgeData.racks[0].portions[0].trays[0].tubes[0].steps
+      this.steps = tube.steps
       this.steps[0].by=this.translation.InbouDate_2_635
       this.steps[1].by=this.translation.InbouProce_2_513
       this.steps[2].by=this.translation.Stora_1_366

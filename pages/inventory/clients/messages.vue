@@ -56,7 +56,7 @@
                 <a-button class="ml-5">Reply</a-button>
                 <a-button
                   class="ml-5"
-                  @click="goto(`/inventory/clients/scheduletask`)"
+                  @click="goto(`/inventory/clients/scheduletask?clientName=`+client)"
                   >Schedule Task</a-button
                 >
                 <a-button class="ml-5">Archive</a-button>

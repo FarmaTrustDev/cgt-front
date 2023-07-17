@@ -65,6 +65,18 @@ function getById(id) {
   })
 }
 
+function getByProjectId(id) {
+  return request({
+    url: `${baseApi}/projectId/${id}`,
+  })
+}
+
+function getByPartnerName(name) {
+  return request({
+    url: `${baseApi}/partner/${name}`,
+  })
+}
+
 function destroy(id) {
   return request({
     url: `${baseApi}/${id}`,
@@ -82,7 +94,9 @@ const ProjectServices = {
   addNew,
   getDetail,
   getAllInvestigatorProject,
-  getAllPartnerProject
+  getAllPartnerProject,
+  getByPartnerName,
+  getByProjectId
 }
 
 export default ProjectServices
