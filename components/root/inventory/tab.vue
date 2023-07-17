@@ -7,7 +7,7 @@
       </h2>
       <a-row class="display-inline-block" :gutter="10">
         <a-col class="suit" :span="10">
-          <suite />
+          <suite :data="data" />
         </a-col>
         <a-col :span="2"></a-col>
         <a-col :span="11">
@@ -26,7 +26,7 @@
                 :detail="{
                   img: 'web/inventory/Group-1000002120.svg',
                   heading:
-                    '1x Class II cabinets, Grade A in Grade B background',
+                    'Liquid nitrogen tanks (Planer 1411V and 320 models) -80 Freezers',
                 }"
                 :img-properties="{ width: '50px', height: '50px' }"
               >
@@ -42,9 +42,7 @@
               class="r-shadow mb-15 default-border-radius"
             >
               <h4>
-                <a-button type="link">{{
-                  translation.SuppoEquip_5_584
-                }}</a-button>
+                <a-button type="link">Support Equipment</a-button>
               </h4>
               <span v-for="(cl, index) in outsideEquipment" :key="index">
                 <ImageHeading
@@ -77,11 +75,11 @@ export default {
       outsideEquipment: [
         {
           img: 'web/inventory/Group-1000002123.svg',
-          heading: '1x Class II cabinets, Grade A in Grade B background',
+          heading: 'Phase–contrast microscope',
         },
         {
           img: 'web/inventory/Group-1000002124.svg',
-          heading: '1x Class II cabinets, Grade A in Grade B background',
+          heading: 'CO2 incubator',
         },
       ],
     }

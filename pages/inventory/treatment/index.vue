@@ -68,7 +68,7 @@
                             ? 'ant-steps-item-error'
                             : phase.id === 2 && record.processSample !== 'red'
                             ? 'ant-steps-item-active-blue'
-                            : phase.id !== 3 && record.inbound===true
+                            : (phase.id === 1 && record.processSample==='red')||(phase.id !== 3 && record.inbound===true)
                             ? 'ant-steps-item-finish'
                             : ''
                         "
@@ -843,6 +843,7 @@ export default {
   },
   mounted() {
     this.getTranslationData()
+    this.getLocalStorage()
     this.$store.commit('setSelectedMenu', [`2`])
   },
   methods: {
@@ -852,6 +853,50 @@ export default {
         this.goto(phase)
       } else if(record.inbound===true && phase.id!==3){
         this.goto(phase.url_slug+'&record='+JSON.stringify(record))
+      }
+    },
+    getLocalStorage(){
+      if(localStorage.getItem('acceptedNow')==="true"){
+        const obj={
+          patientEnrollmentNumber: localStorage.getItem('sampleId'),
+          treatmentType: 'Human Cells ',
+          productionLine: 'Zone C',
+          hospital: localStorage.getItem('client'),
+          collectionDateDeliveryDate: localStorage.getItem('dated') + ' - ' + localStorage.getItem('expDated'),
+          projectName:localStorage.getItem('projectName'),
+          projectId:localStorage.getItem('projectId'),
+          dispatchedBy: 'Allen Braun',
+          email:'kite@gmail.com',
+        }
+        this.outbound.push(obj)
+      }
+      else if(localStorage.getItem('acceptedDate')==="true" && localStorage.getItem('dated')=== moment().format('DD/MM/YYYY')){
+        const obj={
+          patientEnrollmentNumber: localStorage.getItem('sampleId'),
+          treatmentType: 'Human Cells ',
+          productionLine: 'Zone C',
+          hospital: localStorage.getItem('client'),
+          collectionDateDeliveryDate: localStorage.getItem('dated') + ' - ' + localStorage.getItem('expDated'),
+          projectName:localStorage.getItem('projectName'),
+          projectId:localStorage.getItem('projectId'),
+          dispatchedBy: 'Allen Braun',
+          email:'kite@gmail.com',
+        }
+        this.outbound.push(obj)
+      }
+      else if(localStorage.getItem('acceptedWeek')==="true" && localStorage.getItem('weekB')=== moment().format('DD/MM/YYYY')){
+        const obj={
+          patientEnrollmentNumber: localStorage.getItem('sampleId'),
+          treatmentType: 'Human Cells ',
+          productionLine: 'Zone C',
+          hospital: localStorage.getItem('client'),
+          collectionDateDeliveryDate: localStorage.getItem('dated') + ' - ' + localStorage.getItem('expDated'),
+          projectName:localStorage.getItem('projectName'),
+          projectId:localStorage.getItem('projectId'),
+          dispatchedBy: 'Allen Braun',
+          email:'kite@gmail.com',
+        }
+        this.outbound.push(obj)
       }
     },
     stepClickOut(record, phase) {
