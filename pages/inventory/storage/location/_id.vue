@@ -59,7 +59,7 @@
         <div class="view-screen steps-green">
           <span v-if="!isEmpty(steps)">
             <h2 slot="title" class="pad-bottom">
-              {{translation.ProveData_2_634}} - Asset DEC123
+              {{translation.ProveData_2_634}} - Asset {{sampleId}}
             </h2>
             <TimeLine :steps="steps"  class="steps-green"  />
           </span>
@@ -100,6 +100,7 @@ export default {
       tubes: [],
       trayData: [],
       autoSelect:null,
+      sampleId:'',
       data: {
         countryName: 'Germany - Cellfuse',
         address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
@@ -148,6 +149,7 @@ export default {
       }
     },
     getTube(tube) {
+      this.sampleId=tube.sampleId
       this.steps = tube.steps
       this.steps[0].by=this.translation.InbouDate_2_635
       this.steps[1].by=this.translation.InbouProce_2_513

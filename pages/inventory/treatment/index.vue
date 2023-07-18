@@ -868,7 +868,7 @@ export default {
       this.activeTab = key
     },
     getLocalStorage(){
-      if(localStorage.getItem('acceptedNow')==="true"){
+      if(localStorage.getItem('acceptedNow')==="true" && localStorage.getItem('isNew')==="true"){
         const obj={
           patientEnrollmentNumber: localStorage.getItem('sampleId'),
           treatmentType: 'Human Cells ',
@@ -881,8 +881,9 @@ export default {
           email:'kite@gmail.com',
         }
         this.outbound.push(obj)
+        localStorage.setItem('isNew',"false")
       }
-      else if(localStorage.getItem('acceptedDate')==="true" && localStorage.getItem('dated')=== moment().format('DD/MM/YYYY')){
+      else if(localStorage.getItem('acceptedDate')==="true" && localStorage.getItem('dated')=== moment().format('DD/MM/YYYY') && localStorage.getItem('isNew')==="true"){
         const obj={
           patientEnrollmentNumber: localStorage.getItem('sampleId'),
           treatmentType: 'Human Cells ',
@@ -895,8 +896,9 @@ export default {
           email:'kite@gmail.com',
         }
         this.outbound.push(obj)
+        localStorage.setItem('isNew',"false")
       }
-      else if(localStorage.getItem('acceptedWeek')==="true" && localStorage.getItem('weekB')=== moment().format('DD/MM/YYYY')){
+      else if(localStorage.getItem('acceptedWeek')==="true" && localStorage.getItem('weekB')=== moment().format('DD/MM/YYYY') && localStorage.getItem('isNew')==="true"){
         const obj={
           patientEnrollmentNumber: localStorage.getItem('sampleId'),
           treatmentType: 'Human Cells ',
@@ -909,6 +911,7 @@ export default {
           email:'kite@gmail.com',
         }
         this.outbound.push(obj)
+        localStorage.setItem('isNew',"false")
       }
     },
     stepClickOut(record, phase) {

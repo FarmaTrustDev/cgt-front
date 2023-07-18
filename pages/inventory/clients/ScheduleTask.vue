@@ -306,6 +306,7 @@ export default {
               localStorage.setItem('expDated',moment(futureDate).format('DD/MM/YYYY'))
               localStorage.setItem('client',this.clientName)
               localStorage.setItem('projectName',this.projectName)
+              localStorage.setItem('isNew',"true")
             })
             this.goto('/inventory/treatment?id=2')
             /* const formData = new FormData()

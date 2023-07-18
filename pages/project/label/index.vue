@@ -62,7 +62,7 @@
                         <a-col :span="6">SN: {{labelData.serialNumber}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col :span="6"><img :src="getImageUrl('label/dated.svg')"> {{ labelData.collectionDate }}</a-col>
+                        <a-col :span="6"><img :src="getImageUrl('label/dated.svg')"> {{ moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY") }}</a-col>
                         <a-col :span="4"><img :src="getImageUrl('label/temp.svg')"> {{ labelData.temp }}</a-col>
                         <a-col :span="4"><img :src="getImageUrl('label/umbrella.svg')"> {{ labelData.status }}</a-col>
                     </a-row>
@@ -424,7 +424,7 @@
           this.newSampleColumns[2].title = newValues.Clien_1_505
           this.newSampleColumns[3].title = newValues.ArrivDate_5_535
           this.newSampleColumns[4].title = newValues.Docum_1_507
-          this.newSampleColumns[5].title = newValues.Actio_1_220
+          // this.newSampleColumns[5].title = newValues.Actio_1_220
   
           this.phases[0].name = newValues.inboushipm_2_302
           this.phases[1].name = newValues.ProceSampl_2_499
@@ -462,6 +462,8 @@
       this.$store.commit('setSelectedMenu', [`2`])
     },
     methods: {
+      _getFutureMomentStandardFormatted,
+      moment,
       searchTreatment() {},
       stepClick(record, phase) {
         if (record === 'error') {

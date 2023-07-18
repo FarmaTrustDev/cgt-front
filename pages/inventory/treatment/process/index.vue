@@ -143,7 +143,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ record.collectionDateDeliveryDate.split("-")[0] }} </span>
+                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(-1, 'days').format('DD/MM/YYYY') }} </span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -173,7 +173,7 @@
                         }}</span>
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(7, 'days').format('DD/MM/YYYY') }}</span>
+                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(2, 'days').format('DD/MM/YYYY') }}</span>
                       </a-col>
                     </a-row>
                   </div>

@@ -874,6 +874,8 @@ export default {
     submit() {
       this.form.validateFields((err,values)=>{
         if(!err){
+          console.log(this.$route.query.record)
+          
           // console.log(this.typeId)
           if ((this.typeId === 'inbound')) {
             this.showInventoryModal=true

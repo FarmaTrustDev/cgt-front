@@ -4,6 +4,24 @@
       <formfield @handleChange="handleChange" />
 
     </a-form>
+    <a-modal
+            :visible="showModal"
+            class="modal-design-smart-lab-label"
+            :dialog-style="{ right: '10%', top: '10%' }"
+            @ok="handleOk(false)"
+            cancelText=""
+          >
+              <a-card class="white-card-smart-lab-label">
+                <a-row>
+                    <a-col :span="6"></a-col>
+                    <a-col :span="12">Message has been sent for approval</a-col>
+                    <a-col :span="6"></a-col>
+                </a-row>
+              </a-card>
+              <div slot="footer">
+                <a-button type="primary" @click="handleOk(false)">OK</a-button>
+              </div>
+          </a-modal>
   </div>
 </template>
 <script>
@@ -24,6 +42,7 @@ export default {
       showError: false,
       user: {},
       entityId: null,
+      showModal:false,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
         name: 'usersCreate',
@@ -47,6 +66,10 @@ export default {
       handleChange(info) {
         this.fileList = info
     },
+    handleOk() {
+        this.showModal = false
+        this.goto('/inventory/storage/facility')
+      },
     checkCreated() {
       const entityId = this.$route.params.id
       if (this.isGuid(entityId)) {
@@ -129,17 +152,21 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          const formData = new FormData()
+          this.success('Message sent for approval')
+          this.showModal=true
+          // this.goto('/inventory/storage/facility')
+          /* const formData = new FormData()
           for (const key in values) {
             formData.append(key, values[key])
           }
           this.fileList.forEach((files) => {
             formData.append('profileImageUrl', files)
           })        
-          this.upsert(formData)
+          this.upsert(formData) */
         } else {
           this.loading = false
         }
+        
       })
       // this.loading = false
     },
