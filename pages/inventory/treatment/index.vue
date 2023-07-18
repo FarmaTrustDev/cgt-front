@@ -21,7 +21,7 @@
         </div>
       </span>
       <div class="h-tabs large-tabs">
-        <a-tabs type="card" :animated="false">
+        <a-tabs type="card" :active-key="activeTab" @change="tabChange" :animated="false">
 
           <a-tab-pane key="1" tab="Inbound">
             <a-input
@@ -763,6 +763,7 @@ export default {
       inbound: newSampleData,
       outbound: completedSampleData,
       allSample: allSampleData,
+      activeTab:'1',
       statusDetails: [
         {
           clientID: 'DAC-654',
@@ -845,6 +846,7 @@ export default {
     this.getTranslationData()
     this.getLocalStorage()
     this.$store.commit('setSelectedMenu', [`2`])
+    this.getActiveTab()
   },
   methods: {
     searchTreatment() {},
@@ -854,6 +856,16 @@ export default {
       } else if(record.inbound===true && phase.id!==3){
         this.goto(phase.url_slug+'&record='+JSON.stringify(record))
       }
+    },
+    getActiveTab(){
+      if(this.$route.query.id){
+        this.activeTab="2"
+      }else{
+        this.activeTab="1"
+      }
+    },
+    tabChange(key) {
+      this.activeTab = key
     },
     getLocalStorage(){
       if(localStorage.getItem('acceptedNow')==="true"){

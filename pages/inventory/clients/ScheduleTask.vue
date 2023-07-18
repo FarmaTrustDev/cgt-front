@@ -307,7 +307,7 @@ export default {
               localStorage.setItem('client',this.clientName)
               localStorage.setItem('projectName',this.projectName)
             })
-            this.goto('/inventory/treatment')
+            this.goto('/inventory/treatment?id=2')
             /* const formData = new FormData()
             for (const key in values) {
               formData.append(key, values[key])
