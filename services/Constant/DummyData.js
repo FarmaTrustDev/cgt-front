@@ -206,6 +206,7 @@ export const baseStorage = [
 const tube = {
     id: 2,
     active: true,
+    sampleId:'DEC123',
     name: '5A',
     steps: [
         {
@@ -249,6 +250,7 @@ const tube = {
 const tube2 = {
     id: 3,
     active: false,
+    sampleId:'DEC245',
     name: '5A',
     steps: [
         {
@@ -290,8 +292,9 @@ const tube2 = {
     ],
 }
 const tube3 = {
-    id: 3,
+    id: 4,
     active: false,
+    sampleId:'DEC422',
     name: '5A',
     steps: [
         {
@@ -333,8 +336,9 @@ const tube3 = {
     ],
 }
 const tube4 = {
-    id: 3,
+    id: 5,
     active: false,
+    sampleId:'DEC225',
     name: '5A',
     steps: [
         {
@@ -376,8 +380,9 @@ const tube4 = {
     ],
 }
 const tube5 = {
-    id: 3,
+    id: 6,
     active: false,
+    sampleId:'DEC732',
     name: '5A',
     steps: [
         {
@@ -419,8 +424,9 @@ const tube5 = {
     ],
 }
 const tube6 = {
-    id: 3,
+    id: 7,
     active: false,
+    sampleId:'DEC274',
     name: '5A',
     steps: [
         {
@@ -462,8 +468,9 @@ const tube6 = {
     ],
 }
 const tube7 = {
-    id: 3,
+    id: 8,
     active: false,
+    sampleId:'DEC847',
     name: '5A',
     steps: [
         {
@@ -505,8 +512,9 @@ const tube7 = {
     ],
 }
 const tubeActive = {
-    id: 3,
+    id: 9,
     active: true,
+    sampleId:'DEC759',
     name: '5A',
     isHover: true,
     steps: [

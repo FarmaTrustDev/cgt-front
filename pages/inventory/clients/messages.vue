@@ -23,7 +23,7 @@
                 <span class="message-span-light-text">
                   steve@{{client.toLowerCase()}}.com
                 </span>
-                <span class="float-right">22/07/2022</span>
+                <span class="float-right"> {{moment(_getFutureMomentStandardFormatted(-1,'day')).format('DD/MM/YYYY') }} </span>
               </div>
 
               <a-card class="mt-15">
@@ -67,7 +67,7 @@
         <div class="mt-15">
           <span class="message-span"> Andrew Jacob </span>
           <span class="message-span-light-text"> jacob@{{client.toLowerCase()}}.com </span>
-          <span class="float-right">22/07/2022</span>
+          <span class="float-right">{{moment(_getFutureMomentStandardFormatted()).format('DD/MM/YYYY') }}</span>
         </div>
 
         <a-card class="mt-15">
@@ -223,9 +223,15 @@
     </div> -->
 </template>
 <script>
+import moment from 'moment'
 import Header from '~/components/inventory/clients/header.vue'
 import routeHelpers from '~/mixins/route-helpers'
 import PageLayout from '~/components/layout/PageLayout'
+import {
+  _getFormatMoment,
+  getMomentByStandardFormat,
+} from '~/services/Helpers/MomentHelpers'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 export const clientData = [
   {
     title: 'Adaptimmune',
@@ -273,6 +279,10 @@ export default {
     this.getClientId()
   },
   methods:{
+    _getFormatMoment,
+    moment,
+    getMomentByStandardFormat,
+    _getFutureMomentStandardFormatted,
     getClientId(){
       this.clientId=this.$route.query.clientId
       for(const i in this.clientData ){
