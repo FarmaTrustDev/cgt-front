@@ -23,7 +23,7 @@
                 <span class="message-span-light-text">
                   steve@{{client.toLowerCase()}}.com
                 </span>
-                <span class="float-right">22/07/2022</span>
+                <span class="float-right"> {{moment(_getFutureMomentStandardFormatted(-1,'day')).format('DD/MM/YYYY') }} </span>
               </div>
 
               <a-card class="mt-15">
@@ -53,7 +53,7 @@
                 class="float-right mt-15 btn-btn-msg-scren"
               >
                 <a-button class="ml-5">Add Internal Note</a-button>
-                <a-button class="ml-5">Reply</a-button>
+                <a-button class="ml-5" @click="showM()">Reply</a-button>
                 <a-button
                   class="ml-5"
                   @click="goto(`/inventory/clients/scheduletask?clientName=`+client)"
@@ -67,7 +67,7 @@
         <div class="mt-15">
           <span class="message-span"> Andrew Jacob </span>
           <span class="message-span-light-text"> jacob@{{client.toLowerCase()}}.com </span>
-          <span class="float-right">22/07/2022</span>
+          <span class="float-right">{{moment(_getFutureMomentStandardFormatted()).format('DD/MM/YYYY') }}</span>
         </div>
 
         <a-card class="mt-15">
@@ -91,7 +91,7 @@
           class="float-right mt-15 btn-btn-msg-scren"
         >
           <a-button class="ml-5">Add Internal Note</a-button>
-          <a-button class="ml-5">Reply</a-button>
+          <a-button class="ml-5" @click="showM()">Reply</a-button>
           <a-button
             class="ml-5"
             @click="goto(`/inventory/clients/scheduletask`)"
@@ -173,6 +173,33 @@
           </a-tab-pane>
         </a-tabs>
       </div>
+      <a-modal
+            :visible="showModal"
+            class="modal-design-smart-lab-label"
+            :dialog-style="{ right: '10%', top: '10%' }"
+            @cancel="handelCancel(false)"
+            @ok="handleOk(false)"
+          >
+              <a-card class="white-card-smart-lab-label">
+                
+        
+        <a-col :span="24">
+          <a-form-item>
+            <a-textarea
+      v-model="textareaValue"
+      :rows="20"
+      placeholder="Write email here"
+      :auto-size="{ minRows: 20, maxRows: 20 }"
+    ></a-textarea>
+          </a-form-item>
+        </a-col>                
+              </a-card>
+              <div slot="footer">
+                <a-button @click="handelCancel(false)">Cancel</a-button>
+                <a-button type="primary" @click="handleOk(false)">Send Email</a-button>
+
+      </div>
+          </a-modal>
     </div>
   </page-layout>
   <!-- <div>
@@ -223,9 +250,16 @@
     </div> -->
 </template>
 <script>
+import moment from 'moment'
 import Header from '~/components/inventory/clients/header.vue'
+import notifications from '~/mixins/notifications'
 import routeHelpers from '~/mixins/route-helpers'
 import PageLayout from '~/components/layout/PageLayout'
+import {
+  _getFormatMoment,
+  getMomentByStandardFormat,
+} from '~/services/Helpers/MomentHelpers'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 export const clientData = [
   {
     title: 'Adaptimmune',
@@ -260,19 +294,34 @@ export const clientData = [
 ]
 export default {
   components: { Header, PageLayout },
-  mixins: [routeHelpers],
+  mixins: [routeHelpers,notifications],
    data() {
     return {
       clientId:null,
       clientData,
       clientName:'',
       client:'',
+      showModal:false,
     }
   },
   mounted() {
     this.getClientId()
   },
   methods:{
+    _getFormatMoment,
+    moment,
+    getMomentByStandardFormat,
+    _getFutureMomentStandardFormatted,
+    handleOk() {
+        this.showModal = false
+        this.success('Email sent successfully')
+      },
+      handelCancel(val){
+        this.showModal = val
+      },
+      showM(){
+        this.showModal=true
+      },
     getClientId(){
       this.clientId=this.$route.query.clientId
       for(const i in this.clientData ){

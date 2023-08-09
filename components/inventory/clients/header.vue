@@ -31,7 +31,7 @@
             <a-row>
               <a-col :span="5" style="font-weight: bold">{{translation.date_1_510}}:</a-col>
               <a-col :span="11"
-                >24 August 2022</a-col
+                >{{moment(_getFutureMomentStandardFormatted()).format('DD MMMM YYYY') }}</a-col
               >
             </a-row>
           </a-col>
@@ -62,9 +62,15 @@
     </div>
 </template>
 <script>
+import moment from 'moment'
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
 import { isEmpty } from '~/services/Helpers'
+import {
+  _getFormatMoment,
+  getMomentByStandardFormat,
+} from '~/services/Helpers/MomentHelpers'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 export default {
   mixins: [routeHelpers, imagesHelper],
   props: {
@@ -103,6 +109,10 @@ export default {
     },
   },
   methods: {
+    _getFormatMoment,
+    moment,
+    getMomentByStandardFormat,
+    _getFutureMomentStandardFormatted,
     openViewModal() {
       this.showModal = true
       // this.qrUrl = id
