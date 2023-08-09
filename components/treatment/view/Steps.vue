@@ -6,7 +6,7 @@
         :bordered="false"
         class="p-0 mt-0 pt-0 default-card pills-tabs green-on-update"
       >
-        <a-tabs class="pt-0" type="card">
+        <a-tabs class="pt-0" type="card" :default-active-key="getCurrentTab()">
           <a-tab-pane
             v-for="(step) in tabs"
             :key="step.id"
@@ -16,7 +16,7 @@
             <div
               slot="tab"
               class="tab-title pl-10"
-              :class="getLastTabsClass(step.minStep,step.completedStep)"
+              :class="getLastTabsClass(step.minStep,step.completedStep,step.id)"
             >
               {{ step.name }}
             </div>
@@ -25,7 +25,7 @@
               :treatment="treatment"
               :step-type-id="step.id"
               step="Timeline"
-              :isExcursionTab = "isExcursionTab(step.minStep,step.completedStep)"
+              :isExcursionTab = "isExcursionTab(step.minStep,step.completedStep,step.id)"
               @getName = "getName"
             />
           </a-tab-pane>
@@ -56,11 +56,14 @@ export default {
     bags: { required: true, type: Array },
   },
   data() {
-    return { tabs: steps}
+    return { 
+      tabs: steps,
+    }
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
-    isExcursionTab(minStep,completedStep){
+    isExcursionTab(minStep,completedStep,id){
       return (this.treatment.excursionId != null && this.treatment.phaseId >=minStep && this.treatment.phaseId <= completedStep)
     },
     getLenthofSteps() {
@@ -71,14 +74,23 @@ export default {
     },
     fetchSteps() {},
     
-    getLastTabsClass(minStep,completedStep) {
+    getLastTabsClass(minStep,completedStep,id) {
       return this.treatment.excursionId != null && this.treatment.phaseId >=minStep && this.treatment.phaseId <= completedStep
-        ? 'showExcursion-tab'
+          ? 'showExcursion-tab' 
         : this.isCompleted(this.treatment.phaseId >= completedStep)
     },
     getName(name)
     {
       this.$emit('getName',name)
+    },
+    getCurrentTab(){
+      for(const step in steps){
+        if(this.treatment.excursionId != null && 
+        this.treatment.phaseId >=steps[step].minStep && 
+        this.treatment.phaseId <= steps[step].completedStep){
+          return parseInt(step) + 1
+        }
+      }
     }
   },
 }

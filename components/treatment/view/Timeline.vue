@@ -6,10 +6,9 @@
         :key="step.id"
         :color="isExcursionTab === true ? step.id === maxCompletedStep ? 'red' : step.isCompleted ? 'green' : 'grey' : step.isCompleted ? 'green' : 'grey'"
       >
-       <a-icon v-if="isExcursionTab === true && step.id === maxCompletedStep" slot="dot" type="close-circle-o"  />
+       <a-icon v-if="isExcursionTab === true && step.id === maxCompletedStep" :style="{fontSize: '16px !important'}" slot="dot" type="close-o"  />
         <a-icon v-else-if="step.isCompleted" slot="dot" type="check-circle-o" />
         <a-icon v-else slot="dot" type="clock-circle-o" />
-        
         <div
           class="step-bar"
           :class="isExcursionTab === true ? step.id === maxCompletedStep ? 'red-border' : step.isCompleted ? 'green-border' : 'grey-border' : step.isCompleted ? 'green-border' : 'grey-border'"
@@ -72,6 +71,7 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    
   },
   watch: {
     translation(newValues, oldValue) {

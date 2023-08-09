@@ -538,15 +538,20 @@
     }
   }
   .ant-timeline-item-head-red {
-    background-color: lightcoral;
-    border-radius: 22px;
-    padding: 5px;
+    //background-color: #eb6c6c;
+    border-radius: 37px;
+    border: 4px solid #eb6c6c;
+    //border-radius: 25px;
+    padding: 4px;
     margin-top: 20px;
+    animation: fadeinout 2s linear infinite;
     .anticon {
       background-color: white;
-      border-radius: 22px;
-      padding: 5px;
+      border-radius: 50px;
+      padding: 2px;
       color: red;
+	border: 3px solid red;
+      animation: borderAnimation 2s infinite;
     }
   }
   .green-border {
@@ -739,3 +744,14 @@
 //       }
 //     }
 // }
+@keyframes borderAnimation {
+  0% {
+    border-color: red;
+  }
+  50% {
+   border-color: transparent;
+  }
+  100% {
+   border-color: red;
+  }
+}
