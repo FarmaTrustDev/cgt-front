@@ -538,10 +538,11 @@
     }
   }
   .ant-timeline-item-head-red {
-    background-color: lightcoral;
+    background-color: #eb6c6c;
     border-radius: 22px;
     padding: 5px;
     margin-top: 20px;
+    animation: fadeinout 2s linear infinite;
     .anticon {
       background-color: white;
       border-radius: 22px;
