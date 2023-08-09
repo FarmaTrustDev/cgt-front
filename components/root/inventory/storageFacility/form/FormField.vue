@@ -13,9 +13,9 @@
           size="large"
           class="default-select"
           >
-            <a-select-option value="Cellfuse">Cellfuse</a-select-option>
-            <a-select-option value="Cellfuse US">Cellfuse US</a-select-option>
-            <a-select-option value="Cellfuse US">Cellfuse US</a-select-option>
+            <a-select-option value="-20">-20 °C</a-select-option>
+            <a-select-option value="-80">-80 °C</a-select-option>
+            <a-select-option value="LN2">LN2 °C</a-select-option>
           </a-select>
         </a-form-item>
       </a-col>
@@ -32,7 +32,7 @@
           class="default-select"
           >
             <a-select-option value="Cellfuse">Cellfuse</a-select-option>
-            <a-select-option value="Cellfuse US">Cellfuse US</a-select-option>
+            <a-select-option value="Cellfuse R&D">Cellfuse R&D</a-select-option>
             <a-select-option value="Cellfuse US">Cellfuse US</a-select-option>
           </a-select>
         </a-form-item>
@@ -66,21 +66,16 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
         >
-          <a-input
-            v-decorator="[
-              'contact',
-              {
-                initialValue: entity.location,
-                rules: [
-                  {
-                    required: true,
-                    message: translation.LabZone_2_554,
-                  },
-                ],
-              },
-            ]"
-            :placeholder="translation.LabZone_2_554"
-          />
+        <a-select
+          :placeholder="translation.SelecLab_2_564"
+          style="width: 100%"
+          size="large"
+          class="default-select"
+          >
+            <a-select-option value="A">Zone A</a-select-option>
+            <a-select-option value="B">Zone B</a-select-option>
+            <a-select-option value="C">Zone C</a-select-option>
+          </a-select>
         </a-form-item>
       </a-col>
       <a-col :span="12">

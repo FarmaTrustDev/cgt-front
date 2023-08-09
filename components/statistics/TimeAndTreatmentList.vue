@@ -115,7 +115,7 @@
                   <a-tabs type="card" :animated="false">
                     <a-tab-pane key="1" tab="Inbound">
                       <nuxt-link
-                        to="/inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS"
+                        :to="`/inventory/treatment/process?view=INBOUND_ACCEPTANCE_DETAILS&record=${JSON.stringify(inRecord)}`"
                       >
                         <a-table
                           class="rounded-table"
@@ -174,7 +174,7 @@
                     </a-tab-pane>
                     <a-tab-pane key="2" tab="Outbound">
                       <nuxt-link
-                        to="/inventory/treatment/outboundProcess?view=OUTBOUND_PROCESS"
+                        :to="`/inventory/treatment/outboundProcess?view=OUTBOUND_PROCESS&record=${JSON.stringify(inRecord)}`"
                       >
                         <a-table
                           class="rounded-table"
@@ -316,6 +316,24 @@ export default {
       loading: false,
       treatmentTypes: [],
       filters: {},
+      inRecord:{
+        patientEnrollmentNumber: 'DAC7993',
+        treatmentType: 'Human Cells ',
+        hospital: 'Baystate Clinic',
+        collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+        print: 'Uploads/DocumentURL/shipping notice.jpg',
+        processSample: 'green',
+        email:'tim@gmail.com',
+      },
+      outRecord:{
+        patientEnrollmentNumber: 'DAC6519',
+        treatmentType: 'Human Cells',
+        productionLine: 'Zone A',
+        hospital: 'Adaptimmune',
+        collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+        dispatchedBy: 'Ben Hawkins',
+        email:'tim@gmail.com',
+      },
       qrUrl: '/Uploads/DocumentURL/shipping notice.png',
       showModalImage: false,
       showModal: false,

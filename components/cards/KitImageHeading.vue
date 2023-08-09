@@ -1,11 +1,11 @@
 <template>
-    <a-col :span="11">
+    <a-col :span="8">
     <div class="display-flex mt-15">
       <slot name="extra" />
       <span class="imageHeading">
         <figure>
-          <figcaption class="font-size-16">
-            <a-col :span="15">{{ detail.heading }}</a-col>
+          <figcaption class="font-size-14">
+            <a-col :span="14">{{ detail.heading }}</a-col>
             <a-col :span="2">{{ detail.qty }}</a-col>
           </figcaption>
         </figure>

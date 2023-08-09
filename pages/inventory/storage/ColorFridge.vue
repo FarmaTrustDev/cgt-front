@@ -9,7 +9,7 @@
     <div slot="content" class="h-tabs large-tabs">
       <a-row>
         <a-col class="mb-15" :span="24">
-          <detail />
+          <detail :data="data1" />
         </a-col>
       </a-row>
       <!--<a-tabs class="" type="card">
@@ -153,6 +153,14 @@ export default {
       showModal:false,
       storage: baseStorageQuarantine2,
       vials:'',
+      data1: {
+        countryName: 'Germany - Cellfuse',
+        address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
+        flag: 'web/flags/de.svg',
+        global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Stephen Jones',
+        phone: '49 6781 9855-0',
+        email: 'info-imfs@cellfuse.de',
+      },
       zones: [
         { id: 1, name: 'Zone A' },
         { id: 2, name: 'Zone B' },

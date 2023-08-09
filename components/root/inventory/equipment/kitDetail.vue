@@ -2,7 +2,22 @@
     <div>
       <a-card :bordered="null" class="default-border-radius shadow">
         <a-tabs>
-          <a-tab-pane key="1" class="display-inline-block border-bottom-none font-size-18" tab="Kit A">
+          <a-tab-pane key="1" class="display-inline-block border-bottom-none font-size-18" tab="All">
+            <!-- <a-tab-pane key="1" :tab="translation.ClassB_3_572"> -->
+            <ImageHeading 
+                v-for="(c, index) in classAll" 
+                :key="index+'A'" 
+                :detail="c"
+            >
+            
+              <span slot="extra">
+                <span><img :src="getImageUrl(c.img)"></span>
+              </span>
+            
+              <!-- :img-properties="{ width: '50px', height: '50px' }" -->
+            </ImageHeading>
+          </a-tab-pane>
+          <a-tab-pane v-if="tabId===1 || tabId===3" key="2" class="display-inline-block border-bottom-none font-size-18" tab="Kit A">
             <!-- <a-tab-pane key="1" :tab="translation.ClassB_3_572"> -->
             <ImageHeading 
                 v-for="(c, index) in classA" 
@@ -18,7 +33,7 @@
             </ImageHeading>
           </a-tab-pane>
               
-          <a-tab-pane key="2" class="display-inline-block border-bottom-none font-size-18" tab="Kit B">
+          <a-tab-pane v-if="tabId===1" key="3" class="display-inline-block border-bottom-none font-size-18" tab="Kit B">
             <ImageHeading
               v-for="(c, index) in classB"
               :key="index+'B'"
@@ -30,7 +45,7 @@
             </ImageHeading>
             <!-- :img-properties="{ width: '50px', height: '50px' }" -->
           </a-tab-pane>
-          <a-tab-pane key="3" class="display-inline-block border-bottom-none font-size-18" tab="Kit C">
+          <a-tab-pane v-if="tabId===1 || tabId===4" key="4" class="display-inline-block border-bottom-none font-size-18" tab="Kit C">
             <ImageHeading
               v-for="(c, index) in classC"
               :key="index+'C'"
@@ -75,90 +90,188 @@
   export default {
     components: { ImageHeading },
     mixins: [imagesHelper],
+    props: { tabId: { type: Number } },
     data() {
       return {
-        classA: [
+        classAll: [
           {
             // img: 'Icons/kits.svg',
-            img: 'web/inventory/Group-masks.svg',
-            heading: 'Masks',
-            qty: 7
+            img: 'web/inventory/tubes.svg',
+            heading: 'Tubes',
+            qty: 950
           },
           {
-            img: 'web/inventory/Group-plasters.svg',
-            heading: 'Plasters',
-            qty: 15
+            img: 'web/inventory/gloves.svg',
+            heading: 'Gloves',
+            qty: 500
           },
           {
-            img: 'web/inventory//Group-needles.svg',
+            img: 'web/inventory//container.svg',
+            heading: 'Containers',
+            qty: 910
+          },
+          {
+            img: 'web/inventory//vials.svg',
+            heading: 'Vials',
+            qty: 990
+          },
+          {
+            img: 'web/inventory//liquid.svg',
+            heading: 'Liquid Bags',
+            qty: 450
+          },
+          {
+            img: 'web/inventory//label.svg',
+            heading: 'Labels',
+            qty: 1000
+          },
+          {
+            img: 'web/inventory//needles.svg',
             heading: 'Needles',
-            qty: 10
+            qty: 1200
           },
           {
-            img: 'web/inventory//Group-antiseptic.svg',
+            img: 'web/inventory//trocars.svg',
+            heading: 'Trocars',
+            qty: 450
+          },
+          {
+            img: 'web/inventory//needle_holder.svg',
+            heading: 'Needle holders',
+            qty: 990
+          },
+          {
+            img: 'web/inventory//masks.svg',
+            heading: 'Masks',
+            qty: 200
+          },
+          {
+            img: 'web/inventory//antiseptic.svg',
             heading: 'Antiseptic wipes',
             qty: 50
           },
           {
-            img: 'web/inventory//Group-cotton.svg',
+            img: 'web/inventory//cotton.svg',
             heading: 'Cotton swabs',
-            qty: 30
+            qty: 500
+          },
+          {
+            img: 'web/inventory//plaster.svg',
+            heading: 'Plasters',
+            qty: 300
+          },
+        ],
+        classA: [
+        
+          {
+            img: 'web/inventory/gloves.svg',
+            heading: 'Gloves',
+            qty: 300
+          },
+          {
+            img: 'web/inventory//container.svg',
+            heading: 'Containers',
+            qty: 120
+          },
+          {
+            img: 'web/inventory//vials.svg',
+            heading: 'Vials',
+            qty: 150
+          },
+          {
+            img: 'web/inventory//liquid.svg',
+            heading: 'Liquid Bags',
+            qty: 120
+          },
+          
+          {
+            img: 'web/inventory//needles.svg',
+            heading: 'Needles',
+            qty: 200
+          },
+          
+          {
+            img: 'web/inventory//needle_holder.svg',
+            heading: 'Needle holders',
+            qty: 500
+          },
+          {
+            img: 'web/inventory//masks.svg',
+            heading: 'Masks',
+            qty: 300
           },
         ],
         classB: [
-        {
-            // img: 'Icons/kits.svg',
-            img: 'web/inventory/Group-masks.svg',
+        
+          {
+            img: 'web/inventory/gloves.svg',
+            heading: 'Gloves',
+            qty: 250
+          },
+          {
+            img: 'web/inventory//container.svg',
+            heading: 'Containers',
+            qty: 300
+          },
+          
+          {
+            img: 'web/inventory//liquid.svg',
+            heading: 'Liquid Bags',
+            qty: 450
+          },
+          {
+            img: 'web/inventory//label.svg',
+            heading: 'Labels',
+            qty: 750
+          },
+          
+          {
+            img: 'web/inventory//trocars.svg',
+            heading: 'Trocars',
+            qty: 450
+          },
+          
+          {
+            img: 'web/inventory//masks.svg',
             heading: 'Masks',
-            qty: 10
-          },
-          {
-            img: 'web/inventory/Group-plasters.svg',
-            heading: 'Plasters',
-            qty: 8
-          },
-          {
-            img: 'web/inventory//Group-needles.svg',
-            heading: 'Needles',
-            qty: 6
-          },
-          {
-            img: 'web/inventory//Group-antiseptic.svg',
-            heading: 'Antiseptic wipes',
-            qty: 40
-          },
-          {
-            img: 'web/inventory//Group-cotton.svg',
-            heading: 'Cotton swabs',
-            qty: 35
+            qty: 300
           },
         ],
         classC: [
-        {
-            // img: 'Icons/kits.svg',
-            img: 'web/inventory/Group-masks.svg',
-            heading: 'Masks',
-            qty: 5
+        
+          {
+            img: 'web/inventory/gloves.svg',
+            heading: 'Gloves',
+            qty: 500
+          },
+          
+          {
+            img: 'web/inventory//vials.svg',
+            heading: 'Vials',
+            qty: 600
+          },
+          
+          {
+            img: 'web/inventory//label.svg',
+            heading: 'Labels',
+            qty: 500
           },
           {
-            img: 'web/inventory/Group-plasters.svg',
-            heading: 'Plasters',
-            qty: 17
-          },
-          {
-            img: 'web/inventory//Group-needles.svg',
+            img: 'web/inventory//needles.svg',
             heading: 'Needles',
-            qty: 12
+            qty: 500
           },
+          
           {
-            img: 'web/inventory//Group-antiseptic.svg',
+            img: 'web/inventory//needle_holder.svg',
+            heading: 'Needle holders',
+            qty: 50
+          },
+          
+          {
+            img: 'web/inventory//antiseptic.svg',
             heading: 'Antiseptic wipes',
-            qty: 35
-          },
-          {
-            img: 'web/inventory//Group-cotton.svg',
-            heading: 'Cotton swabs',
-            qty: 20
+            qty: 300
           },
         ],
       }
@@ -170,4 +283,9 @@
     },
   }
   </script>
+  <style scoped>
+  .ant-tabs-tab {
+    width: 150px; /* Set the desired width for each tab heading */
+  }
+  </style>
   

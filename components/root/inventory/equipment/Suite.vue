@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="null" class="default-border-radius shadow">
       <a-tabs>
-        <a-tab-pane key="1" class="display-inline-block border-bottom-none font-size-18" tab="Class B Suite">
+        <a-tab-pane v-if="data.id===1" key="1" class="display-inline-block border-bottom-none font-size-18" tab="Class B Suite">
           <!-- <a-tab-pane key="1" :tab="translation.ClassB_3_572"> -->
           <ImageHeading v-for="(c, index) in classB" :key="index" :detail="c">
             <span slot="extra">
@@ -12,7 +12,7 @@
           </ImageHeading>
         </a-tab-pane>
             
-        <a-tab-pane key="2" class="font-size-18" tab="Class C Suite">
+        <a-tab-pane v-if="data.id===1" key="2" class="font-size-18" tab="Class C Suite">
           <ImageHeading
             v-for="(c, index) in classC"
             :key="index"
@@ -24,6 +24,7 @@
           >
           <!-- :img-properties="{ width: '50px', height: '50px' }" -->
         </a-tab-pane>
+
         <!-- <a-tab-pane
           key="3"
           class="display-inline-block border-bottom-none border-bottom-line"
@@ -48,6 +49,17 @@
           <ImageHeading class="mt-15" :detail="{ img: '', heading: '' }"
         /></a-tab-pane> -->
       </a-tabs>
+      <div v-if="data.id>1">
+        <ImageHeading
+            v-for="(c, index) in WithOutClass"
+            :key="index"
+            :detail="c"
+          >
+            <span slot="extra">
+              <span><img :src="getImageUrl(c.img)"></span>
+            </span></ImageHeading
+          >
+      </div>  
     </a-card>
   </div>
 </template>
@@ -57,6 +69,7 @@ import imagesHelper from '~/mixins/images-helper'
 export default {
   components: { ImageHeading },
   mixins: [imagesHelper],
+  props: { data: { type: Object, default: () => ({}) } },
   data() {
     return {
       classB: [
@@ -67,11 +80,11 @@ export default {
         },
         {
           img: 'web/inventory/Group-1000002117.svg',
-          heading: `${this.$store.getters.getTranslation['1xClass_10_574']}`,
+          heading: '2x Cobe 2991 Cell processing instrument',
         },
         {
           img: 'web/inventory//Group-1000002115.svg',
-          heading: `${this.$store.getters.getTranslation['1xClass_10_574']}`,
+          heading: '3x CliniMACS Prodigy instrument',
         },
         // {
         //
@@ -86,15 +99,15 @@ export default {
         {
           // img: 'Icons/kits.svg',
           img: 'web/inventory/Group-1000002120.svg',
-          heading: `${this.$store.getters.getTranslation['1xClass_10_574']}`,
+          heading: 'Weighing Scales (grams)',
         },
         {
           img: 'web/inventory/Group-1000002117.svg',
-          heading: `${this.$store.getters.getTranslation['1xClass_10_574']}`,
+          heading: 'PLaner Controlled rate freezer',
         },
         {
           img: 'web/inventory//Group-1000002115.svg',
-          heading: `${this.$store.getters.getTranslation['1xClass_10_574']}`,
+          heading: 'Vacuum bag sealer',
         },
         // {
         //
@@ -102,7 +115,42 @@ export default {
         // },
         {
           img: 'web/inventory//Group-1000002123.svg',
-          heading: '1x Class II cabinets, Grade A in Grade B background',
+          heading: 'Liquid nitrogen Dewars',
+        },
+      ],
+      WithOutClass: [
+        {
+          // img: 'Icons/kits.svg',
+          img: 'web/inventory//Group-1000002115.svg',
+          heading: 'Centrisart®  Centrifuge',
+        },
+        {
+          img: 'web/inventory/Group-1000002123.svg',
+          heading: 'Centrisart® A-14 — Micro-Centrifuge',
+        },
+        {
+          img: 'web/inventory/AllPurposeCentrifuge.svg',
+          heading: 'Centrisart® G-16 — All Purpose Centrifuge',
+        },
+        {
+          img: 'web/inventory//CentrisartG-26C.svg',
+          heading: 'Centrisart® G-26C',
+        },
+        // {
+        //
+        //   heading: '1x Class II cabinets, Grade A in Grade B background',
+        // },
+        {
+          img: 'web/inventory//BenchtopFreezingPlatform.svg',
+          heading: 'Celsius® S3 Benchtop Freezing Platform',
+        },
+        {
+          img: 'web/inventory//PicusElectronicPipette.svg',
+          heading: 'Picus® Electronic Pipette',
+        },
+        {
+          img: 'web/inventory/Group-1000002117.svg',
+          heading: 'Sartolab® Multistation - Hands-Free Cell Culture Filtration for Small Volumes',
         },
       ],
     }

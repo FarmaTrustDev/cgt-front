@@ -9,7 +9,7 @@
     <div slot="content" class="">
       <a-row>
         <a-col class="mb-15" :span="24">
-          <detail />
+          <detail :data="data" />
         </a-col>
       </a-row>
       <a-row :gutter="24">
@@ -59,7 +59,7 @@
         <div class="view-screen steps-green">
           <span v-if="!isEmpty(steps)">
             <h2 slot="title" class="pad-bottom">
-              {{translation.ProveData_2_634}} - Asset DEC123
+              {{translation.ProveData_2_634}} - Asset {{sampleId}}
             </h2>
             <TimeLine :steps="steps"  class="steps-green"  />
           </span>
@@ -100,6 +100,15 @@ export default {
       tubes: [],
       trayData: [],
       autoSelect:null,
+      sampleId:'',
+      data: {
+        countryName: 'Germany - Cellfuse',
+        address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
+        flag: 'web/flags/de.svg',
+        global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Stephen Jones',
+        phone: '49 6781 9855-0',
+        email: 'info-imfs@cellfuse.de',
+      }
     }
   },
   computed: {
@@ -140,7 +149,8 @@ export default {
       }
     },
     getTube(tube) {
-      this.steps = this.fridgeData.racks[0].portions[0].trays[0].tubes[0].steps
+      this.sampleId=tube.sampleId
+      this.steps = tube.steps
       this.steps[0].by=this.translation.InbouDate_2_635
       this.steps[1].by=this.translation.InbouProce_2_513
       this.steps[2].by=this.translation.Stora_1_366

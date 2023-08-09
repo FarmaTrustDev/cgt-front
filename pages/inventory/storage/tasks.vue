@@ -73,7 +73,7 @@
             size="small"
             icon="printer"
             v-if="index.index != 8"
-            @click="openViewModal(print, index)"
+            @click="openPopViewModal(true,print, index)"
             >{{ translation.PrintLabel_2_642 }}</a-button
           >
         </template>
@@ -117,7 +117,64 @@
         <a-button @click="printWindow()">Print</a-button>
       </template> -->
       </a-modal>
+
       <a-modal
+            :visible="showModal"
+            class="modal-design-smart-lab-label"
+            :dialog-style="{ right: '10%', top: '10%' }"
+            @cancel="handelCancel(false)"
+            @ok="handleOk(false)"
+          >
+              <a-card class="white-card-smart-lab-label">
+                <a-row>
+                    <a-col :span="6"></a-col>
+                    <a-col :span="12"><img :src="getImageUrl('label/cryoheader.svg')" width="200" height="125" /></a-col>
+                    <a-col :span="6"></a-col>
+                </a-row>
+                <a-row>
+                    <a-col :span="6"><img :src="getImageUrl('label/qrCode.svg')" width="200" height="75" /></a-col>
+                    <a-col :span="18">
+                    <a-row>
+                        <a-col>{{labelData.treatmentType}}</a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col :span="6">LOT: {{labelData.patientEnrollmentNumber}}</a-col>
+                        <a-col :span="6">SN: {{labelData.serialNumber}}</a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col :span="6"><img :src="getImageUrl('label/dated.svg')"> {{ moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY") }}</a-col>
+                        <a-col :span="4"><img :src="getImageUrl('label/temp.svg')"> {{ labelData.temp }}</a-col>
+                        <a-col :span="4"><img :src="getImageUrl('label/umbrella.svg')"> {{ labelData.status }}</a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col>Internal Batch No: {{labelData.internalBatch}}</a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col>Project Code: {{labelData.projectCode}}</a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col>{{labelData.hospital}}</a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col>{{labelData.address}}</a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col>Cell Number: {{labelData.cell}}</a-col>
+                    </a-row>
+                    </a-col>
+                </a-row>
+                <a-row>
+                    <a-col>&nbsp;</a-col>
+                </a-row>
+                <a-row>
+                    <a-col :span="4"></a-col>
+                    <a-col :span="18"><img :src="getImageUrl('label/bar.png')" width="500" height="90" /></a-col>
+                </a-row>
+              </a-card>
+          </a-modal>
+
+
+      <!--<a-modal
         :visible="showModal"
         :title="translation.Docum_1_507"
         :ok-text="translation.Print_1_111"
@@ -127,19 +184,21 @@
         @cancel="handleModal(false)"
       >
         <img class="img-responsive" :src="getImageUrl(qrUrl)" width="100%" />
-        <!-- <template slot="footer">
+        <template slot="footer">
         <a-button @click="handleModal(false)">Cancel</a-button>
         <a-button @click="printWindow()">Print</a-button>
-      </template> -->
-      </a-modal>
+      </template>
+      </a-modal>-->
     </div>
   </page-layout>
 </template>
 <script>
+import moment from 'moment'
 import routeHelpers from '~/mixins/route-helpers'
 import PageLayout from '~/components/layout/PageLayout'
 
 import imagesHelper from '~/mixins/images-helper'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 // import { newSampleData } from '../treatment/index.vue'
 // import { isEmpty } from '~/services/Utilities'
 // import { isNumber } from '~/services/Helpers'
@@ -157,6 +216,7 @@ export default {
       greenDisk: 'g',
       blueDisk: 'b',
       checkAll: false,
+      labelData:{},
       selectedRowKeys: [],
       qrUrl: 'Uploads/DocumentURL/shipping notice.png',
       newTasksColumns: [
@@ -214,7 +274,17 @@ export default {
       ],
       newTasksData: [
         {
-          sampleId: 'DAC7993',
+          patientEnrollmentNumber: 'DAC7994',
+          serialNumber:'AAD2345',
+          bar:'label/bar.png',
+          qrCode:'label/qrCode.svg',
+          dated:'01/02/2024',
+          temp:'-20C',
+          status:'Keep Dry',
+          projectCode:'AA23416',
+          internalBatch:'AA23428',
+
+          sampleId: 'DAC7994',
           sampleName: 'Human Cells ',
           client: 'Baystate Clinic',
           fridge: 'Freezers 12',
@@ -222,77 +292,15 @@ export default {
           confirm: false,
           index: 0,
           url: 'Uploads/DocumentURL/1.jpeg',
+          address:'12 Kennedy Street, Washington, 213421',
+          cell:'+1 206 203 5278',
+          barCodeNo:'(01) 95012345678903 (3103) 00123',
+          treatmentType: 'Human Cells/Cellules Humaines/人体细胞',
+          hospital: 'Baystate Clinic',
+          collectionDate:moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY"),
+          collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
         },
-        {
-          sampleId: 'DAC7986',
-          sampleName: 'Human Cells ',
-          client: 'Novartis',
-          fridge: 'Freezers 13',
-          position: 'Rack 21A',
-          confirm: false,
-          index: 1,
-          url: 'Uploads/DocumentURL/2.jpeg',
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Human Cells',
-          client: 'Novartis',
-          fridge: 'Freezers 14',
-          position: 'Rack 23A',
-          confirm: false,
-          index: 2,
-          url: 'Uploads/DocumentURL/3.jpeg',
-        },
-        {
-          sampleId: 'DAC7996',
-          sampleName: 'Human Cells ',
-          client: 'Novartis',
-          fridge: 'Freezers 15',
-          position: 'Rack 27A',
-          confirm: false,
-          index: 3,
-          url: 'Uploads/DocumentURL/4.jpeg',
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Human Cells',
-          client: 'Novartis',
-          fridge: 'Freezers 13',
-          position: 'Rack 28A',
-          confirm: false,
-          index: 4,
-          url: 'Uploads/DocumentURL/1.jpeg',
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Human Cells',
-          client: 'Novartis',
-          fridge: 'Freezers 14',
-          position: 'Rack 29A',
-          confirm: false,
-          index: 5,
-          url: 'Uploads/DocumentURL/2.jpeg',
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Human Cells',
-          client: 'Novartis',
-          fridge: 'Freezers 123',
-          position: 'Rack 21A',
-          confirm: false,
-          index: 6,
-          url: 'Uploads/DocumentURL/3.jpeg',
-        },
-        {
-          sampleId: 'DAC9874',
-          sampleName: 'Human Cells',
-          client: 'Novartis',
-          fridge: 'Freezers 19',
-          position: 'Rack 10A',
-          confirm: false,
-          index: 7,
-          url: 'Uploads/DocumentURL/4.jpeg',
-        },
+        
         /* {
           sampleId: '',
           sampleName: '',
@@ -322,19 +330,38 @@ export default {
     },
   },
   methods: {
+    _getFutureMomentStandardFormatted,
+    moment,
     handleModal(show) {
       this.showModal = show
     },
     handlePrintModal(show) {
       this.showAllModal = show
     },
-    openViewModal(id, index) {
+    /* openViewModal(id, index) {
       this.qrUrl = index.url
       this.showModal = true
-    },
+    }, */
     openViewAllModal(id) {
       this.showAllModal = true
     },
+    handleOk() {
+        this.showModal = false
+      },
+      handelCancel(val){
+        this.showModal = val
+      },
+      openViewModal(id) {
+        this.showModalImage = true
+        this.qrUrl = id
+        // LabelServices.scheduling(id);
+      },
+      openPopViewModal(val, record, print) {
+        this.showModal = val
+        this.labelData=print
+        console.log(record)
+        console.log(print)
+      },
     handleClick(confirm, index) {
       // console.log(confirm)
       if (confirm === 'all') {

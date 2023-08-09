@@ -31,7 +31,7 @@
             </a-row>
             <a-row style="line-height:25px">
               <a-col :span="7" class="text-muted">{{translation.Descr_1_655}}</a-col>
-              <a-col :span="8" class="text-color-black">Drug B</a-col>
+              <a-col :span="8" class="text-color-black">Human Cell</a-col>
               <a-col :span="5" class="text-muted">{{translation.Quant_1_657}}</a-col>
               <a-col :span="4" class="text-color-black">10</a-col>
             </a-row>                        

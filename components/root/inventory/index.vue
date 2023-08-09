@@ -51,11 +51,11 @@ export default {
           flag: 'web/flags/at.svg',
           description: {
             countryName: 'Vienna - Cellfuse R&D ',
-            address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
-            global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Stephen Jones',
+            address: 'Leberstraße 20 1110 Vienna Austria',
+            global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Marie DÖPFER',
             flag: 'web/flags/at.svg',
-            phone: '49 6781 9855-0',
-            email: 'info-imfs@cellfuse.de',
+            phone: '+49 6781 9855-0',
+            email: 'info-imfs@cellfuse.at',
           },
         },
         {
@@ -65,11 +65,11 @@ export default {
 
           description: {
             countryName: 'Gaithersburg USA - Cellfuse US ',
-            address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
+            address: 'Gaithersburg 930 Clopper Rd Gaithersburg, MD 20878 USA',
             flag: 'web/flags/us.svg',
-            global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Stephen Jones',
-            phone: '49 6781 9855-0',
-            email: 'info-imfs@cellfuse.de',
+            global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Bob MacLean',
+            phone: '(617) 337-4701',
+            email: 'info-imfs@cellfuse.us',
           },
         },
         {
@@ -78,11 +78,11 @@ export default {
           flag: 'web/flags/us.svg',
           description: {
             countryName: 'Cambridge USA - Cellfuse US',
-            address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
-            global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Stephen Jones',
+            address: 'San Diego 40 Erie Street, Suite 110 Cambridge, MA 02139 USA',
+            global: `${this.$store.getters.getTranslation.Headof_3_549}` + ' - Laura Shilling',
             flag: 'web/flags/us.svg',
-            phone: '49 6781 9855-0',
-            email: 'info-imfs@cellfuse.de',
+            phone: '(617) 337-4701',
+            email: 'info-imfs@cellfuse.us',
           },
         },
       ],

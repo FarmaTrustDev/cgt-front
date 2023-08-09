@@ -534,6 +534,7 @@ export default {
     bagId: { required: true, type: String },
     activeTab: { type: String },
     typeId: { type: String },
+    record:{type: Object},
   },
   data() {
     return {
@@ -873,6 +874,8 @@ export default {
     submit() {
       this.form.validateFields((err,values)=>{
         if(!err){
+          console.log(this.$route.query.record)
+          
           // console.log(this.typeId)
           if ((this.typeId === 'inbound')) {
             this.showInventoryModal=true
@@ -1052,7 +1055,8 @@ export default {
       this.success('Submitted successfully')
       this.showSchedulingModal=false
       this.$emit('handleActiveTab', 'COURIER')
-      this.goto('/inventory/treatment/outboundProcess?view=COURIER')
+      const obj=JSON.stringify(this.record)
+      this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
     },    
     handleInventorygModal(){
       this.showInventoryModal=false
