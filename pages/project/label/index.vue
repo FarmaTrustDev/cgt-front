@@ -459,7 +459,6 @@
     },
     mounted() {
       this.getTranslationData()
-      this.$store.commit('setSelectedMenu', [`2`])
     },
     methods: {
       _getFutureMomentStandardFormatted,

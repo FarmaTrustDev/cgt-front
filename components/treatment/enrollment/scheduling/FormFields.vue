@@ -72,7 +72,7 @@
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
-        <a-form-item :label="translation.DelivDispa_3_728">
+        <a-form-item label="Container Arrival Date">
           <a-date-picker
             v-decorator="[
               'pickupDateTime',
@@ -94,7 +94,7 @@
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
-        <a-form-item :label="translation.SamplDeliv_3_730" class="pb-0">
+        <a-form-item label="Lab Delivery Date" class="pb-0">
           <a-date-picker
             v-decorator="[
               'deliveryDate',
@@ -118,7 +118,7 @@
     </a-row>
     <a-row>
       <a-col :span="8" class="plr-10">
-        <a-form-item :label="translation.TreatStart_3_732" class="pb-0">
+        <a-form-item label="Production Start Date" class="pb-0">
           <a-date-picker
             v-decorator="[
               'manufacturerTreatmentStartDate',
@@ -185,7 +185,7 @@
     </a-row>
     <a-row>
       <a-col :span="12" class="plr-10">
-        <a-form-item :label="translation.DelivArriv_4_736" class="pb-0">
+        <a-form-item label="Treatment Arrival Date" class="pb-0">
           <a-date-picker
             v-decorator="[
               'deliveryArrivalDate',
