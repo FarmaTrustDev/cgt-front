@@ -159,8 +159,6 @@ export default {
       return url.replace(/['"]+/g, '')
     },
     fetch(treatmentId) {
-      alert(treatmentId)
-      // this.loading = true
       TreatmentServices.detail(treatmentId)
         .then((response) => {
           console.log(response)
