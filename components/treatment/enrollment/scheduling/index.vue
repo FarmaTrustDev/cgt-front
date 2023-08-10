@@ -47,7 +47,7 @@
         <a-row>
           <a-col :span="15">
             <a-row class="row-height"><a-col :span="10"><strong>Date: </strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('DD MMMM YYYY') }}</a-col></a-row>
-            <a-row class="row-height"><a-col :span="10"><strong>Time:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('hh:mm:ss') }}</a-col></a-row>
+            <a-row class="row-height"><a-col :span="10"><strong>Time:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('hh:mm') }}</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Room:</strong></a-col><a-col :span="14">A2</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Treatment:</strong></a-col><a-col :span="14">{{treatmentTypeName}}</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Partner:</strong></a-col><a-col :span="14">{{ partner }}</a-col></a-row>
@@ -211,7 +211,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.dated=values.collectionDate
+          this.dated=values.deliveryArrivalDate
           this.containerDate=values.pickupDateTime
           this.partner=values.manufacturerName
           this.startDate=values.deliveryArrivalDate
