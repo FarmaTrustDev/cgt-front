@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <a-spin :spinning="loading">
-      <a-form :form="form" layout="horizontal" @submit="onSubmit">
-        <Form v-if="!isScheduled" :form="form" :treatment="treatment" :rejection="rejection" />
-        <Detail v-else  :entity="entity" />
-      </a-form>
-    </a-spin>
-
-    <a-modal
+    <div>
+      <a-spin :spinning="loading">
+        <a-form :form="form" layout="horizontal">
+          <Form :form="form" :changes="changeEventData" />
+        </a-form>
+      </a-spin>  
+      <!-- <a-modal
       :visible="selectionModal"
       ok-text="Ok"
       :footer="null"
@@ -74,81 +72,81 @@
           >
         </footer>
       </center>
-    </a-modal>    
-  </div>
-</template>
-<script>
-import Form from '~/components/treatment/enrollment/scheduling/Form'
-import Detail from '~/components/treatment/enrollment/scheduling/Detail'
-import withCrud from '~/mixins/with-crud'
-import SchedulingServices from '~/services/API/SchedulingServices'
-import AppointmentServices from '~/services/API/AppointmentServices'
-import DoctorServices from '~/services/API/DoctorServices'
-import TreatmentServices from '~/services/API/TreatmentServices'
-import { isEmpty } from '~/services/Utilities'
-import imagesHelper from '~/mixins/images-helper'
-import {_getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
-import UserServices from '~/services/API/UserServices'
-export default {
-  components: { Form, Detail },
-  mixins: [withCrud,imagesHelper],
-  props: {
-    treatment: {
-      type: Object,
-      default: () => ({}),
+    </a-modal> -->        
+    </div>
+  </template>
+  <script>
+  import Form from '~/components/root/hospital/scheduling/changeForm'
+  import imagesHelper from '~/mixins/images-helper'
+  import AppointmentServices from '~/services/API/AppointmentServices'
+  import DoctorServices from '~/services/API/DoctorServices'
+  import UserServices from '~/services/API/UserServices'
+  import { isEmpty } from '~/services/Utilities'
+  import {_getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+  export default {
+    components: { Form },
+    mixins: [imagesHelper],
+    props: {
+      treatment: {
+        type: Object,
+        default: () => ({}),
+      },
+      rejection: {
+        type: Array,
+        default: () => [],
+      },
     },
-    rejection: {
-      type: Array,
-      default: () => [],
+    data() {
+      return {
+        formLayout: 'horizontal',
+        form: this.$form.createForm(this, {
+          name: 'TreatmentSchedulingForm',
+        }),
+        fetchIdFromParams: false,
+        entity: {},
+        values:{},
+        isScheduled: false,
+        loading: false,
+        dated:'',
+        containerDate:'',
+        startDate:'',
+        partner:'',
+        url:'',
+        selectionModal:false,
+        visibleModalPopUp: false,
+        userData:[],
+        selectedUsers: [],
+        patientName:'',
+        treatmentTypeName:'',
+        patientPUID:'',
+        changeEventData:{},
+        treatments:{},
+        emailIds:[],
+      }
     },
-  },
-  data() {
-    return {
-      formLayout: 'horizontal',
-      form: this.$form.createForm(this, {
-        name: 'TreatmentSchedulingForm',
-      }),
-      apiService: SchedulingServices,
-      fetchIdFromParams: false,
-      entity: {},
-      values:{},
-      isScheduled: false,
-      loading: false,
-      dated:'',
-      containerDate:'',
-      startDate:'',
-      partner:'',
-      url:'',
-      selectionModal:false,
-      visibleModalPopUp: false,
-      userData:[],
-      selectedUsers: [],
-      patientName:'',
-      treatmentTypeName:'',
-      patientPUID:'',
-      treatments:{},
-      emailIds:[],
-    }
-  },
-  computed:{
-    user() {
-      return this.$store.getters.getUser
+    computed:{
+      user() {
+        return this.$store.getters.getUser
+      },
+      filteredUsers() {
+        return this.userData.filter(user => this.selectedUsers.includes(user.id));
+      }
     },
-    filteredUsers() {
-      return this.userData.filter(user => this.selectedUsers.includes(user.id));
-    }
-  },
-  mounted() {
-    this.validateIsCreated()
-    this.getUrl()
-    // this.getUsers()
-    // this.getDoctorsWithDays()
-    // this.getBasicInfo()
-  },
-  methods: {
-    getMomentByStandardFormat,
-    _getFormatMoment,
-    getUrl(){
+    mounted() {
+        this.handlePatient()
+        this.getUrl()
+    },
+    methods: {
+      getMomentByStandardFormat,
+      _getFormatMoment,
+      handlePatient(){
+        if (this.$route.query) {
+            this.changeEventData = this.$route.query[0]
+            // console.log(typeof this.changeEventData)
+            // this.getDoctorsWithDays(this.changeEventData)
+        }
+      },
+      getUrl(){
       this.url=this.user.userProfileImageUrl.replace(/['"]+/g, '')
     },
     
@@ -186,26 +184,8 @@ export default {
         url="Uploads/default/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg"
       }
       return url.replace(/['"]+/g, '')
-    },
-    fetch(treatmentId) {
-      TreatmentServices.detail(treatmentId)
-        .then((response) => {
-          console.log(response)
-          this.patientName=response.data.patient.name
-          this.patientPUID=response.data.patient.enrollmentNumber
-          this.treatmentTypeName=response.data.treatmentTypeName
-          this.selectionModal = true
-          // this.updateTreatment(response.data)
-        })
-        .catch(this.error)
-        .finally(() => {
-          // this.loading = false
-        })
-    },
-    updateTreatment(treatment) {
-      this.treatments = treatment
-    },
-    getUsers(data){
+    },    
+      getUsers(data){
       this.emailIds = []
       data.data.forEach((element) => {
             if (element.daysDTO.workingDays.length > 0) {
@@ -219,64 +199,9 @@ export default {
           this.userData = response.data
         })
         .finally(() => (this.loading = false)) 
-    },
-    validateIsCreated() {
-      this.loading = true
-      if (
-        !isEmpty(this.treatment) &&
-        this.treatment.id &&
-        this.treatment.isSchedule
-      ) {
-        this.fetchScheduling(this.treatment.id)
-      } else {
-       // this.checkCreated()
-      }
-      this.loading = false
-    },
-    afterFetch() {
-      if (this.treatment.isSchedule) {
-        this.fetchScheduling(this.treatment.id)
-      }
-
-      // this.validateIsCreated()
-    },
-    onSubmit(e) {
-      // this.loading = true
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          this.dated=values.deliveryArrivalDate
-          this.containerDate=values.pickupDateTime
-          this.partner=values.manufacturerName
-          this.startDate=values.deliveryArrivalDate
-          this.values=values
-          this.showSelectionPopUp()
-        } else {
-          this.loading = false
-        }
-      })
-      // this.loading = false
-    },
-    fetchScheduling(id) {
-      SchedulingServices.getByTreatment(id).then((response) => {
-        const entity = response.data
-        if (!isEmpty(entity)) {
-          this.entity = entity
-          this.isScheduled = true
-        }
-      })
-    },
-    afterCreate(values) {
-      this.gotoPatient()
-    },
-    afterUpdate(values) {
-      this.gotoPatient()
-    },
-    gotoPatient() {
-      this.goto('/hospital/patients')
-    },
+    },      
     showPopUp(){
-      this.visibleModalPopUp = true
+        this.visibleModalPopUp = true
     },
     async showSelectionPopUp(){
       this.getBasicInfo()
@@ -304,7 +229,7 @@ export default {
           appointmentDate:this.startDate, 
           appointmentTime:tm,
           dayId:dt.getDay()===0? 7 : dt.getDay(),
-          roomName:'A2',
+          roomName:'A2'
         }
         ).then((response)=>{
         this.upsert(this.values)
@@ -323,15 +248,16 @@ export default {
     handleSelectionCancel(){
       this.selectionModal=false
       // this.showPopUp()
+    },      
     },
-  },
-}
-</script>
-<style scoped>
-.row-height {
-  height: 25px;
-}
-.col-height {
-  height: 60px;
-}
-</style>
+  }
+  </script>
+  <style scoped>
+  .row-height {
+    height: 25px;
+  }
+  .col-height {
+    height: 60px;
+  }
+  </style>
+  

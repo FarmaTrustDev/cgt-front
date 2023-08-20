@@ -1,7 +1,9 @@
 import request from '../request'
+import requestSch from '../requestSch'
 import { BASE_API } from '../Constant'
 
 const baseApi = `${BASE_API}/user`
+const schBaseApi = `http://localhost:49299/api/user`
 
 function detail(data) {
   return request({
@@ -25,7 +27,12 @@ function hospitals() {
     url: `${baseApi}/hospitals`,
   })
 }
-
+function getWorkingDaysByEmail(email){
+  return requestSch({
+    url:`${schBaseApi}/timetable/${email}`,
+    method:'Get'
+  })
+}
 function adminSubMenus() {
   return request({
     url: `${baseApi}/admin-menus`,
@@ -46,6 +53,13 @@ function get(params = {}) {
 function getUser() {
   return request({
     url: `${baseApi}/organizationSpecificUsers`,
+  })
+}
+function getUserByEmails(data) {
+  return request({
+    url: `${baseApi}/getUserByEmails`,
+    data,
+    method: 'POST',
   })
 }
 function getSearchUser(params = {}) {
@@ -165,7 +179,9 @@ const UserServices = {
   getSearchUser,
   sendEmailToHospitals,
   basicDetail,
-  userWithOrganizationTypeId
+  userWithOrganizationTypeId,
+  getWorkingDaysByEmail,
+  getUserByEmails
 }
 
 export default UserServices

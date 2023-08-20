@@ -1,7 +1,9 @@
 import { BASE_URL, BASE_API } from '../Constant'
 import request, { getAuthEvent } from '~/services/request'
+import requestSch, { getAuthEventSch } from '~/services/requestSch'
 const baseUrl = `${BASE_URL}`
 const baseApi = `${BASE_API}/auth`
+const schApi = 'https://sch-dev-atmps.microsysx.com'
 
 function login(data) {
   return request({
@@ -11,10 +13,28 @@ function login(data) {
   })
 }
 
+function schAuthentication(data) {
+  return requestSch({
+    url: `${schApi}/api/auth`,
+    data,
+    method: 'POST',
+  })
+}
 
+function schAccessToken(data) {
+  return requestSch({
+    url: `${schApi}/api/auth`,
+    data,
+    method: 'POST',
+  })
+}
 
 function getBusEvent() {
   return getAuthEvent()
+}
+
+function getSchBusEvent() {
+  return getAuthEventSch()
 }
 
 function logout(data = {}) {
@@ -76,9 +96,12 @@ const AuthService = {
   forgetpassword,
   resetPassword,
   getBusEvent,
+  getSchBusEvent,
   getActivationAuth,
   resetPasswordEmail,
   getKeyWithEmail,
+  schAuthentication,
+  schAccessToken
 }
 
 export default AuthService

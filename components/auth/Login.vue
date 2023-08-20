@@ -58,7 +58,7 @@
 <script>
 import AuthServices from '~/services/API/AuthServices'
 import UserServices from '~/services/API/UserServices'
-import { setAccessToken, setRefreshToken } from '~/services/Auth'
+import { setAccessToken, setRefreshToken, setSchRefreshToken, setSchAccessToken } from '~/services/Auth'
 import { success } from '~/services/Helpers/notifications'
 import { isEmpty } from '~/services/Helpers'
 import routeHelpers from '~/mixins/route-helpers'
@@ -96,6 +96,11 @@ export default {
           this.$store.commit('setToken', {
             token: response.accessToken,
             status: true,
+          })
+          AuthServices.schAuthentication({username:'sch_admin', password:'test123', email:'sch_admin'})
+          .then((response)=>{
+            setSchRefreshToken(response.refreshToken)
+            setSchAccessToken(response.accessToken)
           })
           this.userDetail()
           success(this, { message: response.message })
