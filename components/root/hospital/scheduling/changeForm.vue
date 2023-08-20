@@ -4,7 +4,7 @@
       <div class="grey-card">
         <div v-if="loading" class="loading-overlay">
           <div class="loading-spinner"></div>
-        </div>{{ changes }}
+        </div>
         <calendar
         :handle-date-click="fetchEvents"
         :disabled-date="disabledDate"
