@@ -81,7 +81,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Dispatch Date',
+                    message: 'Please select your Container Arrival Date',
                   },
                 ],
               },
@@ -194,7 +194,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Delivery Arrival Date Birth',
+                    message: 'Please select your Treatment Arrival Date',
                   },
                 ],
               },
