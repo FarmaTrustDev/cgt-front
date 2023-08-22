@@ -89,10 +89,13 @@ export default {
       if (event.extendedProps.globalId==='00000000-0000-0000-0000-000000000000') {
         backgroundColor = 'white';
         color="black"
+      }else if(event.extendedProps.isCollection===true){
+        backgroundColor = 'purple';
+        color="white"
       } 
 
       return {
-        html: `<div class="custom-event-content" style="padding-left:2px; margin-top:2px; text-align:center; padding-top:10px; height: 40px; border-radius:5px; width: 155px; background-color: ${backgroundColor}; color:${color}">${event.title}</div>`
+        html: `<div class="custom-event-content" style="padding-left:2px; margin-left:-7px; margin-top:-7px; margin-right:-7px; margin-bottom:-7px; text-align:center; padding-top:8px; height: 35px; border-radius:11px; width: 170px; background-color: ${backgroundColor}; color:${color}">${event.title}</div>`
       };
     }
   },

@@ -1,16 +1,18 @@
 <template>
     <div>
+      <a-spin :spinning="loading">
       <h3 class="page-title">My Schedule</h3>
       <div class="grey-card">
-        <div v-if="loading" class="loading-overlay">
+        <!-- <div v-if="loading" class="loading-overlay">
           <div class="loading-spinner"></div>
-        </div>
+        </div> -->
         <calendar
         :handle-date-click="fetchEvents"
         :disabled-date="disabledDate"
         @getEventClick="getEventClick"
         ></calendar>
       </div>
+    </a-spin>
       <a-modal
       :visible="selectionModal"
       ok-text="Ok"
@@ -20,8 +22,8 @@
       @ok="handleSelectionOk()"
     >
         <h3><strong>{{changes.patientName}} {{changes.patientPUID}}</strong></h3>
-        <h3>Estimated treatment date is {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }}</h3>
-        <h3>Please select available personnel: </h3>
+        <h3>Appointment on {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }} at {{ tim }}</h3>
+        <h3>Please select from the following personnels: </h3>
         <a-row v-for="user in userData" :key="user.id" class="col-height">
           <a-col :span="12">
             <input type="checkbox" v-model="selectedUsers" :value="user.id" style="margin-right:15px; margin-top: 15px;">
@@ -35,8 +37,9 @@
         <a-row>
             <footer>
                 <center>
-                    <a-button class="ant-btn ant-btn-primary" @click="handleSelectionOk()">Confirm</a-button>
+                    
                     <a-button class="ant-btn" @click="handleSelectionCancel()">Cancel</a-button>
+                    <a-button :disabled="isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()">Confirm</a-button>
                 </center>
             </footer>
         </a-row>
@@ -64,22 +67,22 @@
             <a-row class="row-height"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(changes.containerDate)).format('DD MMMM YYYY hh:mm') }}</a-col></a-row>
           </a-col>
           <a-col :span="9">
-              <a-col v-for="user in filteredUsers" :key="user.id"><img class="img-responsive" :src="getImageUrl(getImageFineURL(user.userProfileImageUrl))" width="40" height="30" style="margin-right:15px" />{{ user.name }}</a-col>
+              <a-col v-for="user in filteredUsers" class="col-height" :key="user.id"><img class="img-responsive" :src="getImageUrl(getImageFineURL(user.userProfileImageUrl))" width="40" height="50" style="margin-right:15px" />{{ user.name }}</a-col>
           </a-col>
         </a-row>
         <center>
         <footer>
           <a-button
-            class="ant-btn ant-btn-primary"
-            @click="handlePopUpOk()"
-            style="padding: 5px 50px"
-            >Confirm</a-button
-          >
-          <a-button
             class="ant-btn"
             @click="handlePopUpCancel()"
             style="padding: 5px 50px"
             >Go Back</a-button
+          >
+          <a-button
+            class="ant-btn ant-btn-primary"
+            @click="handlePopUpOk()"
+            style="padding: 5px 50px"
+            >Confirm</a-button
           >
         </footer>
       </center>
@@ -102,17 +105,17 @@
                   <a-row>
                     <a-col :span="6"
                       ><span class="dated-time-schedule">
-                        {{ _getFormatMoment(containerDate).format('HH:mm') }}</span
+                        {{ slotTime }}</span
                       >
                     </a-col>
                     <a-col :span="10">
                       <div class="dateTimeBox">
                         <span class="daysName"><strong>{{
-                          _getFormatMoment(containerDate).format('dddd')
+                          _getFormatMoment(dated).format('dddd')
                         }}</strong></span>
                         <br />
                         <span class="TodaysDate"><strong>{{
-                          _getFormatMoment(containerDate).format('Do MMM YYYY')
+                          _getFormatMoment(dated).format('Do MMM YYYY')
                         }}</strong></span>
                       </div>
                     </a-col>
@@ -219,6 +222,7 @@
   import DoctorServices from '~/services/API/DoctorServices'
   import imagesHelper from '~/mixins/images-helper'
   import UserServices from '~/services/API/UserServices'
+  import { isEmpty } from '~/services/Utilities'
   import routeHelpers from '~/mixins/route-helpers'
   import {
     _getFormatMoment,
@@ -266,7 +270,10 @@
         changeEventData:{},
         treatments:{},
         emailIds:[],
-        id:'',        
+        id:'',
+        slotTime:'',
+        isCollection:true,
+        day:'',
       }
     },
     computed: {
@@ -283,14 +290,16 @@
     },
     methods: {
       disabledDate: _disabledPreviousDate,
+      isEmpty,
       async fetchEvents(arg, callback) {
         this.loading = true
-        const appoint = await AppointmentServices.get({ ...arg})    
+        const appoint = await AppointmentServices.get({ ...arg})
+        const coll = await AppointmentServices.getCollection({ ...arg})    
         const dt= new Date(this.changes.dated)
         const tm=_getFormatMoment(getMomentByStandardFormat(this.changes.dated)).format('HH:mm')
         const docData = await DoctorServices.getDoctorWithDays()
         const avail= await AppointmentServices.doctorData({...arg, doctorDTOs: docData.data, startDate: dt, startTime:tm})
-        this.combinedEvents=[...appoint.data, ...avail.data]
+        this.combinedEvents=[...appoint.data, ...avail.data, ...coll.data]
         callback(this.combinedEvents)
         this.loading = false 
       },
@@ -319,10 +328,19 @@
           this.patientName=detail.event._def.extendedProps.patientName
           this.treatmentTypeName=detail.event._def.extendedProps.treatmentTypeName
           this.patientPUID=detail.event._def.extendedProps.patientId
-          this.dated=detail.event._def.extendedProps.appointmentDate
+          if(detail.event._def.extendedProps.isCollection===true){
+            this.dated=detail.event._def.extendedProps.collectionDate
+            this.slotTime=detail.event._def.extendedProps.collectionTime
+            this.isCollection=true
+          }else{
+            this.dated=detail.event._def.extendedProps.appointmentDate
+            this.slotTime=detail.event._def.extendedProps.appointmentTime
+            this.isCollection=false
+          }
           this.roomName=detail.event._def.extendedProps.roomName
-          this.containerDate=detail.event._def.extendedProps.appointmentDate
+          this.containerDate=detail.event._def.extendedProps.containerDate
           this.partner=detail.event._def.extendedProps.clientName
+          this.day=detail.event._def.extendedProps.dayId
           this.filterUsers=detail.event._def.extendedProps.userDetailResponses
           this.changeEventData=[
             {
@@ -330,6 +348,9 @@
               treatmentTypeName:this.treatmentTypeName,
               patientPUID:this.patientPUID,
               dated:this.dated,
+              slotTIme:this.slotTIme,
+              isCollection:this.isCollection,
+              day:this.day,
               roomName:this.roomName,
               partner:this.partner,
               containerDate:this.containerDate,
@@ -439,7 +460,8 @@
           appointmentTime:this.tim,
           dayId:dt.getDay() ===0 ? 7 : dt.getDay(),
           roomName:'A2',
-          id:this.changes.id
+          id:this.changes.id,
+          isCollection:this.changes.isCollection
         }, this.changes.id
         ).then((response)=>{
           this.goto('/hospital/schedule')
