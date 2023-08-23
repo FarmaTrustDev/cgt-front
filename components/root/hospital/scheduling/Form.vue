@@ -51,7 +51,7 @@
                     <a-row class="row-height"><a-col :span="10"><strong>Room:</strong></a-col><a-col :span="14">{{roomName}}</a-col></a-row>
                     <a-row class="row-height"><a-col :span="10"><strong>Treatment:</strong></a-col><a-col :span="14">{{treatmentTypeName}}</a-col></a-row>
                     <a-row class="row-height"><a-col :span="10"><strong>Partner:</strong></a-col><a-col :span="14">{{ partner }}</a-col></a-row>
-                    <a-row class="row-height"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(containerDate)).format('Do MMM YYYY') }}</a-col></a-row>
+                    <a-row class="row-height" v-if="isCollection"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('Do MMM YYYY') }}</a-col></a-row>
                     <a-row class="row-height">
                       <a-col :span="24">
                         <center>
