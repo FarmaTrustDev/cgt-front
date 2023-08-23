@@ -95,6 +95,7 @@
       :visible="visibleModalPopUp"
       ok-text="Ok"
       :footer="null"
+      :width="700"
       @cancel="handlePopUpCancel()"
       @ok="handlePopUpOk()"
     >
