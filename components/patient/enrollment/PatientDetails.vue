@@ -12,7 +12,7 @@
         <a-col :span="5" class="text-muted" >Phone No: </a-col><a-col :span="7"><h3>{{patientDetail.phone}}</h3></a-col>
       </a-row>
       <a-row class="white-card-smart-lab">
-        <a-col :span="5" class="text-muted" >DOB: </a-col><a-col :span="7"><h3>{{getDateFormat(patientDetail.dOB)}}</h3></a-col>
+        <a-col :span="5" class="text-muted" >DOB: </a-col><a-col :span="7"><h3>{{_getFormatMoment(getMomentByStandardFormat(patientDetail.dob)).format('DD/MM/YYYY')}}</h3></a-col>
         <a-col :span="5" class="text-muted" >Gender: </a-col><a-col :span="7"><h3>{{patientDetail.gender === 1 ? 'Male' : patientDetail.gender === 2 ? 'Female': 'N/A'}}</h3></a-col>
       </a-row>
       <a-row class="white-card-smart-lab">
@@ -43,7 +43,7 @@
   </div>
   </template>
   <script> 
-    import moment from 'moment'
+import {_getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
   export default {
     props:{
       patientDetail: {type: Object, required: true}
@@ -52,13 +52,11 @@
     {
       return {
         loading: false,
-        moment,
       }
     },
     methods: {
-    getDateFormat(date) {
-      return moment(String(date)).format(' DD/MM/YYYY')
-    },
+      getMomentByStandardFormat,
+      _getFormatMoment,
   },
   }
   </script>
