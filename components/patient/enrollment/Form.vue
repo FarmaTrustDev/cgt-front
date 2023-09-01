@@ -52,7 +52,7 @@
       </center>
     </a-modal>
     <a-modal :visible="visiblePatientDetailModal" ok-text="Confirm" width="800px" @cancel="submitModalResponse(false)" @ok="submitModalResponse(true)" >
-      <PatientDetail :patient-detail="patientDetail" />
+      <PatientConfirmModel :patient-detail="patientDetail" />
     </a-modal>
     </a-spin>
   </div>
@@ -60,6 +60,7 @@
 <script>
 import FormFields from '~/components/patient/enrollment/FormFields'
 import PatientDetail from '~/components/patient/enrollment/PatientDetails'
+import PatientConfirmModel from  '~/components/patient/enrollment/ConfirmDetails'
 import notifications from '~/mixins/notifications'
 import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
@@ -67,7 +68,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import imagesHelper from '~/mixins/images-helper'
 export default {
-  components: { FormFields, PatientDetail },
+  components: { FormFields, PatientDetail,PatientConfirmModel },
   mixins: [notifications, routeHelpers, nullHelper, imagesHelper],
   data() {
     return {
