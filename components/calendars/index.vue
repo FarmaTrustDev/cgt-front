@@ -42,6 +42,7 @@ export default {
         selectable: true,
         displayEventTime : false,
         events:this.handleDateClick,
+        eventContent: this.customizeEventContent,
         slotMinTime: '08:00:00',
         height: 550,
         slotMaxTime: '21:00:00',
@@ -79,6 +80,38 @@ export default {
     handleEventClick(arg) {
       this.$emit('getEventClick', arg)
     },
+    customizeEventContent(arg) {
+      const event = arg.event;
+      let backgroundColor;
+      let color;
+
+      // Set background color based on conditions
+      if (event.extendedProps.globalId==='00000000-0000-0000-0000-000000000000') {
+        backgroundColor = 'white';
+        color="black"
+      }else if(event.extendedProps.isCollection===true){
+        backgroundColor = 'purple';
+        color="white"
+      } 
+
+      return {
+        html: `<div class="custom-event-content" style="padding-left:2px; margin-left:-7px; margin-top:-7px; margin-right:-7px; margin-bottom:-7px; text-align:center; padding-top:8px; height: 35px; border-radius:11px; width: 170px; background-color: ${backgroundColor}; color:${color}">${event.title}</div>`
+      };
+    }
   },
 }
 </script>
+
+<style scoped>
+.custom-event-content {
+  /* Customize the styling of the event content here */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+  font-weight: bold;
+}
+</style>
+

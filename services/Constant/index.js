@@ -38,7 +38,53 @@ export const STATUSES = [
     bg_color: '#ffdbd0',
   },
 ]
-
+export const TIME_SLOTS = [
+  {
+    id:1, 
+    time_slot:'09:00', 
+    display:'09:00-10:00'
+  },
+  {
+    id:2, 
+    time_slot:'10:00', 
+    display:'10:00-11:00'
+  },
+  {
+    id:3, 
+    time_slot:'11:00', 
+    display:'11:00-12:00'
+  },
+  {
+    id:4, 
+    time_slot:'12:00', 
+    display:'12:00-13:00'
+  },
+  {
+    id:5, 
+    time_slot:'13:00', 
+    display:'13:00-14:00'
+  },
+  {
+    id:6, 
+    time_slot:'14:00', 
+    display:'14:00-15:00'
+  },
+  {
+    id:7, 
+    time_slot:'15:00', 
+    display:'15:00-16:00'
+  },
+  {
+    id:8, 
+    time_slot:'16:00', 
+    display:'16:00-17:00'
+  },
+  {
+    id:9, 
+    time_slot:'17:00', 
+    display:'17:00-18:00'
+  }, 
+]
 export const BLOOD_TYPES = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
 
 export const GENDER = [

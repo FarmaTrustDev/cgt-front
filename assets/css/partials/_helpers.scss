@@ -121,6 +121,21 @@
   margin-left: 3px;
 }
 
+.dated-time-schedule {
+  background-color: $danger;
+  padding: 3% 10%;
+  border-radius: 22px;
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+  @extend .light-shadow;
+
+  padding-right: 23%;
+  position: absolute;
+  margin: -7px;
+  margin-left: 3px;
+}
+
 .w-1200 {
   max-width: 76%;
 }

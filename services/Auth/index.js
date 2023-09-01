@@ -9,7 +9,17 @@ export const getRefreshToken = () => localStorage.getItem('refresh_token')
 
 export const setRefreshToken = (token) =>
   localStorage.setItem('refresh_token', token)
+
+export const getSchAccessToken = () => localStorage.getItem('sch_access_token')
+
+export const setSchAccessToken = (token) =>
+    localStorage.setItem('sch_access_token', token)
   
+export const getSchRefreshToken = () => localStorage.getItem('sch_refresh_token')
+  
+export const setSchRefreshToken = (token) =>
+    localStorage.setItem('sch_refresh_token', token)  
+
 export const setUserDetails = (details) =>
   localStorage.setItem('user_details', JSON.stringify(details))
 
