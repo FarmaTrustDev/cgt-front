@@ -67,6 +67,7 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import imagesHelper from '~/mixins/images-helper'
+import { isEmpty } from '~/services/Helpers'
 export default {
   components: { FormFields, PatientDetail,PatientConfirmModel },
   mixins: [notifications, routeHelpers, nullHelper, imagesHelper],
@@ -132,11 +133,13 @@ export default {
       PatientServices.getById(id)
         .then((response) => {
           const myString = response.data.phone
-          const result = myString.match(/\((.*)\)/)
-          this.countryIso = result !== null ? result[1] : null
-          const index = myString.indexOf(")");  
-          const ph = myString.substr(index + 1);
-          response.data.phone = ph.split(" ").join("");
+          if(!isEmpty(myString)){
+            const result = myString.match(/\((.*)\)/)
+            this.countryIso = result !== null ? result[1] : null
+            const index = myString.indexOf(")");  
+            const ph = myString.substr(index + 1);
+            response.data.phone = ph.split(" ").join("");
+          }
           this.patient = response.data
           // this.patientPhone = '(' + this.countryIso + ')'
           this.isCreated = true
