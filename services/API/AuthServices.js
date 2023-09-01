@@ -4,6 +4,7 @@ import requestSch, { getAuthEventSch } from '~/services/requestSch'
 const baseUrl = `${BASE_URL}`
 const baseApi = `${BASE_API}/auth`
 const schApi = 'https://sch-dev-atmps.microsysx.com'
+// const schApi = 'http://localhost:49299'
 
 function login(data) {
   return request({

@@ -1,5 +1,6 @@
 import requestSch from '../requestSch'
-const schBaseApi = `http://localhost:49299/api/doctor`
+const schBaseApi = `https://sch-dev-atmps.microsysx.com/api/doctor`
+// const schBaseApi = `http://localhost:49299/api/doctor`
 
 function get() {
   return requestSch({

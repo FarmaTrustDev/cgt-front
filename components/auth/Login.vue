@@ -97,7 +97,7 @@ export default {
             token: response.accessToken,
             status: true,
           })
-          AuthServices.schAuthentication({username:'sch_admin', password:'test123', email:'sch_admin'})
+          AuthServices.schAuthentication({username:'hospital_admin', password:'test123', email:'hospital_admin'})
           .then((response)=>{
             setSchRefreshToken(response.refreshToken)
             setSchAccessToken(response.accessToken)

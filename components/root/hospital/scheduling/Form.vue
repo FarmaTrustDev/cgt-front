@@ -25,17 +25,17 @@
                   <a-row>
                     <a-col :span="6"
                       ><span class="dated-time-schedule">
-                        {{ _getFormatMoment(containerDate).format('HH:mm') }}</span
+                        {{ slotTime }}</span
                       >
                     </a-col>
                     <a-col :span="10">
                       <div class="dateTimeBox">
                         <span class="daysName"><strong>{{
-                          _getFormatMoment(containerDate).format('dddd')
+                          _getFormatMoment(dated).format('dddd')
                         }}</strong></span>
                         <br />
                         <span class="TodaysDate"><strong>{{
-                          _getFormatMoment(containerDate).format('Do MMM YYYY')
+                          _getFormatMoment(dated).format('Do MMM YYYY')
                         }}</strong></span>
                       </div>
                     </a-col>
@@ -51,7 +51,7 @@
                     <a-row class="row-height"><a-col :span="10"><strong>Room:</strong></a-col><a-col :span="14">{{roomName}}</a-col></a-row>
                     <a-row class="row-height"><a-col :span="10"><strong>Treatment:</strong></a-col><a-col :span="14">{{treatmentTypeName}}</a-col></a-row>
                     <a-row class="row-height"><a-col :span="10"><strong>Partner:</strong></a-col><a-col :span="14">{{ partner }}</a-col></a-row>
-                    <a-row class="row-height"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(containerDate)).format('Do MMM YYYY') }}</a-col></a-row>
+                    <a-row class="row-height" v-if="isCollection"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('Do MMM YYYY') }}</a-col></a-row>
                     <a-row class="row-height">
                       <a-col :span="24">
                         <center>
@@ -113,6 +113,10 @@
         partner:'',
         visibleModalPopUp: false,
         changeEventData:[],
+        combinedEvents:[],
+        isCollection:true,
+        slotTime:'',
+        day:'',
       }
     },
     computed: {
@@ -122,9 +126,14 @@
     },
     methods: {
       disabledDate: _disabledPreviousDate,
-      fetchEvents(arg, callback) {
+      async fetchEvents(arg, callback) {
         this.loading = true
-        AppointmentServices.get({
+        const appoint = await AppointmentServices.get({ ...arg}) 
+        const coll= await AppointmentServices.getCollection({...arg})
+        this.combinedEvents=[...appoint.data, ...coll.data]
+        callback(this.combinedEvents)
+        this.loading = false
+        /* AppointmentServices.get({
           ...arg
         })
           .then((Appointment) => {
@@ -132,7 +141,7 @@
             callback(Appointment.data)
           })
           .catch(this.error)
-          .finally(() => (this.loading = false)) 
+          .finally(() => (this.loading = false)) */
       },
       _getFormatMoment,
       getMomentByStandardFormat,
@@ -141,10 +150,19 @@
         this.patientName=detail.event._def.extendedProps.patientName
         this.treatmentTypeName=detail.event._def.extendedProps.treatmentTypeName
         this.patientPUID=detail.event._def.extendedProps.patientId
-        this.dated=detail.event._def.extendedProps.appointmentDate
+        if(detail.event._def.extendedProps.isCollection===true){
+          this.dated=detail.event._def.extendedProps.collectionDate
+          this.slotTime=detail.event._def.extendedProps.collectionTime
+          this.isCollection=true
+        }else{
+          this.dated=detail.event._def.extendedProps.appointmentDate
+          this.slotTime=detail.event._def.extendedProps.appointmentTime
+          this.isCollection=false
+        }
         this.roomName=detail.event._def.extendedProps.roomName
-        this.containerDate=detail.event._def.extendedProps.appointmentDate
+        this.containerDate=detail.event._def.extendedProps.containerDate
         this.partner=detail.event._def.extendedProps.clientName
+        this.day=detail.event._def.extendedProps.dayId
         this.filteredUsers=detail.event._def.extendedProps.userDetailResponses
         this.changeEventData=[
           {
@@ -152,8 +170,11 @@
             treatmentTypeName:this.treatmentTypeName,
             patientPUID:this.patientPUID,
             dated:this.dated,
+            slotTime:this.slotTime,
+            isCollection:this.isCollection,
             roomName:this.roomName,
             partner:this.partner,
+            dayId:this.day,
             containerDate:this.containerDate,
             id:detail.event._def.publicId
           }

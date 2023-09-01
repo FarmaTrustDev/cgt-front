@@ -12,6 +12,15 @@ function get(params = {}) {
     },
   })
 }
+function getCollection(params = {}){
+  return request({
+    url: `${baseApi}/getCollection`,
+    params,
+    paramsSerializer: (params) => {
+      return Qs.stringify(params, { arrayFormat: 'repeat' })
+    },
+  })
+}
 function create(data) {
   return request({
     url: `${baseApi}`,
@@ -37,7 +46,8 @@ const AppointmentServices = {
   get,
   create,
   doctorData,
-  update
+  update,
+  getCollection
 }
 
 export default AppointmentServices

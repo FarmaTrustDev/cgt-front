@@ -6,17 +6,71 @@
         <Detail v-else  :entity="entity" />
       </a-form>
     </a-spin>
-
+    <a-modal
+      :visible="collTimeModal"
+      ok-text="Ok"
+      :footer="null"
+      @cancel="handleCollTimeCancel()"
+      @ok="handleCollTimeOk()"
+    >
+        
+        <center>
+          <h3><strong>{{patientName}} {{patientPUID}}</strong></h3>
+          <h3>Please select Collection Time on {{ _getFormatMoment(getMomentByStandardFormat(collectionDate)).format('DD MMMM YYYY') }}</h3>
+        </center>
+        <a-row>
+          <a-col v-for="tim in timeSlots" :span="6" :key="tim.id" class="col-height">
+            <input type="radio" v-model="selectedCollectionTimeSlot" :value="tim.time_slot" style="margin-right:15px; margin-top: 15px;"> {{ tim.display }}
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="24">
+            <center>
+            <a-button class="ant-btn" @click="handleCollTimeCancel()" style="padding: 5px 50px">Cancel</a-button>
+            <a-button :disabled="isEmpty(selectedCollectionTimeSlot)" class="ant-btn ant-btn-primary" @click="handleCollTimeOk()" style="padding: 5px 50px">Next</a-button>
+            </center>
+          </a-col>
+        </a-row>
+    </a-modal>
+    <a-modal
+      :visible="timeModal"
+      ok-text="Ok"
+      :footer="null"
+      @cancel="handleTimeCancel()"
+      @ok="handleTimeOk()"
+    >
+        
+        <center>
+          <h3><strong>{{patientName}} {{patientPUID}}</strong></h3>
+          <h3>Please select Time for Treatment Room A2 on {{ _getFormatMoment(getMomentByStandardFormat(dated)).format('DD MMMM YYYY') }}</h3>
+        </center>
+        <a-row>
+          <a-col v-for="tim in timeSlots" :span="6" :key="tim.id" class="col-height">
+            <input type="radio" v-model="selectedTimeSlot" :value="tim.time_slot" style="margin-right:15px; margin-top: 15px;"> {{ tim.display }}
+          </a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="24">
+            <center>
+            <a-button class="ant-btn" @click="handleTimeCancel()" style="padding: 5px 50px">Cancel</a-button>
+            <a-button :disabled="isEmpty(selectedTimeSlot)" class="ant-btn ant-btn-primary" @click="handleTimeOk()" style="padding: 5px 50px">Next</a-button>
+            </center>
+          </a-col>
+        </a-row>
+    </a-modal>
     <a-modal
       :visible="selectionModal"
       ok-text="Ok"
+      :loading="loading"
       :footer="null"
       @cancel="handleSelectionCancel()"
       @ok="handleSelectionOk()"
     >
         <h3><strong>{{patientName}} {{patientPUID}}</strong></h3>
-        <h3>Estimated treatment date is {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }}</h3>
-        <h3>Please select available personnel: </h3>
+        <h3>Estimated Collection Date is {{ _getFormatMoment(getMomentByStandardFormat(collectionDate)).format('DD MMMM YYYY') }}</h3>
+        <h3>Estimated Treatment Date is {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }}</h3>
+        <h3>List of available personnel at : {{ this.selectedTimeSlot }} (Room A2)</h3>
+        <a-spin :spinning="loading">
         <a-row v-for="user in userData" :key="user.id" class="col-height">
           <a-col :span="12">
             <input type="checkbox" v-model="selectedUsers" :value="user.id" style="margin-right:15px; margin-top: 15px;">
@@ -27,10 +81,13 @@
             {{ user.roleName }}
           </a-col>
         </a-row>
+        </a-spin>
         <center>
         <footer>
-          <a-button class="ant-btn ant-btn-primary" @click="handleSelectionOk()" style="padding: 5px 50px">Confirm</a-button>
-          <a-button class="ant-btn" @click="handleSelectionCancel()" style="padding: 5px 50px">Cancel</a-button>
+          
+          <a-button class="ant-btn" @click="handleSelectionCancel()" style="padding: 5px 50px">Back</a-button>
+          <a-button :disabled="isEmpty(userData) || isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()" style="padding: 5px 50px">Confirm</a-button>
+          
         </footer>
       </center>
     </a-modal>
@@ -38,6 +95,7 @@
       :visible="visibleModalPopUp"
       ok-text="Ok"
       :footer="null"
+      :width="700"
       @cancel="handlePopUpCancel()"
       @ok="handlePopUpOk()"
     >
@@ -47,12 +105,13 @@
       </center>
         <a-row>
           <a-col :span="15">
-            <a-row class="row-height"><a-col :span="10"><strong>Date: </strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('DD MMMM YYYY') }}</a-col></a-row>
-            <a-row class="row-height"><a-col :span="10"><strong>Time:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('hh:mm') }}</a-col></a-row>
+            <a-row class="row-height"><a-col :span="10"><strong>Collection Date: </strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(collectionDate)).format('DD MMMM YYYY') }}</a-col></a-row>
+            <a-row class="row-height"><a-col :span="10"><strong>Treatment Date: </strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('DD MMMM YYYY') }}</a-col></a-row>
+            <a-row class="row-height"><a-col :span="10"><strong>Time:</strong></a-col><a-col :span="14">{{ selectedTimeSlot }}</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Room:</strong></a-col><a-col :span="14">A2</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Treatment:</strong></a-col><a-col :span="14">{{treatmentTypeName}}</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Partner:</strong></a-col><a-col :span="14">{{ partner }}</a-col></a-row>
-            <a-row class="row-height"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(containerDate)).format('DD MMMM YYYY hh:mm') }}</a-col></a-row>
+            <a-row class="row-height"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(collectionDate)).format('DD MMMM YYYY hh:mm') }}</a-col></a-row>
           </a-col>
           <a-col :span="9">
               <a-col v-for="user in filteredUsers" :key="user.id"><img class="img-responsive" :src="getImageUrl(getImageFineURL(user.userProfileImageUrl))" width="40" height="30" style="margin-right:15px" />{{ user.name }}</a-col>
@@ -61,18 +120,16 @@
         <center>
         <footer>
           <a-button
-            class="ant-btn ant-btn-primary"
-            @click="handlePopUpOk()"
-            style="padding: 5px 50px"
-            >Got it!</a-button
-          >
-          <a-button
             class="ant-btn"
             @click="handlePopUpCancel()"
             style="padding: 5px 50px"
-            >Go Back</a-button
-          >
-        </footer>
+            >Go Back</a-button>
+            <a-button
+            class="ant-btn ant-btn-primary"
+            @click="handlePopUpOk()"
+            style="padding: 5px 50px"
+            >Ok</a-button>
+          </footer>
       </center>
     </a-modal>    
   </div>
@@ -87,6 +144,8 @@ import DoctorServices from '~/services/API/DoctorServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { isEmpty } from '~/services/Utilities'
 import imagesHelper from '~/mixins/images-helper'
+import { TIME_SLOTS } from '~/services/Constant'
+// import TimeCard from '~/components/datetime/TimeCard'
 import {_getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import UserServices from '~/services/API/UserServices'
 export default {
@@ -128,6 +187,12 @@ export default {
       patientPUID:'',
       treatments:{},
       emailIds:[],
+      timeModal:false,
+      selectedTimeSlot:[],
+      selectedCollectionTimeSlot:[],
+      timeSlots:TIME_SLOTS,
+      collectionDate:'',
+      collTimeModal:false,
     }
   },
   computed:{
@@ -248,9 +313,12 @@ export default {
           this.dated=values.deliveryArrivalDate
           this.containerDate=values.pickupDateTime
           this.partner=values.manufacturerName
+          this.collectionDate=values.collectionDate
           this.startDate=values.deliveryArrivalDate
           this.values=values
-          this.showSelectionPopUp()
+          this.showTimeModa()
+          // this.timeModal=true
+          // this.showSelectionPopUp()
         } else {
           this.loading = false
         }
@@ -279,12 +347,14 @@ export default {
       this.visibleModalPopUp = true
     },
     async showSelectionPopUp(){
+      // this.loading=true
       this.getBasicInfo()
       console.log(this.startDate)
       const dt= new Date(this.startDate)
-      const tm=_getFormatMoment(getMomentByStandardFormat(this.startDate)).format('HH:mm')
+      const tm=this.selectedTimeSlot
       await this.getDoctors(dt.getDay() === 0 ? 7 : dt.getDay(),tm)
       // await this.getUsers()
+      // this.loading=false
       this.selectionModal = true
       // this.getUsers
       // this.selectionModal = true
@@ -292,8 +362,9 @@ export default {
     handlePopUpOk() {
       this.visibleModalPopUp = false
       const dt= new Date(this.startDate)
+      const dtCol= new Date(this.collectionDate)
       // console.log(this.startDate)
-      const tm=_getFormatMoment(getMomentByStandardFormat(this.startDate)).format('HH:mm')
+      // const tm=_getFormatMoment(getMomentByStandardFormat(this.startDate)).format('HH:mm')
       AppointmentServices.create(
         {
           patientId:this.patientPUID,
@@ -302,14 +373,37 @@ export default {
           treatmentTypeName:this.treatmentTypeName, 
           personnelIds:this.selectedUsers,
           appointmentDate:this.startDate, 
-          appointmentTime:tm,
+          appointmentTime:this.selectedTimeSlot,
+          collectionDate:this.collectionDate,
+          collectionTime:this.selectedCollectionTimeSlot,
+          containerDate:this.containerDate,
+          collectionPersonnels:this.selectedUsers,
           dayId:dt.getDay()===0? 7 : dt.getDay(),
+          collectionDay:dtCol.getDay()===0? 7 : dtCol.getDay(),
           roomName:'A2',
         }
         ).then((response)=>{
         this.upsert(this.values)
       })
       
+    },
+    showTimeModa(){
+      this.collTimeModal=true
+    },
+    handleTimeOk(){
+      this.timeModal=false
+      this.loading=true
+      this.showSelectionPopUp()
+    },
+    handleCollTimeOk(){
+      this.collTimeModal=false
+      this.timeModal=true
+    },
+    handleCollTimeCancel(){
+      this.collTimeModal=false
+    },
+    handleTimeCancel(){
+      this.timeModal=false
     },
     handlePopUpCancel() {
       this.visibleModalPopUp = false
@@ -322,6 +416,7 @@ export default {
     },
     handleSelectionCancel(){
       this.selectionModal=false
+      this.showTimeModa()
       // this.showPopUp()
     },
   },

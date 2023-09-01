@@ -3,7 +3,8 @@ import requestSch from '../requestSch'
 import { BASE_API } from '../Constant'
 
 const baseApi = `${BASE_API}/user`
-const schBaseApi = `http://localhost:49299/api/user`
+const schBaseApi = `https://sch-dev-atmps.microsysx.com/api/user`
+// const schBaseApi = `http://localhost:49299/api/user`
 
 function detail(data) {
   return request({
