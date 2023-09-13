@@ -38,9 +38,12 @@ export default {
   },
   methods: {
     getHospitalStatWithTreatmentType(id, treatment){
-      console.log(treatment)
+      // console.log(treatment)
       if(treatment.total===0){
         treatment.total=5
+        treatment.completedTotal=2
+        treatment.productionTotal=2
+        treatment.spoilage=1
       }
       ScreeningTemplateServices.GetHospitalStat(id).then((response)=>{
         this.hospitalStatData = response.data
@@ -63,7 +66,7 @@ export default {
           this.hospitalStatData[2].count=parseInt(treatment.total*.1)
           this.hospitalStatData[3].count=treatment.total - (this.hospitalStatData[0].count+this.hospitalStatData[1].count+this.hospitalStatData[2].count)
         }
-        console.log(this.hospitalStatData)
+        // console.log(this.hospitalStatData)
       })
     }
   },
