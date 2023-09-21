@@ -2,6 +2,7 @@
   <div>
     <a-skeleton :rows="10" :loading="loading">
       <Bag :bags="bags" :treatment="treatment" @fetchBags="fetchBag" />
+      <!-- {{ treatment.manufacturerCollectionStatus }} -->
       <div v-if="(treatment.isHold !== true) | (treatment.isCancel !== true)">
         <a-button
           v-if="!treatment[`${showCompleteBtn}`] && bags.length > 0"

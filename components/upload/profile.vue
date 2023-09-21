@@ -2,7 +2,7 @@
   <div class="clearfix">
     <a-upload
       list-type="picture-card"
-      :default-file-list="fileList"
+      :file-list="fileList"
       :remove="handleRemove"
       :before-upload="beforeUpload"
       :showPreviewIcon="true"

@@ -40,6 +40,7 @@ const columns = [
     title: 'Collection Date/Time',
     dataIndex: 'collectionDateTime',
     key: 'collDateTime',
+    scopedSlots:{customRender: 'collDateTime'}
   },
   {
     title: 'Description',

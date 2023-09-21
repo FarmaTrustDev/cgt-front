@@ -175,7 +175,7 @@ export default {
       loading: false,
       dated:'',
       containerDate:'',
-      startDate:'',
+      startDate:'', 
       partner:'',
       url:'',
       selectionModal:false,
@@ -214,7 +214,9 @@ export default {
     getMomentByStandardFormat,
     _getFormatMoment,
     getUrl(){
-      this.url=this.user.userProfileImageUrl.replace(/['"]+/g, '')
+      if(!isEmpty(this.user.userProfileImageUrl)){
+        this.url=this.user.userProfileImageUrl.replace(/['"]+/g, '')
+      }
     },
     
     getDoctorsWithDays(){

@@ -6,6 +6,7 @@
           :collections="bag.collection"
           :bag-id="bag.puid"
           :bag-key-id="bag.id"
+          :treatment="treatment"
           @fetchBags="fetchBags"
         />
         <div class="text-right mt-15">
