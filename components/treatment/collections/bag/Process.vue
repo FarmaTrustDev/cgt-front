@@ -9,8 +9,9 @@
         :loading="loading"
         class="square-table collect-sample-data"
       >
-        <template slot="collected" slot-scope="name, row">
-          <!-- {{ row }} -->
+      
+      <template slot="collected" slot-scope="name, row">
+        <!-- {{ treatment.manufacturerCollectionStatus }} -->
           <a-form-item>
             <a-switch
               v-if="!row.isCollected"
@@ -75,7 +76,7 @@
             Confirm
           </button>
           <a-button
-            v-if="row.isCollected"
+            v-if="row.isCollected && !treatment.manufacturerCollectionStatus"
             type="primary"
             class="btn-send-mail"
             @click="handleEmailModal(true, row)"
@@ -110,6 +111,7 @@ export default {
   mixins: [notifications],
   props: {
     collections: { required: true, type: Array },
+    treatment:{required: true, type: Object},
     bagId: { required: true, type: String },
     bagKeyId: { required: true, type: Number },
   },

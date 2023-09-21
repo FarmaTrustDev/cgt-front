@@ -47,7 +47,7 @@
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="in-process"></span>
-            <span class="number">{{ chartDetail.total!==0 ? chartDetail.productionTotal : 3 }}</span>
+            <span class="number">{{ chartDetail.total!==0 ? chartDetail.productionTotal : 2 }}</span>
             <br />
             <br />
             <span>{{ translation['InProdu_2_57'] }}</span>
@@ -63,7 +63,7 @@
           </a-col>
           <a-col :span="12" class="text-right white-card">
             <span class="spoilage"></span>
-            <span class="number">{{ chartDetail.total!==0 ? chartDetail.spoilage : 0 }}</span>
+            <span class="number">{{ chartDetail.total!==0 ? chartDetail.spoilage : 1 }}</span>
             <br />
             <br />
             <span>{{ translation['Spoil_1_61'] }}</span>
@@ -163,23 +163,28 @@ export default {
   },
   methods: {
     fetchStats(id) {
-      this.fetchTreatmentStats(id)
-      this.$emit('getHospitalStatWithTreatmentType', id)
+      this.fetchTreatmentStats(id).then(()=>{
+        this.$emit('getHospitalStatWithTreatmentType', id, this.chartDetail)
+      })
+      
     },
     intializeData(detail) {
       this.chartData.datasets[0].data[0] = detail.total!==0? detail.completedTotal : 2
       this.chartData.datasets[0].backgroundColor[0] = '#28ced9'
-      this.chartData.datasets[0].data[1] = detail.total!==0? detail.productionTotal : 3
+      this.chartData.datasets[0].data[1] = detail.total!==0? detail.productionTotal : 2
       this.chartData.datasets[0].backgroundColor[1] = '#2255c2'
-      this.chartData.datasets[0].data[2] = detail.total!==0? detail.total : 5
-      this.chartData.datasets[0].backgroundColor[2] = '#f4b71a'
-      this.chartData.datasets[0].data[3] = detail.total!==0? detail.spoilage : 0
+      // this.chartData.datasets[0].data[2] = detail.total!==0? detail.total : 5
+      // this.chartData.datasets[0].backgroundColor[2] = '#f4b71a'
+      this.chartData.datasets[0].data[3] = detail.total!==0? detail.spoilage : 1
       this.chartData.datasets[0].backgroundColor[3] = '#fa6363'
     },
     fetchTreatmentStats(id) {
       this.loaded=false
-      StatisticsServices.treatment(id).then((response) => {
+      return StatisticsServices.treatment(id).then((response) => {
         this.chartDetail = response.data
+        if((this.chartDetail.total - (this.chartDetail.completedTotal + this.chartDetail.productionTotal)) > 0){
+          this.chartDetail.spoilage=this.chartDetail.total - (this.chartDetail.completedTotal + this.chartDetail.productionTotal)
+        }
         this.intializeData(this.chartDetail)
         this.loaded=true
       })
@@ -191,9 +196,11 @@ export default {
         })
         .then(() => {
           if(!isEmpty(this.treatmentTypes[0])){
-            this.fetchTreatmentStats(this.treatmentTypes[0].id)
-            this.defaultValue = this.treatmentTypes !== null ? this.treatmentTypes[0].name : ''
-            this.$emit('getHospitalStatWithTreatmentType', this.treatmentTypes[0].id)
+            this.fetchTreatmentStats(this.treatmentTypes[0].id).then(()=>{
+              this.defaultValue = this.treatmentTypes !== null ? this.treatmentTypes[0].name : ''
+              this.$emit('getHospitalStatWithTreatmentType', this.treatmentTypes[0].id,this.chartDetail)
+            })
+            
           }
         })
     },

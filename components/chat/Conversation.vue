@@ -1,8 +1,8 @@
 <template>
   <div>
     <a-card :bordered="false" class="chat-margin fix-chat-size">
-      <strong slot="title">
-        {{ recipient.name }} <a-divider></a-divider>
+      <strong slot="title" v-if="data.length>0">
+        {{ isEmpty(data[0].group_Name) ? data[0].ownerName : data[0].group_Name }} <a-divider></a-divider>
       </strong>
       <div class="chat-conversation-container">
         <a-row>
@@ -107,6 +107,7 @@
 <script>
 import moment from 'moment'
 import ChatServices from '~/services/API/ChatServices'
+import { isEmpty } from '~/services/Helpers'
 export default {
   props: {
     data: { type: Array, default: () => {} },
@@ -139,6 +140,7 @@ export default {
     // this.extractUniqueIds();
   },
   methods: {
+    isEmpty,
     onSubmit(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {

@@ -47,6 +47,9 @@
           @click="clickImage(record)"
         />
       </template>
+      <template slot="collDateTime" slot-scope="src, record"> 
+        <span>{{ _getFormatMoment(record.collectionDateTime).format("DD/MM/YYYY") }}</span>
+      </template>
       <template slot="active" slot-scope="record">
         <span v-if="record">Accepted</span>
         <span v-else>New Changes Submitted</span>
@@ -565,6 +568,7 @@ import PatientServices from '~/services/API/PatientServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import paginationHelper from '~/mixins/pagination'
 import filterOption from '~/mixins/filter-options'
+import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
 // import { Modal } from 'ant-design-vue';
 export default {
   components: { steps },
@@ -651,6 +655,7 @@ export default {
     }
   },
   methods: {
+    _getFormatMoment,
     onChange(current) {
       localStorage.setItem('patient_list_current_page', current.current)
     },
