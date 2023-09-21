@@ -5,9 +5,10 @@
         <h6 class="heading pl-0">{{translation.SamplShipp_3_517}}</h6>
       </article>
       <dl v-if="!isEmpty(shipment)" class="ant-row common-detail">
+        <!-- {{ shipment }} -->
         <div class="ant-col-24 d-flex">
         <dt class="float-left">{{ translation.DispaDate_2_316 }}:</dt>
-        <dd class="float-right">{{ scheduling.collectionDateDeliveryDate }}</dd>
+        <dd class="float-right">{{ getDateFormat(shipment.pickupAt) }}</dd>
         </div>
         <div class="ant-col-24 d-flex">
         <dt class="float-left">{{ translation.CarriStatu_2_320 }}</dt>
@@ -25,7 +26,7 @@
 
 <script>
 import moment from 'moment'
-import { getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
+import { _getFormatMoment,getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import { isEmpty } from '~/services/Utilities'
 export default {
   props: {
@@ -52,6 +53,7 @@ export default {
   methods: {
     getMomentByStandardFormat,
     isEmpty,
+    _getFormatMoment,
     getDateFormat(date) {
       return moment(String(date)).format('DD/MM/YYYY')
     },
