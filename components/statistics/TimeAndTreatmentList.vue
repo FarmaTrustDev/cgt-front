@@ -70,7 +70,7 @@
                       "
                       >
                       <p class="float-left">
-                      {{ item.patientPUID }}
+                      {{ item.manufacturerPUID }}
                       </p>
                       <p class="float-right">
                       {{ getDateOnly(item.collectionDate) }} /
