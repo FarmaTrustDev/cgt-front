@@ -51,8 +51,8 @@
               </template>
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
-                <div class="treatment-steps">
-                  <span class="step-col" functional>
+                <div v-if="record.type===1" class="treatment-steps">
+                  <span  class="step-col" functional>
                     <a-steps :initial="1" size="small">
                       <a-step
                         v-for="phase in phases"
@@ -80,6 +80,33 @@
                               )
                             : stepClick(record, phase)
                         "
+                      />
+                    </a-steps>
+                  </span>
+                </div>
+                <div v-else class="treatment-steps">  
+                   <!-- // define the class within the data -->
+                  <span  class="step-col" functional>
+                    <a-steps :initial="1" size="small">
+                      <a-step
+                        v-for="phase in kitPhase"
+                        :key="phase.id"
+                        :title="phase.name"
+                        :status="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? 'wait'
+                            : ''
+                        "
+                        :class="
+                          phase.id === 2 && record.processSample == 'red'
+                            ? 'ant-steps-item-error'
+                            : phase.id === 2 && record.processSample !== 'red'
+                            ? 'ant-steps-item-active-blue'
+                            : (phase.id === 1)
+                            ? 'ant-steps-item-finish-special'
+                            : ''
+                        "
+                        @click="phase.id === 2 ? stepKitClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -236,6 +263,7 @@ import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import {
   SMART_LAB_TREATMENT_PENDING_PHASES,
   INVENTORY_OUTBOUND_STATUS_STEPS,
+  SMART_LAB_KIT_COLLECTION_PHASES,
 } from '~/services/Constant/Phases'
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
@@ -381,6 +409,7 @@ export const newSampleData = [
     projectId:'506',
     processSample: 'green',
     email:'baystate@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC7986',
@@ -393,6 +422,7 @@ export const newSampleData = [
     projectId:'7157',
     processSample: 'green',
     email:'novartis@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -405,6 +435,7 @@ export const newSampleData = [
     projectId:'7157',
     processSample: 'red',
     email:'novartis@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC7996',
@@ -417,6 +448,7 @@ export const newSampleData = [
     projectId:'506',
     processSample: 'default',
     email:'baystate@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -429,6 +461,33 @@ export const newSampleData = [
     projectId:'506',
     processSample: 'default',
     email:'baystate@gmail.com',
+    type:1,
+  },
+  {
+    patientEnrollmentNumber: 'KIT246',
+    treatmentType: 'Laeuka Kit',
+    hospital: 'Adaptimmune',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+    print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:false,
+    projectName:'BayState USA IN89873',
+    projectId:'2440',
+    processSample: 'green',
+    email:'baystate@gmail.com',
+    type:2,
+  },
+  {
+    patientEnrollmentNumber: 'KIT246',
+    treatmentType: 'Aphresis Kit',
+    hospital: 'Syneous',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:false,
+    projectName:'BayState USA IN89873',
+    projectId:'2440',
+    processSample: 'green',
+    email:'baystate@gmail.com',
+    type:2,
   },
 ]
 export const completedSampleData = [
@@ -555,6 +614,7 @@ export default {
       phases: SMART_LAB_TREATMENT_PENDING_PHASES,
       outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
       customDisplayData,
+      kitPhase:SMART_LAB_KIT_COLLECTION_PHASES,
       customDisplayDataMat,
       completedColumns: [
         {
@@ -856,6 +916,9 @@ export default {
       } else if(record.inbound===true && phase.id!==3){
         this.goto(phase.url_slug+'&record='+JSON.stringify(record))
       }
+    },
+    stepKitClick(record, phase) {
+      this.goto(phase.url_slug+'?view=KIT_BUILDER&record='+JSON.stringify(record))
     },
     getActiveTab(){
       if(this.$route.query.id){

@@ -1,4 +1,3 @@
-
 export const TREATMENT_PHASES = {
     CONSENT: { id: 1, order: 1 },
     SCREENING: { id: 2, order: 2 },
@@ -209,6 +208,40 @@ export const QUARANTINE_PROCESS_PHASES = [
     },
 ]
 
+
+export const KIT_COLLECTION_PHASES = [
+    {
+        id: 1,
+        name: 'Assigned',
+        alias: 'ASSIGNED',
+        phaseId: 8,
+        enablePageId: 5,
+        url_slug: '',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'ASSIGNED' }
+    },
+    {
+        id: 2,
+        name: 'Kit Builder',
+        alias: 'KIT_BUILDER',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '/inventory/treatment/pickList',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'KIT_BUILDER' }
+    },
+    {
+        id: 3,
+        name: 'Outbound Shipment',
+        alias: 'OUTBOUND_SHIPMENT',
+        phaseId: 14,
+        enablePageId: 14,
+        url_slug: '',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'OUTBOUND_SHIPMENT' }
+    },
+]
+
 export const QUARANTINE_RESOLUTION_PHASES = [
     {
         id: 1,
@@ -273,6 +306,48 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
         // url_slug: '/inventory/storage/ColorFridge?inbound=true',
         url_type: URL_TYPE.treatment,
         params: { view: 'STORE_SAMPLE' }
+    },
+    // {
+    //     id: 4,
+    //     name: 'Outbound Process',
+    //     alias: 'OUTBOUND_PROCESS',
+    //     phaseId: 14,
+    //     enablePageId: 14,
+    //     url_slug: '/inventory/treatment/process/',
+    //     url_type: URL_TYPE.treatment,
+    //     params: { view: 'OUTBOUND_SHIPMENT' }
+    // },
+]
+export const SMART_LAB_KIT_COLLECTION_PHASES = [
+    {
+        id: 1,
+        name: 'Assigned',
+        alias: 'ASSIGNED',
+        phaseId: 8,
+        enablePageId: 5,
+        url_slug: '',
+        url_type: URL_TYPE.patient,
+        params: { view: 'ASSIGNED' }
+    },
+    {
+        id: 2,
+        name: 'Packing Process',
+        alias: 'PROCESS_SAMPLE',
+        phaseId: 10,
+        enablePageId: 10,
+        url_slug: '/inventory/treatment/pickList',
+        url_type: URL_TYPE.patient,
+        params: { view: 'PROCESS_SAMPLE' }
+    },
+    {
+        id: 3,
+        name: 'Outbound Process',
+        alias: 'OUTBOUND_PROCESS',
+        phaseId: 14,
+        enablePageId: 14,
+        // url_slug: '/inventory/storage/ColorFridge?inbound=true',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'OUTBOUND_PROCESS' }
     },
     // {
     //     id: 4,
