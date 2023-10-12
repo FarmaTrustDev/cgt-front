@@ -137,7 +137,7 @@
           <div><h4 class="heading pl-0"><strong>Dispatch Details</strong></h4></div>
           <a-row :gutter="18">
               <a-col :span="10">
-                <a-card :bordered="false" class="default-card details-section">
+                <a-card :bordered="false" class="default-card details-section" style="padding-left:2px">
                     
                       <a-col :span="10" class="mt-15">
                         <h4>
@@ -149,17 +149,18 @@
                                 v-decorator="[
                                 'company',
                                 {
-                                    rules: [
-                                    {
-                                        required: true,
-                                        message: 'Select company',
-                                    },
-                                    ],
+                                  rules: [
+                                  {
+                                      required: true,
+                                      message: 'Select company',
+                                  },
+                                  ],
                                 },
                                 ]"
                                 :show-search="true"
                                 placeholder="Select company name"
                                 style="width: 100%; height: 60px;"
+                                @select="searchCompany"
                             >
                                 <a-select-option v-for="company in companyName" :key="company.id">
                                 {{ company.name }}
@@ -175,7 +176,7 @@
                       <a-col :span="14">
                         <a-select
                                 v-decorator="[
-                                'company',
+                                'address',
                                 {
                                     rules: [
                                     {
@@ -188,11 +189,18 @@
                                 :show-search="true"
                                 placeholder="Select address name"
                                 style="width: 100%; height: 60px;"
+                                @blur="searchAddress"
                             >
-                                <a-select-option v-for="address in addressName" :key="address.id">
+                                <a-select-option v-for="address in addressName[selectedIdex]" :key="address.id">
                                 {{ address.name }}
                                 </a-select-option>
                             </a-select>
+                      </a-col>
+                      <a-col :span="10" class="mt-15">
+                        <h4><strong>Complete Address:</strong></h4>
+                      </a-col>
+                      <a-col :span="14" class="mt-15">
+                        {{ compnayAddress }}
                       </a-col>
                 </a-card>
               </a-col>
@@ -201,7 +209,7 @@
                     <a-row>
                       <a-col :span="10" class="mt-10">
                         <h4>
-                            <strong>Collection Date</strong>
+                            <strong>Dispatch Date</strong>
                         </h4>
                       </a-col>
                       <a-col :span="10" class="mt-10">
@@ -379,8 +387,8 @@
                             <div :style="getColor(row.color)" style="display: flex; align-items: left;">
                                 <a-col style="height: 60px;">
                                     <div style="display: flex; align-items: center; padding-left: 10px; height: 60px;">
-                                        <img :src="getImageUrl(row.url)" style="height: 60px; width: 60px; padding-left: 5px;">
-                                        <span style="margin-left: 10px; margin-top: -2px;">{{ row.item }}</span>
+                                        <img :src="getImageUrl(row.url)" style="height: 50px; width: 60px; padding-left: 5px; padding-top: 5px;">
+                                        <span style="margin-left: 5px; margin-top: -2px;">{{ row.item }}</span>
                                     </div>
                                 </a-col>
                             </div>
@@ -499,12 +507,12 @@
               <strong> Pack Completion Date:</strong> 29/09/2023
             </a-col>
             <a-col :span="12">
-              <strong>Location:</strong> Cryoport - London
+              <strong>Location:</strong> {{addressName[selectedIdex][companyAddIndex].detail}}
             </a-col>
           </a-row>
           <a-row style="line-height:30px">
             <a-col :span="12">
-              <strong> Client:</strong> Baystate Clinic
+              <strong> Client:</strong> {{record.hospital}}
             </a-col>
             <a-col :span="12">
               <strong> Number of boxes:</strong> 01
@@ -539,13 +547,13 @@
                         <a-col>Internal Batch No: AA234TH</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>Project Code: A1232DD</a-col>
+                        <a-col>Project Code: {{record.projectId}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>Adaptaimmune LLC </a-col>
+                        <a-col>{{record.hospital}} </a-col>
                     </a-row>
                     <a-row>
-                        <a-col>12 Kennedy Street, Washington, 213421</a-col>
+                        <a-col>{{addressName[selectedIdex][companyAddIndex].detail}}</a-col>
                     </a-row>
                     <a-row>
                         <a-col>Cell Number: +1 206 203 5278</a-col>
@@ -589,9 +597,71 @@
         notesRequired: {},
         noteItem:[],
         showModal:false,
+        selectedIdex:0,
         showModalKit:false,
-        companyName:[{id:1, name:'Hataali'}, {id:2, name:'Farma Trust'},],
-        addressName:[{id:1, name:'London, UK'}, {id:2, name:'Washington, USA'},],
+        compnayAddress:'',
+        companyAddIndex:0,
+        companyName:[
+          {id:1, name:'Good Hope Hospital'}, 
+          {id:2, name:'Heartlands Hospital'},
+          {id:3, name:'Queen Elizabeth Hospita'},
+          {id:4, name:'Solihull Hospital'},
+          {id:5, name:'Nottingham University Hospitals NHS Trust'},
+          {id:6, name:'Nottingham NHS Treatment Centre'},
+          {id:7, name:'Be The Match'},
+        ],
+        addressName:[
+          [
+            {
+              id:1, name:'Birmingham', detail:'Rectory Road Sutton Coldfield, B75 7RR'
+            }
+          ],
+          [
+            {
+              id:1, name:'Birmingham', detail:'Bordesley Green East, B9 5SS'
+            }
+          ],
+          [
+            {
+              id:1, name:'Birmingham', detail:'Mindelsohn Way Edgbaston, B15 2GW'
+            }
+          ],
+          [
+            {
+              id:1, name:'Birmingham', detail:'Lode Lane Solihull, B91 2JL'
+            }
+          ],
+          [
+            {
+              id:1, name:'Nottingham', detail:'Hucknall Road, NG5 1PB'
+            }
+          ],
+          [
+            {
+              id:1, name:'Nottingham', detail:'Lister Rd, Lenton, NG7 2FT'
+            }
+          ],
+          [
+            {
+              id:1, name:'114 N Taylor Ave', detail:'114 N Taylor Ave, St. Louis, MO 63108'
+            },
+            {
+              id:2, name:'4411 Sunbeam Rd', detail:'4411 Sunbeam Rd, Jacksonville, FL 32257'
+            },
+            {
+              id:3, name:'3650 W Armitage Ave', detail:'3650 W Armitage Ave, Chicago, IL 60647'
+            },
+            {
+              id:4, name:'3 Hillcrest Dr STE A101', detail:'Hillcrest Dr STE A101, Frederick, MD 21703'
+            },
+            {
+              id:5, name:'165 Vanderbilt Ave', detail:'165 Vanderbilt Ave, Staten Island, NY 10304'
+            },
+            {
+              id:6, name:'230 W 17th St', detail:'230 W 17th St, New York, NY 10011'
+            }
+          ]
+        ],
         isSubmit:false,
         columns: [
             {
@@ -623,6 +693,7 @@
             scopedSlots: { customRender: 'collected' },
             },
         ],
+
         formLayout: 'vertical',
         form: this.$form.createForm(this, {
             name: 'bagCollectionProcess',
@@ -732,6 +803,14 @@
         if (this.record && this.record.projectId) {
           this.getSteps(this.record.projectId);
         }
+      },
+      searchCompany(name) {
+        this.selectedIdex=name-1
+        console.log(this.selectedIdex)
+      },
+      searchAddress(name){
+        this.companyAddIndex=name-1
+        this.compnayAddress=this.addressName[this.selectedIdex][this.companyAddIndex].detail
       },
       handleInput(rowId,e) {
       if(this.noteItem.includes(rowId)){
