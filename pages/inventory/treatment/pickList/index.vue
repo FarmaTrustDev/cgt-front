@@ -229,6 +229,7 @@
                             format="DD/MM/YYYY"
                             style="width: 100%; height: 40px; border-radius: 25px;"
                             size="large"
+                            @change="handleDateChange"
                         >
                         </a-date-picker>
                         </a-col>
@@ -256,6 +257,7 @@
                             format="DD/MM/YYYY"
                             class="custom-date-picker"
                             size="large"
+                            @change="handleDeliveryDateChange"
                         >
                         </a-date-picker>
                       </a-col>
@@ -291,7 +293,7 @@
                        
                     </a-col>
                     <a-col :span="6" class="mt-15">
-                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px">Complete</a-button>
+                        <a-button block type="primary" html-type="submit" @click="collectionDate!==null && deliveryDate!==null && compnayAddress!=='' ? goto('/inventory/treatment'): ''" style="width:100px; height:45px">Complete</a-button>
                     </a-col>
                 </a-row>
               </a-col>
@@ -431,7 +433,7 @@
             <a-col :span="20" style="margin-left:42px">
               <a-row style="line-height:30px">
                 <a-col :span="14">
-                  Expected Receipt Date: <strong> 29/09/2023 at 13:00</strong>
+                  Expected Receipt Date: <strong> {{deliveryDate}} at 13:00</strong>
                 </a-col>
                 <a-col :span="10">
                   Lot number: <strong> ABC1</strong>
@@ -495,26 +497,26 @@
             </a-col>
           </a-row>
           <a-row style="line-height:30px">
-            <a-col :span="12">
+            <a-col :span="11">
               <strong>Number of items:</strong> 9
             </a-col>
-            <a-col :span="12">
+            <a-col :span="13">
               <strong>Project:</strong> BayState USA IN89873
             </a-col>
           </a-row>
           <a-row style="line-height:30px">
-            <a-col :span="12">
-              <strong> Pack Completion Date:</strong> 29/09/2023
+            <a-col :span="11">
+              <strong> Pack Completion Date:</strong> {{ moment(collectionDate, 'DD/MM/YYYY').add(-2, 'day').format('DD/MM/YYYY') }}
             </a-col>
-            <a-col :span="12">
+            <a-col :span="13">
               <strong>Location:</strong> {{addressName[selectedIdex][companyAddIndex].detail}}
             </a-col>
           </a-row>
           <a-row style="line-height:30px">
-            <a-col :span="12">
+            <a-col :span="11">
               <strong> Client:</strong> {{record.hospital}}
             </a-col>
-            <a-col :span="12">
+            <a-col :span="13">
               <strong> Number of boxes:</strong> 01
             </a-col>
           </a-row>
@@ -581,7 +583,6 @@
   import tabsHelpers from '~/mixins/tabs-helpers'
   import routeHelpers from '~/mixins/route-helpers'
   import { isEmpty } from '~/services/Helpers'
-  import StepServices from '~/services/API/StepServices'
   import imagesHelper from '~/mixins/images-helper'
   import kitImgColl from '~/components/cards/kitImgColl'
   export default {
@@ -601,6 +602,8 @@
         showModalKit:false,
         compnayAddress:'',
         companyAddIndex:0,
+        collectionDate:null,
+        deliveryDate:null,
         companyName:[
           {id:1, name:'Good Hope Hospital'}, 
           {id:2, name:'Heartlands Hospital'},
@@ -799,18 +802,22 @@
         // this.record= this.$route.query.record
         const obj=this.$route.query.record
         this.record=JSON.parse(obj)
-        console.log(this.record)
-        if (this.record && this.record.projectId) {
-          this.getSteps(this.record.projectId);
-        }
+      },
+      handleDateChange(date){
+        this.collectionDate=date.format('DD/MM/YYYY')
+      },
+      handleDeliveryDateChange(date){
+        this.deliveryDate=date.format('DD/MM/YYYY')
       },
       searchCompany(name) {
         this.selectedIdex=name-1
         console.log(this.selectedIdex)
       },
       searchAddress(name){
-        this.companyAddIndex=name-1
-        this.compnayAddress=this.addressName[this.selectedIdex][this.companyAddIndex].detail
+        if(name!==undefined){
+          this.companyAddIndex=name-1
+          this.compnayAddress=this.addressName[this.selectedIdex][this.companyAddIndex].detail
+        }
       },
       handleInput(rowId,e) {
       if(this.noteItem.includes(rowId)){
@@ -875,13 +882,6 @@
         }
       })
     },
-      getSteps(projectId){
-          console.log(this.dummyCollection)
-          StepServices.getByProjectId(projectId).then((response) => {
-              console.log(response)
-              this.dummyCollection=response.data
-            })
-      },
       updateId(collectionId) {
         const dumCollection = this.dummyCollection.map((collection) => {
           if (collection.id === collectionId) {
