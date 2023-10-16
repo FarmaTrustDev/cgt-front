@@ -636,12 +636,22 @@ a {
       margin-right: 0 !important;
       margin-left: 7px !important;
       .ant-steps-item-title {
-        margin: 0 14px 0 0 !important;
+        margin: 0 7px 0 0 !important;
+        padding-right:20px;
       }
     }
   }
   .ant-steps-item-finish {
     background-color: #cbf3e0;
+  }
+  .treatment-kit-steps {
+    .ant-steps-item {
+      margin-right: 0 !important;
+      margin-left: 2px !important;
+      .ant-steps-item-title {
+        margin: 0 14px 0 0 !important;
+      }
+    }
   }
 }
 .smartlab_task_inner {
