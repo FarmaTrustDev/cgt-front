@@ -509,12 +509,12 @@
               <strong> Pack Completion Date:</strong> {{ moment(collectionDate, 'DD/MM/YYYY').add(-2, 'day').format('DD/MM/YYYY') }}
             </a-col>
             <a-col :span="13">
-              <strong>Location:</strong> {{addressName[selectedIdex][companyAddIndex].detail}}
+              <strong>Location:</strong> {{ (addressName[selectedIdex][companyAddIndex] !== undefined) ? addressName[selectedIdex][companyAddIndex].detail : '' }}
             </a-col>
           </a-row>
           <a-row style="line-height:30px">
             <a-col :span="11">
-              <strong> Hospital Name:</strong> {{record.hospitalName}}
+              <strong> Hospital Name:</strong> {{ companyName[selectedIdex].name}}
             </a-col>
             <a-col :span="13">
               <strong> Number of boxes:</strong> 01
@@ -557,10 +557,10 @@
                         <a-col>Project Code: {{record.projectId}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{ record.hospitalName}}</a-col>
+                        <a-col>{{ companyName[selectedIdex].name}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{addressName[selectedIdex][companyAddIndex].detail}}</a-col>
+                        <a-col>{{ (addressName[selectedIdex][companyAddIndex] !== undefined) ? addressName[selectedIdex][companyAddIndex].detail : '' }}</a-col>
                     </a-row>
                     <a-row>
                         <a-col>Cell Number: +1 206 203 5278</a-col>
