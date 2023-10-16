@@ -35,24 +35,24 @@
                       <a-col :span="5" class="mt-15">
                         <h6>
                           <span class="text-muted">
-                            Hospital Name:
+                            Client Name:
                           </span>
                         </h6>
                       </a-col>
                       <a-col :span="7" class="mt-15">
                         <h6>
-                          <span> {{record.hospital}}</span>
+                          <span> {{ record.hospital}}</span>
                         </h6>
                       </a-col>
                       <a-col :span="5" class="mt-15">
                         <h6>
                           <span class="text-muted"
-                            >Treatment Type:</span
+                            >Kit Type:</span
                           >
                         </h6>
                       </a-col>
                       <a-col :span="7" class="mt-15">
-                        <h6><span>Human Cells</span></h6>
+                        <h6><span>{{record.treatmentType}}</span></h6>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -269,8 +269,8 @@
                         </h4>
                       </a-col>
                       <a-col :span="14" class="mt-15">
-                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px" @click="openPopKitViewModal(true)">Display</a-button>
-                        <a-button block type="primary" html-type="submit" style="width:110px; height:45px">Print</a-button>
+                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px" @click="openPopKitViewModal(true,'disp')">Display</a-button>
+                        <a-button block type="primary" html-type="submit" style="width:110px; height:45px" @click="openPopKitViewModal(true,'print')">Print</a-button>
                       </a-col>
                     </a-row>
                     <a-row>
@@ -280,8 +280,8 @@
                         </h4>
                       </a-col>
                       <a-col :span="10" class="mt-15">
-                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px" @click="openPopViewModal(true)">Display</a-button>
-                        <a-button block type="primary" html-type="submit" style="width:110px; height:45px">Print</a-button>
+                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px" @click="openPopViewModal(true,'disp')">Display</a-button>
+                        <a-button block type="primary" html-type="submit" style="width:110px; height:45px" @click="openPopViewModal(true,'print')">Print</a-button>
                       </a-col>
                     </a-row>
                 </a-card>
@@ -514,13 +514,18 @@
           </a-row>
           <a-row style="line-height:30px">
             <a-col :span="11">
-              <strong> Client:</strong> {{record.hospital}}
+              <strong> Hospital Name:</strong> {{record.hospitalName}}
             </a-col>
             <a-col :span="13">
               <strong> Number of boxes:</strong> 01
             </a-col>
           </a-row>
           </a-card>
+          <template v-if="kitPrint" #footer>
+            
+            <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelKitCancel(false)" >Cancel</a-button>
+            <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow('kit')">Print</a-button>
+          </template>
           </a-modal>
           <a-modal
             :visible="showModal"
@@ -552,7 +557,7 @@
                         <a-col>Project Code: {{record.projectId}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{record.hospital}} </a-col>
+                        <a-col>{{ record.hospitalName}}</a-col>
                     </a-row>
                     <a-row>
                         <a-col>{{addressName[selectedIdex][companyAddIndex].detail}}</a-col>
@@ -570,6 +575,11 @@
                     <a-col :span="18"><img :src="getImageUrl('label/bar.png')" width="500" height="90" /></a-col>
                 </a-row>
               </a-card>
+              <template v-if="labPrint" #footer>
+                
+                <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelCancel(false)" >Cancel</a-button>
+                <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow('label')">Print</a-button>
+              </template>
           </a-modal>
         </div>
       </template>
@@ -646,26 +656,30 @@
           ],
           [
             {
-              id:1, name:'114 N Taylor Ave', detail:'114 N Taylor Ave, St. Louis, MO 63108'
+              id:1, name:'St. Louis', detail:'114 N Taylor Ave, St. Louis, MO 63108'
             },
             {
-              id:2, name:'4411 Sunbeam Rd', detail:'4411 Sunbeam Rd, Jacksonville, FL 32257'
+              id:2, name:'Jacksonville', detail:'4411 Sunbeam Rd, Jacksonville, FL 32257'
             },
             {
-              id:3, name:'3650 W Armitage Ave', detail:'3650 W Armitage Ave, Chicago, IL 60647'
+              id:3, name:'Chicago', detail:'3650 W Armitage Ave, Chicago, IL 60647'
             },
             {
-              id:4, name:'3 Hillcrest Dr STE A101', detail:'Hillcrest Dr STE A101, Frederick, MD 21703'
+              id:4, name:'Frederick', detail:'3 Hillcrest Dr STE A101, Frederick, MD 21703'
             },
             {
-              id:5, name:'165 Vanderbilt Ave', detail:'165 Vanderbilt Ave, Staten Island, NY 10304'
+              id:5, name:'Staten Island', detail:'165 Vanderbilt Ave, Staten Island, NY 10304'
             },
             {
-              id:6, name:'230 W 17th St', detail:'230 W 17th St, New York, NY 10011'
+              id:6, name:'New York', detail:'230 W 17th St, New York, NY 10011'
             }
           ]
         ],
         isSubmit:false,
+        labPrint:false,
+        labDisp:false,
+        kitPrint:false,
+        kitDisp:false,
         columns: [
             {
             title: `Items`,
@@ -854,10 +868,21 @@
           marginLeft:'20px'
         };
     },
-    openPopViewModal(val) {
+    openPopViewModal(val, opt) {
+        if(opt==='print'){
+          this.labPrint=true
+        }else{
+          this.labPrint=false
+        }
         this.showModal = val
       },
-      openPopKitViewModal(val) {
+      openPopKitViewModal(val, opt) {
+        if(opt==='print'){
+          this.kitPrint=true
+        }else{
+          this.kitPrint=false
+        }
+        
         this.showModalKit = val
       },
       handleCheck(value, rowId,alias) {
@@ -894,6 +919,15 @@
       },
       setActiveTav(tab) {
         this.activeTab = tab
+      },
+      printWindow(opt) {
+        if(opt==='kit'){
+          this.showModalKit = false
+        }
+        else{
+          this.showModal = false
+        }
+        window.print()
       },
       reDirect(url, alias) {
         if (!isEmpty(url)) {
