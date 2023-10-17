@@ -343,7 +343,7 @@
                     <a-col>{{ (addressName[selectedIdex][companyAddIndex] !== undefined) ? addressName[selectedIdex][companyAddIndex].detail : '' }}</a-col>
                 </a-row>
                 <a-row>
-                    <a-col>Cell Number: +1 206 203 5278</a-col>
+                    <a-col>Cell Number: {{ (addressName[selectedIdex][companyAddIndex] !== undefined) ? addressName[selectedIdex][companyAddIndex].phone : '' }}</a-col>
                 </a-row>
                 </a-col>
             </a-row>
@@ -610,6 +610,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
@@ -646,7 +647,7 @@ export const customDisplayDataShipInfo = [
   },
   {
     title: '',
-    value: 'Text here...',
+    value: 'N/A',
     key: 2,
     url: '',
   },
@@ -740,7 +741,7 @@ export const customDisplayDataSelectionPackage = [
 export const customDisplayDataExceptionalRel = [
   {
     title: '',
-    value: 'S-01',
+    value: 'N/A',
     key: 1,
     url: '',
   },
@@ -752,7 +753,7 @@ export const customDisplayDataExceptionalRel = [
   },
   {
     title: '',
-    value: '27/06/2023',
+    value: 'N/A',
     key: 2,
     url: '',
   },
@@ -764,7 +765,7 @@ export const customDisplayDataExceptionalRel = [
   },
   {
     title: '',
-    value: 'C-02',
+    value: 'N/A',
     key: 4,
     url: '',
   },
@@ -776,7 +777,7 @@ export const customDisplayDataExceptionalRel = [
   },
   {
     title: '',
-    value: '1564765136',
+    value: 'N/A',
     key: 6,
     url: '',
   },
@@ -860,65 +861,71 @@ export default {
       collectionDate:null,
       deliveryDate:null,
       companyName:[
-      {id:1, name:'Good Hope Hospital'}, 
-      {id:2, name:'Heartlands Hospital'},
-      {id:3, name:'Queen Elizabeth Hospita'},
-      {id:4, name:'Solihull Hospital'},
-      {id:5, name:'Nottingham University Hospitals NHS Trust'},
-      {id:6, name:'Nottingham NHS Treatment Centre'},
-      {id:7, name:'Be The Match'},
+        {id:1, name:'Good Hope Hospital'}, 
+        {id:2, name:'Heartlands Hospital'},
+        {id:3, name:'Queen Elizabeth Hospita'},
+        {id:4, name:'Solihull Hospital'},
+        {id:5, name:'Nottingham University Hospitals NHS Trust'},
+        {id:6, name:'Nottingham NHS Treatment Centre'},
+        {id:7, name:`Queen's Medical Centre`},
+        {id:8, name:'Be The Match'},
       ],
       addressName:[
-      [
+        [
           {
-          id:1, name:'Birmingham', detail:'Rectory Road Sutton Coldfield, B75 7RR'
+            id:1, name:'Birmingham', detail:'Rectory Road Sutton Coldfield, B75 7RR', phone:'+44 121 424 2000'
           }
-      ],
-      [
+        ],
+        [
           {
-          id:1, name:'Birmingham', detail:'Bordesley Green East, B9 5SS'
+            id:1, name:'Birmingham', detail:'Bordesley Green East, B9 5SS', phone:'+44 121 424 2000'
           }
-      ],
-      [
+        ],
+        [
           {
-          id:1, name:'Birmingham', detail:'Mindelsohn Way Edgbaston, B15 2GW'
+            id:1, name:'Birmingham', detail:'Mindelsohn Way Edgbaston, B15 2GW', phone:'+44 121 627 2000'
           }
-      ],
-      [
+        ],
+        [
           {
-          id:1, name:'Birmingham', detail:'Lode Lane Solihull, B91 2JL'
+            id:1, name:'Birmingham', detail:'Lode Lane Solihull, B91 2JL', phone:'+44 121 424 2000'
           }
-      ],
-      [
+        ],
+        [
           {
-          id:1, name:'Nottingham', detail:'Hucknall Road, NG5 1PB'
+            id:1, name:'Nottingham', detail:'Hucknall Road, NG5 1PB', phone:'+44 115 969 1169'
           }
-      ],
-      [
+        ],
+        [
           {
-          id:1, name:'Nottingham', detail:'Lister Rd, Lenton, NG7 2FT'
+            id:1, name:'Nottingham', detail:'Lister Rd, Lenton, NG7 2FT', phone:'+44 115 919 4477'
           }
-      ],
-      [
+        ],
+        [
           {
-          id:1, name:'St. Louis', detail:'114 N Taylor Ave, St. Louis, MO 63108'
+            id:1, name:'Nottingham', detail:'Derby Rd, Lenton,NG7 2UH', phone:'+44 115 924 9924'
+          }
+        ],
+        [
+          {
+            id:1, name:'St. Louis', detail:'114 N Taylor Ave, St. Louis, MO 63108',phone:'+314 534 8600'
           },
           {
-          id:2, name:'Jacksonville', detail:'4411 Sunbeam Rd, Jacksonville, FL 32257'
+            id:2, name:'Jacksonville', detail:'4411 Sunbeam Rd, Jacksonville, FL 32257', phone:'+904 737 4852'
           },
           {
-          id:3, name:'Chicago', detail:'3650 W Armitage Ave, Chicago, IL 60647'
+            id:3, name:'Chicago', detail:'3650 W Armitage Ave, Chicago, IL 60647', phone:'+773 772 5111'
           },
           {
-          id:4, name:'Frederick', detail:'3 Hillcrest Dr STE A101, Frederick, MD 21703'
+            id:4, name:'Frederick', detail:'3 Hillcrest Dr STE A101, Frederick, MD 21703', phone:'+240 575 9940'
           },
           {
-          id:5, name:'Staten Island', detail:'165 Vanderbilt Ave, Staten Island, NY 10304'
+            id:5, name:'Staten Island', detail:'165 Vanderbilt Ave, Staten Island, NY 10304', phone:'+1 844 692 4692'
           },
           {
-          id:6, name:'New York', detail:'230 W 17th St, New York, NY 10011'
+            id:6, name:'New York', detail:'230 W 17th St, New York, NY 10011', phone:'+212 206 5200'
           }
-      ]
+        ]
       ],
       isSubmit:false,
       labPrint:false,
@@ -1300,11 +1307,20 @@ export default {
       window.print()
     },
     clickSubmit(val, opt) {
+      console.log(customDisplayDataSelectionPackage)
+      this.statusDetails[0].createdOn=moment().add(-6, 'day').format('DD/MM/YYYY')
+      customDisplayDataShipInfo[3].value=moment(this.collectionDate, 'DD/MM/YYYY').format('DD/MM/YYYY')
+      customDisplayDataShipInfo[8].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-1, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[4].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-4, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[5].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-3, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[6].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-2, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[7].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-1, 'day').format('DD/MM/YYYY')
       if(opt==='print'){
         this.kitPrint=true
       }else{
         this.kitPrint=false
       }
+      
       this.showCourierModal = true
       // this.handleLogisticsModal(true)
     },
