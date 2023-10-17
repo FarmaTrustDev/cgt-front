@@ -884,12 +884,15 @@ export default {
             this.goto('/inventory/storage/ColorFridge?inbound=true')
           }
           if (this.typeId === 'outbound') {
-            this.showSchedulingModal=true
+            this.$emit('handleActiveTab', 'COURIER')
+            const obj=JSON.stringify(this.record)
+            this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
+            // this.showSchedulingModal=true
           }
         }else{
           if(this.typeId==='inbound'){
             this.inboundCheck=true
-            this.showInventoryModal=true
+            // this.showInventoryModal=true
             // this.showQuaranitineModal=true
           }
           if(this.typeId!=='inbound'){
