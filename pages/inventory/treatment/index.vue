@@ -306,7 +306,7 @@ export const customDisplayData = [
   },
   {
     title: '',
-    value: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY"),
+    value: moment(_getFutureMomentStandardFormatted(-2,'day')).format("DD/MM/YYYY"),
     key: 2,
     url: '',
   },
@@ -324,7 +324,7 @@ export const customDisplayData = [
   },
   {
     title: '',
-    value: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY"),
+    value: moment(_getFutureMomentStandardFormatted(-1,'day')).format("DD/MM/YYYY"),
     key: 5,
     url: '',
   },
