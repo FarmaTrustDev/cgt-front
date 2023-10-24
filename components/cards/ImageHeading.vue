@@ -1,9 +1,9 @@
 <template>
-  <div class="display-flex mt-15">
+  <div class="display-flex" style="margin-top: -25px;">
     <slot name="extra" />
     <span class="imageHeading">
       <figure>
-        <figcaption class="font-size-16">
+        <figcaption class="font-size-14">
           {{ detail.heading }}
         </figcaption>
       </figure>

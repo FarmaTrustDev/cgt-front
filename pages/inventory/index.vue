@@ -5,6 +5,7 @@
     :bordered="false"
     :title="translation.SmartStore_2_548"
     class="specific-storage container Component_body"
+    style="margin-top: -25px;"
   >
     <!--  -->
     <template slot="content">

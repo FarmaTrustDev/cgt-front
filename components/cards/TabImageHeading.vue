@@ -1,17 +1,14 @@
 <template>
-    <a-col :span="6">
-    <div class="display-flex" style="margin-top: -10px; margin-left:-5px; margin-bottom: -15px;">
+    <div class="display-flex" style="margin-top: -5px;">
       <slot name="extra" />
-      <span class="imageHeading">
+      <span class="imageHeading" style="margin-bottom: -10px;">
         <figure>
-          <figcaption class="font-size-12">
-            <a-col :span="14">{{ detail.heading }}</a-col>
-            <a-col :span="2">{{ detail.qty }}</a-col>
+          <figcaption class="font-size-14">
+            {{ detail.heading }}
           </figcaption>
         </figure>
       </span>
     </div>
-    </a-col>
   </template>
   <script>
   import imagesHelper from '~/mixins/images-helper'
@@ -21,7 +18,7 @@
       detail: { type: Object, default: () => ({}), required: true },
       imgProperties: {
         type: Object,
-        default: () => ({ width: '20px', height: '20px' }),
+        default: () => ({ width: '25px', height: '25px' }),
       },
     },
   }

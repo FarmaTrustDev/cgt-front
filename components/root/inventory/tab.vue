@@ -5,19 +5,19 @@
         <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">Equipment</strong>
         <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">Equipment</strong>
       </h2>
-      <a-row class="display-inline-block" :gutter="10">
-        <a-col class="suit" :span="10">
+      <a-row class="display-inline-block" :gutter="10" style="margin-bottom: -20px;">
+        <a-col class="suit" :span="8" :gutter="10" style="margin-top: -5px;">
           <suite :data="data" />
         </a-col>
-        <a-col :span="2"></a-col>
-        <a-col :span="11">
+        <a-col :span="7" :gutter="10" style="margin-top: -5px;">
           <div>
             <a-card
-              class="r-shadow mb-15"
+              class="default-border-radius r-shadow"
               :bordered="false"
               title=""
+              style="margin-bottom: 5px; border-radius: 10px; height: 245px;"
             >
-              <h1>
+              <h1 style="margin-top: -10px;">
                 <a-button type="link">{{
                   translation.ColdStora_2_588
                 }}</a-button>
@@ -28,32 +28,37 @@
                   heading:
                     'Liquid nitrogen tanks (Planer 1411V and 320 models) -80 Freezers',
                 }"
-                :img-properties="{ width: '50px', height: '50px' }"
+                :img-properties="{ width: '40px', height: '50px' }"
               >
               <span slot="extra">
-              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')"/></span>
+              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" height="50px" width="40px" style="margin-top: 8px;" /></span>
             </span>
             </ImageHeading>
             </a-card>
           </div>
-          <div class="">
+        </a-col>
+        <a-col :span="8" :gutter="10" style="margin-top: -5px;">
+          <div>
             <a-card
+              class="default-border-radius r-shadow"
               :bordered="false"
-              class="r-shadow mb-15 default-border-radius"
+              title=""
+              style="border-radius: 10px; height: 245px;"
             >
-              <h4>
+              
+              <h4 style="margin-top: -12px;">
                 <a-button type="link">Support Equipment</a-button>
               </h4>
               <span v-for="(cl, index) in outsideEquipment" :key="index">
-                <ImageHeading
-                  :img-properties="{ width: '50px', height: '50px' }"
-                  class="mt-15"
+                <TabImageHeading
+                  :img-properties="{ width: '40px', height: '50px' }"
+                  class="mt-5"
                   :detail="cl"
                 >
                 <span slot="extra">
-              <span><img :src="getImageUrl(cl.img)"></span>
+              <span><img :src="getImageUrl(cl.img)" height="50px" width="40px" style="margin-top: 2px;"></span>
             </span>
-                </ImageHeading>
+                </TabImageHeading>
               </span>
             </a-card>
           </div>
@@ -65,9 +70,10 @@
 <script>
 import suite from '~/components/root/inventory/equipment/Suite'
 import ImageHeading from '~/components/cards/ImageHeading'
+import TabImageHeading from '~/components/cards/TabImageHeading'
 import imagesHelper from '~/mixins/images-helper'
 export default {
-  components: { suite, ImageHeading },
+  components: { suite, ImageHeading, TabImageHeading },
   mixins:[imagesHelper],
   props: { data: { type: Object, default: () => ({}) } },
   data() {

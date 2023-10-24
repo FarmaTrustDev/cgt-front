@@ -1,25 +1,25 @@
 <template>
   <div>
-    <a-card :bordered="null" class="default-border-radius shadow">
+    <a-card :bordered="null" class="default-border-radius shadow" style="margin-bottom: -30px;">
       <a-tabs>
-        <a-tab-pane v-if="data.id===1" key="1" class="display-inline-block border-bottom-none font-size-18" tab="Class B Suite">
+        <a-tab-pane v-if="data.id===1" key="1" class="display-inline-block border-bottom-none font-size-14" tab="Class B Suite">
           <!-- <a-tab-pane key="1" :tab="translation.ClassB_3_572"> -->
           <ImageHeading v-for="(c, index) in classB" :key="index" :detail="c">
             <span slot="extra">
-              <span><img :src="getImageUrl(c.img)"></span>
+              <span><img :src="getImageUrl(c.img)" height="50px" width="40px"></span>
             </span>
             <!-- :img-properties="{ width: '50px', height: '50px' }" -->
           </ImageHeading>
         </a-tab-pane>
             
-        <a-tab-pane v-if="data.id===1" key="2" class="font-size-18" tab="Class C Suite">
+        <a-tab-pane v-if="data.id===1" key="2" class="font-size-14" tab="Class C Suite">
           <ImageHeading
             v-for="(c, index) in classC"
             :key="index"
             :detail="c"
           >
             <span slot="extra">
-              <span><img :src="getImageUrl(c.img)"></span>
+              <span><img :src="getImageUrl(c.img)" height="50px" width="40px"></span>
             </span></ImageHeading
           >
           <!-- :img-properties="{ width: '50px', height: '50px' }" -->
@@ -56,7 +56,7 @@
             :detail="c"
           >
             <span slot="extra">
-              <span><img :src="getImageUrl(c.img)"></span>
+              <span><img :src="getImageUrl(c.img)" height="50px" width="40px"></span>
             </span></ImageHeading
           >
       </div>  
