@@ -13,7 +13,7 @@
         </a-col>
       </a-row>
       <a-tabs class="" type="card">
-        <a-tab-pane key="storages" :tab="translation.Explostora_3_536">
+        <a-tab-pane key="storages" tab="Storage Unit">
           <a-input
             v-decorator="['quantity']"
             :allow-clear="true"
@@ -26,7 +26,7 @@
           </a-input>
           <Listing :storages="storage" :typeId="isInbound" />
         </a-tab-pane>
-        <a-tab-pane key="products" :tab="translation.Listall_3_537">
+        <a-tab-pane key="products" tab="Sample List">
           <a-input
             v-decorator="['quantity']"
             :allow-clear="true"
