@@ -23,7 +23,7 @@
       <a-row :gutter="24">
         <a-col v-if="false" :span="8">
           <TileCenter
-            heading="Freezer Atara 001"
+            :heading="'Shelf ' + fridgeTitle" 
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
@@ -33,7 +33,7 @@
         </a-col>
         <a-col :span="12">
           <TileCenter
-            heading="Shelf Atara 001"
+            :heading="'Shelf ' + fridgeTitle"
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
@@ -47,14 +47,15 @@
         </a-col>
         <a-col :span="12">
           <TileCenter
-            heading=" Box Atara 001"
+            :heading="'Box ' + fridgeTitle"
             footer="Storage Suite 3, Germany - Cellfuse"
           >
             <div slot="center" class="text-center">
-              <Trays v-if="!isEmpty(trayData)" :numVials="numVials" :autoSelect="autoSelect" :trays="trayData" />
+              <Trays v-if="!isEmpty(trayData)" :numVials="numVials" :autoSelect="autoSelect" @getData="updateSelection" :trays="trayData" />
               <a-empty v-else :description="translation.selecthe_3_628" />
-            </div> </TileCenter
-        ></a-col>
+            </div> 
+          </TileCenter>
+        </a-col>
       </a-row>
 
       <FormActionButton
@@ -73,9 +74,30 @@
       @cancel="handleModal(false)"
       >
       <div>
-        <a-row><a-col>{{translation.Freez_1_624}} : Atara 001</a-col></a-row>
-        <a-row><a-col>{{translation.Shelf_1_623}} : Shelf 01</a-col></a-row>
-        <a-row><a-col>{{translation.BoxLocat_2_622}} : 1A</a-col></a-row>
+        <a-row>
+          <a-col> 
+            <table class="testTubeTable w-100">
+              <tr>
+                <td class="w-30">{{translation.Freez_1_624}} : </td>
+                <td> {{fridgeTitle }} </td>
+              </tr>
+              <tr>
+                <td class="w-30">{{translation.Shelf_1_623}} : </td>
+                <td> {{shelfTitle }} </td>
+              </tr>
+              <tr>
+                <td class="w-30" style="vertical-align: top;">{{translation.BoxLocat_2_622}} :</td>
+                <td>
+                  <tr v-for="rowIndex in getUniqueRowIndices" :key="rowIndex">
+                    <td v-for="cell in getCellsForRowIndex(rowIndex)" :key="cell.colIndex" class="fake-column">
+                      <span>{{ cell.rowIndex + toLetters(cell.colIndex) }}</span>
+                    </td>
+                  </tr>
+                </td>
+              </tr>  
+            </table>
+          </a-col>
+        </a-row>
       </div>
       <!--<img class="img-responsive" :src="qrUrl" />-->
       <!-- <template slot="footer">
@@ -94,7 +116,7 @@ import fridge from '~/components/inventory/freezers/Fridge'
 import TileCenter from '~/components/inventory/storage/TileCenter'
 import racks from '~/components/inventory/storage/racks'
 import Trays from '~/components/inventory/storage/trays'
-import { isEmpty } from '~/services/Helpers'
+import { isEmpty, toLetters } from '~/services/Helpers'
 import { fridgeData } from '~/services/Constant/DummyData'
 import routeHelpers from '~/mixins/route-helpers'
 import notifications from '~/mixins/notifications'
@@ -119,6 +141,10 @@ export default {
       showModal: false,
       autoSelect:null,
       numVials:null,
+      record:{},
+      selectedData:[],
+      fridgeTitle:'',
+      shelfTitle:'',
       data: {
         countryName: 'Germany - Cellfuse',
         address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
@@ -133,6 +159,15 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    getUniqueRowIndices() {
+      // Get unique rowIndex values from the data
+      if(this.selectedData !== undefined){
+        if(this.selectedData.length>0){
+          return [...new Set(this.selectedData.map((item) => item.rowIndex))];
+        }
+      }
+      return null
+    },
   },
   mounted() {
     // console.log(isEmpty(this.$route.query.vial))
@@ -141,12 +176,28 @@ export default {
     }else{
       this.numVials=parseInt(this.$route.query.vial)
     }
+    if(this.$route.query.record){
+      this.record=this.$route.query.record
+    }
+    if(this.$route.query.fridge){
+      this.fridgeTitle=this.$route.query.fridge
+    }
     // console.log(this.numVials)
   },
   methods: {
     isEmpty,
-    getRackPortion(portions, autoSelect) {
-      
+    toLetters,
+    getCellsForRowIndex(rowIndex) {
+      // Get cells for a specific rowIndex
+      return this.selectedData.filter((item) => item.rowIndex === rowIndex);
+    },
+    updateSelection(data){
+      this.selectedData=data
+      console.log(this.selectedData)
+    },
+    getRackPortion(portions,counter, autoSelect) {
+      console.log(counter)
+      this.shelfTitle='Shelf '+counter
       if(isEmpty(autoSelect))
       {
         this.autoSelect=-1
@@ -165,7 +216,7 @@ export default {
     confirm(show) {
       this.showModal = show
       this.success('Sample stored successfully')
-      this.goto('/inventory/storage/tasks')
+      this.goto('/inventory/storage/tasks?fridge='+this.fridgeTitle+'&dt='+JSON.stringify(this.selectedData)+'&record='+this.record)
     },
     getAutoSelect(){
       this.autoSelect=1

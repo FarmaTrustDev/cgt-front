@@ -16,7 +16,7 @@
                 <!-- HREF , why not using  <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>  Please try not to remove the work which is done  -->
                 <img width="90px" :src="menu.icon" />
                 <h4 style="font-size: 1.125rem" class="heading-home">
-                  {{ translation[menu.name] }}
+                  {{ isEmpty(translation[menu.name]) ? menu.name :translation[menu.name] }}
                 </h4>
               </div>
             </nuxt-link>
@@ -30,7 +30,7 @@
 <script>
 import UserServices from '~/services/API/UserServices'
 import PageLayout from '~/components/layout/PageLayout'
-
+import { isEmpty } from '~/services/Helpers'
 export default {
   components: {
     PageLayout,
@@ -53,6 +53,7 @@ export default {
     this.userDetail()
   },
   methods: {
+    isEmpty,
     userDetail() {
       UserServices.adminMenu().then((response) => {
         this.userAdminMenu = response.data

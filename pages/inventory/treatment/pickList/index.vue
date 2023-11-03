@@ -162,8 +162,8 @@
                                 style="width: 100%; height: 60px;"
                                 @select="searchCompany"
                             >
-                                <a-select-option v-for="company in companyName" :key="company.id">
-                                {{ company.name }}
+                                <a-select-option v-for="company in companyName" :key="company.companyName">
+                                {{ company.companyName }}
                                 </a-select-option>
                             </a-select>
                         </a-col>
@@ -191,8 +191,8 @@
                                 style="width: 100%; height: 60px;"
                                 @blur="searchAddress"
                             >
-                                <a-select-option v-for="address in addressName[selectedIdex]" :key="address.id">
-                                {{ address.name }}
+                                <a-select-option v-for="address in addressName" :key="address.id">
+                                {{ address.address }}
                                 </a-select-option>
                             </a-select>
                       </a-col>
@@ -201,6 +201,7 @@
                       </a-col>
                       <a-col :span="14" class="mt-15">
                         {{ compnayAddress }}
+                        <a-icon v-if="!isEmpty(compnayAddress)" type="edit" @click="addAddressModel(true)" />
                       </a-col>
                 </a-card>
               </a-col>
@@ -268,9 +269,10 @@
                             <strong>Pack Slip</strong>
                         </h4>
                       </a-col>
-                      <a-col :span="14" class="mt-15">
-                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px" @click="openPopKitViewModal(true,'disp')">Display</a-button>
-                        <a-button block type="primary" html-type="submit" style="width:110px; height:45px" @click="openPopKitViewModal(true,'print')">Print</a-button>
+                      <a-col :span="2"></a-col>
+                      <a-col :span="10" class="mt-15">
+                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px; display: none;" @click="openPopKitViewModal(true,'disp')">Display</a-button>
+                        <a-button block type="primary" html-type="submit" style="width:150px; height:45px" @click="openPopKitViewModal(true,'print')">Display</a-button>
                       </a-col>
                     </a-row>
                     <a-row>
@@ -279,9 +281,10 @@
                             <strong>Label</strong>
                         </h4>
                       </a-col>
+                      <a-col :span="2"></a-col>
                       <a-col :span="10" class="mt-15">
-                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px" @click="openPopViewModal(true,'disp')">Display</a-button>
-                        <a-button block type="primary" html-type="submit" style="width:110px; height:45px" @click="openPopViewModal(true,'print')">Print</a-button>
+                        <a-button block type="primary" html-type="submit" style="width:100px; height:45px; display: none;" @click="openPopViewModal(true,'disp')">Display</a-button>
+                        <a-button block type="primary" html-type="submit" style="width:150px; height:45px" @click="openPopViewModal(true,'print')">Display</a-button>
                       </a-col>
                     </a-row>
                 </a-card>
@@ -289,11 +292,9 @@
                     <a-col :span="10" class="mt-15">
                        
                     </a-col>
-                    <a-col :span="5" class="mt-15">
-                       
-                    </a-col>
+                    
                     <a-col :span="6" class="mt-15">
-                        <a-button block type="primary" html-type="submit" @click="collectionDate!==null && deliveryDate!==null && compnayAddress!=='' ? goto('/inventory/treatment'): ''" style="width:100px; height:45px">Complete</a-button>
+                        <a-button block type="primary" html-type="submit" @click="collectionDate!==null && deliveryDate!==null && compnayAddress!=='' ? submitLabel() : ''" style="width:220px; height:45px">Complete</a-button>
                     </a-col>
                 </a-row>
               </a-col>
@@ -349,7 +350,7 @@
                             <a-icon
                             v-else
                             class="text-success"
-                            style="font-size: 1rem"
+                            style="font-size: 1rem;"
                             type="check"
                             ></a-icon>
                         </a-form-item>
@@ -509,12 +510,12 @@
               <strong> Pack Completion Date:</strong> {{ moment(collectionDate, 'DD/MM/YYYY').add(-2, 'day').format('DD/MM/YYYY') }}
             </a-col>
             <a-col :span="13">
-              <strong>Location:</strong> {{ (addressName[selectedIdex][companyAddIndex] !== undefined) ? addressName[selectedIdex][companyAddIndex].detail : '' }}
+              <strong>Location:</strong> {{ compnayAddress }}
             </a-col>
           </a-row>
           <a-row style="line-height:30px">
             <a-col :span="11">
-              <strong> Hospital Name:</strong> {{ companyName[selectedIdex].name}}
+              <strong> Hospital Name:</strong> {{ compName }}
             </a-col>
             <a-col :span="13">
               <strong> Number of boxes:</strong> 01
@@ -523,7 +524,7 @@
           </a-card>
           <template v-if="kitPrint" #footer>
             
-            <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelKitCancel(false)" >Cancel</a-button>
+            <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelKitCancel(false)" >OK</a-button>
             <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow('kit')">Print</a-button>
           </template>
           </a-modal>
@@ -557,13 +558,13 @@
                         <a-col>Project Code: {{record.projectId}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{ companyName[selectedIdex].name}}</a-col>
+                        <a-col>{{ compName }}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{ (addressName[selectedIdex][companyAddIndex] !== undefined) ? addressName[selectedIdex][companyAddIndex].detail : '' }}</a-col>
+                        <a-col>{{ compnayAddress }}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>Cell Number: {{ (addressName[selectedIdex][companyAddIndex] !== undefined) ? addressName[selectedIdex][companyAddIndex].phone : '' }}</a-col>
+                        <a-col>Cell Number: {{ cell }}</a-col>
                     </a-row>
                     </a-col>
                 </a-row>
@@ -577,10 +578,55 @@
               </a-card>
               <template v-if="labPrint" #footer>
                 
-                <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelCancel(false)" >Cancel</a-button>
+                <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelCancel(false)" >OK</a-button>
                 <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow('label')">Print</a-button>
               </template>
           </a-modal>
+          <a-modal
+        :visible="visibleAddAddress"
+        title="Add New Address"
+        class="support-add-modal"
+        :dialog-style="{ top: '20px' }"
+        :loading="loading"
+        :footer="null"
+        :width="600"
+        @cancel="addAddressModel(false,0)"
+      >
+        <a-form :form="addressForm" @submit="onSubmitAddress">
+          <a-row :gutter="23">
+            <a-col :span="23">
+              <a-form-item
+                label="Complete Address *:"
+                :label-col="{ span: 24 }"
+                :wrapper-col="{ span: 24 }"
+              >
+                <a-input
+                  v-decorator="[
+                    'completeAddress',
+                    {
+                      rules: [
+                        {
+                          required: true,
+                          message: 'Please input complete address',
+                        },
+                      ],
+                    },
+                  ]"
+                  placeholder="Complete Address"
+                />
+              </a-form-item>
+            </a-col>
+          </a-row>
+
+          <a-row :gutter="23">
+            <a-col :span="16"></a-col>
+            <a-col :span="6">
+              <FormActionButton custom-text="Update Address" :loading="loading" />
+            </a-col>
+          </a-row>
+        </a-form>
+        
+      </a-modal>
         </div>
       </template>
     </page-layout>
@@ -594,7 +640,9 @@
   import routeHelpers from '~/mixins/route-helpers'
   import { isEmpty } from '~/services/Helpers'
   import imagesHelper from '~/mixins/images-helper'
+  import LabelServices from '~/services/API/LabelServices'
   import kitImgColl from '~/components/cards/kitImgColl'
+  import CompanyAddressServices from '~/services/API/CompanyAddressServices'
   export default {
     components: {'page-layout': PageLayout,kitImgColl},
     mixins: [tabsHelpers, routeHelpers,imagesHelper],
@@ -602,6 +650,9 @@
     data() {
       return {
         moment,
+        visibleAddAddress:false,
+        isCreatedAddress:false,
+        addressForm: this.$form.createForm(this, { name: 'equipmentForm' }),
         btnLoading: false,
         loading: false,
         buttonEnable: false,
@@ -614,17 +665,9 @@
         companyAddIndex:0,
         collectionDate:null,
         deliveryDate:null,
-        companyName:[
-          {id:1, name:'Good Hope Hospital'}, 
-          {id:2, name:'Heartlands Hospital'},
-          {id:3, name:'Queen Elizabeth Hospita'},
-          {id:4, name:'Solihull Hospital'},
-          {id:5, name:'Nottingham University Hospitals NHS Trust'},
-          {id:6, name:'Nottingham NHS Treatment Centre'},
-          {id:7, name:`Queen's Medical Centre`},
-          {id:8, name:'Be The Match'},
-        ],
-        addressName:[
+        companyName:[],
+        addressName:[],
+        addressNames:[
           [
             {
               id:1, name:'Birmingham', detail:'Rectory Road Sutton Coldfield, B75 7RR', phone:'+44 121 424 2000'
@@ -814,9 +857,11 @@
       this.handleActiveTab()
       // this.getTranslationData()
       this.$store.commit('setSelectedMenu', [`2`])
+      this.getCompany()
       // this.getSteps()
     },
     methods: {
+      isEmpty,
       handleActiveTab() {
         this.activeTab = this.$route.query.view
         // this.record= this.$route.query.record
@@ -829,16 +874,89 @@
       handleDeliveryDateChange(date){
         this.deliveryDate=date.format('DD/MM/YYYY')
       },
-      searchCompany(name) {
+      /* searchCompany(name) {
         this.selectedIdex=name-1
         console.log(this.selectedIdex)
+      }, */
+      getCompany(){
+      CompanyAddressServices.getCompanies().then((response)=>{
+        this.companyName=response.data
+      })
+    },
+    searchCompany(name) {
+      // this.selectedIdex=name-1
+      CompanyAddressServices.getAddressesByCompany(name).then((response)=>{
+        this.addressName=response.data
+      })
+      console.log(this.selectedIdex)
+    },
+    searchAddress(id){
+      if(id!==undefined && id!=='other'){
+        this.compnayAddress=this.addressName.find(item=>item.id===id).completeAddress
+        this.cell=this.addressName.find(item=>item.id===id).phoneNo
+        this.compName=this.addressName.find(item=>item.id===id).companyName
+        console.log(this.compnayAddress)
+      }
+    },
+    addAddressModel(e) {
+      this.addressForm.resetFields()
+      this.isCreatedAddress = false
+      this.visibleAddAddress = e
+    },
+    onSubmitAddress(e) {
+      e.preventDefault()
+      this.addressForm.validateFields((err, values) => {
+        if (!err) {
+          this.loading = true
+          console.log(values)
+          this.compnayAddress=values.completeAddress
+          this.loading=false
+          this.visibleAddAddress=false
+          /* 
+            CompanyAddressServices.createAddress(values).then((response)=>{
+              success(this, { message: response.data })
+                this.fetchEquipments()
+                this.loading = false
+                this.isCreatedAddress = false
+                this.addressForm.resetFields()
+            }).catch(this.error)
+         */
+        }
+      })
+    },
+      submitLabel(){
+        this.record=JSON.parse(this.$route.query.record)
+        console.log(this.record)
+        const dateParts = this.record.collectionDateDeliveryDate.split('-');
+        const arrivalDates = this.parseDate(dateParts[0]);
+        const expiryDates = this.parseDate(dateParts[1]);
+        const obj={
+          sampleId:this.record.patientEnrollmentNumber,
+          sampleName:this.record.treatmentType,
+          clientName:this.record.hospital,
+          labelStatus:'Dispatched',
+          arrivalDate:arrivalDates,
+          expiryDate:expiryDates,
+          company:this.compName,
+          address:this.compnayAddress,
+          phoneNo:this.cell,
+        }
+        console.log(obj)
+        LabelServices.create(obj).then((response)=>{
+          console.log(response)
+          this.goto('/inventory/treatment')
+        })
       },
-      searchAddress(name){
+      parseDate(dateStr) {
+        const [day, month, year] = dateStr.split('/').map(Number);
+        return new Date(year, month - 1, day); // Subtract 1 from the month since months are zero-indexed
+      },
+      /* searchAddress(name){
         if(name!==undefined){
           this.companyAddIndex=name-1
           this.compnayAddress=this.addressName[this.selectedIdex][this.companyAddIndex].detail
         }
-      },
+      }, */
       handleInput(rowId,e) {
       if(this.noteItem.includes(rowId)){
         this.noteItem.splice(this.noteItem.indexOf(rowId),1);
@@ -951,5 +1069,11 @@
   .a-date-picker.custom-date-picker {
     border-radius: 10px; /* Adjust the border-radius value as needed */
   }
-  </style>
+  .green-background {
+    background-color: green;
+  }
   
+  .red-background {
+    background-color: red;
+  }
+  </style>
