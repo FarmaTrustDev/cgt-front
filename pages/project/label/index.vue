@@ -36,7 +36,37 @@
                     <img :src="getImageUrl('Icons/Union.svg')"/>
                   </a-button>
                 </template>
-                
+                <template slot="action" slot-scope="action">
+                  <a-dropdown>
+                    <a-button class="action-button" @click="preventDefault">
+                      Admin <a-icon type="down" />
+                    </a-button>
+                    <a-menu slot="overlay">
+                      <a-menu-item key="1">
+                        <a-popconfirm
+                          title="Are you sure you want to return this label ?"
+                          ok-text="Yes"
+                          cancel-text="No"
+                          placement="topLeft"
+                          @confirm="returnLabel(action)"
+                          >
+                        <span>Return</span>
+                        </a-popconfirm>
+                      </a-menu-item>
+                      <a-menu-item key="2">
+                        <a-popconfirm
+                          title="Are you sure you want to destroy this label ?"
+                          ok-text="Yes"
+                          cancel-text="No"
+                          placement="topLeft"
+                          @confirm="destroyLabel(action)"
+                          >
+                        <span>Destroy</span>
+                        </a-popconfirm>
+                      </a-menu-item>
+                    </a-menu>
+                  </a-dropdown>
+                </template>
               </a-table>
           <a-modal
             :visible="showModal"
@@ -73,13 +103,13 @@
                         <a-col>Project Code: {{labelData.projectCode}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{labelData.hospital}}</a-col>
+                        <a-col>{{ (!isEmpty(company)) ? company: labelData.hospital}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{labelData.address}}</a-col>
+                        <a-col>{{ (!isEmpty(address)) ? address: labelData.address}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>Cell Number: {{labelData.cell}}</a-col>
+                        <a-col>Cell Number: {{ (!isEmpty(phoneNo)) ? phoneNo : labelData.cell}}</a-col>
                     </a-row>
                     </a-col>
                 </a-row>
@@ -101,6 +131,7 @@
   <script>
   import moment from 'moment'
   import PageLayout from '~/components/layout/PageLayout'
+  import LabelServices from '~/services/API/LabelServices'
   // import treatmentTable from '~/components/inventory/treatment/treatmentTable'
   import {
     SMART_LAB_TREATMENT_PENDING_PHASES,
@@ -108,6 +139,7 @@
   } from '~/services/Constant/Phases'
   import routeHelpers from '~/mixins/route-helpers'
   import imagesHelper from '~/mixins/images-helper'
+  import { preventDefault } from '~/services/Helpers'
   import { isEmpty } from '~/services/Utilities'
   import { isNumber } from '~/services/Helpers'
   import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
@@ -339,6 +371,106 @@
       print: 'Uploads/DocumentURL/shipping notice.jpg',
       processSample: 'default',
     },
+    {
+      patientEnrollmentNumber: 'KIT341',
+      serialNumber:'AAC3245',
+      treatmentType: 'Laeuka Kit',
+      hospital: 'Adaptimmune',
+      temp:'-20C',
+      status:'Keep Dry',
+      internalBatch:'AX25429',
+      hospitalName:'The Royal Hospital',
+      collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+      print: 'Uploads/DocumentURL/shipping notice.jpg',
+      inbound:false,
+      projectName:'BayState USA OUT89873',
+      projectId:'2440',
+      processSample: 'green',
+      email:'baystate@gmail.com',
+      type:2,
+    },
+    {
+      patientEnrollmentNumber: 'KIT246',
+      serialNumber:'AAK2235',
+      treatmentType: 'Aphresis Kit',
+      temp:'-20C',
+      status:'Keep Dry',
+      internalBatch:'AX25430',
+      hospital: 'Syneous',
+      hospitalName:'The Royal Hospital',
+      collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+      print: 'Uploads/DocumentURL/shipping notice.jpg',
+      inbound:false,
+      projectName:'BayState UK OUT89873',
+      projectId:'2456',
+      processSample: 'green',
+      email:'baystate@gmail.com',
+      type:2,
+    },
+    {
+    patientEnrollmentNumber: 'DAC65198',
+    serialNumber:'AAX3235',
+    treatmentType: 'Human Cells/Cellules Humaines/人体细胞',
+    temp:'-20C',
+    status:'Keep Dry',
+    internalBatch:'AC36421',
+    productionLine: 'Zone A',
+    hospital: 'Adaptimmune',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+    projectName:'Autolus Project Out89343',
+    projectId:'2440',
+    dispatchedBy: 'Ben Hawkins',
+    email:'adaptimmune@gmail.com',
+    type:1,
+  },
+  {
+    patientEnrollmentNumber: 'DAC2237',
+    serialNumber:'AAX8654',
+    treatmentType: 'Human Cells/Cellules Humaines/人体细胞',
+    temp:'-20C',
+    status:'Keep Dry',
+    internalBatch:'AC66441',
+    productionLine: 'Zone C',
+    hospital: 'Adaptimmune',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    projectName:'Autolus Project Out89343',
+    projectId:'2440',
+    dispatchedBy: 'Shawn David',
+    email:'adaptimmune@gmail.com',
+    type:1,
+  },
+  {
+    patientEnrollmentNumber: 'DAC85597',
+    serialNumber:'AAX6435',
+    treatmentType: 'Human Cells/Cellules Humaines/人体细胞',
+    temp:'-20C',
+    status:'Keep Dry',
+    internalBatch:'AC76423',
+    productionLine: 'Zone A',
+    hospital: 'Kite',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
+    projectName:'Kite Out Washington Clinical Trial Ref:2343',
+    projectId:'594',
+    dispatchedBy: 'Chris Murphy',
+    email:'kite@gmail.com',
+    type:1,
+  },
+  {
+    patientEnrollmentNumber: 'DAC39647',
+    serialNumber:'AAX3637',
+    treatmentType: 'Human Cells/Cellules Humaines/人体细胞',
+    temp:'-20C',
+    status:'Keep Dry',
+    internalBatch:'AC37428',
+    productionLine: 'Zone C',
+    hospital: 'Kite',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    projectName:'Kite Out Washington Clinical Trial Ref:2343',
+    projectId:'594',
+    dispatchedBy: 'Allen Braun',
+    email:'kite@gmail.com',
+    type:1,
+  },
   ]
   
   
@@ -358,31 +490,54 @@
         qrUrl: '/Uploads/DocumentURL/shipping notice.png',
         showModalImage: false,
         showModal: false,
+        phoneNo:'',
+        company:'',
+        address:'',
         phases: SMART_LAB_TREATMENT_PENDING_PHASES,
         outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
         customDisplayData,
         customDisplayDataMat,
     
         newSampleColumns: [
-          {
+        {
+            title: `Label ID`,
+            dataIndex: 'labelId',
+            key: 'labelId',
+          },  
+        {
             title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-            dataIndex: 'patientEnrollmentNumber',
-            key: 'patientEnrollmentNumber',
+            dataIndex: 'sampleId',
+            key: 'sampleId',
           },
           {
             title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-            dataIndex: 'treatmentType',
-            key: 'treatmentType',
+            dataIndex: 'sampleName',
+            key: 'sampleName',
           },
           {
             title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-            dataIndex: 'hospital',
-            key: 'hospital',
+            dataIndex: 'clientName',
+            key: 'clientName',
           },
           {
             title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-            dataIndex: 'collectionDateDeliveryDate',
-            key: 'collectionDateDeliveryDate',
+            dataIndex: 'arrivalDate',
+            key: 'arrivalDate',
+          },
+          {
+            title: `Status`,
+            dataIndex: 'labelStatus',
+            key: 'labelStatus',
+          },
+          {
+            title: `Created At`,
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+          },
+          {
+            title: `Updated At`,
+            dataIndex: 'updatedAt',
+            key: 'updatedAt',
           },
           {
             title: `${this.$store.getters.getTranslation.Print_1_111}`,
@@ -390,9 +545,14 @@
             key: 'print',
             scopedSlots: { customRender: 'print' },
           },
+          {
+            title: `Update Status`,
+            key: 'action',
+            scopedSlots: { customRender: 'action' },
+          },
         ],
         
-        inbound: newSampleData,
+        inbound: [],
         labelData:{},
         statusDetails: [
           {
@@ -419,11 +579,11 @@
     watch: {
       translation(newValues, oldValue) {
         if (newValues !== oldValue) {
-          this.newSampleColumns[0].title = newValues.SamplID_2_502
-          this.newSampleColumns[1].title = newValues.SamplName_2_503
-          this.newSampleColumns[2].title = newValues.Clien_1_505
-          this.newSampleColumns[3].title = newValues.ArrivDate_5_535
-          this.newSampleColumns[4].title = newValues.Docum_1_507
+          this.newSampleColumns[1].title = newValues.SamplID_2_502
+          this.newSampleColumns[2].title = newValues.SamplName_2_503
+          this.newSampleColumns[3].title = newValues.Clien_1_505
+          this.newSampleColumns[4].title = newValues.ArrivDate_5_535
+          this.newSampleColumns[8].title = newValues.Print_1_111
           // this.newSampleColumns[5].title = newValues.Actio_1_220
   
           this.phases[0].name = newValues.inboushipm_2_302
@@ -459,10 +619,18 @@
     },
     mounted() {
       this.getTranslationData()
+      this.getLabels()
     },
     methods: {
       _getFutureMomentStandardFormatted,
       moment,
+      isEmpty,
+      preventDefault,
+      getLabels(){
+        LabelServices.getAllLabels().then((response)=>{
+          this.inbound=response.data
+        })
+      },
       searchTreatment() {},
       stepClick(record, phase) {
         if (record === 'error') {
@@ -470,6 +638,19 @@
         } else {
           this.goto(phase.url_slug)
         }
+      },
+      returnLabel(record){
+        console.log(record.id)
+        LabelServices.update('Returned', record.id).then((response)=>{
+          console.log(response.data)
+          this.getLabels()
+        })
+      },
+      destroyLabel(record){
+        LabelServices.update('Destroyed', record.id).then((response)=>{
+          console.log(response.data)
+          this.getLabels()
+        })
       },
       clickImage(record) {
         this.qrUrl = record.qrUrl
@@ -491,7 +672,10 @@
       },
       openPopViewModal(val, record, print) {
         this.showModal = val
-        this.labelData=print
+        this.labelData=newSampleData.find((key)=>key.patientEnrollmentNumber===print.sampleId)
+        this.company=print.company
+        this.address=print.address
+        this.phoneNo=print.phoneNo
         console.log(record)
         console.log(print)
       },

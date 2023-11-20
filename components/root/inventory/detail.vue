@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div class="mb-15">
+    <div class="mb-15" style="margin-top: -15px;">
       <h2 class="color-black">
         {{ data.countryName }}
         <img height="25" width="40" :src="getImageUrl(data.flag)" />
       </h2>
     </div>
-    <a-row :gutter="16">
-      <a-col :span="11" class="icon-col"
+    <a-row :gutter="16" style="margin-top: -15px;">
+      <a-col :span="9" class="icon-col"
         ><a-icon type="pushpin" theme="filled" /> {{ data.address }}</a-col
       >
-      <a-col :span="11" class="icon-col">
+      <a-col :span="4" class="icon-col">
         <a-icon type="phone" theme="filled" /> {{ data.phone }}
       </a-col>
-      <a-col :span="11" class="color-black icon-col"
+      <a-col :span="6" class="color-black icon-col"
         ><a-icon type="global" />{{ data.global }}
       </a-col>
-      <a-col class="color-black icon-col" :span="11"
+      <a-col class="color-black icon-col" :span="4"
         ><strong>@</strong> {{ data.email }}</a-col
       >
     </a-row>

@@ -126,6 +126,7 @@ export const PICTURE_UPLOAD_EXTENSIONS = [
   '.gif',
   '.png',
 ]
+export const EXCEL_DOCUMENT = ['.xlsx','.xls','.csv']
 export const DOCUMENT_UPLOAD_EXTENSIONS = ['.doc', '.docx', '.pdf']
 export const DOCUMENT_EXTENSIONS = [
   ...PICTURE_UPLOAD_EXTENSIONS,

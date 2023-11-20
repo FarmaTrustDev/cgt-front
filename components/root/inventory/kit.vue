@@ -1,17 +1,17 @@
 <template>
     <div>
     <a-row>
-      <a-col :span="24">
+      <a-col :span="24" style="margin-top: -5px; margin-bottom: -25px;">
         <detail class="" :data="data.description" />
         <br />
       </a-col>
     </a-row>
-      <div class="mb-15 pr-15 clearfix">
-        <h2 class="">
+      <div class="pr-15 clearfix" style="padding-top: -15px;">
+        <h2 style="padding-top: -15px;">
           <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">Collection Kits</strong>
-          <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">Collection Kits</strong>
+          <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" style="padding-top: -25px;">Collection Kits</strong>
         </h2>
-        <a-row class="display-inline-block" :gutter="10">
+        <a-row class="display-inline-block" :gutter="10" style="margin-top: -5px;">
           <a-col class="suit" :span="23">
             <kitDetail :tabId="data.id" />
           </a-col>

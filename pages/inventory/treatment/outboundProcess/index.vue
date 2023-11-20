@@ -143,7 +143,279 @@
           class="mt-15 default-card inbound-accept-tabs bount_status"
           style="width: 96%; margin-left: 2%"
         >
-          <div class="h-tabs large-tabs" style="width: 100%">
+
+        <a-row :gutter="18">
+        <a-col :span="10">
+        <a-card :bordered="false" class="default-card details-section" style="padding-left:2px">
+            
+                <a-col :span="10" class="mt-15">
+                <h4>
+                    <strong>Company Name</strong>
+                </h4>
+                </a-col>
+                <a-col :span="14" style="text-align: left;">
+                    <a-select
+                        v-decorator="[
+                        'company',
+                        {
+                            rules: [
+                            {
+                                required: true,
+                                message: 'Select company',
+                            },
+                            ],
+                        },
+                        ]"
+                        :show-search="true"
+                        placeholder="Select company name"
+                        style="width: 100%; height: 60px;"
+                        @select="searchCompany"
+                    >
+                        <a-select-option v-for="company in companyName" :key="company.companyName">
+                        {{ company.companyName }}
+                        </a-select-option>
+                    </a-select>
+                </a-col>
+            
+                <a-col :span="10" class="mt-15">
+                <h4>
+                    <strong>Address</strong>
+                </h4>
+                </a-col>
+                <a-col :span="14">
+                <a-select
+                        v-decorator="[
+                        'address',
+                        {
+                            rules: [
+                            {
+                                required: true,
+                                message: 'Select address',
+                            },
+                            ],
+                        },
+                        ]"
+                        :show-search="true"
+                        placeholder="Select address name"
+                        style="width: 100%; height: 60px;"
+                        @blur="searchAddress"
+                    >
+                        <a-select-option v-for="address in addressName" :key="address.id">
+                        {{ address.address }}
+                        </a-select-option>
+                        <!-- <a-select-option key="other" @click="addAddressModel(true)" >
+                          Other
+                        </a-select-option> -->
+                    </a-select>
+                </a-col>
+                <a-col :span="10" class="mt-15">
+                <h4><strong>Complete Address:</strong></h4>
+                </a-col>
+                <a-col :span="14" class="mt-15">
+                {{ compnayAddress }}
+                <a-icon v-if="!isEmpty(compnayAddress)" type="edit" @click="addAddressModel(true)" />
+                
+                </a-col>
+        </a-card>
+        </a-col>
+        <a-col :span="14">
+        <a-card :bordered="false" class="default-card details-section">
+            <a-row>
+                <a-col :span="10" class="mt-10">
+                <h4>
+                    <strong>Dispatch Date</strong>
+                </h4>
+                </a-col>
+                <a-col :span="10" class="mt-10">
+                <a-date-picker
+                    v-decorator="[
+                    'collectionDate',
+                    {
+                        rules: [
+                        {
+                            required: true,
+                            message: 'Required',
+                        },
+                        ],
+                    },
+                    ]"
+                    placeholder="DD/MM/YYYY"
+                    format="DD/MM/YYYY"
+                    style="width: 100%; height: 40px; border-radius: 25px;"
+                    size="large"
+                    @change="handleDateChange"
+                >
+                </a-date-picker>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col :span="10" class="mt-10">
+                <h4>
+                    <strong>Delivery Date</strong>
+                </h4>
+                </a-col>
+                <a-col :span="10" class="mt-10">
+                <a-date-picker
+                    v-decorator="[
+                    'deliveryDate',
+                    {
+                        rules: [
+                        {
+                            required: true,
+                            message: 'Required',
+                        },
+                        ],
+                    },
+                    ]"
+                    placeholder="DD/MM/YYYY"
+                    format="DD/MM/YYYY"
+                    class="custom-date-picker"
+                    size="large"
+                    @change="handleDeliveryDateChange"
+                >
+                </a-date-picker>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col :span="10" class="mt-15">
+                <h4>
+                    <strong>Pack Slip</strong>
+                </h4>
+                </a-col>
+                <a-col :span="2"></a-col>
+                <a-col :span="10" class="mt-15">
+                <a-button block type="primary" html-type="submit" style="width:100px; display: none; height:45px" @click="clickSubmit(true,'disp')">Display</a-button>
+                <a-button block type="primary" html-type="submit" style="width:150px; height:45px" @click="clickSubmit(true,'print')">Display</a-button>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col :span="10" class="mt-15">
+                <h4>
+                    <strong>Label</strong>
+                </h4>
+                </a-col>
+                <a-col :span="2"></a-col>
+                <a-col :span="10" class="mt-15">
+                <a-button block type="primary" html-type="submit" style="width:200px; display: none; height:45px;" @click="openPopViewModal(true,'disp')">Display</a-button>
+                <a-button block type="primary" html-type="submit" style="width:150px; height:45px;" @click="openPopViewModal(true,'print')">Display</a-button>
+                </a-col>
+            </a-row>
+        </a-card>
+        <a-row>
+            <a-col :span="10" class="mt-15">
+                
+            </a-col>
+            
+            <a-col :span="6" class="mt-15" style="margin-left: 5px;">
+                <a-button block type="primary" html-type="submit" @click="collectionDate!==null && deliveryDate!==null && compnayAddress!=='' ? submitLabel() : ''" style="width:220px; height:45px">Complete</a-button>
+            </a-col>
+        </a-row>
+        </a-col>
+    </a-row>
+    <a-modal
+        :visible="showModal"
+        class="modal-design-smart-lab-label"
+        :dialog-style="{ right: '10%', top: '10%' }"
+        @cancel="handelCancel(false)"
+        @ok="handleOk(false)"
+        >
+            <a-card class="white-card-smart-lab-label">
+            <a-row>
+                <a-col :span="6"></a-col>
+                <a-col :span="12"><img :src="getImageUrl('label/cryoheader.svg')" width="200" height="125" /></a-col>
+                <a-col :span="6"></a-col>
+            </a-row>
+            <a-row>
+                <a-col :span="10"><img :src="getImageUrl('label/qrCode.svg')" width="350" height="120" /></a-col>
+                <a-col :span="14">
+                <a-row>
+                    <a-col>Laeuka Collection Kit</a-col>
+                </a-row>
+                <a-row>
+                    <a-col :span="6"><img :src="getImageUrl('label/dated.svg')"> 14/12/2024</a-col>
+                    <a-col :span="6"><img :src="getImageUrl('label/umbrella.svg')"> Keep Dry</a-col>
+                </a-row>
+                <a-row>
+                    <a-col>Internal Batch No: AA234TH</a-col>
+                </a-row>
+                <a-row>
+                    <a-col>Project Code: {{record.projectId}}</a-col>
+                </a-row>
+                <a-row>
+                    <a-col>{{ compName }}</a-col>
+                </a-row>
+                <a-row>
+                    <a-col>{{ compnayAddress }}</a-col>
+                </a-row>
+                <a-row>
+                    <a-col>Cell Number: {{ cell }}</a-col>
+                </a-row>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col>&nbsp;</a-col>
+            </a-row>
+            <a-row>
+                <a-col :span="4"></a-col>
+                <a-col :span="18"><img :src="getImageUrl('label/bar.png')" width="500" height="90" /></a-col>
+            </a-row>
+            </a-card>
+            <template v-if="labPrint" #footer>
+              <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelCancel(false)" >OK</a-button>
+              <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printLabWindow('label')">Print</a-button>
+            </template>
+            <template v-else #footer>
+              <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelCancel(false)" >OK</a-button>
+              <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="handleOk(false)">OK</a-button>
+            </template>
+        </a-modal>
+        <a-modal
+        :visible="visibleAddAddress"
+        title="Add New Address"
+        class="support-add-modal"
+        :dialog-style="{ top: '20px' }"
+        :loading="loading"
+        :footer="null"
+        :width="600"
+        @cancel="addAddressModel(false,0)"
+      >
+        <a-form :form="addressForm" @submit="onSubmitAddress">
+          <a-row :gutter="23">
+            <a-col :span="23">
+              <a-form-item
+                label="Complete Address *:"
+                :label-col="{ span: 24 }"
+                :wrapper-col="{ span: 24 }"
+              >
+                <a-input
+                  v-decorator="[
+                    'completeAddress',
+                    {
+                      rules: [
+                        {
+                          required: true,
+                          message: 'Please input complete address',
+                        },
+                      ],
+                    },
+                  ]"
+                  placeholder="Complete Address"
+                />
+              </a-form-item>
+            </a-col>
+          </a-row>
+
+          <a-row :gutter="23">
+            <a-col :span="16"></a-col>
+            <a-col :span="6">
+              <FormActionButton custom-text="Update Address" :loading="loading" />
+            </a-col>
+          </a-row>
+        </a-form>
+        
+      </a-modal>
+          <!-- <div class="h-tabs large-tabs" style="width: 100%">
+            <courierComp />
             <div>
               <a-skeleton :loading="loading">
                 <a-table
@@ -291,7 +563,7 @@
                       <a-col :span="24">{{ translation.Areyou_8_631 }}</a-col>
                     </a-row>
                   </div>
-                  <!--<img class="img-responsive" :src="qrUrl" />-->
+                  <img class="img-responsive" :src="qrUrl" />
                   <template slot="footer">
                     <a-button @click="handleLogisticsModal(false)">{{
                       translation.cance_1_296
@@ -303,14 +575,12 @@
                 </a-modal>
               </a-form-item>
             </a-form>
-          </div>
+          </div> -->
         </a-card>
 
         <a-modal
           :visible="showCourierModal"
           class="modal-design-smart-lab"
-          :cancel-text="'Print'"
-          :ok-text="'Submit'"
           :dialog-style="{ right: '20%', top: '5%' }"
           @cancel="handleCourierModal(false)"
           @ok="handleCourierModalOk(false)"
@@ -328,24 +598,13 @@
               :colVal="12"
               :customDisplayData="customDisplayDataShipInfo"
             />
-            <a-row>
-              <a-col :span="10"
-                ><h2 class="mt-15">
-                  {{ translation['2.Excep_3_752'] }}
-                </h2></a-col
-              >
-              <a-col :span="10"
-                ><h2 class="mt-15">
-                  {{ translation['3.Trans_3_778'] }}
-                </h2></a-col
-              >
-            </a-row>
+            
             <CustomDisplay
               :headingTitle="translation.Selecall_4_753"
               :colVal="12"
               :customDisplayData="customDisplayDataExceptionalRel"
             />
-            <h2 class="mt-15">{{ translation['4.Shipp_4_761'] }}</h2>
+            <h2 class="mt-15">{{ translation['2.Shipp_4_761'] }}</h2>
             <CustomDisplay
               :headingTitle="''"
               :colVal="24"
@@ -356,16 +615,16 @@
               :dataSource="shippingTableData"
               :heading-title="''"
             />
-            <h2 class="mt-15">{{ translation['5.Inven_2_769'] }}</h2>
+            <h2 class="mt-15">{{ translation['3.Inven_2_769'] }}</h2>
             <a-row>
               <a-col :span="10"
                 ><h2 class="mt-15">
-                  {{ translation['6.Selec_4_770'] }}
+                  {{ translation['4.Selec_4_770'] }}
                 </h2></a-col
               >
               <a-col :span="10"
                 ><h2 class="mt-15">
-                  {{ translation['7.Revie_4_771'] }}
+                  {{ translation['5.Revie_4_771'] }}
                 </h2></a-col
               >
             </a-row>
@@ -375,13 +634,13 @@
               :customDisplayData="customDisplayDataSelectionPackage"
             />
           </a-card>
-          <template slot="footer">
-            <a-button @click="printWindow()">{{
-              translation.Print_1_111
-            }}</a-button>
-            <a-button type="primary" @click="handleCourierModalOk(false)">{{
-              translation.Submi_1_248
-            }}</a-button>
+          <template v-if="kitPrint" #footer>
+            <a-button class="footer-btn-label footer-btn-label-cancelled no-print" @click="handleCourierModalOk(false)">OK</a-button>
+            <a-button type="primary" @click="printWindow()">Print</a-button>
+          </template>
+          <template v-else #footer>
+            <a-button class="footer-btn-label footer-btn-label-cancelled no-print" @click="handleCourierModalOk(false)">Cancel</a-button>
+            <a-button type="primary" @click="handleCourierModalOk(false)">OK</a-button>
           </template>
         </a-modal>
       </div>
@@ -390,11 +649,14 @@
 </template>
 
 <script>
+import moment from 'moment'
 import PageLayout from '~/components/layout/PageLayout'
 import Process from '~/components/root/inventory/Process'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
-import LogisticLookup from '~/components/lookups/LogisticLookup'
+import imagesHelper from '~/mixins/images-helper'
+// import LogisticLookup from '~/components/lookups/LogisticLookup'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
+import LabelServices from '~/services/API/LabelServices'
 import {
   getMomentByStandardFormat,
   _disabledPreviousDate,
@@ -404,9 +666,11 @@ import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
 import { INVENTORY_OUTBOUND_STATUS_STEPS } from '~/services/Constant/Phases'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
+// import courierComp from '~/components/inventory/courierComp'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import StepServices from '~/services/API/StepServices'
+import CompanyAddressServices from '~/services/API/CompanyAddressServices'
 
 // import shipment from '~/components/inventory/treatment/shipment'
 export const customDisplayDataShipInfo = [
@@ -424,7 +688,7 @@ export const customDisplayDataShipInfo = [
   },
   {
     title: '',
-    value: 'Text here...',
+    value: 'N/A',
     key: 2,
     url: '',
   },
@@ -456,12 +720,6 @@ export const customDisplayDataShipInfo = [
     title: '',
     value: 'Andrea Marosan',
     key: 7,
-    url: '',
-  },
-  {
-    title: '',
-    value: '27/06/2023 at 14:00',
-    key: 8,
     url: '',
   },
 ]
@@ -518,7 +776,7 @@ export const customDisplayDataSelectionPackage = [
 export const customDisplayDataExceptionalRel = [
   {
     title: '',
-    value: 'S-01',
+    value: 'N/A',
     key: 1,
     url: '',
   },
@@ -530,7 +788,7 @@ export const customDisplayDataExceptionalRel = [
   },
   {
     title: '',
-    value: '27/06/2023',
+    value: 'N/A',
     key: 2,
     url: '',
   },
@@ -542,7 +800,7 @@ export const customDisplayDataExceptionalRel = [
   },
   {
     title: '',
-    value: 'C-02',
+    value: 'N/A',
     key: 4,
     url: '',
   },
@@ -554,7 +812,7 @@ export const customDisplayDataExceptionalRel = [
   },
   {
     title: '',
-    value: '1564765136',
+    value: 'N/A',
     key: 6,
     url: '',
   },
@@ -605,19 +863,23 @@ export default {
   components: {
     'page-layout': PageLayout,
     Process,
-    LogisticLookup,
+    // LogisticLookup,
     StatusDetail,
     CustomDisplay,
     treatmentTable,
+    // courierComp
     // shipment,
   },
   middleware: 'auth',
-  mixins: [routeHelpers, notifications],
+  mixins: [routeHelpers, notifications,imagesHelper],
   data() {
     return {
       activeTab: 'OUTBOUND_PROCESS',
       type: 'outbound',
       qrUrl: null,
+      visibleAddAddress:false,
+      isCreatedAddress:false,
+      addressForm: this.$form.createForm(this, { name: 'equipmentForm' }),
       loading: false,
       showModal: false,
       showLogisticsModal: false,
@@ -630,6 +892,80 @@ export default {
       customDisplayDataExceptionalRel,
       customDisplayDataSelectionPackage,
       record:{},
+      selectedIdex:0,
+      showModalKit:false,
+      compnayAddress:'',
+      cell:'',
+      compName:'',
+      companyAddIndex:0,
+      collectionDate:null,
+      deliveryDate:null,
+      companyName:[],
+      addressName:[],
+      addressNames:[
+        [
+          {
+            id:1, name:'Birmingham', detail:'Rectory Road Sutton Coldfield, B75 7RR', phone:'+44 121 424 2000'
+          }
+        ],
+        [
+          {
+            id:1, name:'Birmingham', detail:'Bordesley Green East, B9 5SS', phone:'+44 121 424 2000'
+          }
+        ],
+        [
+          {
+            id:1, name:'Birmingham', detail:'Mindelsohn Way Edgbaston, B15 2GW', phone:'+44 121 627 2000'
+          }
+        ],
+        [
+          {
+            id:1, name:'Birmingham', detail:'Lode Lane Solihull, B91 2JL', phone:'+44 121 424 2000'
+          }
+        ],
+        [
+          {
+            id:1, name:'Nottingham', detail:'Hucknall Road, NG5 1PB', phone:'+44 115 969 1169'
+          }
+        ],
+        [
+          {
+            id:1, name:'Nottingham', detail:'Lister Rd, Lenton, NG7 2FT', phone:'+44 115 919 4477'
+          }
+        ],
+        [
+          {
+            id:1, name:'Nottingham', detail:'Derby Rd, Lenton,NG7 2UH', phone:'+44 115 924 9924'
+          }
+        ],
+        [
+          {
+            id:1, name:'St. Louis', detail:'114 N Taylor Ave, St. Louis, MO 63108',phone:'+314 534 8600'
+          },
+          {
+            id:2, name:'Jacksonville', detail:'4411 Sunbeam Rd, Jacksonville, FL 32257', phone:'+904 737 4852'
+          },
+          {
+            id:3, name:'Chicago', detail:'3650 W Armitage Ave, Chicago, IL 60647', phone:'+773 772 5111'
+          },
+          {
+            id:4, name:'Frederick', detail:'3 Hillcrest Dr STE A101, Frederick, MD 21703', phone:'+240 575 9940'
+          },
+          {
+            id:5, name:'Staten Island', detail:'165 Vanderbilt Ave, Staten Island, NY 10304', phone:'+1 844 692 4692'
+          },
+          {
+            id:6, name:'New York', detail:'230 W 17th St, New York, NY 10011', phone:'+212 206 5200'
+          }
+        ]
+      ],
+      isSubmit:false,
+      labPrint:false,
+      labDisp:false,
+      kitPrint:false,
+      kitDisp:false,
+
+
       shippingTableDataColumn: [
         {
           title: `${this.$store.getters.getTranslation.ShippType_2_766}`,
@@ -840,7 +1176,6 @@ export default {
         this.customDisplayDataShipInfo[5].title = newValues.ShippTempe_2_733
         this.customDisplayDataShipInfo[6].title = newValues.CouriPhone_2_734
         this.customDisplayDataShipInfo[7].title = newValues['Initiby:_2_661']
-        this.customDisplayDataShipInfo[8].title = newValues['Date:_1_664']
 
         this.customDisplayDataSelectionPackage[0].title =
           newValues['Selecby:_2_772']
@@ -871,9 +1206,11 @@ export default {
   mounted() {
     this.getTranslationData()
     this.handleActiveTab()
+    this.getCompany()
   },
   methods: {
     disabledDate: _disabledPreviousDate,
+    isEmpty,
     handleActiveTab(view) {
       this.setActiveTab(view)
     },
@@ -888,6 +1225,79 @@ export default {
       if (this.record && this.record.projectId) {
         this.getSteps(this.record.projectId);
       }      
+    },
+    getCompany(){
+      CompanyAddressServices.getCompanies().then((response)=>{
+        this.companyName=response.data
+      })
+    },
+    searchCompany(name) {
+      // this.selectedIdex=name-1
+      CompanyAddressServices.getAddressesByCompany(name).then((response)=>{
+        this.addressName=response.data
+      })
+      console.log(this.selectedIdex)
+    },
+    searchAddress(id){
+      if(id!==undefined && id!=='other'){
+        this.compnayAddress=this.addressName.find(item=>item.id===id).completeAddress
+        this.cell=this.addressName.find(item=>item.id===id).phoneNo
+        this.compName=this.addressName.find(item=>item.id===id).companyName
+        console.log(this.compnayAddress)
+      }
+    },
+    addAddressModel(e) {
+      this.addressForm.resetFields()
+      this.isCreatedAddress = false
+      this.visibleAddAddress = e
+    },
+    onSubmitAddress(e) {
+      e.preventDefault()
+      this.addressForm.validateFields((err, values) => {
+        if (!err) {
+          this.loading = true
+          console.log(values)
+          this.compnayAddress=values.completeAddress
+          this.loading=false
+          this.visibleAddAddress=false
+          /* 
+            CompanyAddressServices.createAddress(values).then((response)=>{
+              success(this, { message: response.data })
+                this.fetchEquipments()
+                this.loading = false
+                this.isCreatedAddress = false
+                this.addressForm.resetFields()
+            }).catch(this.error)
+         */
+        }
+      })
+    },
+    submitLabel(){
+      this.record=JSON.parse(this.$route.query.record)
+      console.log(this.record)
+      const dateParts = this.record.collectionDateDeliveryDate.split('-');
+      const arrivalDates = this.parseDate(dateParts[0]);
+      const expiryDates = this.parseDate(dateParts[1]);
+      const obj={
+        sampleId:this.record.patientEnrollmentNumber,
+        sampleName:this.record.treatmentType,
+        clientName:this.record.hospital,
+        labelStatus:'Dispatched',
+        arrivalDate:arrivalDates,
+        expiryDate:expiryDates,
+        company:this.compName,
+        address:this.compnayAddress,
+        phoneNo:this.cell,
+      }
+      console.log(obj)
+      LabelServices.create(obj).then((response)=>{
+        console.log(response)
+        this.goto('/inventory/treatment')
+      })
+    },
+    parseDate(dateStr) {
+      const [day, month, year] = dateStr.split('/').map(Number);
+      return new Date(year, month - 1, day); // Subtract 1 from the month since months are zero-indexed
     },
     getSteps(projectId){
         StepServices.getByProjectId(projectId).then((response) => {
@@ -940,7 +1350,6 @@ export default {
         this.translation.CouriPhone_2_734
       this.customDisplayDataShipInfo[7].title =
         this.translation['Initiby:_2_661']
-      this.customDisplayDataShipInfo[8].title = this.translation['Date:_1_664']
 
       this.customDisplayDataSelectionPackage[0].title =
         this.translation['Selecby:_2_772']
@@ -1002,7 +1411,21 @@ export default {
     printWindow() {
       window.print()
     },
-    clickSubmit() {
+    clickSubmit(val, opt) {
+      console.log(customDisplayDataSelectionPackage)
+      this.statusDetails[0].createdOn=moment().add(-6, 'day').format('DD/MM/YYYY')
+      customDisplayDataShipInfo[3].value=moment(this.collectionDate, 'DD/MM/YYYY').format('DD/MM/YYYY')
+      // customDisplayDataShipInfo[8].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-1, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[4].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-4, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[5].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-3, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[6].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-2, 'day').format('DD/MM/YYYY')
+      customDisplayDataSelectionPackage[7].value=moment(this.collectionDate, 'DD/MM/YYYY').add(-1, 'day').format('DD/MM/YYYY')
+      if(opt==='print'){
+        this.kitPrint=true
+      }else{
+        this.kitPrint=false
+      }
+      
       this.showCourierModal = true
       // this.handleLogisticsModal(true)
     },
@@ -1014,9 +1437,9 @@ export default {
       this.showCourierModal = false
     },
     handleCourierModalOk() {
-      this.success('Submitted successfully')
+      
       this.showCourierModal = false
-      this.goto('/inventory/storage/tasks')
+      // this.goto('/inventory/storage/tasks')
     },
     confirm(show) {
       this.showLogisticsModal = show
@@ -1028,6 +1451,51 @@ export default {
         this.goto(url)
       }
     },
+    handleDateChange(date){
+            this.collectionDate=date.format('DD/MM/YYYY')
+        },
+        handleDeliveryDateChange(date){
+            this.deliveryDate=date.format('DD/MM/YYYY')
+        },
+        
+        handleOk() {
+            this.showModal = false
+        },
+        handelCancel(val){
+            this.showModal = val
+        },
+        handleKitOk() {
+            this.showModalKit = false
+        },
+        handelKitCancel(val){
+            this.showModalKit = val
+        },
+        openPopViewModal(val, opt) {
+            if(opt==='print'){
+            this.labPrint=true
+            }else{
+            this.labPrint=false
+            }
+            this.showModal = val
+        },
+        openPopKitViewModal(val, opt) {
+            if(opt==='print'){
+            this.kitPrint=true
+            }else{
+            this.kitPrint=false
+            }
+            
+            this.showModal = val
+        },
+        printLabWindow(opt) {
+            if(opt==='kit'){
+            this.showModalKit = false
+            }
+            else{
+            this.showModal = false
+            }
+            window.print()
+        },
   },
 }
 </script>

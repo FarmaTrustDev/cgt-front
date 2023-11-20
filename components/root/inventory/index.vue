@@ -5,6 +5,7 @@
         <a-tabs
           :animated="false"
           class="h-tabs no-border-bottom"
+          style="margin-top: -30px;"
           :default-active-key="1"
           @change="callback"
         >

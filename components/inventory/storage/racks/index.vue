@@ -32,7 +32,7 @@ export default {
       this.autoSelects=autoSelect
       this.currentCounter=counter
       this.activeIndex=index
-      this.$emit('getRackPortion', portion, this.autoSelects)
+      this.$emit('getRackPortion', portion, counter, this.autoSelects)
     },
   },
 }
