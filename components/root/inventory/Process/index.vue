@@ -185,7 +185,7 @@
       <p v-if="inboundCheck">{{translation.Doyou_7_626}}</p>
       <template #footer>
         <a-button key="back" @click="handleErrorShowModal(false)">{{translation.no_1_656}}</a-button>
-        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">{{translation.yes_1_654}}</a-button>
+        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false)">{{translation.yes_1_654}}</a-button>
       </template>      
     </a-modal>
     <a-modal
@@ -1068,16 +1068,16 @@ export default {
       this.showInventoryModal=false
     },
     handleInventoryOk(){
-      if(this.inboundCheck===true){
+      /* if(this.inboundCheck===true){
         this.showQuaranitineModal=true
         this.showInventoryModal=false
-      }else{
+      }else{ */
         this.success('Submitted successfully')
         this.showInventoryModal=false
         const obj=JSON.stringify(this.$route.query.record)
         console.log(obj)
         this.goto('/inventory/storage/ColorFridge?inbound=true&record='+obj)
-      }
+      // }
     },
     handleCourierModal(){
       this.showCourierModal=false
