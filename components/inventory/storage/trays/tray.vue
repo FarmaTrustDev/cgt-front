@@ -24,7 +24,12 @@
 import imagesHelper from '~/mixins/images-helper'
 export default {
   mixins: [imagesHelper],
-  props: { tube: { type: Object, default: () => ({}) }, isHovers:{type: Boolean}, },
+  props: { 
+    tube: { type: Object, default: () => ({}) }, 
+    isHovers:{type: Boolean}, 
+    col:{type: Number},
+    row:{type:Number},
+  },
   data() {
     return {
       isHover: this.isHovers,
@@ -43,7 +48,11 @@ export default {
     handleHoverDisable(result) {
       // console.log(this.tube)
       this.makeHoverDisable = result
+      this.getColRow(this.col, this.row)
     },
+    getColRow(col, row){
+      this.$emit('getColRow', col+1, row+1)
+    }
   },
 }
 </script>

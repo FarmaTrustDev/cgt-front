@@ -76,7 +76,7 @@
       </a-row>
       </a-form>
       <h3 class="page-title ml-40">{{translation.SelecStora_3_602}}</h3>  
-          <Listing :storages="storage" :selectedVials="vials" :typeId="isInbound" />
+          <Listing :storages="storage" :record="record" :selectedVials="vials" :typeId="isInbound" />
         <!--</a-tab-pane>
         <a-tab-pane key="products" :tab="translation.Listall_3_537">
           <a-input
@@ -153,6 +153,7 @@ export default {
       showModal:false,
       storage: baseStorageQuarantine2,
       vials:'',
+      record:{},
       data1: {
         countryName: 'Germany - Cellfuse',
         address: 'Volmersbachstr. 66 D-55743 Idar-Oberstein Germany',
@@ -321,6 +322,9 @@ export default {
     this.data = this.productsData
     if (this.$route.query.inbound) {
       this.isInbound = true
+    }
+    if (this.$route.query.record) {
+      this.record = JSON.parse(this.$route.query.record)
     }
   },
   methods: {

@@ -49,7 +49,7 @@
     <div class="margin-auto p-15 default-border-radius">
       <a-row :gutter="16">
         <a-col v-for="storage in storages" :key="storage.id" :span="6">
-          <span @click="typeId === true ? goto(`/inventory/storage/location/save?vial=${selectedVials}`) : goto(`/inventory/storage/1`)">
+          <span @click="typeId === true ? goto(`/inventory/storage/location/save?fridge=${storage.title}&vial=${selectedVials}&record=${record}`) : goto(`/inventory/storage/1`)">
             <Tile class="light-shadow" :storage="storage"
           /></span>
         </a-col>
@@ -70,6 +70,9 @@ export default {
     storages: { type: Array, default: () => [] },
     typeId:{ type: Boolean},
     selectedVials:{type: String},
+    record:{type: Object,
+      default: () => {},
+    }
   },
   data() {
     return {

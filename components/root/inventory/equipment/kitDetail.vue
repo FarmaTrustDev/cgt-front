@@ -1,8 +1,8 @@
 <template>
     <div>
-      <a-card :bordered="null" class="default-border-radius shadow">
+      <a-card :bordered="null" class="default-border-radius shadow" style="margin-bottom: -5px;">
         <a-tabs>
-          <a-tab-pane key="1" class="display-inline-block border-bottom-none font-size-18" tab="All">
+          <a-tab-pane key="1" class="display-inline-block border-bottom-none font-size-14" tab="All" style="margin-top: -10px; margin-bottom: -30px;">
             <!-- <a-tab-pane key="1" :tab="translation.ClassB_3_572"> -->
             <ImageHeading 
                 v-for="(c, index) in classAll" 
@@ -11,7 +11,7 @@
             >
             
               <span slot="extra">
-                <span><img :src="getImageUrl(c.img)"></span>
+                <span><img :src="getImageUrl(c.img)" height="50px" width="40px" style="margin-top: 2px;"></span>
               </span>
             
               <!-- :img-properties="{ width: '50px', height: '50px' }" -->
@@ -26,7 +26,7 @@
             >
             
               <span slot="extra">
-                <span><img :src="getImageUrl(c.img)"></span>
+                <span><img :src="getImageUrl(c.img)" height="50px" width="40px" style="margin-top: 3px;"></span>
               </span>
             
               <!-- :img-properties="{ width: '50px', height: '50px' }" -->
@@ -40,7 +40,7 @@
               :detail="c"
             >
               <span slot="extra">
-                <span><img :src="getImageUrl(c.img)"></span>
+                <span><img :src="getImageUrl(c.img)" height="50px" width="40px"></span>
               </span>
             </ImageHeading>
             <!-- :img-properties="{ width: '50px', height: '50px' }" -->
@@ -52,7 +52,7 @@
               :detail="c"
             >
               <span slot="extra">
-                <span><img :src="getImageUrl(c.img)"></span>
+                <span><img :src="getImageUrl(c.img)" height="50px" width="40px"></span>
               </span>
             </ImageHeading>
             <!-- :img-properties="{ width: '50px', height: '50px' }" -->
@@ -95,11 +95,11 @@
       return {
         classAll: [
           {
-            // img: 'Icons/kits.svg',
-            img: 'web/inventory/tubes.svg',
-            heading: 'Tubes',
-            qty: 950
+            img: 'web/inventory//label.svg',
+            heading: 'Labels',
+            qty: 1000
           },
+          
           {
             img: 'web/inventory/gloves.svg',
             heading: 'Gloves',
@@ -121,9 +121,10 @@
             qty: 450
           },
           {
-            img: 'web/inventory//label.svg',
-            heading: 'Labels',
-            qty: 1000
+            // img: 'Icons/kits.svg',
+            img: 'web/inventory/tubes.svg',
+            heading: 'Tubes',
+            qty: 950
           },
           {
             img: 'web/inventory//needles.svg',
@@ -155,11 +156,7 @@
             heading: 'Cotton swabs',
             qty: 500
           },
-          {
-            img: 'web/inventory//plaster.svg',
-            heading: 'Plasters',
-            qty: 300
-          },
+         
         ],
         classA: [
         

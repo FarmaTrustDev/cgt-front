@@ -185,7 +185,7 @@
       <p v-if="inboundCheck">{{translation.Doyou_7_626}}</p>
       <template #footer>
         <a-button key="back" @click="handleErrorShowModal(false)">{{translation.no_1_656}}</a-button>
-        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false), handleQuarantineModal(true)">{{translation.yes_1_654}}</a-button>
+        <a-button v-if="inboundCheck" key="submit" type="primary" :loading="loading" @click="handleErrorShowModal(false)">{{translation.yes_1_654}}</a-button>
       </template>      
     </a-modal>
     <a-modal
@@ -203,6 +203,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
@@ -214,6 +215,7 @@ import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import imagesHelper from '~/mixins/images-helper'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 
 
 export const customDisplayDataMRI = [
@@ -363,25 +365,25 @@ export const customDisplayDataMRI = [
   },  
   {
     title: '',
-    value: '27/06/2022',
+    value: moment(_getFutureMomentStandardFormatted(365,'day')).format("DD/MM/YYYY"),
     key:24,
     url:''
   },
   {
     title: '',
-    value: '27/06/2022',
+    value: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
     key:25,
     url:''
   }, 
   {
     title: '',
-    value: '27/06/2022',
+    value: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
     key:26,
     url:''
   }, 
   {
     title: '',
-    value: '27/06/2022',
+    value: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
     key:27,
     url:'web/icons/greenTick.png',
   },                     
@@ -408,7 +410,7 @@ export const customDisplayDataShipInfo = [
   },
   {
     title: '',
-    value: '27/06/2022',
+    value: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
     key:3,
     url:'',
   },  
@@ -438,7 +440,7 @@ export const customDisplayDataShipInfo = [
   },
   {
     title: '',
-    value: '27/06/2023 at 14:00',
+    value: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
     key:8,
     url:'',
   },              
@@ -487,8 +489,8 @@ export const contentTracking2= [
 ]
 export const contentTrackingQA= [
     {
-      createdEvent: 'PR.27.06.2022',
-      dateCreated: '27/06/2022 at 13:34',
+      createdEvent: 'PR.'+moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD.MM.YYYY"),
+      dateCreated: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY") + ' at 13:34',
       createdBy: 'David Handerson',
       fromStep: 'New Event',
       status: 'Review',
@@ -497,7 +499,7 @@ export const contentTrackingQA= [
 export const customDisplayDataReleaseBy = [
   {    
     releaseBy: 'David Handerson',
-    date: '27/06/2022',
+    date: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
     key:0,
   },        
 ]
@@ -574,7 +576,7 @@ export default {
         project: 'Texas Test Project',
         protocol: 'Kiet Test',
         description: 'Novartis Receipt',
-        createdOn: '27/06/2022',
+        createdOn: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
         location: 'Cryoport - London',
       }],
       loading: false,
@@ -881,15 +883,19 @@ export default {
             this.showInventoryModal=true
           }
           if(this.typeId === 'quarantine'){
-            this.goto('/inventory/storage/ColorFridge?inbound=true')
+            const obj=JSON.stringify(this.record)
+            this.goto('/inventory/storage/ColorFridge?inbound=true&record='+obj)
           }
           if (this.typeId === 'outbound') {
-            this.showSchedulingModal=true
+            this.$emit('handleActiveTab', 'COURIER')
+            const obj=JSON.stringify(this.record)
+            this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
+            // this.showSchedulingModal=true
           }
         }else{
           if(this.typeId==='inbound'){
             this.inboundCheck=true
-            this.showInventoryModal=true
+            // this.showInventoryModal=true
             // this.showQuaranitineModal=true
           }
           if(this.typeId!=='inbound'){
@@ -1062,14 +1068,16 @@ export default {
       this.showInventoryModal=false
     },
     handleInventoryOk(){
-      if(this.inboundCheck===true){
+      /* if(this.inboundCheck===true){
         this.showQuaranitineModal=true
         this.showInventoryModal=false
-      }else{
+      }else{ */
         this.success('Submitted successfully')
         this.showInventoryModal=false
-        this.goto('/inventory/storage/ColorFridge?inbound=true')
-      }
+        const obj=JSON.stringify(this.$route.query.record)
+        console.log(obj)
+        this.goto('/inventory/storage/ColorFridge?inbound=true&record='+obj)
+      // }
     },
     handleCourierModal(){
       this.showCourierModal=false

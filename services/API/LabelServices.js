@@ -14,9 +14,30 @@ function scheduling(id) {
     url: `${baseApi}/scheduling/${id}`,
   })
 }
+function create(data) {
+  return request({
+    url: `${baseApi}`,
+    data,
+    method: 'POST',
+  })
+}
+function getAllLabels() {
+  return request({
+    url: `${baseApi}/getLabels`,
+  })
+}
+function update(status, id) {
+  return request({
+    url: `${baseApi}/${id}/${status}`,
+    method: 'Put',
+  })
+}
 const LabelServices = {
   hospital,
   scheduling,
+  getAllLabels,
+  create,
+  update
 }
 
 export default LabelServices

@@ -52,7 +52,7 @@
               <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
-                  <span class="step-col" functional>
+                  <span  class="step-col" functional>
                     <a-steps :initial="1" size="small">
                       <a-step
                         v-for="phase in phases"
@@ -84,11 +84,10 @@
                     </a-steps>
                   </span>
                 </div>
-
-                <!-- //Steps -->
               </span>
             </a-table>
           </a-tab-pane>
+          
           <a-tab-pane key="2" tab="Outbound">
             <a-input
               ref="userNameInput"
@@ -118,6 +117,54 @@
                           phase.id === 2 ? 'ant-steps-item-active-blue' : ''
                         "
                         @click="stepClickOut(record, phase)"
+                      />
+                    </a-steps>
+                  </span>
+                </div>
+              </span>
+
+              <!-- ==== steps === -->
+            </a-table>
+          </a-tab-pane>
+          <a-tab-pane key="3" tab="Sample Kits">
+            <a-input
+              ref="userNameInput"
+              :placeholder="translation.searc_1_488"
+              class="float-right inventory-search mb-15"
+              @change="
+                (e) => outboundSearch(e.target.value, 'patientEnrollmentNumber')
+              "
+            >
+              <a-icon slot="prefix" type="search" class="mt-5" />
+            </a-input>
+            <a-table
+              class="rounded-table"
+              :columns="kitColumns"
+              :data-source="sampleKits"
+            >
+              <!-- ==== steps === -->
+              <template slot="print" slot-scope="record, print">
+                <a-button
+                  v-if="print.processSample === 'default'"
+                  @click="openViewModal(record)"
+                  ><img :src="getImageUrl('Icons/Union.svg')"
+                /></a-button>
+                <a-button v-else @click="openPopViewModal(true, print)">
+                  <img :src="getImageUrl('Icons/Union.svg')"
+                /></a-button>
+              </template>
+              <span slot="action" slot-scope="text, record">
+                <div class="treatment-steps">
+                  <span class="step-col" functional>
+                    <a-steps :initial="1" :current="2" size="small">
+                      <a-step
+                        v-for="phase in kitPhase"
+                        :key="phase.id"
+                        :title="phase.name"
+                        :class="
+                          phase.id === 2 ? 'ant-steps-item-active-blue' : ''
+                        "
+                        @click="phase.id === 2 ? stepKitClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -236,6 +283,7 @@ import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import {
   SMART_LAB_TREATMENT_PENDING_PHASES,
   INVENTORY_OUTBOUND_STATUS_STEPS,
+  SMART_LAB_KIT_COLLECTION_PHASES,
 } from '~/services/Constant/Phases'
 import routeHelpers from '~/mixins/route-helpers'
 import imagesHelper from '~/mixins/images-helper'
@@ -258,7 +306,7 @@ export const customDisplayData = [
   },
   {
     title: '',
-    value: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY"),
+    value: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY"),
     key: 2,
     url: '',
   },
@@ -276,7 +324,7 @@ export const customDisplayData = [
   },
   {
     title: '',
-    value: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY"),
+    value: moment(_getFutureMomentStandardFormatted(-1,'day')).format("DD/MM/YYYY"),
     key: 5,
     url: '',
   },
@@ -381,6 +429,7 @@ export const newSampleData = [
     projectId:'506',
     processSample: 'green',
     email:'baystate@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC7986',
@@ -393,6 +442,7 @@ export const newSampleData = [
     projectId:'7157',
     processSample: 'green',
     email:'novartis@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -405,6 +455,7 @@ export const newSampleData = [
     projectId:'7157',
     processSample: 'red',
     email:'novartis@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC7996',
@@ -417,6 +468,7 @@ export const newSampleData = [
     projectId:'506',
     processSample: 'default',
     email:'baystate@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC9874',
@@ -429,6 +481,7 @@ export const newSampleData = [
     projectId:'506',
     processSample: 'default',
     email:'baystate@gmail.com',
+    type:1,
   },
 ]
 export const completedSampleData = [
@@ -442,6 +495,7 @@ export const completedSampleData = [
     projectId:'2440',
     dispatchedBy: 'Ben Hawkins',
     email:'adaptimmune@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC2237',
@@ -453,6 +507,7 @@ export const completedSampleData = [
     projectId:'2440',
     dispatchedBy: 'Shawn David',
     email:'adaptimmune@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC85597',
@@ -464,6 +519,7 @@ export const completedSampleData = [
     projectId:'594',
     dispatchedBy: 'Chris Murphy',
     email:'kite@gmail.com',
+    type:1,
   },
   {
     patientEnrollmentNumber: 'DAC39647',
@@ -475,6 +531,37 @@ export const completedSampleData = [
     projectId:'594',
     dispatchedBy: 'Allen Braun',
     email:'kite@gmail.com',
+    type:1,
+  },
+]
+export const sampleKits=[
+  {
+    patientEnrollmentNumber: 'KIT341',
+    treatmentType: 'Laeuka Kit',
+    hospital: 'Adaptimmune',
+    hospitalName:'The Royal Hospital',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
+    print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:false,
+    projectName:'BayState USA OUT89873',
+    projectId:'2440',
+    processSample: 'green',
+    email:'baystate@gmail.com',
+    type:2,
+  },
+  {
+    patientEnrollmentNumber: 'KIT246',
+    treatmentType: 'Aphresis Kit',
+    hospital: 'Syneous',
+    hospitalName:'The Royal Hospital',
+    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
+    print: 'Uploads/DocumentURL/shipping notice.jpg',
+    inbound:false,
+    projectName:'BayState UK OUT89873',
+    projectId:'2456',
+    processSample: 'green',
+    email:'baystate@gmail.com',
+    type:2,
   },
 ]
 export const allSampleData = [
@@ -555,6 +642,7 @@ export default {
       phases: SMART_LAB_TREATMENT_PENDING_PHASES,
       outboundSteps: INVENTORY_OUTBOUND_STATUS_STEPS,
       customDisplayData,
+      kitPhase:SMART_LAB_KIT_COLLECTION_PHASES,
       customDisplayDataMat,
       completedColumns: [
         {
@@ -599,7 +687,6 @@ export default {
           scopedSlots: { customRender: 'status-steps' },
         },
       ],
-
       pendingSampleData: [
         {
           patientEnrollmentNumber: 'DAC7986',
@@ -672,6 +759,52 @@ export default {
         },
         {
           title: `${this.$store.getters.getTranslation.Docum_1_507}`,
+          dataIndex: 'print',
+          key: 'print',
+          scopedSlots: { customRender: 'print' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          dataIndex: 'action',
+          scopedSlots: {
+            customRender: 'action',
+          },
+        },
+      ],
+      kitColumns: [
+        {
+          title: `Kit ID`,
+          dataIndex: 'patientEnrollmentNumber',
+          key: 'patientEnrollmentNumber',
+        },
+        {
+          title: `Kit Name`,
+          dataIndex: 'treatmentType',
+          key: 'treatmentType',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Clien_1_505}`,
+          dataIndex: 'hospital',
+          key: 'hospital',
+        },
+        {
+          title: 'Project ID',
+          dataIndex: 'projectId',
+          key: 'projectId',
+        },
+        {
+          title: 'Project Name',
+          dataIndex: 'projectName',
+          key: 'projectName',
+        },
+
+        {
+          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
+          dataIndex: 'collectionDateDeliveryDate',
+          key: 'collectionDateDeliveryDate',
+        },
+        {
+          title: `Kit Shipping Details`,
           dataIndex: 'print',
           key: 'print',
           scopedSlots: { customRender: 'print' },
@@ -762,6 +895,7 @@ export default {
 
       inbound: newSampleData,
       outbound: completedSampleData,
+      sampleKits,
       allSample: allSampleData,
       activeTab:'1',
       statusDetails: [
@@ -856,6 +990,9 @@ export default {
       } else if(record.inbound===true && phase.id!==3){
         this.goto(phase.url_slug+'&record='+JSON.stringify(record))
       }
+    },
+    stepKitClick(record, phase) {
+      this.goto(phase.url_slug+'?view=KIT_BUILDER&record='+JSON.stringify(record))
     },
     getActiveTab(){
       if(this.$route.query.id){

@@ -66,6 +66,20 @@
             >
           </div>
         </span>
+        <template slot="position" slot-scope="position">
+          <span :key="position">
+            <table class="testTubeTable w-100" style="border: none; border-color: white;">
+              <tr>
+                <td v-for="(sel,index) in selectedData" :key="index">{{ sel.colIndex + toLetters(sel.rowIndex) }}</td>
+              </tr>
+            </table>
+          </span>
+        </template>
+        <template slot="fridge" slot-scope="fridge">
+          <span :key="fridge">
+            <div>{{ fridgeTitle }}</div>
+          </span>
+        </template>
         <template slot="print" slot-scope="print, index">
           <a-button
             class="print-btn"
@@ -92,7 +106,7 @@
           ><a-button
             style="width: 100%; font-size: 20px"
             type="primary"
-            @click="goto('/inventory/treatment')"
+            @click="submitLabel()"
             >{{ translation.finis_1_508 }}</a-button
           ></a-col
         >
@@ -196,9 +210,10 @@
 import moment from 'moment'
 import routeHelpers from '~/mixins/route-helpers'
 import PageLayout from '~/components/layout/PageLayout'
-
+import LabelServices from '~/services/API/LabelServices'
 import imagesHelper from '~/mixins/images-helper'
 import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
+import { toLetters } from '~/services/Helpers'
 // import { newSampleData } from '../treatment/index.vue'
 // import { isEmpty } from '~/services/Utilities'
 // import { isNumber } from '~/services/Helpers'
@@ -218,6 +233,9 @@ export default {
       checkAll: false,
       labelData:{},
       selectedRowKeys: [],
+      record:{},
+      selectedData:[],
+      fridgeTitle:'',
       qrUrl: 'Uploads/DocumentURL/shipping notice.png',
       newTasksColumns: [
         {
@@ -239,6 +257,9 @@ export default {
           title: `${this.$store.getters.getTranslation.Freez_1_624}`,
           dataIndex: 'fridge',
           key: 'fridge',
+          scopedSlots: {
+            customRender: 'fridge',
+          },
         },
         {
           title: `${this.$store.getters.getTranslation.Posit_1_645}`,
@@ -329,11 +350,33 @@ export default {
       }
     },
   },
+  mounted() {
+    if(this.$route.query.record){
+      this.record=this.$route.query.record
+      this.selectedData=this.$route.query.dt
+      this.fridgeTitle=this.$route.query.fridge
+    }
+    this.getPosition()
+  },
   methods: {
     _getFutureMomentStandardFormatted,
     moment,
+    toLetters,
     handleModal(show) {
       this.showModal = show
+    },
+    getPosition(){
+      console.log(this.$route.query.dt)
+      this.selectedData=JSON.parse(this.$route.query.dt)
+    },
+    getUniqueRowIndices() {
+      // Get unique rowIndex values from the data
+      if(this.selectedData !== undefined){
+        if(this.selectedData.length>0){
+          return [...new Set(this.selectedData.map((item) => item.rowIndex))];
+        }
+      }
+      return null
     },
     handlePrintModal(show) {
       this.showAllModal = show
@@ -344,6 +387,30 @@ export default {
     }, */
     openViewAllModal(id) {
       this.showAllModal = true
+    },
+    submitLabel(){
+      this.record=JSON.parse(this.$route.query.record)
+      console.log(this.record)
+      const dateParts = this.record.collectionDateDeliveryDate.split('-');
+      const arrivalDates = this.parseDate(dateParts[0]);
+      const expiryDates = this.parseDate(dateParts[1]);
+      const obj={
+        sampleId:this.record.patientEnrollmentNumber,
+        sampleName:this.record.treatmentType,
+        clientName:this.record.hospital,
+        labelStatus:'Stored',
+        arrivalDate:arrivalDates,
+        expiryDate:expiryDates,
+      }
+      console.log(obj)
+      LabelServices.create(obj).then((response)=>{
+        console.log(response)
+        this.goto('/inventory/treatment')
+      })
+    },
+    parseDate(dateStr) {
+      const [day, month, year] = dateStr.split('/').map(Number);
+      return new Date(year, month - 1, day); // Subtract 1 from the month since months are zero-indexed
     },
     handleOk() {
         this.showModal = false

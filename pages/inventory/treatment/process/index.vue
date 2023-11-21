@@ -239,7 +239,7 @@
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs test"
           style="width: 96%; margin-left: 2%"
-        >
+        > 
           <div class="h-tabs large-tabs" style="width: 100%">
             <div>
               <strong style="font-size: 1.25rem">{{
