@@ -125,6 +125,17 @@
     }
   }
 }
+.qP-approval-body {
+  .ant-tabs-nav-container {
+    padding: 0;
+  }
+  .ant-tabs.ant-tabs-card {
+    .ant-tabs-tab {
+      width: 17.4%;
+      // color: #000;
+    }
+  }
+}
 .treatment_tabs {
   .default-card.no-shadow >
     .ant-card-body {

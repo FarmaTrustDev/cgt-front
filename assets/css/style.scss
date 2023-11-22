@@ -783,3 +783,12 @@ a {
   background-color: #f9f9f9;
   padding-top: 15px;
 }
+.selChange{
+  .ant-form-item-control input, .ant-form-item-control textarea, .ant-form-item-control .ant-select-selection--single {
+    border-radius: 1px;
+    height:30px;
+    padding: 0 0 0 0;
+    margin-bottom: 1px;
+    background-color: white;
+  }
+}
