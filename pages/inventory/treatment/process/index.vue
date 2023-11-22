@@ -371,9 +371,9 @@ export default {
   watch: {
     translation(newValues, oldValue) {
       if (newValues !== oldValue) {
-        this.phases[0].name = newValues.InbouAccep_3_834
+        // this.phases[0].name = newValues.InbouAccep_3_834
         this.phases[1].name = newValues.ProceSampl_2_499
-        this.phases[2].name = newValues.StoreSampl_2_579
+        // this.phases[2].name = newValues.StoreSampl_2_579
 
         this.dummyCollection[0].name = newValues.Hasthe_8_592
         this.dummyCollection[1].name = newValues.Doesthe_8_593
@@ -382,7 +382,7 @@ export default {
         this.dummyCollection[4].name = newValues.Confithe_13_596
         this.dummyCollection[5].name = newValues.Confino_5_597
         this.dummyCollection[6].name = newValues.Confithere_6_598
-        this.dummyCollection[7].name = newValues.Confithat_12_599
+        // this.dummyCollection[7].name = newValues.Confithat_12_599
 
         this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583
         this.dummyOutBoundCollection[1].name = newValues.Doessampl_6_584
@@ -400,9 +400,9 @@ export default {
   },
   methods: {
     getTranslationData() {
-      this.phases[0].name = this.translation.InbouAccep_3_834
+      // this.phases[0].name = this.translation.InbouAccep_3_834
       this.phases[1].name = this.translation.ProceSampl_2_499
-      this.phases[2].name = this.translation.StoreSampl_2_579
+      // this.phases[2].name = this.translation.StoreSampl_2_579
     },
     handleActiveTab() {
       this.activeTab = this.$route.query.view

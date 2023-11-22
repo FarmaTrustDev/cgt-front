@@ -120,15 +120,15 @@
       // bottom: 0;
       margin: auto;
       height: 2px;
-      left: 82px;
+      left: 50px;
       background-color: #d8d8d8;
     }
     // .ant-steps-small.ant-steps-label-horizontal {
     // display: block !important;
     // }
     .ant-steps-item {
-      margin-right: 8px !important;
-      padding-right: 3px;
+      margin-right: 4px !important;
+      padding-right: 4px;
       margin-bottom: 4px;
       margin-top: 4px;
     }
@@ -327,7 +327,7 @@
     margin-left: 2%;
     border-radius: 20px;
     height: 60px;
-    min-width: 30%;
+    min-width: 25%;
     .ant-steps-item-content {
       margin-left: 5%;
       font-weight: 400;
@@ -352,7 +352,7 @@
     margin-left: 2%;
     border-radius: 20px;
     height: 60px;
-    min-width: 30%;
+    min-width: 25%;
     .ant-steps-item-content {
       font-weight: 600;
       font-size: 1.8rem;
@@ -395,7 +395,7 @@
     margin-left: 2%;
     border-radius: 20px;
     height: 60px;
-    min-width: 30%;
+    min-width: 20%;
     .ant-steps-item-content {
       font-weight: 600;
       font-size: 1.8rem;
@@ -418,7 +418,7 @@
     margin-left: 2%;
     border-radius: 20px;
     height: 60px;
-    min-width: 30%;
+    min-width: 20%;
     .ant-steps-item-content {
       margin-left: 20px;
       font-weight: 400;
@@ -441,9 +441,10 @@
   .ant-steps-item-active-blue {
     background-color: #d1e8f2;
     .ant-steps-item-content {
-      margin-left: 5px;
+      margin-left: 2px;
+      margin-right: 3px;
       &::before {
-        margin-left: 5px;
+        margin-left: 2px;
         background-image: url(https://cgt-dev-ft.microsysx.com/images/v2/icons/circle-active.svg);
       }
     }
@@ -468,7 +469,7 @@
 
   .ant-steps-horizontal {
     & .ant-steps-item:last-child {
-      padding-right: 5px;
+      padding-right: 10px;
       padding-left: 0;
       // flex: auto;
     }
@@ -477,7 +478,7 @@
   .ant-steps-horizontal-large {
     border-radius: 20px;
     height: 60px;
-    min-width: 30%;
+    min-width: 25%;
     margin-left: 2%;
     // margin-right: 5%;
     .ant-steps-item-content {
