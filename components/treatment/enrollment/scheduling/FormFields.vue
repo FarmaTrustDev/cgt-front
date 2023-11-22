@@ -94,6 +94,29 @@
           </a-date-picker> </a-form-item
       ></a-col>
       <a-col :span="8" class="plr-10">
+        <a-form-item
+        label="Time"
+        >
+          <a-input
+          v-decorator="[
+            'time',{
+              initialValue: entity.time,
+              rules: [
+                  {
+                    required: true,
+                    message: 'Please select time',
+                  },
+                ],
+            }
+
+          ]"
+          type="time"
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+    <a-row>
+      <a-col :span="8" class="plr-10">
         <a-form-item label="Lab Delivery Date" class="pb-0">
           <a-date-picker
             v-decorator="[
@@ -115,8 +138,6 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
-    </a-row>
-    <a-row>
       <a-col :span="8" class="plr-10">
         <a-form-item label="Production Start Date" class="pb-0">
           <a-date-picker
@@ -160,6 +181,31 @@
           >
           </a-date-picker> </a-form-item
       ></a-col>
+      
+    </a-row>
+    <a-row>
+      <a-col :span="8" class="plr-10">
+        <a-form-item label="Treatment Arrival Date" class="pb-0">
+          <a-date-picker
+            v-decorator="[
+              'deliveryArrivalDate',
+              {
+                initialValue: entity.deliveryArrivalDate,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your Treatment Arrival Date',
+                  },
+                ],
+              },
+            ]"
+            :format="dateFormat"
+            :disabled-date="disabledDate"
+            style="width: 100%"
+            size="large"
+          >
+          </a-date-picker> </a-form-item
+      ></a-col>
       <a-col :span="8" class="plr-10">
         <a-form-item label="Duration" class="pb-0">
           <a-input-number
@@ -182,31 +228,7 @@
             :disabled="true"
           ></a-input-number> </a-form-item
       ></a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="12" class="plr-10">
-        <a-form-item label="Treatment Arrival Date" class="pb-0">
-          <a-date-picker
-            v-decorator="[
-              'deliveryArrivalDate',
-              {
-                initialValue: entity.deliveryArrivalDate,
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please select your Treatment Arrival Date',
-                  },
-                ],
-              },
-            ]"
-            :format="dateFormat"
-            :disabled-date="disabledDate"
-            style="width: 100%"
-            size="large"
-          >
-          </a-date-picker> </a-form-item
-      ></a-col>
-      <a-col :md="12" class="plr-10">
+      <a-col :md="8" class="plr-10">
         <a-form-item :label="translation.Notes_1_350" class="pb-0">
           <a-textarea
             v-decorator="[

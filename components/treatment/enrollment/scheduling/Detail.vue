@@ -9,8 +9,9 @@
       </a-descriptions-item>
       <br />
       <a-descriptions-item :label="translation.SamplDeliv_3_730">
-        {{ getDateFormat(entity.deliveryDate) }}
+        {{ getDateFormat(entity.deliveryDate) + getTime(entity.time)  }}
       </a-descriptions-item>
+
     </a-descriptions>
     <hr class="line" />
     <a-descriptions
@@ -52,6 +53,7 @@
 
 <script>
 import moment from 'moment'
+import { isEmpty } from '~/services/Helpers'
 export default {
   props: {
     entity: {
@@ -74,6 +76,12 @@ export default {
     getDateFormat(date) {
       return moment(String(date)).format(' DD/MM/YYYY')
     },
+    getTime(time) {
+      if(!isEmpty(time)){
+        return " at " + time
+      }
+      else { return ""}
+    }
   },
 }
 </script>

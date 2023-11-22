@@ -44,6 +44,17 @@
                   }}</a>
           </span>
         </template>
+        <template slot="qp" slot-scope="qp">
+          <span>
+            <a-button
+              class="print-btn"
+              type="primary"
+              size="small"
+              @click="goto(`/project/qpProcess?id=${qp.globalId}`)"
+              >Create QP</a-button
+            >
+          </span>
+        </template>
         <template slot="projectDate" slot-scope="projectDate">
           <span>
             {{ moment(projectDate.projectDate).format('DD/MM/YYYY') }}
@@ -151,6 +162,11 @@
             scopedSlots: { customRender: 'projectName' },
           },
           {
+            title: 'Task',
+            key: 'taskName',
+            dataIndex: 'taskName',
+          },
+          {
             title:'Date',
             key: 'projectDate',
             scopedSlots: { customRender: 'projectDate' },
@@ -159,6 +175,11 @@
             title: 'Principle Investigator',
             key: 'projectInvestigator',
             scopedSlots: { customRender: 'investigator' },
+          },
+          {
+            title: 'Create QP',
+            key: 'qp',
+            scopedSlots: { customRender: 'qp' },
           },
           {
             title: `${this.$store.getters.getTranslation.Actio_1_220}`,
