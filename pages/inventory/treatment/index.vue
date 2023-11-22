@@ -946,11 +946,11 @@ export default {
 
         this.phases[0].name = newValues.inboushipm_2_302
         this.phases[1].name = newValues.ProceSampl_2_499
-        this.phases[2].name = newValues.StoreSampl_2_579
+        // this.phases[2].name = newValues.StoreSampl_2_579
 
         this.outboundSteps[0].name = newValues.StoreSampl_2_579
         this.outboundSteps[1].name = newValues.OutboProce_2_514
-        this.outboundSteps[2].name = newValues.Couri_1_234
+        // this.outboundSteps[2].name = newValues.Couri_1_234
 
         this.customDisplayData[0].title = newValues.ReturMater_2_660
         this.customDisplayData[1].title = newValues['Initiby:_2_661']
@@ -1089,11 +1089,11 @@ export default {
     getTranslationData() {
       this.phases[0].name = this.translation.inboushipm_2_302
       this.phases[1].name = this.translation.ProceSampl_2_499
-      this.phases[2].name = this.translation.StoreSampl_2_579
+      // this.phases[2].name = this.translation.StoreSampl_2_579
 
       this.outboundSteps[0].name = this.translation.StoreSampl_2_579
       this.outboundSteps[1].name = this.translation.OutboProce_2_514
-      this.outboundSteps[2].name = this.translation.Couri_1_234
+      // this.outboundSteps[2].name = this.translation.Couri_1_234
 
       this.customDisplayData[0].title = this.translation.ReturMater_2_660
       this.customDisplayData[1].title = this.translation['Initiby:_2_661']
