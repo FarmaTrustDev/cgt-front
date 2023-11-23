@@ -18,7 +18,7 @@
                     />
   
                     <figcaption>
-                      Kit ID: {{record.patientEnrollmentNumber}}
+                      Kit ID: {{record.sampleId}}
                     </figcaption>
                   </figure>
                 </a-card>
@@ -41,7 +41,7 @@
                       </a-col>
                       <a-col :span="7" class="mt-15">
                         <h6>
-                          <span> {{ record.hospital}}</span>
+                          <span> {{ record.clientName}}</span>
                         </h6>
                       </a-col>
                       <a-col :span="5" class="mt-15">
@@ -52,7 +52,7 @@
                         </h6>
                       </a-col>
                       <a-col :span="7" class="mt-15">
-                        <h6><span>{{record.treatmentType}}</span></h6>
+                        <h6><span>{{record.sampleName}}</span></h6>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -65,7 +65,7 @@
                       </a-col>
                       <a-col :span="7" class="mt-15">
                         <h6>
-                          <span> {{record.email}}</span>
+                          <span> info@gmail.com</span>
                         </h6>
                       </a-col>
                       <a-col :span="5" class="mt-15">

@@ -19,7 +19,7 @@
                   />
 
                   <figcaption>
-                    {{ translation.SamplID_2_502 }}: {{record.patientEnrollmentNumber}}
+                    {{ translation.SamplID_2_502 }}: {{record.sampleId}}
                   </figcaption>
                 </figure>
               </a-card>
@@ -42,7 +42,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.hospital}}</span>
+                        <span> {{record.clientName}}</span>
                       </h6>
                     </a-col>
                     <a-col :span="5" class="mt-15">
@@ -66,7 +66,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.email}}</span>
+                        <span> info@gmail.com</span>
                       </h6>
                     </a-col>
                   </a-row>
@@ -143,7 +143,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(-1, 'days').format('DD/MM/YYYY') }} </span>
+                        <span class="text-muted"> {{ _getFormatMoment(record.arrivalDate).format("DD/MM/YYYY") }} </span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -173,7 +173,7 @@
                         }}</span>
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(2, 'days').format('DD/MM/YYYY') }}</span>
+                        <span class="text-muted"> {{ _getFormatMoment(record.arrivalDate).format("DD/MM/YYYY") }}</span>
                       </a-col>
                     </a-row>
                   </div>
@@ -215,7 +215,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted">  {{ record.collectionDateDeliveryDate.split("-")[0] }}</span>
+                        <span class="text-muted">  {{ _getFormatMoment(record.arrivalDate).format("DD/MM/YYYY") }}</span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -271,6 +271,7 @@ import tabsHelpers from '~/mixins/tabs-helpers'
 import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
 import StepServices from '~/services/API/StepServices'
+import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
 export default {
   components: {
     'page-layout': PageLayout,
@@ -399,6 +400,7 @@ export default {
     // this.getSteps()
   },
   methods: {
+    _getFormatMoment,
     getTranslationData() {
       // this.phases[0].name = this.translation.InbouAccep_3_834
       this.phases[1].name = this.translation.ProceSampl_2_499
