@@ -256,6 +256,9 @@
           </div>
         </a-card>
       </div>
+      <div>
+        <QPProcess></QPProcess>
+        </div>
     </template>
   </page-layout>
 </template>
@@ -271,10 +274,11 @@ import tabsHelpers from '~/mixins/tabs-helpers'
 import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
 import StepServices from '~/services/API/StepServices'
+import QPProcess from '~/components/root/inventory/qpProcess'
 export default {
   components: {
     'page-layout': PageLayout,
-    Process,
+    Process,QPProcess
     // shipment,
   },
   mixins: [tabsHelpers, routeHelpers],
