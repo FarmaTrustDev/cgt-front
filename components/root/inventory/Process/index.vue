@@ -73,15 +73,24 @@
         </template>
 
         <template slot="email" slot-scope="name, row">
-          <InstantUpload
+          <!-- <InstantUpload
             :saved-list="row.uploads"
-            :action="bagService.uploads(row.id)"
             :show-button="false"
-          >
+            :action="bagService.uploads(row.id)"
+            >
             <a-button slot="button" type="">
               <a-icon type="upload" />
             </a-button>
-          </InstantUpload>
+          </InstantUpload> -->
+          <a-upload
+            name="file"
+            :before-upload="beforeUploadWithParam(row.id)"
+            :multiple="true"
+            :default-file-list="savedList"
+            @change="handleChange(row.id, $event)"
+          ><a-button> <a-icon type="upload" /> </a-button>
+             <slot name="button"></slot>
+            </a-upload> 
         </template>
         <template slot="action" slot-scope="name, row">
           <a-button
@@ -208,7 +217,7 @@ import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
 import Quarantine from '~/components/inventory/quarantine'
-import InstantUpload from '~/components/upload/InstantUpload'
+// import InstantUpload from '~/components/upload/InstantUpload'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
 import routeHelpers from '~/mixins/route-helpers'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
@@ -216,7 +225,7 @@ import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import imagesHelper from '~/mixins/images-helper'
 import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
-
+import SampleProcessServices from '~/services/API/SampleProcessServices'
 
 export const customDisplayDataMRI = [
   {
@@ -529,7 +538,9 @@ export const customDisplayDataOrderReview = [
   },          
 ]
 export default {
-  components: { Email, InstantUpload, Quarantine,StatusDetail,CustomDisplay,treatmentTable },
+  components: { Email, 
+    // InstantUpload, 
+    Quarantine,StatusDetail,CustomDisplay,treatmentTable },
   mixins: [notifications, routeHelpers,imagesHelper],
   props: {
     collections: { required: true, type: Array },
@@ -740,7 +751,7 @@ export default {
           key: 'availability',
         },
       ],
-      
+      checkboxValues:new Array(8).fill(false),
       btnLoading: false,
       showEmailModal: false,
       body: null,
@@ -766,7 +777,11 @@ export default {
       customDisplayDataOrderReview,
       customDisplayDataShipInfo,
       errorMessage:`${this.$store.getters.getTranslation.Thecheck_10_582}`,
-      promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,      
+      promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,  
+      imgData: [] ,
+      images: {},
+      savedList:[],   
+      outputArray :[]
     }
   },
   computed: {
@@ -877,9 +892,33 @@ export default {
       this.form.validateFields((err,values)=>{
         if(!err){
           console.log(this.$route.query.record)
-          
+          console.log(this.checkboxValues)
+          console.log(values)
+          const data = JSON.parse(JSON.stringify(this.collections))
+          console.log(data)
+          for (const question of data) {
+            const imageUrl = this.imgData.find(item => item.iBSId === question.id) !== undefined ? this.imgData.find(item => item.iBSId === question.id).imgData : ''
+            const stepId = question.id
+            const action = values.collection[`id-`+question.id].collect
+            const notes =  values.collection[`id-`+question.id].notes
+            const stepName = question.name
+            const sampleId = JSON.parse(this.$route.query.record).patientEnrollmentNumber
+            this.outputArray.push({
+            notes,
+            action,
+            imageUrl,
+            stepId,
+            stepName,
+            sampleId
+          })
+          }
+          console.log(this.outputArray,  'array')
           // console.log(this.typeId)
           if ((this.typeId === 'inbound')) {
+            this.loading = true
+            SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+            }).catch(this.error).finally(this.loading = false)
             this.showInventoryModal=true
           }
           if(this.typeId === 'quarantine'){
@@ -894,6 +933,7 @@ export default {
           }
         }else{
           if(this.typeId==='inbound'){
+
             this.inboundCheck=true
             // this.showInventoryModal=true
             // this.showQuaranitineModal=true
@@ -901,7 +941,7 @@ export default {
           if(this.typeId!=='inbound'){
             this.error()
           }
-          
+
           // console.log(this.typeId)
           // alert("You have missed the option(s) 'No'. Do you want to quarantine the sample?")
         }
@@ -1024,6 +1064,7 @@ export default {
       if(this.filledData<0){
         this.filledData=0
       }
+      this.checkboxValues[rowId] = value
       // this.sendData(this.filledData)
     },
     handleInput(rowId,e) {
@@ -1094,6 +1135,36 @@ export default {
       title: this.errorMessage,
       // content: 'some messages...some messages...',
     });
+    },
+    beforeUploadWithParam(param) {
+      return (file) => {
+        const reader = new FileReader();
+        reader.onload = (event)=> {
+        const resultData = event.target.result;
+        const res=resultData.split(',')[1];
+        this.pushListImage(res,param)
+        };
+        reader.readAsDataURL(file);
+        return false;
+
+      };
+    },
+    pushListImage(image,id)
+    {
+      this.imgData.push({iBSId:id,imgData:image})
+    },
+    handleChange(id, info) {
+      if (info.file.status !== 'uploading') {
+        const file = info;
+        if(file){ 
+          this.images[id] = info
+        }
+      }
+      if (info.file.status === 'done') {
+        this.$message.success(`${info.file.name} file uploaded successfully`)
+      } else if (info.file.status === 'error') {
+        this.$message.error(`${info.file.name} file upload failed.`)
+      }
     },
   },
 }
