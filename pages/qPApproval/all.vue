@@ -1,8 +1,12 @@
 <template>
     <a-table :loading="loading" :columns="column" :data-source="data">
+      <template slot="arrivalDate" slot-scope="arrivalDate">
+            {{ arrivalDate.arrivalDate }} - {{ arrivalDate.expiryDate  }}
+        </template>
     </a-table>
 </template>
 <script>
+import QPStatusServices from '~/services/API/QPStatusServices';
 export default {
   data() {
     return {
@@ -19,19 +23,19 @@ export default {
             },
             {
                 title: `Arrival - Expiry Date`,
-                key: 'organizationName',
-                scopedSlots: { customRender: 'organizationName' },
+                key: 'arrivalDate',
+                scopedSlots: { customRender: 'arrivalDate' },
             },
             {
                 title: 'Client Name',
                 key : 'clientName',
-                scopedSlots : { customRender : 'duration'}, 
+                dataIndex: 'clientName', 
             },
             {
-                title: `Action`,
-                dataIndex: 'action',
-                scopedSlots: { customRender: 'action' },
-            },
+              title: 'Status',
+              key: 'status',
+              dataIndex : 'status'
+            }
             ],
       loading: false,
       data: [],
@@ -42,7 +46,16 @@ export default {
   },
   watch:{
   },  
+  mounted(){
+    this.getAll()
+  },
   methods: {
+    getAll(){
+      this.loading = true
+      QPStatusServices.getAll().then((response)=>{
+        this.data = response.data
+      }).catch(this.error).finally(this.loading = false)
+    }
   },
 }
 </script>
