@@ -1114,7 +1114,6 @@ export default {
         this.showQuaranitineModal=true
         this.showInventoryModal=false
       }else{ */
-        debugger
         this.loading = true
             SampleProcessServices.create(this.outputArray).then((response)=>{
               this.outputArray = [] 
