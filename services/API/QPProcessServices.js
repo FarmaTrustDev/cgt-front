@@ -10,6 +10,13 @@ function create(data){
         data,
     })
 }
+function updateQp(data){
+    return request({
+        url: `${baseApi}`,
+        method : 'PUT',
+        data,
+    })
+}
 
 function get(){
     return request({
@@ -30,6 +37,12 @@ function getById(id){
         method : 'GET'
     })
 }
+function deleteQPProcess(id){
+    return request({
+        url : `${baseApi}/${id}`,
+        method : 'DELETE'
+    })
+}
 
 
 
@@ -37,7 +50,9 @@ const QPProcessServices = {
     create,
     get,
     getById,
-    getByProjectId
+    getByProjectId,
+    deleteQPProcess,
+    updateQp
 }
 
 export default QPProcessServices
