@@ -902,23 +902,24 @@ export default {
             const action = values.collection[`id-`+question.id].collect
             const notes =  values.collection[`id-`+question.id].notes
             const stepName = question.name
-            const sampleId = JSON.parse(this.$route.query.record).patientEnrollmentNumber
+            const sampleId = JSON.parse(this.$route.query.record).sampleId
+            const taskId = JSON.parse(this.$route.query.record).taskId
+            const taskName = JSON.parse(this.$route.query.record).taskName
             this.outputArray.push({
             notes,
             action,
             imageUrl,
             stepId,
             stepName,
-            sampleId
+            sampleId,
+            taskId,
+            taskName
           })
           }
           console.log(this.outputArray,  'array')
           // console.log(this.typeId)
           if ((this.typeId === 'inbound')) {
-            this.loading = true
-            SampleProcessServices.create(this.outputArray).then((response)=>{
-              this.outputArray = [] 
-            }).catch(this.error).finally(this.loading = false)
+            
             this.showInventoryModal=true
           }
           if(this.typeId === 'quarantine'){
@@ -1113,6 +1114,11 @@ export default {
         this.showQuaranitineModal=true
         this.showInventoryModal=false
       }else{ */
+        debugger
+        this.loading = true
+            SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+            }).catch(this.error).finally(this.loading = false)
         this.success('Submitted successfully')
         this.showInventoryModal=false
         const obj=JSON.stringify(this.$route.query.record)
