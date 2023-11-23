@@ -129,7 +129,10 @@ import FormFields from '~/components/root/sample/formField'
         SampleServices
           .create(values)
           .then((response) => {
+            // this.success(response.message)
+            // this.countDown(response)
             this.goto('/inventory/treatment')
+            // this.goto('/inbound/samples/qualityAssurance?id='+response.data.sampleGuid)
             if (this.isFunction(this.afterCreate)) {
               this.afterCreate(response)
               this.btnLoading = false
