@@ -78,6 +78,17 @@
                 ]"
               />
             </a-form-item>
+            <a-form-item>
+              <a-input
+                type="hidden"
+                v-decorator="[
+                  'id',
+                  {
+                    initialValue: 0,
+                  },
+                ]"
+              />
+            </a-form-item>
           </a-row>
           <a-row class="bg-grey pt-2">  
             
@@ -112,7 +123,7 @@
           <a-row>  
             <a-col>
               <a-form-item>
-                <FormActionButton custom-text="Add Step" class="mt-40" />
+                <FormActionButton :custom-text="stepAct" class="mt-40" />
                 <!-- @click="showStep(false)" -->
               </a-form-item>
             </a-col>
@@ -122,9 +133,14 @@
         <a-row >
             <a-col :span="24">
             <div v-for="(step, index) in steps" :key="index">
-                <div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
+                <a-col :span="20"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
                 {{ step.question }}
                 </div>
+              </a-col>
+              <a-col :span="4" class="mt-15">
+                <a-button @click="editQPProcess(step.id)" class="ml-20">Edit</a-button>
+                <a-button @click="deleteQPProcess(step.id)">Delete</a-button>
+              </a-col>
             </div>
             </a-col>
         </a-row>
@@ -161,8 +177,10 @@
         visibleAddSoftware: false,
         softwareticket: {},
         isCreated: false,
+        isCreatedStep:true,
         visible: false,
         show: true,
+        stepAct:'Add Step',
         loading: false,
         form: this.$form.createForm(this, { name: 'processForm' }),
         stepForm: this.$form.createForm(this, { name: 'stepForm' }),
@@ -276,6 +294,24 @@
           })
         }
       }, */
+      editQPProcess(id)
+      {
+        QPProcessServices.getById(id).then((response)=>{
+          this.stepForm.setFieldsValue({
+            question:response.data.question,
+            id:response.data.id
+          }
+          )
+          this.stepAct = 'Update'
+          this.isCreatedStep = false
+        })
+      },
+      deleteQPProcess(id)
+      {
+        QPProcessServices.deleteQPProcess(id).then((response)=>{
+         this.getByProcessId(this.processId)
+        })
+      },
       visibleModel(e) {
         this.visible = e
       },
@@ -333,16 +369,27 @@
         this.stepForm
           .validateFields((err, values) => {
             if (!err) {
-              if (this.isCreated) {
-                values.projectId = this.processId;
-                values.projectName = this.processName;
-                values.taskId = this.taskId;
-                values.taskName = this.taskName
+              values.projectId = this.processId;
+              values.projectName = this.processName;
+              values.taskId = this.taskId;
+              values.taskName = this.taskName
+              if (this.isCreatedStep) {
                 QPProcessServices.create(values).then((response) => {
                   // this.showStep(false)
                   this.getByProcessId(this.processId)
                   this.loading = false
                   this.stepForm.setFieldsValue({ question: '' })
+                })
+              }
+              else{
+                QPProcessServices.updateQp(values).then((response) => {
+                  // this.showStep(false)
+                  this.getByProcessId(this.processId)
+                  this.loading = false
+                  this.stepForm.setFieldsValue({ question: '' })
+                  this.isCreatedStep = true
+                  this.stepAct = 'Add Step'
+
                 })
               }
             }
@@ -411,7 +458,7 @@
           this.processName=response.data.description
           this.taskName=response.data.taskName
           this.taskId = response.data.taskId
-          this.getByProcessId(response.data.id)
+          this.getByProcessId(this.processId)
         })
       },
       handleCheck(isCheck, id) {
