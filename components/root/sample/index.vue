@@ -21,18 +21,14 @@
     </div>
   </template>
   <script>
-  import moment from 'moment'
-//   import routeHelpers from '~/mixins/route-helpers'
-//   import nullHelper from '~/mixins/null-helpers'
-//   import notifications from '~/mixins/notifications'
-//   import UserServices from '~/services/API/UserServices'
-//   import ProjectServices from '~/services/API/ProjectServices'
+import moment from 'moment'
+import routeHelpers from '~/mixins/route-helpers'
 import SampleServices from '~/services/API/SampleServices'
-  import FormFields from '~/components/root/sample/FormField'
+import FormFields from '~/components/root/sample/formField'
   // import { isEmpty } from '~/services/Helpers'
   export default {
     components: { FormFields },
-    // mixins: [notifications, routeHelpers, nullHelper],
+    mixins: [routeHelpers],
   
     data() {
       return {
@@ -133,9 +129,7 @@ import SampleServices from '~/services/API/SampleServices'
         SampleServices
           .create(values)
           .then((response) => {
-            this.success(response.message)
-            this.countDown(response)
-            // this.goto('/inbound/samples/qualityAssurance?id='+response.data.sampleGuid)
+            this.goto('/inventory/treatment')
             if (this.isFunction(this.afterCreate)) {
               this.afterCreate(response)
               this.btnLoading = false
@@ -148,25 +142,6 @@ import SampleServices from '~/services/API/SampleServices'
             this.loading = false
           })
       },
-      countDown(response) {
-      let secondsToGo = 2;
-      const modal = this.$success({
-        title: 'Sample has been registered successfully',
-        
-      });
-      const interval = setInterval(() => {
-        secondsToGo -= 1;
-        modal.update({
-          // content: `This modal will be destroyed after ${secondsToGo} second.`,
-        });
-      }, 1000);
-      setTimeout(() => {
-        clearInterval(interval);
-        modal.destroy();
-        this.goto('/task')
-        // this.goto('/inbound/samples/qualityAssurance?id='+response.data.sampleGuid)
-      }, secondsToGo * 1000);
-    },
       onSubmit(e) {
         this.loading = true
         e.preventDefault()
