@@ -9,6 +9,12 @@ function getById(id) {
   })
 }
 
+function getSampleByTaskId(id) {
+  return request({
+    url: `${baseApi}/task-id/${id}`,
+  })
+}
+
 function create(data){
     return request({
         url: `${baseApi}`,
@@ -19,7 +25,8 @@ function create(data){
 
 const SampleServices = {
   getById,
-  create
+  create,
+  getSampleByTaskId
 }
 
 export default SampleServices

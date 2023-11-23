@@ -39,6 +39,9 @@
               :data-source="inbound"
               :should-fetch="false"
             >
+              <template slot="colDateDeliveryDate" slot-scope="record, colDateDeliveryDate">
+                <span>{{ colDateDeliveryDate.collectionDateDeliveryDate }}</span>
+              </template>
               <template slot="print" slot-scope="record, print">
                 <a-button
                   v-if="print.processSample === 'default'"
@@ -279,6 +282,8 @@ import PageLayout from '~/components/layout/PageLayout'
 import Header from '~/components/inventory/treatment/treatmentheader'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
+import SampleServices from '~/services/API/SampleServices'
+import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
 // import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import {
   SMART_LAB_TREATMENT_PENDING_PHASES,
@@ -728,18 +733,18 @@ export default {
       newSampleColumns: [
         {
           title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
+          dataIndex: 'sampleId',
+          key: 'sampleId',
         },
         {
           title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
+          dataIndex: 'sampleName',
+          key: 'sampleName',
         },
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
+          dataIndex: 'clientName',
+          key: 'clientName',
         },
         {
           title: 'Project ID',
@@ -754,8 +759,8 @@ export default {
 
         {
           title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
+          dataIndex: 'colDateDeliveryDate',
+          scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
         {
           title: `${this.$store.getters.getTranslation.Docum_1_507}`,
@@ -981,6 +986,8 @@ export default {
     this.getLocalStorage()
     this.$store.commit('setSelectedMenu', [`2`])
     this.getActiveTab()
+    this.sampleStepsByTaskId()
+    this.sampleByTaskId()
   },
   methods: {
     searchTreatment() {},
@@ -990,6 +997,18 @@ export default {
       } else if(record.inbound===true && phase.id!==3){
         this.goto(phase.url_slug+'&record='+JSON.stringify(record))
       }
+    },
+    sampleStepsByTaskId(){
+      const actTabId=parseInt(this.activeTab)
+      SmartLabTasksServices.getStepsByTaskId(actTabId).then((response)=>{
+        console.log(response.data)
+      })
+    },
+    sampleByTaskId(){
+      const actTabId=parseInt(this.activeTab)
+      SampleServices.getSampleByTaskId(actTabId).then((response)=>{
+        console.log(response.data)
+      })
     },
     stepKitClick(record, phase) {
       this.goto(phase.url_slug+'?view=KIT_BUILDER&record='+JSON.stringify(record))
