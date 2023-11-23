@@ -19,7 +19,7 @@
                   />
 
                   <figcaption>
-                    {{ translation.SamplID_2_502 }}: {{record.patientEnrollmentNumber}}
+                    {{ translation.SamplID_2_502 }}: {{record.sampleId}}
                   </figcaption>
                 </figure>
               </a-card>
@@ -42,7 +42,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.hospital}}</span>
+                        <span> {{record.clientName}}</span>
                       </h6>
                     </a-col>
                     <a-col :span="5" class="mt-15">
@@ -66,7 +66,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.email}}</span>
+                        <span> info@gmail.com</span>
                       </h6>
                     </a-col>
                   </a-row>
@@ -329,7 +329,7 @@
                 <a-col :span="10"><img :src="getImageUrl('label/qrCode.svg')" width="350" height="120" /></a-col>
                 <a-col :span="14">
                 <a-row>
-                    <a-col>Laeuka Collection Kit</a-col>
+                    <a-col>Human Cells/Cellules Humaines/人体细胞</a-col>
                 </a-row>
                 <a-row>
                     <a-col :span="6"><img :src="getImageUrl('label/dated.svg')"> 14/12/2024</a-col>

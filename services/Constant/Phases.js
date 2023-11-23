@@ -254,7 +254,7 @@ export const KIT_COLLECTION_PHASES = [
         alias: 'QP_SK_Process',
         phaseId: 11,
         enablePageId: 11,
-        url_slug: '',
+        url_slug: '/inventory/treatment/sKQProcess',
         url_type: URL_TYPE.treatment,
         params: { view: 'QP_SK_Process' }
     },

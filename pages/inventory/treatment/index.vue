@@ -40,7 +40,7 @@
               :should-fetch="false"
             >
               <template slot="colDateDeliveryDate" slot-scope="record, colDateDeliveryDate">
-                <span>{{ colDateDeliveryDate.collectionDateDeliveryDate }}</span>
+                <span>{{ _getFormatMoment(colDateDeliveryDate.arrivalDate).format("DD/MM/YYYY") }} - {{ _getFormatMoment(colDateDeliveryDate.expiryDate).format("DD/MM/YYYY") }}</span>
               </template>
               <template slot="print" slot-scope="record, print">
                 <a-button
@@ -52,7 +52,7 @@
                   <img :src="getImageUrl('Icons/Union.svg')"
                 /></a-button>
               </template>
-              <span slot="action" slot-scope="text, record">
+              <span slot="action" slot-scope="text, record">{{ record.nexStepId }}
                 <!-- //Steps -->
                 <div class="treatment-steps">
                   <span  class="step-col" functional>
@@ -60,29 +60,19 @@
                       <a-step
                         v-for="phase in phases"
                         :key="phase.id"
-                        :title="phase.name"
+                        :title="phase.taskStepName"
                         :status="
-                          phase.id === 2 && record.processSample == 'red'
-                            ? 'wait'
-                            : ''
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                          phase.id === 2 && record.processSample == 'red'
-                            ? 'ant-steps-item-error'
-                            : phase.id === 2 && record.processSample !== 'red'
-                            ? 'ant-steps-item-active-blue'
-                            : (phase.id === 1 && record.processSample==='red')||(phase.id !== 3 && record.inbound===true)
+                          phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
-                            : ''
+                            : phase.id === (record.stageId+1)
+                            ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="
-                          phase.id === 2 && record.processSample == 'red'
-                            ? stepClick(
-                                'error',
-                                '/inventory/storage/quarantine/status'
-                              )
-                            : stepClick(record, phase)
-                        "
+                        @click="phase.url!=='' ? stepClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -105,21 +95,32 @@
             <a-table
               class="rounded-table"
               :columns="completedColumns"
-              :data-source="outbound"
+              :data-source="inbound"
             >
               <!-- ==== steps === -->
+              <template slot="colDateDeliveryDate" slot-scope="record, colDateDeliveryDate">
+                <span>{{ _getFormatMoment(colDateDeliveryDate.arrivalDate).format("DD/MM/YYYY") }} - {{ _getFormatMoment(colDateDeliveryDate.expiryDate).format("DD/MM/YYYY") }}</span>
+              </template>
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                    <a-steps :initial="1" :current="2" size="small">
+                    <a-steps :initial="1" size="small">
                       <a-step
-                        v-for="phase in outboundSteps"
+                        v-for="phase in phases"
                         :key="phase.id"
-                        :title="phase.name"
-                        :class="
-                          phase.id === 2 ? 'ant-steps-item-active-blue' : ''
+                        :title="phase.taskStepName"
+                        :status="
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                        @click="stepClickOut(record, phase)"
+                        :class="
+                          phase.id <= record.stageId
+                            ? 'ant-steps-item-finish'
+                            : phase.id === (record.stageId+1)
+                            ? 'ant-steps-item-active-blue' : ''
+                        "
+                        @click="phase.url!=='' ? stepClickOut(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -143,9 +144,12 @@
             <a-table
               class="rounded-table"
               :columns="kitColumns"
-              :data-source="sampleKits"
+              :data-source="inbound"
             >
               <!-- ==== steps === -->
+              <template slot="colDateDeliveryDate" slot-scope="record, colDateDeliveryDate">
+                <span>{{ _getFormatMoment(colDateDeliveryDate.arrivalDate).format("DD/MM/YYYY") }} - {{ _getFormatMoment(colDateDeliveryDate.expiryDate).format("DD/MM/YYYY") }}</span>
+              </template>
               <template slot="print" slot-scope="record, print">
                 <a-button
                   v-if="print.processSample === 'default'"
@@ -161,13 +165,21 @@
                   <span class="step-col" functional>
                     <a-steps :initial="1" :current="2" size="small">
                       <a-step
-                        v-for="phase in kitPhase"
+                        v-for="phase in phases"
                         :key="phase.id"
-                        :title="phase.name"
-                        :class="
-                          phase.id === 2 ? 'ant-steps-item-active-blue' : ''
+                        :title="phase.taskStepName"
+                        :status="
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                        @click="phase.id === 2 ? stepKitClick(record, phase) : ''"
+                        :class="
+                          phase.id <= record.stageId
+                            ? 'ant-steps-item-finish'
+                            : phase.id === (record.stageId+1)
+                            ? 'ant-steps-item-active-blue' : ''
+                        "
+                        @click="phase.url!=='' ? stepKitClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -284,6 +296,7 @@ import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import SampleServices from '~/services/API/SampleServices'
 import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
+import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
 // import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import {
   SMART_LAB_TREATMENT_PENDING_PHASES,
@@ -652,23 +665,23 @@ export default {
       completedColumns: [
         {
           title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
+          dataIndex: 'sampleId',
+          key: 'sampleId',
         },
         {
           title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
+          dataIndex: 'sampleName',
+          key: 'sampleName',
         },
         {
           title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
-          dataIndex: 'productionLine',
-          key: 'productionLine',
+          dataIndex: 'location',
+          key: 'location',
         },
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
+          dataIndex: 'clientName',
+          key: 'clientName',
         },
         {
           title: 'Project ID',
@@ -681,9 +694,9 @@ export default {
           key: 'projectName',
         },
         {
-          title: 'Execution Date - Expiry Date',
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
+          title: 'Execution - Expiry Date',
+          dataIndex: 'colDateDeliveryDate',
+          scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
         {
           title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
@@ -758,7 +771,7 @@ export default {
         },
 
         {
-          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
+          title: `Arrival - Expiry Date`,
           dataIndex: 'colDateDeliveryDate',
           scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
@@ -779,18 +792,18 @@ export default {
       kitColumns: [
         {
           title: `Kit ID`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
+          dataIndex: 'sampleId',
+          key: 'sampleId',
         },
         {
           title: `Kit Name`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
+          dataIndex: 'sampleName',
+          key: 'sampleName',
         },
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
+          dataIndex: 'clientName',
+          key: 'clientName',
         },
         {
           title: 'Project ID',
@@ -804,9 +817,9 @@ export default {
         },
 
         {
-          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
+          title: `Arrival - Expiry Date`,
+          dataIndex: 'colDateDeliveryDate',
+          scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
         {
           title: `Kit Shipping Details`,
@@ -942,15 +955,15 @@ export default {
         this.pendingColumns[4].title = newValues.ArrivDate_5_535
         this.pendingColumns[5].title = newValues.Actio_1_220
 
-        this.newSampleColumns[0].title = newValues.SamplID_2_502
+        /* this.newSampleColumns[0].title = newValues.SamplID_2_502
         this.newSampleColumns[1].title = newValues.SamplName_2_503
         this.newSampleColumns[2].title = newValues.Clien_1_505
         this.newSampleColumns[3].title = newValues.ArrivDate_5_535
         this.newSampleColumns[4].title = newValues.Docum_1_507
-        this.newSampleColumns[5].title = newValues.Actio_1_220
+        this.newSampleColumns[5].title = newValues.Actio_1_220 */
 
-        this.phases[0].name = newValues.inboushipm_2_302
-        this.phases[1].name = newValues.ProceSampl_2_499
+        // this.phases[0].name = newValues.inboushipm_2_302
+        // this.phases[1].name = newValues.ProceSampl_2_499
         // this.phases[2].name = newValues.StoreSampl_2_579
 
         this.outboundSteps[0].name = newValues.StoreSampl_2_579
@@ -991,37 +1004,46 @@ export default {
   },
   methods: {
     searchTreatment() {},
+    _getFormatMoment,
     stepClick(record, phase) {
       if (record === 'error') {
         this.goto(phase)
-      } else if(record.inbound===true && phase.id!==3){
-        this.goto(phase.url_slug+'&record='+JSON.stringify(record))
+      } else{
+        this.goto(phase.url+'&record='+JSON.stringify(record))
       }
     },
     sampleStepsByTaskId(){
       const actTabId=parseInt(this.activeTab)
       SmartLabTasksServices.getStepsByTaskId(actTabId).then((response)=>{
         console.log(response.data)
+        this.phases=response.data
       })
     },
     sampleByTaskId(){
       const actTabId=parseInt(this.activeTab)
       SampleServices.getSampleByTaskId(actTabId).then((response)=>{
         console.log(response.data)
+        this.inbound=response.data
       })
     },
     stepKitClick(record, phase) {
-      this.goto(phase.url_slug+'?view=KIT_BUILDER&record='+JSON.stringify(record))
+      this.goto(phase.url+'?view=KIT_BUILDER&record='+JSON.stringify(record))
     },
     getActiveTab(){
       if(this.$route.query.id){
         this.activeTab="2"
+        this.sampleByTaskId()
+        this.sampleStepsByTaskId()
       }else{
         this.activeTab="1"
+        this.sampleByTaskId()
+        this.sampleStepsByTaskId()
       }
     },
     tabChange(key) {
       this.activeTab = key
+      this.sampleByTaskId()
+      this.sampleStepsByTaskId()
     },
     getLocalStorage(){
       if(localStorage.getItem('acceptedNow')==="true" && localStorage.getItem('isNew')==="true"){
@@ -1071,12 +1093,10 @@ export default {
       }
     },
     stepClickOut(record, phase) {
-      if (record === 'error') {
-        this.goto(phase)
-      } else if(phase.phaseId===1) {
-        this.goto(phase.url_slug+'?record='+JSON.stringify(record))
-      } else if (phase.phaseId===2){
-        this.goto(phase.url_slug+'&record='+JSON.stringify(record))
+      if(phase.id===5) {
+        this.goto(phase.url+'?record='+JSON.stringify(record))
+      } else if (phase.id===6){
+        this.goto(phase.url+'&record='+JSON.stringify(record))
       }
     },
     
