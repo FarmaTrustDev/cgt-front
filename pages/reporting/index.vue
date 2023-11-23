@@ -38,12 +38,11 @@
           </div>
           <div slot="doc" slot-scope="">
             <a-button
-              icon="printer"
               class="print-btn"
               type="primary"
               size="small"
               @click="goto(`/reporting/cocreport`)"
-              >{{ translation.ViewForm_2_789 }}</a-button
+              >COC Report</a-button
             >
           </div>
         </a-table>
@@ -167,12 +166,12 @@ export default {
           key: 'sample',
         },
         {
-          title: `${this.$store.getters.getTranslation.QualiPerso_2_787}`,
+          title: 'Qualified Person',
           dataIndex: 'name',
           key: 'name',
         },
         {
-          title: `${this.$store.getters.getTranslation.ArrivDate_2_788}`,
+          title: 'Arrival Date',
           dataIndex: 'date',
           key: 'date',
         },

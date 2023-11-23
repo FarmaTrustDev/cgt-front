@@ -21,14 +21,14 @@
     </div>
   </template>
   <script>
-  import moment from 'moment'
+import moment from 'moment'
+import routeHelpers from '~/mixins/route-helpers'
 import SampleServices from '~/services/API/SampleServices'
-  import FormFields from '~/components/root/sample/formField'
-  import notifications from '~/mixins/notifications'
-  import routeHelpers from '~/mixins/route-helpers'
+import FormFields from '~/components/root/sample/formField'
+  // import { isEmpty } from '~/services/Helpers'
   export default {
     components: { FormFields },
-    mixins: [notifications, routeHelpers],
+    mixins: [routeHelpers],
   
     data() {
       return {
@@ -130,13 +130,13 @@ import SampleServices from '~/services/API/SampleServices'
           .create(values)
           .then((response) => {
             this.success(response.message)
-            this.goto('/inventory/treatment')
+            this.countDown(response)
             // this.goto('/inbound/samples/qualityAssurance?id='+response.data.sampleGuid)
-            // if (this.isFunction(this.afterCreate)) {
-            //   this.afterCreate(response)
-            //   this.btnLoading = false
-            //   this.loading = false
-            // }
+            if (this.isFunction(this.afterCreate)) {
+              this.afterCreate(response)
+              this.btnLoading = false
+              this.loading = false
+            }
           })
           .catch(this.error)
           .finally(() => {

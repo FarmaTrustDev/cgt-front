@@ -25,12 +25,18 @@ function getById(id){
     })
 }
 
-
+function getStepsByTaskId(id){
+    return request({
+        url : `${baseApi}/getSLTSteps/${id}`,
+        method : 'GET'
+    })
+}
 
 const SmartLabTasksServices = {
     create,
     get,
     getById,
+    getStepsByTaskId
 }
 
 export default SmartLabTasksServices

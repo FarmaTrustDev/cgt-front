@@ -50,6 +50,17 @@
                 ]"
               />
             </a-form-item>
+            <a-form-item>
+              <a-input
+                type="hidden"
+                v-decorator="[
+                  'id',
+                  {
+                    initialValue: 0,
+                  },
+                ]"
+              />
+            </a-form-item>
           </a-row>
           <a-row class="bg-grey pt-2">  
             <a-col :span="24" class="bg-grey">
@@ -83,7 +94,7 @@
           <a-row>  
             <a-col>
               <a-form-item>
-                <FormActionButton custom-text="Add Step" class="mt-40" />
+                <FormActionButton :custom-text="stepAct" class="mt-40" />
                 <!-- @click="showStep(false)" -->
               </a-form-item>
             </a-col>
@@ -93,9 +104,14 @@
         <a-row >
             <a-col :span="24">
             <div v-for="(step, index) in steps" :key="index">
-                <div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
+              <a-col :span="20"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
                 {{ step.name }}
                 </div>
+              </a-col>
+              <a-col :span="4" class="mt-15">
+                <a-button @click="editStep(step.id)" class="ml-20">Edit</a-button>
+                <a-button @click="deleteStep(step.id)">Delete</a-button>
+              </a-col>
             </div>
             </a-col>
         </a-row>
@@ -132,6 +148,7 @@
         softwareticket: {},
         isCreated: false,
         visible: false,
+        stepAct:'Add Step',
         show: true,
         loading: false,
         form: this.$form.createForm(this, { name: 'processForm' }),
@@ -173,7 +190,8 @@
         ],
         processId: '',
         processName:'',
-        sopList: []
+        sopList: [],
+        isCreatedStep:true
       }
     },
     watch: {
@@ -244,6 +262,24 @@
           })
         }
       }, */
+      editStep(id)
+      {
+        StepServices.getById(id).then((response)=>{
+          this.stepForm.setFieldsValue({
+            name:response.data.name,
+            id:response.data.id
+          }
+          )
+          this.stepAct = 'Update'
+          this.isCreatedStep = false
+        })
+      },
+      deleteStep(id)
+      {
+        StepServices.deleteStep(id).then((response)=>{
+         this.getByProcessId(this.processId)
+        })
+      },
       visibleModel(e) {
         this.visible = e
       },
@@ -301,12 +337,22 @@
         this.stepForm
           .validateFields((err, values) => {
             if (!err) {
-              if (this.isCreated) {
+              if (this.isCreatedStep) {
                 StepServices.create(values).then((response) => {
                   // this.showStep(false)
                   this.getByProcessId(this.processId)
                   this.loading = false
                   this.stepForm.setFieldsValue({ name: '' })
+                })
+              }
+              else{
+                StepServices.updateStep(values).then((response) => {
+                  // this.showStep(false)
+                  this.getByProcessId(this.processId)
+                  this.loading = false
+                  this.stepForm.setFieldsValue({ name: '' })
+                  this.isCreatedStep = true
+                  this.stepAct = 'Add Step'
                 })
               }
             }

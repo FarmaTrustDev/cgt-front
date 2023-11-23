@@ -10,6 +10,13 @@ function create(data){
         data,
     })
 }
+function updateStep(data){
+    return request({
+        url: `${baseApi}`,
+        method : 'PUT',
+        data,
+    })
+}
 
 function get(){
     return request({
@@ -24,6 +31,18 @@ function getByProcessId(id){
         method : 'GET'
     })
 }
+function getById(id){
+    return request({
+        url : `${baseApi}/${id}`,
+        method : 'GET'
+    })
+}
+function deleteStep(id){
+    return request({
+        url : `${baseApi}/${id}`,
+        method : 'DELETE'
+    })
+}
 
 function getByProjectId(id){
     return request({
@@ -36,7 +55,10 @@ const StepServices = {
     create,
     get,
     getByProcessId,
-    getByProjectId
+    getByProjectId,
+    getById,
+    deleteStep,
+    updateStep
 }
 
 export default StepServices
