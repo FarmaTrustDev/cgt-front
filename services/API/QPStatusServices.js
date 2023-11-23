@@ -11,6 +11,13 @@ function update(data){
       })
 }
 
+function getAll(){
+    return request({
+        url: `${baseApi}`,
+        method: 'GET'
+      })
+}
+
 function getPending(){
     return request({
         url: `${baseApi}/get-pending`,
@@ -18,9 +25,34 @@ function getPending(){
       })
 }
 
+function getApproved(){
+    return request({
+        url: `${baseApi}/get-approved`,
+        method: 'GET'
+      })
+}
+
+function getRejected(){
+    return request({
+        url: `${baseApi}/get-rejected`,
+        method: 'GET'
+      })
+}
+
+function getQuarantine(){
+    return request({
+        url: `${baseApi}/get-quarantine`,
+        method: 'GET'
+      })
+}
+
 const QPStatusServices = {
     getPending,
-    update
+    update,
+    getApproved,
+    getRejected,
+    getQuarantine,
+    getAll
 }
 
 export default QPStatusServices

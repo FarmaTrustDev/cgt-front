@@ -22,17 +22,13 @@
   </template>
   <script>
   import moment from 'moment'
-//   import routeHelpers from '~/mixins/route-helpers'
-//   import nullHelper from '~/mixins/null-helpers'
-//   import notifications from '~/mixins/notifications'
-//   import UserServices from '~/services/API/UserServices'
-//   import ProjectServices from '~/services/API/ProjectServices'
 import SampleServices from '~/services/API/SampleServices'
-  import FormFields from '~/components/root/sample/FormField'
-  // import { isEmpty } from '~/services/Helpers'
+  import FormFields from '~/components/root/sample/formField'
+  import notifications from '~/mixins/notifications'
+  import routeHelpers from '~/mixins/route-helpers'
   export default {
     components: { FormFields },
-    // mixins: [notifications, routeHelpers, nullHelper],
+    mixins: [notifications, routeHelpers],
   
     data() {
       return {
@@ -134,13 +130,13 @@ import SampleServices from '~/services/API/SampleServices'
           .create(values)
           .then((response) => {
             this.success(response.message)
-            this.countDown(response)
+            this.goto('/inventory/treatment')
             // this.goto('/inbound/samples/qualityAssurance?id='+response.data.sampleGuid)
-            if (this.isFunction(this.afterCreate)) {
-              this.afterCreate(response)
-              this.btnLoading = false
-              this.loading = false
-            }
+            // if (this.isFunction(this.afterCreate)) {
+            //   this.afterCreate(response)
+            //   this.btnLoading = false
+            //   this.loading = false
+            // }
           })
           .catch(this.error)
           .finally(() => {
@@ -148,25 +144,6 @@ import SampleServices from '~/services/API/SampleServices'
             this.loading = false
           })
       },
-      countDown(response) {
-      let secondsToGo = 2;
-      const modal = this.$success({
-        title: 'Sample has been registered successfully',
-        
-      });
-      const interval = setInterval(() => {
-        secondsToGo -= 1;
-        modal.update({
-          // content: `This modal will be destroyed after ${secondsToGo} second.`,
-        });
-      }, 1000);
-      setTimeout(() => {
-        clearInterval(interval);
-        modal.destroy();
-        this.goto('/task')
-        // this.goto('/inbound/samples/qualityAssurance?id='+response.data.sampleGuid)
-      }, secondsToGo * 1000);
-    },
       onSubmit(e) {
         this.loading = true
         e.preventDefault()

@@ -34,8 +34,8 @@
 </div>
    </template>
   <script>
-  import newRequests from '~/pages/qPApproval/NewRequest'
-  import all from '~/pages/qPApproval/All'
+  import newRequests from '~/pages/qPApproval/newRequest'
+  import all from '~/pages/qPApproval/all'
   import approved from '~/pages/qPApproval/approved'
   import quarantine from '~/pages/qPApproval/quarantine'
   import rejected from '~/pages/qPApproval/rejected'
