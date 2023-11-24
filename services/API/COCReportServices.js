@@ -10,9 +10,16 @@ function getBySampleId(id){
         method : 'GET'
     })
 }
+function getAll(id){
+    return request({
+        url : `${baseApi}`,
+        method : 'GET'
+    })
+}
 
 const COCReportServices = {
     getBySampleId,
+    getAll
 }
 
 export default COCReportServices

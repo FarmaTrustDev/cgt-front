@@ -35,14 +35,14 @@
             <div v-else>
               <span :id="row.statusId">{{ value }}</span>
             </div> -->
-            <span>{{ row.cocStatus }}</span>
+            <span>{{ row.status }}</span>
           </div>
           <div slot="doc" slot-scope="value,row">
             <a-button
               class="print-btn"
               type="primary"
               size="small"
-              @click="goto(`/reporting/cocreport?sampleId=${row.id}`)"
+              @click="goto(`/reporting/cocreport?sampleId=${row.samplId}`)"
               >COC Report</a-button
             >
           </div>
@@ -90,7 +90,8 @@ import PageLayout from '~/components/layout/PageLayout'
 // import Table from '~/components/labeling/Listing'
 import routeHelpers from '~/mixins/route-helpers'
 import LabelServices from '~/services/API/LabelServices'
-import SampleServices from '~/services/API/SampleServices'
+
+import COCReportServices from '~/services/API/COCReportServices'
 
 export default {
   components: {
@@ -180,7 +181,7 @@ export default {
         },
         {
           title: `${this.$store.getters.getTranslation.Statu_1_202}`,
-          dataIndex: 'cocStatus',
+          dataIndex: 'status',
           key: 'status',
           class: 'status-sample',
           scopedSlots: { customRender: 'status' },
@@ -325,7 +326,7 @@ export default {
     },
     fetchSamples() {
       this.loading = true
-      SampleServices.get()
+      COCReportServices.getAll()
         .then((response) => {
           this.datasourceCOC = response.data
         })

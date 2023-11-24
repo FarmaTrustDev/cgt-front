@@ -501,6 +501,7 @@ export const contentTrackingQA= [
 
     }
   },
+  
   computed: {
     translation() {
       return this.$store.getters.getTranslation
@@ -749,9 +750,19 @@ export const contentTrackingQA= [
             const obj=this.$route.query.record
             this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
           } 
+          if(this.typeId === 'QP_SK_PROCESS')
+          {
+            this.$emit('handleActive',true)
+          }
         }
         })
         // this.loading = false
+      },
+      submitProcess(){
+        this.loading = true
+            SampleQPProcessServices.create(this.outputArray).then((response)=>{
+                this.outputArray = []
+              }).catch(this.error).finally(this.loading = false)
       },
       handleInventorygModal(){
       this.showInventoryModal=false

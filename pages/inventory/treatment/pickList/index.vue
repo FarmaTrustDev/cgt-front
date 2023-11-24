@@ -310,14 +310,14 @@
 
           </a-card>
           <a-card
-            v-if="activeTab === 'QP_SK_PROCESS'"
+            v-if="!isSubmit && activeTab === 'QP_SK_PROCESS'"
             :bordered="false"
             class="mt-15 default-card inbound-accept-tabs"
             style="width: 96%; margin-left: 2%"
           >
             <div><h4 class="heading pl-0"><strong>Pick List</strong></h4></div>
             <div class="collection-processing-steps" style="margin-top:10px">
-              <QPProcess :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName"  /> 
+              <QPProcess ref="childComponentRef" @handleActive="handleActive" :type-id="typeId" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" ></QPProcess> 
             </div>
           </a-card>
           <a-card
@@ -341,7 +341,7 @@
                         <!-- {{ row }} -->
                         <a-form-item class="mt-5" style="height: 20px;">
                             <a-switch
-                            v-if="!row.isCollected"
+                            v-if="!isAlreadyCreated"
                             v-decorator="[
                                 `collection[id-${row.id}][collect]`,
                                 {
@@ -361,17 +361,25 @@
                             />
 
                             <a-icon
-                            v-else
+                            v-else-if="getAction(row.item)"
                             class="text-success"
                             style="font-size: 1rem;"
                             type="check"
                             ></a-icon>
+                            <a-icon 
+                            v-else
+                            style="font-size: 1rem;"
+                            class="color-red"
+                            type="close"
+                            >
+
+                            </a-icon>
                         </a-form-item>
                         </template>
                         <template slot="notes" slot-scope="item, row" >
                         <a-form-item class="mtminus-2" style="height: 20px;">
                             <a-input
-                            v-if="!row.isCollected"
+                            v-if="!isAlreadyCreated"
                             v-decorator="[
                                 `collection[id-${row.id}][notes]`,
                                 {
@@ -387,7 +395,7 @@
                             :placeholder="translation.Enternote_3_588"
                             @blur="(e) => handleInput(row.id,e, row.item)"
                             />
-                            <span v-else>{{ row.notes }}</span>
+                            <span v-else>{{ getNotes(row.item) }}</span>
                             <a-input
                             v-decorator="[
                                 `collection[id-${row.id}][id]`,
@@ -419,6 +427,7 @@
 
                     <a-form-item class="mt-15">
                     <FormActionButton
+                        v-if="!isAlreadyCreated"
                         :disabled="buttonEnable"
                         text="Submit for QP Approval"
                         @click="submit"
@@ -659,6 +668,7 @@
   import SampleProcessServices from '~/services/API/SampleProcessServices'
   import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
   import QPProcess from '~/components/root/inventory/qpProcess'
+
   export default {
     components: {'page-layout': PageLayout,kitImgColl,QPProcess},
     mixins: [tabsHelpers, routeHelpers,imagesHelper],
@@ -666,12 +676,14 @@
     data() {
       return {
         moment,
+        dummyCollection:[],
         visibleAddAddress:false,
         isCreatedAddress:false,
         addressForm: this.$form.createForm(this, { name: 'equipmentForm' }),
         btnLoading: false,
         loading: false,
         buttonEnable: false,
+        typeId: this.$route.query.view,
         notesRequired: {},
         noteItem:[],
         compName:'',
@@ -863,6 +875,7 @@
       filledData:0,
       outputArray :[],
       actTabId:3,
+      isAlreadyCreated: false,
       checkboxValues:new Array(9).fill(false),
       checkboxBool:new Array(9).fill(''),
       promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
@@ -880,6 +893,7 @@
       this.$store.commit('setSelectedMenu', [`2`])
       this.getCompany()
       this.sampleStepsByTaskId()
+      this.checkCreated(JSON.parse(this.$route.query.record).sampleId)
       // this.getSteps()
     },
     methods: {
@@ -890,6 +904,20 @@
         const obj=this.$route.query.record
         this.record=JSON.parse(obj)
         this.sampleStepsByTaskId()
+      },
+      checkCreated(sampleId){
+        SampleProcessServices.getBySampleId(sampleId).then((response)=>{
+          if(!isEmpty(response.data)){
+            this.isAlreadyCreated = true
+            this.dummyCollection = response.data
+          }
+      }).catch(this.error)
+      },
+      getAction(name){
+        return this.dummyCollection.find(list => list.name === name).action
+      },
+      getNotes(name){
+        return this.dummyCollection.find(list => list.name === name).notes
       },
       sampleStepsByTaskId(){
         // const actTabId=parseInt(this.activeTab)
@@ -928,6 +956,9 @@
         console.log(this.compnayAddress)
       }
     },
+    handleActive(e){
+      this.isSubmit = e
+    },
     addAddressModel(e) {
       this.addressForm.resetFields()
       this.isCreatedAddress = false
@@ -957,9 +988,9 @@
       submitLabel(){
         this.record=JSON.parse(this.$route.query.record)
         console.log(this.record)
-        const dateParts = this.record.collectionDateDeliveryDate.split('-');
-        const arrivalDates = this.parseDate(dateParts[0]);
-        const expiryDates = this.parseDate(dateParts[1]);
+        // const dateParts = this.record.collectionDateDeliveryDate.split('-');
+        const arrivalDates = this.record.arrivalDate
+        const expiryDates = this.record.expiryDate
         const obj={
           sampleId:this.record.patientEnrollmentNumber,
           sampleName:this.record.treatmentType,
@@ -973,6 +1004,12 @@
         }
         console.log(obj)
         LabelServices.create(obj).then((response)=>{
+          // EventBus.$emit('submitProcess');
+          const QPProcess = this.$refs.childComponentRef;
+          if (typeof QPProcess.submitProcess === 'function') {
+
+            QPProcess.submitProcess();
+        }
           console.log(response)
           this.goto('/inventory/treatment')
         })
@@ -1092,6 +1129,7 @@
           console.log(this.outputArray)
           SampleProcessServices.create(this.outputArray).then((response)=>{
               this.outputArray = [] 
+              // this.isSubmit = true
               this.goto('/inventory/treatment')
             }).catch(this.error).finally(this.loading = false)
           
