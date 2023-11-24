@@ -105,22 +105,23 @@
               <!-- //Steps -->
               <div class="treatment-steps" style="width: 100%">
                 <span class="step-col-large">
-                  <a-steps size="small" :current="2">
+                  <a-steps size="small" :initial="1">
                     <a-step
                       v-for="phase in phases"
                       :key="phase.id"
-                      :title="phase.name"
+                      :title="phase.taskStepName"
                       :class="
-                        phase.id == 1
-                          ? 'ant-steps-item-finish-large'
-                          : phase.id == 2
-                          ? 'ant-steps-item-active-blue-large'
-                          : 'ant-steps-horizontal-large'
+                      phase.id <= record.stageId
+                      ? 'ant-steps-item-finish-large'
+                      : phase.id === (record.stageId+1)
+                      ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
                       "
                       :status="
-                        phase.id == 1 ? 'finish' : phase.id == 2 ? 'wait' : ''
-                      "
-                      @click="reDirect(phase.id===2? phase.url_slug+'?record='+JSON.stringify(record) : '', phase.alias)"
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
+                        "
+                      @click="reDirect(phase.url!=='' ? phase.url+'&record='+JSON.stringify(record) : '')"
                     />
                   </a-steps>
                 </span>
@@ -306,9 +307,19 @@
 
 
           </a-card>
-          
           <a-card
-            v-else
+            v-if="activeTab === 'QP_SK_PROCESS'"
+            :bordered="false"
+            class="mt-15 default-card inbound-accept-tabs"
+            style="width: 96%; margin-left: 2%"
+          >
+            <div><h4 class="heading pl-0"><strong>Pick List</strong></h4></div>
+            <div class="collection-processing-steps" style="margin-top:10px">
+              <QPProcess :sample-id="record.projectId" /> 
+            </div>
+          </a-card>
+          <a-card
+            v-if="activeTab === 'KIT_BUILDER'"
             :bordered="false"
             class="mt-15 default-card inbound-accept-tabs"
             style="width: 96%; margin-left: 2%"
@@ -330,7 +341,7 @@
                             <a-switch
                             v-if="!row.isCollected"
                             v-decorator="[
-                                `collection[id-${row.item}][collect]`,
+                                `collection[id-${row.id}][collect]`,
                                 {
                                 initialValue: row.isCollected,
                                 valuePropName: 'checked',
@@ -360,7 +371,7 @@
                             <a-input
                             v-if="!row.isCollected"
                             v-decorator="[
-                                `collection[id-${row.item}][notes]`,
+                                `collection[id-${row.id}][notes]`,
                                 {
                                 initialValue: row.notes,
                                 rules: [
@@ -643,8 +654,11 @@
   import LabelServices from '~/services/API/LabelServices'
   import kitImgColl from '~/components/cards/kitImgColl'
   import CompanyAddressServices from '~/services/API/CompanyAddressServices'
+  import SampleProcessServices from '~/services/API/SampleProcessServices'
+  import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
+  import QPProcess from '~/components/root/inventory/qpProcess'
   export default {
-    components: {'page-layout': PageLayout,kitImgColl},
+    components: {'page-layout': PageLayout,kitImgColl,QPProcess},
     mixins: [tabsHelpers, routeHelpers,imagesHelper],
     middleware: 'auth',
     data() {
@@ -845,6 +859,8 @@
         },
       ],
       filledData:0,
+      outputArray :[],
+      actTabId:3,
       checkboxValues:new Array(9).fill(false),
       checkboxBool:new Array(9).fill(''),
       promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
@@ -861,6 +877,7 @@
       // this.getTranslationData()
       this.$store.commit('setSelectedMenu', [`2`])
       this.getCompany()
+      this.sampleStepsByTaskId()
       // this.getSteps()
     },
     methods: {
@@ -870,6 +887,14 @@
         // this.record= this.$route.query.record
         const obj=this.$route.query.record
         this.record=JSON.parse(obj)
+        this.sampleStepsByTaskId()
+      },
+      sampleStepsByTaskId(){
+        // const actTabId=parseInt(this.activeTab)
+        SmartLabTasksServices.getStepsByTaskId(this.actTabId).then((response)=>{
+          console.log(response.data)
+          this.phases=response.data
+        })
       },
       handleDateChange(date){
         this.collectionDate=date.format('DD/MM/YYYY')
@@ -1034,7 +1059,7 @@
     
     submit() {
       this.form.validateFields((err,values)=>{
-        console.log(values)
+        // console.log(values)
         if(!err){
           // this.isSubmit=true
           // console.log(this.$route.query.record)
@@ -1045,9 +1070,9 @@
           for (const question of data) {
             // const imageUrl = this.imgData.find(item => item.iBSId === question.id) !== undefined ? this.imgData.find(item => item.iBSId === question.id).imgData : ''
             const stepId = question.id
-            const action = values.collection[`id-`+question.item].collect
+            const action = values.collection[`id-`+question.id].collect
             const notes =  values.collection[`id-`+question.id].notes
-            const stepName = question.name
+            const stepName = question.item
             const sampleId = JSON.parse(this.$route.query.record).sampleId
             const taskId = JSON.parse(this.$route.query.record).taskId
             const taskName = JSON.parse(this.$route.query.record).taskName
@@ -1063,6 +1088,11 @@
             })
           }
           console.log(this.outputArray)
+          SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+              this.goto('/inventory/treatment')
+            }).catch(this.error).finally(this.loading = false)
+          
         }
       })
     },
@@ -1088,9 +1118,10 @@
         }
         window.print()
       },
-      reDirect(url, alias) {
+      reDirect(url) {
         if (!isEmpty(url)) {
-          this.activeTab = alias
+          // this.activeTab = alias
+          this.handleActiveTab()
           this.goto(url)
         }
       },

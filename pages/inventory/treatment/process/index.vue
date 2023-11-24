@@ -96,22 +96,24 @@
             <!-- //Steps -->
             <div class="treatment-steps" style="width: 100%">
               <span class="step-col-large">
-                <a-steps size="small" :current="2">
+                <a-steps size="small" :initial="1">
                   <a-step
                     v-for="phase in phases"
                     :key="phase.id"
-                    :title="phase.name"
+                    :title="phase.taskStepName"
                     :class="
-                      phase.id == 1
-                        ? 'ant-steps-item-finish-large'
-                        : phase.id == 2
-                        ? 'ant-steps-item-active-blue-large'
-                        : 'ant-steps-horizontal-large'
+                    phase.id <= record.stageId
+                    ? 'ant-steps-item-finish-large'
+                    : phase.id === (record.stageId+1)
+                    ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
                     "
+                    
                     :status="
-                      phase.id == 1 ? 'finish' : phase.id == 2 ? 'wait' : ''
-                    "
-                    @click="reDirect(phase.id<=2? phase.url_slug+'&record='+JSON.stringify(record) : '', phase.alias)"
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
+                        "
+                    @click="reDirect(phase.url+'&record='+JSON.stringify(record))"
                   />
                 </a-steps>
               </span>
@@ -119,9 +121,9 @@
             <!-- //Steps -->
           </span>
         </a-card>
-
+        
         <a-card
-          v-if="activeTab == 'INBOUND_ACCEPTANCE_DETAILS'"
+          v-if="activeTab == 'INBOUND_ACCEPTANCE_DETAILS' || activeTab == 'INBOUND_SHIPMENT'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
           style="width: 96%; margin-left: 2%"
@@ -235,7 +237,7 @@
           </div>
         </a-card>
         <a-card
-          v-if="activeTab == 'PROCESS_SAMPLE'"
+          v-if="activeTab == 'PROCESS_SAMPLE' || activeTab == 'INBOUND_PROCESS'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs test"
           style="width: 96%; margin-left: 2%"
@@ -289,6 +291,7 @@ import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
 import StepServices from '~/services/API/StepServices'
 import QPProcess from '~/components/root/inventory/qpProcess'
+import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
 import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
 export default {
   components: {
@@ -302,6 +305,7 @@ export default {
     return {
     moment,
       activeTab: 'inbound',
+      actTabId:1,
       type: 'inbound',
       phases: QUARANTINE_PROCESS_PHASES,
       record:{},
@@ -391,7 +395,7 @@ export default {
     translation(newValues, oldValue) {
       if (newValues !== oldValue) {
         // this.phases[0].name = newValues.InbouAccep_3_834
-        this.phases[1].name = newValues.ProceSampl_2_499
+        // this.phases[1].name = newValues.ProceSampl_2_499
         // this.phases[2].name = newValues.StoreSampl_2_579
 
         /* this.dummyCollection[0].name = newValues.Hasthe_8_592
@@ -415,14 +419,22 @@ export default {
     this.handleActiveTab()
     this.getTranslationData()
     this.$store.commit('setSelectedMenu', [`2`])
+    this.sampleStepsByTaskId()
     // this.getSteps()
   },
   methods: {
     _getFormatMoment,
     getTranslationData() {
       // this.phases[0].name = this.translation.InbouAccep_3_834
-      this.phases[1].name = this.translation.ProceSampl_2_499
+      // this.phases[1].name = this.translation.ProceSampl_2_499
       // this.phases[2].name = this.translation.StoreSampl_2_579
+    },
+    sampleStepsByTaskId(){
+      // const actTabId=parseInt(this.activeTab)
+      SmartLabTasksServices.getStepsByTaskId(this.actTabId).then((response)=>{
+        console.log(response.data)
+        this.phases=response.data
+      })
     },
     handleActiveTab() {
       this.activeTab = this.$route.query.view
@@ -430,6 +442,7 @@ export default {
       const obj=this.$route.query.record
       this.record=JSON.parse(obj)
       console.log(this.record)
+      this.sampleStepsByTaskId()
       if (this.record && this.record.projectId) {
         this.getSteps(this.record.projectId);
       }
@@ -454,9 +467,10 @@ export default {
     setActiveTav(tab) {
       this.activeTab = tab
     },
-    reDirect(url, alias) {
+    reDirect(url) {
       if (!isEmpty(url)) {
-        this.activeTab = alias
+        this.handleActiveTab()
+        // this.activeTab = alias
         this.goto(url)
       }
     },
