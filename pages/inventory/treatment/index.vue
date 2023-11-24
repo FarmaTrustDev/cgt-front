@@ -62,17 +62,19 @@
                         :key="phase.id"
                         :title="phase.taskStepName"
                         :status="
-                          phase.id === record.stageId
+                          phase.id === record.stageId 
                             ? 'active'
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
+                          (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="phase.url!=='' ? stepClick(record, phase) : ''"
+                        @click="phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
