@@ -688,7 +688,7 @@ import StepServices from '~/services/API/StepServices'
 import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
 import QPProcess from '~/components/root/inventory/qpProcess'
 import CompanyAddressServices from '~/services/API/CompanyAddressServices'
-
+import SampleProcessServices from '~/services/API/SampleProcessServices'
 // import shipment from '~/components/inventory/treatment/shipment'
 export const customDisplayDataShipInfo = [
   {
@@ -1251,9 +1251,19 @@ export default {
       if(obj!==undefined){
         this.record=JSON.parse(obj)
         if (this.record && this.record.projectId) {
-          this.getSteps(this.record.projectId);
+          this.checkCreated(this.record.sampleId,this.record.projectId);
         }      
       }
+    },
+    checkCreated(sampleId,projectId){
+      SampleProcessServices.getBySampleId(sampleId).then((response)=>{
+        if(isEmpty(response.data)){
+          this.getSteps(projectId)
+        }
+        else{
+          this.dummyOutBoundCollection = response.data
+        }
+      }).catch(this.error)
     },
     getCompany(){
       CompanyAddressServices.getCompanies().then((response)=>{

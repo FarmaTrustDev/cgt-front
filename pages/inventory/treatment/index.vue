@@ -1033,7 +1033,7 @@ export default {
       })
     },
     stepKitClick(record, phase) {
-      this.goto(phase.url+'&record='+JSON.stringify(record))
+      this.goto(phase.url+'?record='+JSON.stringify(record))
     },
     getActiveTab(){
       if(this.$route.query.id){

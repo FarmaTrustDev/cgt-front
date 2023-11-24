@@ -10,11 +10,17 @@ function create(data){
         method : 'POST',
     })
 }
-
+function getBySampleId(id){
+    return request({
+        url : `${baseApi}/get-by-sample-id/${id}`,
+        metho: 'GET'
+    })
+}
 
 
 const SampleQPProcessServices = {
     create,
+    getBySampleId
 }
 
 export default SampleQPProcessServices
