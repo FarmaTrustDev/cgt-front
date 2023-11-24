@@ -11,10 +11,16 @@ function create(data){
     })
 }
 
-
+function getBySampleId(id){
+    return request({
+        url : `${baseApi}/get-by-sample-id/${id}`,
+        metho: 'GET'
+    })
+}
 
 const SampleProcessServices = {
     create,
+    getBySampleId
 }
 
 export default SampleProcessServices

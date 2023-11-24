@@ -2,7 +2,11 @@
     <div>
     <a-table class="rounded-table" :loading="loading" :columns="column" :data-source="data">
         <template slot="arrivalDate" slot-scope="arrivalDate">
-            {{ arrivalDate.arrivalDate }} - {{ arrivalDate.expiryDate  }}
+            {{ _getFormatMoment(arrivalDate.arrivalDate).format('DD/MM/YYYY') }} - {{ _getFormatMoment(arrivalDate.expiryDate).format('DD/MM/YYYY')  }}
+        </template>
+        <template slot="steps" slot-scope="steps">
+          <!-- {{ steps }} -->
+          <a-icon type="eye" @click="getProcessSteps(steps.samplePUID, steps.taskName)" />
         </template>
         <template slot="action" slot-scope="action">
             <a-button type="primary" dashed @click="submitStatus(action.globalId, approved)">
@@ -62,11 +66,31 @@
           </a-row>
         </a-form>
         </a-modal>
+        <a-modal
+        :visible="visibleStepModal"
+        :loading = "loading"
+        :footer="null"
+        @cancel="stepModal(false)"
+        >
+        <Process
+                :collections="dummyCollection"
+                :bag-id="'BUID-123'"
+                :type-id="typeId"
+                @fetchBags="() => {}"
+                @updateId="updateId"
+              />
+        </a-modal>
     </div>
 </template>
 <script>
     import QPStatusServices from '~/services/API/QPStatusServices'
+    import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
+    import Process from '~/components/root/inventory/Process'
+    import SampleProcessServices from '~/services/API/SampleProcessServices'
 export default {
+  components:{
+    Process
+  },
   data() {
     return {
       column:[
@@ -91,6 +115,11 @@ export default {
                 dataIndex:'clientName', 
             },
             {
+              title: 'View Steps',
+              key: 'steps',
+              scopedSlots:{customRender: 'steps'}
+            },
+            {
                 title: `Action`,
                 key: 'action',
                 scopedSlots: { customRender: 'action' },
@@ -105,6 +134,9 @@ export default {
       qPStatusId : 0,
       status: '',
       form: this.$form.createForm(this, { name: 'form' }),
+      dummyCollection: [],
+      typeId: '',
+      visibleStepModal: false
     }
   },
   computed: {
@@ -115,6 +147,7 @@ export default {
   watch:{
   },  
   methods: {
+    _getFormatMoment,
     getPending(){
         QPStatusServices.getPending().then((response) => {
             this.data = response.data
@@ -130,6 +163,19 @@ export default {
             console.log(response.data)
             this.getPending()
         }).catch(this.error).finally(this.loading = false)
+    },
+    getProcessSteps(sampleId,taskName)
+    {
+      this.loading = true
+      this.typeId = taskName
+      SampleProcessServices.getBySampleId(sampleId).then((response)=>{
+          console.log(response.data)
+          this.dummyCollection = response.data
+          this.visibleStepModal = true
+      }).catch(this.error).finally(this.loading = false)
+    },
+    stepModal(e){
+      this.visibleStepModal = e
     },
     reasonModal(id, e, status){
         this.visibleReason = e
@@ -157,7 +203,16 @@ export default {
             }
             this.loading = false
         })
-    }
+    },
+    updateId(collectionId) {
+      const dumCollection = this.dummyCollection.map((collection) => {
+        if (collection.id === collectionId) {
+          collection.isCollected = true
+        }
+        return collection
+      })
+      this.dummyCollection = dumCollection
+    },
   },
 }
 </script>

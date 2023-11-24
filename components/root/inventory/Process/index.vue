@@ -33,11 +33,19 @@
             />
 
             <a-icon
-              v-else
+              v-else-if="row.action"
               class="text-success"
               style="font-size: 1rem"
               type="check"
             ></a-icon>
+            <a-icon
+            v-else
+            type="close"
+            style="font-size: 1rem"
+            class="color-red"
+            >
+
+            </a-icon>
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
@@ -83,12 +91,13 @@
             </a-button>
           </InstantUpload> -->
           <a-upload
+            
             name="file"
             :before-upload="beforeUploadWithParam(row.id)"
             :multiple="true"
             :default-file-list="savedList"
             @change="handleChange(row.id, $event)"
-          ><a-button> <a-icon type="upload" /> </a-button>
+          ><a-button :disabled="row.isCollected"> <a-icon type="upload" /> </a-button>
              <slot name="button"></slot>
             </a-upload> 
         </template>
@@ -101,15 +110,16 @@
           />
         </template>
       </a-table>
+      <a-form-item class="mt-15">
+        <FormActionButton
+        v-if="!isEmpty(collections[0]) ? !collections[0].isCollected : true"
+          :disabled="buttonEnable"
+          text="Submit for QP Approval"
+          @click="submit"
+          :loading="loading"
+        />
+      </a-form-item>
 
-    <a-form-item class="mt-15">
-      <FormActionButton
-        :disabled="buttonEnable"
-        text="Submit for QP Approval"
-        @click="submit"
-        :loading="loading"
-      />
-    </a-form-item>
     </a-form>
     <a-modal
       title="Notify"
@@ -226,7 +236,7 @@ import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import imagesHelper from '~/mixins/images-helper'
 import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 import SampleProcessServices from '~/services/API/SampleProcessServices'
-
+import { isEmpty } from '~/services/Helpers'
 export const customDisplayDataMRI = [
   {
     title: '',
@@ -540,7 +550,7 @@ export const customDisplayDataOrderReview = [
 export default {
   components: { Email, 
     // InstantUpload, 
-    Quarantine,StatusDetail,CustomDisplay,treatmentTable },
+  Quarantine,StatusDetail,CustomDisplay,treatmentTable },
   mixins: [notifications, routeHelpers,imagesHelper],
   props: {
     collections: { required: true, type: Array },
@@ -551,6 +561,7 @@ export default {
   },
   data() {
     return {
+      isEmpty,
       columns: [
         {
           title: `${this.$store.getters.getTranslation.Quest_1_580}`,
@@ -891,11 +902,7 @@ export default {
     submit() {
       this.form.validateFields((err,values)=>{
         if(!err){
-          console.log(this.$route.query.record)
-          console.log(this.checkboxValues)
-          console.log(values)
           const data = JSON.parse(JSON.stringify(this.collections))
-          console.log(data)
           for (const question of data) {
             const imageUrl = this.imgData.find(item => item.iBSId === question.id) !== undefined ? this.imgData.find(item => item.iBSId === question.id).imgData : ''
             const stepId = question.id
@@ -916,7 +923,6 @@ export default {
             taskName
           })
           }
-          console.log(this.outputArray,  'array')
           // console.log(this.typeId)
           if ((this.typeId === 'inbound')) {
             

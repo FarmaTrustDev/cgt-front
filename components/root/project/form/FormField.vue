@@ -375,7 +375,52 @@
             />
           </a-form-item>
         </a-col>
-          
+        <a-col :span="12">
+          <a-form-item
+            label="Email *:"
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 22 }"
+          >
+            <a-input
+              v-decorator="[
+                'email',
+                {
+                  initialValue: partnerevent.email,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please input Email',
+                    },
+                  ],
+                },
+              ]"
+              
+            />
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="Phone No *:"
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 23 }"
+          >
+            <a-input
+              v-decorator="[
+                'phoneNo',
+                {
+                  initialValue: partnerevent.phone,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please input phone',
+                    },
+                  ],
+                },
+              ]"
+              
+            />
+          </a-form-item>
+        </a-col>
         </a-row>
        
 
@@ -501,8 +546,17 @@
             title:'Description',
             dataIndex: 'description',
             key: 'description',
-          }
-          ,
+          },
+          {
+            title:'Email',
+            dataIndex: 'email',
+            key: 'email',
+          },
+          {
+            title:'Phone No',
+            dataIndex: 'phoneNo',
+            key: 'phoneNo',
+          },
           {
             title: `${this.$store.getters.getTranslation.Actio_1_220}`,
             key: 'action',
@@ -650,12 +704,13 @@
       },
       onSubmitInvestigator(e) {
 
-      this.loading = true
+      
       e.preventDefault()
       this.formInvest.validateFields((err, values) => {
         if (!err) {
           if(this.isCreated)
           {
+            this.loading = true
             InvestigatorServices.update(values.investigatorId , values).then((response)=>{
               this.visibleInv=false
             this.loading = false
@@ -663,6 +718,7 @@
             })
           }
           else{
+            this.loading = true
           InvestigatorServices.create(values).then((response)=>{
             this.visibleInv=false
             this.loading = false
@@ -673,22 +729,27 @@
       })
     },
     onSubmitPartner(e) {
-      this.loading = true
+      
       e.preventDefault()
       this.formPart.validateFields((err, values) => {
         if (!err) {
           if(this.isCreatedPartner)
           {
+            this.loading = true
             PartnerServices.update(values.partnerId , values).then((response)=>{
-              this.fetchPartners()
               this.visiblePar=false
               this.loading = false
+              this.isCreated = false
+              this.formPart.resetFields()
+              this.fetchPartners()
             })
           }
           else{
+            this.loading = true
           PartnerServices.create(values).then((response)=>{
             this.visiblePar=false
             this.loading = false
+            this.formPart.resetFields()
             this.fetchPartners()
           })
         }

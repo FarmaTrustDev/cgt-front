@@ -290,6 +290,7 @@ import { isEmpty } from '~/services/Helpers'
 import StepServices from '~/services/API/StepServices'
 import QPProcess from '~/components/root/inventory/qpProcess'
 import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
+import SampleProcessServices from '~/services/API/SampleProcessServices'
 export default {
   components: {
     'page-layout': PageLayout,
@@ -429,10 +430,21 @@ export default {
       // this.record= this.$route.query.record
       const obj=this.$route.query.record
       this.record=JSON.parse(obj)
-      console.log(this.record)
+      console.log(this.record, 'record')
       if (this.record && this.record.projectId) {
-        this.getSteps(this.record.projectId);
+        this.checkCreated(this.record.sampleId,this.record.projectId);
       }
+    },
+    checkCreated(sampleId,projectId){
+      SampleProcessServices.getBySampleId(sampleId).then((response)=>{
+        console.log(response.data, 'outbound')
+        if(isEmpty(response.data)){
+          this.getSteps(projectId)
+        }
+        else{
+          this.dummyCollection = response.data
+        }
+      }).catch(this.error)
     },
     getSteps(projectId){
         console.log(this.dummyCollection)
