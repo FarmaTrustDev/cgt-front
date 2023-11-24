@@ -450,7 +450,6 @@ export default {
     },
     checkCreated(sampleId,projectId){
       SampleProcessServices.getBySampleId(sampleId).then((response)=>{
-        console.log(response.data, 'outbound')
         if(isEmpty(response.data)){
           this.getSteps(projectId)
         }
