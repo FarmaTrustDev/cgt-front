@@ -317,7 +317,7 @@
           >
             <div><h4 class="heading pl-0"><strong>Pick List</strong></h4></div>
             <div class="collection-processing-steps" style="margin-top:10px">
-              <QPProcess ref="childComponentRef" @handleActive="handleActive" :type-id="typeId" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" ></QPProcess> 
+              <QPProcess @handleActive="handleActive" :type-id="typeId" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" ></QPProcess> 
             </div>
           </a-card>
           <a-card
@@ -663,6 +663,8 @@
   import { isEmpty } from '~/services/Helpers'
   import imagesHelper from '~/mixins/images-helper'
   import LabelServices from '~/services/API/LabelServices'
+  // import QPProcessServices from '~/services/API/QPProcessServices'
+  import SampleQPProcessServices from '~/services/API/SampleQPProcessServices'
   import kitImgColl from '~/components/cards/kitImgColl'
   import CompanyAddressServices from '~/services/API/CompanyAddressServices'
   import SampleProcessServices from '~/services/API/SampleProcessServices'
@@ -956,8 +958,10 @@
         console.log(this.compnayAddress)
       }
     },
-    handleActive(e){
+    handleActive(e, out){
+      this.outputArray=out
       this.isSubmit = e
+      console.log(out)
     },
     addAddressModel(e) {
       this.addressForm.resetFields()
@@ -1005,11 +1009,13 @@
         console.log(obj)
         LabelServices.create(obj).then((response)=>{
           // EventBus.$emit('submitProcess');
-          const QPProcess = this.$refs.childComponentRef;
-          if (typeof QPProcess.submitProcess === 'function') {
-
-            QPProcess.submitProcess();
-        }
+          // const QPProcess = this.$refs.childComponentRef;
+          // if (typeof QPProcess.submitProcess === 'function') {
+            SampleQPProcessServices.create(this.outputArray).then((response)=>{
+                this.outputArray = []
+              }).catch(this.error).finally(this.loading = false)
+            // QPProcess.submitProcess();
+        // }
           console.log(response)
           this.goto('/inventory/treatment')
         })
