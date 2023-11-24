@@ -103,6 +103,8 @@
                     :key="phase.id"
                     :title="phase.taskStepName"
                     :class="
+                    (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error-large':
                       phase.id <= record.stageId
                       ? 'ant-steps-item-finish-large'
                         : phase.id === (record.stageId+1)
