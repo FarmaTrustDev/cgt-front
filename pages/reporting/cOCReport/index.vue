@@ -16,19 +16,19 @@
                 <h3><b>Sample Collection Information</b></h3>
             </a-col>
             <a-col :span="10" class="report-head">
-               <h3 class="ml-10">Sample ID: {{ sampleData.id }}</h3>  
+               <h3 class="ml-10">Sample ID: {{ sampleData.sampleId }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head">
                <h3 class="ml-10">Collection Date: {{ sampleData.collectionDate }}</h3>  
             </a-col>
             <a-col :span="10" class="report-head mt-10">
-               <h3 class="ml-10">Sample Type: {{ sampleData.sampleType }}</h3>  
+               <h3 class="ml-10">Sample Type: {{ sampleData.sampleTypeName }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head mt-10">
-               <h3 class="ml-10">Collection Time:  {{ sampleData.collectionTime }}</h3>  
+               <h3 class="ml-10">Collection Time:  {{ sampleData.collectionDate }}</h3>  
             </a-col>
             <a-col :span="10" class="report-head mt-10">
-               <h3 class="ml-10">Sample Quantity: {{ sampleData.sampleQuantity }}</h3>  
+               <h3 class="ml-10">Sample Quantity: {{ sampleData.quantity }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head mt-10">
                <h3 class="ml-10">Collected By: {{ sampleData.collectedBy }}</h3>  
@@ -37,10 +37,10 @@
                 <h3><b>Donor Information</b></h3>
             </a-col>
             <a-col :span="10" class="report-head">
-               <h3 class="ml-10">Donor ID: {{ donorData.id }}</h3>  
+               <h3 class="ml-10">Donor ID: {{ sampleData.donorId }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head">
-               <h3 class="ml-10">Donor Name: {{ donorData.name }}</h3>  
+               <h3 class="ml-10">Donor Name: {{ sampleData.donorName }}</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Chain of Custody</b></h3>
@@ -75,7 +75,7 @@
                 <a-table style="border-radius: none;"
                         :columns="columnsEI"
                         :loading="loading"
-                        :data-source="dataEI"
+                        :data-source="[sampleData]"
                         class="rounded-table pt-10 users-list"
                         :pagination="false"
                         >
@@ -245,6 +245,7 @@
   // import Table from '~/components/labeling/Listing'
   import routeHelpers from '~/mixins/route-helpers'
   import LabelServices from '~/services/API/LabelServices'
+  import COCReportServices from '~/services/API/COCReportServices'
   export default {
     components: {
       'page-layout': PageLayout,
@@ -494,17 +495,17 @@
         columnsEI: [
         {
             title: 'Equipment ID',
-            dataIndex: 'id',
+            dataIndex: 'equipmentId',
             key: 'id',
           },
         {
             title: 'Equipment Name',
-            dataIndex: 'name',
+            dataIndex: 'equipmentName',
             key: 'name',
           },
           {
             title: 'Equipment Type',
-            dataIndex: 'type',
+            dataIndex: 'equipmentType',
             key: 'type',
           },
           {
@@ -526,7 +527,8 @@
       }
     },
     mounted() {
-      this.fetch()
+      const id = this.$route.query.sampleId
+      this.fetch(id)
     },
     computed: {
       translation() {
@@ -535,11 +537,11 @@
     },
     
     methods: {
-      fetch() {
+      fetch(id) {
         this.loading = true
-        LabelServices.hospital()
+        COCReportServices.getBySampleId(id)
           .then((response) => {
-            this.data = response.data
+            this.sampleData = response.data
           })
           .finally(() => (this.loading = false))
       },
@@ -551,6 +553,7 @@
           })
           .finally(() => (this.loading = false))
       },
+      
       searchLabel(e) {
         const search = e.target.value
         if (search !== '') {

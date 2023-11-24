@@ -84,7 +84,7 @@
       <a-form-item class="mt-15">
         <FormActionButton v-if="!isAllreadyFill"
           
-          text="Submit for QP Process"
+          text="Submit QP Process"
           
           :loading="loading"
         />
@@ -122,6 +122,10 @@
   import QPProcessServices from '~/services/API/QPProcessServices'
   import SampleQPProcessServices from '~/services/API/SampleQPProcessServices'
   import { isEmpty } from '~/services/Helpers'
+  // import Email from '~/components/treatment/collections/bag/Email'
+  import StatusDetail from '~/components/inventory/treatment/statusDetail'
+  import CustomDisplay from '~/components/inventory/treatment/customDisplay'
+  import treatmentTable from '~/components/inventory/treatment/treatmentTable'
   import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
   import routeHelpers from '~/mixins/route-helpers'
   export const customDisplayDataMRI = [
@@ -331,7 +335,7 @@ export const contentTrackingQA= [
     },
 ]
   export default {
-  components: {  },
+  components: { StatusDetail,CustomDisplay,treatmentTable },
   mixins: [routeHelpers],
   props: {
     projId: { required: true, type: String },

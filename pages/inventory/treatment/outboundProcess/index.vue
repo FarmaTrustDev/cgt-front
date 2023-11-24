@@ -115,7 +115,7 @@
                         ? 'active'
                         : phase.id < record.stageId ?  'finish' : 'wait'
                       "
-                    @click="reDirect(phase.id==5 ? phase.url : phase.url+'&record='+JSON.stringify(record))"
+                    @click="reDirect(phase.id==5 ? phase.url : phase.url!=='' ? phase.url+'&record='+JSON.stringify(record) : '')"
                   />
                 </a-steps>
                 <!-- @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)" -->
@@ -1316,9 +1316,9 @@ export default {
     submitLabel(){
       this.record=JSON.parse(this.$route.query.record)
       console.log(this.record)
-      const dateParts = this.record.collectionDateDeliveryDate.split('-');
-      const arrivalDates = this.parseDate(dateParts[0]);
-      const expiryDates = this.parseDate(dateParts[1]);
+      // const dateParts = this.record.collectionDateDeliveryDate.split('-');
+      const arrivalDates = this.record.arrivalDate;
+      const expiryDates = this.record.expiryDate;
       const obj={
         sampleId:this.record.patientEnrollmentNumber,
         sampleName:this.record.treatmentType,
