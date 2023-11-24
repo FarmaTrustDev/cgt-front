@@ -1,6 +1,6 @@
 <template>
     <div class="collection-processing-steps" style="margin-top:10px">
-      <a-form :form="form" layout="horizontal">{{ checkboxValues }}
+      <a-form :form="form" @submit="onSubmit" layout="horizontal">{{ checkboxValuesda }}{{ collections }}
         <a-table
           :columns="columns"
           :data-source="collections"
@@ -13,13 +13,13 @@
             <a-form-item class="mt-20">
               <a-switch
                 v-decorator="[
-                  'collection'+row.id,
+                  `collection[id-${row.id}][collect]`,
                   {
                     
                     valuePropName: 'checked',
                     rules: [
                       {
-                        required: true,
+                        required: false,
                         message: 'this is rquired',
                       },
                     ],
@@ -38,7 +38,7 @@
               <a-input
                
                 v-decorator="[
-                  'note'+row.id,
+                  `collection[id-${row.id}][notes]`,
                   {
                     
                     rules: [
@@ -83,12 +83,16 @@
   </template>
   <script>
   import QPProcessServices from '~/services/API/QPProcessServices'
+  import SampleQPProcessServices from '~/services/API/SampleQPProcessServices'
 
   export default {
   components: {  },
   mixins: [],
   props: {
+    projId: { required: true, type: Number },
     sampleId: { required: true, type: Number },
+    samplePuid: { required: true, type: String },
+    sampleName: { required: true, type: String },
   },
   data() {
     return {
@@ -117,7 +121,7 @@
         }, */
       ],
       collections:[],
-      projectId:this.sampleId,
+      projectId:this.projId,
       loading: false,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
@@ -126,7 +130,8 @@
       btnLoading: false,
       showEmailModal: false,
       body: null,
-      checkboxValues:[],      
+      checkboxValuesda:[],   
+      outputArray:[]   
     }
   },
   
@@ -140,14 +145,53 @@
        {
         QPProcessServices.getByProjectId(id).then((response)=>{
             this.collections = response.data
-            this.checkboxValues=new Array(this.collections.length).fill(false)
+            this.checkboxValuesda=new Array(response.data.length).fill(false)
         })
        },
        handleCheckboxChange(id, value) {
-        // alert(id)
-        this.checkboxValues[id] = value;
-        console.log(this.checkboxValues)
+        this.checkboxValuesda[id] = value;
+        console.log(this.checkboxValuesda)
     },
+    onSubmit(e) {
+        this.loading = true
+        e.preventDefault()
+        this.form.validateFields((err, values) => {
+          if (!err) {
+             console.log(values)
+             const data = JSON.parse(JSON.stringify(this.collections))
+             console.log(data)
+            for (const question of data) {
+            const id = question.id
+            const action = values.collection[`id-`+question.id].collect !== undefined ? values.collection[`id-`+question.id].collect :false
+            const notes =  values.collection[`id-`+question.id].notes !== undefined ? values.collection[`id-`+question.id].notes : null
+            const qPProcessName = question.question
+            const sampleId = this.sampleId
+            const samplePUID = this.samplePuid
+            const sampleName = this.sampleName
+            this.outputArray.push({
+            notes,
+            action,
+            id,
+            qPProcessName,
+            sampleId,
+            samplePUID,
+            sampleName,
+          })
+          console.log(this.outputArray)
+          }
+
+          SampleQPProcessServices.create(this.outputArray).then((response)=>{
+            this.outputArray = []
+          }).catch(this.error).finally(this.loading = false)
+
+            this.upsert(values)
+          } else {
+            this.loading = false
+          }
+        })
+        // this.loading = false
+      },
+      
     
   },
 }
