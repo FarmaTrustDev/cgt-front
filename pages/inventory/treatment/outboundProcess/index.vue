@@ -149,7 +149,7 @@
           style="width: 96%; margin-left: 2%"
         >
           <div class="h-tabs large-tabs" style="width: 100%; margin-left: -1%">
-            <QPProcess :sample-id="record.projectId" />
+            <QPProcess :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
           </div>
         </a-card>
         <a-card

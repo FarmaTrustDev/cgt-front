@@ -315,7 +315,7 @@
           >
             <div><h4 class="heading pl-0"><strong>Pick List</strong></h4></div>
             <div class="collection-processing-steps" style="margin-top:10px">
-              <QPProcess :sample-id="record.projectId" /> 
+              <QPProcess :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName"  /> 
             </div>
           </a-card>
           <a-card
