@@ -1005,11 +1005,10 @@
         console.log(obj)
         LabelServices.create(obj).then((response)=>{
           // EventBus.$emit('submitProcess');
-          const QPProcess = this.$refs.childComponentRef;
-          if (typeof QPProcess.submitProcess === 'function') {
+      const QPProcess = this.$refs.childComponentRef
 
-            QPProcess.submitProcess();
-        }
+      
+        QPProcess.submitProcess();
           console.log(response)
           this.goto('/inventory/treatment')
         })

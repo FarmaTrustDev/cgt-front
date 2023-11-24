@@ -1105,36 +1105,6 @@ export default {
         },
       ],
       dummyOutBoundCollection: [
-        // {
-        //   id: 1,
-        //   isCollected: false,
-        //   name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
-        // },
-        {
-          id: 2,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Hassampl_6_583}`,
-        },
-        {
-          id: 3,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Doessampl_6_584}`,
-        },
-        {
-          id: 4,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.IsSampl_6_529}`,
-        },
-        {
-          id: 5,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Hassampl_6_585}`,
-        },
-        {
-          id: 6,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Isdocum_9_586}`,
-        },
       ],
     }
   },

@@ -806,12 +806,12 @@ export default {
             taskName
           })
           }
-          this.loading = true
-            SampleProcessServices.create(this.outputArray).then((response)=>{
-              this.outputArray = [] 
-            }).catch(this.error).finally(this.loading = false)
-          this.success('Submitted successfully')
-          this.goto('/inventory/treatment')
+          // this.loading = true
+          //   SampleProcessServices.create(this.outputArray).then((response)=>{
+          //     this.outputArray = [] 
+          //   }).catch(this.error).finally(this.loading = false)
+          // this.success('Submitted successfully')
+          
           // console.log(this.typeId)
           // if ((this.typeId === 'inbound')) {
             
@@ -825,7 +825,7 @@ export default {
             SampleProcessServices.create(this.outputArray).then((response)=>{
               this.outputArray = [] 
             }).catch(this.error).finally(this.loading = false)
-            
+            this.goto('/inventory/treatment')
             // this.showSchedulingModal=true
           }
         }else{
