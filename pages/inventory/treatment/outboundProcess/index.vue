@@ -1486,8 +1486,8 @@ export default {
       this.showLogisticsModal = show
       this.success('Request sent to logistics')
     },
-    reDirect(url, alias) {
-      if (!isEmpty(url)) {
+    reDirect(url) {
+      if (!isEmpty(url) || url!=='') {
         // this.activeTab = alias
         this.handleActiveTab()
         this.goto(url)
