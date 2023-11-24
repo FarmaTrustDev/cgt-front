@@ -123,7 +123,7 @@
                             ? 'active'
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                      @click="reDirect((phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '')"
+                      @click="phase.id<=(record.stageId+1) ? reDirect((phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '') : ''"
                     />
                   </a-steps>
                 </span>
