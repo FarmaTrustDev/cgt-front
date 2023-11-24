@@ -29,25 +29,26 @@
           class="rounded-table"
         >
           <div slot="status" slot-scope="value, row">
-            <div v-if="row.statusId === 'tag1'">
+            <!-- <div v-if="row.statusId === 'tag1'">
               <span :id="row.statusId">{{ value }}</span>
             </div>
             <div v-else>
               <span :id="row.statusId">{{ value }}</span>
-            </div>
+            </div> -->
+            <span>{{ row.cocStatus }}</span>
           </div>
-          <div slot="doc" slot-scope="">
+          <div slot="doc" slot-scope="value,row">
             <a-button
               class="print-btn"
               type="primary"
               size="small"
-              @click="goto(`/reporting/cocreport`)"
+              @click="goto(`/reporting/cocreport?sampleId=${row.id}`)"
               >COC Report</a-button
             >
           </div>
         </a-table>
       </a-row>
-      <a-row class="">
+      <!-- <a-row class="">
         <a-table
           :columns="columns"
           :data-source="datasource"
@@ -77,7 +78,7 @@
             >
           </div>
         </a-table>
-      </a-row>
+      </a-row> -->
       </template
     ></page-layout
   >
@@ -89,6 +90,8 @@ import PageLayout from '~/components/layout/PageLayout'
 // import Table from '~/components/labeling/Listing'
 import routeHelpers from '~/mixins/route-helpers'
 import LabelServices from '~/services/API/LabelServices'
+import SampleServices from '~/services/API/SampleServices'
+
 export default {
   components: {
     'page-layout': PageLayout,
@@ -157,27 +160,27 @@ export default {
       columnsCOC: [
         {
           title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-          dataIndex: 'id',
+          dataIndex: 'sampleId',
           key: 'id',
         },
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'sample',
+          dataIndex: 'clientName',
           key: 'sample',
         },
         {
           title: 'Qualified Person',
-          dataIndex: 'name',
+          dataIndex: 'qualifiedPerson',
           key: 'name',
         },
         {
           title: 'Arrival Date',
-          dataIndex: 'date',
+          dataIndex: 'arrivalDate',
           key: 'date',
         },
         {
           title: `${this.$store.getters.getTranslation.Statu_1_202}`,
-          dataIndex: 'status',
+          dataIndex: 'cocStatus',
           key: 'status',
           class: 'status-sample',
           scopedSlots: { customRender: 'status' },
@@ -283,6 +286,7 @@ export default {
     }
   },
   mounted() {
+    this.fetchSamples()
     this.fetch()
   },
   computed: {
@@ -319,6 +323,15 @@ export default {
         })
         .finally(() => (this.loading = false))
     },
+    fetchSamples() {
+      this.loading = true
+      SampleServices.get()
+        .then((response) => {
+          this.datasourceCOC = response.data
+        })
+        .finally(() => (this.loading = false))
+    },
+
     searchLabel(e) {
       const search = e.target.value
       if (search !== '') {
