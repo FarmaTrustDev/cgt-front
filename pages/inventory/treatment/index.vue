@@ -117,6 +117,8 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
+                        (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
@@ -176,6 +178,8 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
+                        (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
