@@ -714,9 +714,9 @@ export const contentTrackingQA= [
         e.preventDefault()
         this.form.validateFields((err, values) => {
           if (!err) {
-             console.log(values)
+             // console.log(values)
              const data = JSON.parse(JSON.stringify(this.collections))
-             console.log(data)
+             // console.log(data)
             for (const question of data) {
             const id = question.id
             const action = values.collection[`id-`+question.id].collect !== undefined ? values.collection[`id-`+question.id].collect :false
@@ -734,7 +734,7 @@ export const contentTrackingQA= [
             samplePUID,
             sampleName,
           })
-          console.log(this.outputArray)
+          // console.log(this.outputArray)
           }
 
           if ((this.typeId === 'inbound')) {
@@ -752,11 +752,15 @@ export const contentTrackingQA= [
           } 
           if(this.typeId === 'QP_SK_PROCESS')
           {
-            this.$emit('handleActive',true)
+            this.handleActive(this.outputArray)
+            // this.$emit('handleActive',true)
           }
         }
         })
         // this.loading = false
+      },
+      handleActive(out){
+        this.$emit('handleActive',true, out )
       },
       submitProcess(){
         this.loading = true
