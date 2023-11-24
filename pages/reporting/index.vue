@@ -29,12 +29,13 @@
           class="rounded-table"
         >
           <div slot="status" slot-scope="value, row">
-            <div v-if="row.statusId === 'tag1'">
+            <!-- <div v-if="row.statusId === 'tag1'">
               <span :id="row.statusId">{{ value }}</span>
             </div>
             <div v-else>
               <span :id="row.statusId">{{ value }}</span>
-            </div>
+            </div> -->
+            <span>{{ row.cocStatus }}</span>
           </div>
           <div slot="doc" slot-scope="value,row">
             <a-button
@@ -179,7 +180,7 @@ export default {
         },
         {
           title: `${this.$store.getters.getTranslation.Statu_1_202}`,
-          dataIndex: 'cOCStatus',
+          dataIndex: 'cocStatus',
           key: 'status',
           class: 'status-sample',
           scopedSlots: { customRender: 'status' },
