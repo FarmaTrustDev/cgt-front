@@ -828,10 +828,12 @@ export default {
             this.goto('/inventory/treatment')
             // this.showSchedulingModal=true
           }
-        }else{
+        }
           if(this.typeId==='inbound'){
-
-            this.inboundCheck=true
+            SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+            }).catch(this.error).finally(this.loading = false)
+            this.goto('/inventory/treatment')
             // this.showInventoryModal=true
             // this.showQuaranitineModal=true
           }
@@ -841,7 +843,6 @@ export default {
 
           // console.log(this.typeId)
           // alert("You have missed the option(s) 'No'. Do you want to quarantine the sample?")
-        }
       })
     },
     getTranslationData(){
