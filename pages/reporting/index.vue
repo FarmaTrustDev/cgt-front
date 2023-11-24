@@ -167,17 +167,17 @@ export default {
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
           dataIndex: 'clientName',
-          key: 'sample',
+          key: 'clientName',
         },
         {
           title: 'Qualified Person',
           dataIndex: 'qualifiedPerson',
-          key: 'name',
+          key: 'qualifiedPerson',
         },
         {
           title: 'Arrival Date',
           dataIndex: 'arrivalDate',
-          key: 'date',
+          key: 'arrivalDate',
         },
         {
           title: `${this.$store.getters.getTranslation.Statu_1_202}`,
