@@ -102,6 +102,8 @@
                     :key="phase.id"
                     :title="phase.taskStepName"
                     :class="
+                    (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error-large':
                     phase.id <= record.stageId
                     ? 'ant-steps-item-finish-large'
                     : phase.id === (record.stageId+1)
@@ -268,7 +270,7 @@
               <strong style="font-size: 1.25rem">{{
                 translation.QualiAssur_3_565
               }}</strong>
-              <QPProcess :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
+              <QPProcess :type-id="type" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
             </div>
           </div>
         </a-card>

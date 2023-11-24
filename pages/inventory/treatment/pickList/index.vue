@@ -111,6 +111,8 @@
                       :key="phase.id"
                       :title="phase.taskStepName"
                       :class="
+                      (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error-large':
                       phase.id <= record.stageId
                       ? 'ant-steps-item-finish-large'
                       : phase.id === (record.stageId+1)
@@ -121,7 +123,7 @@
                             ? 'active'
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                      @click="reDirect(phase.url!=='' ? phase.url+'&record='+JSON.stringify(record) : '')"
+                      @click="reDirect(phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '')"
                     />
                   </a-steps>
                 </span>
