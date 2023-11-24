@@ -391,9 +391,9 @@ export default {
     submitLabel(){
       this.record=JSON.parse(this.$route.query.record)
       console.log(this.record)
-      const dateParts = this.record.collectionDateDeliveryDate.split('-');
-      const arrivalDates = this.parseDate(dateParts[0]);
-      const expiryDates = this.parseDate(dateParts[1]);
+      // const dateParts = this.record.collectionDateDeliveryDate.split('-');
+      const arrivalDates = this.record.arrivalDate
+      const expiryDates = this.expiryDate
       const obj={
         sampleId:this.record.patientEnrollmentNumber,
         sampleName:this.record.treatmentType,
