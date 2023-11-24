@@ -1,6 +1,6 @@
 <template>
     <div class="collection-processing-steps" style="margin-top:10px">
-      <a-form :form="form" @submit="onSubmit" layout="horizontal">{{ checkboxValuesda }}{{ collections }}
+      <a-form :form="form" @submit="onSubmit" layout="horizontal">
         <a-table
           :columns="columns"
           :data-source="collections"
