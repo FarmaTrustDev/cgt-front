@@ -115,7 +115,7 @@
                         ? 'active'
                         : phase.id < record.stageId ?  'finish' : 'wait'
                       "
-                    @click="reDirect(phase.id==5 ? phase.url : phase.url!=='' ? phase.url+'&record='+JSON.stringify(record) : '')"
+                    @click="reDirect(phase.id==5 ? phase.url : (phase.url!=='' && phase.url!==null) ? phase.url+'&record='+JSON.stringify(record) : '')"
                   />
                 </a-steps>
                 <!-- @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)" -->
@@ -1457,7 +1457,7 @@ export default {
       this.success('Request sent to logistics')
     },
     reDirect(url) {
-      if (!isEmpty(url) || url!=='') {
+      if (!isEmpty(url) && url!=='' && url!==null) {
         // this.activeTab = alias
         this.handleActiveTab()
         this.goto(url)
