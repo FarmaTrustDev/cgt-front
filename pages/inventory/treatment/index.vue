@@ -124,7 +124,7 @@
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="phase.url!=='' ? stepClickOut(record, phase) : ''"
+                        @click="phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepClickOut(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -185,7 +185,7 @@
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="phase.url!=='' ? stepKitClick(record, phase) : ''"
+                        @click="phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepKitClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -1033,7 +1033,7 @@ export default {
       })
     },
     stepKitClick(record, phase) {
-      this.goto(phase.url+'?record='+JSON.stringify(record))
+      this.goto(phase.url+'&record='+JSON.stringify(record))
     },
     getActiveTab(){
       if(this.$route.query.id){
