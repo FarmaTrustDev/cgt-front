@@ -923,6 +923,11 @@ export default {
             taskName
           })
           }
+          this.loading = true
+            SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+            }).catch(this.error).finally(this.loading = false)
+          this.success('Submitted successfully')
           // console.log(this.typeId)
           if ((this.typeId === 'inbound')) {
             
@@ -1124,11 +1129,7 @@ export default {
         this.showQuaranitineModal=true
         this.showInventoryModal=false
       }else{ */
-        this.loading = true
-            SampleProcessServices.create(this.outputArray).then((response)=>{
-              this.outputArray = [] 
-            }).catch(this.error).finally(this.loading = false)
-        this.success('Submitted successfully')
+        
         this.showInventoryModal=false
         const obj=JSON.stringify(this.$route.query.record)
         console.log(obj)
