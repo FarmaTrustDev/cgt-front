@@ -101,17 +101,22 @@
                   <a-step
                     v-for="phase in phases"
                     :key="phase.id"
-                    :title="phase.name"
+                    :title="phase.taskStepName"
                     :class="
-                      phase.id == 1
-                        ? 'ant-steps-item-finish-large'
-                        : phase.id == 2
-                        ? 'ant-steps-item-active-blue-large'
-                        : 'ant-steps-horizontal-large'
-                    "
-                    @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)"
+                      phase.id <= record.stageId
+                      ? 'ant-steps-item-finish-large'
+                        : phase.id === (record.stageId+1)
+                        ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
+                      "
+                    :status="
+                      phase.id === record.stageId
+                        ? 'active'
+                        : phase.id < record.stageId ?  'finish' : 'wait'
+                      "
+                    @click="reDirect(phase.id==5 ? phase.url : phase.url+'&record='+JSON.stringify(record))"
                   />
                 </a-steps>
+                <!-- @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)" -->
               </span>
             </div>
           </span>
@@ -135,6 +140,16 @@
               @updateId="updateDummyOutBoundCollectionId"
               @handleActiveTab="handleActiveTab"
             />
+          </div>
+        </a-card>
+        <a-card
+          v-if="activeTab == 'QP_OUT_PROCESS'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs"
+          style="width: 96%; margin-left: 2%"
+        >
+          <div class="h-tabs large-tabs" style="width: 100%; margin-left: -1%">
+            <QPProcess :sample-id="record.projectId" />
           </div>
         </a-card>
         <a-card
@@ -670,6 +685,8 @@ import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import StepServices from '~/services/API/StepServices'
+import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
+import QPProcess from '~/components/root/inventory/qpProcess'
 import CompanyAddressServices from '~/services/API/CompanyAddressServices'
 
 // import shipment from '~/components/inventory/treatment/shipment'
@@ -867,6 +884,7 @@ export default {
     StatusDetail,
     CustomDisplay,
     treatmentTable,
+    QPProcess,
     // courierComp
     // shipment,
   },
@@ -964,6 +982,7 @@ export default {
       labDisp:false,
       kitPrint:false,
       kitDisp:false,
+      actTabId:2,
 
 
       shippingTableDataColumn: [
@@ -1144,8 +1163,8 @@ export default {
         this.columns[1].title = newValues.SamplID_2_502
         this.columns[2].title = newValues.Print_1_111
 
-        this.phases[0].name = newValues.StoreSampl_2_579
-        this.phases[1].name = newValues.OutboProce_2_514
+        // this.phases[0].name = newValues.StoreSampl_2_579
+        // this.phases[1].name = newValues.OutboProce_2_514
         // this.phases[2].name = newValues.Couri_1_234
 
         this.customDisplayDataExceptionalRel[0].title = newValues.Works_1_754
@@ -1213,6 +1232,14 @@ export default {
     isEmpty,
     handleActiveTab(view) {
       this.setActiveTab(view)
+      this.sampleStepsByTaskId()
+    },
+    sampleStepsByTaskId(){
+      // const actTabId=parseInt(this.activeTab)
+      SmartLabTasksServices.getStepsByTaskId(this.actTabId).then((response)=>{
+        console.log(response.data)
+        this.phases=response.data
+      })
     },
     setActiveTab(view) {
       if (!isEmpty(view)) {
@@ -1221,10 +1248,12 @@ export default {
         this.activeTab = this.$route.query.view
       }
       const obj=this.$route.query.record
-      this.record=JSON.parse(obj)
-      if (this.record && this.record.projectId) {
-        this.getSteps(this.record.projectId);
-      }      
+      if(obj!==undefined){
+        this.record=JSON.parse(obj)
+        if (this.record && this.record.projectId) {
+          this.getSteps(this.record.projectId);
+        }      
+      }
     },
     getCompany(){
       CompanyAddressServices.getCompanies().then((response)=>{
@@ -1447,7 +1476,8 @@ export default {
     },
     reDirect(url, alias) {
       if (!isEmpty(url)) {
-        this.activeTab = alias
+        // this.activeTab = alias
+        this.handleActiveTab()
         this.goto(url)
       }
     },

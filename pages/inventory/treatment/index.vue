@@ -52,7 +52,7 @@
                   <img :src="getImageUrl('Icons/Union.svg')"
                 /></a-button>
               </template>
-              <span slot="action" slot-scope="text, record">{{ record.nexStepId }}
+              <span slot="action" slot-scope="text, record">
                 <!-- //Steps -->
                 <div class="treatment-steps">
                   <span  class="step-col" functional>
@@ -165,7 +165,7 @@
               <span slot="action" slot-scope="text, record">
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                    <a-steps :initial="1" :current="2" size="small">
+                    <a-steps :initial="1" size="small">
                       <a-step
                         v-for="phase in phases"
                         :key="phase.id"
@@ -1029,7 +1029,7 @@ export default {
       })
     },
     stepKitClick(record, phase) {
-      this.goto(phase.url+'?view=KIT_BUILDER&record='+JSON.stringify(record))
+      this.goto(phase.url+'&record='+JSON.stringify(record))
     },
     getActiveTab(){
       if(this.$route.query.id){
@@ -1097,7 +1097,7 @@ export default {
     stepClickOut(record, phase) {
       if(phase.id===5) {
         this.goto(phase.url+'?record='+JSON.stringify(record))
-      } else if (phase.id===6){
+      } else if (phase.id>5){
         this.goto(phase.url+'&record='+JSON.stringify(record))
       }
     },
