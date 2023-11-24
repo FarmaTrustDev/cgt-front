@@ -268,7 +268,7 @@
               <strong style="font-size: 1.25rem">{{
                 translation.QualiAssur_3_565
               }}</strong>
-              <QPProcess :sample-id="record.projectId" />
+              <QPProcess :proj-id="record.projectId"  :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
             </div>
           </div>
         </a-card>
