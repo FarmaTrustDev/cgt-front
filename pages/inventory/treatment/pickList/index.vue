@@ -123,7 +123,7 @@
                             ? 'active'
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                      @click="reDirect(phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '')"
+                      @click="reDirect((phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '')"
                     />
                   </a-steps>
                 </span>
@@ -1165,7 +1165,7 @@
         window.print()
       },
       reDirect(url) {
-        if (!isEmpty(url)) {
+        if (!isEmpty(url) && url!=='' && url!==null) {
           // this.activeTab = alias
           this.handleActiveTab()
           this.goto(url)

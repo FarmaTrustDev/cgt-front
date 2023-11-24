@@ -124,7 +124,7 @@
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepClickOut(record, phase) : ''"
+                        @click="(phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepClickOut(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -185,7 +185,7 @@
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepKitClick(record, phase) : ''"
+                        @click="(phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepKitClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -1033,7 +1033,9 @@ export default {
       })
     },
     stepKitClick(record, phase) {
-      this.goto(phase.url+'&record='+JSON.stringify(record))
+      if(phase.url!=='' && phase.url!==null){
+        this.goto(phase.url+'&record='+JSON.stringify(record))
+      }
     },
     getActiveTab(){
       if(this.$route.query.id){
@@ -1099,10 +1101,12 @@ export default {
       }
     },
     stepClickOut(record, phase) {
-      if(phase.id===5) {
-        this.goto(phase.url+'?record='+JSON.stringify(record))
-      } else if (phase.id>5){
-        this.goto(phase.url+'&record='+JSON.stringify(record))
+      if(phase.url!=='' && phase.url!==null){
+        if(phase.id===5) {
+          this.goto(phase.url+'?record='+JSON.stringify(record))
+        } else if (phase.id>5){
+          this.goto(phase.url+'&record='+JSON.stringify(record))
+        }
       }
     },
     

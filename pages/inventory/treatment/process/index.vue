@@ -115,7 +115,7 @@
                             ? 'active'
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                    @click="reDirect(phase.url+'&record='+JSON.stringify(record))"
+                    @click="reDirect((phase.url!=='' && phase.url!==null)? phase.url+'&record='+JSON.stringify(record) : '')"
                   />
                 </a-steps>
               </span>
