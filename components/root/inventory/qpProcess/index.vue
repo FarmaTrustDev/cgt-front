@@ -11,7 +11,7 @@
           <template slot="collected" slot-scope="name, row">
             <!-- {{ row }} -->
             <a-form-item class="mt-20">
-              <a-switch
+              <a-switch v-if="!row.isCollected"
                 v-decorator="[
                   `collection[id-${row.id}][collect]`,
                   {
@@ -29,13 +29,23 @@
                 un-checked-children="no"
                 @change="handleCheckboxChange(row.id, $event)"
               />
-  
-             
+              <a-icon
+              v-else-if="row.action"
+              class="text-success"
+              style="font-size: 1rem"
+              type="check"
+            ></a-icon>
+            <a-icon
+            v-else
+            type="close"
+            style="font-size: 1rem"
+            class="color-red"
+            ></a-icon>
             </a-form-item>
           </template>
           <template slot="notes" slot-scope="name, row">
             <a-form-item class="mt-20">
-              <a-input
+              <a-input  v-if="!row.isCollected"
                
                 v-decorator="[
                   `collection[id-${row.id}][notes]`,
@@ -52,6 +62,7 @@
                 placeholder="note"
                 
               />
+              <span v-else>{{ row.notes }}</span>
             </a-form-item>
           </template>
   
@@ -71,7 +82,7 @@
         </a-table>
   
       <a-form-item class="mt-15">
-        <FormActionButton
+        <FormActionButton v-if="!isAllreadyFill"
           
           text="Submit for QP Process"
           
@@ -84,12 +95,12 @@
   <script>
   import QPProcessServices from '~/services/API/QPProcessServices'
   import SampleQPProcessServices from '~/services/API/SampleQPProcessServices'
-
+  import { isEmpty } from '~/services/Helpers'
   export default {
   components: {  },
   mixins: [],
   props: {
-    projId: { required: true, type: Number },
+    projId: { required: true, type: String },
     sampleId: { required: true, type: Number },
     samplePuid: { required: true, type: String },
     sampleName: { required: true, type: String },
@@ -131,13 +142,14 @@
       showEmailModal: false,
       body: null,
       checkboxValuesda:[],   
-      outputArray:[]   
+      outputArray:[] , 
+      isAllreadyFill:false 
     }
   },
   
   
   mounted() {
-    this.getQPData(this.projectId)
+    this.getQPDataFilled(this.samplePuid)
   },   
   methods: {
     
@@ -148,6 +160,21 @@
             this.checkboxValuesda=new Array(response.data.length).fill(false)
         })
        },
+
+       getQPDataFilled(id)
+       {
+        SampleQPProcessServices.getBySampleId(id).then((response)=>{
+          if(isEmpty(response.data)){
+            this.getQPData(this.projectId)
+          }
+          else{
+            this.collections = response.data
+            this.isAllreadyFill = true
+            this.checkboxValuesda=new Array(response.data.length).fill(false)
+          }
+        })
+       },
+
        handleCheckboxChange(id, value) {
         this.checkboxValuesda[id] = value;
         console.log(this.checkboxValuesda)
