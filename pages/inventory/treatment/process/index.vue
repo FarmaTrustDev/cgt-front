@@ -255,9 +255,23 @@
             </div>
           </div>
         </a-card>
+        <a-card
+          v-if="activeTab == 'QP_PROCESS'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs test"
+          style="width: 96%; margin-left: 2%"
+        > 
+          <div class="h-tabs large-tabs" style="width: 100%">
+            <div>
+              <strong style="font-size: 1.25rem">{{
+                translation.QualiAssur_3_565
+              }}</strong>
+              <QPProcess :sample-id="record.projectId" />
+            </div>
+          </div>
+        </a-card>
       </div>
       <div>
-        <QPProcess></QPProcess>
         </div>
     </template>
   </page-layout>
@@ -279,7 +293,7 @@ import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
 export default {
   components: {
     'page-layout': PageLayout,
-    Process,QPProcess
+    Process, QPProcess
     // shipment,
   },
   mixins: [tabsHelpers, routeHelpers],
@@ -380,13 +394,13 @@ export default {
         this.phases[1].name = newValues.ProceSampl_2_499
         // this.phases[2].name = newValues.StoreSampl_2_579
 
-        this.dummyCollection[0].name = newValues.Hasthe_8_592
+        /* this.dummyCollection[0].name = newValues.Hasthe_8_592
         this.dummyCollection[1].name = newValues.Doesthe_8_593
         this.dummyCollection[2].name = newValues.Confithere_7_594
         this.dummyCollection[3].name = newValues.Confipacka_8_595
         this.dummyCollection[4].name = newValues.Confithe_13_596
         this.dummyCollection[5].name = newValues.Confino_5_597
-        this.dummyCollection[6].name = newValues.Confithere_6_598
+        this.dummyCollection[6].name = newValues.Confithere_6_598 */
         // this.dummyCollection[7].name = newValues.Confithat_12_599
 
         this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583

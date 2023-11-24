@@ -1,6 +1,6 @@
 <template>
     <div class="collection-processing-steps" style="margin-top:10px">
-      <a-form :form="form" layout="horizontal">
+      <a-form :form="form" layout="horizontal">{{ checkboxValues }}
         <a-table
           :columns="columns"
           :data-source="collections"
@@ -88,7 +88,7 @@
   components: {  },
   mixins: [],
   props: {
-    // collections: { required: true, type: Array },
+    sampleId: { required: true, type: Number },
   },
   data() {
     return {
@@ -117,7 +117,7 @@
         }, */
       ],
       collections:[],
-      projectId:'5475',
+      projectId:this.sampleId,
       loading: false,
       formLayout: 'vertical',
       form: this.$form.createForm(this, {
@@ -144,7 +144,7 @@
         })
        },
        handleCheckboxChange(id, value) {
-        alert(id)
+        // alert(id)
         this.checkboxValues[id] = value;
         console.log(this.checkboxValues)
     },

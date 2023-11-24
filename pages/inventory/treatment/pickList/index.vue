@@ -318,7 +318,7 @@
                 <a-form :form="form" layout="horizontal">
                     <a-table
                         :columns="columns"
-                        :row-key="(record) => record.id"
+                        :row-key="(record) => record.item"
                         :data-source="pickList"
                         :pagination="false"
                         :loading="loading"
@@ -330,7 +330,7 @@
                             <a-switch
                             v-if="!row.isCollected"
                             v-decorator="[
-                                `collection[id-${row.id}][collect]`,
+                                `collection[id-${row.item}][collect]`,
                                 {
                                 initialValue: row.isCollected,
                                 valuePropName: 'checked',
@@ -344,7 +344,7 @@
                             ]"
                             :checked-children="translation.yes_1_654"
                             :un-checked-children="translation.no_1_656"
-                            @change="(value) => handleCheck(value, row.id)"
+                            @change="(value) => handleCheck(value, row.id, row.item)"
                             />
 
                             <a-icon
@@ -360,7 +360,7 @@
                             <a-input
                             v-if="!row.isCollected"
                             v-decorator="[
-                                `collection[id-${row.id}][notes]`,
+                                `collection[id-${row.item}][notes]`,
                                 {
                                 initialValue: row.notes,
                                 rules: [
@@ -372,7 +372,7 @@
                                 },
                             ]"
                             :placeholder="translation.Enternote_3_588"
-                            @blur="(e) => handleInput(row.id,e)"
+                            @blur="(e) => handleInput(row.id,e, row.item)"
                             />
                             <span v-else>{{ row.notes }}</span>
                             <a-input
@@ -407,7 +407,7 @@
                     <a-form-item class="mt-15">
                     <FormActionButton
                         :disabled="buttonEnable"
-                        :text="translation['Submi_1_248']"
+                        text="Submit for QP Approval"
                         @click="submit"
                         :loading="loading"
                     />
@@ -658,7 +658,9 @@
         buttonEnable: false,
         notesRequired: {},
         noteItem:[],
+        compName:'',
         showModal:false,
+        cell:'',
         selectedIdex:0,
         showModalKit:false,
         compnayAddress:'',
@@ -843,8 +845,9 @@
         },
       ],
       filledData:0,
-        
-        promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
+      checkboxValues:new Array(9).fill(false),
+      checkboxBool:new Array(9).fill(''),
+      promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
         
       }
     },
@@ -957,8 +960,9 @@
           this.compnayAddress=this.addressName[this.selectedIdex][this.companyAddIndex].detail
         }
       }, */
-      handleInput(rowId,e) {
-      if(this.noteItem.includes(rowId)){
+      handleInput(rowId,e,item) {
+        console.log(rowId)
+      if(this.noteItem.includes(item)){
         this.noteItem.splice(this.noteItem.indexOf(rowId),1);
         this.filledData=this.filledData - 1
       }
@@ -967,7 +971,7 @@
       }
       if(!this.notesRequired[rowId] && e.target.value!==null){
         // console.log(this.noteItem)
-        this.noteItem.push(rowId)
+        this.noteItem.push(item)
         this.filledData=this.filledData + 1
         // this.sendData(this.filledData)
       }
@@ -1009,25 +1013,56 @@
         
         this.showModalKit = val
       },
-      handleCheck(value, rowId,alias) {
-      // console.log(alias)
-      const notesRequired = this.notesRequired
-      notesRequired[rowId] = value
-      this.notesRequired = notesRequired
-      if(value===true){
-        this.filledData=this.filledData+1
-      }else{
-        this.filledData=this.filledData-1
-      }
-      if(this.filledData<0){
-        this.filledData=0
-      }
-      // this.sendData(this.filledData)
+      handleCheck(value, rowId,item) {
+        console.log(item)
+        const notesRequired = this.notesRequired
+        notesRequired[rowId] = item
+        this.notesRequired = notesRequired
+        if(value===true){
+          this.filledData=this.filledData+1
+        }else{
+          this.filledData=this.filledData-1
+        }
+        if(this.filledData<0){
+          this.filledData=0
+        }
+        this.checkboxValues[rowId] = item
+        this.checkboxBool[rowId]=value
+        console.log(notesRequired)
+        // this.sendData(this.filledData)
     },
+    
     submit() {
       this.form.validateFields((err,values)=>{
+        console.log(values)
         if(!err){
-            this.isSubmit=true
+          // this.isSubmit=true
+          // console.log(this.$route.query.record)
+          // console.log(this.checkboxBool)
+          // console.log(values)
+          const data = JSON.parse(JSON.stringify(this.pickList))
+          // console.log(data)
+          for (const question of data) {
+            // const imageUrl = this.imgData.find(item => item.iBSId === question.id) !== undefined ? this.imgData.find(item => item.iBSId === question.id).imgData : ''
+            const stepId = question.id
+            const action = values.collection[`id-`+question.item].collect
+            const notes =  values.collection[`id-`+question.id].notes
+            const stepName = question.name
+            const sampleId = JSON.parse(this.$route.query.record).sampleId
+            const taskId = JSON.parse(this.$route.query.record).taskId
+            const taskName = JSON.parse(this.$route.query.record).taskName
+            this.outputArray.push({
+              notes,
+              action,
+              // imageUrl,
+              stepId,
+              stepName,
+              sampleId,
+              taskId,
+              taskName
+            })
+          }
+          console.log(this.outputArray)
         }
       })
     },

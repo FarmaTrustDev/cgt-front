@@ -927,6 +927,9 @@ export default {
             this.goto('/inventory/storage/ColorFridge?inbound=true&record='+obj)
           }
           if (this.typeId === 'outbound') {
+            SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+            }).catch(this.error).finally(this.loading = false)
             this.$emit('handleActiveTab', 'COURIER')
             const obj=JSON.stringify(this.record)
             this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
@@ -1066,6 +1069,7 @@ export default {
         this.filledData=0
       }
       this.checkboxValues[rowId] = value
+      
       // this.sendData(this.filledData)
     },
     handleInput(rowId,e) {
