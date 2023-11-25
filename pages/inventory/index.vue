@@ -12,7 +12,7 @@
 
       <inventory />
       <a-card :bordered="false" class="default-border-radius">
-        <h2 slot="title"><strong>Consumables</strong></h2>
+        <h2 slot="title" style="margin-top: -10px;"><strong>Consumables</strong></h2>
         <a-row :gutter="16">
           <consumables />
           <!-- <a-col :span="2"> </a-col>
