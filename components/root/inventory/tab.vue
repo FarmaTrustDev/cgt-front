@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-15 pr-15 clearfix">
-      <h2 class="">
+      <h2 class="mt-10">
         <strong v-if="user.organizationTypeAlias != 'SMARTLAB'">Equipment</strong>
         <strong v-if="user.organizationTypeAlias == 'SMARTLAB'" class="">Equipment</strong>
       </h2>
