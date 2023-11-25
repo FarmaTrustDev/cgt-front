@@ -6,19 +6,9 @@
         </template>
         <template slot="steps" slot-scope="steps">
           <!-- {{ steps }} -->
-          <a-icon type="eye" @click="getProcessSteps(steps.samplePUID, steps.taskName)" />
+          <a-button type="primary" @click="getProcessSteps(steps.globalId,steps.samplePUID, steps.taskName)" >Review Steps</a-button>
         </template>
-        <template slot="action" slot-scope="action">
-            <a-button type="primary" dashed @click="submitStatus(action.globalId, approved)">
-                        Approve
-                    </a-button>
-                    <a-button class="new-treatment-btn" dashed @click="reasonModal(action.globalId, true, rejected)">
-                        Reject
-                    </a-button>
-                    <a-button type="danger" dashed @click="submitStatus(action.globalId, quarantine)"> 
-                        Quarantine
-                    </a-button>
-        </template>
+        
     </a-table>
     <a-modal
           :visible="visibleReason"
@@ -69,7 +59,6 @@
         <a-modal
         :visible="visibleStepModal"
         :loading = "loading"
-        :footer="null"
         @cancel="stepModal(false)"
         >
         <Process
@@ -79,6 +68,21 @@
                 @fetchBags="() => {}"
                 @updateId="updateId"
               />
+              <template slot="footer" >
+                <!--  -->
+            <a-button style="background-color:#4CAF50; color:white" @click="submitStatus(approved)" dashed>
+                        Approve
+                    </a-button>
+                    <!-- -->
+                    <a-button type="danger" dashed  @click="reasonModal(true, rejected)"
+                    >
+                        Reject
+                    </a-button>
+                    <!--  -->
+                    <a-button style="background-color:#625264; color:white" @click="reasonModal(true,quarantine)" dashed> 
+                        Quarantine
+                    </a-button>
+        </template>
         </a-modal>
     </div>
 </template>
@@ -94,6 +98,11 @@ export default {
   data() {
     return {
       column:[
+        {
+          title: `SampleId`,
+          dataIndex: 'samplePUID',
+          key: 'samplePUID'
+        },
             {
                 title: `Sample Name`,
                 dataIndex: 'sampleName',
@@ -115,15 +124,11 @@ export default {
                 dataIndex:'clientName', 
             },
             {
-              title: 'View Steps',
+              title: 'View Process Steps',
               key: 'steps',
               scopedSlots:{customRender: 'steps'}
             },
-            {
-                title: `Action`,
-                key: 'action',
-                scopedSlots: { customRender: 'action' },
-            },
+            
             ],
       loading: false,
       data: [],
@@ -136,7 +141,8 @@ export default {
       form: this.$form.createForm(this, { name: 'form' }),
       dummyCollection: [],
       typeId: '',
-      visibleStepModal: false
+      visibleStepModal: false,
+      stepGlobalId: '',
     }
   },
   computed: {
@@ -153,19 +159,21 @@ export default {
             this.data = response.data
         }).catch(this.error)
     },
-    submitStatus(id, resp){
+    submitStatus(resp){
         this.loading = true
         const values = JSON.parse(JSON.stringify({
-            globalId : id,
+            globalId : this.stepGlobalId,
             status: resp
         }))
         QPStatusServices.update(values).then((response)=>{
             console.log(response.data)
             this.getPending()
+            this.stepModal(false)
         }).catch(this.error).finally(this.loading = false)
     },
-    getProcessSteps(sampleId,taskName)
+    getProcessSteps(id,sampleId,taskName)
     {
+      this.stepGlobalId = id
       this.loading = true
       this.typeId = taskName
       SampleProcessServices.getBySampleId(sampleId).then((response)=>{
@@ -177,9 +185,9 @@ export default {
     stepModal(e){
       this.visibleStepModal = e
     },
-    reasonModal(id, e, status){
+    reasonModal(e, status){
         this.visibleReason = e
-        this.qPStatusId = id
+        // this.qPStatusId = id
         this.status = status
         if(!e){
           this.form.resetFields()
@@ -191,13 +199,14 @@ export default {
         this.form.validateFields((err, value) => {
             if (!err) {
                 const values = JSON.parse(JSON.stringify({
-                    globalId : this.qPStatusId,
+                    globalId : this.stepGlobalId,
                     status : this.status,
                     reason : value.reason
                 }))
             QPStatusServices.update(values).then((response)=>{
             console.log(response.data)
-            this.reasonModal('', false, '')
+            this.reasonModal(false, '')
+            this.stepModal(false)
             this.getPending()
         }).catch(this.error)
             }
