@@ -169,7 +169,7 @@
         <div v-else>
           <a-row class="mt-20">
               <div class="consentClass">
-              <a-col :offset="6" :span="11">
+              <a-col :offset="9" :span="11">
               <div class="pt-3"><h3>QP Status is pending</h3></div>
               </a-col>
               
