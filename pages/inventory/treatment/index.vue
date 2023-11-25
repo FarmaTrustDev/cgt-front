@@ -67,14 +67,14 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                          (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="phase.url!=='' && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepClick(record, phase) : ''"
+                        @click="phase.url!=='' && phase.id<=(record.stageId+1) ? stepClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -117,14 +117,14 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                        (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                        (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="(phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepClickOut(record, phase) : ''"
+                        @click="(phase.url!=='' && phase.url!==null) && phase.id<=(record.stageId+1) ? stepClickOut(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -178,14 +178,14 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                        (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                        (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
                             ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="(phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? stepKitClick(record, phase) : ''"
+                        @click="(phase.url!=='' && phase.url!==null) && phase.id<=(record.stageId+1) ? stepKitClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
