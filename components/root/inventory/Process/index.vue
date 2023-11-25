@@ -837,7 +837,7 @@ export default {
             // this.showInventoryModal=true
             // this.showQuaranitineModal=true
           }
-          if(this.typeId!=='inbound'){
+          else if(this.typeId!=='inbound'){
             this.error()
           }
 

@@ -28,11 +28,20 @@ function create(data){
       })
 }
 
+function update(data){
+  return request({
+      url: `${baseApi}`,
+      data,
+      method: 'PUT'
+    })
+}
+
 const SampleServices = {
   getById,
   create,
   getSampleByTaskId,
-  get
+  get,
+  update
 }
 
 export default SampleServices

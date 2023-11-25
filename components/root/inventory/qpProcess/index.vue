@@ -225,6 +225,7 @@
   import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
   import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
   import routeHelpers from '~/mixins/route-helpers'
+  import SampleServices from '~/services/API/SampleServices'
   export const customDisplayDataMRI = [
   {
     title: '',
@@ -841,6 +842,8 @@ export const contentTrackingQA= [
           // console.log(this.outputArray)
           }
 
+          
+
           if ((this.typeId === 'inbound')) {
             
             this.showInventoryModal=true
@@ -856,6 +859,11 @@ export const contentTrackingQA= [
           } 
           if(this.typeId === 'QP_SK_PROCESS')
           {
+            const request = JSON.parse(JSON.stringify({sampleId: this.samplePuid}))
+          SampleServices.update(request).then((response)=>{
+            // 
+          }).catch(this.error)
+            
             this.handleActive(this.outputArray)
             // this.$emit('handleActive',true)
           }
