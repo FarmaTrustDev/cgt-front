@@ -1,7 +1,7 @@
 <template>
     <div class="collection-processing-steps" style="margin-top:10px">
       <a-form :form="form" @submit="onSubmit" layout="horizontal">
-        <a-table
+        <a-table style="display: none;"
           :columns="columns"
           :data-source="collections"
           :pagination="false"
@@ -80,9 +80,104 @@
             />
           </template>
         </a-table>
-  
+        <div v-if="qPStatusData.status === 'Approved'">
+          <a-row >
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Approved By:</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ qPStatusData.createdBy }}</h3></div>
+              </a-col>
+              </div>
+          </a-row>
+          <a-row class="mt-20">
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Approved On:</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY") }}  </h3></div>
+              </a-col>
+              </div>
+          </a-row>
+        </div>
+        <div v-else-if="qPStatusData.status === 'Rejected'">
+          <a-row >
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Rejected By:</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ qPStatusData.createdBy }}</h3></div>
+              </a-col>
+              </div>
+          </a-row>
+          <a-row class="mt-20">
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Rejected On:</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY") }}</h3></div>
+              </a-col>
+              </div>
+          </a-row>
+          <a-row class="mt-20">
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Reason</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ qPStatusData.reason }}</h3></div>
+              </a-col>
+              </div>
+          </a-row>
+        </div>
+        <div v-else-if="qPStatusData.status === 'Quarantine'">
+          <a-row >
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Quarantine By:</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ qPStatusData.createdBy }}</h3></div>
+              </a-col>
+              </div>
+          </a-row>
+          <a-row class="mt-20">
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Quarantine At:</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY") }}</h3></div>
+              </a-col>
+              </div>
+          </a-row>
+          <a-row class="mt-20">
+              <div class="consentClass">
+              <a-col :offset="1" :span="11">
+              <div class="pt-3"><h3>Reason</h3></div>
+              </a-col>
+              <a-col :span="10">
+              <div class="pt-3"><h3>{{ qPStatusData.reason }}</h3></div>
+              </a-col>
+              </div>
+          </a-row>
+        </div>
+        <div v-else>
+          <a-row class="mt-20">
+              <div class="consentClass">
+              <a-col :offset="6" :span="11">
+              <div class="pt-3"><h3>QP Status is pending</h3></div>
+              </a-col>
+              
+              </div>
+          </a-row>
+        </div>
       <a-form-item class="mt-15">
-        <FormActionButton v-if="!isAllreadyFill"
+        <FormActionButton v-if="qPStatusData.status==='Approved'"
           
           text="Submit QP Process"
           
@@ -120,6 +215,7 @@
   <script>
   import moment from 'moment'
   import QPProcessServices from '~/services/API/QPProcessServices'
+  import QPStatusServices from '~/services/API/QPStatusServices'
   import SampleQPProcessServices from '~/services/API/SampleQPProcessServices'
   import { isEmpty } from '~/services/Helpers'
   // import Email from '~/components/treatment/collections/bag/Email'
@@ -127,6 +223,7 @@
   import CustomDisplay from '~/components/inventory/treatment/customDisplay'
   import treatmentTable from '~/components/inventory/treatment/treatmentTable'
   import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
+  import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
   import routeHelpers from '~/mixins/route-helpers'
   export const customDisplayDataMRI = [
   {
@@ -472,6 +569,7 @@ export const contentTrackingQA= [
       form: this.$form.createForm(this, {
         name: 'bagCollectionProcess',
       }),
+      qPStatusData:{},
       btnLoading: false,
       showEmailModal: false,
       body: null,
@@ -605,8 +703,10 @@ export const contentTrackingQA= [
   mounted() {
     this.getQPDataFilled(this.samplePuid)
     this.getTranslationData()
+    this.getQPApproval(this.sampleId)
   },   
   methods: {
+    _getFormatMoment,
     getTranslationData(){
         this.customDisplayDataMRI[0].title=this.translation['Item#:_2_684']
         this.customDisplayDataMRI[1].title=this.translation.Descr_1_655
@@ -690,7 +790,11 @@ export const contentTrackingQA= [
             this.checkboxValuesda=new Array(response.data.length).fill(false)
         })
        },
-
+       getQPApproval(id){
+        QPStatusServices.getBySample(id).then((response)=>{
+          this.qPStatusData=response.data
+        })
+       },
        getQPDataFilled(id)
        {
         SampleQPProcessServices.getBySampleId(id).then((response)=>{

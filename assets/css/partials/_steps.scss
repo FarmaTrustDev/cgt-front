@@ -309,6 +309,19 @@
   }
 
   .ant-steps-item-error {
+    background: rgb(98, 82, 100);
+    margin-left: 8px;
+    .ant-steps-item-content {
+      margin-left: 2px;
+
+      &::before {
+        content: '';
+        background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
+        background-repeat: no-repeat;
+      }
+    }
+  }
+  .ant-steps-item-rejection {
     background: #ffd8d8;
     margin-left: 8px;
     .ant-steps-item-content {

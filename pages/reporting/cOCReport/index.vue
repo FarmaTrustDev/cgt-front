@@ -16,19 +16,22 @@
                 <h3><b>Sample Collection Information</b></h3>
             </a-col>
             <a-col :span="10" class="report-head">
-               <h3 class="ml-10">Sample ID: {{ sampleData.sampleId }}</h3>  
+               <h3 class="ml-10" v-if="sampleData.taskName === 'Sample Kit'">Kit ID: {{ sampleData.sampleId }}</h3> 
+               <h3 class="ml-10" v-else>Sample ID: {{ sampleData.sampleId }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head">
                <h3 class="ml-10">Collection Date: {{ sampleData.collectionDate }}</h3>  
             </a-col>
             <a-col :span="10" class="report-head mt-10">
-               <h3 class="ml-10">Sample Type: {{ sampleData.sampleTypeName }}</h3>  
+               <h3 class="ml-10" v-if="sampleData.taskName === 'Sample Kit'">Kit Name: {{ sampleData.sampleTypeName }}</h3>
+               <h3 class="ml-10" v-else>Sample Name: {{ sampleData.sampleTypeName }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head mt-10">
                <h3 class="ml-10">Collection Time:  {{ sampleData.collectionDate }}</h3>  
             </a-col>
             <a-col :span="10" class="report-head mt-10">
-               <h3 class="ml-10">Sample Quantity: {{ sampleData.quantity }}</h3>  
+               <h3 class="ml-10" v-if="sampleData.taskName === 'Sample Kit'">Kit Quantity: {{ sampleData.quantity }}</h3>
+               <h3 class="ml-10" v-else>Sample Quantity: {{ sampleData.quantity }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head mt-10">
                <h3 class="ml-10">Collected By: {{ sampleData.collectedBy }}</h3>  
@@ -37,10 +40,12 @@
                 <h3><b>Donor Information</b></h3>
             </a-col>
             <a-col :span="10" class="report-head">
-               <h3 class="ml-10">Donor ID: {{ sampleData.donorId }}</h3>  
+               <h3 class="ml-10" v-if="sampleData.taskName === 'Sample Kit'">Donor ID: N/A</h3>
+               <h3 class="ml-10" v-else>Donor ID: {{ sampleData.donorId }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head">
-               <h3 class="ml-10">Donor Name: {{ sampleData.donorName }}</h3>  
+               <h3 class="ml-10" v-if="sampleData.taskName === 'Sample Kit'" >Donor Name: N/A</h3>
+               <h3 class="ml-10" v-else>Donor Name: {{ sampleData.donorName }}</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Chain of Custody</b></h3>
