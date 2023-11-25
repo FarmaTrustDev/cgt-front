@@ -315,7 +315,7 @@
             class="mt-15 default-card inbound-accept-tabs"
             style="width: 96%; margin-left: 2%"
           >
-            <div><h4 class="heading pl-0"><strong>Pick List</strong></h4></div>
+            <div><h4 class="heading pl-0"><strong>QP Status</strong></h4></div>
             <div class="collection-processing-steps" style="margin-top:10px">
               <QPProcess @handleActive="handleActive" :type-id="typeId" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" ></QPProcess> 
             </div>

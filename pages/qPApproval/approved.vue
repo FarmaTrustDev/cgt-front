@@ -12,6 +12,11 @@ export default {
   data() {
     return {
       column:[
+      {
+          title: `SampleId`,
+          dataIndex: 'samplePUID',
+          key: 'samplePUID'
+        },
             {
                 title: `Sample Name`,
                 dataIndex: 'sampleName',

@@ -45,6 +45,12 @@ function getQuarantine(){
         method: 'GET'
       })
 }
+function getBySample(id){
+    return request({
+        url: `${baseApi}/get-by-sample/${id}`,
+        method: 'GET'
+      })
+}
 
 const QPStatusServices = {
     getPending,
@@ -52,7 +58,8 @@ const QPStatusServices = {
     getApproved,
     getRejected,
     getQuarantine,
-    getAll
+    getAll,
+    getBySample
 }
 
 export default QPStatusServices

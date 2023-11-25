@@ -628,6 +628,7 @@
       preventDefault,
       getLabels(){
         LabelServices.getAllLabels().then((response)=>{
+          console.log(response.data , 'labels response')
           this.inbound=response.data
         })
       },

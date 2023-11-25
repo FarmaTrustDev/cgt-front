@@ -390,7 +390,7 @@ export default {
     },
     submitLabel(){
       this.record=JSON.parse(this.$route.query.record)
-      console.log(this.record)
+      console.log(this.record, 'creating label')
       // const dateParts = this.record.collectionDateDeliveryDate.split('-');
       const arrivalDates = this.record.arrivalDate
       const expiryDates = this.expiryDate
