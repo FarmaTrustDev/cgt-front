@@ -270,7 +270,8 @@
           <div class="h-tabs large-tabs" style="width: 100%">
             <div>
               <strong style="font-size: 1.25rem">QP Status</strong>
-              <QPProcess :type-id="type" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
+              <QPProcess :type-id="type" :proj-id="record.projectId" :stageId="record.stageId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
+              
             </div>
           </div>
         </a-card>

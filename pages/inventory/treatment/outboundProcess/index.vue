@@ -154,7 +154,7 @@
           style="width: 96%; margin-left: 2%"
         >
           <div class="h-tabs large-tabs" style="width: 100%; margin-left: -1%">
-            <QPProcess @handleActiveTab="handleActiveTab" :type-id="type" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
+            <QPProcess @handleActiveTab="handleActiveTab" :type-id="type" :proj-id="record.projectId" :stageId="record.stageId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
           </div>
         </a-card>
         <a-card
@@ -1201,15 +1201,15 @@ export default {
   },
   mounted() {
     this.getTranslationData()
-    this.handleActiveTab()
+    this.handleActiveTab(this.$route.query.view, this.stageId)
     this.getCompany()
     this.getCurrentStage()
   },
   methods: {
     disabledDate: _disabledPreviousDate,
     isEmpty,
-    handleActiveTab(view) {
-      this.setActiveTab(view)
+    handleActiveTab(view, stgId) {
+      this.setActiveTab(view, stgId)
       this.sampleStepsByTaskId()
     },
     getCurrentStage(){
@@ -1224,7 +1224,8 @@ export default {
         this.phases=response.data
       })
     },
-    setActiveTab(view) {
+    setActiveTab(view,stgId) {
+      this.stageId=stgId
       if (!isEmpty(view)) {
         this.activeTab = view
       } else {
@@ -1468,9 +1469,10 @@ export default {
       this.success('Request sent to logistics')
     },
     reDirect(url) {
+      // alert(url)
       if (!isEmpty(url) && url!=='' && url!==null) {
         // this.activeTab = alias
-        this.handleActiveTab()
+        this.handleActiveTab(this.$route.query.view, this.stageId)
         this.goto(url)
       }
     },

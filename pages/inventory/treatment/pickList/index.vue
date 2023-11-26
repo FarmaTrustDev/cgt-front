@@ -111,21 +111,21 @@
                       :key="phase.id"
                       :title="phase.taskStepName"
                       :class="
-                      (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
+                      (phase.id === (stageId+1) && (record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error-large':
-                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          (phase.id === (stageId+1) && (record.qpStatus==='Rejected')) ?
                           'ant-steps-item-rejection-large':
-                      phase.id <= record.stageId
+                      phase.id <= stageId
                       ? 'ant-steps-item-finish-large'
-                      : phase.id === (record.stageId+1)
+                      : phase.id === (stageId+1)
                       ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
                       "
                       :status="
-                          phase.id === record.stageId
+                          phase.id === stageId
                             ? 'active'
-                            : phase.id < record.stageId ?  'finish' : 'wait'
+                            : phase.id < stageId ?  'finish' : 'wait'
                         "
-                      @click="phase.id<=(record.stageId+1) ? reDirect((phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '') : ''"
+                      @click="phase.id<=(stageId+1) ? reDirect((phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '') : ''"
                     />
                   </a-steps>
                 </span>
@@ -319,7 +319,7 @@
           >
             <div><h4 class="heading pl-0"><strong>QP Status</strong></h4></div>
             <div class="collection-processing-steps" style="margin-top:10px">
-              <QPProcess @handleActive="handleActive" :type-id="typeId" :proj-id="record.projectId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" ></QPProcess> 
+              <QPProcess @handleActive="handleActive" :type-id="typeId" :proj-id="record.projectId" :stageId="record.stageId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" ></QPProcess> 
             </div>
           </a-card>
           <a-card
@@ -765,6 +765,7 @@
         labDisp:false,
         kitPrint:false,
         kitDisp:false,
+        stageId:0,
         columns: [
             {
             title: `Items`,
@@ -968,7 +969,8 @@
         console.log(this.compnayAddress)
       }
     },
-    handleActive(e, out){
+    handleActive(e, out, stgId){
+      this.stageId=stgId
       this.outputArray=out
       this.isSubmit = e
       console.log(out)
@@ -1181,6 +1183,7 @@
         window.print()
       },
       reDirect(url) {
+        // alert(url)
         if (!isEmpty(url) && url!=='' && url!==null) {
           // this.activeTab = alias
           this.handleActiveTab()

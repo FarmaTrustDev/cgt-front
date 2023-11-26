@@ -441,6 +441,7 @@ export const contentTrackingQA= [
     samplePuid: { required: true, type: String },
     sampleName: { required: true, type: String },
     typeId: { required: true, type: String },
+    stageId:{ required:true, type: Number},
   },
   data() {
     return {
@@ -850,23 +851,26 @@ export const contentTrackingQA= [
             this.showInventoryModal=true
           }
           if (this.typeId === 'outbound') {
-            this.loading = true
-            if(this.outputArray.length>0){
-              SampleQPProcessServices.create(this.outputArray).then((response)=>{
-                this.outputArray = []
-              }).catch(this.error).finally(this.loading = false)
-            }
             this.handleActiveTab('COURIER')
-            
+            this.loading = true
+            // if(this.outputArray.length>0){
+              // SampleQPProcessServices.create(this.outputArray).then((response)=>{
+                this.outputArray = []
+              // }).catch(this.error).finally(this.loading = false)
+            // }
+            const request = JSON.parse(JSON.stringify({sampleId: this.samplePuid}))
+            SampleServices.update(request).then((response)=>{
+            }).catch(this.error)
           } 
           if(this.typeId === 'QP_SK_PROCESS')
           {
+            this.handleActive('isSubmit')
             const request = JSON.parse(JSON.stringify({sampleId: this.samplePuid}))
             SampleServices.update(request).then((response)=>{
             // 
             }).catch(this.error)
             
-            this.handleActive('COURIER')
+            
             // this.$emit('handleActive',true)
           }
         }
@@ -874,10 +878,10 @@ export const contentTrackingQA= [
         // this.loading = false
       },
       handleActive(out){
-        this.$emit('handleActive',true, out )
+        this.$emit('handleActive',true, out, this.stageId+1 )
       },
       handleActiveTab(out){
-        this.$emit('handleActiveTab',out )
+        this.$emit('handleActiveTab',out,this.stageId+1 )
         const obj=this.$route.query.record
         this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
         
@@ -897,9 +901,12 @@ export const contentTrackingQA= [
         this.showInventoryModal=false
       }else{ */
         this.loading = true
-        SampleQPProcessServices.create(this.outputArray).then((response)=>{
+        const request = JSON.parse(JSON.stringify({sampleId: this.samplePuid}))
+            SampleServices.update(request).then((response)=>{
+            }).catch(this.error)
+        /* SampleQPProcessServices.create(this.outputArray).then((response)=>{
             this.outputArray = []
-          }).catch(this.error).finally(this.loading = false)
+          }).catch(this.error).finally(this.loading = false) */
         this.showInventoryModal=false
         const obj=JSON.stringify(this.$route.query.record)
         console.log(obj)
