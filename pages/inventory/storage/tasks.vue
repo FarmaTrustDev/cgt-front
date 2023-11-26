@@ -395,9 +395,9 @@ export default {
       const arrivalDates = this.record.arrivalDate
       const expiryDates = this.expiryDate
       const obj={
-        sampleId:this.record.patientEnrollmentNumber,
-        sampleName:this.record.treatmentType,
-        clientName:this.record.hospital,
+        sampleId:this.record.sampleId,
+        sampleName:this.record.sampleName,
+        clientName:this.record.clientName,
         labelStatus:'Stored',
         arrivalDate:arrivalDates,
         expiryDate:expiryDates,
