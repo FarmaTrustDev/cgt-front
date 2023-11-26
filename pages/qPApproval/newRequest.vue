@@ -157,6 +157,7 @@ export default {
     getPending(){
         QPStatusServices.getPending().then((response) => {
             this.data = response.data
+            this.$store.commit('setApproval', this.data.length)
         }).catch(this.error)
     },
     submitStatus(resp){

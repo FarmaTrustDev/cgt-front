@@ -22,8 +22,8 @@
             </div>
             <div>
               <span class="title">
-                {{ isEmpty(translation[menu.name]) ? menu.name : translation[menu.name] }}
-                <a-badge v-if="((isEmpty(translation[menu.name]) ? menu.name : translation[menu.name])=== 'QPApproval') && pendingCount !== 0" :count="pendingCount" />
+                {{ isEmpty(translation[menu.name]) ? menu.name : translation[menu.name] }} 
+                <a-badge v-if="((isEmpty(translation[menu.name]) ? menu.name : translation[menu.name])=== 'QPApproval') && pendingCount !== 0" :count="approval" /> 
               </span>
             </div>
           </div>
@@ -46,9 +46,11 @@ import { setAccessToken, setRefreshToken } from '~/services/Auth'
 import { isEmpty } from '~/services/Helpers'
 import AuthServices from '~/services/API/AuthServices'
 import imagesHelper from '~/mixins/images-helper'
+import approvalHelper from '~/mixins/approval-helper'
 import QPStatusServices from '~/services/API/QPStatusServices'
+// import approvalHelper from '~/mixins/approval-helper'
 export default {
-  mixins: [imagesHelper],
+  mixins: [imagesHelper,approvalHelper],
   data() {
     return {
       collapsed: false,
@@ -64,6 +66,9 @@ export default {
     },
     translation() {
       return this.$store.getters.getTranslation
+    },
+    approval() {
+      return this.$store.getters.getApproval
     },
     selectedKey() {
       return this.$store.getters.getSelectedMenu
@@ -100,6 +105,7 @@ export default {
         QPStatusServices.getPending().then((response) => {
           if(response.data.length !== 0){
             this.pendingCount = response.data.length
+            this.$store.commit('setApproval', this.pendingCount)
           }  
         }).catch(this.error)
     },

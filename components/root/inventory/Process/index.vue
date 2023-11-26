@@ -212,6 +212,8 @@ import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import imagesHelper from '~/mixins/images-helper'
 import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 import SampleProcessServices from '~/services/API/SampleProcessServices'
+import QPStatusServices from '~/services/API/QPStatusServices'
+import approvalHelper from '~/mixins/approval-helper'
 import { isEmpty } from '~/services/Helpers'
 
 export const customDisplayDataMRI = [
@@ -528,7 +530,7 @@ export default {
   components: { Email, 
     // InstantUpload, 
   Quarantine,StatusDetail,CustomDisplay,treatmentTable },
-  mixins: [notifications, routeHelpers,imagesHelper],
+  mixins: [approvalHelper, notifications, routeHelpers,imagesHelper],
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
@@ -824,6 +826,12 @@ export default {
           if (this.typeId === 'outbound') {
             SampleProcessServices.create(this.outputArray).then((response)=>{
               this.outputArray = [] 
+              QPStatusServices.getPending().then((response) => {
+                if(response.data.length !== 0){
+                  const pendingCount = response.data.length
+                  this.$store.commit('setApproval', pendingCount)
+                }  
+              }).catch(this.error)
             }).catch(this.error).finally(this.loading = false)
             this.goto('/inventory/treatment')
             // this.showSchedulingModal=true
@@ -832,13 +840,20 @@ export default {
           if(this.typeId==='inbound'){
             SampleProcessServices.create(this.outputArray).then((response)=>{
               this.outputArray = [] 
+              QPStatusServices.getPending().then((response) => {
+                if(response.data.length !== 0){
+                  const pendingCount = response.data.length
+                  this.$store.commit('setApproval', pendingCount)
+                }  
+              }).catch(this.error)
             }).catch(this.error).finally(this.loading = false)
             this.goto('/inventory/treatment')
             // this.showInventoryModal=true
             // this.showQuaranitineModal=true
           }
           else if(this.typeId!=='inbound'){
-            this.error()
+            console.log('complete')
+            // this.error()
           }
 
           // console.log(this.typeId)

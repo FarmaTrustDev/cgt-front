@@ -67,8 +67,10 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
@@ -117,8 +119,10 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                        (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                        (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
@@ -178,8 +182,10 @@
                             : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                        (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                        (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection':
                           phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
                             : phase.id === (record.stageId+1)
@@ -1037,3 +1043,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.ant-steps-item-error > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: #000;
+}
+</style>

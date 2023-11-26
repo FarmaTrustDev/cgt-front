@@ -103,19 +103,22 @@
                     :key="phase.id"
                     :title="phase.taskStepName"
                     :class="
-                    (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                    
+                          (phase.id === (stageId+1) && (record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error-large':
-                      phase.id <= record.stageId
+                          (phase.id === (stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection-large':
+                      phase.id <= stageId
                       ? 'ant-steps-item-finish-large'
-                        : phase.id === (record.stageId+1)
+                        : phase.id === (stageId+1)
                         ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
                       "
                     :status="
-                      phase.id === record.stageId
+                      phase.id === stageId
                         ? 'active'
-                        : phase.id < record.stageId ?  'finish' : 'wait'
+                        : phase.id < stageId ?  'finish' : 'wait'
                       "
-                    @click="phase.id<=(record.stageId+1) ? reDirect(phase.id==5 ? phase.url : (phase.url!=='' && phase.url!==null) ? phase.url+'&record='+JSON.stringify(record) : '') : ''"
+                    @click="phase.id<=(stageId+1) ? reDirect(phase.id==5 ? phase.url : (phase.url!=='' && phase.url!==null) ? phase.url+'&record='+JSON.stringify(record) : '') : ''"
                   />
                 </a-steps>
                 <!-- @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)" -->
@@ -691,6 +694,7 @@ import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
 import QPProcess from '~/components/root/inventory/qpProcess'
 import CompanyAddressServices from '~/services/API/CompanyAddressServices'
 import SampleProcessServices from '~/services/API/SampleProcessServices'
+import SampleServices from '~/services/API/SampleServices'
 // import shipment from '~/components/inventory/treatment/shipment'
 export const customDisplayDataShipInfo = [
   {
@@ -921,6 +925,7 @@ export default {
       collectionDate:null,
       deliveryDate:null,
       companyName:[],
+      stageId:0,
       addressName:[],
       addressNames:[
         [
@@ -1116,11 +1121,11 @@ export default {
   watch: {
     translation(newValues, oldValue) {
       if (newValues !== oldValue) {
-        this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583
-        this.dummyOutBoundCollection[1].name = newValues.Doessampl_6_584
-        this.dummyOutBoundCollection[2].name = newValues.IsSampl_6_529
-        this.dummyOutBoundCollection[3].name = newValues.Hassampl_6_585
-        this.dummyOutBoundCollection[4].name = newValues.Isdocum_9_586
+        // this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583
+        // this.dummyOutBoundCollection[1].name = newValues.Doessampl_6_584
+        // this.dummyOutBoundCollection[2].name = newValues.IsSampl_6_529
+        // this.dummyOutBoundCollection[3].name = newValues.Hassampl_6_585
+        // this.dummyOutBoundCollection[4].name = newValues.Isdocum_9_586
 
         this.dummyCollection[0].name = newValues.Packarecei_2_518
         this.dummyCollection[1].name = newValues.Doespacka_6_519
@@ -1198,6 +1203,7 @@ export default {
     this.getTranslationData()
     this.handleActiveTab()
     this.getCompany()
+    this.getCurrentStage()
   },
   methods: {
     disabledDate: _disabledPreviousDate,
@@ -1205,6 +1211,11 @@ export default {
     handleActiveTab(view) {
       this.setActiveTab(view)
       this.sampleStepsByTaskId()
+    },
+    getCurrentStage(){
+      SampleServices.getById(this.record.id).then((response)=>{
+        this.stageId=response.data.stageId
+      })
     },
     sampleStepsByTaskId(){
       // const actTabId=parseInt(this.activeTab)

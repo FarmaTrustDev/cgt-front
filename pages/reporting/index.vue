@@ -28,6 +28,9 @@
           }"
           class="rounded-table"
         >
+        <template slot="arrivalDate" slot-scope="record, arrivalDate">
+                <span>{{ _getFormatMoment(arrivalDate.arrivalDate).format("DD/MM/YYYY") }} - {{ _getFormatMoment(arrivalDate.expiryDate).format("DD/MM/YYYY") }}</span>
+              </template>
           <div slot="status" slot-scope="value, row">
             <!-- <div v-if="row.statusId === 'tag1'">
               <span :id="row.statusId">{{ value }}</span>
@@ -90,7 +93,7 @@ import PageLayout from '~/components/layout/PageLayout'
 // import Table from '~/components/labeling/Listing'
 import routeHelpers from '~/mixins/route-helpers'
 import LabelServices from '~/services/API/LabelServices'
-
+import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
 import COCReportServices from '~/services/API/COCReportServices'
 
 export default {
@@ -178,6 +181,7 @@ export default {
           title: 'Arrival Date',
           dataIndex: 'arrivalDate',
           key: 'arrivalDate',
+          scopedSlots: { customRender: 'arrivalDate' },
         },
         {
           title: `${this.$store.getters.getTranslation.Statu_1_202}`,
@@ -308,6 +312,7 @@ export default {
     }
   },
   methods: {
+    _getFormatMoment,
     fetch() {
       this.loading = true
       LabelServices.hospital()

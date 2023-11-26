@@ -111,8 +111,10 @@
                       :key="phase.id"
                       :title="phase.taskStepName"
                       :class="
-                      (phase.id == (record.stageId+1) && (record.qpStatus==='Rejected' || record.qpStatus==='Quarantine')) ?
+                      (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
                           'ant-steps-item-error-large':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection-large':
                       phase.id <= record.stageId
                       ? 'ant-steps-item-finish-large'
                       : phase.id === (record.stageId+1)
@@ -670,10 +672,12 @@
   import SampleProcessServices from '~/services/API/SampleProcessServices'
   import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
   import QPProcess from '~/components/root/inventory/qpProcess'
-
+  import SampleServices from '~/services/API/SampleServices'
+  import QPStatusServices from '~/services/API/QPStatusServices'
+  import approvalHelper from '~/mixins/approval-helper'
   export default {
     components: {'page-layout': PageLayout,kitImgColl,QPProcess},
-    mixins: [tabsHelpers, routeHelpers,imagesHelper],
+    mixins: [approvalHelper, tabsHelpers, routeHelpers,imagesHelper],
     middleware: 'auth',
     data() {
       return {
@@ -896,6 +900,7 @@
       this.getCompany()
       this.sampleStepsByTaskId()
       this.checkCreated(JSON.parse(this.$route.query.record).sampleId)
+      this.getCurrentStage()
       // this.getSteps()
     },
     methods: {
@@ -906,6 +911,11 @@
         const obj=this.$route.query.record
         this.record=JSON.parse(obj)
         this.sampleStepsByTaskId()
+      },
+      getCurrentStage(){
+        SampleServices.getById(this.record.id).then((response)=>{
+          this.stageId=response.data.stageId
+        })
       },
       checkCreated(sampleId){
         SampleProcessServices.getBySampleId(sampleId).then((response)=>{
@@ -1136,6 +1146,12 @@
           SampleProcessServices.create(this.outputArray).then((response)=>{
               this.outputArray = [] 
               // this.isSubmit = true
+              QPStatusServices.getPending().then((response) => {
+                if(response.data.length !== 0){
+                  const pendingCount = response.data.length
+                  this.$store.commit('setApproval', pendingCount)
+                }  
+              }).catch(this.error)
               this.goto('/inventory/treatment')
             }).catch(this.error).finally(this.loading = false)
           

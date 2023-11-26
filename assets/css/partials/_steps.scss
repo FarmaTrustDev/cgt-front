@@ -319,6 +319,9 @@
         background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
         background-repeat: no-repeat;
       }
+      .ant-steps-item-title{
+        color: #fff;
+      }
     }
   }
   .ant-steps-item-rejection {
@@ -332,10 +335,38 @@
         background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
         background-repeat: no-repeat;
       }
+      .ant-steps-item-title{
+        color: #f5225d;
+      }
     }
   }
 
   .ant-steps-item-error-large {
+    background: rgb(98, 82, 100);
+    margin-left: 2%;
+    border-radius: 20px;
+    height: 60px;
+    min-width: 25%;
+    .ant-steps-item-content {
+      margin-left: 5%;
+      font-weight: 400;
+      font-size: 1.8rem;
+      &::before {
+        margin-top: 1px;
+        width: 30px;
+        height: 30px;
+        background-image: url(http://demoapi.qmaid.co/web/icons/alarm.png);
+        background-repeat: no-repeat;
+      }
+      .ant-steps-item-title {
+        font-size: large;
+        font-weight: 400;
+        margin-left: 4%;
+        color: #fff;
+      }
+    }
+  }
+  .ant-steps-item-rejection-large {
     background: #ffd8d8;
     margin-left: 2%;
     border-radius: 20px;
@@ -359,7 +390,6 @@
       }
     }
   }
-
   .ant-steps-item-active-large {
     background-color: #d1f2dc;
     margin-left: 2%;

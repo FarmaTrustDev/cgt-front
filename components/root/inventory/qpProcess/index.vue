@@ -821,26 +821,27 @@ export const contentTrackingQA= [
           if (!err) {
              // console.log(values)
              const data = JSON.parse(JSON.stringify(this.collections))
-             // console.log(data)
-            for (const question of data) {
-            const id = question.id
-            const action = values.collection[`id-`+question.id].collect !== undefined ? values.collection[`id-`+question.id].collect :false
-            const notes =  values.collection[`id-`+question.id].notes !== undefined ? values.collection[`id-`+question.id].notes : null
-            const qPProcessName = question.question
-            const sampleId = this.sampleId
-            const samplePUID = this.samplePuid
-            const sampleName = this.sampleName
-            this.outputArray.push({
-            notes,
-            action,
-            id,
-            qPProcessName,
-            sampleId,
-            samplePUID,
-            sampleName,
-          })
-          // console.log(this.outputArray)
-          }
+            if(values.length!==undefined){
+              for (const question of data) {
+                const id = question.id
+                const action = values.collection[`id-`+question.id].collect !== undefined ? values.collection[`id-`+question.id].collect :false
+                const notes =  values.collection[`id-`+question.id].notes !== undefined ? values.collection[`id-`+question.id].notes : null
+                const qPProcessName = question.question
+                const sampleId = this.sampleId
+                const samplePUID = this.samplePuid
+                const sampleName = this.sampleName
+                this.outputArray.push({
+                  notes,
+                  action,
+                  id,
+                  qPProcessName,
+                  sampleId,
+                  samplePUID,
+                  sampleName,
+                })
+              // console.log(this.outputArray)
+              }
+            }
 
           
 
@@ -850,21 +851,22 @@ export const contentTrackingQA= [
           }
           if (this.typeId === 'outbound') {
             this.loading = true
-            SampleQPProcessServices.create(this.outputArray).then((response)=>{
+            if(this.outputArray.length>0){
+              SampleQPProcessServices.create(this.outputArray).then((response)=>{
                 this.outputArray = []
               }).catch(this.error).finally(this.loading = false)
-            this.$emit('handleActiveTab', 'COURIER')
-            const obj=this.$route.query.record
-            this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
+            }
+            this.handleActiveTab('COURIER')
+            
           } 
           if(this.typeId === 'QP_SK_PROCESS')
           {
             const request = JSON.parse(JSON.stringify({sampleId: this.samplePuid}))
-          SampleServices.update(request).then((response)=>{
+            SampleServices.update(request).then((response)=>{
             // 
-          }).catch(this.error)
+            }).catch(this.error)
             
-            this.handleActive(this.outputArray)
+            this.handleActive('COURIER')
             // this.$emit('handleActive',true)
           }
         }
@@ -873,6 +875,12 @@ export const contentTrackingQA= [
       },
       handleActive(out){
         this.$emit('handleActive',true, out )
+      },
+      handleActiveTab(out){
+        this.$emit('handleActiveTab',out )
+        const obj=this.$route.query.record
+        this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
+        
       },
       submitProcess(){
         this.loading = true
