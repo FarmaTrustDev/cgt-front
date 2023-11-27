@@ -178,7 +178,7 @@ export default {
           key: 'qualifiedPerson',
         },
         {
-          title: 'Arrival Date',
+          title: 'Arrival Date - Expiry Date',
           dataIndex: 'arrivalDate',
           key: 'arrivalDate',
           scopedSlots: { customRender: 'arrivalDate' },
