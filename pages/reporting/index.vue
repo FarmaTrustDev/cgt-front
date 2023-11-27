@@ -270,7 +270,7 @@ export default {
           key: 'name',
         },
         {
-          title: `${this.$store.getters.getTranslation.ArrivDate_2_788}`,
+          title: `Arrival Date - Expiry Date`,
           dataIndex: 'date',
           key: 'date',
         },
