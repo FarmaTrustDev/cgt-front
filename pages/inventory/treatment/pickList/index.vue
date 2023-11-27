@@ -1008,9 +1008,9 @@
         const arrivalDates = this.record.arrivalDate
         const expiryDates = this.record.expiryDate
         const obj={
-          sampleId:this.record.patientEnrollmentNumber,
-          sampleName:this.record.treatmentType,
-          clientName:this.record.hospital,
+          sampleId:this.record.sampleId,
+          sampleName:this.record.sampleName,
+          clientName:this.record.clientName,
           labelStatus:'Dispatched',
           arrivalDate:arrivalDates,
           expiryDate:expiryDates,
