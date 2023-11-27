@@ -12,7 +12,6 @@
     </a-table>
     <a-modal
           :visible="visibleReason"
-          title="Reject Reason"
           class="support-add-modal"
           :dialog-style="{ top: '20px' }"
           :loading="loading"

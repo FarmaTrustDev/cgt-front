@@ -22,7 +22,7 @@
           <a-tab-pane key="3" tab="Rejected"
             ><rejected :search-by-type="searchByType"/>
         </a-tab-pane>
-          <a-tab-pane key="4" tab="Quaratine">
+          <a-tab-pane key="4" tab="Quarantine">
             <quarantine :search-by-type="searchByType"/>
         </a-tab-pane>
           <a-tab-pane key="5" tab="All">

@@ -85,31 +85,31 @@
                     <a-col :span="6"><img :src="getImageUrl('label/qrCode.svg')" width="200" height="75" /></a-col>
                     <a-col :span="18">
                     <a-row>
-                        <a-col>{{labelData.treatmentType}}</a-col>
+                        <a-col>{{labelData.clientName}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col :span="6">LOT: {{labelData.patientEnrollmentNumber}}</a-col>
-                        <a-col :span="6">SN: {{labelData.serialNumber}}</a-col>
+                        <a-col :span="6">LOT: {{labelData.sampleId}}</a-col>
+                        <a-col :span="6">SN: AAD2345</a-col>
                     </a-row>
                     <a-row>
                         <a-col :span="6"><img :src="getImageUrl('label/dated.svg')"> {{ moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY") }}</a-col>
-                        <a-col :span="4"><img :src="getImageUrl('label/temp.svg')"> {{ labelData.temp }}</a-col>
-                        <a-col :span="4"><img :src="getImageUrl('label/umbrella.svg')"> {{ labelData.status }}</a-col>
+                        <a-col :span="4"><img :src="getImageUrl('label/temp.svg')"> -20C</a-col>
+                        <a-col :span="4"><img :src="getImageUrl('label/umbrella.svg')"> Keep Dry</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>Internal Batch No: {{labelData.internalBatch}}</a-col>
+                        <a-col>Internal Batch No: AA23428</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>Project Code: {{labelData.projectCode}}</a-col>
+                        <a-col>Project Code: {{labelData.projectId}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>{{ (!isEmpty(company)) ? company: labelData.hospital}}</a-col>
+                        <a-col>{{ (!isEmpty(company)) ? company: labelData.clientName}}</a-col>
                     </a-row>
                     <a-row>
                         <a-col>{{ (!isEmpty(address)) ? address: labelData.address}}</a-col>
                     </a-row>
                     <a-row>
-                        <a-col>Cell Number: {{ (!isEmpty(phoneNo)) ? phoneNo : labelData.cell}}</a-col>
+                        <a-col>Cell Number: {{ (!isEmpty(phoneNo)) ? phoneNo : labelData.phoneNo}}</a-col>
                     </a-row>
                     </a-col>
                 </a-row>
@@ -673,7 +673,7 @@
       },
       openPopViewModal(val, record, print) {
         this.showModal = val
-        this.labelData=newSampleData.find((key)=>key.patientEnrollmentNumber===print.sampleId)
+        this.labelData=print
         this.company=print.company
         this.address=print.address
         this.phoneNo=print.phoneNo

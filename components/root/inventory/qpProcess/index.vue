@@ -97,7 +97,7 @@
               <div class="pt-3"><h3>Approved On:</h3></div>
               </a-col>
               <a-col :span="10">
-              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY") }}  </h3></div>
+              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY hh:mm:ss") }}  </h3></div>
               </a-col>
               </div>
           </a-row>
@@ -119,7 +119,7 @@
               <div class="pt-3"><h3>Rejected On:</h3></div>
               </a-col>
               <a-col :span="10">
-              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY") }}</h3></div>
+              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY  hh:mm:ss") }}</h3></div>
               </a-col>
               </div>
           </a-row>
@@ -151,7 +151,7 @@
               <div class="pt-3"><h3>Quarantine At:</h3></div>
               </a-col>
               <a-col :span="10">
-              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY") }}</h3></div>
+              <div class="pt-3"><h3>{{ _getFormatMoment(qPStatusData.createdAt).format("DD/MM/YYYY hh:mm:ss") }}</h3></div>
               </a-col>
               </div>
           </a-row>
@@ -179,7 +179,7 @@
       <a-form-item class="mt-15">
         <FormActionButton v-if="qPStatusData.status==='Approved'"
           
-          text="Submit QP Process"
+          text="Proceed"
           
           :loading="loading"
         />
