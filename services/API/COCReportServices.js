@@ -10,6 +10,13 @@ function getBySampleId(id){
         method : 'GET'
     })
 }
+function submitCOC(id,status){
+    return request({
+        url : `${baseApi}/updateStatus/${id}/${status}`,
+        method : 'GET'
+    })
+}
+
 function getAll(id){
     return request({
         url : `${baseApi}`,
@@ -19,7 +26,8 @@ function getAll(id){
 
 const COCReportServices = {
     getBySampleId,
-    getAll
+    getAll,
+    submitCOC
 }
 
 export default COCReportServices
