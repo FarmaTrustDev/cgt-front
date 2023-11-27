@@ -18,7 +18,7 @@
           :loading="loading"
           :footer="null"
           :width="600"
-          @cancel="reasonModal('',false)"
+          @cancel="reasonModal(false,false)"
         >
         <a-form :form="form" @submit="onSubmitReason">
           <a-row>
