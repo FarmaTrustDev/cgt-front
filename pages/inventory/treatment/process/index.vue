@@ -19,7 +19,7 @@
                   />
 
                   <figcaption>
-                    {{ translation.SamplID_2_502 }}: {{record.patientEnrollmentNumber}}
+                    {{ translation.SamplID_2_502 }}: {{record.sampleId}}
                   </figcaption>
                 </figure>
               </a-card>
@@ -42,7 +42,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.hospital}}</span>
+                        <span> {{record.clientName}}</span>
                       </h6>
                     </a-col>
                     <a-col :span="5" class="mt-15">
@@ -66,7 +66,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.email}}</span>
+                        <span> info@gmail.com</span>
                       </h6>
                     </a-col>
                   </a-row>
@@ -96,22 +96,28 @@
             <!-- //Steps -->
             <div class="treatment-steps" style="width: 100%">
               <span class="step-col-large">
-                <a-steps size="small" :current="2">
+                <a-steps size="small" :initial="1">
                   <a-step
                     v-for="phase in phases"
                     :key="phase.id"
-                    :title="phase.name"
+                    :title="phase.taskStepName"
                     :class="
-                      phase.id == 1
-                        ? 'ant-steps-item-finish-large'
-                        : phase.id == 2
-                        ? 'ant-steps-item-active-blue-large'
-                        : 'ant-steps-horizontal-large'
+                    (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error-large':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection-large':
+                    phase.id <= record.stageId
+                    ? 'ant-steps-item-finish-large'
+                    : phase.id === (record.stageId+1)
+                    ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
                     "
+                    
                     :status="
-                      phase.id == 1 ? 'finish' : phase.id == 2 ? 'wait' : ''
-                    "
-                    @click="reDirect(phase.id<=2? phase.url_slug+'&record='+JSON.stringify(record) : '', phase.alias)"
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
+                        "
+                    @click="phase.id<=(record.stageId+1) ? reDirect((phase.url!=='' && phase.url!==null)? phase.url+'&record='+JSON.stringify(record) : '') : ''"
                   />
                 </a-steps>
               </span>
@@ -119,9 +125,9 @@
             <!-- //Steps -->
           </span>
         </a-card>
-
+        
         <a-card
-          v-if="activeTab == 'INBOUND_ACCEPTANCE_DETAILS'"
+          v-if="activeTab == 'INBOUND_ACCEPTANCE_DETAILS' || activeTab == 'INBOUND_SHIPMENT'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs"
           style="width: 96%; margin-left: 2%"
@@ -143,7 +149,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(-1, 'days').format('DD/MM/YYYY') }} </span>
+                        <span class="text-muted"> {{ _getFormatMoment(record.arrivalDate).format("DD/MM/YYYY") }} </span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -173,7 +179,7 @@
                         }}</span>
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted"> {{ moment(record.collectionDateDeliveryDate.split("-")[0],'DD/MM/YYYY').add(2, 'days').format('DD/MM/YYYY') }}</span>
+                        <span class="text-muted"> {{ _getFormatMoment(record.arrivalDate).format("DD/MM/YYYY") }}</span>
                       </a-col>
                     </a-row>
                   </div>
@@ -215,7 +221,7 @@
                         >
                       </a-col>
                       <a-col :span="6" class="mt-15 float-right">
-                        <span class="text-muted">  {{ record.collectionDateDeliveryDate.split("-")[0] }}</span>
+                        <span class="text-muted">  {{ _getFormatMoment(record.arrivalDate).format("DD/MM/YYYY") }}</span>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -235,7 +241,7 @@
           </div>
         </a-card>
         <a-card
-          v-if="activeTab == 'PROCESS_SAMPLE'"
+          v-if="activeTab == 'PROCESS_SAMPLE' || activeTab == 'INBOUND_PROCESS'"
           :bordered="false"
           class="mt-15 default-card inbound-accept-tabs test"
           style="width: 96%; margin-left: 2%"
@@ -255,7 +261,23 @@
             </div>
           </div>
         </a-card>
+        <a-card
+          v-if="activeTab == 'QP_PROCESS'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs test"
+          style="width: 96%; margin-left: 2%"
+        > 
+          <div class="h-tabs large-tabs" style="width: 100%">
+            <div>
+              <strong style="font-size: 1.25rem">QP Status</strong>
+              <QPProcess :type-id="type" :proj-id="record.projectId" :stageId="record.stageId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
+              
+            </div>
+          </div>
+        </a-card>
       </div>
+      <div>
+        </div>
     </template>
   </page-layout>
 </template>
@@ -271,10 +293,14 @@ import tabsHelpers from '~/mixins/tabs-helpers'
 import routeHelpers from '~/mixins/route-helpers'
 import { isEmpty } from '~/services/Helpers'
 import StepServices from '~/services/API/StepServices'
+import QPProcess from '~/components/root/inventory/qpProcess'
+import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
+import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
+import SampleProcessServices from '~/services/API/SampleProcessServices'
 export default {
   components: {
     'page-layout': PageLayout,
-    Process,
+    Process, QPProcess
     // shipment,
   },
   mixins: [tabsHelpers, routeHelpers],
@@ -283,6 +309,7 @@ export default {
     return {
     moment,
       activeTab: 'inbound',
+      actTabId:1,
       type: 'inbound',
       phases: QUARANTINE_PROCESS_PHASES,
       record:{},
@@ -371,18 +398,18 @@ export default {
   watch: {
     translation(newValues, oldValue) {
       if (newValues !== oldValue) {
-        this.phases[0].name = newValues.InbouAccep_3_834
-        this.phases[1].name = newValues.ProceSampl_2_499
-        this.phases[2].name = newValues.StoreSampl_2_579
+        // this.phases[0].name = newValues.InbouAccep_3_834
+        // this.phases[1].name = newValues.ProceSampl_2_499
+        // this.phases[2].name = newValues.StoreSampl_2_579
 
-        this.dummyCollection[0].name = newValues.Hasthe_8_592
+        /* this.dummyCollection[0].name = newValues.Hasthe_8_592
         this.dummyCollection[1].name = newValues.Doesthe_8_593
         this.dummyCollection[2].name = newValues.Confithere_7_594
         this.dummyCollection[3].name = newValues.Confipacka_8_595
         this.dummyCollection[4].name = newValues.Confithe_13_596
         this.dummyCollection[5].name = newValues.Confino_5_597
-        this.dummyCollection[6].name = newValues.Confithere_6_598
-        this.dummyCollection[7].name = newValues.Confithat_12_599
+        this.dummyCollection[6].name = newValues.Confithere_6_598 */
+        // this.dummyCollection[7].name = newValues.Confithat_12_599
 
         this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583
         this.dummyOutBoundCollection[1].name = newValues.Doessampl_6_584
@@ -396,13 +423,22 @@ export default {
     this.handleActiveTab()
     this.getTranslationData()
     this.$store.commit('setSelectedMenu', [`2`])
+    this.sampleStepsByTaskId()
     // this.getSteps()
   },
   methods: {
+    _getFormatMoment,
     getTranslationData() {
-      this.phases[0].name = this.translation.InbouAccep_3_834
-      this.phases[1].name = this.translation.ProceSampl_2_499
-      this.phases[2].name = this.translation.StoreSampl_2_579
+      // this.phases[0].name = this.translation.InbouAccep_3_834
+      // this.phases[1].name = this.translation.ProceSampl_2_499
+      // this.phases[2].name = this.translation.StoreSampl_2_579
+    },
+    sampleStepsByTaskId(){
+      // const actTabId=parseInt(this.activeTab)
+      SmartLabTasksServices.getStepsByTaskId(this.actTabId).then((response)=>{
+        console.log(response.data)
+        this.phases=response.data
+      })
     },
     handleActiveTab() {
       this.activeTab = this.$route.query.view
@@ -410,9 +446,20 @@ export default {
       const obj=this.$route.query.record
       this.record=JSON.parse(obj)
       console.log(this.record)
+      this.sampleStepsByTaskId()
       if (this.record && this.record.projectId) {
-        this.getSteps(this.record.projectId);
+        this.checkCreated(this.record.sampleId,this.record.projectId);
       }
+    },
+    checkCreated(sampleId,projectId){
+      SampleProcessServices.getBySampleId(sampleId).then((response)=>{
+        if(isEmpty(response.data)){
+          this.getSteps(projectId)
+        }
+        else{
+          this.dummyCollection = response.data
+        }
+      }).catch(this.error)
     },
     getSteps(projectId){
         console.log(this.dummyCollection)
@@ -434,9 +481,10 @@ export default {
     setActiveTav(tab) {
       this.activeTab = tab
     },
-    reDirect(url, alias) {
+    reDirect(url) {
       if (!isEmpty(url)) {
-        this.activeTab = alias
+        this.handleActiveTab()
+        // this.activeTab = alias
         this.goto(url)
       }
     },

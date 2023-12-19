@@ -360,6 +360,7 @@ a {
     border: 1px solid #ececec !important;
   }
 }
+
 .users-list {
   .ant-btn:active {
     color: unset !important;
@@ -632,12 +633,13 @@ a {
 // ================== SMARTLAB ======================
 .smartlab_task {
   .treatment-steps {
+    width: 99%;
     .ant-steps-item {
       margin-right: 0 !important;
-      margin-left: 7px !important;
+      margin-left: 5px !important;
       .ant-steps-item-title {
-        margin: 0 7px 0 0 !important;
-        padding-right:20px;
+        margin: 0 5px 0 0 !important;
+        padding-right:15px;
       }
     }
   }
@@ -766,6 +768,17 @@ a {
 .anticon-down {
   margin-left: 4px !important;
 }
+.consentClass{
+  background-color: white;
+  border-radius: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height:50px;
+  border-top: 2px solid #D9D9D9;
+  border-bottom: 2px solid #D9D9D9;
+  border-left: 2px solid #D9D9D9;
+  border-right: 2px solid #D9D9D9;
+}
 .flash {
   color: red;
   -webkit-animation: flash linear 1.5s infinite;
@@ -776,4 +789,19 @@ a {
 }
 .temp-container .alert-success {
   color: white;
+}
+.report-head{
+  border-radius: 1px;
+  height: 50px;
+  background-color: #f9f9f9;
+  padding-top: 15px;
+}
+.selChange{
+  .ant-form-item-control input, .ant-form-item-control textarea, .ant-form-item-control .ant-select-selection--single {
+    border-radius: 1px;
+    height:30px;
+    padding: 0 0 0 0;
+    margin-bottom: 1px;
+    background-color: white;
+  }
 }

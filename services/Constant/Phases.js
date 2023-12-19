@@ -39,9 +39,17 @@ export const INVENTORY_OUTBOUND_STATUS_STEPS = [
     },
     {
         id: 3,
+        name: 'QP Process',
+        alias: 'QP_OUT_PROCESS',
+        phaseId: 3,
+        url_slug: '/inventory/treatment/outboundProcess?view=QP_OUT_PROCESS',
+        params: {}
+    },
+    {
+        id: 4,
         name: 'Courier',
         alias: 'COURIER',
-        phaseId: 3,
+        phaseId: 4,
         // url_slug: '/inventory/treatment/outboundProcess/',
         params: {}
     },
@@ -145,7 +153,7 @@ export const MANUFACTURER_TREATMENT_PENDING_PHASES = [
 export const MANUFACTURER_TREATMENT_PENDING_PHASES_DETAILS = [
     {
         id: 1,
-        name: 'Inbound Acceptance Details',
+        name: 'Inbound Acceptance',
         alias: 'INBOUND_SHIPMENT',
         phaseId: 3,
         enablePageId: 3,
@@ -198,6 +206,16 @@ export const QUARANTINE_PROCESS_PHASES = [
     },
     {
         id: 3,
+        name: 'QP Process',
+        alias: 'QP_PROCESS',
+        phaseId: 11,
+        enablePageId: 11,
+        url_slug: '/inventory/treatment/process?view=QP_PROCESS',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'QP_PROCESS' }
+    },
+    {
+        id: 4,
         name: 'Store sample',
         alias: 'STORE_SAMPLE',
         phaseId: 14,
@@ -232,6 +250,16 @@ export const KIT_COLLECTION_PHASES = [
     },
     {
         id: 3,
+        name: 'QP Process',
+        alias: 'QP_SK_Process',
+        phaseId: 11,
+        enablePageId: 11,
+        url_slug: '/inventory/treatment/sKQProcess',
+        url_type: URL_TYPE.treatment,
+        params: { view: 'QP_SK_Process' }
+    },
+    {
+        id: 4,
         name: 'Outbound Shipment',
         alias: 'OUTBOUND_SHIPMENT',
         phaseId: 14,
@@ -299,6 +327,16 @@ export const SMART_LAB_TREATMENT_PENDING_PHASES = [
     },
     {
         id: 3,
+        name: 'QP Process',
+        alias: 'QP_PROCESS',
+        phaseId: 11,
+        enablePageId: 11,
+        url_slug: '/inventory/treatment/process?view=QP_PROCESS',
+        url_type: URL_TYPE.patient,
+        params: { view: 'MANUFACTURER' }
+    },
+    {
+        id: 4,
         name: 'Store Sample',
         alias: 'STORE_SAMPLE',
         phaseId: 14,
@@ -341,6 +379,16 @@ export const SMART_LAB_KIT_COLLECTION_PHASES = [
     },
     {
         id: 3,
+        name: 'QP Process',
+        alias: 'QP_SK_PROCESS',
+        phaseId: 11,
+        enablePageId: 11,
+        url_slug: '/inventory/treatment/sKQProcess',
+        url_type: URL_TYPE.patient,
+        params: { view: 'QP_SK_PROCESS' }
+    },
+    {
+        id: 4,
         name: 'Outbound Process',
         alias: 'OUTBOUND_PROCESS',
         phaseId: 14,

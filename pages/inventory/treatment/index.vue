@@ -39,6 +39,9 @@
               :data-source="inbound"
               :should-fetch="false"
             >
+              <template slot="colDateDeliveryDate" slot-scope="record, colDateDeliveryDate">
+                <span>{{ _getFormatMoment(colDateDeliveryDate.arrivalDate).format("DD/MM/YYYY") }} - {{ _getFormatMoment(colDateDeliveryDate.expiryDate).format("DD/MM/YYYY") }}</span>
+              </template>
               <template slot="print" slot-scope="record, print">
                 <a-button
                   v-if="print.processSample === 'default'"
@@ -57,29 +60,23 @@
                       <a-step
                         v-for="phase in phases"
                         :key="phase.id"
-                        :title="phase.name"
+                        :title="phase.taskStepName"
                         :status="
-                          phase.id === 2 && record.processSample == 'red'
-                            ? 'wait'
-                            : ''
+                          phase.id === record.stageId 
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
                         "
                         :class="
-                          phase.id === 2 && record.processSample == 'red'
-                            ? 'ant-steps-item-error'
-                            : phase.id === 2 && record.processSample !== 'red'
-                            ? 'ant-steps-item-active-blue'
-                            : (phase.id === 1 && record.processSample==='red')||(phase.id !== 3 && record.inbound===true)
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection':
+                          phase.id <= record.stageId
                             ? 'ant-steps-item-finish'
-                            : ''
+                            : phase.id === (record.stageId+1)
+                            ? 'ant-steps-item-active-blue' : ''
                         "
-                        @click="
-                          phase.id === 2 && record.processSample == 'red'
-                            ? stepClick(
-                                'error',
-                                '/inventory/storage/quarantine/status'
-                              )
-                            : stepClick(record, phase)
-                        "
+                        @click="phase.url!=='' && phase.id<=(record.stageId+1) ? stepClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -102,21 +99,36 @@
             <a-table
               class="rounded-table"
               :columns="completedColumns"
-              :data-source="outbound"
+              :data-source="inbound"
             >
               <!-- ==== steps === -->
+              <template slot="colDateDeliveryDate" slot-scope="record, colDateDeliveryDate">
+                <span>{{ _getFormatMoment(colDateDeliveryDate.arrivalDate).format("DD/MM/YYYY") }} - {{ _getFormatMoment(colDateDeliveryDate.expiryDate).format("DD/MM/YYYY") }}</span>
+              </template>
               <span slot="status-steps" slot-scope="text, record">
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                    <a-steps :initial="1" :current="2" size="small">
+                    <a-steps :initial="1" size="small">
                       <a-step
-                        v-for="phase in outboundSteps"
+                        v-for="phase in phases"
                         :key="phase.id"
-                        :title="phase.name"
-                        :class="
-                          phase.id === 2 ? 'ant-steps-item-active-blue' : ''
+                        :title="phase.taskStepName"
+                        :status="
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                        @click="stepClickOut(record, phase)"
+                        :class="
+                        (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection':
+                          phase.id <= record.stageId
+                            ? 'ant-steps-item-finish'
+                            : phase.id === (record.stageId+1)
+                            ? 'ant-steps-item-active-blue' : ''
+                        "
+                        @click="(phase.url!=='' && phase.url!==null) && phase.id<=(record.stageId+1) ? stepClickOut(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -140,9 +152,12 @@
             <a-table
               class="rounded-table"
               :columns="kitColumns"
-              :data-source="sampleKits"
+              :data-source="inbound"
             >
               <!-- ==== steps === -->
+              <template slot="colDateDeliveryDate" slot-scope="record, colDateDeliveryDate">
+                <span>{{ _getFormatMoment(colDateDeliveryDate.arrivalDate).format("DD/MM/YYYY") }} - {{ _getFormatMoment(colDateDeliveryDate.expiryDate).format("DD/MM/YYYY") }}</span>
+              </template>
               <template slot="print" slot-scope="record, print">
                 <a-button
                   v-if="print.processSample === 'default'"
@@ -156,15 +171,27 @@
               <span slot="action" slot-scope="text, record">
                 <div class="treatment-steps">
                   <span class="step-col" functional>
-                    <a-steps :initial="1" :current="2" size="small">
+                    <a-steps :initial="1" size="small">
                       <a-step
-                        v-for="phase in kitPhase"
+                        v-for="phase in phases"
                         :key="phase.id"
-                        :title="phase.name"
-                        :class="
-                          phase.id === 2 ? 'ant-steps-item-active-blue' : ''
+                        :title="phase.taskStepName"
+                        :status="
+                          phase.id === record.stageId
+                            ? 'active'
+                            : phase.id < record.stageId ?  'finish' : 'wait'
                         "
-                        @click="phase.id === 2 ? stepKitClick(record, phase) : ''"
+                        :class="
+                        (phase.id === (record.stageId+1) && (record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error':
+                          (phase.id === (record.stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection':
+                          phase.id <= record.stageId
+                            ? 'ant-steps-item-finish'
+                            : phase.id === (record.stageId+1)
+                            ? 'ant-steps-item-active-blue' : ''
+                        "
+                        @click="(phase.url!=='' && phase.url!==null) && phase.id<=(record.stageId+1) ? stepKitClick(record, phase) : ''"
                       />
                     </a-steps>
                   </span>
@@ -279,6 +306,9 @@ import PageLayout from '~/components/layout/PageLayout'
 import Header from '~/components/inventory/treatment/treatmentheader'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
+import SampleServices from '~/services/API/SampleServices'
+import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
+import {_getFormatMoment } from '~/services/Helpers/MomentHelpers'
 // import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import {
   SMART_LAB_TREATMENT_PENDING_PHASES,
@@ -417,203 +447,10 @@ export const customDisplayDataMat = [
   },
 ]
 
-export const newSampleData = [
-  {
-    patientEnrollmentNumber: 'DAC7994',
-    treatmentType: 'Human Cells ',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
-    print: 'Uploads/DocumentURL/shipping notice.jpg',
-    inbound:true,
-    projectName:'BayState USA IN89873',
-    projectId:'506',
-    processSample: 'green',
-    email:'baystate@gmail.com',
-    type:1,
-  },
-  {
-    patientEnrollmentNumber: 'DAC7986',
-    treatmentType: 'Human Cells ',
-    hospital: 'Novartis',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(8,'month')).format("DD/MM/YYYY"),
-    print: 'Uploads/DocumentURL/shipping notice.jpg',
-    inbound:true,
-    projectName:'Novartis - NTU Sample Project',
-    projectId:'7157',
-    processSample: 'green',
-    email:'novartis@gmail.com',
-    type:1,
-  },
-  {
-    patientEnrollmentNumber: 'DAC9874',
-    treatmentType: 'Human Cells',
-    hospital: 'Novartis',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
-    print: 'Uploads/DocumentURL/shipping notice.jpg',
-    inbound:false,
-    projectName:'Novartis - NTU Sample Project',
-    projectId:'7157',
-    processSample: 'red',
-    email:'novartis@gmail.com',
-    type:1,
-  },
-  {
-    patientEnrollmentNumber: 'DAC7996',
-    treatmentType: 'Human Cells',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
-    print: 'Uploads/DocumentURL/shipping notice.jpg',
-    inbound:false,
-    projectName:'BayState USA IN89873',
-    projectId:'506',
-    processSample: 'default',
-    email:'baystate@gmail.com',
-    type:1,
-  },
-  {
-    patientEnrollmentNumber: 'DAC9874',
-    treatmentType: 'Human Cells',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
-    print: 'Uploads/DocumentURL/shipping notice.jpg',
-    inbound:false,
-    projectName:'BayState USA IN89873',
-    projectId:'506',
-    processSample: 'default',
-    email:'baystate@gmail.com',
-    type:1,
-  },
-]
-export const completedSampleData = [
-  {
-    patientEnrollmentNumber: 'DAC65198',
-    treatmentType: 'Human Cells',
-    productionLine: 'Zone A',
-    hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted()).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
-    projectName:'Autolus Project Out89343',
-    projectId:'2440',
-    dispatchedBy: 'Ben Hawkins',
-    email:'adaptimmune@gmail.com',
-    type:1,
-  },
-  {
-    patientEnrollmentNumber: 'DAC2237',
-    treatmentType: 'Human Cells',
-    productionLine: 'Zone C',
-    hospital: 'Adaptimmune',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(1,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
-    projectName:'Autolus Project Out89343',
-    projectId:'2440',
-    dispatchedBy: 'Shawn David',
-    email:'adaptimmune@gmail.com',
-    type:1,
-  },
-  {
-    patientEnrollmentNumber: 'DAC85597',
-    treatmentType: 'Human Cells',
-    productionLine: 'Zone A',
-    hospital: 'Kite',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(12,'month')).format("DD/MM/YYYY"),
-    projectName:'Kite Out Washington Clinical Trial Ref:2343',
-    projectId:'594',
-    dispatchedBy: 'Chris Murphy',
-    email:'kite@gmail.com',
-    type:1,
-  },
-  {
-    patientEnrollmentNumber: 'DAC39647',
-    treatmentType: 'Human Cells ',
-    productionLine: 'Zone C',
-    hospital: 'Kite',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
-    projectName:'Kite Out Washington Clinical Trial Ref:2343',
-    projectId:'594',
-    dispatchedBy: 'Allen Braun',
-    email:'kite@gmail.com',
-    type:1,
-  },
-]
-export const sampleKits=[
-  {
-    patientEnrollmentNumber: 'KIT341',
-    treatmentType: 'Laeuka Kit',
-    hospital: 'Adaptimmune',
-    hospitalName:'The Royal Hospital',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(2,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(6,'month')).format("DD/MM/YYYY"),
-    print: 'Uploads/DocumentURL/shipping notice.jpg',
-    inbound:false,
-    projectName:'BayState USA OUT89873',
-    projectId:'2440',
-    processSample: 'green',
-    email:'baystate@gmail.com',
-    type:2,
-  },
-  {
-    patientEnrollmentNumber: 'KIT246',
-    treatmentType: 'Aphresis Kit',
-    hospital: 'Syneous',
-    hospitalName:'The Royal Hospital',
-    collectionDateDeliveryDate: moment(_getFutureMomentStandardFormatted(3,'day')).format("DD/MM/YYYY") + ' - ' + moment(_getFutureMomentStandardFormatted(7,'month')).format("DD/MM/YYYY"),
-    print: 'Uploads/DocumentURL/shipping notice.jpg',
-    inbound:false,
-    projectName:'BayState UK OUT89873',
-    projectId:'2456',
-    processSample: 'green',
-    email:'baystate@gmail.com',
-    type:2,
-  },
-]
-export const allSampleData = [
-  {
-    patientEnrollmentNumber: 'DAC7993',
-    treatmentType: 'Human Cells ',
-    productionLine: 'Zone C',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '05/06/2023 - 08/02/2024',
-    dispatchedBy: 'In Progress',
-  },
-  {
-    patientEnrollmentNumber: 'DAC21362',
-    treatmentType: 'Human Cells ',
-    productionLine: 'Zone C',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '30/05/2023 - 02/12/2023',
-    dispatchedBy: 'In Progress',
-  },
-  {
-    patientEnrollmentNumber: 'DAC59736',
-    treatmentType: 'Human Cells ',
-    productionLine: 'Zone A',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '29/05/2023 - 01/07/2024',
-    dispatchedBy: 'Jake Paul',
-  },
-  {
-    patientEnrollmentNumber: 'DAC48959',
-    treatmentType: 'Human Cells ',
-    productionLine: 'Zone C',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '29/05/2023 - 01/08/2024',
-    dispatchedBy: 'In Progress',
-  },
-  {
-    patientEnrollmentNumber: 'DAC31900',
-    treatmentType: 'Human Cells',
-    productionLine: 'Zone A',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '26/05/2023 - 29/12/2024',
-    dispatchedBy: 'cgt_hospital',
-  },
-  {
-    patientEnrollmentNumber: 'DAC53835',
-    treatmentType: 'Human Cells',
-    productionLine: 'Zone A',
-    hospital: 'Baystate Clinic',
-    collectionDateDeliveryDate: '26/05/2023 - 29/11/2024',
-    dispatchedBy: 'In Progress',
-  },
-]
+export const newSampleData = []
+export const completedSampleData = []
+export const sampleKits=[]
+export const allSampleData = []
 
 export default {
   components: {
@@ -647,23 +484,23 @@ export default {
       completedColumns: [
         {
           title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
+          dataIndex: 'sampleId',
+          key: 'sampleId',
         },
         {
           title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
+          dataIndex: 'sampleName',
+          key: 'sampleName',
         },
         {
           title: `${this.$store.getters.getTranslation.StoraArea_2_504}`,
-          dataIndex: 'productionLine',
-          key: 'productionLine',
+          dataIndex: 'location',
+          key: 'location',
         },
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
+          dataIndex: 'clientName',
+          key: 'clientName',
         },
         {
           title: 'Project ID',
@@ -676,9 +513,9 @@ export default {
           key: 'projectName',
         },
         {
-          title: 'Execution Date - Expiry Date',
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
+          title: 'Execution - Expiry Date',
+          dataIndex: 'colDateDeliveryDate',
+          scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
         {
           title: `${this.$store.getters.getTranslation.Dispaby_2_396}`,
@@ -687,59 +524,23 @@ export default {
           scopedSlots: { customRender: 'status-steps' },
         },
       ],
-      pendingSampleData: [
-        {
-          patientEnrollmentNumber: 'DAC7986',
-          treatmentName: 'Human Cells',
-          productionLine: 'Zone A',
-          hospital: 'Baystate Clinic',
-          collectionDateDeliveryDate: '10/06/2022 - 14/08/2022',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9874',
-          treatmentName: 'Human Cells',
-          productionLine: 'Zone C',
-          hospital: 'Novartis',
-          collectionDateDeliveryDate: '15/06/2022 - 20/07/2023',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9875',
-          treatmentName: 'Human Cells',
-          productionLine: 'Zone C',
-          hospital: 'Autolus',
-          collectionDateDeliveryDate: '21/06/2022 - 26/07/2024',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9876',
-          treatmentName: 'Human Cells',
-          productionLine: 'Zone A',
-          hospital: 'Baystate Clinic',
-          collectionDateDeliveryDate: '25/06/2022 - 29/07/2025',
-        },
-        {
-          patientEnrollmentNumber: 'DAC9876',
-          treatmentName: 'Human Cells ',
-          productionLine: 'Zone C',
-          hospital: 'Baystate Clinic',
-          collectionDateDeliveryDate: '28/06/2022 - 03/07/2026',
-        },
-      ],
+      pendingSampleData: [],
 
       newSampleColumns: [
         {
           title: `${this.$store.getters.getTranslation.SamplID_2_502}`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
+          dataIndex: 'sampleId',
+          key: 'sampleId',
         },
         {
           title: `${this.$store.getters.getTranslation.SamplName_2_503}`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
+          dataIndex: 'sampleName',
+          key: 'sampleName',
         },
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
+          dataIndex: 'clientName',
+          key: 'clientName',
         },
         {
           title: 'Project ID',
@@ -753,9 +554,9 @@ export default {
         },
 
         {
-          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
+          title: `Arrival - Expiry Date`,
+          dataIndex: 'colDateDeliveryDate',
+          scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
         {
           title: `${this.$store.getters.getTranslation.Docum_1_507}`,
@@ -774,18 +575,18 @@ export default {
       kitColumns: [
         {
           title: `Kit ID`,
-          dataIndex: 'patientEnrollmentNumber',
-          key: 'patientEnrollmentNumber',
+          dataIndex: 'sampleId',
+          key: 'sampleId',
         },
         {
           title: `Kit Name`,
-          dataIndex: 'treatmentType',
-          key: 'treatmentType',
+          dataIndex: 'sampleName',
+          key: 'sampleName',
         },
         {
           title: `${this.$store.getters.getTranslation.Clien_1_505}`,
-          dataIndex: 'hospital',
-          key: 'hospital',
+          dataIndex: 'clientName',
+          key: 'clientName',
         },
         {
           title: 'Project ID',
@@ -799,9 +600,9 @@ export default {
         },
 
         {
-          title: `${this.$store.getters.getTranslation.ArrivDate_5_535}`,
-          dataIndex: 'collectionDateDeliveryDate',
-          key: 'collectionDateDeliveryDate',
+          title: `Arrival - Expiry Date`,
+          dataIndex: 'colDateDeliveryDate',
+          scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
         {
           title: `Kit Shipping Details`,
@@ -937,20 +738,20 @@ export default {
         this.pendingColumns[4].title = newValues.ArrivDate_5_535
         this.pendingColumns[5].title = newValues.Actio_1_220
 
-        this.newSampleColumns[0].title = newValues.SamplID_2_502
+        /* this.newSampleColumns[0].title = newValues.SamplID_2_502
         this.newSampleColumns[1].title = newValues.SamplName_2_503
         this.newSampleColumns[2].title = newValues.Clien_1_505
         this.newSampleColumns[3].title = newValues.ArrivDate_5_535
         this.newSampleColumns[4].title = newValues.Docum_1_507
-        this.newSampleColumns[5].title = newValues.Actio_1_220
+        this.newSampleColumns[5].title = newValues.Actio_1_220 */
 
-        this.phases[0].name = newValues.inboushipm_2_302
-        this.phases[1].name = newValues.ProceSampl_2_499
-        this.phases[2].name = newValues.StoreSampl_2_579
+        // this.phases[0].name = newValues.inboushipm_2_302
+        // this.phases[1].name = newValues.ProceSampl_2_499
+        // this.phases[2].name = newValues.StoreSampl_2_579
 
         this.outboundSteps[0].name = newValues.StoreSampl_2_579
         this.outboundSteps[1].name = newValues.OutboProce_2_514
-        this.outboundSteps[2].name = newValues.Couri_1_234
+        // this.outboundSteps[2].name = newValues.Couri_1_234
 
         this.customDisplayData[0].title = newValues.ReturMater_2_660
         this.customDisplayData[1].title = newValues['Initiby:_2_661']
@@ -981,28 +782,53 @@ export default {
     this.getLocalStorage()
     this.$store.commit('setSelectedMenu', [`2`])
     this.getActiveTab()
+    this.sampleStepsByTaskId()
+    this.sampleByTaskId()
   },
   methods: {
     searchTreatment() {},
+    _getFormatMoment,
     stepClick(record, phase) {
       if (record === 'error') {
         this.goto(phase)
-      } else if(record.inbound===true && phase.id!==3){
-        this.goto(phase.url_slug+'&record='+JSON.stringify(record))
+      } else{
+        this.goto(phase.url+'&record='+JSON.stringify(record))
       }
     },
+    sampleStepsByTaskId(){
+      const actTabId=parseInt(this.activeTab)
+      SmartLabTasksServices.getStepsByTaskId(actTabId).then((response)=>{
+        console.log(response.data)
+        this.phases=response.data
+      })
+    },
+    sampleByTaskId(){
+      const actTabId=parseInt(this.activeTab)
+      SampleServices.getSampleByTaskId(actTabId).then((response)=>{
+        console.log(response.data)
+        this.inbound=response.data
+      })
+    },
     stepKitClick(record, phase) {
-      this.goto(phase.url_slug+'?view=KIT_BUILDER&record='+JSON.stringify(record))
+      if(phase.url!=='' && phase.url!==null){
+        this.goto(phase.url+'&record='+JSON.stringify(record))
+      }
     },
     getActiveTab(){
       if(this.$route.query.id){
         this.activeTab="2"
+        this.sampleByTaskId()
+        this.sampleStepsByTaskId()
       }else{
         this.activeTab="1"
+        this.sampleByTaskId()
+        this.sampleStepsByTaskId()
       }
     },
     tabChange(key) {
       this.activeTab = key
+      this.sampleByTaskId()
+      this.sampleStepsByTaskId()
     },
     getLocalStorage(){
       if(localStorage.getItem('acceptedNow')==="true" && localStorage.getItem('isNew')==="true"){
@@ -1052,12 +878,12 @@ export default {
       }
     },
     stepClickOut(record, phase) {
-      if (record === 'error') {
-        this.goto(phase)
-      } else if(phase.phaseId===1) {
-        this.goto(phase.url_slug+'?record='+JSON.stringify(record))
-      } else if (phase.phaseId===2){
-        this.goto(phase.url_slug+'&record='+JSON.stringify(record))
+      if(phase.url!=='' && phase.url!==null){
+        if(phase.id===5) {
+          this.goto(phase.url+'?record='+JSON.stringify(record))
+        } else if (phase.id>5){
+          this.goto(phase.url+'&record='+JSON.stringify(record))
+        }
       }
     },
     
@@ -1089,11 +915,11 @@ export default {
     getTranslationData() {
       this.phases[0].name = this.translation.inboushipm_2_302
       this.phases[1].name = this.translation.ProceSampl_2_499
-      this.phases[2].name = this.translation.StoreSampl_2_579
+      // this.phases[2].name = this.translation.StoreSampl_2_579
 
       this.outboundSteps[0].name = this.translation.StoreSampl_2_579
       this.outboundSteps[1].name = this.translation.OutboProce_2_514
-      this.outboundSteps[2].name = this.translation.Couri_1_234
+      // this.outboundSteps[2].name = this.translation.Couri_1_234
 
       this.customDisplayData[0].title = this.translation.ReturMater_2_660
       this.customDisplayData[1].title = this.translation['Initiby:_2_661']
@@ -1217,3 +1043,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.ant-steps-item-error > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: #000;
+}
+</style>

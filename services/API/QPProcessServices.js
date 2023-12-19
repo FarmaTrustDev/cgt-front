@@ -1,7 +1,7 @@
 import request from '../request'
 import { BASE_API } from '../Constant'
 
-const baseApi = `${BASE_API}/step`
+const baseApi = `${BASE_API}/QPProcess`
 
 function create(data){
     return request({
@@ -10,7 +10,7 @@ function create(data){
         data,
     })
 }
-function updateStep(data){
+function updateQp(data){
     return request({
         url: `${baseApi}`,
         method : 'PUT',
@@ -24,41 +24,35 @@ function get(){
         method : 'GET'
     })
 }
-
-function getByProcessId(id){
+function getByProjectId(id){
     return request({
-        url : `${baseApi}/get-by-process-id/${id}`,
+        url : `${baseApi}/getByProjectId/${id}`,
         method : 'GET'
     })
 }
+
 function getById(id){
     return request({
         url : `${baseApi}/${id}`,
         method : 'GET'
     })
 }
-function deleteStep(id){
+function deleteQPProcess(id){
     return request({
         url : `${baseApi}/${id}`,
         method : 'DELETE'
     })
 }
 
-function getByProjectId(id){
-    return request({
-        url : `${baseApi}/get-by-project-id/${id}`,
-        method : 'GET'
-    })
-}
 
-const StepServices = {
+
+const QPProcessServices = {
     create,
     get,
-    getByProcessId,
-    getByProjectId,
     getById,
-    deleteStep,
-    updateStep
+    getByProjectId,
+    deleteQPProcess,
+    updateQp
 }
 
-export default StepServices
+export default QPProcessServices

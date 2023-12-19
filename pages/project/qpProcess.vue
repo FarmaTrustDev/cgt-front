@@ -11,7 +11,7 @@
                   :wrapper-col="{ span: 18 }"
                   class="pt-3"
                 >
-                  <a-input
+                  <a-input disabled
                     v-decorator="[
                       'projectName',
                       {
@@ -29,6 +29,34 @@
                     ]"
                     style="background-color: white"
                     placeholder="Project Name"
+                  />
+                </a-form-item>
+              </a-col>
+              <a-col :span="24" class="ml-10">
+                <a-form-item
+                  label="Project Task "
+                  :label-col="{ span: 4 }"
+                  :wrapper-col="{ span: 18 }"
+                  class="pt-3"
+                >
+                  <a-input disabled
+                    v-decorator="[
+                      'taskName',
+                      {
+                        initialValue: taskName,
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Please input your Task Name',
+                          },
+                          {
+                            message: 'Please enter a valid name',
+                          },
+                        ],
+                      },
+                    ]"
+                    style="background-color: white"
+                    placeholder="Task Name"
                   />
                 </a-form-item>
               </a-col>
@@ -63,16 +91,17 @@
             </a-form-item>
           </a-row>
           <a-row class="bg-grey pt-2">  
+            
             <a-col :span="24" class="bg-grey">
               <a-form-item
-                label="New Step"
+                label="New QP Step"
                 :label-col="{ span: 4 }"
                 :wrapper-col="{ span: 18 }"
                 class="ml-10"
               >
                 <a-input
                   v-decorator="[
-                    'name',
+                    'question',
                     {
                       rules: [
                         {
@@ -104,13 +133,13 @@
         <a-row >
             <a-col :span="24">
             <div v-for="(step, index) in steps" :key="index">
-              <a-col :span="20"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
-                {{ step.name }}
+                <a-col :span="20"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
+                {{ step.question }}
                 </div>
               </a-col>
               <a-col :span="4" class="mt-15">
-                <a-button @click="editStep(step.id)" class="ml-20">Edit</a-button>
-                <a-button @click="deleteStep(step.id)">Delete</a-button>
+                <a-button @click="editQPProcess(step.id)" class="ml-20">Edit</a-button>
+                <a-button @click="deleteQPProcess(step.id)">Delete</a-button>
               </a-col>
             </div>
             </a-col>
@@ -130,7 +159,8 @@
   import PageLayout from '~/components/layout/PageLayout.vue'
   import { preventDefault } from '~/services/Helpers'
   import ProjectServices from '~/services/API/ProjectServices'
-  import StepServices from '~/services/API/StepServices'
+  // import StepServices from '~/services/API/StepServices'
+  import QPProcessServices from '~/services/API/QPProcessServices'
   import routeHelpers from '~/mixins/route-helpers'
   // import {success} from '~/services/Helpers/notifications'
   export default {
@@ -147,9 +177,10 @@
         visibleAddSoftware: false,
         softwareticket: {},
         isCreated: false,
+        isCreatedStep:true,
         visible: false,
-        stepAct:'Add Step',
         show: true,
+        stepAct:'Add Step',
         loading: false,
         form: this.$form.createForm(this, { name: 'processForm' }),
         stepForm: this.$form.createForm(this, { name: 'stepForm' }),
@@ -190,8 +221,9 @@
         ],
         processId: '',
         processName:'',
-        sopList: [],
-        isCreatedStep:true
+        taskName:'',
+        taskId:'',
+        sopList: []
       }
     },
     watch: {
@@ -262,11 +294,11 @@
           })
         }
       }, */
-      editStep(id)
+      editQPProcess(id)
       {
-        StepServices.getById(id).then((response)=>{
+        QPProcessServices.getById(id).then((response)=>{
           this.stepForm.setFieldsValue({
-            name:response.data.name,
+            question:response.data.question,
             id:response.data.id
           }
           )
@@ -274,9 +306,9 @@
           this.isCreatedStep = false
         })
       },
-      deleteStep(id)
+      deleteQPProcess(id)
       {
-        StepServices.deleteStep(id).then((response)=>{
+        QPProcessServices.deleteQPProcess(id).then((response)=>{
          this.getByProcessId(this.processId)
         })
       },
@@ -337,22 +369,27 @@
         this.stepForm
           .validateFields((err, values) => {
             if (!err) {
+              values.projectId = this.processId;
+              values.projectName = this.processName;
+              values.taskId = this.taskId;
+              values.taskName = this.taskName
               if (this.isCreatedStep) {
-                StepServices.create(values).then((response) => {
+                QPProcessServices.create(values).then((response) => {
                   // this.showStep(false)
                   this.getByProcessId(this.processId)
                   this.loading = false
-                  this.stepForm.setFieldsValue({ name: '' })
+                  this.stepForm.setFieldsValue({ question: '' })
                 })
               }
               else{
-                StepServices.updateStep(values).then((response) => {
+                QPProcessServices.updateQp(values).then((response) => {
                   // this.showStep(false)
                   this.getByProcessId(this.processId)
                   this.loading = false
-                  this.stepForm.setFieldsValue({ name: '' })
+                  this.stepForm.setFieldsValue({ question: '' })
                   this.isCreatedStep = true
                   this.stepAct = 'Add Step'
+
                 })
               }
             }
@@ -392,7 +429,7 @@
         .finally(this.loading = false)
       }, */
       getByProcessId(id) {
-        StepServices.getByProcessId(id).then((response) => {
+        QPProcessServices.getByProjectId(id).then((response) => {
           this.steps = response.data
         })
       },
@@ -417,9 +454,11 @@
       }, */
       getProcessById(id) {
         ProjectServices.getById(id).then((response) => {
-          this.processId = response.data.id
+          this.processId = response.data.projectId
           this.processName=response.data.description
-          this.getByProcessId(response.data.id)
+          this.taskName=response.data.taskName
+          this.taskId = response.data.taskId
+          this.getByProcessId(this.processId)
         })
       },
       handleCheck(isCheck, id) {

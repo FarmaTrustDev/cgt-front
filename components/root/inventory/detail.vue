@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-15" style="margin-top: -15px;">
+    <div class="mb-10">
       <h2 class="color-black">
         {{ data.countryName }}
         <img height="25" width="40" :src="getImageUrl(data.flag)" />

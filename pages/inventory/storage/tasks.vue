@@ -390,14 +390,14 @@ export default {
     },
     submitLabel(){
       this.record=JSON.parse(this.$route.query.record)
-      console.log(this.record)
-      const dateParts = this.record.collectionDateDeliveryDate.split('-');
-      const arrivalDates = this.parseDate(dateParts[0]);
-      const expiryDates = this.parseDate(dateParts[1]);
+      console.log(this.record, 'creating label')
+      // const dateParts = this.record.collectionDateDeliveryDate.split('-');
+      const arrivalDates = this.record.arrivalDate
+      const expiryDates = this.expiryDate
       const obj={
-        sampleId:this.record.patientEnrollmentNumber,
-        sampleName:this.record.treatmentType,
-        clientName:this.record.hospital,
+        sampleId:this.record.sampleId,
+        sampleName:this.record.sampleName,
+        clientName:this.record.clientName,
         labelStatus:'Stored',
         arrivalDate:arrivalDates,
         expiryDate:expiryDates,

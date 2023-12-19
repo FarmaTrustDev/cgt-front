@@ -122,9 +122,44 @@
               style="width: 100%"
               size="large"
               class="default-select"
+              
             >
               <a-select-option v-for="partner in partners" :key="partner.partnerId">
                 {{ partner.partnerName }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row>
+        <a-col :span="12">
+          <a-form-item class="mtm-20"
+            label="Task *:"
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 22 }"
+          >
+            <a-select :getPopupContainer="trigger => trigger.parentNode"
+              v-decorator="[
+                'taskId',
+                {
+                  initialValue: entity.taskId,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please select task',
+                    },
+                  ],
+                },
+              ]"
+              :show-search="true"
+              :filter-option="filterOption"
+              placeholder="Task"
+              style="width: 100%"
+              size="large"
+              class="default-select "
+            >
+              <a-select-option v-for="task in taskData" :key="task.id">
+                {{ task.name }}
               </a-select-option>
             </a-select>
           </a-form-item>
@@ -340,7 +375,52 @@
             />
           </a-form-item>
         </a-col>
-          
+        <a-col :span="12">
+          <a-form-item
+            label="Email *:"
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 22 }"
+          >
+            <a-input
+              v-decorator="[
+                'email',
+                {
+                  initialValue: partnerevent.email,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please input Email',
+                    },
+                  ],
+                },
+              ]"
+              
+            />
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="Phone No *:"
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 23 }"
+          >
+            <a-input
+              v-decorator="[
+                'phoneNo',
+                {
+                  initialValue: partnerevent.phone,
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please input phone',
+                    },
+                  ],
+                },
+              ]"
+              
+            />
+          </a-form-item>
+        </a-col>
         </a-row>
        
 
@@ -406,6 +486,7 @@
   import { filterOption,isEmpty, preventDefault } from '~/services/Helpers'
   import PartnerServices from '~/services/API/PartnerServices'
   import InvestigatorServices from '~/services/API/InvestigatorServices'
+  import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
   import nullHelper from '~/mixins/null-helpers'
   
   export default {
@@ -436,6 +517,7 @@
         isCreated:false
         ,
         datasource: [],
+        taskData:[],
         columns: [
           {
             title: 'Investigator Name',
@@ -464,8 +546,17 @@
             title:'Description',
             dataIndex: 'description',
             key: 'description',
-          }
-          ,
+          },
+          {
+            title:'Email',
+            dataIndex: 'email',
+            key: 'email',
+          },
+          {
+            title:'Phone No',
+            dataIndex: 'phoneNo',
+            key: 'phoneNo',
+          },
           {
             title: `${this.$store.getters.getTranslation.Actio_1_220}`,
             key: 'action',
@@ -513,6 +604,7 @@
       this.fetchInvestigator()
       this.fetchAllInvestigator()
       this.fetchAllPartnerList()
+      this.fetchSmartLabTasks()
     },
     /* updated() {
       if (this.isCreated && this.fetchCountry) {
@@ -605,15 +697,20 @@
             this.isCreatedPartner = true
         })
       },
-      
+      fetchSmartLabTasks(){
+        SmartLabTasksServices.get().then((response)=>{
+          this.taskData = response.data
+        })
+      },
       onSubmitInvestigator(e) {
 
-      this.loading = true
+      
       e.preventDefault()
       this.formInvest.validateFields((err, values) => {
         if (!err) {
           if(this.isCreated)
           {
+            this.loading = true
             InvestigatorServices.update(values.investigatorId , values).then((response)=>{
               this.visibleInv=false
             this.loading = false
@@ -621,6 +718,7 @@
             })
           }
           else{
+            this.loading = true
           InvestigatorServices.create(values).then((response)=>{
             this.visibleInv=false
             this.loading = false
@@ -631,22 +729,27 @@
       })
     },
     onSubmitPartner(e) {
-      this.loading = true
+      
       e.preventDefault()
       this.formPart.validateFields((err, values) => {
         if (!err) {
           if(this.isCreatedPartner)
           {
+            this.loading = true
             PartnerServices.update(values.partnerId , values).then((response)=>{
-              this.fetchPartners()
               this.visiblePar=false
               this.loading = false
+              this.isCreated = false
+              this.formPart.resetFields()
+              this.fetchPartners()
             })
           }
           else{
+            this.loading = true
           PartnerServices.create(values).then((response)=>{
             this.visiblePar=false
             this.loading = false
+            this.formPart.resetFields()
             this.fetchPartners()
           })
         }

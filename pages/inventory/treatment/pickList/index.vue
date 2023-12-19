@@ -18,7 +18,7 @@
                     />
   
                     <figcaption>
-                      Kit ID: {{record.patientEnrollmentNumber}}
+                      Kit ID: {{record.sampleId}}
                     </figcaption>
                   </figure>
                 </a-card>
@@ -41,7 +41,7 @@
                       </a-col>
                       <a-col :span="7" class="mt-15">
                         <h6>
-                          <span> {{ record.hospital}}</span>
+                          <span> {{ record.clientName}}</span>
                         </h6>
                       </a-col>
                       <a-col :span="5" class="mt-15">
@@ -52,7 +52,7 @@
                         </h6>
                       </a-col>
                       <a-col :span="7" class="mt-15">
-                        <h6><span>{{record.treatmentType}}</span></h6>
+                        <h6><span>{{record.sampleName}}</span></h6>
                       </a-col>
                     </a-row>
                     <a-row :gutter="20" dir="ltr">
@@ -65,7 +65,7 @@
                       </a-col>
                       <a-col :span="7" class="mt-15">
                         <h6>
-                          <span> {{record.email}}</span>
+                          <span> info@gmail.com</span>
                         </h6>
                       </a-col>
                       <a-col :span="5" class="mt-15">
@@ -105,22 +105,27 @@
               <!-- //Steps -->
               <div class="treatment-steps" style="width: 100%">
                 <span class="step-col-large">
-                  <a-steps size="small" :current="2">
+                  <a-steps size="small" :initial="1">
                     <a-step
                       v-for="phase in phases"
                       :key="phase.id"
-                      :title="phase.name"
+                      :title="phase.taskStepName"
                       :class="
-                        phase.id == 1
-                          ? 'ant-steps-item-finish-large'
-                          : phase.id == 2
-                          ? 'ant-steps-item-active-blue-large'
-                          : 'ant-steps-horizontal-large'
+                      (phase.id === (stageId+1) && (record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error-large':
+                          (phase.id === (stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection-large':
+                      phase.id <= stageId
+                      ? 'ant-steps-item-finish-large'
+                      : phase.id === (stageId+1)
+                      ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
                       "
                       :status="
-                        phase.id == 1 ? 'finish' : phase.id == 2 ? 'wait' : ''
-                      "
-                      @click="reDirect(phase.id===2? phase.url_slug+'?record='+JSON.stringify(record) : '', phase.alias)"
+                          phase.id === stageId
+                            ? 'active'
+                            : phase.id < stageId ?  'finish' : 'wait'
+                        "
+                      @click="phase.id<=(stageId+1) ? reDirect((phase.url!=='' && phase.url!==null) && (record.qpStatus!=='Rejected' && record.qpStatus!=='Quarantine') ? phase.url+'&record='+JSON.stringify(record) : '') : ''"
                     />
                   </a-steps>
                 </span>
@@ -306,9 +311,19 @@
 
 
           </a-card>
-          
           <a-card
-            v-else
+            v-if="!isSubmit && activeTab === 'QP_SK_PROCESS'"
+            :bordered="false"
+            class="mt-15 default-card inbound-accept-tabs"
+            style="width: 96%; margin-left: 2%"
+          >
+            <div><h4 class="heading pl-0"><strong>QP Status</strong></h4></div>
+            <div class="collection-processing-steps" style="margin-top:10px">
+              <QPProcess @handleActive="handleActive" :type-id="typeId" :proj-id="record.projectId" :stageId="record.stageId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" ></QPProcess> 
+            </div>
+          </a-card>
+          <a-card
+            v-if="activeTab === 'KIT_BUILDER'"
             :bordered="false"
             class="mt-15 default-card inbound-accept-tabs"
             style="width: 96%; margin-left: 2%"
@@ -318,7 +333,7 @@
                 <a-form :form="form" layout="horizontal">
                     <a-table
                         :columns="columns"
-                        :row-key="(record) => record.id"
+                        :row-key="(record) => record.item"
                         :data-source="pickList"
                         :pagination="false"
                         :loading="loading"
@@ -328,7 +343,7 @@
                         <!-- {{ row }} -->
                         <a-form-item class="mt-5" style="height: 20px;">
                             <a-switch
-                            v-if="!row.isCollected"
+                            v-if="!isAlreadyCreated"
                             v-decorator="[
                                 `collection[id-${row.id}][collect]`,
                                 {
@@ -344,21 +359,29 @@
                             ]"
                             :checked-children="translation.yes_1_654"
                             :un-checked-children="translation.no_1_656"
-                            @change="(value) => handleCheck(value, row.id)"
+                            @change="(value) => handleCheck(value, row.id, row.item)"
                             />
 
                             <a-icon
-                            v-else
+                            v-else-if="getAction(row.item)"
                             class="text-success"
                             style="font-size: 1rem;"
                             type="check"
                             ></a-icon>
+                            <a-icon 
+                            v-else
+                            style="font-size: 1rem;"
+                            class="color-red"
+                            type="close"
+                            >
+
+                            </a-icon>
                         </a-form-item>
                         </template>
                         <template slot="notes" slot-scope="item, row" >
                         <a-form-item class="mtminus-2" style="height: 20px;">
                             <a-input
-                            v-if="!row.isCollected"
+                            v-if="!isAlreadyCreated"
                             v-decorator="[
                                 `collection[id-${row.id}][notes]`,
                                 {
@@ -372,9 +395,9 @@
                                 },
                             ]"
                             :placeholder="translation.Enternote_3_588"
-                            @blur="(e) => handleInput(row.id,e)"
+                            @blur="(e) => handleInput(row.id,e, row.item)"
                             />
-                            <span v-else>{{ row.notes }}</span>
+                            <span v-else>{{ getNotes(row.item) }}</span>
                             <a-input
                             v-decorator="[
                                 `collection[id-${row.id}][id]`,
@@ -406,8 +429,9 @@
 
                     <a-form-item class="mt-15">
                     <FormActionButton
+                        v-if="!isAlreadyCreated"
                         :disabled="buttonEnable"
-                        :text="translation['Submi_1_248']"
+                        text="Submit for QP Approval"
                         @click="submit"
                         :loading="loading"
                     />
@@ -641,24 +665,36 @@
   import { isEmpty } from '~/services/Helpers'
   import imagesHelper from '~/mixins/images-helper'
   import LabelServices from '~/services/API/LabelServices'
+  // import QPProcessServices from '~/services/API/QPProcessServices'
+  import SampleQPProcessServices from '~/services/API/SampleQPProcessServices'
   import kitImgColl from '~/components/cards/kitImgColl'
   import CompanyAddressServices from '~/services/API/CompanyAddressServices'
+  import SampleProcessServices from '~/services/API/SampleProcessServices'
+  import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
+  import QPProcess from '~/components/root/inventory/qpProcess'
+  import SampleServices from '~/services/API/SampleServices'
+  import QPStatusServices from '~/services/API/QPStatusServices'
+  import approvalHelper from '~/mixins/approval-helper'
   export default {
-    components: {'page-layout': PageLayout,kitImgColl},
-    mixins: [tabsHelpers, routeHelpers,imagesHelper],
+    components: {'page-layout': PageLayout,kitImgColl,QPProcess},
+    mixins: [approvalHelper, tabsHelpers, routeHelpers,imagesHelper],
     middleware: 'auth',
     data() {
       return {
         moment,
+        dummyCollection:[],
         visibleAddAddress:false,
         isCreatedAddress:false,
         addressForm: this.$form.createForm(this, { name: 'equipmentForm' }),
         btnLoading: false,
         loading: false,
         buttonEnable: false,
+        typeId: this.$route.query.view,
         notesRequired: {},
         noteItem:[],
+        compName:'',
         showModal:false,
+        cell:'',
         selectedIdex:0,
         showModalKit:false,
         compnayAddress:'',
@@ -729,6 +765,7 @@
         labDisp:false,
         kitPrint:false,
         kitDisp:false,
+        stageId:0,
         columns: [
             {
             title: `Items`,
@@ -843,8 +880,12 @@
         },
       ],
       filledData:0,
-        
-        promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
+      outputArray :[],
+      actTabId:3,
+      isAlreadyCreated: false,
+      checkboxValues:new Array(9).fill(false),
+      checkboxBool:new Array(9).fill(''),
+      promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
         
       }
     },
@@ -858,6 +899,9 @@
       // this.getTranslationData()
       this.$store.commit('setSelectedMenu', [`2`])
       this.getCompany()
+      this.sampleStepsByTaskId()
+      this.checkCreated(JSON.parse(this.$route.query.record).sampleId)
+      this.getCurrentStage()
       // this.getSteps()
     },
     methods: {
@@ -867,6 +911,33 @@
         // this.record= this.$route.query.record
         const obj=this.$route.query.record
         this.record=JSON.parse(obj)
+        this.sampleStepsByTaskId()
+      },
+      getCurrentStage(){
+        SampleServices.getById(this.record.id).then((response)=>{
+          this.stageId=response.data.stageId
+        })
+      },
+      checkCreated(sampleId){
+        SampleProcessServices.getBySampleId(sampleId).then((response)=>{
+          if(!isEmpty(response.data)){
+            this.isAlreadyCreated = true
+            this.dummyCollection = response.data
+          }
+      }).catch(this.error)
+      },
+      getAction(name){
+        return this.dummyCollection.find(list => list.name === name).action
+      },
+      getNotes(name){
+        return this.dummyCollection.find(list => list.name === name).notes
+      },
+      sampleStepsByTaskId(){
+        // const actTabId=parseInt(this.activeTab)
+        SmartLabTasksServices.getStepsByTaskId(this.actTabId).then((response)=>{
+          console.log(response.data)
+          this.phases=response.data
+        })
       },
       handleDateChange(date){
         this.collectionDate=date.format('DD/MM/YYYY')
@@ -898,6 +969,12 @@
         console.log(this.compnayAddress)
       }
     },
+    handleActive(e, out, stgId){
+      this.stageId=stgId
+      this.outputArray=out
+      this.isSubmit = e
+      console.log(out)
+    },
     addAddressModel(e) {
       this.addressForm.resetFields()
       this.isCreatedAddress = false
@@ -927,13 +1004,13 @@
       submitLabel(){
         this.record=JSON.parse(this.$route.query.record)
         console.log(this.record)
-        const dateParts = this.record.collectionDateDeliveryDate.split('-');
-        const arrivalDates = this.parseDate(dateParts[0]);
-        const expiryDates = this.parseDate(dateParts[1]);
+        // const dateParts = this.record.collectionDateDeliveryDate.split('-');
+        const arrivalDates = this.record.arrivalDate
+        const expiryDates = this.record.expiryDate
         const obj={
-          sampleId:this.record.patientEnrollmentNumber,
-          sampleName:this.record.treatmentType,
-          clientName:this.record.hospital,
+          sampleId:this.record.sampleId,
+          sampleName:this.record.sampleName,
+          clientName:this.record.clientName,
           labelStatus:'Dispatched',
           arrivalDate:arrivalDates,
           expiryDate:expiryDates,
@@ -943,6 +1020,14 @@
         }
         console.log(obj)
         LabelServices.create(obj).then((response)=>{
+          // EventBus.$emit('submitProcess');
+          // const QPProcess = this.$refs.childComponentRef;
+          // if (typeof QPProcess.submitProcess === 'function') {
+            SampleQPProcessServices.create(this.outputArray).then((response)=>{
+                this.outputArray = []
+              }).catch(this.error).finally(this.loading = false)
+            // QPProcess.submitProcess();
+        // }
           console.log(response)
           this.goto('/inventory/treatment')
         })
@@ -957,8 +1042,9 @@
           this.compnayAddress=this.addressName[this.selectedIdex][this.companyAddIndex].detail
         }
       }, */
-      handleInput(rowId,e) {
-      if(this.noteItem.includes(rowId)){
+      handleInput(rowId,e,item) {
+        console.log(rowId)
+      if(this.noteItem.includes(item)){
         this.noteItem.splice(this.noteItem.indexOf(rowId),1);
         this.filledData=this.filledData - 1
       }
@@ -967,7 +1053,7 @@
       }
       if(!this.notesRequired[rowId] && e.target.value!==null){
         // console.log(this.noteItem)
-        this.noteItem.push(rowId)
+        this.noteItem.push(item)
         this.filledData=this.filledData + 1
         // this.sendData(this.filledData)
       }
@@ -1009,25 +1095,68 @@
         
         this.showModalKit = val
       },
-      handleCheck(value, rowId,alias) {
-      // console.log(alias)
-      const notesRequired = this.notesRequired
-      notesRequired[rowId] = value
-      this.notesRequired = notesRequired
-      if(value===true){
-        this.filledData=this.filledData+1
-      }else{
-        this.filledData=this.filledData-1
-      }
-      if(this.filledData<0){
-        this.filledData=0
-      }
-      // this.sendData(this.filledData)
+      handleCheck(value, rowId,item) {
+        console.log(item)
+        const notesRequired = this.notesRequired
+        notesRequired[rowId] = item
+        this.notesRequired = notesRequired
+        if(value===true){
+          this.filledData=this.filledData+1
+        }else{
+          this.filledData=this.filledData-1
+        }
+        if(this.filledData<0){
+          this.filledData=0
+        }
+        this.checkboxValues[rowId] = item
+        this.checkboxBool[rowId]=value
+        console.log(notesRequired)
+        // this.sendData(this.filledData)
     },
+    
     submit() {
       this.form.validateFields((err,values)=>{
+        // console.log(values)
         if(!err){
-            this.isSubmit=true
+          // this.isSubmit=true
+          // console.log(this.$route.query.record)
+          // console.log(this.checkboxBool)
+          // console.log(values)
+          const data = JSON.parse(JSON.stringify(this.pickList))
+          // console.log(data)
+          for (const question of data) {
+            // const imageUrl = this.imgData.find(item => item.iBSId === question.id) !== undefined ? this.imgData.find(item => item.iBSId === question.id).imgData : ''
+            const stepId = question.id
+            const action = values.collection[`id-`+question.id].collect
+            const notes =  values.collection[`id-`+question.id].notes
+            const stepName = question.item
+            const sampleId = JSON.parse(this.$route.query.record).sampleId
+            const taskId = JSON.parse(this.$route.query.record).taskId
+            const taskName = JSON.parse(this.$route.query.record).taskName
+            this.outputArray.push({
+              notes,
+              action,
+              // imageUrl,
+              stepId,
+              stepName,
+              sampleId,
+              taskId,
+              taskName
+            })
+          }
+          console.log(this.outputArray)
+          SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+              // this.isSubmit = true
+              QPStatusServices.getPending().then((response) => {
+                if(response.data.length !== 0){
+                  const pendingCount = response.data.length
+                  this.$store.commit('setApproval', pendingCount)
+                }  
+              }).catch(this.error)
+              this.goto('/inventory/treatment')
+            }).catch(this.error).finally(this.loading = false)
+          
         }
       })
     },
@@ -1053,9 +1182,11 @@
         }
         window.print()
       },
-      reDirect(url, alias) {
-        if (!isEmpty(url)) {
-          this.activeTab = alias
+      reDirect(url) {
+        // alert(url)
+        if (!isEmpty(url) && url!=='' && url!==null) {
+          // this.activeTab = alias
+          this.handleActiveTab()
           this.goto(url)
         }
       },

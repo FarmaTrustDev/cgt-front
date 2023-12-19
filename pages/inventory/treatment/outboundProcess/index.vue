@@ -19,7 +19,7 @@
                   />
 
                   <figcaption>
-                    {{ translation.SamplID_2_502 }}: {{record.patientEnrollmentNumber}}
+                    {{ translation.SamplID_2_502 }}: {{record.sampleId}}
                   </figcaption>
                 </figure>
               </a-card>
@@ -42,7 +42,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.hospital}}</span>
+                        <span> {{record.clientName}}</span>
                       </h6>
                     </a-col>
                     <a-col :span="5" class="mt-15">
@@ -66,7 +66,7 @@
                     </a-col>
                     <a-col :span="9" class="mt-15">
                       <h6>
-                        <span> {{record.email}}</span>
+                        <span> info@gmail.com</span>
                       </h6>
                     </a-col>
                   </a-row>
@@ -101,17 +101,27 @@
                   <a-step
                     v-for="phase in phases"
                     :key="phase.id"
-                    :title="phase.name"
+                    :title="phase.taskStepName"
                     :class="
-                      phase.id == 1
-                        ? 'ant-steps-item-finish-large'
-                        : phase.id == 2
-                        ? 'ant-steps-item-active-blue-large'
-                        : 'ant-steps-horizontal-large'
-                    "
-                    @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)"
+                    
+                          (phase.id === (stageId+1) && (record.qpStatus==='Quarantine')) ?
+                          'ant-steps-item-error-large':
+                          (phase.id === (stageId+1) && (record.qpStatus==='Rejected')) ?
+                          'ant-steps-item-rejection-large':
+                      phase.id <= stageId
+                      ? 'ant-steps-item-finish-large'
+                        : phase.id === (stageId+1)
+                        ? 'ant-steps-item-active-blue-large' : 'ant-steps-horizontal-large'
+                      "
+                    :status="
+                      phase.id === stageId
+                        ? 'active'
+                        : phase.id < stageId ?  'finish' : 'wait'
+                      "
+                    @click="phase.id<=(stageId+1) ? reDirect(phase.id==5 ? phase.url : (phase.url!=='' && phase.url!==null) ? phase.url+'&record='+JSON.stringify(record) : '') : ''"
                   />
                 </a-steps>
+                <!-- @click="reDirect(phase.id==1? phase.url_slug : phase.id===2 ? phase.url_slug+'&record='+JSON.stringify(record):'', phase.alias)" -->
               </span>
             </div>
           </span>
@@ -135,6 +145,16 @@
               @updateId="updateDummyOutBoundCollectionId"
               @handleActiveTab="handleActiveTab"
             />
+          </div>
+        </a-card>
+        <a-card
+          v-if="activeTab == 'QP_OUT_PROCESS'"
+          :bordered="false"
+          class="mt-15 default-card inbound-accept-tabs"
+          style="width: 96%; margin-left: 2%"
+        >
+          <div class="h-tabs large-tabs" style="width: 100%; margin-left: -1%">
+            <QPProcess @handleActiveTab="handleActiveTab" :type-id="type" :proj-id="record.projectId" :stageId="record.stageId" :sample-puid="record.sampleId" :sample-id="record.id" :sample-name="record.sampleName" />
           </div>
         </a-card>
         <a-card
@@ -329,7 +349,7 @@
                 <a-col :span="10"><img :src="getImageUrl('label/qrCode.svg')" width="350" height="120" /></a-col>
                 <a-col :span="14">
                 <a-row>
-                    <a-col>Laeuka Collection Kit</a-col>
+                    <a-col>Human Cells/Cellules Humaines/人体细胞</a-col>
                 </a-row>
                 <a-row>
                     <a-col :span="6"><img :src="getImageUrl('label/dated.svg')"> 14/12/2024</a-col>
@@ -670,8 +690,11 @@ import StatusDetail from '~/components/inventory/treatment/statusDetail'
 import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import StepServices from '~/services/API/StepServices'
+import SmartLabTasksServices from '~/services/API/SmartLabTasksServices'
+import QPProcess from '~/components/root/inventory/qpProcess'
 import CompanyAddressServices from '~/services/API/CompanyAddressServices'
-
+import SampleProcessServices from '~/services/API/SampleProcessServices'
+import SampleServices from '~/services/API/SampleServices'
 // import shipment from '~/components/inventory/treatment/shipment'
 export const customDisplayDataShipInfo = [
   {
@@ -867,6 +890,7 @@ export default {
     StatusDetail,
     CustomDisplay,
     treatmentTable,
+    QPProcess,
     // courierComp
     // shipment,
   },
@@ -901,6 +925,7 @@ export default {
       collectionDate:null,
       deliveryDate:null,
       companyName:[],
+      stageId:0,
       addressName:[],
       addressNames:[
         [
@@ -964,6 +989,7 @@ export default {
       labDisp:false,
       kitPrint:false,
       kitDisp:false,
+      actTabId:2,
 
 
       shippingTableDataColumn: [
@@ -1084,36 +1110,6 @@ export default {
         },
       ],
       dummyOutBoundCollection: [
-        // {
-        //   id: 1,
-        //   isCollected: false,
-        //   name: `${this.$store.getters.getTranslation.TheOutbo_5_526}`,
-        // },
-        {
-          id: 2,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Hassampl_6_583}`,
-        },
-        {
-          id: 3,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Doessampl_6_584}`,
-        },
-        {
-          id: 4,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.IsSampl_6_529}`,
-        },
-        {
-          id: 5,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Hassampl_6_585}`,
-        },
-        {
-          id: 6,
-          isCollected: false,
-          name: `${this.$store.getters.getTranslation.Isdocum_9_586}`,
-        },
       ],
     }
   },
@@ -1125,11 +1121,11 @@ export default {
   watch: {
     translation(newValues, oldValue) {
       if (newValues !== oldValue) {
-        this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583
-        this.dummyOutBoundCollection[1].name = newValues.Doessampl_6_584
-        this.dummyOutBoundCollection[2].name = newValues.IsSampl_6_529
-        this.dummyOutBoundCollection[3].name = newValues.Hassampl_6_585
-        this.dummyOutBoundCollection[4].name = newValues.Isdocum_9_586
+        // this.dummyOutBoundCollection[0].name = newValues.Hassampl_6_583
+        // this.dummyOutBoundCollection[1].name = newValues.Doessampl_6_584
+        // this.dummyOutBoundCollection[2].name = newValues.IsSampl_6_529
+        // this.dummyOutBoundCollection[3].name = newValues.Hassampl_6_585
+        // this.dummyOutBoundCollection[4].name = newValues.Isdocum_9_586
 
         this.dummyCollection[0].name = newValues.Packarecei_2_518
         this.dummyCollection[1].name = newValues.Doespacka_6_519
@@ -1144,9 +1140,9 @@ export default {
         this.columns[1].title = newValues.SamplID_2_502
         this.columns[2].title = newValues.Print_1_111
 
-        this.phases[0].name = newValues.StoreSampl_2_579
-        this.phases[1].name = newValues.OutboProce_2_514
-        this.phases[2].name = newValues.Couri_1_234
+        // this.phases[0].name = newValues.StoreSampl_2_579
+        // this.phases[1].name = newValues.OutboProce_2_514
+        // this.phases[2].name = newValues.Couri_1_234
 
         this.customDisplayDataExceptionalRel[0].title = newValues.Works_1_754
         this.customDisplayDataExceptionalRel[1].title =
@@ -1205,26 +1201,53 @@ export default {
   },
   mounted() {
     this.getTranslationData()
-    this.handleActiveTab()
+    this.handleActiveTab(this.$route.query.view, this.stageId)
     this.getCompany()
+    this.getCurrentStage()
   },
   methods: {
     disabledDate: _disabledPreviousDate,
     isEmpty,
-    handleActiveTab(view) {
-      this.setActiveTab(view)
+    handleActiveTab(view, stgId) {
+      this.setActiveTab(view, stgId)
+      this.sampleStepsByTaskId()
     },
-    setActiveTab(view) {
+    getCurrentStage(){
+      SampleServices.getById(this.record.id).then((response)=>{
+        this.stageId=response.data.stageId
+      })
+    },
+    sampleStepsByTaskId(){
+      // const actTabId=parseInt(this.activeTab)
+      SmartLabTasksServices.getStepsByTaskId(this.actTabId).then((response)=>{
+        console.log(response.data)
+        this.phases=response.data
+      })
+    },
+    setActiveTab(view,stgId) {
+      this.stageId=stgId
       if (!isEmpty(view)) {
         this.activeTab = view
       } else {
         this.activeTab = this.$route.query.view
       }
       const obj=this.$route.query.record
-      this.record=JSON.parse(obj)
-      if (this.record && this.record.projectId) {
-        this.getSteps(this.record.projectId);
-      }      
+      if(obj!==undefined){
+        this.record=JSON.parse(obj)
+        if (this.record && this.record.projectId) {
+          this.checkCreated(this.record.sampleId,this.record.projectId);
+        }      
+      }
+    },
+    checkCreated(sampleId,projectId){
+      SampleProcessServices.getBySampleId(sampleId).then((response)=>{
+        if(isEmpty(response.data)){
+          this.getSteps(projectId)
+        }
+        else{
+          this.dummyOutBoundCollection = response.data
+        }
+      }).catch(this.error)
     },
     getCompany(){
       CompanyAddressServices.getCompanies().then((response)=>{
@@ -1275,13 +1298,13 @@ export default {
     submitLabel(){
       this.record=JSON.parse(this.$route.query.record)
       console.log(this.record)
-      const dateParts = this.record.collectionDateDeliveryDate.split('-');
-      const arrivalDates = this.parseDate(dateParts[0]);
-      const expiryDates = this.parseDate(dateParts[1]);
+      // const dateParts = this.record.collectionDateDeliveryDate.split('-');
+      const arrivalDates = this.record.arrivalDate;
+      const expiryDates = this.record.expiryDate;
       const obj={
-        sampleId:this.record.patientEnrollmentNumber,
-        sampleName:this.record.treatmentType,
-        clientName:this.record.hospital,
+        sampleId:this.record.sampleId,
+        sampleName:this.record.sampleName,
+        clientName:this.record.clientName,
         labelStatus:'Dispatched',
         arrivalDate:arrivalDates,
         expiryDate:expiryDates,
@@ -1308,7 +1331,7 @@ export default {
     getTranslationData() {
       this.phases[0].name = this.translation.StoreSampl_2_579
       this.phases[1].name = this.translation.OutboProce_2_514
-      this.phases[2].name = this.translation.Couri_1_234
+      // this.phases[2].name = this.translation.Couri_1_234
 
       this.customDisplayDataExceptionalRel[0].title =
         this.translation.Works_1_754
@@ -1445,9 +1468,11 @@ export default {
       this.showLogisticsModal = show
       this.success('Request sent to logistics')
     },
-    reDirect(url, alias) {
-      if (!isEmpty(url)) {
-        this.activeTab = alias
+    reDirect(url) {
+      // alert(url)
+      if (!isEmpty(url) && url!=='' && url!==null) {
+        // this.activeTab = alias
+        this.handleActiveTab(this.$route.query.view, this.stageId)
         this.goto(url)
       }
     },

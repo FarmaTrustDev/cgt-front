@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-row :gutter="16" class="flex-child-container" style="margin-top: -45px;">
+    <a-row :gutter="16" class="flex-child-container" style="margin-top: -55px;">
       <a-col v-for="consume in consumables" :key="consume.heading" :span="6">
         <card :data="consume" />
       </a-col>

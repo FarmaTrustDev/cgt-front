@@ -33,11 +33,19 @@
             />
 
             <a-icon
-              v-else
+              v-else-if="row.action"
               class="text-success"
               style="font-size: 1rem"
               type="check"
             ></a-icon>
+            <a-icon
+            v-else
+            type="close"
+            style="font-size: 1rem"
+            class="color-red"
+            >
+
+            </a-icon>
           </a-form-item>
         </template>
         <template slot="notes" slot-scope="name, row">
@@ -73,15 +81,25 @@
         </template>
 
         <template slot="email" slot-scope="name, row">
-          <InstantUpload
+          <!-- <InstantUpload
             :saved-list="row.uploads"
-            :action="bagService.uploads(row.id)"
             :show-button="false"
-          >
+            :action="bagService.uploads(row.id)"
+            >
             <a-button slot="button" type="">
               <a-icon type="upload" />
             </a-button>
-          </InstantUpload>
+          </InstantUpload> -->
+          <a-upload
+            
+            name="file"
+            :before-upload="beforeUploadWithParam(row.id)"
+            :multiple="true"
+            :default-file-list="savedList"
+            @change="handleChange(row.id, $event)"
+          ><a-button :disabled="row.isCollected"> <a-icon type="upload" /> </a-button>
+             <slot name="button"></slot>
+            </a-upload> 
         </template>
         <template slot="action" slot-scope="name, row">
           <a-button
@@ -92,15 +110,16 @@
           />
         </template>
       </a-table>
+      <a-form-item class="mt-15">
+        <FormActionButton
+        v-if="!isEmpty(collections[0]) ? !collections[0].isCollected : true"
+          :disabled="buttonEnable"
+          text="Submit for QP Approval"
+          @click="submit"
+          :loading="loading"
+        />
+      </a-form-item>
 
-    <a-form-item class="mt-15">
-      <FormActionButton
-        :disabled="buttonEnable"
-        :text="translation['Submi_1_248']"
-        @click="submit"
-        :loading="loading"
-      />
-    </a-form-item>
     </a-form>
     <a-modal
       title="Notify"
@@ -117,31 +136,7 @@
     </a-modal>
 
 
-    <a-modal :visible="showInventoryModal" class="modal-design-smart-lab" :cancel-text="'Print'" :ok-text="'Submit'" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleInventorygModal(false)" @ok="handleInventoryOk(false)">
-          <a-card class="grey-card-smart-lab">
-            <status-detail :heading-title="translation.MaterRecei_2_677" :statusDetails="statusDetails" :status="translation.Inven_1_538" />
-            <hr class="mt-15">
-            <h2 class="mt-15">{{translation['1.Mater_5_683']}}</h2>
-            <CustomDisplay :headingTitle="''" :colVal="6" :customDisplayData="customDisplayDataMRI" />
-            <h2 class="mt-15">{{translation['2.Mater_3_712']}}</h2>
-            <treatment-table :columns="contentTrackingColumns" :dataSource="contentTracking" :heading-title="translation.ConteTrack_2_713" />
-            <treatment-table :columns="contentTrackingColumns2" :dataSource="contentTracking2" :heading-title="''" />
-            <h2 class="mt-15">{{translation['3.QA_3_721']}}</h2>
-            <treatment-table :columns="contentTrackingColumnsQA" :dataSource="contentTrackingQA" :heading-title="''" />
-            <h2 class="mt-15">{{translation['4.Mater_3_724']}}</h2>
-            <a-row><a-col :span="6"><h2 style="line-height:50px">{{translation.ReleaLocat_2_725}} </h2></a-col><a-col :span="14"><h2><a-input style="border-radius:10px; height:50px" /></h2></a-col></a-row>
-            <a-card class="white-card-smart-lab">
-                <a-row v-for="custDD in customDisplayDataReleaseBy" :key="custDD.key">
-                  <a-col :span="2" class="text-muted" >{{translation['ReleaBy:_2_726']}} </a-col><a-col :span="5">{{custDD.releaseBy}}</a-col>
-                  <a-col :span="1" class="text-muted" >{{translation['Date:_1_664']}} </a-col><a-col :span="8">{{custDD.date}}</a-col>
-                </a-row>
-            </a-card>
-      </a-card>    
-          <template slot="footer">
-            <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
-            <a-button type="primary" @click="handleInventoryOk(false)">{{translation.Submi_1_248}}</a-button>
-          </template>
-    </a-modal>
+   
     <a-modal :visible="showSchedulingModal" :cancel-text="translation.Print_1_111" :ok-text="translation.Submi_1_248" class="modal-design-smart-lab" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleSchedulingModal(false)" @ok="handleScheOk(false)">
           <a-card class="grey-card-smart-lab">
             <status-detail :heading-title="translation.Order_1_727" :statusDetails="statusDetails" :status="translation.Sched_1_681" />
@@ -208,7 +203,7 @@ import BagCollectionServices from '~/services/API/BagCollectionServices'
 import notifications from '~/mixins/notifications'
 import Email from '~/components/treatment/collections/bag/Email'
 import Quarantine from '~/components/inventory/quarantine'
-import InstantUpload from '~/components/upload/InstantUpload'
+// import InstantUpload from '~/components/upload/InstantUpload'
 import { QUARANTINE_STORAGE } from '~/services/Constant'
 import routeHelpers from '~/mixins/route-helpers'
 import StatusDetail from '~/components/inventory/treatment/statusDetail'
@@ -216,7 +211,10 @@ import CustomDisplay from '~/components/inventory/treatment/customDisplay'
 import treatmentTable from '~/components/inventory/treatment/treatmentTable'
 import imagesHelper from '~/mixins/images-helper'
 import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
-
+import SampleProcessServices from '~/services/API/SampleProcessServices'
+import QPStatusServices from '~/services/API/QPStatusServices'
+import approvalHelper from '~/mixins/approval-helper'
+import { isEmpty } from '~/services/Helpers'
 
 export const customDisplayDataMRI = [
   {
@@ -388,7 +386,35 @@ export const customDisplayDataMRI = [
     url:'web/icons/greenTick.png',
   },                     
 ]
-
+export const contentTracking= [
+    {
+      containerID: '15646541023',
+      monitorID: '641625169416',
+      temperature: '-180',
+      inAlarm: 'No',
+      tamperSeal: '151564156',
+    },
+  ]
+export const contentTracking2= [
+    {
+      intvtmlID: '221144',
+      lot: 'ABC1',
+      package: 'Vial 1',
+      subPackage: 'N/A',
+      containerID: 'Vial 1',
+      description:'Drug Product',
+      temperature:'Frozen',
+    },
+]
+export const contentTrackingQA= [
+    {
+      createdEvent: 'PR.'+moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD.MM.YYYY"),
+      dateCreated: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY") + ' at 13:34',
+      createdBy: 'David Handerson',
+      fromStep: 'New Event',
+      status: 'Review',
+    },
+]
 export const customDisplayDataShipInfo = [
   {
     title: '',
@@ -467,35 +493,7 @@ export const orderTableData= [
       contact: 'Primary',
     },
   ]
-export const contentTracking= [
-    {
-      containerID: '15646541023',
-      monitorID: '641625169416',
-      temperature: '-180',
-      inAlarm: 'No',
-      tamperSeal: '151564156',
-    },
-  ]
-export const contentTracking2= [
-    {
-      intvtmlID: '221144',
-      lot: 'ABC1',
-      package: 'Vial 1',
-      subPackage: 'N/A',
-      containerID: 'Vial 1',
-      description:'Drug Product',
-      temperature:'Frozen',
-    },
-]
-export const contentTrackingQA= [
-    {
-      createdEvent: 'PR.'+moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD.MM.YYYY"),
-      dateCreated: moment(_getFutureMomentStandardFormatted(-5,'day')).format("DD/MM/YYYY") + ' at 13:34',
-      createdBy: 'David Handerson',
-      fromStep: 'New Event',
-      status: 'Review',
-    },
-]
+
 export const customDisplayDataReleaseBy = [
   {    
     releaseBy: 'David Handerson',
@@ -529,8 +527,10 @@ export const customDisplayDataOrderReview = [
   },          
 ]
 export default {
-  components: { Email, InstantUpload, Quarantine,StatusDetail,CustomDisplay,treatmentTable },
-  mixins: [notifications, routeHelpers,imagesHelper],
+  components: { Email, 
+    // InstantUpload, 
+  Quarantine,StatusDetail,CustomDisplay,treatmentTable },
+  mixins: [approvalHelper, notifications, routeHelpers,imagesHelper],
   props: {
     collections: { required: true, type: Array },
     bagId: { required: true, type: String },
@@ -540,6 +540,7 @@ export default {
   },
   data() {
     return {
+      isEmpty,
       columns: [
         {
           title: `${this.$store.getters.getTranslation.Quest_1_580}`,
@@ -585,101 +586,7 @@ export default {
         name: 'bagCollectionProcess',
       }),
 
-      contentTrackingColumns:[
-        {
-          title: `${this.$store.getters.getTranslation.ContaID_2_719}`,
-          dataIndex: 'containerID',
-          key: 'containerID',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.MonitID_2_714}`,
-          dataIndex: 'monitorID',
-          key: 'monitorID',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Tempe_1_605}`,
-          dataIndex: 'temperature',
-          key: 'temperature',
-        }, 
-        {
-          title: `${this.$store.getters.getTranslation.InAlarm_2_716}`,
-          dataIndex: 'inAlarm',
-          key: 'inAlarm',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.TampeSeal_2_720}`,
-          dataIndex: 'tamperSeal',
-          key: 'tamperSeal',
-        },                                     
-      ],
-      contentTrackingColumnsQA:[
-        {
-          title: `${this.$store.getters.getTranslation.CreatEvent_2_780}`,
-          dataIndex: 'createdEvent',
-          key: 'createdEvent',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.DateCreat_2_781}`,
-          dataIndex: 'dateCreated',
-          key: 'dateCreated',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.CreatBy_2_782}`,
-          dataIndex: 'createdBy',
-          key: 'createdBy',
-        }, 
-        {
-          title: `${this.$store.getters.getTranslation.FromStep_2_783}`,
-          dataIndex: 'fromStep',
-          key: 'fromStep',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Statu_1_202}`,
-          dataIndex: 'status',
-          key: 'status',
-        },                                     
-      ],
-
-
-
-
-      contentTrackingColumns2:[
-        {
-          title: `${this.$store.getters.getTranslation.IntvtID_2_715}`,
-          dataIndex: 'intvtmlID',
-          key: 'intvtmlID',
-        },
-        {
-          title: 'Lot',
-          dataIndex: 'lot',
-          key: 'lot',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Packa_1_717}`,
-          dataIndex: 'package',
-          key: 'package',
-        }, 
-        {
-          title: `${this.$store.getters.getTranslation['Sub-P_1_718']}`,
-          dataIndex: 'subPackage',
-          key: 'subPackage',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.ContaID_2_719}`,
-          dataIndex: 'containerID',
-          key: 'containerID',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Descr_1_69}`,
-          dataIndex: 'description',
-          key: 'description',
-        },
-        {
-          title: `${this.$store.getters.getTranslation.Tempe_1_605}`,
-          dataIndex: 'temperature',
-          key: 'temperature',
-        },                                        
-      ],
+      
       orderTableDataColumns:[
         {
           title: `${this.$store.getters.getTranslation.ShippDesti_2_735}`,
@@ -740,7 +647,7 @@ export default {
           key: 'availability',
         },
       ],
-      
+      checkboxValues:new Array(8).fill(false),
       btnLoading: false,
       showEmailModal: false,
       body: null,
@@ -766,7 +673,11 @@ export default {
       customDisplayDataOrderReview,
       customDisplayDataShipInfo,
       errorMessage:`${this.$store.getters.getTranslation.Thecheck_10_582}`,
-      promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,      
+      promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,  
+      imgData: [] ,
+      images: {},
+      savedList:[],   
+      outputArray :[]
     }
   },
   computed: {
@@ -815,56 +726,56 @@ export default {
         this.customDisplayDataMRI[27].title=newValues.LineClear_3_711
 
 
-        this.contentTrackingColumns2[0].title=newValues.IntvtID_2_715
-        // this.contentTrackingColumns2[1].title=newValues
-        this.contentTrackingColumns2[2].title=newValues.Packa_1_717
-        this.contentTrackingColumns2[3].title=newValues['Sub-P_1_718']
-        this.contentTrackingColumns2[4].title=newValues.ContaID_2_719
-        this.contentTrackingColumns2[5].title=newValues.Descr_1_69
-        this.contentTrackingColumns2[6].title=newValues.Tempe_1_605
+        // this.contentTrackingColumns2[0].title=newValues.IntvtID_2_715
+        // // this.contentTrackingColumns2[1].title=newValues
+        // this.contentTrackingColumns2[2].title=newValues.Packa_1_717
+        // this.contentTrackingColumns2[3].title=newValues['Sub-P_1_718']
+        // this.contentTrackingColumns2[4].title=newValues.ContaID_2_719
+        // this.contentTrackingColumns2[5].title=newValues.Descr_1_69
+        // this.contentTrackingColumns2[6].title=newValues.Tempe_1_605
 
 
-        this.contentTrackingColumns[0].title=newValues.ContaID_2_719
-        // this.contentTrackingColumns2[1].title=newValues
-        this.contentTrackingColumns[1].title=newValues.MonitID_2_714
-        this.contentTrackingColumns[2].title=newValues.Tempe_1_605
-        this.contentTrackingColumns[3].title=newValues.InAlarm_2_716
-        this.contentTrackingColumns[4].title=newValues.TampeSeal_2_720
+        // this.contentTrackingColumns[0].title=newValues.ContaID_2_719
+        // // this.contentTrackingColumns2[1].title=newValues
+        // this.contentTrackingColumns[1].title=newValues.MonitID_2_714
+        // this.contentTrackingColumns[2].title=newValues.Tempe_1_605
+        // this.contentTrackingColumns[3].title=newValues.InAlarm_2_716
+        // this.contentTrackingColumns[4].title=newValues.TampeSeal_2_720
 
 
-        this.customDisplayDataShipInfo[0].title=newValues.ReceiInsti_2_728
-        this.customDisplayDataShipInfo[1].title=newValues.Consi_1_729
-        this.customDisplayDataShipInfo[2].title=newValues.AdditInfor_2_751
-        this.customDisplayDataShipInfo[3].title=newValues.PlannDate_4_731
-        this.customDisplayDataShipInfo[4].title=newValues['CouriName:_2_732']
-        this.customDisplayDataShipInfo[5].title=newValues.ShippTempe_2_733
-        this.customDisplayDataShipInfo[6].title=newValues.CouriPhone_2_734
-        this.customDisplayDataShipInfo[7].title=newValues['Initiby:_2_661']
-        this.customDisplayDataShipInfo[8].title=newValues['Date:_1_664']
-
-
-
+        // this.customDisplayDataShipInfo[0].title=newValues.ReceiInsti_2_728
+        // this.customDisplayDataShipInfo[1].title=newValues.Consi_1_729
+        // this.customDisplayDataShipInfo[2].title=newValues.AdditInfor_2_751
+        // this.customDisplayDataShipInfo[3].title=newValues.PlannDate_4_731
+        // this.customDisplayDataShipInfo[4].title=newValues['CouriName:_2_732']
+        // this.customDisplayDataShipInfo[5].title=newValues.ShippTempe_2_733
+        // this.customDisplayDataShipInfo[6].title=newValues.CouriPhone_2_734
+        // this.customDisplayDataShipInfo[7].title=newValues['Initiby:_2_661']
+        // this.customDisplayDataShipInfo[8].title=newValues['Date:_1_664']
 
 
 
-      this.orderProductTableDataColumns[0].title=newValues.ItemNumbe_2_744
-      this.orderProductTableDataColumns[1].title=newValues.ReceiID_2_740
-      this.orderProductTableDataColumns[2].title=newValues.ItemDescr_2_741
-      this.orderProductTableDataColumns[3].title=newValues.Lot_1_785
-      this.orderProductTableDataColumns[4].title=newValues.Avail_1_450
 
-      this.orderTableDataColumns[0].title=newValues.ShippDesti_2_735
-      this.orderTableDataColumns[1].title=newValues.Addre1_2_736
-      this.orderTableDataColumns[2].title=newValues.City_1_446
-      this.orderTableDataColumns[3].title=newValues.State_1_737
-      this.orderTableDataColumns[4].title=newValues.Zip_1_738
-      this.orderTableDataColumns[5].title=newValues.ContaNumbe_2_404
 
-      this.contentTrackingColumnsQA[0].title=newValues.CreatEvent_2_780
-      this.contentTrackingColumnsQA[1].title=newValues.DateCreat_2_781
-      this.contentTrackingColumnsQA[2].title=newValues.CreatBy_2_782
-      this.contentTrackingColumnsQA[3].title=newValues.FromStep_2_783
-      this.contentTrackingColumnsQA[4].title=newValues.Statu_1_202
+
+      // this.orderProductTableDataColumns[0].title=newValues.ItemNumbe_2_744
+      // this.orderProductTableDataColumns[1].title=newValues.ReceiID_2_740
+      // this.orderProductTableDataColumns[2].title=newValues.ItemDescr_2_741
+      // this.orderProductTableDataColumns[3].title=newValues.Lot_1_785
+      // this.orderProductTableDataColumns[4].title=newValues.Avail_1_450
+
+      // this.orderTableDataColumns[0].title=newValues.ShippDesti_2_735
+      // this.orderTableDataColumns[1].title=newValues.Addre1_2_736
+      // this.orderTableDataColumns[2].title=newValues.City_1_446
+      // this.orderTableDataColumns[3].title=newValues.State_1_737
+      // this.orderTableDataColumns[4].title=newValues.Zip_1_738
+      // this.orderTableDataColumns[5].title=newValues.ContaNumbe_2_404
+
+      // this.contentTrackingColumnsQA[0].title=newValues.CreatEvent_2_780
+      // this.contentTrackingColumnsQA[1].title=newValues.DateCreat_2_781
+      // this.contentTrackingColumnsQA[2].title=newValues.CreatBy_2_782
+      // this.contentTrackingColumnsQA[3].title=newValues.FromStep_2_783
+      // this.contentTrackingColumnsQA[4].title=newValues.Statu_1_202
 
       }
     }
@@ -876,35 +787,77 @@ export default {
     submit() {
       this.form.validateFields((err,values)=>{
         if(!err){
-          console.log(this.$route.query.record)
+          const data = JSON.parse(JSON.stringify(this.collections))
+          for (const question of data) {
+            const imageUrl = this.imgData.find(item => item.iBSId === question.id) !== undefined ? this.imgData.find(item => item.iBSId === question.id).imgData : ''
+            const stepId = question.id
+            const action = values.collection[`id-`+question.id].collect
+            const notes =  values.collection[`id-`+question.id].notes
+            const stepName = question.name
+            const sampleId = JSON.parse(this.$route.query.record).sampleId
+            const taskId = JSON.parse(this.$route.query.record).taskId
+            const taskName = JSON.parse(this.$route.query.record).taskName
+            this.outputArray.push({
+            notes,
+            action,
+            imageUrl,
+            stepId,
+            stepName,
+            sampleId,
+            taskId,
+            taskName
+          })
+          }
+          // this.loading = true
+          //   SampleProcessServices.create(this.outputArray).then((response)=>{
+          //     this.outputArray = [] 
+          //   }).catch(this.error).finally(this.loading = false)
+          // this.success('Submitted successfully')
           
           // console.log(this.typeId)
-          if ((this.typeId === 'inbound')) {
-            this.showInventoryModal=true
-          }
+          // if ((this.typeId === 'inbound')) {
+            
+          //   this.showInventoryModal=true
+          // }
           if(this.typeId === 'quarantine'){
             const obj=JSON.stringify(this.record)
             this.goto('/inventory/storage/ColorFridge?inbound=true&record='+obj)
           }
           if (this.typeId === 'outbound') {
-            this.$emit('handleActiveTab', 'COURIER')
-            const obj=JSON.stringify(this.record)
-            this.goto('/inventory/treatment/outboundProcess?view=COURIER&record='+obj)
+            SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+              QPStatusServices.getPending().then((response) => {
+                if(response.data.length !== 0){
+                  const pendingCount = response.data.length
+                  this.$store.commit('setApproval', pendingCount)
+                }  
+              }).catch(this.error)
+            }).catch(this.error).finally(this.loading = false)
+            this.goto('/inventory/treatment')
             // this.showSchedulingModal=true
           }
-        }else{
+        }
           if(this.typeId==='inbound'){
-            this.inboundCheck=true
+            SampleProcessServices.create(this.outputArray).then((response)=>{
+              this.outputArray = [] 
+              QPStatusServices.getPending().then((response) => {
+                if(response.data.length !== 0){
+                  const pendingCount = response.data.length
+                  this.$store.commit('setApproval', pendingCount)
+                }  
+              }).catch(this.error)
+            }).catch(this.error).finally(this.loading = false)
+            this.goto('/inventory/treatment')
             // this.showInventoryModal=true
             // this.showQuaranitineModal=true
           }
-          if(this.typeId!=='inbound'){
-            this.error()
+          else if(this.typeId!=='inbound'){
+            console.log('complete')
+            // this.error()
           }
-          
+
           // console.log(this.typeId)
           // alert("You have missed the option(s) 'No'. Do you want to quarantine the sample?")
-        }
       })
     },
     getTranslationData(){
@@ -938,50 +891,50 @@ export default {
         this.customDisplayDataMRI[27].title=this.translation.LineClear_3_711
 
 
-        this.contentTrackingColumns2[0].title=this.translation.IntvtID_2_715
+        // this.contentTrackingColumns2[0].title=this.translation.IntvtID_2_715
         // this.contentTrackingColumns2[1].title=newValues
-        this.contentTrackingColumns2[2].title=this.translation.Packa_1_717
-        this.contentTrackingColumns2[3].title=this.translation['Sub-P_1_718']
-        this.contentTrackingColumns2[4].title=this.translation.ContaID_2_719
-        this.contentTrackingColumns2[5].title=this.translation.Descr_1_69
-        this.contentTrackingColumns2[6].title=this.translation.Tempe_1_605
+        // this.contentTrackingColumns2[2].title=this.translation.Packa_1_717
+        // this.contentTrackingColumns2[3].title=this.translation['Sub-P_1_718']
+        // this.contentTrackingColumns2[4].title=this.translation.ContaID_2_719
+        // this.contentTrackingColumns2[5].title=this.translation.Descr_1_69
+        // this.contentTrackingColumns2[6].title=this.translation.Tempe_1_605
 
-        this.contentTrackingColumns[0].title=this.translation.ContaID_2_719
-        // this.contentTrackingColumns2[1].title=newValues
-        this.contentTrackingColumns[1].title=this.translation.MonitID_2_714
-        this.contentTrackingColumns[2].title=this.translation.Tempe_1_605
-        this.contentTrackingColumns[3].title=this.translation.InAlarm_2_716
-        this.contentTrackingColumns[4].title=this.translation.TampeSeal_2_720
+        // this.contentTrackingColumns[0].title=this.translation.ContaID_2_719
+        // // this.contentTrackingColumns2[1].title=newValues
+        // this.contentTrackingColumns[1].title=this.translation.MonitID_2_714
+        // this.contentTrackingColumns[2].title=this.translation.Tempe_1_605
+        // this.contentTrackingColumns[3].title=this.translation.InAlarm_2_716
+        // this.contentTrackingColumns[4].title=this.translation.TampeSeal_2_720
 
-        this.customDisplayDataShipInfo[0].title=this.translation.ReceiInsti_2_728
-        this.customDisplayDataShipInfo[1].title=this.translation.Consi_1_729
-        this.customDisplayDataShipInfo[2].title=this.translation.AdditInfor_2_751
-        this.customDisplayDataShipInfo[3].title=this.translation.PlannDate_4_731
-        this.customDisplayDataShipInfo[4].title=this.translation['CouriName:_2_732']
-        this.customDisplayDataShipInfo[5].title=this.translation.ShippTempe_2_733
-        this.customDisplayDataShipInfo[6].title=this.translation.CouriPhone_2_734
-        this.customDisplayDataShipInfo[7].title=this.translation['Initiby:_2_661']
-        this.customDisplayDataShipInfo[8].title=this.translation['Date:_1_664']
+        // this.customDisplayDataShipInfo[0].title=this.translation.ReceiInsti_2_728
+        // this.customDisplayDataShipInfo[1].title=this.translation.Consi_1_729
+        // this.customDisplayDataShipInfo[2].title=this.translation.AdditInfor_2_751
+        // this.customDisplayDataShipInfo[3].title=this.translation.PlannDate_4_731
+        // this.customDisplayDataShipInfo[4].title=this.translation['CouriName:_2_732']
+        // this.customDisplayDataShipInfo[5].title=this.translation.ShippTempe_2_733
+        // this.customDisplayDataShipInfo[6].title=this.translation.CouriPhone_2_734
+        // this.customDisplayDataShipInfo[7].title=this.translation['Initiby:_2_661']
+        // this.customDisplayDataShipInfo[8].title=this.translation['Date:_1_664']
 
         
-      this.orderProductTableDataColumns[0].title=this.translation.ItemNumbe_2_744
-      this.orderProductTableDataColumns[1].title=this.translation.ReceiID_2_740
-      this.orderProductTableDataColumns[2].title=this.translation.ItemDescr_2_741
-      this.orderProductTableDataColumns[3].title=this.translation.Lot_1_785
-      this.orderProductTableDataColumns[4].title=this.translation.Avail_1_450
+      // this.orderProductTableDataColumns[0].title=this.translation.ItemNumbe_2_744
+      // this.orderProductTableDataColumns[1].title=this.translation.ReceiID_2_740
+      // this.orderProductTableDataColumns[2].title=this.translation.ItemDescr_2_741
+      // this.orderProductTableDataColumns[3].title=this.translation.Lot_1_785
+      // this.orderProductTableDataColumns[4].title=this.translation.Avail_1_450
 
-      this.orderTableDataColumns[0].title=this.translation.ShippDesti_2_735
-      this.orderTableDataColumns[1].title=this.translation.Addre1_2_736
-      this.orderTableDataColumns[2].title=this.translation.City_1_446
-      this.orderTableDataColumns[3].title=this.translation.State_1_737
-      this.orderTableDataColumns[4].title=this.translation.Zip_1_738
-      this.orderTableDataColumns[5].title=this.translation.ContaNumbe_2_404
+      // this.orderTableDataColumns[0].title=this.translation.ShippDesti_2_735
+      // this.orderTableDataColumns[1].title=this.translation.Addre1_2_736
+      // this.orderTableDataColumns[2].title=this.translation.City_1_446
+      // this.orderTableDataColumns[3].title=this.translation.State_1_737
+      // this.orderTableDataColumns[4].title=this.translation.Zip_1_738
+      // this.orderTableDataColumns[5].title=this.translation.ContaNumbe_2_404
 
-      this.contentTrackingColumnsQA[0].title=this.translation.CreatEvent_2_780
-      this.contentTrackingColumnsQA[1].title=this.translation.DateCreat_2_781
-      this.contentTrackingColumnsQA[2].title=this.translation.CreatBy_2_782
-      this.contentTrackingColumnsQA[3].title=this.translation.FromStep_2_783
-      this.contentTrackingColumnsQA[4].title=this.translation.Statu_1_202      
+      // this.contentTrackingColumnsQA[0].title=this.translation.CreatEvent_2_780
+      // this.contentTrackingColumnsQA[1].title=this.translation.DateCreat_2_781
+      // this.contentTrackingColumnsQA[2].title=this.translation.CreatBy_2_782
+      // this.contentTrackingColumnsQA[3].title=this.translation.FromStep_2_783
+      // this.contentTrackingColumnsQA[4].title=this.translation.Statu_1_202      
     },    
     handleCollectionSubmit(collection) {
       // console.log(collection.alias)
@@ -1024,6 +977,8 @@ export default {
       if(this.filledData<0){
         this.filledData=0
       }
+      this.checkboxValues[rowId] = value
+      
       // this.sendData(this.filledData)
     },
     handleInput(rowId,e) {
@@ -1072,7 +1027,7 @@ export default {
         this.showQuaranitineModal=true
         this.showInventoryModal=false
       }else{ */
-        this.success('Submitted successfully')
+        
         this.showInventoryModal=false
         const obj=JSON.stringify(this.$route.query.record)
         console.log(obj)
@@ -1094,6 +1049,36 @@ export default {
       title: this.errorMessage,
       // content: 'some messages...some messages...',
     });
+    },
+    beforeUploadWithParam(param) {
+      return (file) => {
+        const reader = new FileReader();
+        reader.onload = (event)=> {
+        const resultData = event.target.result;
+        const res=resultData.split(',')[1];
+        this.pushListImage(res,param)
+        };
+        reader.readAsDataURL(file);
+        return false;
+
+      };
+    },
+    pushListImage(image,id)
+    {
+      this.imgData.push({iBSId:id,imgData:image})
+    },
+    handleChange(id, info) {
+      if (info.file.status !== 'uploading') {
+        const file = info;
+        if(file){ 
+          this.images[id] = info
+        }
+      }
+      if (info.file.status === 'done') {
+        this.$message.success(`${info.file.name} file uploaded successfully`)
+      } else if (info.file.status === 'error') {
+        this.$message.error(`${info.file.name} file upload failed.`)
+      }
     },
   },
 }
