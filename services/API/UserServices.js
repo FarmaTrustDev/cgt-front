@@ -150,6 +150,13 @@ function basicDetail(){
     url: `${baseApi}/basic-detail`,
   })
 }
+function verify(data){
+  return request({
+    url: `${baseApi}/signature`,
+    data,
+    method: 'POST',
+  })
+}
 
 function userWithOrganizationTypeId(params = {}) {
   return request({
@@ -182,7 +189,8 @@ const UserServices = {
   basicDetail,
   userWithOrganizationTypeId,
   getWorkingDaysByEmail,
-  getUserByEmails
+  getUserByEmails,
+  verify
 }
 
 export default UserServices

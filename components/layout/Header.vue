@@ -25,22 +25,22 @@
               <a-menu-item v-if="notifications.length == 0">
                 <span>No notifications</span>
               </a-menu-item>
-
-              <a-menu-item
-                v-for="notification in notifications"
-                v-else
-                :key="notification.id"
-                @click="markRead(notification)"
-              >
-                <strong
-                  ><p class="m-0">
-                    {{ notification.recipient_Name }}
-                  </p></strong
+              <span v-else>
+                <a-menu-item
+                  v-for="notification in notifications"
+                  :key="notification.id"
+                  @click="markRead(notification)"
                 >
-                <span class="ellipsis border-bottom">{{
-                  notification.message
-                }}</span>
-              </a-menu-item>
+                  <strong
+                    ><p class="m-0">
+                      {{ notification.recipient_Name }}
+                    </p></strong
+                  >
+                  <span class="ellipsis border-bottom">{{
+                    notification.message
+                  }}</span>
+                </a-menu-item>
+              </span>
             </a-menu>
           </a-dropdown>
         </div>

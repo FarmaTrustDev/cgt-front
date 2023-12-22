@@ -19,6 +19,12 @@
         <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
       </a-form-item>
     </a-form>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+    >
+    <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
     <a-modal
       :visible="visibleModal"
       ok-text="OK"
@@ -59,6 +65,7 @@
 </template>
 <script>
 import FormFields from '~/components/patient/enrollment/FormFields'
+import Signature from '~/components/signature'
 import PatientDetail from '~/components/patient/enrollment/PatientDetails'
 import PatientConfirmModel from  '~/components/patient/enrollment/ConfirmDetails'
 import notifications from '~/mixins/notifications'
@@ -69,13 +76,14 @@ import nullHelper from '~/mixins/null-helpers'
 import imagesHelper from '~/mixins/images-helper'
 import { isEmpty } from '~/services/Helpers'
 export default {
-  components: { FormFields, PatientDetail,PatientConfirmModel },
+  components: { FormFields, PatientDetail,PatientConfirmModel, Signature },
   mixins: [notifications, routeHelpers, nullHelper, imagesHelper],
   data() {
     return {
       loading: false,
       successResponse: '',
       visibleModal: false,
+      visibleSignature:false,
       formLayout: 'vertical',
       patient: {},
       entityId: null,
@@ -88,7 +96,8 @@ export default {
       patientDetail: {},
       visiblePatientDetailModal: false,
       patientPhone: '',
-      countryIso : ''
+      countryIso : '',
+      signature:false,
     }
   },
   computed: {
@@ -166,7 +175,9 @@ export default {
     {
       if(e === true)
       {
-        this.upsert(this.patientDetail)
+        this.visibleSignature=true
+        // this.loading = false
+        // this.upsert(this.patientDetail)
         this.visiblePatientDetailModal = false
       }
       else{
@@ -176,6 +187,14 @@ export default {
     },
     handleOk() {
       this.visibleModal = false
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.upsert(this.patientDetail)
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
     },
     upsert(values) {
       this.loading = true

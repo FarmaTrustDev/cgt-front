@@ -50,6 +50,12 @@
         :text="translation.SaveConse_4_695"
       />
     </a-form>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+    >
+    <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -59,11 +65,12 @@ import routeHelpers from '~/mixins/route-helpers'
 import nullHelper from '~/mixins/null-helpers'
 import notifications from '~/mixins/notifications'
 import Upload from '~/components/upload'
+import Signature from '~/components/signature'
 import { isEmpty } from '~/services/Utilities'
 import { DOCUMENT_EXTENSIONS } from '~/services/Constant'
 import { TREATMENT_PHASES } from '~/services/Constant/Phases'
 export default {
-  components: { Upload },
+  components: { Upload, Signature },
   mixins: [notifications, routeHelpers, nullHelper],
   props: {
     treatment: {
@@ -84,6 +91,8 @@ export default {
       checkBoxError: false,
       treatId: '',
       TREATMENT_PHASES,
+      visibleSignature:false,
+      consentDetail:{},
     }
   },
   computed: {
@@ -157,14 +166,24 @@ export default {
     getTreatmentId(treatmentid) {
       this.treatId = treatmentid
     },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.upsert(this.consentDetail)
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
           if (values.consent === true) {
+            this.visibleSignature=true
+            this.consentDetail=values
             // if(this.treatment.id==null)
-            const param = this.$route.query
+            /* const param = this.$route.query
             if (!isEmpty(param.treatment_id)) {
               this.getTreatmentId(param.treatment_id)
             }
@@ -175,7 +194,7 @@ export default {
               values.globalId = treatGlobalId
               this.updateConcent(values)
               // this.goto(this.$route.path, { treatment_id: response.data.globalId })
-            }
+            } */
           } else {
             this.checkBoxError = true
             this.loading = false
@@ -184,6 +203,20 @@ export default {
           this.loading = false
         }
       })
+    },
+    upsert(values) {
+      const param = this.$route.query
+      if (!isEmpty(param.treatment_id)) {
+        this.getTreatmentId(param.treatment_id)
+      }
+      if (this.$route.query.treatment_id == null) {
+        this.create(values)
+      } else {
+        const treatGlobalId = this.$route.query.treatment_id
+        values.globalId = treatGlobalId
+        this.updateConcent(values)
+        // this.goto(this.$route.path, { treatment_id: response.data.globalId })
+      }
     },
   },
 }
