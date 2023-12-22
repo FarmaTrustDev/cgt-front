@@ -65,6 +65,12 @@
         </div>
       </span>
     </a-table>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+    >
+    <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
 
     <a-modal
       :title="
@@ -103,6 +109,7 @@ import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import withTableCrud from '~/mixins/with-table-crud'
+import Signature from '~/components/signature'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
@@ -113,6 +120,7 @@ export default {
   components: {
     Form,
     Filters,
+    Signature
   },
     mixins: [withTableCrud],
   props:{
@@ -121,6 +129,7 @@ export default {
   data() {
     return {
       clicked:false,
+      visibleSignature:false,
       column: [
         {
           title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
@@ -161,6 +170,7 @@ export default {
       ],
       loading: false,
       data: [],
+      submitData:{},
       apiService: SchedulingServices,
       ActionLink,
       treatmentStatusClass: 'normal',
@@ -226,7 +236,16 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          const data = this.selectedRow
+          this.submitData = values
+          this.visibleSignature = true
+        }
+      })
+      this.loading = false
+      this.clicked = false
+    },
+    upsert(values)
+    {
+      const data = this.selectedRow
           const performedAction = values.accepted === true ? 'accepted' : 'rejected'
           SchedulingServices.markScheduleRequest(data.id, values).then(
             (response) => {
@@ -235,10 +254,14 @@ export default {
               this.fetch()
             }
           )
-        }
-      })
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.upsert(this.submitData)
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
       this.loading = false
-      this.clicked = false
     },
     showButton(schedule) {
       return !(schedule.treatment.isHold || schedule.treatment.isDead | schedule.treatment.isCancel)

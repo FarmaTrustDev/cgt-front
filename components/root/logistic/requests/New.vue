@@ -65,6 +65,12 @@
           </span>
         </FormActionButton>
       </a-form>
+      <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+      >
+        <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+      </a-modal>
     </a-modal>
   </div>
 </template>
@@ -73,6 +79,7 @@ import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import withTableCrud from '~/mixins/with-table-crud'
+import Signature from '~/components/signature'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
 import {
   _getPastMomentStandardFormatted,
@@ -80,7 +87,7 @@ import {
 } from '~/services/Helpers/MomentHelpers'
 const ActionLink = '/manufacturer/schedules'
 export default {
-  components: { Form, Filters },
+  components: { Form, Filters, Signature },
   mixins: [withTableCrud],
   data() {
     return {
@@ -123,6 +130,8 @@ export default {
       data: [],
       apiService: SchedulingServices,
       ActionLink,
+      manfData:{},
+      visibleSignature:false,
       showResponseModal: false,
       isAccepted: false,
       params: {
@@ -191,7 +200,9 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          const data = this.selectedRow
+          this.manfData=values
+          this.visibleSignature = true
+          /* const data = this.selectedRow
           const performedAction = values.accepted === true ? 'accepted' : 'rejected' 
           SchedulingServices.markScheduleRequest(data.id, values).then(
             (response) => {
@@ -204,10 +215,34 @@ export default {
             this.goto(`/logistic/shipment/${data.globalId}`)
           }else{
             this.goto(`/logistic/`)
-          }
+          } */
         }
       })
       this.loading = false
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.actionPerformed()
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
+    },
+    actionPerformed(){
+      const data = this.selectedRow
+          const performedAction = this.manfData.accepted === true ? 'accepted' : 'rejected' 
+          SchedulingServices.markScheduleRequest(data.id, this.manfData).then(
+            (response) => {
+              this.success('Request ' + performedAction)
+              this.handleModal(false)
+              this.fetch()
+            }
+          )
+          if(this.manfData.accepted===true){
+            this.goto(`/logistic/shipment/${data.globalId}`)
+          }else{
+            this.goto(`/logistic/`)
+          }
     },
     getParams(params) {
       this.fetch(params)

@@ -107,6 +107,12 @@
         </a-col>
       </a-row>
     </a-form>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+      >
+        <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -119,8 +125,10 @@ import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import ShipmentServices from '~/services/API/ShipmentServices'
 import notifications from '~/mixins/notifications'
 import imagesHelper from '~/mixins/images-helper'
+import Signature from '~/components/signature'
 import { isEmpty } from '~/services/Utilities'
 export default {
+  components: { Signature },
   mixins: [notifications, imagesHelper],
   props: {
     scheduling: {
@@ -137,6 +145,8 @@ export default {
       }),
       formLayout: 'vertical',
       STANDARD_UK_DATE_FORMAT,
+      visibleSignature:false,
+      pickUpData:{},
     }
   },
   computed: {
@@ -158,17 +168,35 @@ export default {
       this.loading = true
       this.form.validateFields((err, values) => {
         if (!err) {
-          ShipmentServices.pickupCreate(this.scheduling.id, values)
+          this.pickUpData=values
+          this.visibleSignature = true
+          /* ShipmentServices.pickupCreate(this.scheduling.id, values)
             .then((response) => {
               this.success('Submitted successfully')
               this.$emit('onCreate', response)
             })
-            .catch(this.error)
+            .catch(this.error) */
         }
         else{
           this.loading = false
         }
       })
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.pickUp()
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
+    },
+    pickUp(){
+      ShipmentServices.pickupCreate(this.scheduling.id, this.pickUpData)
+        .then((response) => {
+          this.success('Submitted successfully')
+          this.$emit('onCreate', response)
+        })
+        .catch(this.error)
     },
     _getTodayMoment,
   },

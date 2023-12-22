@@ -154,6 +154,12 @@
     
     </div>
     </div>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+    >
+    <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -186,9 +192,11 @@ export default {
       loading: false,
       visible: false,
       schedule: null,
+      visibleSignature: false,
       moment,
       pickupShipment: {},
       deliveryShipment: {},
+      submitData:{},
       rejectedData: [],
       logisticId: null,
       logisticName: '',
@@ -240,17 +248,21 @@ export default {
         }
       })
     },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.upsert(this.submitData)
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          SchedulingServices.createForManufacturer(values)
-            .then((response) => {
-              this.success(response.message)
-              this.goto('/manufacturer/treatments')
-            })
-            .catch(this.error)
+          this.submitData = values
+          this.visibleSignature = true
         }
       })
       this.loading = false
@@ -263,6 +275,15 @@ export default {
       else{
         return "Reason: " + 'N/A'
       }
+    },
+    upsert(values)
+    {
+      SchedulingServices.createForManufacturer(values)
+            .then((response) => {
+              this.success(response.message)
+              this.goto('/manufacturer/treatments')
+            })
+            .catch(this.error)
     },
     fetch(id) {
       SchedulingServices.getDetailByTreatmentOut(this.treatment.id)

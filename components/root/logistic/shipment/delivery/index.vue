@@ -69,6 +69,12 @@
         /></a-col>
       </a-row>
     </a-form>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+      >
+        <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -79,7 +85,9 @@ import {
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import ShipmentServices from '~/services/API/ShipmentServices'
 import notifications from '~/mixins/notifications'
+import Signature from '~/components/signature'
 export default {
+  components: { Signature },
   mixins: [notifications],
   props: {
     scheduling: {
@@ -96,6 +104,8 @@ export default {
       }),
       formLayout: 'vertical',
       STANDARD_UK_DATE_FORMAT,
+      visibleSignature:false,
+      deliveryData:{},
     }
   },
   computed:{
@@ -110,14 +120,32 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          ShipmentServices.deliveryCreate(this.scheduling.id, values)
+          this.deliveryData=values
+          this.visibleSignature = true
+          /* ShipmentServices.deliveryCreate(this.scheduling.id, values)
             .then((response) => {
               this.success('Submitted successfully')
               this.$emit('onCreate', response)
             })
-            .catch(this.error)
+            .catch(this.error) */
         }
       })
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.delivery()
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
+    },
+    delivery(){
+      ShipmentServices.deliveryCreate(this.scheduling.id, this.deliveryData)
+        .then((response) => {
+          this.success('Submitted successfully')
+          this.$emit('onCreate', response)
+        })
+        .catch(this.error)
     },
     _getTodayMoment,
   },
