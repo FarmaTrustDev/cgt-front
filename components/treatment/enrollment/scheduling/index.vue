@@ -6,6 +6,12 @@
         <Detail v-else  :entity="entity" />
       </a-form>
     </a-spin>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+    >
+    <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
     <a-modal
       :visible="collTimeModal"
       ok-text="Ok"
@@ -145,11 +151,12 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import { isEmpty } from '~/services/Utilities'
 import imagesHelper from '~/mixins/images-helper'
 import { TIME_SLOTS } from '~/services/Constant'
+import Signature from '~/components/signature'
 // import TimeCard from '~/components/datetime/TimeCard'
 import {_getFormatMoment, getMomentByStandardFormat } from '~/services/Helpers/MomentHelpers'
 import UserServices from '~/services/API/UserServices'
 export default {
-  components: { Form, Detail },
+  components: { Form, Detail, Signature },
   mixins: [withCrud,imagesHelper],
   props: {
     treatment: {
@@ -193,6 +200,7 @@ export default {
       timeSlots:TIME_SLOTS,
       collectionDate:'',
       collTimeModal:false,
+      visibleSignature:false,
     }
   },
   computed:{
@@ -363,6 +371,34 @@ export default {
     },
     handlePopUpOk() {
       this.visibleModalPopUp = false
+      this.visibleSignature = true
+      /* const dt= new Date(this.startDate)
+      const dtCol= new Date(this.collectionDate)
+      // console.log(this.startDate)
+      // const tm=_getFormatMoment(getMomentByStandardFormat(this.startDate)).format('HH:mm')
+      AppointmentServices.create(
+        {
+          patientId:this.patientPUID,
+          patientName:this.patientName,
+          clientName:this.partner,
+          treatmentTypeName:this.treatmentTypeName, 
+          personnelIds:this.selectedUsers,
+          appointmentDate:this.startDate, 
+          appointmentTime:this.selectedTimeSlot,
+          collectionDate:this.collectionDate,
+          collectionTime:this.selectedCollectionTimeSlot,
+          containerDate:this.containerDate,
+          collectionPersonnels:this.selectedUsers,
+          dayId:dt.getDay()===0? 7 : dt.getDay(),
+          collectionDay:dtCol.getDay()===0? 7 : dtCol.getDay(),
+          roomName:'A2',
+        }
+        ).then((response)=>{
+          this.upsert(this.values)
+        }) */
+      
+    },
+    scheduling(){
       const dt= new Date(this.startDate)
       const dtCol= new Date(this.collectionDate)
       // console.log(this.startDate)
@@ -385,9 +421,16 @@ export default {
           roomName:'A2',
         }
         ).then((response)=>{
-        this.upsert(this.values)
-      })
-      
+          this.upsert(this.values)
+        })
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.scheduling()
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
     },
     showTimeModa(){
       this.collTimeModal=true

@@ -17,6 +17,12 @@
         </span>
       </a-skeleton>
     </a-form>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+    >
+    <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
     <a-modal
       :visible="showMessage"
       ok-text="Ok"
@@ -58,9 +64,10 @@ import ScreeningCategoryServices from '~/services/API/ScreeningCategoryServices'
 import TreatmentScreeningServices from '~/services/API/TreatmentScreeningServices'
 import CategoryTabs from '~/components/treatment/enrollment/screening/Tabs'
 import imagesHelper from '~/mixins/images-helper'
+import Signature from '~/components/signature'
 
 export default {
-  components: { CategoryTabs },
+  components: { CategoryTabs, Signature },
   mixins: [notifications, routeHelpers, nullHelper, imagesHelper],
   props: {
     treatment: {
@@ -80,6 +87,8 @@ export default {
       categories: null,
       isCreated: false,
       showMessage: false,
+      screeningData:{},
+      visibleSignature:false,
     }
   },
   computed: {
@@ -95,12 +104,22 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           values.screeningStatus = true
-          this.create(values)
+          this.screeningData=values
+          this.visibleSignature=true
+          // this.create(values)
         } else {
           this.confirm('Complete the patient screenings first!')
           this.loading = false
         }
       })
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.create(this.screeningData)
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
     },
     onTreatmentSelect(treatmentTypeId) {
       this.loading = true
