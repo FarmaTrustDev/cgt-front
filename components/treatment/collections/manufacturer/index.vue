@@ -13,6 +13,12 @@
           >Complete Collection Process
         </a-button>
       </div>
+      <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+    >
+    <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
       <a-modal
         :visible="visibleModal"
         ok-text="Ok"
@@ -49,6 +55,7 @@ import { COLLECTION_TYPE } from '~/services/Constant'
 import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 import imagesHelper from '~/mixins/images-helper'
+
 export default {
   components: { Bag },
   mixins: [notifications, imagesHelper],
@@ -59,6 +66,7 @@ export default {
   data() {
     return {
       showModal: false,
+      visibleSignature: false,
       fetchIdFromParams: false,
       visibleModal: false,
       bags: [],
@@ -103,14 +111,26 @@ export default {
     },
     completeAllBags(bags) {
       if (this.validateAllBagsCompleted(bags)) {
-        this.$emit('completeAllBag', bags)
+        this.visibleSignature = true
       } else {
         this.visibleModal = true
         // this.error('Complete all the bags')
       }
     },
+    upsert()
+    {
+      this.$emit('completeAllBag', this.bags)
+    },
     handleOk() {
       this.visibleModal = false
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.upsert()
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
     },
     validateAllBagsCompleted(bags) {
       if (!isEmpty(bags)) {
