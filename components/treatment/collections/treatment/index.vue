@@ -24,6 +24,12 @@
       @click="markTreatmentCollectionComplete(bags)"
       >Complete Collection Process
     </a-button>
+    <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+      >
+        <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+    </a-modal>
     <a-modal
       :footer="false"
       :visible="showModal"
@@ -42,11 +48,12 @@ import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import { COLLECTION_TYPE } from '~/services/Constant'
 import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
+import Signature from '~/components/signature'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
-  components: { Bag, BagForm },
+  components: { Bag, BagForm, Signature },
   mixins: [notifications,routeHelpers],
   props: {
     treatment: { required: true, type: Object },
@@ -59,6 +66,8 @@ export default {
       bags: [],
       COLLECTION_TYPE,
       loading: true,
+      treatmentData:[],
+      visibleSignature:false,
     }
   },
   mounted() {
@@ -96,7 +105,9 @@ export default {
     },
     markTreatmentCollectionComplete(bags) {
       if (this.validateAllBagsCompleted(bags)) {
-        TreatmentServices.markTreatmentCollection(this.treatment.id).then(
+        this.treatmentData=bags
+        this.visibleSignature = true
+        /* TreatmentServices.markTreatmentCollection(this.treatment.id).then(
           (response) => {
             this.$nuxt.$emit(
               EVENT_FETCH_TREATMENT_DETAIL,
@@ -107,8 +118,30 @@ export default {
         this.goto(`/hospital/patients/collection/${this.treatment.globalId}`, {
           treatment_id: this.treatment.globalId, view: 'after-care'
         })
-        this.$emit('callback','after-care')
+        this.$emit('callback','after-care') */
       }
+    },
+    collection(){
+      TreatmentServices.markTreatmentCollection(this.treatment.id).then(
+          (response) => {
+            this.$nuxt.$emit(
+              EVENT_FETCH_TREATMENT_DETAIL,
+              this.treatment.globalId
+            )
+          }
+        )
+      this.goto(`/hospital/patients/collection/${this.treatment.globalId}`, {
+        treatment_id: this.treatment.globalId, view: 'after-care'
+      })
+      this.$emit('callback','after-care')
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.collection()
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
     },
     completeAllBags(bags) {
       if (this.validateAllBagsCompleted(bags)) {

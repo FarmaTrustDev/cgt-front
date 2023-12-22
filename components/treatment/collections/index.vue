@@ -21,6 +21,12 @@
         @click="markHospitalCollectionComplete(bags)"
         >Complete Collection Process
       </a-button>
+      <a-modal 
+      :visible="visibleSignature"
+      :footer="null"
+      >
+        <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+      </a-modal>
       <a-modal
         :footer="false"
         :visible="showModal"
@@ -78,12 +84,13 @@ import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import { COLLECTION_TYPE } from '~/services/Constant'
 import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
+import Signature from '~/components/signature'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 import imagesHelper from '~/mixins/images-helper'
 import routeHelpers from '~/mixins/route-helpers'
 export default {
-  components: { BagForm, Bag },
+  components: { BagForm, Bag, Signature },
   mixins: [notifications, imagesHelper, routeHelpers],
   props: {
     treatment: { required: true, type: Object },
@@ -98,6 +105,8 @@ export default {
       COLLECTION_TYPE,
       loading: true,
       schedule: [],
+      bagData:[],
+      visibleSignature:false,
     }
   },
   mounted() {
@@ -111,6 +120,7 @@ export default {
       this.handleModal(true)
     },
     isEmpty,
+    
     fetchBags() {
       if (!isEmpty(this.treatment)) {
         this.loading = true
@@ -134,6 +144,25 @@ export default {
     },
     markHospitalCollectionComplete(bags) {
       if (this.validateAllBagsCompleted(bags)) {
+        this.bagData=bags
+        this.visibleSignature = true
+        // console.log(bags)
+        /* TreatmentServices.markCompleteCollection(this.treatment.id).then(
+          (response) => {
+            this.$nuxt.$emit(
+              EVENT_FETCH_TREATMENT_DETAIL,
+              this.treatment.globalId
+            )
+            this.goto('/hospital/patients')
+            this.success('Collection step has been completed')
+          }
+        ) */
+      } else {
+        this.visibleModal = true
+        // this.error('Complete all the bags')
+      }
+    },
+    collection(){
         TreatmentServices.markCompleteCollection(this.treatment.id).then(
           (response) => {
             this.$nuxt.$emit(
@@ -144,10 +173,14 @@ export default {
             this.success('Collection step has been completed')
           }
         )
-      } else {
-        this.visibleModal = true
-        // this.error('Complete all the bags')
-      }
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.collection()
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
     },
     validateAllBagsCompleted(bags) {
       if (!isEmpty(bags)) {
