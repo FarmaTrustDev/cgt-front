@@ -15,7 +15,7 @@
                 {{ translation.Check_1_454 }}
                 <strong class="strong"
                   >{{ translation['new_1_276'] }}
-                  {{ translation['Patie_1_184'] }}
+                  Orders
                 </strong>
               </h4>
             </a>
