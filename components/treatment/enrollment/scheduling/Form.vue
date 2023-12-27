@@ -3,11 +3,10 @@
     <div v-for="(data, index) in rejection" :key="index">
       <a-alert
         :message="
-          'The treatment was rejected by ' +
+          'Patient Treatment has been Terminated by ' +
           data.organization +
-          '. Re-schedule the treatment from available slots below.'
+          ' on ' + moment(data.rejectionDate).format('DD/MM/YYYY')
         "
-        :description="getRejectionDetail(data.rejectionReason) + '. At ' + moment(data.rejectionDate).format('DD/MM/YYYY')"
         type="success"
       />
     </div>

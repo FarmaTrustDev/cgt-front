@@ -75,7 +75,7 @@ export default {
     return {
       column: [
         {
-          title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
+          title: `Order ID`,
           dataIndex: 'patientEnrollmentNumber',
           key: 'patientEnrollmentNumber',
           scopedSlots: { customRender: 'pUIDRender' },
@@ -92,7 +92,7 @@ export default {
           key: 'OrganizationName',
         },
         {
-          title: `${this.$store.getters.getTranslation.Durat_1_71}`,
+          title: `No. of Days`,
           dataIndex: 'duration',
           scopedSlots: { customRender: 'duration' },
         },
@@ -136,8 +136,8 @@ export default {
         this.column[0].title = newValues.PatieID_2_264
         this.column[1].title = newValues.TreatType_2_67
         this.column[2].title = newValues.Organ_1_166
-        this.column[3].title = newValues['Colle-_4_268']
-        this.column[4].title = newValues.Actio_1_220
+        this.column[4].title = newValues['Colle-_4_268']
+        this.column[5].title = newValues.Actio_1_220
       }
     },
   },

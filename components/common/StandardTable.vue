@@ -34,7 +34,9 @@
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
           <a-tooltip :title="'TreatmentID: ' + treatment.treatmentPUID">
-            <span class="treatmentName">{{ treatment.treatmentTypeName }}</span>
+            <span class="treatmentName">
+              <a href="javascript:;" @click="gotoView(patient, treatment)">{{ treatment.treatmentTypeName }}</a>
+            </span>
           </a-tooltip>
         </strong>
       </template>

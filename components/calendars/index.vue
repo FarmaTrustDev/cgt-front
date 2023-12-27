@@ -11,10 +11,12 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 import FullCalendar from '@fullcalendar/vue'
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
@@ -72,6 +74,7 @@ export default {
       entityId: null,
       isCreated: false,
       savedEvents: [],
+      moment,
     }
   },
   mounted() {
@@ -82,17 +85,25 @@ export default {
     },
     customizeEventContent(arg) {
       const event = arg.event;
+      console.log(event.start)
+      const curDate = moment().format('DD-MM-YYYY');
+      const calDate=_getFormatMoment(event.start).format('DD-MM-YYYY')
+
+
       let backgroundColor;
       let color;
-
       // Set background color based on conditions
-      if (event.extendedProps.globalId==='00000000-0000-0000-0000-000000000000') {
+      if(moment(calDate, 'DD-MM-YYYY').isSameOrBefore(moment(curDate, 'DD-MM-YYYY'))){
+        backgroundColor = 'gray';
+        color="white"
+      }
+      else if (event.extendedProps.globalId==='00000000-0000-0000-0000-000000000000') {
         backgroundColor = 'white';
         color="black"
       }else if(event.extendedProps.isCollection===true){
         backgroundColor = 'purple';
         color="white"
-      } 
+      }
 
       return {
         html: `<div class="custom-event-content" style="padding-left:2px; margin-left:-7px; margin-top:-7px; margin-right:-7px; margin-bottom:-7px; text-align:center; padding-top:8px; height: 35px; border-radius:11px; width: 170px; background-color: ${backgroundColor}; color:${color}">${event.title}</div>`
