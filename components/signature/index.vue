@@ -3,7 +3,7 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <center>
           
-          <h2>Please provide Login Credetials</h2>
+          <h2>Please provide Login Credentials</h2>
 
           <a-alert v-if="showError" :message="error" banner closable />
           <a-form-item label="Username">
