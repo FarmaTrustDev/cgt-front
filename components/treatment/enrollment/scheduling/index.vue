@@ -9,6 +9,8 @@
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
     >
     <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
     </a-modal>
@@ -423,6 +425,9 @@ export default {
         ).then((response)=>{
           this.upsert(this.values)
         })
+    },
+    handleOk() {
+      this.handleSignatureCancel()
     },
     handleSignatureOk() {
       this.visibleSignature = false

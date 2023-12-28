@@ -72,6 +72,8 @@
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
       >
         <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
     </a-modal>
@@ -106,6 +108,7 @@ export default {
       STANDARD_UK_DATE_FORMAT,
       visibleSignature:false,
       deliveryData:{},
+      
     }
   },
   computed:{
@@ -130,6 +133,9 @@ export default {
             .catch(this.error) */
         }
       })
+    },
+    handleOk() {
+      this.handleSignatureCancel()
     },
     handleSignatureOk() {
       this.visibleSignature = false

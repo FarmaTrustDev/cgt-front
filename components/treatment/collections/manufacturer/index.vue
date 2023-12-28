@@ -16,6 +16,8 @@
       <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
     >
     <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
     </a-modal>
@@ -23,8 +25,7 @@
         :visible="visibleModal"
         ok-text="Ok"
         :footer="null"
-        @cancel="handleOk()"
-        @ok="handleOk()"
+        
       >
         <center>
           <p class="cross-img">
@@ -122,7 +123,7 @@ export default {
       this.$emit('completeAllBag', this.bags)
     },
     handleOk() {
-      this.visibleModal = false
+      this.handleSignatureCancel()
     },
     handleSignatureOk() {
       this.visibleSignature = false

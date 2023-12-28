@@ -4,7 +4,7 @@
       <a-row>
         <a-col :span="24">
           <a-form-item
-            label="Image:"
+            :label="translation.Image_1_438"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
             class="pb-0"
@@ -25,14 +25,14 @@
               :extensions="allowedExtensions"
               @handleChange="handleChange"
             />
-            {{reqMessage}}
+            {{translation.requi_1_336}}
           </a-form-item>
         </a-col>
       </a-row>
       <a-row>
         <a-col :span="12">
           <a-form-item
-            :label='organizationName + " Name*"'
+            :label='organizationName + " " + translation.Name_1_138'
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 22 }"
           >
@@ -44,12 +44,12 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Required',
+                      message: translation.requi_1_336,
                     },
                   ],
                 },
               ]"
-              :placeholder='organizationName  +" Name"'
+              :placeholder='organizationName  + " " + translation.Name_1_138'
             /> </a-form-item
         ></a-col>
         <!-- <a-col :span="12">
@@ -112,19 +112,19 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Required',
+                      message: translation.requi_1_336,
                     },
                   ],
                 },
               ]"
-              placeholder="Contact Number"
+              :placeholder="translation.ContaNumbe_2_430"
             />
           </a-form-item>
         </a-col>
       </a-row>
       <a-col :span="12">
         <a-form-item
-          :label="translation.EmailAddre_2_140 + '*:'"
+          :label="translation.EmailAddre_2_140"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -136,7 +136,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -148,7 +148,7 @@
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label='organizationName + " Address*"'
+          :label='organizationName + " "+ translation.Addre_1_559 '
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -160,17 +160,17 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
             ]"
-            :placeholder='organizationName + " Address"'
+            :placeholder='organizationName + translation.Addre_1_559'
           /> </a-form-item
       ></a-col>
       <a-col :span="12">
         <a-form-item
-          :label='organizationName + " PUID Prefix*"'
+          :label='organizationName + " PUID Prefix"'
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -182,7 +182,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -205,7 +205,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -219,7 +219,7 @@
       <a-col  :span="24">
          <a-form-item
          v-if="organizationName === 'Manufacturer'"
-         label="Treatment Type"
+         :label="translation.TreatType_2_67"
          >
         <a-select
         v-decorator="[

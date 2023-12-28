@@ -3,7 +3,7 @@
     class="support container"
     :create="false"
     :loading="loading"
-    title="Support Detail"
+    :title="translation.SuppoDetai_2_1120"
   >
     <template slot="content">
       <div class="grey-card">
@@ -46,6 +46,11 @@ export default {
       fetchMethod: SupportServices.getByGUId,
       data: [],
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     afterFetch() {

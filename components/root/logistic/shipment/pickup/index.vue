@@ -110,6 +110,8 @@
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
       >
         <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
     </a-modal>
@@ -181,6 +183,9 @@ export default {
           this.loading = false
         }
       })
+    },
+    handleOk() {
+      this.handleSignatureCancel()
     },
     handleSignatureOk() {
       this.visibleSignature = false

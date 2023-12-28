@@ -181,7 +181,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Department*:"
+          :label="translation.Depar_1_436 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -203,7 +203,7 @@
                 ],
               },
             ]"
-            placeholder="Department"
+            :placeholder="translation.Depar_1_436"
           />
         </a-form-item>
       </a-col>
@@ -224,7 +224,7 @@
       <div v-if="users.name === 'Super Admin'">
       <a-col :span="4">
         <!-- :default-value=""  -->
-        <label>User Group*:</label>
+        <label>{{translation.UserGroup_2_518}} *:</label>
       </a-col>
       <a-col :span="20">
         <a-form-item>
@@ -250,7 +250,7 @@
       </a-col>
       
       <a-col :span="10">
-        <a-form-item label="Entities">
+        <a-form-item :label="translation.Entit_1_945">
           <a-select
           v-decorator="[
               'organizationId',
@@ -264,7 +264,7 @@
                 ],
               },
             ]"
-            placeholder="Entities"
+            :placeholder="translation.Entit_1_945"
           >
             <a-select-option v-for="org in organization" :key="org.id">
               {{ org.name }}
@@ -470,7 +470,7 @@
                 ],
               },
             ]"
-            placeholder="City"
+            :placeholder="translation.City_1_446"
           />
         </a-form-item>
       </a-col>
@@ -546,7 +546,7 @@
                 ],
               },
             ]"
-            placeholder="County"
+            :placeholder="translation.Count_1_657"
           />
         </a-form-item>
       </a-col>

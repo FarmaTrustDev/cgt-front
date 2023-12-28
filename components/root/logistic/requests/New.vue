@@ -68,6 +68,8 @@
       <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
       >
         <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
       </a-modal>
@@ -170,6 +172,9 @@ export default {
       this.isAccepted = isAccepted
       this.selectedRow = record
       this.handleModal(true)
+    },
+    handleOk() {
+      this.handleSignatureCancel()
     },
     getButtonText() {
       return this.isAccepted ? "Accept" : "Reject"

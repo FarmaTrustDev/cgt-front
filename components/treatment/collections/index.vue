@@ -24,6 +24,8 @@
       <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
       >
         <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
       </a-modal>
@@ -140,7 +142,7 @@ export default {
     },
     // for handle modal
     handleOk() {
-      this.visibleModal = false
+      this.handleSignatureCancel()
     },
     markHospitalCollectionComplete(bags) {
       if (this.validateAllBagsCompleted(bags)) {

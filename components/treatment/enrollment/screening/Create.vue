@@ -20,6 +20,8 @@
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
     >
     <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
     </a-modal>
@@ -27,8 +29,7 @@
       :visible="showMessage"
       ok-text="Ok"
       :footer="null"
-      @cancel="handleOk()"
-      @ok="handleOk()"
+      
     >
       <center>
         <p class="cross-img">
@@ -152,7 +153,7 @@ export default {
         .catch(this.error)
     },
     handleOk() {
-      this.showMessage = false
+      this.handleSignatureCancel()
     },
   },
 }

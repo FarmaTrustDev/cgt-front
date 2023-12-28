@@ -1,7 +1,7 @@
 <template>
 <div>
   <page-layout
-    title="Treatment Types"
+    :title="translation.TreatType_2_67"
     class="specific container page-search-input-container"
     :loading="loading"
     :create="false"
@@ -15,12 +15,12 @@
       <a-input
         class="page-search-input"
         ref="userNameInput"
-        placeholder="Search"
+        :placeholder="translation.searc_1_488"
       >
         <!-- @change="searchUser" -->
         <a-icon slot="prefix" type="search" />
       </a-input>
-      <a-button type="primary" @click="showModal">Add Treatment Type</a-button>
+      <a-button type="primary" @click="showModal">{{translation.AddTreat_3_1118}}</a-button>
     </template>
     <div slot="content">
       <a-table
@@ -30,13 +30,13 @@
         class="rounded-table pt-10 users-list"
       >
         <div slot="action" slot-scope="action, slot">
-          <a-button type="danger" @click="treatTypeDelete(true ,slot.id)">Delete</a-button>
+          <a-button type="danger" @click="treatTypeDelete(true ,slot.id)">{{translation.Delet_1_451}}</a-button>
         </div>
       </a-table>
     </div>
   </page-layout>
   <a-modal
-      title="Add Treatment Type"
+      :title="translation.AddTreat_3_1118"
       :visible="visible"
       :footer="null"
       @ok="handleOk"
@@ -50,10 +50,10 @@
               'treatmentType',
               {
                 initialValue: treatmentTypes.name,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [{ required: true, message: translation.requi_1_336 }],
               },
             ]"
-            placeholder="Treatment Type"
+            :placeholder="translation.TreatType_2_67"
           />
         </a-form-item>
         <a-form-item>
@@ -63,7 +63,7 @@
             html-type="submit"
             class="float-right"
           >
-            Submit
+            {{translation.Submi_1_248}}
           </a-button>
         </a-form-item>
         </a-form>
@@ -86,7 +86,7 @@
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="handleResponseModal(false)"
-            >Ok</a-button
+            >{{translation.Ok_1_663}}</a-button
           >
       </footer>
       </center>
@@ -105,21 +105,21 @@
           </span>
         </p>
         <h3>
-          Are you sure you want to delete this treatment type ?
+          {{translation.Areyou_11_1119}}
         </h3>
         <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="treatTypeDeleteMethod()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn text-cancel"
             style="padding: 5px 50px"
             @click="treatTypeDelete(false, '')"
           >
-            Cancel
+            {{translation.cance_1_296}}
           </a-button>
         </footer>
       </center>
@@ -140,12 +140,12 @@ export default {
       treatmentTypes: [],
       column: [
         {
-          title: 'Treatment Type',
+          title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
           dataIndex: 'name',
           key: 'name',
         },
         {
-          title: 'Action',
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'action',
           scopedSlots: { customRender: 'action' },
         },
@@ -169,6 +169,14 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  watch:{
+    translation(newValues, oldValue){
+      if(newValues!==oldValue){
+        this.column[0].title=newValues.TreatType_2_67
+        this.column[1].title=newValues.Actio_1_220
+      }
+    }
+  },  
   mounted() {
     this.fetchTreamentTypes()
   },

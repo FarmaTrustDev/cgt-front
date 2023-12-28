@@ -3,7 +3,7 @@
     :create="false"
     :bordered="false"
     :loading="loading"
-    :title="translation.Treat_1_29"
+    title="Orders"
     class="container"
   >
     <template slot="content">

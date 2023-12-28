@@ -16,7 +16,7 @@
       </article>
       <div class="grey-card d-flex">
         <dl class="ant-row common-detail">
-          <h2 class="heading">External Entities</h2>
+          <h2 class="heading">{{translation.ExterEntit_2_760}}</h2>
           <div class="ant-col-24 d-flex">
             <dt>{{ translation.LogisProvi_2_380 }}</dt>
             <dd>{{ scheduling.logisticName }}</dd>

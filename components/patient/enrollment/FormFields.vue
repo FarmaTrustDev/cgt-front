@@ -375,7 +375,7 @@
               },
             ]"
             :auto-size="{ minRows: 2, maxRows: 5 }"
-            placeholder="Steet Number"
+            :placeholder="translation.StreeNumbe_2_653"
           />
         </a-form-item>
       </a-col>
@@ -396,7 +396,7 @@
               },
             ]"
             name="postCode"
-            placeholder="Postal Code "
+            :placeholder="translation['PostaCode:_2_649']"
             @blur="fetchCountryByPostCode"
           /> </a-form-item
       ></a-col>
@@ -439,7 +439,7 @@
                 rules: [{ message: '' }],
               },
             ]"
-            placeholder="Postal Code Address"
+            :placeholder="translation.PostaCode_3_651"
           /> </a-form-item
       ></a-col>
     </a-row>
