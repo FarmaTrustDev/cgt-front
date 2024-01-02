@@ -16,11 +16,11 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your first name',
+                    message: translation.Pleasinput_5_1122,
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid name'
+                    message: translation.Pleasinput_5_1122
                   }
                 ],
               },
@@ -42,11 +42,11 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your last name',
+                    message: translation.Pleasinput_5_1123,
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid name'
+                    message: translation.Pleasinput_5_1123
                   }
                 ],
               },
@@ -72,7 +72,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your email',
+                    message: translation.Pleasinput_4_1124,
                   },
                 ],
                 
@@ -97,7 +97,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your usrename',
+                    message: translation.Pleasinput_4_1125,
                   },
                 ],
               },
@@ -122,7 +122,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your office address',
+                    message: translation.OfficAddre_2_428,
                   },
                 ],
               },
@@ -145,7 +145,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your contact number',
+                    message: translation.Pleasinput_5_1126,
                   },
                 ],
               },
@@ -170,7 +170,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your what3words',
+                    message: translation.What3_1_432,
                   },
                 ],
               },
@@ -194,11 +194,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your department',
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid name'
+                    message: translation.Pleasinput_4_1127,
                   }
                 ],
               },
@@ -236,7 +232,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please select organization type',
+                    message: translation.SelecOrgan_3_1145,
                   },
                 ],
               },
@@ -336,7 +332,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your role',
+                    message: translation.Pleasselec_4_1128,
                   },
                 ],
               },
@@ -386,7 +382,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your role',
+                    message: translation.Roles_1_442,
                   },
                 ],
               },
@@ -436,7 +432,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your postcode',
+                    message: translation.Postc_1_444,
                   },
                 ],
               },
@@ -461,11 +457,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your city',
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid city name'
+                    message: translation.Pleasinput_4_1129,
                   }
                 ],
               },
@@ -489,7 +481,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your location',
+                    message: translation.Locat_1_448,
                   },
                 ],
               },
@@ -537,11 +529,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your county',
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid county name'
+                    message: translation.Pleasinput_4_1130,
                   }
                 ],
               },
@@ -565,7 +553,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your country',
+                    message: translation.Pleasselec_4_1131,
                   },
                 ],
               },

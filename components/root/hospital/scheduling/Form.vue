@@ -11,7 +11,7 @@
       </div>
         <a-modal
         :visible="visibleModalPopUp"
-        ok-text="Ok"
+        :ok-text="translation.Ok_1_663"
         :width="700"
         :footer="null"
         :closable="false"

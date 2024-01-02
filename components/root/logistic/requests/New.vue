@@ -61,7 +61,7 @@
           :btn-type="getButtonType()"
           :is-created="false"
           ><span slot="extra" class="mr-5">
-            <a-button @click="handleModal(false)">Cancel</a-button>
+            <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
           </span>
         </FormActionButton>
       </a-form>

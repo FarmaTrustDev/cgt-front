@@ -16,7 +16,7 @@
       <a-modal :visible="showModal" :title="translation.Docum_1_507">
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">
-            <a-button @click="handleModal(false)">Cancel</a-button>
+            <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
             <a-button @click="printWindow()">Print</a-button>
           </template>
         </a-modal>
@@ -24,7 +24,7 @@
       <a-modal
         :visible="showModal"
         ok-text="Print"
-        cancel-text="Cancel"
+        :cancel-text="translation.cance_1_296"
         @ok="printWindow()"
         @cancel="handleModal(false)"
         :title="translation.Docum_1_507"

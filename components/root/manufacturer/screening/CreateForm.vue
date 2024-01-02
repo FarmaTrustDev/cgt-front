@@ -17,7 +17,7 @@
           ]"
           :disabled="isCreated"
           :loading="typeLoading"
-          placeholder="Select Treatment Type"
+          :placeholder="translation.SelecTreat_3_1133"
           style="width: 100%"
           size="large"
           class="default-select"

@@ -15,15 +15,15 @@
     </a-spin>
       <a-modal
       :visible="selectionModal"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :width="550"
       :footer="null"
       @cancel="handleSelectionCancel()"
       @ok="handleSelectionOk()"
     >
         <h3><strong>{{changes.patientName}} {{changes.patientPUID}}</strong></h3>
-        <h3>Appointment on {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }} at {{ tim }}</h3>
-        <h3>Please select from the following personnels: </h3>
+        <h3>{{translation.Appoion_2_860}} {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }} at {{ tim }}</h3>
+        <h3>{{translation.Pleasselec_6_861}} </h3>
         <a-row v-for="user in userData" :key="user.id" class="col-height">
           <a-col :span="12">
             <input type="checkbox" v-model="selectedUsers" :value="user.id" style="margin-right:15px; margin-top: 15px;">
@@ -38,8 +38,8 @@
             <footer>
                 <center>
                     
-                    <a-button class="ant-btn" @click="handleSelectionCancel()">Cancel</a-button>
-                    <a-button :disabled="isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()">Confirm</a-button>
+                    <a-button class="ant-btn" @click="handleSelectionCancel()">{{translation.cance_1_296}}</a-button>
+                    <a-button :disabled="isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()">{{translation.Confi_1_646}}</a-button>
                 </center>
             </footer>
         </a-row>
@@ -47,7 +47,7 @@
     </a-modal>
     <a-modal
       :visible="visibleModalPopUp"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :width="700"
       :footer="null"
       @cancel="handlePopUpCancel()"
@@ -82,7 +82,7 @@
             class="ant-btn ant-btn-primary"
             @click="handlePopUpOk()"
             style="padding: 5px 50px"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
         </footer>
       </center>
@@ -91,7 +91,7 @@
     
     <a-modal
         :visible="visibleBasicModalPopUp"
-        ok-text="Ok"
+        :ok-text="translation.Ok_1_663"
         :width="700"
         :footer="null"
         :closable="false"

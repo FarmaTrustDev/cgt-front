@@ -17,7 +17,7 @@
       }"
       @changeDate="handleDateClick"
     />
-    <FormActionButton :loading="loading" text="Save Schedule" @click="onSubmit"> </FormActionButton>
+    <FormActionButton :loading="loading" :text="translation.savesched_2_520" @click="onSubmit"> </FormActionButton>
   </div>
 </template>
 <script>
@@ -95,6 +95,9 @@ export default {
   computed: {
     user() {
       return this.$store.getters.getUser
+    },
+    translation() {
+      return this.$store.getters.getTranslation
     },
   },
   mounted() {

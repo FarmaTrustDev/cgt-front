@@ -16,7 +16,7 @@
     </a-modal>
     <a-modal
       :visible="collTimeModal"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       @cancel="handleCollTimeCancel()"
       @ok="handleCollTimeOk()"
@@ -42,7 +42,7 @@
     </a-modal>
     <a-modal
       :visible="timeModal"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       @cancel="handleTimeCancel()"
       @ok="handleTimeOk()"
@@ -68,7 +68,7 @@
     </a-modal>
     <a-modal
       :visible="selectionModal"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :loading="loading"
       :footer="null"
       @cancel="handleSelectionCancel()"
@@ -94,14 +94,14 @@
         <footer>
           
           <a-button class="ant-btn" @click="handleSelectionCancel()" style="padding: 5px 50px">Back</a-button>
-          <a-button :disabled="isEmpty(userData) || isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()" style="padding: 5px 50px">Confirm</a-button>
+          <a-button :disabled="isEmpty(userData) || isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()" style="padding: 5px 50px">{{translation.Confi_1_646}}</a-button>
           
         </footer>
       </center>
     </a-modal>
     <a-modal
       :visible="visibleModalPopUp"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       :width="700"
       @cancel="handlePopUpCancel()"

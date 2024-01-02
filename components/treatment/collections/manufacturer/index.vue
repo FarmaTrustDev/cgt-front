@@ -10,7 +10,7 @@
           type="primary"
           :loading="loading"
           @click="completeAllBags(bags)"
-          >Complete Collection Process
+          >{{translation.ComplColle_3_985}}
         </a-button>
       </div>
       <a-modal 
@@ -23,7 +23,7 @@
     </a-modal>
       <a-modal
         :visible="visibleModal"
-        ok-text="Ok"
+        :ok-text="translation.Ok_1_663"
         :footer="null"
         
       >
@@ -34,13 +34,13 @@
               <span class="line-right line"></span>
             </span>
           </p>
-          <h3>Complete all steps before completing this sample.</h3>
+          <h3>{{translation.Complall_7_986}}</h3>
           <footer>
             <!-- @Mehdi please optimize the code  -->
             <a-button
               class="ant-btn ant-btn-primary error-ok-btn"
               @click="handleOk()"
-              ><b>Ok</b></a-button
+              ><b>{{translation.Ok_1_663}}</b></a-button
             >
             <!-- @Mehdi please optimize the code  -->
           </footer>
@@ -74,6 +74,11 @@ export default {
       COLLECTION_TYPE,
       loading: false,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.fetchBags()
