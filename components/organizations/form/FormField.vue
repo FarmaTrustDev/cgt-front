@@ -143,7 +143,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Organization Type"
+          :label="translation.OrganType_2_164"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 21 }"
           class="pb-0"
@@ -156,13 +156,13 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your Organization Type!',
+                    message: translation.SelecOrgan_3_1145,
                   },
                 ],
               },
             ]"
             :loading="typeLoading"
-            placeholder="Select Organization Type"
+            :placeholder="translation.SelecOrgan_3_1145"
             style="width: 100%"
             size="large"
             class="default-select"

@@ -8,7 +8,7 @@
     <a-alert
       v-if="data.length <= 0"
       type="info"
-      message="There are no screening questions from the manufacturer"
+      :message="translation.Thereare_8_1004"
     >
     </a-alert>
     <a-list

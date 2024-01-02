@@ -142,12 +142,17 @@
       handlePatient(){
         if (this.$route.query) {
             this.changeEventData = this.$route.query[0]
-            // console.log(typeof this.changeEventData)
+            console.log(this.changeEventData)
             // this.getDoctorsWithDays(this.changeEventData)
         }
       },
       getUrl(){
-      this.url=this.user.userProfileImageUrl.replace(/['"]+/g, '')
+        console.log(this.user.userProfileImageUrl)
+        if(this.user.userProfileImageUrl===null){
+          this.url="Uploads/default/11bf4d92-7774-411b-b240-5bb8bc60ebf8.jpeg"
+        }else{
+          this.url=this.user.userProfileImageUrl.replace(/['"]+/g, '')
+        }
     },
     
     getDoctorsWithDays(){

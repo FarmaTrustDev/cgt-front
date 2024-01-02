@@ -89,7 +89,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },

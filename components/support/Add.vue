@@ -14,7 +14,7 @@
       <a-form :form="form" class="support-add-modal" @submit="onSubmit">
         <a-row :gutter="20">
           <a-col :span="12">
-            <a-form-item v-if="!isCreated" label="Patient">
+            <a-form-item v-if="!isCreated" :label="translation.Patie_1_184">
               <a-select
                 v-decorator="[
                   'patient_Id',
@@ -23,14 +23,14 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
                 ]"
                 :show-search="true"
                 :filter-option="filterOption"
-                placeholder="Name (PUID)"
+                :placeholder="translation.Name_1_138+ '(PUID)'"
                 style="width: 100%"
                 size="large"
                 autocomplete="off"
@@ -55,7 +55,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -73,7 +73,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -89,7 +89,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -100,7 +100,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="BagID">
+            <a-form-item :label="translation.BagID_1_788">
               <a-input
                 v-decorator="[
                   'id',
@@ -158,7 +158,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -183,7 +183,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -197,7 +197,7 @@
 
         <a-row :gutter="20">
           <a-col :span="12">
-            <a-form-item label="Status">
+            <a-form-item :label="translation.Statu_1_202">
               <a-select
                 v-decorator="[
                   'status_Id',
@@ -206,7 +206,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -233,7 +233,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -244,7 +244,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
-            <a-form-item label="Priority">
+            <a-form-item :label="translation.Prior_1_192">
               <a-select
                 v-decorator="[
                   'priority',
@@ -253,7 +253,7 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
@@ -276,7 +276,7 @@
         </a-row>
         <a-row :gutter="20">
           <a-col>
-            <a-form-item label="Stackholders">
+            <a-form-item :label="translation.Stack_1_978">
               <a-select
                 v-decorator="[
                   'stackHolder',
@@ -285,14 +285,14 @@
                     rules: [
                       {
                         required: true,
-                        message: 'Required',
+                        message: translation.requi_1_336,
                       },
                     ],
                   },
                 ]"
                 mode="tags"
                 :loading="typeLoading"
-                placeholder="Select StackHolders"
+                :placeholder="translation.SelecStack_2_1147"
                 style="width: 100%"
                 size="large"
                 class="default-select"

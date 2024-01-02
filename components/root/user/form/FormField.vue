@@ -259,7 +259,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please select organization',
+                    message: translation.Entit_1_945,
                   },
                 ],
               },

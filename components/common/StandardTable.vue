@@ -368,7 +368,7 @@
               'note',
               {
                 initialValue: note,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [{ required: true, message: translation.requi_1_336 }],
               },
             ]"
             placeholder="Enter Note"
@@ -400,7 +400,7 @@
               'notes',
               {
                 initialValue: notes,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [{ required: true, message: translation.requi_1_336 }],
               },
             ]"
             placeholder="Enter Note"

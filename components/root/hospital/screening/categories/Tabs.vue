@@ -22,7 +22,7 @@
       <a-alert
       v-else
       type="info"
-      message="No screening question added by manufacturer">
+      :message="translation.Thereare_8_1004">
     </a-alert>
       <!-- Tabs -->
     </a-spin>

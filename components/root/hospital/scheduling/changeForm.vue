@@ -1,7 +1,7 @@
 <template>
     <div>
       <a-spin :spinning="loading">
-      <h3 class="page-title">My Schedule</h3>
+      <h3 class="page-title">{{translation.MySched_2_859}}</h3>
       <div class="grey-card">
         <!-- <div v-if="loading" class="loading-overlay">
           <div class="loading-spinner"></div>
@@ -139,7 +139,7 @@
                             class="ant-btn ant-btn-primary"
                             @click="handleBasicPopUpOk()"
                             style="padding: 2px 10px"
-                          >Find New Time</a-button>
+                          >{{translation.FindNew_3_868}}</a-button>
                         </center>
                       </a-col>
                     </a-row>
@@ -295,6 +295,7 @@
         this.loading = true
         const appoint = await AppointmentServices.get({ ...arg})
         const coll = await AppointmentServices.getCollection({ ...arg})    
+        console.log(isEmpty(this.changes)?'Empty':'Filled')
         const dt= new Date(this.changes.dated)
         const tm=_getFormatMoment(getMomentByStandardFormat(this.changes.dated)).format('HH:mm')
         const docData = await DoctorServices.getDoctorWithDays()
