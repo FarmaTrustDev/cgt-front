@@ -166,12 +166,12 @@ export default {
       else if(name === 'Logistic')
       {
         // this.organizationTypeAlias = LOGISTIC_ALIAS
-        this.organizationName = this.translation.Manuf_1_89
+        this.organizationName = this.translation.Logis_1_146
       }
       else if(name === 'Manufacturer')
       {
-        // this.organizationTypeAlias = MANUFACTURER_ALIAS
-        this.organizationName = this.translation.Logis_1_146
+        // this.organizationTypeAlias = MANUFACTURER_ALIAS 
+        this.organizationName = this.translation.Manuf_1_89
       }
       else if(name === 'SmartLab')
       {
@@ -195,7 +195,7 @@ export default {
       this.loading = true
       this.apiService.create(values)
       .then((response) =>{
-          ManufacturerTreatmentServices.create({organizationId: response.data.id, treatmentTypesId: this.treatTypesId})
+          ManufacturerTreatmentServices.create({organizationId: response.data.result.id, treatmentTypesId: this.treatTypesId})
         this.success(response.message)
       })
       this.getOrganization();
@@ -206,7 +206,7 @@ export default {
       // const entityId = this.$route.params.id
       this.apiService.update(this.entityId,values)
       .then((response)=>{
-        ManufacturerTreatmentServices.create({organizationId: response.data.id, treatmentTypesId: this.treatTypesId})
+        ManufacturerTreatmentServices.create({organizationId: response.data.result.id, treatmentTypesId: this.treatTypesId})
         this.success(response.message)
       })
       this.getOrganization()

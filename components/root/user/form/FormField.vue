@@ -718,7 +718,7 @@ export default {
     },
     fetchRoles(params = {}) {
       RoleServices.get(params).then((response) => {
-        this.roles = response.data
+        this.roles = response.data.reult
       })
     },
     getCountries() {
@@ -756,7 +756,7 @@ export default {
     getRolebyId(Id)
     {
       RoleServices.getRolesById(Id).then((response)=>{
-        this.roles = response.data
+        this.roles = response.data.result
       })
     },
     getOrganizationByAlias(e)
