@@ -56,7 +56,7 @@
       <a-modal
       title="Confirm partner(s)"
       :visible="visible"
-      okText="Confirm"
+      :okText="translation.Confi_1_646"
       @ok="handleOk"
       @cancel="handleCancel"
     >

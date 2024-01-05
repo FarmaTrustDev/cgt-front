@@ -17,7 +17,7 @@
             v-if="!bag.isCollectionCompleted"
             type="primary"
             @click="completeBag(bag)"
-            >Complete this Sample</a-button
+            >{{translation.ComplThis_3_526}}</a-button
           >
         </div>
       </a-tab-pane>
@@ -39,6 +39,11 @@ export default {
   },
   data() {
     return { activeTab: null, showCompleteBag: true,  }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   watch: {
     bags(newBags, oldVal) {

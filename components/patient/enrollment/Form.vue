@@ -3,7 +3,7 @@
     <div> <FormActionButton
         v-if="isPatientExist"    
       @click="enableForm()"
-          text="Edit"
+          :text="translation.Edit_1_450"
         /></div>
     <a-spin :spinning="loading">
       <PatientDetail v-if="isPatientExist" :patient-detail="patient"/>
@@ -30,9 +30,9 @@
     </a-modal>
     <a-modal
       :visible="visibleModal"
-      ok-text="OK"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
-      
+      @cancel="handleValidationOk()"
     >
       <center>
         <p class="cross-img">
@@ -52,13 +52,13 @@
           <a-button
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
-            @click="handleOk()"
-            ><b>Ok</b></a-button
+            @click="handleValidationOk()"
+            ><b>{{translation.Ok_1_663}}</b></a-button
           >
         </footer>
       </center>
     </a-modal>
-    <a-modal :visible="visiblePatientDetailModal" ok-text="Confirm" width="800px" @cancel="submitModalResponse(false)" @ok="submitModalResponse(true)" >
+    <a-modal :visible="visiblePatientDetailModal" :ok-text="translation.Confi_1_646" :cancel-text="translation.cance_1_296" width="800px" @cancel="submitModalResponse(false)" @ok="submitModalResponse(true)" >
       <PatientConfirmModel :patient-detail="patientDetail" />
     </a-modal>
     </a-spin>
@@ -188,6 +188,9 @@ export default {
     },
     handleOk() {
       this.handleSignatureCancel()
+    },
+    handleValidationOk(){
+      this.visibleModal = false
     },
     handleSignatureOk() {
       this.visibleSignature = false

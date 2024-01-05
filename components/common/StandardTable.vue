@@ -53,8 +53,8 @@
         <span>{{ _getFormatMoment(record.collectionDateTime).format("DD/MM/YYYY") }}</span>
       </template>
       <template slot="active" slot-scope="record">
-        <span v-if="record">Accepted</span>
-        <span v-else>New Changes Submitted</span>
+        <span v-if="record">{{translation.Accep_1_798}}</span>
+        <span v-else>{{translation.NewChang_3_799}}</span>
       </template>
       <template slot="icon" slot-scope="icon, record">
         <a-icon type="cloud-upload" @click="clickIcon(record)" />
@@ -368,10 +368,10 @@
               'note',
               {
                 initialValue: note,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [{ required: true, message: translation.requi_1_336 }],
               },
             ]"
-            placeholder="Enter Note"
+            :placeholder="translation.Enternote_3_794"
           />
         </a-form-item>
         <a-form-item>
@@ -381,7 +381,7 @@
             html-type="submit"
             class="float-right"
           >
-            Submit
+            {{translation.Submi_1_248}}
           </a-button>
         </a-form-item>
       </a-form>
@@ -400,10 +400,10 @@
               'notes',
               {
                 initialValue: notes,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [{ required: true, message: translation.requi_1_336 }],
               },
             ]"
-            placeholder="Enter Note"
+            :placeholder="translation.Enternote_3_794"
           />
         </a-form-item>
         <a-form-item>
@@ -413,7 +413,7 @@
             html-type="submit"
             class="float-right"
           >
-            Submit
+          {{translation.Submi_1_248}}
           </a-button>
         </a-form-item>
       </a-form>
@@ -424,8 +424,7 @@
       @cancel="handleFlagModal(false, patient, treatment, false)"
     >
       <p>
-        Treatment is already in pause state, do you want to switch the status to
-        cancel ?
+        {{translation.Treatis_16_800}}
       </p>
     </a-modal>
     <a-modal
@@ -440,20 +439,20 @@
             <span class="line-right line"></span>
           </span>
         </p>
-        <p>Are you sure you want to delete this treatment?</p>
+        <p>{{translation.Areyou_9_801}}</p>
         <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="handleDeleteModal(false, '', '')"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn text-cancel"
             style="padding: 5px 50px"
             @click="deleteModal(false)"
           >
-            Cancel
+            {{translation.cance_1_296}}
           </a-button>
         </footer>
       </center>
@@ -471,14 +470,14 @@
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="hidePatient()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn text-cancel"
             style="padding: 5px 50px"
             @click="hidePatientModal(false, '')"
           >
-            Cancel
+          {{translation.cance_1_296}}
           </a-button>
         </footer>
       </center>
@@ -488,8 +487,7 @@
       @ok="handleModal()"
       @cancel="cancelModal(false)"
     >
-      The treatment is already in cancel state. Do you want to switch the status
-      to pause ?
+      {{translation.Thetreat_17_802}}
     </a-modal>
     <a-modal
       :visible="patientDeleteModal"
@@ -505,7 +503,7 @@
           </span>
         </p>
         <h3>
-          Are you sure you want to delete this patient (
+          {{translation.Areyou_9_803}} (
           {{ patientRecord.name }} ) ?
         </h3>
         <footer class="mt-6">
@@ -513,21 +511,21 @@
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="patientDeleteMethod()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn text-cancel"
             style="padding: 5px 50px"
             @click="patientDelete(false, '')"
           >
-            Cancel
+          {{translation.cance_1_296}}
           </a-button>
         </footer>
       </center>
     </a-modal>
     <a-modal
       :visible="visibleDeleteModal"
-      ok-text="OK"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       class="error-model"
       @cancel="stepDeleteModal(false, '')"
@@ -545,14 +543,14 @@
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="stepDelete()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn text-cancel"
             style="padding: 5px 50px"
             @click="stepDeleteModal(false, '')"
           >
-            Cancel
+          {{translation.cance_1_296}}
           </a-button>
         </footer>
       </center>

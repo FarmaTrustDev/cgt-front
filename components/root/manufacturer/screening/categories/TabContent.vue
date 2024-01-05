@@ -8,7 +8,7 @@
     <a-alert
       v-if="data.length <= 0"
       type="info"
-      message="There are no screening questions from the manufacturer"
+      :message="translation.Thereare_8_1004"
     >
     </a-alert>
     <a-list
@@ -47,7 +47,7 @@
     </a-list>
     <a-modal
       :visible="visibleDeleteModal"
-      ok-text="OK"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       class="error-model"
       @cancel="stepDeleteModal(false, '')"
@@ -65,7 +65,7 @@
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="stepDelete()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn"

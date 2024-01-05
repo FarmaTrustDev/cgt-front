@@ -5,7 +5,7 @@
         <a-row>
           <a-select
             show-search
-            placeholder="Select Treatment Type"
+            :placeholder="translation.SelecTreat_3_1133"
             option-filter-prop="children"
             class="search-dropdown mt-15"
             v-model="defaultValue"

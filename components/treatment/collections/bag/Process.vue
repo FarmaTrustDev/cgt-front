@@ -73,14 +73,14 @@
             type="primary"
             @click="handleCollectionSubmit(row)"
           >
-            Confirm
+            {{translation.Confi_1_646}}
           </button>
           <a-button
             v-if="row.isCollected && !treatment.manufacturerCollectionStatus"
             type="primary"
             class="btn-send-mail"
             @click="handleEmailModal(true, row)"
-            >Send Email</a-button
+            >{{translation.SendEmail_2_983}}</a-button
           >
         </template>
       </a-table>

@@ -2,7 +2,7 @@
   <a-skeleton :loading="loading">
     <FormActionButton
       v-if="!treatment.hospitalCollectionStatus"
-      text="Add Sample"
+      :text="translation.AddSampl_2_770"
       @click="addBags"
     />
     <Bag
@@ -22,7 +22,7 @@
       type="primary"
       :loading="loading"
       @click="markTreatmentCollectionComplete(bags)"
-      >Complete Collection Process
+      >{{translation.ComplColle_3_985}}
     </a-button>
     <a-modal 
       :visible="visibleSignature"
@@ -71,6 +71,11 @@ export default {
       treatmentData:[],
       visibleSignature:false,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.fetchBags()

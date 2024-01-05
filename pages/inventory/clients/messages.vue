@@ -195,7 +195,7 @@
         </a-col>                
               </a-card>
               <div slot="footer">
-                <a-button @click="handelCancel(false)">Cancel</a-button>
+                <a-button @click="handelCancel(false)">{{translation.cance_1_296}}</a-button>
                 <a-button type="primary" @click="handleOk(false)">Send Email</a-button>
 
       </div>

@@ -88,7 +88,7 @@
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="userDeleteMethod()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn"
@@ -96,7 +96,7 @@
             type="danger"
             @click="userDelete(false, '')"
           >
-            Cancel
+          {{translation.cance_1_296}}
           </a-button>
         </footer>
       </center>

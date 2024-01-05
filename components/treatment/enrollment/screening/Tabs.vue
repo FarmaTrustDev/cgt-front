@@ -3,7 +3,7 @@
     <a-alert
       v-if="isEmpty(categories)"
       type="info"
-      message="There are no screening questions from the manufacturer"
+      :message="translation.Thereare_8_1004"
     ></a-alert>
     <a-tabs  v-else v-model="activeKey" :loading="loading" hide-add type="editable-card">
       <a-tab-pane

@@ -26,7 +26,7 @@
     <FormActionButton text="Finish Scheduling" :is-created="isCreated" />
     <a-modal
       :visible="visibleModal"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       @cancel="handleOk()"
       @ok="handleOk()"

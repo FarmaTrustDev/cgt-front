@@ -86,7 +86,7 @@
                         rules: [
                         {
                             required: true,
-                            message: 'Required',
+                            message: translation.requi_1_336,
                         },
                         ],
                     },
@@ -114,7 +114,7 @@
                         rules: [
                         {
                             required: true,
-                            message: 'Required',
+                            message: translation.requi_1_336,
                         },
                         ],
                     },
@@ -273,7 +273,7 @@
         </a-card>
         <template v-if="kitPrint" #footer>
         
-        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelKitCancel(false)" >Cancel</a-button>
+        <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelKitCancel(false)" >{{translation.cance_1_296}}</a-button>
         <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow('kit')">Print</a-button>
         </template>
         </a-modal>
@@ -327,7 +327,7 @@
             </a-card>
             <template v-if="labPrint" #footer>
             
-            <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelCancel(false)" >Cancel</a-button>
+            <a-button key="back" class="footer-btn-label footer-btn-label-cancelled no-print" @click="handelCancel(false)" >{{translation.cance_1_296}}</a-button>
             <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow('label')">Print</a-button>
             </template>
         </a-modal>

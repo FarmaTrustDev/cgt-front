@@ -226,7 +226,7 @@
                                 rules: [
                                 {
                                     required: true,
-                                    message: 'Required',
+                                    message: translation.requi_1_336,
                                 },
                                 ],
                             },
@@ -254,7 +254,7 @@
                                 rules: [
                                 {
                                     required: true,
-                                    message: 'Required',
+                                    message: translation.requi_1_336,
                                 },
                                 ],
                             },

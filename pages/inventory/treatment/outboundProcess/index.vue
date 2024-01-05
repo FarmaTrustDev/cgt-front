@@ -254,7 +254,7 @@
                         rules: [
                         {
                             required: true,
-                            message: 'Required',
+                            message: translation.requi_1_336,
                         },
                         ],
                     },
@@ -282,7 +282,7 @@
                         rules: [
                         {
                             required: true,
-                            message: 'Required',
+                            message: translation.requi_1_336,
                         },
                         ],
                     },
@@ -659,7 +659,7 @@
             <a-button type="primary" @click="printWindow()">Print</a-button>
           </template>
           <template v-else #footer>
-            <a-button class="footer-btn-label footer-btn-label-cancelled no-print" @click="handleCourierModalOk(false)">Cancel</a-button>
+            <a-button class="footer-btn-label footer-btn-label-cancelled no-print" @click="handleCourierModalOk(false)">{{translation.cance_1_296}}</a-button>
             <a-button type="primary" @click="handleCourierModalOk(false)">OK</a-button>
           </template>
         </a-modal>

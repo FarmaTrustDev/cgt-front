@@ -13,7 +13,7 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 3)"
           >
-            Scheduling
+            {{translation.Sched_1_681}}
           </div>
           <scheduling :treatment="treatment" />
         </a-tab-pane>
@@ -24,7 +24,7 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId >= 6)"
           >
-            Collect Samples
+            {{translation.ColleSampl_2_288}}
           </div>
           <collections
             v-if="tabs.collectSamples != null"
@@ -39,7 +39,7 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 8)"
           >
-            Sample Shipping Detail
+            {{translation.SamplShipp_3_517}}
           </div>
           <div v-if="tabs.shippingDetails">
             <article class="article">
@@ -60,7 +60,7 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 13)"
           >
-            Treatment Delivery
+            {{translation.TreatDeliv_2_1007}}
           </div>
           <treatmentDelivery :treatment="treatment"
         /></a-tab-pane>
@@ -70,7 +70,7 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 14)"
           >
-            Treatment Collection
+            {{translation.TreatColle_2_1006}}
           </div>
           <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
@@ -80,7 +80,7 @@
             class="tab-title"
             :class="isCompleted(tabs.afterCare)"
           >
-            Aftercare
+            {{translation.After_1_758}}
           </div>
           <afterCare :treatment="treatment" />
         </a-tab-pane> </a-tabs

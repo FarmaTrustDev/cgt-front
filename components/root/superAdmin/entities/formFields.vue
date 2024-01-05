@@ -261,7 +261,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },

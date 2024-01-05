@@ -27,7 +27,7 @@
     </a-modal>
     <a-modal
       :visible="showMessage"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       
     >
