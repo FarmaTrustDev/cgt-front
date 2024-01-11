@@ -66,6 +66,11 @@ export default {
       isCreated: false,
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     if (!this.isEmpty(this.categoryId)) {
       this.isCreated = true
