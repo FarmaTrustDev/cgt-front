@@ -12,7 +12,7 @@
     </a-skeleton>
     <a-modal
       :visible="showModal"
-      title="Qr Code"
+      :title="translation.qrcode_2_55"
       @cancel="handleModal(false)"
       @ok="handleModal(false)"
     >
@@ -23,19 +23,7 @@
 <script>
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import StandardTable from '~/components/common/StandardTable'
-const columns = [
-  {
-    title: 'Bag Id',
-    dataIndex: 'puid',
-    key: 'puid',
-  },
-  {
-    title: 'Image',
-    dataIndex: 'qrUrl',
-    key: 'qrUrl',
-    scopedSlots: { customRender: 'image' },
-  },
-]
+// const columns = 
 export default {
   components: { StandardTable },
   props: {
@@ -47,11 +35,28 @@ export default {
   data() {
     return {
       bags: [],
-      columns,
+      columns:[
+        {
+          title: `${this.$store.getters.getTranslation.BagID_2_540}`,
+          dataIndex: 'puid',
+          key: 'puid',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Image_1_412}`,
+          dataIndex: 'qrUrl',
+          key: 'qrUrl',
+          scopedSlots: { customRender: 'image' },
+        },
+      ],
       loading: true,
       qrUrl: null,
       showModal: false,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.fetchBags()

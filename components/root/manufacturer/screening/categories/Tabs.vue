@@ -107,7 +107,7 @@ export default {
       showCategoryModal: false,
       loading: true,
       isCreated: false,
-      catagoryModalTitle: 'Add Group',
+      catagoryModalTitle: `${this.$store.getters.getTranslation.AddGroup_2_456}`,
       visibleDeleteModal: false,
       gotoLink: '/manufacturer/administration/screening',
       deleteStep:''
@@ -183,7 +183,7 @@ export default {
     },
     add() {
       this.setCurrentId(null)
-      this.catagoryModalTitle = 'Add Group'
+      this.catagoryModalTitle = this.translation.AddGroup_2_456
       this.handleCategoryModal(true)
     },
     getScreenTempStatus(){

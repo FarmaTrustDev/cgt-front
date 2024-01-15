@@ -2,7 +2,7 @@
   <page-layout
     :create="false"
     :loading="loading"
-    title="Treatment Collection Process"
+    :title="translation.TreatColle_3_1033"
     :bordered="borderCard"
   >
     <template slot="content">
@@ -23,6 +23,11 @@ export default {
       borderCard: false,
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {},
 }
 </script>

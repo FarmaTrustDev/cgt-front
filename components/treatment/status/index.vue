@@ -50,7 +50,7 @@
           </div>
           <alert
             v-else
-            message="Logistic provider has not approved the request yet"
+            :message="translation.Logisprovi_8_536"
             type="info"
           ></alert>
         </a-tab-pane>

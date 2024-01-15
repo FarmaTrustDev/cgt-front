@@ -1,6 +1,6 @@
 <template>
   <div class="qr_bag">
-    <h4 class="heading pl-0">Inbound Samples</h4>
+    <h4 class="heading pl-0">{{translation.InbouSampl_2_306}}</h4>
     <a-skeleton :loading="loading">
       <StandardTable
         v-if="bags.length > 0"
@@ -13,7 +13,7 @@
     </a-skeleton>
     <a-modal
       :visible="showModal"
-      title="Qr Code"
+      :title="translation.qrcode_2_55"
       @cancel="handleModal(false)"
       @ok="handleModal(false)"
     >
@@ -24,30 +24,7 @@
 <script>
 import TreatmentBagServices from '~/services/API/TreatmentBagServices'
 import StandardTable from '~/components/common/StandardTable'
-const columns = [
-  {
-    title: 'QR Code',
-    dataIndex: 'qrUrl',
-    key: 'qrUrl',
-    scopedSlots: { customRender: 'image' },
-  },
-  {
-    title: 'Bag Id',
-    dataIndex: 'puid',
-    key: 'puid',
-  },
-  {
-    title: 'Collection Date/Time',
-    dataIndex: 'collectionDateTime',
-    key: 'collDateTime',
-    scopedSlots:{customRender: 'collDateTime'}
-  },
-  {
-    title: 'Description',
-    dataIndex: 'notes',
-    key: 'description',
-  },
-]
+// const columns = 
 export default {
   components: { StandardTable },
   props: {
@@ -59,11 +36,39 @@ export default {
   data() {
     return {
       bags: [],
-      columns,
+      columns:[
+        {
+          title: `${this.$store.getters.getTranslation.qrcode_2_55}`,
+          dataIndex: 'qrUrl',
+          key: 'qrUrl',
+          scopedSlots: { customRender: 'image' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.BagID_2_540}`,
+          dataIndex: 'puid',
+          key: 'puid',
+        },
+        {
+          title: `${this.$store.getters.getTranslation['ColleDate/_2_830']}`,
+          dataIndex: 'collectionDateTime',
+          key: 'collDateTime',
+          scopedSlots:{customRender: 'collDateTime'}
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Descr_1_69}`,
+          dataIndex: 'notes',
+          key: 'description',
+        },
+      ],
       loading: true,
       qrUrl: null,
       showModal: false,
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.fetchBags()

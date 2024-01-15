@@ -54,7 +54,7 @@
       @ok="handlePopUpOk()"
     >
       <center>
-        <h2><strong>Confirm Changes</strong></h2>
+        <h2><strong>{{translation.ConfiChang_2_862}}</strong></h2>
         <h3 style="color: #1943AE;"><strong>{{changes.patientPUID}} - {{changes.patientName}}</strong></h3>
       </center>
         <a-row>
@@ -76,7 +76,7 @@
             class="ant-btn"
             @click="handlePopUpCancel()"
             style="padding: 5px 50px"
-            >Go Back</a-button
+            >{{translation.GoBack_2_866}}</a-button
           >
           <a-button
             class="ant-btn ant-btn-primary"

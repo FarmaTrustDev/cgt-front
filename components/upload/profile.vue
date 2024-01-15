@@ -11,7 +11,7 @@
       >
       <div v-if="fileList.length < 1">
         <a-icon type="plus" />
-        <div class="ant-upload-text">Upload</div>
+        <div class="ant-upload-text">{{translation.Uploa_1_984}}</div>
       </div>
     </a-upload>
   </div>
@@ -32,6 +32,11 @@ export default {
       previewImage: '',
       fileList: [],
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   watch: {
     defaultFileList: {

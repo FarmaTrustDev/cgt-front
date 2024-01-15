@@ -2,7 +2,7 @@
   <div>
     <a-skeleton :loading="loading">
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
-        <a-form-item label="Group Name">
+        <a-form-item :label="translation.GroupName_2_150">
           <a-input
             v-decorator="[
               'name',
@@ -17,7 +17,7 @@
               },
             ]"
             size="large"
-            placeholder="Group Name"
+            :placeholder="translation.GroupName_2_150"
           />
           <a-input
             v-decorator="[
@@ -66,6 +66,11 @@ export default {
       isCreated: false,
     }
   },
+  computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
+    },
   mounted() {
     if (!this.isEmpty(this.categoryId)) {
       this.isCreated = true

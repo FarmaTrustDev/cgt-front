@@ -45,7 +45,7 @@
         </div>
     </a-table>
     <a-modal
-      title="Scheduling Request"
+      :title="translation.Sched_1_681"
       :visible="showResponseModal"
       :confirm-loading="confirmLoading"
       :footer="null"
@@ -95,7 +95,7 @@ export default {
     return {
       column:[
   {
-    title: `Order ID`,
+    title: `${this.$store.getters.getTranslation.OrderID_2_1174}`,
     dataIndex: 'patientEnrollmentNumber',
     key: 'patientEnrollmentNumber',
     scopedSlots: { customRender: 'pUIDRender' },

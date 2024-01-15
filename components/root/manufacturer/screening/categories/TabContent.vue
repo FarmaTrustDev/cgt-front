@@ -59,7 +59,7 @@
             <span class="line-right line"></span>
           </span>
         </p>
-        <h3>Are you sure you want to delete this question ?</h3>
+        <h3>{{translation.Areyou_10_900}}</h3>
         <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
@@ -81,7 +81,7 @@
     <a-modal
       v-model="showScreeningModal"
       :destroy-on-close="true"
-      title="Category"
+      :title="translation.Categ_1_1154"
       :footer="null"
       @cancel="handleCategoryModal(false)"
     >

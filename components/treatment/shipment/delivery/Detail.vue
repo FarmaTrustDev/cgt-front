@@ -2,7 +2,7 @@
   <div v-if="!isEmpty(shipment)">
     <a-card :bordered="false" class="default-card delivery-info">
       <article class="article">
-        <h4 class="heading pl-0">Treatment Receiving</h4>
+        <h4 class="heading pl-0">{{translation.TreatRecei_2_326}}</h4>
       </article>
       <div v-if="!isEmpty(shipment)">
       <a-row>

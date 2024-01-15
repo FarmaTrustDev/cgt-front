@@ -537,7 +537,7 @@
             <span class="line-right line"></span>
           </span>
         </p>
-        <h3>Are you sure you want to delete this step ?</h3>
+        <h3>{{translation.Areyou_10_804}}</h3>
         <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"

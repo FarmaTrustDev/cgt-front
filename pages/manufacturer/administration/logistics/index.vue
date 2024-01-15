@@ -57,10 +57,11 @@
       title="Confirm partner(s)"
       :visible="visible"
       :okText="translation.Confi_1_646"
+      :cancelText="translation.cance_1_296"
       @ok="handleOk"
       @cancel="handleCancel"
     >
-      <h2>  Are you sure you want to associate the contract with selected logistics ?</h2>
+      <h2>  {{translation.Areyou_13_1034}}</h2>
     </a-modal>
   </div>
 </template>

@@ -10,14 +10,14 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your Category Name!',
+                    message: translation.Pleasinput_5_1155,
                   },
                 ],
                 initialValue: entity.name,
               },
             ]"
             size="large"
-            placeholder="Insert Category Name"
+            :placeholder="translation.InserCateg_3_1153"
           />
           <a-input
             v-decorator="[
@@ -30,7 +30,7 @@
             type="hidden"
           />
         </a-form-item>
-        <FormActionButton :loading="btnLoading" :is-created="isCreated">
+        <FormActionButton :loading="btnLoading" :is-created="isCreated" :custom-text="translation.Creat_1_123">
           <!-- <FormDeleteButton v-if="isCreated" slot="extra" @delete="onDelete" /> -->
         </FormActionButton>
       </a-form>
@@ -67,6 +67,11 @@ export default {
       fetchIdFromParams: false,
       isCreated: false,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     if (!this.isEmpty(this.categoryId)) {

@@ -2,7 +2,7 @@
   <div class="half-secondary">
     <div class="login">
       <a-card :bordered="false" title="Forgot Password">
-      <h3>Enter you email to reset you password</h3>
+      <h3>{{translation.Enteryou_7_790}}</h3>
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
           <a-form-item :label="translation['EmailAddre_2_140']">
@@ -11,12 +11,12 @@
                 'email',
                 {
                   rules: [
-                    { required: true, message: 'Please input your Email!' },
+                    { required: true, message: translation['EmailAddre_2_140'] },
                   ],
                 },
               ]"
               size="large"
-              placeholder="Email"
+              :placeholder="translation['EmailAddre_2_140']"
             />
           </a-form-item>
           <br>
@@ -27,9 +27,9 @@
               type="primary"
               html-type="submit"
               :loading="loading"
-              >Submit</a-button
+              >{{translation.Submi_1_248}}</a-button
             >
-            <h3 > <a @click="goto('/login')"> Back To Login</a> </h3>
+            <h3 > <a @click="goto('/login')"> {{translation.BackTo_3_791}}</a> </h3>
           </a-form-item>
         </a-form>
       </a-card>

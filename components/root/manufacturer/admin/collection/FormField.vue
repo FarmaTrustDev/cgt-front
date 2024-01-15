@@ -5,12 +5,12 @@
         v-decorator="[
           'name',
           {
-            rules: [{ required: true, message: 'Please input Process' }],
+            rules: [{ required: true, message: translation.ProceStep_2_486 }],
             initialValue: collection.name,
           },
         ]"
         size="large"
-        placeholder="Enter Process Step"
+        :placeholder="translation.EnterProce_3_1149"
       />
 
       <a-input
@@ -20,7 +20,7 @@
             rules: [
               {
                 required: true,
-                message: 'Please input your treatmentTypeId!',
+                message: translation.EnterProce_3_1149,
               },
             ],
             initialValue: treatmentType.id,

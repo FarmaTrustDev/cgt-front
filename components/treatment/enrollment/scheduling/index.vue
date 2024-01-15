@@ -131,7 +131,7 @@
             class="ant-btn"
             @click="handlePopUpCancel()"
             style="padding: 5px 50px"
-            >Go Back</a-button>
+            >{{translation.GoBack_2_866}}</a-button>
             <a-button
             class="ant-btn ant-btn-primary"
             @click="handlePopUpOk()"
@@ -211,7 +211,10 @@ export default {
     },
     filteredUsers() {
       return this.userData.filter(user => this.selectedUsers.includes(user.id));
-    }
+    },
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.validateIsCreated()

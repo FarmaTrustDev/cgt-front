@@ -135,7 +135,7 @@ export default {
           scopedSlots: { customRender: 'notes' },
         },
         {
-          title: 'Upload',
+          title: `${this.$store.getters.getTranslation.Uploa_1_984}`,
           scopedSlots: { customRender: 'uploader' },
         },
         {

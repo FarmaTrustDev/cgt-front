@@ -38,7 +38,7 @@
             class
             <a-step
               :key="1"
-              title="Pickup Shipment"
+              :title="translation.PickuShipm_2_861"
               :class="getTabClass(record.treatment.phaseId >= 8)"
               @click="stepClick(record, 1)"
             />
@@ -75,7 +75,7 @@ export default {
     return {
       column: [
         {
-          title: `Order ID`,
+          title: `${this.$store.getters.getTranslation.OrderID_2_1174}`,
           dataIndex: 'patientEnrollmentNumber',
           key: 'patientEnrollmentNumber',
           scopedSlots: { customRender: 'pUIDRender' },

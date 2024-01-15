@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="24">
         <a-form-item
-          label="Group Name:"
+          :label="translation.GroupName_2_150+':'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
@@ -14,12 +14,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'required!',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
             ]"
-            placeholder="Group Name"
+            :placeholder="translation.GroupName_2_150"
           /> </a-form-item
       ></a-col>
       <a-col :span="24">
