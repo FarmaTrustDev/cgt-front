@@ -404,7 +404,7 @@
               'userRoleId',
               {
                 initialValue:
-                  entity.userRoleId == undefined ? 0 : entity.userRoleId,
+                  entity.userRoleId === undefined ? 0 : entity.userRoleId,
                 rules: [
                   {
                     required: false,
@@ -706,7 +706,7 @@ export default {
     },
     fetchRoles(params = {}) {
       RoleServices.get(params).then((response) => {
-        this.roles = response.data.reult
+        this.roles = response.data.result
       })
     },
     getCountries() {
