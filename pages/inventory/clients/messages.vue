@@ -304,6 +304,11 @@ export default {
       showModal:false,
     }
   },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },
   mounted() {
     this.getClientId()
   },

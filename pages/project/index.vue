@@ -193,7 +193,10 @@
         userId: '',
       }
     },
-    computed: {  
+    computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
     },
     mounted() {
       this.fetch()
