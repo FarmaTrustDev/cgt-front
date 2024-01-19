@@ -4,38 +4,38 @@
       <a-card :bordered="false" title="Sign In To ATMPS">
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
-          <a-form-item label="Username">
+          <a-form-item :label="translation.Usern_1_1158">
             <a-input
               v-decorator="[
                 'username',
                 {
                   rules: [
-                    { required: true, message: 'Please input your Email!' },
+                    { required: true, message: translation.Pleasinput_4_1124 },
                   ],
                 },
               ]"
               size="large"
-              placeholder="Email/Username"
+              :placeholder="translation.Usern_1_1158"
             />
           </a-form-item>
-          <a-form-item label="Password">
+          <a-form-item :label="translation.Passw_1_681">
             <a-input-password
               v-decorator="[
                 'password',
                 {
                   rules: [
-                    { required: true, message: 'Please input your password' },
+                    { required: true, message: translation.Passw_1_681 },
                   ],
                 },
               ]"
               size="large"
-              placeholder="Password"
+              :placeholder="translation.Passw_1_681"
               type="password"
             />
           </a-form-item>
           <a-form-item>
             <a-checkbox>
-              Remember me
+              {{translation.Rememme_2_792}}
             </a-checkbox>
           </a-form-item>
           <a-form-item>
@@ -45,10 +45,10 @@
               type="primary"
               html-type="submit"
               :loading="loading"
-              >Sign In</a-button
+              >{{translation.SignIn_2_793}}</a-button
             >
           </a-form-item>
-          <div class="forgot-link"><a href="javascript:;" @click="goto(`/forgot`)">Forgot Password?</a></div>
+          <div class="forgot-link"><a href="javascript:;" @click="goto(`/forgot`)">{{translation.ForgoPassw_2_471}}?</a></div>
         </a-form>
       </a-card>
     </div>
@@ -76,6 +76,11 @@ export default {
       }),
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   methods: {
     onSubmit(e) {
       this.loading = true

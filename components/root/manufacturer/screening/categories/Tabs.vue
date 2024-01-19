@@ -41,7 +41,7 @@
     </a-modal>
     <a-modal
       :visible="visibleDeleteModal"
-      ok-text="OK"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       class="error-model"
       @cancel="stepDeleteModal(false, '')"
@@ -65,7 +65,7 @@
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="stepDelete()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
           class="ant-btn"
@@ -107,7 +107,7 @@ export default {
       showCategoryModal: false,
       loading: true,
       isCreated: false,
-      catagoryModalTitle: 'Add Group',
+      catagoryModalTitle: `${this.$store.getters.getTranslation.AddGroup_2_456}`,
       visibleDeleteModal: false,
       gotoLink: '/manufacturer/administration/screening',
       deleteStep:''
@@ -183,7 +183,7 @@ export default {
     },
     add() {
       this.setCurrentId(null)
-      this.catagoryModalTitle = 'Add Group'
+      this.catagoryModalTitle = this.translation.AddGroup_2_456
       this.handleCategoryModal(true)
     },
     getScreenTempStatus(){

@@ -1,5 +1,5 @@
 <template>
-  <page-layout :create="false" :loading="loading" title="Production Line">
+  <page-layout :create="false" :loading="loading" :title="translation.ProduLine_2_449">
     <template slot="content"> <productionLineCreate /> </template>
   </page-layout>
 </template>
@@ -13,5 +13,10 @@ export default {
       loading: false,
     }
   },
+  computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
+    },
 }
 </script>

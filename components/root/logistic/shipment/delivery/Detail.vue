@@ -5,7 +5,7 @@
     </article>
     <a-card :bordered="false" class="default-card grey-card ship-cards-body">
         <dl class="ant-row common-detail">
-          <h2 class="heading">Shipping Details</h2>
+          <h2 class="heading">{{translation.ShippDetai_2_314}}</h2>
           <div class="ant-col-24 d-flex">
             <dt>Dispatch Date:</dt>
             <dd>{{getDateFormat(scheduling.pickupDateTime)}}</dd>

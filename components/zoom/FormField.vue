@@ -18,7 +18,7 @@
               ],
             },
           ]"
-          placeholder="Description"
+          :placeholder="translation.Descr_1_69"
         />
       </a-form-item>
     </a-col>

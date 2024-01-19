@@ -1,5 +1,5 @@
 <template>
-  <page-layout :loading="loading" title="Production Line">
+  <page-layout :loading="loading" :title="translation.ProduLine_2_449">
     <template slot="content">
       <standardTable
         :columns="column"

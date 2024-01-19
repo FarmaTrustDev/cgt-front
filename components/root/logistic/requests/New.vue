@@ -45,7 +45,7 @@
         </div>
     </a-table>
     <a-modal
-      title="Scheduling Request"
+      :title="translation.Sched_1_681"
       :visible="showResponseModal"
       :confirm-loading="confirmLoading"
       :footer="null"
@@ -61,13 +61,15 @@
           :btn-type="getButtonType()"
           :is-created="false"
           ><span slot="extra" class="mr-5">
-            <a-button @click="handleModal(false)">Cancel</a-button>
+            <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
           </span>
         </FormActionButton>
       </a-form>
       <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
       >
         <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
       </a-modal>
@@ -93,7 +95,7 @@ export default {
     return {
       column:[
   {
-    title: `Order ID`,
+    title: `${this.$store.getters.getTranslation.OrderID_2_1174}`,
     dataIndex: 'patientEnrollmentNumber',
     key: 'patientEnrollmentNumber',
     scopedSlots: { customRender: 'pUIDRender' },
@@ -170,6 +172,9 @@ export default {
       this.isAccepted = isAccepted
       this.selectedRow = record
       this.handleModal(true)
+    },
+    handleOk() {
+      this.handleSignatureCancel()
     },
     getButtonText() {
       return this.isAccepted ? "Accept" : "Reject"

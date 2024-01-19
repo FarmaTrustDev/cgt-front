@@ -1,7 +1,7 @@
 <template>
   <page-layout
     :loading="loading"
-    title="Treatment Status"
+    :title="translation.TreatStatu_2_748"
     class="patient-page container"
     :create="false"
   >
@@ -53,7 +53,7 @@
         </a-card>
 
         <a-card v-else :bordered="false" class="mt-15 default-card h-tabs manf-detail-list">
-          <h1 class="heading"><b class="ml-5">Manufacture Detail</b></h1>
+          <h1 class="heading"><b class="ml-5">{{translation.ManufDetai_2_1141}}</b></h1>
           
           <BagDetail
             v-if="activeTab === 'INBOUND_SHIPMENT'"

@@ -2,7 +2,7 @@
   <a-skeleton :loading="loading">
     <FormActionButton
       v-if="!treatment.hospitalCollectionStatus"
-      text="Add Sample"
+      :text="translation.AddSampl_2_770"
       @click="addBags"
     />
     <Bag
@@ -22,11 +22,13 @@
       type="primary"
       :loading="loading"
       @click="markTreatmentCollectionComplete(bags)"
-      >Complete Collection Process
+      >{{translation.ComplColle_3_985}}
     </a-button>
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
       >
         <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
     </a-modal>
@@ -69,6 +71,11 @@ export default {
       treatmentData:[],
       visibleSignature:false,
     }
+  },
+  computed: {
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted() {
     this.fetchBags()
@@ -134,6 +141,9 @@ export default {
         treatment_id: this.treatment.globalId, view: 'after-care'
       })
       this.$emit('callback','after-care')
+    },
+    handleOk() {
+      this.handleSignatureCancel()
     },
     handleSignatureOk() {
       this.visibleSignature = false

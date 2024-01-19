@@ -1,7 +1,7 @@
 <template>
     <div>
       
-      <h3 class="page-title">My Schedule</h3>
+      <h3 class="page-title">{{translation.MySched_2_859}}</h3>
       <div class="grey-card">
         <calendar
           :handle-date-click="fetchEvents"
@@ -11,7 +11,7 @@
       </div>
         <a-modal
         :visible="visibleModalPopUp"
-        ok-text="Ok"
+        :ok-text="translation.Ok_1_663"
         :width="700"
         :footer="null"
         :closable="false"
@@ -47,11 +47,11 @@
               <a-col :span="15">
                 <a-card class="grey-card">
                   <a-card class="white-card">
-                    <a-row class="row-height"><a-col :span="10"><strong>Patient: </strong></a-col><a-col :span="14">{{patientPUID}} - {{patientName}}</a-col></a-row>
-                    <a-row class="row-height"><a-col :span="10"><strong>Room:</strong></a-col><a-col :span="14">{{roomName}}</a-col></a-row>
-                    <a-row class="row-height"><a-col :span="10"><strong>Treatment:</strong></a-col><a-col :span="14">{{treatmentTypeName}}</a-col></a-row>
-                    <a-row class="row-height"><a-col :span="10"><strong>Partner:</strong></a-col><a-col :span="14">{{ partner }}</a-col></a-row>
-                    <a-row class="row-height" v-if="isCollection"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('Do MMM YYYY') }}</a-col></a-row>
+                    <a-row class="row-height"><a-col :span="10"><strong>{{translation.Patie_1_184}}: </strong></a-col><a-col :span="14">{{patientPUID}} - {{patientName}}</a-col></a-row>
+                    <a-row class="row-height"><a-col :span="10"><strong>{{translation['Room:_1_865']}}</strong></a-col><a-col :span="14">{{roomName}}</a-col></a-row>
+                    <a-row class="row-height"><a-col :span="10"><strong>{{translation.Treat_1_863}}</strong></a-col><a-col :span="14">{{treatmentTypeName}}</a-col></a-row>
+                    <a-row class="row-height"><a-col :span="10"><strong>{{translation.Partn_1_864}}</strong></a-col><a-col :span="14">{{ partner }}</a-col></a-row>
+                    <a-row class="row-height" v-if="isCollection"><a-col :span="10"><strong>{{translation['ContaDate:_2_867']}}</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('Do MMM YYYY') }}</a-col></a-row>
                     <a-row class="row-height">
                       <a-col :span="24">
                         <center>
@@ -59,7 +59,7 @@
                             class="ant-btn ant-btn-primary"
                             @click="handlePopUpOk()"
                             style="padding: 2px 10px"
-                          >Find New Time</a-button>
+                          >{{translation.FindNew_3_868}}</a-button>
                         </center>
                       </a-col>
                     </a-row>

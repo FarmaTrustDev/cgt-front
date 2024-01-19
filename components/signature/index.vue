@@ -3,10 +3,10 @@
       <a-form :form="form" :layout="formLayout" @submit="onSubmit">
         <center>
           
-          <h2>Please provide Login Credentials</h2>
+          <h2>{{translation.Pleasprovi_4_957}}</h2>
 
           <a-alert v-if="showError" :message="error" banner closable />
-          <a-form-item label="Username">
+          <a-form-item :label="translation.Usern_1_400">
             <a-input
               v-decorator="[
                 'userName',
@@ -17,10 +17,10 @@
                 },
               ]"
               size="large"
-              placeholder="Email/Username"
+              :placeholder="translation.Usern_1_400"
             />
           </a-form-item>
-          <a-form-item label="Password">
+          <a-form-item :label="translation.Passw_1_681">
             <a-input-password
               v-decorator="[
                 'password',
@@ -31,7 +31,7 @@
                 },
               ]"
               size="large"
-              placeholder="Password"
+              :placeholder="translation.Passw_1_681"
               type="password"
             />
           </a-form-item>
@@ -39,11 +39,11 @@
               class="ant-btn"
               style="padding: 5px 50px"
               @click="handleCancel()"
-              >Cancel</a-button
+              >{{translation.cance_1_296}}</a-button
             >
             <a-form-item style="float:left; width: 50%;">
                 <FormActionButton
-                    text="Confirm"
+                    :text="translation.Confi_1_646"
                 />
                 <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
             </a-form-item>

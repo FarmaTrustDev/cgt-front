@@ -236,7 +236,7 @@
                 <a-button v-if="sampleData.status === 'New'"
                 type="primary"
                 @click="submitCOC(sampleData.id,'Canceled')"
-                >Cancel</a-button
+                >{{translation.cance_1_296}}</a-button
                 >
                 </div>
         </a-col>

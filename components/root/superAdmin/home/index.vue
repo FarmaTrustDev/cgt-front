@@ -32,7 +32,7 @@
               />
               <h4 class="heading-home">
                 {{ translation.Manag_1_455 }}
-                <strong class="strong"> All of the entities </strong>
+                <strong class="strong"> {{translation.Allof_4_943}} </strong>
               </h4>
             </a>
           </div>
@@ -46,7 +46,7 @@
               <h4 class="heading-home">
                 {{ translation.Manag_1_455 }}
                 <strong class="strong">
-                  Users
+                  {{translation.Users_1_504}}
                 </strong>
               </h4>
             </a>

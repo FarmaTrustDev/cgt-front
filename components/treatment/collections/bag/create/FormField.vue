@@ -40,7 +40,7 @@
       >
       </a-time-picker>
     </a-form-item>
-    <a-form-item label="Description" class="pb-0">
+    <a-form-item :label="translation.Descr_1_69" class="pb-0">
       <a-textarea
         v-decorator="[
           'notes',
@@ -53,7 +53,7 @@
             ],
           },
         ]"
-        placeholder="Description"
+        :placeholder="translation.Descr_1_69"
         style="width: 100%"
         size="large"
       ></a-textarea>

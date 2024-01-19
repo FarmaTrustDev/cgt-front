@@ -15,7 +15,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -41,7 +41,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -68,7 +68,7 @@
               'email',
               {
                 initialValue: patient.email,
-                rules: [{ required: true, message: 'Required' }],
+                rules: [{ required: true, message: translation.requi_1_336 }],
               },
             ]"
             type="email"
@@ -108,7 +108,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Required',
+                      message: translation.requi_1_336,
                     },
                   ],
                 },
@@ -161,7 +161,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -191,7 +191,7 @@
                 rules: [
                   {
                     required: '',
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -213,7 +213,7 @@
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
-          <a-select
+        <a-select
             v-decorator="[
               'bloodType',
               {
@@ -221,7 +221,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -253,7 +253,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -279,7 +279,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -369,13 +369,13 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
             ]"
             :auto-size="{ minRows: 2, maxRows: 5 }"
-            placeholder="Steet Number"
+            :placeholder="translation.StreeNumbe_2_653"
           />
         </a-form-item>
       </a-col>
@@ -396,7 +396,7 @@
               },
             ]"
             name="postCode"
-            placeholder="Postal Code "
+            :placeholder="translation['PostaCode:_2_649']"
             @blur="fetchCountryByPostCode"
           /> </a-form-item
       ></a-col>
@@ -412,7 +412,7 @@
               {
                 initialValue: patient.city,
                 rules: [
-                  { required: true, message: 'Required' },
+                  { required: true, message: translation.requi_1_336 },
                   {
                     pattern: /^[a-z&A-Z]+$/,
                     message: 'Please enter a valid city name',
@@ -439,7 +439,7 @@
                 rules: [{ message: '' }],
               },
             ]"
-            placeholder="Postal Code Address"
+            :placeholder="translation.PostaCode_3_651"
           /> </a-form-item
       ></a-col>
     </a-row>
@@ -459,7 +459,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
@@ -486,7 +486,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },

@@ -8,12 +8,12 @@
             {
               initialValue: entity.name,
               rules: [
-                { required: true, message: 'Please input  Production Line!' },
+                { required: true, message: translation.ProduLine_2_449 },
               ],
             },
           ]"
           size="large"
-          placeholder="Production Line"
+          :placeholder="translation.ProduLine_2_449"
         />
       </a-form-item>
 
@@ -47,6 +47,11 @@ export default {
       gotoLink: '/manufacturer/administration/productionLine',
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  },  
   mounted() {},
   methods: {},
 }

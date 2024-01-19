@@ -4,18 +4,18 @@
       <a-card :bordered="false" :title="title==='Activate' ? 'Activate Account' : 'Reset Password'">
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
-          <a-form-item label="Password">
+          <a-form-item :label="translation.Passw_1_681">
             <a-input-password
               v-decorator="[
                 'password',
                 {
                   rules: [
-                    { required: true, message: 'This field is required!' },
+                    { required: true, message: translation.requi_1_336 },
                   ],
                 },
               ]"
               size="large"
-              placeholder="Password"
+              :placeholder="translation.Passw_1_681"
               type="password"
             />
           </a-form-item>
@@ -25,7 +25,7 @@
                 'confirmPassword',
                 {
                   rules: [
-                    { required: true, message: 'This field is required.' },
+                    { required: true, message: translation.requi_1_336 },
                   ],
                 },
               ]"
@@ -57,9 +57,9 @@
               type="primary"
               html-type="submit"
               :loading="loading"
-              >Submit</a-button
+              >{{translation.Submi_1_248}}</a-button
             >
-            <h3 > <a @click="goto('/login')"> Back To Login</a> </h3>
+            <h3 > <a @click="goto('/login')">{{translation.BackTo_3_791}}</a> </h3>
           </a-form-item>
         </a-form>
       </a-card>

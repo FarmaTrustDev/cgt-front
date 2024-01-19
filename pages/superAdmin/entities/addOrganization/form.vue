@@ -3,7 +3,7 @@
     :create="false"
     :loading="loading"
     :bordered="false"
-    :title="organizationName + ' Details'"
+    :title="organizationName + ' ' + translation.Detai_1_346"
     class="container"
   >
     <template slot="content">
@@ -21,7 +21,7 @@
           <a-form-item :label-col="{ span: 24 }" :wrapper-col="{ span: 23 }">
           <FormActionButton
           :loading="loading"
-          custom-text="Save"
+          :custom-text="translation.save_1_462"
           :is-created="isCreated"
         />
       </a-form-item>
@@ -68,12 +68,20 @@ export default {
       }
     },
     computed: {
-    translation() {
-      return this.$store.getters.getTranslation
+      translation() {
+        return this.$store.getters.getTranslation
+      },
     },
-  },
+    watch:{
+      translation(newValues, oldValue){
+        if(newValues!==oldValue){
+          this.GetOrganizationTypeTranslation(this.$route.query.name)
+        }
+      },
+    },
   mounted() {
     this.checkCreated()
+    this.GetOrganizationTypeTranslation(this.$route.query.name)
   },
   methods:{
     handleChange(info) {
@@ -130,18 +138,45 @@ export default {
       if(name === 'Hospital')
       {
          this.organizationTypeAlias =  HOSPITAL_ALIAS
+         // this.organizationName = this.translation.Hospi_1_47
       }
       else if(name === 'Logistic')
       {
         this.organizationTypeAlias = LOGISTIC_ALIAS
+        // this.organizationName = this.translation.Manuf_1_89
       }
       else if(name === 'Manufacturer')
       {
         this.organizationTypeAlias = MANUFACTURER_ALIAS
+        // this.organizationName = this.translation.Logis_1_146
       }
       else if(name === 'SmartLab')
       {
         this.organizationTypeAlias = SMARTLAB_ALIAS
+        // this.organizationName = this.translation._1_440
+      }
+    },
+    GetOrganizationTypeTranslation(name)
+    {
+      if(name === 'Hospital')
+      {
+         // this.organizationTypeAlias =  HOSPITAL_ALIAS
+         this.organizationName = this.translation.Hospi_1_47
+      }
+      else if(name === 'Logistic')
+      {
+        // this.organizationTypeAlias = LOGISTIC_ALIAS
+        this.organizationName = this.translation.Logis_1_146
+      }
+      else if(name === 'Manufacturer')
+      {
+        // this.organizationTypeAlias = MANUFACTURER_ALIAS 
+        this.organizationName = this.translation.Manuf_1_89
+      }
+      else if(name === 'SmartLab')
+      {
+        // this.organizationTypeAlias = SMARTLAB_ALIAS
+        this.organizationName = this.translation._1_440
       }
     },
     upsert(values)
@@ -160,7 +195,7 @@ export default {
       this.loading = true
       this.apiService.create(values)
       .then((response) =>{
-          ManufacturerTreatmentServices.create({organizationId: response.data.id, treatmentTypesId: this.treatTypesId})
+          ManufacturerTreatmentServices.create({organizationId: response.data.result.id, treatmentTypesId: this.treatTypesId})
         this.success(response.message)
       })
       this.getOrganization();
@@ -171,7 +206,7 @@ export default {
       // const entityId = this.$route.params.id
       this.apiService.update(this.entityId,values)
       .then((response)=>{
-        ManufacturerTreatmentServices.create({organizationId: response.data.id, treatmentTypesId: this.treatTypesId})
+        ManufacturerTreatmentServices.create({organizationId: response.data.result.id, treatmentTypesId: this.treatTypesId})
         this.success(response.message)
       })
       this.getOrganization()
@@ -179,7 +214,7 @@ export default {
     },
     checkCreated()
     {
-      this.organizationName = this.$route.query.name;
+      // this.organizationName = this.$route.query.name;
       const entityId = this.$route.params.id
         if (this.isGuid(entityId)) {
           this.entityId = entityId

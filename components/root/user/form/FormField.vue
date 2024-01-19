@@ -16,11 +16,11 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your first name',
+                    message: translation.Pleasinput_5_1122,
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid name'
+                    message: translation.Pleasinput_5_1122
                   }
                 ],
               },
@@ -42,11 +42,11 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your last name',
+                    message: translation.Pleasinput_5_1123,
                   },
                   {
                     pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid name'
+                    message: translation.Pleasinput_5_1123
                   }
                 ],
               },
@@ -72,7 +72,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your email',
+                    message: translation.Pleasinput_4_1124,
                   },
                 ],
                 
@@ -97,7 +97,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your usrename',
+                    message: translation.Pleasinput_4_1125,
                   },
                 ],
               },
@@ -122,7 +122,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your office address',
+                    message: translation.OfficAddre_2_428,
                   },
                 ],
               },
@@ -145,7 +145,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your contact number',
+                    message: translation.Pleasinput_5_1126,
                   },
                 ],
               },
@@ -170,7 +170,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your what3words',
+                    message: translation.What3_1_432,
                   },
                 ],
               },
@@ -181,7 +181,7 @@
       </a-col>
       <a-col :span="12">
         <a-form-item
-          label="Department*:"
+          :label="translation.Depar_1_436 + '*:'"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
           class="pb-0"
@@ -194,16 +194,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your department',
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid name'
+                    message: translation.Pleasinput_4_1127,
                   }
                 ],
               },
             ]"
-            placeholder="Department"
+            :placeholder="translation.Depar_1_436"
           />
         </a-form-item>
       </a-col>
@@ -224,7 +220,7 @@
       <div v-if="users.name === 'Super Admin'">
       <a-col :span="4">
         <!-- :default-value=""  -->
-        <label>User Group*:</label>
+        <label>{{translation.UserGroup_2_518}} *:</label>
       </a-col>
       <a-col :span="20">
         <a-form-item>
@@ -236,7 +232,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please select organization type',
+                    message: translation.SelecOrgan_3_1145,
                   },
                 ],
               },
@@ -250,7 +246,7 @@
       </a-col>
       
       <a-col :span="10">
-        <a-form-item label="Entities">
+        <a-form-item :label="translation.Entit_1_945">
           <a-select
           v-decorator="[
               'organizationId',
@@ -259,12 +255,12 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please select organization',
+                    message: translation.Entit_1_945,
                   },
                 ],
               },
             ]"
-            placeholder="Entities"
+            :placeholder="translation.Entit_1_945"
           >
             <a-select-option v-for="org in organization" :key="org.id">
               {{ org.name }}
@@ -336,7 +332,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your role',
+                    message: translation.Pleasselec_4_1128,
                   },
                 ],
               },
@@ -386,7 +382,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your role',
+                    message: translation.Roles_1_442,
                   },
                 ],
               },
@@ -408,7 +404,7 @@
               'userRoleId',
               {
                 initialValue:
-                  entity.userRoleId == undefined ? 0 : entity.userRoleId,
+                  entity.userRoleId === undefined ? 0 : entity.userRoleId,
                 rules: [
                   {
                     required: false,
@@ -436,7 +432,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your postcode',
+                    message: translation.Postc_1_444,
                   },
                 ],
               },
@@ -461,16 +457,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your city',
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid city name'
+                    message: translation.Pleasinput_4_1129,
                   }
                 ],
               },
             ]"
-            placeholder="City"
+            :placeholder="translation.City_1_446"
           />
         </a-form-item>
       </a-col>
@@ -489,7 +481,7 @@
                 rules: [
                   {
                     required: false,
-                    message: 'Please input your location',
+                    message: translation.Locat_1_448,
                   },
                 ],
               },
@@ -537,16 +529,12 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your county',
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid county name'
+                    message: translation.Pleasinput_4_1130,
                   }
                 ],
               },
             ]"
-            placeholder="County"
+            :placeholder="translation.Count_1_657"
           />
         </a-form-item>
       </a-col>
@@ -565,7 +553,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Please select your country',
+                    message: translation.Pleasselec_4_1131,
                   },
                 ],
               },
@@ -718,7 +706,7 @@ export default {
     },
     fetchRoles(params = {}) {
       RoleServices.get(params).then((response) => {
-        this.roles = response.data
+        this.roles = response.data.result
       })
     },
     getCountries() {
@@ -756,7 +744,7 @@ export default {
     getRolebyId(Id)
     {
       RoleServices.getRolesById(Id).then((response)=>{
-        this.roles = response.data
+        this.roles = response.data.result
       })
     },
     getOrganizationByAlias(e)

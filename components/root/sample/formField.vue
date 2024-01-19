@@ -74,7 +74,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -133,7 +133,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -254,7 +254,7 @@
           </a-col>
             <a-col :span="12">
               <a-form-item class="selChange"
-                label="Production Line *:"
+                :label="translation.ProduLine_3_921"
                 :label-col="{ span: 8 }"
                 :wrapper-col="{ span: 12 }"
             >
@@ -388,7 +388,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },

@@ -15,14 +15,14 @@
           :tab="pane.name"
         >
           <TabContent :category="pane" />
-          <a-form-item class="text-right"><a-button type="primary" class="w-min-200" v-if="!active" @click="markAcceptance">Accept</a-button></a-form-item>
+          <a-form-item class="text-right"><a-button type="primary" class="w-min-200" v-if="!active" @click="markAcceptance">{{translation.Accep_1_278}}</a-button></a-form-item>
         </a-tab-pane>
         <!-- // adding button -->
       </a-tabs>
       <a-alert
       v-else
       type="info"
-      message="No screening question added by manufacturer">
+      :message="translation.Thereare_8_1004">
     </a-alert>
       <!-- Tabs -->
     </a-spin>

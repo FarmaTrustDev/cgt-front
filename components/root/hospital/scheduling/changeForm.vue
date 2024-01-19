@@ -1,7 +1,7 @@
 <template>
     <div>
       <a-spin :spinning="loading">
-      <h3 class="page-title">My Schedule</h3>
+      <h3 class="page-title">{{translation.MySched_2_859}}</h3>
       <div class="grey-card">
         <!-- <div v-if="loading" class="loading-overlay">
           <div class="loading-spinner"></div>
@@ -15,15 +15,15 @@
     </a-spin>
       <a-modal
       :visible="selectionModal"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :width="550"
       :footer="null"
       @cancel="handleSelectionCancel()"
       @ok="handleSelectionOk()"
     >
         <h3><strong>{{changes.patientName}} {{changes.patientPUID}}</strong></h3>
-        <h3>Appointment on {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }} at {{ tim }}</h3>
-        <h3>Please select from the following personnels: </h3>
+        <h3>{{translation.Appoion_2_860}} {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }} at {{ tim }}</h3>
+        <h3>{{translation.Pleasselec_6_861}} </h3>
         <a-row v-for="user in userData" :key="user.id" class="col-height">
           <a-col :span="12">
             <input type="checkbox" v-model="selectedUsers" :value="user.id" style="margin-right:15px; margin-top: 15px;">
@@ -38,8 +38,8 @@
             <footer>
                 <center>
                     
-                    <a-button class="ant-btn" @click="handleSelectionCancel()">Cancel</a-button>
-                    <a-button :disabled="isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()">Confirm</a-button>
+                    <a-button class="ant-btn" @click="handleSelectionCancel()">{{translation.cance_1_296}}</a-button>
+                    <a-button :disabled="isEmpty(selectedUsers)" class="ant-btn ant-btn-primary" @click="handleSelectionOk()">{{translation.Confi_1_646}}</a-button>
                 </center>
             </footer>
         </a-row>
@@ -47,14 +47,14 @@
     </a-modal>
     <a-modal
       :visible="visibleModalPopUp"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :width="700"
       :footer="null"
       @cancel="handlePopUpCancel()"
       @ok="handlePopUpOk()"
     >
       <center>
-        <h2><strong>Confirm Changes</strong></h2>
+        <h2><strong>{{translation.ConfiChang_2_862}}</strong></h2>
         <h3 style="color: #1943AE;"><strong>{{changes.patientPUID}} - {{changes.patientName}}</strong></h3>
       </center>
         <a-row>
@@ -76,13 +76,13 @@
             class="ant-btn"
             @click="handlePopUpCancel()"
             style="padding: 5px 50px"
-            >Go Back</a-button
+            >{{translation.GoBack_2_866}}</a-button
           >
           <a-button
             class="ant-btn ant-btn-primary"
             @click="handlePopUpOk()"
             style="padding: 5px 50px"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
         </footer>
       </center>
@@ -91,7 +91,7 @@
     
     <a-modal
         :visible="visibleBasicModalPopUp"
-        ok-text="Ok"
+        :ok-text="translation.Ok_1_663"
         :width="700"
         :footer="null"
         :closable="false"
@@ -139,7 +139,7 @@
                             class="ant-btn ant-btn-primary"
                             @click="handleBasicPopUpOk()"
                             style="padding: 2px 10px"
-                          >Find New Time</a-button>
+                          >{{translation.FindNew_3_868}}</a-button>
                         </center>
                       </a-col>
                     </a-row>
@@ -295,6 +295,7 @@
         this.loading = true
         const appoint = await AppointmentServices.get({ ...arg})
         const coll = await AppointmentServices.getCollection({ ...arg})    
+        console.log(isEmpty(this.changes)?'Empty':'Filled')
         const dt= new Date(this.changes.dated)
         const tm=_getFormatMoment(getMomentByStandardFormat(this.changes.dated)).format('HH:mm')
         const docData = await DoctorServices.getDoctorWithDays()

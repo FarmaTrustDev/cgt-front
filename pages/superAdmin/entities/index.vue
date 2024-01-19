@@ -1,21 +1,21 @@
 <template>
   <div class="mt-3 manf-treatment container" style="margin-top: 80px">
     <div class="page-header clearfix">
-      <h3 class="page-title pl-5 float-left">Entities</h3>
+      <h3 class="page-title pl-5 float-left">{{translation.Entit_1_945}}</h3>
     </div>
     <div class="h-tabs large-tabs rounded-table manf-treatment-body">
       <a-tabs type="card" :animated="false">
-        <a-tab-pane key="1" tab="Hospital">
-          <organization :alias="hospAlias" :field-name="'Hospital'" />
+        <a-tab-pane key="1" :tab="translation.Hospi_1_47">
+          <organization :alias="hospAlias" :field-name="'Hospital'" :title-text="translation.Hospi_1_47" />
         </a-tab-pane>
-        <a-tab-pane key="2" tab="Manufacturer">
-          <organization :alias="manfAlias" :field-name="'Manufacturer'" />
+        <a-tab-pane key="2" :tab="translation.Manuf_1_89">
+          <organization :alias="manfAlias" :field-name="'Manufacturer'" :title-text="translation.Manuf_1_89" />
         </a-tab-pane>
-        <a-tab-pane key="3" tab="Logistic">
-          <organization :alias="logAlias" :field-name="'Logistic'" />
+        <a-tab-pane key="3" :tab="translation.Logis_1_146">
+          <organization :alias="logAlias" :field-name="'Logistic'" :title-text="translation.Logis_1_146" />
         </a-tab-pane>
-        <a-tab-pane key="4" tab="SmartLab"> 
-          <organization :alias="smartLabAlias" :field-name="'SmartLab'" />
+        <a-tab-pane key="4" :tab="translation._1_440"> 
+          <organization :alias="smartLabAlias" :field-name="'SmartLab'" :title-text="translation._1_440" />
         </a-tab-pane>
       </a-tabs>
     </div>

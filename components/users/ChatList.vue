@@ -5,7 +5,7 @@
     <a-select
         class="
         page-search-input ant-selection-placeholder"
-        placeholder="Select Organization Type"
+        :placeholder="translation.SelecOrgan_3_1145"
         @change="onChange"
       >
         <a-select-option

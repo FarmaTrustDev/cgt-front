@@ -10,7 +10,7 @@
     >
       <div v-if="isChanged ? fileList.length<1 : defaultFileList.length<1">
         <a-icon type="camera" />
-        <div class="ant-upload-text">Upload</div>
+        <div class="ant-upload-text">{{translation.Uploa_1_984}}</div>
       </div>
     </a-upload>
     <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
@@ -36,6 +36,11 @@ export default {
       isChanged:false,
       extensionAllowed:true
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   mounted(){
     this.fileList=this.defaultFileList

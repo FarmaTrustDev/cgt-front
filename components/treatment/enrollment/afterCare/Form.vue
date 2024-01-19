@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3 class="page-title">Aftercare Notes</h3>
+    <h3 class="page-title">{{translation.AfterNotes_2_989}}</h3>
     <FormFields :treatment="treatment" :entity="entity"></FormFields>
-    <FormActionButton :is-created="isCreated" />
+    <FormActionButton :is-created="isCreated" :custom-text="translation.Creat_1_123" />
   </div>
 </template>
 <script>
@@ -27,6 +27,11 @@ export default {
       entity: {},
       manufacturerTreatment: {},
     }
+  },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
   },
   methods: {
     fetchEvents(arg, callback) {

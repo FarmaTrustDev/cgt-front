@@ -2,7 +2,7 @@
   <page-layout
     :loading="loading"
     :create="false"
-    title="Screening Question"
+    :title="translation.ScreeQuest_2_1173"
     class="container"
   >
     <template slot="content">

@@ -503,17 +503,17 @@ export default {
           key: 'clientName',
         },
         {
-          title: 'Project ID',
+          title: `${this.$store.getters.getTranslation.ProjeID_2_1177}`,
           dataIndex: 'projectId',
           key: 'projectId',
         },
         {
-          title: 'Project Name',
+          title: `${this.$store.getters.getTranslation.ProjeName_2_1046}`,
           dataIndex: 'projectName',
           key: 'projectName',
         },
         {
-          title: 'Execution - Expiry Date',
+          title: `${this.$store.getters.getTranslation['Arriv-_4_1047']}`,
           dataIndex: 'colDateDeliveryDate',
           scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
@@ -543,18 +543,18 @@ export default {
           key: 'clientName',
         },
         {
-          title: 'Project ID',
+          title: `${this.$store.getters.getTranslation.ProjeID_2_1177}`,
           dataIndex: 'projectId',
           key: 'projectId',
         },
         {
-          title: 'Project Name',
+          title: `${this.$store.getters.getTranslation.ProjeName_2_1046}`,
           dataIndex: 'projectName',
           key: 'projectName',
         },
 
         {
-          title: `Arrival - Expiry Date`,
+          title: `${this.$store.getters.getTranslation['Arriv-_4_1047']}`,
           dataIndex: 'colDateDeliveryDate',
           scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
@@ -574,12 +574,12 @@ export default {
       ],
       kitColumns: [
         {
-          title: `Kit ID`,
+          title: `${this.$store.getters.getTranslation.KitID_2_1178}`,
           dataIndex: 'sampleId',
           key: 'sampleId',
         },
         {
-          title: `Kit Name`,
+          title: `${this.$store.getters.getTranslation.KitName_2_1179}`,
           dataIndex: 'sampleName',
           key: 'sampleName',
         },
@@ -589,23 +589,23 @@ export default {
           key: 'clientName',
         },
         {
-          title: 'Project ID',
+          title: `${this.$store.getters.getTranslation.ProjeID_2_1177}`,
           dataIndex: 'projectId',
           key: 'projectId',
         },
         {
-          title: 'Project Name',
+          title: `${this.$store.getters.getTranslation.ProjeName_2_1046}`,
           dataIndex: 'projectName',
           key: 'projectName',
         },
 
         {
-          title: `Arrival - Expiry Date`,
+          title: `${this.$store.getters.getTranslation['Arriv-_4_1047']}`,
           dataIndex: 'colDateDeliveryDate',
           scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
         {
-          title: `Kit Shipping Details`,
+          title: `${this.$store.getters.getTranslation.KitShipp_3_1180}`,
           dataIndex: 'print',
           key: 'print',
           scopedSlots: { customRender: 'print' },
@@ -640,12 +640,12 @@ export default {
           key: 'hospital',
         },
         {
-          title: 'Project ID',
+          title: `${this.$store.getters.getTranslation.ProjeID_2_1177}`,
           dataIndex: 'projectId',
           key: 'projectId',
         },
         {
-          title: 'Project Name',
+          title: `${this.$store.getters.getTranslation.ProjeName_2_1046}`,
           dataIndex: 'projectName',
           key: 'projectName',
         },
@@ -735,16 +735,19 @@ export default {
         this.pendingColumns[1].title = newValues.SamplName_2_503
         this.pendingColumns[2].title = newValues.StoraArea_2_504
         this.pendingColumns[3].title = newValues.Clien_1_505
-        this.pendingColumns[4].title = newValues.ArrivDate_5_535
-        this.pendingColumns[5].title = newValues.Actio_1_220
+        this.pendingColumns[4].title = newValues.ProjeID_2_1177
+        this.pendingColumns[5].title = newValues.ProjeName_2_1046
+        this.pendingColumns[6].title = newValues['Arriv-_4_1047']
+        this.pendingColumns[7].title = newValues.Actio_1_220
 
-        /* this.newSampleColumns[0].title = newValues.SamplID_2_502
+        this.newSampleColumns[0].title = newValues.SamplID_2_502
         this.newSampleColumns[1].title = newValues.SamplName_2_503
         this.newSampleColumns[2].title = newValues.Clien_1_505
-        this.newSampleColumns[3].title = newValues.ArrivDate_5_535
-        this.newSampleColumns[4].title = newValues.Docum_1_507
-        this.newSampleColumns[5].title = newValues.Actio_1_220 */
-
+        this.newSampleColumns[3].title = newValues.ProjeID_2_1177
+        this.newSampleColumns[4].title = newValues.ProjeName_2_1046
+        this.newSampleColumns[5].title = newValues['Arriv-_4_1047']
+        this.newSampleColumns[6].title = newValues.Docum_1_507
+        this.newSampleColumns[7].title = newValues.Actio_1_220
         // this.phases[0].name = newValues.inboushipm_2_302
         // this.phases[1].name = newValues.ProceSampl_2_499
         // this.phases[2].name = newValues.StoreSampl_2_579

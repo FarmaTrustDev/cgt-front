@@ -44,7 +44,7 @@
                 rules: [
                   {
                     required: true,
-                    message: 'Required',
+                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -224,7 +224,7 @@
         ></a-col>
         <a-col :span="12">
           <a-form-item
-            label="Description *:"
+            :label="translation['Descr*:_2_912']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 23 }"
           >
@@ -351,7 +351,7 @@
         </a-col>
         <a-col :span="12">
           <a-form-item
-            label="Description *:"
+            :label="translation['Descr*:_2_912']"
             :label-col="{ span: 24 }"
             :wrapper-col="{ span: 23 }"
           >
@@ -585,7 +585,6 @@
       }
     },
     computed: {
-      
       translation() {
         return this.$store.getters.getTranslation
       },

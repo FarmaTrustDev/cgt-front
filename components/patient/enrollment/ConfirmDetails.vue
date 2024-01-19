@@ -1,43 +1,43 @@
 <template>
     <div>
-        <h1 class="title">Patient Details</h1>
+        <h1 class="title">{{translation.PatieDetai_2_673}}</h1>
         <!-- <h3> Confirm Patient Details </h3> -->
         <a-card>
             <a-row class="white-card-smart-lab">
-              <a-col :span="5" class="text-muted" >First Name: </a-col><a-col :span="7"><h3>{{patientDetail.firstName}}</h3></a-col>
-              <a-col :span="5" class="text-muted" >Last Name: </a-col><a-col :span="7"><h3>{{patientDetail.lastName}}</h3></a-col>
+              <a-col :span="5" class="text-muted" >{{translation['FirstName:_2_838']}} </a-col><a-col :span="7"><h3>{{patientDetail.firstName}}</h3></a-col>
+              <a-col :span="5" class="text-muted" >{{translation['LastName:_2_839']}} </a-col><a-col :span="7"><h3>{{patientDetail.lastName}}</h3></a-col>
             </a-row>
           <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >Email: </a-col><a-col :span="7"><h3>{{patientDetail.email}}</h3></a-col>
-            <a-col :span="5" class="text-muted" >Phone No: </a-col><a-col :span="7"><h3>{{patientDetail.phone}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.Email_1_840}} </a-col><a-col :span="7"><h3>{{patientDetail.email}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation['PhoneNo:_2_841']}} </a-col><a-col :span="7"><h3>{{patientDetail.phone}}</h3></a-col>
           </a-row>
           <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >DOB: </a-col><a-col :span="7"><h3>{{_getFormatMoment(getMomentByStandardFormat(patientDetail.dOB)).format('DD/MM/YYYY')}}</h3></a-col>
-            <a-col :span="5" class="text-muted" >Gender: </a-col><a-col :span="7"><h3>{{patientDetail.gender === 1 ? 'Male' : patientDetail.gender === 2 ? 'Female': 'N/A'}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation['DOB:_1_842']}} </a-col><a-col :span="7"><h3>{{_getFormatMoment(getMomentByStandardFormat(patientDetail.dOB)).format('DD/MM/YYYY')}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation['Gende_1_843']}} </a-col><a-col :span="7"><h3>{{patientDetail.gender === 1 ? 'Male' : patientDetail.gender === 2 ? 'Female': 'N/A'}}</h3></a-col>
           </a-row>
           <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >Blood Type: </a-col><a-col :span="7"><h3>{{patientDetail.bloodType !== null ? patientDetail.bloodType : 'N/A'}}</h3></a-col>
-            <a-col :span="5" class="text-muted" >Height: </a-col><a-col :span="7"><h3>{{patientDetail.height}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation['BloodType:_2_844']}} </a-col><a-col :span="7"><h3>{{patientDetail.bloodType !== null ? patientDetail.bloodType : 'N/A'}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation['Heigh_1_845']}} </a-col><a-col :span="7"><h3>{{patientDetail.height}}</h3></a-col>
           </a-row>
             <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >Weight: </a-col><a-col :span="7"><h3>{{patientDetail.weight !== null ? patientDetail.weight: 'N/A'}}</h3></a-col>
-            <a-col :span="5" class="text-muted" >Allergies: </a-col><a-col :span="7"><h3>{{patientDetail.allergies !== null ? patientDetail.allergies !== '' ? patientDetail.allergies: 'N/A': 'N/A'}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.Weigh_1_846}} </a-col><a-col :span="7"><h3>{{patientDetail.weight !== null ? patientDetail.weight: 'N/A'}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.Aller_1_847}} </a-col><a-col :span="7"><h3>{{patientDetail.allergies !== null ? patientDetail.allergies !== '' ? patientDetail.allergies: 'N/A': 'N/A'}}</h3></a-col>
           </a-row>
                 <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >Problem: </a-col><a-col :span="7"><h3>{{patientDetail.problem !== null ? patientDetail.problem !== '' ? patientDetail.problem: 'N/A' : 'N/A'}}</h3></a-col>
-            <a-col :span="5" class="text-muted" >Medication: </a-col><a-col :span="7"><h3>{{patientDetail.medication !== null ? patientDetail.medication !== '' ?  patientDetail.medication: 'N/A' : 'N/A'}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.Probl_1_848}} </a-col><a-col :span="7"><h3>{{patientDetail.problem !== null ? patientDetail.problem !== '' ? patientDetail.problem: 'N/A' : 'N/A'}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.Medic_1_849}} </a-col><a-col :span="7"><h3>{{patientDetail.medication !== null ? patientDetail.medication !== '' ?  patientDetail.medication: 'N/A' : 'N/A'}}</h3></a-col>
           </a-row>
                 <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >Post Code: </a-col><a-col :span="7"><h3>{{patientDetail.postCode}}</h3></a-col>
-            <a-col :span="5" class="text-muted" >City: </a-col><a-col :span="7"><h3>{{patientDetail.city}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation['PostCode:_2_850']}} </a-col><a-col :span="7"><h3>{{patientDetail.postCode}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation['City:_1_851']}} </a-col><a-col :span="7"><h3>{{patientDetail.city}}</h3></a-col>
           </a-row>
                 <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >Street: </a-col><a-col :span="7"><h3>{{patientDetail.street}}</h3></a-col>
-            <a-col :span="5" class="text-muted" >County: </a-col><a-col :span="7"><h3>{{patientDetail.county}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.Stree_1_852}} </a-col><a-col :span="7"><h3>{{patientDetail.street}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.Count_1_853}} </a-col><a-col :span="7"><h3>{{patientDetail.county}}</h3></a-col>
             <!-- <a-col :span="4" class="text-muted" >Email: </a-col><a-col :span="4">{{patientDetail.Email}}</a-col> -->
           </a-row>
           <a-row class="white-card-smart-lab">
-            <a-col :span="5" class="text-muted" >Address: </a-col><a-col :span="7"><h3>{{patientDetail.address}}</h3></a-col>
+            <a-col :span="5" class="text-muted" >{{translation.PostaAddre_2_450}} </a-col><a-col :span="7"><h3>{{patientDetail.address}}</h3></a-col>
           </a-row>
         </a-card>
       </div>
@@ -54,10 +54,15 @@
             loading: false,
           }
         },
+        computed: {
+          translation() {
+            return this.$store.getters.getTranslation
+          },
+        },
         methods: {
           getMomentByStandardFormat,
           _getFormatMoment,
-      },
+        },
       }
       </script>
       <style scoped>

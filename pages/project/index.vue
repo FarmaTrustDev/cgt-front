@@ -106,14 +106,14 @@
               <a-button
                 class="ant-btn ant-btn-primary"
                 style="padding: 5px 50px"
-                >Confirm</a-button
+                >{{translation.Confi_1_646}}</a-button
               >
               <a-button
                 class="ant-btn"
                 style="padding: 5px 50px"
                 type="danger"
               >
-                Cancel
+              {{translation.cance_1_296}}
               </a-button>
             </footer>
           </center>
@@ -193,7 +193,10 @@
         userId: '',
       }
     },
-    computed: {  
+    computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
     },
     mounted() {
       this.fetch()

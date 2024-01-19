@@ -53,6 +53,9 @@
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      class="error-model"
+      @cancel="handleOk()"
+      @ok="handleOk()"
     >
     <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
     </a-modal>
@@ -162,6 +165,9 @@ export default {
         })
         .catch(this.error)
         .finally(() => (this.loading = false))
+    },
+    handleOk() {
+      this.handleSignatureCancel()
     },
     getTreatmentId(treatmentid) {
       this.treatId = treatmentid

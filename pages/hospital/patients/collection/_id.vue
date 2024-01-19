@@ -1,7 +1,7 @@
 <template>
   <page-layout
     :loading="loading"
-    title="Treatment Status"
+    :title="translation.TreatStatu_2_748"
     class="patient-page container"
     :create="false"
   >
@@ -33,6 +33,11 @@ export default {
       fetchMethod: TreatmentServices.detail,
     }
   },
+  computed:{
+    translation() {
+      return this.$store.getters.getTranslation
+    },
+  }, 
   mounted() {
     this.registerFetchTreatment()
   },

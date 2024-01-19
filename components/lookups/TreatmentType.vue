@@ -2,7 +2,7 @@
   <div>
     <a-row class="pt-10">
       <a-col :span="12">
-        <h3 class="page-title">Select Treatment Type</h3>
+        <h3 class="page-title">{{translation.SelecTreat_3_1133}}</h3>
       </a-col>
 
       <a-col :span="12">
@@ -62,7 +62,7 @@ export default {
     return {
       treatmentTypes: {},
       typeLoading: false,
-      placeholder: 'Select Treatment Type'
+      placeholder: this.$store.getters.getTranslation.SelecTreat_3_1133
     }
   },
   mounted() {

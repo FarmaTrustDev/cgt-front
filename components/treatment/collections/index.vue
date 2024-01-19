@@ -2,11 +2,11 @@
   <a-skeleton :loading="loading">
     <div v-if="enabled" class="sample-shipping-detail">
       <h1 class="heading" style="display: inline-block">
-       <b> Sample Shipping Details</b>
+       <b> {{translation.SamplShipp_3_517}}</b>
       </h1>
       <FormActionButton
         v-if="!treatment.hospitalCollectionStatus"
-        text="Add Sample"
+        :text="translation.AddSampl_2_770"
         @click="addBags"
         style="float: right;"
       />
@@ -19,11 +19,13 @@
         type="primary"
         :loading="loading"
         @click="markHospitalCollectionComplete(bags)"
-        >Complete Collection Process
+        >{{translation.ComplColle_3_985}}
       </a-button>
       <a-modal 
       :visible="visibleSignature"
       :footer="null"
+      @cancel="handleOk()"
+      @ok="handleOk()"
       >
         <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
       </a-modal>
@@ -43,11 +45,11 @@
     </div>
     <a-alert
       v-else
-      message="Manufacturer has not accepted the treatment request yet"
+      :message="translation.Manufhas_8_988"
     ></a-alert>
     <a-modal
       :visible="visibleModal"
-      ok-text="Ok"
+      :ok-text="translation.Ok_1_663"
       :footer="null"
       @cancel="handleOk()"
       @ok="handleOk()"
@@ -64,13 +66,13 @@
             height="40%"
           /> -->
         </p>
-        <h3>Complete all steps before completing this sample.</h3>
+        <h3>{{translation.Complall_7_986}}</h3>
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"
             @click="handleOk()"
             style="padding: 5px 50px"
-            ><b>Ok</b></a-button
+            ><b>{{translation.Ok_1_663}}</b></a-button
           >
         </footer>
       </center>
@@ -109,6 +111,11 @@ export default {
       visibleSignature:false,
     }
   },
+  computed: {
+      translation() {
+        return this.$store.getters.getTranslation
+      },
+    },
   mounted() {
     this.fetchBags()
   },
@@ -140,7 +147,7 @@ export default {
     },
     // for handle modal
     handleOk() {
-      this.visibleModal = false
+      this.handleSignatureCancel()
     },
     markHospitalCollectionComplete(bags) {
       if (this.validateAllBagsCompleted(bags)) {

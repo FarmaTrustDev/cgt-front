@@ -2,7 +2,7 @@
   <page-layout
     :create="false"
     :loading="loading"
-    title="Treatment Collection Process"
+    :title="translation.TreatColle_3_1033"
   >
     <template slot="content">
       <create :collection-type="COLLECTION_TYPE.treatment.id" />

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-button type="primary" @click="goto('/superAdmin/entities/addOrganization/form?name='+buttonName)">+ Add {{buttonName}}</a-button>
+        <a-button type="primary" @click="goto('/superAdmin/entities/addOrganization/form?name='+orgType)">+ {{translation.Add_1_488}} {{buttonName}}</a-button>
         <a-table :columns="columns" :data-source="organization">
          <template slot="action" slot-scope="action">
           <a-dropdown>
@@ -10,7 +10,7 @@
             <a-menu slot="overlay">
               <a-menu-item key="1">
                 <a 
-                @click="goto(`/superAdmin/entities/addOrganization/${action}?name=`+buttonName)"
+                @click="goto(`/superAdmin/entities/addOrganization/${action}?name=`+orgType)"
                 >{{
                   translation.Edit_1_450
                 }}</a>
@@ -45,14 +45,14 @@
           </span>
         </p>
         <h3>
-          Are you sure you want to delete this user ?
+          {{translation.Areyou_10_942}}
         </h3>
         <footer class="mt-6">
           <a-button
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
             @click="orgDeleteMethod()"
-            >Confirm</a-button
+            >{{translation.Confi_1_646}}</a-button
           >
           <a-button
             class="ant-btn"
@@ -60,7 +60,7 @@
             type="danger"
             @click="orgDelete(false, '')"
           >
-            Cancel
+            {{translation.cance_1_296}}
           </a-button>
         </footer>
       </center>
@@ -84,30 +84,36 @@ export default {
             default:'',
             require: true
         },
+        titleText:{
+            type: String,
+            default:'',
+            require: true
+        },
     },
     data()
     {
         return{
          organization :[],
-         buttonName : this.fieldName,
+         buttonName : this.titleText,
+         orgType:this.fieldName,
         columns:[
         {            
-            title: this.fieldName,
+            title: this.titleText,
             dataIndex:'name',
             key:'name'
         },
         {
-            title:'Contact',
+            title:`${this.$store.getters.getTranslation.Conta_1_542}`,
             dataIndex: 'phone',
             key: 'contact'
         },
         {
-            title: 'Email',
+            title: `${this.$store.getters.getTranslation.Email_1_511}`,
             dataIndex:'email',
             key:''
         },
         {
-          title: ``,
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'globalId',
           scopedSlots: {
             customRender: 'action',
@@ -126,6 +132,15 @@ export default {
     },
   },
     watch:{
+      translation(newValues, oldValue){
+        if(newValues!==oldValue){
+          this.columns[0].title=this.titleText
+          this.columns[1].title=newValues.Conta_1_542
+          this.columns[2].title=newValues.Email_1_511
+          this.columns[3].title=newValues.Actio_1_220
+          this.buttonName = this.titleText
+        }
+      },
       organization(newValue, oldValue)
       {
         if(newValue !== oldValue)
@@ -147,20 +162,20 @@ export default {
       this.orgId = record
       this.orgDeleteModal = e
     },
-        fetch()
-        {
-            OrganizationServices.get({ organizationTypeAlias: this.alias })
-                .then((response) => {
-                    this.organization = response.data
-                    })
-        },
-        deleteUser(id)
-        {
-          OrganizationServices.destroy(id)
-          .then((response)=>{
-            this.fetch();
-            })
-        }
+    fetch()
+    {
+        OrganizationServices.get({ organizationTypeAlias: this.alias })
+            .then((response) => {
+                this.organization = response.data
+                })
+    },
+    deleteUser(id)
+    {
+      OrganizationServices.destroy(id)
+      .then((response)=>{
+        this.fetch();
+        })
+    }
     }
 }
 </script>
