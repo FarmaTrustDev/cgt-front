@@ -70,7 +70,7 @@
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"
-            @click="handleOk()"
+            @click="handleModelOk()"
             style="padding: 5px 50px"
             ><b>{{translation.Ok_1_663}}</b></a-button
           >
@@ -148,6 +148,9 @@ export default {
     // for handle modal
     handleOk() {
       this.handleSignatureCancel()
+    },
+    handleModelOk() {
+      this.visibleModal = false
     },
     markHospitalCollectionComplete(bags) {
       if (this.validateAllBagsCompleted(bags)) {
