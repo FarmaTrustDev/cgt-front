@@ -34,11 +34,12 @@ import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 // import AppointmentServices from '~/services/API/AppointmentServices'
 import nullHelper from '~/mixins/null-helpers'
+import routeHelpers from '~/mixins/route-helpers'
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
   },
-  mixins: [nullHelper, notifications],
+  mixins: [nullHelper, notifications,routeHelpers],
   props: {
     manufacturerTreatment: {
       default: () => ({}),
@@ -170,6 +171,7 @@ export default {
         )
           .then((response) => {
             this.success(response.message)
+            this.goto('/manufacturer/schedules')
           })
           .catch(this.error)
           .finally(() => (this.loading = false))
