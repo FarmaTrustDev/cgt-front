@@ -2,7 +2,7 @@
   <a-skeleton :loading="loading">
     <div v-if="enabled" class="sample-shipping-detail">
       <h1 class="heading" style="display: inline-block">
-       <b> {{translation.SamplShipp_3_517}}</b>
+       <b> Treatment Details</b>
       </h1>
       <FormActionButton
         v-if="!treatment.hospitalCollectionStatus"
