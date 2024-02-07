@@ -1005,8 +1005,8 @@
         this.record=JSON.parse(this.$route.query.record)
         console.log(this.record)
         // const dateParts = this.record.collectionDateDeliveryDate.split('-');
-        const arrivalDates = this.record.arrivalDate
-        const expiryDates = this.record.expiryDate
+        const arrivalDates =new Date(this.record.arrivalDate)
+        const expiryDates = new Date(this.record.expiryDate)
         const obj={
           sampleId:this.record.sampleId,
           sampleName:this.record.sampleName,
