@@ -39,7 +39,7 @@
             <!-- @Mehdi please optimize the code  -->
             <a-button
               class="ant-btn ant-btn-primary error-ok-btn"
-              @click="handleOk()"
+              @click="handleModelOk()"
               ><b>{{translation.Ok_1_663}}</b></a-button
             >
             <!-- @Mehdi please optimize the code  -->
@@ -129,6 +129,9 @@ export default {
     },
     handleOk() {
       this.handleSignatureCancel()
+    },
+    handleModelOk() {
+      this.visibleModal = false
     },
     handleSignatureOk() {
       this.visibleSignature = false

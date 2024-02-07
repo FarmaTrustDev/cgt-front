@@ -41,7 +41,7 @@ import tabsHelpers from '~/mixins/tabs-helpers'
 const steps = [
   { id: 1, name: 'Hospital', alias: 'Hospital', completedStep: 4, minStep:1 },
   { id: 2, name: 'Logistics', alias: 'OutBoundLogistic', completedStep: 8, minStep:5 },
-  { id: 3, name: 'Manufacturer', alias: 'Manufacturer', completedStep: 9, minStep:9 },
+  { id: 3, name: 'Laboratory', alias: 'Manufacturer', completedStep: 9, minStep:9 },
   { id: 4, name: 'Logistics', alias: 'InBoundLogistic', completedStep: 13,minStep:10 },
   { id: 5, name: 'Treatment', alias: 'Treatment', completedStep: 14,minStep:14 },
 ]

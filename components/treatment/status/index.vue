@@ -1,6 +1,6 @@
 <template>
   <a-row :gutter="18" class="mt-15">
-    <a-card :bordered="false" class="default-card default-tabs">
+    <a-card :bordered="false" class="default-card default-tabs">{{  }}
       <a-tabs
         :active-key="activeTab"
         type="card"
@@ -13,7 +13,12 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 3)"
           >
+          <span v-if="treatment.treatmentTypeName==='IVF/ICSI'">
             {{translation.Sched_1_681}}
+          </span>
+          <span v-else>  
+            {{translation.Sched_1_681}}
+          </span>
           </div>
           <scheduling :treatment="treatment" />
         </a-tab-pane>
@@ -24,7 +29,12 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId >= 6)"
           >
+          <span v-if="treatment.treatmentTypeName==='IVF/ICSI'">
+            Sample Collection
+          </span>
+          <span v-else>  
             {{translation.ColleSampl_2_288}}
+          </span>
           </div>
           <collections
             v-if="tabs.collectSamples != null"
@@ -39,7 +49,12 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 8)"
           >
+          <span v-if="treatment.treatmentTypeName==='IVF/ICSI'">
+            Storage
+          </span>
+          <span v-else>  
             {{translation.SamplShipp_3_517}}
+          </span>
           </div>
           <div v-if="tabs.shippingDetails">
             <article class="article">
@@ -54,16 +69,6 @@
             type="info"
           ></alert>
         </a-tab-pane>
-        <a-tab-pane key="5" :disabled="!tabs.treatmentDelivery">
-          <div
-            slot="tab"
-            class="tab-title"
-            :class="isCompleted(treatment.phaseId > 13)"
-          >
-            {{translation.TreatDeliv_2_1007}}
-          </div>
-          <treatmentDelivery :treatment="treatment"
-        /></a-tab-pane>
         <a-tab-pane key="treatment" :disabled="!tabs.treatmentCollection">
           <div
             slot="tab"
@@ -74,6 +79,17 @@
           </div>
           <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
+        <a-tab-pane key="5" :disabled="!tabs.treatmentDelivery">
+          <div
+            slot="tab"
+            class="tab-title"
+            :class="isCompleted(treatment.phaseId > 13)"
+          >
+            {{translation.TreatDeliv_2_1007}}
+          </div>
+          <treatmentDelivery :treatment="treatment"
+        /></a-tab-pane>
+        
         <a-tab-pane key="after-care" :disabled="!tabs.afterCare">
           <div
             slot="tab"

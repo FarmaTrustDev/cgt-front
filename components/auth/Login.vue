@@ -4,7 +4,7 @@
       <a-card :bordered="false" title="Sign In To ATMPS">
         <a-form :form="form" layout="horizontal" @submit="onSubmit">
           <a-alert v-if="showError" :message="error" banner closable />
-          <a-form-item :label="translation.Usern_1_1158">
+          <a-form-item label="Username">
             <a-input
               v-decorator="[
                 'username',
@@ -18,7 +18,7 @@
               :placeholder="translation.Usern_1_1158"
             />
           </a-form-item>
-          <a-form-item :label="translation.Passw_1_681">
+          <a-form-item label="Password">
             <a-input-password
               v-decorator="[
                 'password',
@@ -35,7 +35,7 @@
           </a-form-item>
           <a-form-item>
             <a-checkbox>
-              {{translation.Rememme_2_792}}
+              Remember me
             </a-checkbox>
           </a-form-item>
           <a-form-item>
@@ -45,10 +45,10 @@
               type="primary"
               html-type="submit"
               :loading="loading"
-              >{{translation.SignIn_2_793}}</a-button
+              >Sign In</a-button
             >
           </a-form-item>
-          <div class="forgot-link"><a href="javascript:;" @click="goto(`/forgot`)">{{translation.ForgoPassw_2_471}}?</a></div>
+          <div class="forgot-link"><a href="javascript:;" @click="goto(`/forgot`)">Forgot Password?</a></div>
         </a-form>
       </a-card>
     </div>

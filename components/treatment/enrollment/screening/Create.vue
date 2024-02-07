@@ -48,7 +48,7 @@
           <a-button
             class="ant-btn ant-btn-primary"
             style="padding: 5px 50px"
-            @click="handleOk()"
+            @click="handleOkErrorShow()"
             >Ok</a-button
           >
         </footer>
@@ -154,6 +154,9 @@ export default {
     },
     handleOk() {
       this.handleSignatureCancel()
+    },
+    handleOkErrorShow() {
+      this.showMessage = false
     },
   },
 }

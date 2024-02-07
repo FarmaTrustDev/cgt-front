@@ -64,6 +64,7 @@ export default {
           dataIndex: 'name',
           key: 'name',
           width: 150,
+          scopedSlots:{customRender: 'patientName'}
         },
         {
           title: `${this.$store.getters.getTranslation._1_442}`,

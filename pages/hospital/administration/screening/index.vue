@@ -28,7 +28,7 @@ export default {
       loading: false,
       column: [
         {
-          title: `${this.$store.getters.getTranslation.Manuf_1_89}`,
+          title: `Laboratory`,
           dataIndex: 'manufacturer',
           key: 'hospitals',
           scopedSlots: { customRender: 'nameTags' },

@@ -30,7 +30,10 @@
       <template slot="name" slot-scope="name">
         <strong>{{ name }}</strong>
       </template>
-
+      <template slot="patientName" slot-scope="patientName, patients">
+        <span v-if="patients.treatments!==undefined ? patients.treatments[0].treatmentTypeName==='IVF/ICSI' ? true : false : false" style="color:#ca8787;"><strong>{{ patientName }}</strong></span>
+        <span v-else><strong>{{ patientName }}</strong></span>
+      </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
           <a-tooltip :title="'TreatmentID: ' + treatment.treatmentPUID">
