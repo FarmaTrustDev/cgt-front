@@ -22,7 +22,6 @@
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
-      class="error-model"
       @cancel="handleOk()"
       @ok="handleOk()"
     >
