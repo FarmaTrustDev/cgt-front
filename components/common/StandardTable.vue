@@ -31,7 +31,8 @@
         <strong>{{ name }}</strong>
       </template>
       <template slot="patientName" slot-scope="patientName, patients">
-        <span v-if="patients.treatments!==undefined ? patients.treatments[0].treatmentTypeName==='IVF/ICSI' ? true : false : false" style="color:#ca8787;"><strong>{{ patientName }}</strong></span>
+       
+        <span v-if="hasTreatmentOfType(patients.treatments,'IVF/ICSI')" style="color:#ca8787;"><strong>{{ patientName }}</strong></span>
         <span v-else><strong>{{ patientName }}</strong></span>
       </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
@@ -608,6 +609,7 @@ export default {
       showDeleteModal: false,
       showPauseModal: false,
       showFlagModal: false,
+      isExist:false,
       phases: PATIENT_TREATMENT_PHASES,
       treatmentCancelReason: '',
       treatmentPauseReason: '',
@@ -786,6 +788,24 @@ export default {
         this.goto(`/hospital/patients/${patient.globalId}?view=Consent`, {
           treatment_id: treatment.globalId,
         })
+    },
+     iFTreatmentExist(treatmnt){
+      this.isExist = false
+      if(treatmnt.length !== 0)
+      {
+        const foundElement = treatmnt.find(item => item.treatmentTypeName === 'IVF');
+        if(foundElement !== undefined){
+          this.isExist = true
+        }
+      }
+      return this.isExist;
+    },
+    hasTreatmentOfType(treatments, treatmentType) {
+        if (treatments.length !== 0) {
+          const foundElement = treatments.find(item => item.treatmentTypeName === treatmentType);
+          return foundElement !== undefined;
+        }
+        return false;
     },
     stepClick(patient, treatment, phase) {
       // insane logic
