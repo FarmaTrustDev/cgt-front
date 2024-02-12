@@ -91,6 +91,8 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 import imagesHelper from '~/mixins/images-helper'
 import routeHelpers from '~/mixins/route-helpers'
+import SchedulingServices from '~/services/API/SchedulingServices'
+import ShipmentServices from '~/services/API/ShipmentServices'
 export default {
   components: { BagForm, Bag, Signature },
   mixins: [notifications, imagesHelper, routeHelpers],
@@ -107,7 +109,10 @@ export default {
       COLLECTION_TYPE,
       loading: true,
       schedule: [],
+      schId:0,
       bagData:[],
+      treatTN:'',
+      currentDateTime:null,
       visibleSignature:false,
     }
   },
@@ -118,6 +123,9 @@ export default {
     },
   mounted() {
     this.fetchBags()
+    this.fetchSchedul()
+    this.getTreatData()
+    this.getCurrentDateTime()
   },
   methods: {
     handleModal(show) {
@@ -140,10 +148,20 @@ export default {
           .finally((this.loading = false))
       }
     },
+    fetchSchedul()
+    {
+      SchedulingServices.getByTreatment(this.treatment.id).then((response=>{
+        this.schId=response.data.id
+      }))
+
+    },
     onCreate(data) {
       this.handleModal(false)
       // this.fetchBags()
       this.bags = data.data
+    },
+    getCurrentDateTime() {
+      this.currentDateTime = new Date();
     },
     // for handle modal
     handleOk() {
@@ -151,6 +169,11 @@ export default {
     },
     handleModelOk() {
       this.visibleModal = false
+    },
+    getTreatData(){
+      TreatmentServices.getById(this.treatment.globalId).then((response)=>{
+        this.treatTN = response.data.treatmentTypeName
+      })
     },
     markHospitalCollectionComplete(bags) {
       if (this.validateAllBagsCompleted(bags)) {
@@ -179,8 +202,30 @@ export default {
               EVENT_FETCH_TREATMENT_DETAIL,
               this.treatment.globalId
             )
+            if(this.treatTN === 'IVF/ICSI'){
+              const dat={accepted:true,isLogistic:true}
+              SchedulingServices.markScheduleRequest(this.schId, dat).then(
+              (response) => {
+                const dat = {LogisticUserName:'Steph',origin:'clinic',pickupAt:this.currentDateTime,senderName:'Christy Walter'}
+                ShipmentServices.pickupCreate(this.schId,dat)
+                  .then((response) => {
+                    const dt = {ReceiverName:'Steph',ReceivingNote:'Test',deliveryAt:this.currentDateTime}
+                    ShipmentServices.deliveryCreate(this.schId, dt)
+                      .then((response) => {
+                        this.success('Submitted successfully')
+                        this.$emit('onCreate', response)
+                      })
+
+                    this.goto('/hospital/patients')
+                    this.success('Collection step has been completed')
+                  })
+                
+              }
+            )
+          }else{
             this.goto('/hospital/patients')
             this.success('Collection step has been completed')
+          }
           }
         )
     },

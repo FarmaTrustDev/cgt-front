@@ -203,6 +203,7 @@ export default {
       collectionDate:'',
       collTimeModal:false,
       visibleSignature:false,
+      treatTN:''
     }
   },
   computed:{
@@ -219,6 +220,8 @@ export default {
   mounted() {
     this.validateIsCreated()
     this.getUrl()
+    this.getTreatData()
+    console.log(this.treatment)
     // this.getUsers()
     // this.getDoctorsWithDays()
     // this.getBasicInfo()
@@ -231,7 +234,11 @@ export default {
         this.url=this.user.userProfileImageUrl.replace(/['"]+/g, '')
       }
     },
-    
+    getTreatData(){
+      TreatmentServices.getById(this.treatment.globalId).then((response)=>{
+        this.treatTN = response.data.treatmentTypeName
+      })
+    },
     getDoctorsWithDays(){
       const dt= new Date(this.startDate)
       const tm=_getFormatMoment(getMomentByStandardFormat(this.startDate)).format('HH:mm')
@@ -350,7 +357,18 @@ export default {
       })
     },
     afterCreate(values) {
-      this.gotoPatient()
+      console.log(values)
+      if(this.treatTN === 'IVF/ICSI'){
+      const dat={accepted:true,isManufactuerer:true}
+      SchedulingServices.markScheduleRequest(values.data.id, dat).then(
+            (response) => {
+              this.gotoPatient()
+            }
+          )
+      }
+      else{
+       this.gotoPatient()
+      }
     },
     afterUpdate(values) {
       this.gotoPatient()
@@ -426,7 +444,9 @@ export default {
           roomName:'A2',
         }
         ).then((response)=>{
-          this.upsert(this.values)
+          console.log(response.data.result)
+          const dat = this.upsert(this.values)
+          console.log(dat)
         })
     },
     handleOk() {
