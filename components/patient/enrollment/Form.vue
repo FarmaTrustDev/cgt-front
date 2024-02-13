@@ -7,7 +7,7 @@
         /></div>
     <a-spin :spinning="loading">
       <PatientDetail v-if="isPatientExist" :patient-detail="patient"/>
-    <a-form v-else :form="form" :layout="formLayout" @submit="onSubmit">
+    <a-form v-else-if="!isPartnerRequired" :form="form" :layout="formLayout" @submit="onSubmit">
       
       <FormFields   :form="form" :is-created="isCreated" :patient="patient" :country-iso="countryIso"  @getPhoneNumber ="getPhoneNumber" />
       <a-form-item class="pr-2 mt-15">
@@ -21,7 +21,7 @@
     </a-form>
 
 
-    <a-form v-if="isPartnerRequired" :form="formPartner" :layout="formLayout" @submit="onSubmitPartner">
+    <a-form v-else-if="isPartnerRequired" :form="formPartner" :layout="formLayoutPartner" @submit="onSubmitPartner">
       
       <FormFields   :form="formPartner" :is-created="false" :patient="patient" :country-iso="countryIso"  @getPhoneNumber ="getPhoneNumber" />
       <a-form-item class="pr-2 mt-15">
@@ -126,6 +126,7 @@ export default {
       visibleModal: false,
       visibleSignature:false,
       formLayout: 'vertical',
+      formLayoutPartner: 'vertical',
       patient: {},
       entityId: null,
       isPartnerRequired:false,
@@ -133,6 +134,7 @@ export default {
       isPatientExist: false,
       treatmentData: {},
       isFemale:false,
+      femalePartnerId:'',
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
       }),
@@ -216,6 +218,24 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           values.phone = '(' + values.countryCode  + ') '+  values.phone
+          values.imageUrl = this.femalePartnerId
+          this.patientDetail = values
+          this.visibleDetialModal(true)
+          // this.upsert(values)
+        } else {
+          this.visibleModal = true
+          this.loading = false
+        }
+      })
+    },
+    onSubmitPartner(e) {
+      this.loading = true
+      e.preventDefault()
+      this.formPartner.validateFields((err, values) => {
+        if (!err) {
+          values.phone = '(' + values.countryCode  + ') '+  values.phone
+          // alert(this.femalePartnerId)
+          values.imageUrl = this.femalePartnerId
           this.patientDetail = values
           this.visibleDetialModal(true)
           // this.upsert(values)
@@ -275,6 +295,8 @@ export default {
         .then((response) => {
           if (response.data.globalId != null) {
             if(response.data.gender===2){
+              // alert(response.data.enrollmentNumber)
+              this.femalePartnerId=response.data.enrollmentNumber
               this.isFemale=true 
             }else{
             const formData = new FormData()
