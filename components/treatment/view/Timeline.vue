@@ -2,7 +2,7 @@
   <a-skeleton :loading="loading">
     <a-timeline>
       <a-timeline-item
-        v-for="step in steps"
+        v-for="step in sortedSteps"
         :key="step.id"
         :color="isExcursionTab === true ? step.id === maxCompletedStep ? 'red' : step.isCompleted ? 'green' : 'grey' : step.isCompleted ? 'green' : 'grey'"
       >
@@ -15,7 +15,7 @@
         >
           <!-- {{ step }} -->
           <a-row>
-            <a-col :span="12">
+            <a-col :span="16">
               <span class="left">
                 <span class="step-title" :class="getTimelineClass(step.id,step.name)">{{ step.name }}</span>
                 <span class="date-time">{{
@@ -23,7 +23,7 @@
                 }}</span>
               </span>
             </a-col>
-            <a-col :span="12">
+            <a-col :span="8">
               <div v-if="step.isCompleted" class="right d-block">
                 <strong class="step-title d-block" :class="getTimelineClass(step.id,'')"> by: {{ step.by }}</strong>
                 <span class="organization" :class="getTimelineClass(step.id,'')">{{ step.organizationName }}</span>
@@ -71,7 +71,12 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
-    
+    sortedSteps() {
+      if (!this.steps) {
+        return [];
+      }
+      return this.steps.slice().sort((a, b) => a.id - b.id);
+    }
   },
   watch: {
     translation(newValues, oldValue) {

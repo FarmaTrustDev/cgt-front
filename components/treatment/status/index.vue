@@ -69,7 +69,7 @@
             type="info"
           ></alert>
         </a-tab-pane>
-        <a-tab-pane key="treatment" :disabled="!tabs.treatmentCollection">
+        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI'"  key="treatment" :disabled="!tabs.treatmentCollection">
           <div
             slot="tab"
             class="tab-title"
@@ -79,7 +79,7 @@
           </div>
           <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
-        <a-tab-pane key="5" :disabled="!tabs.treatmentDelivery">
+        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI'" key="5"  :disabled="!tabs.treatmentDelivery">
           <div
             slot="tab"
             class="tab-title"
