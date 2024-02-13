@@ -165,7 +165,7 @@ export default {
       if (!this.collections) {
         return [];
       }
-      return this.collections.slice().sort((a, b) => a.id - b.id);
+      return this.collections.slice().sort((a, b) => a.collectionId - b.collectionId);
     }
   },
   methods: {
