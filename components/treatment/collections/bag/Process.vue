@@ -4,7 +4,7 @@
       <a-table
         :columns="columns"
         :row-key="(record) => record.id"
-        :data-source="collections"
+        :data-source="sortedCollections"
         :pagination="false"
         :loading="loading"
         class="square-table collect-sample-data"
@@ -161,6 +161,12 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    sortedCollections() {
+      if (!this.collections) {
+        return [];
+      }
+      return this.collections.slice().sort((a, b) => a.id - b.id);
+    }
   },
   methods: {
     handleCollectionSubmit(collection) {
