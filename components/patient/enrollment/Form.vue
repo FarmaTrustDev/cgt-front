@@ -167,6 +167,7 @@ export default {
     handlePartnerCancel(){
       // this.isPartnerRequired=false
       this.isFemale=false
+      this.goto(`/hospital/patients`)
     },
     handlePartnerOk(){
       this.isPartnerRequired=true
