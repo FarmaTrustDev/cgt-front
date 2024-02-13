@@ -294,14 +294,14 @@ export default {
     create(values) {
       PatientServices.create(values)
         .then((response) => {
-          if (response.data.globalId != null) {
-            if(response.data.gender===2){
-              // alert(response.data.enrollmentNumber)
-              this.femalePartnerId=response.data.enrollmentNumber
+          if (response.data.result.globalId != null) {
+            // console.log(response.data)
+            if(response.data.result.gender===2){
+              this.femalePartnerId=response.data.result.enrollmentNumber
               this.isFemale=true 
             }else{
             const formData = new FormData()
-            formData.append('patientId', response.data.globalId)
+            formData.append('patientId', response.data.result.globalId)
             TreatmentServices.create(formData)
               .then((res) => {
                 // if(res.data.gender===2){
@@ -310,7 +310,7 @@ export default {
                 // }else{
                   this.sendData(res.data.globalId)
                   this.goto(
-                    `/hospital/patients/${response.data.globalId}?view=Consent`,
+                    `/hospital/patients/${response.data.result.globalId}?view=Consent`,
                     { treatment_id: res.data.globalId }
                   )
                 // }
