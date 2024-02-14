@@ -90,7 +90,7 @@
           <treatmentDelivery :treatment="treatment"
         /></a-tab-pane>
         
-        <a-tab-pane key="after-care" :disabled="!tabs.afterCare">
+        <a-tab-pane key="after-care" :disabled="!tabs.shippingDetails">
           <div
             slot="tab"
             class="tab-title"
