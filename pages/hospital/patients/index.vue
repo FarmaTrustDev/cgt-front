@@ -3,7 +3,7 @@
     <div class="page-header clearfix mt-15">
       <!-- <h3 class="page-title pl-5 float-left">{{ translation.patient_list }}</h3> -->
       <div class="page-title float-left" style="width: 50%">
-        IVF Patient List 
+        Patient List 
       </div>
       <div style="width: 25%; display: inline">
         <a-button
