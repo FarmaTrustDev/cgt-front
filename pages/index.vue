@@ -4,7 +4,7 @@
       <strong>{{ translation['Mydashb_2_7'] }}</strong>
     </h1>
     <manufacturerHome
-      v-if="isManufacturer() || isScientist() || isReceptionist()"
+      v-if="isManufacturer() || isScientist() || isReceptionist() || isPharma()"
     />
     <hospitalHome v-if="isHospital() || isDoctor() || isNurse()" />
     <logisticHome v-if="isLogistic()" class="logistic_board"/>

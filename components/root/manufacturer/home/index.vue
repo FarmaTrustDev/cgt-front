@@ -3,7 +3,7 @@
     <a-card class="grey-card" :bordered="false">
       <a-row class="">
         <!-- left side tabs -->
-        <a-col :md="10" v-if="isManufacturer()">
+        <a-col :md="10" v-if="isManufacturer() || isPharma()">
           <div class="home-tab">
             <a
               href="javascript:;"
