@@ -55,6 +55,10 @@ export default {
         },
         getStoreUserDetails() {
             return this.$store.getters.getUser
-        }
+        },
+        isPharma() {
+            const user = this.getStoreUserDetails();
+            return user.roleName === "PHARMA";
+        },
     },
 }

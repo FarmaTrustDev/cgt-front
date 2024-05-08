@@ -152,6 +152,7 @@ export default {
     {
       SchedulingServices.getByTreatment(this.treatment.id).then((response=>{
         this.schId=response.data.id
+       
       }))
 
     },
@@ -202,7 +203,7 @@ export default {
               EVENT_FETCH_TREATMENT_DETAIL,
               this.treatment.globalId
             )
-            if(this.treatTN === 'IVF/ICSI'){
+            // if(this.treatTN === 'IVF/ICSI'){
               const dat={accepted:true,isLogistic:true}
               SchedulingServices.markScheduleRequest(this.schId, dat).then(
               (response) => {
@@ -222,10 +223,12 @@ export default {
                 
               }
             )
-          }else{
-            this.goto('/hospital/patients')
-            this.success('Collection step has been completed')
-          }
+          // }
+          // else{
+          //   alert("ok")
+          //   this.goto('/hospital/patients')
+          //   this.success('Collection step has been completed')
+          // }
           }
         )
     },

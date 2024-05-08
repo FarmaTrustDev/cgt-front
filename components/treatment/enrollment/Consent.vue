@@ -91,7 +91,7 @@ export default {
       fileList: [],
       allowedExtensions: DOCUMENT_EXTENSIONS,
       checkBoxError: false,
-      treatId: '',
+      treatId: null,
       TREATMENT_PHASES,
       visibleSignature:false,
       consentDetail:{},
