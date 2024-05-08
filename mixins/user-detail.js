@@ -16,6 +16,10 @@ export default {
             const user = this.getStoreUserDetails();
             return user.roleName === "MANUFACTURER_ADMIN";
         },
+        isPharma() {
+            const user = this.getStoreUserDetails();
+            return user.roleName === "PHARMA";
+        },
         isScientist() {
             const user = this.getStoreUserDetails();
             return user.roleName === "SCIENTIST_TYPE";

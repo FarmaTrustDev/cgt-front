@@ -23,7 +23,7 @@
             <div>
               <span class="title">
                 {{ isEmpty(translation[menu.name]) ? menu.name : translation[menu.name] }} 
-                <a-badge v-if="((isEmpty(translation[menu.name]) ? menu.name : translation[menu.name])=== 'QPApproval') && pendingCount !== 0" :count="approval" /> 
+                <a-badge v-if="((isEmpty(translation[menu.name]) ? menu.name : translation[menu.name]) === 'QPApproval') && pendingCount !== 0" :count="approval" /> 
               </span>
             </div>
           </div>
