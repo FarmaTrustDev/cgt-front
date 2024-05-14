@@ -29,35 +29,51 @@
           </a-tooltip>
       </template>
       <span slot="action" slot-scope="text, record">
-        <div v-if="showButton(record)">
-          <a-button
-            type="primary"
-            :loading="loading"
-            dashed
-            @click="showConfirm(record, true)"
-          >
-            {{ translation.Accep_1_278 }}
-          </a-button>
-          <a-button
-            class="new-treatment-btn"
-            :loading="loading"
-            dashed
-            @click="showConfirm(record, false)"
-          >
-            {{ translation.Rejec_1_280 }}
-          </a-button>
-        </div>
-        <div v-else-if="showTreamentStatus(record)">
-          <a-badge v-if = record.treatment.isDead>
-            Patient Dead
-          </a-badge>
-          <a-badge v-if = record.treatment.isHold>
-             Patient is on hold
-          </a-badge>
-          <a-badge v-if = record.treatment.isCancel>
-            Patient has been canceled
-          </a-badge>
-        </div>
+       
+        
+          <div v-if="showButton(record)">
+            <div v-if="isPharma()">
+              <a-button
+                  type="primary"
+                  :loading="loading"
+                  dashed
+                  @click="goToDetail(record)"
+                >
+              View Detail
+              </a-button>
+          </div>
+            <div v-else>
+              <a-button
+                type="primary"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, true)"
+              >
+                {{ translation.Accep_1_278 }}
+              </a-button>
+              <a-button
+                class="new-treatment-btn"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, false)"
+              >
+                {{ translation.Rejec_1_280 }}
+              </a-button>
+            </div>
+          </div>
+          <div v-else-if="showTreamentStatus(record)">
+            <a-badge v-if = record.treatment.isDead>
+              Patient Dead
+            </a-badge>
+            <a-badge v-if = record.treatment.isHold>
+              Patient is on hold
+            </a-badge>
+            <a-badge v-if = record.treatment.isCancel>
+              Patient has been canceled
+            </a-badge>
+          </div>
+       
+
       </span>
       <span slot="status" slot-scope="text, record">
         <div v-if="showButton(record)">
@@ -111,6 +127,7 @@ import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import withTableCrud from '~/mixins/with-table-crud'
+import userDetail from '~/mixins/user-detail'
 import Signature from '~/components/signature'
 import {
   _getPastMomentStandardFormatted,
@@ -124,7 +141,7 @@ export default {
     Filters,
     Signature
   },
-    mixins: [withTableCrud],
+    mixins: [withTableCrud,userDetail],
   props:{
     searchByType: {type : String, default: ''}
   },
@@ -212,6 +229,10 @@ export default {
     }
   }, 
   methods: {
+    goToDetail(record){
+      console.log(record)
+      this.goto('/hospital/patients/'+record.patient.globalId+'?treatment_id='+ record.treatment.globalId +'&view=Screening&dta='+JSON.stringify(record))
+    },
     showConfirm(record, isAccepted) {
       this.isAccepted = isAccepted
       this.selectedRow = record
