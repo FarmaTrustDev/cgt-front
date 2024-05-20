@@ -106,7 +106,7 @@
                <h3 class="ml-10 mt-10">Humidity: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head ">
-               <h3 class="ml-10 "> {{ sampleData.humidity }}</h3>  
+               <h3 class="ml-10 "> 70%</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="ml-10 mt-25">Temperature: </h3>  
@@ -124,7 +124,7 @@
                <h3 class="ml-10 mt-10">Monitoring Sensors: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 "> {{ sampleData.monitoringSensor }}</h3>  
+               <h3 class="ml-10 "> Bluetooth/Rifid Blumfort</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Maintenance Schedule</b></h3>
@@ -133,19 +133,19 @@
                <h3 class=" mt-10">Maintenance Date: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head ">
-               <h3 class="ml-10 "> {{ sampleData.maintenanceDate }}</h3>  
+               <h3 class="ml-10 "> 12th January 2024</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="mt-20">Last Maintenance: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 "> {{ sampleData.maintenanceDueDate }}</h3>  
+               <h3 class="ml-10 "> 21 February 2024</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="mt-20">Next Maintenance Due: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 ">{{ sampleData.maintenanceNextDate }}</h3>  
+               <h3 class="ml-10 ">16th June 2024</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Quality Control and Integrity</b></h3>
@@ -154,13 +154,13 @@
                <h3 class=" mt-10">Sample Quality: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head ">
-               <h3 class="ml-10 "> {{ sampleData.sampleQuality }}</h3>  
+               <h3 class="ml-10 "> Good - no issues</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="mt-10">Contamination Checks: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 "> {{ sampleData.contaminationCheck }}</h3>  
+               <h3 class="ml-10 "> 14 January 2024, 14 February 2024</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Sample Usage</b></h3>

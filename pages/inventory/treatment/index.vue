@@ -169,7 +169,8 @@
                 /></a-button>
                 <a-button v-else @click="openPopViewModal(true, print)">
                   <img :src="getImageUrl('Icons/Union.svg')"
-                /></a-button>
+                />
+                </a-button>
               </template>
               <span slot="action" slot-scope="text, record">
                 <div class="treatment-steps">
@@ -239,7 +240,7 @@
         >
           <a-card class="grey-card-smart-lab">
             <status-detail
-              :heading-title="translation.AdvanRecei_3_648"
+              heading-title="Outbound Items Shipmnet"
               :status="translation.Compl_1_250"
             />
             <hr class="mt-15" />
@@ -254,7 +255,7 @@
               :singleLineValue="'684792563-9570-68746596'"
               :customDisplayData="customDisplayData"
             />
-            <h2 class="mt-15">{{ translation.IncomMater_2_674 }}</h2>
+            <h2 class="mt-15">Outbound Materials</h2>
 
             <a-card class="white-card-smart-lab">
               <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">
@@ -607,12 +608,7 @@ export default {
           dataIndex: 'colDateDeliveryDate',
           scopedSlots: { customRender: 'colDateDeliveryDate' },
         },
-        {
-          title: `${this.$store.getters.getTranslation.KitShipp_3_1180}`,
-          dataIndex: 'print',
-          key: 'print',
-          scopedSlots: { customRender: 'print' },
-        },
+        
         {
           title: `${this.$store.getters.getTranslation.Actio_1_220}`,
           dataIndex: 'action',
