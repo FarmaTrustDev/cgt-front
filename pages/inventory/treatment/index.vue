@@ -48,6 +48,9 @@
                   @click="openViewModal(record)"
                   ><img :src="getImageUrl('Icons/Union.svg')"
                 /></a-button>
+                <a-button v-if="print.projectId=='7157'" @click="openPopScanViewModal(true, print)">
+                  <img :src="getImageUrl('Icons/Union.svg')"
+                /></a-button>
                 <a-button v-else @click="openPopViewModal(true, print)">
                   <img :src="getImageUrl('Icons/Union.svg')"
                 /></a-button>
@@ -473,7 +476,7 @@ export default {
       loading: false,
       treatmentTypes: [],
       filters: {},
-      qrUrl: '/Uploads/DocumentURL/shipping notice.png',
+      qrUrl: '/Uploads/DocumentURL/scan_copy.jpeg',
       showModalImage: false,
       showModal: false,
       phases: SMART_LAB_TREATMENT_PENDING_PHASES,
@@ -914,6 +917,9 @@ export default {
         this.customDisplayData[10].value=record.hospital
       }
       this.showModal = val
+    },
+    openPopScanViewModal(show, print){
+      this.showModalImage = show
     },
     getTranslationData() {
       this.phases[0].name = this.translation.inboushipm_2_302
