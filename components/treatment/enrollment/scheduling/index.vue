@@ -5,6 +5,7 @@
         <Form v-if="!isScheduled" :form="form" :treatment="treatment" :rejection="rejection" />
         <Detail v-else  :entity="entity" />
       </a-form>
+            
     </a-spin>
     <a-modal 
       :visible="visibleSignature"

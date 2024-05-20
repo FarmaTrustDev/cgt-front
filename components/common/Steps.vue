@@ -18,6 +18,7 @@
   </span>
 </template>
 <script>
+import userDetail from '~/mixins/user-detail'
 export default {
   props: {
     treatment: { type: Object, default: () => ({}) },
@@ -26,9 +27,15 @@ export default {
     currentStep: { type: Function, default: () => [] },
     gotoView: { type: Function, default: () => [] },
   },
+  mixins: [userDetail],
   data() {
     return { current: 0 }
   },
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    },
+    },
   methods: {
     getClass(phase, treatment) {
       let className = phase.name
@@ -52,12 +59,13 @@ export default {
       return this.current
     },
     emitGotoView(patient, treatment, phase) {
+      if(this.user.roleName!=='PHARMA'){
       if (this.current >= phase.id) {
         return this.gotoView(patient, treatment, phase)
       } else {
         return false
       }
-
+    }
       // this.gotoView(patient, treatment, phase)
     },
   },

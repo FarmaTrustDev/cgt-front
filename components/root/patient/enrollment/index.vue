@@ -46,7 +46,7 @@
             @getTreatment="updateTreatment"
           />
         </a-tab-pane>
-        <a-tab-pane
+        <a-tab-pane 
           key="Scheduling"
           :disabled="
             checkTreatmentScreeningStatus(
@@ -83,6 +83,7 @@ import TreatmentServices from '~/services/API/TreatmentServices'
 import PatientServices from '~/services/API/PatientServices'
 import notifications from '~/mixins/notifications'
 import tabsHelpers from '~/mixins/tabs-helpers'
+import userDetail from '~/mixins/user-detail'
 import nullHelper from '~/mixins/null-helpers'
 import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 export default {
@@ -92,7 +93,7 @@ export default {
     scheduling,
     screening,
   },
-  mixins: [notifications, tabsHelpers, nullHelper],
+  mixins: [notifications, tabsHelpers, nullHelper,userDetail],
   data() {
     return {
       activeTab: 'enrollment',

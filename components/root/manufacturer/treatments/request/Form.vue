@@ -87,6 +87,7 @@ export default {
     return {
       modalMessage: 'Are you sure you want to accept this treatment?',
       productionLines: [],
+     
     }
   },
     computed: {
@@ -96,6 +97,8 @@ export default {
     },
   mounted() {
     this.fetchProductionLine()
+    
+
   },
   methods: {
     fetchProductionLine() {
