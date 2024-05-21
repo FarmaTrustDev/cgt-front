@@ -15,7 +15,7 @@
 
           <a-col :span="21">
             <a-row style="line-height:25px">
-                <a-col :span="24"><h2>{{translation.ExpecItems_2_650}}</h2></a-col>
+                <a-col :span="24"><h2>Items</h2></a-col>
             </a-row>
             <a-row style="line-height:25px">
               <a-col :span="7" class="text-muted">{{translation.ExpecRecei_3_651}}</a-col>

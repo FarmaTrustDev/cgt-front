@@ -115,10 +115,10 @@ export default {
     return {
       languages: [
         { id: 'en', name: 'English' , flag: 'uk.png'},
-        // { id: 'de', name: 'German' , flag: 'de.png'},
-        // { id: 'za', name: 'Chinese' , flag: 'cn.png'},
-        // { id: 'ar', name: 'Arabic' , flag: 'sa.png'},
-        // { id: 'fr', name: 'French' , flag: 'fr.png'},
+        { id: 'de', name: 'German' , flag: 'de.png'},
+        { id: 'za', name: 'Chinese' , flag: 'cn.png'},
+        { id: 'ar', name: 'Arabic' , flag: 'sa.png'},
+        { id: 'fr', name: 'French' , flag: 'fr.png'},
       ],
       lang: null,
       notificationCount: 0,

@@ -27,7 +27,7 @@
                <h3 class="ml-10" v-else>Sample Name: {{ sampleData.sampleTypeName }}</h3>  
             </a-col>
             <a-col :offset="4" :span="10" class="report-head mt-10">
-               <h3 class="ml-10">Collection Time:  {{ sampleData.collectionDate }}</h3>  
+               <h3 class="ml-10">Collection Time:  {{ _getFormatMoment(sampleData.collectionDate).format("hh:mm") }}</h3>  
             </a-col>
             <a-col :span="10" class="report-head mt-10">
                <h3 class="ml-10" v-if="sampleData.taskName === 'Sample Kit'">Kit Quantity: {{ sampleData.quantity }}</h3>
@@ -106,7 +106,7 @@
                <h3 class="ml-10 mt-10">Humidity: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head ">
-               <h3 class="ml-10 "> {{ sampleData.humidity }}</h3>  
+               <h3 class="ml-10 "> 70%</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="ml-10 mt-25">Temperature: </h3>  
@@ -124,7 +124,7 @@
                <h3 class="ml-10 mt-10">Monitoring Sensors: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 "> {{ sampleData.monitoringSensor }}</h3>  
+               <h3 class="ml-10 "> Bluetooth/Rifid Blumfort</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Maintenance Schedule</b></h3>
@@ -133,19 +133,19 @@
                <h3 class=" mt-10">Maintenance Date: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head ">
-               <h3 class="ml-10 "> {{ sampleData.maintenanceDate }}</h3>  
+               <h3 class="ml-10 "> 12th January 2024</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="mt-20">Last Maintenance: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 "> {{ sampleData.maintenanceDueDate }}</h3>  
+               <h3 class="ml-10 "> 21 February 2024</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="mt-20">Next Maintenance Due: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 ">{{ sampleData.maintenanceNextDate }}</h3>  
+               <h3 class="ml-10 ">16th June 2024</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Quality Control and Integrity</b></h3>
@@ -154,13 +154,13 @@
                <h3 class=" mt-10">Sample Quality: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head ">
-               <h3 class="ml-10 "> {{ sampleData.sampleQuality }}</h3>  
+               <h3 class="ml-10 "> Good - no issues</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="mt-10">Contamination Checks: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head mt-10">
-               <h3 class="ml-10 "> {{ sampleData.contaminationCheck }}</h3>  
+               <h3 class="ml-10 "> 14 January 2024, 14 February 2024</h3>  
             </a-col>
             <a-col :span="24" class="mt-15">
                 <h3><b>Sample Usage</b></h3>
@@ -182,7 +182,7 @@
                <h3 class=" mt-10">Consent Date: </h3>  
             </a-col>
             <a-col :offset="1" :span="19" class="report-head ">
-               <h3 class="ml-10 "> {{ consentData.consentDate }}</h3>  
+               <h3 class="ml-10 "> {{ _getFormatMoment(sampleData.collectionDate).format("DD/MM/YYYY") }}</h3>  
             </a-col>
             <a-col :span="4">
                <h3 class="mt-20">Type of Consent: </h3>  
@@ -245,7 +245,7 @@
     >
   </template>
   <script>
-  
+  import moment from 'moment'
   import PageLayout from '~/components/layout/PageLayout'
   // import Table from '~/components/labeling/Listing'
   import routeHelpers from '~/mixins/route-helpers'
@@ -300,7 +300,7 @@
             id: 'DAC49784',
             date: '21-10-2023',
             location: 'Collection Site B',
-            personal: 'Lily Watson',
+            personnel: 'Lily Watson',
             purpose: 'Sample Collected',
             coe: '-75C',
             note: 'none',
@@ -309,7 +309,7 @@
             id: 'DAC49784',
             date: '30-10-2023',
             location: 'Transport Vehicle',
-            personal: 'John Snow',
+            personnel: 'John Snow',
             purpose: 'Transportation',
             coe: '-80C',
             note: 'none',
@@ -318,7 +318,7 @@
             id: 'DAC49784',
             date: '01-11-2023',
             location: 'Biobank Facility',
-            personal: 'Adam Smith',
+            personnel: 'Adam Smith',
             purpose: 'Storage',
             coe: '-80C',
             note: 'none',
@@ -330,14 +330,14 @@
             id: 'DAC49784',
             date: '21-10-2023',
             temperature: '-75C',
-            personal: 'Lily Watson',
+            personnel: 'Lily Watson',
             purpose: 'Sample Storage',
           },
           {
             id: 'DAC49784',
             date: '30-10-2023',
             temperature: 'Transport Vehicle',
-            personal: 'John Snow',
+            personnel: 'John Snow',
             purpose: 'Transportation',
           },
           
@@ -386,9 +386,9 @@
             key: 'location',
           },
           {
-            title: 'Personal',
-            dataIndex: 'Personal',
-            key: 'Personal',
+            title: 'Personnel',
+            dataIndex: 'personnel',
+            key: 'personnel',
           },
           {
             title: 'Purpose',
@@ -465,9 +465,9 @@
             key: 'date',
           },
           {
-            title: 'Personal',
-            dataIndex: 'Personal',
-            key: 'Personal',
+            title: 'Personnel',
+            dataIndex: 'personnel',
+            key: 'personnel',
           },
           {
             title: 'Purpose',
@@ -516,8 +516,8 @@
           },
           {
             title: 'Equipment Location',
-            dataIndex: 'location',
-            key: 'location',
+            dataIndex: 'storageLocation',
+            key: 'storageLocation',
           },
           {
             title: 'Equipment Temperature',
@@ -549,6 +549,16 @@
         COCReportServices.getBySampleId(id)
           .then((response) => {
             this.sampleData = response.data
+            this.sampleData.condition = 'Excellent'
+            this.sampleData.equipmentId = 'EQ-002'
+            this.sampleData.equipmentType = 'Freezer'
+            // this.sampleData.Location = 'Germany - Cellfuse'
+
+            this.dataCOC[0].date = moment(this.sampleData.collectionDate).add(-4, 'day').format('DD/MM/YYYY')
+            this.dataCOC[1].date = moment(this.sampleData.collectionDate).add(-3, 'day').format('DD/MM/YYYY')
+            this.dataCOC[2].date = moment(this.sampleData.collectionDate).add(-1, 'day').format('DD/MM/YYYY')
+            this.dataEUL[0].date = moment(this.sampleData.collectionDate).add(-6, 'day').format('DD/MM/YYYY')
+            this.dataEUL[1].date = moment(this.sampleData.collectionDate).add(-5, 'day').format('DD/MM/YYYY')
           })
           .finally(() => (this.loading = false))
       },
@@ -563,6 +573,7 @@
         LabelServices.hospital(params)
           .then((response) => {
             this.data = response.data
+            
           })
           .finally(() => (this.loading = false))
       },
