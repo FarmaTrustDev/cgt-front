@@ -49,8 +49,9 @@
           <div class="login-logo-x">
             <img 
               v-if="user.organizationProfileImage"
-              :src="getImageUrl(logo)" 
+              :src="user.roleName!=='PHARMA'? getImageUrl(logo) : 'https://demoapi.qmaid.co/Logos/immatics.jpeg'" 
               width="20px"
+              height="20px"
               logo
               hendling
               for
@@ -67,7 +68,8 @@
               temp
               class="logo"
             />
-            <span class="title">{{ user.organizationName }} </span>
+            <span class="title" v-if="user.roleName!=='PHARMA'">{{ user.organizationName }} </span>
+            <span class="title" v-else >Immatics </span>
           </div>
         </div>
         <!-- Header Lang Select -->

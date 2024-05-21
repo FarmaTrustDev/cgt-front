@@ -32,8 +32,8 @@
       </template>
       <template slot="patientName" slot-scope="patientName, patients">
        
-        <span v-if="hasTreatmentOfType(patients.treatments,'IVF/ICSI')" style="color:#ca8787;"><strong>{{ patientName }}</strong></span>
-        <span v-else><strong>{{ patientName }}</strong></span>
+        <span v-if="hasTreatmentOfType(patients.treatments,'IVF/ICSI')" @click="goto('/hospital/patients/'+patients.globalId+'?view=enrollment')" style="color:#ca8787;"><strong>{{ patientName }}</strong></span>
+        <span v-else @click="goto('/hospital/patients/'+patients.globalId+'?view=enrollment')"><strong>{{ patientName }}</strong></span>
       </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
@@ -117,7 +117,7 @@
                
                 <span class="vertical-line-standard-table"></span>
 
-                <a-dropdown>
+                <a-dropdown v-if="user.roleName!=='PHARMA'">
                   <a-button
                     type="primary"
                     :class="`ant-btn-drop-down patient-btn-admin ${getExcursionClass(
@@ -243,7 +243,7 @@
         slot-scope="text, record"
         class="manf-coll-admin-btn"
       >
-        <a-dropdown>
+        <a-dropdown >
           <a-button class="action-button" @click="preventDefault">
             {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
@@ -633,6 +633,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   watch: {

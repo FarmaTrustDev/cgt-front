@@ -136,6 +136,35 @@
       padding-right: 5px;
     }
   }
+  .step-col-pharma {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+    margin-left: 17%;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 85%;
+      top: 19px !important; // Task list steps line was disturbed for that it has been adjusted from 24 to 15
+      // bottom: 0;
+      margin: auto;
+      height: 2px;
+      left: 50px;
+      background-color: #d8d8d8;
+    }
+    // .ant-steps-small.ant-steps-label-horizontal {
+    // display: block !important;
+    // }
+    .ant-steps-item {
+      margin-right: 4px !important;
+      padding-right: 4px;
+      margin-bottom: 4px;
+      margin-top: 4px;
+    }
+    .Treatments {
+      padding-right: 5px;
+    }
+  }
   .step-col-logistic {
     display: inline-flex;
     overflow: hidden;
