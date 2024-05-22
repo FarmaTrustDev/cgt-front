@@ -1,5 +1,5 @@
 <template>
-  <span class="step-col" functional>
+  <span :class="!isPharma()? 'step-col':'step-col-pharma'" functional>
     <a-steps
       :initial="1"
       :current="getCurrentStep(treatment)"

@@ -6,7 +6,7 @@
         Patient List 
       </div>
       <div style="width: 25%; display: inline">
-        <a-button
+        <a-button v-if="!isPharma()"
           type="primary"
           class="float-right"
           @click="goto('patients/create')"
@@ -25,7 +25,7 @@
     </div>
     <div class="patient-page">
       <standardTable
-        :columns="column"
+        :columns="!isPharma() ? column:columnPharma"
         :pagination="showPagination"
         :api-service="PatientServices"
         :action-link="ActionLink"
@@ -43,11 +43,12 @@ import standardTable from '~/components/common/StandardTable'
 import PatientServices from '~/services/API/PatientServices'
 import routeHelpers from '~/mixins/route-helpers'
 import translationHelpers from '~/mixins/translation-helpers'
+import userDetail from '~/mixins/user-detail'
 
 const ActionLink = '/hospital/patients'
 export default {
   components: { standardTable },
-  mixins: [routeHelpers, translationHelpers],
+  mixins: [routeHelpers, translationHelpers,userDetail],
   middleware: 'auth',
   data() {
     return {
@@ -86,6 +87,36 @@ export default {
           width: 100,
           scopedSlots: { customRender: 'patientAction' },
         },
+      ],
+      columnPharma: [
+        {
+          title: `PUID`,
+          dataIndex: 'hospitalPUID',
+          key: 'PUID',
+          width: 100,
+          scopedSlots:{customRender: 'pUIDRender'}
+        },
+        {
+          title:`${this.$store.getters.getTranslation.PatieName_2_93}`,
+          dataIndex: 'name',
+          key: 'name',
+          width: 150,
+          scopedSlots:{customRender: 'patientName'}
+        },
+        {
+          title: `${this.$store.getters.getTranslation._1_442}`,
+          dataIndex: 'treatmentTypeId',
+          key: 'treatmentTypeId',
+          width: 75,
+          scopedSlots: { customRender: 'treatmentTypeNameRender' },
+        },
+        {
+          dataIndex: 'treatment_status',
+          key: 'treatment_status',
+          slots: { title: 'customTitle' },
+          scopedSlots: { customRender: 'treatment_status' },
+          class: 'treatment-status-col',
+        }
       ],
       loading: false,
       PatientServices,
