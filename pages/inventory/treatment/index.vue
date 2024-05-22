@@ -240,7 +240,7 @@
         >
           <a-card class="grey-card-smart-lab">
             <status-detail
-              heading-title="Outbound Items Shipmnet"
+              heading-title="Advanced Shipment Notice"
               :status="translation.Compl_1_250"
             />
             <hr class="mt-15" />
@@ -255,7 +255,7 @@
               :singleLineValue="'684792563-9570-68746596'"
               :customDisplayData="customDisplayData"
             />
-            <h2 class="mt-15">Outbound Materials</h2>
+            <h2 class="mt-15">Inbound Materials</h2>
 
             <a-card class="white-card-smart-lab">
               <a-col v-for="custDD in customDisplayDataMat" :key="custDD.key">

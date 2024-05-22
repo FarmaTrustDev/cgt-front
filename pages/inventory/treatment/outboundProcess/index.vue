@@ -607,7 +607,7 @@
         >
           <a-card class="grey-card-smart-lab">
             <status-detail
-              :heading-title="translation.Shipm_1_756"
+              heading-title="Shipment Notice"
               :statusDetails="statusDetails"
               :status="translation.Compl_1_250"
             />
