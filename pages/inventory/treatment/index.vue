@@ -290,6 +290,7 @@
           :visible="showModalImage"
           :title="translation.Docum_1_507"
           @cancel="handleModal(false)"
+          :width="750"
         >
           <img class="img-responsive" :src="getImageUrl(qrUrl)" />
           <template slot="footer">

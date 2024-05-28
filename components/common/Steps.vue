@@ -1,5 +1,5 @@
 <template>
-  <span :class="!isPharma()? 'step-col':'step-col-pharma'" functional>
+  <span :class="'step-col'" functional>
     <a-steps
       :initial="1"
       :current="getCurrentStep(treatment)"
@@ -59,13 +59,13 @@ export default {
       return this.current
     },
     emitGotoView(patient, treatment, phase) {
-      if(this.user.roleName!=='PHARMA'){
+      // if(this.user.roleName!=='PHARMA'){
       if (this.current >= phase.id) {
         return this.gotoView(patient, treatment, phase)
-      } else {
+      }else {
         return false
       }
-    }
+    // }
       // this.gotoView(patient, treatment, phase)
     },
   },

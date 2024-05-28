@@ -48,7 +48,7 @@
         {{ entity.notes }}
       </a-descriptions-item>
     </a-descriptions>
-        <a-col :offset="18" v-if="isPharma()">
+        <a-col :offset="18">
           
           <a-button
             type="primary"

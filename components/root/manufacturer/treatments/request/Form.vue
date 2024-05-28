@@ -55,7 +55,7 @@
         :placeholder="translation.Typenote_3_294"
       ></a-textarea
     ></a-form-item>
-    <a-form-item v-if="isAccepted && isPharma()" :label="translation.ProduLine_3_921">
+    <a-form-item v-if="isAccepted" :label="translation.ProduLine_3_921">
       <a-select
         v-decorator="[
           `productionLineId`,
