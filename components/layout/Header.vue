@@ -25,7 +25,6 @@
               <a-menu-item v-if="notifications.length == 0">
                 <span>No notifications</span>
               </a-menu-item>
-              <span v-else>
                 <a-menu-item
                   v-for="notification in notifications"
                   :key="notification.id"
@@ -40,7 +39,7 @@
                     notification.message
                   }}</span>
                 </a-menu-item>
-              </span>
+              
             </a-menu>
           </a-dropdown>
         </div>
