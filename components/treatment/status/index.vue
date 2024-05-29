@@ -79,11 +79,11 @@
           </div>
           <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
-        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI'" key="5"  :disabled="!tabs.treatmentDelivery">
+        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI'" key="delivery"  :disabled="!tabs.treatmentDelivery">
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(treatment.phaseId > 13)"
+            :class="isCompleted(treatment.phaseId > 14)"
           >
             {{translation.TreatDeliv_2_1007}}
           </div>
