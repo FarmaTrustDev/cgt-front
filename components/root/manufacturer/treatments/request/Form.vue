@@ -60,6 +60,7 @@
         v-decorator="[
           `productionLineId`,
           {
+            initialValue: initProduct,
             rules: [],
           },
         ]"
@@ -87,7 +88,7 @@ export default {
     return {
       modalMessage: 'Are you sure you want to accept this treatment?',
       productionLines: [],
-     
+      initProduct:0,
     }
   },
     computed: {
@@ -105,6 +106,7 @@ export default {
       console.log(this.data)
       ProductionLineServices.get().then((productionLine) => {
         this.productionLines = productionLine.data
+        this.initProduct = this.productionLines[0].id
       })
     },
   },

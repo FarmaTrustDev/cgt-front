@@ -41,6 +41,23 @@ function update(id, data) {
   })
 }
 
+function updateTreatmentQPStatus(id, data) {
+  return request({
+    url: `${baseApi}/updateTQPStatus/${id}`,
+    method: 'Put',
+    data,
+  })
+}
+
+
+function updateCMCQPStatus(id, data) {
+  return request({
+    url: `${baseApi}/updateCMCQPStatus/${id}`,
+    method: 'Put',
+    data,
+  })
+}
+
 function detail(id) {
   return request({
     url: `${baseApi}/detail/${id}`,
@@ -56,6 +73,13 @@ function markCompleteCollection(id) {
   return request({
     url: `${baseApi}/mark-complete-collection/${id}`,
     method: 'Put',
+  })
+}
+
+function submitCDMOQPApproval(id){
+  return request({
+    url: `${baseApi}/submitCDMOQPApproval/${id}`,
+    method: 'Post',
   })
 }
 
@@ -94,6 +118,22 @@ function markDead(id, status) {
   return request({
     url: `${baseApi}/mark-patient-dead/${id}/${status}`,
     method: 'PATCH',
+  })
+}
+function getCDMOStatus(treatmentId, patientId) {
+  return request({
+    url: `${baseApi}/getCDMOStatus/${treatmentId}/${patientId}`,
+  })
+}
+function getCMCStatus(treatmentId, patientId) {
+  return request({
+    url: `${baseApi}/getCMCStatus/${treatmentId}/${patientId}`,
+  })
+}
+
+function getTreatmentQP(treatmentId){
+  return request({
+    url: `${baseApi}/getTreatmentQP/${treatmentId}`,
   })
 }
 
@@ -159,7 +199,13 @@ const TreatmentServices = {
   hold,
   destroy,
   getInboundScheduling,
-  cancel
+  cancel,
+  getCDMOStatus,
+  updateTreatmentQPStatus,
+  updateCMCQPStatus,
+  getCMCStatus,
+  submitCDMOQPApproval,
+  getTreatmentQP
 }
 
 export default TreatmentServices

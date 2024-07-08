@@ -36,7 +36,7 @@
 import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 import manufactureCollection from '~/components/treatment/collections/manufacturer'
 import TreatmentServices from '~/services/API/TreatmentServices'
-import alert from '~/components/alert'
+import { EVENT_FETCH_TREATMENT_DETAIL } from '~/services/Constant/Events'
 export default {
   components: { manufactureCollection, alert },
   props: {
@@ -49,18 +49,33 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   methods: {
     completeAllBag(bags) {
-      TreatmentServices.markManufacturerCollection(this.treatment.id).then(
-        (response) => {
-          this.$emit('fetchTreatment', this.treatment.globalId)
-          // this.$nuxt.$emit(
-          //   EVENT_FETCH_TREATMENT_DETAIL,
-          //   this.treatment.globalId
-          // )
-        }
-      )
+      if(this.user.roleName === 'CDMO'){
+        TreatmentServices.submitCDMOQPApproval(this.treatment.id).then(
+          (response) => {
+            this.$emit('fetchTreatment', this.treatment.globalId)
+            this.$nuxt.$emit(
+            EVENT_FETCH_TREATMENT_DETAIL,
+            this.treatment.globalId
+            )
+          }
+        )
+      }else{
+        TreatmentServices.markManufacturerCollection(this.treatment.id).then(
+          (response) => {
+            this.$emit('fetchTreatment', this.treatment.globalId)
+            this.$nuxt.$emit(
+            EVENT_FETCH_TREATMENT_DETAIL,
+            this.treatment.globalId
+            )
+          }
+        )
+      }
     },
   },
 }

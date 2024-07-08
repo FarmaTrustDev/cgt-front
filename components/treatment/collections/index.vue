@@ -19,7 +19,7 @@
         type="primary"
         :loading="loading"
         @click="markHospitalCollectionComplete(bags)"
-        >{{translation.ComplColle_3_985}}
+        >{{ translation.ComplColle_3_985}}
       </a-button>
       <a-modal 
       :visible="visibleSignature"
@@ -120,6 +120,9 @@ export default {
       translation() {
         return this.$store.getters.getTranslation
       },
+      user() {
+        return this.$store.getters.getUser
+      },
     },
   mounted() {
     this.fetchBags()
@@ -207,10 +210,19 @@ export default {
               const dat={accepted:true,isLogistic:true}
               SchedulingServices.markScheduleRequest(this.schId, dat).then(
               (response) => {
-                const dat = {LogisticUserName:'Steph',origin:'clinic',pickupAt:this.currentDateTime,senderName:'Christy Walter'}
+                const dat = {
+                  LogisticUserName:'Steph',
+                  origin:'clinic',
+                  pickupAt:this.currentDateTime,
+                  senderName:'Christy Walter'
+                }
                 ShipmentServices.pickupCreate(this.schId,dat)
                   .then((response) => {
-                    const dt = {ReceiverName:'Steph',ReceivingNote:'Test',deliveryAt:this.currentDateTime}
+                    const dt = {
+                      ReceiverName:'Steph',
+                      ReceivingNote:'Test',
+                      deliveryAt:this.currentDateTime
+                    }
                     ShipmentServices.deliveryCreate(this.schId, dt)
                       .then((response) => {
                         this.success('Submitted successfully')

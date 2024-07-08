@@ -55,8 +55,8 @@
         </a-form-item>
       </a-col>
     </a-row>
-    <a-row>
-      <a-col :span="8">
+    <a-row  v-if="!isClinic()" >
+      <a-col :span="12">
         <a-form-item
           :label="translation.EmailAddre_2_140 + '*:'"
           :label-col="{ span: 24 }"
@@ -76,7 +76,7 @@
           />{{ msg }}
         </a-form-item></a-col
       >
-      <a-col :span="8">
+      <a-col :span="12">
         <a-form-item
           :label="translation.Phone_1_63 + '*:'"
           :label-col="{ span: 24 }"
@@ -146,38 +146,10 @@
           </a-input-group>
         </a-form-item>
       </a-col>
-      <a-col :span="8">
-        <a-form-item
-          :label="translation.DateOf_3_633"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-          class="pb-0"
-        >
-          <a-date-picker
-            v-decorator="[
-              'dOB',
-              {
-                initialValue: patient.dob,
-                rules: [
-                  {
-                    required: true,
-                    message: translation.requi_1_336,
-                  },
-                ],
-              },
-            ]"
-            placeholder="DD/MM/YYYY"
-            :disabled-date="disabledDate"
-            format="DD/MM/YYYY"
-            style="width: 100%"
-            size="large"
-          >
-          </a-date-picker>
-        </a-form-item>
-      </a-col>
+      
       </a-row>
       <a-row>
-      <a-col :span="12">
+      <a-col :span="8">
         <a-form-item
           :label="translation.Gende_1_637"
           :label-col="{ span: 24 }"
@@ -207,7 +179,7 @@
           </a-select>
         </a-form-item></a-col
       >
-      <a-col :span="12">
+      <a-col :span="8">
         <a-form-item
           :label="translation.BloodType_2_635"
           :label-col="{ span: 24 }"
@@ -237,6 +209,35 @@
           </a-select>
         </a-form-item></a-col
       >
+      <a-col :span="8">
+        <a-form-item
+          :label="translation.DateOf_3_633"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-date-picker
+            v-decorator="[
+              'dOB',
+              {
+                initialValue: patient.dob,
+                rules: [
+                  {
+                    required: true,
+                    message: translation.requi_1_336,
+                  },
+                ],
+              },
+            ]"
+            placeholder="DD/MM/YYYY"
+            :disabled-date="disabledDate"
+            format="DD/MM/YYYY"
+            style="width: 100%"
+            size="large"
+          >
+          </a-date-picker>
+        </a-form-item>
+      </a-col>
     </a-row>
     <a-row>
       <a-col :span="12">
@@ -294,7 +295,7 @@
       <a-row>
       <a-col :span="24">
         <a-form-item
-          :label="translation.Aller_1_643"
+          label="Body Surface Area"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -307,12 +308,12 @@
               },
             ]"
             :auto-size="{ minRows: 2, maxRows: 5 }"
-            :placeholder="translation.Aller_1_643"
+            placeholder="Body Surface Area"
           />
         </a-form-item>
       </a-col>
     </a-row>
-    <a-row>
+    <a-row v-if="!isClinic()" >
       <a-col :span="24">
         <a-form-item
           :label="translation.ActivProbl_2_645"
@@ -333,7 +334,7 @@
         </a-form-item>
       </a-col>
     </a-row>
-    <a-row>
+    <a-row v-if="!isClinic()" >
       <a-col :span="24">
         <a-form-item
           :label="translation.Medic_1_647"
@@ -350,32 +351,6 @@
             ]"
             :auto-size="{ minRows: 2, maxRows: 5 }"
             :placeholder="translation.Medic_1_647"
-          />
-        </a-form-item>
-      </a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="24">
-        <a-form-item
-          :label="translation.StreeNumbe_2_653"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 23 }"
-        >
-          <a-textarea
-            v-decorator="[
-              'street',
-              {
-                initialValue: patient.street,
-                rules: [
-                  {
-                    required: true,
-                    message: translation.requi_1_336,
-                  },
-                ],
-              },
-            ]"
-            :auto-size="{ minRows: 2, maxRows: 5 }"
-            :placeholder="translation.StreeNumbe_2_653"
           />
         </a-form-item>
       </a-col>
@@ -424,6 +399,33 @@
           /> </a-form-item
       ></a-col>
     </a-row>
+    <a-row>
+      <a-col :span="24">
+        <a-form-item
+          :label="translation.StreeNumbe_2_653"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 23 }"
+        >
+          <a-textarea
+            v-decorator="[
+              'street',
+              {
+                initialValue: patient.street,
+                rules: [
+                  {
+                    required: true,
+                    message: translation.requi_1_336,
+                  },
+                ],
+              },
+            ]"
+            :auto-size="{ minRows: 2, maxRows: 5 }"
+            :placeholder="translation.StreeNumbe_2_653"
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+    
     <a-row>
       <a-col :span="24">
         <a-form-item
@@ -518,6 +520,7 @@ import CountryServices from '~/services/API/CountryServices'
 import MapServices from '~/services/API/MapServices'
 // import PatientServices from '~/services/API/PatientServices'
 import { isEmpty } from '~/services/Utilities'
+import userDetail from '~/mixins/user-detail'
 export default {
   props: {
     isCreated: {
@@ -537,6 +540,7 @@ export default {
       default: null
     }
   },
+  mixins: [userDetail],
   data() {
     return {
       Gender: GENDER,

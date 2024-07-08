@@ -6,7 +6,7 @@
     <manufacturerHome
       v-if="isManufacturer() || isScientist() || isReceptionist() || isPharma()"
     />
-    <hospitalHome v-if="isHospital() || isDoctor() || isNurse()" />
+    <hospitalHome v-if="isHospital() || isDoctor() || isNurse() || isClinic()" />
     <logisticHome v-if="isLogistic()" class="logistic_board"/>
     <smartLabHome v-if="isSmartLab()" />
     <superAdminHome v-if="isAdmin()"/>
@@ -40,10 +40,18 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
-  mounted() {},
+  mounted() {
+    this.gotoStats()
+  },
   methods: {
     gotoView(uri) {
       this.goto(`/${uri}`)
+    },
+    gotoStats(){
+      // alert(this.isImmatics())
+      if(this.isImmatics() || this.isCMC() || this.isCDMO()){
+        this.$router.push({ path: '/statistics' })
+      }
     },
   },
 }

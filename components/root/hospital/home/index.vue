@@ -2,7 +2,24 @@
   <div class="home-page manf-board">
     <a-card class="grey-card" :bordered="false">
       <!-- left side tabs -->
+      
       <a-col :md="11" class="mtminus-6">
+        <a href="javascript:;" @click="handleSidebarKey(`/hospital/patients`, 2)">
+          <div class="home-tab">
+            <img
+              src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
+              width="120"
+              height="100"
+            />
+            <h4 class="heading-home">
+              {{ translation.Check_1_454 }}
+              <strong class="strong"
+                >{{ translation['Patie_1_184'] }}
+                {{ translation['Statu_1_202'] }}
+              </strong>
+            </h4>
+          </div>
+        </a>
         <a
           href="javascript:;"
           @click="handleSidebarKey(`/hospital/patients/create`, 3)"
@@ -21,22 +38,7 @@
             </h4>
           </div>
         </a>
-        <a href="javascript:;" @click="handleSidebarKey(`/hospital/patients`, 2)">
-          <div class="home-tab">
-            <img
-              src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"
-              width="120"
-              height="100"
-            />
-            <h4 class="heading-home">
-              {{ translation.Check_1_454 }}
-              <strong class="strong"
-                >{{ translation['Patie_1_184'] }}
-                {{ translation['Statu_1_202'] }}
-              </strong>
-            </h4>
-          </div>
-        </a>
+        
         <a href="javascript:;" @click="handleSidebarKey(`/users`, 8)">
           <div v-if="isHospital()" class="home-tab with-arrow">
             <img

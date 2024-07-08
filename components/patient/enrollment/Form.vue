@@ -218,7 +218,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          values.phone = '(' + values.countryCode  + ') '+  values.phone
+          values.phone = values.phone!==undefined ? '(' + values.countryCode  + ') '+  values.phone : ''
           values.imageUrl = this.femalePartnerId
           this.patientDetail = values
           this.visibleDetialModal(true)

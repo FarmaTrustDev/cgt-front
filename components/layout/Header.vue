@@ -48,7 +48,7 @@
           <div class="login-logo-x">
             <img 
               v-if="user.organizationProfileImage"
-              :src="user.roleName!=='PHARMA'? getImageUrl(logo) : 'https://demoapi.qmaid.co/Logos/immatics.jpeg'" 
+              :src="user.roleName==='CDMO' ? 'https://demoapi.qmaid.co/web/icons/cdmo.jpeg': user.roleName==='CMC'? 'https://demoapi.qmaid.co/web/icons/cmc.jpeg' : getImageUrl(logo)" 
               width="20px"
               height="20px"
               logo
@@ -67,19 +67,32 @@
               temp
               class="logo"
             />
-            <span class="title" v-if="user.roleName!=='PHARMA'">{{ user.organizationName }} </span>
-            <span class="title" v-else >Immatics </span>
+            <span class="title" v-if="user.roleName==='CMC'">CMC </span>
+            <span class="title" v-else-if="user.roleName==='CDMO'">CDMO </span>
+            <span class="title" v-else >{{ user.organizationName }} </span>
           </div>
         </div>
         <!-- Header Lang Select -->
         <div>
           {{ translation.first }}
           <a-select
+            v-if="user.roleName!=='CDMO' && user.roleName!=='CMC' && user.roleName!=='IMMATICS' && user.roleName!=='CLINIC'"
             :default-value="isEmpty(selectedLanguage) ? 'en' : selectedLanguage"
             style="width: 130px"
             @change="selectLanguage"
           >
             <a-select-option v-for="language in languages" :key="language.id">
+              {{ language.name }}
+              <img :src="getImageUrl('web/flags/'+ language.flag)" style="vertical-align:middle"  />
+            </a-select-option>
+          </a-select>
+          <a-select
+            v-else
+            :default-value="isEmpty(selectedLanguage) ? 'en' : selectedLanguage"
+            style="width: 130px"
+            @change="selectLanguage"
+          >
+            <a-select-option v-for="language in language" :key="language.id">
               {{ language.name }}
               <img :src="getImageUrl('web/flags/'+ language.flag)" style="vertical-align:middle"  />
             </a-select-option>
@@ -118,6 +131,9 @@ export default {
         { id: 'za', name: 'Chinese' , flag: 'cn.png'},
         { id: 'ar', name: 'Arabic' , flag: 'sa.png'},
         { id: 'fr', name: 'French' , flag: 'fr.png'},
+      ],
+      language: [
+        { id: 'en', name: 'English' , flag: 'uk.png'}
       ],
       lang: null,
       notificationCount: 0,

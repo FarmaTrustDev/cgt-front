@@ -31,6 +31,9 @@
           <span class="treatmentName">{{ patient.manufacturerPUID }}</span>
         </a-tooltip>
       </template>
+      <template slot="dateOfBirth" slot-scope="dateOfBirth">
+        <span class="treatmentName">{{ _getFormatMoment(dateOfBirth).format('DD-MM-YYYY')  }}</span>
+      </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
         <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
           <span class="treatmentName">{{ name }}</span>
@@ -38,7 +41,8 @@
       </template>
       <span slot="action" slot-scope="text, record">
         <!-- //Steps -->
-        <div :class="getTreatmentStepClass(record)">
+        <div v-if="user.roleName === 'CDMO' && record.cdmoqp">{{ record.cdmoqpStatus !==null ? record.cdmoqpStatus : 'Submitted for QP Approval' }}</div>
+        <div v-else :class="getTreatmentStepClass(record)">
           <div class="treatment-steps manufacturer-step">
             <span class="step-col">
               <a-steps
@@ -50,7 +54,7 @@
                   v-for="phase in phases"
                   :key="phase.id"
                   :title="phase.name"
-                  @click="stepClick(record, phase)"
+                  @click=" user.roleName === 'CDMO' && record.treatment.phaseId === 9 ? stepClick(record, phase) : user.roleName!='IMMATICS' && user.roleName!='CDMO' ? stepClick(record, phase) : ''"
                 />
               </a-steps>
             </span>
@@ -71,7 +75,7 @@ import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
-
+import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 import withTableCrud from '~/mixins/with-table-crud'
 const ActionLink = '/manufacturer/schedules'
 export default {
@@ -88,6 +92,17 @@ export default {
           dataIndex: 'patientEnrollmentNumber',
           key: 'patientEnrollmentNumber',
           scopedSlots: { customRender: 'pUIDRender' },
+        },
+        {
+          title: `Patient Name`,
+          dataIndex: 'patient.name',
+          key: 'patientName'
+        },
+        {
+          title: `DOB`,
+          dataIndex: 'patient.dob',
+          key: 'dateOfBirth',
+          scopedSlots: { customRender: 'dateOfBirth' },
         },
         {
           title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
@@ -118,7 +133,7 @@ export default {
         },
       ],
       loading: false,
-      data: [],
+      datas: [],
       apiService: SchedulingServices,
       ActionLink,
       showResponseModal: false,
@@ -140,6 +155,9 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   watch: {
     translation(newValues, oldValue) {
@@ -158,19 +176,30 @@ export default {
     },
   },
 
-  mounted() {},
+  mounted() {
+    this.fetch()
+  },
   methods: {
+    _getFormatMoment,
     getTranslationData() {
       this.phases[0].name = this.translation.InbouAccep_3_834
       this.phases[1].name = this.translation.Manuf_1_342
       this.phases[2].name = this.translation.OutboShipm_2_376
     },
     stepClick(record, phase) {
+      console.log(record)
       if (record.treatment.phaseId >= phase.phaseId) {
-        return this.goto(
-          `/manufacturer/treatments/process/${record.treatment.globalId}`,
-          { ...phase.params }
-        )
+        if(this.user.roleName === 'CMC'){
+          return this.goto(
+            `/manufacturer/treatments/process/${record.treatment.globalId}`,
+            { ...phase.params, treatmentId: record.treatment.id, patientId: record.patient.id }
+          )
+        }else{
+          return this.goto(
+            `/manufacturer/treatments/process/${record.treatment.globalId}`,
+            { ...phase.params }
+          )
+        }
       }
     },
     getTreatmentStepClass(patient) {
