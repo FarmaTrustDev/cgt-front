@@ -68,7 +68,8 @@ export default {
         OrganizationTypeAlias: this.LOGISTIC_ALIAS,
       })
         .then((response) => {
-          this.treatmentTypes = response.data
+          // this.treatmentTypes = response.data
+          this.treatmentTypes = response.data.filter(item => item.name === 'QuickSTAT')
           this.immaticLogisticId = this.treatmentTypes[0].id
           // console.log(this.treatmentTypes)
         })

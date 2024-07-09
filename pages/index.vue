@@ -4,7 +4,7 @@
       <strong>{{ translation['Mydashb_2_7'] }}</strong>
     </h1>
     <manufacturerHome
-      v-if="isManufacturer() || isScientist() || isReceptionist() || isPharma()"
+      v-if="isManufacturer() || isScientist() || isReceptionist() || isPharma() || isImmatics() || isCMC() || isCDMO()"
     />
     <hospitalHome v-if="isHospital() || isDoctor() || isNurse() || isClinic()" />
     <logisticHome v-if="isLogistic()" class="logistic_board"/>
@@ -49,9 +49,9 @@ export default {
     },
     gotoStats(){
       // alert(this.isImmatics())
-      if(this.isImmatics() || this.isCMC() || this.isCDMO()){
+      /* if(this.isCMC() || this.isCDMO()){
         this.$router.push({ path: '/statistics' })
-      }
+      } */
     },
   },
 }

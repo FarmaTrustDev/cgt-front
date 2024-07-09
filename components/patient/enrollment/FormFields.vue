@@ -413,8 +413,6 @@
                 initialValue: patient.street,
                 rules: [
                   {
-                    required: true,
-                    message: translation.requi_1_336,
                   },
                 ],
               },
