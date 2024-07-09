@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-if="user.roleName !== 'CLINIC' && user.roleName !== 'CMC' && user.roleName !== 'CDMO' && user.roleName !== 'IMMATICS'">
     
     <a-select
         class="
@@ -83,7 +83,7 @@ organizationTypes: [],
       UserServices.get().then((response) => {
         this.data = response.data.filter(item => 
           item.organizationId >=1 && 
-          (item.id > 145 && item.id <= 1082 || [3].includes(item.id))
+          (item.id > 1081 && item.id <= 1100 || [3].includes(item.id))
         )
         console.log(this.data)
       })

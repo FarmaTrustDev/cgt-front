@@ -14,7 +14,7 @@ getUser(users) {},
       <a-button type="primary" @click="showModal(true)">{{
         translation['Users_1_504']
       }}</a-button>
-      <a-button type="primary" @click="showGroupModal(true)">{{
+      <a-button v-if="user.roleName !== 'CLINIC' && user.roleName !== 'CMC' && user.roleName !== 'CDMO' && user.roleName !== 'IMMATICS'" type="primary" @click="showGroupModal(true)">{{
         translation.AddGroup_2_456
       }}</a-button>
     </template>
@@ -47,6 +47,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   methods: {
