@@ -356,25 +356,31 @@
       </a-col>
     </a-row>
     <a-row>
+      
+      
       <a-col :span="12">
         <a-form-item
-          :label="translation['PostaCode:_2_649']"
+          label="House No and Street"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 22 }"
         >
-          <a-input
+          <a-textarea
             v-decorator="[
-              'postCode',
+              'street',
               {
-                initialValue: patient.postCode || '',
-                rules: [{ message: '' }],
+                initialValue: patient.street,
+                rules: [
+                  {
+                  },
+                ],
               },
             ]"
-            name="postCode"
-            :placeholder="translation['PostaCode:_2_649']"
-            @blur="fetchCountryByPostCode"
-          /> </a-form-item
-      ></a-col>
+            :auto-size="{ minRows: 2, maxRows: 5 }"
+            :placeholder="translation.StreeNumbe_2_653"
+          />
+        </a-form-item>
+      </a-col>
+
       <a-col :span="12">
         <a-form-item
           :label="translation.City_1_446 + '*:'"
@@ -398,38 +404,16 @@
             :placeholder="translation.City_1_446"
           /> </a-form-item
       ></a-col>
+      
     </a-row>
+
     <a-row>
-      <a-col :span="24">
+      
+      <a-col :span="12">
         <a-form-item
-          :label="translation.StreeNumbe_2_653"
+          label="Post Code/ ZIP"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 23 }"
-        >
-          <a-textarea
-            v-decorator="[
-              'street',
-              {
-                initialValue: patient.street,
-                rules: [
-                  {
-                  },
-                ],
-              },
-            ]"
-            :auto-size="{ minRows: 2, maxRows: 5 }"
-            :placeholder="translation.StreeNumbe_2_653"
-          />
-        </a-form-item>
-      </a-col>
-    </a-row>
-    
-    <a-row>
-      <a-col :span="24">
-        <a-form-item
-          :label="translation.PostaCode_3_651"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 23 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -442,36 +426,6 @@
             :placeholder="translation.PostaCode_3_651"
           /> </a-form-item
       ></a-col>
-    </a-row>
-    
-    <a-row>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.Count_1_657 + ':*'"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
-        >
-          <a-input
-            v-decorator="[
-              'county',
-              {
-                initialValue: patient.county,
-                rules: [
-                  {
-                    required: true,
-                    message: translation.requi_1_336,
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid county name',
-                  },
-                ],
-              },
-            ]"
-            :placeholder="translation.Count_1_657"
-          />
-        </a-form-item>
-      </a-col>
       <a-col :span="12">
         <a-form-item
           :label="translation.Count_1_49 + ':*'"
@@ -507,6 +461,7 @@
         </a-form-item>
       </a-col>
     </a-row>
+    
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2><strong>Select New Date</strong></h2>
     <a-date-picker
       class="availability-calender"
       :open="openDatePicker"

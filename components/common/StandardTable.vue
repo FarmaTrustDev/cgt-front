@@ -124,7 +124,7 @@
                       treatment.excursionId
                     )}`"
                   >
-                    {{ translation['Admin_1_142']
+                    {{ user.roleName === 'CDMO' || user.roleName === 'IMMATICS' || user.roleName === 'CMC' ? 'View' : translation['Admin_1_142']
                     }}<a-icon type="down" class="ml-5" />
                   </a-button>
                   <a-menu slot="overlay">
@@ -136,7 +136,7 @@
                         {{ translation.view_1_750 }}</a
                       >
                     </a-menu-item>
-                    <a-menu-item>
+                    <a-menu-item v-if="user.roleName!=='CMC' && user.roleName!=='CDMO' && user.roleName!=='IMMATICS'">
                       <a
                         href="javascript:;"
                         @click="handleCancelModal(true, record, treatment)"
@@ -148,7 +148,7 @@
                         }}</a
                       >
                     </a-menu-item>
-                    <a-menu-item class="treatment-cancel-placeholder">
+                    <a-menu-item v-if="user.roleName!=='CMC' && user.roleName!=='CDMO' && user.roleName!=='IMMATICS'" class="treatment-cancel-placeholder">
                       <a
                         href="javascript:;"
                         @click="cancelTreatment(record, treatment)"
@@ -160,7 +160,7 @@
                         }}</a
                       >
                     </a-menu-item>
-                    <a-menu-item>
+                    <a-menu-item v-if="user.roleName!=='CMC' && user.roleName!=='CDMO' && user.roleName!=='IMMATICS'">
                       <a
                         href="javascript:;"
                         @click="handleDeleteModal(true, record, treatment)"
@@ -269,7 +269,7 @@
       </span>
 
       <span slot="patientAction" slot-scope="text, record">
-        <a-dropdown :trigger="['click']">
+        <a-dropdown :disabled="user.roleName==='CMC' || user.roleName==='CDMO' || user.roleName==='IMMATICS' ? true : false" :trigger="['click']">
           <a-button class="action-button" @click="preventDefault">
             {{ translation['Suppo_1_33'] }} <a-icon type="down" />
           </a-button>

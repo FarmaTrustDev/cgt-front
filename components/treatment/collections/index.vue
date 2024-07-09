@@ -66,7 +66,7 @@
             height="40%"
           /> -->
         </p>
-        <h3>{{translation.Complall_7_986}}</h3>
+        <h3>Please Complete all Steps and then Press Confirm</h3>
         <footer>
           <a-button
             class="ant-btn ant-btn-primary"

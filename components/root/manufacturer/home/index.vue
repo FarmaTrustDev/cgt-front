@@ -54,7 +54,7 @@
         </a-col>
         <a-col :md="10" v-if="isImmatics() || isCMC() || isCDMO()">
           <!--@click="handleSidebarKey(`/hospital/patients`, 2)"-->
-          <a href="javascript:;">
+          <a href="javascript:;" @click="handleSidebarKey(`/hospital/patients`, 2)">
             <div class="home-tab">
               <img
                 src="https://cgt-dev-ft.microsysx.com/images/v2/icons/enroll-new-patient.svg"

@@ -6,7 +6,7 @@
         Patient List 
       </div>
       <div style="width: 25%; display: inline">
-        <a-button v-if="!isPharma()"
+        <a-button v-if="!isImmatics() && !isCDMO() && !isCMC()"
           type="primary"
           class="float-right"
           @click="goto('patients/create')"

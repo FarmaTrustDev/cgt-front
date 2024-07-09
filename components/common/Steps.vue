@@ -60,7 +60,7 @@ export default {
     },
     emitGotoView(patient, treatment, phase) {
       // if(this.user.roleName!=='PHARMA'){
-      if (this.current >= phase.id) {
+      if (this.current >= phase.id && this.user.roleName !== 'IMMATICS' && this.user.roleName !== 'CDMO' && this.user.roleName !== 'CMC') {
         return this.gotoView(patient, treatment, phase)
       }else {
         return false
