@@ -28,6 +28,11 @@
     </div>
     <div v-else-if="treatment.isSchedule && treatment.phaseId < 4">
       <alert
+        v-if="user.roleName !== 'CLINIC'"
+        message="CDMO and IMMATICS have not approved the treatment request yet."
+      />
+      <alert
+        v-else
         message="Manufacturer has not approved the treatment request yet."
       />
     </div>
@@ -88,6 +93,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   mounted() {

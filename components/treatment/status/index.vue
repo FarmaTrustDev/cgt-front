@@ -75,11 +75,11 @@
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 14)"
           >
-            {{translation.TreatColle_2_1006}}
+            Treatment Administration
           </div>
           <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
-        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI'" key="delivery"  :disabled="!tabs.treatmentDelivery">
+        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI' && user.roleName !== 'CLINIC'" key="delivery"  :disabled="!tabs.treatmentDelivery">
           <div
             slot="tab"
             class="tab-title"
@@ -142,6 +142,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   mounted() {

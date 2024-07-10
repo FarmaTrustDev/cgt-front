@@ -45,7 +45,7 @@
     </div>
     <a-alert
       v-else
-      :message="translation.Manufhas_8_988"
+      :message="user.roleName === 'CLINIC' ? 'CDMO and IMMATICS have not accepted the treatment request yet' : translation.Manufhas_8_988"
     ></a-alert>
     <a-modal
       :visible="visibleModal"

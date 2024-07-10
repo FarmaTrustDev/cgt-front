@@ -18,7 +18,7 @@
               class="tab-title pl-10"
               :class="getLastTabsClass(step.minStep,step.completedStep,step.id)"
             >
-              {{ step.name }}
+              {{ (user.roleName ==='CLINIC' || user.roleName ==='CDMO' || user.roleName ==='CMC' || user.roleName ==='IMMATICS') && step.name === 'Laboratory' ? 'CMC' : step.name }}
             </div>
             <Timeline
               :bag="bag"
@@ -59,6 +59,11 @@ export default {
     return { 
       tabs: steps,
     }
+  },
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   mounted() {
   },
