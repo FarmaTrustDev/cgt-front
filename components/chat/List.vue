@@ -22,7 +22,7 @@
           </span>
           <span v-else>{{ conversation.group_Name }}</span>
         </span>
-        <a-avatar slot="avatar" :src="conversation.group_Image" />
+        <a-avatar slot="avatar" :src="getImageName(conversation.group_Image)" />
       </a-list-item-meta>
     </a-list-item>
   </a-list>
@@ -44,6 +44,12 @@ export default {
     getConversation(conversation) {
       this.$emit('getConversation', conversation)
     },
+    getImageName(str){
+      if(str.startsWith("Uploads")){
+        return "http://demoapi.qmaid.co/"+str
+      }
+      return str
+    }
   },
 }
 </script>
