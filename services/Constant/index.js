@@ -117,6 +117,7 @@ export const COLLECTION_TYPE = {
   hospital: { id: 1, name: 'Hospital' },
   manufacturer: { id: 2, name: 'Manufacturer' },
   treatment: { id: 3, name: 'Treatment' },
+  cdmo: { id: 4, name: 'CDMO' },
 }
 
 export const PICTURE_UPLOAD_EXTENSIONS = [

@@ -29,11 +29,19 @@
                     'Liquid nitrogen tanks (Planer 1411V and 320 models) -80 Freezers',
                 }"
                 :img-properties="{ width: '40px', height: '50px' }"
+                
               >
               <span slot="extra">
-              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" height="50px" width="40px" style="margin-top: 8px;" /></span>
+              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" @click="openViewModal" height="50px" width="40px" style="margin-top: 8px;" /></span>
             </span>
             </ImageHeading>
+            <a-modal :visible="showModal" :title="translation.Docum_1_507">
+              <img class="img-responsive" :src="getImageUrl(qrUrl)" />
+              <template slot="footer">
+                <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
+                <a-button @click="printWindow()">Print</a-button>
+              </template>
+            </a-modal>
             </a-card>
           </div>
         </a-col>
@@ -88,6 +96,8 @@ export default {
           heading: 'CO2 incubator',
         },
       ],
+      showModal: false,
+      qrUrl: 'web/inventory/storage/coldStorage.jpeg',
     }
   },
   computed: {
@@ -98,5 +108,13 @@ export default {
       return this.$store.getters.getTranslation
     },
   },
+  methods:{
+    handleModal(show) {
+      this.showModal = show
+    },
+    openViewModal(id) {
+      this.showModal = true
+    },
+  }
 }
 </script>

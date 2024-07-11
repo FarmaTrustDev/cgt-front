@@ -48,10 +48,11 @@ function getByIntId(param) {
   })
 }
 
-function create(name){
+function create(data){
   return request({
-    url: `${baseApi}/create/${name}`,
-    method: 'POST'
+    url: `${baseApi}/create`,
+    method: 'POST',
+    data
   })
 }
 

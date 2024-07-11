@@ -44,6 +44,9 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   watch: {
     bags(newBags, oldVal) {

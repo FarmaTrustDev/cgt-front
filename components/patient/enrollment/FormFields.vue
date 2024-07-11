@@ -55,8 +55,8 @@
         </a-form-item>
       </a-col>
     </a-row>
-    <a-row>
-      <a-col :span="8">
+    <a-row  v-if="!isClinic()" >
+      <a-col :span="12">
         <a-form-item
           :label="translation.EmailAddre_2_140 + '*:'"
           :label-col="{ span: 24 }"
@@ -76,7 +76,7 @@
           />{{ msg }}
         </a-form-item></a-col
       >
-      <a-col :span="8">
+      <a-col :span="12">
         <a-form-item
           :label="translation.Phone_1_63 + '*:'"
           :label-col="{ span: 24 }"
@@ -146,38 +146,10 @@
           </a-input-group>
         </a-form-item>
       </a-col>
-      <a-col :span="8">
-        <a-form-item
-          :label="translation.DateOf_3_633"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 21 }"
-          class="pb-0"
-        >
-          <a-date-picker
-            v-decorator="[
-              'dOB',
-              {
-                initialValue: patient.dob,
-                rules: [
-                  {
-                    required: true,
-                    message: translation.requi_1_336,
-                  },
-                ],
-              },
-            ]"
-            placeholder="DD/MM/YYYY"
-            :disabled-date="disabledDate"
-            format="DD/MM/YYYY"
-            style="width: 100%"
-            size="large"
-          >
-          </a-date-picker>
-        </a-form-item>
-      </a-col>
+      
       </a-row>
       <a-row>
-      <a-col :span="12">
+      <a-col :span="8">
         <a-form-item
           :label="translation.Gende_1_637"
           :label-col="{ span: 24 }"
@@ -207,7 +179,7 @@
           </a-select>
         </a-form-item></a-col
       >
-      <a-col :span="12">
+      <a-col :span="8">
         <a-form-item
           :label="translation.BloodType_2_635"
           :label-col="{ span: 24 }"
@@ -237,6 +209,35 @@
           </a-select>
         </a-form-item></a-col
       >
+      <a-col :span="8">
+        <a-form-item
+          :label="translation.DateOf_3_633"
+          :label-col="{ span: 24 }"
+          :wrapper-col="{ span: 21 }"
+          class="pb-0"
+        >
+          <a-date-picker
+            v-decorator="[
+              'dOB',
+              {
+                initialValue: patient.dob,
+                rules: [
+                  {
+                    required: true,
+                    message: translation.requi_1_336,
+                  },
+                ],
+              },
+            ]"
+            placeholder="DD/MM/YYYY"
+            :disabled-date="disabledDate"
+            format="DD/MM/YYYY"
+            style="width: 100%"
+            size="large"
+          >
+          </a-date-picker>
+        </a-form-item>
+      </a-col>
     </a-row>
     <a-row>
       <a-col :span="12">
@@ -294,7 +295,7 @@
       <a-row>
       <a-col :span="24">
         <a-form-item
-          :label="translation.Aller_1_643"
+          label="Body Surface Area"
           :label-col="{ span: 24 }"
           :wrapper-col="{ span: 23 }"
         >
@@ -307,12 +308,12 @@
               },
             ]"
             :auto-size="{ minRows: 2, maxRows: 5 }"
-            :placeholder="translation.Aller_1_643"
+            placeholder="Body Surface Area"
           />
         </a-form-item>
       </a-col>
     </a-row>
-    <a-row>
+    <a-row v-if="!isClinic()" >
       <a-col :span="24">
         <a-form-item
           :label="translation.ActivProbl_2_645"
@@ -333,7 +334,7 @@
         </a-form-item>
       </a-col>
     </a-row>
-    <a-row>
+    <a-row v-if="!isClinic()" >
       <a-col :span="24">
         <a-form-item
           :label="translation.Medic_1_647"
@@ -355,11 +356,13 @@
       </a-col>
     </a-row>
     <a-row>
-      <a-col :span="24">
+      
+      
+      <a-col :span="12">
         <a-form-item
-          :label="translation.StreeNumbe_2_653"
+          label="House No and Street"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 23 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-textarea
             v-decorator="[
@@ -368,8 +371,6 @@
                 initialValue: patient.street,
                 rules: [
                   {
-                    required: true,
-                    message: translation.requi_1_336,
                   },
                 ],
               },
@@ -379,27 +380,7 @@
           />
         </a-form-item>
       </a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation['PostaCode:_2_649']"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
-        >
-          <a-input
-            v-decorator="[
-              'postCode',
-              {
-                initialValue: patient.postCode || '',
-                rules: [{ message: '' }],
-              },
-            ]"
-            name="postCode"
-            :placeholder="translation['PostaCode:_2_649']"
-            @blur="fetchCountryByPostCode"
-          /> </a-form-item
-      ></a-col>
+
       <a-col :span="12">
         <a-form-item
           :label="translation.City_1_446 + '*:'"
@@ -423,13 +404,16 @@
             :placeholder="translation.City_1_446"
           /> </a-form-item
       ></a-col>
+      
     </a-row>
+
     <a-row>
-      <a-col :span="24">
+      
+      <a-col :span="12">
         <a-form-item
-          :label="translation.PostaCode_3_651"
+          label="Post Code/ ZIP"
           :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 23 }"
+          :wrapper-col="{ span: 22 }"
         >
           <a-input
             v-decorator="[
@@ -442,36 +426,6 @@
             :placeholder="translation.PostaCode_3_651"
           /> </a-form-item
       ></a-col>
-    </a-row>
-    
-    <a-row>
-      <a-col :span="12">
-        <a-form-item
-          :label="translation.Count_1_657 + ':*'"
-          :label-col="{ span: 24 }"
-          :wrapper-col="{ span: 22 }"
-        >
-          <a-input
-            v-decorator="[
-              'county',
-              {
-                initialValue: patient.county,
-                rules: [
-                  {
-                    required: true,
-                    message: translation.requi_1_336,
-                  },
-                  {
-                    pattern: /^[a-z&A-Z]+$/,
-                    message: 'Please enter a valid county name',
-                  },
-                ],
-              },
-            ]"
-            :placeholder="translation.Count_1_657"
-          />
-        </a-form-item>
-      </a-col>
       <a-col :span="12">
         <a-form-item
           :label="translation.Count_1_49 + ':*'"
@@ -507,6 +461,7 @@
         </a-form-item>
       </a-col>
     </a-row>
+    
   </div>
 </template>
 
@@ -518,6 +473,7 @@ import CountryServices from '~/services/API/CountryServices'
 import MapServices from '~/services/API/MapServices'
 // import PatientServices from '~/services/API/PatientServices'
 import { isEmpty } from '~/services/Utilities'
+import userDetail from '~/mixins/user-detail'
 export default {
   props: {
     isCreated: {
@@ -537,6 +493,7 @@ export default {
       default: null
     }
   },
+  mixins: [userDetail],
   data() {
     return {
       Gender: GENDER,

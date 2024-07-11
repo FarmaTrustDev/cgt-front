@@ -1,15 +1,17 @@
 <template>
   <div class="consent-page">
-    <h3 class="page-title">{{ translation.PatieConse_2_685 }}</h3>
-
+    <h3 v-if="user.roleName !== 'CLINIC'" class="page-title">{{ translation.PatieConse_2_685 }}</h3>
+    <h3 v-else class="page-title">Consent form disabled for Sandbox</h3>
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <Upload
         :default-file-list="treatment.consentFiles"
         :extensions="allowedExtensions"
         @handleChange="handleChange"
+        :disabled = "user.roleName === 'CLINIC' ? true : false"
       />
       <a-form-item>
         <a-checkbox
+          v-if="user.roleName!=='CLINIC'"
           v-decorator="[
             'consent',
             {
@@ -28,7 +30,7 @@
         >
           {{ translation.PatieConse_4_465 }}
         </a-checkbox>
-        <h1 v-if="checkBoxError" style="color: #f00; font-weight: bold">
+        <h1 v-if="checkBoxError && user.roleName!=='CLINIC'" style="color: #f00; font-weight: bold">
           {{ translation.Consecheck_4_840 }}
         </h1>
         <a-input
@@ -47,13 +49,12 @@
       <FormActionButton
         v-if="isInConsentPhase(treatment)"
         :loading="loading"
-        :text="translation.SaveConse_4_695"
+        :text=" user.roleName ==='CLINIC' ? 'Continue Next' : translation.SaveConse_4_695"
       />
     </a-form>
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
-      class="error-model"
       @cancel="handleOk()"
       @ok="handleOk()"
     >
@@ -92,7 +93,7 @@ export default {
       fileList: [],
       allowedExtensions: DOCUMENT_EXTENSIONS,
       checkBoxError: false,
-      treatId: '',
+      treatId: null,
       TREATMENT_PHASES,
       visibleSignature:false,
       consentDetail:{},
@@ -101,6 +102,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user(){
+      return this.$store.getters.getUser
     },
   },
   mounted() {
@@ -126,13 +130,20 @@ export default {
     },
     create(values) {
       const formData = new FormData()
-      for (const key in values) {
-        formData.append(key, values[key])
+      if(this.user.roleName === 'CLINIC'){
+        formData.append('patientId', this.patientId)
+        formData.append('consent', true)
+        this.checkBoxError = false
+      }else{
+        for (const key in values) {
+          formData.append(key, values[key])
+        }
+      
+        this.fileList.forEach((files) => {
+          // console.log(files)
+          formData.append('files', files)
+        })
       }
-      this.fileList.forEach((files) => {
-        // console.log(files)
-        formData.append('files', files)
-      })
       // console.log(formData)
       TreatmentServices.create(formData)
         .then((response) => {
@@ -148,6 +159,9 @@ export default {
     updateConcent(values) {
       this.loading = true
       const formData = new FormData()
+      if(this.user.roleName==='CLINIC'){
+        formData.append('consent', true)
+      }
       for (const key in values) {
         formData.append(key, values[key])
       }
@@ -185,7 +199,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          if (values.consent === true) {
+          if (values.consent === true || this.user.roleName==='CLINIC') {
             this.visibleSignature=true
             this.consentDetail=values
             // if(this.treatment.id==null)

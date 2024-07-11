@@ -18,7 +18,24 @@
           </dl>
         </a-card>
       </a-col>
-      <a-col :span="12">
+      <a-col v-if="treatment.treatmentTypeName==='IVF/ICSI'" :span="12">
+        <a-card :bordered="false" class="default-card">
+          <article class="article">
+            <h4 class="heading pl-0">{{ translation.TreatDetai_2_304 }}</h4>
+          </article>
+          <dl class="row common-detail">
+            <dt>Project ID:</dt>
+            <dd>IVP3425</dd>
+            <dt>Partner ID:</dt>
+            <dd>{{ treatment.patient.partnerID }}</dd>
+            <dt>Partner Name:</dt>
+            <dd>{{ treatment.patient.partnerName }}</dd>
+            <dt>Partner DoB:</dt>
+            <dd>{{ getDateFormat(treatment.patient.partnerDoB) }}</dd>
+          </dl>
+        </a-card>
+      </a-col>
+      <a-col v-else :span="12">
         <a-card :bordered="false" class="default-card">
           <article class="article">
             <h4 class="heading pl-0">{{ translation.TreatDetai_2_304 }}</h4>
@@ -55,6 +72,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import { isEmpty } from '~/services/Helpers'
 export default {
@@ -87,6 +105,9 @@ export default {
             // .finally(() => (this.loading = false))
         }
       }
+    },
+    getDateFormat(date) {
+      return moment(String(date)).format('DD/MM/YYYY')
     },
   },
 }

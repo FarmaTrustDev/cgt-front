@@ -24,10 +24,12 @@
     </div>
     <div class="h-tabs large-tabs rounded-table manf-treatment-body treatment-list-body">
       <a-tabs type="card" :animated="false">
+        <!--<a-tab-pane key="1"  :tab="translation.NewTreat_2_260" v-if="user.roleName==='PHARMA'"> -->
         <a-tab-pane key="1"  :tab="translation.NewTreat_2_260">
           <new-request :search-by-type="searchByType" />
         </a-tab-pane>
-        <a-tab-pane key="2"  :tab="translation.PendiTreat_2_300">
+        <!--<a-tab-pane key="2"  :tab="translation.PendiTreat_2_300" v-if="user.roleName!=='PHARMA'">-->
+          <a-tab-pane key="2"  :tab="translation.PendiTreat_2_300">
           <in-progress :search-by-type="searchByType" />
         </a-tab-pane>
         <a-tab-pane key="3" :tab="translation['Compltreat_2_394']"
@@ -66,6 +68,9 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user(){
+      return this.$store.getters.getUser
+    }
   },
   watch:{
     searchByType(newValue, oldValue)

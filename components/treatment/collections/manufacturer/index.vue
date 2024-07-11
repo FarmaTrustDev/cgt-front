@@ -10,7 +10,8 @@
           type="primary"
           :loading="loading"
           @click="completeAllBags(bags)"
-          >{{translation.ComplColle_3_985}}
+          ><div v-if="user.roleName !== 'CMC' && user.roleName !== 'CDMO'">{{translation.ComplColle_3_985}}</div>
+          <div v-else>Submit for QP Approval</div>
         </a-button>
       </div>
       <a-modal 
@@ -56,6 +57,7 @@ import { COLLECTION_TYPE } from '~/services/Constant'
 import { isEmpty } from '~/services/Utilities'
 import notifications from '~/mixins/notifications'
 import imagesHelper from '~/mixins/images-helper'
+import TreatmentServices from '~/services/API/TreatmentServices'
 
 export default {
   components: { Bag },
@@ -73,11 +75,15 @@ export default {
       bags: [],
       COLLECTION_TYPE,
       loading: false,
+      treatmentQP:false,
     }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   mounted() {
@@ -95,10 +101,11 @@ export default {
       if (!isEmpty(this.treatment)) {
         // this.loading = true
         TreatmentBagServices.getByTreatmentId(this.treatment.id, {
-          type: COLLECTION_TYPE.manufacturer.id,
+          type: this.user.roleName === 'CDMO' && this.treatment.phaseId === 9 ? COLLECTION_TYPE.cdmo.id  :  COLLECTION_TYPE.manufacturer.id,
         })
           .then((response) => {
             this.bags = response.data
+            this.fetchTreatmentQPStatus(this.treatment.id)
           })
           .finally(() => {
             // this.loading = false
@@ -109,6 +116,11 @@ export default {
     {
       this.fetchBags()
       this.activeTab = key
+    },
+    fetchTreatmentQPStatus(treatmentId){
+      TreatmentServices.getTreatmentQP(treatmentId).then((response)=>{
+        this.treatmentQP = (response.data !== null)
+      })
     },
     onCreate(data) {
       this.handleModal(false)
@@ -125,6 +137,7 @@ export default {
     },
     upsert()
     {
+      // alert('hello')
       this.$emit('completeAllBag', this.bags)
     },
     handleOk() {

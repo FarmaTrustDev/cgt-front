@@ -7,6 +7,9 @@
             <span class="treatmentName">{{ name }}</span>
           </a-tooltip>
       </template>   
+      <template slot="dateOfBirth" slot-scope="dateOfBirth">
+        <span class="treatmentName">{{ _getFormatMoment(dateOfBirth).format('DD-MM-YYYY')  }}</span>
+      </template>
       <template slot="name" slot-scope="name, treatment">
         <a-tooltip 
           :title="
@@ -37,7 +40,7 @@ import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
-
+import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 import withTableCrud from '~/mixins/with-table-crud'
 
 const ActionLink = '/manufacturer/schedules'
@@ -55,6 +58,17 @@ export default {
     dataIndex: 'patientEnrollmentNumber',
     key: 'patientEnrollmentNumber',
     scopedSlots: { customRender: 'name' },
+  },
+  {
+    title: `Patient Name`,
+    dataIndex: 'patient.name',
+    key: 'patientName'
+  },
+  {
+    title: `DOB`,
+    dataIndex: 'patient.dob',
+    key: 'dateOfBirth',
+    scopedSlots: { customRender: 'dateOfBirth' },
   },
   {
     title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
@@ -102,6 +116,9 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
   },  
   watch:{
     translation(newValues, oldValue){
@@ -121,7 +138,8 @@ export default {
     // this.fetch()
   },
   methods: {
-        customRowReDirect(record) {
+    _getFormatMoment,
+    customRowReDirect(record) {
       return {
         on: {
           click: (event) => {

@@ -48,22 +48,99 @@
         {{ entity.notes }}
       </a-descriptions-item>
     </a-descriptions>
+        <a-col v-if=" user.roleName !== 'CLINIC'" :offset="18">
+          
+          <a-button
+            type="primary"
+            :loading="loading"
+            dashed
+            @click="showConfirm(treatment,true)"
+          >
+            Accept
+          </a-button>
+          <a-button
+            class="new-treatment-btn"
+            :loading="loading"
+            dashed
+            @click="showConfirm(treatment, false)"
+          >
+            Reject
+          </a-button>
+        </a-col>
+        <a-modal 
+              :visible="visibleSignature"
+              :footer="null"
+              @cancel="handleOk()"
+              @ok="handleOk()"
+            >
+            <Signature @handleSignatureOk="handleSignatureOk" @handleSignatureCancel="handleSignatureCancel"/>
+        </a-modal>
+        <a-modal
+      :title="
+        isAccepted ? 'Accept Scheduling Request' : 'Reject Scheduling Request'
+      "
+      :visible="showResponseModal"
+      :confirm-loading="confirmLoading"
+      :footer="null"
+      :destroy-on-close="true"
+      :width="700"
+      @ok="submitTreatmentResult"
+      @cancel="handleModal(false)"
+    >
+      <a-form :form="form" :layout="formLayout" @submit="onSubmit">
+        <Form :is-accepted="isAccepted" :data="selectedRow" />
+
+        <FormActionButton
+          :text="getButtonText()"
+          :btn-type="getButtonType()"
+          :is-created="false"
+          :loading="loading"
+          :disabled="clicked"
+          ><span slot="extra" class="mr-5">
+            <a-button @click="handleModal(false)" Reject Scheduling Request>{{
+              translation.cance_1_296
+            }}</a-button>
+          </span></FormActionButton
+        >
+      </a-form>
+    </a-modal>
   </div>
+  
 </template>
 
 <script>
 import moment from 'moment'
+import routeHelpers from '~/mixins/route-helpers'
+import Form from '~/components/root/manufacturer/treatments/request/Form'
 import { isEmpty } from '~/services/Helpers'
+import userDetail from '~/mixins/user-detail'
+import Signature from '~/components/signature'
+import notifications from '~/mixins/notifications'
+import SchedulingServices from '~/services/API/SchedulingServices'
 export default {
+  components: { Form,Signature },
   props: {
     entity: {
       type: Object,
       default: () => ({}),
     },
   },
+  mixins: [userDetail,notifications,routeHelpers],
   data() {
     return {
       moment,
+      showResponseModal: false,
+      isAccepted: false,
+      selectedRow: {},
+      data:{},
+      clicked:false,
+      visibleSignature:false,
+      confirmLoading: false,
+      loading: false,
+      form: this.$form.createForm(this, {
+        name: 'screeningCategory',
+      }),
+      formLayout: 'vertical',
     }
   },
 
@@ -71,6 +148,15 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
+  },
+  mounted() {
+    
+    if(this.user.roleName === 'PHARMA'){
+      this.data = JSON.parse(this.$route.query.dta)
+    }
   },
   methods: {
     getDateFormat(date) {
@@ -81,7 +167,67 @@ export default {
         return " at " + time
       }
       else { return ""}
-    }
+    },
+    submitTreatmentResult() {
+      alert("as")
+    },
+    onSubmit(e) {
+      
+      this.loading = true
+      this.clicked = true
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.submitData = values
+          this.visibleSignature = true
+        }
+      })
+      this.loading = false
+      this.clicked = false
+    },
+    upsert(values)
+    {
+      const data = this.selectedRow
+          const performedAction = values.accepted === true ? 'accepted' : 'rejected'
+          SchedulingServices.markScheduleRequest(data.id, values).then(
+            (response) => {
+              this.visibleSignature = false
+              this.success('Request ' + performedAction)
+              this.handleModal(false)
+              this.goto('/manufacturer/treatments')
+            }
+          )
+    },
+    handleOk() {
+      this.handleSignatureCancel()
+    },
+    handleSignatureOk() {
+      this.visibleSignature = false
+      this.upsert(this.submitData)
+    },
+    handleSignatureCancel(){
+      this.visibleSignature = false
+      this.loading = false
+    },
+    handleModal(show) {
+      if (!show) {
+        this.isAccepted = false
+      }
+      this.showResponseModal = show
+    },
+    showConfirm(record, isAccepted) {
+      this.isAccepted = isAccepted
+      this.selectedRow = this.data
+      this.handleModal(true)
+    },
+    getButtonText() {
+      return this.isAccepted
+        ? this.$store.getters.getTranslation.Accep_1_278
+        : this.$store.getters.getTranslation.Rejec_1_280
+    },
+    getButtonType() {
+      return this.isAccepted ? 'primary' : 'danger'
+    },
   },
 }
 </script>

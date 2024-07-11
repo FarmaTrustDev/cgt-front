@@ -31,8 +31,9 @@
         <strong>{{ name }}</strong>
       </template>
       <template slot="patientName" slot-scope="patientName, patients">
-        <span v-if="patients.treatments!==undefined ? patients.treatments[0].treatmentTypeName==='IVF/ICSI' ? true : false : false" style="color:#ca8787;"><strong>{{ patientName }}</strong></span>
-        <span v-else><strong>{{ patientName }}</strong></span>
+       
+        <span v-if="hasTreatmentOfType(patients.treatments,'IVF/ICSI')" @click="goto('/hospital/patients/'+patients.globalId+'?view=enrollment')" style="color:#ca8787;"><strong>{{ patientName }}</strong></span>
+        <span v-else @click="goto('/hospital/patients/'+patients.globalId+'?view=enrollment')"><strong>{{ patientName }}</strong></span>
       </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, patient">
         <strong v-for="treatment in patient.treatments" :key="treatment.id">
@@ -116,14 +117,14 @@
                
                 <span class="vertical-line-standard-table"></span>
 
-                <a-dropdown>
+                <a-dropdown v-if="user.roleName!=='PHARMA'">
                   <a-button
                     type="primary"
                     :class="`ant-btn-drop-down patient-btn-admin ${getExcursionClass(
                       treatment.excursionId
                     )}`"
                   >
-                    {{ translation['Admin_1_142']
+                    {{ user.roleName === 'CDMO' || user.roleName === 'IMMATICS' || user.roleName === 'CMC' ? 'View' : translation['Admin_1_142']
                     }}<a-icon type="down" class="ml-5" />
                   </a-button>
                   <a-menu slot="overlay">
@@ -135,7 +136,7 @@
                         {{ translation.view_1_750 }}</a
                       >
                     </a-menu-item>
-                    <a-menu-item>
+                    <a-menu-item v-if="user.roleName!=='CMC' && user.roleName!=='CDMO' && user.roleName!=='IMMATICS'">
                       <a
                         href="javascript:;"
                         @click="handleCancelModal(true, record, treatment)"
@@ -147,7 +148,7 @@
                         }}</a
                       >
                     </a-menu-item>
-                    <a-menu-item class="treatment-cancel-placeholder">
+                    <a-menu-item v-if="user.roleName!=='CMC' && user.roleName!=='CDMO' && user.roleName!=='IMMATICS'" class="treatment-cancel-placeholder">
                       <a
                         href="javascript:;"
                         @click="cancelTreatment(record, treatment)"
@@ -159,7 +160,7 @@
                         }}</a
                       >
                     </a-menu-item>
-                    <a-menu-item>
+                    <a-menu-item v-if="user.roleName!=='CMC' && user.roleName!=='CDMO' && user.roleName!=='IMMATICS'">
                       <a
                         href="javascript:;"
                         @click="handleDeleteModal(true, record, treatment)"
@@ -242,7 +243,7 @@
         slot-scope="text, record"
         class="manf-coll-admin-btn"
       >
-        <a-dropdown>
+        <a-dropdown >
           <a-button class="action-button" @click="preventDefault">
             {{ translation['Admin_1_142'] }} <a-icon type="down" />
           </a-button>
@@ -268,7 +269,7 @@
       </span>
 
       <span slot="patientAction" slot-scope="text, record">
-        <a-dropdown :trigger="['click']">
+        <a-dropdown :disabled="user.roleName==='CMC' || user.roleName==='CDMO' || user.roleName==='IMMATICS' ? true : false" :trigger="['click']">
           <a-button class="action-button" @click="preventDefault">
             {{ translation['Suppo_1_33'] }} <a-icon type="down" />
           </a-button>
@@ -608,6 +609,7 @@ export default {
       showDeleteModal: false,
       showPauseModal: false,
       showFlagModal: false,
+      isExist:false,
       phases: PATIENT_TREATMENT_PHASES,
       treatmentCancelReason: '',
       treatmentPauseReason: '',
@@ -631,6 +633,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   watch: {
@@ -786,6 +791,24 @@ export default {
         this.goto(`/hospital/patients/${patient.globalId}?view=Consent`, {
           treatment_id: treatment.globalId,
         })
+    },
+     iFTreatmentExist(treatmnt){
+      this.isExist = false
+      if(treatmnt.length !== 0)
+      {
+        const foundElement = treatmnt.find(item => item.treatmentTypeName === 'IVF');
+        if(foundElement !== undefined){
+          this.isExist = true
+        }
+      }
+      return this.isExist;
+    },
+    hasTreatmentOfType(treatments, treatmentType) {
+        if (treatments.length !== 0) {
+          const foundElement = treatments.find(item => item.treatmentTypeName === treatmentType);
+          return foundElement !== undefined;
+        }
+        return false;
     },
     stepClick(patient, treatment, phase) {
       // insane logic

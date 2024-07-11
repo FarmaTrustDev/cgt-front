@@ -23,41 +23,109 @@
             <span class="treatmentName">{{ treatment.manufacturerPUID }}</span>
           </a-tooltip>
       </template>
+      <template slot="dateOfBirth" slot-scope="dateOfBirth">
+        <span class="treatmentName">{{ _getFormatMoment(dateOfBirth).format('DD-MM-YYYY')  }}</span>
+      </template>
       <template slot="treatmentTypeNameRender" slot-scope="name, treatment">
           <a-tooltip :title="'TreatmentID: ' + treatment.treatment.puid">
             <span class="treatmentName">{{ name }}</span>
           </a-tooltip>
       </template>
       <span slot="action" slot-scope="text, record">
-        <div v-if="showButton(record)">
-          <a-button
-            type="primary"
-            :loading="loading"
-            dashed
-            @click="showConfirm(record, true)"
-          >
-            {{ translation.Accep_1_278 }}
-          </a-button>
-          <a-button
-            class="new-treatment-btn"
-            :loading="loading"
-            dashed
-            @click="showConfirm(record, false)"
-          >
-            {{ translation.Rejec_1_280 }}
-          </a-button>
-        </div>
-        <div v-else-if="showTreamentStatus(record)">
-          <a-badge v-if = record.treatment.isDead>
-            Patient Dead
-          </a-badge>
-          <a-badge v-if = record.treatment.isHold>
-             Patient is on hold
-          </a-badge>
-          <a-badge v-if = record.treatment.isCancel>
-            Patient has been canceled
-          </a-badge>
-        </div>
+       
+        
+          <div v-if="showButton(record)">
+            <div v-if="isPharma()">
+              <a-button
+                  type="primary"
+                  :loading="loading"
+                  dashed
+                  @click="goToDetail(record)"
+                >
+              View Detail
+              </a-button>
+            </div>
+            <div v-if="user.roleName === 'IMMATICS'">
+              
+              <span v-if="!record.isApproved">
+                <a-alert v-if="!record.isApproved" type="error" message="Waiting for CDMO Approval" /></span>
+              <span v-else>
+                <a-button
+                type="primary"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, true)"
+              >
+                {{ translation.Accep_1_278 }}
+              </a-button>
+              <a-button
+                class="new-treatment-btn"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, false)"
+              >
+                {{ translation.Rejec_1_280 }}
+              </a-button>
+              </span>
+            </div>
+            <div v-else-if="user.roleName === 'CMC'">
+              <a-alert v-if="!record.isApproved" type="error" message="Waiting for CDMO approval" />
+              <a-alert v-else type="error" message="Waiting for Immatics Approval" />
+            </div>
+            <div v-else-if="user.roleName === 'CDMO'">
+              <a-alert v-if="record.isApproved" type="error" message="Waiting for Immatics Approval" />
+              <span v-else>
+                
+                <a-button
+                type="primary"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, true)"
+              >
+                {{ translation.Accep_1_278 }}
+              </a-button>
+              <a-button
+                class="new-treatment-btn"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, false)"
+              >
+                {{ translation.Rejec_1_280 }}
+              </a-button>
+              </span>
+            </div>
+            <div v-else>
+              <a-button
+                type="primary"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, true)"
+              >
+                {{ translation.Accep_1_278 }}
+              </a-button>
+              <a-button
+                class="new-treatment-btn"
+                :loading="loading"
+                dashed
+                @click="showConfirm(record, false)"
+              >
+                {{ translation.Rejec_1_280 }}
+              </a-button>
+            </div>
+          </div>
+          <div v-else-if="showTreamentStatus(record)">
+            <a-badge v-if = record.treatment.isDead>
+              Patient Dead
+            </a-badge>
+            <a-badge v-if = record.treatment.isHold>
+              Patient is on hold
+            </a-badge>
+            <a-badge v-if = record.treatment.isCancel>
+              Patient has been canceled
+            </a-badge>
+          </div>
+       
+
       </span>
       <span slot="status" slot-scope="text, record">
         <div v-if="showButton(record)">
@@ -111,11 +179,13 @@ import Form from '~/components/root/manufacturer/treatments/request/Form'
 import SchedulingServices from '~/services/API/SchedulingServices'
 import Filters from '~/components/root/manufacturer/treatments/listing/Filters'
 import withTableCrud from '~/mixins/with-table-crud'
+import userDetail from '~/mixins/user-detail'
 import Signature from '~/components/signature'
 import {
   _getPastMomentStandardFormatted,
   _getFutureMomentStandardFormatted,
 } from '~/services/Helpers/MomentHelpers'
+import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
 import { SCHEDULING_STATUSES } from '~/services/Constant'
 const ActionLink = '/manufacturer/schedules'
 export default {
@@ -124,7 +194,7 @@ export default {
     Filters,
     Signature
   },
-    mixins: [withTableCrud],
+    mixins: [withTableCrud,userDetail],
   props:{
     searchByType: {type : String, default: ''}
   },
@@ -138,6 +208,17 @@ export default {
           dataIndex: 'patientEnrollmentNumber',
           key: 'patientEnrollmentNumber',
           scopedSlots:{customRender: 'pUIDRender'}
+        },
+        {
+          title: `Patient Name`,
+          dataIndex: 'patient.name',
+          key: 'patientName'
+        },
+        {
+          title: `DOB`,
+          dataIndex: 'patient.dob',
+          key: 'dateOfBirth',
+          scopedSlots: { customRender: 'dateOfBirth' },
         },
         {
           title: `${this.$store.getters.getTranslation.TreatType_2_67}`,
@@ -194,9 +275,12 @@ export default {
       
     }
   },
-    computed: {
+  computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   watch:{
@@ -212,6 +296,11 @@ export default {
     }
   }, 
   methods: {
+    _getFormatMoment,
+    goToDetail(record){
+      console.log(record)
+      this.goto('/hospital/patients/'+record.patient.globalId+'?treatment_id='+ record.treatment.globalId +'&view=Screening&dta='+JSON.stringify(record))
+    },
     showConfirm(record, isAccepted) {
       this.isAccepted = isAccepted
       this.selectedRow = record
@@ -248,14 +337,36 @@ export default {
     upsert(values)
     {
       const data = this.selectedRow
-          const performedAction = values.accepted === true ? 'accepted' : 'rejected'
-          SchedulingServices.markScheduleRequest(data.id, values).then(
-            (response) => {
-              this.success('Request ' + performedAction)
-              this.handleModal(false)
-              this.fetch()
-            }
-          )
+      if(this.user.roleName==='CDMO'){
+        console.log(values)
+        const performedAction = values.accepted === true ? 'Approved' : 'Rejected'
+        console.log({patientId: data.patient.id, treatmentId: data.treatment.id , scheduledId: data.id, status: performedAction, reason: ''})
+        const actualData= {
+          patientId: data.patient.id, 
+          treatmentId: data.treatment.id, 
+          scheduledId: data.id, 
+          status: performedAction, 
+          reason: ''
+        }
+        console.log(actualData)
+        const parsedData = JSON.parse(JSON.stringify(actualData))
+        SchedulingServices.markCDMOApproval(data.id, parsedData).then(
+          (response) => {
+            this.success('Request ' + performedAction)
+            this.handleModal(false)
+            this.fetch(this.params)
+          }
+        )
+      }else{
+        const performedAction = values.accepted === true ? 'accepted' : 'rejected'
+        SchedulingServices.markScheduleRequest(data.id, values).then(
+          (response) => {
+            this.success('Request ' + performedAction)
+            this.handleModal(false)
+            this.fetch(this.params)
+          }
+        )
+      }
     },
     handleOk() {
       this.handleSignatureCancel()

@@ -4,17 +4,16 @@
       v-decorator="[
         'logisticId',
         {
-          initialValue: logisticId,
+          initialValue: logisticId === null ?  immaticLogisticId : logisticId,
           rules: [
             {
               required: true,
-              message: 'Please select logistic provider',
+              message: '',
             },
           ],
         },
       ]"
       class="default-select w-100"
-      :placeholder="placeholder"
       :disabled="false"
       size="large"
       @change="onchange"
@@ -48,6 +47,7 @@ export default {
       treatmentTypes: {},
       typeLoading: false,
       logisticsData: {},
+      immaticLogisticId:0,
       placeholder:"Select logistic provider"
     }
   },
@@ -68,7 +68,10 @@ export default {
         OrganizationTypeAlias: this.LOGISTIC_ALIAS,
       })
         .then((response) => {
-          this.treatmentTypes = response.data
+          // this.treatmentTypes = response.data
+          this.treatmentTypes = response.data.filter(item => item.name === 'QuickSTAT')
+          this.immaticLogisticId = this.treatmentTypes[0].id
+          // console.log(this.treatmentTypes)
         })
         .finally(() => (this.typeLoading = false))
     },

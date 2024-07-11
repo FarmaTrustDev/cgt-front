@@ -8,7 +8,6 @@
     <template slot="content">
       <div class="grey-card">
         <treatment-profile-picture-and-detail :treatment="entity" />
-
         <a-card :bordered="false" class="mt-15 default-card-x h-tabs">
           <span>
             <!-- //Steps -->
@@ -62,23 +61,58 @@
           <shipment
             v-if="activeTab === 'INBOUND_SHIPMENT'"
             :treatment="entity"
+          /> 
+          <div v-if="user.roleName === 'CDMO' && entity.phaseId === 9 && activeTab === 'MANUFACTURER'">
+            <process
+              v-if="activeTab === 'MANUFACTURER'"
+              :treatment="entity"
+              @fetchTreatment="fetchTreatment"
+            />
+          </div>
+          <div v-if="user.roleName === 'CMC' && cDMOStatus && activeTab === 'MANUFACTURER'">
+            <process
+              v-if="activeTab === 'MANUFACTURER'"
+              :treatment="entity"
+              @fetchTreatment="fetchTreatment"
+            />
+          </div>
+          <div v-else-if="user.roleName === 'CMC' && cDMORStatus && activeTab === 'MANUFACTURER'">
+            <a-alert
+            type="error"
+            message="QP Rejected by CDMO"
           />
-          <process
-            v-if="activeTab === 'MANUFACTURER'"
-            :treatment="entity"
-            @fetchTreatment="fetchTreatment"
-          />
+          </div>
+          <div v-else-if="user.roleName === 'CMC' && !cDMOStatus && activeTab === 'MANUFACTURER'">
+            <a-alert
+            type="error"
+            message="Waiting for CDMO approval"
+            />
+          </div>
           <div v-if="checkAction()">
             <QrViewer
               v-if="activeTab === 'OUTBOUND_SHIPMENT'"
               :treatment="entity"
             />
           </div>
-          <scheduling-basic-request
-            v-if="activeTab === 'OUTBOUND_SHIPMENT'"
-            :treatment="entity"
-            @fetchTreatment="fetchTreatment"
+          <div v-if="user.roleName === 'CMC' && cMCStatus && activeTab === 'OUTBOUND_SHIPMENT'">
+            <scheduling-basic-request
+              v-if="activeTab === 'OUTBOUND_SHIPMENT' "
+              :treatment="entity"
+              @fetchTreatment="fetchTreatment"
+            />
+          </div>
+          <div v-else-if="user.roleName === 'CMC' && cMCRStatus && activeTab === 'OUTBOUND_SHIPMENT'">
+            <a-alert
+            type="error"
+            message="QP Rejected by CMC"
           />
+          </div>
+          <div  v-else-if="user.roleName === 'CMC' && !cMCStatus && activeTab === 'OUTBOUND_SHIPMENT'">
+            <a-alert
+            type="error"
+            message="Waiting for CMC QP approval"
+          />
+          </div>
         </a-card>
       </div>
     </template>
@@ -133,11 +167,22 @@ export default {
       disableNextTab: false,
       viewAlreadyLoaded: false,
       treatmentCurrentPhase: 1,
+      cMC:false,
+      cDMO:false,
+      cMCStatus:false,
+      cDMOStatus:false,
+      cDMORStatus:false,
+      cMCRStatus:false,
+      patientId:0,
+      treatmentId:0,
     }
   },
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   watch: {
@@ -151,15 +196,45 @@ export default {
   },
   mounted() {
     this.handleActiveTab()
+    this.getQPStatus()
   },
   methods: {
     checkAction() {
       return !(this.entity.isHold | this.entity.isCancel)
     },
     handleActiveTab() {
+      console.log(this.$route.params.id)
       this.activeTab = this.$route.query.view
-
+      this.patientId = this.$route.query.patientId
+      this.treatmentId = this.$route.query.treatmentId
       this.viewAlreadyLoaded = true
+    },
+    getQPStatus(){
+      if(this.user.roleName === 'CMC' && this.activeTab === 'MANUFACTURER' ){
+        this.cMC = true
+        TreatmentServices.getCDMOStatus(this.treatmentId, this.patientId).then((response)=>{
+          if(response.data.status === 'Approved'){
+            this.cDMOStatus =  true
+          }
+          if(response.data.status === 'Rejected'){
+            this.cDMORStatus =  true
+          }
+          // console.log(response)
+        })
+      }
+      if(this.user.roleName === 'CMC'  && this.activeTab === 'OUTBOUND_SHIPMENT'){
+        this.cMC = true
+        TreatmentServices.getCMCStatus(this.treatmentId, this.patientId).then((response)=>{
+          // this.cDMOStatus = response.data.status !== null ? true : false
+          if(response.data.status === 'Approved'){
+            this.cMCStatus =  true
+          }
+          if(response.data.status === 'Rejected'){
+            this.cMCRStatus =  true
+          }
+          // console.log(response)
+        })
+      }
     },
     getTabClass(currentPhase, phase) {
       return (
@@ -213,6 +288,7 @@ export default {
       return 1
     },
     stepClick(record, phase, alias, phaseId) {
+      this.getQPStatus()
       this.disableNextTab = false
       if (
         record.phaseId >= phase.enablePageId
@@ -234,11 +310,19 @@ export default {
       this.activeTab = tab
     },
     fetchTreatment(treatmentId) {
-      this.fetch(treatmentId)
-      this.goto(
-        `/manufacturer/treatments/process/${treatmentId}?view=OUTBOUND_SHIPMENT`
-      )
-      this.setActiveTab('OUTBOUND_SHIPMENT')
+      if(this.user.roleName === 'CDMO'){
+        this.fetch(treatmentId)
+        this.goto(
+          `/manufacturer/treatments`
+        )
+        // this.setActiveTab('MANUFACTURER')
+      }else{
+        this.fetch(treatmentId)
+        this.goto(
+          `/manufacturer/treatments/process/${treatmentId}?view=OUTBOUND_SHIPMENT`
+        )
+        this.setActiveTab('OUTBOUND_SHIPMENT')
+      }
     },
     onChangeSteps(step) {
       // if (!this.disableNextTab) {

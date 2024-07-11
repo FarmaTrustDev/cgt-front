@@ -69,28 +69,28 @@
             type="info"
           ></alert>
         </a-tab-pane>
-        <a-tab-pane key="treatment" :disabled="!tabs.treatmentCollection">
+        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI'"  key="treatment" :disabled="!tabs.treatmentCollection">
           <div
             slot="tab"
             class="tab-title"
             :class="isCompleted(treatment.phaseId > 14)"
           >
-            {{translation.TreatColle_2_1006}}
+            Treatment Administration
           </div>
           <treatmentCollections :treatment="treatment" @callback="callback" />
         </a-tab-pane>
-        <a-tab-pane key="5" :disabled="!tabs.treatmentDelivery">
+        <a-tab-pane v-if="treatment.treatmentTypeName!=='IVF/ICSI' && user.roleName !== 'CLINIC'" key="delivery"  :disabled="!tabs.treatmentDelivery">
           <div
             slot="tab"
             class="tab-title"
-            :class="isCompleted(treatment.phaseId > 13)"
+            :class="isCompleted(treatment.phaseId > 14)"
           >
             {{translation.TreatDeliv_2_1007}}
           </div>
           <treatmentDelivery :treatment="treatment"
         /></a-tab-pane>
         
-        <a-tab-pane key="after-care" :disabled="!tabs.afterCare">
+        <a-tab-pane key="after-care" :disabled="!tabs.shippingDetails">
           <div
             slot="tab"
             class="tab-title"
@@ -142,6 +142,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   mounted() {

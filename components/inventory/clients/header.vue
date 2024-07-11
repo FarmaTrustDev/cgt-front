@@ -2,7 +2,7 @@
   <div>
     <!-- // make its component -->
     <a-row>
-      <a-col :span="3">
+      <a-col v-if="url!==''" :span="3">
         <figure>
           <img class="responsive_img" :src="getImageUrl(url)" />
           <figcaption></figcaption>

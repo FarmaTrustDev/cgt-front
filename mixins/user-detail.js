@@ -16,6 +16,10 @@ export default {
             const user = this.getStoreUserDetails();
             return user.roleName === "MANUFACTURER_ADMIN";
         },
+        isPharma() {
+            const user = this.getStoreUserDetails();
+            return user.roleName === "PHARMA";
+        },
         isScientist() {
             const user = this.getStoreUserDetails();
             return user.roleName === "SCIENTIST_TYPE";
@@ -53,8 +57,25 @@ export default {
             const user = this.getStoreUserDetails();
             return user.roleName === "ADMIN_TYPE";
         },
+        isClinic(){
+            const user = this.getStoreUserDetails();
+            return user.roleName === "CLINIC";
+        },
+        isImmatics(){
+            const user = this.getStoreUserDetails();
+            return user.roleName === "IMMATICS";
+        },
+        isCMC(){
+            const user = this.getStoreUserDetails();
+            return user.roleName === "CMC";
+        },
+        isCDMO(){
+            const user = this.getStoreUserDetails();
+            return user.roleName === "CDMO";
+        },
         getStoreUserDetails() {
             return this.$store.getters.getUser
-        }
+        },
+        
     },
 }

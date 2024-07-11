@@ -130,11 +130,11 @@
 import withCrud from '~/mixins/with-crud'
 import TreatmentTypeService from '~/services/API/TreatmentTypeServices'
 import PageLayout from '~/components/layout/PageLayout'
-import { success } from '~/services/Helpers/notifications'
+import notifications from '~/mixins/notifications'
 import { isEmpty } from '~/services/Utilities'
 export default {
   components: { PageLayout },
-  mixins:[withCrud],
+  mixins:[notifications, withCrud],
   data() {
     return {
       treatmentTypes: [],
@@ -194,22 +194,22 @@ export default {
         this.loading = true
         e.preventDefault()
         this.form.validateFields((err,values)=>{
-            if(!err)
-            {
-                TreatmentTypeService.create(values.treatmentType)
-                .then((response)=>{
-                    success(response.message)
-                    
-                }).catch((e)=>
-                {
-                    if(!isEmpty(e.response))
-                    this.handleResponseModal(true)
-                    this.successResponse = e.response.data.message
-                }).finally(this.loading=false)
+          if(!err)
+          {
+            TreatmentTypeService.create({name: values.treatmentType})
+            .then((response)=>{
+                this.success(response.message)
+                this.fetchTreamentTypes()
                 this.treatmentType = ''
-                this.handleCancel();
-            }
-                this.fetchTreamentTypes();
+                this.handleCancel()
+            })
+            .catch((e) => {
+              if (!isEmpty(e.response)) {
+                console.log(e.response)
+              }
+            })
+            .finally(() => (this.loading = false))
+          }
         })
     },
     deleteType(id)
@@ -245,7 +245,7 @@ export default {
     handleOk(e) {
       this.visible = false
     },
-    handleCancel(e) {
+    handleCancel() {
       this.visible = false
     },
   },

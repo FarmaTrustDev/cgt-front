@@ -20,13 +20,13 @@ export default {
   methods: {
     fetch(params = {}) {
       this.loading = true
-
       this.apiService
         .get({ ...this.params, ...params })
         .then((response) => {
 
           this.$emit('afterFetch', response)
           this.data = response.data
+          // console.log(this.data)
         })
         .catch(this.error)
         .finally(() => {

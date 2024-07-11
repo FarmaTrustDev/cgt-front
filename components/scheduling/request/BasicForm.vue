@@ -173,6 +173,7 @@ import deliveryDetail from '~/components/treatment/treatment/delivery/Detail'
 import { TREATMENT_PHASES } from '~/services/Constant/Phases.js'
 import LogisticLookup from '~/components/lookups/LogisticLookup'
 import SchedulingServices from '~/services/API/SchedulingServices'
+import ShipmentServices from '~/services/API/ShipmentServices'
 import TreatmentServices from '~/services/API/TreatmentServices'
 import { STANDARD_UK_DATE_FORMAT } from '~/services/Constant/DateTime'
 import { isEmpty } from '~/services/Utilities'
@@ -200,8 +201,10 @@ export default {
       deliveryShipment: {},
       submitData:{},
       rejectedData: [],
+      schId:0,
       logisticId: null,
       logisticName: '',
+      currentDateTime:null,
       collectionDate: null,
       deliveryDate: null,
       showData: false,
@@ -222,6 +225,7 @@ export default {
   },
   mounted() {
     this.GetRejectionDetail(this.treatmentId)
+    this.getCurrentDateTime()
   },
   methods: {
     checkAction(){
@@ -261,6 +265,9 @@ export default {
       this.visibleSignature = false
       this.loading = false
     },
+    getCurrentDateTime() {
+      this.currentDateTime = new Date();
+    },
     onSubmit(e) {
       this.loading = true
       e.preventDefault()
@@ -281,12 +288,47 @@ export default {
         return "Reason: " + 'N/A'
       }
     },
+    fetchSchedul()
+    {
+      SchedulingServices.sBytreatment(this.treatment.id).then((response=>{
+        this.schId=response.data
+        console.log(this.schId)
+      }))
+
+    },
     upsert(values)
     {
       SchedulingServices.createForManufacturer(values)
             .then((response) => {
-              this.success(response.message)
-              this.goto('/manufacturer/treatments')
+
+              SchedulingServices.sBytreatment(this.treatment.id).then((response=>{
+              this.schId=response.data
+             
+            
+
+              const dat={accepted:true,isLogistic:false}
+              SchedulingServices.markScheduleRequest(this.schId, dat).then(
+              (response) => {
+                const dat = {LogisticUserName:'Steph',origin:'clinic',pickupAt:this.currentDateTime,senderName:'Christy Walter'}
+                ShipmentServices.pickupCreate(this.schId,dat)
+                  .then((response) => {
+                    const dt = {ReceiverName:'Steph',ReceivingNote:'Test',deliveryAt:this.currentDateTime}
+                    ShipmentServices.deliveryCreate(this.schId, dt)
+                      .then((response) => {
+                        this.success('Submitted successfully')
+                        this.$emit('onCreate', response)
+                      })
+
+                      this.success(response.message)
+                      this.goto('/manufacturer/treatments')
+                  })
+                
+              }
+            )
+          }))
+
+
+              
             })
             .catch(this.error)
     },

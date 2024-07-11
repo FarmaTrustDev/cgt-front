@@ -55,11 +55,12 @@
         :placeholder="translation.Typenote_3_294"
       ></a-textarea
     ></a-form-item>
-    <a-form-item v-if="isAccepted && isManufacturer()" :label="translation.ProduLine_3_921">
+    <a-form-item v-if="isAccepted" :label="translation.ProduLine_3_921">
       <a-select
         v-decorator="[
           `productionLineId`,
           {
+            initialValue: initProduct,
             rules: [],
           },
         ]"
@@ -87,6 +88,7 @@ export default {
     return {
       modalMessage: 'Are you sure you want to accept this treatment?',
       productionLines: [],
+      initProduct:0,
     }
   },
     computed: {
@@ -96,12 +98,15 @@ export default {
     },
   mounted() {
     this.fetchProductionLine()
+    
+
   },
   methods: {
     fetchProductionLine() {
       console.log(this.data)
       ProductionLineServices.get().then((productionLine) => {
         this.productionLines = productionLine.data
+        this.initProduct = this.productionLines[0].id
       })
     },
   },

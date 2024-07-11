@@ -4,7 +4,7 @@
       <a-table
         :columns="columns"
         :row-key="(record) => record.id"
-        :data-source="collections"
+        :data-source="sortedCollections"
         :pagination="false"
         :loading="loading"
         class="square-table collect-sample-data"
@@ -56,7 +56,7 @@
           </a-form-item>
         </template>
 
-        <template slot="uploader" slot-scope="name, row">
+        <template v-if="user.roleName !== 'CDMO' && user.roleName !== 'CMC'" slot="uploader" slot-scope="name, row">
           <InstantUpload
             :saved-list="row.uploads"
             :action="bagService.uploads(row.id)"
@@ -76,7 +76,7 @@
             {{translation.Confi_1_646}}
           </button>
           <a-button
-            v-if="row.isCollected && !treatment.manufacturerCollectionStatus"
+            v-if="row.isCollected && !treatment.manufacturerCollectionStatus && user.roleName!='CLINIC' && user.roleName !== 'CDMO' && user.roleName !== 'CMC'"
             type="primary"
             class="btn-send-mail"
             @click="handleEmailModal(true, row)"
@@ -161,6 +161,15 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user(){
+      return this.$store.getters.getUser
+    },
+    sortedCollections() {
+      if (!this.collections) {
+        return [];
+      }
+      return this.collections.slice().sort((a, b) => a.collectionId - b.collectionId);
+    }
   },
   methods: {
     handleCollectionSubmit(collection) {

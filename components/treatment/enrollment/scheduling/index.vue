@@ -5,6 +5,7 @@
         <Form v-if="!isScheduled" :form="form" :treatment="treatment" :rejection="rejection" />
         <Detail v-else  :entity="entity" />
       </a-form>
+            
     </a-spin>
     <a-modal 
       :visible="visibleSignature"
@@ -111,7 +112,7 @@
         <h2><strong>Appointment Summary</strong></h2>
         <h3 style="color: #1943AE;"><strong>{{patientPUID}} - {{patientName}}</strong></h3>
       </center>
-        <a-row>
+        <a-row style="display: flex; align-items: center;">
           <a-col :span="15">
             <a-row class="row-height"><a-col :span="10"><strong>Collection Date: </strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(collectionDate)).format('DD MMMM YYYY') }}</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Treatment Date: </strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(dated)).format('DD MMMM YYYY') }}</a-col></a-row>
@@ -121,8 +122,8 @@
             <a-row class="row-height"><a-col :span="10"><strong>Partner:</strong></a-col><a-col :span="14">{{ partner }}</a-col></a-row>
             <a-row class="row-height"><a-col :span="10"><strong>Container Date:</strong></a-col><a-col :span="14">{{ _getFormatMoment(getMomentByStandardFormat(collectionDate)).format('DD MMMM YYYY hh:mm') }}</a-col></a-row>
           </a-col>
-          <a-col :span="9">
-              <a-col v-for="user in filteredUsers" :key="user.id"><img class="img-responsive" :src="getImageUrl(getImageFineURL(user.userProfileImageUrl))" width="40" height="30" style="margin-right:15px" />{{ user.name }}</a-col>
+          <a-col :span="9" >
+              <a-col v-for="user in filteredUsers" :key="user.id" style="margin-top: 7px;"><img class="img-responsive" :src="getImageUrl(getImageFineURL(user.userProfileImageUrl))" width="40" height="30" style="margin-right:15px" />{{ user.name }}</a-col>
           </a-col>
         </a-row>
         <center>
@@ -203,6 +204,7 @@ export default {
       collectionDate:'',
       collTimeModal:false,
       visibleSignature:false,
+      treatTN:''
     }
   },
   computed:{
@@ -219,6 +221,8 @@ export default {
   mounted() {
     this.validateIsCreated()
     this.getUrl()
+    this.getTreatData()
+    console.log(this.treatment)
     // this.getUsers()
     // this.getDoctorsWithDays()
     // this.getBasicInfo()
@@ -231,7 +235,11 @@ export default {
         this.url=this.user.userProfileImageUrl.replace(/['"]+/g, '')
       }
     },
-    
+    getTreatData(){
+      TreatmentServices.getById(this.treatment.globalId).then((response)=>{
+        this.treatTN = response.data.treatmentTypeName
+      })
+    },
     getDoctorsWithDays(){
       const dt= new Date(this.startDate)
       const tm=_getFormatMoment(getMomentByStandardFormat(this.startDate)).format('HH:mm')
@@ -350,7 +358,18 @@ export default {
       })
     },
     afterCreate(values) {
-      this.gotoPatient()
+      console.log(values)
+      if(this.treatTN === 'IVF/ICSI'){
+      const dat={accepted:true,isManufactuerer:true}
+      SchedulingServices.markScheduleRequest(values.data.id, dat).then(
+            (response) => {
+              this.gotoPatient()
+            }
+          )
+      }
+      else{
+       this.gotoPatient()
+      }
     },
     afterUpdate(values) {
       this.gotoPatient()
@@ -426,7 +445,9 @@ export default {
           roomName:'A2',
         }
         ).then((response)=>{
-          this.upsert(this.values)
+          console.log(response.data.result)
+          const dat = this.upsert(this.values)
+          console.log(dat)
         })
     },
     handleOk() {

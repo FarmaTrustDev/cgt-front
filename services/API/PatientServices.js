@@ -10,6 +10,12 @@ function get(params = {}) {
     params,
   })
 }
+function getPharmaPatient(params = {}) {
+  return request({
+    url: `${baseApi}/getPharmaPatient`,
+    params,
+  })
+}
 
 function search(params = {}) {
   return request({
@@ -59,7 +65,8 @@ const PatientServices = {
   get,
   getMapInfo,
   destroy,
-  search
+  search,
+  getPharmaPatient
 }
 
 export default PatientServices

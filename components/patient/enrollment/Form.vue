@@ -7,7 +7,7 @@
         /></div>
     <a-spin :spinning="loading">
       <PatientDetail v-if="isPatientExist" :patient-detail="patient"/>
-    <a-form v-else :form="form" :layout="formLayout" @submit="onSubmit">
+    <a-form v-else-if="!isPartnerRequired" :form="form" :layout="formLayout" @submit="onSubmit">
       
       <FormFields   :form="form" :is-created="isCreated" :patient="patient" :country-iso="countryIso"  @getPhoneNumber ="getPhoneNumber" />
       <a-form-item class="pr-2 mt-15">
@@ -19,10 +19,50 @@
         <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
       </a-form-item>
     </a-form>
+
+
+    <a-form v-else-if="isPartnerRequired" :form="formPartner" :layout="formLayoutPartner" @submit="onSubmitPartner">
+      
+      <FormFields   :form="formPartner" :is-created="false" :patient="patient" :country-iso="countryIso"  @getPhoneNumber ="getPhoneNumber" />
+      <a-form-item class="pr-2 mt-15">
+        <FormActionButton
+          :is-created="false"
+          :loading="loading"
+          :text="translation.SavePatie_4_665"
+        />
+        <!-- <a-button type="primary" html-type="submit">Submit</a-button> -->
+      </a-form-item>
+    </a-form>
+
+    <a-modal :visible="isFemale" :footer="null" @cancel="handlePartnerCancel()" @ok="handlePartnerOk()">
+
+
+      <center>
+        <h3>Do you want to register partner?</h3>
+        <!-- <p>There are some errors in your submission. Please correct them.</p> -->
+        <footer>
+          <a-button
+              class="ant-btn"
+              style="padding: 5px 50px"
+              @click="handlePartnerCancel()"
+              >No</a-button
+            >
+            <a-button
+              class="ant-btn ant-btn-primary"
+              style="padding: 5px 50px"
+              @click="handlePartnerOk()"
+              >Yes</a-button
+            >  
+        </footer>
+      </center>
+
+
+
+    </a-modal>
+
     <a-modal 
       :visible="visibleSignature"
       :footer="null"
-      class="error-model"
       @cancel="handleOk()"
       @ok="handleOk()"
     >
@@ -86,13 +126,20 @@ export default {
       visibleModal: false,
       visibleSignature:false,
       formLayout: 'vertical',
+      formLayoutPartner: 'vertical',
       patient: {},
       entityId: null,
+      isPartnerRequired:false,
       isCreated: false,
       isPatientExist: false,
       treatmentData: {},
+      isFemale:false,
+      femalePartnerId:'',
       form: this.$form.createForm(this, {
         name: 'patientEnrollment',
+      }),
+      formPartner: this.$form.createForm(this, {
+        name: 'patientPartnerEnrollment',
       }),
       patientDetail: {},
       visiblePatientDetailModal: false,
@@ -116,6 +163,15 @@ export default {
       this.loading = true
       this.isPatientExist = false
       this.loading = false
+    },
+    handlePartnerCancel(){
+      // this.isPartnerRequired=false
+      this.isFemale=false
+      this.goto(`/hospital/patients`)
+    },
+    handlePartnerOk(){
+      this.isPartnerRequired=true
+      this.isFemale=false
     },
     patientExist(){
       const patientId = this.$route.params.id
@@ -162,7 +218,25 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
+          values.phone = values.phone!==undefined ? '(' + values.countryCode  + ') '+  values.phone : ''
+          values.imageUrl = this.femalePartnerId
+          this.patientDetail = values
+          this.visibleDetialModal(true)
+          // this.upsert(values)
+        } else {
+          this.visibleModal = true
+          this.loading = false
+        }
+      })
+    },
+    onSubmitPartner(e) {
+      this.loading = true
+      e.preventDefault()
+      this.formPartner.validateFields((err, values) => {
+        if (!err) {
           values.phone = '(' + values.countryCode  + ') '+  values.phone
+          // alert(this.femalePartnerId)
+          values.imageUrl = this.femalePartnerId
           this.patientDetail = values
           this.visibleDetialModal(true)
           // this.upsert(values)
@@ -220,23 +294,35 @@ export default {
     create(values) {
       PatientServices.create(values)
         .then((response) => {
-          if (response.data.globalId != null) {
+          if (response.data.result.globalId != null) {
+            // console.log(response.data)
+            if(response.data.result.gender===2){
+              this.femalePartnerId=response.data.result.enrollmentNumber
+              this.isFemale=true 
+            }else{
             const formData = new FormData()
-            formData.append('patientId', response.data.globalId)
+            formData.append('patientId', response.data.result.globalId)
             TreatmentServices.create(formData)
               .then((res) => {
-                this.sendData(res.data.globalId)
-                this.goto(
-                  `/hospital/patients/${response.data.globalId}?view=Consent`,
-                  { treatment_id: res.data.globalId }
-                )
+                // if(res.data.gender===2){
+                  // alert('hello')
+                  // this.isFemale=true                
+                // }else{
+                  this.sendData(res.data.globalId)
+                  this.goto(
+                    `/hospital/patients/${response.data.result.globalId}?view=Consent`,
+                    { treatment_id: res.data.globalId }
+                  )
+                // }
               })
               .catch(this.error)
               .finally(() => (this.loading = false))
+              this.success('Patient enrolled successfully')
+              this.$emit('getNextTab', 'Consent')
+            }
+            
           }
-          this.success('Patient enrolled successfully')
 
-          this.$emit('getNextTab', 'Consent')
         })
         .catch(this.error)
         .finally(() => (this.loading = false))

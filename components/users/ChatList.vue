@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-if="user.roleName !== 'CLINIC' && user.roleName !== 'CMC' && user.roleName !== 'CDMO' && user.roleName !== 'IMMATICS'">
     
     <a-select
         class="
@@ -58,6 +58,9 @@ organizationTypes: [],
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
   },
   watch:{
     translation(newValues, oldValue){
@@ -78,7 +81,11 @@ organizationTypes: [],
     },
     fetch() {
       UserServices.get().then((response) => {
-        this.data = response.data
+        this.data = response.data.filter(item => 
+          item.organizationId >=1 && 
+          (item.id > 1081 && item.id <= 1100 || [3].includes(item.id))
+        )
+        console.log(this.data)
       })
     },
     fetchOrganizationTypes() {
