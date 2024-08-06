@@ -76,6 +76,13 @@
               @fetchTreatment="fetchTreatment"
             />
           </div>
+          <div v-if="user.roleName ==='MANUFACTURER_ADMIN' && activeTab === 'MANUFACTURER'">
+            <process
+              v-if="activeTab === 'MANUFACTURER'"
+              :treatment="entity"
+              @fetchTreatment="fetchTreatment"
+            />
+          </div>
           <div v-else-if="user.roleName === 'CMC' && cDMORStatus && activeTab === 'MANUFACTURER'">
             <a-alert
             type="error"
