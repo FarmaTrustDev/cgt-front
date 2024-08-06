@@ -101,6 +101,13 @@
               :treatment="entity"
             />
           </div>
+          <div v-if="user.roleName === 'MANUFACTURER_ADMIN' && activeTab === 'OUTBOUND_SHIPMENT'">
+            <scheduling-basic-request
+              v-if="activeTab === 'OUTBOUND_SHIPMENT' "
+              :treatment="entity"
+              @fetchTreatment="fetchTreatment"
+            />
+          </div>
           <div v-if="user.roleName === 'CMC' && cMCStatus && activeTab === 'OUTBOUND_SHIPMENT'">
             <scheduling-basic-request
               v-if="activeTab === 'OUTBOUND_SHIPMENT' "
