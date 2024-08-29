@@ -15,6 +15,11 @@
             <span class="treatmentName">{{ name }}</span>
           </a-tooltip>
       </template>
+      <template slot="manf" slot-scope="name, label">
+          <a-tooltip :title="'Hospital PUID: ' + label.hospitalPUID">
+            <span class="treatmentName">{{ name }}</span>
+          </a-tooltip>
+      </template>
       <template slot="print" slot-scope="text, schedule">
         <a-button
           v-for="bag in schedule.treatment.bags"
@@ -50,6 +55,13 @@ export default {
         {
           title: `${this.$store.getters.getTranslation.PatieID_2_264}`,
           dataIndex: 'patientEnrollmentNumber',
+          scopedSlots: { customRender: 'manf'}
+        },
+
+        {
+          title: this.$store.getters.getUser.roleName === 'MANUFACTURER_ADMIN' ? 'Date of Birth' : `${this.$store.getters.getTranslation.PatieName_2_93}` ,
+          dataIndex: this.$store.getters.getUser.roleName === 'MANUFACTURER_ADMIN' ? 'doB' : 'patientName',
+          
         },
         {
           title: `${this.$store.getters.getTranslation['Colle-_4_268']}`,
@@ -72,14 +84,23 @@ export default {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
   },  
   watch:{
     translation(newValues, oldValue){
       if(newValues!==oldValue){
         this.columns[0].title=newValues.PatieID_2_264
-        this.columns[1].title=newValues['Colle-_4_268']
-        this.columns[2].title=newValues.TreatType_2_67
-        this.columns[3].title=newValues.Print_1_111
+        if(this.user.roleName === 'MANUFACTURER_ADMIN'){
+          this.columns[1].title='Date of Birth'
+        }else{
+          this.columns[1].title=newValues.PatieName_2_93
+        }
+        
+        this.columns[2].title=newValues['Colle-_4_268']
+        this.columns[3].title=newValues.TreatType_2_67
+        this.columns[4].title=newValues.Print_1_111
       }
     }
   },  
