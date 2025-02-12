@@ -5,7 +5,7 @@
         <div slot="description">
           <!-- <img :src="getImageUrl('Icons/thermometer-temperature-icon.svg')" alt="" height="25px"> -->
           <span class="display-flex"><h2 class="text-white font-wt-600 font-size-24"> {{ getMessage(treatment.excursionId) }} EXCURSION </h2> <span class="ml-2 pt-05 font-size-16"> {{ redTileName!= null ? '(' + redTileName + ')' : '' }}</span></span>
-          <div class="font-size-20">Contact 0441839380 <span class="font-size-18">Wednesday 25th November 2023 8:20</span></div>
+          <div class="font-size-20">Contact 0441839380 <span class="font-size-18">{{moment(_getFutureMomentStandardFormatted()).add(-2,'day').format('dddd, DD MMMM YYYY')}} at 13:00</span></div>
         </div>
       </div>
     </div>
@@ -13,6 +13,8 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
+import { _getFutureMomentStandardFormatted } from '~/services/Helpers/MomentHelpers'
 // import imagesHelper from '~/mixins/images-helper'
 export default {
   // components: { alert },
@@ -22,7 +24,13 @@ export default {
     redTileName : {type: String}
     // bags: { required: true, type: Object },
   },
+  data(){
+    return{
+    moment,    
+    }
+  },
   methods: {
+    _getFutureMomentStandardFormatted,
     getMessage(excursionId) {
       switch (excursionId) {
         case 1:
