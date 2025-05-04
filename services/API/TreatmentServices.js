@@ -88,6 +88,7 @@ function markManufacturerCollection(id) {
   return request({
     url: `${baseApi}/mark-manufacturer-collection/${id}`,
     method: 'Put',
+    data:{}
   })
 }
 
