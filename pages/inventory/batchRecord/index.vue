@@ -15,8 +15,8 @@
             <a-col :span="24" style="margin-bottom: 200px;"></a-col>
             <a-col :span="3"></a-col>
             <a-col>
-            <a-button type="primary" style="width: 200px; height: 60px; margin-right: 150px;">Novartis <br> Project 345</a-button>
-            <a-button type="primary" style="width: 200px; height: 60px;">GSK <br> Project 348</a-button>
+            <a-button type="primary" style="width: 200px; height: 60px; margin-right: 150px;" @click="goto('/inventory/treatment/batch?id=7157')">Novartis <br> Project 345</a-button>
+            <a-button type="primary" style="width: 200px; height: 60px;" @click="goto('/inventory/treatment/batch?id=660')">GSK <br> Project 348</a-button>
             </a-col>
         <!-- </template> -->
         

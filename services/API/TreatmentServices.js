@@ -73,6 +73,7 @@ function markCompleteCollection(id) {
   return request({
     url: `${baseApi}/mark-complete-collection/${id}`,
     method: 'Put',
+    data:{}
   })
 }
 
@@ -94,6 +95,7 @@ function markTreatmentCollection(id) {
   return request({
     url: `${baseApi}/mark-treatment-collection/${id}`,
     method: 'Put',
+    data:{}
   })
 }
 
