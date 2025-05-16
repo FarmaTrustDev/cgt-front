@@ -32,10 +32,10 @@
                 
               >
               <span slot="extra">
-              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" @click="openViewModal" height="50px" width="40px" style="margin-top: 8px;" /></span>
+              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" :class="{ 'active-image': activeIndex === 11 }" @click="openViewModal('web/inventory/storage/coldStorage.jpeg', 'Liquid nitrogen tanks (Planer 1411V and 320 models) -80 Freezers',11)" height="50px" width="40px" style="margin-top: 8px;" /></span>
             </span>
             </ImageHeading>
-            <a-modal :visible="showModal" :title="translation.Docum_1_507">
+            <a-modal :visible="showModal" :title="head" @cancel="handleModal(false)" @ok="handleModal(false)">
               <img class="img-responsive" :src="getImageUrl(qrUrl)" />
               <template slot="footer">
                 <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
@@ -64,7 +64,7 @@
                   :detail="cl"
                 >
                 <span slot="extra">
-              <span><img :src="getImageUrl(cl.img)" height="50px" width="40px" style="margin-top: 2px;"></span>
+              <span><img :src="getImageUrl(cl.img)" :class="{ 'active-image': activeIndex === index }" @click="openViewModal(cl.qrMr, cl.heading, index)" height="50px" width="40px" style="margin-top: 2px;"></span>
             </span>
                 </TabImageHeading>
               </span>
@@ -90,14 +90,18 @@ export default {
         {
           img: 'web/inventory/Group-1000002123.svg',
           heading: 'Phase–contrast microscope',
+          qrMr: 'web/inventory/storage/maint.jpeg',
         },
         {
           img: 'web/inventory/Group-1000002124.svg',
           heading: 'CO2 incubator',
+          qrMr: 'web/inventory/storage/maint.jpeg',
         },
       ],
       showModal: false,
       qrUrl: 'web/inventory/storage/coldStorage.jpeg',
+      head:'',
+      activeIndex : -1
     }
   },
   computed: {
@@ -112,9 +116,19 @@ export default {
     handleModal(show) {
       this.showModal = show
     },
-    openViewModal(id) {
+    openViewModal(id,head,index) {
       this.showModal = true
+      this.qrUrl = id
+      this.head = head
+      this.activeIndex = index
     },
   }
 }
 </script>
+<style scoped>
+.active-image {
+  border: 2px solid red;
+  border-radius: 50%; /* Makes it circular */
+  padding: 2px;
+}
+</style>

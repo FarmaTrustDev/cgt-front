@@ -2,6 +2,7 @@
     <page-layout
       :loading="false"
       class="specific container smartlab_task_inner"
+      title="Sample Kit"
       :create="false"
     >
       <template slot="content">
@@ -413,7 +414,7 @@
                             <div :style="getColor(row.color)" style="display: flex; align-items: left;">
                                 <a-col style="height: 60px;">
                                     <div style="display: flex; align-items: center; padding-left: 10px; height: 60px;">
-                                        <img :src="getImageUrl(row.url)" style="height: 50px; width: 60px; padding-left: 5px; padding-top: 5px;">
+                                        <img :src="getImageUrl(row.url)" @click="showModalLab(row.img)" style="height: 50px; width: 60px; padding-left: 5px; padding-top: 5px;">
                                         <span style="margin-left: 5px; margin-top: -2px;">{{ row.item }}</span>
                                     </div>
                                 </a-col>
@@ -509,6 +510,7 @@
             {{ c }}
               <span slot="extra">
                 <span><img :src="getImageUrl(c.url)"></span>
+                
               </span>
             
               <!-- :img-properties="{ width: '50px', height: '50px' }" -->
@@ -552,6 +554,13 @@
             <a-button key="submit" class="footer-btn-label no-print" type="primary" @click="printWindow('kit')">Print</a-button>
           </template>
           </a-modal>
+          <a-modal :visible="showModalLa" @cancel="handleModalLab(false)" @ok="handleModalLab(false)">
+              <img class="img-responsive" :src="getImageUrl(labImage)" />
+              <template slot="footer">
+                <a-button @click="handleModalLab(false)">{{translation.cance_1_296}}</a-button>
+                <a-button @click="printWindow()">Print</a-button>
+              </template>
+            </a-modal>
           <a-modal
             :visible="showModal"
             class="modal-design-smart-lab-label"
@@ -813,6 +822,7 @@
           expiryDate: '14/09/2025',
           color:'#F5636342',
           url:'web/inventory/tubes.svg',
+          img: '',
         },
         {
           id: 2,
@@ -821,6 +831,7 @@
           expiryDate: '14/08/2025',
           color:'#2F78E3',
           url:'web/inventory/needles.svg',
+          img: '',
         },
         {
           id: 3,
@@ -829,6 +840,7 @@
           expiryDate: '14/07/2025',
           color:'#FFFBD4',
           url:'web/inventory/masks.svg',
+          img: '',
         },
         {
           id: 4,
@@ -837,6 +849,7 @@
           expiryDate: '14/10/2025',
           color:'#CDF4DC',
           url:'web/inventory/plaster.svg',
+          img: '',
         },
         {
           id: 5,
@@ -845,6 +858,7 @@
           expiryDate: '14/12/2024',
           color:'#FFDBB0',
           url:'web/inventory/gloves.svg',
+          img: '',
         },
         {
           id: 6,
@@ -853,6 +867,7 @@
           expiryDate: '14/06/2025',
           color:'#98DCBC',
           url:'web/inventory/liquid.svg',
+          img: '',
         },
         {
           id: 7,
@@ -861,6 +876,7 @@
           expiryDate: '14/09/2025',
           color:'#D06DFF42',
           url:'web/inventory/antiseptic.svg',
+          img: '',
         },
         {
           id: 8,
@@ -869,6 +885,7 @@
           expiryDate: '14/09/2025',
           color:'#D298FF',
           url:'web/inventory/container.svg',
+          img: '',
         },
         {
           id: 9,
@@ -877,6 +894,7 @@
           expiryDate: '14/09/2025',
           color:'#FFA9A9',
           url:'web/inventory/label.svg',
+          img:'web/inventory/storage/sampleKitLabel.jpeg'
         },
       ],
       filledData:0,
@@ -886,7 +904,8 @@
       checkboxValues:new Array(9).fill(false),
       checkboxBool:new Array(9).fill(''),
       promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
-        
+      labImage:'',
+      showModalLa:false,
       }
     },
     computed: {
@@ -1172,6 +1191,15 @@
       },
       setActiveTav(tab) {
         this.activeTab = tab
+      },
+      showModalLab(im){
+        if(!isEmpty(im)){
+          this.showModalLa = true
+        }
+        this.labImage = im
+      },
+      handleModalLab(opt){
+        this.showModalLa = opt
       },
       printWindow(opt) {
         if(opt==='kit'){
