@@ -35,10 +35,10 @@
               <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" :class="{ 'active-image': activeIndex === 11 }" @click="openViewModal('web/inventory/storage/coldStorage.jpeg', 'Liquid nitrogen tanks (Planer 1411V and 320 models) -80 Freezers',11)" height="50px" width="40px" style="margin-top: 8px;" /></span>
             </span>
             </ImageHeading>
-            <a-modal :visible="showModal" :title="head" @cancel="handleModal(false)" @ok="handleModal(false)">
+            <a-modal :visible="showModal" :title="head" @cancel="handleModal(false, -1)" @ok="handleModal(false, activeIndex)">
               <img class="img-responsive" :src="getImageUrl(qrUrl)" />
               <template slot="footer">
-                <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
+                <a-button @click="handleModal(false, -1)">{{translation.cance_1_296}}</a-button>
                 <a-button @click="printWindow()">Print</a-button>
               </template>
             </a-modal>
@@ -113,8 +113,9 @@ export default {
     },
   },
   methods:{
-    handleModal(show) {
+    handleModal(show, ind) {
       this.showModal = show
+      this.activeIndex = ind
     },
     openViewModal(id,head,index) {
       this.showModal = true

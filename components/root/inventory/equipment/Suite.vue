@@ -60,7 +60,7 @@
             </span></ImageHeading
           >
       </div>  
-      <a-modal :visible="showModal" :title="head" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleModal(false)" @ok="handleModal(false)">
+      <a-modal :visible="showModal" :title="head" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleModal(false, -1)" @ok="handleModal(false, activeIndex)">
        
             <div v-if="single" >           
               <img class="img-responsive" :src="getImageUrl(qrMr)" />
@@ -71,7 +71,7 @@
               <img :src="getImageUrl('web/inventory/storage/right.png')" @click="handleLNav(qrMr)" width="30px">
             </div>
             <template slot="footer">
-                <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
+                <a-button @click="handleModal(false, -1)">{{translation.cance_1_296}}</a-button>
                 <a-button @click="printWindow()">Print</a-button>
             </template>
             </a-modal>
@@ -345,8 +345,9 @@ export default {
     handleInventoryOk(){
       this.showInventoryModal=false
     },
-    handleModal(opt){
+    handleModal(opt, ind){
       this.showModal=opt
+      this.activeIndex = ind
     },
     showCBModal(opt, qru, qrm, sts,head,index){
       this.showModal=opt
