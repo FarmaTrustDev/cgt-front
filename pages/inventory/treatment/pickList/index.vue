@@ -414,9 +414,11 @@
                             <div :style="getColor(row.color)" style="display: flex; align-items: left;">
                                 <a-col style="height: 60px;">
                                     <div style="display: flex; align-items: center; padding-left: 10px; height: 60px;">
-                                        <img :src="getImageUrl(row.url)" @click="showModalLab(row.img)" style="height: 50px; width: 60px; padding-left: 5px; padding-top: 5px;">
+                                        <img :src="getImageUrl(row.url)" style="height: 50px; width: 60px; padding-left: 5px; padding-top: 5px;">
                                         <span style="margin-left: 5px; margin-top: -2px;">{{ row.item }}</span>
+                                        <img v-if="!isEmpty(row.img)" :src="getImageUrl('web/inventory/storage/picIcon.jpeg')" @click="showModalLab(row.img)" style="border-radius: 10px; object-fit: cover; background-color: transparent; height: 40px; width: 40px; padding-top: 1px; margin-left: 75px;">
                                     </div>
+                                    
                                 </a-col>
                             </div>
                         </template>
@@ -427,16 +429,31 @@
                             <div class="mtminus-2">{{ row.expiryDate }}</div>
                         </template>
                     </a-table>
-
+                    <a-col :span="12"></a-col>
+                    <a-col :span="4" style="text-align: right; size: 15px;" class="mt-15">
+                      
+                      <a-upload v-if="!isAlreadyCreated"
+                        name="file"
+                        :default-file-list="savedList"
+                        :before-upload="() => false"
+                        @change="handleChange($event)"
+                      >
+                        <a-button type="primary" html-type="submit" style="width: 200px; height: 60px;"> Upload Pic </a-button>
+                        <slot name="button"></slot>
+                      </a-upload> 
+                    </a-col>
+                    <a-col :span="8">
                     <a-form-item class="mt-15">
+                    
                     <FormActionButton
                         v-if="!isAlreadyCreated"
-                        :disabled="buttonEnable"
+                        :disabled="!upload"
                         text="Submit for QP Approval"
                         @click="submit"
                         :loading="loading"
                     />
                     </a-form-item>
+                  </a-col>
                 </a-form>
             </div>
           </a-card>
@@ -712,6 +729,7 @@
         deliveryDate:null,
         companyName:[],
         addressName:[],
+        savedList:[],
         addressNames:[
           [
             {
@@ -819,7 +837,7 @@
           id: 1,
           item: 'Tubes',
           serialNo: '12345',
-          expiryDate: '14/09/2025',
+          expiryDate: '14/09/2026',
           color:'#F5636342',
           url:'web/inventory/tubes.svg',
           img: '',
@@ -828,7 +846,7 @@
           id: 2,
           item: 'Needles',
           serialNo: '234567',
-          expiryDate: '14/08/2025',
+          expiryDate: '14/08/2027',
           color:'#2F78E3',
           url:'web/inventory/needles.svg',
           img: '',
@@ -837,7 +855,7 @@
           id: 3,
           item: 'Masks',
           serialNo: '352683',
-          expiryDate: '14/07/2025',
+          expiryDate: '14/07/2026',
           color:'#FFFBD4',
           url:'web/inventory/masks.svg',
           img: '',
@@ -846,7 +864,7 @@
           id: 4,
           item: 'Plasters',
           serialNo: '837582',
-          expiryDate: '14/10/2025',
+          expiryDate: '14/10/2026',
           color:'#CDF4DC',
           url:'web/inventory/plaster.svg',
           img: '',
@@ -855,7 +873,7 @@
           id: 5,
           item: 'Gloves',
           serialNo: '374826',
-          expiryDate: '14/12/2024',
+          expiryDate: '14/12/2025',
           color:'#FFDBB0',
           url:'web/inventory/gloves.svg',
           img: '',
@@ -864,7 +882,7 @@
           id: 6,
           item: 'Liquid bags',
           serialNo: '836837',
-          expiryDate: '14/06/2025',
+          expiryDate: '14/06/2026',
           color:'#98DCBC',
           url:'web/inventory/liquid.svg',
           img: '',
@@ -873,7 +891,7 @@
           id: 7,
           item: 'Antiseptic wipes',
           serialNo: '264725',
-          expiryDate: '14/09/2025',
+          expiryDate: '14/09/2026',
           color:'#D06DFF42',
           url:'web/inventory/antiseptic.svg',
           img: '',
@@ -882,7 +900,7 @@
           id: 8,
           item: 'Containers',
           serialNo: '284612',
-          expiryDate: '14/09/2025',
+          expiryDate: '14/09/2026',
           color:'#D298FF',
           url:'web/inventory/container.svg',
           img: '',
@@ -906,6 +924,7 @@
       promptMessage:`${this.$store.getters.getTranslation.Pleasinput_4_578}`,
       labImage:'',
       showModalLa:false,
+      upload:false,
       }
     },
     computed: {
@@ -932,6 +951,7 @@
         this.record=JSON.parse(obj)
         this.sampleStepsByTaskId()
       },
+
       getCurrentStage(){
         SampleServices.getById(this.record.id).then((response)=>{
           this.stageId=response.data.stageId
@@ -1096,6 +1116,28 @@
           borderRadius: '10px',
           marginLeft:'20px'
         };
+    },
+    handleChange(info) {
+      if (info.file.status !== 'uploading') {
+        const file = info;
+        if(file){ 
+          console.log(file.fileList.length)
+          if(file.fileList.length >0){
+            this.upload = true
+          }else{
+            this.upload = false
+          }
+          // this.images[id] = info
+        }
+      }
+      if (info.file.status === 'done') {
+        this.$message.success(`${info.file.name} file uploaded successfully`)
+      } else if (info.file.status === 'error') {
+        this.$message.error(`${info.file.name} file upload failed.`)
+      }
+    },
+    getFile(){
+      console.log('instantUpload')
     },
     openPopViewModal(val, opt) {
         if(opt==='print'){

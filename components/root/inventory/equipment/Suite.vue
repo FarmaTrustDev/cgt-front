@@ -60,21 +60,51 @@
             </span></ImageHeading
           >
       </div>  
-      <a-modal :visible="showModal" :title="head" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleModal(false, -1)" @ok="handleModal(false, activeIndex)">
+      <a-modal :visible="showModal" :title="head" 
+        :dialog-style="{
+          height: 'auto',
+          maxHeight: '90vh',
+          overflow: 'hidden',
+          border: '5px solid #1890ff',
+          borderRadius: '25px',
+          paddingBottom: '0px'
+        }"
+        :body-style="{
+          padding: '1px',
+          margin: '1px',
+        }"
+        @cancel="handleModal(false, -1)" 
+        @ok="handleModal(false, activeIndex)"
+      >
        
-            <div v-if="single" >           
-              <img class="img-responsive" :src="getImageUrl(qrMr)" />
-            </div>
-            <div v-else >     
-              <img class="img-responsive" :src="getImageUrl(currImg)" />
-              <img :src="getImageUrl('web/inventory/storage/left.png')" @click="handleLNav(qrUr)" style="margin-left: 40%; margin-right: 20px;" width="30px">
-              <img :src="getImageUrl('web/inventory/storage/right.png')" @click="handleLNav(qrMr)" width="30px">
-            </div>
-            <template slot="footer">
-                <a-button @click="handleModal(false, -1)">{{translation.cance_1_296}}</a-button>
-                <a-button @click="printWindow()">Print</a-button>
-            </template>
-            </a-modal>
+        <div v-if="single" style="padding-bottom: 1px;">           
+          <img class="img-responsive" :src="getImageUrl(qrMr)" />
+        </div>
+        <div v-else style="padding-bottom: 1px;">     
+          <img class="img-responsive" :src="getImageUrl(currImg)" />
+          <img :src="getImageUrl('web/inventory/storage/left.png')" @click="handleLNav(qrUr)" style="margin-left: 40%; margin-right: 20px;" width="30px">
+          <img :src="getImageUrl('web/inventory/storage/right.png')" @click="handleLNav(qrMr)" width="30px">
+        </div>
+        <template slot="footer">
+          <a-row>
+            <a-col :span="2"></a-col>
+            <a-col :span="3" style="text-align: center;">
+              <span><strong>Status: Clean</strong></span>
+            </a-col>
+            <a-col :span="3"></a-col>
+            <a-col :span="6" style="text-align: center;">
+              <span><strong style="color:blue">Next Scheduled Maintenance: <br> 11 March 2026</strong></span>
+            </a-col>
+            <a-col :span="2"></a-col>
+            <a-col :span="4">
+              <a-button @click="handleModal(false, -1)">{{translation.cance_1_296}}</a-button>
+            </a-col>
+            <a-col :span="4">
+              <a-button @click="printWindow()">Print</a-button>
+            </a-col>
+          </a-row>
+        </template>
+      </a-modal>
         <a-modal :visible="showInventoryModal" class="modal-design-smart-lab" style="border-color: brown; border-width: 1px;" :cancel-text="'Print'" :ok-text="'Submit'" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleInventorygModal(false)" @ok="handleInventoryOk(false)">
           <a-card class="grey-card-smart-lab">
             <hr class="mt-15">
@@ -380,5 +410,10 @@ export default {
   border: 2px solid red;
   border-radius: 50%; /* Makes it circular */
   padding: 2px;
+}
+</style>
+<style scoped>
+.ant-modal {
+  padding-bottom: 1px;
 }
 </style>

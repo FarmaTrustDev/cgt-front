@@ -92,7 +92,7 @@
           </a-row>
           <a-row class="bg-grey pt-2">  
             
-            <a-col :span="24" class="bg-grey">
+            <a-col :span="18" class="bg-grey">
               <a-form-item
                 label="New QP Step"
                 :label-col="{ span: 4 }"
@@ -119,6 +119,13 @@
                 />
               </a-form-item>
             </a-col>
+            <a-col :span="6" class="bg-grey mt-10">
+              <a-form-item>
+                <a-checkbox v-decorator="[`documentRequired`]" :checked="checked" @change="checkChanged" :disabled="false">
+                  <b>Document Required</b>
+                </a-checkbox>
+             </a-form-item>
+            </a-col>
           </a-row>
           <a-row>  
             <a-col>
@@ -133,9 +140,13 @@
         <a-row >
             <a-col :span="24">
             <div v-for="(step, index) in steps" :key="index">
-                <a-col :span="20"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
+              <a-col :span="16"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
                 {{ step.question }}
                 </div>
+              </a-col>
+              <a-col :span="4">
+                <div v-if="step.documentRequired" class="bg-grey pt-10 pb-10 mt-10 pl-2 min-height"><img class="img-responsive" :src="getImageUrl('web/inventory/storage/clipper.jpeg')" height="40px" width="40px" /></div>
+                <div v-else class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height"></div>
               </a-col>
               <a-col :span="4" class="mt-15">
                 <a-button @click="editQPProcess(step.id)" class="ml-20">Edit</a-button>
@@ -162,12 +173,13 @@
   // import StepServices from '~/services/API/StepServices'
   import QPProcessServices from '~/services/API/QPProcessServices'
   import routeHelpers from '~/mixins/route-helpers'
+  import imagesHelper from '~/mixins/images-helper'
   // import {success} from '~/services/Helpers/notifications'
   export default {
     components: {
       PageLayout,
     },
-    mixins: [routeHelpers],
+    mixins: [routeHelpers,imagesHelper],
     data() {
       return {
         ticket: {
@@ -223,7 +235,8 @@
         processName:'',
         taskName:'',
         taskId:'',
-        sopList: []
+        sopList: [],
+        checked:false
       }
     },
     watch: {
@@ -299,9 +312,11 @@
         QPProcessServices.getById(id).then((response)=>{
           this.stepForm.setFieldsValue({
             question:response.data.question,
-            id:response.data.id
+            id:response.data.id,
+            documentRequired: response.data.documentRequired
           }
           )
+          this.checked = response.data.documentRequired
           this.stepAct = 'Update'
           this.isCreatedStep = false
         })
@@ -320,6 +335,9 @@
       },
       addSoftwareModel(e) {
         this.visibleAddSoftware = e
+      },
+      checkChanged(e){
+        this.checked=e.target.checked;
       },
       showStep(e) {
         this.show = e

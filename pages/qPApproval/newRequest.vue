@@ -57,19 +57,51 @@
         </a-modal>
         <a-modal
         :visible="visibleStepModal"
+        :width="600"
+        :dialog-style="{ left: '20%', top:'9%', border: '5px solid #1890ff', borderRadius: '25px',paddingBottom: '0px' }"
+        :loading = "loading"
+        :footer="null"
+        @cancel="stepModal(false)"
+        >
+          <TabImageHeading
+            :img-properties="{ width: '800px', height: '500px' }"
+            class="mt-5"
+          >
+            <span slot="extra">
+              <span><img :src="getImageUrl('web/inventory/storage/popUpImage.jpeg')" style="margin-top: 2px; margin-left: 1%; width: 520px; height: 750px;"></span>
+            </span>
+          </TabImageHeading>    
+        </a-modal>
+        <a-modal
+        :dialog-style="{ right: '10%', top:'9%', border: '5px solid #1890ff', borderRadius: '25px',paddingBottom: '0px' }"
+        :visible="visibleStepModal"
+        :width="600"
         :loading = "loading"
         @cancel="stepModal(false)"
         >
-        <Process
-                :collections="dummyCollection"
-                :bag-id="'BUID-123'"
-                :type-id="typeId"
-                @fetchBags="() => {}"
-                @updateId="updateId"
-              />
+        
+              <a-table class="rounded-table" :loading="loading" :columns="popColumns" :pagination="false" :data-source="dummyCollection">
+                <template slot="isCollected" slot-scope="isCollected">
+                  <a-icon
+                    v-if="isCollected"
+                    class="text-success"
+                    style="font-size: 1rem"
+                    type="check"
+                  >
+                  </a-icon>
+                  <a-icon
+                  v-else
+                  type="close"
+                  style="font-size: 1rem"
+                  class="color-red"
+                  >
+                  </a-icon>
+                </template>
+              </a-table>
+                       
               <template slot="footer" >
                 <!--  -->
-            <a-button style="background-color:#4CAF50; color:white" @click="submitStatus(approved)" dashed>
+                    <a-button style="background-color:#4CAF50; color:white" @click="submitStatus(approved)" dashed>
                         Approve
                     </a-button>
                     <!-- -->
@@ -88,12 +120,17 @@
 <script>
     import QPStatusServices from '~/services/API/QPStatusServices'
     import { _getFormatMoment } from '~/services/Helpers/MomentHelpers'
-    import Process from '~/components/root/inventory/Process'
+    // import Process from '~/components/root/inventory/Process'
     import SampleProcessServices from '~/services/API/SampleProcessServices'
+    import TabImageHeading from '~/components/cards/TabImageHeading'
+    import imagesHelper from '~/mixins/images-helper'
+
 export default {
   components:{
-    Process
+    TabImageHeading
+    // Process
   },
+  mixins:[imagesHelper],
   data() {
     return {
       column:[
@@ -129,6 +166,31 @@ export default {
             },
             
             ],
+        popColumns: [
+        {
+          title: `${this.$store.getters.getTranslation.Quest_1_580}`,
+          dataIndex: 'name',
+          width: '30%',
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Check_1_454}`,
+          dataIndex: 'isCollected',
+          scopedSlots: { customRender: 'isCollected' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.Notes_1_350}`,
+          dataIndex: 'notes',
+          scopedSlots: { customRender: 'notes' },
+        },
+        {
+          title: `${this.$store.getters.getTranslation.SuppoDocum_2_581}`,
+          scopedSlots: { customRender: 'email' },
+        },
+        /* {
+          title: `${this.$store.getters.getTranslation.Actio_1_220}`,
+          scopedSlots: { customRender: 'action' },
+        }, */
+      ],
       loading: false,
       data: [],
       approved:'Approved',
