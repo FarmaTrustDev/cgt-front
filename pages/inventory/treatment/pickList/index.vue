@@ -448,7 +448,7 @@
                     <FormActionButton
                         v-if="!isAlreadyCreated"
                         :disabled="!upload"
-                        text="Submit for QP Approval"
+                        text="Submit for Approval"
                         @click="submit"
                         :loading="loading"
                     />

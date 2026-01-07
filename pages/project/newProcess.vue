@@ -1,14 +1,12 @@
 <template>
     <PageLayout :create="false" title="Add Steps to Project">
       <div slot="content">
-        <a-form :form="form" >
-          <div class="bd-r-5">
-            <a-row class="bg-grey pt-2">
-              <a-col :span="24" class="ml-10">
+        <a-form :form="form">
+              <a-col :span="24" style="margin-bottom: -50px;">
                 <a-form-item
                   label="Study/Project Name "
-                  :label-col="{ span: 4 }"
-                  :wrapper-col="{ span: 18 }"
+                  :label-col="{ span: 24 }"
+                  :wrapper-col="{ span: 24 }"
                   class="pt-3"
                 >
                   <a-input
@@ -27,18 +25,12 @@
                         ],
                       },
                     ]"
-                    style="background-color: white"
                     placeholder="Project Name"
                   />
                 </a-form-item>
               </a-col>
-            </a-row>
-            
-
-          </div>
         </a-form>
-        <a-form :form="stepForm" @submit="onSubmitStep" v-if="show && isCreated">
-          <a-row >
+        <a-form v-if="show && isCreated" :form="stepForm" layout="formLayout" @submit="onSubmitStep">
             <a-form-item>
               <a-input
                 type="hidden"
@@ -61,19 +53,19 @@
                 ]"
               />
             </a-form-item>
-          </a-row>
-          <a-row class="bg-grey pt-2">  
-            <a-col :span="24" class="bg-grey">
+          <a-row class="pt-2" >  
+            <a-col :span="24">
               <a-form-item
                 label="New Step"
-                :label-col="{ span: 4 }"
-                :wrapper-col="{ span: 18 }"
-                class="ml-10"
+                :label-col="{ span: 24 }"
+                :wrapper-col="{ span: 24 }"
+                
               >
                 <a-input
                   v-decorator="[
                     'name',
                     {
+                      initialValue: name,
                       rules: [
                         {
                           required: true,
@@ -85,16 +77,119 @@
                       ],
                     },
                   ]"
-                  style="background-color: white"
                   placeholder="Step Name"
                 />
               </a-form-item>
+            </a-col>
+            </a-row>
+            <a-row class="pt-2" >
+            <a-col :span="5">
+              <a-form-item
+                label="Color"
+                :label-col="{ span: 24 }"
+                :wrapper-col="{ span: 22 }"
+                
+              >
+                <a-input
+                  v-decorator="[
+                    'colorName',
+                    {
+                      initialValue: colorName,
+                      rules: [
+                        {
+                          message: 'Enter Color',
+                        },
+                      ],
+                    },
+                  ]"
+                  placeholder="Color"
+                />
+              </a-form-item>
+            </a-col>
+            <a-col :span="5">
+              <a-form-item
+                label="Color"
+                :label-col="{ span: 24 }"
+                :wrapper-col="{ span: 22 }"
+                
+              >
+                <a-input
+                  v-decorator="[
+                    'serialNumber',
+                    {
+                      initialValue: serialNumber,
+                      rules: [
+                        {
+                          message: 'Enter Serial Number',
+                        },
+                      ],
+                    },
+                  ]"
+                  placeholder="Serial"
+                />
+              </a-form-item>
+            </a-col>
+            <a-col :span="5">
+              <a-form-item
+                label="Expiry Date"
+                :label-col="{ span: 24 }"
+                :wrapper-col="{ span: 22 }"
+                
+              >
+                <a-input
+                  v-decorator="[
+                    'expiryDate',
+                    {
+                      initialValue: expiryDate,
+                      rules: [
+                        {
+                          message: 'Date',
+                        },
+                      ],
+                    },
+                  ]"
+                  placeholder="Serial"
+                />
+              </a-form-item>
+            </a-col>
+            <a-col :span="5">
+              <a-form-item
+                label="Expiry Date"
+                :label-col="{ span: 24 }"
+                :wrapper-col="{ span: 22 }"
+        >
+        <a-select
+            v-decorator="[
+              'inputType',
+              {
+                initialValue: inputType,
+                rules: [
+                  {
+                    required: true
+                  },
+                ],
+              },
+            ]"
+            placeholder="Input Type"
+          >
+            <a-select-option v-for="type in inpytType" :key="type">
+              {{ type }}
+            </a-select-option>
+          </a-select>
+        </a-form-item>
+            </a-col>
+            <a-col :span="4">
+              <a-form-item class="mt-25">
+                <a-checkbox v-decorator="[`documentRequired`]" :checked="checked" @change="checkChanged" :disabled="false">
+                  <b>Document Required</b>
+                </a-checkbox>
+             </a-form-item>
             </a-col>
           </a-row>
           <a-row>  
             <a-col>
               <a-form-item>
-                <FormActionButton :custom-text="stepAct" class="mt-40" />
+                <FormActionButton :custom-text="stepAct" class="mt-10" />
                 <!-- @click="showStep(false)" -->
               </a-form-item>
             </a-col>
@@ -104,9 +199,25 @@
         <a-row >
             <a-col :span="24">
             <div v-for="(step, index) in steps" :key="index">
-              <a-col :span="20"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
+              <a-col :span="10"><div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">
                 {{ step.name }}
                 </div>
+              </a-col>
+              <a-col :span="2">
+                <div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height"></div>
+              </a-col>
+              <a-col :span="2">
+                <div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height"></div>
+              </a-col>
+              <a-col :span="2">
+                <div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height"></div>
+              </a-col>
+              <a-col :span="2">
+                <div class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height">{{ step.inputType }}</div>
+              </a-col>
+              <a-col :span="2">
+                <div v-if="step.documentRequired" class="bg-grey pt-10 pb-10 mt-10 pl-2 min-height"><img class="img-responsive" :src="getImageUrl('web/inventory/storage/clipper.jpeg')" height="40px" width="40px" /></div>
+                <div v-else class="bg-grey pt-20 pb-10 mt-10 pl-2 min-height"></div>
               </a-col>
               <a-col :span="4" class="mt-15">
                 <a-button @click="editStep(step.id)" class="ml-20">Edit</a-button>
@@ -117,7 +228,7 @@
         </a-row>
         <a-row >
             <a-col :span="24">
-                <a-form-item class="text-right mt-20">
+                <a-form-item class="text-right mt-10">
                     <a-button type="primary" @click="goto('/project')">Submit</a-button>
                 </a-form-item>
             </a-col>
@@ -132,12 +243,14 @@
   import ProjectServices from '~/services/API/ProjectServices'
   import StepServices from '~/services/API/StepServices'
   import routeHelpers from '~/mixins/route-helpers'
+  import imagesHelper from '~/mixins/images-helper'
+  import {INPUT_TYPES} from '~/services/Constant/index'
   // import {success} from '~/services/Helpers/notifications'
   export default {
     components: {
       PageLayout,
     },
-    mixins: [routeHelpers],
+    mixins: [routeHelpers,imagesHelper],
     data() {
       return {
         ticket: {
@@ -158,8 +271,10 @@
         visibleAddEquipment: false,
         dummyData: [],
         steps: [],
+        formLayout: 'vertical',
         isCreatedSoftware: false,
         isCreatedEquipment: false,
+        inpytType:INPUT_TYPES,
         columns: [
           {
             title: 'Equipment Name',
@@ -191,7 +306,8 @@
         processId: '',
         processName:'',
         sopList: [],
-        isCreatedStep:true
+        isCreatedStep:true,
+        checked:false
       }
     },
     watch: {
@@ -267,9 +383,12 @@
         StepServices.getById(id).then((response)=>{
           this.stepForm.setFieldsValue({
             name:response.data.name,
-            id:response.data.id
+            id:response.data.id,
+            documentRequired: response.data.documentRequired,
+            inputType: response.data.inputType
           }
           )
+          this.checked = response.data.documentRequired
           this.stepAct = 'Update'
           this.isCreatedStep = false
         })
@@ -340,6 +459,7 @@
               if (this.isCreatedStep) {
                 StepServices.create(values).then((response) => {
                   // this.showStep(false)
+                  this.checked = false
                   this.getByProcessId(this.processId)
                   this.loading = false
                   this.stepForm.setFieldsValue({ name: '' })
@@ -348,6 +468,7 @@
               else{
                 StepServices.updateStep(values).then((response) => {
                   // this.showStep(false)
+                  this.checked = false
                   this.getByProcessId(this.processId)
                   this.loading = false
                   this.stepForm.setFieldsValue({ name: '' })
@@ -422,6 +543,9 @@
           this.getByProcessId(response.data.id)
         })
       },
+      checkChanged(e){
+        this.checked=e.target.checked;
+      },
       handleCheck(isCheck, id) {
         this.pushListArray(isCheck, id)
       },
@@ -455,4 +579,3 @@
     },
   }
   </script>
-  

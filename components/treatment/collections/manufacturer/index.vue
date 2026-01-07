@@ -11,7 +11,7 @@
           :loading="loading"
           @click="completeAllBags(bags)"
           ><div v-if="user.roleName !== 'CMC' && user.roleName !== 'CDMO'">{{translation.ComplColle_3_985}}</div>
-          <div v-else>Submit for QP Approval</div>
+          <div v-else>Submit for Approval</div>
         </a-button>
       </div>
       <a-modal 
