@@ -114,7 +114,7 @@
         <FormActionButton
         v-if="!isEmpty(collections[0]) ? !collections[0].isCollected : true"
           :disabled="buttonEnable"
-          text="Submit for QP Approval"
+          text="Submit for Approval"
           @click="submit"
           :loading="loading"
         />

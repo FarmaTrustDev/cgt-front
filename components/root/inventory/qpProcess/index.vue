@@ -185,7 +185,7 @@
         />
       </a-form-item>
       </a-form>
-      <a-modal :visible="showInventoryModal" class="modal-design-smart-lab" :cancel-text="'Print'" :ok-text="'Submit'" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleInventorygModal(false)" @ok="handleInventoryOk(false)">
+        <a-modal :visible="showInventoryModal" class="modal-design-smart-lab" :cancel-text="'Print'" :ok-text="'Submit'" :dialog-style="{ right: '20%', top:'5%' }" @cancel="handleInventorygModal(false)" @ok="handleInventoryOk(false)">
           <a-card class="grey-card-smart-lab">
             <status-detail :heading-title="translation.MaterRecei_2_677" :statusDetails="statusDetails" :status="translation.Inven_1_538" />
             <hr class="mt-15">
@@ -204,12 +204,12 @@
                   <a-col :span="1" class="text-muted" >{{translation['Date:_1_664']}} </a-col><a-col :span="8">{{custDD.date}}</a-col>
                 </a-row>
             </a-card>
-      </a-card>    
+          </a-card>    
           <template slot="footer">
             <a-button @click="printWindow()">{{translation.Print_1_111}}</a-button>
             <a-button type="primary" @click="handleInventoryOk(false)">{{translation.Submi_1_248}}</a-button>
           </template>
-    </a-modal>
+        </a-modal>
     </div>
   </template>
   <script>
@@ -893,8 +893,8 @@ export const contentTrackingQA= [
               }).catch(this.error).finally(this.loading = false)
       },
       handleInventorygModal(){
-      this.showInventoryModal=false
-    },
+        this.showInventoryModal=false
+      },
     handleInventoryOk(){
       /* if(this.inboundCheck===true){
         this.showQuaranitineModal=true

@@ -86,7 +86,7 @@ export const TIME_SLOTS = [
   }, 
 ]
 export const BLOOD_TYPES = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
-
+export const INPUT_TYPES = ['Yes/No','Number', 'Text', 'DateTime']
 export const GENDER = [
   {
     id: 1,

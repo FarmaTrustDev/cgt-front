@@ -35,6 +35,7 @@ function put(id, data) {
 function markCollectionComplete(id) {
   return request({
     url: `${baseApi}/markCollectionComplete/${id}`,
+    data:{},
     method: 'put',
   })
 }

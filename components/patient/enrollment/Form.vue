@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div> <FormActionButton
+    <div v-if="user.roleName!=='CMC' && user.roleName!=='CDMO' && user.roleName!=='IMMATICS'"> 
+      <FormActionButton
         v-if="isPatientExist"    
       @click="enableForm()"
           :text="translation.Edit_1_450"
-        /></div>
+        />
+    </div>
     <a-spin :spinning="loading">
       <PatientDetail v-if="isPatientExist" :patient-detail="patient"/>
     <a-form v-else-if="!isPartnerRequired" :form="form" :layout="formLayout" @submit="onSubmit">
@@ -151,6 +153,9 @@ export default {
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   mounted() {

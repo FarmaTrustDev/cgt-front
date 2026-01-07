@@ -154,9 +154,9 @@
 import userDetail from '~/mixins/user-detail'
 import routeHelpers from '~/mixins/route-helpers'
 import TimeAndTreatmentList from '~/components/statistics/TimeAndTreatmentList'
-import treatmentStats from '~/components/statistics/treatment'
+import TreatmentStats from '~/components/statistics/treatment'
 export default {
-  components: { treatmentStats, TimeAndTreatmentList },
+  components: { TreatmentStats, TimeAndTreatmentList },
   mixins: [routeHelpers, userDetail],
   data() {
     return {}

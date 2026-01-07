@@ -1,13 +1,14 @@
 <template>
   <div class="consent-page">
-    <h3 v-if="user.roleName !== 'CLINIC'" class="page-title">{{ translation.PatieConse_2_685 }}</h3>
-    <h3 v-else class="page-title">Consent form disabled for Sandbox</h3>
+    <h3 v-if="user.roleName === 'CLINIC' || user.roleName === 'IMMATICS' || user.roleName === 'CDMO' || user.roleName === 'CMC'" class="page-title">Consent form disabled for Sandbox</h3>
+    <h3 v-else class="page-title">{{ translation.PatieConse_2_685 }}</h3>
+    
     <a-form :form="form" :layout="formLayout" @submit="onSubmit">
       <Upload
         :default-file-list="treatment.consentFiles"
         :extensions="allowedExtensions"
         @handleChange="handleChange"
-        :disabled = "user.roleName === 'CLINIC' ? true : false"
+        :disabled = "(user.roleName === 'CLINIC' || user.roleName === 'IMMATICS' || user.roleName === 'CDMO' || user.roleName === 'CMC') ? true : false"
       />
       <a-form-item>
         <a-checkbox
@@ -49,6 +50,7 @@
       <FormActionButton
         v-if="isInConsentPhase(treatment)"
         :loading="loading"
+        :disabled="(user.roleName === 'IMMATICS' || user.roleName === 'CDMO' || user.roleName === 'CMC')"
         :text=" user.roleName ==='CLINIC' ? 'Continue Next' : translation.SaveConse_4_695"
       />
     </a-form>

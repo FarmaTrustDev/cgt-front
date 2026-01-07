@@ -44,14 +44,14 @@
                   }}</a>
           </span>
         </template>
-        <template slot="qp" slot-scope="qp">
+        <template slot="cp" slot-scope="cp">
           <span>
             <a-button
               class="print-btn"
               type="primary"
               size="small"
-              @click="goto(`/project/qpProcess?id=${qp.globalId}`)"
-              >Create QP</a-button
+              @click="goto(`/project/newProcess?id=${cp.globalId}`)"
+              >Create Process</a-button
             >
           </span>
         </template>
@@ -177,9 +177,9 @@
             scopedSlots: { customRender: 'investigator' },
           },
           {
-            title: 'Create QP',
-            key: 'qp',
-            scopedSlots: { customRender: 'qp' },
+            title: 'Create Process',
+            key: 'cp',
+            scopedSlots: { customRender: 'cp' },
           },
           {
             title: `${this.$store.getters.getTranslation.Actio_1_220}`,

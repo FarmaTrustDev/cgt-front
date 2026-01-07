@@ -32,14 +32,29 @@
                 
               >
               <span slot="extra">
-              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" @click="openViewModal" height="50px" width="40px" style="margin-top: 8px;" /></span>
+              <span><img :src="getImageUrl('web/inventory/Group-1000002122.svg')" :class="{ 'active-image': activeIndex === 11 }" @click="openViewModal('web/inventory/storage/coldStorage.jpeg', 'Liquid nitrogen tanks (Planer 1411V and 320 models) -80 Freezers',11)" height="50px" width="40px" style="margin-top: 8px;" /></span>
             </span>
             </ImageHeading>
-            <a-modal :visible="showModal" :title="translation.Docum_1_507">
+            <a-modal :visible="showModal" :dialog-style="{ right: '20%', top:'5%', border: '5px solid #1890ff', borderRadius: '25px',paddingBottom: '0px' }"  :title="head" @cancel="handleModal(false, -1)" @ok="handleModal(false, activeIndex)">
               <img class="img-responsive" :src="getImageUrl(qrUrl)" />
               <template slot="footer">
-                <a-button @click="handleModal(false)">{{translation.cance_1_296}}</a-button>
-                <a-button @click="printWindow()">Print</a-button>
+                <a-row>
+                  <a-col :span="2"></a-col>
+                  <a-col :span="3" style="text-align: center;">
+                    <span><strong>Status: Clean</strong></span>
+                  </a-col>
+                  <a-col :span="3"></a-col>
+                  <a-col :span="6" style="text-align: center;">
+                    <span><strong style="color:blue">Next Scheduled Maintenance: <br> 11 March 2026</strong></span>
+                  </a-col>
+                  <a-col :span="2"></a-col>
+                  <a-col :span="4">
+                    <a-button @click="handleModal(false, -1)">{{translation.cance_1_296}}</a-button>
+                  </a-col>
+                  <a-col :span="4">
+                    <a-button @click="printWindow()">Print</a-button>
+                  </a-col>
+                </a-row>
               </template>
             </a-modal>
             </a-card>
@@ -64,7 +79,7 @@
                   :detail="cl"
                 >
                 <span slot="extra">
-              <span><img :src="getImageUrl(cl.img)" height="50px" width="40px" style="margin-top: 2px;"></span>
+              <span><img :src="getImageUrl(cl.img)" :class="{ 'active-image': activeIndex === index }" @click="openViewModal(cl.qrMr, cl.heading, index)" height="50px" width="40px" style="margin-top: 2px;"></span>
             </span>
                 </TabImageHeading>
               </span>
@@ -90,14 +105,18 @@ export default {
         {
           img: 'web/inventory/Group-1000002123.svg',
           heading: 'Phase–contrast microscope',
+          qrMr: 'web/inventory/storage/maint.jpeg',
         },
         {
           img: 'web/inventory/Group-1000002124.svg',
           heading: 'CO2 incubator',
+          qrMr: 'web/inventory/storage/maint.jpeg',
         },
       ],
       showModal: false,
       qrUrl: 'web/inventory/storage/coldStorage.jpeg',
+      head:'',
+      activeIndex : -1
     }
   },
   computed: {
@@ -109,12 +128,26 @@ export default {
     },
   },
   methods:{
-    handleModal(show) {
+    handleModal(show, ind) {
       this.showModal = show
+      this.activeIndex = ind
     },
-    openViewModal(id) {
+    openViewModal(id,head,index) {
       this.showModal = true
+      this.qrUrl = id
+      this.head = head
+      this.activeIndex = index
+    },
+    printWindow(){
+      window.print()
     },
   }
 }
 </script>
+<style scoped>
+.active-image {
+  border: 2px solid red;
+  border-radius: 50%; /* Makes it circular */
+  padding: 2px;
+}
+</style>

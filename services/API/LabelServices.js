@@ -30,6 +30,7 @@ function update(status, id) {
   return request({
     url: `${baseApi}/${id}/${status}`,
     method: 'Put',
+    data:{}
   })
 }
 const LabelServices = {

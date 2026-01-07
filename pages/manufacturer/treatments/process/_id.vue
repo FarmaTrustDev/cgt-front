@@ -76,6 +76,13 @@
               @fetchTreatment="fetchTreatment"
             />
           </div>
+          <div v-if="user.roleName ==='MANUFACTURER_ADMIN' && activeTab === 'MANUFACTURER'">
+            <process
+              v-if="activeTab === 'MANUFACTURER'"
+              :treatment="entity"
+              @fetchTreatment="fetchTreatment"
+            />
+          </div>
           <div v-else-if="user.roleName === 'CMC' && cDMORStatus && activeTab === 'MANUFACTURER'">
             <a-alert
             type="error"
@@ -92,6 +99,13 @@
             <QrViewer
               v-if="activeTab === 'OUTBOUND_SHIPMENT'"
               :treatment="entity"
+            />
+          </div>
+          <div v-if="user.roleName === 'MANUFACTURER_ADMIN' && activeTab === 'OUTBOUND_SHIPMENT'">
+            <scheduling-basic-request
+              v-if="activeTab === 'OUTBOUND_SHIPMENT' "
+              :treatment="entity"
+              @fetchTreatment="fetchTreatment"
             />
           </div>
           <div v-if="user.roleName === 'CMC' && cMCStatus && activeTab === 'OUTBOUND_SHIPMENT'">
