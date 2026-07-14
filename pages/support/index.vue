@@ -240,9 +240,147 @@ export default {
     },
     fetch(params = {}) {
       // console.log(params.reference_Id)
+      const response = {
+        "success": true,
+        "ticket": [
+          {
+            "id": 1001,
+            "subject": "Patient Transport Request",
+            "status_Id": "1",
+            "status_Name": "In progress",
+            "priority": 1,
+            "assignee_Id": "DAC3138P",
+            "reporter_Id": "USR001",
+            "reference_Id": "BAG10001",
+            "global_Id": "c8b34fd8-4b95-44cb-9dc6-1d8b5d4c1001",
+            "reporter_name": "Chris Murphy (DAC3138P)",
+            "description": "Patient transport has been requested.",
+            "created_At": "2026-07-14T08:15:00",
+            "updated_At": "2026-07-14T09:10:00",
+            "stackHolder": [
+              "Hospital",
+              "Logistics"
+            ],
+            "entityBelongsToId": "1",
+            "entityId": "101",
+            "patient_Id": "PAT1001",
+            "last_Updated_At": "2 hours ago"
+          },
+          {
+            "id": 1002,
+            "subject": "Blood Sample Collection",
+            "status_Id": "1",
+            "status_Name": "In progress",
+            "priority": 2,
+            "assignee_Id": "DAC3150P",
+            "reporter_Id": "USR002",
+            "reference_Id": "BAG10002",
+            "global_Id": "c8b34fd8-4b95-44cb-9dc6-1d8b5d4c1002",
+            "reporter_name": "John Smith (DAC3150P)",
+            "description": "Waiting for courier pickup.",
+            "created_At": "2026-07-14T07:30:00",
+            "updated_At": "2026-07-14T08:45:00",
+            "stackHolder": [
+              "Laboratory"
+            ],
+            "entityBelongsToId": "1",
+            "entityId": "101",
+            "patient_Id": "PAT1002",
+            "last_Updated_At": "3 hours ago"
+          },
+          {
+            "id": 1003,
+            "subject": "Temperature Excursion",
+            "status_Id": "2",
+            "status_Name": "Resolved",
+            "priority": 1,
+            "assignee_Id": "DAC3200P",
+            "reporter_Id": "USR003",
+            "reference_Id": "BAG10003",
+            "global_Id": "c8b34fd8-4b95-44cb-9dc6-1d8b5d4c1003",
+            "reporter_name": "Emma Thompson (DAC3200P)",
+            "description": "Issue resolved after investigation.",
+            "created_At": "2026-07-13T10:00:00",
+            "updated_At": "2026-07-13T13:15:00",
+            "stackHolder": [
+              "Quality"
+            ],
+            "entityBelongsToId": "1",
+            "entityId": "101",
+            "patient_Id": "PAT1003",
+            "last_Updated_At": "Yesterday"
+          },
+          {
+            "id": 1004,
+            "subject": "Patient Registration",
+            "status_Id": "2",
+            "status_Name": "Resolved",
+            "priority": 3,
+            "assignee_Id": "DAC3210P",
+            "reporter_Id": "USR004",
+            "reference_Id": "REG10004",
+            "global_Id": "c8b34fd8-4b95-44cb-9dc6-1d8b5d4c1004",
+            "reporter_name": "Sarah Williams (DAC3210P)",
+            "description": "Registration completed successfully.",
+            "created_At": "2026-07-12T09:20:00",
+            "updated_At": "2026-07-12T10:05:00",
+            "stackHolder": [
+              "Reception"
+            ],
+            "entityBelongsToId": "1",
+            "entityId": "101",
+            "patient_Id": "PAT1004",
+            "last_Updated_At": "2 days ago"
+          },
+          {
+            "id": 1005,
+            "subject": "Old Courier Request",
+            "status_Id": "3",
+            "status_Name": "Archived",
+            "priority": 2,
+            "assignee_Id": "DAC3220P",
+            "reporter_Id": "USR005",
+            "reference_Id": null,
+            "global_Id": "c8b34fd8-4b95-44cb-9dc6-1d8b5d4c1005",
+            "reporter_name": "David Johnson (DAC3220P)",
+            "description": "Archived after successful completion.",
+            "created_At": "2026-07-01T11:30:00",
+            "updated_At": "2026-07-02T08:15:00",
+            "stackHolder": [
+              "Archive"
+            ],
+            "entityBelongsToId": "1",
+            "entityId": "101",
+            "patient_Id": "PAT1005",
+            "last_Updated_At": "12 days ago"
+          },
+          {
+            "id": 1006,
+            "subject": "Equipment Maintenance",
+            "status_Id": "3",
+            "status_Name": "Archived",
+            "priority": 1,
+            "assignee_Id": "DAC3230P",
+            "reporter_Id": "USR006",
+            "reference_Id": "EQ10006",
+            "global_Id": "c8b34fd8-4b95-44cb-9dc6-1d8b5d4c1006",
+            "reporter_name": "Michael Brown (DAC3230P)",
+            "description": "Maintenance completed and archived.",
+            "created_At": "2026-06-28T14:00:00",
+            "updated_At": "2026-06-29T09:40:00",
+            "stackHolder": [
+              "Engineering"
+            ],
+            "entityBelongsToId": "1",
+            "entityId": "101",
+            "patient_Id": "PAT1006",
+            "last_Updated_At": "15 days ago"
+          }
+        ]
+      }
       this.loading = true
-      SupportServices.get(params)
-        .then((response) => {
+      // SupportServices.get(params)
+        // .then((response) => {
           this.data = response.ticket
           this.archivedData.splice(0)
           this.inprogressData.splice(0)
@@ -269,10 +407,10 @@ export default {
           }
           // console.log(this.resolvedData)
           // this.data[1].reporter_name='Chris Murphy (DAC3138P)'
-        })
-        .finally(() => {
+        // })
+        // .finally(() => {
           this.loading = false
-        })
+        // })
     },
     fetchTicket(globalId) {
       this.loadingTicket = true

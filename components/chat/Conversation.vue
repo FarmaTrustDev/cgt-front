@@ -106,16 +106,21 @@
 </template>
 <script>
 import moment from 'moment'
-import ChatServices from '~/services/API/ChatServices'
+// import ChatServices from '~/services/API/ChatServices'
 import { isEmpty } from '~/services/Helpers'
 export default {
-  props: {
+  /* props: {
     data: { type: Array, default: () => {} },
     colorMap: { type: Object, default: () => {} },
     // messageToId: { type: String, default: null, required: true },
     // messageTo: { type: String, default: `recipient_Id`, required: true },
     recipient: { type: Object, default: () => {}, required: true },
-  },
+  }, */
+  props: {
+  data: { type: Array, default: () => [] },
+  colorMap: { type: Object, default: () => ({}) },
+  recipient: { type: Object, default: () => ({}), required: true },
+},
   data() {
     return {
       submitting: false,
@@ -154,11 +159,27 @@ export default {
       })
     },
     
-    postMessage(params) {
+    /* postMessage(params) {
       ChatServices.create(params).then((response) => {
         this.$emit('fetch', response)
       })
-    },
+    }, */
+    postMessage(params) {
+  const localMessage = {
+    id: Date.now(),
+    isGroup: this.recipient.type === 'group_Id',
+    isOwner: true,
+    sender_Id: this.users.id || 1,
+    sender_Name: this.users.name || 'Zulqrnain Ali',
+    ownerName: this.users.name || 'Zulqrnain Ali',
+    group_Id: this.recipient.type === 'group_Id' ? this.recipient.id : null,
+    group_Name: this.recipient.type === 'group_Id' ? this.recipient.name : null,
+    message: params.message,
+    created_at: moment().format('YYYY-MM-DD hh:mm A'),
+  }
+
+  this.$emit('sendLocalMessage', localMessage)
+},
     handleChange(e) {
       this.value = e.target.value
     },

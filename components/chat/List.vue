@@ -10,46 +10,59 @@
       slot-scope="conversation"
       style="cursor: pointer"
       @click="getConversation(conversation)"
-    >
-      <a-list-item-meta :description="conversation.message">
+    > 
+      <a-list-item-meta v-if="conversation.organizationId === user.organizationId" :description="conversation.message">
         <span slot="title" style="text-decoration: none">
-          <!-- sorry for the shit code  -->
-          <span v-if="!conversation.isGroup">
-            <span v-if="conversation.isOwner">{{
-              conversation.recipient_Name
-            }}</span>
-            <span v-else>{{ conversation.sender_Name }}</span>
+          <span v-if="conversation.isGroup">
+            {{ conversation.group_Name }}
           </span>
-          <span v-else>{{ conversation.group_Name }}</span>
+
+          <span v-else>
+            {{ conversation.isOwner ? conversation.recipient_Name : conversation.sender_Name }}
+          </span>
         </span>
+
         <a-avatar slot="avatar" :src="getImageName(conversation.group_Image)" />
       </a-list-item-meta>
     </a-list-item>
   </a-list>
 </template>
+
 <script>
 export default {
   props: {
     conversations: { type: Array, default: () => [] },
   },
-  data() {
-    return {}
-  },
+
   computed: {
     translation() {
       return this.$store.getters.getTranslation
     },
+    user() {
+      return this.$store.getters.getUser
+    },
   },
+
   methods: {
     getConversation(conversation) {
       this.$emit('getConversation', conversation)
     },
-    getImageName(str){
-      if(str.startsWith("Uploads")){
-        return "http://demoapi.qmaid.co/"+str
+
+    getImageName(str) {
+      if (!str) {
+        return ''
       }
+
+      if (str.startsWith('http')) {
+        return str
+      }
+
+      if (str.startsWith('Uploads')) {
+        return 'https://demoapi.qmaid.co/' + str
+      }
+
       return str
-    }
+    },
   },
 }
 </script>

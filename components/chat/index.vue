@@ -4,7 +4,7 @@
     <a-row class="grey-card" style="margin: 0">
       <a-col :span="9" class="left-bar">
         <a-card :bordered="false" class="default-card chat-container-height"
-          ><a-spin :spinning="conversationLoader">
+          ><a-spin :spinning="conversationLoader"> 
             <List
               :conversations="conversations"
               @getConversation="getConversation" /></a-spin
@@ -16,13 +16,14 @@
           <div class="max-h-200">
             <a-spin class="p-0" :spinning="endToEndConversationLoader">
               <Conversation
-                v-if="!isEmpty(recipient)"
-                :recipient="recipient"
-                :data="endToEndConversation"
-                :colorMap="colorMap"
-                @fetch="loadFromChat"
-                @loadScrollMethod="loadScrollMethod"
-              />
+  v-if="!isEmpty(recipient)"
+  :recipient="recipient"
+  :data="endToEndConversation"
+  :colorMap="colorMap"
+  @fetch="loadFromChat"
+  @sendLocalMessage="sendLocalMessage"
+  @loadScrollMethod="loadScrollMethod"
+/>
               <a-empty v-else class="h-100vh">
                 <span slot="description">
                   {{ translation.SelecUser_5_117 }}
@@ -69,7 +70,7 @@ import UserList from '~/components/users/ChatList'
 import { isEmpty } from '~/services/Helpers'
 export default {
   components: { Conversation, List, UserList, Group },
-  data() {
+  /* data() {
     return {
       conversations: [],
       conversationLoader: false,
@@ -85,10 +86,144 @@ export default {
       uniqueIds: [],
       colorMap: {},
     }
+  }, */
+  data() {
+  return {
+    useMockChat: true,
+
+    conversations: [],
+    conversationLoader: false,
+    endToEndConversation: [],
+    opponentId: null,
+    messageTo: null,
+    usersModal: false,
+    recipient: {},
+    endToEndConversationLoader: false,
+    scrollMethod: () => {},
+    groupModal: false,
+    newConversations: [],
+    uniqueIds: [],
+    colorMap: {},
+
+    mockConversations: [
+      {
+    id: 1,
+    isGroup: false,
+    isOwner: true,
+    opponentId: 101,
+    recipient_Name: 'Timothy Hornstein',
+    sender_Name: 'Harley Raddix',
+    message: '',
+    organizationId: 1,
+    group_Image:
+      'https://demoapi.qmaid.co/Uploads//user/806b4314-55ef-43b1-a4c9-e9ab5e2907d6/6b1f4de1-3a8a-43c5-a3ca-859adf0bf5fe.jpg',
   },
+  {
+    id: 2,
+    isGroup: false,
+    isOwner: false,
+    opponentId: 102,
+    recipient_Name: 'Tyler Jackson',
+    sender_Name: 'Dr. Smith',
+    message: '',
+    organizationId: 2,
+    group_Image:
+      'https://demoapi.qmaid.co/Uploads//user/9f9152ea-63e0-4f33-8ddd-7582bf7a526d/4a33c2e3-6574-45c1-8be3-60e238ad4497.jpg',
+  },
+      
+    ],
+
+    mockMessages: {
+      101: [
+        {
+          id: 1001,
+          isGroup: false,
+          isOwner: false,
+          sender_Id: 101,
+          sender_Name: 'Harley Raddix',
+          message: 'Hello - one of my treatments is missing, please can you check status and get back to me ASAP',
+          created_at: '2026-06-16 10:00 AM',
+        },
+        {
+          id: 1002,
+          isGroup: false,
+          isOwner: true,
+          sender_Id: 1,
+          sender_Name: 'Timothy Hornstein',
+          message: 'OK let me check it and get back to you in 15 minutes',
+          created_at: '2026-06-16 10:01 AM',
+        },
+        
+      ],
+
+      102: [
+        {
+          id: 2001,
+          isGroup: false,
+          isOwner: false,
+          sender_Id: 102,
+          sender_Name: 'Dr. Smith',
+          message: 'Please note that treatment BG2035 is delayed by the courier, we are getting a new courier and the treatment should be with you in the next 6 hours',
+          created_at: '2026-06-16 11:00 AM',
+        },
+        {
+          id: 2002,
+          isGroup: false,
+          isOwner: true,
+          sender_Id: 1,
+          sender_Name: 'Nathan Green',
+          message: 'OK thanks',
+          created_at: '2026-06-16 11:02 AM',
+        },
+      ],
+
+      group_501: [
+        {
+          id: 3001,
+          isGroup: true,
+          isOwner: false,
+          sender_Id: 101,
+          sender_Name: 'Ali Raza',
+          ownerName: 'Ali Raza',
+          group_Id: 501,
+          group_Name: 'Development Team',
+          message: 'Backend API is pending',
+          created_at: '2026-06-16 12:00 PM',
+        },
+        {
+          id: 3002,
+          isGroup: true,
+          isOwner: true,
+          sender_Id: 1,
+          sender_Name: 'Zulqrnain Ali',
+          ownerName: 'Zulqrnain Ali',
+          group_Id: 501,
+          group_Name: 'Development Team',
+          message: 'Okay, use hardcoded data for now',
+          created_at: '2026-06-16 12:01 PM',
+        },
+        {
+          id: 3003,
+          isGroup: true,
+          isOwner: false,
+          sender_Id: 102,
+          sender_Name: 'Ahmed Khan',
+          ownerName: 'Ahmed Khan',
+          group_Id: 501,
+          group_Name: 'Development Team',
+          message: 'I will connect API later',
+          created_at: '2026-06-16 12:03 PM',
+        },
+      ],
+    }, 
+  }
+},
   computed: {
     translation() {
       return this.$store.getters.getTranslation
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   mounted() {
@@ -103,7 +238,7 @@ export default {
       this.scrollMethod = method
     },
     isEmpty,
-    fetchConversation() {
+    /* fetchConversation() {
       this.conversationLoader = true
       ChatServices.getConversations()
         .then((conversations) => {
@@ -125,8 +260,57 @@ export default {
         .finally(() => {
           this.conversationLoader = false
         })
-    },
-    fetch(params = {}) {
+    }, */
+    fetchConversation() {
+  this.conversationLoader = true
+
+  if (this.useMockChat) {
+    this.conversations = [...this.mockConversations]
+    this.conversationLoader = false
+    return
+  }
+
+  ChatServices.getConversations()
+    .then((conversations) => {
+      this.conversations = conversations.data
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+    .finally(() => {
+      this.conversationLoader = false
+    })
+},
+sendLocalMessage(message) {
+  this.endToEndConversation.push(message)
+
+  if (this.recipient.type === 'recipient_Id') {
+    const id = this.recipient.id
+
+    if (!this.mockMessages[id]) {
+      this.$set(this.mockMessages, id, [])
+    }
+
+    this.mockMessages[id].push(message)
+  }
+
+  if (this.recipient.type === 'group_Id') {
+    const key = `group_${this.recipient.id}`
+
+    if (!this.mockMessages[key]) {
+      this.$set(this.mockMessages, key, [])
+    }
+
+    this.mockMessages[key].push(message)
+  }
+
+  this.extractUniqueIds(this.endToEndConversation)
+
+  this.$nextTick(() => {
+    this.scrollMethod()
+  })
+},
+    /* fetch(params = {}) {
       // End to End conversation right side
       this.endToEndConversationLoader = true
       ChatServices.get(params)
@@ -149,7 +333,53 @@ export default {
           this.scrollMethod()
         })
         .finally(() => (this.endToEndConversationLoader = false))
-    },
+    }, */
+
+fetch(params = {}) {
+  this.endToEndConversationLoader = true
+
+  if (this.useMockChat) {
+    let messages = []
+
+    if (params.recipient_Id) {
+      messages = this.mockMessages[params.recipient_Id] || []
+    }
+
+    if (params.group_Id || params.Group_Id) {
+      const groupId = params.group_Id || params.Group_Id
+      messages = this.mockMessages[`group_${groupId}`] || []
+    }
+
+    this.endToEndConversation = [...messages]
+
+    this.extractUniqueIds(this.endToEndConversation)
+
+    this.$nextTick(() => {
+      this.scrollMethod()
+    })
+
+    this.endToEndConversationLoader = false
+    return
+  }
+
+  ChatServices.get(params)
+    .then((response) => {
+      this.endToEndConversation.splice(0)
+
+      for (const dt in response.data) {
+        this.endToEndConversation.push(response.data[dt])
+      }
+
+      this.extractUniqueIds(this.endToEndConversation)
+    })
+    .then(() => {
+      this.scrollMethod()
+    })
+    .finally(() => {
+      this.endToEndConversationLoader = false
+    })
+},
+
     extractUniqueIds(data) {
       const uniqueIdsSet = new Set();
       data.forEach((item) => {
@@ -159,13 +389,20 @@ export default {
       // console.log(this.uniqueIds)
       this.assignColors();
     },
-    assignColors() {
+    /* assignColors() {
       this.uniqueIds.forEach((id) => {
         const color = this.generateRandomColor();
         this.colorMap[id] = color;
       });
       console.log(this.colorMap)
-    },
+    }, */
+    assignColors() {
+  this.uniqueIds.forEach((id) => {
+    if (!this.colorMap[id]) {
+      this.$set(this.colorMap, id, this.generateRandomColor())
+    }
+  })
+},
     generateRandomColor() {
       const letters = 'BCEF';
       let color = '#';

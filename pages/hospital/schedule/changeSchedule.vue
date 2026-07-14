@@ -164,10 +164,18 @@
         })
       })
     },
-    async getDoctors(dayId, startTime) {
+    /* async getDoctors(dayId, startTime) {
       try {
         const response = await DoctorServices.getWithDays(dayId, startTime);
         this.getUsers(response)
+      } catch (error) {
+        console.error("Error in getDoctors:", error);
+      }
+    }, */
+    getDoctors(dayId, startTime) {
+      try {
+        // const response = await DoctorServices.getWithDays(dayId, startTime);
+        this.getUsers()
       } catch (error) {
         console.error("Error in getDoctors:", error);
       }
@@ -190,7 +198,7 @@
       }
       return url.replace(/['"]+/g, '')
     },    
-      getUsers(data){
+      /* getUsers(data){
       this.emailIds = []
       data.data.forEach((element) => {
             if (element.daysDTO.workingDays.length > 0) {
@@ -204,7 +212,34 @@
           this.userData = response.data
         })
         .finally(() => (this.loading = false)) 
-    },      
+    }, */
+    
+    getUsers(){
+      this.emailIds = [
+        'elizabeth_shelly@gmail.com',
+        'harley@gmail.com',
+        'emerson@gmail.com',
+        'john_clare@gmail.com',
+        'dean_winter@gmail.com',
+        'raja@loop.com',
+        'sadaan+22@farmatrust.com',
+        'hirzemoyde@gufum.com',
+        'amy@gmail.com',
+        'lewis@gmail.com',
+        'hemma_patel@gmail.com',
+        'katy_wong@gmail.com',
+        'faith_edwards@gmail.com',
+        'rihanna_chiumbo@gmail.com',
+        'sheila_tan@gmail.com'
+      ]
+      const dt= new Date(this.startDate)
+      const tm=_getFormatMoment(getMomentByStandardFormat(this.startDate)).format('HH:mm')    
+      UserServices.getUserByEmails({emails: this.emailIds, appointmentDate: dt, appointmentTime: tm})
+        .then((response) => {
+          this.userData = response.data
+        })
+        .finally(() => (this.loading = false)) 
+    },  
     showPopUp(){
         this.visibleModalPopUp = true
     },
