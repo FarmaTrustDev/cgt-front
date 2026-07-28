@@ -13,6 +13,7 @@
       @ok="handleSelectionOk()"
     >
         <h3><strong>{{patientName}} {{patientPUID}}</strong></h3>
+        <h3><strong>{{patientName}} {{patientPUID}}</strong></h3>
         <h3>Estimated treatment date is {{ _getFormatMoment(getMomentByStandardFormat(startDate)).format('DD MMMM YYYY') }}</h3>
         <h3>Please select available personnel: </h3>
         <a-row v-for="user in userData" :key="user.id" class="col-height">
